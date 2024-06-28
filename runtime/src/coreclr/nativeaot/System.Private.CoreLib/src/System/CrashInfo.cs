@@ -132,13 +132,11 @@ namespace System
 
             CrashReason crashReason = reason switch
             {
-                RhFailFastReason.AssertionFailure
-                or RhFailFastReason.EnvironmentFailFast
-                    => CrashReason.EnvironmentFailFast,
+                RhFailFastReason.AssertionFailure or RhFailFastReason.EnvironmentFailFast =>
+                    CrashReason.EnvironmentFailFast,
                 RhFailFastReason.InternalError => CrashReason.InternalFailFast,
                 RhFailFastReason.UnhandledException
-                or RhFailFastReason.UnhandledExceptionFromPInvoke
-                    => CrashReason.UnhandledException,
+                or RhFailFastReason.UnhandledExceptionFromPInvoke => CrashReason.UnhandledException,
                 _ => CrashReason.Unknown,
             };
 

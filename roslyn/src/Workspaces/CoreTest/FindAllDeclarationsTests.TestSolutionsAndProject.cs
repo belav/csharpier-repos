@@ -168,56 +168,53 @@ namespace Microsoft.CodeAnalysis.UnitTests
         ) =>
             solutionKind switch
             {
-                SolutionKind.SingleClass
-                    => CreateWorkspaceWithSingleProjectSolution(
-                        testHost,
-                        [SingleClass],
-                        out solution
-                    ),
-                SolutionKind.SingleClassWithSingleMethod
-                    => CreateWorkspaceWithSingleProjectSolution(
+                SolutionKind.SingleClass => CreateWorkspaceWithSingleProjectSolution(
+                    testHost,
+                    [SingleClass],
+                    out solution
+                ),
+                SolutionKind.SingleClassWithSingleMethod =>
+                    CreateWorkspaceWithSingleProjectSolution(
                         testHost,
                         [SingleClassWithSingleMethod],
                         out solution
                     ),
-                SolutionKind.SingleClassWithSingleProperty
-                    => CreateWorkspaceWithSingleProjectSolution(
+                SolutionKind.SingleClassWithSingleProperty =>
+                    CreateWorkspaceWithSingleProjectSolution(
                         testHost,
                         [SingleClassWithSingleProperty],
                         out solution
                     ),
-                SolutionKind.SingleClassWithSingleField
-                    => CreateWorkspaceWithSingleProjectSolution(
-                        testHost,
-                        [SingleClassWithSingleField],
-                        out solution
-                    ),
-                SolutionKind.TwoProjectsEachWithASingleClassWithSingleMethod
-                    => CreateWorkspaceWithMultipleProjectSolution(
+                SolutionKind.SingleClassWithSingleField => CreateWorkspaceWithSingleProjectSolution(
+                    testHost,
+                    [SingleClassWithSingleField],
+                    out solution
+                ),
+                SolutionKind.TwoProjectsEachWithASingleClassWithSingleMethod =>
+                    CreateWorkspaceWithMultipleProjectSolution(
                         testHost,
                         [SingleClassWithSingleMethod, SingleClassWithSingleMethod],
                         out solution
                     ),
-                SolutionKind.TwoProjectsEachWithASingleClassWithSingleProperty
-                    => CreateWorkspaceWithMultipleProjectSolution(
+                SolutionKind.TwoProjectsEachWithASingleClassWithSingleProperty =>
+                    CreateWorkspaceWithMultipleProjectSolution(
                         testHost,
                         [SingleClassWithSingleProperty, SingleClassWithSingleProperty],
                         out solution
                     ),
-                SolutionKind.TwoProjectsEachWithASingleClassWithSingleField
-                    => CreateWorkspaceWithMultipleProjectSolution(
+                SolutionKind.TwoProjectsEachWithASingleClassWithSingleField =>
+                    CreateWorkspaceWithMultipleProjectSolution(
                         testHost,
                         [SingleClassWithSingleField, SingleClassWithSingleField],
                         out solution
                     ),
-                SolutionKind.NestedClass
-                    => CreateWorkspaceWithSingleProjectSolution(
-                        testHost,
-                        [NestedClass],
-                        out solution
-                    ),
-                SolutionKind.TwoNamespacesWithIdenticalClasses
-                    => CreateWorkspaceWithSingleProjectSolution(
+                SolutionKind.NestedClass => CreateWorkspaceWithSingleProjectSolution(
+                    testHost,
+                    [NestedClass],
+                    out solution
+                ),
+                SolutionKind.TwoNamespacesWithIdenticalClasses =>
+                    CreateWorkspaceWithSingleProjectSolution(
                         testHost,
                         [Namespace1, Namespace2],
                         out solution

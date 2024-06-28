@@ -279,15 +279,15 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         {
             return context switch
             {
-                ChangeSignatureAnalysisSucceededContext changeSignatureAnalyzedSucceedContext
-                    => await GetChangeSignatureResultAsync(
+                ChangeSignatureAnalysisSucceededContext changeSignatureAnalyzedSucceedContext =>
+                    await GetChangeSignatureResultAsync(
                             changeSignatureAnalyzedSucceedContext,
                             options,
                             cancellationToken
                         )
                         .ConfigureAwait(false),
-                CannotChangeSignatureAnalyzedContext cannotChangeSignatureAnalyzedContext
-                    => new ChangeSignatureResult(
+                CannotChangeSignatureAnalyzedContext cannotChangeSignatureAnalyzedContext =>
+                    new ChangeSignatureResult(
                         succeeded: false,
                         changeSignatureFailureKind: cannotChangeSignatureAnalyzedContext.CannotChangeSignatureReason
                     ),

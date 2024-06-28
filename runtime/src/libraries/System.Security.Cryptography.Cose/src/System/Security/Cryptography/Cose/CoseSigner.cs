@@ -216,11 +216,10 @@ namespace System.Security.Cryptography.Cose
                     nameof(HashAlgorithmName.SHA256) => KnownCoseAlgorithms.ES256,
                     nameof(HashAlgorithmName.SHA384) => KnownCoseAlgorithms.ES384,
                     nameof(HashAlgorithmName.SHA512) => KnownCoseAlgorithms.ES512,
-                    _
-                        => throw new ArgumentException(
-                            SR.Format(SR.Sign1SignUnsupportedHashAlgorithm, hashAlgorithmName),
-                            "hashAlgorithm"
-                        ),
+                    _ => throw new ArgumentException(
+                        SR.Format(SR.Sign1SignUnsupportedHashAlgorithm, hashAlgorithmName),
+                        "hashAlgorithm"
+                    ),
                 };
             }
 
@@ -234,11 +233,10 @@ namespace System.Security.Cryptography.Cose
                     nameof(HashAlgorithmName.SHA256) => KnownCoseAlgorithms.PS256,
                     nameof(HashAlgorithmName.SHA384) => KnownCoseAlgorithms.PS384,
                     nameof(HashAlgorithmName.SHA512) => KnownCoseAlgorithms.PS512,
-                    _
-                        => throw new ArgumentException(
-                            SR.Format(SR.Sign1SignUnsupportedHashAlgorithm, hashAlgorithmName),
-                            "hashAlgorithm"
-                        ),
+                    _ => throw new ArgumentException(
+                        SR.Format(SR.Sign1SignUnsupportedHashAlgorithm, hashAlgorithmName),
+                        "hashAlgorithm"
+                    ),
                 };
             }
 
@@ -249,11 +247,10 @@ namespace System.Security.Cryptography.Cose
                 nameof(HashAlgorithmName.SHA256) => KnownCoseAlgorithms.RS256,
                 nameof(HashAlgorithmName.SHA384) => KnownCoseAlgorithms.RS384,
                 nameof(HashAlgorithmName.SHA512) => KnownCoseAlgorithms.RS512,
-                _
-                    => throw new ArgumentException(
-                        SR.Format(SR.Sign1SignUnsupportedHashAlgorithm, hashAlgorithmName),
-                        "hashAlgorithm"
-                    ),
+                _ => throw new ArgumentException(
+                    SR.Format(SR.Sign1SignUnsupportedHashAlgorithm, hashAlgorithmName),
+                    "hashAlgorithm"
+                ),
             };
         }
     }

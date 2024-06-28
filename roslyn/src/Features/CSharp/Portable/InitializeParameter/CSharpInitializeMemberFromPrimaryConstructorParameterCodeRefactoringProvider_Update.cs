@@ -131,10 +131,16 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
             // relevant existing member.
             var (sibling, siblingSyntax, addContext) = fieldOrProperty switch
             {
-                IPropertySymbol
-                    => GetAddContext<IPropertySymbol>(compilation, parameter, cancellationToken),
-                IFieldSymbol
-                    => GetAddContext<IFieldSymbol>(compilation, parameter, cancellationToken),
+                IPropertySymbol => GetAddContext<IPropertySymbol>(
+                    compilation,
+                    parameter,
+                    cancellationToken
+                ),
+                IFieldSymbol => GetAddContext<IFieldSymbol>(
+                    compilation,
+                    parameter,
+                    cancellationToken
+                ),
                 _ => throw ExceptionUtilities.UnexpectedValue(fieldOrProperty),
             };
 

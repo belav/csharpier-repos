@@ -381,15 +381,14 @@ namespace Microsoft.Interop.Analyzers
 
                     InvocationExpressionSyntax? invocation = identifierNode switch
                     {
-                        { Parent: InvocationExpressionSyntax invocationInScope }
-                            => invocationInScope,
+                        { Parent: InvocationExpressionSyntax invocationInScope } =>
+                            invocationInScope,
                         {
                             Parent: MemberAccessExpressionSyntax
                             {
                                 Parent: InvocationExpressionSyntax invocationOnType
                             }
-                        }
-                            => invocationOnType,
+                        } => invocationOnType,
                         _ => null!,
                     };
 
@@ -803,20 +802,20 @@ namespace Microsoft.Interop.Analyzers
 
             ITypeSymbol? callingConventionType = callingConvention switch
             {
-                CallingConvention.Cdecl
-                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                CallingConvention.Cdecl =>
+                    editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
                         $"System.Runtime.CompilerServices.CallConvCdecl"
                     ),
-                CallingConvention.StdCall
-                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                CallingConvention.StdCall =>
+                    editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
                         $"System.Runtime.CompilerServices.CallConvStdcall"
                     ),
-                CallingConvention.ThisCall
-                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                CallingConvention.ThisCall =>
+                    editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
                         $"System.Runtime.CompilerServices.CallConvThiscall"
                     ),
-                CallingConvention.FastCall
-                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                CallingConvention.FastCall =>
+                    editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
                         $"System.Runtime.CompilerServices.CallConvFastcall"
                     ),
                 _ => null,

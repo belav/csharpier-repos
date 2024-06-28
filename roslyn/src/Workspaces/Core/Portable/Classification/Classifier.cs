@@ -249,18 +249,18 @@ namespace Microsoft.CodeAnalysis.Classification
                 ClassificationTypeNames.InterfaceName => SymbolDisplayPartKind.InterfaceName,
                 ClassificationTypeNames.DelegateName => SymbolDisplayPartKind.DelegateName,
                 ClassificationTypeNames.EnumName => SymbolDisplayPartKind.EnumName,
-                ClassificationTypeNames.TypeParameterName
-                    => SymbolDisplayPartKind.TypeParameterName,
+                ClassificationTypeNames.TypeParameterName =>
+                    SymbolDisplayPartKind.TypeParameterName,
                 ClassificationTypeNames.ModuleName => SymbolDisplayPartKind.ModuleName,
-                ClassificationTypeNames.VerbatimStringLiteral
-                    => SymbolDisplayPartKind.StringLiteral,
+                ClassificationTypeNames.VerbatimStringLiteral =>
+                    SymbolDisplayPartKind.StringLiteral,
                 ClassificationTypeNames.FieldName => SymbolDisplayPartKind.FieldName,
                 ClassificationTypeNames.EnumMemberName => SymbolDisplayPartKind.EnumMemberName,
                 ClassificationTypeNames.ConstantName => SymbolDisplayPartKind.ConstantName,
                 ClassificationTypeNames.LocalName => SymbolDisplayPartKind.LocalName,
                 ClassificationTypeNames.ParameterName => SymbolDisplayPartKind.ParameterName,
-                ClassificationTypeNames.ExtensionMethodName
-                    => SymbolDisplayPartKind.ExtensionMethodName,
+                ClassificationTypeNames.ExtensionMethodName =>
+                    SymbolDisplayPartKind.ExtensionMethodName,
                 ClassificationTypeNames.MethodName => SymbolDisplayPartKind.MethodName,
                 ClassificationTypeNames.PropertyName => SymbolDisplayPartKind.PropertyName,
                 ClassificationTypeNames.LabelName => SymbolDisplayPartKind.LabelName,

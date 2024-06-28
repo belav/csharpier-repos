@@ -57,10 +57,9 @@ namespace System.Security.Cryptography.Cose
                 nameof(RS256) => RS256,
                 nameof(RS384) => RS384,
                 nameof(RS512) => RS512,
-                _
-                    => throw new CryptographicException(
-                        SR.Format(SR.Sign1UnknownCoseAlgorithm, algString)
-                    ),
+                _ => throw new CryptographicException(
+                    SR.Format(SR.Sign1UnknownCoseAlgorithm, algString)
+                ),
             };
         }
     }

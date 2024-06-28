@@ -119,24 +119,24 @@ namespace Microsoft.CodeAnalysis
             operation switch
             {
                 ILocalReferenceOperation localReference => localReference.Local.Equals(symbol),
-                IParameterReferenceOperation parameterReference
-                    => parameterReference.Parameter.Equals(symbol),
-                IAssignmentOperation assignment
-                    => IsSymbolReferencedByOperation(assignment.Target, symbol),
-                ITupleOperation tupleOperation
-                    => tupleOperation.Elements.Any(
-                        static (element, symbol) => IsSymbolReferencedByOperation(element, symbol),
-                        symbol
-                    ),
+                IParameterReferenceOperation parameterReference =>
+                    parameterReference.Parameter.Equals(symbol),
+                IAssignmentOperation assignment => IsSymbolReferencedByOperation(
+                    assignment.Target,
+                    symbol
+                ),
+                ITupleOperation tupleOperation => tupleOperation.Elements.Any(
+                    static (element, symbol) => IsSymbolReferencedByOperation(element, symbol),
+                    symbol
+                ),
                 IForEachLoopOperation
                 {
                     LoopControlVariable: IVariableDeclaratorOperation variableDeclarator
-                }
-                    => variableDeclarator.Symbol.Equals(symbol),
+                } => variableDeclarator.Symbol.Equals(symbol),
 
                 // A variable initializer is required for this to be a meaningful operation for determining possible null assignment
-                IVariableDeclaratorOperation variableDeclarator
-                    => variableDeclarator.GetVariableInitializer() != null
+                IVariableDeclaratorOperation variableDeclarator =>
+                    variableDeclarator.GetVariableInitializer() != null
                         && variableDeclarator.Symbol.Equals(symbol),
                 _ => false,
             };

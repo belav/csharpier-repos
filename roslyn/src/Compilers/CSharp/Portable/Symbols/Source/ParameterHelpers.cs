@@ -117,8 +117,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ImmutableArray<CustomModifier> customModifiers = refKind switch
                     {
                         RefKind.In => CreateInModifiers(binder, diagnostics, syntax),
-                        RefKind.RefReadOnlyParameter
-                            => CreateRefReadonlyParameterModifiers(binder, diagnostics, syntax),
+                        RefKind.RefReadOnlyParameter => CreateRefReadonlyParameterModifiers(
+                            binder,
+                            diagnostics,
+                            syntax
+                        ),
                         RefKind.Out => CreateOutModifiers(binder, diagnostics, syntax),
                         _ => ImmutableArray<CustomModifier>.Empty,
                     };

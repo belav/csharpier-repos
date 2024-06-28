@@ -209,8 +209,10 @@ namespace Microsoft.Extensions.Logging.Console
             {
                 LogLevel.Trace => new ConsoleColors(ConsoleColor.Gray, ConsoleColor.Black),
                 LogLevel.Debug => new ConsoleColors(ConsoleColor.Gray, ConsoleColor.Black),
-                LogLevel.Information
-                    => new ConsoleColors(ConsoleColor.DarkGreen, ConsoleColor.Black),
+                LogLevel.Information => new ConsoleColors(
+                    ConsoleColor.DarkGreen,
+                    ConsoleColor.Black
+                ),
                 LogLevel.Warning => new ConsoleColors(ConsoleColor.Yellow, ConsoleColor.Black),
                 LogLevel.Error => new ConsoleColors(ConsoleColor.Black, ConsoleColor.DarkRed),
                 LogLevel.Critical => new ConsoleColors(ConsoleColor.White, ConsoleColor.DarkRed),

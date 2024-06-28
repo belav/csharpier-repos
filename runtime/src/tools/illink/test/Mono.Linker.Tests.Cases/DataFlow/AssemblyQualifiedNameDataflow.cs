@@ -88,11 +88,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 0 => GetTypeWithPublicConstructors(),
                 1 => GetTypeWithNonPublicConstructors(), // Should produce warning IL2072 due to mismatch annotation
                 2 => null, // Should be ignored
-                _
-                    => (Type)
-                        o[
-                            0
-                        ] // This creates an unknown value - should produce warning IL2062
+                _ => (Type)
+                    o[
+                        0
+                    ] // This creates an unknown value - should produce warning IL2062
                 ,
             };
 

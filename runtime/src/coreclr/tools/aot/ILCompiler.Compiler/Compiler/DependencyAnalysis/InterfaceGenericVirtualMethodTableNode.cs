@@ -265,10 +265,10 @@ namespace ILCompiler.DependencyAnalysis
                         Debug.Assert(impl is DefaultInterfaceMethodResolution);
                         uint constant = (DefaultInterfaceMethodResolution)impl switch
                         {
-                            DefaultInterfaceMethodResolution.Diamond
-                                => SpecialGVMInterfaceEntry.Diamond,
-                            DefaultInterfaceMethodResolution.Reabstraction
-                                => SpecialGVMInterfaceEntry.Reabstraction,
+                            DefaultInterfaceMethodResolution.Diamond =>
+                                SpecialGVMInterfaceEntry.Diamond,
+                            DefaultInterfaceMethodResolution.Reabstraction =>
+                                SpecialGVMInterfaceEntry.Reabstraction,
                             _ => throw new NotImplementedException(),
                         };
                         vertex = nativeFormatWriter.GetTuple(

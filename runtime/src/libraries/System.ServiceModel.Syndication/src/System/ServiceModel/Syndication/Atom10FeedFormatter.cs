@@ -747,13 +747,12 @@ namespace System.ServiceModel.Syndication
                 Atom10Constants.PlaintextType => TextSyndicationContentKind.Plaintext,
                 Atom10Constants.HtmlType => TextSyndicationContentKind.Html,
                 Atom10Constants.XHtmlType => TextSyndicationContentKind.XHtml,
-                _
-                    => throw new XmlException(
-                        FeedUtils.AddLineInfo(
-                            reader,
-                            SR.Format(SR.Atom10SpecRequiresTextConstruct, context, type)
-                        )
-                    ),
+                _ => throw new XmlException(
+                    FeedUtils.AddLineInfo(
+                        reader,
+                        SR.Format(SR.Atom10SpecRequiresTextConstruct, context, type)
+                    )
+                ),
             };
 
             Dictionary<XmlQualifiedName, string> attrs = null;

@@ -85,22 +85,19 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         {
             return pullMembersUpOptions.Destination.TypeKind switch
             {
-                TypeKind.Interface
-                    => PullMembersIntoInterfaceAsync(
-                        document,
-                        pullMembersUpOptions,
-                        fallbackOptions,
-                        cancellationToken
-                    ),
+                TypeKind.Interface => PullMembersIntoInterfaceAsync(
+                    document,
+                    pullMembersUpOptions,
+                    fallbackOptions,
+                    cancellationToken
+                ),
                 // We can treat VB modules as a static class
-                TypeKind.Class
-                or TypeKind.Module
-                    => PullMembersIntoClassAsync(
-                        document,
-                        pullMembersUpOptions,
-                        fallbackOptions,
-                        cancellationToken
-                    ),
+                TypeKind.Class or TypeKind.Module => PullMembersIntoClassAsync(
+                    document,
+                    pullMembersUpOptions,
+                    fallbackOptions,
+                    cancellationToken
+                ),
                 _ => throw ExceptionUtilities.UnexpectedValue(pullMembersUpOptions.Destination),
             };
         }

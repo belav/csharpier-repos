@@ -198,32 +198,43 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static BaseParameterListSyntax? GetParameterList(this SyntaxNode? declaration) =>
             declaration?.Kind() switch
             {
-                SyntaxKind.DelegateDeclaration
-                    => ((DelegateDeclarationSyntax)declaration).ParameterList,
-                SyntaxKind.MethodDeclaration
-                    => ((MethodDeclarationSyntax)declaration).ParameterList,
-                SyntaxKind.OperatorDeclaration
-                    => ((OperatorDeclarationSyntax)declaration).ParameterList,
-                SyntaxKind.ConversionOperatorDeclaration
-                    => ((ConversionOperatorDeclarationSyntax)declaration).ParameterList,
-                SyntaxKind.ConstructorDeclaration
-                    => ((ConstructorDeclarationSyntax)declaration).ParameterList,
-                SyntaxKind.DestructorDeclaration
-                    => ((DestructorDeclarationSyntax)declaration).ParameterList,
-                SyntaxKind.IndexerDeclaration
-                    => ((IndexerDeclarationSyntax)declaration).ParameterList,
-                SyntaxKind.ParenthesizedLambdaExpression
-                    => ((ParenthesizedLambdaExpressionSyntax)declaration).ParameterList,
-                SyntaxKind.LocalFunctionStatement
-                    => ((LocalFunctionStatementSyntax)declaration).ParameterList,
-                SyntaxKind.AnonymousMethodExpression
-                    => ((AnonymousMethodExpressionSyntax)declaration).ParameterList,
+                SyntaxKind.DelegateDeclaration => (
+                    (DelegateDeclarationSyntax)declaration
+                ).ParameterList,
+                SyntaxKind.MethodDeclaration => (
+                    (MethodDeclarationSyntax)declaration
+                ).ParameterList,
+                SyntaxKind.OperatorDeclaration => (
+                    (OperatorDeclarationSyntax)declaration
+                ).ParameterList,
+                SyntaxKind.ConversionOperatorDeclaration => (
+                    (ConversionOperatorDeclarationSyntax)declaration
+                ).ParameterList,
+                SyntaxKind.ConstructorDeclaration => (
+                    (ConstructorDeclarationSyntax)declaration
+                ).ParameterList,
+                SyntaxKind.DestructorDeclaration => (
+                    (DestructorDeclarationSyntax)declaration
+                ).ParameterList,
+                SyntaxKind.IndexerDeclaration => (
+                    (IndexerDeclarationSyntax)declaration
+                ).ParameterList,
+                SyntaxKind.ParenthesizedLambdaExpression => (
+                    (ParenthesizedLambdaExpressionSyntax)declaration
+                ).ParameterList,
+                SyntaxKind.LocalFunctionStatement => (
+                    (LocalFunctionStatementSyntax)declaration
+                ).ParameterList,
+                SyntaxKind.AnonymousMethodExpression => (
+                    (AnonymousMethodExpressionSyntax)declaration
+                ).ParameterList,
                 SyntaxKind.RecordDeclaration
                 or SyntaxKind.RecordStructDeclaration
                 or SyntaxKind.ClassDeclaration
                 or SyntaxKind.StructDeclaration
-                or SyntaxKind.InterfaceDeclaration
-                    => ((TypeDeclarationSyntax)declaration).ParameterList,
+                or SyntaxKind.InterfaceDeclaration => (
+                    (TypeDeclarationSyntax)declaration
+                ).ParameterList,
                 _ => null,
             };
 
@@ -238,8 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 CompilationUnitSyntax compilationUnit => compilationUnit.AttributeLists,
                 StatementSyntax statementSyntax => statementSyntax.AttributeLists,
                 TypeParameterSyntax typeParameter => typeParameter.AttributeLists,
-                LambdaExpressionSyntax lambdaExpressionSyntax
-                    => lambdaExpressionSyntax.AttributeLists,
+                LambdaExpressionSyntax lambdaExpressionSyntax =>
+                    lambdaExpressionSyntax.AttributeLists,
                 _ => default,
             };
 
@@ -1022,8 +1033,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             {
                 ArrayRankSpecifierSyntax n => (n.OpenBracketToken, n.CloseBracketToken),
                 BracketedArgumentListSyntax n => (n.OpenBracketToken, n.CloseBracketToken),
-                ImplicitArrayCreationExpressionSyntax n
-                    => (n.OpenBracketToken, n.CloseBracketToken),
+                ImplicitArrayCreationExpressionSyntax n => (
+                    n.OpenBracketToken,
+                    n.CloseBracketToken
+                ),
                 AttributeListSyntax n => (n.OpenBracketToken, n.CloseBracketToken),
                 BracketedParameterListSyntax n => (n.OpenBracketToken, n.CloseBracketToken),
                 ListPatternSyntax n => (n.OpenBracketToken, n.CloseBracketToken),

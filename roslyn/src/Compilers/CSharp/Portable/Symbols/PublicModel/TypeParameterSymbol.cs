@@ -41,8 +41,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         CodeAnalysis.NullableAnnotation ITypeParameterSymbol.ReferenceTypeConstraintNullableAnnotation =>
             _underlying.ReferenceTypeConstraintIsNullable switch
             {
-                false when !_underlying.HasReferenceTypeConstraint
-                    => CodeAnalysis.NullableAnnotation.None,
+                false when !_underlying.HasReferenceTypeConstraint => CodeAnalysis
+                    .NullableAnnotation
+                    .None,
                 false => CodeAnalysis.NullableAnnotation.NotAnnotated,
                 true => CodeAnalysis.NullableAnnotation.Annotated,
                 null => CodeAnalysis.NullableAnnotation.None,

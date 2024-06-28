@@ -202,20 +202,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             var diagnostics = kind switch
             {
-                AnalysisKind.Syntax
-                    => await GetSyntaxDiagnosticsAsync(
-                            analyzer,
-                            isCompilerAnalyzer,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false),
-                AnalysisKind.Semantic
-                    => await GetSemanticDiagnosticsAsync(
-                            analyzer,
-                            isCompilerAnalyzer,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false),
+                AnalysisKind.Syntax => await GetSyntaxDiagnosticsAsync(
+                        analyzer,
+                        isCompilerAnalyzer,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false),
+                AnalysisKind.Semantic => await GetSemanticDiagnosticsAsync(
+                        analyzer,
+                        isCompilerAnalyzer,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false),
                 _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
 

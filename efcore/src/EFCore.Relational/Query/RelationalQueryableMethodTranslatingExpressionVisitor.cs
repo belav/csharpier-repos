@@ -364,8 +364,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                 var tableAlias = sqlExpression switch
                 {
                     ColumnExpression c => c.Name[..1].ToLowerInvariant(),
-                    JsonScalarExpression { Path: [.., { PropertyName: string propertyName }] }
-                        => propertyName[..1].ToLowerInvariant(),
+                    JsonScalarExpression { Path: [.., { PropertyName: string propertyName }] } =>
+                        propertyName[..1].ToLowerInvariant(),
                     _ => "j",
                 };
 
@@ -2041,21 +2041,20 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             {
                 MemberExpression { Expression: not null } memberExpression
                     when memberExpression.Expression.UnwrapTypeConversion(out _)
-                        is StructuralTypeShaperExpression s
-                    => s,
+                        is StructuralTypeShaperExpression s => s,
 
                 MethodCallExpression mce
                     when mce.TryGetEFPropertyArguments(out var source, out _)
-                        && source.UnwrapTypeConversion(out _) is StructuralTypeShaperExpression s
-                    => s,
+                        && source.UnwrapTypeConversion(out _) is StructuralTypeShaperExpression s =>
+                    s,
 
                 MethodCallExpression mce
                     when mce.TryGetIndexerArguments(
                         RelationalDependencies.Model,
                         out var source2,
                         out _
-                    ) && source2.UnwrapTypeConversion(out _) is StructuralTypeShaperExpression s
-                    => s,
+                    ) && source2.UnwrapTypeConversion(out _) is StructuralTypeShaperExpression s =>
+                    s,
 
                 _ => null,
             };
@@ -3015,8 +3014,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         ) =>
             shaper.ValueBufferExpression switch
             {
-                ProjectionBindingExpression projectionBindingExpression
-                    => (StructuralTypeProjectionExpression)
+                ProjectionBindingExpression projectionBindingExpression =>
+                    (StructuralTypeProjectionExpression)
                         _selectExpression.GetProjection(projectionBindingExpression),
                 StructuralTypeProjectionExpression typeProjection => typeProjection,
                 _ => throw new InvalidOperationException(),
@@ -3546,9 +3545,10 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     // them.
                     FromSqlExpression => false,
 
-                    SelectExpression subquery
-                        => subquery.Projection.FirstOrDefault(p => p.Alias == columnExpression.Name)
-                            is { Expression.TypeMapping: null },
+                    SelectExpression subquery => subquery.Projection.FirstOrDefault(p =>
+                        p.Alias == columnExpression.Name
+                    )
+                        is { Expression.TypeMapping: null },
 
                     JoinExpressionBase => throw new UnreachableException("Impossible: nested join"),
 

@@ -136,25 +136,23 @@ public class ManyToManyData : ISetSource
             nameof(EntityThree) => (IQueryable<TEntity>)_threes.AsQueryable(),
             nameof(EntityCompositeKey) => (IQueryable<TEntity>)_compositeKeys.AsQueryable(),
             nameof(EntityRoot) => (IQueryable<TEntity>)_roots.AsQueryable(),
-            nameof(EntityBranch)
-                => (IQueryable<TEntity>)_roots.OfType<EntityBranch>().AsQueryable(),
+            nameof(EntityBranch) => (IQueryable<TEntity>)
+                _roots.OfType<EntityBranch>().AsQueryable(),
             nameof(EntityLeaf) => (IQueryable<TEntity>)_roots.OfType<EntityLeaf>().AsQueryable(),
-            nameof(UnidirectionalEntityOne)
-                => (IQueryable<TEntity>)_unidirectionalOnes.AsQueryable(),
-            nameof(UnidirectionalEntityTwo)
-                => (IQueryable<TEntity>)_unidirectionalTwos.AsQueryable(),
-            nameof(UnidirectionalEntityThree)
-                => (IQueryable<TEntity>)_unidirectionalThrees.AsQueryable(),
-            nameof(UnidirectionalEntityCompositeKey)
-                => (IQueryable<TEntity>)_unidirectionalCompositeKeys.AsQueryable(),
-            nameof(UnidirectionalEntityRoot)
-                => (IQueryable<TEntity>)_unidirectionalRoots.AsQueryable(),
-            nameof(UnidirectionalEntityBranch)
-                => (IQueryable<TEntity>)
-                    _unidirectionalRoots.OfType<UnidirectionalEntityBranch>().AsQueryable(),
-            nameof(UnidirectionalEntityLeaf)
-                => (IQueryable<TEntity>)
-                    _unidirectionalRoots.OfType<UnidirectionalEntityLeaf>().AsQueryable(),
+            nameof(UnidirectionalEntityOne) => (IQueryable<TEntity>)
+                _unidirectionalOnes.AsQueryable(),
+            nameof(UnidirectionalEntityTwo) => (IQueryable<TEntity>)
+                _unidirectionalTwos.AsQueryable(),
+            nameof(UnidirectionalEntityThree) => (IQueryable<TEntity>)
+                _unidirectionalThrees.AsQueryable(),
+            nameof(UnidirectionalEntityCompositeKey) => (IQueryable<TEntity>)
+                _unidirectionalCompositeKeys.AsQueryable(),
+            nameof(UnidirectionalEntityRoot) => (IQueryable<TEntity>)
+                _unidirectionalRoots.AsQueryable(),
+            nameof(UnidirectionalEntityBranch) => (IQueryable<TEntity>)
+                _unidirectionalRoots.OfType<UnidirectionalEntityBranch>().AsQueryable(),
+            nameof(UnidirectionalEntityLeaf) => (IQueryable<TEntity>)
+                _unidirectionalRoots.OfType<UnidirectionalEntityLeaf>().AsQueryable(),
             _ => throw new InvalidOperationException("Invalid entity type: " + typeof(TEntity)),
         };
 

@@ -209,40 +209,39 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         {
             return invocableNode switch
             {
-                InvocationExpressionSyntax invocationExpression
-                    => GetInvocationExpressionParameterLists(
+                InvocationExpressionSyntax invocationExpression =>
+                    GetInvocationExpressionParameterLists(
                         semanticModel,
                         position,
                         invocationExpression,
                         cancellationToken
                     ),
-                ConstructorInitializerSyntax constructorInitializer
-                    => GetConstructorInitializerParameterLists(
+                ConstructorInitializerSyntax constructorInitializer =>
+                    GetConstructorInitializerParameterLists(
                         semanticModel,
                         position,
                         constructorInitializer,
                         cancellationToken
                     ),
-                ElementAccessExpressionSyntax elementAccessExpression
-                    => GetElementAccessExpressionParameterLists(
+                ElementAccessExpressionSyntax elementAccessExpression =>
+                    GetElementAccessExpressionParameterLists(
                         semanticModel,
                         position,
                         elementAccessExpression,
                         cancellationToken
                     ),
-                BaseObjectCreationExpressionSyntax objectCreationExpression
-                    => GetObjectCreationExpressionParameterLists(
+                BaseObjectCreationExpressionSyntax objectCreationExpression =>
+                    GetObjectCreationExpressionParameterLists(
                         semanticModel,
                         position,
                         objectCreationExpression,
                         cancellationToken
                     ),
-                PrimaryConstructorBaseTypeSyntax baseType
-                    => GetPrimaryConstructorParameterLists(
-                        semanticModel,
-                        baseType,
-                        cancellationToken
-                    ),
+                PrimaryConstructorBaseTypeSyntax baseType => GetPrimaryConstructorParameterLists(
+                    semanticModel,
+                    baseType,
+                    cancellationToken
+                ),
                 _ => null,
             };
         }

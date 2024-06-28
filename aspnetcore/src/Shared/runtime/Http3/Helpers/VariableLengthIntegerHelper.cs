@@ -120,8 +120,8 @@ namespace System.Net.Http
                         InitialOneByteLengthMask => 1,
                         InitialTwoByteLengthMask => 2,
                         InitialFourByteLengthMask => 4,
-                        _
-                            => 8 // LengthEightByte
+                        _ =>
+                            8 // LengthEightByte
                         ,
                     };
 

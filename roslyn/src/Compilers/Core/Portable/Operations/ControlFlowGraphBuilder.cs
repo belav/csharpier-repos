@@ -2414,8 +2414,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 // this check is more complexity than this scenario needs.
                 var argument = arguments[i].Value switch
                 {
-                    IDeclarationExpressionOperation declaration when i < lastIndexForSpilling
-                        => declaration.Expression,
+                    IDeclarationExpressionOperation declaration when i < lastIndexForSpilling =>
+                        declaration.Expression,
                     var value => value,
                 };
 

@@ -66,8 +66,8 @@ internal abstract class VisualStudioOptionStorage
                 {
                     LanguageNames.CSharp => "CSharp",
                     LanguageNames.VisualBasic => "VisualBasic",
-                    _
-                        => language // handles F#, TypeScript and Xaml
+                    _ =>
+                        language // handles F#, TypeScript and Xaml
                     ,
                 }
             );

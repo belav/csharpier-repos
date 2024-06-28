@@ -56,12 +56,11 @@ namespace Internal.TypeSystem.NoMetadata
                             ? GenericVariance.None
                             : runtimeVarianceData[i] switch
                             {
-                                Runtime.GenericVariance.Contravariant
-                                    => GenericVariance.Contravariant,
+                                Runtime.GenericVariance.Contravariant =>
+                                    GenericVariance.Contravariant,
                                 Runtime.GenericVariance.Covariant => GenericVariance.Covariant,
                                 Runtime.GenericVariance.NonVariant
-                                or Runtime.GenericVariance.ArrayCovariant
-                                    => GenericVariance.None,
+                                or Runtime.GenericVariance.ArrayCovariant => GenericVariance.None,
                                 _ => throw new NotImplementedException(),
                             };
                     genericParameters[i] = new RuntimeGenericParameterDesc(

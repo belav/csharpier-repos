@@ -59,10 +59,8 @@ namespace Microsoft.CodeAnalysis.AddRequiredParentheses
         protected static string GetEquivalenceKey(PrecedenceKind precedenceKind) =>
             precedenceKind switch
             {
-                PrecedenceKind.Arithmetic
-                or PrecedenceKind.Shift
-                or PrecedenceKind.Bitwise
-                    => "ArithmeticBinary",
+                PrecedenceKind.Arithmetic or PrecedenceKind.Shift or PrecedenceKind.Bitwise =>
+                    "ArithmeticBinary",
                 PrecedenceKind.Relational or PrecedenceKind.Equality => "RelationalBinary",
                 PrecedenceKind.Logical or PrecedenceKind.Coalesce => "OtherBinary",
                 PrecedenceKind.Other => "Other",

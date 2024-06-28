@@ -157,10 +157,16 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
         {
             var matches = initializer.Parent switch
             {
-                ArrayCreationExpressionSyntax arrayCreation
-                    => TryGetMatches(semanticModel, arrayCreation, cancellationToken),
-                ImplicitArrayCreationExpressionSyntax arrayCreation
-                    => TryGetMatches(semanticModel, arrayCreation, cancellationToken),
+                ArrayCreationExpressionSyntax arrayCreation => TryGetMatches(
+                    semanticModel,
+                    arrayCreation,
+                    cancellationToken
+                ),
+                ImplicitArrayCreationExpressionSyntax arrayCreation => TryGetMatches(
+                    semanticModel,
+                    arrayCreation,
+                    cancellationToken
+                ),
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 

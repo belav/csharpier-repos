@@ -122,16 +122,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                     BuildPropertyNames.MSBuildProjectFullPath => ProjectFilePath,
                     BuildPropertyNames.TargetPath => TargetPath,
                     BuildPropertyNames.AssemblyName => AssemblyName,
-                    BuildPropertyNames.CommandLineArgsForDesignTimeEvaluation
-                        => "-checksumalgorithm:" + ChecksumAlgorithm,
+                    BuildPropertyNames.CommandLineArgsForDesignTimeEvaluation =>
+                        "-checksumalgorithm:" + ChecksumAlgorithm,
                     _ => throw ExceptionUtilities.UnexpectedValue(name),
                 };
 
             public override ImmutableArray<string> GetItemValues(string name) =>
                 name switch
                 {
-                    BuildPropertyNames.IntermediateAssembly
-                        => ImmutableArray.Create(OutputAssembly),
+                    BuildPropertyNames.IntermediateAssembly => ImmutableArray.Create(
+                        OutputAssembly
+                    ),
                     _ => throw ExceptionUtilities.UnexpectedValue(name),
                 };
         }

@@ -387,13 +387,12 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
                 SyntaxKind.CharKeyword => PredefinedType.Char,
                 SyntaxKind.ObjectKeyword => PredefinedType.Object,
                 SyntaxKind.VoidKeyword => PredefinedType.Void,
-                SyntaxKind.IdentifierToken
-                    => token.Text switch
-                    {
-                        "nint" => PredefinedType.IntPtr,
-                        "nuint" => PredefinedType.UIntPtr,
-                        _ => PredefinedType.None,
-                    },
+                SyntaxKind.IdentifierToken => token.Text switch
+                {
+                    "nint" => PredefinedType.IntPtr,
+                    "nuint" => PredefinedType.UIntPtr,
+                    _ => PredefinedType.None,
+                },
                 _ => PredefinedType.None,
             };
 

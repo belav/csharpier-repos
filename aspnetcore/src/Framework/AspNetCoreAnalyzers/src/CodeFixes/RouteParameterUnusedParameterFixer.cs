@@ -127,14 +127,19 @@ public class RouteParameterUnusedParameterFixer : CodeFixProvider
             .WithType(type);
         var updatedMethod = methodSyntax switch
         {
-            BaseMethodDeclarationSyntax declaredMethodSyntax
-                => AddParameter(declaredMethodSyntax, newParameter, routeParameterInsertIndex),
-            ParenthesizedLambdaExpressionSyntax lambdaExpressionSyntax
-                => AddParameter(lambdaExpressionSyntax, newParameter, routeParameterInsertIndex),
-            _
-                => throw new InvalidOperationException(
-                    $"Unexpected method syntax: {methodSyntax.GetType().FullName}"
-                ),
+            BaseMethodDeclarationSyntax declaredMethodSyntax => AddParameter(
+                declaredMethodSyntax,
+                newParameter,
+                routeParameterInsertIndex
+            ),
+            ParenthesizedLambdaExpressionSyntax lambdaExpressionSyntax => AddParameter(
+                lambdaExpressionSyntax,
+                newParameter,
+                routeParameterInsertIndex
+            ),
+            _ => throw new InvalidOperationException(
+                $"Unexpected method syntax: {methodSyntax.GetType().FullName}"
+            ),
         };
 
         // Update document.

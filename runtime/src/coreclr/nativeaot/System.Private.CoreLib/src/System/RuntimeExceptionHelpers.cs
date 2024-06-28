@@ -121,10 +121,10 @@ namespace System
             reason switch
             {
                 RhFailFastReason.InternalError => "Runtime internal error",
-                RhFailFastReason.UnhandledException
-                    => "Unhandled exception: a managed exception was not handled before reaching unmanaged code",
-                RhFailFastReason.UnhandledExceptionFromPInvoke
-                    => "Unhandled exception: an unmanaged exception was thrown out of a managed-to-native transition",
+                RhFailFastReason.UnhandledException =>
+                    "Unhandled exception: a managed exception was not handled before reaching unmanaged code",
+                RhFailFastReason.UnhandledExceptionFromPInvoke =>
+                    "Unhandled exception: an unmanaged exception was thrown out of a managed-to-native transition",
                 RhFailFastReason.EnvironmentFailFast => "Environment.FailFast was called",
                 RhFailFastReason.AssertionFailure => "Assertion failure",
                 _ => "Unknown reason.",

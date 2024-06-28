@@ -221,8 +221,9 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
             {
                 var location = declaringSyntax.GetSyntax() switch
                 {
-                    CSharpSyntax.ClassDeclarationSyntax { BaseList.Types.Count: > 0 } s
-                        => s.BaseList.Types[0].GetLocation(),
+                    CSharpSyntax.ClassDeclarationSyntax { BaseList.Types.Count: > 0 } s => s
+                        .BaseList.Types[0]
+                        .GetLocation(),
                     { } otherSyntax => otherSyntax.GetLocation(),
                 };
 
@@ -328,15 +329,14 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
             CSharpSyntax.InvocationExpressionSyntax
             {
                 Expression: CSharpSyntax.MemberAccessExpressionSyntax memberAccessSyntax
-            }
-                => memberAccessSyntax.Name,
+            } => memberAccessSyntax.Name,
             CSharpSyntax.MemberAccessExpressionSyntax s => s.Name,
             CSharpSyntax.ObjectCreationExpressionSyntax s => s.Type,
             CSharpSyntax.PropertyDeclarationSyntax s => s.Type,
-            CSharpSyntax.VariableDeclaratorSyntax declarator
-                => declarator.Parent is CSharpSyntax.VariableDeclarationSyntax declaration
-                    ? declaration.Type
-                    : declarator,
+            CSharpSyntax.VariableDeclaratorSyntax declarator => declarator.Parent
+                is CSharpSyntax.VariableDeclarationSyntax declaration
+                ? declaration.Type
+                : declarator,
             CSharpSyntax.TypeOfExpressionSyntax s => s.Type,
 
             // TODO: VB syntax narrowing (#22085)

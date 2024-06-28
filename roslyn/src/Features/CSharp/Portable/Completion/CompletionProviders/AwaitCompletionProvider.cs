@@ -49,11 +49,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 // If we have an explicit lambda return type, async should go just before it. Otherwise, it should go before parameter list.
                 // static [|async|] (a) => ....
                 // static [|async|] ExplicitReturnType (a) => ....
-                ParenthesizedLambdaExpressionSyntax parenthesizedLambda
-                    => (
-                        parenthesizedLambda.ReturnType as SyntaxNode
-                        ?? parenthesizedLambda.ParameterList
-                    ).SpanStart,
+                ParenthesizedLambdaExpressionSyntax parenthesizedLambda => (
+                    parenthesizedLambda.ReturnType as SyntaxNode
+                    ?? parenthesizedLambda.ParameterList
+                ).SpanStart,
                 SimpleLambdaExpressionSyntax simpleLambda => simpleLambda.Parameter.SpanStart,
                 _ => throw ExceptionUtilities.UnexpectedValue(declaration.Kind()),
             };
@@ -98,8 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             {
                 // Don't support conditional access someTask?.$$ or c?.TaskReturning().$$ because there is no good completion until
                 // await? is supported by the language https://github.com/dotnet/csharplang/issues/35
-                MemberAccessExpressionSyntax memberAccess
-                    => memberAccess.GetParentConditionalAccessExpression() is null
+                MemberAccessExpressionSyntax memberAccess =>
+                    memberAccess.GetParentConditionalAccessExpression() is null
                         ? memberAccess
                         : null,
                 // someTask.$$.

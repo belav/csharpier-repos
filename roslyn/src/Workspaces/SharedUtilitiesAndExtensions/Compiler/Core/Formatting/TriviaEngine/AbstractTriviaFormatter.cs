@@ -706,16 +706,18 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return rule.IndentationOperation switch
                 {
                     LineColumnRule.IndentationOperations.Absolute => Math.Max(0, rule.Indentation),
-                    LineColumnRule.IndentationOperations.Default
-                        => this.Context.GetBaseIndentation(
-                            trivia2.RawKind == 0 ? this.EndPosition : trivia2.SpanStart
-                        ),
-                    LineColumnRule.IndentationOperations.Given
-                        => (trivia2.RawKind == 0) ? this.Spaces : Math.Max(0, _indentation),
-                    LineColumnRule.IndentationOperations.Follow
-                        => Math.Max(0, lineColumnBeforeTrivia1.Column),
-                    LineColumnRule.IndentationOperations.Preserve
-                        => existingWhitespaceBetween.Spaces,
+                    LineColumnRule.IndentationOperations.Default => this.Context.GetBaseIndentation(
+                        trivia2.RawKind == 0 ? this.EndPosition : trivia2.SpanStart
+                    ),
+                    LineColumnRule.IndentationOperations.Given => (trivia2.RawKind == 0)
+                        ? this.Spaces
+                        : Math.Max(0, _indentation),
+                    LineColumnRule.IndentationOperations.Follow => Math.Max(
+                        0,
+                        lineColumnBeforeTrivia1.Column
+                    ),
+                    LineColumnRule.IndentationOperations.Preserve =>
+                        existingWhitespaceBetween.Spaces,
                     _ => throw ExceptionUtilities.UnexpectedValue(rule.IndentationOperation),
                 };
             }
@@ -723,8 +725,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             // okay, we are not on a its own line, use space information
             return rule.SpaceOperation switch
             {
-                LineColumnRule.SpaceOperations.Preserve
-                    => Math.Max(rule.Spaces, existingWhitespaceBetween.Spaces),
+                LineColumnRule.SpaceOperations.Preserve => Math.Max(
+                    rule.Spaces,
+                    existingWhitespaceBetween.Spaces
+                ),
                 LineColumnRule.SpaceOperations.Force => Math.Max(rule.Spaces, 0),
                 _ => throw ExceptionUtilities.UnexpectedValue(rule.SpaceOperation),
             };

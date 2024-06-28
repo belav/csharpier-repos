@@ -86,12 +86,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         ) =>
             symbol switch
             {
-                IEventSymbol @event
-                    => ImmutableArray<ISymbol>.CastUp(@event.ExplicitInterfaceImplementations),
-                IMethodSymbol method
-                    => ImmutableArray<ISymbol>.CastUp(method.ExplicitInterfaceImplementations),
-                IPropertySymbol property
-                    => ImmutableArray<ISymbol>.CastUp(property.ExplicitInterfaceImplementations),
+                IEventSymbol @event => ImmutableArray<ISymbol>.CastUp(
+                    @event.ExplicitInterfaceImplementations
+                ),
+                IMethodSymbol method => ImmutableArray<ISymbol>.CastUp(
+                    method.ExplicitInterfaceImplementations
+                ),
+                IPropertySymbol property => ImmutableArray<ISymbol>.CastUp(
+                    property.ExplicitInterfaceImplementations
+                ),
                 _ => ImmutableArray.Create<ISymbol>(),
             };
 

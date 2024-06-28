@@ -1197,12 +1197,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 data switch
                 {
                     null => (null, false, false),
-                    { } d
-                        => (
-                            d.Construction,
-                            d.UsesBoolReturns,
-                            d.HasTrailingHandlerValidityParameter
-                        ),
+                    { } d => (
+                        d.Construction,
+                        d.UsesBoolReturns,
+                        d.HasTrailingHandlerValidityParameter
+                    ),
                 };
 
             VisitInterpolatedStringHandlerConstructor(construction);
@@ -3147,8 +3146,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     Conversion: Conversion conversion,
                     Operand: BoundConditionalAccess ca
-                } when CanPropagateStateWhenNotNull(conversion)
-                    => ca,
+                } when CanPropagateStateWhenNotNull(conversion) => ca,
                 _ => null,
             };
 

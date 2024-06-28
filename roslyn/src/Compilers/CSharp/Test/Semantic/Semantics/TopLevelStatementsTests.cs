@@ -8505,27 +8505,22 @@ extern static void internalCallStatic();
                     {
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
-                            + ">g__forwardRef|0_0"
-                            => MethodImplAttributes.ForwardRef,
+                            + ">g__forwardRef|0_0" => MethodImplAttributes.ForwardRef,
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
-                            + ">g__noInlining|0_1"
-                            => MethodImplAttributes.NoInlining,
+                            + ">g__noInlining|0_1" => MethodImplAttributes.NoInlining,
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
-                            + ">g__noOptimization|0_2"
-                            => MethodImplAttributes.NoOptimization,
+                            + ">g__noOptimization|0_2" => MethodImplAttributes.NoOptimization,
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
-                            + ">g__synchronized|0_3"
-                            => MethodImplAttributes.Synchronized,
+                            + ">g__synchronized|0_3" => MethodImplAttributes.Synchronized,
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
-                            + ">g__internalCallStatic|0_4"
-                            => MethodImplAttributes.InternalCall,
+                            + ">g__internalCallStatic|0_4" => MethodImplAttributes.InternalCall,
                         ".ctor" => MethodImplAttributes.IL,
-                        WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
-                            => MethodImplAttributes.IL,
+                        WellKnownMemberNames.TopLevelStatementsEntryPointMethodName =>
+                            MethodImplAttributes.IL,
                         _ => throw TestExceptionUtilities.UnexpectedValue(methodName),
                     };
 

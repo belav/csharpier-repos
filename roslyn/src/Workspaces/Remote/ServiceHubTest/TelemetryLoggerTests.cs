@@ -74,8 +74,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             value switch
             {
                 null => "<null>",
-                TelemetryComplexProperty { Value: IEnumerable<object?> items }
-                    => $"Complex[{string.Join(",", items.Select(InspectPropertyValue))}]",
+                TelemetryComplexProperty { Value: IEnumerable<object?> items } =>
+                    $"Complex[{string.Join(",", items.Select(InspectPropertyValue))}]",
                 _ => value.ToString()!,
             };
 

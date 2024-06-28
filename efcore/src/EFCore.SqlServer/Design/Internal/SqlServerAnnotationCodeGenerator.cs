@@ -470,19 +470,26 @@ public class SqlServerAnnotationCodeGenerator : AnnotationCodeGenerator
     ) =>
         annotation.Name switch
         {
-            SqlServerAnnotationNames.Clustered
-                => (bool)annotation.Value! == false
-                    ? new MethodCallCodeFragment(IndexIsClusteredMethodInfo, false)
-                    : new MethodCallCodeFragment(IndexIsClusteredMethodInfo),
+            SqlServerAnnotationNames.Clustered => (bool)annotation.Value! == false
+                ? new MethodCallCodeFragment(IndexIsClusteredMethodInfo, false)
+                : new MethodCallCodeFragment(IndexIsClusteredMethodInfo),
 
-            SqlServerAnnotationNames.Include
-                => new MethodCallCodeFragment(IndexIncludePropertiesMethodInfo, annotation.Value),
-            SqlServerAnnotationNames.FillFactor
-                => new MethodCallCodeFragment(IndexHasFillFactorMethodInfo, annotation.Value),
-            SqlServerAnnotationNames.SortInTempDb
-                => new MethodCallCodeFragment(IndexSortInTempDbMethodInfo, annotation.Value),
-            SqlServerAnnotationNames.DataCompression
-                => new MethodCallCodeFragment(IndexUseDataCompressionMethodInfo, annotation.Value),
+            SqlServerAnnotationNames.Include => new MethodCallCodeFragment(
+                IndexIncludePropertiesMethodInfo,
+                annotation.Value
+            ),
+            SqlServerAnnotationNames.FillFactor => new MethodCallCodeFragment(
+                IndexHasFillFactorMethodInfo,
+                annotation.Value
+            ),
+            SqlServerAnnotationNames.SortInTempDb => new MethodCallCodeFragment(
+                IndexSortInTempDbMethodInfo,
+                annotation.Value
+            ),
+            SqlServerAnnotationNames.DataCompression => new MethodCallCodeFragment(
+                IndexUseDataCompressionMethodInfo,
+                annotation.Value
+            ),
 
             _ => null,
         };

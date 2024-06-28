@@ -576,18 +576,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
             return destination switch
             {
-                MemberDeclarationSyntax member
-                    => Cast<TDeclarationNode>(member.AddAttributeLists(attributeSyntaxList)),
-                AccessorDeclarationSyntax accessor
-                    => Cast<TDeclarationNode>(accessor.AddAttributeLists(attributeSyntaxList)),
-                CompilationUnitSyntax compilationUnit
-                    => Cast<TDeclarationNode>(
-                        compilationUnit.AddAttributeLists(attributeSyntaxList)
-                    ),
-                ParameterSyntax parameter
-                    => Cast<TDeclarationNode>(parameter.AddAttributeLists(attributeSyntaxList)),
-                TypeParameterSyntax typeParameter
-                    => Cast<TDeclarationNode>(typeParameter.AddAttributeLists(attributeSyntaxList)),
+                MemberDeclarationSyntax member => Cast<TDeclarationNode>(
+                    member.AddAttributeLists(attributeSyntaxList)
+                ),
+                AccessorDeclarationSyntax accessor => Cast<TDeclarationNode>(
+                    accessor.AddAttributeLists(attributeSyntaxList)
+                ),
+                CompilationUnitSyntax compilationUnit => Cast<TDeclarationNode>(
+                    compilationUnit.AddAttributeLists(attributeSyntaxList)
+                ),
+                ParameterSyntax parameter => Cast<TDeclarationNode>(
+                    parameter.AddAttributeLists(attributeSyntaxList)
+                ),
+                TypeParameterSyntax typeParameter => Cast<TDeclarationNode>(
+                    typeParameter.AddAttributeLists(attributeSyntaxList)
+                ),
                 _ => destination,
             };
         }
@@ -1234,30 +1237,26 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         ) =>
             declaration switch
             {
-                BaseTypeDeclarationSyntax typeDeclaration
-                    => Cast<TDeclarationNode>(
-                        typeDeclaration.WithModifiers(
-                            computeNewModifiersList(typeDeclaration.Modifiers)
-                        )
-                    ),
-                BaseFieldDeclarationSyntax fieldDeclaration
-                    => Cast<TDeclarationNode>(
-                        fieldDeclaration.WithModifiers(
-                            computeNewModifiersList(fieldDeclaration.Modifiers)
-                        )
-                    ),
-                BaseMethodDeclarationSyntax methodDeclaration
-                    => Cast<TDeclarationNode>(
-                        methodDeclaration.WithModifiers(
-                            computeNewModifiersList(methodDeclaration.Modifiers)
-                        )
-                    ),
-                BasePropertyDeclarationSyntax propertyDeclaration
-                    => Cast<TDeclarationNode>(
-                        propertyDeclaration.WithModifiers(
-                            computeNewModifiersList(propertyDeclaration.Modifiers)
-                        )
-                    ),
+                BaseTypeDeclarationSyntax typeDeclaration => Cast<TDeclarationNode>(
+                    typeDeclaration.WithModifiers(
+                        computeNewModifiersList(typeDeclaration.Modifiers)
+                    )
+                ),
+                BaseFieldDeclarationSyntax fieldDeclaration => Cast<TDeclarationNode>(
+                    fieldDeclaration.WithModifiers(
+                        computeNewModifiersList(fieldDeclaration.Modifiers)
+                    )
+                ),
+                BaseMethodDeclarationSyntax methodDeclaration => Cast<TDeclarationNode>(
+                    methodDeclaration.WithModifiers(
+                        computeNewModifiersList(methodDeclaration.Modifiers)
+                    )
+                ),
+                BasePropertyDeclarationSyntax propertyDeclaration => Cast<TDeclarationNode>(
+                    propertyDeclaration.WithModifiers(
+                        computeNewModifiersList(propertyDeclaration.Modifiers)
+                    )
+                ),
                 _ => declaration,
             };
 

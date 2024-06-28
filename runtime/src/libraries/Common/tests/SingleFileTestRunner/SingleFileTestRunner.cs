@@ -157,10 +157,9 @@ public class SingleFileTestRunner : XunitTestFramework
                     "assemblies" => (true, false),
                     "collections" => (false, true),
                     "none" => (false, false),
-                    _
-                        => throw new ArgumentException(
-                            $"Unknown parallelism option '{parallelismArg}'."
-                        ),
+                    _ => throw new ArgumentException(
+                        $"Unknown parallelism option '{parallelismArg}'."
+                    ),
                 };
 
                 assemblyConfig.ParallelizeAssembly = parallelizeAssemblies;

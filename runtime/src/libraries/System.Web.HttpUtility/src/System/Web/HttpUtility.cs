@@ -148,10 +148,9 @@ namespace System.Web
             {
                 null => null,
                 IHtmlString ihs => ihs.ToHtmlString() ?? string.Empty,
-                _
-                    => HtmlEncode(
-                        Convert.ToString(value, CultureInfo.CurrentCulture) ?? string.Empty
-                    ),
+                _ => HtmlEncode(
+                    Convert.ToString(value, CultureInfo.CurrentCulture) ?? string.Empty
+                ),
             };
 
         public static void HtmlEncode(string? s, TextWriter output) =>

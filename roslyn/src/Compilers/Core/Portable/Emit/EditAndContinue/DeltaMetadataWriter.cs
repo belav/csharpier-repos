@@ -892,8 +892,10 @@ namespace Microsoft.CodeAnalysis.Emit
             item switch
             {
                 IMethodDefinition methodDef => TryGetExistingMethodDefIndex(methodDef, out _),
-                IPropertyDefinition propertyDef
-                    => TryGetExistingPropertyDefIndex(propertyDef, out _),
+                IPropertyDefinition propertyDef => TryGetExistingPropertyDefIndex(
+                    propertyDef,
+                    out _
+                ),
                 IFieldDefinition fieldDef => TryGetExistingFieldDefIndex(fieldDef, out _),
                 IEventDefinition eventDef => TryGetExistingEventDefIndex(eventDef, out _),
                 _ => false,

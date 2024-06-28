@@ -401,16 +401,15 @@ public class RoutePatternParserTests
                     (
                         RoutePatternParameterPart xParameterPart,
                         RoutePatternParameterPart yParameterPart
+                    ) => string.Equals(
+                        xParameterPart.Name,
+                        yParameterPart.Name,
+                        StringComparison.OrdinalIgnoreCase
                     )
-                        => string.Equals(
-                            xParameterPart.Name,
-                            yParameterPart.Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                            && xParameterPart.IsOptional == yParameterPart.IsOptional
-                            && xParameterPart.IsCatchAll == yParameterPart.IsCatchAll,
-                    (RoutePatternLiteralPart xLiteralPart, RoutePatternLiteralPart yLiteralPart)
-                        => string.Equals(
+                        && xParameterPart.IsOptional == yParameterPart.IsOptional
+                        && xParameterPart.IsCatchAll == yParameterPart.IsCatchAll,
+                    (RoutePatternLiteralPart xLiteralPart, RoutePatternLiteralPart yLiteralPart) =>
+                        string.Equals(
                             xLiteralPart.Content,
                             yLiteralPart.Content,
                             StringComparison.OrdinalIgnoreCase

@@ -62,18 +62,26 @@ public class SqlExpressionFactory : ISqlExpressionFactory
         {
             null or { TypeMapping: not null } => sqlExpression,
 
-            SqlConditionalExpression sqlConditionalExpression
-                => ApplyTypeMappingOnSqlConditional(sqlConditionalExpression, typeMapping),
-            SqlBinaryExpression sqlBinaryExpression
-                => ApplyTypeMappingOnSqlBinary(sqlBinaryExpression, typeMapping),
-            SqlUnaryExpression sqlUnaryExpression
-                => ApplyTypeMappingOnSqlUnary(sqlUnaryExpression, typeMapping),
-            SqlConstantExpression sqlConstantExpression
-                => sqlConstantExpression.ApplyTypeMapping(typeMapping),
-            SqlParameterExpression sqlParameterExpression
-                => sqlParameterExpression.ApplyTypeMapping(typeMapping),
-            SqlFunctionExpression sqlFunctionExpression
-                => sqlFunctionExpression.ApplyTypeMapping(typeMapping),
+            SqlConditionalExpression sqlConditionalExpression => ApplyTypeMappingOnSqlConditional(
+                sqlConditionalExpression,
+                typeMapping
+            ),
+            SqlBinaryExpression sqlBinaryExpression => ApplyTypeMappingOnSqlBinary(
+                sqlBinaryExpression,
+                typeMapping
+            ),
+            SqlUnaryExpression sqlUnaryExpression => ApplyTypeMappingOnSqlUnary(
+                sqlUnaryExpression,
+                typeMapping
+            ),
+            SqlConstantExpression sqlConstantExpression => sqlConstantExpression.ApplyTypeMapping(
+                typeMapping
+            ),
+            SqlParameterExpression sqlParameterExpression =>
+                sqlParameterExpression.ApplyTypeMapping(typeMapping),
+            SqlFunctionExpression sqlFunctionExpression => sqlFunctionExpression.ApplyTypeMapping(
+                typeMapping
+            ),
 
             _ => sqlExpression,
         };

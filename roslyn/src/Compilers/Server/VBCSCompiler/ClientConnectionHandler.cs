@@ -135,8 +135,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         {
             var message = response switch
             {
-                RejectedBuildResponse r
-                    => $"Writing {r.Type} response '{r.Reason}' for {requestId}",
+                RejectedBuildResponse r =>
+                    $"Writing {r.Type} response '{r.Reason}' for {requestId}",
                 _ => $"Writing {response.Type} response for {requestId}",
             };
             Logger.Log(message);
@@ -180,11 +180,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                             // Once there is an analyzer inconsistency the assembly load space is polluted. The
                             // request is an error.
                             AnalyzerInconsistencyBuildResponse _ => CompletionData.RequestError,
-                            _
-                                => new CompletionData(
-                                    CompletionReason.RequestCompleted,
-                                    newKeepAlive: CheckForNewKeepAlive(request)
-                                ),
+                            _ => new CompletionData(
+                                CompletionReason.RequestCompleted,
+                                newKeepAlive: CheckForNewKeepAlive(request)
+                            ),
                         };
                     }
                     catch (Exception ex)

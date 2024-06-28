@@ -271,8 +271,8 @@ namespace Microsoft.Interop
         {
             return (type, other) switch
             {
-                (INamedTypeSymbol namedType, INamedTypeSymbol namedOther)
-                    => SymbolEqualityComparer.Default.Equals(
+                (INamedTypeSymbol namedType, INamedTypeSymbol namedOther) =>
+                    SymbolEqualityComparer.Default.Equals(
                         namedType.ConstructedFrom,
                         namedOther.ConstructedFrom
                     ),

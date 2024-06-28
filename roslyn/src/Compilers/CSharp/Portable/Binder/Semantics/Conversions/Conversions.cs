@@ -105,10 +105,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         WellKnownMember? member = defaultValue.SpecialType switch
                         {
-                            SpecialType.System_Decimal
-                                => WellKnownMember.System_Runtime_CompilerServices_DecimalConstantAttribute__ctor,
-                            SpecialType.System_DateTime
-                                => WellKnownMember.System_Runtime_CompilerServices_DateTimeConstantAttribute__ctor,
+                            SpecialType.System_Decimal =>
+                                WellKnownMember.System_Runtime_CompilerServices_DecimalConstantAttribute__ctor,
+                            SpecialType.System_DateTime =>
+                                WellKnownMember.System_Runtime_CompilerServices_DateTimeConstantAttribute__ctor,
                             _ => null,
                         };
                         if (member != null)
@@ -377,18 +377,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 return element switch
                 {
-                    BoundCollectionExpressionSpreadElement spreadElement
-                        => GetCollectionExpressionSpreadElementConversion(
+                    BoundCollectionExpressionSpreadElement spreadElement =>
+                        GetCollectionExpressionSpreadElementConversion(
                             spreadElement,
                             elementType,
                             ref useSiteInfo
                         ),
-                    _
-                        => ClassifyImplicitConversionFromExpression(
-                            (BoundExpression)element,
-                            elementType,
-                            ref useSiteInfo
-                        ),
+                    _ => ClassifyImplicitConversionFromExpression(
+                        (BoundExpression)element,
+                        elementType,
+                        ref useSiteInfo
+                    ),
                 };
             }
         }

@@ -1197,10 +1197,9 @@ namespace Microsoft.Cci
                     {
                         MetadataImageKind.Assembly => 1,
                         MetadataImageKind.Module => 0,
-                        _
-                            => throw ExceptionUtilities.UnexpectedValue(
-                                portableReference.Properties.Kind
-                            ),
+                        _ => throw ExceptionUtilities.UnexpectedValue(
+                            portableReference.Properties.Kind
+                        ),
                     };
 
                     builder.WriteByte(kindAndEmbedInteropTypes);

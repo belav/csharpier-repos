@@ -89,8 +89,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 {
                     // Strict mode doesn't allow comments at all.
                     JsonKind.MultiLineCommentTrivia
-                    or JsonKind.SingleLineCommentTrivia when !allowComments
-                        => new EmbeddedDiagnostic(
+                    or JsonKind.SingleLineCommentTrivia when !allowComments =>
+                        new EmbeddedDiagnostic(
                             FeaturesResources.Comments_not_allowed,
                             GetSpan(trivia.VirtualChars)
                         ),
@@ -218,8 +218,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                     // These are all json.net extensions.  Disallow them all.
                     JsonKind.NaNLiteralToken
                     or JsonKind.InfinityLiteralToken
-                    or JsonKind.UndefinedLiteralToken
-                        => InvalidLiteral(node.LiteralToken),
+                    or JsonKind.UndefinedLiteralToken => InvalidLiteral(node.LiteralToken),
                     JsonKind.NumberToken => CheckNumber(node.LiteralToken, allowComments),
                     JsonKind.StringToken => CheckString(node.LiteralToken, allowComments),
                     _ => null,

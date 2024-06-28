@@ -444,30 +444,24 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return nestedConversion.Kind switch
             {
-                ConversionKind.Identity
-                    => kind == ConversionKind.ImplicitNullable
-                        ? ImplicitNullableWithIdentityUnderlying
-                        : ExplicitNullableWithIdentityUnderlying,
-                ConversionKind.ImplicitConstant
-                    => kind == ConversionKind.ImplicitNullable
-                        ? ImplicitNullableWithImplicitConstantUnderlying
-                        : ExplicitNullableWithImplicitConstantUnderlying,
-                ConversionKind.ImplicitNumeric
-                    => kind == ConversionKind.ImplicitNullable
-                        ? ImplicitNullableWithImplicitNumericUnderlying
-                        : ExplicitNullableWithImplicitNumericUnderlying,
-                ConversionKind.ExplicitNumeric
-                    => kind == ConversionKind.ImplicitNullable
-                        ? ImplicitNullableWithExplicitNumericUnderlying
-                        : ExplicitNullableWithExplicitNumericUnderlying,
-                ConversionKind.ExplicitEnumeration
-                    => kind == ConversionKind.ImplicitNullable
-                        ? ImplicitNullableWithExplicitEnumerationUnderlying
-                        : ExplicitNullableWithExplicitEnumerationUnderlying,
-                ConversionKind.ExplicitPointerToInteger
-                    => kind == ConversionKind.ImplicitNullable
-                        ? ImplicitNullableWithPointerToIntegerUnderlying
-                        : ExplicitNullableWithPointerToIntegerUnderlying,
+                ConversionKind.Identity => kind == ConversionKind.ImplicitNullable
+                    ? ImplicitNullableWithIdentityUnderlying
+                    : ExplicitNullableWithIdentityUnderlying,
+                ConversionKind.ImplicitConstant => kind == ConversionKind.ImplicitNullable
+                    ? ImplicitNullableWithImplicitConstantUnderlying
+                    : ExplicitNullableWithImplicitConstantUnderlying,
+                ConversionKind.ImplicitNumeric => kind == ConversionKind.ImplicitNullable
+                    ? ImplicitNullableWithImplicitNumericUnderlying
+                    : ExplicitNullableWithImplicitNumericUnderlying,
+                ConversionKind.ExplicitNumeric => kind == ConversionKind.ImplicitNullable
+                    ? ImplicitNullableWithExplicitNumericUnderlying
+                    : ExplicitNullableWithExplicitNumericUnderlying,
+                ConversionKind.ExplicitEnumeration => kind == ConversionKind.ImplicitNullable
+                    ? ImplicitNullableWithExplicitEnumerationUnderlying
+                    : ExplicitNullableWithExplicitEnumerationUnderlying,
+                ConversionKind.ExplicitPointerToInteger => kind == ConversionKind.ImplicitNullable
+                    ? ImplicitNullableWithPointerToIntegerUnderlying
+                    : ExplicitNullableWithPointerToIntegerUnderlying,
                 _ => new Conversion(kind, ImmutableArray.Create(nestedConversion)),
             };
         }

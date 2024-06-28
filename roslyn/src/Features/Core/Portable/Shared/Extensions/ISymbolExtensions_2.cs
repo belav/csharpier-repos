@@ -221,34 +221,36 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             return symbol switch
             {
-                IParameterSymbol parameter
-                    => GetParameterDocumentation(parameter, compilation, cancellationToken)
-                        ?? DocumentationComment.Empty,
-                ITypeParameterSymbol typeParam
-                    => typeParam
-                        .ContainingSymbol.GetDocumentationComment(
-                            compilation,
-                            expandIncludes: true,
-                            expandInheritdoc: true,
-                            cancellationToken: cancellationToken
-                        )
-                        ?.GetTypeParameter(typeParam.Name) ?? DocumentationComment.Empty,
-                IMethodSymbol method
-                    => GetMethodDocumentation(method, compilation, cancellationToken),
-                IAliasSymbol alias
-                    => alias.Target.GetDocumentationComment(
+                IParameterSymbol parameter => GetParameterDocumentation(
+                    parameter,
+                    compilation,
+                    cancellationToken
+                ) ?? DocumentationComment.Empty,
+                ITypeParameterSymbol typeParam => typeParam
+                    .ContainingSymbol.GetDocumentationComment(
                         compilation,
                         expandIncludes: true,
                         expandInheritdoc: true,
                         cancellationToken: cancellationToken
-                    ),
-                _
-                    => symbol.GetDocumentationComment(
-                        compilation,
-                        expandIncludes: true,
-                        expandInheritdoc: true,
-                        cancellationToken: cancellationToken
-                    ),
+                    )
+                    ?.GetTypeParameter(typeParam.Name) ?? DocumentationComment.Empty,
+                IMethodSymbol method => GetMethodDocumentation(
+                    method,
+                    compilation,
+                    cancellationToken
+                ),
+                IAliasSymbol alias => alias.Target.GetDocumentationComment(
+                    compilation,
+                    expandIncludes: true,
+                    expandInheritdoc: true,
+                    cancellationToken: cancellationToken
+                ),
+                _ => symbol.GetDocumentationComment(
+                    compilation,
+                    expandIncludes: true,
+                    expandInheritdoc: true,
+                    cancellationToken: cancellationToken
+                ),
             };
         }
 

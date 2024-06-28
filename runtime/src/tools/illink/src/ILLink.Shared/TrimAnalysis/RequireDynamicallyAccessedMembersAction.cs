@@ -116,19 +116,18 @@ namespace ILLink.Shared.TrimAnalysis
                 {
                     DiagnosticId diagnosticId = targetValue switch
                     {
-                        MethodParameterValue maybeThis when maybeThis.IsThisParameter()
-                            => DiagnosticId.ImplicitThisCannotBeStaticallyDetermined,
-                        MethodParameterValue
-                            => DiagnosticId.MethodParameterCannotBeStaticallyDetermined,
-                        MethodReturnValue
-                            => DiagnosticId.MethodReturnValueCannotBeStaticallyDetermined,
+                        MethodParameterValue maybeThis when maybeThis.IsThisParameter() =>
+                            DiagnosticId.ImplicitThisCannotBeStaticallyDetermined,
+                        MethodParameterValue =>
+                            DiagnosticId.MethodParameterCannotBeStaticallyDetermined,
+                        MethodReturnValue =>
+                            DiagnosticId.MethodReturnValueCannotBeStaticallyDetermined,
                         FieldValue => DiagnosticId.FieldValueCannotBeStaticallyDetermined,
-                        GenericParameterValue
-                            => DiagnosticId.TypePassedToGenericParameterCannotBeStaticallyDetermined,
-                        _
-                            => throw new NotImplementedException(
-                                $"unsupported target value {targetValue}"
-                            ),
+                        GenericParameterValue =>
+                            DiagnosticId.TypePassedToGenericParameterCannotBeStaticallyDetermined,
+                        _ => throw new NotImplementedException(
+                            $"unsupported target value {targetValue}"
+                        ),
                     };
 
                     _diagnosticContext.AddDiagnostic(

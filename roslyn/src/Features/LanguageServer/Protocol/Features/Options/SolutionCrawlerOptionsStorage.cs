@@ -112,8 +112,8 @@ internal static class SolutionCrawlerOptionsStorage
 
         return globalOptions.GetOption(SolutionBackgroundAnalysisScopeOption) switch
         {
-            BackgroundAnalysisScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics
-                => CompilerDiagnosticsScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics,
+            BackgroundAnalysisScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics =>
+                CompilerDiagnosticsScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics,
             BackgroundAnalysisScope.OpenFiles => CompilerDiagnosticsScope.OpenFiles,
             BackgroundAnalysisScope.FullSolution => CompilerDiagnosticsScope.FullSolution,
             BackgroundAnalysisScope.None => CompilerDiagnosticsScope.None,

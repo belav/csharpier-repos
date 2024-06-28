@@ -3370,17 +3370,15 @@ namespace System
                     {
                         mode = formatAs switch
                         {
-                            V1ToStringUnescape
-                                => (
-                                    InFact(Flags.UserEscaped)
-                                        ? UnescapeMode.Unescape
-                                        : UnescapeMode.EscapeUnescape
-                                ) | UnescapeMode.V1ToStringFlag,
-                            UriFormat.Unescaped => UnescapeMode.Unescape | UnescapeMode.UnescapeAll,
-                            _
-                                => InFact(Flags.UserEscaped)
+                            V1ToStringUnescape => (
+                                InFact(Flags.UserEscaped)
                                     ? UnescapeMode.Unescape
-                                    : UnescapeMode.EscapeUnescape,
+                                    : UnescapeMode.EscapeUnescape
+                            ) | UnescapeMode.V1ToStringFlag,
+                            UriFormat.Unescaped => UnescapeMode.Unescape | UnescapeMode.UnescapeAll,
+                            _ => InFact(Flags.UserEscaped)
+                                ? UnescapeMode.Unescape
+                                : UnescapeMode.EscapeUnescape,
                         };
                     }
                 }
@@ -3429,17 +3427,15 @@ namespace System
                     {
                         mode = formatAs switch
                         {
-                            V1ToStringUnescape
-                                => (
-                                    InFact(Flags.UserEscaped)
-                                        ? UnescapeMode.Unescape
-                                        : UnescapeMode.EscapeUnescape
-                                ) | UnescapeMode.V1ToStringFlag,
-                            UriFormat.Unescaped => UnescapeMode.Unescape | UnescapeMode.UnescapeAll,
-                            _
-                                => InFact(Flags.UserEscaped)
+                            V1ToStringUnescape => (
+                                InFact(Flags.UserEscaped)
                                     ? UnescapeMode.Unescape
-                                    : UnescapeMode.EscapeUnescape,
+                                    : UnescapeMode.EscapeUnescape
+                            ) | UnescapeMode.V1ToStringFlag,
+                            UriFormat.Unescaped => UnescapeMode.Unescape | UnescapeMode.UnescapeAll,
+                            _ => InFact(Flags.UserEscaped)
+                                ? UnescapeMode.Unescape
+                                : UnescapeMode.EscapeUnescape,
                         };
                     }
                 }

@@ -80,8 +80,7 @@ public class ILVerifier : IResolver, IDisposable
                 // ex. localloc cannot be statically verified by ILVerify
                 or VerifierError.Unverifiable
                 // initlocals must be set for verifiable methods with one or more local variables - Lots of these in class libraries
-                or VerifierError.InitLocals
-                    => false,
+                or VerifierError.InitLocals => false,
                 _ => true,
             }
         );

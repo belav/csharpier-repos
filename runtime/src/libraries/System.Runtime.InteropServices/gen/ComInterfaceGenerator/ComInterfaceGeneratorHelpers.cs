@@ -111,14 +111,14 @@ namespace Microsoft.Interop
         ) =>
             (env.HasFlag(EnvironmentFlags.DisableRuntimeMarshalling), direction) switch
             {
-                (true, MarshalDirection.ManagedToUnmanaged)
-                    => s_managedToUnmanagedDisabledMarshallingGeneratorFactory,
-                (true, MarshalDirection.UnmanagedToManaged)
-                    => s_unmanagedToManagedDisabledMarshallingGeneratorFactory,
-                (false, MarshalDirection.ManagedToUnmanaged)
-                    => s_managedToUnmanagedEnabledMarshallingGeneratorFactory,
-                (false, MarshalDirection.UnmanagedToManaged)
-                    => s_unmanagedToManagedEnabledMarshallingGeneratorFactory,
+                (true, MarshalDirection.ManagedToUnmanaged) =>
+                    s_managedToUnmanagedDisabledMarshallingGeneratorFactory,
+                (true, MarshalDirection.UnmanagedToManaged) =>
+                    s_unmanagedToManagedDisabledMarshallingGeneratorFactory,
+                (false, MarshalDirection.ManagedToUnmanaged) =>
+                    s_managedToUnmanagedEnabledMarshallingGeneratorFactory,
+                (false, MarshalDirection.UnmanagedToManaged) =>
+                    s_unmanagedToManagedEnabledMarshallingGeneratorFactory,
                 _ => throw new UnreachableException(),
             };
     }

@@ -1847,12 +1847,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     {
                         var returnTypeSyntax = this.SyntaxNode switch
                         {
-                            MethodDeclarationSyntax { ReturnType: var methodReturnType }
-                                => methodReturnType,
-                            LocalFunctionStatementSyntax { ReturnType: var localReturnType }
-                                => localReturnType,
-                            ParenthesizedLambdaExpressionSyntax { ReturnType: { } lambdaReturnType }
-                                => lambdaReturnType,
+                            MethodDeclarationSyntax { ReturnType: var methodReturnType } =>
+                                methodReturnType,
+                            LocalFunctionStatementSyntax { ReturnType: var localReturnType } =>
+                                localReturnType,
+                            ParenthesizedLambdaExpressionSyntax
+                            {
+                                ReturnType: { } lambdaReturnType
+                            } => lambdaReturnType,
                             var unexpected => throw ExceptionUtilities.UnexpectedValue(unexpected),
                         };
 

@@ -124,10 +124,9 @@ namespace {TestNamespace}{suiteNamespacePart}
                     ClassDeclarationSyntax classSyntax => $"{classSyntax.Identifier.ValueText}",
                     NamespaceDeclarationSyntax namespaceSyntax => $"{namespaceSyntax.Name}",
                     CompilationUnitSyntax => null,
-                    _
-                        => throw new NotImplementedException(
-                            $"GetFullName for node type {node.GetType()}"
-                        ),
+                    _ => throw new NotImplementedException(
+                        $"GetFullName for node type {node.GetType()}"
+                    ),
                 };
 
                 if (name == null)

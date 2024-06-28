@@ -90,10 +90,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 {
                     return metadataReference switch
                     {
-                        PortableExecutableReference portableExecutableReference
-                            => portableExecutableReference.FilePath,
-                        UnresolvedMetadataReference unresolvedMetadataReference
-                            => unresolvedMetadataReference.Reference,
+                        PortableExecutableReference portableExecutableReference =>
+                            portableExecutableReference.FilePath,
+                        UnresolvedMetadataReference unresolvedMetadataReference =>
+                            unresolvedMetadataReference.Reference,
                         _ => null,
                     };
                 }

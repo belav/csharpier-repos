@@ -373,10 +373,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         {
             var diagnosticModeOption = context.ServerKind switch
             {
-                WellKnownLspServerKinds.LiveShareLspServer
-                    => InternalDiagnosticsOptionsStorage.LiveShareDiagnosticMode,
-                WellKnownLspServerKinds.RazorLspServer
-                    => InternalDiagnosticsOptionsStorage.RazorDiagnosticMode,
+                WellKnownLspServerKinds.LiveShareLspServer =>
+                    InternalDiagnosticsOptionsStorage.LiveShareDiagnosticMode,
+                WellKnownLspServerKinds.RazorLspServer =>
+                    InternalDiagnosticsOptionsStorage.RazorDiagnosticMode,
                 _ => InternalDiagnosticsOptionsStorage.NormalDiagnosticMode,
             };
 
@@ -677,10 +677,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 // that will hide the item in a client that knows about those tags.
                 DiagnosticSeverity.Hidden => LSP.DiagnosticSeverity.Hint,
                 // VSCode shows information diagnostics as blue squiggles, and hint diagnostics as 3 dots.  We prefer the latter rendering so we return hint diagnostics in vscode.
-                DiagnosticSeverity.Info
-                    => clientCapabilities.HasVisualStudioLspCapability()
-                        ? LSP.DiagnosticSeverity.Information
-                        : LSP.DiagnosticSeverity.Hint,
+                DiagnosticSeverity.Info => clientCapabilities.HasVisualStudioLspCapability()
+                    ? LSP.DiagnosticSeverity.Information
+                    : LSP.DiagnosticSeverity.Hint,
                 DiagnosticSeverity.Warning => LSP.DiagnosticSeverity.Warning,
                 DiagnosticSeverity.Error => LSP.DiagnosticSeverity.Error,
                 _ => throw ExceptionUtilities.UnexpectedValue(severity),

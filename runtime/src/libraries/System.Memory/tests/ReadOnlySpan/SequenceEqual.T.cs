@@ -118,11 +118,10 @@ namespace System.SpanTests
                         {
                             0 => firstSpan.SequenceEqual(secondSpan),
                             1 => firstSpan.SequenceEqual(secondSpan, null),
-                            _
-                                => firstSpan.SequenceEqual(
-                                    secondSpan,
-                                    EqualityComparer<TInt>.Default
-                                ),
+                            _ => firstSpan.SequenceEqual(
+                                secondSpan,
+                                EqualityComparer<TInt>.Default
+                            ),
                         }
                     );
 

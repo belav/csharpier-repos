@@ -111,8 +111,7 @@ namespace System.Runtime.InteropServices
                     Interop.Errors.ERROR_FILE_NOT_FOUND
                     or Interop.Errors.ERROR_PATH_NOT_FOUND
                     or Interop.Errors.ERROR_MOD_NOT_FOUND
-                    or Interop.Errors.ERROR_DLL_NOT_FOUND
-                        => PriorityNotFound,
+                    or Interop.Errors.ERROR_DLL_NOT_FOUND => PriorityNotFound,
 
                     // If we can't access a location, we can't know if the dll's there or if it's good.
                     // Still, this is probably more unusual (and thus of more interest) than a dll-not-found

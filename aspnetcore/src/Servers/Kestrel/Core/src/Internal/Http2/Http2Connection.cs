@@ -732,11 +732,10 @@ internal sealed partial class Http2Connection
             Http2FrameType.PRIORITY => ProcessPriorityFrameAsync(),
             Http2FrameType.RST_STREAM => ProcessRstStreamFrameAsync(),
             Http2FrameType.SETTINGS => ProcessSettingsFrameAsync(payload),
-            Http2FrameType.PUSH_PROMISE
-                => throw new Http2ConnectionErrorException(
-                    CoreStrings.Http2ErrorPushPromiseReceived,
-                    Http2ErrorCode.PROTOCOL_ERROR
-                ),
+            Http2FrameType.PUSH_PROMISE => throw new Http2ConnectionErrorException(
+                CoreStrings.Http2ErrorPushPromiseReceived,
+                Http2ErrorCode.PROTOCOL_ERROR
+            ),
             Http2FrameType.PING => ProcessPingFrameAsync(payload),
             Http2FrameType.GOAWAY => ProcessGoAwayFrameAsync(),
             Http2FrameType.WINDOW_UPDATE => ProcessWindowUpdateFrameAsync(),

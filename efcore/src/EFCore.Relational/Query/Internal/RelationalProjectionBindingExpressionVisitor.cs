@@ -141,19 +141,17 @@ public class RelationalProjectionBindingExpressionVisitor : ExpressionVisitor
                     case ProjectionBindingExpression projectionBindingExpression:
                         return _selectExpression.GetProjection(projectionBindingExpression) switch
                         {
-                            StructuralTypeProjectionExpression projection
-                                => AddClientProjection(projection, typeof(ValueBuffer)),
-                            SqlExpression mappedSqlExpression
-                                => AddClientProjection(
-                                    mappedSqlExpression,
-                                    expression.Type.MakeNullable()
-                                ),
-                            _
-                                => throw new InvalidOperationException(
-                                    CoreStrings.TranslationFailed(
-                                        projectionBindingExpression.Print()
-                                    )
-                                ),
+                            StructuralTypeProjectionExpression projection => AddClientProjection(
+                                projection,
+                                typeof(ValueBuffer)
+                            ),
+                            SqlExpression mappedSqlExpression => AddClientProjection(
+                                mappedSqlExpression,
+                                expression.Type.MakeNullable()
+                            ),
+                            _ => throw new InvalidOperationException(
+                                CoreStrings.TranslationFailed(projectionBindingExpression.Print())
+                            ),
                         };
 
                     case MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression:

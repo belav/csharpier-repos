@@ -98,14 +98,18 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return (type.SpecialType, symValue) switch
             {
                 (SpecialType.System_Boolean, short shortVal) => ConstantValue.Create(shortVal != 0),
-                (SpecialType.System_Byte, short shortVal) when unchecked((byte)shortVal) == shortVal
-                    => ConstantValue.Create((byte)shortVal),
+                (SpecialType.System_Byte, short shortVal)
+                    when unchecked((byte)shortVal) == shortVal => ConstantValue.Create(
+                    (byte)shortVal
+                ),
                 (SpecialType.System_SByte, short shortVal)
-                    when unchecked((sbyte)shortVal) == shortVal
-                    => ConstantValue.Create((sbyte)shortVal),
+                    when unchecked((sbyte)shortVal) == shortVal => ConstantValue.Create(
+                    (sbyte)shortVal
+                ),
                 (SpecialType.System_Int16, short shortVal) => ConstantValue.Create(shortVal),
-                (SpecialType.System_Char, ushort ushortVal)
-                    => ConstantValue.Create((char)ushortVal),
+                (SpecialType.System_Char, ushort ushortVal) => ConstantValue.Create(
+                    (char)ushortVal
+                ),
                 (SpecialType.System_UInt16, ushort ushortVal) => ConstantValue.Create(ushortVal),
                 (SpecialType.System_Int32, int intVal) => ConstantValue.Create(intVal),
                 (SpecialType.System_UInt32, uint uintVal) => ConstantValue.Create(uintVal),
@@ -117,10 +121,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 (SpecialType.System_String, null) => ConstantValue.Create(string.Empty),
                 (SpecialType.System_String, string str) => ConstantValue.Create(str),
                 (SpecialType.System_Object, 0) => ConstantValue.Null,
-                (SpecialType.System_Decimal, decimal decimalValue)
-                    => ConstantValue.Create(decimalValue),
-                (SpecialType.System_DateTime, double doubleVal)
-                    => ConstantValue.Create(DateTimeUtilities.ToDateTime(doubleVal)),
+                (SpecialType.System_Decimal, decimal decimalValue) => ConstantValue.Create(
+                    decimalValue
+                ),
+                (SpecialType.System_DateTime, double doubleVal) => ConstantValue.Create(
+                    DateTimeUtilities.ToDateTime(doubleVal)
+                ),
                 (SpecialType.None, 0) when type.IsReferenceType => ConstantValue.Null,
                 _ => ConstantValue.Bad,
             };

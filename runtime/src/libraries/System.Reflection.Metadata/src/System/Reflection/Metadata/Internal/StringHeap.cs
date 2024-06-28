@@ -239,8 +239,11 @@ namespace System.Reflection.Metadata.Ecma335
             return handle.StringKind switch
             {
                 StringKind.Virtual => GetVirtualString(handle.GetVirtualIndex()),
-                StringKind.WinRTPrefixed
-                    => GetNonVirtualString(handle, utf8Decoder, MetadataReader.WinRTPrefix),
+                StringKind.WinRTPrefixed => GetNonVirtualString(
+                    handle,
+                    utf8Decoder,
+                    MetadataReader.WinRTPrefix
+                ),
                 _ => throw ExceptionUtilities.UnexpectedValue(handle.StringKind),
             };
         }
@@ -256,10 +259,13 @@ namespace System.Reflection.Metadata.Ecma335
                 {
                     byte[] bytes = handle.StringKind switch
                     {
-                        StringKind.Virtual
-                            => Encoding.UTF8.GetBytes(GetVirtualString(handle.GetVirtualIndex())),
-                        StringKind.WinRTPrefixed
-                            => GetNonVirtualStringBytes(handle, MetadataReader.WinRTPrefix),
+                        StringKind.Virtual => Encoding.UTF8.GetBytes(
+                            GetVirtualString(handle.GetVirtualIndex())
+                        ),
+                        StringKind.WinRTPrefixed => GetNonVirtualStringBytes(
+                            handle,
+                            MetadataReader.WinRTPrefix
+                        ),
                         _ => throw ExceptionUtilities.UnexpectedValue(handle.StringKind),
                     };
                     block = heap.AddBlob(handle.RawValue, bytes);

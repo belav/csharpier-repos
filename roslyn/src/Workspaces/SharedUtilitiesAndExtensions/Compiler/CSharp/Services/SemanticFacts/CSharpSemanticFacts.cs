@@ -420,12 +420,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return node switch
             {
-                AssignmentExpressionSyntax _ when token.Kind() == SyntaxKind.EqualsToken
-                    => GetDeconstructionAssignmentMethods(semanticModel, node).As<ISymbol>(),
-                ForEachVariableStatementSyntax _ when token.Kind() == SyntaxKind.InKeyword
-                    => GetDeconstructionForEachMethods(semanticModel, node).As<ISymbol>(),
-                FunctionPointerUnmanagedCallingConventionSyntax syntax
-                    => GetCallingConventionSymbols(semanticModel, syntax),
+                AssignmentExpressionSyntax _ when token.Kind() == SyntaxKind.EqualsToken =>
+                    GetDeconstructionAssignmentMethods(semanticModel, node).As<ISymbol>(),
+                ForEachVariableStatementSyntax _ when token.Kind() == SyntaxKind.InKeyword =>
+                    GetDeconstructionForEachMethods(semanticModel, node).As<ISymbol>(),
+                FunctionPointerUnmanagedCallingConventionSyntax syntax =>
+                    GetCallingConventionSymbols(semanticModel, syntax),
                 _ => GetSymbolInfo(semanticModel, node, token, cancellationToken),
             };
 

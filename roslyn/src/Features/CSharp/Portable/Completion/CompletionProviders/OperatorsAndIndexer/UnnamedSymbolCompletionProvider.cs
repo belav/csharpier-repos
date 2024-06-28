@@ -205,30 +205,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var kind = item.GetProperty(KindName);
             return kind switch
             {
-                IndexerKindName
-                    => await GetIndexerDescriptionAsync(
-                            document,
-                            item,
-                            displayOptions,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false),
-                OperatorKindName
-                    => await GetOperatorDescriptionAsync(
-                            document,
-                            item,
-                            displayOptions,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false),
-                ConversionKindName
-                    => await GetConversionDescriptionAsync(
-                            document,
-                            item,
-                            displayOptions,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false),
+                IndexerKindName => await GetIndexerDescriptionAsync(
+                        document,
+                        item,
+                        displayOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false),
+                OperatorKindName => await GetOperatorDescriptionAsync(
+                        document,
+                        item,
+                        displayOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false),
+                ConversionKindName => await GetConversionDescriptionAsync(
+                        document,
+                        item,
+                        displayOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false),
                 _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
         }

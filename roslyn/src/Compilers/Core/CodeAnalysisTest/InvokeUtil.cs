@@ -54,21 +54,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var tempRoot = new TempRoot();
             AnalyzerAssemblyLoader loader = kind switch
             {
-                AnalyzerTestKind.LoadDirect
-                    => new DefaultAnalyzerAssemblyLoader(
-                        compilerContext,
-                        AnalyzerLoadOption.LoadFromDisk
-                    ),
-                AnalyzerTestKind.LoadStream
-                    => new DefaultAnalyzerAssemblyLoader(
-                        compilerContext,
-                        AnalyzerLoadOption.LoadFromStream
-                    ),
-                AnalyzerTestKind.ShadowLoad
-                    => new ShadowCopyAnalyzerAssemblyLoader(
-                        compilerContext,
-                        tempRoot.CreateDirectory().Path
-                    ),
+                AnalyzerTestKind.LoadDirect => new DefaultAnalyzerAssemblyLoader(
+                    compilerContext,
+                    AnalyzerLoadOption.LoadFromDisk
+                ),
+                AnalyzerTestKind.LoadStream => new DefaultAnalyzerAssemblyLoader(
+                    compilerContext,
+                    AnalyzerLoadOption.LoadFromStream
+                ),
+                AnalyzerTestKind.ShadowLoad => new ShadowCopyAnalyzerAssemblyLoader(
+                    compilerContext,
+                    tempRoot.CreateDirectory().Path
+                ),
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 
@@ -125,8 +122,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             AnalyzerAssemblyLoader loader = kind switch
             {
                 AnalyzerTestKind.LoadDirect => new DefaultAnalyzerAssemblyLoader(),
-                AnalyzerTestKind.ShadowLoad
-                    => new ShadowCopyAnalyzerAssemblyLoader(tempRoot.CreateDirectory().Path),
+                AnalyzerTestKind.ShadowLoad => new ShadowCopyAnalyzerAssemblyLoader(
+                    tempRoot.CreateDirectory().Path
+                ),
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 

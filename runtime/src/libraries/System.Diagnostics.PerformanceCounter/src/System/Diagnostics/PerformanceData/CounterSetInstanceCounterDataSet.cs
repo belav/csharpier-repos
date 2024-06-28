@@ -173,15 +173,14 @@ namespace System.Diagnostics.PerformanceData
                         // ERROR_INVALID_PARAMETER or ERROR_NOT_FOUND
                         throw Status switch
                         {
-                            (uint)Interop.Errors.ERROR_NOT_FOUND
-                                => new InvalidOperationException(
-                                    SR.Format(
-                                        SR.Perflib_InvalidOperation_CounterRefValue,
-                                        _instance._counterSet._counterSet,
-                                        CounterDef.Key,
-                                        _instance._instName
-                                    )
-                                ),
+                            (uint)Interop.Errors.ERROR_NOT_FOUND => new InvalidOperationException(
+                                SR.Format(
+                                    SR.Perflib_InvalidOperation_CounterRefValue,
+                                    _instance._counterSet._counterSet,
+                                    CounterDef.Key,
+                                    _instance._instName
+                                )
+                            ),
 
                             _ => new Win32Exception((int)Status),
                         };

@@ -70,18 +70,18 @@ namespace Microsoft.CodeAnalysis.CSharp.InheritanceMargin
             declarationNode switch
             {
                 MethodDeclarationSyntax methodDeclarationNode => methodDeclarationNode.Identifier,
-                PropertyDeclarationSyntax propertyDeclarationNode
-                    => propertyDeclarationNode.Identifier,
+                PropertyDeclarationSyntax propertyDeclarationNode =>
+                    propertyDeclarationNode.Identifier,
                 EventDeclarationSyntax eventDeclarationNode => eventDeclarationNode.Identifier,
-                VariableDeclaratorSyntax variableDeclaratorNode
-                    => variableDeclaratorNode.Identifier,
+                VariableDeclaratorSyntax variableDeclaratorNode =>
+                    variableDeclaratorNode.Identifier,
                 TypeDeclarationSyntax baseTypeDeclarationNode => baseTypeDeclarationNode.Identifier,
-                IndexerDeclarationSyntax indexerDeclarationNode
-                    => indexerDeclarationNode.ThisKeyword,
-                OperatorDeclarationSyntax operatorDeclarationNode
-                    => operatorDeclarationNode.OperatorToken,
-                ConversionOperatorDeclarationSyntax conversionOperatorDeclarationNode
-                    => conversionOperatorDeclarationNode.Type.GetFirstToken(),
+                IndexerDeclarationSyntax indexerDeclarationNode =>
+                    indexerDeclarationNode.ThisKeyword,
+                OperatorDeclarationSyntax operatorDeclarationNode =>
+                    operatorDeclarationNode.OperatorToken,
+                ConversionOperatorDeclarationSyntax conversionOperatorDeclarationNode =>
+                    conversionOperatorDeclarationNode.Type.GetFirstToken(),
                 // Shouldn't reach here since the input declaration nodes are coming from GetMembers() method above
                 _ => throw ExceptionUtilities.UnexpectedValue(declarationNode),
             };

@@ -193,26 +193,22 @@ internal class HandlerProvider : IHandlerProvider
             {
                 var methodInfo = (requestType != null, responseType != null) switch
                 {
-                    (true, true)
-                        => handlerType.GetMethod(
-                            nameof(IRequestHandler<object, object, object>.HandleRequestAsync),
-                            new Type[] { requestType!, contextType, typeof(CancellationToken) }
-                        ),
-                    (false, true)
-                        => handlerType.GetMethod(
-                            nameof(IRequestHandler<object, object>.HandleRequestAsync),
-                            new Type[] { contextType, typeof(CancellationToken) }
-                        ),
-                    (true, false)
-                        => handlerType.GetMethod(
-                            nameof(INotificationHandler<object, object>.HandleNotificationAsync),
-                            new Type[] { requestType!, contextType, typeof(CancellationToken) }
-                        ),
-                    (false, false)
-                        => handlerType.GetMethod(
-                            nameof(INotificationHandler<object>.HandleNotificationAsync),
-                            new Type[] { contextType, typeof(CancellationToken) }
-                        ),
+                    (true, true) => handlerType.GetMethod(
+                        nameof(IRequestHandler<object, object, object>.HandleRequestAsync),
+                        new Type[] { requestType!, contextType, typeof(CancellationToken) }
+                    ),
+                    (false, true) => handlerType.GetMethod(
+                        nameof(IRequestHandler<object, object>.HandleRequestAsync),
+                        new Type[] { contextType, typeof(CancellationToken) }
+                    ),
+                    (true, false) => handlerType.GetMethod(
+                        nameof(INotificationHandler<object, object>.HandleNotificationAsync),
+                        new Type[] { requestType!, contextType, typeof(CancellationToken) }
+                    ),
+                    (false, false) => handlerType.GetMethod(
+                        nameof(INotificationHandler<object>.HandleNotificationAsync),
+                        new Type[] { contextType, typeof(CancellationToken) }
+                    ),
                 };
 
                 if (methodInfo is null)

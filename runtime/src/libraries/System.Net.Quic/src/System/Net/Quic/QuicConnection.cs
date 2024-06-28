@@ -689,27 +689,27 @@ public sealed partial class QuicConnection : IAsyncDisposable
     private unsafe int HandleConnectionEvent(ref QUIC_CONNECTION_EVENT connectionEvent) =>
         connectionEvent.Type switch
         {
-            QUIC_CONNECTION_EVENT_TYPE.CONNECTED
-                => HandleEventConnected(ref connectionEvent.CONNECTED),
-            QUIC_CONNECTION_EVENT_TYPE.SHUTDOWN_INITIATED_BY_TRANSPORT
-                => HandleEventShutdownInitiatedByTransport(
+            QUIC_CONNECTION_EVENT_TYPE.CONNECTED => HandleEventConnected(
+                ref connectionEvent.CONNECTED
+            ),
+            QUIC_CONNECTION_EVENT_TYPE.SHUTDOWN_INITIATED_BY_TRANSPORT =>
+                HandleEventShutdownInitiatedByTransport(
                     ref connectionEvent.SHUTDOWN_INITIATED_BY_TRANSPORT
                 ),
-            QUIC_CONNECTION_EVENT_TYPE.SHUTDOWN_INITIATED_BY_PEER
-                => HandleEventShutdownInitiatedByPeer(
-                    ref connectionEvent.SHUTDOWN_INITIATED_BY_PEER
-                ),
+            QUIC_CONNECTION_EVENT_TYPE.SHUTDOWN_INITIATED_BY_PEER =>
+                HandleEventShutdownInitiatedByPeer(ref connectionEvent.SHUTDOWN_INITIATED_BY_PEER),
             QUIC_CONNECTION_EVENT_TYPE.SHUTDOWN_COMPLETE => HandleEventShutdownComplete(),
-            QUIC_CONNECTION_EVENT_TYPE.LOCAL_ADDRESS_CHANGED
-                => HandleEventLocalAddressChanged(ref connectionEvent.LOCAL_ADDRESS_CHANGED),
-            QUIC_CONNECTION_EVENT_TYPE.PEER_ADDRESS_CHANGED
-                => HandleEventPeerAddressChanged(ref connectionEvent.PEER_ADDRESS_CHANGED),
-            QUIC_CONNECTION_EVENT_TYPE.PEER_STREAM_STARTED
-                => HandleEventPeerStreamStarted(ref connectionEvent.PEER_STREAM_STARTED),
-            QUIC_CONNECTION_EVENT_TYPE.PEER_CERTIFICATE_RECEIVED
-                => HandleEventPeerCertificateReceived(
-                    ref connectionEvent.PEER_CERTIFICATE_RECEIVED
-                ),
+            QUIC_CONNECTION_EVENT_TYPE.LOCAL_ADDRESS_CHANGED => HandleEventLocalAddressChanged(
+                ref connectionEvent.LOCAL_ADDRESS_CHANGED
+            ),
+            QUIC_CONNECTION_EVENT_TYPE.PEER_ADDRESS_CHANGED => HandleEventPeerAddressChanged(
+                ref connectionEvent.PEER_ADDRESS_CHANGED
+            ),
+            QUIC_CONNECTION_EVENT_TYPE.PEER_STREAM_STARTED => HandleEventPeerStreamStarted(
+                ref connectionEvent.PEER_STREAM_STARTED
+            ),
+            QUIC_CONNECTION_EVENT_TYPE.PEER_CERTIFICATE_RECEIVED =>
+                HandleEventPeerCertificateReceived(ref connectionEvent.PEER_CERTIFICATE_RECEIVED),
             _ => QUIC_STATUS_SUCCESS,
         };
 

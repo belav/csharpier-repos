@@ -166,8 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration switch
             {
                 CompilationUnitSyntax compilationUnit => compilationUnit.WithMembers(default),
-                BaseNamespaceDeclarationSyntax namespaceDeclaration
-                    => namespaceDeclaration.WithMembers(default),
+                BaseNamespaceDeclarationSyntax namespaceDeclaration =>
+                    namespaceDeclaration.WithMembers(default),
                 _ => declaration,
             };
 

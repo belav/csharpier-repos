@@ -84,8 +84,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var comparison = (ExpressionSyntax)node;
             var (comparisonLeft, comparisonRight) = comparison switch
             {
-                BinaryExpressionSyntax binaryExpression
-                    => (binaryExpression.Left, (SyntaxNode)binaryExpression.Right),
+                BinaryExpressionSyntax binaryExpression => (
+                    binaryExpression.Left,
+                    (SyntaxNode)binaryExpression.Right
+                ),
                 IsPatternExpressionSyntax isPattern => (isPattern.Expression, isPattern.Pattern),
                 _ => throw ExceptionUtilities.Unreachable(),
             };

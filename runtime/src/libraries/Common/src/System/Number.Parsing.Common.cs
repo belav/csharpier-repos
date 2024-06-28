@@ -460,8 +460,7 @@ namespace System
                     or // Heavy Minus Sign
                     '\uFE63'
                     or // Small Hyphen-Minus
-                    '\uFF0D'
-                        => true, // Fullwidth Hyphen-Minus
+                    '\uFF0D' => true, // Fullwidth Hyphen-Minus
                     _ => false,
                 };
         }

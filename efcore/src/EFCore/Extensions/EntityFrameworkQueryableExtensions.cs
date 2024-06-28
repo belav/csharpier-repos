@@ -3188,8 +3188,8 @@ public static class EntityFrameworkQueryableExtensions
         {
             QueryTrackingBehavior.TrackAll => source.AsTracking(),
             QueryTrackingBehavior.NoTracking => source.AsNoTracking(),
-            QueryTrackingBehavior.NoTrackingWithIdentityResolution
-                => source.AsNoTrackingWithIdentityResolution(),
+            QueryTrackingBehavior.NoTrackingWithIdentityResolution =>
+                source.AsNoTrackingWithIdentityResolution(),
             _ => throw new ArgumentOutOfRangeException(nameof(track)),
         };
 

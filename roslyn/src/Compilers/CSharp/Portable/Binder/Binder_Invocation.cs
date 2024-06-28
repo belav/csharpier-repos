@@ -714,8 +714,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 builder[i] = builder[i] switch
                 {
                     OutVariablePendingInference outvar => outvar.FailInference(this, diagnostics),
-                    BoundDiscardExpression discard when !discard.HasExpressionType()
-                        => discard.FailInference(this, diagnostics),
+                    BoundDiscardExpression discard when !discard.HasExpressionType() =>
+                        discard.FailInference(this, diagnostics),
                     var arg => BindToNaturalType(arg, diagnostics),
                 };
             }
@@ -1800,12 +1800,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 InvocationExpressionSyntax invocation => invocation.ArgumentList.OpenParenToken,
                 BaseObjectCreationExpressionSyntax objectCreation => objectCreation.NewKeyword,
-                ConstructorInitializerSyntax constructorInitializer
-                    => constructorInitializer.ArgumentList.OpenParenToken,
-                PrimaryConstructorBaseTypeSyntax primaryConstructorBaseType
-                    => primaryConstructorBaseType.ArgumentList.OpenParenToken,
-                ElementAccessExpressionSyntax elementAccess
-                    => elementAccess.ArgumentList.OpenBracketToken,
+                ConstructorInitializerSyntax constructorInitializer => constructorInitializer
+                    .ArgumentList
+                    .OpenParenToken,
+                PrimaryConstructorBaseTypeSyntax primaryConstructorBaseType =>
+                    primaryConstructorBaseType.ArgumentList.OpenParenToken,
+                ElementAccessExpressionSyntax elementAccess => elementAccess
+                    .ArgumentList
+                    .OpenBracketToken,
                 _ => syntax.GetFirstToken(),
             };
 

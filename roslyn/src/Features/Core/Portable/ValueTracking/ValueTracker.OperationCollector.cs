@@ -26,38 +26,47 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             public Task VisitAsync(IOperation operation, CancellationToken cancellationToken) =>
                 operation switch
                 {
-                    IObjectCreationOperation objectCreationOperation
-                        => VisitObjectCreationAsync(objectCreationOperation, cancellationToken),
-                    IInvocationOperation invocationOperation
-                        => VisitInvocationAsync(invocationOperation, cancellationToken),
-                    ILiteralOperation literalOperation
-                        => VisitLiteralAsync(literalOperation, cancellationToken),
-                    IReturnOperation returnOperation
-                        => VisitReturnAsync(returnOperation, cancellationToken),
-                    IArgumentOperation argumentOperation
-                        => ShouldTrackArgument(argumentOperation)
-                            ? VisitAsync(argumentOperation.Value, cancellationToken)
-                            : Task.CompletedTask,
+                    IObjectCreationOperation objectCreationOperation => VisitObjectCreationAsync(
+                        objectCreationOperation,
+                        cancellationToken
+                    ),
+                    IInvocationOperation invocationOperation => VisitInvocationAsync(
+                        invocationOperation,
+                        cancellationToken
+                    ),
+                    ILiteralOperation literalOperation => VisitLiteralAsync(
+                        literalOperation,
+                        cancellationToken
+                    ),
+                    IReturnOperation returnOperation => VisitReturnAsync(
+                        returnOperation,
+                        cancellationToken
+                    ),
+                    IArgumentOperation argumentOperation => ShouldTrackArgument(argumentOperation)
+                        ? VisitAsync(argumentOperation.Value, cancellationToken)
+                        : Task.CompletedTask,
                     ILocalReferenceOperation
                     or IParameterReferenceOperation
                     or IFieldReferenceOperation
-                    or IPropertyReferenceOperation
-                        => VisitReferenceAsync(operation, cancellationToken),
+                    or IPropertyReferenceOperation => VisitReferenceAsync(
+                        operation,
+                        cancellationToken
+                    ),
 
-                    IAssignmentOperation assignmentOperation
-                        => VisitAssignmentOperationAsync(assignmentOperation, cancellationToken),
-                    IMethodBodyOperation methodBodyOperation
-                        => VisitReturnDescendentsAsync(
-                            methodBodyOperation,
-                            allowImplicit: true,
-                            cancellationToken
-                        ),
-                    IBlockOperation blockOperation
-                        => VisitReturnDescendentsAsync(
-                            blockOperation,
-                            allowImplicit: false,
-                            cancellationToken
-                        ),
+                    IAssignmentOperation assignmentOperation => VisitAssignmentOperationAsync(
+                        assignmentOperation,
+                        cancellationToken
+                    ),
+                    IMethodBodyOperation methodBodyOperation => VisitReturnDescendentsAsync(
+                        methodBodyOperation,
+                        allowImplicit: true,
+                        cancellationToken
+                    ),
+                    IBlockOperation blockOperation => VisitReturnDescendentsAsync(
+                        blockOperation,
+                        allowImplicit: false,
+                        cancellationToken
+                    ),
 
                     // Default to reporting if there is symbol information available
                     _ => VisitDefaultAsync(operation, cancellationToken),
@@ -204,30 +213,26 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                 Task AddReferenceAsync(IOperation operation, CancellationToken cancellationToken) =>
                     operation switch
                     {
-                        IParameterReferenceOperation parameterReference
-                            => AddOperationAsync(
-                                operation,
-                                parameterReference.Parameter,
-                                cancellationToken
-                            ),
-                        IFieldReferenceOperation fieldReferenceOperation
-                            => AddOperationAsync(
-                                operation,
-                                fieldReferenceOperation.Member,
-                                cancellationToken
-                            ),
-                        IPropertyReferenceOperation propertyReferenceOperation
-                            => AddOperationAsync(
-                                operation,
-                                propertyReferenceOperation.Member,
-                                cancellationToken
-                            ),
-                        ILocalReferenceOperation localReferenceOperation
-                            => AddOperationAsync(
-                                operation,
-                                localReferenceOperation.Local,
-                                cancellationToken
-                            ),
+                        IParameterReferenceOperation parameterReference => AddOperationAsync(
+                            operation,
+                            parameterReference.Parameter,
+                            cancellationToken
+                        ),
+                        IFieldReferenceOperation fieldReferenceOperation => AddOperationAsync(
+                            operation,
+                            fieldReferenceOperation.Member,
+                            cancellationToken
+                        ),
+                        IPropertyReferenceOperation propertyReferenceOperation => AddOperationAsync(
+                            operation,
+                            propertyReferenceOperation.Member,
+                            cancellationToken
+                        ),
+                        ILocalReferenceOperation localReferenceOperation => AddOperationAsync(
+                            operation,
+                            localReferenceOperation.Local,
+                            cancellationToken
+                        ),
                         _ => Task.CompletedTask,
                     };
             }

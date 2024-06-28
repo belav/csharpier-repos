@@ -296,11 +296,10 @@ namespace System.Text.Json
             {
                 0 => (_count - 1, true), // Not a continuation, report previous frames and Current.
                 1 => (0, true), // Continuation of depth 1, just report Current frame.
-                int c
-                    => (
-                        c,
-                        false
-                    ) // Continuation of depth > 1, report the entire stack.
+                int c => (
+                    c,
+                    false
+                ) // Continuation of depth > 1, report the entire stack.
                 ,
             };
 

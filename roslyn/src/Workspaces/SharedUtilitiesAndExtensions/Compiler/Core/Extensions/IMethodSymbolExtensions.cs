@@ -85,49 +85,46 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 WellKnownMemberNames.AdditionOperatorName
                 or WellKnownMemberNames.CheckedAdditionOperatorName
-                or WellKnownMemberNames.UnaryPlusOperatorName
-                    => PredefinedOperator.Addition,
+                or WellKnownMemberNames.UnaryPlusOperatorName => PredefinedOperator.Addition,
                 WellKnownMemberNames.BitwiseAndOperatorName => PredefinedOperator.BitwiseAnd,
                 WellKnownMemberNames.BitwiseOrOperatorName => PredefinedOperator.BitwiseOr,
                 WellKnownMemberNames.ConcatenateOperatorName => PredefinedOperator.Concatenate,
                 WellKnownMemberNames.DecrementOperatorName
-                or WellKnownMemberNames.CheckedDecrementOperatorName
-                    => PredefinedOperator.Decrement,
+                or WellKnownMemberNames.CheckedDecrementOperatorName =>
+                    PredefinedOperator.Decrement,
                 WellKnownMemberNames.DivisionOperatorName
-                or WellKnownMemberNames.CheckedDivisionOperatorName
-                    => PredefinedOperator.Division,
+                or WellKnownMemberNames.CheckedDivisionOperatorName => PredefinedOperator.Division,
                 WellKnownMemberNames.EqualityOperatorName => PredefinedOperator.Equality,
                 WellKnownMemberNames.ExclusiveOrOperatorName => PredefinedOperator.ExclusiveOr,
                 WellKnownMemberNames.ExponentOperatorName => PredefinedOperator.Exponent,
                 WellKnownMemberNames.GreaterThanOperatorName => PredefinedOperator.GreaterThan,
-                WellKnownMemberNames.GreaterThanOrEqualOperatorName
-                    => PredefinedOperator.GreaterThanOrEqual,
+                WellKnownMemberNames.GreaterThanOrEqualOperatorName =>
+                    PredefinedOperator.GreaterThanOrEqual,
                 WellKnownMemberNames.IncrementOperatorName
-                or WellKnownMemberNames.CheckedIncrementOperatorName
-                    => PredefinedOperator.Increment,
+                or WellKnownMemberNames.CheckedIncrementOperatorName =>
+                    PredefinedOperator.Increment,
                 WellKnownMemberNames.InequalityOperatorName => PredefinedOperator.Inequality,
-                WellKnownMemberNames.IntegerDivisionOperatorName
-                    => PredefinedOperator.IntegerDivision,
+                WellKnownMemberNames.IntegerDivisionOperatorName =>
+                    PredefinedOperator.IntegerDivision,
                 WellKnownMemberNames.LeftShiftOperatorName => PredefinedOperator.LeftShift,
                 WellKnownMemberNames.LessThanOperatorName => PredefinedOperator.LessThan,
-                WellKnownMemberNames.LessThanOrEqualOperatorName
-                    => PredefinedOperator.LessThanOrEqual,
+                WellKnownMemberNames.LessThanOrEqualOperatorName =>
+                    PredefinedOperator.LessThanOrEqual,
                 WellKnownMemberNames.LikeOperatorName => PredefinedOperator.Like,
                 WellKnownMemberNames.LogicalNotOperatorName
-                or WellKnownMemberNames.OnesComplementOperatorName
-                    => PredefinedOperator.Complement,
+                or WellKnownMemberNames.OnesComplementOperatorName => PredefinedOperator.Complement,
                 WellKnownMemberNames.ModulusOperatorName => PredefinedOperator.Modulus,
                 WellKnownMemberNames.MultiplyOperatorName
-                or WellKnownMemberNames.CheckedMultiplyOperatorName
-                    => PredefinedOperator.Multiplication,
+                or WellKnownMemberNames.CheckedMultiplyOperatorName =>
+                    PredefinedOperator.Multiplication,
                 WellKnownMemberNames.RightShiftOperatorName => PredefinedOperator.RightShift,
-                WellKnownMemberNames.UnsignedRightShiftOperatorName
-                    => PredefinedOperator.UnsignedRightShift,
+                WellKnownMemberNames.UnsignedRightShiftOperatorName =>
+                    PredefinedOperator.UnsignedRightShift,
                 WellKnownMemberNames.SubtractionOperatorName
                 or WellKnownMemberNames.CheckedSubtractionOperatorName
                 or WellKnownMemberNames.UnaryNegationOperatorName
-                or WellKnownMemberNames.CheckedUnaryNegationOperatorName
-                    => PredefinedOperator.Subtraction,
+                or WellKnownMemberNames.CheckedUnaryNegationOperatorName =>
+                    PredefinedOperator.Subtraction,
                 _ => PredefinedOperator.None,
             };
 

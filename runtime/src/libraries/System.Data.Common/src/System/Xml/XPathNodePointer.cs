@@ -740,22 +740,20 @@ namespace System.Xml
             Debug.Assert(xntInt != -1);
             return xntInt switch
             {
-                (int)XPathNodeType.Root
-                    => (
-                        xntChildInt == (int)XPathNodeType.Element
-                        || xntChildInt == (int)XPathNodeType.Comment
-                        || xntChildInt == (int)XPathNodeType.ProcessingInstruction
-                    ),
+                (int)XPathNodeType.Root => (
+                    xntChildInt == (int)XPathNodeType.Element
+                    || xntChildInt == (int)XPathNodeType.Comment
+                    || xntChildInt == (int)XPathNodeType.ProcessingInstruction
+                ),
 
-                (int)XPathNodeType.Element
-                    => (
-                        xntChildInt == (int)XPathNodeType.Element
-                        || xntChildInt == (int)XPathNodeType.Text
-                        || xntChildInt == (int)XPathNodeType.Comment
-                        || xntChildInt == (int)XPathNodeType.Whitespace
-                        || xntChildInt == (int)XPathNodeType.SignificantWhitespace
-                        || xntChildInt == (int)XPathNodeType.ProcessingInstruction
-                    ),
+                (int)XPathNodeType.Element => (
+                    xntChildInt == (int)XPathNodeType.Element
+                    || xntChildInt == (int)XPathNodeType.Text
+                    || xntChildInt == (int)XPathNodeType.Comment
+                    || xntChildInt == (int)XPathNodeType.Whitespace
+                    || xntChildInt == (int)XPathNodeType.SignificantWhitespace
+                    || xntChildInt == (int)XPathNodeType.ProcessingInstruction
+                ),
 
                 _ => false,
             };
@@ -768,11 +766,10 @@ namespace System.Xml
             return xntInt switch
             {
                 (int)XPathNodeType.Root => c.ColumnMapping == MappingType.Element,
-                (int)XPathNodeType.Element
-                    => (
-                        c.ColumnMapping == MappingType.Element
-                        || c.ColumnMapping == MappingType.SimpleContent
-                    ),
+                (int)XPathNodeType.Element => (
+                    c.ColumnMapping == MappingType.Element
+                    || c.ColumnMapping == MappingType.SimpleContent
+                ),
                 _ => false,
             };
         }

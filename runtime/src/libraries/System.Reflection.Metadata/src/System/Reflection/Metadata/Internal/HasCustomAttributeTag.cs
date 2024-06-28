@@ -116,47 +116,48 @@ namespace System.Reflection.Metadata.Ecma335
             uint rowId = (uint)handle.RowId;
             return (tokenType >> TokenTypeIds.RowIdBitCount) switch
             {
-                TokenTypeIds.MethodDef >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | MethodDef,
-                TokenTypeIds.FieldDef >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | Field,
-                TokenTypeIds.TypeRef >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | TypeRef,
-                TokenTypeIds.TypeDef >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | TypeDef,
-                TokenTypeIds.ParamDef >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | Param,
-                TokenTypeIds.InterfaceImpl >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | InterfaceImpl,
-                TokenTypeIds.MemberRef >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | MemberRef,
+                TokenTypeIds.MethodDef >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | MethodDef,
+                TokenTypeIds.FieldDef >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | Field,
+                TokenTypeIds.TypeRef >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | TypeRef,
+                TokenTypeIds.TypeDef >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | TypeDef,
+                TokenTypeIds.ParamDef >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | Param,
+                TokenTypeIds.InterfaceImpl >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | InterfaceImpl,
+                TokenTypeIds.MemberRef >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | MemberRef,
                 TokenTypeIds.Module >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits | Module,
-                TokenTypeIds.DeclSecurity >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | DeclSecurity,
-                TokenTypeIds.Property >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | Property,
+                TokenTypeIds.DeclSecurity >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | DeclSecurity,
+                TokenTypeIds.Property >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | Property,
                 TokenTypeIds.Event >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits | Event,
-                TokenTypeIds.Signature >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | StandAloneSig,
-                TokenTypeIds.ModuleRef >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | ModuleRef,
-                TokenTypeIds.TypeSpec >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | TypeSpec,
-                TokenTypeIds.Assembly >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | Assembly,
-                TokenTypeIds.AssemblyRef >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | AssemblyRef,
+                TokenTypeIds.Signature >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | StandAloneSig,
+                TokenTypeIds.ModuleRef >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | ModuleRef,
+                TokenTypeIds.TypeSpec >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | TypeSpec,
+                TokenTypeIds.Assembly >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | Assembly,
+                TokenTypeIds.AssemblyRef >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | AssemblyRef,
                 TokenTypeIds.File >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits | File,
-                TokenTypeIds.ExportedType >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | ExportedType,
-                TokenTypeIds.ManifestResource >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | ManifestResource,
-                TokenTypeIds.GenericParam >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | GenericParam,
-                TokenTypeIds.GenericParamConstraint >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | GenericParamConstraint,
-                TokenTypeIds.MethodSpec >> TokenTypeIds.RowIdBitCount
-                    => rowId << NumberOfBits | MethodSpec,
+                TokenTypeIds.ExportedType >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | ExportedType,
+                TokenTypeIds.ManifestResource >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | ManifestResource,
+                TokenTypeIds.GenericParam >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | GenericParam,
+                TokenTypeIds.GenericParamConstraint >> TokenTypeIds.RowIdBitCount => rowId
+                    << NumberOfBits
+                    | GenericParamConstraint,
+                TokenTypeIds.MethodSpec >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits
+                    | MethodSpec,
 
                 _ => 0,
             };

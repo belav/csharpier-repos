@@ -97,8 +97,8 @@ End Class",
             var compilerBuildOnlyDiagnosticsType = languageName switch
             {
                 LanguageNames.CSharp => typeof(CSharp.LanguageServer.CSharpLspBuildOnlyDiagnostics),
-                LanguageNames.VisualBasic
-                    => typeof(VisualBasic.LanguageServer.VisualBasicLspBuildOnlyDiagnostics),
+                LanguageNames.VisualBasic =>
+                    typeof(VisualBasic.LanguageServer.VisualBasicLspBuildOnlyDiagnostics),
                 _ => null,
             };
 

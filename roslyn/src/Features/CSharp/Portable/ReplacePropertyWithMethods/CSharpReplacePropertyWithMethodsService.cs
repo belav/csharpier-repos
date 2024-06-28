@@ -463,8 +463,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
                 SyntaxKind.OrAssignmentExpression => SyntaxKind.BitwiseOrExpression,
                 SyntaxKind.RightShiftAssignmentExpression => SyntaxKind.RightShiftExpression,
                 SyntaxKind.SubtractAssignmentExpression => SyntaxKind.SubtractExpression,
-                SyntaxKind.UnsignedRightShiftAssignmentExpression
-                    => SyntaxKind.UnsignedRightShiftExpression,
+                SyntaxKind.UnsignedRightShiftAssignmentExpression =>
+                    SyntaxKind.UnsignedRightShiftExpression,
                 _ => SyntaxKind.None,
             };
 

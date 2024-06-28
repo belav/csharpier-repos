@@ -813,10 +813,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 BaseArgumentListSyntax? argumentList = node switch
                 {
                     InvocationExpressionSyntax invocation => invocation.ArgumentList,
-                    BaseObjectCreationExpressionSyntax objectCreation
-                        => objectCreation.ArgumentList,
-                    ConstructorInitializerSyntax constructorInitializer
-                        => constructorInitializer.ArgumentList,
+                    BaseObjectCreationExpressionSyntax objectCreation =>
+                        objectCreation.ArgumentList,
+                    ConstructorInitializerSyntax constructorInitializer =>
+                        constructorInitializer.ArgumentList,
                     ElementAccessExpressionSyntax elementAccess => elementAccess.ArgumentList,
                     _ => throw ExceptionUtilities.UnexpectedValue(node.Kind()),
                 };
@@ -1210,8 +1210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             return newArgument switch
             {
                 ArgumentSyntax a => (TArgumentSyntax)(SyntaxNode)a.WithNameColon(NameColon(name)),
-                AttributeArgumentSyntax a
-                    => (TArgumentSyntax)(SyntaxNode)a.WithNameColon(NameColon(name)),
+                AttributeArgumentSyntax a => (TArgumentSyntax)
+                    (SyntaxNode)a.WithNameColon(NameColon(name)),
                 _ => throw ExceptionUtilities.UnexpectedValue(newArgument.Kind()),
             };
         }

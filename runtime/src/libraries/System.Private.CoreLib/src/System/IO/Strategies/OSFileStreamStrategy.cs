@@ -170,9 +170,8 @@ namespace System.IO.Strategies
             {
                 SeekOrigin.Begin => offset,
                 SeekOrigin.End => Length + offset,
-                _
-                    => _filePosition
-                        + offset // SeekOrigin.Current
+                _ => _filePosition
+                    + offset // SeekOrigin.Current
                 ,
             };
 

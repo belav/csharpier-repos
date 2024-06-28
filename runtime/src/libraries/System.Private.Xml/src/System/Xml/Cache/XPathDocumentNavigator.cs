@@ -957,8 +957,9 @@ namespace MS.Internal.Xml.Cache
             return _pageCurrent[_idxCurrent].NodeType switch
             {
                 // Namespace nodes come first (make location negative, but greater than int.MinValue)
-                XPathNodeType.Namespace
-                    => int.MinValue + 1 + XPathNodeHelper.GetLocation(_pageCurrent, _idxCurrent),
+                XPathNodeType.Namespace => int.MinValue
+                    + 1
+                    + XPathNodeHelper.GetLocation(_pageCurrent, _idxCurrent),
 
                 // Attribute nodes come next (location is always positive)
                 XPathNodeType.Attribute => XPathNodeHelper.GetLocation(_pageCurrent, _idxCurrent),

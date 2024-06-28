@@ -625,11 +625,10 @@ namespace System.Security.Cryptography
                 "SHA256" => CapiHelper.CALG_SHA_256,
                 "SHA384" => CapiHelper.CALG_SHA_384,
                 "SHA512" => CapiHelper.CALG_SHA_512,
-                _
-                    => throw new CryptographicException(
-                        SR.Cryptography_UnknownHashAlgorithm,
-                        hashAlgorithm.Name
-                    ),
+                _ => throw new CryptographicException(
+                    SR.Cryptography_UnknownHashAlgorithm,
+                    hashAlgorithm.Name
+                ),
             };
 
         public override byte[] Encrypt(byte[] data, RSAEncryptionPadding padding)

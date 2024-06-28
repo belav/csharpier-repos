@@ -203,9 +203,10 @@ namespace System.Net
                     clientOptions.RequiredProtectionLevel switch
                     {
                         ProtectionLevel.Sign => Interop.NetSecurityNative.GssFlags.GSS_C_INTEG_FLAG,
-                        ProtectionLevel.EncryptAndSign
-                            => Interop.NetSecurityNative.GssFlags.GSS_C_INTEG_FLAG
-                                | Interop.NetSecurityNative.GssFlags.GSS_C_CONF_FLAG,
+                        ProtectionLevel.EncryptAndSign => Interop
+                            .NetSecurityNative
+                            .GssFlags
+                            .GSS_C_INTEG_FLAG | Interop.NetSecurityNative.GssFlags.GSS_C_CONF_FLAG,
                         _ => 0,
                     };
 
@@ -215,10 +216,14 @@ namespace System.Net
 
                 contextFlags |= clientOptions.AllowedImpersonationLevel switch
                 {
-                    TokenImpersonationLevel.Identification
-                        => Interop.NetSecurityNative.GssFlags.GSS_C_IDENTIFY_FLAG,
-                    TokenImpersonationLevel.Delegation
-                        => Interop.NetSecurityNative.GssFlags.GSS_C_DELEG_FLAG,
+                    TokenImpersonationLevel.Identification => Interop
+                        .NetSecurityNative
+                        .GssFlags
+                        .GSS_C_IDENTIFY_FLAG,
+                    TokenImpersonationLevel.Delegation => Interop
+                        .NetSecurityNative
+                        .GssFlags
+                        .GSS_C_DELEG_FLAG,
                     _ => 0,
                 };
 
@@ -287,9 +292,10 @@ namespace System.Net
                     serverOptions.RequiredProtectionLevel switch
                     {
                         ProtectionLevel.Sign => Interop.NetSecurityNative.GssFlags.GSS_C_INTEG_FLAG,
-                        ProtectionLevel.EncryptAndSign
-                            => Interop.NetSecurityNative.GssFlags.GSS_C_INTEG_FLAG
-                                | Interop.NetSecurityNative.GssFlags.GSS_C_CONF_FLAG,
+                        ProtectionLevel.EncryptAndSign => Interop
+                            .NetSecurityNative
+                            .GssFlags
+                            .GSS_C_INTEG_FLAG | Interop.NetSecurityNative.GssFlags.GSS_C_CONF_FLAG,
                         _ => 0,
                     };
 
@@ -477,8 +483,8 @@ namespace System.Net
                     {
                         return status switch
                         {
-                            Interop.NetSecurityNative.Status.GSS_S_BAD_SIG
-                                => NegotiateAuthenticationStatusCode.MessageAltered,
+                            Interop.NetSecurityNative.Status.GSS_S_BAD_SIG =>
+                                NegotiateAuthenticationStatusCode.MessageAltered,
                             _ => NegotiateAuthenticationStatusCode.InvalidToken,
                         };
                     }
@@ -521,8 +527,8 @@ namespace System.Net
                         unwrappedLength = 0;
                         return status switch
                         {
-                            Interop.NetSecurityNative.Status.GSS_S_BAD_SIG
-                                => NegotiateAuthenticationStatusCode.MessageAltered,
+                            Interop.NetSecurityNative.Status.GSS_S_BAD_SIG =>
+                                NegotiateAuthenticationStatusCode.MessageAltered,
                             _ => NegotiateAuthenticationStatusCode.InvalidToken,
                         };
                     }

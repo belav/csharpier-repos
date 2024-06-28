@@ -291,11 +291,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     _globalOptions
                 ) switch
                 {
-                    BackgroundAnalysisScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics
-                        => ServicesVSResources.Default_Current_Document,
+                    BackgroundAnalysisScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics =>
+                        ServicesVSResources.Default_Current_Document,
                     BackgroundAnalysisScope.OpenFiles => ServicesVSResources.Default_Open_Documents,
-                    BackgroundAnalysisScope.FullSolution
-                        => ServicesVSResources.Default_Entire_Solution,
+                    BackgroundAnalysisScope.FullSolution =>
+                        ServicesVSResources.Default_Entire_Solution,
                     BackgroundAnalysisScope.None => ServicesVSResources.Default_None,
                     _ => ServicesVSResources.Default_,
                 };

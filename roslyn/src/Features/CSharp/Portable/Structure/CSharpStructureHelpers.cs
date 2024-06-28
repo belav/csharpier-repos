@@ -301,53 +301,52 @@ internal static class CSharpStructureHelpers
         static SyntaxToken GetEndToken(SyntaxNode node) =>
             node switch
             {
-                ConstructorDeclarationSyntax constructorDeclaration
-                    => constructorDeclaration.Modifiers.FirstOrNull()
+                ConstructorDeclarationSyntax constructorDeclaration =>
+                    constructorDeclaration.Modifiers.FirstOrNull()
                         ?? constructorDeclaration.Identifier,
-                ConversionOperatorDeclarationSyntax conversionOperatorDeclaration
-                    => conversionOperatorDeclaration.Modifiers.FirstOrNull()
+                ConversionOperatorDeclarationSyntax conversionOperatorDeclaration =>
+                    conversionOperatorDeclaration.Modifiers.FirstOrNull()
                         ?? conversionOperatorDeclaration.ImplicitOrExplicitKeyword,
-                DelegateDeclarationSyntax delegateDeclaration
-                    => delegateDeclaration.Modifiers.FirstOrNull()
+                DelegateDeclarationSyntax delegateDeclaration =>
+                    delegateDeclaration.Modifiers.FirstOrNull()
                         ?? delegateDeclaration.DelegateKeyword,
-                DestructorDeclarationSyntax destructorDeclaration
-                    => destructorDeclaration.TildeToken,
-                EnumDeclarationSyntax enumDeclaration
-                    => enumDeclaration.Modifiers.FirstOrNull() ?? enumDeclaration.EnumKeyword,
-                EnumMemberDeclarationSyntax enumMemberDeclaration
-                    => enumMemberDeclaration.Identifier,
-                EventDeclarationSyntax eventDeclaration
-                    => eventDeclaration.Modifiers.FirstOrNull() ?? eventDeclaration.EventKeyword,
-                EventFieldDeclarationSyntax eventFieldDeclaration
-                    => eventFieldDeclaration.Modifiers.FirstOrNull()
+                DestructorDeclarationSyntax destructorDeclaration =>
+                    destructorDeclaration.TildeToken,
+                EnumDeclarationSyntax enumDeclaration => enumDeclaration.Modifiers.FirstOrNull()
+                    ?? enumDeclaration.EnumKeyword,
+                EnumMemberDeclarationSyntax enumMemberDeclaration =>
+                    enumMemberDeclaration.Identifier,
+                EventDeclarationSyntax eventDeclaration => eventDeclaration.Modifiers.FirstOrNull()
+                    ?? eventDeclaration.EventKeyword,
+                EventFieldDeclarationSyntax eventFieldDeclaration =>
+                    eventFieldDeclaration.Modifiers.FirstOrNull()
                         ?? eventFieldDeclaration.EventKeyword,
-                FieldDeclarationSyntax fieldDeclaration
-                    => fieldDeclaration.Modifiers.FirstOrNull()
-                        ?? fieldDeclaration.Declaration.GetFirstToken(),
-                IndexerDeclarationSyntax indexerDeclaration
-                    => indexerDeclaration.Modifiers.FirstOrNull()
+                FieldDeclarationSyntax fieldDeclaration => fieldDeclaration.Modifiers.FirstOrNull()
+                    ?? fieldDeclaration.Declaration.GetFirstToken(),
+                IndexerDeclarationSyntax indexerDeclaration =>
+                    indexerDeclaration.Modifiers.FirstOrNull()
                         ?? indexerDeclaration.Type.GetFirstToken(),
-                MethodDeclarationSyntax methodDeclaration
-                    => methodDeclaration.Modifiers.FirstOrNull()
+                MethodDeclarationSyntax methodDeclaration =>
+                    methodDeclaration.Modifiers.FirstOrNull()
                         ?? methodDeclaration.ReturnType.GetFirstToken(),
-                OperatorDeclarationSyntax operatorDeclaration
-                    => operatorDeclaration.Modifiers.FirstOrNull()
+                OperatorDeclarationSyntax operatorDeclaration =>
+                    operatorDeclaration.Modifiers.FirstOrNull()
                         ?? operatorDeclaration.ReturnType.GetFirstToken(),
-                PropertyDeclarationSyntax propertyDeclaration
-                    => propertyDeclaration.Modifiers.FirstOrNull()
+                PropertyDeclarationSyntax propertyDeclaration =>
+                    propertyDeclaration.Modifiers.FirstOrNull()
                         ?? propertyDeclaration.Type.GetFirstToken(),
-                TypeDeclarationSyntax typeDeclaration
-                    => typeDeclaration.Modifiers.FirstOrNull() ?? typeDeclaration.Keyword,
+                TypeDeclarationSyntax typeDeclaration => typeDeclaration.Modifiers.FirstOrNull()
+                    ?? typeDeclaration.Keyword,
                 _ => default,
             };
 
         static SyntaxToken GetHintTextEndToken(SyntaxNode node) =>
             node switch
             {
-                EnumDeclarationSyntax enumDeclaration
-                    => enumDeclaration.OpenBraceToken.GetPreviousToken(),
-                TypeDeclarationSyntax typeDeclaration
-                    => typeDeclaration.OpenBraceToken.GetPreviousToken(),
+                EnumDeclarationSyntax enumDeclaration =>
+                    enumDeclaration.OpenBraceToken.GetPreviousToken(),
+                TypeDeclarationSyntax typeDeclaration =>
+                    typeDeclaration.OpenBraceToken.GetPreviousToken(),
                 _ => node.GetLastToken(),
             };
     }

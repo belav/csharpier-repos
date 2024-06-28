@@ -108,111 +108,101 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 bool val => GenerateBooleanLiteralExpression(val),
                 string val => GenerateStringLiteralExpression(val),
                 char val => GenerateCharLiteralExpression(val),
-                sbyte val
-                    => GenerateLiteralExpression(
-                        type,
-                        val,
-                        LiteralSpecialValues.SByteSpecialValues,
-                        formatString: null,
-                        canUseFieldReference,
-                        (s, v) => SyntaxFactory.Literal(s, v),
-                        x => x < 0,
-                        x => (sbyte)-x,
-                        "128"
-                    ),
-                short val
-                    => GenerateLiteralExpression(
-                        type,
-                        val,
-                        LiteralSpecialValues.Int16SpecialValues,
-                        formatString: null,
-                        canUseFieldReference,
-                        (s, v) => SyntaxFactory.Literal(s, v),
-                        x => x < 0,
-                        x => (short)-x,
-                        "32768"
-                    ),
-                int val
-                    => GenerateLiteralExpression(
-                        type,
-                        val,
-                        LiteralSpecialValues.Int32SpecialValues,
-                        formatString: null,
-                        canUseFieldReference,
-                        SyntaxFactory.Literal,
-                        x => x < 0,
-                        x => -x,
-                        "2147483648"
-                    ),
-                long val
-                    => GenerateLiteralExpression(
-                        type,
-                        val,
-                        LiteralSpecialValues.Int64SpecialValues,
-                        formatString: null,
-                        canUseFieldReference,
-                        SyntaxFactory.Literal,
-                        x => x < 0,
-                        x => -x,
-                        "9223372036854775808"
-                    ),
-                byte val
-                    => GenerateNonNegativeLiteralExpression(
-                        type,
-                        val,
-                        LiteralSpecialValues.ByteSpecialValues,
-                        formatString: null,
-                        canUseFieldReference,
-                        (s, v) => SyntaxFactory.Literal(s, v)
-                    ),
-                ushort val
-                    => GenerateNonNegativeLiteralExpression(
-                        type,
-                        val,
-                        LiteralSpecialValues.UInt16SpecialValues,
-                        formatString: null,
-                        canUseFieldReference,
-                        (s, v) => SyntaxFactory.Literal(s, (uint)v)
-                    ),
-                uint val
-                    => GenerateNonNegativeLiteralExpression(
-                        type,
-                        val,
-                        LiteralSpecialValues.UInt32SpecialValues,
-                        formatString: null,
-                        canUseFieldReference,
-                        SyntaxFactory.Literal
-                    ),
-                ulong val
-                    => GenerateNonNegativeLiteralExpression(
-                        type,
-                        val,
-                        LiteralSpecialValues.UInt64SpecialValues,
-                        formatString: null,
-                        canUseFieldReference,
-                        SyntaxFactory.Literal
-                    ),
+                sbyte val => GenerateLiteralExpression(
+                    type,
+                    val,
+                    LiteralSpecialValues.SByteSpecialValues,
+                    formatString: null,
+                    canUseFieldReference,
+                    (s, v) => SyntaxFactory.Literal(s, v),
+                    x => x < 0,
+                    x => (sbyte)-x,
+                    "128"
+                ),
+                short val => GenerateLiteralExpression(
+                    type,
+                    val,
+                    LiteralSpecialValues.Int16SpecialValues,
+                    formatString: null,
+                    canUseFieldReference,
+                    (s, v) => SyntaxFactory.Literal(s, v),
+                    x => x < 0,
+                    x => (short)-x,
+                    "32768"
+                ),
+                int val => GenerateLiteralExpression(
+                    type,
+                    val,
+                    LiteralSpecialValues.Int32SpecialValues,
+                    formatString: null,
+                    canUseFieldReference,
+                    SyntaxFactory.Literal,
+                    x => x < 0,
+                    x => -x,
+                    "2147483648"
+                ),
+                long val => GenerateLiteralExpression(
+                    type,
+                    val,
+                    LiteralSpecialValues.Int64SpecialValues,
+                    formatString: null,
+                    canUseFieldReference,
+                    SyntaxFactory.Literal,
+                    x => x < 0,
+                    x => -x,
+                    "9223372036854775808"
+                ),
+                byte val => GenerateNonNegativeLiteralExpression(
+                    type,
+                    val,
+                    LiteralSpecialValues.ByteSpecialValues,
+                    formatString: null,
+                    canUseFieldReference,
+                    (s, v) => SyntaxFactory.Literal(s, v)
+                ),
+                ushort val => GenerateNonNegativeLiteralExpression(
+                    type,
+                    val,
+                    LiteralSpecialValues.UInt16SpecialValues,
+                    formatString: null,
+                    canUseFieldReference,
+                    (s, v) => SyntaxFactory.Literal(s, (uint)v)
+                ),
+                uint val => GenerateNonNegativeLiteralExpression(
+                    type,
+                    val,
+                    LiteralSpecialValues.UInt32SpecialValues,
+                    formatString: null,
+                    canUseFieldReference,
+                    SyntaxFactory.Literal
+                ),
+                ulong val => GenerateNonNegativeLiteralExpression(
+                    type,
+                    val,
+                    LiteralSpecialValues.UInt64SpecialValues,
+                    formatString: null,
+                    canUseFieldReference,
+                    SyntaxFactory.Literal
+                ),
                 float val => GenerateSingleLiteralExpression(type, val, canUseFieldReference),
                 double val => GenerateDoubleLiteralExpression(type, val, canUseFieldReference),
-                decimal val
-                    => GenerateLiteralExpression(
-                        type,
-                        val,
-                        LiteralSpecialValues.DecimalSpecialValues,
-                        formatString: null,
-                        canUseFieldReference,
-                        SyntaxFactory.Literal,
-                        x => x < 0,
-                        x => -x,
-                        integerMinValueString: null
-                    ),
-                _
-                    => type == null
-                    || type.IsReferenceType
-                    || type is IPointerTypeSymbol
-                    || type.IsNullable()
-                        ? GenerateNullLiteral()
-                        : (ExpressionSyntax)generator.DefaultExpression(type),
+                decimal val => GenerateLiteralExpression(
+                    type,
+                    val,
+                    LiteralSpecialValues.DecimalSpecialValues,
+                    formatString: null,
+                    canUseFieldReference,
+                    SyntaxFactory.Literal,
+                    x => x < 0,
+                    x => -x,
+                    integerMinValueString: null
+                ),
+                _ => type == null
+                || type.IsReferenceType
+                || type is IPointerTypeSymbol
+                || type.IsNullable()
+                    ? GenerateNullLiteral()
+                    : (ExpressionSyntax)generator.DefaultExpression(type),
             };
 
         private static ExpressionSyntax GenerateBooleanLiteralExpression(bool val)

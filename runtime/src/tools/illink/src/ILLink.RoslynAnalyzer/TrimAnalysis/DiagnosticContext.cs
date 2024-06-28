@@ -77,8 +77,8 @@ namespace ILLink.Shared.TrimAnalysis
             {
                 FieldValue field => field.FieldSymbol,
                 MethodParameterValue maybeThisParameter
-                    when maybeThisParameter.Parameter.IsImplicitThis
-                    => maybeThisParameter.MethodSymbol,
+                    when maybeThisParameter.Parameter.IsImplicitThis =>
+                    maybeThisParameter.MethodSymbol,
                 MethodParameterValue methodParameter => methodParameter.Parameter.ParameterSymbol!,
                 MethodReturnValue mrv => mrv.MethodSymbol,
                 GenericParameterValue gpv => gpv.GenericParameter.TypeParameterSymbol,

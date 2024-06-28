@@ -913,10 +913,9 @@ namespace ILCompiler
                             long size = entry.ValueKind switch
                             {
                                 StackValueKind.Int32 => entry.Value.AsInt32(),
-                                StackValueKind.NativeInt
-                                    => (context.Target.PointerSize == 4)
-                                        ? entry.Value.AsInt32()
-                                        : entry.Value.AsInt64(),
+                                StackValueKind.NativeInt => (context.Target.PointerSize == 4)
+                                    ? entry.Value.AsInt32()
+                                    : entry.Value.AsInt64(),
                                 _ => long.MaxValue,
                             };
 
@@ -1551,32 +1550,28 @@ namespace ILCompiler
                                 {
                                     branchTaken = normalizedOpcode switch
                                     {
-                                        ILOpcode.blt_s
-                                            => value1.Value.AsInt32() < value2.Value.AsInt32(),
-                                        ILOpcode.blt_un_s
-                                            => (uint)value1.Value.AsInt32()
-                                                < (uint)value2.Value.AsInt32(),
-                                        ILOpcode.bgt_s
-                                            => value1.Value.AsInt32() > value2.Value.AsInt32(),
-                                        ILOpcode.bgt_un_s
-                                            => (uint)value1.Value.AsInt32()
-                                                > (uint)value2.Value.AsInt32(),
-                                        ILOpcode.bge_s
-                                            => value1.Value.AsInt32() >= value2.Value.AsInt32(),
-                                        ILOpcode.bge_un_s
-                                            => (uint)value1.Value.AsInt32()
-                                                >= (uint)value2.Value.AsInt32(),
-                                        ILOpcode.beq_s
-                                            => value1.Value.AsInt32() == value2.Value.AsInt32(),
-                                        ILOpcode.bne_un_s
-                                            => value1.Value.AsInt32() != value2.Value.AsInt32(),
-                                        ILOpcode.ble_s
-                                            => value1.Value.AsInt32() <= value2.Value.AsInt32(),
-                                        ILOpcode.ble_un_s
-                                            => (uint)value1.Value.AsInt32()
-                                                <= (uint)value2.Value.AsInt32(),
-                                        _
-                                            => throw new NotImplementedException() // unreachable
+                                        ILOpcode.blt_s => value1.Value.AsInt32()
+                                            < value2.Value.AsInt32(),
+                                        ILOpcode.blt_un_s => (uint)value1.Value.AsInt32()
+                                            < (uint)value2.Value.AsInt32(),
+                                        ILOpcode.bgt_s => value1.Value.AsInt32()
+                                            > value2.Value.AsInt32(),
+                                        ILOpcode.bgt_un_s => (uint)value1.Value.AsInt32()
+                                            > (uint)value2.Value.AsInt32(),
+                                        ILOpcode.bge_s => value1.Value.AsInt32()
+                                            >= value2.Value.AsInt32(),
+                                        ILOpcode.bge_un_s => (uint)value1.Value.AsInt32()
+                                            >= (uint)value2.Value.AsInt32(),
+                                        ILOpcode.beq_s => value1.Value.AsInt32()
+                                            == value2.Value.AsInt32(),
+                                        ILOpcode.bne_un_s => value1.Value.AsInt32()
+                                            != value2.Value.AsInt32(),
+                                        ILOpcode.ble_s => value1.Value.AsInt32()
+                                            <= value2.Value.AsInt32(),
+                                        ILOpcode.ble_un_s => (uint)value1.Value.AsInt32()
+                                            <= (uint)value2.Value.AsInt32(),
+                                        _ =>
+                                            throw new NotImplementedException() // unreachable
                                         ,
                                     };
                                 }
@@ -1589,32 +1584,28 @@ namespace ILCompiler
                                 {
                                     branchTaken = normalizedOpcode switch
                                     {
-                                        ILOpcode.blt_s
-                                            => value1.Value.AsInt64() < value2.Value.AsInt64(),
-                                        ILOpcode.blt_un_s
-                                            => (ulong)value1.Value.AsInt64()
-                                                < (ulong)value2.Value.AsInt64(),
-                                        ILOpcode.bgt_s
-                                            => value1.Value.AsInt64() > value2.Value.AsInt64(),
-                                        ILOpcode.bgt_un_s
-                                            => (ulong)value1.Value.AsInt64()
-                                                > (ulong)value2.Value.AsInt64(),
-                                        ILOpcode.bge_s
-                                            => value1.Value.AsInt64() >= value2.Value.AsInt64(),
-                                        ILOpcode.bge_un_s
-                                            => (ulong)value1.Value.AsInt64()
-                                                >= (ulong)value2.Value.AsInt64(),
-                                        ILOpcode.beq_s
-                                            => value1.Value.AsInt64() == value2.Value.AsInt64(),
-                                        ILOpcode.bne_un_s
-                                            => value1.Value.AsInt64() != value2.Value.AsInt64(),
-                                        ILOpcode.ble_s
-                                            => value1.Value.AsInt64() <= value2.Value.AsInt64(),
-                                        ILOpcode.ble_un_s
-                                            => (ulong)value1.Value.AsInt64()
-                                                <= (ulong)value2.Value.AsInt64(),
-                                        _
-                                            => throw new NotImplementedException() // unreachable
+                                        ILOpcode.blt_s => value1.Value.AsInt64()
+                                            < value2.Value.AsInt64(),
+                                        ILOpcode.blt_un_s => (ulong)value1.Value.AsInt64()
+                                            < (ulong)value2.Value.AsInt64(),
+                                        ILOpcode.bgt_s => value1.Value.AsInt64()
+                                            > value2.Value.AsInt64(),
+                                        ILOpcode.bgt_un_s => (ulong)value1.Value.AsInt64()
+                                            > (ulong)value2.Value.AsInt64(),
+                                        ILOpcode.bge_s => value1.Value.AsInt64()
+                                            >= value2.Value.AsInt64(),
+                                        ILOpcode.bge_un_s => (ulong)value1.Value.AsInt64()
+                                            >= (ulong)value2.Value.AsInt64(),
+                                        ILOpcode.beq_s => value1.Value.AsInt64()
+                                            == value2.Value.AsInt64(),
+                                        ILOpcode.bne_un_s => value1.Value.AsInt64()
+                                            != value2.Value.AsInt64(),
+                                        ILOpcode.ble_s => value1.Value.AsInt64()
+                                            <= value2.Value.AsInt64(),
+                                        ILOpcode.ble_un_s => (ulong)value1.Value.AsInt64()
+                                            <= (ulong)value2.Value.AsInt64(),
+                                        _ =>
+                                            throw new NotImplementedException() // unreachable
                                         ,
                                     };
                                 }
@@ -1625,32 +1616,32 @@ namespace ILCompiler
                                 {
                                     branchTaken = normalizedOpcode switch
                                     {
-                                        ILOpcode.blt_s
-                                            => value1.Value.AsDouble() < value2.Value.AsDouble(),
-                                        ILOpcode.blt_un_s
-                                            => !(
-                                                value1.Value.AsDouble() >= value2.Value.AsDouble()
-                                            ),
-                                        ILOpcode.bgt_s
-                                            => value1.Value.AsDouble() > value2.Value.AsDouble(),
-                                        ILOpcode.bgt_un_s
-                                            => !(
-                                                value1.Value.AsDouble() <= value2.Value.AsDouble()
-                                            ),
-                                        ILOpcode.bge_s
-                                            => value1.Value.AsDouble() >= value2.Value.AsDouble(),
-                                        ILOpcode.bge_un_s
-                                            => !(value1.Value.AsDouble() < value2.Value.AsDouble()),
-                                        ILOpcode.beq_s
-                                            => value1.Value.AsDouble() == value2.Value.AsDouble(),
-                                        ILOpcode.bne_un_s
-                                            => value1.Value.AsDouble() != value2.Value.AsDouble(),
-                                        ILOpcode.ble_s
-                                            => value1.Value.AsDouble() <= value2.Value.AsDouble(),
-                                        ILOpcode.ble_un_s
-                                            => !(value1.Value.AsDouble() > value2.Value.AsDouble()),
-                                        _
-                                            => throw new NotImplementedException() // unreachable
+                                        ILOpcode.blt_s => value1.Value.AsDouble()
+                                            < value2.Value.AsDouble(),
+                                        ILOpcode.blt_un_s => !(
+                                            value1.Value.AsDouble() >= value2.Value.AsDouble()
+                                        ),
+                                        ILOpcode.bgt_s => value1.Value.AsDouble()
+                                            > value2.Value.AsDouble(),
+                                        ILOpcode.bgt_un_s => !(
+                                            value1.Value.AsDouble() <= value2.Value.AsDouble()
+                                        ),
+                                        ILOpcode.bge_s => value1.Value.AsDouble()
+                                            >= value2.Value.AsDouble(),
+                                        ILOpcode.bge_un_s => !(
+                                            value1.Value.AsDouble() < value2.Value.AsDouble()
+                                        ),
+                                        ILOpcode.beq_s => value1.Value.AsDouble()
+                                            == value2.Value.AsDouble(),
+                                        ILOpcode.bne_un_s => value1.Value.AsDouble()
+                                            != value2.Value.AsDouble(),
+                                        ILOpcode.ble_s => value1.Value.AsDouble()
+                                            <= value2.Value.AsDouble(),
+                                        ILOpcode.ble_un_s => !(
+                                            value1.Value.AsDouble() > value2.Value.AsDouble()
+                                        ),
+                                        _ =>
+                                            throw new NotImplementedException() // unreachable
                                         ,
                                     };
                                 }
@@ -1890,24 +1881,20 @@ namespace ILCompiler
                                 int result = opcode switch
                                 {
                                     ILOpcode.or => value1.Value.AsInt32() | value2.Value.AsInt32(),
-                                    ILOpcode.shl
-                                        => value1.Value.AsInt32() << value2.Value.AsInt32(),
+                                    ILOpcode.shl => value1.Value.AsInt32()
+                                        << value2.Value.AsInt32(),
                                     ILOpcode.add => value1.Value.AsInt32() + value2.Value.AsInt32(),
                                     ILOpcode.sub => value1.Value.AsInt32() - value2.Value.AsInt32(),
                                     ILOpcode.and => value1.Value.AsInt32() & value2.Value.AsInt32(),
                                     ILOpcode.mul => value1.Value.AsInt32() * value2.Value.AsInt32(),
                                     ILOpcode.div => value1.Value.AsInt32() / value2.Value.AsInt32(),
-                                    ILOpcode.div_un
-                                        => (int)(
-                                            (uint)value1.Value.AsInt32()
-                                            / (uint)value2.Value.AsInt32()
-                                        ),
+                                    ILOpcode.div_un => (int)(
+                                        (uint)value1.Value.AsInt32() / (uint)value2.Value.AsInt32()
+                                    ),
                                     ILOpcode.rem => value1.Value.AsInt32() % value2.Value.AsInt32(),
-                                    ILOpcode.rem_un
-                                        => (int)(
-                                            (uint)value1.Value.AsInt32()
-                                            % (uint)value2.Value.AsInt32()
-                                        ),
+                                    ILOpcode.rem_un => (int)(
+                                        (uint)value1.Value.AsInt32() % (uint)value2.Value.AsInt32()
+                                    ),
                                     _ => throw new NotImplementedException(), // unreachable
                                 };
 
@@ -1938,17 +1925,15 @@ namespace ILCompiler
                                     ILOpcode.and => value1.Value.AsInt64() & value2.Value.AsInt64(),
                                     ILOpcode.mul => value1.Value.AsInt64() * value2.Value.AsInt64(),
                                     ILOpcode.div => value1.Value.AsInt64() / value2.Value.AsInt64(),
-                                    ILOpcode.div_un
-                                        => (long)(
-                                            (ulong)value1.Value.AsInt64()
-                                            / (ulong)value2.Value.AsInt64()
-                                        ),
+                                    ILOpcode.div_un => (long)(
+                                        (ulong)value1.Value.AsInt64()
+                                        / (ulong)value2.Value.AsInt64()
+                                    ),
                                     ILOpcode.rem => value1.Value.AsInt64() % value2.Value.AsInt64(),
-                                    ILOpcode.rem_un
-                                        => (long)(
-                                            (ulong)value1.Value.AsInt64()
-                                            % (ulong)value2.Value.AsInt64()
-                                        ),
+                                    ILOpcode.rem_un => (long)(
+                                        (ulong)value1.Value.AsInt64()
+                                        % (ulong)value2.Value.AsInt64()
+                                    ),
                                     _ => throw new NotImplementedException(), // unreachable
                                 };
 
@@ -1980,16 +1965,16 @@ namespace ILCompiler
 
                                 double result = opcode switch
                                 {
-                                    ILOpcode.add
-                                        => value1.Value.AsDouble() + value2.Value.AsDouble(),
-                                    ILOpcode.sub
-                                        => value1.Value.AsDouble() - value2.Value.AsDouble(),
-                                    ILOpcode.mul
-                                        => value1.Value.AsDouble() * value2.Value.AsDouble(),
-                                    ILOpcode.div
-                                        => value1.Value.AsDouble() / value2.Value.AsDouble(),
-                                    ILOpcode.rem
-                                        => value1.Value.AsDouble() % value2.Value.AsDouble(),
+                                    ILOpcode.add => value1.Value.AsDouble()
+                                        + value2.Value.AsDouble(),
+                                    ILOpcode.sub => value1.Value.AsDouble()
+                                        - value2.Value.AsDouble(),
+                                    ILOpcode.mul => value1.Value.AsDouble()
+                                        * value2.Value.AsDouble(),
+                                    ILOpcode.div => value1.Value.AsDouble()
+                                        / value2.Value.AsDouble(),
+                                    ILOpcode.rem => value1.Value.AsDouble()
+                                        % value2.Value.AsDouble(),
                                     _ => throw new NotImplementedException(), // unreachable
                                 };
 
@@ -2036,10 +2021,9 @@ namespace ILCompiler
                                 long addition = addend.ValueKind switch
                                 {
                                     StackValueKind.Int32 => addend.Value.AsInt32(),
-                                    _
-                                        => context.Target.PointerSize == 8
-                                            ? addend.Value.AsInt64()
-                                            : addend.Value.AsInt32(),
+                                    _ => context.Target.PointerSize == 8
+                                        ? addend.Value.AsInt64()
+                                        : addend.Value.AsInt32(),
                                 };
 
                                 var previousByRef = (ByRefValue)reference.Value;
@@ -2108,10 +2092,12 @@ namespace ILCompiler
                                 ILOpcode.stelem_i2 => context.GetWellKnownType(WellKnownType.Int16),
                                 ILOpcode.stelem_i4 => context.GetWellKnownType(WellKnownType.Int32),
                                 ILOpcode.stelem_i8 => context.GetWellKnownType(WellKnownType.Int64),
-                                ILOpcode.stelem_r4
-                                    => context.GetWellKnownType(WellKnownType.Single),
-                                ILOpcode.stelem_r8
-                                    => context.GetWellKnownType(WellKnownType.Double),
+                                ILOpcode.stelem_r4 => context.GetWellKnownType(
+                                    WellKnownType.Single
+                                ),
+                                ILOpcode.stelem_r8 => context.GetWellKnownType(
+                                    WellKnownType.Double
+                                ),
                                 _ => (TypeDesc)methodIL.GetObject(reader.ReadILToken()),
                             };
 
@@ -2164,16 +2150,20 @@ namespace ILCompiler
                                 ILOpcode.ldelem_i1 => context.GetWellKnownType(WellKnownType.SByte),
                                 ILOpcode.ldelem_u1 => context.GetWellKnownType(WellKnownType.Byte),
                                 ILOpcode.ldelem_i2 => context.GetWellKnownType(WellKnownType.Int16),
-                                ILOpcode.ldelem_u2
-                                    => context.GetWellKnownType(WellKnownType.UInt16),
+                                ILOpcode.ldelem_u2 => context.GetWellKnownType(
+                                    WellKnownType.UInt16
+                                ),
                                 ILOpcode.ldelem_i4 => context.GetWellKnownType(WellKnownType.Int32),
-                                ILOpcode.ldelem_u4
-                                    => context.GetWellKnownType(WellKnownType.UInt32),
+                                ILOpcode.ldelem_u4 => context.GetWellKnownType(
+                                    WellKnownType.UInt32
+                                ),
                                 ILOpcode.ldelem_i8 => context.GetWellKnownType(WellKnownType.Int64),
-                                ILOpcode.ldelem_r4
-                                    => context.GetWellKnownType(WellKnownType.Single),
-                                ILOpcode.ldelem_r8
-                                    => context.GetWellKnownType(WellKnownType.Double),
+                                ILOpcode.ldelem_r4 => context.GetWellKnownType(
+                                    WellKnownType.Single
+                                ),
+                                ILOpcode.ldelem_r8 => context.GetWellKnownType(
+                                    WellKnownType.Double
+                                ),
                                 _ => (TypeDesc)methodIL.GetObject(reader.ReadILToken()),
                             };
 
@@ -2378,14 +2368,10 @@ namespace ILCompiler
                                     methodIL.GetObject(reader.ReadILToken()) as TypeDesc;
                                 opcode = type.Category switch
                                 {
-                                    TypeFlags.SByte
-                                    or TypeFlags.Boolean
-                                    or TypeFlags.Byte
-                                        => ILOpcode.stind_i1,
-                                    TypeFlags.Int16
-                                    or TypeFlags.Char
-                                    or TypeFlags.UInt16
-                                        => ILOpcode.stind_i2,
+                                    TypeFlags.SByte or TypeFlags.Boolean or TypeFlags.Byte =>
+                                        ILOpcode.stind_i1,
+                                    TypeFlags.Int16 or TypeFlags.Char or TypeFlags.UInt16 =>
+                                        ILOpcode.stind_i2,
                                     TypeFlags.Int32 or TypeFlags.UInt32 => ILOpcode.stind_i4,
                                     TypeFlags.Int64 or TypeFlags.UInt64 => ILOpcode.stind_i8,
                                     _ => ILOpcode.stobj,
@@ -2399,22 +2385,18 @@ namespace ILCompiler
 
                             Value val = opcode switch
                             {
-                                ILOpcode.stind_i1
-                                    => stack.PopIntoLocation(
-                                        context.GetWellKnownType(WellKnownType.Byte)
-                                    ),
-                                ILOpcode.stind_i2
-                                    => stack.PopIntoLocation(
-                                        context.GetWellKnownType(WellKnownType.UInt16)
-                                    ),
-                                ILOpcode.stind_i4
-                                    => stack.PopIntoLocation(
-                                        context.GetWellKnownType(WellKnownType.UInt32)
-                                    ),
-                                ILOpcode.stind_i8
-                                    => stack.PopIntoLocation(
-                                        context.GetWellKnownType(WellKnownType.UInt64)
-                                    ),
+                                ILOpcode.stind_i1 => stack.PopIntoLocation(
+                                    context.GetWellKnownType(WellKnownType.Byte)
+                                ),
+                                ILOpcode.stind_i2 => stack.PopIntoLocation(
+                                    context.GetWellKnownType(WellKnownType.UInt16)
+                                ),
+                                ILOpcode.stind_i4 => stack.PopIntoLocation(
+                                    context.GetWellKnownType(WellKnownType.UInt32)
+                                ),
+                                ILOpcode.stind_i8 => stack.PopIntoLocation(
+                                    context.GetWellKnownType(WellKnownType.UInt64)
+                                ),
                                 _ => throw new NotImplementedException(),
                             };
 
@@ -4250,10 +4232,9 @@ namespace ILCompiler
         ) =>
             kind switch
             {
-                StackValueKind.NativeInt
-                    => context.Target.PointerSize == 8
-                        ? StackValueKind.Int64
-                        : StackValueKind.Int32,
+                StackValueKind.NativeInt => context.Target.PointerSize == 8
+                    ? StackValueKind.Int64
+                    : StackValueKind.Int32,
                 _ => kind,
             };
     }

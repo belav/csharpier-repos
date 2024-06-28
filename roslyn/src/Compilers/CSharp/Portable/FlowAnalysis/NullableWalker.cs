@@ -1253,52 +1253,46 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 includeAllMembers: false,
                                 includeCurrentTypeRequiredMembers: false,
                                 includeBaseRequiredMembers: false
-                            )
-                                => ImmutableArray<Symbol>.Empty,
+                            ) => ImmutableArray<Symbol>.Empty,
 
                             (
                                 includeAllMembers: false,
                                 includeCurrentTypeRequiredMembers: true,
                                 includeBaseRequiredMembers: false
-                            )
-                                => containingType
-                                    .GetMembersUnordered()
-                                    .SelectManyAsArray(
-                                        predicate: SymbolExtensions.IsRequired,
-                                        selector: getAllMembersToBeDefaulted
-                                    ),
+                            ) => containingType
+                                .GetMembersUnordered()
+                                .SelectManyAsArray(
+                                    predicate: SymbolExtensions.IsRequired,
+                                    selector: getAllMembersToBeDefaulted
+                                ),
 
                             (
                                 includeAllMembers: false,
                                 includeCurrentTypeRequiredMembers: true,
                                 includeBaseRequiredMembers: true
-                            )
-                                => containingType.AllRequiredMembers.SelectManyAsArray(static kvp =>
-                                    getAllMembersToBeDefaulted(kvp.Value)
-                                ),
+                            ) => containingType.AllRequiredMembers.SelectManyAsArray(static kvp =>
+                                getAllMembersToBeDefaulted(kvp.Value)
+                            ),
 
                             (
                                 includeAllMembers: true,
                                 includeCurrentTypeRequiredMembers: _,
                                 includeBaseRequiredMembers: false
-                            )
-                                => containingType
-                                    .GetMembersUnordered()
-                                    .SelectAsArray(getFieldSymbolToBeInitialized),
+                            ) => containingType
+                                .GetMembersUnordered()
+                                .SelectAsArray(getFieldSymbolToBeInitialized),
 
                             (
                                 includeAllMembers: true,
                                 includeCurrentTypeRequiredMembers: true,
                                 includeBaseRequiredMembers: true
-                            )
-                                => getAllTypeAndRequiredMembers(containingType),
+                            ) => getAllTypeAndRequiredMembers(containingType),
 
                             (
                                 includeAllMembers: _,
                                 includeCurrentTypeRequiredMembers: false,
                                 includeBaseRequiredMembers: true
-                            )
-                                => throw ExceptionUtilities.Unreachable(),
+                            ) => throw ExceptionUtilities.Unreachable(),
                         };
 
                         static ImmutableArray<Symbol> getAllTypeAndRequiredMembers(
@@ -4439,8 +4433,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return (original, updated) switch
             {
-                (LambdaSymbol l, NamedTypeSymbol n) _ when n.IsDelegateType()
-                    => AreLambdaAndNewDelegateSimilar(l, n),
+                (LambdaSymbol l, NamedTypeSymbol n) _ when n.IsDelegateType() =>
+                    AreLambdaAndNewDelegateSimilar(l, n),
                 (
                     FieldSymbol
                     {
@@ -4452,17 +4446,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ContainingType: { IsTupleType: true },
                         TupleElementIndex: var ui
                     } updatedField
+                ) => originalField.Type.Equals(
+                    updatedField.Type,
+                    TypeCompareKind.AllNullableIgnoreOptions | TypeCompareKind.IgnoreTupleNames
                 )
-                    => originalField.Type.Equals(
-                        updatedField.Type,
-                        TypeCompareKind.AllNullableIgnoreOptions | TypeCompareKind.IgnoreTupleNames
-                    )
-                        && oi == ui,
-                _
-                    => original.Equals(
-                        updated,
-                        TypeCompareKind.AllNullableIgnoreOptions | TypeCompareKind.IgnoreTupleNames
-                    ),
+                    && oi == ui,
+                _ => original.Equals(
+                    updated,
+                    TypeCompareKind.AllNullableIgnoreOptions | TypeCompareKind.IgnoreTupleNames
+                ),
             };
         }
 #endif
@@ -7151,21 +7143,28 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var (resultType, leftState) = node.OperatorResultKind switch
             {
-                BoundNullCoalescingOperatorResultKind.NoCommonType
-                    => (node.Type, NullableFlowState.NotNull),
-                BoundNullCoalescingOperatorResultKind.LeftType
-                    => getLeftResultType(leftResultType!, rightResultType!),
-                BoundNullCoalescingOperatorResultKind.LeftUnwrappedType
-                    => getLeftResultType(leftResultType!.StrippedType(), rightResultType!),
-                BoundNullCoalescingOperatorResultKind.RightType
-                    => getResultStateWithRightType(leftResultType!, rightResultType!),
-                BoundNullCoalescingOperatorResultKind.LeftUnwrappedRightType
-                    => getResultStateWithRightType(
-                        leftResultType!.StrippedType(),
-                        rightResultType!
-                    ),
-                BoundNullCoalescingOperatorResultKind.RightDynamicType
-                    => (rightResultType!, NullableFlowState.NotNull),
+                BoundNullCoalescingOperatorResultKind.NoCommonType => (
+                    node.Type,
+                    NullableFlowState.NotNull
+                ),
+                BoundNullCoalescingOperatorResultKind.LeftType => getLeftResultType(
+                    leftResultType!,
+                    rightResultType!
+                ),
+                BoundNullCoalescingOperatorResultKind.LeftUnwrappedType => getLeftResultType(
+                    leftResultType!.StrippedType(),
+                    rightResultType!
+                ),
+                BoundNullCoalescingOperatorResultKind.RightType => getResultStateWithRightType(
+                    leftResultType!,
+                    rightResultType!
+                ),
+                BoundNullCoalescingOperatorResultKind.LeftUnwrappedRightType =>
+                    getResultStateWithRightType(leftResultType!.StrippedType(), rightResultType!),
+                BoundNullCoalescingOperatorResultKind.RightDynamicType => (
+                    rightResultType!,
+                    NullableFlowState.NotNull
+                ),
                 _ => throw ExceptionUtilities.UnexpectedValue(node.OperatorResultKind),
             };
 
@@ -8770,8 +8769,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         CheckMethodConstraints(
                             syntax switch
                             {
-                                InvocationExpressionSyntax { Expression: var expression }
-                                    => expression,
+                                InvocationExpressionSyntax { Expression: var expression } =>
+                                    expression,
                                 ForEachStatementSyntax { Expression: var expression } => expression,
                                 _ => syntax,
                             },
@@ -11480,13 +11479,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 TypeKind: TypeKind.Delegate,
                                 DelegateInvokeMethod: { Parameters: { } parameters } signature
-                            }
-                                => (signature, parameters),
+                            } => (signature, parameters),
                             FunctionPointerTypeSymbol
                             {
                                 Signature: { Parameters: { } parameters } signature
-                            }
-                                => (signature, parameters),
+                            } => (signature, parameters),
                             _ => (null, ImmutableArray<ParameterSymbol>.Empty),
                         };
 
@@ -13140,12 +13137,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var annotations = expr switch
             {
-                BoundPropertyAccess property
-                    => property.PropertySymbol.GetFlowAnalysisAnnotations(),
+                BoundPropertyAccess property =>
+                    property.PropertySymbol.GetFlowAnalysisAnnotations(),
                 BoundIndexerAccess indexer => indexer.Indexer.GetFlowAnalysisAnnotations(),
                 BoundFieldAccess field => GetFieldAnnotations(field.FieldSymbol),
-                BoundParameter { ParameterSymbol: ParameterSymbol parameter }
-                    => ToInwardAnnotations(
+                BoundParameter { ParameterSymbol: ParameterSymbol parameter } =>
+                    ToInwardAnnotations(
                         GetParameterAnnotations(parameter) & ~FlowAnalysisAnnotations.NotNull
                     ), // NotNull is enforced upon method exit
                 _ => FlowAnalysisAnnotations.None,
@@ -14568,8 +14565,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var variableLocation = node.Syntax switch
             {
                 ForEachStatementSyntax statement => statement.Identifier.GetLocation(),
-                ForEachVariableStatementSyntax variableStatement
-                    => variableStatement.Variable.GetLocation(),
+                ForEachVariableStatementSyntax variableStatement =>
+                    variableStatement.Variable.GetLocation(),
                 _ => throw ExceptionUtilities.UnexpectedValue(node.Syntax),
             };
 #pragma warning restore IDE0055 // Fix formatting
@@ -14980,16 +14977,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return node switch
             {
-                BoundBinaryOperator binary
-                    => InferResultNullability(
-                        binary.OperatorKind,
-                        binary.Method,
-                        binary.Type,
-                        leftType,
-                        rightType
-                    ),
-                BoundUserDefinedConditionalLogicalOperator userDefined
-                    => InferResultNullability(userDefined),
+                BoundBinaryOperator binary => InferResultNullability(
+                    binary.OperatorKind,
+                    binary.Method,
+                    binary.Type,
+                    leftType,
+                    rightType
+                ),
+                BoundUserDefinedConditionalLogicalOperator userDefined => InferResultNullability(
+                    userDefined
+                ),
                 _ => throw ExceptionUtilities.UnexpectedValue(node),
             };
         }

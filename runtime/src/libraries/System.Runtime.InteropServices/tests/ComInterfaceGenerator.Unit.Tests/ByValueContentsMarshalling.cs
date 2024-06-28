@@ -22,8 +22,8 @@ namespace ComInterfaceGenerator.Unit.Tests
             generator switch
             {
                 GeneratorKind.VTableIndexStubGenerator => new VirtualMethodIndexAttributeProvider(),
-                GeneratorKind.ComInterfaceGeneratorManagedObjectWrapper
-                    => new GeneratedComInterfaceAttributeProvider(
+                GeneratorKind.ComInterfaceGeneratorManagedObjectWrapper =>
+                    new GeneratedComInterfaceAttributeProvider(
                         System
                             .Runtime
                             .InteropServices
@@ -31,8 +31,8 @@ namespace ComInterfaceGenerator.Unit.Tests
                             .ComInterfaceOptions
                             .ManagedObjectWrapper
                     ),
-                GeneratorKind.ComInterfaceGeneratorComObjectWrapper
-                    => new GeneratedComInterfaceAttributeProvider(
+                GeneratorKind.ComInterfaceGeneratorComObjectWrapper =>
+                    new GeneratedComInterfaceAttributeProvider(
                         System
                             .Runtime
                             .InteropServices

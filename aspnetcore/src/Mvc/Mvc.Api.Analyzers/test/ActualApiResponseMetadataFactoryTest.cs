@@ -536,8 +536,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         return variant switch
         {
-            ReturnOperationTestVariant.SwitchExpression
-                => "InspectReturnExpressionTestsForSwitchExpression",
+            ReturnOperationTestVariant.SwitchExpression =>
+                "InspectReturnExpressionTestsForSwitchExpression",
             _ => "InspectReturnExpressionTests",
         };
     }
@@ -546,8 +546,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         var controllerType = variant switch
         {
-            ReturnOperationTestVariant.SwitchExpression
-                => typeof(TestFiles.InspectReturnExpressionTestsForSwitchExpression.TestController),
+            ReturnOperationTestVariant.SwitchExpression =>
+                typeof(TestFiles.InspectReturnExpressionTestsForSwitchExpression.TestController),
             _ => typeof(TestFiles.InspectReturnExpressionTests.TestController),
         };
 

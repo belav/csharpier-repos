@@ -261,14 +261,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var attrData = defaultValue.SpecialType switch
                 {
-                    SpecialType.System_Decimal
-                        => compilation.SynthesizeDecimalConstantAttribute(
-                            defaultValue.DecimalValue
-                        ),
-                    SpecialType.System_DateTime
-                        => compilation.SynthesizeDateTimeConstantAttribute(
-                            defaultValue.DateTimeValue
-                        ),
+                    SpecialType.System_Decimal => compilation.SynthesizeDecimalConstantAttribute(
+                        defaultValue.DecimalValue
+                    ),
+                    SpecialType.System_DateTime => compilation.SynthesizeDateTimeConstantAttribute(
+                        defaultValue.DateTimeValue
+                    ),
                     _ => null,
                 };
                 AddSynthesizedAttribute(ref attributes, attrData);

@@ -439,8 +439,8 @@ namespace System.Reflection.Metadata.Ecma335
                     return treatment switch
                     {
                         TypeRefSignatureTreatment.ProjectedToClass => SignatureTypeKind.Class,
-                        TypeRefSignatureTreatment.ProjectedToValueType
-                            => SignatureTypeKind.ValueType,
+                        TypeRefSignatureTreatment.ProjectedToValueType =>
+                            SignatureTypeKind.ValueType,
                         TypeRefSignatureTreatment.None => typeKind,
                         _ => throw ExceptionUtilities.UnexpectedValue(treatment),
                     };

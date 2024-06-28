@@ -129,10 +129,9 @@ namespace CSharpSyntaxGenerator
                         {
                             string s => new[] { s },
                             IEnumerable<string> ss => ss,
-                            _
-                                => throw new InvalidOperationException(
-                                    "Join must be passed strings or collections of strings"
-                                ),
+                            _ => throw new InvalidOperationException(
+                                "Join must be passed strings or collections of strings"
+                            ),
                         }
                     ).Where(s => s != "")
                 )

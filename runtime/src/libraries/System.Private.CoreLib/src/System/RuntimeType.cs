@@ -254,11 +254,10 @@ namespace System
                 TypeCode.Single => Enum.IsDefinedPrimitive(this, (float)value),
                 TypeCode.Double => Enum.IsDefinedPrimitive(this, (double)value),
                 TypeCode.Char => Enum.IsDefinedPrimitive(this, (char)value),
-                _
-                    => underlyingType == typeof(nint)
-                        ? Enum.IsDefinedPrimitive(this, (nuint)(nint)value)
-                    : underlyingType == typeof(nuint) ? Enum.IsDefinedPrimitive(this, (nuint)value)
-                    : throw new InvalidOperationException(SR.InvalidOperation_UnknownEnumType),
+                _ => underlyingType == typeof(nint)
+                    ? Enum.IsDefinedPrimitive(this, (nuint)(nint)value)
+                : underlyingType == typeof(nuint) ? Enum.IsDefinedPrimitive(this, (nuint)value)
+                : throw new InvalidOperationException(SR.InvalidOperation_UnknownEnumType),
             };
         }
 
