@@ -6,7 +6,9 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.InternalTesting;
 
-[Obsolete("This API is obsolete and the pattern its usage encouraged should not be used anymore. See https://github.com/dotnet/extensions/issues/1697 for details.")]
+[Obsolete(
+    "This API is obsolete and the pattern its usage encouraged should not be used anymore. See https://github.com/dotnet/extensions/issues/1697 for details."
+)]
 public class TestPathUtilities
 {
     public static string GetSolutionRootDirectory(string solution)
@@ -16,7 +18,9 @@ public class TestPathUtilities
 
         do
         {
-            var projectFileInfo = new FileInfo(Path.Combine(directoryInfo.FullName, $"{solution}.slnf"));
+            var projectFileInfo = new FileInfo(
+                Path.Combine(directoryInfo.FullName, $"{solution}.slnf")
+            );
             if (projectFileInfo.Exists)
             {
                 return projectFileInfo.DirectoryName;
@@ -27,7 +31,12 @@ public class TestPathUtilities
             {
                 // Have reached the solution root. Work down through the src/ folder to find the solution filter.
                 directoryInfo = new DirectoryInfo(Path.Combine(directoryInfo.FullName, "src"));
-                foreach (var solutionFileInfo in directoryInfo.EnumerateFiles($"{solution}.slnf", SearchOption.AllDirectories))
+                foreach (
+                    var solutionFileInfo in directoryInfo.EnumerateFiles(
+                        $"{solution}.slnf",
+                        SearchOption.AllDirectories
+                    )
+                )
                 {
                     return solutionFileInfo.DirectoryName;
                 }
@@ -37,9 +46,10 @@ public class TestPathUtilities
             }
 
             directoryInfo = directoryInfo.Parent;
-        }
-        while (directoryInfo.Parent != null);
+        } while (directoryInfo.Parent != null);
 
-        throw new Exception($"Solution file {solution}.slnf could not be found in {applicationBasePath} or its parent directories.");
+        throw new Exception(
+            $"Solution file {solution}.slnf could not be found in {applicationBasePath} or its parent directories."
+        );
     }
 }

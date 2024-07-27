@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,43 +28,45 @@
 
 namespace System.Configuration
 {
-	public sealed class ExeConfigurationFileMap: ConfigurationFileMap
-	{
-		string exeConfigFilename;
-		string localUserConfigFilename;
-		string roamingUserConfigFilename;
-		
-		public ExeConfigurationFileMap ()
-		{
-			exeConfigFilename = "";
-			localUserConfigFilename = "";
-			roamingUserConfigFilename = "";
-		}
-		
-		public string ExeConfigFilename {
-			get { return exeConfigFilename; }
-			set { exeConfigFilename = value; }
-		}
-		
-		public string LocalUserConfigFilename {
-			get { return localUserConfigFilename; }
-			set { localUserConfigFilename = value; }
-		}
-		
-		public string RoamingUserConfigFilename {
-			get { return roamingUserConfigFilename; }
-			set { roamingUserConfigFilename = value; }
-		}
-		
-		public override object Clone ()
-		{
-			ExeConfigurationFileMap map = new ExeConfigurationFileMap ();
-			map.exeConfigFilename = exeConfigFilename;
-			map.localUserConfigFilename = localUserConfigFilename;
-			map.roamingUserConfigFilename = roamingUserConfigFilename;
-			map.MachineConfigFilename = MachineConfigFilename;
-			return map;
-		}
-	}
-}
+    public sealed class ExeConfigurationFileMap : ConfigurationFileMap
+    {
+        string exeConfigFilename;
+        string localUserConfigFilename;
+        string roamingUserConfigFilename;
 
+        public ExeConfigurationFileMap()
+        {
+            exeConfigFilename = "";
+            localUserConfigFilename = "";
+            roamingUserConfigFilename = "";
+        }
+
+        public string ExeConfigFilename
+        {
+            get { return exeConfigFilename; }
+            set { exeConfigFilename = value; }
+        }
+
+        public string LocalUserConfigFilename
+        {
+            get { return localUserConfigFilename; }
+            set { localUserConfigFilename = value; }
+        }
+
+        public string RoamingUserConfigFilename
+        {
+            get { return roamingUserConfigFilename; }
+            set { roamingUserConfigFilename = value; }
+        }
+
+        public override object Clone()
+        {
+            ExeConfigurationFileMap map = new ExeConfigurationFileMap();
+            map.exeConfigFilename = exeConfigFilename;
+            map.localUserConfigFilename = localUserConfigFilename;
+            map.roamingUserConfigFilename = roamingUserConfigFilename;
+            map.MachineConfigFilename = MachineConfigFilename;
+            return map;
+        }
+    }
+}

@@ -12,11 +12,11 @@ namespace System.Data
     {
         internal readonly object _val;
 
-        internal ConstNode(DataTable? table, ValueType type, object constant) : this(table, type, constant, true)
-        {
-        }
+        internal ConstNode(DataTable? table, ValueType type, object constant)
+            : this(table, type, constant, true) { }
 
-        internal ConstNode(DataTable? table, ValueType type, object constant, bool fParseQuotes) : base(table)
+        internal ConstNode(DataTable? table, ValueType type, object constant, bool fParseQuotes)
+            : base(table)
         {
             switch (type)
             {
@@ -101,6 +101,7 @@ namespace System.Data
         {
             return false;
         }
+
         internal override bool HasRemoteAggregate()
         {
             return false;
@@ -123,13 +124,27 @@ namespace System.Data
                 if (null != sval)
                 {
                     decimal r12;
-                    if (decimal.TryParse(sval, NumberStyles.Number, NumberFormatInfo.InvariantInfo, out r12))
+                    if (
+                        decimal.TryParse(
+                            sval,
+                            NumberStyles.Number,
+                            NumberFormatInfo.InvariantInfo,
+                            out r12
+                        )
+                    )
                     {
                         return r12;
                     }
 
                     double r8;
-                    if (double.TryParse(sval, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.InvariantInfo, out r8))
+                    if (
+                        double.TryParse(
+                            sval,
+                            NumberStyles.Float | NumberStyles.AllowThousands,
+                            NumberFormatInfo.InvariantInfo,
+                            out r8
+                        )
+                    )
                     {
                         return r8;
                     }
@@ -197,17 +212,38 @@ namespace System.Data
                 if (null != sval)
                 {
                     int i4;
-                    if (int.TryParse(sval, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out i4))
+                    if (
+                        int.TryParse(
+                            sval,
+                            NumberStyles.Integer,
+                            NumberFormatInfo.InvariantInfo,
+                            out i4
+                        )
+                    )
                     {
                         return i4;
                     }
                     long i8;
-                    if (long.TryParse(sval, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out i8))
+                    if (
+                        long.TryParse(
+                            sval,
+                            NumberStyles.Integer,
+                            NumberFormatInfo.InvariantInfo,
+                            out i8
+                        )
+                    )
                     {
                         return i8;
                     }
                     double r8;
-                    if (double.TryParse(sval, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.InvariantInfo, out r8))
+                    if (
+                        double.TryParse(
+                            sval,
+                            NumberStyles.Float | NumberStyles.AllowThousands,
+                            NumberFormatInfo.InvariantInfo,
+                            out r8
+                        )
+                    )
                     {
                         return r8;
                     }

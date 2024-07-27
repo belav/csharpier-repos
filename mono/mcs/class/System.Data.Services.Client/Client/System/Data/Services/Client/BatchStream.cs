@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -18,8 +18,7 @@ namespace System.Data.Services.Client
     using System.Globalization;
     using System.IO;
     using System.Text;
-
-#if !ASTORIA_LIGHT    
+#if !ASTORIA_LIGHT
     using System.Net;
 #else
     using System.Data.Services.Http;
@@ -59,7 +58,6 @@ namespace System.Data.Services.Client
 
         private bool disposeWithContentStreamDispose;
 
-
         private string statusCode;
 
         private BatchStreamState batchState;
@@ -72,7 +70,12 @@ namespace System.Data.Services.Client
 #pragma warning restore 649
 #endif
 
-        internal BatchStream(Stream stream, string boundary, Encoding batchEncoding, bool requestStream)
+        internal BatchStream(
+            Stream stream,
+            string boundary,
+            Encoding batchEncoding,
+            bool requestStream
+        )
         {
             Debug.Assert(null != stream, "null stream");
 
@@ -136,7 +139,13 @@ namespace System.Data.Services.Client
             this.reader.Flush();
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw Error.NotSupported();
         }
@@ -161,22 +170,24 @@ namespace System.Data.Services.Client
             }
 
             if (Int32.MaxValue == offset)
-            {                byte[] buffer = new byte[256];                while (0 < this.ReadDelimiter(buffer, 0, buffer.Length))
-                {
-                }
+            {
+                byte[] buffer = new byte[256];
+                while (0 < this.ReadDelimiter(buffer, 0, buffer.Length)) { }
             }
             else if (0 < offset)
-            {                do
+            {
+                do
                 {
-                    int count = Math.Min(checked((int)offset), Math.Min(this.byteLength, this.batchLength));
+                    int count = Math.Min(
+                        checked((int)offset),
+                        Math.Min(this.byteLength, this.batchLength)
+                    );
                     this.totalCount += count;
                     this.bytePosition += count;
                     this.byteLength -= count;
                     this.batchLength -= count;
                     offset -= count;
-
-                }
-                while ((0 < offset) && (this.batchLength != 0) && this.ReadBuffer());
+                } while ((0 < offset) && (this.batchLength != 0) && this.ReadBuffer());
             }
 
             Debug.Assert(0 <= this.byteLength, "negative byteLength");
@@ -195,24 +206,45 @@ namespace System.Data.Services.Client
         }
         #endregion
 
-        internal static bool GetBoundaryAndEncodingFromMultipartMixedContentType(string contentType, out string boundary, out Encoding encoding)
+        internal static bool GetBoundaryAndEncodingFromMultipartMixedContentType(
+            string contentType,
+            out string boundary,
+            out Encoding encoding
+        )
         {
             boundary = null;
             encoding = null;
 
             string mime;
-            KeyValuePair<string, string>[] parameters = HttpProcessUtility.ReadContentType(contentType, out mime, out encoding);
+            KeyValuePair<string, string>[] parameters = HttpProcessUtility.ReadContentType(
+                contentType,
+                out mime,
+                out encoding
+            );
 
-            if (String.Equals(XmlConstants.MimeMultiPartMixed, mime, StringComparison.OrdinalIgnoreCase))
+            if (
+                String.Equals(
+                    XmlConstants.MimeMultiPartMixed,
+                    mime,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 if (null != parameters)
                 {
                     foreach (KeyValuePair<string, string> parameter in parameters)
                     {
-                        if (String.Equals(parameter.Key, XmlConstants.HttpMultipartBoundary, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            String.Equals(
+                                parameter.Key,
+                                XmlConstants.HttpMultipartBoundary,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             if (boundary != null)
-                            {                                boundary = null;
+                            {
+                                boundary = null;
                                 break;
                             }
 
@@ -222,13 +254,13 @@ namespace System.Data.Services.Client
                 }
 
                 if (String.IsNullOrEmpty(boundary))
-                {                    throw Error.BatchStreamMissingBoundary();
+                {
+                    throw Error.BatchStreamMissingBoundary();
                 }
             }
 
             return (null != boundary);
         }
-
 
         internal string GetResponseVersion()
         {
@@ -239,7 +271,11 @@ namespace System.Data.Services.Client
 
         internal HttpStatusCode GetStatusCode()
         {
-            return (HttpStatusCode)(null != this.statusCode ? Int32.Parse(this.statusCode, CultureInfo.InvariantCulture) : 500);
+            return (HttpStatusCode)(
+                null != this.statusCode
+                    ? Int32.Parse(this.statusCode, CultureInfo.InvariantCulture)
+                    : 500
+            );
         }
 
         internal bool MoveNext()
@@ -264,7 +300,10 @@ namespace System.Data.Services.Client
             {
                 case BatchStreamState.EndBatch:
                     Debug.Assert(null == this.batchBoundary, "non-null batch boundary");
-                    Debug.Assert(null == this.changesetBoundary, "non-null changesetBoundary boundary");
+                    Debug.Assert(
+                        null == this.changesetBoundary,
+                        "non-null changesetBoundary boundary"
+                    );
                     throw Error.BatchStreamInvalidBatchFormat();
 
                 case BatchStreamState.Get:
@@ -314,15 +353,17 @@ namespace System.Data.Services.Client
             Debug.Assert(null == this.statusCode, "non-null statusCode");
 
             Debug.Assert(
-                this.batchState == BatchStreamState.EndBatch ||
-                this.batchState == BatchStreamState.EndChangeSet,
-                "unexpected state at start");
+                this.batchState == BatchStreamState.EndBatch
+                    || this.batchState == BatchStreamState.EndChangeSet,
+                "unexpected state at start"
+            );
             #endregion
 
             #region read --delimiter
             string delimiter = this.ReadLine();
             if (String.IsNullOrEmpty(delimiter))
-            {                delimiter = this.ReadLine();
+            {
+                delimiter = this.ReadLine();
             }
 
             if (String.IsNullOrEmpty(delimiter))
@@ -336,7 +377,10 @@ namespace System.Data.Services.Client
 
                 if ((null != this.changesetBoundary) && (delimiter == this.changesetBoundary))
                 {
-                    Debug.Assert(this.batchState == BatchStreamState.EndChangeSet, "bad changeset boundary state");
+                    Debug.Assert(
+                        this.batchState == BatchStreamState.EndChangeSet,
+                        "bad changeset boundary state"
+                    );
 
                     this.changesetBoundary = null;
                     return true;
@@ -344,7 +388,8 @@ namespace System.Data.Services.Client
                 else if (delimiter == this.batchBoundary)
                 {
                     if (BatchStreamState.EndChangeSet == this.batchState)
-                    {                        throw Error.BatchStreamMissingEndChangesetDelimiter();
+                    {
+                        throw Error.BatchStreamMissingEndChangesetDelimiter();
                     }
 
                     this.changesetBoundary = null;
@@ -363,14 +408,18 @@ namespace System.Data.Services.Client
             }
             else if ((null != this.changesetBoundary) && (delimiter == this.changesetBoundary))
             {
-                Debug.Assert(this.batchState == BatchStreamState.EndChangeSet, "bad changeset boundary state");
+                Debug.Assert(
+                    this.batchState == BatchStreamState.EndChangeSet,
+                    "bad changeset boundary state"
+                );
             }
             else if (delimiter == this.batchBoundary)
             {
                 if (this.batchState != BatchStreamState.EndBatch)
                 {
                     if (this.batchState == BatchStreamState.EndChangeSet)
-                    {                        throw Error.BatchStreamMissingEndChangesetDelimiter();
+                    {
+                        throw Error.BatchStreamMissingEndChangesetDelimiter();
                     }
                     else
                     {
@@ -379,7 +428,8 @@ namespace System.Data.Services.Client
                 }
             }
             else
-            {                throw Error.BatchStreamInvalidDelimiter(delimiter);
+            {
+                throw Error.BatchStreamInvalidDelimiter(delimiter);
             }
 
             #endregion
@@ -393,22 +443,35 @@ namespace System.Data.Services.Client
             bool readHttpHeaders = false;
             if (this.contentHeaders.TryGetValue(XmlConstants.HttpContentType, out contentType))
             {
-                if (String.Equals(contentType, XmlConstants.MimeApplicationHttp, StringComparison.OrdinalIgnoreCase))
+                if (
+                    String.Equals(
+                        contentType,
+                        XmlConstants.MimeApplicationHttp,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     if (this.contentHeaders.Count != 2)
                     {
                         throw Error.BatchStreamInvalidNumberOfHeadersAtOperationStart(
                             XmlConstants.HttpContentType,
-                            XmlConstants.HttpContentTransferEncoding);
+                            XmlConstants.HttpContentTransferEncoding
+                        );
                     }
 
                     string transferEncoding;
-                    if (!this.contentHeaders.TryGetValue(XmlConstants.HttpContentTransferEncoding, out transferEncoding) ||
-                        XmlConstants.BatchRequestContentTransferEncoding != transferEncoding)
+                    if (
+                        !this.contentHeaders.TryGetValue(
+                            XmlConstants.HttpContentTransferEncoding,
+                            out transferEncoding
+                        )
+                        || XmlConstants.BatchRequestContentTransferEncoding != transferEncoding
+                    )
                     {
                         throw Error.BatchStreamMissingOrInvalidContentEncodingHeader(
                             XmlConstants.HttpContentTransferEncoding,
-                            XmlConstants.BatchRequestContentTransferEncoding);
+                            XmlConstants.BatchRequestContentTransferEncoding
+                        );
                     }
 
                     readHttpHeaders = true;
@@ -417,7 +480,13 @@ namespace System.Data.Services.Client
                 {
                     string boundary;
                     Encoding encoding;
-                    if (GetBoundaryAndEncodingFromMultipartMixedContentType(contentType, out boundary, out encoding))
+                    if (
+                        GetBoundaryAndEncodingFromMultipartMixedContentType(
+                            contentType,
+                            out boundary,
+                            out encoding
+                        )
+                    )
                     {
                         this.changesetBoundary = VerifyBoundary(boundary);
                         this.changesetEncoding = encoding;
@@ -429,13 +498,22 @@ namespace System.Data.Services.Client
                             XmlConstants.HttpContentType,
                             contentType,
                             XmlConstants.MimeApplicationHttp,
-                            XmlConstants.MimeMultiPartMixed);
+                            XmlConstants.MimeMultiPartMixed
+                        );
                     }
 
-                    if (this.contentHeaders.Count > 2 ||
-                        (this.contentHeaders.Count == 2 && !this.contentHeaders.ContainsKey(XmlConstants.HttpContentLength)))
+                    if (
+                        this.contentHeaders.Count > 2
+                        || (
+                            this.contentHeaders.Count == 2
+                            && !this.contentHeaders.ContainsKey(XmlConstants.HttpContentLength)
+                        )
+                    )
                     {
-                        throw Error.BatchStreamInvalidNumberOfHeadersAtChangeSetStart(XmlConstants.HttpContentType, XmlConstants.HttpContentLength);
+                        throw Error.BatchStreamInvalidNumberOfHeadersAtChangeSetStart(
+                            XmlConstants.HttpContentType,
+                            XmlConstants.HttpContentLength
+                        );
                     }
                 }
                 else
@@ -444,7 +522,8 @@ namespace System.Data.Services.Client
                         XmlConstants.HttpContentType,
                         contentType,
                         XmlConstants.MimeApplicationHttp,
-                        XmlConstants.MimeMultiPartMixed);
+                        XmlConstants.MimeMultiPartMixed
+                    );
                 }
             }
             else
@@ -481,12 +560,13 @@ namespace System.Data.Services.Client
                 else if (length != 0)
                 {
                     Debug.Assert(
-                        this.batchState == BatchStreamState.Delete ||
-                        this.batchState == BatchStreamState.Get ||
-                        this.batchState == BatchStreamState.Post ||
-                        this.batchState == BatchStreamState.Put ||
-                        this.batchState == BatchStreamState.Merge,
-                        "unexpected contentlength location");
+                        this.batchState == BatchStreamState.Delete
+                            || this.batchState == BatchStreamState.Get
+                            || this.batchState == BatchStreamState.Post
+                            || this.batchState == BatchStreamState.Put
+                            || this.batchState == BatchStreamState.Merge,
+                        "unexpected contentlength location"
+                    );
                     this.contentStream = new StreamWithLength(this, length);
                 }
             }
@@ -506,15 +586,26 @@ namespace System.Data.Services.Client
             #endregion
 
             Debug.Assert(
-                this.batchState == BatchStreamState.BeginChangeSet ||
-                (this.batchRequest && (this.batchState == BatchStreamState.Delete ||
-                                       this.batchState == BatchStreamState.Get ||
-                                       this.batchState == BatchStreamState.Post ||
-                                       this.batchState == BatchStreamState.Put ||
-                                       this.batchState == BatchStreamState.Merge)) ||
-                (!this.batchRequest && (this.batchState == BatchStreamState.GetResponse ||
-                                        this.batchState == BatchStreamState.ChangeResponse)),
-                "unexpected state at return");
+                this.batchState == BatchStreamState.BeginChangeSet
+                    || (
+                        this.batchRequest
+                        && (
+                            this.batchState == BatchStreamState.Delete
+                            || this.batchState == BatchStreamState.Get
+                            || this.batchState == BatchStreamState.Post
+                            || this.batchState == BatchStreamState.Put
+                            || this.batchState == BatchStreamState.Merge
+                        )
+                    )
+                    || (
+                        !this.batchRequest
+                        && (
+                            this.batchState == BatchStreamState.GetResponse
+                            || this.batchState == BatchStreamState.ChangeResponse
+                        )
+                    ),
+                "unexpected state at return"
+            );
 
             #region enforce if contentStream is expected, caller needs to enforce if contentStream is not expected
             if (null == this.contentStream)
@@ -524,7 +615,9 @@ namespace System.Data.Services.Client
                     case BatchStreamState.BeginChangeSet:
                     case BatchStreamState.Delete:
                     case BatchStreamState.Get:
-                    case BatchStreamState.ChangeResponse:                    case BatchStreamState.GetResponse:                        break;
+                    case BatchStreamState.ChangeResponse:
+                    case BatchStreamState.GetResponse:
+                        break;
 
                     case BatchStreamState.Post:
                     case BatchStreamState.Put:
@@ -548,7 +641,9 @@ namespace System.Data.Services.Client
                     case BatchStreamState.ChangeResponse:
                         break;
 
-                    case BatchStreamState.Get:                    case BatchStreamState.Delete:                    default:
+                    case BatchStreamState.Get:
+                    case BatchStreamState.Delete:
+                    default:
                         throw Error.BatchStreamContentUnexpected(this.batchState);
                 }
             }
@@ -567,7 +662,8 @@ namespace System.Data.Services.Client
             if (disposing)
             {
                 if (null != this.contentStream)
-                {                    this.disposeWithContentStreamDispose = true;
+                {
+                    this.disposeWithContentStreamDispose = true;
                 }
                 else
                 {
@@ -632,7 +728,8 @@ namespace System.Data.Services.Client
             foreach (char c in boundary)
             {
                 if ((127 < (int)c) || Char.IsWhiteSpace(c) || Char.IsControl(c))
-                {                    throw Error.BatchStreamInvalidDelimiter(boundary);
+                {
+                    throw Error.BatchStreamInvalidDelimiter(boundary);
                 }
             }
 
@@ -684,7 +781,11 @@ namespace System.Data.Services.Client
             if (0 == this.byteLength)
             {
                 this.bytePosition = 0;
-                this.byteLength = this.reader.Read(this.byteBuffer, this.bytePosition, this.byteBuffer.Length);
+                this.byteLength = this.reader.Read(
+                    this.byteBuffer,
+                    this.bytePosition,
+                    this.byteBuffer.Length
+                );
                 if (null != this.writer)
                 {
                     this.writer.Write(this.byteBuffer, this.bytePosition, this.byteLength);
@@ -740,7 +841,10 @@ namespace System.Data.Services.Client
             do
             {
                 Debug.Assert(0 < this.byteLength, "out of bytes");
-                Debug.Assert(this.bytePosition + this.byteLength <= this.byteBuffer.Length, "byte tracking out of range");
+                Debug.Assert(
+                    this.bytePosition + this.byteLength <= this.byteBuffer.Length,
+                    "byte tracking out of range"
+                );
                 int i = this.bytePosition;
                 int end = i + Math.Min(this.byteLength, this.batchLength);
                 do
@@ -771,7 +875,11 @@ namespace System.Data.Services.Client
                         this.bytePosition++;
                         this.byteLength--;
                         this.batchLength--;
-                        if (('\r' == ch) && ((0 < this.byteLength) || this.ReadBuffer()) && (0 < this.batchLength))
+                        if (
+                            ('\r' == ch)
+                            && ((0 < this.byteLength) || this.ReadBuffer())
+                            && (0 < this.batchLength)
+                        )
                         {
                             ch = (char)this.byteBuffer[this.bytePosition];
                             if ('\n' == ch)
@@ -789,13 +897,11 @@ namespace System.Data.Services.Client
                     }
 
                     i++;
-                }
-                while (i < end);
+                } while (i < end);
 
                 i -= this.bytePosition;
                 this.Append(ref buffer, i);
-            }
-            while (this.ReadBuffer() && (0 < this.batchLength));
+            } while (this.ReadBuffer() && (0 < this.batchLength));
 
             Debug.Assert(0 <= this.byteLength, "negative byteLength");
             Debug.Assert(0 <= this.batchLength, "negative batchLength");
@@ -806,24 +912,24 @@ namespace System.Data.Services.Client
         {
             if (this.byteLength < 2)
             {
-#if !ASTORIA_LIGHT                
+#if !ASTORIA_LIGHT
                 return Encoding.ASCII;
 #else
                 return HttpProcessUtility.FallbackEncoding;
 #endif
             }
             else if (this.byteBuffer[0] == 0xFE && this.byteBuffer[1] == 0xFF)
-            {                this.bytePosition = 2;
+            {
+                this.bytePosition = 2;
                 this.byteLength -= 2;
                 return new UnicodeEncoding(true, true);
             }
             else if (this.byteBuffer[0] == 0xFF && this.byteBuffer[1] == 0xFE)
-            {                if (this.byteLength >= 4 &&
-                    this.byteBuffer[2] == 0 &&
-                    this.byteBuffer[3] == 0)
+            {
+                if (this.byteLength >= 4 && this.byteBuffer[2] == 0 && this.byteBuffer[3] == 0)
                 {
-#if !ASTORIA_LIGHT                    
-                this.bytePosition = 4;
+#if !ASTORIA_LIGHT
+                    this.bytePosition = 4;
                     this.byteLength -= 4;
                     return new UTF32Encoding(false, true);
 #else
@@ -837,21 +943,26 @@ namespace System.Data.Services.Client
                     return new UnicodeEncoding(false, true);
                 }
             }
-            else if (this.byteLength >= 3 &&
-                     this.byteBuffer[0] == 0xEF &&
-                     this.byteBuffer[1] == 0xBB &&
-                     this.byteBuffer[2] == 0xBF)
-            {                this.bytePosition = 3;
+            else if (
+                this.byteLength >= 3
+                && this.byteBuffer[0] == 0xEF
+                && this.byteBuffer[1] == 0xBB
+                && this.byteBuffer[2] == 0xBF
+            )
+            {
+                this.bytePosition = 3;
                 this.byteLength -= 3;
                 return Encoding.UTF8;
             }
-            else if (this.byteLength >= 4 &&
-                     this.byteBuffer[0] == 0 &&
-                     this.byteBuffer[1] == 0 &&
-                     this.byteBuffer[2] == 0xFE &&
-                     this.byteBuffer[3] == 0xFF)
+            else if (
+                this.byteLength >= 4
+                && this.byteBuffer[0] == 0
+                && this.byteBuffer[1] == 0
+                && this.byteBuffer[2] == 0xFE
+                && this.byteBuffer[3] == 0xFF
+            )
             {
-#if !ASTORIA_LIGHT                
+#if !ASTORIA_LIGHT
                 this.bytePosition = 4;
                 this.byteLength -= 4;
                 return new UTF32Encoding(true, true);
@@ -861,7 +972,7 @@ namespace System.Data.Services.Client
             }
             else
             {
-#if !ASTORIA_LIGHT                
+#if !ASTORIA_LIGHT
                 return Encoding.ASCII;
 #else
                 return HttpProcessUtility.FallbackEncoding;
@@ -887,7 +998,9 @@ namespace System.Data.Services.Client
                 int boundary1Index = 0;
                 int boundary2Index = 0;
 
-                int size = Math.Min(Math.Min(count, this.byteLength), this.batchLength) + this.bytePosition;
+                int size =
+                    Math.Min(Math.Min(count, this.byteLength), this.batchLength)
+                    + this.bytePosition;
 
                 byte[] data = this.byteBuffer;
                 for (int i = this.bytePosition; i < size; ++i)
@@ -897,7 +1010,8 @@ namespace System.Data.Services.Client
                     if ((char)value == boundary1[boundary1Index])
                     {
                         if (boundary1.Length == ++boundary1Index)
-                        {                            size = (1 + i) - boundary1Index;
+                        {
+                            size = (1 + i) - boundary1Index;
                             offset -= boundary1Index;
                             Debug.Assert(this.bytePosition <= size, "negative size");
                             break;
@@ -911,7 +1025,8 @@ namespace System.Data.Services.Client
                     if ((null != boundary2) && ((char)value == boundary2[boundary2Index]))
                     {
                         if (boundary2.Length == ++boundary2Index)
-                        {                            size = (1 + i) - boundary2Index;
+                        {
+                            size = (1 + i) - boundary2Index;
                             offset -= boundary2Index;
                             Debug.Assert(this.bytePosition <= size, "negative size");
                             break;
@@ -939,16 +1054,19 @@ namespace System.Data.Services.Client
                 }
 
                 if (size == this.batchLength)
-                {                    boundaryIndex = 0;
+                {
+                    boundaryIndex = 0;
                 }
 
                 if ((0 < boundaryIndex) && (boundary.Length != boundaryIndex))
-                {                    if ((size + copied == boundaryIndex) && (boundaryIndex < this.byteLength))
+                {
+                    if ((size + copied == boundaryIndex) && (boundaryIndex < this.byteLength))
                     {
                         throw Error.BatchStreamInternalBufferRequestTooSmall();
                     }
                     else
-                    {                        size -= boundaryIndex;
+                    {
+                        size -= boundaryIndex;
                         offset -= boundaryIndex;
                     }
                 }
@@ -961,7 +1079,12 @@ namespace System.Data.Services.Client
                 count -= size;
                 copied += size;
 
-                if (boundaryIndex > 0 && copied >= 2 && buffer[copied - 2] == '\r' && buffer[copied - 1] == '\n')
+                if (
+                    boundaryIndex > 0
+                    && copied >= 2
+                    && buffer[copied - 2] == '\r'
+                    && buffer[copied - 1] == '\n'
+                )
                 {
                     copied -= 2;
                 }
@@ -973,19 +1096,26 @@ namespace System.Data.Services.Client
                 else if (0 < boundaryIndex)
                 {
                     if (boundaryIndex == this.byteLength)
-                    {                        if (0 < this.bytePosition)
-                        {                            Buffer.BlockCopy(data, this.bytePosition, data, 0, this.byteLength);
+                    {
+                        if (0 < this.bytePosition)
+                        {
+                            Buffer.BlockCopy(data, this.bytePosition, data, 0, this.byteLength);
                             this.bytePosition = 0;
                         }
 
-                        int tmp = this.reader.Read(this.byteBuffer, this.byteLength, this.byteBuffer.Length - this.byteLength);
+                        int tmp = this.reader.Read(
+                            this.byteBuffer,
+                            this.byteLength,
+                            this.byteBuffer.Length - this.byteLength
+                        );
                         if (null != this.writer)
                         {
                             this.writer.Write(this.byteBuffer, this.byteLength, tmp);
                         }
 
                         if (0 == tmp)
-                        {                            this.totalCount += boundaryIndex;
+                        {
+                            this.totalCount += boundaryIndex;
                             this.bytePosition += boundaryIndex;
                             this.byteLength -= boundaryIndex;
                             this.batchLength -= boundaryIndex;
@@ -999,7 +1129,8 @@ namespace System.Data.Services.Client
                         this.byteLength += tmp;
                     }
                     else
-                    {                        break;
+                    {
+                        break;
                     }
                 }
             }
@@ -1016,7 +1147,8 @@ namespace System.Data.Services.Client
             int copied = 0;
 
             if (0 < this.byteLength)
-            {                int size = Math.Min(Math.Min(count, this.byteLength), this.batchLength);
+            {
+                int size = Math.Min(Math.Min(count, this.byteLength), this.batchLength);
                 Buffer.BlockCopy(this.byteBuffer, this.bytePosition, buffer, offset, size);
                 this.totalCount += size;
                 this.bytePosition += size;
@@ -1029,7 +1161,8 @@ namespace System.Data.Services.Client
             }
 
             if (0 < count && this.batchLength > 0)
-            {                int size = this.reader.Read(buffer, offset, Math.Min(count, this.batchLength));
+            {
+                int size = this.reader.Read(buffer, offset, Math.Min(count, this.batchLength));
                 if (null != this.writer)
                 {
                     this.writer.Write(buffer, offset, size);
@@ -1055,7 +1188,8 @@ namespace System.Data.Services.Client
                 {
                     int colon = line.IndexOf(':');
                     if (colon <= 0)
-                    {                        throw Error.BatchStreamInvalidHeaderValueSpecified(line);
+                    {
+                        throw Error.BatchStreamInvalidHeaderValueSpecified(line);
                     }
 
                     string name = line.Substring(0, colon).Trim();
@@ -1073,25 +1207,31 @@ namespace System.Data.Services.Client
         {
             string line = this.ReadLine();
 
-
             int index1 = line.IndexOf(' ');
             if ((index1 <= 0) || ((line.Length - 3) <= index1))
             {
                 throw Error.BatchStreamInvalidMethodHeaderSpecified(line);
             }
 
-            int index2 = (this.batchRequest ? line.LastIndexOf(' ') : line.IndexOf(' ', index1 + 1));
+            int index2 = (
+                this.batchRequest ? line.LastIndexOf(' ') : line.IndexOf(' ', index1 + 1)
+            );
             if ((index2 < 0) || (index2 - index1 - 1 <= 0) || ((line.Length - 1) <= index2))
             {
                 throw Error.BatchStreamInvalidMethodHeaderSpecified(line);
             }
 
-            string segment1 = line.Substring(0, index1);            string segment2 = line.Substring(index1 + 1, index2 - index1 - 1);            string segment3 = line.Substring(index2 + 1);
+            string segment1 = line.Substring(0, index1);
+            string segment2 = line.Substring(index1 + 1, index2 - index1 - 1);
+            string segment3 = line.Substring(index2 + 1);
             #region validate HttpVersion
             string httpVersion = this.batchRequest ? segment3 : segment1;
             if (httpVersion != XmlConstants.HttpVersionInBatching)
             {
-                throw Error.BatchStreamInvalidHttpVersionSpecified(httpVersion, XmlConstants.HttpVersionInBatching);
+                throw Error.BatchStreamInvalidHttpVersionSpecified(
+                    httpVersion,
+                    XmlConstants.HttpVersionInBatching
+                );
             }
             #endregion
 
@@ -1104,20 +1244,26 @@ namespace System.Data.Services.Client
             }
             else
             {
-                state = (BatchStreamState.EndBatch == this.batchState) ? BatchStreamState.GetResponse : BatchStreamState.ChangeResponse;
+                state =
+                    (BatchStreamState.EndBatch == this.batchState)
+                        ? BatchStreamState.GetResponse
+                        : BatchStreamState.ChangeResponse;
                 this.statusCode = segment2;
             }
 
             #region validate state change
             Debug.Assert(
-                BatchStreamState.EndBatch == this.batchState ||
-                BatchStreamState.EndChangeSet == this.batchState,
-                "unexpected BatchStreamState");
+                BatchStreamState.EndBatch == this.batchState
+                    || BatchStreamState.EndChangeSet == this.batchState,
+                "unexpected BatchStreamState"
+            );
 
             if (this.batchState == BatchStreamState.EndBatch)
             {
-                if ((this.batchRequest && (state == BatchStreamState.Get)) ||
-                    (!this.batchRequest && (state == BatchStreamState.GetResponse)))
+                if (
+                    (this.batchRequest && (state == BatchStreamState.Get))
+                    || (!this.batchRequest && (state == BatchStreamState.GetResponse))
+                )
                 {
                     this.batchState = state;
                 }
@@ -1128,8 +1274,17 @@ namespace System.Data.Services.Client
             }
             else if (this.batchState == BatchStreamState.EndChangeSet)
             {
-                if ((this.batchRequest && ((BatchStreamState.Post == state) || (BatchStreamState.Put == state) || (BatchStreamState.Delete == state) || (BatchStreamState.Merge == state))) ||
-                    (!this.batchRequest && (state == BatchStreamState.ChangeResponse)))
+                if (
+                    (
+                        this.batchRequest
+                        && (
+                            (BatchStreamState.Post == state)
+                            || (BatchStreamState.Put == state)
+                            || (BatchStreamState.Delete == state)
+                            || (BatchStreamState.Merge == state)
+                        )
+                    ) || (!this.batchRequest && (state == BatchStreamState.ChangeResponse))
+                )
                 {
                     this.batchState = state;
                 }
@@ -1141,7 +1296,8 @@ namespace System.Data.Services.Client
                 }
             }
             else
-            {                throw Error.BatchStreamInvalidOperationHeaderSpecified();
+            {
+                throw Error.BatchStreamInvalidOperationHeaderSpecified();
             }
             #endregion
         }
@@ -1149,9 +1305,7 @@ namespace System.Data.Services.Client
         private sealed class StreamWithDelimiter : StreamWithLength
         {
             internal StreamWithDelimiter(BatchStream stream)
-                : base(stream, Int32.MaxValue)
-            {
-            }
+                : base(stream, Int32.MaxValue) { }
 
             public override int Read(byte[] buffer, int offset, int count)
             {
@@ -1210,12 +1364,16 @@ namespace System.Data.Services.Client
                 get { return this.target; }
             }
 
-            public override void Flush()
-            {
-            }
+            public override void Flush() { }
 
-#if DEBUG && !ASTORIA_LIGHT            
-            public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+#if DEBUG && !ASTORIA_LIGHT
+            public override IAsyncResult BeginRead(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback callback,
+                object state
+            )
             {
                 throw Error.NotSupported();
             }

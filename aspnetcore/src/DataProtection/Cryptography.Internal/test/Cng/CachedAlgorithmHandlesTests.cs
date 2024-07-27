@@ -41,7 +41,8 @@ public unsafe class CachedAlgorithmHandlesTests
             expectedAlgorithmName: "SHA1",
             expectedBlockSizeInBytes: 512 / 8,
             expectedDigestSizeInBytes: 160 / 8,
-            expectedDigest: "MbYo3dZmXtgUZcUoWoxkCDKFvkk=");
+            expectedDigest: "MbYo3dZmXtgUZcUoWoxkCDKFvkk="
+        );
     }
 
     [ConditionalFact]
@@ -53,7 +54,8 @@ public unsafe class CachedAlgorithmHandlesTests
             expectedAlgorithmName: "SHA1",
             expectedBlockSizeInBytes: 512 / 8,
             expectedDigestSizeInBytes: 160 / 8,
-            expectedDigest: "PjYTgLTWkt6NeH0NudIR7N47Ipg=");
+            expectedDigest: "PjYTgLTWkt6NeH0NudIR7N47Ipg="
+        );
     }
 
     [ConditionalFact]
@@ -65,7 +67,8 @@ public unsafe class CachedAlgorithmHandlesTests
             expectedAlgorithmName: "SHA256",
             expectedBlockSizeInBytes: 512 / 8,
             expectedDigestSizeInBytes: 256 / 8,
-            expectedDigest: "5uRfQadsrnUTa3/TEo5PP6SDZQkb9AcE4wNXDVcM0Fo=");
+            expectedDigest: "5uRfQadsrnUTa3/TEo5PP6SDZQkb9AcE4wNXDVcM0Fo="
+        );
     }
 
     [ConditionalFact]
@@ -77,7 +80,8 @@ public unsafe class CachedAlgorithmHandlesTests
             expectedAlgorithmName: "SHA256",
             expectedBlockSizeInBytes: 512 / 8,
             expectedDigestSizeInBytes: 256 / 8,
-            expectedDigest: "KLzo0lVg5gZkpL5D6Ck7QT8w4iuPCe/pGCrMcOXWbKY=");
+            expectedDigest: "KLzo0lVg5gZkpL5D6Ck7QT8w4iuPCe/pGCrMcOXWbKY="
+        );
     }
 
     [ConditionalFact]
@@ -89,7 +93,8 @@ public unsafe class CachedAlgorithmHandlesTests
             expectedAlgorithmName: "SHA512",
             expectedBlockSizeInBytes: 1024 / 8,
             expectedDigestSizeInBytes: 512 / 8,
-            expectedDigest: "jKI7WrcgPP7n2HAYOb8uFRi7xEsNG/BmdGd18dwwkIpqJ4Vmlk2b+8hssLyMQlprTSKVJNObSiYUqW5THS7okw==");
+            expectedDigest: "jKI7WrcgPP7n2HAYOb8uFRi7xEsNG/BmdGd18dwwkIpqJ4Vmlk2b+8hssLyMQlprTSKVJNObSiYUqW5THS7okw=="
+        );
     }
 
     [ConditionalFact]
@@ -101,7 +106,8 @@ public unsafe class CachedAlgorithmHandlesTests
             expectedAlgorithmName: "SHA512",
             expectedBlockSizeInBytes: 1024 / 8,
             expectedDigestSizeInBytes: 512 / 8,
-            expectedDigest: "pKTX5vtPtbsn7pX9ISDlOYr1NFklTBIPYAFICy0ZQbFc0QVzGaTUvtqTOi91I0sHa1DIod6uIogux5iLdHjfcA==");
+            expectedDigest: "pKTX5vtPtbsn7pX9ISDlOYr1NFklTBIPYAFICy0ZQbFc0QVzGaTUvtqTOi91I0sHa1DIod6uIogux5iLdHjfcA=="
+        );
     }
 
     private static void RunAesBlockCipherAlgorithmTest(Func<BCryptAlgorithmHandle> getter)
@@ -126,7 +132,8 @@ public unsafe class CachedAlgorithmHandlesTests
         string expectedAlgorithmName,
         uint expectedBlockSizeInBytes,
         uint expectedDigestSizeInBytes,
-        string expectedDigest)
+        string expectedDigest
+    )
     {
         // Getter must return the same instance of the cached handle
         var algorithmHandle = getter();
@@ -146,18 +153,24 @@ public unsafe class CachedAlgorithmHandlesTests
         {
             fixed (byte* pOutput = outputHash)
             {
-                hashHandle.HashData(pInput, (uint)_dataToHash.Length, pOutput, (uint)outputHash.Length);
+                hashHandle.HashData(
+                    pInput,
+                    (uint)_dataToHash.Length,
+                    pOutput,
+                    (uint)outputHash.Length
+                );
             }
         }
         Assert.Equal(expectedDigest, Convert.ToBase64String(outputHash));
     }
 
     private static void RunHashAlgorithmTest_With_HMAC(
-       Func<BCryptAlgorithmHandle> getter,
-       string expectedAlgorithmName,
-       uint expectedBlockSizeInBytes,
-       uint expectedDigestSizeInBytes,
-       string expectedDigest)
+        Func<BCryptAlgorithmHandle> getter,
+        string expectedAlgorithmName,
+        uint expectedBlockSizeInBytes,
+        uint expectedDigestSizeInBytes,
+        string expectedDigest
+    )
     {
         // Getter must return the same instance of the cached handle
         var algorithmHandle = getter();
@@ -179,7 +192,12 @@ public unsafe class CachedAlgorithmHandlesTests
             {
                 fixed (byte* pOutput = outputHash)
                 {
-                    hashHandle.HashData(pInput, (uint)_dataToHash.Length, pOutput, (uint)outputHash.Length);
+                    hashHandle.HashData(
+                        pInput,
+                        (uint)_dataToHash.Length,
+                        pOutput,
+                        (uint)outputHash.Length
+                    );
                 }
             }
             Assert.Equal(expectedDigest, Convert.ToBase64String(outputHash));

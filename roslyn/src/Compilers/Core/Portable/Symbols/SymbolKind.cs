@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis
         DynamicType = 3,
 
         /// <summary>
-        /// Symbol that represents an error 
+        /// Symbol that represents an error
         /// </summary>
         ErrorType = 4,
 

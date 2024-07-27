@@ -17,7 +17,9 @@ namespace System.ServiceModel.Activities.Presentation.Converters
             if (null != content)
             {
                 results.AddRange(new ArgumentSearchableStringConverter().Convert(content.Message));
-                results.AddRange(new TypeSearchableStringConverter().Convert(content.DeclaredMessageType));
+                results.AddRange(
+                    new TypeSearchableStringConverter().Convert(content.DeclaredMessageType)
+                );
             }
             return results;
         }

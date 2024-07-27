@@ -28,8 +28,8 @@
 
 namespace System
 {
-	static class EmptyArray<T>
-	{
-		public static readonly T[] Value = new T [0];
-	}
+    static class EmptyArray<T>
+    {
+        public static readonly T[] Value = new T[0];
+    }
 }

@@ -1,21 +1,21 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>GPaperin</OWNER>
 // <OWNER>Microsoft</OWNER>
 
 using System;
-using System.Security;
-using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -26,7 +26,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     // That's because they are invoked with special "this"! The "this" object
     // for all of these methods are not DictionaryToMapAdapter objects. Rather, they are of type
     // IDictionary<K, V>. No actual DictionaryToMapAdapter object is ever instantiated. Thus, you will
-    // see a lot of expressions that cast "this" to "IDictionary<K, V>". 
+    // see a lot of expressions that cast "this" to "IDictionary<K, V>".
     internal sealed class DictionaryToMapAdapter
     {
         private DictionaryToMapAdapter()
@@ -44,7 +44,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
             if (!keyFound)
             {
-                Exception e = new KeyNotFoundException(Environment.GetResourceString("Arg_KeyNotFound"));
+                Exception e = new KeyNotFoundException(
+                    Environment.GetResourceString("Arg_KeyNotFound")
+                );
                 e.SetErrorCode(__HResults.E_BOUNDS);
                 throw e;
             }
@@ -59,7 +61,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             IDictionary<K, V> _this = JitHelpers.UnsafeCast<IDictionary<K, V>>(this);
             return (uint)_this.Count;
         }
-        
+
         // bool HasKey(K key)
         [SecurityCritical]
         internal bool HasKey<K, V>(K key)
@@ -104,7 +106,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
             if (!removed)
             {
-                Exception e = new KeyNotFoundException(Environment.GetResourceString("Arg_KeyNotFound"));
+                Exception e = new KeyNotFoundException(
+                    Environment.GetResourceString("Arg_KeyNotFound")
+                );
                 e.SetErrorCode(__HResults.E_BOUNDS);
                 throw e;
             }

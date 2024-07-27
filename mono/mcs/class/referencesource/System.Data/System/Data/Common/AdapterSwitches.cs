@@ -10,17 +10,23 @@
 
 using System.Diagnostics;
 
-namespace System.Data.Common {
+namespace System.Data.Common
+{
+    internal static class AdapterSwitches
+    {
+        private static TraceSwitch _dataSchema;
 
-    internal static class AdapterSwitches {
-
-        static private TraceSwitch _dataSchema;
-
-        static internal TraceSwitch DataSchema {
-            get {
+        internal static TraceSwitch DataSchema
+        {
+            get
+            {
                 TraceSwitch dataSchema = _dataSchema;
-                if (null == dataSchema) {
-                    _dataSchema = dataSchema = new TraceSwitch("Data.Schema", "Enable tracing for schema actions.");
+                if (null == dataSchema)
+                {
+                    _dataSchema = dataSchema = new TraceSwitch(
+                        "Data.Schema",
+                        "Enable tracing for schema actions."
+                    );
                 }
                 return dataSchema;
             }

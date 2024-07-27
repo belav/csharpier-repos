@@ -16,7 +16,10 @@ namespace Microsoft.TestCommon
     {
         private static SerializerAssert singleton = new SerializerAssert();
 
-        public static SerializerAssert Singleton { get { return singleton; } }
+        public static SerializerAssert Singleton
+        {
+            get { return singleton; }
+        }
 
         /// <summary>
         /// Creates a <see cref="Stream"/>, serializes <paramref name="objectInstance"/> to it using
@@ -25,7 +28,11 @@ namespace Microsoft.TestCommon
         /// <param name="type">The type to serialize.  It cannot be <c>null</c>.</param>
         /// <param name="objectInstance">The value to serialize.</param>
         /// <param name="codeThatChecks">Code to check the contents of the stream.</param>
-        public void UsingXmlSerializer(Type type, object objectInstance, Action<Stream> codeThatChecks)
+        public void UsingXmlSerializer(
+            Type type,
+            object objectInstance,
+            Action<Stream> codeThatChecks
+        )
         {
             if (type == null)
             {
@@ -69,7 +76,11 @@ namespace Microsoft.TestCommon
         /// <param name="type">The type to serialize.  It cannot be <c>null</c>.</param>
         /// <param name="objectInstance">The value to serialize.</param>
         /// <param name="codeThatChecks">Code to check the contents of the stream.</param>
-        public void UsingDataContractSerializer(Type type, object objectInstance, Action<Stream> codeThatChecks)
+        public void UsingDataContractSerializer(
+            Type type,
+            object objectInstance,
+            Action<Stream> codeThatChecks
+        )
         {
             if (type == null)
             {
@@ -113,7 +124,11 @@ namespace Microsoft.TestCommon
         /// <param name="type">The type to serialize.  It cannot be <c>null</c>.</param>
         /// <param name="objectInstance">The value to serialize.</param>
         /// <param name="codeThatChecks">Code to check the contents of the stream.</param>
-        public static void UsingDataContractJsonSerializer(Type type, object objectInstance, Action<Stream> codeThatChecks)
+        public static void UsingDataContractJsonSerializer(
+            Type type,
+            object objectInstance,
+            Action<Stream> codeThatChecks
+        )
         {
             if (type == null)
             {
@@ -145,7 +160,10 @@ namespace Microsoft.TestCommon
         /// <typeparam name="T">The type to serialize.</typeparam>
         /// <param name="objectInstance">The value to serialize.</param>
         /// <param name="codeThatChecks">Code to check the contents of the stream.</param>
-        public void UsingDataContractJsonSerializer<T>(T objectInstance, Action<Stream> codeThatChecks)
+        public void UsingDataContractJsonSerializer<T>(
+            T objectInstance,
+            Action<Stream> codeThatChecks
+        )
         {
             UsingDataContractJsonSerializer(typeof(T), objectInstance, codeThatChecks);
         }

@@ -10,13 +10,16 @@ namespace System.ServiceModel.Channels
     class NamedPipeConnectionPoolRegistry : ConnectionPoolRegistry
     {
         public NamedPipeConnectionPoolRegistry()
-            : base()
-        {
-        }
+            : base() { }
 
-        protected override ConnectionPool CreatePool(IConnectionOrientedTransportChannelFactorySettings settings)
+        protected override ConnectionPool CreatePool(
+            IConnectionOrientedTransportChannelFactorySettings settings
+        )
         {
-            Fx.Assert(settings is IPipeTransportFactorySettings, "NamedPipeConnectionPool requires an IPipeTransportFactorySettings.");
+            Fx.Assert(
+                settings is IPipeTransportFactorySettings,
+                "NamedPipeConnectionPool requires an IPipeTransportFactorySettings."
+            );
             return new NamedPipeConnectionPool((IPipeTransportFactorySettings)settings);
         }
 
@@ -44,7 +47,10 @@ namespace System.ServiceModel.Channels
                 {
                     if (!this.pipeNameCache.TryGetValue(via, out result))
                     {
-                        result = PipeConnectionInitiator.GetPipeName(via, this.transportFactorySettings);
+                        result = PipeConnectionInitiator.GetPipeName(
+                            via,
+                            this.transportFactorySettings
+                        );
                         this.pipeNameCache.Add(via, result);
                     }
                 }
@@ -87,7 +93,8 @@ namespace System.ServiceModel.Channels
         class PipeNameCache
         {
             Dictionary<Uri, string> forwardTable = new Dictionary<Uri, string>();
-            Dictionary<string, ICollection<Uri>> reverseTable = new Dictionary<string, ICollection<Uri>>();
+            Dictionary<string, ICollection<Uri>> reverseTable =
+                new Dictionary<string, ICollection<Uri>>();
 
             public void Add(Uri uri, string pipeName)
             {
@@ -128,5 +135,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-
-

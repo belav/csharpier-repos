@@ -33,7 +33,9 @@ internal sealed class StatusCheckPipeWriter : PipeWriter
         Debug.Assert(_context != null);
         if (_context.StatusCode < 300)
         {
-            throw new InvalidOperationException(CoreStrings.FormatConnectResponseCanNotHaveBody(_context.StatusCode));
+            throw new InvalidOperationException(
+                CoreStrings.FormatConnectResponseCanNotHaveBody(_context.StatusCode)
+            );
         }
     }
 
@@ -85,7 +87,10 @@ internal sealed class StatusCheckPipeWriter : PipeWriter
         return _inner.CompleteAsync(exception);
     }
 
-    public override ValueTask<FlushResult> WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
+    public override ValueTask<FlushResult> WriteAsync(
+        ReadOnlyMemory<byte> source,
+        CancellationToken cancellationToken = default
+    )
     {
         CheckStatus();
         return _inner.WriteAsync(source, cancellationToken);

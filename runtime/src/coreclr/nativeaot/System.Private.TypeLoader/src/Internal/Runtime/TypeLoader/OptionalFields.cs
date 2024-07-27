@@ -4,7 +4,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Internal.NativeFormat;
 
 namespace Internal.Runtime.TypeLoader
@@ -25,10 +24,14 @@ namespace Internal.Runtime.TypeLoader
             bool isLastField = false;
             while (!isLastField)
             {
-                byte fieldHeader = NativePrimitiveDecoder.ReadUInt8(ref pInitializeFromOptionalFields);
+                byte fieldHeader = NativePrimitiveDecoder.ReadUInt8(
+                    ref pInitializeFromOptionalFields
+                );
                 isLastField = (fieldHeader & 0x80) != 0;
                 EETypeOptionalFieldTag eCurrentTag = (EETypeOptionalFieldTag)(fieldHeader & 0x7f);
-                uint uiCurrentValue = NativePrimitiveDecoder.DecodeUnsigned(ref pInitializeFromOptionalFields);
+                uint uiCurrentValue = NativePrimitiveDecoder.DecodeUnsigned(
+                    ref pInitializeFromOptionalFields
+                );
 
                 _rgFields[(int)eCurrentTag].m_fPresent = true;
                 _rgFields[(int)eCurrentTag].m_uiValue = uiCurrentValue;
@@ -37,7 +40,9 @@ namespace Internal.Runtime.TypeLoader
 
         internal uint GetFieldValue(EETypeOptionalFieldTag eTag, uint defaultValueIfNotFound)
         {
-            return _rgFields[(int)eTag].m_fPresent ? _rgFields[(int)eTag].m_uiValue : defaultValueIfNotFound;
+            return _rgFields[(int)eTag].m_fPresent
+                ? _rgFields[(int)eTag].m_uiValue
+                : defaultValueIfNotFound;
         }
 
         internal void SetFieldValue(EETypeOptionalFieldTag eTag, uint value)

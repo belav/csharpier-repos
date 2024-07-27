@@ -8,10 +8,6 @@ namespace Microsoft.Build.Tasks.Xaml
 
     public sealed class XamlBuildTypeGenerationExtensionContext : BuildExtensionContext
     {
-        public ITaskItem InputTaskItem
-        {
-            get;
-            internal set;
-        }
+        public ITaskItem InputTaskItem { get; internal set; }
     }
 }

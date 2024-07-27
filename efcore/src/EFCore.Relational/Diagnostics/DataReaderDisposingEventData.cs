@@ -39,9 +39,20 @@ public class DataReaderDisposingEventData : DataReaderEventData
         int recordsAffected,
         int readCount,
         DateTimeOffset startTime,
-        TimeSpan duration)
+        TimeSpan duration
+    )
         : base(
-            eventDefinition, messageGenerator, command, dataReader, context, commandId, connectionId, recordsAffected, readCount, startTime)
+            eventDefinition,
+            messageGenerator,
+            command,
+            dataReader,
+            context,
+            commandId,
+            connectionId,
+            recordsAffected,
+            readCount,
+            startTime
+        )
     {
         Duration = duration;
     }

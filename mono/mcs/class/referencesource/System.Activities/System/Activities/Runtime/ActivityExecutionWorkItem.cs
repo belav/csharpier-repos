@@ -5,10 +5,10 @@
 namespace System.Activities.Runtime
 {
     using System;
-    using System.Runtime;
-    using System.Reflection;
-    using System.Runtime.Serialization;
     using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract]
     abstract class ActivityExecutionWorkItem : WorkItem
@@ -16,29 +16,19 @@ namespace System.Activities.Runtime
         bool skipActivityInstanceAbort;
 
         // Used by subclasses in the pooled case
-        protected ActivityExecutionWorkItem()
-        {
-        }
+        protected ActivityExecutionWorkItem() { }
 
         public ActivityExecutionWorkItem(ActivityInstance activityInstance)
-            : base(activityInstance)
-        {
-        }
+            : base(activityInstance) { }
 
         public override bool IsValid
         {
-            get
-            {
-                return this.ActivityInstance.State == ActivityInstanceState.Executing;
-            }
+            get { return this.ActivityInstance.State == ActivityInstanceState.Executing; }
         }
 
         public override ActivityInstance PropertyManagerOwner
         {
-            get
-            {
-                return this.ActivityInstance;
-            }
+            get { return this.ActivityInstance; }
         }
 
         protected override void ClearForReuse()

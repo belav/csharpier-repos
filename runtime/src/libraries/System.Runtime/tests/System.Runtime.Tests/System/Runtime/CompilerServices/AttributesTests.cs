@@ -61,8 +61,13 @@ namespace System.Runtime.CompilerServices.Tests
             var attr1 = new CompilationRelaxationsAttribute(42);
             Assert.Equal(42, attr1.CompilationRelaxations);
 
-            var attr2 = new CompilationRelaxationsAttribute(CompilationRelaxations.NoStringInterning);
-            Assert.Equal((int)CompilationRelaxations.NoStringInterning, attr2.CompilationRelaxations);
+            var attr2 = new CompilationRelaxationsAttribute(
+                CompilationRelaxations.NoStringInterning
+            );
+            Assert.Equal(
+                (int)CompilationRelaxations.NoStringInterning,
+                attr2.CompilationRelaxations
+            );
         }
 
         [Fact]
@@ -90,14 +95,37 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public static void DecimalConstantAttributeTests()
         {
-            var attrSigned = new DecimalConstantAttribute(scale: 10, sign: 20, hi: 30, mid: 40, low: 50);
+            var attrSigned = new DecimalConstantAttribute(
+                scale: 10,
+                sign: 20,
+                hi: 30,
+                mid: 40,
+                low: 50
+            );
             Assert.Equal(-55340232238.3085240370m, attrSigned.Value);
 
-            var attrUnsigned = new DecimalConstantAttribute(scale: 0, sign: 0, hi: 12u, mid: 13u, low: 14u);
+            var attrUnsigned = new DecimalConstantAttribute(
+                scale: 0,
+                sign: 0,
+                hi: 12u,
+                mid: 13u,
+                low: 14u
+            );
             Assert.Equal(221360928940349194254m, attrUnsigned.Value);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new DecimalConstantAttribute(scale: 50, sign: 55, hi: 60, mid: 65, low: 70));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new DecimalConstantAttribute(scale: 100, sign: 101, hi: 102u, mid: 103u, low: 104u));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new DecimalConstantAttribute(scale: 50, sign: 55, hi: 60, mid: 65, low: 70)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    new DecimalConstantAttribute(
+                        scale: 100,
+                        sign: 101,
+                        hi: 102u,
+                        mid: 103u,
+                        low: 104u
+                    )
+            );
         }
 
         [Fact]
@@ -291,8 +319,14 @@ namespace System.Runtime.CompilerServices.Tests
             var attr = new TypeForwardedFromAttribute(assemblyFullName);
             Assert.Equal(assemblyFullName, attr.AssemblyFullName);
 
-            AssertExtensions.Throws<ArgumentNullException>("assemblyFullName", () => new TypeForwardedFromAttribute(null));
-            AssertExtensions.Throws<ArgumentException>("assemblyFullName", () => new TypeForwardedFromAttribute(""));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "assemblyFullName",
+                () => new TypeForwardedFromAttribute(null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "assemblyFullName",
+                () => new TypeForwardedFromAttribute("")
+            );
         }
 
         [Fact]
@@ -354,7 +388,9 @@ namespace System.Runtime.CompilerServices.Tests
         [Theory]
         [InlineData("")]
         [InlineData("param1")]
-        public static void InterpolatedStringHandlerArgumentAttributeTests(string firstParameterName)
+        public static void InterpolatedStringHandlerArgumentAttributeTests(
+            string firstParameterName
+        )
         {
             var attr1 = new InterpolatedStringHandlerArgumentAttribute(firstParameterName);
             Assert.NotNull(attr1.Arguments);

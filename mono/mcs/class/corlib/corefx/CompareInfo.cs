@@ -31,166 +31,223 @@
 
 namespace System.Globalization
 {
-	partial class CompareInfo
-	{
-		void InitSort (CultureInfo culture)
-		{
-			_sortName = culture.SortName;
-		}
+    partial class CompareInfo
+    {
+        void InitSort(CultureInfo culture)
+        {
+            _sortName = culture.SortName;
+        }
 
-		unsafe static int CompareStringOrdinalIgnoreCase (char* pString1, int length1, char* pString2, int length2)
-		{
-			var ti = CultureInfo.InvariantCulture.TextInfo;
+        static unsafe int CompareStringOrdinalIgnoreCase(
+            char* pString1,
+            int length1,
+            char* pString2,
+            int length2
+        )
+        {
+            var ti = CultureInfo.InvariantCulture.TextInfo;
 
-			int index = 0;
-			while (index < length1 && index < length2 && ti.ToUpper (*pString1) == ti.ToUpper (*pString2)) {
-				++index;
-				++pString1;
-				++pString2;
-			}
+            int index = 0;
+            while (
+                index < length1 && index < length2 && ti.ToUpper(*pString1) == ti.ToUpper(*pString2)
+            )
+            {
+                ++index;
+                ++pString1;
+                ++pString2;
+            }
 
-			if (index >= length1) {
-				if (index >= length2)
-					return 0;
+            if (index >= length1)
+            {
+                if (index >= length2)
+                    return 0;
 
-				return -1;
-			}
+                return -1;
+            }
 
-			if (index >= length2)
-				return 1;
+            if (index >= length2)
+                return 1;
 
-			return ti.ToUpper (*pString1) - ti.ToUpper (*pString2);
-		}
+            return ti.ToUpper(*pString1) - ti.ToUpper(*pString2);
+        }
 
-		internal static int IndexOfOrdinalCore (string source, string value, int startIndex, int count, bool ignoreCase)
-		{
-			if (!ignoreCase)
-				return source.IndexOfUnchecked (value, startIndex, count);
+        internal static int IndexOfOrdinalCore(
+            string source,
+            string value,
+            int startIndex,
+            int count,
+            bool ignoreCase
+        )
+        {
+            if (!ignoreCase)
+                return source.IndexOfUnchecked(value, startIndex, count);
 
-			return source.IndexOfUncheckedIgnoreCase (value, startIndex, count);
-		}
+            return source.IndexOfUncheckedIgnoreCase(value, startIndex, count);
+        }
 
-		internal static unsafe int LastIndexOfOrdinalCore (string source, string value, int startIndex, int count, bool ignoreCase)
-		{
-			if (!ignoreCase)
-				return source.LastIndexOfUnchecked (value, startIndex, count);
+        internal static unsafe int LastIndexOfOrdinalCore(
+            string source,
+            string value,
+            int startIndex,
+            int count,
+            bool ignoreCase
+        )
+        {
+            if (!ignoreCase)
+                return source.LastIndexOfUnchecked(value, startIndex, count);
 
-			return source.LastIndexOfUncheckedIgnoreCase (value, startIndex, count);
-		}
+            return source.LastIndexOfUncheckedIgnoreCase(value, startIndex, count);
+        }
 
-		int LastIndexOfCore (string source, string target, int startIndex, int count, CompareOptions options)
-		{
-			return internal_index_switch (source, startIndex, count, target, options, false);
-		}
+        int LastIndexOfCore(
+            string source,
+            string target,
+            int startIndex,
+            int count,
+            CompareOptions options
+        )
+        {
+            return internal_index_switch(source, startIndex, count, target, options, false);
+        }
 
-		unsafe int IndexOfCore (string source, string target, int startIndex, int count, CompareOptions options, int* matchLengthPtr)
-		{
-			if (matchLengthPtr != null)
-				*matchLengthPtr = target.Length;
+        unsafe int IndexOfCore(
+            string source,
+            string target,
+            int startIndex,
+            int count,
+            CompareOptions options,
+            int* matchLengthPtr
+        )
+        {
+            if (matchLengthPtr != null)
+                *matchLengthPtr = target.Length;
 
-			return internal_index_switch (source, startIndex, count, target, options, true);
-		}
+            return internal_index_switch(source, startIndex, count, target, options, true);
+        }
 
-		unsafe int IndexOfCore (ReadOnlySpan<char> source, ReadOnlySpan<char> target, CompareOptions options, int* matchLengthPtr)
-		{
-			// TODO: optimize
+        unsafe int IndexOfCore(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> target,
+            CompareOptions options,
+            int* matchLengthPtr
+        )
+        {
+            // TODO: optimize
 
-			var s = new string (source);
-			var t = new string (target);
+            var s = new string(source);
+            var t = new string(target);
 
-			return IndexOfCore (s, t, 0, s.Length, options, matchLengthPtr);
-		}
+            return IndexOfCore(s, t, 0, s.Length, options, matchLengthPtr);
+        }
 
-		int IndexOfOrdinalCore (ReadOnlySpan<char> source, ReadOnlySpan<char> value, bool ignoreCase)
-		{
-			// TODO: optimize
+        int IndexOfOrdinalCore(ReadOnlySpan<char> source, ReadOnlySpan<char> value, bool ignoreCase)
+        {
+            // TODO: optimize
 
-			var s = new string (source);
-			var v = new string (value);
+            var s = new string(source);
+            var v = new string(value);
 
-			if (!ignoreCase)
-				return s.IndexOfUnchecked (v, 0, s.Length);
+            if (!ignoreCase)
+                return s.IndexOfUnchecked(v, 0, s.Length);
 
-			return s.IndexOfUncheckedIgnoreCase (v, 0, s.Length);
-		}
+            return s.IndexOfUncheckedIgnoreCase(v, 0, s.Length);
+        }
 
-		int CompareString (ReadOnlySpan<char> string1, string string2, CompareOptions options)
-		{
-			// TODO: optimize
-			
-			var s1 = new string (string1);
+        int CompareString(ReadOnlySpan<char> string1, string string2, CompareOptions options)
+        {
+            // TODO: optimize
 
-			return internal_compare_switch (s1, 0, s1.Length, string2, 0, string2.Length, options);
-		}
+            var s1 = new string(string1);
 
-		int CompareString (ReadOnlySpan<char> string1, ReadOnlySpan<char> string2, CompareOptions options)
-		{
-			// TODO: optimize
+            return internal_compare_switch(s1, 0, s1.Length, string2, 0, string2.Length, options);
+        }
 
-			var s1 = new string (string1);
-			var s2 = new string (string2);
+        int CompareString(
+            ReadOnlySpan<char> string1,
+            ReadOnlySpan<char> string2,
+            CompareOptions options
+        )
+        {
+            // TODO: optimize
 
-			return internal_compare_switch (s1, 0, s1.Length, new string (s2), 0, s2.Length, options);
-		}
+            var s1 = new string(string1);
+            var s2 = new string(string2);
 
-		unsafe static bool IsSortable (char *text, int length)
-		{
-			return Mono.Globalization.Unicode.MSCompatUnicodeTable.IsSortable (new string (text, 0, length));
-		}
+            return internal_compare_switch(s1, 0, s1.Length, new string(s2), 0, s2.Length, options);
+        }
 
-		SortKey CreateSortKey (String source, CompareOptions options)
-		{
-			if (source == null)
-				throw new ArgumentNullException (nameof (source));
+        static unsafe bool IsSortable(char* text, int length)
+        {
+            return Mono.Globalization.Unicode.MSCompatUnicodeTable.IsSortable(
+                new string(text, 0, length)
+            );
+        }
 
-			if ((options & ValidSortkeyCtorMaskOffFlags) != 0)
-				throw new ArgumentException (SR.Argument_InvalidFlag, nameof (options));
+        SortKey CreateSortKey(String source, CompareOptions options)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
 
-			return CreateSortKeyCore (source, options);
-		}
+            if ((options & ValidSortkeyCtorMaskOffFlags) != 0)
+                throw new ArgumentException(SR.Argument_InvalidFlag, nameof(options));
 
-		bool StartsWith (string source, string prefix, CompareOptions options)
-		{
-			if (UseManagedCollation)
-				return GetCollator ().IsPrefix (source, prefix, options);
+            return CreateSortKeyCore(source, options);
+        }
 
-			if (source.Length < prefix.Length)
-				return false;
+        bool StartsWith(string source, string prefix, CompareOptions options)
+        {
+            if (UseManagedCollation)
+                return GetCollator().IsPrefix(source, prefix, options);
 
-			return Compare (source, 0, prefix.Length, prefix, 0, prefix.Length, options) == 0;
-		}
+            if (source.Length < prefix.Length)
+                return false;
 
-		bool StartsWith (ReadOnlySpan<char> source, ReadOnlySpan<char> prefix, CompareOptions options)
-		{
-			// TODO: optimize
-			return StartsWith (new string (source), new string (prefix), options);
-		}
+            return Compare(source, 0, prefix.Length, prefix, 0, prefix.Length, options) == 0;
+        }
 
-		bool EndsWith (string source, string suffix, CompareOptions options)
-		{
-			if (UseManagedCollation)
-				return GetCollator ().IsSuffix (source, suffix, options);
+        bool StartsWith(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> prefix,
+            CompareOptions options
+        )
+        {
+            // TODO: optimize
+            return StartsWith(new string(source), new string(prefix), options);
+        }
 
-			if (source.Length < suffix.Length)
-				return false;
+        bool EndsWith(string source, string suffix, CompareOptions options)
+        {
+            if (UseManagedCollation)
+                return GetCollator().IsSuffix(source, suffix, options);
 
-			return Compare (source, source.Length - suffix.Length, suffix.Length, suffix, 0, suffix.Length, options) == 0;
-		}
+            if (source.Length < suffix.Length)
+                return false;
 
-		bool EndsWith (ReadOnlySpan<char> source, ReadOnlySpan<char> suffix, CompareOptions options)
-		{
-			// TODO: optimize
-			return EndsWith (new string (source), new string (suffix), options);
-		}
+            return Compare(
+                    source,
+                    source.Length - suffix.Length,
+                    suffix.Length,
+                    suffix,
+                    0,
+                    suffix.Length,
+                    options
+                ) == 0;
+        }
 
-		internal int GetHashCodeOfStringCore (string source, CompareOptions options)
-		{
-			return GetSortKey (source, options).GetHashCode ();
-		}
+        bool EndsWith(ReadOnlySpan<char> source, ReadOnlySpan<char> suffix, CompareOptions options)
+        {
+            // TODO: optimize
+            return EndsWith(new string(source), new string(suffix), options);
+        }
 
-		SortVersion GetSortVersion ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        internal int GetHashCodeOfStringCore(string source, CompareOptions options)
+        {
+            return GetSortKey(source, options).GetHashCode();
+        }
+
+        SortVersion GetSortVersion()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

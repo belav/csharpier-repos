@@ -11,8 +11,11 @@ namespace System.ComponentModel.DataAnnotations
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class CompareAttribute : ValidationAttribute
     {
-        [RequiresUnreferencedCode("The property referenced by 'otherProperty' may be trimmed. Ensure it is preserved.")]
-        public CompareAttribute(string otherProperty) : base(SR.CompareAttribute_MustMatch)
+        [RequiresUnreferencedCode(
+            "The property referenced by 'otherProperty' may be trimmed. Ensure it is preserved."
+        )]
+        public CompareAttribute(string otherProperty)
+            : base(SR.CompareAttribute_MustMatch)
         {
             ArgumentNullException.ThrowIfNull(otherProperty);
 
@@ -27,31 +30,56 @@ namespace System.ComponentModel.DataAnnotations
 
         public override string FormatErrorMessage(string name) =>
             string.Format(
-                CultureInfo.CurrentCulture, ErrorMessageString, name, OtherPropertyDisplayName ?? OtherProperty);
+                CultureInfo.CurrentCulture,
+                ErrorMessageString,
+                name,
+                OtherPropertyDisplayName ?? OtherProperty
+            );
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072:UnrecognizedReflectionPattern",
-            Justification = "The ctor is marked with RequiresUnreferencedCode informing the caller to preserve the other property.")]
-        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2072:UnrecognizedReflectionPattern",
+            Justification = "The ctor is marked with RequiresUnreferencedCode informing the caller to preserve the other property."
+        )]
+        protected override ValidationResult? IsValid(
+            object? value,
+            ValidationContext validationContext
+        )
         {
             var otherPropertyInfo = validationContext.ObjectType.GetRuntimeProperty(OtherProperty);
             if (otherPropertyInfo == null)
             {
-                return new ValidationResult(SR.Format(SR.CompareAttribute_UnknownProperty, OtherProperty));
+                return new ValidationResult(
+                    SR.Format(SR.CompareAttribute_UnknownProperty, OtherProperty)
+                );
             }
             if (otherPropertyInfo.GetIndexParameters().Length > 0)
             {
-                throw new ArgumentException(SR.Format(SR.Common_PropertyNotFound, validationContext.ObjectType.FullName, OtherProperty));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Common_PropertyNotFound,
+                        validationContext.ObjectType.FullName,
+                        OtherProperty
+                    )
+                );
             }
 
-            object? otherPropertyValue = otherPropertyInfo.GetValue(validationContext.ObjectInstance, null);
+            object? otherPropertyValue = otherPropertyInfo.GetValue(
+                validationContext.ObjectInstance,
+                null
+            );
             if (!Equals(value, otherPropertyValue))
             {
                 OtherPropertyDisplayName ??= GetDisplayNameForProperty(otherPropertyInfo);
 
-                string[]? memberNames = validationContext.MemberName != null
-                   ? new[] { validationContext.MemberName }
-                   : null;
-                return new ValidationResult(FormatErrorMessage(validationContext.DisplayName), memberNames);
+                string[]? memberNames =
+                    validationContext.MemberName != null
+                        ? new[] { validationContext.MemberName }
+                        : null;
+                return new ValidationResult(
+                    FormatErrorMessage(validationContext.DisplayName),
+                    memberNames
+                );
             }
 
             return null;
@@ -59,12 +87,15 @@ namespace System.ComponentModel.DataAnnotations
 
         private string? GetDisplayNameForProperty(PropertyInfo property)
         {
-            IEnumerable<Attribute> attributes = CustomAttributeExtensions.GetCustomAttributes(property, true);
+            IEnumerable<Attribute> attributes = CustomAttributeExtensions.GetCustomAttributes(
+                property,
+                true
+            );
             foreach (Attribute attribute in attributes)
             {
                 if (attribute is DisplayAttribute display)
                 {
-                   return display.GetName();
+                    return display.GetName();
                 }
             }
 

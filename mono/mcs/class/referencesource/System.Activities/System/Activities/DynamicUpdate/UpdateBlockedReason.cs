@@ -24,7 +24,7 @@ namespace System.Activities.DynamicUpdate
         AddedIdleExpression,
         DelegateArgumentChange,
         DynamicArguments,
-        NewHandle
+        NewHandle,
     }
 
     static class UpdateBlockedReasonMessages

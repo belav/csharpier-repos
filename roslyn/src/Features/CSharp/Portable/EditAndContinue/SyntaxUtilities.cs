@@ -15,61 +15,114 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 {
     internal static partial class SyntaxUtilities
     {
-        public static LambdaBody CreateLambdaBody(SyntaxNode node)
-            => new CSharpLambdaBody(node);
+        public static LambdaBody CreateLambdaBody(SyntaxNode node) => new CSharpLambdaBody(node);
 
-        public static MemberBody? TryGetDeclarationBody(SyntaxNode node, ISymbol? symbol)
-            => node switch
+        public static MemberBody? TryGetDeclarationBody(SyntaxNode node, ISymbol? symbol) =>
+            node switch
             {
-                MethodDeclarationSyntax methodDeclaration => CreateSimpleBody(BlockOrExpression(methodDeclaration.Body, methodDeclaration.ExpressionBody)),
-                ConversionOperatorDeclarationSyntax conversionDeclaration => CreateSimpleBody(BlockOrExpression(conversionDeclaration.Body, conversionDeclaration.ExpressionBody)),
-                OperatorDeclarationSyntax operatorDeclaration => CreateSimpleBody(BlockOrExpression(operatorDeclaration.Body, operatorDeclaration.ExpressionBody)),
-                DestructorDeclarationSyntax destructorDeclaration => CreateSimpleBody(BlockOrExpression(destructorDeclaration.Body, destructorDeclaration.ExpressionBody)),
+                MethodDeclarationSyntax methodDeclaration
+                    => CreateSimpleBody(
+                        BlockOrExpression(methodDeclaration.Body, methodDeclaration.ExpressionBody)
+                    ),
+                ConversionOperatorDeclarationSyntax conversionDeclaration
+                    => CreateSimpleBody(
+                        BlockOrExpression(
+                            conversionDeclaration.Body,
+                            conversionDeclaration.ExpressionBody
+                        )
+                    ),
+                OperatorDeclarationSyntax operatorDeclaration
+                    => CreateSimpleBody(
+                        BlockOrExpression(
+                            operatorDeclaration.Body,
+                            operatorDeclaration.ExpressionBody
+                        )
+                    ),
+                DestructorDeclarationSyntax destructorDeclaration
+                    => CreateSimpleBody(
+                        BlockOrExpression(
+                            destructorDeclaration.Body,
+                            destructorDeclaration.ExpressionBody
+                        )
+                    ),
 
                 AccessorDeclarationSyntax accessorDeclaration
-                    => BlockOrExpression(accessorDeclaration.Body, accessorDeclaration.ExpressionBody) != null
-                       ? new PropertyOrIndexerAccessorWithExplicitBodyDeclarationBody(accessorDeclaration)
-                       : new ExplicitAutoPropertyAccessorDeclarationBody(accessorDeclaration),
+                    => BlockOrExpression(
+                        accessorDeclaration.Body,
+                        accessorDeclaration.ExpressionBody
+                    ) != null
+                        ? new PropertyOrIndexerAccessorWithExplicitBodyDeclarationBody(
+                            accessorDeclaration
+                        )
+                        : new ExplicitAutoPropertyAccessorDeclarationBody(accessorDeclaration),
 
                 // We associate the body of expression-bodied property/indexer with the ArrowExpressionClause
                 // since that's the syntax node associated with the getter symbol.
                 // This approach makes it possible to change the expression body to an explicit getter and vice versa (both are method symbols).
-                // 
+                //
                 // The property/indexer itself is considered to not have a body unless the property has an initializer.
-                ArrowExpressionClauseSyntax { Parent: (kind: SyntaxKind.PropertyDeclaration) or (kind: SyntaxKind.IndexerDeclaration) } arrowExpression
-                    => new PropertyOrIndexerWithExplicitBodyDeclarationBody((BasePropertyDeclarationSyntax)arrowExpression.Parent!),
+                ArrowExpressionClauseSyntax
+                {
+                    Parent:
+                        (kind: SyntaxKind.PropertyDeclaration)
+                        or
+                        (kind: SyntaxKind.IndexerDeclaration)
+                } arrowExpression
+                    => new PropertyOrIndexerWithExplicitBodyDeclarationBody(
+                        (BasePropertyDeclarationSyntax)arrowExpression.Parent!
+                    ),
 
                 PropertyDeclarationSyntax { Initializer: { } propertyInitializer }
                     => CreateSimpleBody(propertyInitializer.Value),
 
-                ConstructorDeclarationSyntax constructorDeclaration when constructorDeclaration.Body != null || constructorDeclaration.ExpressionBody != null
+                ConstructorDeclarationSyntax constructorDeclaration
+                    when constructorDeclaration.Body != null
+                        || constructorDeclaration.ExpressionBody != null
                     => constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
-                       ? CreateSimpleBody(BlockOrExpression(constructorDeclaration.Body, constructorDeclaration.ExpressionBody))
-                       : (constructorDeclaration.Initializer != null)
-                       ? new OrdinaryInstanceConstructorWithExplicitInitializerDeclarationBody(constructorDeclaration)
-                       : new OrdinaryInstanceConstructorWithImplicitInitializerDeclarationBody(constructorDeclaration),
+                        ? CreateSimpleBody(
+                            BlockOrExpression(
+                                constructorDeclaration.Body,
+                                constructorDeclaration.ExpressionBody
+                            )
+                        )
+                    : (constructorDeclaration.Initializer != null)
+                        ? new OrdinaryInstanceConstructorWithExplicitInitializerDeclarationBody(
+                            constructorDeclaration
+                        )
+                    : new OrdinaryInstanceConstructorWithImplicitInitializerDeclarationBody(
+                        constructorDeclaration
+                    ),
 
                 CompilationUnitSyntax unit when unit.ContainsGlobalStatements()
                     => new TopLevelCodeDeclarationBody(unit),
 
-                VariableDeclaratorSyntax { Parent.Parent: BaseFieldDeclarationSyntax fieldDeclaration, Initializer: { } } variableDeclarator
-                    when !fieldDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword)
+                VariableDeclaratorSyntax
+                {
+                    Parent.Parent: BaseFieldDeclarationSyntax fieldDeclaration,
+                    Initializer: { }
+                } variableDeclarator when !fieldDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword)
                     => new FieldWithInitializerDeclarationBody(variableDeclarator),
 
                 ParameterListSyntax { Parent: TypeDeclarationSyntax typeDeclaration }
-                    => typeDeclaration is { BaseList.Types: [PrimaryConstructorBaseTypeSyntax { }, ..] }
-                        ? new PrimaryConstructorWithExplicitInitializerDeclarationBody(typeDeclaration)
-                        : new PrimaryConstructorWithImplicitInitializerDeclarationBody(typeDeclaration),
+                    => typeDeclaration
+                        is { BaseList.Types: [PrimaryConstructorBaseTypeSyntax { }, ..] }
+                        ? new PrimaryConstructorWithExplicitInitializerDeclarationBody(
+                            typeDeclaration
+                        )
+                        : new PrimaryConstructorWithImplicitInitializerDeclarationBody(
+                            typeDeclaration
+                        ),
 
                 // Record type itself does not have a body, create body only when the declaration represents copy constructor:
                 RecordDeclarationSyntax recordDeclarationSyntax when symbol is not INamedTypeSymbol
                     => new CopyConstructorDeclarationBody(recordDeclarationSyntax),
 
                 // Parameters themselves do not have a body, the synthesized property accessors do:
-                ParameterSyntax { Parent.Parent: RecordDeclarationSyntax } parameterSyntax when symbol is not IParameterSymbol
+                ParameterSyntax { Parent.Parent: RecordDeclarationSyntax } parameterSyntax
+                    when symbol is not IParameterSymbol
                     => new RecordParameterDeclarationBody(parameterSyntax),
 
-                _ => null
+                _ => null,
             };
 
         internal static MemberBody? CreateSimpleBody(SyntaxNode? body)
@@ -83,8 +136,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             return new SimpleMemberBody(body);
         }
 
-        public static SyntaxNode? BlockOrExpression(BlockSyntax? blockBody, ArrowExpressionClauseSyntax? expressionBody)
-             => (SyntaxNode?)blockBody ?? expressionBody?.Expression;
+        public static SyntaxNode? BlockOrExpression(
+            BlockSyntax? blockBody,
+            ArrowExpressionClauseSyntax? expressionBody
+        ) => (SyntaxNode?)blockBody ?? expressionBody?.Expression;
 
         [Conditional("DEBUG")]
         public static void AssertIsBody(SyntaxNode syntax, bool allowLambda)
@@ -130,11 +185,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             Debug.Assert(false);
         }
 
-        public static bool ContainsGlobalStatements(this CompilationUnitSyntax compilationUnit)
-            => compilationUnit.Members is [GlobalStatementSyntax, ..];
+        public static bool ContainsGlobalStatements(this CompilationUnitSyntax compilationUnit) =>
+            compilationUnit.Members is [GlobalStatementSyntax, ..];
 
-        public static bool Any(TypeParameterListSyntax? list)
-            => list != null && list.ChildNodesAndTokens().Count != 0;
+        public static bool Any(TypeParameterListSyntax? list) =>
+            list != null && list.ChildNodesAndTokens().Count != 0;
 
         public static SyntaxNode? TryGetEffectiveGetterBody(SyntaxNode declaration)
         {
@@ -151,14 +206,19 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             return null;
         }
 
-        public static SyntaxNode? TryGetEffectiveGetterBody(ArrowExpressionClauseSyntax? propertyBody, AccessorListSyntax? accessorList)
+        public static SyntaxNode? TryGetEffectiveGetterBody(
+            ArrowExpressionClauseSyntax? propertyBody,
+            AccessorListSyntax? accessorList
+        )
         {
             if (propertyBody != null)
             {
                 return propertyBody.Expression;
             }
 
-            var firstGetter = accessorList?.Accessors.Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration)).FirstOrDefault();
+            var firstGetter = accessorList
+                ?.Accessors.Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
+                .FirstOrDefault();
             if (firstGetter == null)
             {
                 return null;
@@ -190,14 +250,18 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
         public static bool HasBackingField(PropertyDeclarationSyntax property)
         {
-            if (property.Modifiers.Any(SyntaxKind.AbstractKeyword) ||
-                property.Modifiers.Any(SyntaxKind.ExternKeyword))
+            if (
+                property.Modifiers.Any(SyntaxKind.AbstractKeyword)
+                || property.Modifiers.Any(SyntaxKind.ExternKeyword)
+            )
             {
                 return false;
             }
 
             return property.ExpressionBody == null
-                && property.AccessorList!.Accessors.Any(e => e.Body == null && e.ExpressionBody == null);
+                && property.AccessorList!.Accessors.Any(e =>
+                    e.Body == null && e.ExpressionBody == null
+                );
         }
 
         /// <summary>
@@ -221,8 +285,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             return declaration switch
             {
                 MethodDeclarationSyntax method => method.Modifiers.Any(SyntaxKind.AsyncKeyword),
-                LocalFunctionStatementSyntax localFunction => localFunction.Modifiers.Any(SyntaxKind.AsyncKeyword),
-                _ => false
+                LocalFunctionStatementSyntax localFunction
+                    => localFunction.Modifiers.Any(SyntaxKind.AsyncKeyword),
+                _ => false,
             };
         }
 
@@ -237,11 +302,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         /// <see cref="VariableDeclaratorSyntax"/> for await using declarators.
         /// <see cref="UsingStatementSyntax"/> for await using statements.
         /// </returns>
-        public static IEnumerable<SyntaxNode> GetSuspensionPoints(SyntaxNode body)
-            => body.DescendantNodesAndSelf(LambdaUtilities.IsNotLambda).Where(SyntaxBindingUtilities.BindsToResumableStateMachineState);
+        public static IEnumerable<SyntaxNode> GetSuspensionPoints(SyntaxNode body) =>
+            body.DescendantNodesAndSelf(LambdaUtilities.IsNotLambda)
+                .Where(SyntaxBindingUtilities.BindsToResumableStateMachineState);
 
-        // Presence of yield break or yield return indicates state machine, but yield break does not bind to a resumable state. 
-        public static bool IsIterator(SyntaxNode body)
-            => body.DescendantNodesAndSelf(LambdaUtilities.IsNotLambda).Any(n => n is YieldStatementSyntax);
+        // Presence of yield break or yield return indicates state machine, but yield break does not bind to a resumable state.
+        public static bool IsIterator(SyntaxNode body) =>
+            body.DescendantNodesAndSelf(LambdaUtilities.IsNotLambda)
+                .Any(n => n is YieldStatementSyntax);
     }
 }

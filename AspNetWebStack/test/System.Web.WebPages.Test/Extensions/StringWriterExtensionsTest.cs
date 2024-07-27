@@ -60,10 +60,16 @@ namespace System.Web.WebPages.Test
                 StringWriter writer = new StringWriter();
 
                 mock = new Mock<StreamWriter>(MockBehavior.Strict, stream) { CallBase = true };
-                mock.Setup(sw => sw.Write(It.IsAny<char[]>(),
-                                          It.IsAny<int>(),
-                                          It.Is<int>(c => c == StringWriterExtensions.BufferSize ||
-                                                          c == textInBytes.Length % StringWriterExtensions.BufferSize)))
+                mock.Setup(sw =>
+                        sw.Write(
+                            It.IsAny<char[]>(),
+                            It.IsAny<int>(),
+                            It.Is<int>(c =>
+                                c == StringWriterExtensions.BufferSize
+                                || c == textInBytes.Length % StringWriterExtensions.BufferSize
+                            )
+                        )
+                    )
                     .Verifiable();
 
                 StreamWriter outputWriter = mock.Object;
@@ -76,9 +82,9 @@ namespace System.Web.WebPages.Test
 
         [Theory]
         [InlineData(1)]
-        [InlineData(1023/7)]
-        [InlineData(20000/7)]
-        [InlineData(100000/7)]
+        [InlineData(1023 / 7)]
+        [InlineData(20000 / 7)]
+        [InlineData(100000 / 7)]
         public void ProperlyCopiesLargeSetsOfText(int count)
         {
             // The char א turns into a two byte sequence so we end up with a

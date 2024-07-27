@@ -13,10 +13,10 @@ namespace System.Xml
 {
     public enum XmlOutputMethod
     {
-        Xml = 0,    // Use Xml 1.0 rules to serialize
-        Html = 1,    // Use Html rules specified by Xslt specification to serialize
-        Text = 2,    // Only serialize text blocks
-        AutoDetect = 3,    // Choose between Xml and Html output methods at runtime (using Xslt rules to do so)
+        Xml = 0, // Use Xml 1.0 rules to serialize
+        Html = 1, // Use Html rules specified by Xslt specification to serialize
+        Text = 2, // Only serialize text blocks
+        AutoDetect = 3, // Choose between Xml and Html output methods at runtime (using Xslt rules to do so)
     }
 
     /// <summary>
@@ -40,7 +40,8 @@ namespace System.Xml
     // XmlWriterSettings class specifies basic features of an XmlWriter.
     public sealed class XmlWriterSettings
     {
-        internal static readonly XmlWriterSettings s_defaultWriterSettings = new() { ReadOnly = true };
+        internal static readonly XmlWriterSettings s_defaultWriterSettings =
+            new() { ReadOnly = true };
         private bool _useAsync;
         private Encoding _encoding;
         private bool _omitXmlDecl;
@@ -60,6 +61,7 @@ namespace System.Xml
         private string? _docTypePublic;
         private XmlStandalone _standalone;
         private bool _autoXmlDecl;
+
         public XmlWriterSettings()
         {
             Initialize();
@@ -208,7 +210,11 @@ namespace System.Xml
             set
             {
                 CheckReadOnly();
-                ArgumentOutOfRangeException.ThrowIfGreaterThan(unchecked((uint)value), (uint)NamespaceHandling.OmitDuplicates, nameof(value));
+                ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                    unchecked((uint)value),
+                    (uint)NamespaceHandling.OmitDuplicates,
+                    nameof(value)
+                );
                 _namespaceHandling = value;
             }
         }
@@ -328,7 +334,12 @@ namespace System.Xml
         // If TriState.Unknown, then Indent property was not explicitly set.  In this case, the AutoDetect output
         // method will default to Indent=true for Html and Indent=false for Xml.
         internal TriState IndentInternal { get; set; }
-        private bool IsQuerySpecific => CDataSectionElements.Count != 0 || _docTypePublic != null || _docTypeSystem != null || _standalone == XmlStandalone.Yes;
+        private bool IsQuerySpecific =>
+            CDataSectionElements.Count != 0
+            || _docTypePublic != null
+            || _docTypeSystem != null
+            || _standalone == XmlStandalone.Yes;
+
         internal XmlWriter CreateWriter(string outputFileName)
         {
             ArgumentNullException.ThrowIfNull(outputFileName);
@@ -345,7 +356,14 @@ namespace System.Xml
             try
             {
                 // open file stream
-                fs = new FileStream(outputFileName, FileMode.Create, FileAccess.Write, FileShare.Read, 0x1000, _useAsync);
+                fs = new FileStream(
+                    outputFileName,
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.Read,
+                    0x1000,
+                    _useAsync
+                );
 
                 // create writer
                 return newSettings.CreateWriter(fs);
@@ -371,10 +389,14 @@ namespace System.Xml
                 switch (OutputMethod)
                 {
                     case XmlOutputMethod.Xml:
-                        writer = Indent ? new XmlUtf8RawTextWriterIndent(output, this) : new XmlUtf8RawTextWriter(output, this);
+                        writer = Indent
+                            ? new XmlUtf8RawTextWriterIndent(output, this)
+                            : new XmlUtf8RawTextWriter(output, this);
                         break;
                     case XmlOutputMethod.Html:
-                        writer = Indent ? new HtmlUtf8RawTextWriterIndent(output, this) : new HtmlUtf8RawTextWriter(output, this);
+                        writer = Indent
+                            ? new HtmlUtf8RawTextWriterIndent(output, this)
+                            : new HtmlUtf8RawTextWriter(output, this);
                         break;
                     case XmlOutputMethod.Text:
                         writer = new TextUtf8RawTextWriter(output, this);
@@ -393,10 +415,14 @@ namespace System.Xml
                 switch (OutputMethod)
                 {
                     case XmlOutputMethod.Xml:
-                        writer = Indent ? new XmlEncodedRawTextWriterIndent(output, this) : new XmlEncodedRawTextWriter(output, this);
+                        writer = Indent
+                            ? new XmlEncodedRawTextWriterIndent(output, this)
+                            : new XmlEncodedRawTextWriter(output, this);
                         break;
                     case XmlOutputMethod.Html:
-                        writer = Indent ? new HtmlEncodedRawTextWriterIndent(output, this) : new HtmlEncodedRawTextWriter(output, this);
+                        writer = Indent
+                            ? new HtmlEncodedRawTextWriterIndent(output, this)
+                            : new HtmlEncodedRawTextWriter(output, this);
                         break;
                     case XmlOutputMethod.Text:
                         writer = new TextEncodedRawTextWriter(output, this);
@@ -442,10 +468,14 @@ namespace System.Xml
             switch (OutputMethod)
             {
                 case XmlOutputMethod.Xml:
-                    writer = Indent ? new XmlEncodedRawTextWriterIndent(output, this) : new XmlEncodedRawTextWriter(output, this);
+                    writer = Indent
+                        ? new XmlEncodedRawTextWriterIndent(output, this)
+                        : new XmlEncodedRawTextWriter(output, this);
                     break;
                 case XmlOutputMethod.Html:
-                    writer = Indent ? new HtmlEncodedRawTextWriterIndent(output, this) : new HtmlEncodedRawTextWriter(output, this);
+                    writer = Indent
+                        ? new HtmlEncodedRawTextWriterIndent(output, this)
+                        : new HtmlEncodedRawTextWriter(output, this);
                     break;
                 case XmlOutputMethod.Text:
                     writer = new TextEncodedRawTextWriter(output, this);
@@ -485,9 +515,9 @@ namespace System.Xml
             return AddConformanceWrapper(output);
         }
 
-
         internal bool ReadOnly { get; set; }
-        private void CheckReadOnly([CallerMemberName]string? propertyName = null)
+
+        private void CheckReadOnly([CallerMemberName] string? propertyName = null)
         {
             if (ReadOnly)
             {
@@ -561,8 +591,10 @@ namespace System.Xml
                     checkNames = confLevel == ConformanceLevel.Auto;
                     needWrap = true;
                 }
-                if (_newLineHandling == NewLineHandling.Replace &&
-                     baseWriterSettings.NewLineHandling == NewLineHandling.None)
+                if (
+                    _newLineHandling == NewLineHandling.Replace
+                    && baseWriterSettings.NewLineHandling == NewLineHandling.None
+                )
                 {
                     replaceNewLines = true;
                     needWrap = true;
@@ -579,11 +611,20 @@ namespace System.Xml
                 }
                 if (checkValues || replaceNewLines)
                 {
-                    writer = new XmlCharCheckingWriter(writer, checkValues, checkNames, replaceNewLines, this.NewLineChars);
+                    writer = new XmlCharCheckingWriter(
+                        writer,
+                        checkValues,
+                        checkNames,
+                        replaceNewLines,
+                        this.NewLineChars
+                    );
                 }
             }
 
-            if (this.IsQuerySpecific && (baseWriterSettings == null || !baseWriterSettings.IsQuerySpecific))
+            if (
+                this.IsQuerySpecific
+                && (baseWriterSettings == null || !baseWriterSettings.IsQuerySpecific)
+            )
             {
                 // Create QueryOutputWriterV1 if CData sections or DocType need to be tracked
                 writer = new QueryOutputWriterV1(writer, this);
@@ -600,7 +641,10 @@ namespace System.Xml
             // Encoding encoding;
             // NOTE: For Encoding we serialize only CodePage, and ignore EncoderFallback/DecoderFallback.
             // It suffices for XSLT purposes, but not in the general case.
-            Debug.Assert(Encoding.Equals(Encoding.GetEncoding(Encoding.CodePage)), "Cannot serialize encoding correctly");
+            Debug.Assert(
+                Encoding.Equals(Encoding.GetEncoding(Encoding.CodePage)),
+                "Cannot serialize encoding correctly"
+            );
             writer.Write(Encoding.CodePage);
             // bool omitXmlDecl;
             writer.Write(OmitXmlDeclaration);
@@ -659,7 +703,8 @@ namespace System.Xml
             // string newLineChars;
             NewLineChars = reader.ReadStringQ()!;
             // TriState indent;
-            IndentInternal = (TriState)reader.ReadSByte((sbyte)TriState.Unknown, (sbyte)TriState.True);
+            IndentInternal = (TriState)
+                reader.ReadSByte((sbyte)TriState.Unknown, (sbyte)TriState.True);
             // string indentChars;
             IndentChars = reader.ReadStringQ()!;
             // bool newLineOnAttributes;
@@ -667,7 +712,8 @@ namespace System.Xml
             // bool closeOutput;
             CloseOutput = reader.ReadBoolean();
             // ConformanceLevel conformanceLevel;
-            ConformanceLevel = (ConformanceLevel)reader.ReadSByte(0, (sbyte)ConformanceLevel.Document);
+            ConformanceLevel = (ConformanceLevel)
+                reader.ReadSByte(0, (sbyte)ConformanceLevel.Document);
             // bool checkCharacters;
             CheckCharacters = reader.ReadBoolean();
             // XmlOutputMethod outputMethod;
@@ -677,7 +723,9 @@ namespace System.Xml
             CDataSectionElements = new List<XmlQualifiedName>(length);
             for (int idx = 0; idx < length; idx++)
             {
-                CDataSectionElements.Add(new XmlQualifiedName(reader.ReadString(), reader.ReadString()));
+                CDataSectionElements.Add(
+                    new XmlQualifiedName(reader.ReadString(), reader.ReadString())
+                );
             }
             // bool mergeCDataSections;
             _mergeCDataSections = reader.ReadBoolean();

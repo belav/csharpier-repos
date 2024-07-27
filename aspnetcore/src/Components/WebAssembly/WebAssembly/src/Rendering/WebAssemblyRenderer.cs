@@ -23,8 +23,17 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
 {
     private readonly ILogger _logger;
 
-    public WebAssemblyRenderer(IServiceProvider serviceProvider, ILoggerFactory loggerFactory, JSComponentInterop jsComponentInterop)
-        : base(serviceProvider, loggerFactory, DefaultWebAssemblyJSRuntime.Instance.ReadJsonSerializerOptions(), jsComponentInterop)
+    public WebAssemblyRenderer(
+        IServiceProvider serviceProvider,
+        ILoggerFactory loggerFactory,
+        JSComponentInterop jsComponentInterop
+    )
+        : base(
+            serviceProvider,
+            loggerFactory,
+            DefaultWebAssemblyJSRuntime.Instance.ReadJsonSerializerOptions(),
+            jsComponentInterop
+        )
     {
         _logger = loggerFactory.CreateLogger<WebAssemblyRenderer>();
 
@@ -32,7 +41,11 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
         DefaultWebAssemblyJSRuntime.Instance.OnUpdateRootComponents += OnUpdateRootComponents;
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "These are root components which belong to the user and are in assemblies that don't get trimmed.")]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2072",
+        Justification = "These are root components which belong to the user and are in assemblies that don't get trimmed."
+    )]
     private void OnUpdateRootComponents(RootComponentOperationBatch batch)
     {
         var webRootComponentManager = GetOrCreateWebRootComponentManager();
@@ -46,14 +59,16 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
                         operation.SsrComponentId,
                         operation.Descriptor!.ComponentType,
                         operation.Marker!.Value.Key!,
-                        operation.Descriptor!.Parameters);
+                        operation.Descriptor!.Parameters
+                    );
                     break;
                 case RootComponentOperationType.Update:
                     _ = webRootComponentManager.UpdateRootComponentAsync(
                         operation.SsrComponentId,
                         operation.Descriptor!.ComponentType,
                         operation.Marker?.Key,
-                        operation.Descriptor!.Parameters);
+                        operation.Descriptor!.Parameters
+                    );
                     break;
                 case RootComponentOperationType.Remove:
                     webRootComponentManager.RemoveRootComponent(operation.SsrComponentId);
@@ -66,12 +81,19 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
 
     public static void NotifyEndUpdateRootComponents(long batchId)
     {
-        DefaultWebAssemblyJSRuntime.Instance.InvokeVoid("Blazor._internal.endUpdateRootComponents", batchId);
+        DefaultWebAssemblyJSRuntime.Instance.InvokeVoid(
+            "Blazor._internal.endUpdateRootComponents",
+            batchId
+        );
     }
 
     public override Dispatcher Dispatcher => NullDispatcher.Instance;
 
-    public Task AddComponentAsync([DynamicallyAccessedMembers(Component)] Type componentType, ParameterView parameters, string domElementSelector)
+    public Task AddComponentAsync(
+        [DynamicallyAccessedMembers(Component)] Type componentType,
+        ParameterView parameters,
+        string domElementSelector
+    )
     {
         var componentId = AddRootComponent(componentType, domElementSelector);
         return RenderRootComponentAsync(componentId, parameters);
@@ -85,7 +107,8 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
             "Blazor._internal.attachRootComponentToElement",
             domElementSelector,
             componentId,
-            RendererId);
+            RendererId
+        );
     }
 
     /// <inheritdoc />
@@ -114,7 +137,10 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
         }
         else
         {
-            WebAssemblyCallQueue.Schedule(this, static @this => @this.CallBaseProcessPendingRender());
+            WebAssemblyCallQueue.Schedule(
+                this,
+                static @this => @this.CallBaseProcessPendingRender()
+            );
         }
     }
 
@@ -161,7 +187,11 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
         {
             foreach (var innerException in aggregateException.Flatten().InnerExceptions)
             {
-                Log.UnhandledExceptionRenderingComponent(_logger, innerException.Message, innerException);
+                Log.UnhandledExceptionRenderingComponent(
+                    _logger,
+                    innerException.Message,
+                    innerException
+                );
             }
         }
         else
@@ -170,17 +200,36 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
         }
     }
 
-    protected override IComponent ResolveComponentForRenderMode([DynamicallyAccessedMembers(Component)] Type componentType, int? parentComponentId, IComponentActivator componentActivator, IComponentRenderMode renderMode)
-        => renderMode switch
+    protected override IComponent ResolveComponentForRenderMode(
+        [DynamicallyAccessedMembers(Component)] Type componentType,
+        int? parentComponentId,
+        IComponentActivator componentActivator,
+        IComponentRenderMode renderMode
+    ) =>
+        renderMode switch
         {
-            InteractiveWebAssemblyRenderMode or InteractiveAutoRenderMode => componentActivator.CreateInstance(componentType),
-            _ => throw new NotSupportedException($"Cannot create a component of type '{componentType}' because its render mode '{renderMode}' is not supported by WebAssembly rendering."),
+            InteractiveWebAssemblyRenderMode
+            or InteractiveAutoRenderMode
+                => componentActivator.CreateInstance(componentType),
+            _
+                => throw new NotSupportedException(
+                    $"Cannot create a component of type '{componentType}' because its render mode '{renderMode}' is not supported by WebAssembly rendering."
+                ),
         };
 
     private static partial class Log
     {
-        [LoggerMessage(100, LogLevel.Critical, "Unhandled exception rendering component: {Message}", EventName = "ExceptionRenderingComponent")]
-        public static partial void UnhandledExceptionRenderingComponent(ILogger logger, string message, Exception exception);
+        [LoggerMessage(
+            100,
+            LogLevel.Critical,
+            "Unhandled exception rendering component: {Message}",
+            EventName = "ExceptionRenderingComponent"
+        )]
+        public static partial void UnhandledExceptionRenderingComponent(
+            ILogger logger,
+            string message,
+            Exception exception
+        );
     }
 
     [JSImport("Blazor._internal.renderBatch", "blazor-internal")]

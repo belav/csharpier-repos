@@ -12,7 +12,13 @@ namespace Microsoft.CodeAnalysis.DecompiledSource;
 /// </summary>
 internal interface IDecompilationService : ILanguageService
 {
-    Document? PerformDecompilation(Document document, string fullName, Compilation compilation, MetadataReference? metadataReference, string? assemblyLocation);
+    Document? PerformDecompilation(
+        Document document,
+        string fullName,
+        Compilation compilation,
+        MetadataReference? metadataReference,
+        string? assemblyLocation
+    );
 
     FileVersionInfo GetDecompilerVersion();
 }

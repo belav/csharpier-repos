@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
-    using System.ComponentModel;
 
     public sealed class BasicHttpSecurity
     {
@@ -16,16 +16,23 @@ namespace System.ServiceModel
         BasicHttpMessageSecurity messageSecurity;
 
         public BasicHttpSecurity()
-            : this(DefaultMode, new HttpTransportSecurity(), new BasicHttpMessageSecurity())
-        {
-        }
+            : this(DefaultMode, new HttpTransportSecurity(), new BasicHttpMessageSecurity()) { }
 
-        BasicHttpSecurity(BasicHttpSecurityMode mode, HttpTransportSecurity transportSecurity, BasicHttpMessageSecurity messageSecurity)
+        BasicHttpSecurity(
+            BasicHttpSecurityMode mode,
+            HttpTransportSecurity transportSecurity,
+            BasicHttpMessageSecurity messageSecurity
+        )
         {
-            Fx.Assert(BasicHttpSecurityModeHelper.IsDefined(mode), string.Format("Invalid BasicHttpSecurityMode value: {0}.", mode.ToString()));
+            Fx.Assert(
+                BasicHttpSecurityModeHelper.IsDefined(mode),
+                string.Format("Invalid BasicHttpSecurityMode value: {0}.", mode.ToString())
+            );
             this.Mode = mode;
-            this.transportSecurity = transportSecurity == null ? new HttpTransportSecurity() : transportSecurity;
-            this.messageSecurity = messageSecurity == null ? new BasicHttpMessageSecurity() : messageSecurity;
+            this.transportSecurity =
+                transportSecurity == null ? new HttpTransportSecurity() : transportSecurity;
+            this.messageSecurity =
+                messageSecurity == null ? new BasicHttpMessageSecurity() : messageSecurity;
         }
 
         public BasicHttpSecurityMode Mode
@@ -35,7 +42,9 @@ namespace System.ServiceModel
             {
                 if (!BasicHttpSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.mode = value;
             }
@@ -44,19 +53,13 @@ namespace System.ServiceModel
         public HttpTransportSecurity Transport
         {
             get { return this.transportSecurity; }
-            set
-            {
-                this.transportSecurity = (value == null) ? new HttpTransportSecurity() : value;
-            }
+            set { this.transportSecurity = (value == null) ? new HttpTransportSecurity() : value; }
         }
 
         public BasicHttpMessageSecurity Message
         {
             get { return this.messageSecurity; }
-            set
-            {
-                this.messageSecurity = (value == null) ? new BasicHttpMessageSecurity() : value;
-            }
+            set { this.messageSecurity = (value == null) ? new BasicHttpMessageSecurity() : value; }
         }
 
         internal void EnableTransportSecurity(HttpsTransportBindingElement https)
@@ -71,9 +74,15 @@ namespace System.ServiceModel
             }
         }
 
-        internal static void EnableTransportSecurity(HttpsTransportBindingElement https, HttpTransportSecurity transportSecurity)
+        internal static void EnableTransportSecurity(
+            HttpsTransportBindingElement https,
+            HttpTransportSecurity transportSecurity
+        )
         {
-            HttpTransportSecurity.ConfigureTransportProtectionAndAuthentication(https, transportSecurity);
+            HttpTransportSecurity.ConfigureTransportProtectionAndAuthentication(
+                https,
+                transportSecurity
+            );
         }
 
         internal void EnableTransportAuthentication(HttpTransportBindingElement http)
@@ -81,9 +90,15 @@ namespace System.ServiceModel
             this.transportSecurity.ConfigureTransportAuthentication(http);
         }
 
-        internal static bool IsEnabledTransportAuthentication(HttpTransportBindingElement http, HttpTransportSecurity transportSecurity)
+        internal static bool IsEnabledTransportAuthentication(
+            HttpTransportBindingElement http,
+            HttpTransportSecurity transportSecurity
+        )
         {
-            return HttpTransportSecurity.IsConfiguredTransportAuthentication(http, transportSecurity);
+            return HttpTransportSecurity.IsConfiguredTransportAuthentication(
+                http,
+                transportSecurity
+            );
         }
 
         internal void DisableTransportAuthentication(HttpTransportBindingElement http)
@@ -93,10 +108,14 @@ namespace System.ServiceModel
 
         internal SecurityBindingElement CreateMessageSecurity()
         {
-            if (this.mode == BasicHttpSecurityMode.Message
-                || this.mode == BasicHttpSecurityMode.TransportWithMessageCredential)
+            if (
+                this.mode == BasicHttpSecurityMode.Message
+                || this.mode == BasicHttpSecurityMode.TransportWithMessageCredential
+            )
             {
-                return this.messageSecurity.CreateMessageSecurity(this.Mode == BasicHttpSecurityMode.TransportWithMessageCredential);
+                return this.messageSecurity.CreateMessageSecurity(
+                    this.Mode == BasicHttpSecurityMode.TransportWithMessageCredential
+                );
             }
             else
             {
@@ -104,26 +123,52 @@ namespace System.ServiceModel
             }
         }
 
-        internal static bool TryCreate(SecurityBindingElement sbe, UnifiedSecurityMode mode, HttpTransportSecurity transportSecurity, out BasicHttpSecurity security)
+        internal static bool TryCreate(
+            SecurityBindingElement sbe,
+            UnifiedSecurityMode mode,
+            HttpTransportSecurity transportSecurity,
+            out BasicHttpSecurity security
+        )
         {
             security = null;
             BasicHttpMessageSecurity messageSecurity = null;
             if (sbe != null)
             {
-                mode &= UnifiedSecurityMode.Message | UnifiedSecurityMode.TransportWithMessageCredential;
+                mode &=
+                    UnifiedSecurityMode.Message
+                    | UnifiedSecurityMode.TransportWithMessageCredential;
                 bool isSecureTransportMode;
-                if (!BasicHttpMessageSecurity.TryCreate(sbe, out messageSecurity, out isSecureTransportMode))
+                if (
+                    !BasicHttpMessageSecurity.TryCreate(
+                        sbe,
+                        out messageSecurity,
+                        out isSecureTransportMode
+                    )
+                )
                 {
                     return false;
                 }
             }
             else
             {
-                mode &= ~(UnifiedSecurityMode.Message | UnifiedSecurityMode.TransportWithMessageCredential);
+                mode &= ~(
+                    UnifiedSecurityMode.Message | UnifiedSecurityMode.TransportWithMessageCredential
+                );
             }
-            BasicHttpSecurityMode basicHttpSecurityMode = BasicHttpSecurityModeHelper.ToSecurityMode(mode);
-            Fx.Assert(BasicHttpSecurityModeHelper.IsDefined(basicHttpSecurityMode), string.Format("Invalid BasicHttpSecurityMode value: {0}.", basicHttpSecurityMode.ToString()));
-            security = new BasicHttpSecurity(basicHttpSecurityMode, transportSecurity, messageSecurity);
+            BasicHttpSecurityMode basicHttpSecurityMode =
+                BasicHttpSecurityModeHelper.ToSecurityMode(mode);
+            Fx.Assert(
+                BasicHttpSecurityModeHelper.IsDefined(basicHttpSecurityMode),
+                string.Format(
+                    "Invalid BasicHttpSecurityMode value: {0}.",
+                    basicHttpSecurityMode.ToString()
+                )
+            );
+            security = new BasicHttpSecurity(
+                basicHttpSecurityMode,
+                transportSecurity,
+                messageSecurity
+            );
 
             return SecurityElement.AreBindingsMatching(security.CreateMessageSecurity(), sbe);
         }

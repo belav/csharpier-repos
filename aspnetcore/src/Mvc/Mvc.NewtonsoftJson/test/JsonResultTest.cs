@@ -46,7 +46,8 @@ public class JsonResultTest
             NullLogger<NewtonsoftJsonResultExecutor>.Instance,
             Options.Create(new MvcOptions()),
             Options.Create(new MvcNewtonsoftJsonOptions()),
-            ArrayPool<char>.Shared);
+            ArrayPool<char>.Shared
+        );
 
         var services = new ServiceCollection();
         services.AddSingleton<IActionResultExecutor<JsonResult>>(executor);

@@ -27,7 +27,8 @@ public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : Rela
     protected RelationalGeometryTypeMapping(
         ValueConverter<TGeometry, TProvider>? converter,
         string storeType,
-        JsonValueReaderWriter? jsonValueReaderWriter = null)
+        JsonValueReaderWriter? jsonValueReaderWriter = null
+    )
         : base(CreateRelationalTypeMappingParameters(storeType, jsonValueReaderWriter))
     {
         SpatialConverter = converter;
@@ -40,29 +41,43 @@ public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : Rela
     /// <param name="converter">The converter to use when converting to and from database types.</param>
     protected RelationalGeometryTypeMapping(
         RelationalTypeMappingParameters parameters,
-        ValueConverter<TGeometry, TProvider>? converter)
+        ValueConverter<TGeometry, TProvider>? converter
+    )
         : base(
             parameters.WithCoreParameters(
                 parameters.CoreParameters with
                 {
-                    ProviderValueComparer = parameters.CoreParameters.ProviderValueComparer
-                    ?? (RuntimeFeature.IsDynamicCodeSupported
-                        ? CreateProviderValueComparer(
-                            parameters.CoreParameters.Converter?.ProviderClrType ?? parameters.CoreParameters.ClrType)
-                        : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel))
-                }))
+                    ProviderValueComparer =
+                        parameters.CoreParameters.ProviderValueComparer
+                        ?? (
+                            RuntimeFeature.IsDynamicCodeSupported
+                                ? CreateProviderValueComparer(
+                                    parameters.CoreParameters.Converter?.ProviderClrType
+                                        ?? parameters.CoreParameters.ClrType
+                                )
+                                : throw new InvalidOperationException(
+                                    CoreStrings.NativeAotNoCompiledModel
+                                )
+                        ),
+                }
+            )
+        )
     {
         SpatialConverter = converter;
     }
 
-    private static ValueComparer? CreateProviderValueComparer(Type providerType)
-        => providerType.IsAssignableTo(typeof(TGeometry))
-            ? (ValueComparer)Activator.CreateInstance(typeof(GeometryValueComparer<>).MakeGenericType(providerType))!
+    private static ValueComparer? CreateProviderValueComparer(Type providerType) =>
+        providerType.IsAssignableTo(typeof(TGeometry))
+            ? (ValueComparer)
+                Activator.CreateInstance(
+                    typeof(GeometryValueComparer<>).MakeGenericType(providerType)
+                )!
             : null;
 
     private static RelationalTypeMappingParameters CreateRelationalTypeMappingParameters(
         string storeType,
-        JsonValueReaderWriter? jsonValueReaderWriter)
+        JsonValueReaderWriter? jsonValueReaderWriter
+    )
     {
         var comparer = new GeometryValueComparer<TGeometry>();
 
@@ -73,8 +88,10 @@ public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : Rela
                 comparer,
                 comparer,
                 CreateProviderValueComparer(typeof(TGeometry)),
-                jsonValueReaderWriter: jsonValueReaderWriter),
-            storeType);
+                jsonValueReaderWriter: jsonValueReaderWriter
+            ),
+            storeType
+        );
     }
 
     /// <summary>
@@ -88,7 +105,8 @@ public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : Rela
         string name,
         object? value,
         bool? nullable = null,
-        ParameterDirection direction = ParameterDirection.Input)
+        ParameterDirection direction = ParameterDirection.Input
+    )
     {
         var parameter = command.CreateParameter();
         parameter.Direction = ParameterDirection.Input;
@@ -99,11 +117,10 @@ public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : Rela
             value = Converter.ConvertToProvider(value);
         }
 
-        parameter.Value = value is null
-            ? DBNull.Value
-            : SpatialConverter is null
-                ? value
-                : SpatialConverter.ConvertToProvider(value);
+        parameter.Value =
+            value is null ? DBNull.Value
+            : SpatialConverter is null ? value
+            : SpatialConverter.ConvertToProvider(value);
 
         if (nullable.HasValue)
         {
@@ -136,7 +153,8 @@ public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : Rela
         return ReplacingExpressionVisitor.Replace(
             SpatialConverter.ConvertFromProviderExpression.Parameters.Single(),
             expression,
-            SpatialConverter.ConvertFromProviderExpression.Body);
+            SpatialConverter.ConvertFromProviderExpression.Body
+        );
     }
 
     /// <summary>
@@ -146,13 +164,15 @@ public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : Rela
     /// </summary>
     /// <param name="value">The value for which a literal is needed.</param>
     /// <returns>An expression tree that can be used to generate code for the literal value.</returns>
-    public override Expression GenerateCodeLiteral(object value)
-        => Expression.Convert(
+    public override Expression GenerateCodeLiteral(object value) =>
+        Expression.Convert(
             Expression.Call(
                 Expression.New(WktReaderType),
                 WktReaderType.GetMethod("Read", new[] { typeof(string) })!,
-                Expression.Constant(CreateWktWithSrid(value), typeof(string))),
-            value.GetType());
+                Expression.Constant(CreateWktWithSrid(value), typeof(string))
+            ),
+            value.GetType()
+        );
 
     private string CreateWktWithSrid(object value)
     {

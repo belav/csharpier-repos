@@ -26,14 +26,18 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullDocumentToWrite_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("documentToWrite", () => new Formatter(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "documentToWrite",
+                () => new Formatter(null)
+            );
         }
 
         [Fact]
         public void CreateInlineCategoriesDocument_Invoke_ReturnsExpected()
         {
             var formatter = new Formatter();
-            InlineCategoriesDocument document = formatter.CreateInlineCategoriesDocumentEntryPoint();
+            InlineCategoriesDocument document =
+                formatter.CreateInlineCategoriesDocumentEntryPoint();
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.Categories);
@@ -47,7 +51,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateReferencedCategoriesDocument_Invoke_ReturnsExpected()
         {
             var formatter = new Formatter();
-            ReferencedCategoriesDocument document = formatter.CreateReferencedCategoriesDocumentEntryPoint();
+            ReferencedCategoriesDocument document =
+                formatter.CreateReferencedCategoriesDocumentEntryPoint();
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.ElementExtensions);
@@ -69,13 +74,17 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class Formatter : CategoriesDocumentFormatter
         {
-            public Formatter() : base() { }
+            public Formatter()
+                : base() { }
 
-            public Formatter(CategoriesDocument documentToWrite) : base(documentToWrite) { }
+            public Formatter(CategoriesDocument documentToWrite)
+                : base(documentToWrite) { }
 
-            public InlineCategoriesDocument CreateInlineCategoriesDocumentEntryPoint() => CreateInlineCategoriesDocument();
+            public InlineCategoriesDocument CreateInlineCategoriesDocumentEntryPoint() =>
+                CreateInlineCategoriesDocument();
 
-            public ReferencedCategoriesDocument CreateReferencedCategoriesDocumentEntryPoint() => CreateReferencedCategoriesDocument();
+            public ReferencedCategoriesDocument CreateReferencedCategoriesDocumentEntryPoint() =>
+                CreateReferencedCategoriesDocument();
 
             public void SetDocumentEntryPoint(CategoriesDocument document) => SetDocument(document);
 

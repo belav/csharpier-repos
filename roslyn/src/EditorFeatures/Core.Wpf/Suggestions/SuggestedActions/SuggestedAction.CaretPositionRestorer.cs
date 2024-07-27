@@ -29,7 +29,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
             private bool _caretChanged;
 
-            public CaretPositionRestorer(ITextBuffer subjectBuffer, ITextBufferAssociatedViewService associatedViewService)
+            public CaretPositionRestorer(
+                ITextBuffer subjectBuffer,
+                ITextBufferAssociatedViewService associatedViewService
+            )
             {
                 Contract.ThrowIfNull(associatedViewService);
                 _subjectBuffer = subjectBuffer;
@@ -41,7 +44,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
             private IList<Tuple<ITextView, IMappingPoint>> GetCaretPositions()
             {
-                // Currently, only do this if there's a single view 
+                // Currently, only do this if there's a single view
                 var views = _associatedViewService.GetAssociatedTextViews(_subjectBuffer);
                 var result = new List<Tuple<ITextView, IMappingPoint>>();
 
@@ -51,7 +54,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     var point = view.GetCaretPoint(_subjectBuffer);
                     if (point != null)
                     {
-                        result.Add(Tuple.Create(view, view.BufferGraph.CreateMappingPoint(point.Value, PointTrackingMode.Negative)));
+                        result.Add(
+                            Tuple.Create(
+                                view,
+                                view.BufferGraph.CreateMappingPoint(
+                                    point.Value,
+                                    PointTrackingMode.Negative
+                                )
+                            )
+                        );
                     }
                 }
 

@@ -41,8 +41,9 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
     private bool _useStatefulReconnect;
 
     private IDuplexPipe? _transport;
+
     // Used for reconnect (when enabled) to determine if the close was ungraceful or not, reconnect only happens on ungraceful disconnect
-    // The assumption is that a graceful close was triggered purposefully by either the client or server and a reconnect shouldn't occur 
+    // The assumption is that a graceful close was triggered purposefully by either the client or server and a reconnect shouldn't occur
     private bool _gracefulClose;
     private Func<PipeWriter, Task>? _notifyOnReconnect;
 
@@ -71,8 +72,13 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
     }
 #pragma warning restore CA2252 // This API requires opting into preview features
 
-    public WebSocketsTransport(HttpConnectionOptions httpConnectionOptions, ILoggerFactory loggerFactory, Func<Task<string?>> accessTokenProvider, HttpClient? httpClient,
-        bool useStatefulReconnect = false)
+    public WebSocketsTransport(
+        HttpConnectionOptions httpConnectionOptions,
+        ILoggerFactory loggerFactory,
+        Func<Task<string?>> accessTokenProvider,
+        HttpClient? httpClient,
+        bool useStatefulReconnect = false
+    )
     {
         _useStatefulReconnect = useStatefulReconnect;
         _logger = (loggerFactory ?? NullLoggerFactory.Instance).CreateLogger<WebSocketsTransport>();
@@ -87,7 +93,10 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
         _httpClient = httpClient;
     }
 
-    private async ValueTask<WebSocket> DefaultWebSocketFactory(WebSocketConnectionContext context, CancellationToken cancellationToken)
+    private async ValueTask<WebSocket> DefaultWebSocketFactory(
+        WebSocketConnectionContext context,
+        CancellationToken cancellationToken
+    )
     {
         var webSocket = new ClientWebSocket();
         var url = context.Uri;
@@ -101,7 +110,10 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
             webSocket.Options.SetRequestHeader("User-Agent", Constants.UserAgentHeader.ToString());
 #else
             // Set an alternative user agent header on Full framework
-            webSocket.Options.SetRequestHeader("X-SignalR-User-Agent", Constants.UserAgentHeader.ToString());
+            webSocket.Options.SetRequestHeader(
+                "X-SignalR-User-Agent",
+                Constants.UserAgentHeader.ToString()
+            );
 #endif
 
             // Set this header so the server auth middleware will set an Unauthorized instead of Redirect status code
@@ -139,7 +151,9 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
                 if (context.Options.ClientCertificates is { Count: > 0 })
                 {
-                    webSocket.Options.ClientCertificates.AddRange(context.Options.ClientCertificates);
+                    webSocket.Options.ClientCertificates.AddRange(
+                        context.Options.ClientCertificates
+                    );
                 }
 
                 if (context.Options.Credentials != null)
@@ -160,7 +174,10 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
                 if (context.Options.UseDefaultCredentials != null)
                 {
-                    webSocket.Options.UseDefaultCredentials = context.Options.UseDefaultCredentials.Value;
+                    webSocket.Options.UseDefaultCredentials = context
+                        .Options
+                        .UseDefaultCredentials
+                        .Value;
                     if (context.Options.UseDefaultCredentials.Value)
                     {
                         // Negotiate Auth isn't supported over HTTP/2 and HttpClient does not gracefully fallback to HTTP/1.1 in that case
@@ -182,7 +199,12 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
                     {
                         webSocket.Options.Cookies = null;
                     }
-                    if (IsX509CertificateCollectionEqual(webSocket.Options.ClientCertificates, context.Options.ClientCertificates))
+                    if (
+                        IsX509CertificateCollectionEqual(
+                            webSocket.Options.ClientCertificates,
+                            context.Options.ClientCertificates
+                        )
+                    )
                     {
                         webSocket.Options.ClientCertificates.Clear();
                     }
@@ -190,7 +212,10 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
                     {
                         webSocket.Options.Credentials = null;
                     }
-                    if (webSocket.Options.UseDefaultCredentials == (context.Options.UseDefaultCredentials ?? false))
+                    if (
+                        webSocket.Options.UseDefaultCredentials
+                        == (context.Options.UseDefaultCredentials ?? false)
+                    )
                     {
                         webSocket.Options.UseDefaultCredentials = false;
                     }
@@ -203,17 +228,25 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
                 if (!allowHttp2 && webSocket.Options.HttpVersion >= HttpVersion.Version20)
                 {
                     // We shouldn't fallback to HTTP/1.1 if the user explicitly states
-                    if (webSocket.Options.HttpVersionPolicy == HttpVersionPolicy.RequestVersionOrLower)
+                    if (
+                        webSocket.Options.HttpVersionPolicy
+                        == HttpVersionPolicy.RequestVersionOrLower
+                    )
                     {
                         webSocket.Options.HttpVersion = HttpVersion.Version11;
                     }
                     else
                     {
-                        throw new InvalidOperationException("Negotiate Authentication doesn't work with HTTP/2 or higher.");
+                        throw new InvalidOperationException(
+                            "Negotiate Authentication doesn't work with HTTP/2 or higher."
+                        );
                     }
                 }
 
-                static bool IsX509CertificateCollectionEqual(X509CertificateCollection? left, X509CertificateCollection? right)
+                static bool IsX509CertificateCollectionEqual(
+                    X509CertificateCollection? left,
+                    X509CertificateCollection? right
+                )
                 {
                     var leftCount = left?.Count ?? 0;
                     var rightCount = right?.Count ?? 0;
@@ -239,10 +272,12 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 #if NET7_0_OR_GREATER
             && webSocket.Options.HttpVersion < HttpVersion.Version20
 #endif
-            )
+        )
         {
             // Apply access token logic when using HTTP/1.1 because we don't use the AccessTokenHttpMessageHandler via HttpClient unless the user specifies HTTP/2.0 or higher
-            var accessToken = await _httpConnectionOptions.AccessTokenProvider().ConfigureAwait(false);
+            var accessToken = await _httpConnectionOptions
+                .AccessTokenProvider()
+                .ConfigureAwait(false);
             if (!string.IsNullOrWhiteSpace(accessToken))
             {
                 // We can't use request headers in the browser, so instead append the token as a query string in that case
@@ -267,7 +302,9 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
             // and there isn't really any benefit to sharing the HttpClient in HTTP/1.1
             if (webSocket.Options.HttpVersion > HttpVersion.Version11)
             {
-                await webSocket.ConnectAsync(url, invoker: _httpClient, cancellationToken).ConfigureAwait(false);
+                await webSocket
+                    .ConnectAsync(url, invoker: _httpClient, cancellationToken)
+                    .ConfigureAwait(false);
             }
             else
 #endif
@@ -284,18 +321,26 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
         return webSocket;
     }
 
-    public async Task StartAsync(Uri url, TransferFormat transferFormat, CancellationToken cancellationToken = default)
+    public async Task StartAsync(
+        Uri url,
+        TransferFormat transferFormat,
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(url);
 
         if (transferFormat != TransferFormat.Binary && transferFormat != TransferFormat.Text)
         {
-            throw new ArgumentException($"The '{transferFormat}' transfer format is not supported by this transport.", nameof(transferFormat));
+            throw new ArgumentException(
+                $"The '{transferFormat}' transfer format is not supported by this transport.",
+                nameof(transferFormat)
+            );
         }
 
-        _webSocketMessageType = transferFormat == TransferFormat.Binary
-            ? WebSocketMessageType.Binary
-            : WebSocketMessageType.Text;
+        _webSocketMessageType =
+            transferFormat == TransferFormat.Binary
+                ? WebSocketMessageType.Binary
+                : WebSocketMessageType.Text;
 
         var resolvedUrl = ResolveWebSocketsUrl(url);
 
@@ -307,7 +352,9 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
         if (_webSocket == null)
         {
-            throw new InvalidOperationException("Configured WebSocketFactory did not return a value.");
+            throw new InvalidOperationException(
+                "Configured WebSocketFactory did not return a value."
+            );
         }
 
         Log.StartedTransport(_logger);
@@ -319,7 +366,10 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
         if (_transport is null)
         {
             // Create the pipe pair (Application's writer is connected to Transport's reader, and vice versa)
-            var pair = CreateConnectionPair(_httpConnectionOptions.TransportPipeOptions, _httpConnectionOptions.AppPipeOptions);
+            var pair = CreateConnectionPair(
+                _httpConnectionOptions.TransportPipeOptions,
+                _httpConnectionOptions.AppPipeOptions
+            );
 
             _transport = pair.Transport;
             _application = pair.Application;
@@ -364,7 +414,11 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
                 // Cancel the application so that ReadAsync yields
                 _application.Input.CancelPendingRead();
 
-                var resultTask = await Task.WhenAny(sending, Task.Delay(_closeTimeout, _stopCts.Token)).ConfigureAwait(false);
+                var resultTask = await Task.WhenAny(
+                        sending,
+                        Task.Delay(_closeTimeout, _stopCts.Token)
+                    )
+                    .ConfigureAwait(false);
 
                 if (resultTask != sending)
                 {
@@ -406,13 +460,22 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
             {
                 try
                 {
-                    await StartAsync(url, _webSocketMessageType == WebSocketMessageType.Binary ? TransferFormat.Binary : TransferFormat.Text,
-                        cancellationToken: default).ConfigureAwait(false);
+                    await StartAsync(
+                            url,
+                            _webSocketMessageType == WebSocketMessageType.Binary
+                                ? TransferFormat.Binary
+                                : TransferFormat.Text,
+                            cancellationToken: default
+                        )
+                        .ConfigureAwait(false);
                     cleanup = false;
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException("Reconnect attempt failed.", innerException: ex);
+                    throw new InvalidOperationException(
+                        "Reconnect attempt failed.",
+                        innerException: ex
+                    );
                 }
             }
         }
@@ -440,7 +503,9 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
             {
 #if NETSTANDARD2_1 || NETCOREAPP
                 // Do a 0 byte read so that idle connections don't allocate a buffer when waiting for a read
-                var result = await socket.ReceiveAsync(Memory<byte>.Empty, _stopCts.Token).ConfigureAwait(false);
+                var result = await socket
+                    .ReceiveAsync(Memory<byte>.Empty, _stopCts.Token)
+                    .ConfigureAwait(false);
 
                 if (result.MessageType == WebSocketMessageType.Close)
                 {
@@ -449,7 +514,9 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
                     if (socket.CloseStatus != WebSocketCloseStatus.NormalClosure)
                     {
-                        throw new InvalidOperationException($"Websocket closed with error: {socket.CloseStatus}.");
+                        throw new InvalidOperationException(
+                            $"Websocket closed with error: {socket.CloseStatus}."
+                        );
                     }
 
                     return;
@@ -458,13 +525,17 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
                 var memory = _application.Output.GetMemory();
 #if NETSTANDARD2_1 || NETCOREAPP
                 // Because we checked the CloseStatus from the 0 byte read above, we don't need to check again after reading
-                var receiveResult = await socket.ReceiveAsync(memory, _stopCts.Token).ConfigureAwait(false);
+                var receiveResult = await socket
+                    .ReceiveAsync(memory, _stopCts.Token)
+                    .ConfigureAwait(false);
 #elif NETSTANDARD2_0 || NETFRAMEWORK
                 var isArray = MemoryMarshal.TryGetArray<byte>(memory, out var arraySegment);
                 Debug.Assert(isArray);
 
                 // Exceptions are handled above where the send and receive tasks are being run.
-                var receiveResult = await socket.ReceiveAsync(arraySegment, _stopCts.Token).ConfigureAwait(false);
+                var receiveResult = await socket
+                    .ReceiveAsync(arraySegment, _stopCts.Token)
+                    .ConfigureAwait(false);
 #else
 #error TFMs need to be updated
 #endif
@@ -476,13 +547,20 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
                     if (socket.CloseStatus != WebSocketCloseStatus.NormalClosure)
                     {
-                        throw new InvalidOperationException($"Websocket closed with error: {socket.CloseStatus}.");
+                        throw new InvalidOperationException(
+                            $"Websocket closed with error: {socket.CloseStatus}."
+                        );
                     }
 
                     return;
                 }
 
-                Log.MessageReceived(_logger, receiveResult.MessageType, receiveResult.Count, receiveResult.EndOfMessage);
+                Log.MessageReceived(
+                    _logger,
+                    receiveResult.MessageType,
+                    receiveResult.Count,
+                    receiveResult.EndOfMessage
+                );
 
                 _application.Output.Advance(receiveResult.Count);
 
@@ -559,7 +637,9 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
                             if (WebSocketCanSend(socket))
                             {
-                                await socket.SendAsync(buffer, _webSocketMessageType, _stopCts.Token).ConfigureAwait(false);
+                                await socket
+                                    .SendAsync(buffer, _webSocketMessageType, _stopCts.Token)
+                                    .ConfigureAwait(false);
                             }
                             else
                             {
@@ -599,13 +679,29 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
                     if (!OperatingSystem.IsBrowser())
                     {
                         // We're done sending, send the close frame to the client if the websocket is still open
-                        await socket.CloseOutputAsync(error != null ? WebSocketCloseStatus.InternalServerError : WebSocketCloseStatus.NormalClosure, "", _stopCts.Token).ConfigureAwait(false);
+                        await socket
+                            .CloseOutputAsync(
+                                error != null
+                                    ? WebSocketCloseStatus.InternalServerError
+                                    : WebSocketCloseStatus.NormalClosure,
+                                "",
+                                _stopCts.Token
+                            )
+                            .ConfigureAwait(false);
                     }
                     else
                     {
                         // WebSocket in the browser doesn't have an equivalent to CloseOutputAsync, it just calls CloseAsync and logs a warning
                         // So let's just call CloseAsync to avoid the warning
-                        await socket.CloseAsync(error != null ? WebSocketCloseStatus.InternalServerError : WebSocketCloseStatus.NormalClosure, "", _stopCts.Token).ConfigureAwait(false);
+                        await socket
+                            .CloseAsync(
+                                error != null
+                                    ? WebSocketCloseStatus.InternalServerError
+                                    : WebSocketCloseStatus.NormalClosure,
+                                "",
+                                _stopCts.Token
+                            )
+                            .ConfigureAwait(false);
                     }
                 }
                 catch (Exception ex)
@@ -632,9 +728,11 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
     private static bool WebSocketCanSend(WebSocket ws)
     {
-        return !(ws.State == WebSocketState.Aborted ||
-               ws.State == WebSocketState.Closed ||
-               ws.State == WebSocketState.CloseSent);
+        return !(
+            ws.State == WebSocketState.Aborted
+            || ws.State == WebSocketState.Closed
+            || ws.State == WebSocketState.CloseSent
+        );
     }
 
     private static Uri ResolveWebSocketsUrl(Uri url)

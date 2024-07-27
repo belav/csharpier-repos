@@ -13,7 +13,10 @@ namespace System.Web.Razor.Generator
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
             Name = name;
             Value = value ?? String.Empty; // Coerce to empty string if it was null.
@@ -29,7 +32,8 @@ namespace System.Web.Razor.Generator
             var attributeDeclaration = new CodeAttributeDeclaration(
                 attributeType,
                 new CodeAttributeArgument(new CodePrimitiveExpression(Name)),
-                new CodeAttributeArgument(new CodePrimitiveExpression(Value)));
+                new CodeAttributeArgument(new CodePrimitiveExpression(Value))
+            );
             context.GeneratedClass.CustomAttributes.Add(attributeDeclaration);
         }
 
@@ -40,16 +44,16 @@ namespace System.Web.Razor.Generator
 
         public override bool Equals(object obj)
         {
-            RazorDirectiveAttributeCodeGenerator other = obj as RazorDirectiveAttributeCodeGenerator;
-            return other != null &&
-                   Name.Equals(other.Name, StringComparison.OrdinalIgnoreCase) &&
-                   Value.Equals(other.Value, StringComparison.OrdinalIgnoreCase);
+            RazorDirectiveAttributeCodeGenerator other =
+                obj as RazorDirectiveAttributeCodeGenerator;
+            return other != null
+                && Name.Equals(other.Name, StringComparison.OrdinalIgnoreCase)
+                && Value.Equals(other.Value, StringComparison.OrdinalIgnoreCase);
         }
 
         public override int GetHashCode()
         {
-            return Tuple.Create(Name.ToUpperInvariant(), Value.ToUpperInvariant())
-                .GetHashCode();
+            return Tuple.Create(Name.ToUpperInvariant(), Value.ToUpperInvariant()).GetHashCode();
         }
     }
 }

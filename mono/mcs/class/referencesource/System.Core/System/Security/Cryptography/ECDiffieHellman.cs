@@ -1,23 +1,27 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System;
 using System.Runtime.Serialization;
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
     /// <summary>
     ///     Abstract base class for implementations of elliptic curve Diffie-Hellman to derive from
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public abstract class ECDiffieHellman : AsymmetricAlgorithm {
-        public override string KeyExchangeAlgorithm {
+    public abstract class ECDiffieHellman : AsymmetricAlgorithm
+    {
+        public override string KeyExchangeAlgorithm
+        {
             get { return "ECDiffieHellman"; }
         }
 
-        public override string SignatureAlgorithm {
+        public override string SignatureAlgorithm
+        {
             get { return null; }
         }
 
@@ -25,16 +29,19 @@ namespace System.Security.Cryptography {
         // Creation factory methods
         //
 
-        public static new ECDiffieHellman Create() {
+        public static new ECDiffieHellman Create()
+        {
 #if MONO
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
 #else
             return Create(typeof(ECDiffieHellmanCng).FullName);
 #endif
         }
 
-        public static new ECDiffieHellman Create(string algorithm) {
-            if (algorithm == null) {
+        public static new ECDiffieHellman Create(string algorithm)
+        {
+            if (algorithm == null)
+            {
                 throw new ArgumentNullException("algorithm");
             }
 
@@ -51,11 +58,14 @@ namespace System.Security.Cryptography {
         {
             ECDiffieHellman ecdh = Create();
 
-            if (ecdh != null) {
-                try {
+            if (ecdh != null)
+            {
+                try
+                {
                     ecdh.GenerateKey(curve);
                 }
-                catch {
+                catch
+                {
                     ecdh.Dispose();
                     throw;
                 }
@@ -74,11 +84,14 @@ namespace System.Security.Cryptography {
         {
             ECDiffieHellman ecdh = Create();
 
-            if (ecdh != null) {
-                try {
+            if (ecdh != null)
+            {
+                try
+                {
                     ecdh.ImportParameters(parameters);
                 }
-                catch {
+                catch
+                {
                     ecdh.Dispose();
                     throw;
                 }
@@ -106,7 +119,10 @@ namespace System.Security.Cryptography {
         /// <param name="hashAlgorithm">The identifier for the hash algorithm to use.</param>
         /// <returns>A hashed output suitable for key material</returns>
         /// <exception cref="ArgumentException"><paramref name="otherPartyPublicKey"/> is over a different curve than this key</exception>
-        public byte[] DeriveKeyFromHash(ECDiffieHellmanPublicKey otherPartyPublicKey, HashAlgorithmName hashAlgorithm)
+        public byte[] DeriveKeyFromHash(
+            ECDiffieHellmanPublicKey otherPartyPublicKey,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             return DeriveKeyFromHash(otherPartyPublicKey, hashAlgorithm, null, null);
         }
@@ -125,7 +141,8 @@ namespace System.Security.Cryptography {
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm,
             byte[] secretPrepend,
-            byte[] secretAppend)
+            byte[] secretAppend
+        )
         {
             throw DerivedClassMustOverride();
         }
@@ -142,7 +159,8 @@ namespace System.Security.Cryptography {
         public byte[] DeriveKeyFromHmac(
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm,
-            byte[] hmacKey)
+            byte[] hmacKey
+        )
         {
             return DeriveKeyFromHmac(otherPartyPublicKey, hashAlgorithm, hmacKey, null, null);
         }
@@ -163,7 +181,8 @@ namespace System.Security.Cryptography {
             HashAlgorithmName hashAlgorithm,
             byte[] hmacKey,
             byte[] secretPrepend,
-            byte[] secretAppend)
+            byte[] secretAppend
+        )
         {
             throw DerivedClassMustOverride();
         }
@@ -179,7 +198,11 @@ namespace System.Security.Cryptography {
         /// <exception cref="ArgumentNullException"><paramref name="prfLabel"/> is null</exception>
         /// <exception cref="ArgumentNullException"><paramref name="prfSeed"/> is null</exception>
         /// <exception cref="CryptographicException"><paramref name="prfSeed"/> is not exactly 64 bytes in length</exception>
-        public virtual byte[] DeriveKeyTls(ECDiffieHellmanPublicKey otherPartyPublicKey, byte[] prfLabel, byte[] prfSeed)
+        public virtual byte[] DeriveKeyTls(
+            ECDiffieHellmanPublicKey otherPartyPublicKey,
+            byte[] prfLabel,
+            byte[] prfSeed
+        )
         {
             throw DerivedClassMustOverride();
         }
@@ -229,12 +252,18 @@ namespace System.Security.Cryptography {
             throw new NotSupportedException(SR.GetString(SR.NotSupported_SubclassOverride));
         }
 
-#if MONO 
-        public virtual byte[] ExportECPrivateKey () => throw new PlatformNotSupportedException ();
+#if MONO
+        public virtual byte[] ExportECPrivateKey() => throw new PlatformNotSupportedException();
 
-        public virtual bool TryExportECPrivateKey (System.Span<byte> destination, out int bytesWritten) => throw new PlatformNotSupportedException ();
+        public virtual bool TryExportECPrivateKey(
+            System.Span<byte> destination,
+            out int bytesWritten
+        ) => throw new PlatformNotSupportedException();
 
-        public virtual void ImportECPrivateKey (System.ReadOnlySpan<byte> source, out int bytesRead) => throw new PlatformNotSupportedException ();
+        public virtual void ImportECPrivateKey(
+            System.ReadOnlySpan<byte> source,
+            out int bytesRead
+        ) => throw new PlatformNotSupportedException();
 #endif
     }
 }

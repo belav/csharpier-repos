@@ -10,17 +10,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Metadata.Edm;
 using System.Text;
 using System.Xml;
-using System.Data.Metadata.Edm;
 
-namespace System.Data.Mapping {
+namespace System.Data.Mapping
+{
     /// <summary>
     /// Mapping metadata for all types of property mappings.
     /// </summary>
     /// <example>
     /// For Example if conceptually you could represent the CS MSL file as following
-    /// --Mapping 
+    /// --Mapping
     ///   --EntityContainerMapping ( CNorthwind-->SNorthwind )
     ///     --EntitySetMapping
     ///       --EntityTypeMapping
@@ -36,7 +37,7 @@ namespace System.Data.Mapping {
     ///             --ScalarPropertyMap
     ///             --ScalarProperyMap
     ///           --ScalarPropertyMap
-    ///     --AssociationSetMapping 
+    ///     --AssociationSetMapping
     ///       --AssociationTypeMapping
     ///         --MappingFragment
     ///           --EndPropertyMap
@@ -44,17 +45,19 @@ namespace System.Data.Mapping {
     ///             --ScalarProperyMap
     ///           --EndPropertyMap
     ///             --ScalarPropertyMap
-    /// This class represents the metadata for all property map elements in the 
+    /// This class represents the metadata for all property map elements in the
     /// above example. This includes the scalar property maps, complex property maps
     /// and end property maps.
     /// </example>
-    internal abstract class StoragePropertyMapping {
+    internal abstract class StoragePropertyMapping
+    {
         #region Constructors
         /// <summary>
         /// Construct a new EdmProperty mapping object
         /// </summary>
         /// <param name="cdmMember">The PropertyMetadata object that represents the member for which mapping is being specified</param>
-        internal StoragePropertyMapping(EdmProperty cdmMember) {
+        internal StoragePropertyMapping(EdmProperty cdmMember)
+        {
             this.m_cdmMember = cdmMember;
         }
         #endregion
@@ -72,9 +75,7 @@ namespace System.Data.Mapping {
         /// </summary>
         internal virtual EdmProperty EdmProperty
         {
-            get {
-                return this.m_cdmMember;
-            }
+            get { return this.m_cdmMember; }
         }
         #endregion
 
@@ -84,8 +85,7 @@ namespace System.Data.Mapping {
         /// Will be removed shortly.
         /// </summary>
         /// <param name="index"></param>
-        internal virtual void Print(int index) {
-        }
+        internal virtual void Print(int index) { }
         #endregion
     }
 }

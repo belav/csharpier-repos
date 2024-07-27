@@ -32,8 +32,14 @@ namespace System.Net.Http.Json
             this HttpClient client,
             [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
             JsonSerializerOptions? options,
-            CancellationToken cancellationToken = default) =>
-            GetFromJsonAsAsyncEnumerable<TValue>(client, CreateUri(requestUri), options, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) =>
+            GetFromJsonAsAsyncEnumerable<TValue>(
+                client,
+                CreateUri(requestUri),
+                options,
+                cancellationToken
+            );
 
         /// <summary>
         /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the value that results
@@ -52,8 +58,8 @@ namespace System.Net.Http.Json
             this HttpClient client,
             Uri? requestUri,
             JsonSerializerOptions? options,
-            CancellationToken cancellationToken = default) =>
-            FromJsonStreamAsyncCore<TValue>(client, requestUri, options, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) => FromJsonStreamAsyncCore<TValue>(client, requestUri, options, cancellationToken);
 
         /// <summary>
         /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the value that results
@@ -70,8 +76,14 @@ namespace System.Net.Http.Json
             this HttpClient client,
             [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
             JsonTypeInfo<TValue> jsonTypeInfo,
-            CancellationToken cancellationToken = default) =>
-            GetFromJsonAsAsyncEnumerable(client, CreateUri(requestUri), jsonTypeInfo, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) =>
+            GetFromJsonAsAsyncEnumerable(
+                client,
+                CreateUri(requestUri),
+                jsonTypeInfo,
+                cancellationToken
+            );
 
         /// <summary>
         /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the value that results
@@ -88,8 +100,8 @@ namespace System.Net.Http.Json
             this HttpClient client,
             Uri? requestUri,
             JsonTypeInfo<TValue> jsonTypeInfo,
-            CancellationToken cancellationToken = default) =>
-            FromJsonStreamAsyncCore(client, requestUri, jsonTypeInfo, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) => FromJsonStreamAsyncCore(client, requestUri, jsonTypeInfo, cancellationToken);
 
         /// <summary>
         /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the value that results
@@ -106,8 +118,14 @@ namespace System.Net.Http.Json
         public static IAsyncEnumerable<TValue?> GetFromJsonAsAsyncEnumerable<TValue>(
             this HttpClient client,
             [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
-            CancellationToken cancellationToken = default) =>
-            GetFromJsonAsAsyncEnumerable<TValue>(client, requestUri, options: null, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) =>
+            GetFromJsonAsAsyncEnumerable<TValue>(
+                client,
+                requestUri,
+                options: null,
+                cancellationToken
+            );
 
         /// <summary>
         /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the value that results
@@ -124,8 +142,14 @@ namespace System.Net.Http.Json
         public static IAsyncEnumerable<TValue?> GetFromJsonAsAsyncEnumerable<TValue>(
             this HttpClient client,
             Uri? requestUri,
-            CancellationToken cancellationToken = default) =>
-            GetFromJsonAsAsyncEnumerable<TValue>(client, requestUri, options: null, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) =>
+            GetFromJsonAsAsyncEnumerable<TValue>(
+                client,
+                requestUri,
+                options: null,
+                cancellationToken
+            );
 
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
@@ -133,9 +157,11 @@ namespace System.Net.Http.Json
             HttpClient client,
             Uri? requestUri,
             JsonSerializerOptions? options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var jsonTypeInfo = (JsonTypeInfo<TValue>)JsonHelpers.GetJsonTypeInfo(typeof(TValue), options);
+            var jsonTypeInfo =
+                (JsonTypeInfo<TValue>)JsonHelpers.GetJsonTypeInfo(typeof(TValue), options);
 
             return FromJsonStreamAsyncCore(client, requestUri, jsonTypeInfo, cancellationToken);
         }
@@ -144,7 +170,8 @@ namespace System.Net.Http.Json
             HttpClient client,
             Uri? requestUri,
             JsonTypeInfo<TValue> jsonTypeInfo,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (client is null)
             {
@@ -157,17 +184,35 @@ namespace System.Net.Http.Json
                 HttpClient client,
                 Uri? requestUri,
                 JsonTypeInfo<TValue> jsonTypeInfo,
-                [EnumeratorCancellation] CancellationToken cancellationToken)
+                [EnumeratorCancellation] CancellationToken cancellationToken
+            )
             {
-                using HttpResponseMessage response = await client.GetAsync(requestUri, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+                using HttpResponseMessage response = await client
+                    .GetAsync(
+                        requestUri,
+                        HttpCompletionOption.ResponseHeadersRead,
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
-                using Stream readStream = await GetHttpResponseStreamAsync(client, response, false, cancellationToken)
+                using Stream readStream = await GetHttpResponseStreamAsync(
+                        client,
+                        response,
+                        false,
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
 
-                await foreach (TValue? value in JsonSerializer.DeserializeAsyncEnumerable<TValue>(
-                    readStream, jsonTypeInfo, cancellationToken).ConfigureAwait(false))
+                await foreach (
+                    TValue? value in JsonSerializer
+                        .DeserializeAsyncEnumerable<TValue>(
+                            readStream,
+                            jsonTypeInfo,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                )
                 {
                     yield return value;
                 }

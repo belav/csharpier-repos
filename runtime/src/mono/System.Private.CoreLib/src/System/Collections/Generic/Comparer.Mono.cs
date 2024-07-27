@@ -30,17 +30,26 @@ namespace System.Collections.Generic
             RuntimeType t = (RuntimeType)typeof(T);
 
             if (typeof(IComparable<T>).IsAssignableFrom(t))
-                return (Comparer<T>)RuntimeType.CreateInstanceForAnotherGenericParameter(typeof(GenericComparer<>), t);
+                return (Comparer<T>)
+                    RuntimeType.CreateInstanceForAnotherGenericParameter(
+                        typeof(GenericComparer<>),
+                        t
+                    );
 
             // If T is a Nullable<U> return a NullableComparer<U>
             if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 RuntimeType u = (RuntimeType)t.GetGenericArguments()[0];
-                return (Comparer<T>)RuntimeType.CreateInstanceForAnotherGenericParameter(typeof(NullableComparer<>), u);
+                return (Comparer<T>)
+                    RuntimeType.CreateInstanceForAnotherGenericParameter(
+                        typeof(NullableComparer<>),
+                        u
+                    );
             }
 
             if (t.IsEnum)
-                return (Comparer<T>)RuntimeType.CreateInstanceForAnotherGenericParameter(typeof(EnumComparer<>), t);
+                return (Comparer<T>)
+                    RuntimeType.CreateInstanceForAnotherGenericParameter(typeof(EnumComparer<>), t);
 
             // Otherwise return an ObjectComparer<T>
             return new ObjectComparer<T>();

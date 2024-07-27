@@ -16,10 +16,14 @@ namespace Microsoft.CodeAnalysis.Organizing
     {
         /// <summary>
         /// Organize the whole document.
-        /// 
+        ///
         /// Optionally you can provide your own organizers. otherwise, default will be used.
         /// </summary>
-        public static Task<Document> OrganizeAsync(Document document, IEnumerable<ISyntaxOrganizer> organizers = null, CancellationToken cancellationToken = default)
+        public static Task<Document> OrganizeAsync(
+            Document document,
+            IEnumerable<ISyntaxOrganizer> organizers = null,
+            CancellationToken cancellationToken = default
+        )
         {
             var service = document.GetLanguageService<IOrganizingService>();
             return service.OrganizeAsync(document, organizers, cancellationToken);

@@ -9,9 +9,14 @@ namespace System.Buffers
     {
         private static readonly int SystemPageSize = Environment.SystemPageSize;
 
-        private static WindowsImplementation<T> AllocateWithoutDataPopulationWindows<T>(int elementCount, PoisonPagePlacement placement) where T : unmanaged
+        private static WindowsImplementation<T> AllocateWithoutDataPopulationWindows<T>(
+            int elementCount,
+            PoisonPagePlacement placement
+        )
+            where T : unmanaged
         {
-            long cb, totalBytesToAllocate;
+            long cb,
+                totalBytesToAllocate;
             checked
             {
                 cb = elementCount * sizeof(T);
@@ -35,9 +40,12 @@ namespace System.Buffers
 
             VirtualAllocHandle handle = UnsafeNativeMethods.VirtualAlloc(
                 lpAddress: IntPtr.Zero,
-                dwSize: (IntPtr)totalBytesToAllocate /* cast throws OverflowException if out of range */,
-                flAllocationType: VirtualAllocAllocationType.MEM_RESERVE | VirtualAllocAllocationType.MEM_COMMIT,
-                flProtect: VirtualAllocProtection.PAGE_NOACCESS);
+                dwSize: (IntPtr)totalBytesToAllocate /* cast throws OverflowException if out of range */
+                ,
+                flAllocationType: VirtualAllocAllocationType.MEM_RESERVE
+                    | VirtualAllocAllocationType.MEM_COMMIT,
+                flProtect: VirtualAllocProtection.PAGE_NOACCESS
+            );
 
             if (handle == null || handle.IsInvalid)
             {
@@ -57,21 +65,30 @@ namespace System.Buffers
                 handle: handle,
                 byteOffsetIntoHandle: (placement == PoisonPagePlacement.Before)
                     ? SystemPageSize /* just after leading poison page */
-                    : checked((int)(totalBytesToAllocate - SystemPageSize - cb)) /* just before trailing poison page */,
-                elementCount: elementCount)
+                    : checked(
+                        (int)(totalBytesToAllocate - SystemPageSize - cb)
+                    ) /* just before trailing poison page */
+                ,
+                elementCount: elementCount
+            )
             {
-                Protection = VirtualAllocProtection.PAGE_READWRITE
+                Protection = VirtualAllocProtection.PAGE_READWRITE,
             };
         }
 
-        private sealed class WindowsImplementation<T> : BoundedMemory<T> where T : unmanaged
+        private sealed class WindowsImplementation<T> : BoundedMemory<T>
+            where T : unmanaged
         {
             private readonly VirtualAllocHandle _handle;
             private readonly int _byteOffsetIntoHandle;
             private readonly int _elementCount;
             private readonly BoundedMemoryManager _memoryManager;
 
-            internal WindowsImplementation(VirtualAllocHandle handle, int byteOffsetIntoHandle, int elementCount)
+            internal WindowsImplementation(
+                VirtualAllocHandle handle,
+                int byteOffsetIntoHandle,
+                int elementCount
+            )
             {
                 _handle = handle;
                 _byteOffsetIntoHandle = byteOffsetIntoHandle;
@@ -79,7 +96,8 @@ namespace System.Buffers
                 _memoryManager = new BoundedMemoryManager(this);
             }
 
-            public override bool IsReadonly => (Protection != VirtualAllocProtection.PAGE_READWRITE);
+            public override bool IsReadonly =>
+                (Protection != VirtualAllocProtection.PAGE_READWRITE);
 
             public override int Length => _elementCount;
 
@@ -91,13 +109,18 @@ namespace System.Buffers
                     try
                     {
                         _handle.DangerousAddRef(ref refAdded);
-                        if (UnsafeNativeMethods.VirtualQuery(
-                            lpAddress: _handle.DangerousGetHandle() + _byteOffsetIntoHandle,
-                            lpBuffer: out MEMORY_BASIC_INFORMATION memoryInfo,
-                            dwLength: (IntPtr)sizeof(MEMORY_BASIC_INFORMATION)) == IntPtr.Zero)
+                        if (
+                            UnsafeNativeMethods.VirtualQuery(
+                                lpAddress: _handle.DangerousGetHandle() + _byteOffsetIntoHandle,
+                                lpBuffer: out MEMORY_BASIC_INFORMATION memoryInfo,
+                                dwLength: (IntPtr)sizeof(MEMORY_BASIC_INFORMATION)
+                            ) == IntPtr.Zero
+                        )
                         {
                             Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
-                            throw new InvalidOperationException("VirtualQuery failed unexpectedly.");
+                            throw new InvalidOperationException(
+                                "VirtualQuery failed unexpectedly."
+                            );
                         }
                         return memoryInfo.Protect;
                     }
@@ -117,14 +140,19 @@ namespace System.Buffers
                         try
                         {
                             _handle.DangerousAddRef(ref refAdded);
-                            if (!UnsafeNativeMethods.VirtualProtect(
-                                lpAddress: _handle.DangerousGetHandle() + _byteOffsetIntoHandle,
-                                dwSize: (IntPtr)(&((T*)null)[_elementCount]),
-                                flNewProtect: value,
-                                lpflOldProtect: out _))
+                            if (
+                                !UnsafeNativeMethods.VirtualProtect(
+                                    lpAddress: _handle.DangerousGetHandle() + _byteOffsetIntoHandle,
+                                    dwSize: (IntPtr)(&((T*)null)[_elementCount]),
+                                    flNewProtect: value,
+                                    lpflOldProtect: out _
+                                )
+                            )
                             {
                                 Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
-                                throw new InvalidOperationException("VirtualProtect failed unexpectedly.");
+                                throw new InvalidOperationException(
+                                    "VirtualProtect failed unexpectedly."
+                                );
                             }
                         }
                         finally
@@ -148,7 +176,10 @@ namespace System.Buffers
                     try
                     {
                         _handle.DangerousAddRef(ref refAdded);
-                        return new Span<T>((void*)(_handle.DangerousGetHandle() + _byteOffsetIntoHandle), _elementCount);
+                        return new Span<T>(
+                            (void*)(_handle.DangerousGetHandle() + _byteOffsetIntoHandle),
+                            _elementCount
+                        );
                     }
                     finally
                     {
@@ -204,7 +235,10 @@ namespace System.Buffers
                     try
                     {
                         _impl._handle.DangerousAddRef(ref refAdded);
-                        return new MemoryHandle((T*)(_impl._handle.DangerousGetHandle() + _impl._byteOffsetIntoHandle) + elementIndex);
+                        return new MemoryHandle(
+                            (T*)(_impl._handle.DangerousGetHandle() + _impl._byteOffsetIntoHandle)
+                                + elementIndex
+                        );
                     }
                     finally
                     {
@@ -275,9 +309,7 @@ namespace System.Buffers
         {
             // Called by P/Invoke when returning SafeHandles
             public VirtualAllocHandle()
-                : base(IntPtr.Zero, ownsHandle: true)
-            {
-            }
+                : base(IntPtr.Zero, ownsHandle: true) { }
 
             // Do not provide a finalizer - SafeHandle's critical finalizer will
             // call ReleaseHandle for you.
@@ -285,7 +317,11 @@ namespace System.Buffers
             public override bool IsInvalid => (handle == IntPtr.Zero);
 
             protected override bool ReleaseHandle() =>
-                UnsafeNativeMethods.VirtualFree(handle, IntPtr.Zero, VirtualAllocAllocationType.MEM_RELEASE);
+                UnsafeNativeMethods.VirtualFree(
+                    handle,
+                    IntPtr.Zero,
+                    VirtualAllocAllocationType.MEM_RELEASE
+                );
         }
 
         private static partial class UnsafeNativeMethods
@@ -298,7 +334,8 @@ namespace System.Buffers
                 IntPtr lpAddress,
                 IntPtr dwSize,
                 VirtualAllocAllocationType flAllocationType,
-                VirtualAllocProtection flProtect);
+                VirtualAllocProtection flProtect
+            );
 
             // https://msdn.microsoft.com/en-us/library/windows/desktop/aa366892(v=vs.85).aspx
             [LibraryImport(KERNEL32_LIB, SetLastError = true)]
@@ -306,7 +343,8 @@ namespace System.Buffers
             public static partial bool VirtualFree(
                 IntPtr lpAddress,
                 IntPtr dwSize,
-                VirtualAllocAllocationType dwFreeType);
+                VirtualAllocAllocationType dwFreeType
+            );
 
             // https://msdn.microsoft.com/en-us/library/windows/desktop/aa366898(v=vs.85).aspx
             [LibraryImport(KERNEL32_LIB, SetLastError = true)]
@@ -315,14 +353,16 @@ namespace System.Buffers
                 IntPtr lpAddress,
                 IntPtr dwSize,
                 VirtualAllocProtection flNewProtect,
-                out VirtualAllocProtection lpflOldProtect);
+                out VirtualAllocProtection lpflOldProtect
+            );
 
             // https://msdn.microsoft.com/en-us/library/windows/desktop/aa366902(v=vs.85).aspx
             [LibraryImport(KERNEL32_LIB, SetLastError = true)]
             public static partial IntPtr VirtualQuery(
                 IntPtr lpAddress,
                 out MEMORY_BASIC_INFORMATION lpBuffer,
-                IntPtr dwLength);
+                IntPtr dwLength
+            );
         }
     }
 }

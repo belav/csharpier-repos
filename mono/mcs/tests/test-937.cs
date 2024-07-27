@@ -4,12 +4,10 @@ using System;
 
 class TypeForwarderOfSystemObject
 {
-	void TestAttributeReadDoesNotCrash ()
-	{
-		System.Runtime.InteropServices.Marshal.ReadByte (IntPtr.Zero, 0);		
-	}
+    void TestAttributeReadDoesNotCrash()
+    {
+        System.Runtime.InteropServices.Marshal.ReadByte(IntPtr.Zero, 0);
+    }
 
-	static void Main ()
-	{
-	}
+    static void Main() { }
 }

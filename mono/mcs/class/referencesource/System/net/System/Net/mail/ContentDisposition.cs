@@ -8,12 +8,12 @@ namespace System.Net.Mime
 {
     using System;
     using System.Collections;
-    using System.Collections.Specialized;
-    using System.IO;
-    using System.Text;
-    using System.Globalization;
-    using System.Net.Mail;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Globalization;
+    using System.IO;
+    using System.Net.Mail;
+    using System.Text;
 
     public class ContentDisposition
     {
@@ -29,33 +29,44 @@ namespace System.Net.Mime
         const string fileName = "filename";
 
         private static readonly TrackingValidationObjectDictionary.ValidateAndParseValue dateParser =
-                new TrackingValidationObjectDictionary.ValidateAndParseValue
-                ((object value) =>
+            new TrackingValidationObjectDictionary.ValidateAndParseValue(
+                (object value) =>
                 {
                     // this will throw a FormatException if the value supplied is not a valid SmtpDateTime
                     SmtpDateTime date = new SmtpDateTime(value.ToString());
                     return date;
-                });
+                }
+            );
 
         private static readonly TrackingValidationObjectDictionary.ValidateAndParseValue longParser =
-                new TrackingValidationObjectDictionary.ValidateAndParseValue
-                ((object value) =>
+            new TrackingValidationObjectDictionary.ValidateAndParseValue(
+                (object value) =>
                 {
                     long longValue;
-                    if (!long.TryParse(value.ToString(),
-                        NumberStyles.None, CultureInfo.InvariantCulture, out longValue))
+                    if (
+                        !long.TryParse(
+                            value.ToString(),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out longValue
+                        )
+                    )
                     {
                         throw new FormatException(SR.GetString(SR.ContentDispositionInvalid));
                     }
                     return longValue;
-                });
+                }
+            );
 
-        private static readonly IDictionary<string, TrackingValidationObjectDictionary.ValidateAndParseValue>
-            validators;
+        private static readonly IDictionary<
+            string,
+            TrackingValidationObjectDictionary.ValidateAndParseValue
+        > validators;
 
         static ContentDisposition()
         {
-            validators = new Dictionary<string, TrackingValidationObjectDictionary.ValidateAndParseValue>();
+            validators =
+                new Dictionary<string, TrackingValidationObjectDictionary.ValidateAndParseValue>();
 
             validators.Add(creationDate, dateParser);
             validators.Add(modificationDate, dateParser);
@@ -87,7 +98,8 @@ namespace System.Net.Mime
         internal DateTime GetDateParameter(string parameterName)
         {
             SmtpDateTime dateValue =
-                ((TrackingValidationObjectDictionary)Parameters).InternalGet(parameterName) as SmtpDateTime;
+                ((TrackingValidationObjectDictionary)Parameters).InternalGet(parameterName)
+                as SmtpDateTime;
             if (dateValue == null)
             {
                 return DateTime.MinValue;
@@ -100,10 +112,7 @@ namespace System.Net.Mime
         /// </summary>
         public string DispositionType
         {
-            get
-            {
-                return dispositionType;
-            }
+            get { return dispositionType; }
             set
             {
                 if (value == null)
@@ -139,10 +148,7 @@ namespace System.Net.Mime
         /// </summary>
         public string FileName
         {
-            get
-            {
-                return Parameters[fileName];
-            }
+            get { return Parameters[fileName]; }
             set
             {
                 if (String.IsNullOrEmpty(value))
@@ -161,10 +167,7 @@ namespace System.Net.Mime
         /// </summary>
         public DateTime CreationDate
         {
-            get
-            {
-                return GetDateParameter(creationDate);
-            }
+            get { return GetDateParameter(creationDate); }
             set
             {
                 SmtpDateTime date = new SmtpDateTime(value);
@@ -177,23 +180,20 @@ namespace System.Net.Mime
         /// </summary>
         public DateTime ModificationDate
         {
-            get
-            {
-                return GetDateParameter(modificationDate);
-            }
+            get { return GetDateParameter(modificationDate); }
             set
             {
                 SmtpDateTime date = new SmtpDateTime(value);
-                ((TrackingValidationObjectDictionary)Parameters).InternalSet(modificationDate, date);
+                ((TrackingValidationObjectDictionary)Parameters).InternalSet(
+                    modificationDate,
+                    date
+                );
             }
         }
 
         public bool Inline
         {
-            get
-            {
-                return (dispositionType == DispositionTypeNames.Inline);
-            }
+            get { return (dispositionType == DispositionTypeNames.Inline); }
             set
             {
                 isChanged = true;
@@ -213,10 +213,7 @@ namespace System.Net.Mime
         /// </summary>
         public DateTime ReadDate
         {
-            get
-            {
-                return GetDateParameter(readDate);
-            }
+            get { return GetDateParameter(readDate); }
             set
             {
                 SmtpDateTime date = new SmtpDateTime(value);
@@ -231,16 +228,15 @@ namespace System.Net.Mime
         {
             get
             {
-                object sizeValue = ((TrackingValidationObjectDictionary)Parameters).InternalGet(size);
+                object sizeValue = ((TrackingValidationObjectDictionary)Parameters).InternalGet(
+                    size
+                );
                 if (sizeValue == null)
                     return -1;
                 else
                     return (long)sizeValue;
             }
-            set
-            {
-                ((TrackingValidationObjectDictionary)Parameters).InternalSet(size, value);
-            }
+            set { ((TrackingValidationObjectDictionary)Parameters).InternalSet(size, value); }
         }
 
         internal void Set(string contentDisposition, HeaderCollection headers)
@@ -249,7 +245,10 @@ namespace System.Net.Mime
             // via the headers.
             disposition = contentDisposition;
             ParseValue();
-            headers.InternalSet(MailHeaderInfo.GetString(MailHeaderID.ContentDisposition), ToString());
+            headers.InternalSet(
+                MailHeaderInfo.GetString(MailHeaderID.ContentDisposition),
+                ToString()
+            );
             isPersisted = true;
         }
 
@@ -257,17 +256,17 @@ namespace System.Net.Mime
         {
             if (IsChanged || !isPersisted || forcePersist)
             {
-                headers.InternalSet(MailHeaderInfo.GetString(MailHeaderID.ContentDisposition), ToString());
+                headers.InternalSet(
+                    MailHeaderInfo.GetString(MailHeaderID.ContentDisposition),
+                    ToString()
+                );
                 isPersisted = true;
             }
         }
 
         internal bool IsChanged
         {
-            get
-            {
-                return (isChanged || parameters != null && parameters.IsChanged);
-            }
+            get { return (isChanged || parameters != null && parameters.IsChanged); }
         }
 
         public override string ToString()
@@ -304,8 +303,10 @@ namespace System.Net.Mime
             {
                 builder.Append("\"" + value + "\"");
             }
-            else if ((allowUnicode && !MailBnfHelper.HasCROrLF(value)) // Unicode without CL or LF's
-                || MimeBasePart.IsAscii(value, false)) // Ascii
+            else if (
+                (allowUnicode && !MailBnfHelper.HasCROrLF(value)) // Unicode without CL or LF's
+                || MimeBasePart.IsAscii(value, false)
+            ) // Ascii
             {
                 MailBnfHelper.GetTokenOrQuotedString(value, builder, allowUnicode);
             }
@@ -313,8 +314,15 @@ namespace System.Net.Mime
             {
                 // MIME Encoding required
                 encoding = Encoding.GetEncoding(MimeBasePart.defaultCharSet);
-                builder.Append("\"" + MimeBasePart.EncodeHeaderValue(value, encoding,
-                    MimeBasePart.ShouldUseBase64Encoding(encoding)) + "\"");
+                builder.Append(
+                    "\""
+                        + MimeBasePart.EncodeHeaderValue(
+                            value,
+                            encoding,
+                            MimeBasePart.ShouldUseBase64Encoding(encoding)
+                        )
+                        + "\""
+                );
             }
         }
 
@@ -324,7 +332,10 @@ namespace System.Net.Mime
             {
                 return false;
             }
-            return (String.Compare(ToString(), rparam.ToString(), StringComparison.OrdinalIgnoreCase) == 0);
+            return (
+                String.Compare(ToString(), rparam.ToString(), StringComparison.OrdinalIgnoreCase)
+                == 0
+            );
         }
 
         public override int GetHashCode()
@@ -361,13 +372,22 @@ namespace System.Net.Mime
                 {
                     // ensure that the separator charactor is present
                     if (disposition[offset++] != ';')
-                        throw new FormatException(SR.GetString(SR.MailHeaderFieldInvalidCharacter, disposition[offset-1]));
+                        throw new FormatException(
+                            SR.GetString(
+                                SR.MailHeaderFieldInvalidCharacter,
+                                disposition[offset - 1]
+                            )
+                        );
 
                     // skip whitespace and see if there's anything left to parse or if we're done
                     if (!MailBnfHelper.SkipCFWS(disposition, ref offset))
                         break;
 
-                    string paramAttribute = MailBnfHelper.ReadParameterAttribute(disposition, ref offset, null);
+                    string paramAttribute = MailBnfHelper.ReadParameterAttribute(
+                        disposition,
+                        ref offset,
+                        null
+                    );
                     string paramValue;
 
                     // verify the next character after the parameter is correct
@@ -399,7 +419,7 @@ namespace System.Net.Mime
                         throw new FormatException(SR.GetString(SR.ContentDispositionInvalid));
                     }
 
-                    // if validation is needed, the parameters dictionary will have a validator registered  
+                    // if validation is needed, the parameters dictionary will have a validator registered
                     // for the parameter that is being set so no additional formatting checks are needed here
                     Parameters.Add(paramAttribute, paramValue);
                 }

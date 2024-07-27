@@ -11,6 +11,11 @@ public class ConventionalControllerWithMetadata : Controller
     [Metadata("C")]
     public IActionResult GetMetadata()
     {
-        return Ok(HttpContext.GetEndpoint().Metadata.GetOrderedMetadata<MetadataAttribute>().Select(m => m.Value));
+        return Ok(
+            HttpContext
+                .GetEndpoint()
+                .Metadata.GetOrderedMetadata<MetadataAttribute>()
+                .Select(m => m.Value)
+        );
     }
 }

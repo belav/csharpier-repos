@@ -40,7 +40,8 @@ public sealed record DbContextDependencies : IDbContextDependencies
         IStateManager stateManager,
         IExceptionDetector exceptionDetector,
         IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger,
-        IDiagnosticsLogger<DbLoggerCategory.Infrastructure> infrastructureLogger)
+        IDiagnosticsLogger<DbLoggerCategory.Infrastructure> infrastructureLogger
+    )
     {
         ChangeDetector = changeDetector;
         SetSource = setSource;
@@ -50,7 +51,12 @@ public sealed record DbContextDependencies : IDbContextDependencies
         ExceptionDetector = exceptionDetector;
         UpdateLogger = updateLogger;
         InfrastructureLogger = infrastructureLogger;
-        EntityFinderFactory = new EntityFinderFactory(entityFinderSource, stateManager, setSource, currentContext.Context);
+        EntityFinderFactory = new EntityFinderFactory(
+            entityFinderSource,
+            stateManager,
+            setSource,
+            currentContext.Context
+        );
     }
 
     /// <summary>

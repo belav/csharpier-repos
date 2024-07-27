@@ -12,7 +12,10 @@ public class SignInResult
     private static readonly SignInResult _failed = new SignInResult();
     private static readonly SignInResult _lockedOut = new SignInResult { IsLockedOut = true };
     private static readonly SignInResult _notAllowed = new SignInResult { IsNotAllowed = true };
-    private static readonly SignInResult _twoFactorRequired = new SignInResult { RequiresTwoFactor = true };
+    private static readonly SignInResult _twoFactorRequired = new SignInResult
+    {
+        RequiresTwoFactor = true,
+    };
 
     /// <summary>
     /// Returns a flag indication whether the sign-in was successful.
@@ -80,9 +83,10 @@ public class SignInResult
     /// <returns>A string representation of value of the current <see cref="SignInResult"/> object.</returns>
     public override string ToString()
     {
-        return IsLockedOut ? "LockedOut" :
-               IsNotAllowed ? "NotAllowed" :
-               RequiresTwoFactor ? "RequiresTwoFactor" :
-               Succeeded ? "Succeeded" : "Failed";
+        return IsLockedOut ? "LockedOut"
+            : IsNotAllowed ? "NotAllowed"
+            : RequiresTwoFactor ? "RequiresTwoFactor"
+            : Succeeded ? "Succeeded"
+            : "Failed";
     }
 }

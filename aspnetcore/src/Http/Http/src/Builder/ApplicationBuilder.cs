@@ -28,9 +28,8 @@ public partial class ApplicationBuilder : IApplicationBuilder
     /// Initializes a new instance of <see cref="ApplicationBuilder"/>.
     /// </summary>
     /// <param name="serviceProvider">The <see cref="IServiceProvider"/> for application services.</param>
-    public ApplicationBuilder(IServiceProvider serviceProvider) : this(serviceProvider, new FeatureCollection())
-    {
-    }
+    public ApplicationBuilder(IServiceProvider serviceProvider)
+        : this(serviceProvider, new FeatureCollection()) { }
 
     private int MiddlewareCount => _components.Count;
 
@@ -47,7 +46,8 @@ public partial class ApplicationBuilder : IApplicationBuilder
         SetProperty(ServerFeaturesKey, server);
 
         // IDebugger service can optionally be added by tests to simulate the debugger being attached.
-        _debugger = (IDebugger?)serviceProvider?.GetService(typeof(IDebugger)) ?? DebuggerWrapper.Instance;
+        _debugger =
+            (IDebugger?)serviceProvider?.GetService(typeof(IDebugger)) ?? DebuggerWrapper.Instance;
 
         if (_debugger.IsAttached)
         {
@@ -60,7 +60,10 @@ public partial class ApplicationBuilder : IApplicationBuilder
 
     private ApplicationBuilder(ApplicationBuilder builder)
     {
-        Properties = new CopyOnWriteDictionary<string, object?>(builder.Properties, StringComparer.Ordinal);
+        Properties = new CopyOnWriteDictionary<string, object?>(
+            builder.Properties,
+            StringComparer.Ordinal
+        );
         _debugger = builder._debugger;
         if (_debugger.IsAttached)
         {
@@ -73,14 +76,8 @@ public partial class ApplicationBuilder : IApplicationBuilder
     /// </summary>
     public IServiceProvider ApplicationServices
     {
-        get
-        {
-            return GetProperty<IServiceProvider>(ApplicationServicesKey)!;
-        }
-        set
-        {
-            SetProperty<IServiceProvider>(ApplicationServicesKey, value);
-        }
+        get { return GetProperty<IServiceProvider>(ApplicationServicesKey)!; }
+        set { SetProperty<IServiceProvider>(ApplicationServicesKey, value); }
     }
 
     /// <summary>
@@ -91,10 +88,7 @@ public partial class ApplicationBuilder : IApplicationBuilder
     /// </remarks>
     public IFeatureCollection ServerFeatures
     {
-        get
-        {
-            return GetProperty<IFeatureCollection>(ServerFeaturesKey)!;
-        }
+        get { return GetProperty<IFeatureCollection>(ServerFeaturesKey)!; }
     }
 
     /// <summary>
@@ -125,7 +119,9 @@ public partial class ApplicationBuilder : IApplicationBuilder
         return this;
     }
 
-    private static string CreateMiddlewareDescription(Func<RequestDelegate, RequestDelegate> middleware)
+    private static string CreateMiddlewareDescription(
+        Func<RequestDelegate, RequestDelegate> middleware
+    )
     {
         if (middleware.Target != null)
         {
@@ -172,9 +168,9 @@ public partial class ApplicationBuilder : IApplicationBuilder
             if (endpointRequestDelegate != null)
             {
                 var message =
-                    $"The request reached the end of the pipeline without executing the endpoint: '{endpoint!.DisplayName}'. " +
-                    $"Please register the EndpointMiddleware using '{nameof(IApplicationBuilder)}.UseEndpoints(...)' if using " +
-                    $"routing.";
+                    $"The request reached the end of the pipeline without executing the endpoint: '{endpoint!.DisplayName}'. "
+                    + $"Please register the EndpointMiddleware using '{nameof(IApplicationBuilder)}.UseEndpoints(...)' if using "
+                    + $"routing.";
                 throw new InvalidOperationException(message);
             }
 
@@ -211,8 +207,12 @@ public partial class ApplicationBuilder : IApplicationBuilder
         {
             get
             {
-                if (_applicationBuilder.Properties.TryGetValue("__MiddlewareDescriptions", out var value) &&
-                    value is IList<string> descriptions)
+                if (
+                    _applicationBuilder.Properties.TryGetValue(
+                        "__MiddlewareDescriptions",
+                        out var value
+                    ) && value is IList<string> descriptions
+                )
                 {
                     return descriptions;
                 }

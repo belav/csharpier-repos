@@ -28,6 +28,6 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public enum RoleTransferOperation
     {
         First,
-        Second
+        Second,
     }
 }

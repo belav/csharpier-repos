@@ -6,6 +6,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_Args5
 {
     const int Pass = 100;
@@ -14,14 +15,16 @@ public class BringUpTest_Args5
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int Args5(int a, int b, int c, int d, int e)
     {
-        return a+b+c+d+e;
+        return a + b + c + d + e;
     }
 
     [Fact]
     public static int TestEntryPoint()
     {
-        int y = Args5(1,2,3,4,5);
-        if (y == 15) return Pass;
-        else return Fail;
+        int y = Args5(1, 2, 3, 4, 5);
+        if (y == 15)
+            return Pass;
+        else
+            return Fail;
     }
 }

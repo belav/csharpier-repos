@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
 
         public CodeActionPriority CodeActionPriority { get; }
 
-        public UnifiedSuggestedAction(Workspace workspace, CodeAction codeAction, CodeActionPriority codeActionPriority)
+        public UnifiedSuggestedAction(
+            Workspace workspace,
+            CodeAction codeAction,
+            CodeActionPriority codeActionPriority
+        )
         {
             Workspace = workspace;
             OriginalCodeAction = codeAction;

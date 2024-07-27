@@ -7,13 +7,10 @@ using Xunit;
 
 namespace BadBox1
 {
-
-
     public struct BytearrayHolder
     {
         public Byte[] m_value;
     }
-
 
     public class BoxedObjectHolder
     {
@@ -26,7 +23,6 @@ namespace BadBox1
             return;
         }
     }
-
 
     public static class App
     {
@@ -42,7 +38,6 @@ namespace BadBox1
 
             return;
         }
-
 
         [Fact]
         public static int TestEntryPoint()

@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// <param name="appDomainHost">Unit test AppDomain host</param>
         /// <param name="expectedSignatures">Baseline signatures - use the Signature() factory method to create instances of SignatureDescription</param>
         internal static void VerifyMemberSignatures(
-            IRuntimeEnvironment appDomainHost, params SignatureDescription[] expectedSignatures)
+            IRuntimeEnvironment appDomainHost,
+            params SignatureDescription[] expectedSignatures
+        )
         {
             Assert.NotNull(expectedSignatures);
             Assert.NotEmpty(expectedSignatures);
@@ -33,9 +35,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             {
                 var expectedSignature = signature.ExpectedSignature;
 
-                if (!VerifyMemberSignatureHelper(
-                    appDomainHost, signature.FullyQualifiedTypeName, signature.MemberName,
-                    ref expectedSignature, out var actualSignatures))
+                if (
+                    !VerifyMemberSignatureHelper(
+                        appDomainHost,
+                        signature.FullyQualifiedTypeName,
+                        signature.MemberName,
+                        ref expectedSignature,
+                        out var actualSignatures
+                    )
+                )
                 {
                     succeeded = false;
                 }
@@ -72,16 +80,30 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// <param name="actualSignatures">List of found signatures matching member name</param>
         /// <returns>True if a matching member signature was found, false otherwise</returns>
         private static bool VerifyMemberSignatureHelper(
-            IRuntimeEnvironment appDomainHost, string fullyQualifiedTypeName, string memberName,
-            ref string expectedSignature, out List<string> actualSignatures)
+            IRuntimeEnvironment appDomainHost,
+            string fullyQualifiedTypeName,
+            string memberName,
+            ref string expectedSignature,
+            out List<string> actualSignatures
+        )
         {
-            Assert.False(string.IsNullOrWhiteSpace(fullyQualifiedTypeName), "'fullyQualifiedTypeName' can't be null or empty");
-            Assert.False(string.IsNullOrWhiteSpace(memberName), "'memberName' can't be null or empty");
+            Assert.False(
+                string.IsNullOrWhiteSpace(fullyQualifiedTypeName),
+                "'fullyQualifiedTypeName' can't be null or empty"
+            );
+            Assert.False(
+                string.IsNullOrWhiteSpace(memberName),
+                "'memberName' can't be null or empty"
+            );
 
             var retVal = true;
             actualSignatures = new List<string>();
-            var signatures = appDomainHost.GetMemberSignaturesFromMetadata(fullyQualifiedTypeName, memberName);
-            var signatureAssertText = "Signature(\"" + fullyQualifiedTypeName + "\", \"" + memberName + "\", \"{0}\"),";
+            var signatures = appDomainHost.GetMemberSignaturesFromMetadata(
+                fullyQualifiedTypeName,
+                memberName
+            );
+            var signatureAssertText =
+                "Signature(\"" + fullyQualifiedTypeName + "\", \"" + memberName + "\", \"{0}\"),";
 
             if (!string.IsNullOrWhiteSpace(expectedSignature))
             {
@@ -138,7 +160,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// </summary>
         /// <param name="expectedSignatures">List of baseline signature strings</param>
         /// <param name="actualSignatures">List of actually found signature strings</param>
-        private static void TriggerSignatureMismatchFailure(List<string> expectedSignatures, List<string> actualSignatures)
+        private static void TriggerSignatureMismatchFailure(
+            List<string> expectedSignatures,
+            List<string> actualSignatures
+        )
         {
             var expectedText = string.Empty;
             var actualText = string.Empty;
@@ -169,7 +194,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             actualText = actualText.TrimEnd(',');
             var diffText = DiffUtil.DiffReport(expectedText, actualText);
 
-            Assert.True(false, "\n\nExpected:" + expectedText + "\n\nActual:" + actualText + "\n\nDifferences:\n" + diffText);
+            Assert.True(
+                false,
+                "\n\nExpected:"
+                    + expectedText
+                    + "\n\nActual:"
+                    + actualText
+                    + "\n\nDifferences:\n"
+                    + diffText
+            );
         }
     }
 }

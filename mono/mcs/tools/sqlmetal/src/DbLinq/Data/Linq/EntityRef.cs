@@ -4,7 +4,7 @@
 //
 // Author:
 //   Atsushi Enomoto  <atsushi@ximian.com>
-//   Pablo Íñigo Blasco <pibgeus@gmail.com>
+//   Pablo ï¿½ï¿½igo Blasco <pibgeus@gmail.com>
 //
 // Copyright (C) 2008 Novell, Inc.
 //
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,7 +41,8 @@ namespace System.Data.Linq
 namespace DbLinq.Data.Linq
 #endif
 {
-    public struct EntityRef<TEntity> where TEntity : class
+    public struct EntityRef<TEntity>
+        where TEntity : class
     {
         private TEntity entity;
         private bool hasLoadedOrAssignedValue;
@@ -75,18 +76,22 @@ namespace DbLinq.Data.Linq
 
         public TEntity Entity
         {
-            get 
-            { 
-                if (source != null) {
-                    foreach (var s in source) {
+            get
+            {
+                if (source != null)
+                {
+                    foreach (var s in source)
+                    {
                         if (entity != null)
-                            throw new InvalidOperationException ("Sequence contains more than one element");
+                            throw new InvalidOperationException(
+                                "Sequence contains more than one element"
+                            );
                         entity = s;
                         hasLoadedOrAssignedValue = true;
                     }
                     source = null;
                 }
-                return entity; 
+                return entity;
             }
             set
             {
@@ -97,10 +102,7 @@ namespace DbLinq.Data.Linq
 
         public bool HasLoadedOrAssignedValue
         {
-            get
-            {
-                return hasLoadedOrAssignedValue;
-            }
+            get { return hasLoadedOrAssignedValue; }
         }
     }
 }

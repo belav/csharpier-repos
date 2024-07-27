@@ -18,7 +18,8 @@ namespace System.Web.Http.Tracing
         private TraceLevel _traceLevel;
 
         private Lazy<Dictionary<object, object>> _properties = new Lazy<Dictionary<object, object>>(
-            () => new Dictionary<object, object>());
+            () => new Dictionary<object, object>()
+        );
 
         public TraceRecord(HttpRequestMessage request, string category, TraceLevel level)
         {
@@ -44,10 +45,7 @@ namespace System.Web.Http.Tracing
         /// </summary>
         public TraceKind Kind
         {
-            get
-            {
-                return _traceKind;
-            }
+            get { return _traceKind; }
             set
             {
                 TraceKindHelper.Validate(value, "value");
@@ -60,10 +58,7 @@ namespace System.Web.Http.Tracing
         /// </summary>
         public TraceLevel Level
         {
-            get
-            {
-                return _traceLevel;
-            }
+            get { return _traceLevel; }
             set
             {
                 TraceLevelHelper.Validate(value, "value");

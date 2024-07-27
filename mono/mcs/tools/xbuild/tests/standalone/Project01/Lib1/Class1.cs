@@ -1,55 +1,55 @@
 using System;
-using System.Resources;
 using System.Reflection;
+using System.Resources;
 
 namespace Lib1
 {
-	public class Book
-	{
-		string name;
-		//this is here just to create a ref to lib2
-		Lib2.Book b;
+    public class Book
+    {
+        string name;
 
-		public Book ()
-		{
-			name = GetDefaultName ();
-		}
+        //this is here just to create a ref to lib2
+        Lib2.Book b;
 
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
+        public Book()
+        {
+            name = GetDefaultName();
+        }
 
-		static string GetDefaultName ()
-		{
-			return new ResourceManager (
-				"Lib1.Book", Assembly.GetExecutingAssembly ())
-				.GetString ("defaultName");
-		}
-	}
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
-	public class Publisher
-	{
-		string name;
+        static string GetDefaultName()
+        {
+            return new ResourceManager("Lib1.Book", Assembly.GetExecutingAssembly()).GetString(
+                "defaultName"
+            );
+        }
+    }
 
-		public Publisher ()
-		{
-			name = GetDefaultName ();
-		}
+    public class Publisher
+    {
+        string name;
 
-		public string Name
-		{
-			get { return name; }
-			set { name = value; }
-		}
+        public Publisher()
+        {
+            name = GetDefaultName();
+        }
 
-		static string GetDefaultName ()
-		{
-			return new ResourceManager (
-				"Lib1.Publisher", Assembly.GetExecutingAssembly ())
-				.GetString ("defaultName");
-		}
-	}
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
-
+        static string GetDefaultName()
+        {
+            return new ResourceManager("Lib1.Publisher", Assembly.GetExecutingAssembly()).GetString(
+                "defaultName"
+            );
+        }
+    }
 }

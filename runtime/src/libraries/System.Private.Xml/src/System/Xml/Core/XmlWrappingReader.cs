@@ -30,30 +30,99 @@ namespace System.Xml
         //
         // XmlReader implementation
         //
-        public override XmlReaderSettings? Settings { get { return reader.Settings; } }
-        public override XmlNodeType NodeType { get { return reader.NodeType; } }
-        public override string Name { get { return reader.Name; } }
-        public override string LocalName { get { return reader.LocalName; } }
-        public override string NamespaceURI { get { return reader.NamespaceURI; } }
-        public override string Prefix { get { return reader.Prefix; } }
-        public override bool HasValue { get { return reader.HasValue; } }
-        public override string Value { get { return reader.Value; } }
-        public override int Depth { get { return reader.Depth; } }
-        public override string BaseURI { get { return reader.BaseURI; } }
-        public override bool IsEmptyElement { get { return reader.IsEmptyElement; } }
-        public override bool IsDefault { get { return reader.IsDefault; } }
-        public override XmlSpace XmlSpace { get { return reader.XmlSpace; } }
-        public override string XmlLang { get { return reader.XmlLang; } }
-        public override System.Type ValueType { get { return reader.ValueType; } }
-        public override int AttributeCount { get { return reader.AttributeCount; } }
-        public override bool EOF { get { return reader.EOF; } }
-        public override ReadState ReadState { get { return reader.ReadState; } }
-        public override bool HasAttributes { get { return reader.HasAttributes; } }
-        public override XmlNameTable NameTable { get { return reader.NameTable; } }
-        public override bool CanResolveEntity { get { return reader.CanResolveEntity; } }
+        public override XmlReaderSettings? Settings
+        {
+            get { return reader.Settings; }
+        }
+        public override XmlNodeType NodeType
+        {
+            get { return reader.NodeType; }
+        }
+        public override string Name
+        {
+            get { return reader.Name; }
+        }
+        public override string LocalName
+        {
+            get { return reader.LocalName; }
+        }
+        public override string NamespaceURI
+        {
+            get { return reader.NamespaceURI; }
+        }
+        public override string Prefix
+        {
+            get { return reader.Prefix; }
+        }
+        public override bool HasValue
+        {
+            get { return reader.HasValue; }
+        }
+        public override string Value
+        {
+            get { return reader.Value; }
+        }
+        public override int Depth
+        {
+            get { return reader.Depth; }
+        }
+        public override string BaseURI
+        {
+            get { return reader.BaseURI; }
+        }
+        public override bool IsEmptyElement
+        {
+            get { return reader.IsEmptyElement; }
+        }
+        public override bool IsDefault
+        {
+            get { return reader.IsDefault; }
+        }
+        public override XmlSpace XmlSpace
+        {
+            get { return reader.XmlSpace; }
+        }
+        public override string XmlLang
+        {
+            get { return reader.XmlLang; }
+        }
+        public override System.Type ValueType
+        {
+            get { return reader.ValueType; }
+        }
+        public override int AttributeCount
+        {
+            get { return reader.AttributeCount; }
+        }
+        public override bool EOF
+        {
+            get { return reader.EOF; }
+        }
+        public override ReadState ReadState
+        {
+            get { return reader.ReadState; }
+        }
+        public override bool HasAttributes
+        {
+            get { return reader.HasAttributes; }
+        }
+        public override XmlNameTable NameTable
+        {
+            get { return reader.NameTable; }
+        }
+        public override bool CanResolveEntity
+        {
+            get { return reader.CanResolveEntity; }
+        }
 
-        public override IXmlSchemaInfo? SchemaInfo { get { return reader.SchemaInfo; } }
-        public override char QuoteChar { get { return reader.QuoteChar; } }
+        public override IXmlSchemaInfo? SchemaInfo
+        {
+            get { return reader.SchemaInfo; }
+        }
+        public override char QuoteChar
+        {
+            get { return reader.QuoteChar; }
+        }
 
         public override string? GetAttribute(string name)
         {
@@ -140,18 +209,12 @@ namespace System.Xml
 
         public virtual int LineNumber
         {
-            get
-            {
-                return (readerAsIXmlLineInfo == null) ? 0 : readerAsIXmlLineInfo.LineNumber;
-            }
+            get { return (readerAsIXmlLineInfo == null) ? 0 : readerAsIXmlLineInfo.LineNumber; }
         }
 
         public virtual int LinePosition
         {
-            get
-            {
-                return (readerAsIXmlLineInfo == null) ? 0 : readerAsIXmlLineInfo.LinePosition;
-            }
+            get { return (readerAsIXmlLineInfo == null) ? 0 : readerAsIXmlLineInfo.LinePosition; }
         }
 
         //
@@ -159,10 +222,7 @@ namespace System.Xml
         //
         internal override IDtdInfo? DtdInfo
         {
-            get
-            {
-                return reader.DtdInfo;
-            }
+            get { return reader.DtdInfo; }
         }
     }
 }

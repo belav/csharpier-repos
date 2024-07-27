@@ -33,7 +33,11 @@ public class CheckConstraintBuilder : IInfrastructure<IConventionCheckConstraint
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalCheckConstraintBuilder Builder { [DebuggerStepThrough] get; }
+    protected virtual InternalCheckConstraintBuilder Builder
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <inheritdoc />
     IConventionCheckConstraintBuilder IInfrastructure<IConventionCheckConstraintBuilder>.Instance
@@ -45,8 +49,7 @@ public class CheckConstraintBuilder : IInfrastructure<IConventionCheckConstraint
     /// <summary>
     ///     The check constraint being configured.
     /// </summary>
-    public virtual IMutableCheckConstraint Metadata
-        => Builder.Metadata;
+    public virtual IMutableCheckConstraint Metadata => Builder.Metadata;
 
     /// <summary>
     ///     Sets the database name of the check constraint.
@@ -86,8 +89,7 @@ public class CheckConstraintBuilder : IInfrastructure<IConventionCheckConstraint
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -96,8 +98,7 @@ public class CheckConstraintBuilder : IInfrastructure<IConventionCheckConstraint
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -105,8 +106,7 @@ public class CheckConstraintBuilder : IInfrastructure<IConventionCheckConstraint
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

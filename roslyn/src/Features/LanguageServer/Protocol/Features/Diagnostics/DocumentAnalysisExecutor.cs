@@ -34,8 +34,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         private readonly ImmutableArray<DiagnosticAnalyzer> _compilationBasedAnalyzersInAnalysisScope;
 
-        private ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult>? _lazySyntaxDiagnostics;
-        private ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult>? _lazySemanticDiagnostics;
+        private ImmutableDictionary<
+            DiagnosticAnalyzer,
+            DiagnosticAnalysisResult
+        >? _lazySyntaxDiagnostics;
+        private ImmutableDictionary<
+            DiagnosticAnalyzer,
+            DiagnosticAnalysisResult
+        >? _lazySemanticDiagnostics;
 
         public DocumentAnalysisExecutor(
             DocumentAnalysisScope analysisScope,
@@ -43,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             InProcOrRemoteHostAnalyzerRunner diagnosticAnalyzerRunner,
             bool isExplicit,
             bool logPerformanceInfo,
-            Action? onAnalysisException = null)
+            Action? onAnalysisException = null
+        )
         {
             AnalysisScope = analysisScope;
             _compilationWithAnalyzers = compilationWithAnalyzers;
@@ -52,21 +59,33 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _logPerformanceInfo = logPerformanceInfo;
             _onAnalysisException = onAnalysisException;
 
-            var compilationBasedAnalyzers = compilationWithAnalyzers?.Analyzers.ToImmutableHashSet();
-            _compilationBasedAnalyzersInAnalysisScope = compilationBasedAnalyzers != null
-                ? analysisScope.Analyzers.WhereAsArray(compilationBasedAnalyzers.Contains)
-                : ImmutableArray<DiagnosticAnalyzer>.Empty;
+            var compilationBasedAnalyzers =
+                compilationWithAnalyzers?.Analyzers.ToImmutableHashSet();
+            _compilationBasedAnalyzersInAnalysisScope =
+                compilationBasedAnalyzers != null
+                    ? analysisScope.Analyzers.WhereAsArray(compilationBasedAnalyzers.Contains)
+                    : ImmutableArray<DiagnosticAnalyzer>.Empty;
         }
 
         public DocumentAnalysisScope AnalysisScope { get; }
 
-        public DocumentAnalysisExecutor With(DocumentAnalysisScope analysisScope)
-            => new(analysisScope, _compilationWithAnalyzers, _diagnosticAnalyzerRunner, _isExplicit, _logPerformanceInfo, _onAnalysisException);
+        public DocumentAnalysisExecutor With(DocumentAnalysisScope analysisScope) =>
+            new(
+                analysisScope,
+                _compilationWithAnalyzers,
+                _diagnosticAnalyzerRunner,
+                _isExplicit,
+                _logPerformanceInfo,
+                _onAnalysisException
+            );
 
         /// <summary>
         /// Return all local diagnostics (syntax, semantic) that belong to given document for the given analyzer by calculating them.
         /// </summary>
-        public async Task<IEnumerable<DiagnosticData>> ComputeDiagnosticsAsync(DiagnosticAnalyzer analyzer, CancellationToken cancellationToken)
+        public async Task<IEnumerable<DiagnosticData>> ComputeDiagnosticsAsync(
+            DiagnosticAnalyzer analyzer,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(AnalysisScope.Analyzers.Contains(analyzer));
 
@@ -75,14 +94,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var kind = AnalysisScope.Kind;
 
             var document = textDocument as Document;
-            RoslynDebug.Assert(document != null || kind == AnalysisKind.Syntax, "We only support syntactic analysis for non-source documents");
+            RoslynDebug.Assert(
+                document != null || kind == AnalysisKind.Syntax,
+                "We only support syntactic analysis for non-source documents"
+            );
 
-            var loadDiagnostic = await textDocument.State.GetLoadDiagnosticAsync(cancellationToken).ConfigureAwait(false);
+            var loadDiagnostic = await textDocument
+                .State.GetLoadDiagnosticAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             if (analyzer == FileContentLoadAnalyzer.Instance)
             {
                 return loadDiagnostic != null
-                    ? SpecializedCollections.SingletonEnumerable(DiagnosticData.Create(loadDiagnostic, textDocument))
+                    ? SpecializedCollections.SingletonEnumerable(
+                        DiagnosticData.Create(loadDiagnostic, textDocument)
+                    )
                     : SpecializedCollections.EmptyEnumerable<DiagnosticData>();
             }
 
@@ -96,7 +122,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // We will count generator diagnostics as semantic diagnostics; some filtering to either syntax/semantic is necessary or else we'll report diagnostics twice.
                 if (kind == AnalysisKind.Semantic)
                 {
-                    var generatorDiagnostics = await GetSourceGeneratorDiagnosticsAsync(textDocument.Project, cancellationToken).ConfigureAwait(false);
+                    var generatorDiagnostics = await GetSourceGeneratorDiagnosticsAsync(
+                            textDocument.Project,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     return ConvertToLocalDiagnostics(generatorDiagnostics, textDocument, span);
                 }
                 else
@@ -113,7 +143,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 var documentDiagnostics = await ComputeDocumentDiagnosticAnalyzerDiagnosticsAsync(
-                    documentAnalyzer, document, kind, _compilationWithAnalyzers?.Compilation, cancellationToken).ConfigureAwait(false);
+                        documentAnalyzer,
+                        document,
+                        kind,
+                        _compilationWithAnalyzers?.Compilation,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return ConvertToLocalDiagnostics(documentDiagnostics, document, span);
             }
@@ -123,8 +159,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 if (kind == AnalysisKind.Syntax)
                 {
-                    Logger.Log(FunctionId.Diagnostics_SyntaxDiagnostic,
-                        (r, d, a, k) => $"Driver: {r != null}, {d.Id}, {d.Project.Id}, {a}, {k}", _compilationWithAnalyzers, textDocument, analyzer, kind);
+                    Logger.Log(
+                        FunctionId.Diagnostics_SyntaxDiagnostic,
+                        (r, d, a, k) => $"Driver: {r != null}, {d.Id}, {d.Project.Id}, {a}, {k}",
+                        _compilationWithAnalyzers,
+                        textDocument,
+                        analyzer,
+                        kind
+                    );
                 }
 
                 return SpecializedCollections.EmptyEnumerable<DiagnosticData>();
@@ -134,9 +176,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var isCompilerAnalyzer = analyzer.IsCompilerAnalyzer();
             if (kind != AnalysisKind.Syntax && isCompilerAnalyzer)
             {
-                var isEnabled = await textDocument.Project.HasSuccessfullyLoadedAsync(cancellationToken).ConfigureAwait(false);
+                var isEnabled = await textDocument
+                    .Project.HasSuccessfullyLoadedAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
-                Logger.Log(FunctionId.Diagnostics_SemanticDiagnostic, (a, d, e) => $"{a}, ({d.Id}, {d.Project.Id}), Enabled:{e}", analyzer, textDocument, isEnabled);
+                Logger.Log(
+                    FunctionId.Diagnostics_SemanticDiagnostic,
+                    (a, d, e) => $"{a}, ({d.Id}, {d.Project.Id}), Enabled:{e}",
+                    analyzer,
+                    textDocument,
+                    isEnabled
+                );
 
                 if (!isEnabled)
                 {
@@ -152,41 +202,86 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             var diagnostics = kind switch
             {
-                AnalysisKind.Syntax => await GetSyntaxDiagnosticsAsync(analyzer, isCompilerAnalyzer, cancellationToken).ConfigureAwait(false),
-                AnalysisKind.Semantic => await GetSemanticDiagnosticsAsync(analyzer, isCompilerAnalyzer, cancellationToken).ConfigureAwait(false),
+                AnalysisKind.Syntax
+                    => await GetSyntaxDiagnosticsAsync(
+                            analyzer,
+                            isCompilerAnalyzer,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
+                AnalysisKind.Semantic
+                    => await GetSemanticDiagnosticsAsync(
+                            analyzer,
+                            isCompilerAnalyzer,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
                 _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
 
             // Remap diagnostic locations, if required.
-            diagnostics = await RemapDiagnosticLocationsIfRequiredAsync(textDocument, diagnostics, cancellationToken).ConfigureAwait(false);
+            diagnostics = await RemapDiagnosticLocationsIfRequiredAsync(
+                    textDocument,
+                    diagnostics,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (span.HasValue && document != null)
             {
-                var sourceText = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+                var sourceText = await document
+                    .GetValueTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 // TODO: Unclear if using the unmapped span here is correct.  It does feel somewhat appropriate as the
                 // caller should be asking about diagnostics in an actual document, and not where they were remapped to.
-                diagnostics = diagnostics.WhereAsArray(
-                    d => d.DocumentId is null || span.Value.IntersectsWith(d.DataLocation.UnmappedFileSpan.GetClampedTextSpan(sourceText)));
+                diagnostics = diagnostics.WhereAsArray(d =>
+                    d.DocumentId is null
+                    || span.Value.IntersectsWith(
+                        d.DataLocation.UnmappedFileSpan.GetClampedTextSpan(sourceText)
+                    )
+                );
             }
 
 #if DEBUG
-            var diags = await diagnostics.ToDiagnosticsAsync(textDocument.Project, cancellationToken).ConfigureAwait(false);
-            Debug.Assert(diags.Length == CompilationWithAnalyzers.GetEffectiveDiagnostics(diags, _compilationWithAnalyzers.Compilation).Count());
-            Debug.Assert(diagnostics.Length == ConvertToLocalDiagnostics(diags, textDocument, span).Count());
+            var diags = await diagnostics
+                .ToDiagnosticsAsync(textDocument.Project, cancellationToken)
+                .ConfigureAwait(false);
+            Debug.Assert(
+                diags.Length
+                    == CompilationWithAnalyzers
+                        .GetEffectiveDiagnostics(diags, _compilationWithAnalyzers.Compilation)
+                        .Count()
+            );
+            Debug.Assert(
+                diagnostics.Length == ConvertToLocalDiagnostics(diags, textDocument, span).Count()
+            );
 #endif
 
             return diagnostics;
         }
 
-        private async Task<ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult>> GetAnalysisResultAsync(DocumentAnalysisScope analysisScope, CancellationToken cancellationToken)
+        private async Task<
+            ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult>
+        > GetAnalysisResultAsync(
+            DocumentAnalysisScope analysisScope,
+            CancellationToken cancellationToken
+        )
         {
             RoslynDebug.Assert(_compilationWithAnalyzers != null);
 
             try
             {
-                var resultAndTelemetry = await _diagnosticAnalyzerRunner.AnalyzeDocumentAsync(analysisScope, _compilationWithAnalyzers,
-                    _isExplicit, _logPerformanceInfo, getTelemetryInfo: false, cancellationToken).ConfigureAwait(false);
+                var resultAndTelemetry = await _diagnosticAnalyzerRunner
+                    .AnalyzeDocumentAsync(
+                        analysisScope,
+                        _compilationWithAnalyzers,
+                        _isExplicit,
+                        _logPerformanceInfo,
+                        getTelemetryInfo: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return resultAndTelemetry.AnalysisResult;
             }
             catch when (_onAnalysisException != null)
@@ -196,11 +291,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
         }
 
-        private async Task<ImmutableArray<Diagnostic>> GetSourceGeneratorDiagnosticsAsync(Project project, CancellationToken cancellationToken)
+        private async Task<ImmutableArray<Diagnostic>> GetSourceGeneratorDiagnosticsAsync(
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                return await InProcOrRemoteHostAnalyzerRunner.GetSourceGeneratorDiagnosticsAsync(project, cancellationToken).ConfigureAwait(false);
+                return await InProcOrRemoteHostAnalyzerRunner
+                    .GetSourceGeneratorDiagnosticsAsync(project, cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch when (_onAnalysisException != null)
             {
@@ -209,15 +309,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
         }
 
-        private async Task<ImmutableArray<DiagnosticData>> GetCompilerAnalyzerDiagnosticsAsync(DiagnosticAnalyzer analyzer, TextSpan? span, CancellationToken cancellationToken)
+        private async Task<ImmutableArray<DiagnosticData>> GetCompilerAnalyzerDiagnosticsAsync(
+            DiagnosticAnalyzer analyzer,
+            TextSpan? span,
+            CancellationToken cancellationToken
+        )
         {
             RoslynDebug.Assert(analyzer.IsCompilerAnalyzer());
             RoslynDebug.Assert(_compilationWithAnalyzers != null);
             RoslynDebug.Assert(_compilationBasedAnalyzersInAnalysisScope.Contains(analyzer));
             RoslynDebug.Assert(AnalysisScope.TextDocument is Document);
 
-            var analysisScope = AnalysisScope.WithAnalyzers(ImmutableArray.Create(analyzer)).WithSpan(span);
-            var analysisResult = await GetAnalysisResultAsync(analysisScope, cancellationToken).ConfigureAwait(false);
+            var analysisScope = AnalysisScope
+                .WithAnalyzers(ImmutableArray.Create(analyzer))
+                .WithSpan(span);
+            var analysisResult = await GetAnalysisResultAsync(analysisScope, cancellationToken)
+                .ConfigureAwait(false);
             if (!analysisResult.TryGetValue(analyzer, out var result))
             {
                 return ImmutableArray<DiagnosticData>.Empty;
@@ -226,7 +333,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return result.GetDocumentDiagnostics(analysisScope.TextDocument.Id, analysisScope.Kind);
         }
 
-        private async Task<ImmutableArray<DiagnosticData>> GetSyntaxDiagnosticsAsync(DiagnosticAnalyzer analyzer, bool isCompilerAnalyzer, CancellationToken cancellationToken)
+        private async Task<ImmutableArray<DiagnosticData>> GetSyntaxDiagnosticsAsync(
+            DiagnosticAnalyzer analyzer,
+            bool isCompilerAnalyzer,
+            CancellationToken cancellationToken
+        )
         {
             // PERF:
             //  1. Compute diagnostics for all analyzers with a single invocation into CompilationWithAnalyzers.
@@ -244,24 +355,45 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     return ImmutableArray<DiagnosticData>.Empty;
                 }
 
-                return await GetCompilerAnalyzerDiagnosticsAsync(analyzer, AnalysisScope.Span, cancellationToken).ConfigureAwait(false);
+                return await GetCompilerAnalyzerDiagnosticsAsync(
+                        analyzer,
+                        AnalysisScope.Span,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             if (_lazySyntaxDiagnostics == null)
             {
-                using var _ = TelemetryLogging.LogBlockTimeAggregated(FunctionId.RequestDiagnostics_Summary, $"{nameof(GetSyntaxDiagnosticsAsync)}.{nameof(GetAnalysisResultAsync)}");
+                using var _ = TelemetryLogging.LogBlockTimeAggregated(
+                    FunctionId.RequestDiagnostics_Summary,
+                    $"{nameof(GetSyntaxDiagnosticsAsync)}.{nameof(GetAnalysisResultAsync)}"
+                );
 
-                var analysisScope = AnalysisScope.WithAnalyzers(_compilationBasedAnalyzersInAnalysisScope);
-                var syntaxDiagnostics = await GetAnalysisResultAsync(analysisScope, cancellationToken).ConfigureAwait(false);
+                var analysisScope = AnalysisScope.WithAnalyzers(
+                    _compilationBasedAnalyzersInAnalysisScope
+                );
+                var syntaxDiagnostics = await GetAnalysisResultAsync(
+                        analysisScope,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 Interlocked.CompareExchange(ref _lazySyntaxDiagnostics, syntaxDiagnostics, null);
             }
 
             return _lazySyntaxDiagnostics.TryGetValue(analyzer, out var diagnosticAnalysisResult)
-                ? diagnosticAnalysisResult.GetDocumentDiagnostics(AnalysisScope.TextDocument.Id, AnalysisScope.Kind)
+                ? diagnosticAnalysisResult.GetDocumentDiagnostics(
+                    AnalysisScope.TextDocument.Id,
+                    AnalysisScope.Kind
+                )
                 : ImmutableArray<DiagnosticData>.Empty;
         }
 
-        private async Task<ImmutableArray<DiagnosticData>> GetSemanticDiagnosticsAsync(DiagnosticAnalyzer analyzer, bool isCompilerAnalyzer, CancellationToken cancellationToken)
+        private async Task<ImmutableArray<DiagnosticData>> GetSemanticDiagnosticsAsync(
+            DiagnosticAnalyzer analyzer,
+            bool isCompilerAnalyzer,
+            CancellationToken cancellationToken
+        )
         {
             // PERF:
             //  1. Compute diagnostics for all analyzers with a single invocation into CompilationWithAnalyzers.
@@ -279,21 +411,43 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 await VerifySpanBasedCompilerDiagnosticsAsync().ConfigureAwait(false);
 #endif
 
-                var adjustedSpan = await GetAdjustedSpanForCompilerAnalyzerAsync().ConfigureAwait(false);
-                return await GetCompilerAnalyzerDiagnosticsAsync(analyzer, adjustedSpan, cancellationToken).ConfigureAwait(false);
+                var adjustedSpan = await GetAdjustedSpanForCompilerAnalyzerAsync()
+                    .ConfigureAwait(false);
+                return await GetCompilerAnalyzerDiagnosticsAsync(
+                        analyzer,
+                        adjustedSpan,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             if (_lazySemanticDiagnostics == null)
             {
-                using var _ = TelemetryLogging.LogBlockTimeAggregated(FunctionId.RequestDiagnostics_Summary, $"{nameof(GetSemanticDiagnosticsAsync)}.{nameof(GetAnalysisResultAsync)}");
+                using var _ = TelemetryLogging.LogBlockTimeAggregated(
+                    FunctionId.RequestDiagnostics_Summary,
+                    $"{nameof(GetSemanticDiagnosticsAsync)}.{nameof(GetAnalysisResultAsync)}"
+                );
 
-                var analysisScope = AnalysisScope.WithAnalyzers(_compilationBasedAnalyzersInAnalysisScope);
-                var semanticDiagnostics = await GetAnalysisResultAsync(analysisScope, cancellationToken).ConfigureAwait(false);
-                Interlocked.CompareExchange(ref _lazySemanticDiagnostics, semanticDiagnostics, null);
+                var analysisScope = AnalysisScope.WithAnalyzers(
+                    _compilationBasedAnalyzersInAnalysisScope
+                );
+                var semanticDiagnostics = await GetAnalysisResultAsync(
+                        analysisScope,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                Interlocked.CompareExchange(
+                    ref _lazySemanticDiagnostics,
+                    semanticDiagnostics,
+                    null
+                );
             }
 
             return _lazySemanticDiagnostics.TryGetValue(analyzer, out var diagnosticAnalysisResult)
-                ? diagnosticAnalysisResult.GetDocumentDiagnostics(AnalysisScope.TextDocument.Id, AnalysisScope.Kind)
+                ? diagnosticAnalysisResult.GetDocumentDiagnostics(
+                    AnalysisScope.TextDocument.Id,
+                    AnalysisScope.Kind
+                )
                 : ImmutableArray<DiagnosticData>.Empty;
 
             async Task<TextSpan?> GetAdjustedSpanForCompilerAnalyzerAsync()
@@ -309,7 +463,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 var service = document.GetRequiredLanguageService<ISyntaxFactsService>();
-                var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await document
+                    .GetRequiredSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var startNode = service.GetContainingMemberDeclaration(root, span.Value.Start);
                 var endNode = service.GetContainingMemberDeclaration(root, span.Value.End);
 
@@ -325,10 +481,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     return span;
                 }
 
-                var startSpan = service.IsMethodLevelMember(startNode) ? startNode.FullSpan : span.Value;
+                var startSpan = service.IsMethodLevelMember(startNode)
+                    ? startNode.FullSpan
+                    : span.Value;
                 var endSpan = service.IsMethodLevelMember(endNode) ? endNode.FullSpan : span.Value;
 
-                return TextSpan.FromBounds(Math.Min(startSpan.Start, endSpan.Start), Math.Max(startSpan.End, endSpan.End));
+                return TextSpan.FromBounds(
+                    Math.Min(startSpan.Start, endSpan.Start),
+                    Math.Max(startSpan.End, endSpan.End)
+                );
             }
 
 #if DEBUG
@@ -340,14 +501,30 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 // make sure what we got from range is same as what we got from whole diagnostics
-                var model = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var rangeDeclaractionDiagnostics = model.GetDeclarationDiagnostics(span.Value, cancellationToken).ToArray();
-                var rangeMethodBodyDiagnostics = model.GetMethodBodyDiagnostics(span.Value, cancellationToken).ToArray();
-                var rangeDiagnostics = rangeDeclaractionDiagnostics.Concat(rangeMethodBodyDiagnostics).Where(shouldInclude).ToArray();
+                var model = await document
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var rangeDeclaractionDiagnostics = model
+                    .GetDeclarationDiagnostics(span.Value, cancellationToken)
+                    .ToArray();
+                var rangeMethodBodyDiagnostics = model
+                    .GetMethodBodyDiagnostics(span.Value, cancellationToken)
+                    .ToArray();
+                var rangeDiagnostics = rangeDeclaractionDiagnostics
+                    .Concat(rangeMethodBodyDiagnostics)
+                    .Where(shouldInclude)
+                    .ToArray();
 
-                var wholeDeclarationDiagnostics = model.GetDeclarationDiagnostics(cancellationToken: cancellationToken).ToArray();
-                var wholeMethodBodyDiagnostics = model.GetMethodBodyDiagnostics(cancellationToken: cancellationToken).ToArray();
-                var wholeDiagnostics = wholeDeclarationDiagnostics.Concat(wholeMethodBodyDiagnostics).Where(shouldInclude).ToArray();
+                var wholeDeclarationDiagnostics = model
+                    .GetDeclarationDiagnostics(cancellationToken: cancellationToken)
+                    .ToArray();
+                var wholeMethodBodyDiagnostics = model
+                    .GetMethodBodyDiagnostics(cancellationToken: cancellationToken)
+                    .ToArray();
+                var wholeDiagnostics = wholeDeclarationDiagnostics
+                    .Concat(wholeMethodBodyDiagnostics)
+                    .Where(shouldInclude)
+                    .ToArray();
 
                 if (!AreEquivalent(rangeDiagnostics, wholeDiagnostics))
                 {
@@ -380,15 +557,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 // Exclude unused import diagnostics since they are never reported when a span is passed.
                 // (See CSharp/VisualBasicCompilation.GetDiagnosticsForMethodBodiesInTree.)
-                bool shouldInclude(Diagnostic d) => span.Value.IntersectsWith(d.Location.SourceSpan) && !IsUnusedImportDiagnostic(d);
+                bool shouldInclude(Diagnostic d) =>
+                    span.Value.IntersectsWith(d.Location.SourceSpan)
+                    && !IsUnusedImportDiagnostic(d);
             }
 #endif
         }
 
-        private static async Task<ImmutableArray<DiagnosticData>> RemapDiagnosticLocationsIfRequiredAsync(
+        private static async Task<
+            ImmutableArray<DiagnosticData>
+        > RemapDiagnosticLocationsIfRequiredAsync(
             TextDocument textDocument,
             ImmutableArray<DiagnosticData> diagnostics,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (diagnostics.IsEmpty)
             {
@@ -396,17 +578,23 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             // Check if IWorkspaceVenusSpanMappingService is present for remapping.
-            var diagnosticSpanMappingService = textDocument.Project.Solution.Services.GetService<IWorkspaceVenusSpanMappingService>();
+            var diagnosticSpanMappingService =
+                textDocument.Project.Solution.Services.GetService<IWorkspaceVenusSpanMappingService>();
             if (diagnosticSpanMappingService == null)
             {
                 return diagnostics;
             }
 
             // Round tripping the diagnostics should ensure they get correctly remapped.
-            using var _ = ArrayBuilder<DiagnosticData>.GetInstance(diagnostics.Length, out var builder);
+            using var _ = ArrayBuilder<DiagnosticData>.GetInstance(
+                diagnostics.Length,
+                out var builder
+            );
             foreach (var diagnosticData in diagnostics)
             {
-                var diagnostic = await diagnosticData.ToDiagnosticAsync(textDocument.Project, cancellationToken).ConfigureAwait(false);
+                var diagnostic = await diagnosticData
+                    .ToDiagnosticAsync(textDocument.Project, cancellationToken)
+                    .ConfigureAwait(false);
                 builder.Add(DiagnosticData.Create(diagnostic, textDocument));
             }
 

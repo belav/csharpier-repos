@@ -3,11 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
 using System.Threading;
-using System.Runtime;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
 
@@ -20,11 +20,17 @@ namespace System.Tests
         [Fact]
         public static void AddMemoryPressure_InvalidBytesAllocated_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("bytesAllocated", () => GC.AddMemoryPressure(-1)); // Bytes allocated < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "bytesAllocated",
+                () => GC.AddMemoryPressure(-1)
+            ); // Bytes allocated < 0
 
             if (s_is32Bits)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("bytesAllocated", () => GC.AddMemoryPressure((long)int.MaxValue + 1)); // Bytes allocated > int.MaxValue on 32 bit platforms
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "bytesAllocated",
+                    () => GC.AddMemoryPressure((long)int.MaxValue + 1)
+                ); // Bytes allocated > int.MaxValue on 32 bit platforms
             }
         }
 
@@ -43,7 +49,10 @@ namespace System.Tests
         [Fact]
         public static void Collect_Int_NegativeGeneration_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("generation", () => GC.Collect(-1)); // Generation < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "generation",
+                () => GC.Collect(-1)
+            ); // Generation < 0
         }
 
         [Theory]
@@ -66,17 +75,33 @@ namespace System.Tests
         [Fact]
         public static void Collect_NegativeGenerationCount_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("generation", () => GC.Collect(-1, GCCollectionMode.Default));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("generation", () => GC.Collect(-1, GCCollectionMode.Default, false));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "generation",
+                () => GC.Collect(-1, GCCollectionMode.Default)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "generation",
+                () => GC.Collect(-1, GCCollectionMode.Default, false)
+            );
         }
 
         [Theory]
         [InlineData(GCCollectionMode.Default - 1)]
         [InlineData(GCCollectionMode.Aggressive + 1)]
-        public static void Collection_InvalidCollectionMode_ThrowsArgumentOutOfRangeException(GCCollectionMode mode)
+        public static void Collection_InvalidCollectionMode_ThrowsArgumentOutOfRangeException(
+            GCCollectionMode mode
+        )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", null, () => GC.Collect(2, mode));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", null, () => GC.Collect(2, mode, false));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "mode",
+                null,
+                () => GC.Collect(2, mode)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "mode",
+                null,
+                () => GC.Collect(2, mode, false)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
@@ -87,7 +112,9 @@ namespace System.Tests
 
         private class FinalizerTest
         {
-            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImplAttribute(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
             private static void MakeAndDropTest()
             {
                 new TestObject();
@@ -119,13 +146,15 @@ namespace System.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void ExpensiveFinalizerDoesNotBlockShutdown()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                for (int i = 0; i < 100000; i++)
-                    GC.KeepAlive(new ObjectWithExpensiveFinalizer());
-                GC.Collect();
-                Thread.Sleep(100); // Give the finalizer thread a chance to start running
-            }).Dispose();
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    for (int i = 0; i < 100000; i++)
+                        GC.KeepAlive(new ObjectWithExpensiveFinalizer());
+                    GC.Collect();
+                    Thread.Sleep(100); // Give the finalizer thread a chance to start running
+                })
+                .Dispose();
         }
 
         private class ObjectWithExpensiveFinalizer
@@ -144,7 +173,9 @@ namespace System.Tests
 
         private class KeepAliveTest
         {
-            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImplAttribute(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
             private static void MakeAndDropDNKA()
             {
                 new DoNotKeepAliveObject();
@@ -194,7 +225,9 @@ namespace System.Tests
 
         private class KeepAliveNullTest
         {
-            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImplAttribute(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
             private static void MakeAndNull()
             {
                 var obj = new TestObject();
@@ -307,7 +340,10 @@ namespace System.Tests
         [Fact]
         public static void ReRegisterFoFinalize_NullObject_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("obj", () => GC.ReRegisterForFinalize(null)); // Obj is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "obj",
+                () => GC.ReRegisterForFinalize(null)
+            ); // Obj is null
         }
 
         private class ReRegisterForFinalizeTest
@@ -350,17 +386,26 @@ namespace System.Tests
         [Fact]
         public static void CollectionCount_NegativeGeneration_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("generation", () => GC.CollectionCount(-1)); // Generation < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "generation",
+                () => GC.CollectionCount(-1)
+            ); // Generation < 0
         }
 
         [Fact]
         public static void RemoveMemoryPressure_InvalidBytesAllocated_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("bytesAllocated", () => GC.RemoveMemoryPressure(-1)); // Bytes allocated < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "bytesAllocated",
+                () => GC.RemoveMemoryPressure(-1)
+            ); // Bytes allocated < 0
 
             if (s_is32Bits)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("bytesAllocated", () => GC.RemoveMemoryPressure((long)int.MaxValue + 1)); // Bytes allocated > int.MaxValue on 32 bit platforms
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "bytesAllocated",
+                    () => GC.RemoveMemoryPressure((long)int.MaxValue + 1)
+                ); // Bytes allocated > int.MaxValue on 32 bit platforms
             }
         }
 
@@ -403,10 +448,15 @@ namespace System.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsPreciseGcSupported)
+        )]
         [InlineData(GCLargeObjectHeapCompactionMode.CompactOnce)]
         [InlineData(GCLargeObjectHeapCompactionMode.Default)]
-        public static void LargeObjectHeapCompactionModeRoundTrips(GCLargeObjectHeapCompactionMode value)
+        public static void LargeObjectHeapCompactionModeRoundTrips(
+            GCLargeObjectHeapCompactionMode value
+        )
         {
             GCLargeObjectHeapCompactionMode orig = GCSettings.LargeObjectHeapCompactionMode;
             try
@@ -467,45 +517,61 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(() =>
-                {
-
-                    Func<WeakReference> getweakref = delegate ()
+            RemoteExecutor
+                .Invoke(
+                    () =>
                     {
-                        Version myobj = new Version();
-                        var wkref = new WeakReference(myobj);
+                        Func<WeakReference> getweakref = delegate()
+                        {
+                            Version myobj = new Version();
+                            var wkref = new WeakReference(myobj);
 
-                        Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget));
-                        Assert.True(GC.GetGeneration(wkref) >= 0);
-                        Assert.Equal(GC.GetGeneration(wkref), GC.GetGeneration(myobj));
-                        GC.EndNoGCRegion();
+                            Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget));
+                            Assert.True(GC.GetGeneration(wkref) >= 0);
+                            Assert.Equal(GC.GetGeneration(wkref), GC.GetGeneration(myobj));
+                            GC.EndNoGCRegion();
 
-                        myobj = null;
-                        return wkref;
-                    };
+                            myobj = null;
+                            return wkref;
+                        };
 
-                    WeakReference weakref = getweakref();
-                    Assert.True(weakref != null);
+                        WeakReference weakref = getweakref();
+                        Assert.True(weakref != null);
 #if !DEBUG
-                    GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
-                    Assert.Throws<ArgumentNullException>(() => GC.GetGeneration(weakref));
+                        GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+                        Assert.Throws<ArgumentNullException>(() => GC.GetGeneration(weakref));
 #endif
-                }, options).Dispose();
-
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [Fact]
         public static void GCNotificationNegTests()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => GC.RegisterForFullGCNotification(-1, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => GC.RegisterForFullGCNotification(100, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => GC.RegisterForFullGCNotification(-1, 100));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => GC.RegisterForFullGCNotification(-1, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => GC.RegisterForFullGCNotification(100, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => GC.RegisterForFullGCNotification(-1, 100)
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => GC.RegisterForFullGCNotification(10, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => GC.RegisterForFullGCNotification(-1, 10));
-            Assert.Throws<ArgumentOutOfRangeException>(() => GC.RegisterForFullGCNotification(100, 10));
-            Assert.Throws<ArgumentOutOfRangeException>(() => GC.RegisterForFullGCNotification(10, 100));
-
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => GC.RegisterForFullGCNotification(10, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => GC.RegisterForFullGCNotification(-1, 10)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => GC.RegisterForFullGCNotification(100, 10)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => GC.RegisterForFullGCNotification(10, 100)
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => GC.WaitForFullGCApproach(-2));
             Assert.Throws<ArgumentOutOfRangeException>(() => GC.WaitForFullGCComplete(-2));
@@ -526,10 +592,17 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke((approachString, timeoutString) =>
-                {
-                    TestWait(bool.Parse(approachString), int.Parse(timeoutString));
-                }, approach.ToString(), timeout.ToString(), options).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    (approachString, timeoutString) =>
+                    {
+                        TestWait(bool.Parse(approachString), int.Parse(timeoutString));
+                    },
+                    approach.ToString(),
+                    timeout.ToString(),
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -539,10 +612,15 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(() =>
-                {
-                    Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
-                }, options).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [MethodImpl(MethodImplOptions.NoOptimization)]
@@ -562,16 +640,21 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(() =>
-                {
-                    Assert.True(GC.TryStartNoGCRegion(1024));
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        Assert.True(GC.TryStartNoGCRegion(1024));
 
-                    AllocateALot();
+                        AllocateALot();
 
-                    // at this point, the GC should have booted us out of the no GC region
-                    // since we allocated too much.
-                    Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
-                }, options).Dispose();
+                        // at this point, the GC should have booted us out of the no GC region
+                        // since we allocated too much.
+                        Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -581,13 +664,20 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(() =>
-            {
-                Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget));
-                Assert.Throws<InvalidOperationException>(() => GC.TryStartNoGCRegion(NoGCRequestedBudget));
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget));
+                        Assert.Throws<InvalidOperationException>(
+                            () => GC.TryStartNoGCRegion(NoGCRequestedBudget)
+                        );
 
-                Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
-            }, options).Dispose();
+                        Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -597,13 +687,20 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(() =>
-            {
-                Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget, true));
-                Assert.Throws<InvalidOperationException>(() => GC.TryStartNoGCRegion(NoGCRequestedBudget, true));
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget, true));
+                        Assert.Throws<InvalidOperationException>(
+                            () => GC.TryStartNoGCRegion(NoGCRequestedBudget, true)
+                        );
 
-                Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
-            }, options).Dispose();
+                        Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -613,13 +710,22 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(() =>
-            {
-                Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget));
-                Assert.Throws<InvalidOperationException>(() => GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget));
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        Assert.True(
+                            GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget)
+                        );
+                        Assert.Throws<InvalidOperationException>(
+                            () => GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget)
+                        );
 
-                Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
-            }, options).Dispose();
+                        Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -629,13 +735,27 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(() =>
-            {
-                Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget, true));
-                Assert.Throws<InvalidOperationException>(() => GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget, true));
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        Assert.True(
+                            GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget, true)
+                        );
+                        Assert.Throws<InvalidOperationException>(
+                            () =>
+                                GC.TryStartNoGCRegion(
+                                    NoGCRequestedBudget,
+                                    NoGCRequestedBudget,
+                                    true
+                                )
+                        );
 
-                Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
-            }, options).Dispose();
+                        Assert.Throws<InvalidOperationException>(() => GC.EndNoGCRegion());
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -645,18 +765,25 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(() =>
-            {
-                // The budget for this test is 4mb, because the act of throwing an exception with a message
-                // contained in a System.Private.CoreLib resource file has to potential to allocate a lot.
-                //
-                // In addition to this, the Assert.Throws xunit combinator tends to also allocate a lot.
-                Assert.True(GC.TryStartNoGCRegion(4000 * 1024, true));
-                Assert.Equal(GCLatencyMode.NoGCRegion, GCSettings.LatencyMode);
-                Assert.Throws<InvalidOperationException>(() => GCSettings.LatencyMode = GCLatencyMode.LowLatency);
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        // The budget for this test is 4mb, because the act of throwing an exception with a message
+                        // contained in a System.Private.CoreLib resource file has to potential to allocate a lot.
+                        //
+                        // In addition to this, the Assert.Throws xunit combinator tends to also allocate a lot.
+                        Assert.True(GC.TryStartNoGCRegion(4000 * 1024, true));
+                        Assert.Equal(GCLatencyMode.NoGCRegion, GCSettings.LatencyMode);
+                        Assert.Throws<InvalidOperationException>(
+                            () => GCSettings.LatencyMode = GCLatencyMode.LowLatency
+                        );
 
-                GC.EndNoGCRegion();
-            }, options).Dispose();
+                        GC.EndNoGCRegion();
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -666,12 +793,17 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(() =>
-                {
-                    Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget));
-                    Assert.Equal(GCLatencyMode.NoGCRegion, GCSettings.LatencyMode);
-                    GC.EndNoGCRegion();
-                }, options).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget));
+                        Assert.Equal(GCLatencyMode.NoGCRegion, GCSettings.LatencyMode);
+                        GC.EndNoGCRegion();
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -681,12 +813,17 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(() =>
-            {
-                Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget, true));
-                Assert.Equal(GCLatencyMode.NoGCRegion, GCSettings.LatencyMode);
-                GC.EndNoGCRegion();
-            }, options).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget, true));
+                        Assert.Equal(GCLatencyMode.NoGCRegion, GCSettings.LatencyMode);
+                        GC.EndNoGCRegion();
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -696,12 +833,19 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(() =>
-            {
-                Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget));
-                Assert.Equal(GCLatencyMode.NoGCRegion, GCSettings.LatencyMode);
-                GC.EndNoGCRegion();
-            }, options).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        Assert.True(
+                            GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget)
+                        );
+                        Assert.Equal(GCLatencyMode.NoGCRegion, GCSettings.LatencyMode);
+                        GC.EndNoGCRegion();
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -711,12 +855,19 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(() =>
-            {
-                Assert.True(GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget, true));
-                Assert.Equal(GCLatencyMode.NoGCRegion, GCSettings.LatencyMode);
-                GC.EndNoGCRegion();
-            }, options).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        Assert.True(
+                            GC.TryStartNoGCRegion(NoGCRequestedBudget, NoGCRequestedBudget, true)
+                        );
+                        Assert.Equal(GCLatencyMode.NoGCRegion, GCSettings.LatencyMode);
+                        GC.EndNoGCRegion();
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -728,26 +879,44 @@ namespace System.Tests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(sizeString =>
-            {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("totalSize", () => GC.TryStartNoGCRegion(long.Parse(sizeString)));
-            }, size.ToString(), options).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    sizeString =>
+                    {
+                        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                            "totalSize",
+                            () => GC.TryStartNoGCRegion(long.Parse(sizeString))
+                        );
+                    },
+                    size.ToString(),
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/73167", TestRuntimes.Mono)]
         [OuterLoop]
-        [InlineData(0)]                   // invalid because lohSize ==
-        [InlineData(-1)]                  // invalid because lohSize < 0
+        [InlineData(0)] // invalid because lohSize ==
+        [InlineData(-1)] // invalid because lohSize < 0
         [InlineData(1152921504606846976)] // invalid because lohSize > totalSize
         public static void TryStartNoGCRegion_LOHSizeInvalid(long size)
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.TimeOut = TimeoutMilliseconds;
-            RemoteExecutor.Invoke(sizeString =>
-            {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("lohSize", () => GC.TryStartNoGCRegion(1024, long.Parse(sizeString)));
-            }, size.ToString(), options).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    sizeString =>
+                    {
+                        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                            "lohSize",
+                            () => GC.TryStartNoGCRegion(1024, long.Parse(sizeString))
+                        );
+                    },
+                    size.ToString(),
+                    options
+                )
+                .Dispose();
         }
 
         private static void TestWait(bool approach, int timeout)
@@ -777,7 +946,10 @@ namespace System.Tests
             }
             catch (Exception e)
             {
-                Assert.True(false, $"({approach}, {timeout}) Error - Unexpected exception received: {e.ToString()}");
+                Assert.True(
+                    false,
+                    $"({approach}, {timeout}) Error - Unexpected exception received: {e.ToString()}"
+                );
             }
             finally
             {
@@ -787,11 +959,17 @@ namespace System.Tests
 
             if (cancelTimeout)
             {
-                Assert.True(result == GCNotificationStatus.Canceled, $"({approach}, {timeout}) Error - WaitForFullGCApproach result not Cancelled");
+                Assert.True(
+                    result == GCNotificationStatus.Canceled,
+                    $"({approach}, {timeout}) Error - WaitForFullGCApproach result not Cancelled"
+                );
             }
             else
             {
-                Assert.True(result == GCNotificationStatus.Timeout, $"({approach}, {timeout}) Error - WaitForFullGCApproach result not Timeout");
+                Assert.True(
+                    result == GCNotificationStatus.Timeout,
+                    $"({approach}, {timeout}) Error - WaitForFullGCApproach result not Timeout"
+                );
             }
         }
 
@@ -812,76 +990,107 @@ namespace System.Tests
 
             long end = GC.GetAllocatedBytesForCurrentThread();
 
-            Assert.True((end - start) > size, $"Allocated too little: start: {start} end: {end} size: {size}");
-            Assert.True((end - start) < 5 * size, $"Allocated too much: start: {start} end: {end} size: {size}");
+            Assert.True(
+                (end - start) > size,
+                $"Allocated too little: start: {start} end: {end} size: {size}"
+            );
+            Assert.True(
+                (end - start) < 5 * size,
+                $"Allocated too much: start: {start} end: {end} size: {size}"
+            );
         }
 
-        private static bool IsNotArmProcessAndRemoteExecutorSupported => PlatformDetection.IsNotArmProcess && RemoteExecutor.IsSupported;
+        private static bool IsNotArmProcessAndRemoteExecutorSupported =>
+            PlatformDetection.IsNotArmProcess && RemoteExecutor.IsSupported;
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/73167", TestRuntimes.Mono)]
         [ConditionalFact(nameof(IsNotArmProcessAndRemoteExecutorSupported))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/29434")]
         public static void GetGCMemoryInfo()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                // Allows to update the value returned by GC.GetGCMemoryInfo
-                GC.Collect();
-
-                GCMemoryInfo memoryInfo1 = GC.GetGCMemoryInfo();
-
-                long maxVirtualSpaceSize = (IntPtr.Size == 4) ? uint.MaxValue : long.MaxValue;
-
-                Assert.InRange(memoryInfo1.HighMemoryLoadThresholdBytes, 1, maxVirtualSpaceSize);
-                Assert.InRange(memoryInfo1.MemoryLoadBytes, 1, maxVirtualSpaceSize);
-                Assert.InRange(memoryInfo1.TotalAvailableMemoryBytes, 1, maxVirtualSpaceSize);
-                Assert.InRange(memoryInfo1.HeapSizeBytes, 1, maxVirtualSpaceSize);
-                Assert.InRange(memoryInfo1.FragmentedBytes, 0, maxVirtualSpaceSize);
-
-                GCHandle[] gch = new GCHandle[64 * 1024];
-                for (int i = 0; i < gch.Length * 2; ++i)
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    byte[] arr = new byte[64];
-                    if (i % 2 == 0)
+                    // Allows to update the value returned by GC.GetGCMemoryInfo
+                    GC.Collect();
+
+                    GCMemoryInfo memoryInfo1 = GC.GetGCMemoryInfo();
+
+                    long maxVirtualSpaceSize = (IntPtr.Size == 4) ? uint.MaxValue : long.MaxValue;
+
+                    Assert.InRange(
+                        memoryInfo1.HighMemoryLoadThresholdBytes,
+                        1,
+                        maxVirtualSpaceSize
+                    );
+                    Assert.InRange(memoryInfo1.MemoryLoadBytes, 1, maxVirtualSpaceSize);
+                    Assert.InRange(memoryInfo1.TotalAvailableMemoryBytes, 1, maxVirtualSpaceSize);
+                    Assert.InRange(memoryInfo1.HeapSizeBytes, 1, maxVirtualSpaceSize);
+                    Assert.InRange(memoryInfo1.FragmentedBytes, 0, maxVirtualSpaceSize);
+
+                    GCHandle[] gch = new GCHandle[64 * 1024];
+                    for (int i = 0; i < gch.Length * 2; ++i)
                     {
-                        gch[i / 2] = GCHandle.Alloc(arr, GCHandleType.Pinned);
+                        byte[] arr = new byte[64];
+                        if (i % 2 == 0)
+                        {
+                            gch[i / 2] = GCHandle.Alloc(arr, GCHandleType.Pinned);
+                        }
                     }
-                }
 
-                // Allows to update the value returned by GC.GetGCMemoryInfo
-                GC.Collect();
+                    // Allows to update the value returned by GC.GetGCMemoryInfo
+                    GC.Collect();
 
-                GCMemoryInfo memoryInfo2 = GC.GetGCMemoryInfo();
+                    GCMemoryInfo memoryInfo2 = GC.GetGCMemoryInfo();
 
-                string scenario = null;
-                try
-                {
-                    scenario = nameof(memoryInfo2.HighMemoryLoadThresholdBytes);
-                    Assert.Equal(memoryInfo2.HighMemoryLoadThresholdBytes, memoryInfo1.HighMemoryLoadThresholdBytes);
-
-                    // Even though we have allocated, the overall load may decrease or increase depending what other processes are doing.
-                    // It cannot go above total available though.
-                    scenario = nameof(memoryInfo2.MemoryLoadBytes);
-                    Assert.InRange(memoryInfo2.MemoryLoadBytes, 1, memoryInfo1.TotalAvailableMemoryBytes);
-
-                    scenario = nameof(memoryInfo2.TotalAvailableMemoryBytes);
-                    Assert.Equal(memoryInfo2.TotalAvailableMemoryBytes, memoryInfo1.TotalAvailableMemoryBytes);
-
-                    scenario = nameof(memoryInfo2.HeapSizeBytes);
-                    Assert.InRange(memoryInfo2.HeapSizeBytes, memoryInfo1.HeapSizeBytes + 1, maxVirtualSpaceSize);
-
-                    scenario = nameof(memoryInfo2.FragmentedBytes);
-                    Assert.InRange(memoryInfo2.FragmentedBytes, memoryInfo1.FragmentedBytes + 1, maxVirtualSpaceSize);
-
-                    scenario = null;
-                }
-                finally
-                {
-                    if (scenario != null)
+                    string scenario = null;
+                    try
                     {
-                        System.Console.WriteLine("FAILED: " + scenario);
+                        scenario = nameof(memoryInfo2.HighMemoryLoadThresholdBytes);
+                        Assert.Equal(
+                            memoryInfo2.HighMemoryLoadThresholdBytes,
+                            memoryInfo1.HighMemoryLoadThresholdBytes
+                        );
+
+                        // Even though we have allocated, the overall load may decrease or increase depending what other processes are doing.
+                        // It cannot go above total available though.
+                        scenario = nameof(memoryInfo2.MemoryLoadBytes);
+                        Assert.InRange(
+                            memoryInfo2.MemoryLoadBytes,
+                            1,
+                            memoryInfo1.TotalAvailableMemoryBytes
+                        );
+
+                        scenario = nameof(memoryInfo2.TotalAvailableMemoryBytes);
+                        Assert.Equal(
+                            memoryInfo2.TotalAvailableMemoryBytes,
+                            memoryInfo1.TotalAvailableMemoryBytes
+                        );
+
+                        scenario = nameof(memoryInfo2.HeapSizeBytes);
+                        Assert.InRange(
+                            memoryInfo2.HeapSizeBytes,
+                            memoryInfo1.HeapSizeBytes + 1,
+                            maxVirtualSpaceSize
+                        );
+
+                        scenario = nameof(memoryInfo2.FragmentedBytes);
+                        Assert.InRange(
+                            memoryInfo2.FragmentedBytes,
+                            memoryInfo1.FragmentedBytes + 1,
+                            maxVirtualSpaceSize
+                        );
+
+                        scenario = null;
                     }
-                }
-            }).Dispose();
+                    finally
+                    {
+                        if (scenario != null)
+                        {
+                            System.Console.WriteLine("FAILED: " + scenario);
+                        }
+                    }
+                })
+                .Dispose();
         }
 
         [Fact]
@@ -890,24 +1099,33 @@ namespace System.Tests
         {
             byte[] stash;
 
-            long CallGetTotalAllocatedBytesAndCheck(long previous, out long differenceBetweenPreciseAndImprecise)
+            long CallGetTotalAllocatedBytesAndCheck(
+                long previous,
+                out long differenceBetweenPreciseAndImprecise
+            )
             {
                 long precise = GC.GetTotalAllocatedBytes(true);
                 long imprecise = GC.GetTotalAllocatedBytes(false);
 
                 if (precise <= 0)
                 {
-                    throw new Exception($"Bytes allocated is not positive, this is unlikely. precise = {precise}");
+                    throw new Exception(
+                        $"Bytes allocated is not positive, this is unlikely. precise = {precise}"
+                    );
                 }
 
                 if (imprecise < precise)
                 {
-                    throw new Exception($"Imprecise total bytes allocated less than precise, imprecise is required to be a conservative estimate (that estimates high). imprecise = {imprecise}, precise = {precise}");
+                    throw new Exception(
+                        $"Imprecise total bytes allocated less than precise, imprecise is required to be a conservative estimate (that estimates high). imprecise = {imprecise}, precise = {precise}"
+                    );
                 }
 
                 if (previous > precise)
                 {
-                    throw new Exception($"Expected more memory to be allocated. previous = {previous}, precise = {precise}, difference = {previous - precise}");
+                    throw new Exception(
+                        $"Expected more memory to be allocated. previous = {previous}, precise = {precise}, difference = {previous - precise}"
+                    );
                 }
 
                 differenceBetweenPreciseAndImprecise = imprecise - precise;
@@ -917,9 +1135,15 @@ namespace System.Tests
             long CallGetTotalAllocatedBytes(long previous)
             {
                 long differenceBetweenPreciseAndImprecise;
-                previous = CallGetTotalAllocatedBytesAndCheck(previous, out differenceBetweenPreciseAndImprecise);
+                previous = CallGetTotalAllocatedBytesAndCheck(
+                    previous,
+                    out differenceBetweenPreciseAndImprecise
+                );
                 stash = new byte[differenceBetweenPreciseAndImprecise];
-                previous = CallGetTotalAllocatedBytesAndCheck(previous, out differenceBetweenPreciseAndImprecise);
+                previous = CallGetTotalAllocatedBytesAndCheck(
+                    previous,
+                    out differenceBetweenPreciseAndImprecise
+                );
                 return previous;
             }
 
@@ -1046,15 +1270,26 @@ namespace System.Tests
         {
             Assert.Throws<OverflowException>(() => GC.AllocateUninitializedArray<byte>(-1));
             Assert.Throws<OverflowException>(() => GC.AllocateUninitializedArray<byte>(negValue));
-            Assert.Throws<OverflowException>(() => GC.AllocateUninitializedArray<byte>(-1, pinned: true));
-            Assert.Throws<OverflowException>(() => GC.AllocateUninitializedArray<byte>(negValue, pinned: true));
+            Assert.Throws<OverflowException>(
+                () => GC.AllocateUninitializedArray<byte>(-1, pinned: true)
+            );
+            Assert.Throws<OverflowException>(
+                () => GC.AllocateUninitializedArray<byte>(negValue, pinned: true)
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotIntMaxValueArrayIndexSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotIntMaxValueArrayIndexSupported)
+        )]
         private static void AllocateArrayTooLarge()
         {
-            Assert.Throws<OutOfMemoryException>(() => GC.AllocateUninitializedArray<double>(int.MaxValue));
-            Assert.Throws<OutOfMemoryException>(() => GC.AllocateUninitializedArray<double>(int.MaxValue, pinned: true));
+            Assert.Throws<OutOfMemoryException>(
+                () => GC.AllocateUninitializedArray<double>(int.MaxValue)
+            );
+            Assert.Throws<OutOfMemoryException>(
+                () => GC.AllocateUninitializedArray<double>(int.MaxValue, pinned: true)
+            );
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1073,7 +1308,9 @@ namespace System.Tests
 
         [Theory]
         [InlineData(false), InlineData(true)]
-        private static void AllocateArray_UninitializedOrNot_WithManagedType_DoesNotThrow(bool pinned)
+        private static void AllocateArray_UninitializedOrNot_WithManagedType_DoesNotThrow(
+            bool pinned
+        )
         {
             void TryType<T>()
             {
@@ -1090,19 +1327,25 @@ namespace System.Tests
 
         [Theory]
         [InlineData(false), InlineData(true)]
-        private unsafe static void AllocateArrayPinned_ManagedValueType_CanRoundtripThroughPointer(bool uninitialized)
+        private static unsafe void AllocateArrayPinned_ManagedValueType_CanRoundtripThroughPointer(
+            bool uninitialized
+        )
         {
             const int length = 100;
             var rng = new Random(0xAF);
 
-            EmbeddedValueType<string>[] array = uninitialized ? GC.AllocateUninitializedArray<EmbeddedValueType<string>>(length, pinned: true) : GC.AllocateArray<EmbeddedValueType<string>>(length, pinned: true);
+            EmbeddedValueType<string>[] array = uninitialized
+                ? GC.AllocateUninitializedArray<EmbeddedValueType<string>>(length, pinned: true)
+                : GC.AllocateArray<EmbeddedValueType<string>>(length, pinned: true);
             byte* pointer = (byte*)Unsafe.AsPointer(ref array[0]);
             var size = Unsafe.SizeOf<EmbeddedValueType<string>>();
 
-            for(int i = 0; i < length; ++i)
+            for (int i = 0; i < length; ++i)
             {
                 int idx = rng.Next(length);
-                ref EmbeddedValueType<string> evt = ref Unsafe.AsRef<EmbeddedValueType<string>>(pointer + size * idx);
+                ref EmbeddedValueType<string> evt = ref Unsafe.AsRef<EmbeddedValueType<string>>(
+                    pointer + size * idx
+                );
 
                 string stringValue = rng.NextSingle().ToString();
                 evt.Value = stringValue;
@@ -1114,7 +1357,7 @@ namespace System.Tests
         }
 
         [Fact]
-        private unsafe static void AllocateArrayCheckPinning()
+        private static unsafe void AllocateArrayCheckPinning()
         {
             var list = new List<long[]>();
 
@@ -1122,9 +1365,10 @@ namespace System.Tests
             for (int i = 0; i < 10000; i++)
             {
                 int size = r.Next(2, 100);
-                var arr = i % 2 == 1 ?
-                    GC.AllocateArray<long>(size, pinned: true) :
-                    GC.AllocateUninitializedArray<long>(size, pinned: true) ;
+                var arr =
+                    i % 2 == 1
+                        ? GC.AllocateArray<long>(size, pinned: true)
+                        : GC.AllocateUninitializedArray<long>(size, pinned: true);
 
                 fixed (long* pElem = &arr[0])
                 {

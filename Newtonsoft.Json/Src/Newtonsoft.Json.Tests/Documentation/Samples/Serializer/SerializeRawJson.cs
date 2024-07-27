@@ -56,7 +56,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             JavaScriptSettings settings = new JavaScriptSettings
             {
                 OnLoadFunction = new JRaw("OnLoad"),
-                OnUnloadFunction = new JRaw("function(e) { alert(e); }")
+                OnUnloadFunction = new JRaw("function(e) { alert(e); }"),
             };
 
             string json = JsonConvert.SerializeObject(settings, Formatting.Indented);
@@ -68,10 +68,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""OnLoadFunction"": OnLoad,
   ""OnUnloadFunction"": function(e) { alert(e); }
-}", json);
+}",
+                json
+            );
         }
     }
 }

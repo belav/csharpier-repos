@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 /// </remarks>
 public abstract class QueryContext : IParameterValues
 {
-    private readonly IDictionary<string, object?> _parameterValues = new Dictionary<string, object?>();
+    private readonly IDictionary<string, object?> _parameterValues =
+        new Dictionary<string, object?>();
     private IStateManager? _stateManager;
 
     /// <summary>
@@ -57,25 +58,23 @@ public abstract class QueryContext : IParameterValues
     /// <param name="navigation">The navigation property.</param>
     public virtual void SetNavigationIsLoaded(object entity, INavigationBase navigation)
         // InitializeStateManager will populate the field before calling here
-        => _stateManager!.TryGetEntry(entity)!.SetIsLoaded(navigation);
+        =>
+        _stateManager!.TryGetEntry(entity)!.SetIsLoaded(navigation);
 
     /// <summary>
     ///     The execution strategy to use while executing the query.
     /// </summary>
-    public virtual IExecutionStrategy ExecutionStrategy
-        => Dependencies.ExecutionStrategy;
+    public virtual IExecutionStrategy ExecutionStrategy => Dependencies.ExecutionStrategy;
 
     /// <summary>
     ///     The concurrency detector to use while executing the query.
     /// </summary>
-    public virtual IConcurrencyDetector ConcurrencyDetector
-        => Dependencies.ConcurrencyDetector;
+    public virtual IConcurrencyDetector ConcurrencyDetector => Dependencies.ConcurrencyDetector;
 
     /// <summary>
     ///     The exception detector to use while executing the query.
     /// </summary>
-    public virtual IExceptionDetector ExceptionDetector
-        => Dependencies.ExceptionDetector;
+    public virtual IExceptionDetector ExceptionDetector => Dependencies.ExceptionDetector;
 
     /// <summary>
     ///     The cancellation token to use while executing the query.
@@ -85,35 +84,35 @@ public abstract class QueryContext : IParameterValues
     /// <summary>
     ///     The command logger to use while executing the query.
     /// </summary>
-    public virtual IDiagnosticsLogger<DbLoggerCategory.Database.Command> CommandLogger
-        => Dependencies.CommandLogger;
+    public virtual IDiagnosticsLogger<DbLoggerCategory.Database.Command> CommandLogger =>
+        Dependencies.CommandLogger;
 
     /// <summary>
     ///     The query logger to use while executing the query.
     /// </summary>
-    public virtual IDiagnosticsLogger<DbLoggerCategory.Query> QueryLogger
-        => Dependencies.QueryLogger;
+    public virtual IDiagnosticsLogger<DbLoggerCategory.Query> QueryLogger =>
+        Dependencies.QueryLogger;
 
     /// <summary>
     ///     The parameter values to use while executing the query.
     /// </summary>
-    public virtual IReadOnlyDictionary<string, object?> ParameterValues
-        => (IReadOnlyDictionary<string, object?>)_parameterValues;
+    public virtual IReadOnlyDictionary<string, object?> ParameterValues =>
+        (IReadOnlyDictionary<string, object?>)_parameterValues;
 
     /// <summary>
     ///     Adds a parameter to <see cref="ParameterValues" /> for this query.
     /// </summary>
     /// <param name="name">The name.</param>
     /// <param name="value">The value.</param>
-    public virtual void AddParameter(string name, object? value)
-        => _parameterValues.Add(name, value);
+    public virtual void AddParameter(string name, object? value) =>
+        _parameterValues.Add(name, value);
 
     /// <summary>
     ///     Initializes the <see cref="IStateManager" /> to be used with this QueryContext.
     /// </summary>
     /// <param name="standAlone">Whether a stand-alone <see cref="IStateManager" /> should be created to perform identity resolution.</param>
-    public virtual void InitializeStateManager(bool standAlone = false)
-        => _stateManager ??= standAlone
+    public virtual void InitializeStateManager(bool standAlone = false) =>
+        _stateManager ??= standAlone
             ? new StateManager(Dependencies.StateManager.Dependencies)
             : Dependencies.StateManager;
 
@@ -125,12 +124,14 @@ public abstract class QueryContext : IParameterValues
     /// </summary>
     [EntityFrameworkInternal]
     public virtual InternalEntityEntry? TryGetEntry(
-            IKey key,
-            object[] keyValues,
-            bool throwOnNullKey,
-            out bool hasNullKey)
+        IKey key,
+        object[] keyValues,
+        bool throwOnNullKey,
+        out bool hasNullKey
+    )
         // InitializeStateManager will populate the field before calling here
-        => _stateManager!.TryGetEntry(key, keyValues, throwOnNullKey, out hasNullKey);
+        =>
+        _stateManager!.TryGetEntry(key, keyValues, throwOnNullKey, out hasNullKey);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -140,9 +141,11 @@ public abstract class QueryContext : IParameterValues
     /// </summary>
     [EntityFrameworkInternal]
     public virtual InternalEntityEntry StartTracking(
-            IEntityType entityType,
-            object entity,
-            in ISnapshot snapshot)
+        IEntityType entityType,
+        object entity,
+        in ISnapshot snapshot
+    )
         // InitializeStateManager will populate the field before calling here
-        => _stateManager!.StartTrackingFromQuery(entityType, entity, snapshot);
+        =>
+        _stateManager!.StartTrackingFromQuery(entityType, entity, snapshot);
 }

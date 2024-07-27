@@ -15,7 +15,10 @@ namespace System.Reflection.TypeLoading
         private readonly RoDefinitionMethod _genericMethodDefinition;
         private readonly RoType[] _genericMethodArguments;
 
-        internal RoConstructedGenericMethod(RoDefinitionMethod genericMethodDefinition, RoType[] genericMethodArguments)
+        internal RoConstructedGenericMethod(
+            RoDefinitionMethod genericMethodDefinition,
+            RoType[] genericMethodArguments
+        )
             : base(genericMethodDefinition.ReflectedType)
         {
             Debug.Assert(genericMethodDefinition != null);
@@ -25,31 +28,49 @@ namespace System.Reflection.TypeLoading
             _genericMethodArguments = genericMethodArguments;
         }
 
-        internal sealed override RoType GetRoDeclaringType() => _genericMethodDefinition.GetRoDeclaringType();
+        internal sealed override RoType GetRoDeclaringType() =>
+            _genericMethodDefinition.GetRoDeclaringType();
+
         internal sealed override RoModule GetRoModule() => _genericMethodDefinition.GetRoModule();
 
         protected sealed override string ComputeName() => _genericMethodDefinition.Name;
+
         public sealed override int MetadataToken => _genericMethodDefinition.MetadataToken;
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => _genericMethodDefinition.CustomAttributes;
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            _genericMethodDefinition.CustomAttributes;
         public sealed override bool IsConstructedGenericMethod => true;
         public sealed override bool IsGenericMethodDefinition => false;
-        protected sealed override MethodAttributes ComputeAttributes() => _genericMethodDefinition.Attributes;
-        protected sealed override CallingConventions ComputeCallingConvention() => _genericMethodDefinition.CallingConvention;
-        protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() => _genericMethodDefinition.MethodImplementationFlags;
 
-        protected sealed override MethodSig<RoParameter> ComputeMethodSig() => _genericMethodDefinition.SpecializeMethodSig(this);
+        protected sealed override MethodAttributes ComputeAttributes() =>
+            _genericMethodDefinition.Attributes;
 
-        public sealed override MethodBody? GetMethodBody() => _genericMethodDefinition.SpecializeMethodBody(this);
+        protected sealed override CallingConventions ComputeCallingConvention() =>
+            _genericMethodDefinition.CallingConvention;
 
-        protected sealed override RoType[] ComputeGenericArgumentsOrParameters() => _genericMethodArguments;
+        protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() =>
+            _genericMethodDefinition.MethodImplementationFlags;
 
-        internal sealed override RoType[] GetGenericTypeArgumentsNoCopy() => _genericMethodArguments;
+        protected sealed override MethodSig<RoParameter> ComputeMethodSig() =>
+            _genericMethodDefinition.SpecializeMethodSig(this);
+
+        public sealed override MethodBody? GetMethodBody() =>
+            _genericMethodDefinition.SpecializeMethodBody(this);
+
+        protected sealed override RoType[] ComputeGenericArgumentsOrParameters() =>
+            _genericMethodArguments;
+
+        internal sealed override RoType[] GetGenericTypeArgumentsNoCopy() =>
+            _genericMethodArguments;
+
         internal sealed override RoType[] GetGenericTypeParametersNoCopy() => Array.Empty<RoType>();
 
         public sealed override MethodInfo GetGenericMethodDefinition() => _genericMethodDefinition;
 
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
-        public sealed override MethodInfo MakeGenericMethod(params Type[] typeArguments) => throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericMethodDefinition, this));
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
+        public sealed override MethodInfo MakeGenericMethod(params Type[] typeArguments) =>
+            throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericMethodDefinition, this));
 
         public sealed override bool Equals([NotNullWhen(true)] object? obj)
         {
@@ -81,8 +102,13 @@ namespace System.Reflection.TypeLoading
             return hashCode;
         }
 
-        protected sealed override MethodSig<string> ComputeMethodSigStrings() => _genericMethodDefinition.SpecializeMethodSigStrings(TypeContext);
+        protected sealed override MethodSig<string> ComputeMethodSigStrings() =>
+            _genericMethodDefinition.SpecializeMethodSigStrings(TypeContext);
 
-        public sealed override TypeContext TypeContext => new TypeContext(_genericMethodDefinition.TypeContext.GenericTypeArguments, _genericMethodArguments);
+        public sealed override TypeContext TypeContext =>
+            new TypeContext(
+                _genericMethodDefinition.TypeContext.GenericTypeArguments,
+                _genericMethodArguments
+            );
     }
 }

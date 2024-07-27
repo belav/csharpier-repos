@@ -23,16 +23,18 @@ namespace System
 
     [Serializable]
     [NonVersionable] // This only applies to field layout
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed partial class String
         : IComparable,
-          IEnumerable,
-          IConvertible,
-          IEnumerable<char>,
-          IComparable<string?>,
-          IEquatable<string?>,
-          ICloneable,
-          ISpanParsable<string>
+            IEnumerable,
+            IConvertible,
+            IEnumerable<char>,
+            IComparable<string?>,
+            IEquatable<string?>,
+            ICloneable,
+            ISpanParsable<string>
     {
         /// <summary>Maximum length allowed for a string.</summary>
         /// <remarks>Keep in sync with AllocateString in gchelpers.cpp.</remarks>
@@ -84,7 +86,8 @@ namespace System
             Buffer.Memmove(
                 elementCount: (uint)result.Length, // derefing Length now allows JIT to prove 'result' not null below
                 destination: ref result._firstChar,
-                source: ref MemoryMarshal.GetArrayDataReference(value));
+                source: ref MemoryMarshal.GetArrayDataReference(value)
+            );
 
             return result;
         }
@@ -110,7 +113,8 @@ namespace System
             Buffer.Memmove(
                 elementCount: (uint)result.Length, // derefing Length now allows JIT to prove 'result' not null below
                 destination: ref result._firstChar,
-                source: ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(value), startIndex));
+                source: ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(value), startIndex)
+            );
 
             return result;
         }
@@ -136,7 +140,8 @@ namespace System
             Buffer.Memmove(
                 elementCount: (uint)result.Length, // derefing Length now allows JIT to prove 'result' not null below
                 destination: ref result._firstChar,
-                source: ref *ptr);
+                source: ref *ptr
+            );
 
             return result;
         }
@@ -157,20 +162,27 @@ namespace System
 
             // overflow check
             if (pStart < ptr)
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_PartialWCHAR);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.ArgumentOutOfRange_PartialWCHAR
+                );
 
             if (length == 0)
                 return Empty;
 
             if (ptr == null)
-                throw new ArgumentOutOfRangeException(nameof(ptr), SR.ArgumentOutOfRange_PartialWCHAR);
+                throw new ArgumentOutOfRangeException(
+                    nameof(ptr),
+                    SR.ArgumentOutOfRange_PartialWCHAR
+                );
 
             string result = FastAllocateString(length);
 
             Buffer.Memmove(
-               elementCount: (uint)result.Length, // derefing Length now allows JIT to prove 'result' not null below
-               destination: ref result._firstChar,
-               source: ref *pStart);
+                elementCount: (uint)result.Length, // derefing Length now allows JIT to prove 'result' not null below
+                destination: ref result._firstChar,
+                source: ref *pStart
+            );
 
             return result;
         }
@@ -217,7 +229,10 @@ namespace System
 
             // overflow check
             if (pStart < value)
-                throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_PartialWCHAR);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    SR.ArgumentOutOfRange_PartialWCHAR
+                );
 
             return CreateStringForSByteConstructor(pStart, length);
         }
@@ -232,14 +247,28 @@ namespace System
                 return Empty;
 
 #if TARGET_WINDOWS
-            int numCharsRequired = Interop.Kernel32.MultiByteToWideChar(Interop.Kernel32.CP_ACP, Interop.Kernel32.MB_PRECOMPOSED, pb, numBytes, (char*)null, 0);
+            int numCharsRequired = Interop.Kernel32.MultiByteToWideChar(
+                Interop.Kernel32.CP_ACP,
+                Interop.Kernel32.MB_PRECOMPOSED,
+                pb,
+                numBytes,
+                (char*)null,
+                0
+            );
             if (numCharsRequired == 0)
                 throw new ArgumentException(SR.Arg_InvalidANSIString);
 
             string newString = FastAllocateString(numCharsRequired);
             fixed (char* pFirstChar = &newString._firstChar)
             {
-                numCharsRequired = Interop.Kernel32.MultiByteToWideChar(Interop.Kernel32.CP_ACP, Interop.Kernel32.MB_PRECOMPOSED, pb, numBytes, pFirstChar, numCharsRequired);
+                numCharsRequired = Interop.Kernel32.MultiByteToWideChar(
+                    Interop.Kernel32.CP_ACP,
+                    Interop.Kernel32.MB_PRECOMPOSED,
+                    pb,
+                    numBytes,
+                    pFirstChar,
+                    numCharsRequired
+                );
             }
             if (numCharsRequired == 0)
                 throw new ArgumentException(SR.Arg_InvalidANSIString);
@@ -276,7 +305,10 @@ namespace System
 
             // overflow check
             if (pStart < value)
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_PartialWCHAR);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.ArgumentOutOfRange_PartialWCHAR
+                );
 
             return enc.GetString(new ReadOnlySpan<byte>(pStart, length));
         }
@@ -315,11 +347,19 @@ namespace System
                 return Empty;
 
             string result = FastAllocateString(value.Length);
-            Buffer.Memmove(ref result._firstChar, ref MemoryMarshal.GetReference(value), (uint)value.Length);
+            Buffer.Memmove(
+                ref result._firstChar,
+                ref MemoryMarshal.GetReference(value),
+                (uint)value.Length
+            );
             return result;
         }
 
-        public static string Create<TState>(int length, TState state, SpanAction<char, TState> action)
+        public static string Create<TState>(
+            int length,
+            TState state,
+            SpanAction<char, TState> action
+        )
         {
             if (action is null)
             {
@@ -345,21 +385,30 @@ namespace System
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <param name="handler">The interpolated string.</param>
         /// <returns>The string that results for formatting the interpolated string using the specified format provider.</returns>
-        public static string Create(IFormatProvider? provider, [InterpolatedStringHandlerArgument(nameof(provider))] ref DefaultInterpolatedStringHandler handler) =>
-            handler.ToStringAndClear();
+        public static string Create(
+            IFormatProvider? provider,
+            [InterpolatedStringHandlerArgument(nameof(provider))]
+                ref DefaultInterpolatedStringHandler handler
+        ) => handler.ToStringAndClear();
 
         /// <summary>Creates a new string by using the specified provider to control the formatting of the specified interpolated string.</summary>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <param name="initialBuffer">The initial buffer that may be used as temporary space as part of the formatting operation. The contents of this buffer may be overwritten.</param>
         /// <param name="handler">The interpolated string.</param>
         /// <returns>The string that results for formatting the interpolated string using the specified format provider.</returns>
-        public static string Create(IFormatProvider? provider, Span<char> initialBuffer, [InterpolatedStringHandlerArgument(nameof(provider), nameof(initialBuffer))] ref DefaultInterpolatedStringHandler handler) =>
-            handler.ToStringAndClear();
+        public static string Create(
+            IFormatProvider? provider,
+            Span<char> initialBuffer,
+            [InterpolatedStringHandlerArgument(nameof(provider), nameof(initialBuffer))]
+                ref DefaultInterpolatedStringHandler handler
+        ) => handler.ToStringAndClear();
 
         [Intrinsic] // When input is a string literal
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator ReadOnlySpan<char>(string? value) =>
-            value != null ? new ReadOnlySpan<char>(ref value.GetRawStringData(), value.Length) : default;
+            value != null
+                ? new ReadOnlySpan<char>(ref value.GetRawStringData(), value.Length)
+                : default;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal bool TryGetSpan(int startIndex, int count, out ReadOnlySpan<char> slice)
@@ -379,7 +428,13 @@ namespace System
             }
 #endif
 
-            slice = new ReadOnlySpan<char>(ref Unsafe.Add(ref _firstChar, (nint)(uint)startIndex /* force zero-extension */), count);
+            slice = new ReadOnlySpan<char>(
+                ref Unsafe.Add(
+                    ref _firstChar,
+                    (nint)(uint)startIndex /* force zero-extension */
+                ),
+                count
+            );
             return true;
         }
 
@@ -389,7 +444,9 @@ namespace System
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This API should not be used to create mutable strings. See https://go.microsoft.com/fwlink/?linkid=2084035 for alternatives.")]
+        [Obsolete(
+            "This API should not be used to create mutable strings. See https://go.microsoft.com/fwlink/?linkid=2084035 for alternatives."
+        )]
         public static unsafe string Copy(string str)
         {
             ArgumentNullException.ThrowIfNull(str);
@@ -399,7 +456,8 @@ namespace System
             Buffer.Memmove(
                 elementCount: (uint)result.Length, // derefing Length now allows JIT to prove 'result' not null below
                 destination: ref result._firstChar,
-                source: ref str._firstChar);
+                source: ref str._firstChar
+            );
 
             return result;
         }
@@ -409,20 +467,36 @@ namespace System
         // sourceIndex + count - 1 to the character array buffer, beginning
         // at destinationIndex.
         //
-        public unsafe void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+        public unsafe void CopyTo(
+            int sourceIndex,
+            char[] destination,
+            int destinationIndex,
+            int count
+        )
         {
             ArgumentNullException.ThrowIfNull(destination);
 
             ArgumentOutOfRangeException.ThrowIfNegative(count);
             ArgumentOutOfRangeException.ThrowIfNegative(sourceIndex);
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(count, Length - sourceIndex, nameof(sourceIndex));
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(destinationIndex, destination.Length - count);
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                count,
+                Length - sourceIndex,
+                nameof(sourceIndex)
+            );
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                destinationIndex,
+                destination.Length - count
+            );
             ArgumentOutOfRangeException.ThrowIfNegative(destinationIndex);
 
             Buffer.Memmove(
-                destination: ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(destination), destinationIndex),
+                destination: ref Unsafe.Add(
+                    ref MemoryMarshal.GetArrayDataReference(destination),
+                    destinationIndex
+                ),
                 source: ref Unsafe.Add(ref _firstChar, sourceIndex),
-                elementCount: (uint)count);
+                elementCount: (uint)count
+            );
         }
 
         /// <summary>Copies the contents of this string into the destination span.</summary>
@@ -467,7 +541,8 @@ namespace System
             Buffer.Memmove(
                 destination: ref MemoryMarshal.GetArrayDataReference(chars),
                 source: ref _firstChar,
-                elementCount: (uint)Length);
+                elementCount: (uint)Length
+            );
 
             return chars;
         }
@@ -477,7 +552,11 @@ namespace System
         public char[] ToCharArray(int startIndex, int length)
         {
             // Range check everything.
-            ArgumentOutOfRangeException.ThrowIfGreaterThan((uint)startIndex, (uint)Length, nameof(startIndex));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                (uint)startIndex,
+                (uint)Length,
+                nameof(startIndex)
+            );
             ArgumentOutOfRangeException.ThrowIfGreaterThan(startIndex, Length - length);
 
             if (length <= 0)
@@ -489,9 +568,10 @@ namespace System
             char[] chars = new char[length];
 
             Buffer.Memmove(
-               destination: ref MemoryMarshal.GetArrayDataReference(chars),
-               source: ref Unsafe.Add(ref _firstChar, startIndex),
-               elementCount: (uint)length);
+                destination: ref MemoryMarshal.GetArrayDataReference(chars),
+                source: ref Unsafe.Add(ref _firstChar, startIndex),
+                elementCount: (uint)length
+            );
 
             return chars;
         }
@@ -503,11 +583,13 @@ namespace System
 
         public static bool IsNullOrWhiteSpace([NotNullWhen(false)] string? value)
         {
-            if (value == null) return true;
+            if (value == null)
+                return true;
 
             for (int i = 0; i < value.Length; i++)
             {
-                if (!char.IsWhiteSpace(value[i])) return false;
+                if (!char.IsWhiteSpace(value[i]))
+                    return false;
             }
 
             return true;
@@ -521,12 +603,17 @@ namespace System
         public ref readonly char GetPinnableReference() => ref _firstChar;
 
         internal ref char GetRawStringData() => ref _firstChar;
-        internal ref ushort GetRawStringDataAsUInt16() => ref Unsafe.As<char, ushort>(ref _firstChar);
+
+        internal ref ushort GetRawStringDataAsUInt16() =>
+            ref Unsafe.As<char, ushort>(ref _firstChar);
 
         // Helper for encodings so they can talk to our buffer directly
         // stringLength must be the exact size we'll expect
         internal static unsafe string CreateStringFromEncoding(
-            byte* bytes, int byteLength, Encoding encoding)
+            byte* bytes,
+            int byteLength,
+            Encoding encoding
+        )
         {
             Debug.Assert(bytes != null);
             Debug.Assert(byteLength >= 0);
@@ -544,8 +631,10 @@ namespace System
             fixed (char* pTempChars = &s._firstChar)
             {
                 int doubleCheck = encoding.GetChars(bytes, byteLength, pTempChars, stringLength);
-                Debug.Assert(stringLength == doubleCheck,
-                    "Expected encoding.GetChars to return same length as encoding.GetCharCount");
+                Debug.Assert(
+                    stringLength == doubleCheck,
+                    "Expected encoding.GetChars to return same length as encoding.GetCharCount"
+                );
             }
 
             return s;
@@ -707,10 +796,12 @@ namespace System
             if (Ascii.IsValid(this))
             {
                 // If its ASCII && one of the 4 main forms, then its already normalized
-                if (normalizationForm == NormalizationForm.FormC ||
-                    normalizationForm == NormalizationForm.FormKC ||
-                    normalizationForm == NormalizationForm.FormD ||
-                    normalizationForm == NormalizationForm.FormKD)
+                if (
+                    normalizationForm == NormalizationForm.FormC
+                    || normalizationForm == NormalizationForm.FormKC
+                    || normalizationForm == NormalizationForm.FormD
+                    || normalizationForm == NormalizationForm.FormKD
+                )
                     return true;
             }
             return Normalization.IsNormalized(this, normalizationForm);
@@ -726,10 +817,12 @@ namespace System
             if (Ascii.IsValid(this))
             {
                 // If its ASCII && one of the 4 main forms, then its already normalized
-                if (normalizationForm == NormalizationForm.FormC ||
-                    normalizationForm == NormalizationForm.FormKC ||
-                    normalizationForm == NormalizationForm.FormD ||
-                    normalizationForm == NormalizationForm.FormKD)
+                if (
+                    normalizationForm == NormalizationForm.FormC
+                    || normalizationForm == NormalizationForm.FormKC
+                    || normalizationForm == NormalizationForm.FormD
+                    || normalizationForm == NormalizationForm.FormKD
+                )
                     return this;
             }
             return Normalization.Normalize(this, normalizationForm);
@@ -745,7 +838,10 @@ namespace System
             {
                 if ((uint)index >= (uint)_stringLength)
                     ThrowHelper.ThrowIndexOutOfRangeException();
-                return Unsafe.Add(ref _firstChar, (nint)(uint)index /* force zero-extension */);
+                return Unsafe.Add(
+                    ref _firstChar,
+                    (nint)(uint)index /* force zero-extension */
+                );
             }
         }
 
@@ -772,7 +868,11 @@ namespace System
             return s;
         }
 
-        static bool IParsable<string>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(returnValue: false)] out string result)
+        static bool IParsable<string>.TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            [MaybeNullWhen(returnValue: false)] out string result
+        )
         {
             result = s;
             return s is not null;
@@ -791,7 +891,11 @@ namespace System
             return s.ToString();
         }
 
-        static bool ISpanParsable<string>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, [MaybeNullWhen(returnValue: false)] out string result)
+        static bool ISpanParsable<string>.TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            [MaybeNullWhen(returnValue: false)] out string result
+        )
         {
             if (s.Length <= MaxLength)
             {

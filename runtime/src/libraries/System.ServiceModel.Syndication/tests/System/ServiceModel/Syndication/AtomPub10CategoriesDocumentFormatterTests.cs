@@ -41,15 +41,24 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullDocumentToWrite_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("documentToWrite", () => new AtomPub10CategoriesDocumentFormatter(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "documentToWrite",
+                () => new AtomPub10CategoriesDocumentFormatter(null)
+            );
         }
 
         [Theory]
         [InlineData(typeof(InlineCategoriesDocument), typeof(ReferencedCategoriesDocument))]
-        [InlineData(typeof(InlineCategoriesDocumentSubclass), typeof(ReferencedCategoriesDocumentSubclass))]
+        [InlineData(
+            typeof(InlineCategoriesDocumentSubclass),
+            typeof(ReferencedCategoriesDocumentSubclass)
+        )]
         public void Ctor_Type_Type(Type inlineDocumentType, Type referencedDocumentType)
         {
-            var formatter = new AtomPub10CategoriesDocumentFormatter(inlineDocumentType, referencedDocumentType);
+            var formatter = new AtomPub10CategoriesDocumentFormatter(
+                inlineDocumentType,
+                referencedDocumentType
+            );
             Assert.Null(formatter.Document);
             Assert.Equal("http://www.w3.org/2007/app", formatter.Version);
         }
@@ -57,25 +66,50 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullInlineDocumentType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("inlineDocumentType", () => new AtomPub10CategoriesDocumentFormatter(null, typeof(ReferencedCategoriesDocument)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "inlineDocumentType",
+                () =>
+                    new AtomPub10CategoriesDocumentFormatter(
+                        null,
+                        typeof(ReferencedCategoriesDocument)
+                    )
+            );
         }
 
         [Fact]
         public void Ctor_InvlaidInlineDocumentType_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("inlineDocumentType", () => new AtomPub10CategoriesDocumentFormatter(typeof(int), typeof(ReferencedCategoriesDocument)));
+            AssertExtensions.Throws<ArgumentException>(
+                "inlineDocumentType",
+                () =>
+                    new AtomPub10CategoriesDocumentFormatter(
+                        typeof(int),
+                        typeof(ReferencedCategoriesDocument)
+                    )
+            );
         }
 
         [Fact]
         public void Ctor_NullReferencedDocumentType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("referencedDocumentType", () => new AtomPub10CategoriesDocumentFormatter(typeof(InlineCategoriesDocument), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "referencedDocumentType",
+                () =>
+                    new AtomPub10CategoriesDocumentFormatter(typeof(InlineCategoriesDocument), null)
+            );
         }
 
         [Fact]
         public void Ctor_InvalidReferencedDocumentType_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("referencedDocumentType", () => new AtomPub10CategoriesDocumentFormatter(typeof(InlineCategoriesDocument), typeof(int)));
+            AssertExtensions.Throws<ArgumentException>(
+                "referencedDocumentType",
+                () =>
+                    new AtomPub10CategoriesDocumentFormatter(
+                        typeof(InlineCategoriesDocument),
+                        typeof(int)
+                    )
+            );
         }
 
         [Fact]
@@ -91,40 +125,66 @@ namespace System.ServiceModel.Syndication.Tests
             yield return new object[]
             {
                 new InlineCategoriesDocument(),
-                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />"
+                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />",
             };
 
             // Full InlineCategoriesDocument
-            var fullSyndicationCategory = new SyndicationCategory("category_name", "category_scheme", "category_label");
-            fullSyndicationCategory.AttributeExtensions.Add(new XmlQualifiedName("category_name1"), null);
-            fullSyndicationCategory.AttributeExtensions.Add(new XmlQualifiedName("category_name2", "category_namespace"), "");
-            fullSyndicationCategory.AttributeExtensions.Add(new XmlQualifiedName("category_name3", "category_namespace"), "category_value");
-            fullSyndicationCategory.AttributeExtensions.Add(new XmlQualifiedName("category_name4", "xmlns"), "");
+            var fullSyndicationCategory = new SyndicationCategory(
+                "category_name",
+                "category_scheme",
+                "category_label"
+            );
+            fullSyndicationCategory.AttributeExtensions.Add(
+                new XmlQualifiedName("category_name1"),
+                null
+            );
+            fullSyndicationCategory.AttributeExtensions.Add(
+                new XmlQualifiedName("category_name2", "category_namespace"),
+                ""
+            );
+            fullSyndicationCategory.AttributeExtensions.Add(
+                new XmlQualifiedName("category_name3", "category_namespace"),
+                "category_value"
+            );
+            fullSyndicationCategory.AttributeExtensions.Add(
+                new XmlQualifiedName("category_name4", "xmlns"),
+                ""
+            );
 
             fullSyndicationCategory.ElementExtensions.Add(new ExtensionObject { Value = 10 });
 
-            var fullInlineCategoriesDocument = new InlineCategoriesDocument(new SyndicationCategory[]
-            {
-                new SyndicationCategory(),
-                fullSyndicationCategory
-            })
+            var fullInlineCategoriesDocument = new InlineCategoriesDocument(
+                new SyndicationCategory[] { new SyndicationCategory(), fullSyndicationCategory }
+            )
             {
                 BaseUri = new Uri("http://inlinecategories_url.com"),
                 Language = "inlinecategories_Language",
                 IsFixed = true,
-                Scheme = "inlinecategories_scheme"
+                Scheme = "inlinecategories_scheme",
             };
-            fullInlineCategoriesDocument.AttributeExtensions.Add(new XmlQualifiedName("inlinecategories_name1"), null);
-            fullInlineCategoriesDocument.AttributeExtensions.Add(new XmlQualifiedName("inlinecategories_name2", "inlinecategories_namespace"), "");
-            fullInlineCategoriesDocument.AttributeExtensions.Add(new XmlQualifiedName("inlinecategories_name3", "inlinecategories_namespace"), "inlinecategories_value");
-            fullInlineCategoriesDocument.AttributeExtensions.Add(new XmlQualifiedName("inlinecategories_name4", "xmlns"), "");
+            fullInlineCategoriesDocument.AttributeExtensions.Add(
+                new XmlQualifiedName("inlinecategories_name1"),
+                null
+            );
+            fullInlineCategoriesDocument.AttributeExtensions.Add(
+                new XmlQualifiedName("inlinecategories_name2", "inlinecategories_namespace"),
+                ""
+            );
+            fullInlineCategoriesDocument.AttributeExtensions.Add(
+                new XmlQualifiedName("inlinecategories_name3", "inlinecategories_namespace"),
+                "inlinecategories_value"
+            );
+            fullInlineCategoriesDocument.AttributeExtensions.Add(
+                new XmlQualifiedName("inlinecategories_name4", "xmlns"),
+                ""
+            );
 
             fullInlineCategoriesDocument.ElementExtensions.Add(new ExtensionObject { Value = 10 });
 
             yield return new object[]
             {
                 fullInlineCategoriesDocument,
-@"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xml:base=""http://inlinecategories_url.com/"" xml:lang=""inlinecategories_Language"" scheme=""inlinecategories_scheme"" fixed=""yes"" inlinecategories_name1="""" d1p1:inlinecategories_name2="""" d1p1:inlinecategories_name3=""inlinecategories_value"" d1p2:inlinecategories_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""inlinecategories_namespace"" xmlns:app=""http://www.w3.org/2007/app"">
+                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xml:base=""http://inlinecategories_url.com/"" xml:lang=""inlinecategories_Language"" scheme=""inlinecategories_scheme"" fixed=""yes"" inlinecategories_name1="""" d1p1:inlinecategories_name2="""" d1p1:inlinecategories_name3=""inlinecategories_value"" d1p2:inlinecategories_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""inlinecategories_namespace"" xmlns:app=""http://www.w3.org/2007/app"">
     <a10:category term="""" />
     <a10:category category_name1="""" d2p1:category_name2="""" d2p1:category_name3=""category_value"" d1p2:category_name4="""" term=""category_name"" label=""category_label"" scheme=""category_scheme"" xmlns:d2p1=""category_namespace"">
         <AtomPub10CategoriesDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
@@ -134,53 +194,75 @@ namespace System.ServiceModel.Syndication.Tests
     <AtomPub10CategoriesDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
         <Value>10</Value>
     </AtomPub10CategoriesDocumentFormatterTests.ExtensionObject>
-</app:categories>"
+</app:categories>",
             };
 
             // Empty ReferencedCategoriesDocument.
             yield return new object[]
             {
                 new ReferencedCategoriesDocument(),
-                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />"
+                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />",
             };
 
             // Full ReferencedCategoriesDocument.
-            var fullReferenceCategoriesDocument = new ReferencedCategoriesDocument(new Uri("http://referencecategories_link.com"))
+            var fullReferenceCategoriesDocument = new ReferencedCategoriesDocument(
+                new Uri("http://referencecategories_link.com")
+            )
             {
                 BaseUri = new Uri("http://referencecategories_url.com"),
-                Language = "referencecategories_language"
+                Language = "referencecategories_language",
             };
-            fullReferenceCategoriesDocument.AttributeExtensions.Add(new XmlQualifiedName("referencecategories_name1"), null);
-            fullReferenceCategoriesDocument.AttributeExtensions.Add(new XmlQualifiedName("referencecategories_name2", "referencecategories_namespace"), "");
-            fullReferenceCategoriesDocument.AttributeExtensions.Add(new XmlQualifiedName("referencecategories_name3", "referencecategories_namespace"), "referencecategories_value");
-            fullReferenceCategoriesDocument.AttributeExtensions.Add(new XmlQualifiedName("referencecategories_name4", "xmlns"), "");
+            fullReferenceCategoriesDocument.AttributeExtensions.Add(
+                new XmlQualifiedName("referencecategories_name1"),
+                null
+            );
+            fullReferenceCategoriesDocument.AttributeExtensions.Add(
+                new XmlQualifiedName("referencecategories_name2", "referencecategories_namespace"),
+                ""
+            );
+            fullReferenceCategoriesDocument.AttributeExtensions.Add(
+                new XmlQualifiedName("referencecategories_name3", "referencecategories_namespace"),
+                "referencecategories_value"
+            );
+            fullReferenceCategoriesDocument.AttributeExtensions.Add(
+                new XmlQualifiedName("referencecategories_name4", "xmlns"),
+                ""
+            );
 
-            fullReferenceCategoriesDocument.ElementExtensions.Add(new ExtensionObject { Value = 10 });
+            fullReferenceCategoriesDocument.ElementExtensions.Add(
+                new ExtensionObject { Value = 10 }
+            );
 
             yield return new object[]
             {
                 fullReferenceCategoriesDocument,
-@"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xml:base=""http://referencecategories_url.com/"" xml:lang=""referencecategories_language"" href=""http://referencecategories_link.com/"" referencecategories_name1="""" d1p1:referencecategories_name2="""" d1p1:referencecategories_name3=""referencecategories_value"" d1p2:referencecategories_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""referencecategories_namespace"" xmlns:app=""http://www.w3.org/2007/app"">
+                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xml:base=""http://referencecategories_url.com/"" xml:lang=""referencecategories_language"" href=""http://referencecategories_link.com/"" referencecategories_name1="""" d1p1:referencecategories_name2="""" d1p1:referencecategories_name3=""referencecategories_value"" d1p2:referencecategories_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""referencecategories_namespace"" xmlns:app=""http://www.w3.org/2007/app"">
     <AtomPub10CategoriesDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
         <Value>10</Value>
     </AtomPub10CategoriesDocumentFormatterTests.ExtensionObject>
-</app:categories>"
+</app:categories>",
             };
         }
 
         [Theory]
         [MemberData(nameof(WriteTo_TestData))]
-        public void WriteTo_HasDocument_SerializesExpected(CategoriesDocument document, string expected)
+        public void WriteTo_HasDocument_SerializesExpected(
+            CategoriesDocument document,
+            string expected
+        )
         {
             var formatter = new AtomPub10CategoriesDocumentFormatter(document);
             CompareHelper.AssertEqualWriteOutput(expected, writer => formatter.WriteTo(writer));
             CompareHelper.AssertEqualWriteOutput(expected, writer => document.Save(writer));
-            CompareHelper.AssertEqualWriteOutput(expected, writer =>
-            {
-                writer.WriteStartElement("app", "categories", "http://www.w3.org/2007/app");
-                ((IXmlSerializable)formatter).WriteXml(writer);
-                writer.WriteEndElement();
-            });
+            CompareHelper.AssertEqualWriteOutput(
+                expected,
+                writer =>
+                {
+                    writer.WriteStartElement("app", "categories", "http://www.w3.org/2007/app");
+                    ((IXmlSerializable)formatter).WriteXml(writer);
+                    writer.WriteEndElement();
+                }
+            );
         }
 
         [Fact]
@@ -205,7 +287,10 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteXml_NullWriter_ThrowsArgumentNullException()
         {
             IXmlSerializable formatter = new AtomPub10CategoriesDocumentFormatter();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => formatter.WriteXml(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => formatter.WriteXml(null)
+            );
         }
 
         [Fact]
@@ -222,8 +307,16 @@ namespace System.ServiceModel.Syndication.Tests
         public static IEnumerable<object[]> CanRead_TestData()
         {
             yield return new object[] { @"<categories />", false };
-            yield return new object[] { @"<app:different xmlns:app=""http://www.w3.org/2007/app"">", false };
-            yield return new object[] { @"<app:categories xmlns:app=""http://www.w3.org/2007/app"" />", true };
+            yield return new object[]
+            {
+                @"<app:different xmlns:app=""http://www.w3.org/2007/app"">",
+                false,
+            };
+            yield return new object[]
+            {
+                @"<app:categories xmlns:app=""http://www.w3.org/2007/app"" />",
+                true,
+            };
         }
 
         [Theory]
@@ -249,7 +342,7 @@ namespace System.ServiceModel.Syndication.Tests
         public void ReadFrom_InlineCategoriesDocument_ReturnsExpected()
         {
             string xmlString =
-@"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xml:base=""http://inlinecategories_url.com/"" xml:lang=""inlinecategories_Language"" scheme=""inlinecategories_scheme"" fixed=""yes"" inlinecategories_name1="""" d1p1:inlinecategories_name2="""" d1p1:inlinecategories_name3=""inlinecategories_value"" d1p2:inlinecategories_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""inlinecategories_namespace"" xmlns:app=""http://www.w3.org/2007/app"">
+                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xml:base=""http://inlinecategories_url.com/"" xml:lang=""inlinecategories_Language"" scheme=""inlinecategories_scheme"" fixed=""yes"" inlinecategories_name1="""" d1p1:inlinecategories_name2="""" d1p1:inlinecategories_name3=""inlinecategories_value"" d1p2:inlinecategories_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""inlinecategories_namespace"" xmlns:app=""http://www.w3.org/2007/app"">
     <a10:category term="""" />
     <a10:category category_name1="""" d2p1:category_name2="""" d2p1:category_name3=""category_value"" d1p2:category_name4="""" term=""category_name"" label=""category_label"" scheme=""category_scheme"" xmlns:d2p1=""category_namespace"">
         <AtomPub10CategoriesDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
@@ -260,47 +353,99 @@ namespace System.ServiceModel.Syndication.Tests
         <Value>10</Value>
     </AtomPub10CategoriesDocumentFormatterTests.ExtensionObject>
 </app:categories>";
-            VerifyRead<InlineCategoriesDocument>(xmlString, document =>
-            {
-                Assert.Equal(4, document.AttributeExtensions.Count);
-                Assert.Equal("", document.AttributeExtensions[new XmlQualifiedName("inlinecategories_name1")]);
-                Assert.Equal("", document.AttributeExtensions[new XmlQualifiedName("inlinecategories_name2", "inlinecategories_namespace")]);
-                Assert.Equal("inlinecategories_value", document.AttributeExtensions[new XmlQualifiedName("inlinecategories_name3", "inlinecategories_namespace")]);
-                Assert.Equal("", document.AttributeExtensions[new XmlQualifiedName("inlinecategories_name4", "xmlns")]);
-                Assert.Equal(new Uri("http://inlinecategories_url.com/"), document.BaseUri);
-                Assert.Equal(2, document.Categories.Count);
-                Assert.Equal(1, document.ElementExtensions.Count);
-                Assert.Equal(10, document.ElementExtensions[0].GetObject<ExtensionObject>().Value);
-                Assert.True(document.IsFixed);
-                Assert.Equal("inlinecategories_Language", document.Language);
-                Assert.Equal("inlinecategories_scheme", document.Scheme);
+            VerifyRead<InlineCategoriesDocument>(
+                xmlString,
+                document =>
+                {
+                    Assert.Equal(4, document.AttributeExtensions.Count);
+                    Assert.Equal(
+                        "",
+                        document.AttributeExtensions[new XmlQualifiedName("inlinecategories_name1")]
+                    );
+                    Assert.Equal(
+                        "",
+                        document.AttributeExtensions[
+                            new XmlQualifiedName(
+                                "inlinecategories_name2",
+                                "inlinecategories_namespace"
+                            )
+                        ]
+                    );
+                    Assert.Equal(
+                        "inlinecategories_value",
+                        document.AttributeExtensions[
+                            new XmlQualifiedName(
+                                "inlinecategories_name3",
+                                "inlinecategories_namespace"
+                            )
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        document.AttributeExtensions[
+                            new XmlQualifiedName("inlinecategories_name4", "xmlns")
+                        ]
+                    );
+                    Assert.Equal(new Uri("http://inlinecategories_url.com/"), document.BaseUri);
+                    Assert.Equal(2, document.Categories.Count);
+                    Assert.Equal(1, document.ElementExtensions.Count);
+                    Assert.Equal(
+                        10,
+                        document.ElementExtensions[0].GetObject<ExtensionObject>().Value
+                    );
+                    Assert.True(document.IsFixed);
+                    Assert.Equal("inlinecategories_Language", document.Language);
+                    Assert.Equal("inlinecategories_scheme", document.Scheme);
 
-                SyndicationCategory firstCategory = document.Categories[0];
-                Assert.Empty(firstCategory.AttributeExtensions);
-                Assert.Empty(firstCategory.ElementExtensions);
-                Assert.Empty(firstCategory.Name);
-                Assert.Equal("inlinecategories_scheme", firstCategory.Scheme);
-                Assert.Null(firstCategory.Label);
+                    SyndicationCategory firstCategory = document.Categories[0];
+                    Assert.Empty(firstCategory.AttributeExtensions);
+                    Assert.Empty(firstCategory.ElementExtensions);
+                    Assert.Empty(firstCategory.Name);
+                    Assert.Equal("inlinecategories_scheme", firstCategory.Scheme);
+                    Assert.Null(firstCategory.Label);
 
-                SyndicationCategory secondCategory = document.Categories[1];
-                Assert.Equal(4, secondCategory.AttributeExtensions.Count);
-                Assert.Equal("", secondCategory.AttributeExtensions[new XmlQualifiedName("category_name1")]);
-                Assert.Equal("", secondCategory.AttributeExtensions[new XmlQualifiedName("category_name2", "category_namespace")]);
-                Assert.Equal("category_value", secondCategory.AttributeExtensions[new XmlQualifiedName("category_name3", "category_namespace")]);
-                Assert.Equal("", secondCategory.AttributeExtensions[new XmlQualifiedName("category_name4", "xmlns")]);
-                Assert.Equal(1, secondCategory.ElementExtensions.Count);
-                Assert.Equal(10, secondCategory.ElementExtensions[0].GetObject<ExtensionObject>().Value);
-                Assert.Equal("category_name", secondCategory.Name);
-                Assert.Equal("category_scheme", secondCategory.Scheme);
-                Assert.Equal("category_label", secondCategory.Label);
-            });
+                    SyndicationCategory secondCategory = document.Categories[1];
+                    Assert.Equal(4, secondCategory.AttributeExtensions.Count);
+                    Assert.Equal(
+                        "",
+                        secondCategory.AttributeExtensions[new XmlQualifiedName("category_name1")]
+                    );
+                    Assert.Equal(
+                        "",
+                        secondCategory.AttributeExtensions[
+                            new XmlQualifiedName("category_name2", "category_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "category_value",
+                        secondCategory.AttributeExtensions[
+                            new XmlQualifiedName("category_name3", "category_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        secondCategory.AttributeExtensions[
+                            new XmlQualifiedName("category_name4", "xmlns")
+                        ]
+                    );
+                    Assert.Equal(1, secondCategory.ElementExtensions.Count);
+                    Assert.Equal(
+                        10,
+                        secondCategory.ElementExtensions[0].GetObject<ExtensionObject>().Value
+                    );
+                    Assert.Equal("category_name", secondCategory.Name);
+                    Assert.Equal("category_scheme", secondCategory.Scheme);
+                    Assert.Equal("category_label", secondCategory.Label);
+                }
+            );
         }
 
         [Fact]
         public void Read_InlineCategoriesDocumentTryParseTrue_ReturnsExpected()
         {
-            using (var stringReader = new StringReader(
-@"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xml:base=""http://inlinecategories_url.com/"" xml:lang=""inlinecategories_Language"" scheme=""inlinecategories_scheme"" fixed=""yes"" inlinecategories_name1="""" d1p1:inlinecategories_name2="""" d1p1:inlinecategories_name3=""inlinecategories_value"" d1p2:inlinecategories_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""inlinecategories_namespace"" xmlns:app=""http://www.w3.org/2007/app"">
+            using (
+                var stringReader = new StringReader(
+                    @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xml:base=""http://inlinecategories_url.com/"" xml:lang=""inlinecategories_Language"" scheme=""inlinecategories_scheme"" fixed=""yes"" inlinecategories_name1="""" d1p1:inlinecategories_name2="""" d1p1:inlinecategories_name3=""inlinecategories_value"" d1p2:inlinecategories_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""inlinecategories_namespace"" xmlns:app=""http://www.w3.org/2007/app"">
     <a10:category term="""" />
     <a10:category category_name1="""" d2p1:category_name2="""" d2p1:category_name3=""category_value"" d1p2:category_name4="""" term=""category_name"" label=""category_label"" scheme=""category_scheme"" xmlns:d2p1=""category_namespace"">
         <AtomPub10CategoriesDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
@@ -310,13 +455,19 @@ namespace System.ServiceModel.Syndication.Tests
     <AtomPub10CategoriesDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
         <Value>10</Value>
     </AtomPub10CategoriesDocumentFormatterTests.ExtensionObject>
-</app:categories>"))
+</app:categories>"
+                )
+            )
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
-                var formatter = new AtomPub10CategoriesDocumentFormatter(typeof(InlineCategoriesDocumentTryParseTrueSubclass), typeof(ReferencedCategoriesDocumentTryParseTrueSubclass));
+                var formatter = new AtomPub10CategoriesDocumentFormatter(
+                    typeof(InlineCategoriesDocumentTryParseTrueSubclass),
+                    typeof(ReferencedCategoriesDocumentTryParseTrueSubclass)
+                );
                 formatter.ReadFrom(reader);
 
-                InlineCategoriesDocumentTryParseTrueSubclass document = Assert.IsType<InlineCategoriesDocumentTryParseTrueSubclass>(formatter.Document);
+                InlineCategoriesDocumentTryParseTrueSubclass document =
+                    Assert.IsType<InlineCategoriesDocumentTryParseTrueSubclass>(formatter.Document);
                 Assert.Empty(document.AttributeExtensions);
                 Assert.Equal(new Uri("http://inlinecategories_url.com/"), document.BaseUri);
                 Assert.Equal(2, document.Categories.Count);
@@ -345,41 +496,82 @@ namespace System.ServiceModel.Syndication.Tests
         public void ReadFrom_ReferencedCategoriesDocument_ReturnsExpected()
         {
             string xmlString =
-@"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xml:base=""http://referencecategories_url.com/"" xml:lang=""referencecategories_language"" href=""http://referencecategories_link.com/"" referencecategories_name1="""" d1p1:referencecategories_name2="""" d1p1:referencecategories_name3=""referencecategories_value"" d1p2:referencecategories_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""referencecategories_namespace"" xmlns:app=""http://www.w3.org/2007/app"">
+                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xml:base=""http://referencecategories_url.com/"" xml:lang=""referencecategories_language"" href=""http://referencecategories_link.com/"" referencecategories_name1="""" d1p1:referencecategories_name2="""" d1p1:referencecategories_name3=""referencecategories_value"" d1p2:referencecategories_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""referencecategories_namespace"" xmlns:app=""http://www.w3.org/2007/app"">
     <AtomPub10CategoriesDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
         <Value>10</Value>
     </AtomPub10CategoriesDocumentFormatterTests.ExtensionObject>
 </app:categories>";
-            VerifyRead<ReferencedCategoriesDocument>(xmlString, document =>
-            {
-                Assert.Equal(4, document.AttributeExtensions.Count);
-                Assert.Equal("", document.AttributeExtensions[new XmlQualifiedName("referencecategories_name1")]);
-                Assert.Equal("", document.AttributeExtensions[new XmlQualifiedName("referencecategories_name2", "referencecategories_namespace")]);
-                Assert.Equal("referencecategories_value", document.AttributeExtensions[new XmlQualifiedName("referencecategories_name3", "referencecategories_namespace")]);
-                Assert.Equal("", document.AttributeExtensions[new XmlQualifiedName("referencecategories_name4", "xmlns")]);
-                Assert.Equal(new Uri("http://referencecategories_url.com/"), document.BaseUri);
-                Assert.Equal(1, document.ElementExtensions.Count);
-                Assert.Equal(10, document.ElementExtensions[0].GetObject<ExtensionObject>().Value);
-                Assert.Equal("referencecategories_language", document.Language);
-                Assert.Equal(new Uri("http://referencecategories_link.com"), document.Link);
-            });
+            VerifyRead<ReferencedCategoriesDocument>(
+                xmlString,
+                document =>
+                {
+                    Assert.Equal(4, document.AttributeExtensions.Count);
+                    Assert.Equal(
+                        "",
+                        document.AttributeExtensions[
+                            new XmlQualifiedName("referencecategories_name1")
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        document.AttributeExtensions[
+                            new XmlQualifiedName(
+                                "referencecategories_name2",
+                                "referencecategories_namespace"
+                            )
+                        ]
+                    );
+                    Assert.Equal(
+                        "referencecategories_value",
+                        document.AttributeExtensions[
+                            new XmlQualifiedName(
+                                "referencecategories_name3",
+                                "referencecategories_namespace"
+                            )
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        document.AttributeExtensions[
+                            new XmlQualifiedName("referencecategories_name4", "xmlns")
+                        ]
+                    );
+                    Assert.Equal(new Uri("http://referencecategories_url.com/"), document.BaseUri);
+                    Assert.Equal(1, document.ElementExtensions.Count);
+                    Assert.Equal(
+                        10,
+                        document.ElementExtensions[0].GetObject<ExtensionObject>().Value
+                    );
+                    Assert.Equal("referencecategories_language", document.Language);
+                    Assert.Equal(new Uri("http://referencecategories_link.com"), document.Link);
+                }
+            );
         }
 
         [Fact]
         public void ReadFrom_ReferencedCategoriesDocumentTryParseTrue_ReturnsExpected()
         {
-            using (var stringReader = new StringReader(
-@"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xml:base=""http://referencecategories_url.com/"" xml:lang=""referencecategories_language"" href=""http://referencecategories_link.com/"" referencecategories_name1="""" d1p1:referencecategories_name2="""" d1p1:referencecategories_name3=""referencecategories_value"" d1p2:referencecategories_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""referencecategories_namespace"" xmlns:app=""http://www.w3.org/2007/app"">
+            using (
+                var stringReader = new StringReader(
+                    @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xml:base=""http://referencecategories_url.com/"" xml:lang=""referencecategories_language"" href=""http://referencecategories_link.com/"" referencecategories_name1="""" d1p1:referencecategories_name2="""" d1p1:referencecategories_name3=""referencecategories_value"" d1p2:referencecategories_name4="""" xmlns:d1p2=""xmlns"" xmlns:d1p1=""referencecategories_namespace"" xmlns:app=""http://www.w3.org/2007/app"">
     <AtomPub10CategoriesDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
         <Value>10</Value>
     </AtomPub10CategoriesDocumentFormatterTests.ExtensionObject>
-</app:categories>"))
+</app:categories>"
+                )
+            )
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
-                var formatter = new AtomPub10CategoriesDocumentFormatter(typeof(InlineCategoriesDocumentTryParseTrueSubclass), typeof(ReferencedCategoriesDocumentTryParseTrueSubclass));
+                var formatter = new AtomPub10CategoriesDocumentFormatter(
+                    typeof(InlineCategoriesDocumentTryParseTrueSubclass),
+                    typeof(ReferencedCategoriesDocumentTryParseTrueSubclass)
+                );
                 formatter.ReadFrom(reader);
 
-                ReferencedCategoriesDocumentTryParseTrueSubclass document = Assert.IsType<ReferencedCategoriesDocumentTryParseTrueSubclass>(formatter.Document);
+                ReferencedCategoriesDocumentTryParseTrueSubclass document =
+                    Assert.IsType<ReferencedCategoriesDocumentTryParseTrueSubclass>(
+                        formatter.Document
+                    );
                 Assert.Empty(document.AttributeExtensions);
                 Assert.Equal(new Uri("http://referencecategories_url.com/"), document.BaseUri);
                 Assert.Empty(document.ElementExtensions);
@@ -391,19 +583,23 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void ReadFrom_EmptyCategory_ReturnsExpected()
         {
-            VerifyRead<InlineCategoriesDocument>(@"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />", document =>
-            {
-                Assert.Empty(document.AttributeExtensions);
-                Assert.Null(document.BaseUri);
-                Assert.Empty(document.Categories);
-                Assert.Empty(document.ElementExtensions);
-                Assert.False(document.IsFixed);
-                Assert.Null(document.Language);
-                Assert.Null(document.Scheme);
-            });
+            VerifyRead<InlineCategoriesDocument>(
+                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />",
+                document =>
+                {
+                    Assert.Empty(document.AttributeExtensions);
+                    Assert.Null(document.BaseUri);
+                    Assert.Empty(document.Categories);
+                    Assert.Empty(document.ElementExtensions);
+                    Assert.False(document.IsFixed);
+                    Assert.Null(document.Language);
+                    Assert.Null(document.Scheme);
+                }
+            );
         }
 
-        private static void VerifyRead<T>(string xmlString, Action<T> verifyAction) where T : CategoriesDocument
+        private static void VerifyRead<T>(string xmlString, Action<T> verifyAction)
+            where T : CategoriesDocument
         {
             // ReadFrom.
             using (var stringReader = new StringReader(xmlString))
@@ -420,17 +616,22 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringReader = new StringReader(xmlString))
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
-                var formatter = new AtomPub10CategoriesDocumentFormatter(typeof(InlineCategoriesDocumentSubclass), typeof(ReferencedCategoriesDocumentSubclass));
+                var formatter = new AtomPub10CategoriesDocumentFormatter(
+                    typeof(InlineCategoriesDocumentSubclass),
+                    typeof(ReferencedCategoriesDocumentSubclass)
+                );
                 formatter.ReadFrom(reader);
 
                 if (typeof(T) == typeof(InlineCategoriesDocument))
                 {
-                    InlineCategoriesDocumentSubclass document = Assert.IsType<InlineCategoriesDocumentSubclass>(formatter.Document);
+                    InlineCategoriesDocumentSubclass document =
+                        Assert.IsType<InlineCategoriesDocumentSubclass>(formatter.Document);
                     verifyAction(document as T);
                 }
                 else
                 {
-                    ReferencedCategoriesDocumentSubclass document = Assert.IsType<ReferencedCategoriesDocumentSubclass>(formatter.Document);
+                    ReferencedCategoriesDocumentSubclass document =
+                        Assert.IsType<ReferencedCategoriesDocumentSubclass>(formatter.Document);
                     verifyAction(document as T);
                 }
             }
@@ -454,17 +655,22 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 reader.MoveToContent();
 
-                var formatter = new AtomPub10CategoriesDocumentFormatter(typeof(InlineCategoriesDocumentSubclass), typeof(ReferencedCategoriesDocumentSubclass));
+                var formatter = new AtomPub10CategoriesDocumentFormatter(
+                    typeof(InlineCategoriesDocumentSubclass),
+                    typeof(ReferencedCategoriesDocumentSubclass)
+                );
                 ((IXmlSerializable)formatter).ReadXml(reader);
 
                 if (typeof(T) == typeof(InlineCategoriesDocument))
                 {
-                    InlineCategoriesDocumentSubclass document = Assert.IsType<InlineCategoriesDocumentSubclass>(formatter.Document);
+                    InlineCategoriesDocumentSubclass document =
+                        Assert.IsType<InlineCategoriesDocumentSubclass>(formatter.Document);
                     verifyAction(document as T);
                 }
                 else
                 {
-                    ReferencedCategoriesDocumentSubclass document = Assert.IsType<ReferencedCategoriesDocumentSubclass>(formatter.Document);
+                    ReferencedCategoriesDocumentSubclass document =
+                        Assert.IsType<ReferencedCategoriesDocumentSubclass>(formatter.Document);
                     verifyAction(document as T);
                 }
             }
@@ -482,12 +688,19 @@ namespace System.ServiceModel.Syndication.Tests
         public void ReadFrom_NullReader_ThrowsArgumentNullException()
         {
             var formatter = new AtomPub10CategoriesDocumentFormatter();
-            AssertExtensions.Throws<ArgumentNullException>("reader", () => formatter.ReadFrom(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "reader",
+                () => formatter.ReadFrom(null)
+            );
         }
 
         [Theory]
-        [InlineData(@"<app:different xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />")]
-        [InlineData(@"<categories xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />")]
+        [InlineData(
+            @"<app:different xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />"
+        )]
+        [InlineData(
+            @"<categories xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />"
+        )]
         public void ReadFrom_CantRead_ThrowsXmlException(string xmlString)
         {
             using (var stringReader = new StringReader(xmlString))
@@ -525,7 +738,9 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateInlineCategoriesDocument_NonGeneric_Success()
         {
             var formatter = new Formatter();
-            InlineCategoriesDocument document = Assert.IsType<InlineCategoriesDocument>(formatter.CreateInlineCategoriesDocumentEntryPoint());
+            InlineCategoriesDocument document = Assert.IsType<InlineCategoriesDocument>(
+                formatter.CreateInlineCategoriesDocumentEntryPoint()
+            );
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.Categories);
@@ -534,8 +749,13 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Null(document.Language);
             Assert.Null(document.Scheme);
 
-            var typedFormatter = new Formatter(typeof(InlineCategoriesDocumentSubclass), typeof(ReferencedCategoriesDocumentSubclass));
-            document = Assert.IsType<InlineCategoriesDocumentSubclass>(typedFormatter.CreateInlineCategoriesDocumentEntryPoint());
+            var typedFormatter = new Formatter(
+                typeof(InlineCategoriesDocumentSubclass),
+                typeof(ReferencedCategoriesDocumentSubclass)
+            );
+            document = Assert.IsType<InlineCategoriesDocumentSubclass>(
+                typedFormatter.CreateInlineCategoriesDocumentEntryPoint()
+            );
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.Categories);
@@ -549,15 +769,22 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateReferencedCategoriesDocument_NonGeneric_Success()
         {
             var formatter = new Formatter();
-            ReferencedCategoriesDocument document = Assert.IsType<ReferencedCategoriesDocument>(formatter.CreateReferencedCategoriesDocumentEntryPoint());
+            ReferencedCategoriesDocument document = Assert.IsType<ReferencedCategoriesDocument>(
+                formatter.CreateReferencedCategoriesDocumentEntryPoint()
+            );
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.ElementExtensions);
             Assert.Null(document.Language);
             Assert.Null(document.Link);
 
-            var typedFormatter = new Formatter(typeof(InlineCategoriesDocumentSubclass), typeof(ReferencedCategoriesDocumentSubclass));
-            document = Assert.IsType<ReferencedCategoriesDocumentSubclass>(typedFormatter.CreateReferencedCategoriesDocumentEntryPoint());
+            var typedFormatter = new Formatter(
+                typeof(InlineCategoriesDocumentSubclass),
+                typeof(ReferencedCategoriesDocumentSubclass)
+            );
+            document = Assert.IsType<ReferencedCategoriesDocumentSubclass>(
+                typedFormatter.CreateReferencedCategoriesDocumentEntryPoint()
+            );
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.ElementExtensions);
@@ -571,7 +798,12 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class InlineCategoriesDocumentTryParseTrueSubclass : InlineCategoriesDocument
         {
-            protected override bool TryParseAttribute(string name, string ns, string value, string version) => true;
+            protected override bool TryParseAttribute(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => true;
 
             protected override bool TryParseElement(XmlReader reader, string version)
             {
@@ -579,12 +811,18 @@ namespace System.ServiceModel.Syndication.Tests
                 return true;
             }
 
-            protected override SyndicationCategory CreateCategory() => new SyndicationCategoryTryParseTrueSubclass();
+            protected override SyndicationCategory CreateCategory() =>
+                new SyndicationCategoryTryParseTrueSubclass();
         }
 
         public class SyndicationCategoryTryParseTrueSubclass : SyndicationCategory
         {
-            protected override bool TryParseAttribute(string name, string ns, string value, string version) => true;
+            protected override bool TryParseAttribute(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => true;
 
             protected override bool TryParseElement(XmlReader reader, string version)
             {
@@ -595,7 +833,12 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class ReferencedCategoriesDocumentTryParseTrueSubclass : ReferencedCategoriesDocument
         {
-            protected override bool TryParseAttribute(string name, string ns, string value, string version) => true;
+            protected override bool TryParseAttribute(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => true;
 
             protected override bool TryParseElement(XmlReader reader, string version)
             {
@@ -606,15 +849,20 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class Formatter : AtomPub10CategoriesDocumentFormatter
         {
-            public Formatter() : base() { }
+            public Formatter()
+                : base() { }
 
-            public Formatter(CategoriesDocument documentToWrite) : base(documentToWrite) { }
+            public Formatter(CategoriesDocument documentToWrite)
+                : base(documentToWrite) { }
 
-            public Formatter(Type inlineDocumentType, Type referencedDocumentType) : base(inlineDocumentType, referencedDocumentType) { }
+            public Formatter(Type inlineDocumentType, Type referencedDocumentType)
+                : base(inlineDocumentType, referencedDocumentType) { }
 
-            public InlineCategoriesDocument CreateInlineCategoriesDocumentEntryPoint() => CreateInlineCategoriesDocument();
+            public InlineCategoriesDocument CreateInlineCategoriesDocumentEntryPoint() =>
+                CreateInlineCategoriesDocument();
 
-            public ReferencedCategoriesDocument CreateReferencedCategoriesDocumentEntryPoint() => CreateReferencedCategoriesDocument();
+            public ReferencedCategoriesDocument CreateReferencedCategoriesDocumentEntryPoint() =>
+                CreateReferencedCategoriesDocument();
         }
 
         [DataContract]

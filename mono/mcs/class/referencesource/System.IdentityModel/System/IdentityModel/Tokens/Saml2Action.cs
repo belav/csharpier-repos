@@ -29,11 +29,11 @@ namespace System.IdentityModel.Tokens
             }
 
             // ==
-            // There is a discrepency between the schema and the text of the 
+            // There is a discrepency between the schema and the text of the
             // specification as to whether the Namespace attribute is optional
             // or required. The schema specifies required.
             // ==
-            // Per the SAML 2.0 errata the schema takes precedence over the text, 
+            // Per the SAML 2.0 errata the schema takes precedence over the text,
             // and the namespace attribute is required. This is errata item E36.
             // ==
             // SAML 2.0 errata at the time of this implementation:
@@ -46,7 +46,10 @@ namespace System.IdentityModel.Tokens
 
             if (!actionNamespace.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("actionNamespace", SR.GetString(SR.ID0013));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "actionNamespace",
+                    SR.GetString(SR.ID0013)
+                );
             }
 
             this.actionNamespace = actionNamespace;
@@ -59,11 +62,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public Uri Namespace
         {
-            get
-            { 
-                return this.actionNamespace; 
-            }
-
+            get { return this.actionNamespace; }
             set
             {
                 // See note in constructor about why this is required.
@@ -74,7 +73,10 @@ namespace System.IdentityModel.Tokens
 
                 if (!value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID0013));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID0013)
+                    );
                 }
 
                 this.actionNamespace = value;
@@ -82,16 +84,12 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the label for an action sought to be performed on the 
+        /// Gets or sets the label for an action sought to be performed on the
         /// specified resource. [Saml2Core, 2.7.4.2]
         /// </summary>
         public string Value
         {
-            get
-            { 
-                return this.value; 
-            }
-
+            get { return this.value; }
             set
             {
                 if (string.IsNullOrEmpty(value))

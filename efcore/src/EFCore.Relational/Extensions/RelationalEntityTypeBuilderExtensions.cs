@@ -72,9 +72,11 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static EntityTypeBuilder<TEntity> UseTpcMappingStrategy<TEntity>(this EntityTypeBuilder<TEntity> entityTypeBuilder)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).UseTpcMappingStrategy();
+    public static EntityTypeBuilder<TEntity> UseTpcMappingStrategy<TEntity>(
+        this EntityTypeBuilder<TEntity> entityTypeBuilder
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).UseTpcMappingStrategy();
 
     /// <summary>
     ///     Configures TPH as the mapping strategy for the derived types. All types will be mapped to the same database object.
@@ -85,9 +87,11 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static EntityTypeBuilder<TEntity> UseTphMappingStrategy<TEntity>(this EntityTypeBuilder<TEntity> entityTypeBuilder)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).UseTphMappingStrategy();
+    public static EntityTypeBuilder<TEntity> UseTphMappingStrategy<TEntity>(
+        this EntityTypeBuilder<TEntity> entityTypeBuilder
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).UseTphMappingStrategy();
 
     /// <summary>
     ///     Configures TPT as the mapping strategy for the derived types. Each type will be mapped to a different database object.
@@ -98,9 +102,11 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static EntityTypeBuilder<TEntity> UseTptMappingStrategy<TEntity>(this EntityTypeBuilder<TEntity> entityTypeBuilder)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).UseTptMappingStrategy();
+    public static EntityTypeBuilder<TEntity> UseTptMappingStrategy<TEntity>(
+        this EntityTypeBuilder<TEntity> entityTypeBuilder
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).UseTptMappingStrategy();
 
     /// <summary>
     ///     Sets the hierarchy mapping strategy.
@@ -118,7 +124,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? UseMappingStrategy(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? strategy,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetMappingStrategy(strategy, fromDataAnnotation))
         {
@@ -143,9 +150,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static bool CanSetMappingStrategy(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? strategy,
-        bool fromDataAnnotation = false)
-        => entityTypeBuilder.CanSetAnnotation
-            (RelationalAnnotationNames.MappingStrategy, strategy, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        entityTypeBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.MappingStrategy,
+            strategy,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Mark the table that this entity type is mapped to as excluded from migrations.
@@ -163,14 +174,23 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? ExcludeTableFromMigrations(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         bool? excludedFromMigrations,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
-        if (!entityTypeBuilder.CanExcludeTableFromMigrations(excludedFromMigrations, fromDataAnnotation))
+        if (
+            !entityTypeBuilder.CanExcludeTableFromMigrations(
+                excludedFromMigrations,
+                fromDataAnnotation
+            )
+        )
         {
             return null;
         }
 
-        entityTypeBuilder.Metadata.SetIsTableExcludedFromMigrations(excludedFromMigrations, fromDataAnnotation);
+        entityTypeBuilder.Metadata.SetIsTableExcludedFromMigrations(
+            excludedFromMigrations,
+            fromDataAnnotation
+        );
         return entityTypeBuilder;
     }
 
@@ -188,9 +208,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static bool CanExcludeTableFromMigrations(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         bool? excludedFromMigrations,
-        bool fromDataAnnotation = false)
-        => entityTypeBuilder.CanSetAnnotation
-            (RelationalAnnotationNames.IsTableExcludedFromMigrations, excludedFromMigrations, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        entityTypeBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.IsTableExcludedFromMigrations,
+            excludedFromMigrations,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures a SQL string used to provide data for the entity type.
@@ -203,7 +227,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder ToSqlQuery(
         this EntityTypeBuilder entityTypeBuilder,
-        string query)
+        string query
+    )
     {
         Check.NotNull(query, nameof(query));
 
@@ -223,9 +248,10 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> ToSqlQuery<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        string query)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)ToSqlQuery((EntityTypeBuilder)entityTypeBuilder, query);
+        string query
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)ToSqlQuery((EntityTypeBuilder)entityTypeBuilder, query);
 
     /// <summary>
     ///     Configures a SQL string used to provide data for the entity type.
@@ -242,7 +268,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? ToSqlQuery(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetSqlQuery(name, fromDataAnnotation))
         {
@@ -269,11 +296,16 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static bool CanSetSqlQuery(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
-        return entityTypeBuilder.CanSetAnnotation(RelationalAnnotationNames.SqlQuery, name, fromDataAnnotation);
+        return entityTypeBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.SqlQuery,
+            name,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -287,7 +319,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The function configuration builder.</returns>
     public static EntityTypeBuilder ToFunction(
         this EntityTypeBuilder entityTypeBuilder,
-        string? name)
+        string? name
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
@@ -307,7 +340,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The function configuration builder.</returns>
     public static EntityTypeBuilder ToFunction(
         this EntityTypeBuilder entityTypeBuilder,
-        MethodInfo? function)
+        MethodInfo? function
+    )
     {
         ToFunction(function, entityTypeBuilder.Metadata);
 
@@ -327,12 +361,18 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder ToFunction(
         this EntityTypeBuilder entityTypeBuilder,
         string name,
-        Action<TableValuedFunctionBuilder> configureFunction)
+        Action<TableValuedFunctionBuilder> configureFunction
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NotNull(configureFunction, nameof(configureFunction));
 
-        configureFunction(new TableValuedFunctionBuilder(ToFunction(name, entityTypeBuilder.Metadata), entityTypeBuilder));
+        configureFunction(
+            new TableValuedFunctionBuilder(
+                ToFunction(name, entityTypeBuilder.Metadata),
+                entityTypeBuilder
+            )
+        );
 
         return entityTypeBuilder;
     }
@@ -350,12 +390,18 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder ToFunction(
         this EntityTypeBuilder entityTypeBuilder,
         MethodInfo function,
-        Action<TableValuedFunctionBuilder> configureFunction)
+        Action<TableValuedFunctionBuilder> configureFunction
+    )
     {
         Check.NotNull(function, nameof(function));
         Check.NotNull(configureFunction, nameof(configureFunction));
 
-        configureFunction(new TableValuedFunctionBuilder(ToFunction(function, entityTypeBuilder.Metadata), entityTypeBuilder));
+        configureFunction(
+            new TableValuedFunctionBuilder(
+                ToFunction(function, entityTypeBuilder.Metadata),
+                entityTypeBuilder
+            )
+        );
 
         return entityTypeBuilder;
     }
@@ -372,9 +418,10 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The function configuration builder.</returns>
     public static EntityTypeBuilder<TEntity> ToFunction<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        string? name)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)ToFunction((EntityTypeBuilder)entityTypeBuilder, name);
+        string? name
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)ToFunction((EntityTypeBuilder)entityTypeBuilder, name);
 
     /// <summary>
     ///     Configures the function that the entity type maps to when targeting a relational database.
@@ -388,9 +435,10 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The function configuration builder.</returns>
     public static EntityTypeBuilder<TEntity> ToFunction<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        MethodInfo? function)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)ToFunction((EntityTypeBuilder)entityTypeBuilder, function);
+        MethodInfo? function
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)ToFunction((EntityTypeBuilder)entityTypeBuilder, function);
 
     /// <summary>
     ///     Configures the function that the entity type maps to when targeting a relational database.
@@ -406,13 +454,19 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToFunction<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
-        Action<TableValuedFunctionBuilder<TEntity>> configureFunction)
+        Action<TableValuedFunctionBuilder<TEntity>> configureFunction
+    )
         where TEntity : class
     {
         Check.NotNull(name, nameof(name));
         Check.NotNull(configureFunction, nameof(configureFunction));
 
-        configureFunction(new TableValuedFunctionBuilder<TEntity>(ToFunction(name, entityTypeBuilder.Metadata), entityTypeBuilder));
+        configureFunction(
+            new TableValuedFunctionBuilder<TEntity>(
+                ToFunction(name, entityTypeBuilder.Metadata),
+                entityTypeBuilder
+            )
+        );
 
         return entityTypeBuilder;
     }
@@ -431,13 +485,19 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToFunction<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         MethodInfo function,
-        Action<TableValuedFunctionBuilder<TEntity>> configureFunction)
+        Action<TableValuedFunctionBuilder<TEntity>> configureFunction
+    )
         where TEntity : class
     {
         Check.NotNull(function, nameof(function));
         Check.NotNull(configureFunction, nameof(configureFunction));
 
-        configureFunction(new TableValuedFunctionBuilder<TEntity>(ToFunction(function, entityTypeBuilder.Metadata), entityTypeBuilder));
+        configureFunction(
+            new TableValuedFunctionBuilder<TEntity>(
+                ToFunction(function, entityTypeBuilder.Metadata),
+                entityTypeBuilder
+            )
+        );
 
         return entityTypeBuilder;
     }
@@ -453,7 +513,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The function configuration builder.</returns>
     public static OwnedNavigationBuilder ToFunction(
         this OwnedNavigationBuilder ownedNavigationBuilder,
-        string? name)
+        string? name
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
@@ -473,7 +534,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The function configuration builder.</returns>
     public static OwnedNavigationBuilder ToFunction(
         this OwnedNavigationBuilder ownedNavigationBuilder,
-        MethodInfo? function)
+        MethodInfo? function
+    )
     {
         ToFunction(function, ownedNavigationBuilder.OwnedEntityType);
 
@@ -493,14 +555,18 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static OwnedNavigationBuilder ToFunction(
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string name,
-        Action<OwnedNavigationTableValuedFunctionBuilder> configureFunction)
+        Action<OwnedNavigationTableValuedFunctionBuilder> configureFunction
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
         Check.NotNull(configureFunction, nameof(configureFunction));
 
         configureFunction(
             new OwnedNavigationTableValuedFunctionBuilder(
-                ToFunction(name, ownedNavigationBuilder.OwnedEntityType), ownedNavigationBuilder));
+                ToFunction(name, ownedNavigationBuilder.OwnedEntityType),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -518,14 +584,18 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static OwnedNavigationBuilder ToFunction(
         this OwnedNavigationBuilder ownedNavigationBuilder,
         MethodInfo function,
-        Action<OwnedNavigationTableValuedFunctionBuilder> configureFunction)
+        Action<OwnedNavigationTableValuedFunctionBuilder> configureFunction
+    )
     {
         Check.NotNull(function, nameof(function));
         Check.NotNull(configureFunction, nameof(configureFunction));
 
         configureFunction(
             new OwnedNavigationTableValuedFunctionBuilder(
-                ToFunction(function, ownedNavigationBuilder.OwnedEntityType), ownedNavigationBuilder));
+                ToFunction(function, ownedNavigationBuilder.OwnedEntityType),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -541,13 +611,17 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">The name of the function.</param>
     /// <returns>The function configuration builder.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToFunction<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToFunction<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
-        string? name)
+        string? name
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)ToFunction(
-            (OwnedNavigationBuilder)ownedNavigationBuilder, name);
+        where TDependentEntity : class =>
+        (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+            ToFunction((OwnedNavigationBuilder)ownedNavigationBuilder, name);
 
     /// <summary>
     ///     Configures the function that the entity type maps to when targeting a relational database.
@@ -560,13 +634,17 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
     /// <param name="function">The method representing the function.</param>
     /// <returns>The function configuration builder.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToFunction<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToFunction<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
-        MethodInfo? function)
+        MethodInfo? function
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)ToFunction(
-            (OwnedNavigationBuilder)ownedNavigationBuilder, function);
+        where TDependentEntity : class =>
+        (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+            ToFunction((OwnedNavigationBuilder)ownedNavigationBuilder, function);
 
     /// <summary>
     ///     Configures the function that the entity type maps to when targeting a relational database.
@@ -580,10 +658,16 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="name">The name of the function.</param>
     /// <param name="configureFunction">The function configuration action.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToFunction<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToFunction<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string name,
-        Action<OwnedNavigationTableValuedFunctionBuilder<TOwnerEntity, TDependentEntity>> configureFunction)
+        Action<
+            OwnedNavigationTableValuedFunctionBuilder<TOwnerEntity, TDependentEntity>
+        > configureFunction
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
@@ -592,7 +676,10 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         configureFunction(
             new OwnedNavigationTableValuedFunctionBuilder<TOwnerEntity, TDependentEntity>(
-                ToFunction(name, ownedNavigationBuilder.OwnedEntityType), ownedNavigationBuilder));
+                ToFunction(name, ownedNavigationBuilder.OwnedEntityType),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -609,10 +696,16 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="function">The method representing the function.</param>
     /// <param name="configureFunction">The function configuration action.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToFunction<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToFunction<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         MethodInfo function,
-        Action<OwnedNavigationTableValuedFunctionBuilder<TOwnerEntity, TDependentEntity>> configureFunction)
+        Action<
+            OwnedNavigationTableValuedFunctionBuilder<TOwnerEntity, TDependentEntity>
+        > configureFunction
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
@@ -621,7 +714,10 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         configureFunction(
             new OwnedNavigationTableValuedFunctionBuilder<TOwnerEntity, TDependentEntity>(
-                ToFunction(function, ownedNavigationBuilder.OwnedEntityType), ownedNavigationBuilder));
+                ToFunction(function, ownedNavigationBuilder.OwnedEntityType),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -644,7 +740,10 @@ public static partial class RelationalEntityTypeBuilderExtensions
         }
         else
         {
-            function = model.AddDbFunction(name, typeof(IQueryable<>).MakeGenericType(entityType.ClrType));
+            function = model.AddDbFunction(
+                name,
+                typeof(IQueryable<>).MakeGenericType(entityType.ClrType)
+            );
         }
 
         return function;
@@ -691,7 +790,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? ToFunction(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetFunction(name, fromDataAnnotation))
         {
@@ -703,7 +803,11 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         if (name is not null)
         {
-            entityType.Model.Builder.HasDbFunction(name, typeof(IQueryable<>).MakeGenericType(entityType.ClrType), fromDataAnnotation);
+            entityType.Model.Builder.HasDbFunction(
+                name,
+                typeof(IQueryable<>).MakeGenericType(entityType.ClrType),
+                fromDataAnnotation
+            );
         }
 
         return entityTypeBuilder;
@@ -725,7 +829,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? ToFunction(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         MethodInfo? function,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         var name = function == null ? null : DbFunction.GetFunctionName(function);
         if (!entityTypeBuilder.CanSetFunction(name, fromDataAnnotation))
@@ -758,11 +863,16 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static bool CanSetFunction(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
-        return entityTypeBuilder.CanSetAnnotation(RelationalAnnotationNames.FunctionName, name, fromDataAnnotation);
+        return entityTypeBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.FunctionName,
+            name,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -779,8 +889,12 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static bool CanSetFunction(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         MethodInfo? function,
-        bool fromDataAnnotation = false)
-        => entityTypeBuilder.CanSetFunction(function == null ? null : DbFunction.GetFunctionName(function), fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        entityTypeBuilder.CanSetFunction(
+            function == null ? null : DbFunction.GetFunctionName(function),
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures a database check constraint when targeting a relational database.
@@ -796,13 +910,15 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder HasCheckConstraint(
         this EntityTypeBuilder entityTypeBuilder,
         string name,
-        string? sql)
+        string? sql
+    )
     {
         InternalCheckConstraintBuilder.HasCheckConstraint(
             (IConventionEntityType)entityTypeBuilder.Metadata,
             name,
             sql,
-            ConfigurationSource.Explicit);
+            ConfigurationSource.Explicit
+        );
 
         return entityTypeBuilder;
     }
@@ -823,14 +939,17 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder entityTypeBuilder,
         string name,
         string sql,
-        Action<CheckConstraintBuilder> buildAction)
+        Action<CheckConstraintBuilder> buildAction
+    )
     {
         Check.NotEmpty(sql, nameof(sql));
         Check.NotNull(buildAction, nameof(buildAction));
 
         entityTypeBuilder.HasCheckConstraint(name, sql);
 
-        buildAction(new CheckConstraintBuilder(entityTypeBuilder.Metadata.FindCheckConstraint(name)!));
+        buildAction(
+            new CheckConstraintBuilder(entityTypeBuilder.Metadata.FindCheckConstraint(name)!)
+        );
 
         return entityTypeBuilder;
     }
@@ -850,9 +969,11 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> HasCheckConstraint<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
-        string? sql)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)HasCheckConstraint((EntityTypeBuilder)entityTypeBuilder, name, sql);
+        string? sql
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)
+            HasCheckConstraint((EntityTypeBuilder)entityTypeBuilder, name, sql);
 
     /// <summary>
     ///     Configures a database check constraint when targeting a relational database.
@@ -871,9 +992,11 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         string sql,
-        Action<CheckConstraintBuilder> buildAction)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)HasCheckConstraint((EntityTypeBuilder)entityTypeBuilder, name, sql, buildAction);
+        Action<CheckConstraintBuilder> buildAction
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)
+            HasCheckConstraint((EntityTypeBuilder)entityTypeBuilder, name, sql, buildAction);
 
     /// <summary>
     ///     Configures a database check constraint when targeting a relational database.
@@ -889,13 +1012,15 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static OwnedNavigationBuilder HasCheckConstraint(
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string name,
-        string? sql)
+        string? sql
+    )
     {
         InternalCheckConstraintBuilder.HasCheckConstraint(
             (IConventionEntityType)ownedNavigationBuilder.OwnedEntityType,
             name,
             sql,
-            ConfigurationSource.Explicit);
+            ConfigurationSource.Explicit
+        );
 
         return ownedNavigationBuilder;
     }
@@ -913,13 +1038,17 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="sql">The logical constraint sql used in the check constraint.</param>
     /// <returns>A builder to further configure the navigation.</returns>
     [Obsolete("Configure this using ToTable(t => t.HasCheckConstraint()) instead.")] // Don't remove, used in snapshot
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> HasCheckConstraint<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> HasCheckConstraint<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string name,
-        string? sql)
+        string? sql
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+        where TDependentEntity : class =>
+        (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
             HasCheckConstraint((OwnedNavigationBuilder)ownedNavigationBuilder, name, sql);
 
     /// <summary>
@@ -938,14 +1067,19 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string name,
         string sql,
-        Action<CheckConstraintBuilder> buildAction)
+        Action<CheckConstraintBuilder> buildAction
+    )
     {
         Check.NotEmpty(sql, nameof(sql));
         Check.NotNull(buildAction, nameof(buildAction));
 
         ownedNavigationBuilder.HasCheckConstraint(name, sql);
 
-        buildAction(new CheckConstraintBuilder(ownedNavigationBuilder.OwnedEntityType.FindCheckConstraint(name)!));
+        buildAction(
+            new CheckConstraintBuilder(
+                ownedNavigationBuilder.OwnedEntityType.FindCheckConstraint(name)!
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -964,15 +1098,24 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="buildAction">An action that performs configuration of the check constraint.</param>
     /// <returns>A builder to further configure the navigation.</returns>
     [Obsolete("Configure this using ToTable(t => t.HasCheckConstraint()) instead.")] // Don't remove, used in snapshot
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> HasCheckConstraint<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> HasCheckConstraint<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string name,
         string sql,
-        Action<CheckConstraintBuilder> buildAction)
+        Action<CheckConstraintBuilder> buildAction
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
-            HasCheckConstraint((OwnedNavigationBuilder)ownedNavigationBuilder, name, sql, buildAction);
+        where TDependentEntity : class =>
+        (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+            HasCheckConstraint(
+                (OwnedNavigationBuilder)ownedNavigationBuilder,
+                name,
+                sql,
+                buildAction
+            );
 
     /// <summary>
     ///     Configures a database check constraint when targeting a relational database.
@@ -992,12 +1135,17 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string name,
         string? sql,
-        bool fromDataAnnotation = false)
-        => InternalCheckConstraintBuilder.HasCheckConstraint(
+        bool fromDataAnnotation = false
+    ) =>
+        InternalCheckConstraintBuilder
+            .HasCheckConstraint(
                 entityTypeBuilder.Metadata,
                 name,
                 sql,
-                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention)
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            )
             ?.Builder;
 
     /// <summary>
@@ -1015,12 +1163,14 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string name,
         string? sql,
-        bool fromDataAnnotation = false)
-        => InternalCheckConstraintBuilder.CanHaveCheckConstraint(
+        bool fromDataAnnotation = false
+    ) =>
+        InternalCheckConstraintBuilder.CanHaveCheckConstraint(
             entityTypeBuilder.Metadata,
             name,
             sql,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     Configures a comment to be applied to the table
@@ -1034,7 +1184,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     [Obsolete("Configure this using ToTable(t => t.HasComment()) instead.")] // Don't remove, used in snapshot
     public static EntityTypeBuilder HasComment(
         this EntityTypeBuilder entityTypeBuilder,
-        string? comment)
+        string? comment
+    )
     {
         entityTypeBuilder.Metadata.SetComment(comment);
         return entityTypeBuilder;
@@ -1053,9 +1204,10 @@ public static partial class RelationalEntityTypeBuilderExtensions
     [Obsolete("Configure this using ToTable(t => t.HasComment()) instead.")] // Don't remove, used in snapshot
     public static EntityTypeBuilder<TEntity> HasComment<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        string? comment)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)HasComment((EntityTypeBuilder)entityTypeBuilder, comment);
+        string? comment
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)HasComment((EntityTypeBuilder)entityTypeBuilder, comment);
 
     /// <summary>
     ///     Configures a comment to be applied to the table
@@ -1073,7 +1225,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? HasComment(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? comment,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetComment(comment, fromDataAnnotation))
         {
@@ -1098,11 +1251,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static bool CanSetComment(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? comment,
-        bool fromDataAnnotation = false)
-        => entityTypeBuilder.CanSetAnnotation(
+        bool fromDataAnnotation = false
+    ) =>
+        entityTypeBuilder.CanSetAnnotation(
             RelationalAnnotationNames.Comment,
             comment,
-            fromDataAnnotation);
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the entity mapped to a JSON column, mapping it to the given JSON property,
@@ -1118,7 +1273,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? HasJsonPropertyName(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetJsonPropertyName(name, fromDataAnnotation))
         {
@@ -1140,6 +1296,11 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static bool CanSetJsonPropertyName(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
-        => entityTypeBuilder.CanSetAnnotation(RelationalAnnotationNames.JsonPropertyName, name, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        entityTypeBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.JsonPropertyName,
+            name,
+            fromDataAnnotation
+        );
 }

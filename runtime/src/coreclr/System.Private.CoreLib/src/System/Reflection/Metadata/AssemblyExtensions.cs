@@ -8,9 +8,16 @@ namespace System.Reflection.Metadata
 {
     public static partial class AssemblyExtensions
     {
-        [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyNative_InternalTryGetRawMetadata")]
+        [LibraryImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "AssemblyNative_InternalTryGetRawMetadata"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static unsafe partial bool InternalTryGetRawMetadata(QCallAssembly assembly, ref byte* blob, ref int length);
+        private static unsafe partial bool InternalTryGetRawMetadata(
+            QCallAssembly assembly,
+            ref byte* blob,
+            ref int length
+        );
 
         /// <summary>
         /// Retrieves the metadata section of the assembly, for use with <see cref="T:System.Reflection.Metadata.MetadataReader" />.
@@ -28,7 +35,11 @@ namespace System.Reflection.Metadata
         /// <para>The caller is responsible for keeping the assembly object alive while accessing the metadata blob.</para>
         /// </remarks>
         [CLSCompliant(false)] // out byte* blob
-        public static unsafe bool TryGetRawMetadata(this Assembly assembly, out byte* blob, out int length)
+        public static unsafe bool TryGetRawMetadata(
+            this Assembly assembly,
+            out byte* blob,
+            out int length
+        )
         {
             ArgumentNullException.ThrowIfNull(assembly);
 

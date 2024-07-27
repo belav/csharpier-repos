@@ -31,18 +31,22 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         // kPOSIXErrorBase is returned for "unknown error from a subsystem",
                         // which seems to happen on writes from SSH sessions even if the keychain
                         // was unlocked.
-                        Console.WriteLine("Writing precondition failed with kPOSIXErrorBase, skipping tests.");
+                        Console.WriteLine(
+                            "Writing precondition failed with kPOSIXErrorBase, skipping tests."
+                        );
                         return false;
                     case errSecWrPerm:
-                        Console.WriteLine("Writing precondition failed with permission denied, skipping tests.");
+                        Console.WriteLine(
+                            "Writing precondition failed with permission denied, skipping tests."
+                        );
                         return false;
                 }
 
-                Console.WriteLine($"Precondition test failed with unknown code {e.HResult}, running anyways.");
+                Console.WriteLine(
+                    $"Precondition test failed with unknown code {e.HResult}, running anyways."
+                );
             }
-            catch
-            {
-            }
+            catch { }
 
             return true;
         }
@@ -51,23 +55,44 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void PersistKeySet_OSX()
         {
             using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.DefaultKeySet))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.DefaultKeySet
+                )
+            )
             {
                 store.Open(OpenFlags.ReadWrite);
 
                 // Defensive removal.
                 store.Remove(cert);
 
-                Assert.False(IsCertInStore(cert, store), "PtxData certificate was found on pre-condition");
+                Assert.False(
+                    IsCertInStore(cert, store),
+                    "PtxData certificate was found on pre-condition"
+                );
 
                 // Opening this as persisted has now added it to login.keychain, aka CU\My.
-                using (var persistedCert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.PersistKeySet))
+                using (
+                    var persistedCert = new X509Certificate2(
+                        TestData.PfxData,
+                        TestData.PfxDataPassword,
+                        X509KeyStorageFlags.PersistKeySet
+                    )
+                )
                 {
-                    Assert.True(IsCertInStore(cert, store), "PtxData certificate was found upon PersistKeySet import");
+                    Assert.True(
+                        IsCertInStore(cert, store),
+                        "PtxData certificate was found upon PersistKeySet import"
+                    );
                 }
 
                 // And ensure it didn't get removed when the certificate got disposed.
-                Assert.True(IsCertInStore(cert, store), "PtxData certificate was found after PersistKeySet Dispose");
+                Assert.True(
+                    IsCertInStore(cert, store),
+                    "PtxData certificate was found after PersistKeySet Dispose"
+                );
 
                 // Cleanup.
                 store.Remove(cert);
@@ -78,7 +103,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void AddToStore_NonExportable_OSX()
         {
             using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.DefaultKeySet))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.DefaultKeySet
+                )
+            )
             {
                 store.Open(OpenFlags.ReadWrite);
 
@@ -98,17 +129,29 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void AddToStore_Exportable()
         {
             using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable
+                )
+            )
             using (var certOnly = new X509Certificate2(cert.RawData))
             {
                 store.Open(OpenFlags.ReadWrite);
 
                 // Defensive removal.
                 store.Remove(certOnly);
-                Assert.False(IsCertInStore(cert, store), "PtxData certificate was found on pre-condition");
+                Assert.False(
+                    IsCertInStore(cert, store),
+                    "PtxData certificate was found on pre-condition"
+                );
 
                 store.Add(cert);
-                Assert.True(IsCertInStore(certOnly, store), "PtxData certificate was found after add");
+                Assert.True(
+                    IsCertInStore(certOnly, store),
+                    "PtxData certificate was found after add"
+                );
 
                 // Cleanup
                 store.Remove(certOnly);
@@ -120,17 +163,29 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (var store = new X509Store("CustomKeyChain_CoreFX", StoreLocation.CurrentUser))
             using (new TemporaryX509Store(store))
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable
+                )
+            )
             using (var certOnly = new X509Certificate2(cert.RawData))
             {
                 store.Open(OpenFlags.ReadWrite);
 
                 // Defensive removal.
                 store.Remove(certOnly);
-                Assert.False(IsCertInStore(cert, store), "PfxData certificate was found on pre-condition");
+                Assert.False(
+                    IsCertInStore(cert, store),
+                    "PfxData certificate was found on pre-condition"
+                );
 
                 store.Add(cert);
-                Assert.True(IsCertInStore(certOnly, store), "PfxData certificate was found after add");
+                Assert.True(
+                    IsCertInStore(certOnly, store),
+                    "PfxData certificate was found after add"
+                );
 
                 // Cleanup
                 store.Remove(certOnly);
@@ -142,7 +197,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (var store = new X509Store("CustomKeyChain_CoreFX", StoreLocation.CurrentUser))
             using (new TemporaryX509Store(store))
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable
+                )
+            )
             using (var certOnly = new X509Certificate2(cert.RawData))
             {
                 store.Open(OpenFlags.ReadOnly);
@@ -153,10 +214,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [ConditionalFact(nameof(PermissionsAllowStoreWrite))]
         public static void CustomStore_OpenExistingOnly()
         {
-            using (var store = new X509Store("CustomKeyChain_CoreFX_" + Guid.NewGuid().ToString(), StoreLocation.CurrentUser))
+            using (
+                var store = new X509Store(
+                    "CustomKeyChain_CoreFX_" + Guid.NewGuid().ToString(),
+                    StoreLocation.CurrentUser
+                )
+            )
             using (new TemporaryX509Store(store))
             {
-                Assert.ThrowsAny<CryptographicException>(() => store.Open(OpenFlags.OpenExistingOnly));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => store.Open(OpenFlags.OpenExistingOnly)
+                );
             }
         }
 
@@ -166,7 +234,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (var store1 = new X509Store("CustomKeyChain_CoreFX", StoreLocation.CurrentUser))
             using (new TemporaryX509Store(store1))
             using (var store2 = new X509Store("customkeychain_CoreFX", StoreLocation.CurrentUser))
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable
+                )
+            )
             using (var certOnly = new X509Certificate2(cert.RawData))
             {
                 store1.Open(OpenFlags.ReadWrite);
@@ -174,11 +248,20 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 // Defensive removal.
                 store1.Remove(certOnly);
-                Assert.False(IsCertInStore(cert, store1), "PfxData certificate was found on pre-condition");
+                Assert.False(
+                    IsCertInStore(cert, store1),
+                    "PfxData certificate was found on pre-condition"
+                );
 
                 store1.Add(cert);
-                Assert.True(IsCertInStore(certOnly, store1), "PfxData certificate was found after add");
-                Assert.True(IsCertInStore(certOnly, store2), "PfxData certificate was found after add (second store)");
+                Assert.True(
+                    IsCertInStore(certOnly, store1),
+                    "PfxData certificate was found after add"
+                );
+                Assert.True(
+                    IsCertInStore(certOnly, store2),
+                    "PfxData certificate was found after add (second store)"
+                );
 
                 // Cleanup
                 store1.Remove(certOnly);

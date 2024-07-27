@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
         ForEachInfo<ForEachStatementSyntax, StatementSyntax> forEachInfo,
         ExpressionSyntax selectExpression,
         ExpressionSyntax modifyingExpression,
-        SyntaxTrivia[] trivia) : AbstractConverter(forEachInfo)
+        SyntaxTrivia[] trivia
+    ) : AbstractConverter(forEachInfo)
     {
         // It is "item" for for "list.Add(item)"
         // It can be anything for "counter++". It will be ingored in the case.
@@ -40,14 +41,28 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
 
         protected abstract string MethodName { get; }
 
-        protected abstract bool CanReplaceInitialization(ExpressionSyntax expressionSyntax, CancellationToken cancellationToken);
+        protected abstract bool CanReplaceInitialization(
+            ExpressionSyntax expressionSyntax,
+            CancellationToken cancellationToken
+        );
 
-        protected abstract StatementSyntax CreateDefaultStatement(ExpressionSyntax queryOrLinqInvocationExpression, ExpressionSyntax expression);
+        protected abstract StatementSyntax CreateDefaultStatement(
+            ExpressionSyntax queryOrLinqInvocationExpression,
+            ExpressionSyntax expression
+        );
 
-        public override void Convert(SyntaxEditor editor, bool convertToQuery, CancellationToken cancellationToken)
+        public override void Convert(
+            SyntaxEditor editor,
+            bool convertToQuery,
+            CancellationToken cancellationToken
+        )
         {
             var queryOrLinqInvocationExpression = CreateQueryExpressionOrLinqInvocation(
-                _selectExpression, Enumerable.Empty<SyntaxToken>(), Enumerable.Empty<SyntaxToken>(), convertToQuery);
+                _selectExpression,
+                Enumerable.Empty<SyntaxToken>(),
+                Enumerable.Empty<SyntaxToken>(),
+                convertToQuery
+            );
 
             var previous = ForEachInfo.ForEachStatement.GetPreviousStatement();
 
@@ -56,32 +71,61 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                 switch (previous.Kind())
                 {
                     case SyntaxKind.LocalDeclarationStatement:
-                        var variables = ((LocalDeclarationStatementSyntax)previous).Declaration.Variables;
+                        var variables = ((LocalDeclarationStatementSyntax)previous)
+                            .Declaration
+                            .Variables;
                         var lastDeclaration = variables.Last();
-                        // Check if 
+                        // Check if
                         // var ...., list = new List<T>(); or var ..., counter = 0;
                         // is just before the foreach.
                         // If so, join the declaration with the query.
-                        if (_modifyingExpression is IdentifierNameSyntax identifierName &&
-                            lastDeclaration.Identifier.ValueText.Equals(identifierName.Identifier.ValueText) &&
-                            CanReplaceInitialization(lastDeclaration.Initializer.Value, cancellationToken))
+                        if (
+                            _modifyingExpression is IdentifierNameSyntax identifierName
+                            && lastDeclaration.Identifier.ValueText.Equals(
+                                identifierName.Identifier.ValueText
+                            )
+                            && CanReplaceInitialization(
+                                lastDeclaration.Initializer.Value,
+                                cancellationToken
+                            )
+                        )
                         {
-                            Convert(lastDeclaration.Initializer.Value, variables.Count == 1 ? previous : lastDeclaration);
+                            Convert(
+                                lastDeclaration.Initializer.Value,
+                                variables.Count == 1 ? previous : lastDeclaration
+                            );
                             return;
                         }
 
                         break;
 
                     case SyntaxKind.ExpressionStatement:
-                        // Check if 
+                        // Check if
                         // list = new List<T>(); or counter = 0;
                         // is just before the foreach.
                         // If so, join the assignment with the query.
-                        if (((ExpressionStatementSyntax)previous).Expression is AssignmentExpressionSyntax assignmentExpression &&
-                            SymbolEquivalenceComparer.Instance.Equals(
-                                ForEachInfo.SemanticModel.GetSymbolInfo(assignmentExpression.Left, cancellationToken).Symbol,
-                                ForEachInfo.SemanticModel.GetSymbolInfo(_modifyingExpression, cancellationToken).Symbol) &&
-                            CanReplaceInitialization(assignmentExpression.Right, cancellationToken))
+                        if (
+                            ((ExpressionStatementSyntax)previous).Expression
+                                is AssignmentExpressionSyntax assignmentExpression
+                            && SymbolEquivalenceComparer.Instance.Equals(
+                                ForEachInfo
+                                    .SemanticModel.GetSymbolInfo(
+                                        assignmentExpression.Left,
+                                        cancellationToken
+                                    )
+                                    .Symbol,
+                                ForEachInfo
+                                    .SemanticModel.GetSymbolInfo(
+                                        _modifyingExpression,
+                                        cancellationToken
+                                    )
+                                    .Symbol
+                            )
+                            && CanReplaceInitialization(
+                                assignmentExpression.Right,
+                                cancellationToken
+                            )
+                        )
                         {
                             Convert(assignmentExpression.Right, previous);
                             return;
@@ -91,25 +135,42 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                 }
             }
 
-            // At least, we already can convert to 
+            // At least, we already can convert to
             // list.AddRange(query) or counter += query.Count();
             editor.ReplaceNode(
                 ForEachInfo.ForEachStatement,
-                CreateDefaultStatement(queryOrLinqInvocationExpression, _modifyingExpression).WithAdditionalAnnotations(Formatter.Annotation));
+                CreateDefaultStatement(queryOrLinqInvocationExpression, _modifyingExpression)
+                    .WithAdditionalAnnotations(Formatter.Annotation)
+            );
 
             return;
 
-            void Convert(ExpressionSyntax replacingExpression, SyntaxNode nodeToRemoveIfFollowedByReturn)
+            void Convert(
+                ExpressionSyntax replacingExpression,
+                SyntaxNode nodeToRemoveIfFollowedByReturn
+            )
             {
                 SyntaxTrivia[] leadingTrivia;
 
                 // Check if expressionAssigning is followed by a return statement.
-                var expresisonSymbol = ForEachInfo.SemanticModel.GetSymbolInfo(_modifyingExpression, cancellationToken).Symbol;
-                if (expresisonSymbol is ILocalSymbol &&
-                    ForEachInfo.ForEachStatement.GetNextStatement() is ReturnStatementSyntax returnStatement &&
-                    !returnStatement.ContainsDirectives &&
-                    SymbolEquivalenceComparer.Instance.Equals(
-                        expresisonSymbol, ForEachInfo.SemanticModel.GetSymbolInfo(returnStatement.Expression, cancellationToken).Symbol))
+                var expresisonSymbol = ForEachInfo
+                    .SemanticModel.GetSymbolInfo(_modifyingExpression, cancellationToken)
+                    .Symbol;
+                if (
+                    expresisonSymbol is ILocalSymbol
+                    && ForEachInfo.ForEachStatement.GetNextStatement()
+                        is ReturnStatementSyntax returnStatement
+                    && !returnStatement.ContainsDirectives
+                    && SymbolEquivalenceComparer.Instance.Equals(
+                        expresisonSymbol,
+                        ForEachInfo
+                            .SemanticModel.GetSymbolInfo(
+                                returnStatement.Expression,
+                                cancellationToken
+                            )
+                            .Symbol
+                    )
+                )
                 {
                     // Input:
                     // var list = new List<T>(); or var counter = 0;
@@ -125,7 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                     //  return queryGenerated.ToList(); or return queryGenerated.Count();
                     replacingExpression = returnStatement.Expression;
                     leadingTrivia = GetTriviaFromNode(nodeToRemoveIfFollowedByReturn)
-                        .Concat(SyntaxNodeOrTokenExtensions.GetTrivia(replacingExpression)).ToArray();
+                        .Concat(SyntaxNodeOrTokenExtensions.GetTrivia(replacingExpression))
+                        .ToArray();
                     editor.RemoveNode(nodeToRemoveIfFollowedByReturn);
                 }
                 else
@@ -136,12 +198,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                 editor.ReplaceNode(
                     replacingExpression,
                     CreateInvocationExpression(queryOrLinqInvocationExpression)
-                        .WithCommentsFrom(leadingTrivia, _trivia).KeepCommentsAndAddElasticMarkers());
+                        .WithCommentsFrom(leadingTrivia, _trivia)
+                        .KeepCommentsAndAddElasticMarkers()
+                );
                 editor.RemoveNode(ForEachInfo.ForEachStatement);
             }
 
-            static SyntaxTrivia[] GetTriviaFromVariableDeclarator(VariableDeclaratorSyntax variableDeclarator)
-                => SyntaxNodeOrTokenExtensions.GetTrivia(variableDeclarator.Identifier, variableDeclarator.Initializer.EqualsToken, variableDeclarator.Initializer.Value);
+            static SyntaxTrivia[] GetTriviaFromVariableDeclarator(
+                VariableDeclaratorSyntax variableDeclarator
+            ) =>
+                SyntaxNodeOrTokenExtensions.GetTrivia(
+                    variableDeclarator.Identifier,
+                    variableDeclarator.Initializer.EqualsToken,
+                    variableDeclarator.Initializer.Value
+                );
             static SyntaxTrivia[] GetTriviaFromNode(SyntaxNode node)
             {
                 switch (node.Kind())
@@ -154,19 +224,33 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                             throw ExceptionUtilities.Unreachable();
                         }
 
-                        return new IEnumerable<SyntaxTrivia>[] {
-                            SyntaxNodeOrTokenExtensions.GetTrivia(localDeclaration.Declaration.Type),
-                            GetTriviaFromVariableDeclarator(localDeclaration.Declaration.Variables[0]),
-                            SyntaxNodeOrTokenExtensions.GetTrivia(localDeclaration.SemicolonToken)}.Flatten().ToArray();
+                        return new IEnumerable<SyntaxTrivia>[]
+                        {
+                            SyntaxNodeOrTokenExtensions.GetTrivia(
+                                localDeclaration.Declaration.Type
+                            ),
+                            GetTriviaFromVariableDeclarator(
+                                localDeclaration.Declaration.Variables[0]
+                            ),
+                            SyntaxNodeOrTokenExtensions.GetTrivia(localDeclaration.SemicolonToken),
+                        }
+                            .Flatten()
+                            .ToArray();
 
                     case SyntaxKind.VariableDeclarator:
                         return GetTriviaFromVariableDeclarator((VariableDeclaratorSyntax)node);
 
                     case SyntaxKind.ExpressionStatement:
-                        if (((ExpressionStatementSyntax)node).Expression is AssignmentExpressionSyntax assignmentExpression)
+                        if (
+                            ((ExpressionStatementSyntax)node).Expression
+                            is AssignmentExpressionSyntax assignmentExpression
+                        )
                         {
                             return SyntaxNodeOrTokenExtensions.GetTrivia(
-                                assignmentExpression.Left, assignmentExpression.OperatorToken, assignmentExpression.Right);
+                                assignmentExpression.Left,
+                                assignmentExpression.OperatorToken,
+                                assignmentExpression.Right
+                            );
                         }
 
                         break;
@@ -178,11 +262,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
 
         // query => query.Method()
         // like query.Count() or query.ToList()
-        protected InvocationExpressionSyntax CreateInvocationExpression(ExpressionSyntax queryOrLinqInvocationExpression)
-            => SyntaxFactory.InvocationExpression(
+        protected InvocationExpressionSyntax CreateInvocationExpression(
+            ExpressionSyntax queryOrLinqInvocationExpression
+        ) =>
+            SyntaxFactory
+                .InvocationExpression(
                     SyntaxFactory.MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
                         queryOrLinqInvocationExpression.Parenthesize(),
-                        SyntaxFactory.IdentifierName(MethodName))).WithAdditionalAnnotations(Formatter.Annotation);
+                        SyntaxFactory.IdentifierName(MethodName)
+                    )
+                )
+                .WithAdditionalAnnotations(Formatter.Annotation);
     }
 }

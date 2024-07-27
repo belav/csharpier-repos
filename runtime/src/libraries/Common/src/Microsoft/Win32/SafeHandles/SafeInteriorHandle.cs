@@ -12,9 +12,7 @@ namespace Microsoft.Win32.SafeHandles
         private SafeHandle? _parent;
 
         protected SafeInteriorHandle(IntPtr invalidHandleValue, bool ownsHandle)
-            : base(invalidHandleValue, ownsHandle)
-        {
-        }
+            : base(invalidHandleValue, ownsHandle) { }
 
         protected override bool ReleaseHandle()
         {
@@ -50,7 +48,8 @@ namespace Microsoft.Win32.SafeHandles
 
         internal static TInteriorHandle OpenInteriorHandle<TInteriorHandle, TExteriorHandle>(
             Func<TExteriorHandle, TInteriorHandle> accessor,
-            TExteriorHandle exteriorHandle)
+            TExteriorHandle exteriorHandle
+        )
             where TInteriorHandle : SafeInteriorHandle
             where TExteriorHandle : SafeHandle
         {
@@ -67,7 +66,8 @@ namespace Microsoft.Win32.SafeHandles
         internal static TInteriorHandle OpenInteriorHandle<TExteriorHandle, TArg1, TInteriorHandle>(
             Func<TExteriorHandle, TArg1, TInteriorHandle> accessor,
             TExteriorHandle exteriorHandle,
-            TArg1 arg1)
+            TArg1 arg1
+        )
             where TInteriorHandle : SafeInteriorHandle
             where TExteriorHandle : SafeHandle
         {

@@ -6,14 +6,31 @@ using System.Security.Permissions;
 namespace System.Diagnostics
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public sealed class PerformanceCounterPermission : ResourcePermissionBase
     {
         public PerformanceCounterPermission() { }
-        public PerformanceCounterPermission(PerformanceCounterPermissionAccess permissionAccess, string machineName, string categoryName) { }
-        public PerformanceCounterPermission(PerformanceCounterPermissionEntry[] permissionAccessEntries) { }
+
+        public PerformanceCounterPermission(
+            PerformanceCounterPermissionAccess permissionAccess,
+            string machineName,
+            string categoryName
+        ) { }
+
+        public PerformanceCounterPermission(
+            PerformanceCounterPermissionEntry[] permissionAccessEntries
+        ) { }
+
         public PerformanceCounterPermission(PermissionState state) { }
-        public PerformanceCounterPermissionEntryCollection PermissionEntries { get { return null; } }
+
+        public PerformanceCounterPermissionEntryCollection PermissionEntries
+        {
+            get { return null; }
+        }
     }
 }

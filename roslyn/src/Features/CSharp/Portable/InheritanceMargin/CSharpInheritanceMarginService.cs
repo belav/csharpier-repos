@@ -20,13 +20,14 @@ namespace Microsoft.CodeAnalysis.CSharp.InheritanceMargin
     {
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         [ImportingConstructor]
-        public CSharpInheritanceMarginService()
-        {
-        }
+        public CSharpInheritanceMarginService() { }
 
-        protected override string GlobalImportsTitle => CSharpFeaturesResources.Global_using_directives;
+        protected override string GlobalImportsTitle =>
+            CSharpFeaturesResources.Global_using_directives;
 
-        protected override ImmutableArray<SyntaxNode> GetMembers(IEnumerable<SyntaxNode> nodesToSearch)
+        protected override ImmutableArray<SyntaxNode> GetMembers(
+            IEnumerable<SyntaxNode> nodesToSearch
+        )
         {
             var typeDeclarationNodes = nodesToSearch.OfType<TypeDeclarationSyntax>();
 
@@ -40,13 +41,15 @@ namespace Microsoft.CodeAnalysis.CSharp.InheritanceMargin
                 // 2. Add type members inside this type declaration.
                 foreach (var member in typeDeclarationNode.Members)
                 {
-                    if (member.Kind() is
-                            SyntaxKind.MethodDeclaration or
-                            SyntaxKind.PropertyDeclaration or
-                            SyntaxKind.EventDeclaration or
-                            SyntaxKind.IndexerDeclaration or
-                            SyntaxKind.OperatorDeclaration or
-                            SyntaxKind.ConversionOperatorDeclaration)
+                    if (
+                        member.Kind()
+                        is SyntaxKind.MethodDeclaration
+                            or SyntaxKind.PropertyDeclaration
+                            or SyntaxKind.EventDeclaration
+                            or SyntaxKind.IndexerDeclaration
+                            or SyntaxKind.OperatorDeclaration
+                            or SyntaxKind.ConversionOperatorDeclaration
+                    )
                     {
                         builder.Add(member);
                     }
@@ -63,17 +66,22 @@ namespace Microsoft.CodeAnalysis.CSharp.InheritanceMargin
             return builder.ToImmutableArray();
         }
 
-        protected override SyntaxToken GetDeclarationToken(SyntaxNode declarationNode)
-            => declarationNode switch
+        protected override SyntaxToken GetDeclarationToken(SyntaxNode declarationNode) =>
+            declarationNode switch
             {
                 MethodDeclarationSyntax methodDeclarationNode => methodDeclarationNode.Identifier,
-                PropertyDeclarationSyntax propertyDeclarationNode => propertyDeclarationNode.Identifier,
+                PropertyDeclarationSyntax propertyDeclarationNode
+                    => propertyDeclarationNode.Identifier,
                 EventDeclarationSyntax eventDeclarationNode => eventDeclarationNode.Identifier,
-                VariableDeclaratorSyntax variableDeclaratorNode => variableDeclaratorNode.Identifier,
+                VariableDeclaratorSyntax variableDeclaratorNode
+                    => variableDeclaratorNode.Identifier,
                 TypeDeclarationSyntax baseTypeDeclarationNode => baseTypeDeclarationNode.Identifier,
-                IndexerDeclarationSyntax indexerDeclarationNode => indexerDeclarationNode.ThisKeyword,
-                OperatorDeclarationSyntax operatorDeclarationNode => operatorDeclarationNode.OperatorToken,
-                ConversionOperatorDeclarationSyntax conversionOperatorDeclarationNode => conversionOperatorDeclarationNode.Type.GetFirstToken(),
+                IndexerDeclarationSyntax indexerDeclarationNode
+                    => indexerDeclarationNode.ThisKeyword,
+                OperatorDeclarationSyntax operatorDeclarationNode
+                    => operatorDeclarationNode.OperatorToken,
+                ConversionOperatorDeclarationSyntax conversionOperatorDeclarationNode
+                    => conversionOperatorDeclarationNode.Type.GetFirstToken(),
                 // Shouldn't reach here since the input declaration nodes are coming from GetMembers() method above
                 _ => throw ExceptionUtilities.UnexpectedValue(declarationNode),
             };

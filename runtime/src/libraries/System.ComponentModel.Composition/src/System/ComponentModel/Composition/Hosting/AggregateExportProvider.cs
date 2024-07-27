@@ -80,9 +80,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     </para>
         /// </remarks>
         public AggregateExportProvider(IEnumerable<ExportProvider>? providers)
-            : this(providers?.AsArray())
-        {
-        }
+            : this(providers?.AsArray()) { }
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -153,7 +151,10 @@ namespace System.ComponentModel.Composition.Hosting
         /// it should return an empty <see cref="IEnumerable{T}"/> of <see cref="Export"/>.
         /// </note>
         /// </remarks>
-        protected override IEnumerable<Export> GetExportsCore(ImportDefinition definition, AtomicComposition? atomicComposition)
+        protected override IEnumerable<Export> GetExportsCore(
+            ImportDefinition definition,
+            AtomicComposition? atomicComposition
+        )
         {
             ThrowIfDisposed();
 
@@ -177,7 +178,11 @@ namespace System.ComponentModel.Composition.Hosting
                 // which best complies with the request, wins.
                 foreach (ExportProvider provider in _providers)
                 {
-                    bool cardinalityCheckResult = provider.TryGetExports(definition, atomicComposition, out IEnumerable<Export>? exports);
+                    bool cardinalityCheckResult = provider.TryGetExports(
+                        definition,
+                        atomicComposition,
+                        out IEnumerable<Export>? exports
+                    );
                     Debug.Assert(exports != null);
                     bool anyExports = exports.Any();
                     if (cardinalityCheckResult && anyExports)
@@ -195,7 +200,8 @@ namespace System.ComponentModel.Composition.Hosting
                         // but no information is lost.
                         if (anyExports)
                         {
-                            allExports = (allExports != null) ? allExports.Concat(exports) : exports;
+                            allExports =
+                                (allExports != null) ? allExports.Concat(exports) : exports;
                         }
                     }
                 }

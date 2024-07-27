@@ -43,7 +43,8 @@ namespace System.Xml.XmlWriterApiTests
             return WriterFactory.GetReader();
         }
 
-        internal static string BaselinePath => Path.Combine(FilePathUtil.GetTestDataPath(), @"XmlWriter2\");
+        internal static string BaselinePath =>
+            Path.Combine(FilePathUtil.GetTestDataPath(), @"XmlWriter2\");
 
         public static string FullPath(string fileName)
         {
@@ -81,7 +82,10 @@ namespace System.Xml.XmlWriterApiTests
 
         public bool IsIndent()
         {
-            return (WriterType == WriterType.UTF8WriterIndent || WriterType == WriterType.UnicodeWriterIndent);
+            return (
+                WriterType == WriterType.UTF8WriterIndent
+                || WriterType == WriterType.UnicodeWriterIndent
+            );
         }
 
         public void CheckErrorState(WriteState ws)
@@ -101,7 +105,10 @@ namespace System.Xml.XmlWriterApiTests
             XmlReaderSettings readerSettings = new XmlReaderSettings();
             readerSettings.CloseInput = true;
 
-            XmlReader xrExpected = XmlReader.Create(FilePathUtil.getStream(FullPath(baselineFile)), readerSettings);
+            XmlReader xrExpected = XmlReader.Create(
+                FilePathUtil.getStream(FullPath(baselineFile)),
+                readerSettings
+            );
             return WriterFactory.CompareReader(xrExpected);
         }
     }

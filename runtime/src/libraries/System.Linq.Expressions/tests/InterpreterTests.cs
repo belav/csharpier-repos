@@ -9,15 +9,21 @@ namespace System.Linq.Expressions.Tests
 {
     public static class InterpreterTests
     {
-        private static readonly PropertyInfo s_debugView = typeof(LightLambda).GetPropertyAssert("DebugView");
+        private static readonly PropertyInfo s_debugView = typeof(LightLambda).GetPropertyAssert(
+            "DebugView"
+        );
 
         // IsNotLinqExpressionsBuiltWithIsInterpretingOnly is not directly required,
         // but this functionality relies on private reflection and that would not work with AOT
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         public static void VerifyInstructions_Simple()
         {
             // Using an unchecked multiplication to ensure that a mul instruction is emitted (and not mul.ovf)
-            Expression<Func<string, bool>> f = s => s != null && unchecked(s.Substring(1).Length * 2) > 0;
+            Expression<Func<string, bool>> f = s =>
+                s != null && unchecked(s.Substring(1).Length * 2) > 0;
 
             f.VerifyInstructions(
                 @"object lambda_method(object[])
@@ -41,33 +47,30 @@ namespace System.Linq.Expressions.Tests
                     IP_0012: GreaterThan()
                     IP_0013: Branch(2) -> 15
                     IP_0014: LoadObject(False)
-                  }");
+                  }"
+            );
         }
 
         // IsNotLinqExpressionsBuiltWithIsInterpretingOnly is not directly required,
         // but this functionality relies on private reflection and that would not work with AOT
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         public static void VerifyInstructions_Exceptions()
         {
             ParameterExpression x = Expression.Parameter(typeof(int), "x");
-            Expression<Func<int, int>> f =
-                Expression.Lambda<Func<int, int>>(
-                    Expression.TryCatchFinally(
-                        Expression.Call(
-                            typeof(Math).GetMethod(nameof(Math.Abs), new[] { typeof(int) }),
-                            Expression.Divide(
-                                Expression.Constant(42),
-                                x
-                            )
-                        ),
-                        Expression.Empty(),
-                        Expression.Catch(
-                            typeof(DivideByZeroException),
-                            Expression.Constant(-1)
-                        )
+            Expression<Func<int, int>> f = Expression.Lambda<Func<int, int>>(
+                Expression.TryCatchFinally(
+                    Expression.Call(
+                        typeof(Math).GetMethod(nameof(Math.Abs), new[] { typeof(int) }),
+                        Expression.Divide(Expression.Constant(42), x)
                     ),
-                    x
-                );
+                    Expression.Empty(),
+                    Expression.Catch(typeof(DivideByZeroException), Expression.Constant(-1))
+                ),
+                x
+            );
 
             f.VerifyInstructions(
                 @"object lambda_method(object[])
@@ -98,11 +101,16 @@ namespace System.Linq.Expressions.Tests
                       IP_0011: EnterFinally[0] -> 11
                       IP_0012: LeaveFinally()
                     }
-                  }");
+                  }"
+            );
         }
 
         [Fact]
-        [ActiveIssue ("https://github.com/dotnet/runtime/issues/53599", platforms: TestPlatforms.MacCatalyst, runtimes: TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/53599",
+            platforms: TestPlatforms.MacCatalyst,
+            runtimes: TestRuntimes.Mono
+        )]
         public static void ConstructorThrows_StackTrace()
         {
             Expression<Func<Thrower>> e = () => new Thrower(true);
@@ -122,7 +130,13 @@ namespace System.Linq.Expressions.Tests
         public static void PropertySetterThrows_StackTrace()
         {
             ParameterExpression t = Expression.Parameter(typeof(Thrower), "t");
-            Expression<Action<Thrower>> e = Expression.Lambda<Action<Thrower>>(Expression.Assign(Expression.Property(t, nameof(Thrower.Bar)), Expression.Constant(0)), t);
+            Expression<Action<Thrower>> e = Expression.Lambda<Action<Thrower>>(
+                Expression.Assign(
+                    Expression.Property(t, nameof(Thrower.Bar)),
+                    Expression.Constant(0)
+                ),
+                t
+            );
             Action<Thrower> f = e.Compile(preferInterpretation: true);
             AssertStackTrace(() => f(new Thrower(error: false)), "Thrower.set_Bar");
         }
@@ -131,7 +145,14 @@ namespace System.Linq.Expressions.Tests
         public static void IndexerGetterThrows_StackTrace()
         {
             ParameterExpression t = Expression.Parameter(typeof(Thrower), "t");
-            Expression<Func<Thrower, int>> e = Expression.Lambda<Func<Thrower, int>>(Expression.MakeIndex(t, typeof(Thrower).GetProperty("Item"), new[] { Expression.Constant(0) }), t);
+            Expression<Func<Thrower, int>> e = Expression.Lambda<Func<Thrower, int>>(
+                Expression.MakeIndex(
+                    t,
+                    typeof(Thrower).GetProperty("Item"),
+                    new[] { Expression.Constant(0) }
+                ),
+                t
+            );
             Func<Thrower, int> f = e.Compile(preferInterpretation: true);
             AssertStackTrace(() => f(new Thrower(error: false)), "Thrower.get_Item");
         }
@@ -140,7 +161,17 @@ namespace System.Linq.Expressions.Tests
         public static void IndexerSetterThrows_StackTrace()
         {
             ParameterExpression t = Expression.Parameter(typeof(Thrower), "t");
-            Expression<Action<Thrower>> e = Expression.Lambda<Action<Thrower>>(Expression.Assign(Expression.MakeIndex(t, typeof(Thrower).GetProperty("Item"), new[] { Expression.Constant(0) }), Expression.Constant(0)), t);
+            Expression<Action<Thrower>> e = Expression.Lambda<Action<Thrower>>(
+                Expression.Assign(
+                    Expression.MakeIndex(
+                        t,
+                        typeof(Thrower).GetProperty("Item"),
+                        new[] { Expression.Constant(0) }
+                    ),
+                    Expression.Constant(0)
+                ),
+                t
+            );
             Action<Thrower> f = e.Compile(preferInterpretation: true);
             AssertStackTrace(() => f(new Thrower(error: false)), "Thrower.set_Item");
         }
@@ -165,9 +196,7 @@ namespace System.Linq.Expressions.Tests
 
         private static string Normalize(string s)
         {
-            Collections.Generic.IEnumerable<string> lines =
-                s
-                .Replace("\r\n", "\n")
+            Collections.Generic.IEnumerable<string> lines = s.Replace("\r\n", "\n")
                 .Split(new[] { '\n' })
                 .Select(line => line.Trim())
                 .Where(line => line != "" && !line.StartsWith("//"));

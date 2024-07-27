@@ -41,7 +41,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
             writer.WriteValue(":::" + fixedColor.ToKnownColor().ToString().ToUpper() + ":::");
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             return Enum.Parse(typeof(Color), reader.Value.ToString());
         }

@@ -54,9 +54,6 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Gets the number of argument expressions of the node.
         /// </summary>
-        int ArgumentCount
-        {
-            get;
-        }
+        int ArgumentCount { get; }
     }
 }

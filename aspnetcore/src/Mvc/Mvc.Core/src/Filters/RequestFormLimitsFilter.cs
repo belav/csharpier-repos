@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 /// <summary>
 /// A filter that configures <see cref="FormOptions"/> for the current request.
 /// </summary>
-internal sealed partial class RequestFormLimitsFilter : IAuthorizationFilter, IRequestFormLimitsPolicy
+internal sealed partial class RequestFormLimitsFilter
+    : IAuthorizationFilter,
+        IRequestFormLimitsPolicy
 {
     private readonly ILogger _logger;
 
@@ -27,7 +29,12 @@ internal sealed partial class RequestFormLimitsFilter : IAuthorizationFilter, IR
         var effectivePolicy = context.FindEffectivePolicy<IRequestFormLimitsPolicy>();
         if (effectivePolicy != null && effectivePolicy != this)
         {
-            Log.NotMostEffectiveFilter(_logger, GetType(), effectivePolicy.GetType(), typeof(IRequestFormLimitsPolicy));
+            Log.NotMostEffectiveFilter(
+                _logger,
+                GetType(),
+                effectivePolicy.GetType(),
+                typeof(IRequestFormLimitsPolicy)
+            );
             return;
         }
 
@@ -48,13 +55,33 @@ internal sealed partial class RequestFormLimitsFilter : IAuthorizationFilter, IR
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Warning, "Unable to apply configured form options since the request form has already been read.", EventName = "CannotApplyRequestFormLimits")]
+        [LoggerMessage(
+            1,
+            LogLevel.Warning,
+            "Unable to apply configured form options since the request form has already been read.",
+            EventName = "CannotApplyRequestFormLimits"
+        )]
         public static partial void CannotApplyRequestFormLimits(ILogger logger);
 
-        [LoggerMessage(2, LogLevel.Debug, "Applied the configured form options on the current request.", EventName = "AppliedRequestFormLimits")]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Applied the configured form options on the current request.",
+            EventName = "AppliedRequestFormLimits"
+        )]
         public static partial void AppliedRequestFormLimits(ILogger logger);
 
-        [LoggerMessage(4, LogLevel.Debug, "Execution of filter {OverriddenFilter} is preempted by filter {OverridingFilter} which is the most effective filter implementing policy {FilterPolicy}.", EventName = "NotMostEffectiveFilter")]
-        public static partial void NotMostEffectiveFilter(ILogger logger, Type overriddenFilter, Type overridingFilter, Type filterPolicy);
+        [LoggerMessage(
+            4,
+            LogLevel.Debug,
+            "Execution of filter {OverriddenFilter} is preempted by filter {OverridingFilter} which is the most effective filter implementing policy {FilterPolicy}.",
+            EventName = "NotMostEffectiveFilter"
+        )]
+        public static partial void NotMostEffectiveFilter(
+            ILogger logger,
+            Type overriddenFilter,
+            Type overridingFilter,
+            Type filterPolicy
+        );
     }
 }

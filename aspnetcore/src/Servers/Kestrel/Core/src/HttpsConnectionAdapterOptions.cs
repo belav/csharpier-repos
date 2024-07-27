@@ -53,12 +53,17 @@ public class HttpsConnectionAdapterOptions
     /// If the server certificate has an Extended Key Usage extension, the usages must include Server Authentication (OID 1.3.6.1.5.5.7.3.1).
     /// </para>
     /// </summary>
-    public Func<ConnectionContext?, string?, X509Certificate2?>? ServerCertificateSelector { get; set; }
+    public Func<
+        ConnectionContext?,
+        string?,
+        X509Certificate2?
+    >? ServerCertificateSelector { get; set; }
 
     /// <summary>
     /// Convenient shorthand for a common check.
     /// </summary>
-    internal bool HasServerCertificateOrSelector => ServerCertificate is not null || ServerCertificateSelector is not null;
+    internal bool HasServerCertificateOrSelector =>
+        ServerCertificate is not null || ServerCertificateSelector is not null;
 
     /// <summary>
     /// Specifies the client certificate requirements for a HTTPS connection. Defaults to <see cref="ClientCertificateMode.NoCertificate"/>.
@@ -69,7 +74,12 @@ public class HttpsConnectionAdapterOptions
     /// Specifies a callback for additional client certificate validation that will be invoked during authentication. This will be ignored
     /// if <see cref="AllowAnyClientCertificate"/> is called after this callback is set.
     /// </summary>
-    public Func<X509Certificate2, X509Chain?, SslPolicyErrors, bool>? ClientCertificateValidation { get; set; }
+    public Func<
+        X509Certificate2,
+        X509Chain?,
+        SslPolicyErrors,
+        bool
+    >? ClientCertificateValidation { get; set; }
 
     /// <summary>
     /// Specifies allowable SSL protocols. Defaults to <see cref="SslProtocols.None" /> which allows the operating system to choose the best protocol to use,
@@ -107,7 +117,10 @@ public class HttpsConnectionAdapterOptions
         {
             if (value <= TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.PositiveTimeSpanRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    CoreStrings.PositiveTimeSpanRequired
+                );
             }
             _handshakeTimeout = value != Timeout.InfiniteTimeSpan ? value : TimeSpan.MaxValue;
         }

@@ -23,9 +23,7 @@ public sealed partial class RedirectToRouteHttpResult : IResult
     /// <param name="routeValues">The parameters for the route.</param>
     [RequiresUnreferencedCode(RouteValueDictionaryTrimmerWarning.Warning)]
     internal RedirectToRouteHttpResult(object? routeValues)
-        : this(routeName: null, routeValues: routeValues)
-    {
-    }
+        : this(routeName: null, routeValues: routeValues) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteHttpResult"/> with the values
@@ -34,12 +32,8 @@ public sealed partial class RedirectToRouteHttpResult : IResult
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for the route.</param>
     [RequiresUnreferencedCode(RouteValueDictionaryTrimmerWarning.Warning)]
-    internal RedirectToRouteHttpResult(
-        string? routeName,
-        object? routeValues)
-        : this(routeName, routeValues, permanent: false)
-    {
-    }
+    internal RedirectToRouteHttpResult(string? routeName, object? routeValues)
+        : this(routeName, routeValues, permanent: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteHttpResult"/> with the values
@@ -50,13 +44,8 @@ public sealed partial class RedirectToRouteHttpResult : IResult
     /// <param name="permanent">If set to true, makes the redirect permanent (301).
     /// Otherwise a temporary redirect is used (302).</param>
     [RequiresUnreferencedCode(RouteValueDictionaryTrimmerWarning.Warning)]
-    internal RedirectToRouteHttpResult(
-        string? routeName,
-        object? routeValues,
-        bool permanent)
-        : this(routeName, routeValues, permanent, fragment: null)
-    {
-    }
+    internal RedirectToRouteHttpResult(string? routeName, object? routeValues, bool permanent)
+        : this(routeName, routeValues, permanent, fragment: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteHttpResult"/> with the values
@@ -72,10 +61,9 @@ public sealed partial class RedirectToRouteHttpResult : IResult
         string? routeName,
         object? routeValues,
         bool permanent,
-        string? fragment)
-        : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment)
-    {
-    }
+        string? fragment
+    )
+        : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteHttpResult"/> with the values
@@ -94,14 +82,15 @@ public sealed partial class RedirectToRouteHttpResult : IResult
         object? routeValues,
         bool permanent,
         bool preserveMethod,
-        string? fragment) : this(
+        string? fragment
+    )
+        : this(
             routeName,
             new RouteValueDictionary(routeValues),
             permanent,
             preserveMethod,
-            fragment)
-    {
-    }
+            fragment
+        ) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteHttpResult"/> with the values
@@ -119,7 +108,8 @@ public sealed partial class RedirectToRouteHttpResult : IResult
         RouteValueDictionary? routeValues,
         bool permanent,
         bool preserveMethod,
-        string? fragment)
+        string? fragment
+    )
     {
         RouteName = routeName;
         RouteValues = routeValues ?? new RouteValueDictionary();
@@ -164,7 +154,8 @@ public sealed partial class RedirectToRouteHttpResult : IResult
             httpContext,
             RouteName,
             RouteValues,
-            fragment: Fragment == null ? FragmentString.Empty : new FragmentString("#" + Fragment));
+            fragment: Fragment == null ? FragmentString.Empty : new FragmentString("#" + Fragment)
+        );
 
         if (string.IsNullOrEmpty(destinationUrl))
         {
@@ -173,13 +164,16 @@ public sealed partial class RedirectToRouteHttpResult : IResult
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.RedirectToRouteResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.RedirectToRouteResult"
+        );
         Log.RedirectToRouteResultExecuting(logger, destinationUrl, RouteName);
 
         if (PreserveMethod)
         {
-            httpContext.Response.StatusCode = Permanent ?
-                StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+            httpContext.Response.StatusCode = Permanent
+                ? StatusCodes.Status308PermanentRedirect
+                : StatusCodes.Status307TemporaryRedirect;
             httpContext.Response.Headers.Location = destinationUrl;
         }
         else
@@ -192,9 +186,16 @@ public sealed partial class RedirectToRouteHttpResult : IResult
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information,
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
             "Executing RedirectToRouteResult, redirecting to {Destination} from route {RouteName}.",
-            EventName = "RedirectToRouteResultExecuting")]
-        public static partial void RedirectToRouteResultExecuting(ILogger logger, string destination, string? routeName);
+            EventName = "RedirectToRouteResultExecuting"
+        )]
+        public static partial void RedirectToRouteResultExecuting(
+            ILogger logger,
+            string destination,
+            string? routeName
+        );
     }
 }

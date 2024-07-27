@@ -14,9 +14,7 @@ namespace System.Text.Json.Serialization.Tests
     public partial class DefaultJsonTypeInfoResolverMultiContextTests : SerializerTests
     {
         public DefaultJsonTypeInfoResolverMultiContextTests()
-            : base(JsonSerializerWrapper.StringSerializer)
-        {
-        }
+            : base(JsonSerializerWrapper.StringSerializer) { }
 
         [Fact]
         public async Task TypeInfoWithNullCreateObjectFailsDeserialization()
@@ -34,8 +32,15 @@ namespace System.Text.Json.Serialization.Tests
             o.TypeInfoResolver = resolver;
 
             string json = """{"StringProperty":"test"}""";
-            await TestMultiContextDeserialization<Poco>(json, new Poco() { StringProperty = "test" });
-            await TestMultiContextDeserialization<Poco>(json, options: o, expectedExceptionType: typeof(NotSupportedException));
+            await TestMultiContextDeserialization<Poco>(
+                json,
+                new Poco() { StringProperty = "test" }
+            );
+            await TestMultiContextDeserialization<Poco>(
+                json,
+                options: o,
+                expectedExceptionType: typeof(NotSupportedException)
+            );
 
             Assert.Throws<InvalidOperationException>(() => resolver.Modifiers.Add(ti => { }));
         }
@@ -58,15 +63,14 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions o = new();
             DefaultJsonTypeInfoResolver r = new();
             // note: TypeInfoResolver not set
-            JsonTypeInfo<SomeClass> ti = (JsonTypeInfo<SomeClass>)r.GetTypeInfo(typeof(SomeClass), o);
-            SomeClass obj = new()
-            {
-                ObjProp = "test",
-                IntProp = 42,
-            };
+            JsonTypeInfo<SomeClass> ti =
+                (JsonTypeInfo<SomeClass>)r.GetTypeInfo(typeof(SomeClass), o);
+            SomeClass obj = new() { ObjProp = "test", IntProp = 42 };
 
             // TODO: reassess if this is expected behavior
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(obj, ti));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(obj, ti)
+            );
         }
 
         [Fact]
@@ -75,11 +79,14 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions o = new();
             DefaultJsonTypeInfoResolver r = new();
             // note: TypeInfoResolver not set
-            JsonTypeInfo<SomeClass> ti = (JsonTypeInfo<SomeClass>)r.GetTypeInfo(typeof(SomeClass), o);
+            JsonTypeInfo<SomeClass> ti =
+                (JsonTypeInfo<SomeClass>)r.GetTypeInfo(typeof(SomeClass), o);
 
             // TODO: reassess if this is expected behavior
             string json = """{"ObjProp":"test","IntProp":42}""";
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.DeserializeWrapper(json, ti));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.DeserializeWrapper(json, ti)
+            );
         }
 
         [Fact]
@@ -88,12 +95,9 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions o = new();
             DefaultJsonTypeInfoResolver r = new();
             o.TypeInfoResolver = r;
-            JsonTypeInfo<SomeClass> ti = (JsonTypeInfo<SomeClass>)r.GetTypeInfo(typeof(SomeClass), o);
-            SomeClass obj = new()
-            {
-                ObjProp = "test",
-                IntProp = 42,
-            };
+            JsonTypeInfo<SomeClass> ti =
+                (JsonTypeInfo<SomeClass>)r.GetTypeInfo(typeof(SomeClass), o);
+            SomeClass obj = new() { ObjProp = "test", IntProp = 42 };
 
             string json = await Serializer.SerializeWrapper(obj, ti);
             Assert.Equal("""{"ObjProp":"test","IntProp":42}""", json);
@@ -105,7 +109,8 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions o = new();
             DefaultJsonTypeInfoResolver r = new();
             o.TypeInfoResolver = r;
-            JsonTypeInfo<SomeClass> ti = (JsonTypeInfo<SomeClass>)r.GetTypeInfo(typeof(SomeClass), o);
+            JsonTypeInfo<SomeClass> ti =
+                (JsonTypeInfo<SomeClass>)r.GetTypeInfo(typeof(SomeClass), o);
             string json = """{"ObjProp":"test","IntProp":42}""";
             SomeClass deserialized = await Serializer.DeserializeWrapper(json, ti);
             Assert.IsType<JsonElement>(deserialized.ObjProp);
@@ -117,7 +122,11 @@ namespace System.Text.Json.Serialization.Tests
         {
             yield return new object[] { "value", @"""value""" };
             yield return new object[] { 5, @"5" };
-            yield return new object[] { new SomeClass() { IntProp = 15, ObjProp = 17m }, @"{""ObjProp"":17,""IntProp"":15}" };
+            yield return new object[]
+            {
+                new SomeClass() { IntProp = 15, ObjProp = 17m },
+                @"{""ObjProp"":17,""IntProp"":15}",
+            };
         }
 
         private class Poco

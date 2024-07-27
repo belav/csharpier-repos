@@ -29,7 +29,8 @@ public static class JsonHelperExtensions
     public static IHtmlContent Serialize(
         this IJsonHelper jsonHelper,
         object value,
-        JsonSerializerSettings serializerSettings)
+        JsonSerializerSettings serializerSettings
+    )
     {
         ArgumentNullException.ThrowIfNull(jsonHelper);
 
@@ -39,7 +40,8 @@ public static class JsonHelperExtensions
                 nameof(jsonHelper),
                 nameof(IJsonHelper),
                 typeof(JsonHelperExtensions).Assembly.GetName().Name,
-                nameof(NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson));
+                nameof(NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson)
+            );
 
             throw new ArgumentException(message, nameof(jsonHelper));
         }

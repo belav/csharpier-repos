@@ -11,9 +11,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                    where x > int.MinValue
-                    select x;
+            var q =
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x;
 
             Func<int, bool> predicate = IsEven;
             Assert.Equal(q.All(predicate), q.All(predicate));
@@ -22,8 +23,9 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
-                    select x;
+            var q =
+                from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
+                select x;
 
             Func<string, bool> predicate = string.IsNullOrEmpty;
             Assert.Equal(q.All(predicate), q.All(predicate));
@@ -65,14 +67,20 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).All(i => i != 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).All(i => i != 0)
+            );
         }
 
         [Fact]
         public void NullPredicate_ThrowsArgumentNullException()
         {
             Func<int, bool> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => Enumerable.Range(0, 3).All(predicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => Enumerable.Range(0, 3).All(predicate)
+            );
         }
     }
 }

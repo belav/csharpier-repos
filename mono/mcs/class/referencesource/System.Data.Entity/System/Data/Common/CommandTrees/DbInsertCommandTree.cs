@@ -9,13 +9,12 @@
 
 using System;
 using System.Collections.Generic;
-
-using System.Data.Metadata.Edm;
+using System.Collections.ObjectModel;
 using System.Data.Common.CommandTrees.Internal;
 using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
-using System.Collections.ObjectModel;
-using ReadOnlyModificationClauses = System.Collections.ObjectModel.ReadOnlyCollection<System.Data.Common.CommandTrees.DbModificationClause>;  // System.Data.Common.ReadOnlyCollection conflicts
+using ReadOnlyModificationClauses = System.Collections.ObjectModel.ReadOnlyCollection<System.Data.Common.CommandTrees.DbModificationClause>; // System.Data.Common.ReadOnlyCollection conflicts
 
 namespace System.Data.Common.CommandTrees
 {
@@ -24,13 +23,23 @@ namespace System.Data.Common.CommandTrees
     /// When the <see cref="Returning"/> property is set, the command returns a reader; otherwise,
     /// it returns a scalar value indicating the number of rows affected.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1709:IdentifiersShouldBeCasedCorrectly",
+        MessageId = "Db"
+    )]
     public sealed class DbInsertCommandTree : DbModificationCommandTree
     {
         private readonly ReadOnlyModificationClauses _setClauses;
         private readonly DbExpression _returning;
 
-        internal DbInsertCommandTree(MetadataWorkspace metadata, DataSpace dataSpace, DbExpressionBinding target, ReadOnlyModificationClauses setClauses, DbExpression returning)
+        internal DbInsertCommandTree(
+            MetadataWorkspace metadata,
+            DataSpace dataSpace,
+            DbExpressionBinding target,
+            ReadOnlyModificationClauses setClauses,
+            DbExpression returning
+        )
             : base(metadata, dataSpace, target)
         {
             EntityUtil.CheckArgumentNull(setClauses, "setClauses");
@@ -43,12 +52,9 @@ namespace System.Data.Common.CommandTrees
         /// <summary>
         /// Gets set clauses determining values of columns in the inserted row.
         /// </summary>
-        public IList<DbModificationClause> SetClauses 
+        public IList<DbModificationClause> SetClauses
         {
-            get 
-            {
-                return _setClauses; 
-            }
+            get { return _setClauses; }
         }
 
         /// <summary>
@@ -64,10 +70,7 @@ namespace System.Data.Common.CommandTrees
         /// </remarks>
         public DbExpression Returning
         {
-            get
-            {
-                return _returning;
-            }
+            get { return _returning; }
         }
 
         internal override DbCommandTreeKind CommandTreeKind
@@ -102,7 +105,7 @@ namespace System.Data.Common.CommandTrees
 
         internal override string PrintTree(ExpressionPrinter printer)
         {
-            return printer.Print(this); 
+            return printer.Print(this);
         }
     }
 }

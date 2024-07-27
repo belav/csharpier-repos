@@ -19,10 +19,9 @@ public class SqliteParameterBasedSqlProcessor : RelationalParameterBasedSqlProce
     /// </summary>
     public SqliteParameterBasedSqlProcessor(
         RelationalParameterBasedSqlProcessorDependencies dependencies,
-        bool useRelationalNulls)
-        : base(dependencies, useRelationalNulls)
-    {
-    }
+        bool useRelationalNulls
+    )
+        : base(dependencies, useRelationalNulls) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,6 +32,11 @@ public class SqliteParameterBasedSqlProcessor : RelationalParameterBasedSqlProce
     protected override Expression ProcessSqlNullability(
         Expression queryExpression,
         IReadOnlyDictionary<string, object?> parametersValues,
-        out bool canCache)
-        => new SqliteSqlNullabilityProcessor(Dependencies, UseRelationalNulls).Process(queryExpression, parametersValues, out canCache);
+        out bool canCache
+    ) =>
+        new SqliteSqlNullabilityProcessor(Dependencies, UseRelationalNulls).Process(
+            queryExpression,
+            parametersValues,
+            out canCache
+        );
 }

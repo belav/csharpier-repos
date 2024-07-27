@@ -2,20 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using System.Collections.Generic;
+using System.Reflection.Runtime.General;
 using System.Runtime.InteropServices;
-
-using Internal.Runtime.Augments;
-
 using Internal.Reflection.Core;
 using Internal.Reflection.Core.Execution;
 using Internal.Reflection.Execution.PayForPlayExperience;
 using Internal.Reflection.Extensions.NonPortable;
-
-using System.Reflection.Runtime.General;
-
+using Internal.Runtime.Augments;
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
@@ -23,9 +19,13 @@ namespace Internal.Reflection.Execution
     //==========================================================================================================================
     // This class provides various services down to System.Private.CoreLib. (Though we forward most or all of them directly up to Reflection.Core.)
     //==========================================================================================================================
-    internal sealed class ReflectionExecutionDomainCallbacksImplementation : ReflectionExecutionDomainCallbacks
+    internal sealed class ReflectionExecutionDomainCallbacksImplementation
+        : ReflectionExecutionDomainCallbacks
     {
-        public ReflectionExecutionDomainCallbacksImplementation(ExecutionDomain executionDomain, ExecutionEnvironmentImplementation executionEnvironment)
+        public ReflectionExecutionDomainCallbacksImplementation(
+            ExecutionDomain executionDomain,
+            ExecutionEnvironmentImplementation executionEnvironment
+        )
         {
             _executionDomain = executionDomain;
             _executionEnvironment = executionEnvironment;
@@ -78,18 +78,29 @@ namespace Internal.Reflection.Execution
             return _executionDomain.CreateMissingMetadataException(pertainant);
         }
 
-        public sealed override MethodBase GetMethodBaseFromStartAddressIfAvailable(IntPtr methodStartAddress)
+        public sealed override MethodBase GetMethodBaseFromStartAddressIfAvailable(
+            IntPtr methodStartAddress
+        )
         {
             RuntimeTypeHandle declaringTypeHandle = default(RuntimeTypeHandle);
             QMethodDefinition methodHandle;
-            if (!ReflectionExecution.ExecutionEnvironment.TryGetMethodForStartAddress(methodStartAddress,
-                ref declaringTypeHandle, out methodHandle))
+            if (
+                !ReflectionExecution.ExecutionEnvironment.TryGetMethodForStartAddress(
+                    methodStartAddress,
+                    ref declaringTypeHandle,
+                    out methodHandle
+                )
+            )
             {
                 return null;
             }
 
             // We don't use the type argument handles as we want the uninstantiated method info
-            return ReflectionCoreExecution.ExecutionDomain.GetMethod(declaringTypeHandle, methodHandle, genericMethodTypeArgumentHandles: null);
+            return ReflectionCoreExecution.ExecutionDomain.GetMethod(
+                declaringTypeHandle,
+                methodHandle,
+                genericMethodTypeArgumentHandles: null
+            );
         }
 
         public sealed override Assembly GetAssemblyForHandle(RuntimeTypeHandle typeHandle)
@@ -97,9 +108,13 @@ namespace Internal.Reflection.Execution
             return Type.GetTypeFromHandle(typeHandle).Assembly;
         }
 
-        public sealed override IntPtr TryGetStaticClassConstructionContext(RuntimeTypeHandle runtimeTypeHandle)
+        public sealed override IntPtr TryGetStaticClassConstructionContext(
+            RuntimeTypeHandle runtimeTypeHandle
+        )
         {
-            return ExecutionEnvironmentImplementation.TryGetStaticClassConstructionContext(runtimeTypeHandle);
+            return ExecutionEnvironmentImplementation.TryGetStaticClassConstructionContext(
+                runtimeTypeHandle
+            );
         }
 
         public sealed override RuntimeTypeHandle GetTypeHandleIfAvailable(Type type)

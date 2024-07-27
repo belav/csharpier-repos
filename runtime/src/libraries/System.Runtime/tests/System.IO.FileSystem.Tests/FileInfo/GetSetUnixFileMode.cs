@@ -7,10 +7,9 @@ namespace System.IO.Tests
     {
         protected override bool GetModeThrowsPNSE => false;
 
-        protected override UnixFileMode GetMode(string path)
-            => new FileInfo(path).UnixFileMode;
+        protected override UnixFileMode GetMode(string path) => new FileInfo(path).UnixFileMode;
 
-        protected override void SetMode(string path, UnixFileMode mode)
-            => new FileInfo(path).UnixFileMode = mode;
+        protected override void SetMode(string path, UnixFileMode mode) =>
+            new FileInfo(path).UnixFileMode = mode;
     }
 }

@@ -37,7 +37,8 @@ namespace System.Web.Http.Hosting
         /// <summary>
         /// Provides a key for the collection of resources that should be disposed when a request is disposed.
         /// </summary>
-        public static readonly string DisposableRequestResourcesKey = "MS_DisposableRequestResources";
+        public static readonly string DisposableRequestResourcesKey =
+            "MS_DisposableRequestResources";
 
         /// <summary>
         /// Provides a key for the dependency scope for this request.
@@ -52,7 +53,8 @@ namespace System.Web.Http.Hosting
         /// <summary>
         /// Provides a key for a delegate which can retrieve the client certificate for this request.
         /// </summary>
-        public static readonly string RetrieveClientCertificateDelegateKey = "MS_RetrieveClientCertificateDelegate";
+        public static readonly string RetrieveClientCertificateDelegateKey =
+            "MS_RetrieveClientCertificateDelegate";
 
         /// <summary>
         /// Provides a key for the <see cref="HttpRequestContext"/> for this request.

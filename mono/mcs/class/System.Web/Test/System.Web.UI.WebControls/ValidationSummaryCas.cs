@@ -1,5 +1,5 @@
 //
-// ValidationSummaryCas.cs 
+// ValidationSummaryCas.cs
 //	- CAS unit tests for System.Web.UI.WebControls.ValidationSummary
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,55 +27,57 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI.WebControls;
-
 using MonoTests.System.Web.UI.WebControls;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
+namespace MonoCasTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class ValidationSummaryCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            ValidationSummaryTest unit = new ValidationSummaryTest();
+            unit.ValidationSummary_Defaults();
+            unit.ValidationSummary_ValidationGroup();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ValidationSummaryCas : AspNetHostingMinimal {
+        [Test]
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+        [ExpectedException(typeof(TargetInvocationException))]
+        public void ValidationSummaryRenderTest_Deny_Minimal()
+        {
+            ValidationSummaryTest unit = new ValidationSummaryTest();
+            unit.ValidationSummaryRenderTest();
+            // note: this is a failing security check on reflection,
+            // the SecurityException is the InnerException of the
+            // TargetInvocationException
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			ValidationSummaryTest unit = new ValidationSummaryTest ();
-			unit.ValidationSummary_Defaults ();
-			unit.ValidationSummary_ValidationGroup ();
-		}
+        [Test]
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Minimal
+        )]
+        public void ValidationSummaryRenderTest_PermitOnly_Minimal()
+        {
+            ValidationSummaryTest unit = new ValidationSummaryTest();
+            unit.ValidationSummaryRenderTest();
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-		[ExpectedException (typeof (TargetInvocationException))]
-		public void ValidationSummaryRenderTest_Deny_Minimal ()
-		{
-			ValidationSummaryTest unit = new ValidationSummaryTest ();
-			unit.ValidationSummaryRenderTest ();
-			// note: this is a failing security check on reflection,
-			// the SecurityException is the InnerException of the 
-			// TargetInvocationException
-		}
+        // LinkDemand
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-		public void ValidationSummaryRenderTest_PermitOnly_Minimal ()
-		{
-			ValidationSummaryTest unit = new ValidationSummaryTest ();
-			unit.ValidationSummaryRenderTest ();
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (ValidationSummary); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(ValidationSummary); }
+        }
+    }
 }

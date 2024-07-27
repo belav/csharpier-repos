@@ -1,30 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeFieldReferenceExpression.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents a reference to a field.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeFieldReferenceExpression : CodeExpression {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeFieldReferenceExpression : CodeExpression
+    {
         private CodeExpression targetObject;
         private string fieldName;
 
@@ -33,15 +30,15 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeFieldReferenceExpression'/>.
         ///    </para>
         /// </devdoc>
-        public CodeFieldReferenceExpression() {
-        }
+        public CodeFieldReferenceExpression() { }
 
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeFieldReferenceExpression'/>.
         ///    </para>
         /// </devdoc>
-        public CodeFieldReferenceExpression(CodeExpression targetObject, string fieldName) {
+        public CodeFieldReferenceExpression(CodeExpression targetObject, string fieldName)
+        {
             TargetObject = targetObject;
             FieldName = fieldName;
         }
@@ -52,13 +49,10 @@ namespace System.CodeDom {
         ///       the target object.
         ///    </para>
         /// </devdoc>
-        public CodeExpression TargetObject {
-            get {
-                return targetObject;
-            }
-            set {
-                targetObject = value;
-            }
+        public CodeExpression TargetObject
+        {
+            get { return targetObject; }
+            set { targetObject = value; }
         }
 
         /// <devdoc>
@@ -67,13 +61,10 @@ namespace System.CodeDom {
         ///       the field name.
         ///    </para>
         /// </devdoc>
-        public string FieldName {
-            get {
-                return (fieldName == null) ? string.Empty : fieldName;
-            }
-            set {
-                fieldName = value;
-            }
+        public string FieldName
+        {
+            get { return (fieldName == null) ? string.Empty : fieldName; }
+            set { fieldName = value; }
         }
     }
 }

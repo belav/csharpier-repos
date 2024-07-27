@@ -33,15 +33,23 @@ public static class ProblemDetailsServiceCollectionExtensions
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
     public static IServiceCollection AddProblemDetails(
         this IServiceCollection services,
-        Action<ProblemDetailsOptions>? configure)
+        Action<ProblemDetailsOptions>? configure
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
 
         // Adding default services;
         services.TryAddSingleton<IProblemDetailsService, ProblemDetailsService>();
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IProblemDetailsWriter, DefaultProblemDetailsWriter>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<IProblemDetailsWriter, DefaultProblemDetailsWriter>()
+        );
         // Use IConfigureOptions (instead of post-configure) so the registration gets added/invoked relative to when AddProblemDetails() is called.
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<JsonOptions>, ProblemDetailsJsonOptionsSetup>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<JsonOptions>,
+                ProblemDetailsJsonOptionsSetup
+            >()
+        );
 
         if (configure != null)
         {

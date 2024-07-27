@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Net.Sockets;
-
 using Xunit;
 
 namespace System.Net.Primitives.Functional.Tests
@@ -13,7 +12,28 @@ namespace System.Net.Primitives.Functional.Tests
         public static readonly object[][] IpAddresses =
         {
             new object[] { new byte[] { 0x8f, 0x18, 0x14, 0x24 } },
-            new object[] { new byte[] { 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x80, 0x90, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 } },
+            new object[]
+            {
+                new byte[]
+                {
+                    0x10,
+                    0x20,
+                    0x30,
+                    0x40,
+                    0x50,
+                    0x60,
+                    0x70,
+                    0x80,
+                    0x90,
+                    0x10,
+                    0x11,
+                    0x12,
+                    0x13,
+                    0x14,
+                    0x15,
+                    0x16,
+                },
+            },
         };
 
         [Theory]

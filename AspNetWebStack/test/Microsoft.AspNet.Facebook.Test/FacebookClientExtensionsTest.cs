@@ -96,20 +96,32 @@ namespace Microsoft.AspNet.Facebook.Test
         public async Task GetFacebookObjectAsyncOfT_ThrowArgumentNullExceptions()
         {
             LocalFacebookClient client = null;
-            await Assert.ThrowsArgumentNullAsync(() => client.GetFacebookObjectAsync<SimpleUser>("me"), "client");
+            await Assert.ThrowsArgumentNullAsync(
+                () => client.GetFacebookObjectAsync<SimpleUser>("me"),
+                "client"
+            );
 
             client = new LocalFacebookClient();
-            await Assert.ThrowsArgumentNullAsync(() => client.GetFacebookObjectAsync<SimpleUser>(null), "objectPath");
+            await Assert.ThrowsArgumentNullAsync(
+                () => client.GetFacebookObjectAsync<SimpleUser>(null),
+                "objectPath"
+            );
         }
 
         [Fact]
         public async Task GetFacebookObjectAsync_ThrowArgumentNullExceptions()
         {
             LocalFacebookClient client = null;
-            await Assert.ThrowsArgumentNullAsync(() => client.GetFacebookObjectAsync("me"), "client");
+            await Assert.ThrowsArgumentNullAsync(
+                () => client.GetFacebookObjectAsync("me"),
+                "client"
+            );
 
             client = new LocalFacebookClient();
-            await Assert.ThrowsArgumentNullAsync(() => client.GetFacebookObjectAsync(null), "objectPath");
+            await Assert.ThrowsArgumentNullAsync(
+                () => client.GetFacebookObjectAsync(null),
+                "objectPath"
+            );
         }
     }
 }

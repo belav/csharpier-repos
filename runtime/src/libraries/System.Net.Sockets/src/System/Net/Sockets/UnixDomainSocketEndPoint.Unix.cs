@@ -26,7 +26,10 @@ namespace System.Net.Sockets
             }
 
             Debug.Assert(s_nativePathOffset >= 0, "Expected path offset to be positive");
-            Debug.Assert(s_nativePathOffset + s_nativePathLength <= s_nativeAddressSize, "Expected address size to include all of the path length");
+            Debug.Assert(
+                s_nativePathOffset + s_nativePathLength <= s_nativeAddressSize,
+                "Expected address size to include all of the path length"
+            );
             Debug.Assert(s_nativePathLength >= 92, "Expected max path length to be at least 92"); // per http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_un.h.html
         }
 

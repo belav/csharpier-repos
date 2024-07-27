@@ -13,9 +13,11 @@ namespace XPathTests.XPathExpressionTests
         {
             Assert.NotNull(XPathExpression.Compile(toCompile));
         }
+
         private static void NavigatorCompileTest(Utils.NavigatorKind kind, string toCompile)
         {
-            var xml = @"<DocumentElement>
+            var xml =
+                @"<DocumentElement>
     <Level1 Data='0'>
         <Name>first</Name>
         <Level2 Data='1'></Level2>
@@ -44,7 +46,11 @@ namespace XPathTests.XPathExpressionTests
             NavigatorCompileTest(kind, toCompile);
         }
 
-        private static void CompileTestsErrors(Utils.NavigatorKind kind, string toCompile, string exceptionString)
+        private static void CompileTestsErrors(
+            Utils.NavigatorKind kind,
+            string toCompile,
+            string exceptionString
+        )
         {
             Assert.Throws<XPathException>(() => XPathExpressionCompileTest(toCompile));
             Assert.Throws<XPathException>(() => NavigatorCompileTest(kind, toCompile));

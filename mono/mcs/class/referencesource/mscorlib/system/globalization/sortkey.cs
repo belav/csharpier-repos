@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 ////////////////////////////////////////////////////////////////////////////
 //
@@ -14,54 +14,55 @@
 //
 ////////////////////////////////////////////////////////////////////////////
 
-namespace System.Globalization {
-    
+namespace System.Globalization
+{
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
 
-[System.Runtime.InteropServices.ComVisible(true)]
-    [Serializable] public class SortKey
+    [System.Runtime.InteropServices.ComVisible(true)]
+    [Serializable]
+    public class SortKey
     {
         //--------------------------------------------------------------------//
         //                        Internal Information                        //
         //--------------------------------------------------------------------//
-    
+
         //
         //  Variables.
         //
-        // 
+        //
 
         [OptionalField(VersionAdded = 3)]
-        internal String localeName;       // locale identifier
+        internal String localeName; // locale identifier
 
         [OptionalField(VersionAdded = 1)] // LCID field so serialization is Whidbey compatible though we don't officially support it
-        internal int win32LCID;           // 
-                                          // Whidbey serialization 
+        internal int win32LCID; //
 
-        internal CompareOptions options;  // options
-        internal String m_String;         // original string
-        internal byte[] m_KeyData;        // sortkey data
-        
+        // Whidbey serialization
+
+        internal CompareOptions options; // options
+        internal String m_String; // original string
+        internal byte[] m_KeyData; // sortkey data
 #if !FEATURE_PAL
         //
-        // The following constructor is designed to be called from CompareInfo to get the 
+        // The following constructor is designed to be called from CompareInfo to get the
         // the sort key of specific string for synthetic culture
         //
         internal SortKey(String localeName, String str, CompareOptions options, byte[] keyData)
         {
             this.m_KeyData = keyData;
             this.localeName = localeName;
-            this.options    = options;
-            this.m_String   = str;
+            this.options = options;
+            this.m_String = str;
         }
 
 #endif // !FEATURE_PAL
 
 #if FEATURE_USE_LCID
         //
-        // 
+        //
 
 
         [OnSerializing]
@@ -75,7 +76,7 @@ namespace System.Globalization {
         }
 
         //
-        // 
+        //
 
 
         [OnDeserialized]
@@ -88,7 +89,7 @@ namespace System.Globalization {
             }
         }
 #endif //FEATURE_USE_LCID
-    
+
         ////////////////////////////////////////////////////////////////////////
         //
         //  GetOriginalString
@@ -99,12 +100,9 @@ namespace System.Globalization {
         ////////////////////////////////////////////////////////////////////////
         public virtual String OriginalString
         {
-            get {
-                return (m_String);
-            }
+            get { return (m_String); }
         }
-    
-    
+
         ////////////////////////////////////////////////////////////////////////
         //
         //  GetKeyData
@@ -115,12 +113,9 @@ namespace System.Globalization {
         ////////////////////////////////////////////////////////////////////////
         public virtual byte[] KeyData
         {
-            get {
-                return (byte[])(m_KeyData.Clone());
-            }
+            get { return (byte[])(m_KeyData.Clone()); }
         }
-    
-    
+
         ////////////////////////////////////////////////////////////////////////
         //
         //  Compare
@@ -130,45 +125,50 @@ namespace System.Globalization {
         //  and a number greater than 0 if sortkey1 is greater than sortkey2.
         //
         ////////////////////////////////////////////////////////////////////////
-        public static int Compare(SortKey sortkey1, SortKey sortkey2) {
-    
-            if (sortkey1==null || sortkey2==null) {
-                throw new ArgumentNullException((sortkey1==null ? "sortkey1": "sortkey2"));
+        public static int Compare(SortKey sortkey1, SortKey sortkey2)
+        {
+            if (sortkey1 == null || sortkey2 == null)
+            {
+                throw new ArgumentNullException((sortkey1 == null ? "sortkey1" : "sortkey2"));
             }
             Contract.EndContractBlock();
-    
+
             byte[] key1Data = sortkey1.m_KeyData;
             byte[] key2Data = sortkey2.m_KeyData;
-    
-            Contract.Assert(key1Data!=null, "key1Data!=null");
-            Contract.Assert(key2Data!=null, "key2Data!=null");
 
-            if (key1Data.Length == 0) {
-                if (key2Data.Length == 0) {
+            Contract.Assert(key1Data != null, "key1Data!=null");
+            Contract.Assert(key2Data != null, "key2Data!=null");
+
+            if (key1Data.Length == 0)
+            {
+                if (key2Data.Length == 0)
+                {
                     return (0);
                 }
                 return (-1);
             }
-            if (key2Data.Length == 0) {
+            if (key2Data.Length == 0)
+            {
                 return (1);
             }
-    
-            int compLen = (key1Data.Length<key2Data.Length)?key1Data.Length:key2Data.Length;
 
-            for (int i=0; i<compLen; i++) {
-                if (key1Data[i]>key2Data[i]) {
+            int compLen = (key1Data.Length < key2Data.Length) ? key1Data.Length : key2Data.Length;
+
+            for (int i = 0; i < compLen; i++)
+            {
+                if (key1Data[i] > key2Data[i])
+                {
                     return (1);
                 }
-                if (key1Data[i]<key2Data[i]) {
+                if (key1Data[i] < key2Data[i])
+                {
                     return (-1);
                 }
             }
-    
+
             return 0;
-    
         }
-    
-    
+
         ////////////////////////////////////////////////////////////////////////
         //
         //  Equals
@@ -180,7 +180,7 @@ namespace System.Globalization {
         public override bool Equals(Object value)
         {
             SortKey that = value as SortKey;
-            
+
             if (that != null)
             {
                 return Compare(this, that) == 0;
@@ -188,8 +188,7 @@ namespace System.Globalization {
 
             return (false);
         }
-    
-    
+
         ////////////////////////////////////////////////////////////////////////
         //
         //  GetHashCode
@@ -201,11 +200,13 @@ namespace System.Globalization {
         ////////////////////////////////////////////////////////////////////////
         public override int GetHashCode()
         {
-            return (CompareInfo.GetCompareInfo(
-                this.localeName).GetHashCodeOfString(this.m_String, this.options));
+            return (
+                CompareInfo
+                    .GetCompareInfo(this.localeName)
+                    .GetHashCodeOfString(this.m_String, this.options)
+            );
         }
-    
-    
+
         ////////////////////////////////////////////////////////////////////////
         //
         //  ToString

@@ -13,7 +13,9 @@ namespace Microsoft.AspNetCore.Connections;
 /// </summary>
 public class MultiplexedConnectionBuilder : IMultiplexedConnectionBuilder
 {
-    private readonly IList<Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate>> _components = new List<Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate>>();
+    private readonly IList<
+        Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate>
+    > _components = new List<Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate>>();
 
     /// <inheritdoc />
     public IServiceProvider ApplicationServices { get; }
@@ -28,7 +30,9 @@ public class MultiplexedConnectionBuilder : IMultiplexedConnectionBuilder
     }
 
     /// <inheritdoc />
-    public IMultiplexedConnectionBuilder Use(Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate> middleware)
+    public IMultiplexedConnectionBuilder Use(
+        Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate> middleware
+    )
     {
         _components.Add(middleware);
         return this;

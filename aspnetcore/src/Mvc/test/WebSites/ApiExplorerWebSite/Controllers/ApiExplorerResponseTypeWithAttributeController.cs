@@ -10,15 +10,11 @@ public class ApiExplorerResponseTypeWithAttributeController : Controller
 {
     [HttpGet]
     [ProducesResponseType(typeof(void), 204)]
-    public void GetVoidWithExplicitResponseTypeStatusCode()
-    {
-    }
+    public void GetVoidWithExplicitResponseTypeStatusCode() { }
 
     [HttpGet]
     [Produces(typeof(Customer))]
-    public void GetVoid()
-    {
-    }
+    public void GetVoid() { }
 
     [HttpGet]
     [Produces("application/json", Type = typeof(Product))]

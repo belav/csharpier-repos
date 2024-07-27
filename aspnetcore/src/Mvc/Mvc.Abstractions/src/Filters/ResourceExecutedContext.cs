@@ -19,9 +19,7 @@ public class ResourceExecutedContext : FilterContext
     /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
     /// <param name="filters">The list of <see cref="IFilterMetadata"/> instances.</param>
     public ResourceExecutedContext(ActionContext actionContext, IList<IFilterMetadata> filters)
-        : base(actionContext, filters)
-    {
-    }
+        : base(actionContext, filters) { }
 
     /// <summary>
     /// Gets or sets a value which indicates whether or not execution was canceled by a resource filter.
@@ -55,7 +53,6 @@ public class ResourceExecutedContext : FilterContext
                 return _exception;
             }
         }
-
         set
         {
             _exceptionDispatchInfo = null;
@@ -77,11 +74,7 @@ public class ResourceExecutedContext : FilterContext
     /// </remarks>
     public virtual ExceptionDispatchInfo? ExceptionDispatchInfo
     {
-        get
-        {
-            return _exceptionDispatchInfo;
-        }
-
+        get { return _exceptionDispatchInfo; }
         set
         {
             _exception = null;

@@ -12,13 +12,15 @@ namespace System
     /// The exception that is thrown when a <see langword="null"/> reference (<see langword="Nothing"/> in Visual Basic) is passed to a method that does not accept it as a valid argument.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ArgumentNullException : ArgumentException
     {
         // Creates a new ArgumentNullException with its message
         // string set to a default message explaining an argument was null.
         public ArgumentNullException()
-             : base(SR.ArgumentNull_Generic)
+            : base(SR.ArgumentNull_Generic)
         {
             // Use E_POINTER - COM used that for null pointers.  Description is "invalid pointer"
             HResult = HResults.E_POINTER;
@@ -42,16 +44,22 @@ namespace System
             HResult = HResults.E_POINTER;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected ArgumentNullException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected ArgumentNullException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         /// <summary>Throws an <see cref="ArgumentNullException"/> if <paramref name="argument"/> is null.</summary>
         /// <param name="argument">The reference type argument to validate as non-null.</param>
         /// <param name="paramName">The name of the parameter with which <paramref name="argument"/> corresponds.</param>
-        public static void ThrowIfNull([NotNull] object? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+        public static void ThrowIfNull(
+            [NotNull] object? argument,
+            [CallerArgumentExpression(nameof(argument))] string? paramName = null
+        )
         {
             if (argument is null)
             {
@@ -71,7 +79,10 @@ namespace System
         /// <param name="argument">The pointer argument to validate as non-null.</param>
         /// <param name="paramName">The name of the parameter with which <paramref name="argument"/> corresponds.</param>
         [CLSCompliant(false)]
-        public static unsafe void ThrowIfNull([NotNull] void* argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+        public static unsafe void ThrowIfNull(
+            [NotNull] void* argument,
+            [CallerArgumentExpression(nameof(argument))] string? paramName = null
+        )
         {
             if (argument is null)
             {
@@ -82,7 +93,10 @@ namespace System
         /// <summary>Throws an <see cref="ArgumentNullException"/> if <paramref name="argument"/> is null.</summary>
         /// <param name="argument">The pointer argument to validate as non-null.</param>
         /// <param name="paramName">The name of the parameter with which <paramref name="argument"/> corresponds.</param>
-        internal static unsafe void ThrowIfNull(IntPtr argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+        internal static unsafe void ThrowIfNull(
+            IntPtr argument,
+            [CallerArgumentExpression(nameof(argument))] string? paramName = null
+        )
         {
             if (argument == IntPtr.Zero)
             {
@@ -91,7 +105,6 @@ namespace System
         }
 
         [DoesNotReturn]
-        internal static void Throw(string? paramName) =>
-            throw new ArgumentNullException(paramName);
+        internal static void Throw(string? paramName) => throw new ArgumentNullException(paramName);
     }
 }

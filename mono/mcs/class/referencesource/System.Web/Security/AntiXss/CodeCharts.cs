@@ -4,14 +4,16 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Security.AntiXss {
+namespace System.Web.Security.AntiXss
+{
     using System;
 
     /// <summary>
     /// Values for the lowest section of the UTF8 Unicode code tables, from U0000 to U0FFF.
     /// </summary>
     [Flags]
-    public enum LowerCodeCharts : long {
+    public enum LowerCodeCharts : long
+    {
         /// <summary>
         /// No code charts from the lower region of the Unicode tables are safe-listed.
         /// </summary>
@@ -206,14 +208,22 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// The default code tables marked as safe on initialisation.
         /// </summary>
-        Default = BasicLatin | C1ControlsAndLatin1Supplement | LatinExtendedA | LatinExtendedB | SpacingModifierLetters | IpaExtensions | CombiningDiacriticalMarks
+        Default =
+            BasicLatin
+            | C1ControlsAndLatin1Supplement
+            | LatinExtendedA
+            | LatinExtendedB
+            | SpacingModifierLetters
+            | IpaExtensions
+            | CombiningDiacriticalMarks,
     }
 
     /// <summary>
     /// Values for the lower-mid section of the UTF8 Unicode code tables, from U1000 to U1EFF.
     /// </summary>
     [Flags]
-    public enum LowerMidCodeCharts : long {
+    public enum LowerMidCodeCharts : long
+    {
         /// <summary>
         /// No code charts from the lower-mid region of the Unicode tables are safe-listed.
         /// </summary>
@@ -396,21 +406,22 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// The Combining Diacritical Marks Supplement code table.
         /// </summary>
-        /// <remarks>http://www.unicode.org/charts/PDF/U1DC0.pdf</remarks>        
+        /// <remarks>http://www.unicode.org/charts/PDF/U1DC0.pdf</remarks>
         CombiningDiacriticalMarksSupplement = 1 << 0x1D,
 
         /// <summary>
         /// The Latin Extended Additional code table.
         /// </summary>
         /// <remarks>http://www.unicode.org/charts/PDF/U1E00.pdf</remarks>
-        LatinExtendedAdditional = 1 << 0x1E
+        LatinExtendedAdditional = 1 << 0x1E,
     }
 
     /// <summary>
     /// Values for the middle section of the UTF8 Unicode code tables, from U1F00 to U2DDF
     /// </summary>
     [Flags]
-    public enum MidCodeCharts : long {
+    public enum MidCodeCharts : long
+    {
         /// <summary>
         /// No code charts from the lower region of the Unicode tables are safe-listed.
         /// </summary>
@@ -551,7 +562,7 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// The Miscellaneous Mathematical Symbols-B code table.
         /// </summary>
-        /// <remarks>http://www.unicode.org/charts/PDF/U2980.pdf</remarks>                
+        /// <remarks>http://www.unicode.org/charts/PDF/U2980.pdf</remarks>
         MiscellaneousMathematicalSymbolsB = 1 << 0x16,
 
         /// <summary>
@@ -563,7 +574,7 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// The Miscellaneous Symbols and Arrows code table.
         /// </summary>
-        /// <remarks>http://www.unicode.org/charts/PDF/U2B00.pdf</remarks>        
+        /// <remarks>http://www.unicode.org/charts/PDF/U2B00.pdf</remarks>
         MiscellaneousSymbolsAndArrows = 1 << 0x18,
 
         /// <summary>
@@ -575,7 +586,7 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// The Latin Extended-C code table.
         /// </summary>
-        /// <remarks>http://www.unicode.org/charts/PDF/U2C60.pdf</remarks>        
+        /// <remarks>http://www.unicode.org/charts/PDF/U2C60.pdf</remarks>
         LatinExtendedC = 1 << 0x1A,
 
         /// <summary>
@@ -607,7 +618,8 @@ namespace System.Web.Security.AntiXss {
     /// Values for the upper middle section of the UTF8 Unicode code tables, from U2DE0 to UA8DF
     /// </summary>
     [Flags]
-    public enum UpperMidCodeCharts : long {
+    public enum UpperMidCodeCharts : long
+    {
         /// <summary>
         /// No code charts from the lower region of the Unicode tables are safe-listed.
         /// </summary>
@@ -744,7 +756,7 @@ namespace System.Web.Security.AntiXss {
         /// <summary>
         /// The Lisu code table.
         /// </summary>
-        /// <remarks>http://www.unicode.org/charts/PDF/UA4D0.pdf</remarks>        
+        /// <remarks>http://www.unicode.org/charts/PDF/UA4D0.pdf</remarks>
         Lisu = 1 << 0x15,
 
         /// <summary>
@@ -806,7 +818,8 @@ namespace System.Web.Security.AntiXss {
     /// Values for the upper section of the UTF8 Unicode code tables, from UA8E0 to UFFFD
     /// </summary>
     [Flags]
-    public enum UpperCodeCharts {
+    public enum UpperCodeCharts
+    {
         /// <summary>
         /// No code charts from the upper region of the Unicode tables are safe-listed.
         /// </summary>

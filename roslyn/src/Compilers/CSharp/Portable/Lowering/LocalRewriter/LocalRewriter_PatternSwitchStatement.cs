@@ -5,9 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.PooledObjects;
-using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -23,9 +23,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <summary>
             /// A map from section syntax to the first label in that section.
             /// </summary>
-            private readonly Dictionary<SyntaxNode, LabelSymbol> _sectionLabels = PooledDictionary<SyntaxNode, LabelSymbol>.GetInstance();
+            private readonly Dictionary<SyntaxNode, LabelSymbol> _sectionLabels = PooledDictionary<
+                SyntaxNode,
+                LabelSymbol
+            >.GetInstance();
 
-            public static BoundStatement Rewrite(LocalRewriter localRewriter, BoundSwitchStatement node)
+            public static BoundStatement Rewrite(
+                LocalRewriter localRewriter,
+                BoundSwitchStatement node
+            )
             {
                 var rewriter = new SwitchStatementLocalRewriter(node, localRewriter);
                 BoundStatement result = rewriter.LowerSwitchStatement(node);
@@ -61,24 +67,36 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return result;
             }
 
-            private SwitchStatementLocalRewriter(BoundSwitchStatement node, LocalRewriter localRewriter)
-                : base(node.Syntax, localRewriter, node.SwitchSections.SelectAsArray(section => section.Syntax),
-                      // Only add instrumentation (such as sequence points) if the node is not compiler-generated.
-                      generateInstrumentation: localRewriter.Instrument && !node.WasCompilerGenerated)
-            {
-            }
+            private SwitchStatementLocalRewriter(
+                BoundSwitchStatement node,
+                LocalRewriter localRewriter
+            )
+                : base(
+                    node.Syntax,
+                    localRewriter,
+                    node.SwitchSections.SelectAsArray(section => section.Syntax),
+                    // Only add instrumentation (such as sequence points) if the node is not compiler-generated.
+                    generateInstrumentation: localRewriter.Instrument && !node.WasCompilerGenerated
+                ) { }
 
             private BoundStatement LowerSwitchStatement(BoundSwitchStatement node)
             {
                 _factory.Syntax = node.Syntax;
                 var result = ArrayBuilder<BoundStatement>.GetInstance();
                 var outerVariables = ArrayBuilder<LocalSymbol>.GetInstance();
-                var loweredSwitchGoverningExpression = _localRewriter.VisitExpression(node.Expression);
+                var loweredSwitchGoverningExpression = _localRewriter.VisitExpression(
+                    node.Expression
+                );
                 if (!node.WasCompilerGenerated && _localRewriter.Instrument)
                 {
                     // EnC: We need to insert a hidden sequence point to handle function remapping in case
                     // the containing method is edited while methods invoked in the expression are being executed.
-                    var instrumentedExpression = _localRewriter.Instrumenter.InstrumentSwitchStatementExpression(node, loweredSwitchGoverningExpression, _factory);
+                    var instrumentedExpression =
+                        _localRewriter.Instrumenter.InstrumentSwitchStatementExpression(
+                            node,
+                            loweredSwitchGoverningExpression,
+                            _factory
+                        );
                     if (loweredSwitchGoverningExpression.ConstantValueOpt == null)
                     {
                         loweredSwitchGoverningExpression = instrumentedExpression;
@@ -97,7 +115,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Evaluate the input and set up sharing for dag temps with user variables
                 BoundDecisionDag decisionDag = ShareTempsIfPossibleAndEvaluateInput(
                     node.GetDecisionDagForLowering(_factory.Compilation),
-                    loweredSwitchGoverningExpression, result, out _);
+                    loweredSwitchGoverningExpression,
+                    result,
+                    out _
+                );
 
                 // In a switch statement, there is a hidden sequence point after evaluating the input at the start of
                 // the code to handle the decision dag. This is necessary so that jumps back from a `when` clause into
@@ -112,8 +133,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 // lower the decision dag.
-                (ImmutableArray<BoundStatement> loweredDag, ImmutableDictionary<SyntaxNode, ImmutableArray<BoundStatement>> switchSections) =
-                    LowerDecisionDag(decisionDag);
+                (
+                    ImmutableArray<BoundStatement> loweredDag,
+                    ImmutableDictionary<SyntaxNode, ImmutableArray<BoundStatement>> switchSections
+                ) = LowerDecisionDag(decisionDag);
 
                 if (_whenNodeIdentifierLocal is not null)
                 {
@@ -171,10 +194,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                     result.Add(_factory.HiddenSequencePoint());
 
                 result.Add(_factory.Label(node.BreakLabel));
-                BoundStatement translatedSwitch = _factory.Block(outerVariables.ToImmutableAndFree(), node.InnerLocalFunctions, result.ToImmutableAndFree());
+                BoundStatement translatedSwitch = _factory.Block(
+                    outerVariables.ToImmutableAndFree(),
+                    node.InnerLocalFunctions,
+                    result.ToImmutableAndFree()
+                );
 
                 if (GenerateInstrumentation)
-                    translatedSwitch = _localRewriter.Instrumenter.InstrumentSwitchStatement(node, translatedSwitch);
+                    translatedSwitch = _localRewriter.Instrumenter.InstrumentSwitchStatement(
+                        node,
+                        translatedSwitch
+                    );
 
                 return translatedSwitch;
             }

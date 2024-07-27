@@ -17,13 +17,16 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits;
 internal partial class RemoteRenderer : WebRenderer
 #pragma warning restore CA1852 // Seal internal types
 {
-    private static readonly Task CanceledTask = Task.FromCanceled(new CancellationToken(canceled: true));
+    private static readonly Task CanceledTask = Task.FromCanceled(
+        new CancellationToken(canceled: true)
+    );
 
     private readonly CircuitClientProxy _client;
     private readonly CircuitOptions _options;
     private readonly IServerComponentDeserializer _serverComponentDeserializer;
     private readonly ILogger _logger;
-    internal readonly ConcurrentQueue<UnacknowledgedRenderBatch> _unacknowledgedRenderBatches = new ConcurrentQueue<UnacknowledgedRenderBatch>();
+    internal readonly ConcurrentQueue<UnacknowledgedRenderBatch> _unacknowledgedRenderBatches =
+        new ConcurrentQueue<UnacknowledgedRenderBatch>();
     private long _nextRenderId = 1;
     private bool _disposing;
 
@@ -43,8 +46,14 @@ internal partial class RemoteRenderer : WebRenderer
         IServerComponentDeserializer serverComponentDeserializer,
         ILogger logger,
         RemoteJSRuntime jsRuntime,
-        CircuitJSComponentInterop jsComponentInterop)
-        : base(serviceProvider, loggerFactory, jsRuntime.ReadJsonSerializerOptions(), jsComponentInterop)
+        CircuitJSComponentInterop jsComponentInterop
+    )
+        : base(
+            serviceProvider,
+            loggerFactory,
+            jsRuntime.ReadJsonSerializerOptions(),
+            jsComponentInterop
+        )
     {
         _client = client;
         _options = options;
@@ -56,7 +65,11 @@ internal partial class RemoteRenderer : WebRenderer
 
     public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 
-    public Task AddComponentAsync(Type componentType, ParameterView parameters, string domElementSelector)
+    public Task AddComponentAsync(
+        Type componentType,
+        ParameterView parameters,
+        string domElementSelector
+    )
     {
         var componentId = AddRootComponent(componentType, domElementSelector);
         return RenderRootComponentAsync(componentId, parameters);
@@ -66,7 +79,11 @@ internal partial class RemoteRenderer : WebRenderer
 
     protected override void AttachRootComponentToBrowser(int componentId, string domElementSelector)
     {
-        var attachComponentTask = _client.SendAsync("JS.AttachComponent", componentId, domElementSelector);
+        var attachComponentTask = _client.SendAsync(
+            "JS.AttachComponent",
+            componentId,
+            domElementSelector
+        );
         _ = CaptureAsyncExceptions(attachComponentTask);
     }
 
@@ -132,7 +149,9 @@ internal partial class RemoteRenderer : WebRenderer
     }
 
     /// <inheritdoc />
-    protected override Task UpdateDisplayAsync(in Microsoft.AspNetCore.Components.RenderTree.RenderBatch batch)
+    protected override Task UpdateDisplayAsync(
+        in Microsoft.AspNetCore.Components.RenderTree.RenderBatch batch
+    )
     {
         if (_disposing)
         {
@@ -160,7 +179,8 @@ internal partial class RemoteRenderer : WebRenderer
                 renderId,
                 arrayBuilder,
                 new TaskCompletionSource(),
-                ValueStopwatch.StartNew());
+                ValueStopwatch.StartNew()
+            );
 
             // Buffer the rendered batches no matter what. We'll send it down immediately when the client
             // is connected or right after the client reconnects.
@@ -207,7 +227,12 @@ internal partial class RemoteRenderer : WebRenderer
                 return;
             }
 
-            Log.BeginUpdateDisplayAsync(_logger, pending.BatchId, pending.Data.Count, _client.ConnectionId);
+            Log.BeginUpdateDisplayAsync(
+                _logger,
+                pending.BatchId,
+                pending.Data.Count,
+                _client.ConnectionId
+            );
             var segment = new ArraySegment<byte>(pending.Data.Buffer, 0, pending.Data.Count);
             await _client.SendAsync("JS.RenderBatch", pending.BatchId, segment);
         }
@@ -253,7 +278,10 @@ internal partial class RemoteRenderer : WebRenderer
         // synchronizes calls to hub methods. That is, it won't issue more than one call to this method from the same hub
         // at the same time on different threads.
 
-        if (!_unacknowledgedRenderBatches.TryPeek(out var nextUnacknowledgedBatch) || incomingBatchId < nextUnacknowledgedBatch.BatchId)
+        if (
+            !_unacknowledgedRenderBatches.TryPeek(out var nextUnacknowledgedBatch)
+            || incomingBatchId < nextUnacknowledgedBatch.BatchId
+        )
         {
             Log.ReceivedDuplicateBatchAck(_logger, incomingBatchId);
             return Task.CompletedTask;
@@ -262,7 +290,10 @@ internal partial class RemoteRenderer : WebRenderer
         {
             var lastBatchId = nextUnacknowledgedBatch.BatchId;
             // Order is important here so that we don't prematurely dequeue the last nextUnacknowledgedBatch
-            while (_unacknowledgedRenderBatches.TryPeek(out nextUnacknowledgedBatch) && nextUnacknowledgedBatch.BatchId <= incomingBatchId)
+            while (
+                _unacknowledgedRenderBatches.TryPeek(out nextUnacknowledgedBatch)
+                && nextUnacknowledgedBatch.BatchId <= incomingBatchId
+            )
             {
                 lastBatchId = nextUnacknowledgedBatch.BatchId;
                 // At this point the queue is definitely not full, we have at least emptied one slot, so we allow a further
@@ -275,7 +306,9 @@ internal partial class RemoteRenderer : WebRenderer
             {
                 // This exception is due to a bad client input, so we mark it as such to prevent logging it as a warning and
                 // flooding the logs with warnings.
-                throw new InvalidOperationException($"Received an acknowledgement for batch with id '{incomingBatchId}' when the last batch produced was '{lastBatchId}'.");
+                throw new InvalidOperationException(
+                    $"Received an acknowledgement for batch with id '{incomingBatchId}' when the last batch produced was '{lastBatchId}'."
+                );
             }
 
             // Normally we will not have pending renders, but it might happen that we reached the limit of
@@ -296,11 +329,21 @@ internal partial class RemoteRenderer : WebRenderer
         }
     }
 
-    protected override IComponent ResolveComponentForRenderMode([DynamicallyAccessedMembers(Component)] Type componentType, int? parentComponentId, IComponentActivator componentActivator, IComponentRenderMode renderMode)
-        => renderMode switch
+    protected override IComponent ResolveComponentForRenderMode(
+        [DynamicallyAccessedMembers(Component)] Type componentType,
+        int? parentComponentId,
+        IComponentActivator componentActivator,
+        IComponentRenderMode renderMode
+    ) =>
+        renderMode switch
         {
-            InteractiveServerRenderMode or InteractiveAutoRenderMode => componentActivator.CreateInstance(componentType),
-            _ => throw new NotSupportedException($"Cannot create a component of type '{componentType}' because its render mode '{renderMode}' is not supported by interactive server-side rendering."),
+            InteractiveServerRenderMode
+            or InteractiveAutoRenderMode
+                => componentActivator.CreateInstance(componentType),
+            _
+                => throw new NotSupportedException(
+                    $"Cannot create a component of type '{componentType}' because its render mode '{renderMode}' is not supported by interactive server-side rendering."
+                ),
         };
 
     private void ProcessPendingBatch(string? errorMessageOrNull, UnacknowledgedRenderBatch entry)
@@ -319,7 +362,10 @@ internal partial class RemoteRenderer : WebRenderer
         CompleteRender(entry.CompletionSource, errorMessageOrNull);
     }
 
-    private static void CompleteRender(TaskCompletionSource pendingRenderInfo, string? errorMessageOrNull)
+    private static void CompleteRender(
+        TaskCompletionSource pendingRenderInfo,
+        string? errorMessageOrNull
+    )
     {
         if (errorMessageOrNull == null)
         {
@@ -333,7 +379,12 @@ internal partial class RemoteRenderer : WebRenderer
 
     internal readonly struct UnacknowledgedRenderBatch
     {
-        public UnacknowledgedRenderBatch(long batchId, ArrayBuilder<byte> data, TaskCompletionSource completionSource, ValueStopwatch valueStopwatch)
+        public UnacknowledgedRenderBatch(
+            long batchId,
+            ArrayBuilder<byte> data,
+            TaskCompletionSource completionSource,
+            ValueStopwatch valueStopwatch
+        )
         {
             BatchId = batchId;
             Data = data;
@@ -361,40 +412,114 @@ internal partial class RemoteRenderer : WebRenderer
 
     private static partial class Log
     {
-        [LoggerMessage(100, LogLevel.Warning, "Unhandled exception rendering component: {Message}", EventName = "ExceptionRenderingComponent")]
-        private static partial void UnhandledExceptionRenderingComponent(ILogger logger, string message, Exception exception);
+        [LoggerMessage(
+            100,
+            LogLevel.Warning,
+            "Unhandled exception rendering component: {Message}",
+            EventName = "ExceptionRenderingComponent"
+        )]
+        private static partial void UnhandledExceptionRenderingComponent(
+            ILogger logger,
+            string message,
+            Exception exception
+        );
 
-        public static void UnhandledExceptionRenderingComponent(ILogger logger, Exception exception)
-            => UnhandledExceptionRenderingComponent(logger, exception.Message, exception);
+        public static void UnhandledExceptionRenderingComponent(
+            ILogger logger,
+            Exception exception
+        ) => UnhandledExceptionRenderingComponent(logger, exception.Message, exception);
 
-        [LoggerMessage(101, LogLevel.Debug, "Sending render batch {BatchId} of size {DataLength} bytes to client {ConnectionId}.", EventName = "BeginUpdateDisplayAsync")]
-        public static partial void BeginUpdateDisplayAsync(ILogger logger, long batchId, int dataLength, string connectionId);
+        [LoggerMessage(
+            101,
+            LogLevel.Debug,
+            "Sending render batch {BatchId} of size {DataLength} bytes to client {ConnectionId}.",
+            EventName = "BeginUpdateDisplayAsync"
+        )]
+        public static partial void BeginUpdateDisplayAsync(
+            ILogger logger,
+            long batchId,
+            int dataLength,
+            string connectionId
+        );
 
-        [LoggerMessage(102, LogLevel.Debug, "Buffering remote render because the client on connection {ConnectionId} is disconnected.", EventName = "SkipUpdateDisplayAsync")]
-        public static partial void BufferingRenderDisconnectedClient(ILogger logger, string connectionId);
+        [LoggerMessage(
+            102,
+            LogLevel.Debug,
+            "Buffering remote render because the client on connection {ConnectionId} is disconnected.",
+            EventName = "SkipUpdateDisplayAsync"
+        )]
+        public static partial void BufferingRenderDisconnectedClient(
+            ILogger logger,
+            string connectionId
+        );
 
-        [LoggerMessage(103, LogLevel.Information, "Sending data for batch failed: {Message}", EventName = "SendBatchDataFailed")]
-        private static partial void SendBatchDataFailed(ILogger logger, string message, Exception exception);
+        [LoggerMessage(
+            103,
+            LogLevel.Information,
+            "Sending data for batch failed: {Message}",
+            EventName = "SendBatchDataFailed"
+        )]
+        private static partial void SendBatchDataFailed(
+            ILogger logger,
+            string message,
+            Exception exception
+        );
 
-        public static void SendBatchDataFailed(ILogger logger, Exception exception)
-            => SendBatchDataFailed(logger, exception.Message, exception);
+        public static void SendBatchDataFailed(ILogger logger, Exception exception) =>
+            SendBatchDataFailed(logger, exception.Message, exception);
 
-        [LoggerMessage(104, LogLevel.Debug, "Completing batch {BatchId} with error: {ErrorMessage} in {ElapsedMilliseconds}ms.", EventName = "CompletingBatchWithError")]
-        private static partial void CompletingBatchWithError(ILogger logger, long batchId, string errorMessage, double elapsedMilliseconds);
+        [LoggerMessage(
+            104,
+            LogLevel.Debug,
+            "Completing batch {BatchId} with error: {ErrorMessage} in {ElapsedMilliseconds}ms.",
+            EventName = "CompletingBatchWithError"
+        )]
+        private static partial void CompletingBatchWithError(
+            ILogger logger,
+            long batchId,
+            string errorMessage,
+            double elapsedMilliseconds
+        );
 
-        public static void CompletingBatchWithError(ILogger logger, long batchId, string errorMessage, TimeSpan elapsedTime)
-            => CompletingBatchWithError(logger, batchId, errorMessage, elapsedTime.TotalMilliseconds);
+        public static void CompletingBatchWithError(
+            ILogger logger,
+            long batchId,
+            string errorMessage,
+            TimeSpan elapsedTime
+        ) => CompletingBatchWithError(logger, batchId, errorMessage, elapsedTime.TotalMilliseconds);
 
-        [LoggerMessage(105, LogLevel.Debug, "Completing batch {BatchId} without error in {ElapsedMilliseconds}ms.", EventName = "CompletingBatchWithoutError")]
-        private static partial void CompletingBatchWithoutError(ILogger logger, long batchId, double elapsedMilliseconds);
+        [LoggerMessage(
+            105,
+            LogLevel.Debug,
+            "Completing batch {BatchId} without error in {ElapsedMilliseconds}ms.",
+            EventName = "CompletingBatchWithoutError"
+        )]
+        private static partial void CompletingBatchWithoutError(
+            ILogger logger,
+            long batchId,
+            double elapsedMilliseconds
+        );
 
-        public static void CompletingBatchWithoutError(ILogger logger, long batchId, TimeSpan elapsedTime)
-            => CompletingBatchWithoutError(logger, batchId, elapsedTime.TotalMilliseconds);
+        public static void CompletingBatchWithoutError(
+            ILogger logger,
+            long batchId,
+            TimeSpan elapsedTime
+        ) => CompletingBatchWithoutError(logger, batchId, elapsedTime.TotalMilliseconds);
 
-        [LoggerMessage(106, LogLevel.Debug, "Received a duplicate ACK for batch id '{IncomingBatchId}'.", EventName = "ReceivedDuplicateBatchAcknowledgement")]
+        [LoggerMessage(
+            106,
+            LogLevel.Debug,
+            "Received a duplicate ACK for batch id '{IncomingBatchId}'.",
+            EventName = "ReceivedDuplicateBatchAcknowledgement"
+        )]
         public static partial void ReceivedDuplicateBatchAck(ILogger logger, long incomingBatchId);
 
-        [LoggerMessage(107, LogLevel.Debug, "The queue of unacknowledged render batches is full.", EventName = "FullUnacknowledgedRenderBatchesQueue")]
+        [LoggerMessage(
+            107,
+            LogLevel.Debug,
+            "The queue of unacknowledged render batches is full.",
+            EventName = "FullUnacknowledgedRenderBatchesQueue"
+        )]
         public static partial void FullUnacknowledgedRenderBatchesQueue(ILogger logger);
     }
 }

@@ -3,20 +3,20 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class WithConstructorsSqlServerTest : WithConstructorsTestBase<WithConstructorsSqlServerTest.WithConstructorsSqlServerFixture>
+public class WithConstructorsSqlServerTest
+    : WithConstructorsTestBase<WithConstructorsSqlServerTest.WithConstructorsSqlServerFixture>
 {
     public WithConstructorsSqlServerTest(WithConstructorsSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
     public class WithConstructorsSqlServerFixture : WithConstructorsFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

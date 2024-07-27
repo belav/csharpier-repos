@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests;
 /// <summary>
 /// A wrapper which takes a service but actually sends calls to it through JsonRpc to ensure we can actually use the service across a wire.
 /// </summary>
-internal sealed class BrokeredServiceProxy<T> : IAsyncDisposable where T : class
+internal sealed class BrokeredServiceProxy<T> : IAsyncDisposable
+    where T : class
 {
     /// <summary>
     /// A task that cane awaited to assert the rest of the fields in this class being assigned and non-null.
@@ -30,8 +31,13 @@ internal sealed class BrokeredServiceProxy<T> : IAsyncDisposable where T : class
             var serverMultiplexingStream = await MultiplexingStream.CreateAsync(serverStream);
             var serverChannel = await serverMultiplexingStream.AcceptChannelAsync("");
 
-            var serverFormatter = new MessagePackFormatter() { MultiplexingStream = serverMultiplexingStream };
-            _serverRpc = new JsonRpc(new LengthHeaderMessageHandler(serverChannel, serverFormatter));
+            var serverFormatter = new MessagePackFormatter()
+            {
+                MultiplexingStream = serverMultiplexingStream,
+            };
+            _serverRpc = new JsonRpc(
+                new LengthHeaderMessageHandler(serverChannel, serverFormatter)
+            );
 
             _serverRpc.AddLocalRpcTarget(service, options: null);
             _serverRpc.StartListening();
@@ -42,8 +48,13 @@ internal sealed class BrokeredServiceProxy<T> : IAsyncDisposable where T : class
             var clientMultiplexingStream = await MultiplexingStream.CreateAsync(clientStream);
             var clientChannel = await clientMultiplexingStream.OfferChannelAsync("");
 
-            var clientFormatter = new MessagePackFormatter() { MultiplexingStream = clientMultiplexingStream };
-            _clientRpc = new JsonRpc(new LengthHeaderMessageHandler(clientChannel, clientFormatter));
+            var clientFormatter = new MessagePackFormatter()
+            {
+                MultiplexingStream = clientMultiplexingStream,
+            };
+            _clientRpc = new JsonRpc(
+                new LengthHeaderMessageHandler(clientChannel, clientFormatter)
+            );
 
             _clientFactoryProxy = _clientRpc.Attach<T>();
             _clientRpc.StartListening();

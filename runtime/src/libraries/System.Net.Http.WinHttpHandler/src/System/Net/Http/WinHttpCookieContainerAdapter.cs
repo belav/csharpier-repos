@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
 using SafeWinHttpHandle = Interop.WinHttp.SafeWinHttpHandle;
 
 namespace System.Net.Http
@@ -20,7 +19,9 @@ namespace System.Net.Http
             Debug.Assert(state.Handler != null);
             CookieContainer? cookieContainer = state.Handler.CookieContainer;
 
-            Debug.Assert(state.Handler.CookieUsePolicy == CookieUsePolicy.UseSpecifiedCookieContainer);
+            Debug.Assert(
+                state.Handler.CookieUsePolicy == CookieUsePolicy.UseSpecifiedCookieContainer
+            );
             Debug.Assert(request != null);
             Debug.Assert(requestHandle != null);
             Debug.Assert(cookieContainer != null);
@@ -30,18 +31,30 @@ namespace System.Net.Http
             char[]? buffer = null;
             uint index = 0;
             string? cookieHeader;
-            while (WinHttpResponseParser.GetResponseHeader(
-                requestHandle, Interop.WinHttp.WINHTTP_QUERY_SET_COOKIE, ref buffer, ref index, out cookieHeader))
+            while (
+                WinHttpResponseParser.GetResponseHeader(
+                    requestHandle,
+                    Interop.WinHttp.WINHTTP_QUERY_SET_COOKIE,
+                    ref buffer,
+                    ref index,
+                    out cookieHeader
+                )
+            )
             {
                 try
                 {
                     cookieContainer.SetCookies(request.RequestUri, cookieHeader);
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(cookieContainer, $"Added cookie: {cookieHeader}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(cookieContainer, $"Added cookie: {cookieHeader}");
                 }
                 catch (CookieException)
                 {
                     // We ignore malformed cookies in the response.
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(cookieContainer, $"Ignoring invalid cookie: {cookieHeader}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(
+                            cookieContainer,
+                            $"Ignoring invalid cookie: {cookieHeader}"
+                        );
                 }
             }
         }
@@ -51,21 +64,29 @@ namespace System.Net.Http
             SafeWinHttpHandle? requestHandle = state.RequestHandle;
 
             Debug.Assert(state.Handler != null);
-            Debug.Assert(state.Handler.CookieUsePolicy == CookieUsePolicy.UseSpecifiedCookieContainer);
+            Debug.Assert(
+                state.Handler.CookieUsePolicy == CookieUsePolicy.UseSpecifiedCookieContainer
+            );
             Debug.Assert(state.Handler.CookieContainer != null);
             Debug.Assert(requestHandle != null);
 
             // Clear cookies.
-            if (!Interop.WinHttp.WinHttpAddRequestHeaders(
-                requestHandle,
-                CookieHeaderNameWithColon,
-                (uint)CookieHeaderNameWithColon.Length,
-                Interop.WinHttp.WINHTTP_ADDREQ_FLAG_REPLACE))
+            if (
+                !Interop.WinHttp.WinHttpAddRequestHeaders(
+                    requestHandle,
+                    CookieHeaderNameWithColon,
+                    (uint)CookieHeaderNameWithColon.Length,
+                    Interop.WinHttp.WINHTTP_ADDREQ_FLAG_REPLACE
+                )
+            )
             {
                 int lastError = Marshal.GetLastWin32Error();
                 if (lastError != Interop.WinHttp.ERROR_WINHTTP_HEADER_NOT_FOUND)
                 {
-                    throw WinHttpException.CreateExceptionUsingError(lastError, nameof(Interop.WinHttp.WinHttpAddRequestHeaders));
+                    throw WinHttpException.CreateExceptionUsingError(
+                        lastError,
+                        nameof(Interop.WinHttp.WinHttpAddRequestHeaders)
+                    );
                 }
             }
 
@@ -74,13 +95,18 @@ namespace System.Net.Http
             string? cookieHeader = GetCookieHeader(redirectUri, state.Handler.CookieContainer);
             if (!string.IsNullOrEmpty(cookieHeader))
             {
-                if (!Interop.WinHttp.WinHttpAddRequestHeaders(
-                    requestHandle,
-                    cookieHeader,
-                    (uint)cookieHeader.Length,
-                    Interop.WinHttp.WINHTTP_ADDREQ_FLAG_ADD))
+                if (
+                    !Interop.WinHttp.WinHttpAddRequestHeaders(
+                        requestHandle,
+                        cookieHeader,
+                        (uint)cookieHeader.Length,
+                        Interop.WinHttp.WINHTTP_ADDREQ_FLAG_ADD
+                    )
+                )
                 {
-                    WinHttpException.ThrowExceptionUsingLastError(nameof(Interop.WinHttp.WinHttpAddRequestHeaders));
+                    WinHttpException.ThrowExceptionUsingLastError(
+                        nameof(Interop.WinHttp.WinHttpAddRequestHeaders)
+                    );
                 }
             }
         }

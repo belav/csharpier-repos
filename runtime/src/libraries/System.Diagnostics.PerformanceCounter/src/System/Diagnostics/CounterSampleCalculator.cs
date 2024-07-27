@@ -32,11 +32,16 @@ namespace System.Diagnostics
                 float eFreq;
                 eFreq = (float)(ulong)oldSample.CounterFrequency;
 
-                if (oldSample.UnsignedRawValue >= (ulong)newSample.CounterTimeStamp || eFreq <= 0.0f)
+                if (
+                    oldSample.UnsignedRawValue >= (ulong)newSample.CounterTimeStamp
+                    || eFreq <= 0.0f
+                )
                     return 0.0f;
 
                 // otherwise compute difference between current time and start time
-                eDifference = (float)((ulong)newSample.CounterTimeStamp - oldSample.UnsignedRawValue);
+                eDifference = (float)(
+                    (ulong)newSample.CounterTimeStamp - oldSample.UnsignedRawValue
+                );
 
                 // convert to fractional seconds using object counter
                 eSeconds = eDifference / eFreq;
@@ -61,14 +66,33 @@ namespace System.Diagnostics
             int newCounterType = (int)newSample.CounterType;
             if (oldSample.SystemFrequency == 0)
             {
-                if ((newCounterType != Interop.Kernel32.PerformanceCounterOptions.PERF_RAW_FRACTION) &&
-                    (newCounterType != Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_RAWCOUNT) &&
-                    (newCounterType != Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_RAWCOUNT_HEX) &&
-                    (newCounterType != Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_LARGE_RAWCOUNT) &&
-                    (newCounterType != Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_LARGE_RAWCOUNT_HEX) &&
-                    (newCounterType != Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_BASE))
+                if (
+                    (newCounterType != Interop.Kernel32.PerformanceCounterOptions.PERF_RAW_FRACTION)
+                    && (
+                        newCounterType
+                        != Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_RAWCOUNT
+                    )
+                    && (
+                        newCounterType
+                        != Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_RAWCOUNT_HEX
+                    )
+                    && (
+                        newCounterType
+                        != Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_LARGE_RAWCOUNT
+                    )
+                    && (
+                        newCounterType
+                        != Interop
+                            .Kernel32
+                            .PerformanceCounterOptions
+                            .PERF_COUNTER_LARGE_RAWCOUNT_HEX
+                    )
+                    && (
+                        newCounterType
+                        != Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_BASE
+                    )
+                )
                 {
-
                     // Since oldSample has a system frequency of 0, this means the newSample is the first sample
                     // on a two sample calculation.  Since we can't do anything with it, return 0.
                     return 0.0f;
@@ -87,27 +111,51 @@ namespace System.Diagnostics
 
             FillInValues(oldSample, newSample, ref oldPdhValue, ref newPdhValue);
 
-            Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_COUNTERVALUE pdhFormattedValue = default;
+            Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_COUNTERVALUE pdhFormattedValue =
+                default;
             long timeBase = newSample.SystemFrequency;
-            int result = Interop.Pdh.PdhFormatFromRawValue((uint)newCounterType, Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_DOUBLE | Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_NOSCALE | Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_NOCAP100,
-                                                          ref timeBase, ref newPdhValue, ref oldPdhValue, ref pdhFormattedValue);
+            int result = Interop.Pdh.PdhFormatFromRawValue(
+                (uint)newCounterType,
+                Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_DOUBLE
+                    | Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_NOSCALE
+                    | Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_NOCAP100,
+                ref timeBase,
+                ref newPdhValue,
+                ref oldPdhValue,
+                ref pdhFormattedValue
+            );
 
             if (result != Interop.Errors.ERROR_SUCCESS)
             {
                 // If the numbers go negative, just return 0.  This better matches the old behavior.
-                if (result == Interop.Kernel32.PerformanceCounterOptions.PDH_CALC_NEGATIVE_VALUE || result == Interop.Kernel32.PerformanceCounterOptions.PDH_CALC_NEGATIVE_DENOMINATOR || result == Interop.Kernel32.PerformanceCounterOptions.PDH_NO_DATA)
+                if (
+                    result == Interop.Kernel32.PerformanceCounterOptions.PDH_CALC_NEGATIVE_VALUE
+                    || result
+                        == Interop.Kernel32.PerformanceCounterOptions.PDH_CALC_NEGATIVE_DENOMINATOR
+                    || result == Interop.Kernel32.PerformanceCounterOptions.PDH_NO_DATA
+                )
                     return 0;
                 else
-                    throw new Win32Exception(result, SR.Format(SR.PerfCounterPdhError, result.ToString("x", CultureInfo.InvariantCulture)));
+                    throw new Win32Exception(
+                        result,
+                        SR.Format(
+                            SR.PerfCounterPdhError,
+                            result.ToString("x", CultureInfo.InvariantCulture)
+                        )
+                    );
             }
 
             return (float)pdhFormattedValue.data;
-
         }
 
         // This method figures out which values are supposed to go into which structures so that PDH can do the
         // calculation for us.  This was ported from Window's cutils.c
-        private static void FillInValues(CounterSample oldSample, CounterSample newSample, ref Interop.Kernel32.PerformanceCounterOptions.PDH_RAW_COUNTER oldPdhValue, ref Interop.Kernel32.PerformanceCounterOptions.PDH_RAW_COUNTER newPdhValue)
+        private static void FillInValues(
+            CounterSample oldSample,
+            CounterSample newSample,
+            ref Interop.Kernel32.PerformanceCounterOptions.PDH_RAW_COUNTER oldPdhValue,
+            ref Interop.Kernel32.PerformanceCounterOptions.PDH_RAW_COUNTER newPdhValue
+        )
         {
             int newCounterType = (int)newSample.CounterType;
 
@@ -144,7 +192,15 @@ namespace System.Diagnostics
 
                     oldPdhValue.FirstValue = oldSample.RawValue;
                     oldPdhValue.SecondValue = oldSample.TimeStamp;
-                    if (newCounterType == Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_TIMER || newCounterType == Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_TIMER_INV)
+                    if (
+                        newCounterType
+                            == Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_TIMER
+                        || newCounterType
+                            == Interop
+                                .Kernel32
+                                .PerformanceCounterOptions
+                                .PERF_COUNTER_MULTI_TIMER_INV
+                    )
                     {
                         //  this is to make PDH work like PERFMON for
                         //  this counter type
@@ -155,7 +211,12 @@ namespace System.Diagnostics
                         }
                     }
 
-                    if ((newCounterType & Interop.Kernel32.PerformanceCounterOptions.PERF_MULTI_COUNTER) == Interop.Kernel32.PerformanceCounterOptions.PERF_MULTI_COUNTER)
+                    if (
+                        (
+                            newCounterType
+                            & Interop.Kernel32.PerformanceCounterOptions.PERF_MULTI_COUNTER
+                        ) == Interop.Kernel32.PerformanceCounterOptions.PERF_MULTI_COUNTER
+                    )
                     {
                         newPdhValue.MultiCount = (int)newSample.BaseValue;
                         oldPdhValue.MultiCount = (int)oldSample.BaseValue;
@@ -189,7 +250,12 @@ namespace System.Diagnostics
 
                     oldPdhValue.FirstValue = oldSample.RawValue;
                     oldPdhValue.SecondValue = oldSample.TimeStamp100nSec;
-                    if ((newCounterType & Interop.Kernel32.PerformanceCounterOptions.PERF_MULTI_COUNTER) == Interop.Kernel32.PerformanceCounterOptions.PERF_MULTI_COUNTER)
+                    if (
+                        (
+                            newCounterType
+                            & Interop.Kernel32.PerformanceCounterOptions.PERF_MULTI_COUNTER
+                        ) == Interop.Kernel32.PerformanceCounterOptions.PERF_MULTI_COUNTER
+                    )
                     {
                         newPdhValue.MultiCount = (int)newSample.BaseValue;
                         oldPdhValue.MultiCount = (int)oldSample.BaseValue;

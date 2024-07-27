@@ -25,11 +25,17 @@ public sealed class JsonWarningEnumReaderWriter<TEnum> : JsonValueReaderWriter<T
     }
 
     /// <inheritdoc />
-    public override TEnum FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
+    public override TEnum FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    )
     {
         if (manager.CurrentReader.TokenType == JsonTokenType.String)
         {
-            if (manager.QueryLogger?.Options.ShouldWarnForStringEnumValueInJson(typeof(TEnum)) == true)
+            if (
+                manager.QueryLogger?.Options.ShouldWarnForStringEnumValueInJson(typeof(TEnum))
+                == true
+            )
             {
                 manager.QueryLogger.StringEnumValueInJson(typeof(TEnum));
             }
@@ -50,17 +56,19 @@ public sealed class JsonWarningEnumReaderWriter<TEnum> : JsonValueReaderWriter<T
                 return (TEnum)Convert.ChangeType(ulongValue, typeof(TEnum).GetEnumUnderlyingType());
             }
 
-            throw new InvalidOperationException(CoreStrings.BadEnumValue(value, typeof(TEnum).ShortDisplayName()));
+            throw new InvalidOperationException(
+                CoreStrings.BadEnumValue(value, typeof(TEnum).ShortDisplayName())
+            );
         }
 
-        return (TEnum)Convert.ChangeType(
-            _isSigned
-                ? manager.CurrentReader.GetInt64()
-                : manager.CurrentReader.GetUInt64(),
-            typeof(TEnum).GetEnumUnderlyingType());
+        return (TEnum)
+            Convert.ChangeType(
+                _isSigned ? manager.CurrentReader.GetInt64() : manager.CurrentReader.GetUInt64(),
+                typeof(TEnum).GetEnumUnderlyingType()
+            );
     }
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, TEnum value)
-        => writer.WriteNumberValue((ulong)Convert.ChangeType(value, typeof(ulong))!);
+    public override void ToJsonTyped(Utf8JsonWriter writer, TEnum value) =>
+        writer.WriteNumberValue((ulong)Convert.ChangeType(value, typeof(ulong))!);
 }

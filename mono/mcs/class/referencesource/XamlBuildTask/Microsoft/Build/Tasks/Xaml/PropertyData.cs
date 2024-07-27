@@ -6,9 +6,9 @@ namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Xaml;
-    using System.Collections.ObjectModel;
     using XamlBuildTask;
 
     public sealed class PropertyData
@@ -16,9 +16,7 @@ namespace Microsoft.Build.Tasks.Xaml
         List<AttributeData> attributes;
         MemberVisibility visibility;
 
-        public PropertyData()
-        {
-        }
+        public PropertyData() { }
 
         public IList<AttributeData> Attributes
         {
@@ -35,10 +33,7 @@ namespace Microsoft.Build.Tasks.Xaml
         [DefaultValue("")]
         public MemberVisibility Visibility
         {
-            get
-            {
-                return this.visibility;
-            }
+            get { return this.visibility; }
             set
             {
                 if (!Enum.IsDefined(typeof(MemberVisibility), value))
@@ -49,16 +44,8 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
-        public XamlType Type
-        {
-            get;
-            set;
-        }
+        public XamlType Type { get; set; }
     }
 }

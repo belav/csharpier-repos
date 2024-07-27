@@ -13,35 +13,49 @@ public class SqlServerTestStore : RelationalTestStore
 {
     public const int CommandTimeout = 300;
 
-    private static string CurrentDirectory
-        => Environment.CurrentDirectory;
+    private static string CurrentDirectory => Environment.CurrentDirectory;
 
-    public static SqlServerTestStore GetNorthwindStore()
-        => (SqlServerTestStore)SqlServerNorthwindTestStoreFactory.Instance
-            .GetOrCreate(SqlServerNorthwindTestStoreFactory.Name).Initialize(null, (Func<DbContext>)null);
+    public static SqlServerTestStore GetNorthwindStore() =>
+        (SqlServerTestStore)
+            SqlServerNorthwindTestStoreFactory
+                .Instance.GetOrCreate(SqlServerNorthwindTestStoreFactory.Name)
+                .Initialize(null, (Func<DbContext>)null);
 
-    public static SqlServerTestStore GetOrCreate(string name)
-        => new(name);
+    public static SqlServerTestStore GetOrCreate(string name) => new(name);
 
-    public static SqlServerTestStore GetOrCreateInitialized(string name)
-        => new SqlServerTestStore(name).InitializeSqlServer(null, (Func<DbContext>)null, null);
+    public static SqlServerTestStore GetOrCreateInitialized(string name) =>
+        new SqlServerTestStore(name).InitializeSqlServer(null, (Func<DbContext>)null, null);
 
-    public static SqlServerTestStore GetOrCreateWithInitScript(string name, string initScript)
-        => new(name, initScript: initScript);
+    public static SqlServerTestStore GetOrCreateWithInitScript(string name, string initScript) =>
+        new(name, initScript: initScript);
 
     public static SqlServerTestStore GetOrCreateWithScriptPath(
         string name,
         string scriptPath,
         bool? multipleActiveResultSets = null,
-        bool shared = true)
-        => new(name, scriptPath: scriptPath, multipleActiveResultSets: multipleActiveResultSets, shared: shared);
+        bool shared = true
+    ) =>
+        new(
+            name,
+            scriptPath: scriptPath,
+            multipleActiveResultSets: multipleActiveResultSets,
+            shared: shared
+        );
 
-    public static SqlServerTestStore Create(string name, bool useFileName = false)
-        => new(name, useFileName, shared: false);
+    public static SqlServerTestStore Create(string name, bool useFileName = false) =>
+        new(name, useFileName, shared: false);
 
-    public static SqlServerTestStore CreateInitialized(string name, bool useFileName = false, bool? multipleActiveResultSets = null)
-        => new SqlServerTestStore(name, useFileName, shared: false, multipleActiveResultSets: multipleActiveResultSets)
-            .InitializeSqlServer(null, (Func<DbContext>)null, null);
+    public static SqlServerTestStore CreateInitialized(
+        string name,
+        bool useFileName = false,
+        bool? multipleActiveResultSets = null
+    ) =>
+        new SqlServerTestStore(
+            name,
+            useFileName,
+            shared: false,
+            multipleActiveResultSets: multipleActiveResultSets
+        ).InitializeSqlServer(null, (Func<DbContext>)null, null);
 
     private readonly string _fileName;
     private readonly string _initScript;
@@ -53,7 +67,8 @@ public class SqlServerTestStore : RelationalTestStore
         bool? multipleActiveResultSets = null,
         string initScript = null,
         string scriptPath = null,
-        bool shared = true)
+        bool shared = true
+    )
         : base(name, shared)
     {
         if (useFileName)
@@ -68,7 +83,10 @@ public class SqlServerTestStore : RelationalTestStore
 
         if (scriptPath != null)
         {
-            _scriptPath = Path.Combine(Path.GetDirectoryName(typeof(SqlServerTestStore).Assembly.Location), scriptPath);
+            _scriptPath = Path.Combine(
+                Path.GetDirectoryName(typeof(SqlServerTestStore).Assembly.Location),
+                scriptPath
+            );
         }
 
         ConnectionString = CreateConnectionString(Name, _fileName, multipleActiveResultSets);
@@ -78,16 +96,20 @@ public class SqlServerTestStore : RelationalTestStore
     public SqlServerTestStore InitializeSqlServer(
         IServiceProvider serviceProvider,
         Func<DbContext> createContext,
-        Action<DbContext> seed)
-        => (SqlServerTestStore)Initialize(serviceProvider, createContext, seed);
+        Action<DbContext> seed
+    ) => (SqlServerTestStore)Initialize(serviceProvider, createContext, seed);
 
     public SqlServerTestStore InitializeSqlServer(
         IServiceProvider serviceProvider,
         Func<SqlServerTestStore, DbContext> createContext,
-        Action<DbContext> seed)
-        => InitializeSqlServer(serviceProvider, () => createContext(this), seed);
+        Action<DbContext> seed
+    ) => InitializeSqlServer(serviceProvider, () => createContext(this), seed);
 
-    protected override void Initialize(Func<DbContext> createContext, Action<DbContext> seed, Action<DbContext> clean)
+    protected override void Initialize(
+        Func<DbContext> createContext,
+        Action<DbContext> seed,
+        Action<DbContext> clean
+    )
     {
         if (CreateDatabase(clean))
         {
@@ -110,16 +132,25 @@ public class SqlServerTestStore : RelationalTestStore
         }
     }
 
-    public override DbContextOptionsBuilder AddProviderOptions(DbContextOptionsBuilder builder)
-        => builder
+    public override DbContextOptionsBuilder AddProviderOptions(DbContextOptionsBuilder builder) =>
+        builder
             .UseSqlServer(Connection, b => b.ApplyConfiguration())
             .ConfigureWarnings(b => b.Ignore(SqlServerEventId.SavepointsDisabledBecauseOfMARS));
 
     private bool CreateDatabase(Action<DbContext> clean)
     {
-        using (var master = new SqlConnection(CreateConnectionString("master", fileName: null, multipleActiveResultSets: false)))
+        using (
+            var master = new SqlConnection(
+                CreateConnectionString("master", fileName: null, multipleActiveResultSets: false)
+            )
+        )
         {
-            if (ExecuteScalar<int>(master, $"SELECT COUNT(*) FROM sys.databases WHERE name = N'{Name}'") > 0)
+            if (
+                ExecuteScalar<int>(
+                    master,
+                    $"SELECT COUNT(*) FROM sys.databases WHERE name = N'{Name}'"
+                ) > 0
+            )
             {
                 // Only reseed scripted databases during CI runs
                 if (_scriptPath != null && !TestEnvironment.IsCI)
@@ -131,9 +162,9 @@ public class SqlServerTestStore : RelationalTestStore
                 {
                     using var context = new DbContext(
                         AddProviderOptions(
-                                new DbContextOptionsBuilder()
-                                    .EnableServiceProviderCaching(false))
-                            .Options);
+                            new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+                        ).Options
+                    );
                     Clean(context);
                     clean?.Invoke(context);
                     return true;
@@ -150,26 +181,37 @@ public class SqlServerTestStore : RelationalTestStore
         return true;
     }
 
-    public override void Clean(DbContext context)
-        => context.Database.EnsureClean();
+    public override void Clean(DbContext context) => context.Database.EnsureClean();
 
-    public void ExecuteScript(string script)
-        => Execute(
-            Connection, command =>
+    public void ExecuteScript(string script) =>
+        Execute(
+            Connection,
+            command =>
             {
-                foreach (var batch in
-                         new Regex("^GO", RegexOptions.IgnoreCase | RegexOptions.Multiline, TimeSpan.FromMilliseconds(1000.0))
-                             .Split(script).Where(b => !string.IsNullOrEmpty(b)))
+                foreach (
+                    var batch in new Regex(
+                        "^GO",
+                        RegexOptions.IgnoreCase | RegexOptions.Multiline,
+                        TimeSpan.FromMilliseconds(1000.0)
+                    )
+                        .Split(script)
+                        .Where(b => !string.IsNullOrEmpty(b))
+                )
                 {
                     command.CommandText = batch;
                     command.ExecuteNonQuery();
                 }
 
                 return 0;
-            }, "");
+            },
+            ""
+        );
 
-    private static void WaitForExists(SqlConnection connection)
-        => new TestSqlServerRetryingExecutionStrategy().Execute(connection, WaitForExistsImplementation);
+    private static void WaitForExists(SqlConnection connection) =>
+        new TestSqlServerRetryingExecutionStrategy().Execute(
+            connection,
+            WaitForExistsImplementation
+        );
 
     private static void WaitForExistsImplementation(SqlConnection connection)
     {
@@ -191,8 +233,14 @@ public class SqlServerTestStore : RelationalTestStore
             }
             catch (SqlException e)
             {
-                if (++retryCount >= 30
-                    || e.Number != 233 && e.Number != -2 && e.Number != 4060 && e.Number != 1832 && e.Number != 5120)
+                if (
+                    ++retryCount >= 30
+                    || e.Number != 233
+                        && e.Number != -2
+                        && e.Number != 4060
+                        && e.Number != 1832
+                        && e.Number != 5120
+                )
                 {
                     throw;
                 }
@@ -209,17 +257,21 @@ public class SqlServerTestStore : RelationalTestStore
         if (TestEnvironment.IsSqlAzure)
         {
             var elasticGroupName = TestEnvironment.ElasticPoolName;
-            result += Environment.NewLine
-                + (string.IsNullOrEmpty(elasticGroupName)
-                    ? " ( Edition = 'basic' )"
-                    : $" ( SERVICE_OBJECTIVE = ELASTIC_POOL ( name = {elasticGroupName} ) )");
+            result +=
+                Environment.NewLine
+                + (
+                    string.IsNullOrEmpty(elasticGroupName)
+                        ? " ( Edition = 'basic' )"
+                        : $" ( SERVICE_OBJECTIVE = ELASTIC_POOL ( name = {elasticGroupName} ) )"
+                );
         }
         else
         {
             if (!string.IsNullOrEmpty(fileName))
             {
                 var logFileName = Path.ChangeExtension(fileName, ".ldf");
-                result += Environment.NewLine
+                result +=
+                    Environment.NewLine
                     + $" ON (NAME = '{name}', FILENAME = '{fileName}')"
                     + $" LOG ON (NAME = '{name}_log', FILENAME = '{logFileName}')";
             }
@@ -232,52 +284,87 @@ public class SqlServerTestStore : RelationalTestStore
     {
         using var master = new SqlConnection(CreateConnectionString("master"));
         ExecuteNonQuery(
-            master, string.Format(
+            master,
+            string.Format(
                 @"IF EXISTS (SELECT * FROM sys.databases WHERE name = N'{0}')
                                           BEGIN
                                               ALTER DATABASE [{0}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
                                               DROP DATABASE [{0}];
-                                          END", Name));
+                                          END",
+                Name
+            )
+        );
 
         SqlConnection.ClearAllPools();
     }
 
-    public override void OpenConnection()
-        => new TestSqlServerRetryingExecutionStrategy().Execute(Connection, connection => connection.Open());
+    public override void OpenConnection() =>
+        new TestSqlServerRetryingExecutionStrategy().Execute(
+            Connection,
+            connection => connection.Open()
+        );
 
-    public override Task OpenConnectionAsync()
-        => new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(Connection, connection => connection.OpenAsync());
+    public override Task OpenConnectionAsync() =>
+        new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
+            Connection,
+            connection => connection.OpenAsync()
+        );
 
-    public T ExecuteScalar<T>(string sql, params object[] parameters)
-        => ExecuteScalar<T>(Connection, sql, parameters);
+    public T ExecuteScalar<T>(string sql, params object[] parameters) =>
+        ExecuteScalar<T>(Connection, sql, parameters);
 
-    private static T ExecuteScalar<T>(DbConnection connection, string sql, params object[] parameters)
-        => Execute(connection, command => (T)command.ExecuteScalar(), sql, false, parameters);
+    private static T ExecuteScalar<T>(
+        DbConnection connection,
+        string sql,
+        params object[] parameters
+    ) => Execute(connection, command => (T)command.ExecuteScalar(), sql, false, parameters);
 
-    public Task<T> ExecuteScalarAsync<T>(string sql, params object[] parameters)
-        => ExecuteScalarAsync<T>(Connection, sql, parameters);
+    public Task<T> ExecuteScalarAsync<T>(string sql, params object[] parameters) =>
+        ExecuteScalarAsync<T>(Connection, sql, parameters);
 
-    private static Task<T> ExecuteScalarAsync<T>(DbConnection connection, string sql, IReadOnlyList<object> parameters = null)
-        => ExecuteAsync(connection, async command => (T)await command.ExecuteScalarAsync(), sql, false, parameters);
+    private static Task<T> ExecuteScalarAsync<T>(
+        DbConnection connection,
+        string sql,
+        IReadOnlyList<object> parameters = null
+    ) =>
+        ExecuteAsync(
+            connection,
+            async command => (T)await command.ExecuteScalarAsync(),
+            sql,
+            false,
+            parameters
+        );
 
-    public int ExecuteNonQuery(string sql, params object[] parameters)
-        => ExecuteNonQuery(Connection, sql, parameters);
+    public int ExecuteNonQuery(string sql, params object[] parameters) =>
+        ExecuteNonQuery(Connection, sql, parameters);
 
-    private static int ExecuteNonQuery(DbConnection connection, string sql, object[] parameters = null)
-        => Execute(connection, command => command.ExecuteNonQuery(), sql, false, parameters);
+    private static int ExecuteNonQuery(
+        DbConnection connection,
+        string sql,
+        object[] parameters = null
+    ) => Execute(connection, command => command.ExecuteNonQuery(), sql, false, parameters);
 
-    public Task<int> ExecuteNonQueryAsync(string sql, params object[] parameters)
-        => ExecuteNonQueryAsync(Connection, sql, parameters);
+    public Task<int> ExecuteNonQueryAsync(string sql, params object[] parameters) =>
+        ExecuteNonQueryAsync(Connection, sql, parameters);
 
-    private static Task<int> ExecuteNonQueryAsync(DbConnection connection, string sql, IReadOnlyList<object> parameters = null)
-        => ExecuteAsync(connection, command => command.ExecuteNonQueryAsync(), sql, false, parameters);
+    private static Task<int> ExecuteNonQueryAsync(
+        DbConnection connection,
+        string sql,
+        IReadOnlyList<object> parameters = null
+    ) =>
+        ExecuteAsync(connection, command => command.ExecuteNonQueryAsync(), sql, false, parameters);
 
-    public IEnumerable<T> Query<T>(string sql, params object[] parameters)
-        => Query<T>(Connection, sql, parameters);
+    public IEnumerable<T> Query<T>(string sql, params object[] parameters) =>
+        Query<T>(Connection, sql, parameters);
 
-    private static IEnumerable<T> Query<T>(DbConnection connection, string sql, object[] parameters = null)
-        => Execute(
-            connection, command =>
+    private static IEnumerable<T> Query<T>(
+        DbConnection connection,
+        string sql,
+        object[] parameters = null
+    ) =>
+        Execute(
+            connection,
+            command =>
             {
                 using var dataReader = command.ExecuteReader();
                 var results = Enumerable.Empty<T>();
@@ -287,14 +374,23 @@ public class SqlServerTestStore : RelationalTestStore
                 }
 
                 return results;
-            }, sql, false, parameters);
+            },
+            sql,
+            false,
+            parameters
+        );
 
-    public Task<IEnumerable<T>> QueryAsync<T>(string sql, params object[] parameters)
-        => QueryAsync<T>(Connection, sql, parameters);
+    public Task<IEnumerable<T>> QueryAsync<T>(string sql, params object[] parameters) =>
+        QueryAsync<T>(Connection, sql, parameters);
 
-    private static Task<IEnumerable<T>> QueryAsync<T>(DbConnection connection, string sql, object[] parameters = null)
-        => ExecuteAsync(
-            connection, async command =>
+    private static Task<IEnumerable<T>> QueryAsync<T>(
+        DbConnection connection,
+        string sql,
+        object[] parameters = null
+    ) =>
+        ExecuteAsync(
+            connection,
+            async command =>
             {
                 using var dataReader = await command.ExecuteReaderAsync();
                 var results = Enumerable.Empty<T>();
@@ -304,31 +400,45 @@ public class SqlServerTestStore : RelationalTestStore
                 }
 
                 return results;
-            }, sql, false, parameters);
+            },
+            sql,
+            false,
+            parameters
+        );
 
     private static T Execute<T>(
         DbConnection connection,
         Func<DbCommand, T> execute,
         string sql,
         bool useTransaction = false,
-        object[] parameters = null)
-        => new TestSqlServerRetryingExecutionStrategy().Execute(
+        object[] parameters = null
+    ) =>
+        new TestSqlServerRetryingExecutionStrategy().Execute(
             new
             {
                 connection,
                 execute,
                 sql,
                 useTransaction,
-                parameters
+                parameters,
             },
-            state => ExecuteCommand(state.connection, state.execute, state.sql, state.useTransaction, state.parameters));
+            state =>
+                ExecuteCommand(
+                    state.connection,
+                    state.execute,
+                    state.sql,
+                    state.useTransaction,
+                    state.parameters
+                )
+        );
 
     private static T ExecuteCommand<T>(
         DbConnection connection,
         Func<DbCommand, T> execute,
         string sql,
         bool useTransaction,
-        object[] parameters)
+        object[] parameters
+    )
     {
         if (connection.State != ConnectionState.Closed)
         {
@@ -364,24 +474,34 @@ public class SqlServerTestStore : RelationalTestStore
         Func<DbCommand, Task<T>> executeAsync,
         string sql,
         bool useTransaction = false,
-        IReadOnlyList<object> parameters = null)
-        => new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
+        IReadOnlyList<object> parameters = null
+    ) =>
+        new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
             new
             {
                 connection,
                 executeAsync,
                 sql,
                 useTransaction,
-                parameters
+                parameters,
             },
-            state => ExecuteCommandAsync(state.connection, state.executeAsync, state.sql, state.useTransaction, state.parameters));
+            state =>
+                ExecuteCommandAsync(
+                    state.connection,
+                    state.executeAsync,
+                    state.sql,
+                    state.useTransaction,
+                    state.parameters
+                )
+        );
 
     private static async Task<T> ExecuteCommandAsync<T>(
         DbConnection connection,
         Func<DbCommand, Task<T>> executeAsync,
         string sql,
         bool useTransaction,
-        IReadOnlyList<object> parameters)
+        IReadOnlyList<object> parameters
+    )
     {
         if (connection.State != ConnectionState.Closed)
         {
@@ -391,7 +511,9 @@ public class SqlServerTestStore : RelationalTestStore
         await connection.OpenAsync();
         try
         {
-            using var transaction = useTransaction ? await connection.BeginTransactionAsync() : null;
+            using var transaction = useTransaction
+                ? await connection.BeginTransactionAsync()
+                : null;
             T result;
             using (var command = CreateCommand(connection, sql, parameters))
             {
@@ -417,7 +539,8 @@ public class SqlServerTestStore : RelationalTestStore
     private static DbCommand CreateCommand(
         DbConnection connection,
         string commandText,
-        IReadOnlyList<object> parameters = null)
+        IReadOnlyList<object> parameters = null
+    )
     {
         var command = (SqlCommand)connection.CreateCommand();
 
@@ -439,18 +562,25 @@ public class SqlServerTestStore : RelationalTestStore
     {
         base.Dispose();
 
-        if (_fileName != null // Clean up the database using a local file, as it might get deleted later
-            || (TestEnvironment.IsSqlAzure && !Shared))
+        if (
+            _fileName != null // Clean up the database using a local file, as it might get deleted later
+            || (TestEnvironment.IsSqlAzure && !Shared)
+        )
         {
             DeleteDatabase();
         }
     }
 
-    public static string CreateConnectionString(string name, string fileName = null, bool? multipleActiveResultSets = null)
+    public static string CreateConnectionString(
+        string name,
+        string fileName = null,
+        bool? multipleActiveResultSets = null
+    )
     {
         var builder = new SqlConnectionStringBuilder(TestEnvironment.DefaultConnection)
         {
-            MultipleActiveResultSets = multipleActiveResultSets ?? Random.Shared.Next(0, 2) == 1, InitialCatalog = name
+            MultipleActiveResultSets = multipleActiveResultSets ?? Random.Shared.Next(0, 2) == 1,
+            InitialCatalog = name,
         };
         if (fileName != null)
         {

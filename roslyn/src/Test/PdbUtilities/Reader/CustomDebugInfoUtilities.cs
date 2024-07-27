@@ -9,26 +9,40 @@ extern alias DSR;
 using System.Collections.Immutable;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-using Microsoft.CodeAnalysis.Debugging;
 using DSR::Microsoft.DiaSymReader;
+using Microsoft.CodeAnalysis.Debugging;
 
 namespace Roslyn.Test.PdbUtilities
 {
     public static class CustomDebugInfoUtilities
     {
-        public static byte[] GetCustomDebugInfoBytes(ISymUnmanagedReader3 reader, MethodDefinitionHandle handle, int methodVersion)
+        public static byte[] GetCustomDebugInfoBytes(
+            ISymUnmanagedReader3 reader,
+            MethodDefinitionHandle handle,
+            int methodVersion
+        )
         {
             return reader.GetCustomDebugInfo(MetadataTokens.GetToken(handle), methodVersion);
         }
 
-        public static ImmutableArray<byte> GetEditAndContinueLocalSlotMapRecord(byte[] customDebugInfoBlob)
+        public static ImmutableArray<byte> GetEditAndContinueLocalSlotMapRecord(
+            byte[] customDebugInfoBlob
+        )
         {
-            return CustomDebugInfoReader.TryGetCustomDebugInfoRecord(customDebugInfoBlob, CustomDebugInfoKind.EditAndContinueLocalSlotMap);
+            return CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                customDebugInfoBlob,
+                CustomDebugInfoKind.EditAndContinueLocalSlotMap
+            );
         }
 
-        public static ImmutableArray<byte> GetEditAndContinueLambdaMapRecord(byte[] customDebugInfoBlob)
+        public static ImmutableArray<byte> GetEditAndContinueLambdaMapRecord(
+            byte[] customDebugInfoBlob
+        )
         {
-            return CustomDebugInfoReader.TryGetCustomDebugInfoRecord(customDebugInfoBlob, CustomDebugInfoKind.EditAndContinueLambdaMap);
+            return CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                customDebugInfoBlob,
+                CustomDebugInfoKind.EditAndContinueLambdaMap
+            );
         }
     }
 }

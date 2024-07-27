@@ -25,10 +25,23 @@ namespace System.Data
             return reader.GetByte(reader.GetOrdinal(name));
         }
 
-        public static long GetBytes(this DbDataReader reader, string name, long dataOffset, byte[] buffer, int bufferOffset, int length)
+        public static long GetBytes(
+            this DbDataReader reader,
+            string name,
+            long dataOffset,
+            byte[] buffer,
+            int bufferOffset,
+            int length
+        )
         {
             AssertNotNull(reader);
-            return reader.GetBytes(reader.GetOrdinal(name), dataOffset, buffer, bufferOffset, length);
+            return reader.GetBytes(
+                reader.GetOrdinal(name),
+                dataOffset,
+                buffer,
+                bufferOffset,
+                length
+            );
         }
 
         public static char GetChar(this DbDataReader reader, string name)
@@ -37,10 +50,23 @@ namespace System.Data
             return reader.GetChar(reader.GetOrdinal(name));
         }
 
-        public static long GetChars(this DbDataReader reader, string name, long dataOffset, char[] buffer, int bufferOffset, int length)
+        public static long GetChars(
+            this DbDataReader reader,
+            string name,
+            long dataOffset,
+            char[] buffer,
+            int bufferOffset,
+            int length
+        )
         {
             AssertNotNull(reader);
-            return reader.GetChars(reader.GetOrdinal(name), dataOffset, buffer, bufferOffset, length);
+            return reader.GetChars(
+                reader.GetOrdinal(name),
+                dataOffset,
+                buffer,
+                bufferOffset,
+                length
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -86,7 +112,11 @@ namespace System.Data
             return reader.GetFieldValue<T>(reader.GetOrdinal(name));
         }
 
-        public static Task<T> GetFieldValueAsync<T>(this DbDataReader reader, string name, CancellationToken cancellationToken = default(CancellationToken))
+        public static Task<T> GetFieldValueAsync<T>(
+            this DbDataReader reader,
+            string name,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             AssertNotNull(reader);
             return reader.GetFieldValueAsync<T>(reader.GetOrdinal(name), cancellationToken);
@@ -166,7 +196,11 @@ namespace System.Data
             return reader.IsDBNull(reader.GetOrdinal(name));
         }
 
-        public static Task<bool> IsDBNullAsync(this DbDataReader reader, string name, CancellationToken cancellationToken = default(CancellationToken))
+        public static Task<bool> IsDBNullAsync(
+            this DbDataReader reader,
+            string name,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             AssertNotNull(reader);
             return reader.IsDBNullAsync(reader.GetOrdinal(name), cancellationToken);

@@ -7,9 +7,9 @@ namespace System.IdentityModel.Tokens
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.IdentityModel.Diagnostics;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Principal;
-    using System.IdentityModel.Diagnostics;
 
     public class KerberosReceiverSecurityToken : WindowsSecurityToken
     {
@@ -23,35 +23,39 @@ namespace System.IdentityModel.Tokens
         ExtendedProtectionPolicy extendedProtectionPolicy;
 
         public KerberosReceiverSecurityToken(byte[] request)
-            : this(request, SecurityUniqueId.Create().Value)
-        { }
+            : this(request, SecurityUniqueId.Create().Value) { }
 
         public KerberosReceiverSecurityToken(byte[] request, string id)
-            : this(request, id, true, null)
-        {
-        }
+            : this(request, id, true, null) { }
 
         public KerberosReceiverSecurityToken(byte[] request, string id, string valueTypeUri)
-            : this(request, id, true, valueTypeUri)
-        {
-        }
+            : this(request, id, true, valueTypeUri) { }
 
-        internal KerberosReceiverSecurityToken( byte[] request, string id, bool doAuthenticate, string valueTypeUri )
-            : this(request, id, doAuthenticate, valueTypeUri, null, null)
-        { }
+        internal KerberosReceiverSecurityToken(
+            byte[] request,
+            string id,
+            bool doAuthenticate,
+            string valueTypeUri
+        )
+            : this(request, id, doAuthenticate, valueTypeUri, null, null) { }
 
-        internal KerberosReceiverSecurityToken( 
-                                byte[] request, 
-                                string id, 
-                                bool doAuthenticate, 
-                                string valueTypeUri, 
-                                ChannelBinding channelBinding, 
-                                ExtendedProtectionPolicy extendedProtectionPolicy )
+        internal KerberosReceiverSecurityToken(
+            byte[] request,
+            string id,
+            bool doAuthenticate,
+            string valueTypeUri,
+            ChannelBinding channelBinding,
+            ExtendedProtectionPolicy extendedProtectionPolicy
+        )
         {
             if (request == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("request"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("request")
+                );
             if (id == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("id"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("id")
+                );
 
             this.id = id;
             this.request = request;
@@ -81,13 +85,13 @@ namespace System.IdentityModel.Tokens
 
         public SymmetricSecurityKey SecurityKey
         {
-            get 
+            get
             {
                 if (!this.isAuthenticated)
                 {
                     Initialize(null, this.channelBinding, this.extendedProtectionPolicy);
                 }
-                return this.symmetricSecurityKey; 
+                return this.symmetricSecurityKey;
             }
         }
 
@@ -133,10 +137,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public string ValueTypeUri
         {
-            get
-            {
-                return valueTypeUri;
-            }
+            get { return valueTypeUri; }
         }
 
         public byte[] GetRequest()
@@ -148,7 +149,11 @@ namespace System.IdentityModel.Tokens
         // 1) From public OM, Initialize happens at ctor time.
         // 2) From internal OM (Sfx), Initialize happens right after ctor (single thread env).
         //    i.e. ReadToken and then AuthenticateToken.
-        internal void Initialize( SafeFreeCredentials credentialsHandle, ChannelBinding channelBinding, ExtendedProtectionPolicy extendedProtectionPolicy )
+        internal void Initialize(
+            SafeFreeCredentials credentialsHandle,
+            ChannelBinding channelBinding,
+            ExtendedProtectionPolicy extendedProtectionPolicy
+        )
         {
             if (this.isAuthenticated)
             {
@@ -173,20 +178,34 @@ namespace System.IdentityModel.Tokens
             {
                 if (credentialsHandle == null)
                 {
-                    credentialsHandle = SspiWrapper.AcquireDefaultCredential("Kerberos", CredentialUse.Inbound);
+                    credentialsHandle = SspiWrapper.AcquireDefaultCredential(
+                        "Kerberos",
+                        CredentialUse.Inbound
+                    );
                     ownCredentialsHandle = true;
                 }
 
-                SspiContextFlags fContextReq = SspiContextFlags.AllocateMemory | SspiContextFlags.Confidentiality
-                                             | SspiContextFlags.Confidentiality
-                                             | SspiContextFlags.ReplayDetect 
-                                             | SspiContextFlags.SequenceDetect;
+                SspiContextFlags fContextReq =
+                    SspiContextFlags.AllocateMemory
+                    | SspiContextFlags.Confidentiality
+                    | SspiContextFlags.Confidentiality
+                    | SspiContextFlags.ReplayDetect
+                    | SspiContextFlags.SequenceDetect;
 
-                ExtendedProtectionPolicyHelper policyHelper = new ExtendedProtectionPolicyHelper(channelBinding, extendedProtectionPolicy);
+                ExtendedProtectionPolicyHelper policyHelper = new ExtendedProtectionPolicyHelper(
+                    channelBinding,
+                    extendedProtectionPolicy
+                );
 
-                if (policyHelper.PolicyEnforcement == PolicyEnforcement.Always && policyHelper.ChannelBinding == null && policyHelper.ProtectionScenario != ProtectionScenario.TrustedProxy)
+                if (
+                    policyHelper.PolicyEnforcement == PolicyEnforcement.Always
+                    && policyHelper.ChannelBinding == null
+                    && policyHelper.ProtectionScenario != ProtectionScenario.TrustedProxy
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.SecurityChannelBindingMissing)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SecurityChannelBindingMissing))
+                    );
                 }
 
                 if (policyHelper.PolicyEnforcement == PolicyEnforcement.WhenSupported)
@@ -216,18 +235,23 @@ namespace System.IdentityModel.Tokens
                     inSecurityBuffer = list.ToArray();
                 }
 
-                int statusCode = SspiWrapper.AcceptSecurityContext(credentialsHandle,
+                int statusCode = SspiWrapper.AcceptSecurityContext(
+                    credentialsHandle,
                     ref securityContext,
                     fContextReq,
                     Endianness.Native,
                     inSecurityBuffer,
                     outSecurityBuffer,
-                    ref contextFlags);
-
+                    ref contextFlags
+                );
 
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    SecurityTraceRecordHelper.TraceChannelBindingInformation(policyHelper, true, channelBinding);
+                    SecurityTraceRecordHelper.TraceChannelBindingInformation(
+                        policyHelper,
+                        true,
+                        channelBinding
+                    );
                 }
 
                 if (statusCode != (int)SecurityStatus.OK)
@@ -235,38 +259,70 @@ namespace System.IdentityModel.Tokens
                     if (statusCode == (int)SecurityStatus.ContinueNeeded)
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(SR.GetString(SR.KerberosMultilegsNotSupported), new Win32Exception(statusCode)));
+                            new SecurityTokenException(
+                                SR.GetString(SR.KerberosMultilegsNotSupported),
+                                new Win32Exception(statusCode)
+                            )
+                        );
                     }
                     else if (statusCode == (int)SecurityStatus.OutOfMemory)
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(SR.GetString(SR.KerberosApReqInvalidOrOutOfMemory), new Win32Exception(statusCode)));
+                            new SecurityTokenException(
+                                SR.GetString(SR.KerberosApReqInvalidOrOutOfMemory),
+                                new Win32Exception(statusCode)
+                            )
+                        );
                     }
                     else
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(SR.GetString(SR.FailAcceptSecurityContext), new Win32Exception(statusCode)));
+                            new SecurityTokenException(
+                                SR.GetString(SR.FailAcceptSecurityContext),
+                                new Win32Exception(statusCode)
+                            )
+                        );
                     }
                 }
 
                 // Expiration
-                LifeSpan lifeSpan = (LifeSpan)SspiWrapper.QueryContextAttributes(securityContext, ContextAttribute.Lifespan);
+                LifeSpan lifeSpan = (LifeSpan)
+                    SspiWrapper.QueryContextAttributes(securityContext, ContextAttribute.Lifespan);
                 DateTime effectiveTime = lifeSpan.EffectiveTimeUtc;
                 DateTime expirationTime = lifeSpan.ExpiryTimeUtc;
 
                 // SessionKey
-                SecuritySessionKeyClass sessionKey = (SecuritySessionKeyClass)SspiWrapper.QueryContextAttributes(securityContext, ContextAttribute.SessionKey);
+                SecuritySessionKeyClass sessionKey = (SecuritySessionKeyClass)
+                    SspiWrapper.QueryContextAttributes(
+                        securityContext,
+                        ContextAttribute.SessionKey
+                    );
                 this.symmetricSecurityKey = new InMemorySymmetricSecurityKey(sessionKey.SessionKey);
 
                 // WindowsSecurityToken
-                statusCode = SspiWrapper.QuerySecurityContextToken(securityContext, out tokenHandle);
+                statusCode = SspiWrapper.QuerySecurityContextToken(
+                    securityContext,
+                    out tokenHandle
+                );
                 if (statusCode != (int)SecurityStatus.OK)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(statusCode));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(statusCode)
+                    );
                 }
 
-                WindowsIdentity windowsIdentity = new WindowsIdentity( tokenHandle.DangerousGetHandle(), SecurityUtils.AuthTypeKerberos);
-                Initialize(this.id, SecurityUtils.AuthTypeKerberos, effectiveTime, expirationTime, windowsIdentity, false);
+                WindowsIdentity windowsIdentity = new WindowsIdentity(
+                    tokenHandle.DangerousGetHandle(),
+                    SecurityUtils.AuthTypeKerberos
+                );
+                Initialize(
+                    this.id,
+                    SecurityUtils.AuthTypeKerberos,
+                    effectiveTime,
+                    expirationTime,
+                    windowsIdentity,
+                    false
+                );
 
                 // Authenticated
                 this.isAuthenticated = true;
@@ -295,14 +351,22 @@ namespace System.IdentityModel.Tokens
         public override T CreateKeyIdentifierClause<T>()
         {
             if (typeof(T) == typeof(KerberosTicketHashKeyIdentifierClause))
-                return new KerberosTicketHashKeyIdentifierClause(CryptoHelper.ComputeHash(this.request), false, null, 0) as T;
+                return new KerberosTicketHashKeyIdentifierClause(
+                        CryptoHelper.ComputeHash(this.request),
+                        false,
+                        null,
+                        0
+                    ) as T;
 
             return base.CreateKeyIdentifierClause<T>();
         }
 
-        public override bool MatchesKeyIdentifierClause(SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
-            KerberosTicketHashKeyIdentifierClause kerbKeyIdentifierClause = keyIdentifierClause as KerberosTicketHashKeyIdentifierClause;
+            KerberosTicketHashKeyIdentifierClause kerbKeyIdentifierClause =
+                keyIdentifierClause as KerberosTicketHashKeyIdentifierClause;
             if (kerbKeyIdentifierClause != null)
                 return kerbKeyIdentifierClause.Matches(CryptoHelper.ComputeHash(this.request));
 

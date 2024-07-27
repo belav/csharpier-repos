@@ -56,7 +56,11 @@ namespace System.Threading.RateLimiting
         /// <param name="cancellationToken">Optional token to allow canceling a queued request for permits.</param>
         /// <returns>A task that completes when the requested permits are acquired or when the requested permits are denied.</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public ValueTask<RateLimitLease> AcquireAsync(TResource resource, int permitCount = 1, CancellationToken cancellationToken = default)
+        public ValueTask<RateLimitLease> AcquireAsync(
+            TResource resource,
+            int permitCount = 1,
+            CancellationToken cancellationToken = default
+        )
         {
             if (permitCount < 0)
             {
@@ -65,7 +69,9 @@ namespace System.Threading.RateLimiting
 
             if (cancellationToken.IsCancellationRequested)
             {
-                return new ValueTask<RateLimitLease>(Task.FromCanceled<RateLimitLease>(cancellationToken));
+                return new ValueTask<RateLimitLease>(
+                    Task.FromCanceled<RateLimitLease>(cancellationToken)
+                );
             }
 
             return AcquireAsyncCore(resource, permitCount, cancellationToken);
@@ -78,7 +84,11 @@ namespace System.Threading.RateLimiting
         /// <param name="permitCount">Number of permits to try and acquire.</param>
         /// <param name="cancellationToken">Optional token to allow canceling a queued request for permits.</param>
         /// <returns>A task that completes when the requested permits are acquired or when the requested permits are denied.</returns>
-        protected abstract ValueTask<RateLimitLease> AcquireAsyncCore(TResource resource, int permitCount, CancellationToken cancellationToken);
+        protected abstract ValueTask<RateLimitLease> AcquireAsyncCore(
+            TResource resource,
+            int permitCount,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Dispose method for implementations to write.
@@ -132,7 +142,10 @@ namespace System.Threading.RateLimiting
         /// <param name="leaveOpen">Specifies whether the returned <see cref="PartitionedRateLimiter{TOuter}"/> will dispose the wrapped <see cref="PartitionedRateLimiter{TResource}"/>.</param>
         /// <returns>A new PartitionedRateLimiter&lt;TOuter&gt; that translates <typeparamref name="TOuter"/>
         /// to <typeparamref name="TResource"/> and calls the inner <see cref="PartitionedRateLimiter{TResource}"/>.</returns>
-        public PartitionedRateLimiter<TOuter> WithTranslatedKey<TOuter>(Func<TOuter, TResource> keyAdapter, bool leaveOpen)
+        public PartitionedRateLimiter<TOuter> WithTranslatedKey<TOuter>(
+            Func<TOuter, TResource> keyAdapter,
+            bool leaveOpen
+        )
         {
             return new TranslatingLimiter<TResource, TOuter>(this, keyAdapter, leaveOpen);
         }

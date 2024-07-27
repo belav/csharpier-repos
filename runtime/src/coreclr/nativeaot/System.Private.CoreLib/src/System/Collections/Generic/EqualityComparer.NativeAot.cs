@@ -4,7 +4,6 @@
 #nullable enable
 using System.Runtime.CompilerServices;
 using System.Threading;
-
 using Internal.IntrinsicSupport;
 using Internal.Runtime.CompilerServices;
 
@@ -25,15 +24,22 @@ namespace System.Collections.Generic
             // when this method is compiled.
             if (SupportsGenericIEquatableInterfaces)
             {
-                return Unsafe.As<EqualityComparer<T>>(EqualityComparerHelpers.GetComparer(typeof(T).TypeHandle));
+                return Unsafe.As<EqualityComparer<T>>(
+                    EqualityComparerHelpers.GetComparer(typeof(T).TypeHandle)
+                );
             }
             return new ObjectEqualityComparer<T>();
         }
 
-        public static EqualityComparer<T> Default { [Intrinsic] get; } = Create();
+        public static EqualityComparer<T> Default
+        {
+            [Intrinsic]
+            get;
+        } = Create();
     }
 
-    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T> where T : struct, Enum
+    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T>
+        where T : struct, Enum
     {
         public sealed override bool Equals(T x, T y)
         {

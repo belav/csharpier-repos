@@ -30,9 +30,17 @@ public static class DefaultHtmlGeneratorExtensions
         string fragment,
         object routeValues,
         string method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
-        var tagBuilder = generator.GenerateForm(viewContext, actionName, controllerName, routeValues, method, htmlAttributes);
+        var tagBuilder = generator.GenerateForm(
+            viewContext,
+            actionName,
+            controllerName,
+            routeValues,
+            method,
+            htmlAttributes
+        );
 
         // Append the fragment to action
         if (fragment != null)
@@ -61,9 +69,16 @@ public static class DefaultHtmlGeneratorExtensions
         object routeValues,
         string fragment,
         string method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
-        var tagBuilder = generator.GenerateRouteForm(viewContext, routeName, routeValues, method, htmlAttributes);
+        var tagBuilder = generator.GenerateRouteForm(
+            viewContext,
+            routeName,
+            routeValues,
+            method,
+            htmlAttributes
+        );
 
         // Append the fragment to action
         if (fragment != null)

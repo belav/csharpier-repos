@@ -12,26 +12,40 @@ namespace System.IO.Tests
 {
     public class File_AppendAllBytesAsync : FileSystemTest
     {
-
         [Fact]
         public async Task NullParametersAsync()
         {
             string path = GetTestFilePath();
 
-            await Assert.ThrowsAsync<ArgumentNullException>("path", async () => await File.AppendAllBytesAsync(null, new byte[0]));
-            await Assert.ThrowsAsync<ArgumentNullException>("bytes", async () => await File.AppendAllBytesAsync(path, null));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "path",
+                async () => await File.AppendAllBytesAsync(null, new byte[0])
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "bytes",
+                async () => await File.AppendAllBytesAsync(path, null)
+            );
         }
 
         [Fact]
         public void NonExistentPathAsync()
         {
-            Assert.ThrowsAsync<DirectoryNotFoundException>(() => File.AppendAllBytesAsync(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()), new byte[0]));
+            Assert.ThrowsAsync<DirectoryNotFoundException>(
+                () =>
+                    File.AppendAllBytesAsync(
+                        Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
+                        new byte[0]
+                    )
+            );
         }
 
         [Fact]
         public async Task InvalidParametersAsync()
         {
-            await Assert.ThrowsAsync<ArgumentException>("path", async () => await File.AppendAllBytesAsync(string.Empty, new byte[0]));
+            await Assert.ThrowsAsync<ArgumentException>(
+                "path",
+                async () => await File.AppendAllBytesAsync(string.Empty, new byte[0])
+            );
         }
 
         [Fact]
@@ -69,7 +83,9 @@ namespace System.IO.Tests
 
             using (File.Create(path))
             {
-                await Assert.ThrowsAsync<IOException>(async () => await File.AppendAllBytesAsync(path, bytes));
+                await Assert.ThrowsAsync<IOException>(
+                    async () => await File.AppendAllBytesAsync(path, bytes)
+                );
             }
         }
 
@@ -95,7 +111,9 @@ namespace System.IO.Tests
                 }
                 else
                 {
-                    await Assert.ThrowsAsync<UnauthorizedAccessException>(async () => await File.AppendAllBytesAsync(path, dataToAppend));
+                    await Assert.ThrowsAsync<UnauthorizedAccessException>(
+                        async () => await File.AppendAllBytesAsync(path, dataToAppend)
+                    );
                 }
             }
             finally

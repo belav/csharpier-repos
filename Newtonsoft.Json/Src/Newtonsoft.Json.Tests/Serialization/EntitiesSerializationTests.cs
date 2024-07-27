@@ -50,9 +50,14 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             Folder rootFolder = CreateEntitiesTestData();
 
-            string json = JsonConvert.SerializeObject(rootFolder, Formatting.Indented, new IsoDateTimeConverter());
+            string json = JsonConvert.SerializeObject(
+                rootFolder,
+                Formatting.Indented,
+                new IsoDateTimeConverter()
+            );
 
-            string expected = @"{
+            string expected =
+                @"{
   ""$id"": ""1"",
   ""FolderId"": ""a4e8ba80-eb24-4591-bb1c-62d3ad83701e"",
   ""Name"": ""Root folder"",
@@ -135,14 +140,15 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 Formatting = Formatting.Indented,
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                Converters = { new IsoDateTimeConverter() }
+                Converters = { new IsoDateTimeConverter() },
             };
 
             string json = JsonConvert.SerializeObject(rootFolder, settings);
 
             Console.WriteLine(json);
 
-            string expected = @"{
+            string expected =
+                @"{
   ""$id"": ""1"",
   ""folderId"": ""a4e8ba80-eb24-4591-bb1c-62d3ad83701e"",
   ""name"": ""Root folder"",
@@ -219,7 +225,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeEntity()
         {
-            string json = @"{
+            string json =
+                @"{
   ""$id"": ""1"",
   ""FolderId"": ""a4e8ba80-eb24-4591-bb1c-62d3ad83701e"",
   ""Name"": ""Root folder"",
@@ -300,7 +307,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(false, f.EntityKey.IsTemporary);
             Assert.AreEqual(1, f.EntityKey.EntityKeyValues.Length);
             Assert.AreEqual("FolderId", f.EntityKey.EntityKeyValues[0].Key);
-            Assert.AreEqual(new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E"), f.EntityKey.EntityKeyValues[0].Value);
+            Assert.AreEqual(
+                new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E"),
+                f.EntityKey.EntityKeyValues[0].Value
+            );
             Assert.AreEqual("Root folder", f.Name);
             Assert.AreEqual(new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc), f.CreatedDate);
             Assert.AreEqual(null, f.ParentFolder);
@@ -319,25 +329,31 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeMultiValueEntityKey()
         {
-            EntityKey e = new EntityKey("DataServicesTestDatabaseEntities.Folder",
+            EntityKey e = new EntityKey(
+                "DataServicesTestDatabaseEntities.Folder",
                 new List<EntityKeyMember>
                 {
                     new EntityKeyMember("GuidId", new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E")),
                     new EntityKeyMember("IntId", int.MaxValue),
                     new EntityKeyMember("LongId", long.MaxValue),
                     new EntityKeyMember("StringId", "String!"),
-                    new EntityKeyMember("DateTimeId", new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc))
-                });
+                    new EntityKeyMember(
+                        "DateTimeId",
+                        new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc)
+                    ),
+                }
+            );
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
             };
 
             string json = JsonConvert.SerializeObject(e, settings);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""entitySetName"": ""Folder"",
   ""entityContainerName"": ""DataServicesTestDatabaseEntities"",
@@ -368,14 +384,19 @@ namespace Newtonsoft.Json.Tests.Serialization
       ""value"": ""12/10/2000 10:50:00""
     }
   ]
-}", json);
+}",
+                json
+            );
 
             EntityKey newKey = JsonConvert.DeserializeObject<EntityKey>(json);
             Assert.IsFalse(ReferenceEquals(e, newKey));
 
             Assert.AreEqual(5, newKey.EntityKeyValues.Length);
             Assert.AreEqual("GuidId", newKey.EntityKeyValues[0].Key);
-            Assert.AreEqual(new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E"), newKey.EntityKeyValues[0].Value);
+            Assert.AreEqual(
+                new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E"),
+                newKey.EntityKeyValues[0].Value
+            );
             Assert.AreEqual("IntId", newKey.EntityKeyValues[1].Key);
             Assert.AreEqual(int.MaxValue, newKey.EntityKeyValues[1].Value);
             Assert.AreEqual("LongId", newKey.EntityKeyValues[2].Key);
@@ -383,25 +404,34 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("StringId", newKey.EntityKeyValues[3].Key);
             Assert.AreEqual("String!", newKey.EntityKeyValues[3].Value);
             Assert.AreEqual("DateTimeId", newKey.EntityKeyValues[4].Key);
-            Assert.AreEqual(new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc), newKey.EntityKeyValues[4].Value);
+            Assert.AreEqual(
+                new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc),
+                newKey.EntityKeyValues[4].Value
+            );
         }
 
         [Test]
         public void SerializeMultiValueEntityKeyCameCase()
         {
-            EntityKey e = new EntityKey("DataServicesTestDatabaseEntities.Folder",
+            EntityKey e = new EntityKey(
+                "DataServicesTestDatabaseEntities.Folder",
                 new List<EntityKeyMember>
                 {
                     new EntityKeyMember("GuidId", new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E")),
                     new EntityKeyMember("IntId", int.MaxValue),
                     new EntityKeyMember("LongId", long.MaxValue),
                     new EntityKeyMember("StringId", "String!"),
-                    new EntityKeyMember("DateTimeId", new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc))
-                });
+                    new EntityKeyMember(
+                        "DateTimeId",
+                        new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc)
+                    ),
+                }
+            );
 
             string json = JsonConvert.SerializeObject(e, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""$id"": ""1"",
   ""EntitySetName"": ""Folder"",
   ""EntityContainerName"": ""DataServicesTestDatabaseEntities"",
@@ -432,14 +462,19 @@ namespace Newtonsoft.Json.Tests.Serialization
       ""Value"": ""12/10/2000 10:50:00""
     }
   ]
-}", json);
+}",
+                json
+            );
 
             EntityKey newKey = JsonConvert.DeserializeObject<EntityKey>(json);
             Assert.IsFalse(ReferenceEquals(e, newKey));
 
             Assert.AreEqual(5, newKey.EntityKeyValues.Length);
             Assert.AreEqual("GuidId", newKey.EntityKeyValues[0].Key);
-            Assert.AreEqual(new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E"), newKey.EntityKeyValues[0].Value);
+            Assert.AreEqual(
+                new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E"),
+                newKey.EntityKeyValues[0].Value
+            );
             Assert.AreEqual("IntId", newKey.EntityKeyValues[1].Key);
             Assert.AreEqual(int.MaxValue, newKey.EntityKeyValues[1].Value);
             Assert.AreEqual("LongId", newKey.EntityKeyValues[2].Key);
@@ -447,21 +482,32 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual("StringId", newKey.EntityKeyValues[3].Key);
             Assert.AreEqual("String!", newKey.EntityKeyValues[3].Value);
             Assert.AreEqual("DateTimeId", newKey.EntityKeyValues[4].Key);
-            Assert.AreEqual(new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc), newKey.EntityKeyValues[4].Value);
+            Assert.AreEqual(
+                new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc),
+                newKey.EntityKeyValues[4].Value
+            );
         }
 
         private Folder CreateEntitiesTestData()
         {
             Folder folder = new Folder();
             folder.FolderId = new Guid("A4E8BA80-EB24-4591-BB1C-62D3AD83701E");
-            folder.EntityKey = new EntityKey("DataServicesTestDatabaseEntities.Folder", "FolderId", folder.FolderId);
+            folder.EntityKey = new EntityKey(
+                "DataServicesTestDatabaseEntities.Folder",
+                "FolderId",
+                folder.FolderId
+            );
             folder.Name = "Root folder";
             folder.Description = "Description!";
             folder.CreatedDate = new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc);
 
             Folder childFolder = new Folder();
             childFolder.FolderId = new Guid("484936E2-7CBB-4592-93FF-B2103E5705E4");
-            childFolder.EntityKey = new EntityKey("DataServicesTestDatabaseEntities.Folder", "FolderId", childFolder.FolderId);
+            childFolder.EntityKey = new EntityKey(
+                "DataServicesTestDatabaseEntities.Folder",
+                "FolderId",
+                childFolder.FolderId
+            );
             childFolder.Name = "Child folder";
             childFolder.Description = "Description!";
             childFolder.CreatedDate = new DateTime(2001, 11, 20, 10, 50, 0, DateTimeKind.Utc);
@@ -470,7 +516,11 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             File file1 = new File();
             file1.FileId = new Guid("CC76D734-49F1-4616-BB38-41514228AC6C");
-            file1.EntityKey = new EntityKey("DataServicesTestDatabaseEntities.File", "FileId", file1.FileId);
+            file1.EntityKey = new EntityKey(
+                "DataServicesTestDatabaseEntities.File",
+                "FileId",
+                file1.FileId
+            );
             file1.Name = "File 1";
             file1.Description = "Description!";
             file1.CreatedDate = new DateTime(2002, 10, 30, 10, 50, 0, DateTimeKind.Utc);

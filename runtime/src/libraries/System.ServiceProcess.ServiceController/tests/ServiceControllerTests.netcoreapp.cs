@@ -5,7 +5,9 @@ using Xunit;
 
 namespace System.ServiceProcess.Tests
 {
-    [OuterLoop(/* Modifies machine state */)]
+    [OuterLoop( /* Modifies machine state */
+
+    )]
     public partial class ServiceControllerTests : IDisposable
     {
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
@@ -15,12 +17,19 @@ namespace System.ServiceProcess.Tests
             Assert.Equal(0, controller.DependentServices.Length);
             Assert.Equal(1, controller.ServicesDependedOn.Length);
 
-            var prerequisiteServiceController = new ServiceController(_testService.TestServiceName + ".Prerequisite");
+            var prerequisiteServiceController = new ServiceController(
+                _testService.TestServiceName + ".Prerequisite"
+            );
             Assert.Equal(1, prerequisiteServiceController.DependentServices.Length);
             Assert.Equal(0, prerequisiteServiceController.ServicesDependedOn.Length);
 
-            prerequisiteServiceController.WaitForStatus(ServiceControllerStatus.Running, _testService.ControlTimeout);
-            Assert.Throws<InvalidOperationException>(() => prerequisiteServiceController.Stop(stopDependentServices: false));
+            prerequisiteServiceController.WaitForStatus(
+                ServiceControllerStatus.Running,
+                _testService.ControlTimeout
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => prerequisiteServiceController.Stop(stopDependentServices: false)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
@@ -33,7 +42,10 @@ namespace System.ServiceProcess.Tests
             controller.WaitForStatus(ServiceControllerStatus.Stopped, _testService.ControlTimeout);
 
             Assert.Equal(ServiceControllerStatus.Stopped, controller.Status);
-            Assert.All(controller.DependentServices, service => Assert.Equal(ServiceControllerStatus.Stopped, service.Status));
+            Assert.All(
+                controller.DependentServices,
+                service => Assert.Equal(ServiceControllerStatus.Stopped, service.Status)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
@@ -46,13 +58,19 @@ namespace System.ServiceProcess.Tests
             foreach (var dependentService in controller.DependentServices)
             {
                 dependentService.Stop(stopDependentServices: false);
-                dependentService.WaitForStatus(ServiceControllerStatus.Stopped, _testService.ControlTimeout);
+                dependentService.WaitForStatus(
+                    ServiceControllerStatus.Stopped,
+                    _testService.ControlTimeout
+                );
             }
             controller.Stop(stopDependentServices: false);
             controller.WaitForStatus(ServiceControllerStatus.Stopped, _testService.ControlTimeout);
 
             Assert.Equal(ServiceControllerStatus.Stopped, controller.Status);
-            Assert.All(controller.DependentServices, service => Assert.Equal(ServiceControllerStatus.Stopped, service.Status));
+            Assert.All(
+                controller.DependentServices,
+                service => Assert.Equal(ServiceControllerStatus.Stopped, service.Status)
+            );
         }
     }
 }

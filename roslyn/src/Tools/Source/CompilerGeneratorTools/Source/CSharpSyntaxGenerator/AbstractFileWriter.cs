@@ -26,7 +26,11 @@ namespace CSharpSyntaxGenerator
         private int _indentLevel;
         private bool _needIndent = true;
 
-        protected AbstractFileWriter(TextWriter writer, Tree tree, CancellationToken cancellationToken)
+        protected AbstractFileWriter(
+            TextWriter writer,
+            Tree tree,
+            CancellationToken cancellationToken
+        )
         {
             _writer = writer;
             _tree = tree;
@@ -39,9 +43,18 @@ namespace CSharpSyntaxGenerator
             CancellationToken = cancellationToken;
         }
 
-        protected IDictionary<string, string> ParentMap { get { return _parentMap; } }
-        protected ILookup<string, string> ChildMap { get { return _childMap; } }
-        protected Tree Tree { get { return _tree; } }
+        protected IDictionary<string, string> ParentMap
+        {
+            get { return _parentMap; }
+        }
+        protected ILookup<string, string> ChildMap
+        {
+            get { return _childMap; }
+        }
+        protected Tree Tree
+        {
+            get { return _tree; }
+        }
         protected CancellationToken CancellationToken { get; }
 
         #region Output helpers
@@ -105,16 +118,25 @@ namespace CSharpSyntaxGenerator
         /// cref="IEnumerable{T}"/>s of <see cref="string"/>.  All of these are flattened into a
         /// single sequence that is joined. Empty strings are ignored.
         /// </summary>
-        protected string CommaJoin(params object[] values)
-            => Join(", ", values);
+        protected string CommaJoin(params object[] values) => Join(", ", values);
 
-        protected string Join(string separator, params object[] values)
-            => string.Join(separator, values.SelectMany(v => (v switch
-            {
-                string s => new[] { s },
-                IEnumerable<string> ss => ss,
-                _ => throw new InvalidOperationException("Join must be passed strings or collections of strings")
-            }).Where(s => s != "")));
+        protected string Join(string separator, params object[] values) =>
+            string.Join(
+                separator,
+                values.SelectMany(v =>
+                    (
+                        v switch
+                        {
+                            string s => new[] { s },
+                            IEnumerable<string> ss => ss,
+                            _
+                                => throw new InvalidOperationException(
+                                    "Join must be passed strings or collections of strings"
+                                ),
+                        }
+                    ).Where(s => s != "")
+                )
+            );
 
         protected void OpenBlock()
         {
@@ -134,18 +156,27 @@ namespace CSharpSyntaxGenerator
 
         protected static string OverrideOrNewModifier(Field field)
         {
-            return IsOverride(field) ? "override " : IsNew(field) ? "new " : "";
+            return IsOverride(field) ? "override "
+                : IsNew(field) ? "new "
+                : "";
         }
 
         protected static bool CanBeField(Field field)
         {
-            return field.Type != "SyntaxToken" && !IsAnyList(field.Type) && !IsOverride(field) && !IsNew(field);
+            return field.Type != "SyntaxToken"
+                && !IsAnyList(field.Type)
+                && !IsOverride(field)
+                && !IsNew(field);
         }
 
         protected static string GetFieldType(Field field, bool green)
         {
             // Fields in red trees are lazily initialized, with null as the uninitialized value
-            return getNullableAwareType(field.Type, optionalOrLazy: IsOptional(field) || !green, green);
+            return getNullableAwareType(
+                field.Type,
+                optionalOrLazy: IsOptional(field) || !green,
+                green
+            );
 
             static string getNullableAwareType(string fieldType, bool optionalOrLazy, bool green)
             {
@@ -175,8 +206,10 @@ namespace CSharpSyntaxGenerator
         protected bool IsDerivedOrListOfDerived(string baseType, string derivedType)
         {
             return IsDerivedType(baseType, derivedType)
-                || ((IsNodeList(derivedType) || IsSeparatedNodeList(derivedType))
-                    && IsDerivedType(baseType, GetElementType(derivedType)));
+                || (
+                    (IsNodeList(derivedType) || IsSeparatedNodeList(derivedType))
+                    && IsDerivedType(baseType, GetElementType(derivedType))
+                );
         }
 
         protected static bool IsSeparatedNodeList(string typeName)
@@ -196,7 +229,10 @@ namespace CSharpSyntaxGenerator
 
         protected bool IsNodeOrNodeList(string typeName)
         {
-            return IsNode(typeName) || IsNodeList(typeName) || IsSeparatedNodeList(typeName) || typeName == "SyntaxNodeOrTokenList";
+            return IsNode(typeName)
+                || IsNodeList(typeName)
+                || IsSeparatedNodeList(typeName)
+                || typeName == "SyntaxNodeOrTokenList";
         }
 
         protected static string GetElementType(string typeName)
@@ -213,14 +249,19 @@ namespace CSharpSyntaxGenerator
 
         protected static bool IsAnyList(string typeName)
         {
-            return IsNodeList(typeName) || IsSeparatedNodeList(typeName) || typeName == "SyntaxNodeOrTokenList";
+            return IsNodeList(typeName)
+                || IsSeparatedNodeList(typeName)
+                || typeName == "SyntaxNodeOrTokenList";
         }
 
         protected bool IsDerivedType(string typeName, string derivedTypeName)
         {
             if (typeName == derivedTypeName)
                 return true;
-            if (derivedTypeName != null && _parentMap.TryGetValue(derivedTypeName, out var baseType))
+            if (
+                derivedTypeName != null
+                && _parentMap.TryGetValue(derivedTypeName, out var baseType)
+            )
             {
                 return IsDerivedType(typeName, baseType);
             }
@@ -237,23 +278,20 @@ namespace CSharpSyntaxGenerator
             return _parentMap.ContainsKey(typeName);
         }
 
-        protected Node GetNode(string typeName)
-            => _nodeMap.TryGetValue(typeName, out var node) ? node : null;
+        protected Node GetNode(string typeName) =>
+            _nodeMap.TryGetValue(typeName, out var node) ? node : null;
 
-        protected TreeType GetTreeType(string typeName)
-            => _typeMap.TryGetValue(typeName, out var node) ? node : null;
+        protected TreeType GetTreeType(string typeName) =>
+            _typeMap.TryGetValue(typeName, out var node) ? node : null;
 
-        private static bool IsTrue(string val)
-            => val != null && string.Compare(val, "true", true) == 0;
+        private static bool IsTrue(string val) =>
+            val != null && string.Compare(val, "true", true) == 0;
 
-        protected static bool IsOptional(Field f)
-            => IsTrue(f.Optional);
+        protected static bool IsOptional(Field f) => IsTrue(f.Optional);
 
-        protected static bool IsOverride(Field f)
-            => IsTrue(f.Override);
+        protected static bool IsOverride(Field f) => IsTrue(f.Override);
 
-        protected static bool IsNew(Field f)
-            => IsTrue(f.New);
+        protected static bool IsNew(Field f) => IsTrue(f.New);
 
         protected static bool HasErrors(Node n)
         {
@@ -377,12 +415,14 @@ namespace CSharpSyntaxGenerator
             while ((field.Kinds is null || field.Kinds.Count == 0) && IsOverride(field))
             {
                 nd = GetTreeType(nd.Base);
-                field = (nd switch
-                {
-                    Node node => node.Fields,
-                    AbstractNode abstractNode => abstractNode.Fields,
-                    _ => throw new InvalidOperationException("Unexpected node type.")
-                }).Single(f => f.Name == field.Name);
+                field = (
+                    nd switch
+                    {
+                        Node node => node.Fields,
+                        AbstractNode abstractNode => abstractNode.Fields,
+                        _ => throw new InvalidOperationException("Unexpected node type."),
+                    }
+                ).Single(f => f.Name == field.Name);
             }
 
             return field.Kinds.Distinct().ToList();

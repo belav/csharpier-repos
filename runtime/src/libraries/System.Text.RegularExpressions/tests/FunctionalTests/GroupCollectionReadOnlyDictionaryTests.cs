@@ -138,7 +138,8 @@ namespace System.Text.RegularExpressions.Tests
 
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
-            while (enumerator.MoveNext());
+            while (enumerator.MoveNext())
+                ;
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
             enumerator.Reset();

@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 using Xunit;
-
 using static DelegateTestNative;
 
 public class DelegateTest
@@ -19,7 +18,9 @@ public class DelegateTest
 
         {
             TestDelegate localDelegate = TestFunction;
-            Assert.True(ReplaceDelegate(expectedValue, ref localDelegate, out int newExpectedValue));
+            Assert.True(
+                ReplaceDelegate(expectedValue, ref localDelegate, out int newExpectedValue)
+            );
             Assert.Equal(newExpectedValue, localDelegate());
         }
 
@@ -37,7 +38,7 @@ public class DelegateTest
             CallbackWithExpectedValue cb = new CallbackWithExpectedValue
             {
                 expectedValue = expectedValue,
-                del = TestFunction
+                del = TestFunction,
             };
 
             Assert.True(ValidateCallbackWithValue(cb));
@@ -47,7 +48,7 @@ public class DelegateTest
             CallbackWithExpectedValue cb = new CallbackWithExpectedValue
             {
                 expectedValue = expectedValue,
-                del = TestFunction
+                del = TestFunction,
             };
 
             Assert.True(ValidateAndUpdateCallbackWithValue(ref cb));
@@ -69,7 +70,9 @@ public class DelegateTest
 
         {
             TestDelegate localDelegate = TestFunction;
-            Assert.True(ValidateDelegateValueMatchesExpectedAndClear(expectedValue, ref localDelegate));
+            Assert.True(
+                ValidateDelegateValueMatchesExpectedAndClear(expectedValue, ref localDelegate)
+            );
             Assert.Null(localDelegate);
         }
 
@@ -88,7 +91,7 @@ public class DelegateTest
             var cb = new DispatchDelegateWithExpectedValue
             {
                 expectedValue = expectedValue,
-                del = TestFunction
+                del = TestFunction,
             };
 
             Assert.True(ValidateStructDelegateValueMatchesExpected(cb));
@@ -98,7 +101,7 @@ public class DelegateTest
             var cb = new DispatchDelegateWithExpectedValue
             {
                 expectedValue = expectedValue,
-                del = TestFunction
+                del = TestFunction,
             };
 
             Assert.True(ValidateDelegateValueMatchesExpectedAndClearStruct(ref cb));
@@ -109,7 +112,7 @@ public class DelegateTest
             var cb = new DispatchDelegateWithExpectedValue
             {
                 expectedValue = expectedValue,
-                del = TestFunction
+                del = TestFunction,
             };
 
             Assert.True(DuplicateStruct(cb, out var cbOut));

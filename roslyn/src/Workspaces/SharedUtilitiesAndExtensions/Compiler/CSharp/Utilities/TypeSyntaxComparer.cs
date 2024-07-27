@@ -12,7 +12,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private readonly IComparer<SyntaxToken> _tokenComparer;
         internal readonly IComparer<NameSyntax?> NameComparer;
 
-        internal TypeSyntaxComparer(IComparer<SyntaxToken> tokenComparer, IComparer<NameSyntax?> nameComparer)
+        internal TypeSyntaxComparer(
+            IComparer<SyntaxToken> tokenComparer,
+            IComparer<NameSyntax?> nameComparer
+        )
         {
             _tokenComparer = tokenComparer;
             NameComparer = nameComparer;

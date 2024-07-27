@@ -35,10 +35,17 @@ namespace System.ServiceModel.Channels
             }
 
             // deserialize the callback context header, if present
-            int headerIndex = message.Headers.FindHeader(CallbackContextMessageHeader.CallbackContextHeaderName, CallbackContextMessageHeader.CallbackContextHeaderNamespace);
+            int headerIndex = message.Headers.FindHeader(
+                CallbackContextMessageHeader.CallbackContextHeaderName,
+                CallbackContextMessageHeader.CallbackContextHeaderNamespace
+            );
             if (headerIndex > 0)
             {
-                CallbackContextMessageProperty property = CallbackContextMessageHeader.ParseCallbackContextHeader(message.Headers.GetReaderAtHeader(headerIndex), message.Version.Addressing);
+                CallbackContextMessageProperty property =
+                    CallbackContextMessageHeader.ParseCallbackContextHeader(
+                        message.Headers.GetReaderAtHeader(headerIndex),
+                        message.Version.Addressing
+                    );
                 message.Properties.Add(CallbackContextMessageProperty.Name, property);
             }
 
@@ -57,7 +64,10 @@ namespace System.ServiceModel.Channels
             {
                 if (this.ContextExchangeMechanism == ContextExchangeMechanism.HttpCookie)
                 {
-                    Fx.Assert(requestContext != null, "DuplexChannel shape cannot have ContextExchangeMechanism = HttpCookie");
+                    Fx.Assert(
+                        requestContext != null,
+                        "DuplexChannel shape cannot have ContextExchangeMechanism = HttpCookie"
+                    );
                     Uri requestUri = null;
 
                     if (requestContext.RequestMessage.Properties != null)
@@ -79,7 +89,14 @@ namespace System.ServiceModel.Channels
             CallbackContextMessageProperty dummy;
             if (CallbackContextMessageProperty.TryGet(message, out dummy))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR.GetString(SR.CallbackContextNotExpectedOnOutgoingMessageAtServer, message.Headers.Action)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.CallbackContextNotExpectedOnOutgoingMessageAtServer,
+                            message.Headers.Action
+                        )
+                    )
+                );
             }
         }
 
@@ -93,7 +110,13 @@ namespace System.ServiceModel.Channels
                 {
                     string cookieHeader = httpRequest.Headers[HttpRequestHeader.Cookie];
                     ContextMessageProperty messageContext;
-                    if (!string.IsNullOrEmpty(cookieHeader) && HttpCookieToolbox.TryCreateFromHttpCookieHeader(cookieHeader, out messageContext))
+                    if (
+                        !string.IsNullOrEmpty(cookieHeader)
+                        && HttpCookieToolbox.TryCreateFromHttpCookieHeader(
+                            cookieHeader,
+                            out messageContext
+                        )
+                    )
                     {
                         messageContext.AddOrReplaceInMessage(message);
                     }
@@ -103,17 +126,20 @@ namespace System.ServiceModel.Channels
 
         void OnReceiveSoapContextHeader(Message message)
         {
-            ContextMessageProperty messageContext = ContextMessageHeader.GetContextFromHeaderIfExists(message);
+            ContextMessageProperty messageContext =
+                ContextMessageHeader.GetContextFromHeaderIfExists(message);
             if (messageContext != null)
             {
                 messageContext.AddOrReplaceInMessage(message);
 
                 if (DiagnosticUtility.ShouldTraceVerbose)
                 {
-                    TraceUtility.TraceEvent(System.Diagnostics.TraceEventType.Verbose,
+                    TraceUtility.TraceEvent(
+                        System.Diagnostics.TraceEventType.Verbose,
                         TraceCode.ContextProtocolContextRetrievedFromMessage,
                         SR.GetString(SR.TraceCodeContextProtocolContextRetrievedFromMessage),
-                        this);
+                        this
+                    );
                 }
             }
         }
@@ -131,7 +157,10 @@ namespace System.ServiceModel.Channels
                 property = new HttpResponseMessageProperty();
                 message.Properties.Add(HttpResponseMessageProperty.Name, property);
             }
-            string setCookieHeader = HttpCookieToolbox.EncodeContextAsHttpSetCookieHeader(context, requestUri);
+            string setCookieHeader = HttpCookieToolbox.EncodeContextAsHttpSetCookieHeader(
+                context,
+                requestUri
+            );
             property.Headers.Add(HttpResponseHeader.SetCookie, setCookieHeader);
         }
     }

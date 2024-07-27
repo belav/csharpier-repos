@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,25 +29,33 @@
 using System;
 using System.Globalization;
 
-namespace System.Net 
+namespace System.Net
 {
-	/// <summary>
-	/// See RFC 2068 3.3.1
-	/// </summary>
-	internal class MonoHttpDate
-	{
-		private static readonly string rfc1123_date = "r";
-		private static readonly string rfc850_date = "dddd, dd-MMM-yy HH:mm:ss G\\MT";
-		private static readonly string asctime_date = "ddd MMM d HH:mm:ss yyyy";
-		private static readonly string [] formats = 
-			new string [] {rfc1123_date, rfc850_date, asctime_date};
-		
-		internal static DateTime Parse (string dateStr)
-		{			
-			 return DateTime.ParseExact (dateStr, 
-			                             formats, 
-			                             CultureInfo.InvariantCulture, 
-			                             DateTimeStyles.AllowWhiteSpaces).ToLocalTime ();
-		}
-	}
+    /// <summary>
+    /// See RFC 2068 3.3.1
+    /// </summary>
+    internal class MonoHttpDate
+    {
+        private static readonly string rfc1123_date = "r";
+        private static readonly string rfc850_date = "dddd, dd-MMM-yy HH:mm:ss G\\MT";
+        private static readonly string asctime_date = "ddd MMM d HH:mm:ss yyyy";
+        private static readonly string[] formats = new string[]
+        {
+            rfc1123_date,
+            rfc850_date,
+            asctime_date,
+        };
+
+        internal static DateTime Parse(string dateStr)
+        {
+            return DateTime
+                .ParseExact(
+                    dateStr,
+                    formats,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AllowWhiteSpaces
+                )
+                .ToLocalTime();
+        }
+    }
 }

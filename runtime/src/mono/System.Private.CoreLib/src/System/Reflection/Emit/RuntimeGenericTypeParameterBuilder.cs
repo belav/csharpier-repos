@@ -41,7 +41,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class RuntimeGenericTypeParameterBuilder : GenericTypeParameterBuilder
     {
-#region Sync with MonoReflectionGenericParam in object-internals.h
+        #region Sync with MonoReflectionGenericParam in object-internals.h
         private RuntimeTypeBuilder tbuilder;
         private RuntimeMethodBuilder? mbuilder;
         private string name;
@@ -50,10 +50,15 @@ namespace System.Reflection.Emit
         private Type[]? iface_constraints;
         private CustomAttributeBuilder[]? cattrs;
         private GenericParameterAttributes attrs;
-#endregion
+        #endregion
 
-        [DynamicDependency(nameof(attrs))]  // Automatically keeps all previous fields too due to StructLayout
-        internal RuntimeGenericTypeParameterBuilder(RuntimeTypeBuilder tbuilder, RuntimeMethodBuilder? mbuilder, string name, int index)
+        [DynamicDependency(nameof(attrs))] // Automatically keeps all previous fields too due to StructLayout
+        internal RuntimeGenericTypeParameterBuilder(
+            RuntimeTypeBuilder tbuilder,
+            RuntimeMethodBuilder? mbuilder,
+            string name,
+            int index
+        )
         {
             this.tbuilder = tbuilder;
             this.mbuilder = mbuilder;
@@ -61,7 +66,10 @@ namespace System.Reflection.Emit
             this.index = index;
         }
 
-        protected override void SetBaseTypeConstraintCore([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? baseTypeConstraint)
+        protected override void SetBaseTypeConstraintCore(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                Type? baseTypeConstraint
+        )
         {
             this.base_type = baseTypeConstraint ?? typeof(object);
         }
@@ -71,7 +79,9 @@ namespace System.Reflection.Emit
             this.iface_constraints = interfaceConstraints;
         }
 
-        protected override void SetGenericParameterAttributesCore(GenericParameterAttributes genericParameterAttributes)
+        protected override void SetGenericParameterAttributesCore(
+            GenericParameterAttributes genericParameterAttributes
+        )
         {
             this.attrs = genericParameterAttributes;
         }
@@ -79,14 +89,24 @@ namespace System.Reflection.Emit
         internal override Type InternalResolve()
         {
             if (mbuilder != null)
-                return MethodBase.GetMethodFromHandle(mbuilder.MethodHandleInternal, mbuilder.TypeBuilder.InternalResolve().TypeHandle)!.GetGenericArguments()[index];
+                return MethodBase
+                    .GetMethodFromHandle(
+                        mbuilder.MethodHandleInternal,
+                        mbuilder.TypeBuilder.InternalResolve().TypeHandle
+                    )!
+                    .GetGenericArguments()[index];
             return tbuilder.InternalResolve().GetGenericArguments()[index];
         }
 
         internal override Type RuntimeResolve()
         {
             if (mbuilder != null)
-                return MethodBase.GetMethodFromHandle(mbuilder.MethodHandleInternal, mbuilder.TypeBuilder.RuntimeResolve().TypeHandle)!.GetGenericArguments()[index];
+                return MethodBase
+                    .GetMethodFromHandle(
+                        mbuilder.MethodHandleInternal,
+                        mbuilder.TypeBuilder.RuntimeResolve().TypeHandle
+                    )!
+                    .GetGenericArguments()[index];
             return tbuilder.RuntimeResolve().GetGenericArguments()[index];
         }
 
@@ -100,23 +120,34 @@ namespace System.Reflection.Emit
             return TypeAttributes.Public;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-        protected override ConstructorInfo? GetConstructorImpl(BindingFlags bindingAttr,
-                                       Binder? binder,
-                                       CallingConventions callConvention,
-                                       Type[] types,
-                                       ParameterModifier[]? modifiers)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
+        protected override ConstructorInfo? GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[]? modifiers
+        )
         {
             throw not_supported();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
         public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
         {
             throw not_supported();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
         public override EventInfo GetEvent(string name, BindingFlags bindingAttr)
         {
             throw not_supported();
@@ -128,19 +159,28 @@ namespace System.Reflection.Emit
             throw not_supported();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
         public override EventInfo[] GetEvents(BindingFlags bindingAttr)
         {
             throw not_supported();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
         public override FieldInfo GetField(string name, BindingFlags bindingAttr)
         {
             throw not_supported();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
         public override FieldInfo[] GetFields(BindingFlags bindingAttr)
         {
             throw not_supported();
@@ -166,49 +206,79 @@ namespace System.Reflection.Emit
         }
 
         [DynamicallyAccessedMembers(GetAllMembers)]
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr)
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
             throw not_supported();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
         public override MethodInfo[] GetMethods(BindingFlags bindingAttr)
         {
             throw not_supported();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        protected override MethodInfo? GetMethodImpl(string name, BindingFlags bindingAttr,
-                                 Binder? binder,
-                                 CallingConventions callConvention,
-                                 Type[]? types, ParameterModifier[]? modifiers)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        protected override MethodInfo? GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             throw not_supported();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
         public override Type GetNestedType(string name, BindingFlags bindingAttr)
         {
             throw not_supported();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
         public override Type[] GetNestedTypes(BindingFlags bindingAttr)
         {
             throw not_supported();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
         public override PropertyInfo[] GetProperties(BindingFlags bindingAttr)
         {
             throw not_supported();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
-        protected override PropertyInfo? GetPropertyImpl(string name, BindingFlags bindingAttr,
-                                 Binder? binder, Type? returnType,
-                                 Type[]? types,
-                                 ParameterModifier[]? modifiers)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
+        protected override PropertyInfo? GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            Type? returnType,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             throw not_supported();
         }
@@ -268,17 +338,20 @@ namespace System.Reflection.Emit
 
         public override bool IsSZArray
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-        public override object? InvokeMember(string name, BindingFlags invokeAttr,
-                             Binder? binder, object? target, object?[]? args,
-                             ParameterModifier[]? modifiers,
-                             CultureInfo? culture, string[]? namedParameters)
+        public override object? InvokeMember(
+            string name,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object? target,
+            object?[]? args,
+            ParameterModifier[]? modifiers,
+            CultureInfo? culture,
+            string[]? namedParameters
+        )
         {
             throw not_supported();
         }
@@ -290,10 +363,7 @@ namespace System.Reflection.Emit
 
         public override Type UnderlyingSystemType
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         public override Assembly Assembly
@@ -336,7 +406,13 @@ namespace System.Reflection.Emit
             throw not_supported();
         }
 
-        public override InterfaceMapping GetInterfaceMap([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] Type interfaceType)
+        public override InterfaceMapping GetInterfaceMap(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                Type interfaceType
+        )
         {
             throw not_supported();
         }
@@ -403,10 +479,7 @@ namespace System.Reflection.Emit
 
         public override GenericParameterAttributes GenericParameterAttributes
         {
-            get
-            {
-                return attrs;
-            }
+            get { return attrs; }
         }
 
         public override int GenericParameterPosition
@@ -424,7 +497,10 @@ namespace System.Reflection.Emit
             get { return mbuilder; }
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             CustomAttributeBuilder customBuilder = new CustomAttributeBuilder(con, binaryAttribute);
             if (cattrs != null)
@@ -481,8 +557,12 @@ namespace System.Reflection.Emit
             return SymbolType.FormCompoundType("&", this, 0)!;
         }
 
-        [RequiresDynamicCode("The native code for this instantiation might not be available at runtime.")]
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresDynamicCode(
+            "The native code for this instantiation might not be available at runtime."
+        )]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override Type MakeGenericType(params Type[] typeArguments)
         {
             throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericTypeDefinition, this));
@@ -495,10 +575,7 @@ namespace System.Reflection.Emit
 
         internal override bool IsUserType
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsByRefLike => false;

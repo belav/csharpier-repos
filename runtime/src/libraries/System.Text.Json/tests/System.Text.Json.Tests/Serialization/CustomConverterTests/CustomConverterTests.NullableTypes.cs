@@ -11,15 +11,20 @@ namespace System.Text.Json.Serialization.Tests
     {
         private class JsonTestStructConverter : JsonConverter<TestStruct>
         {
-            public override TestStruct Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override TestStruct Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
-                return new TestStruct
-                {
-                    InnerValue = reader.GetInt32()
-                };
+                return new TestStruct { InnerValue = reader.GetInt32() };
             }
 
-            public override void Write(Utf8JsonWriter writer, TestStruct value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                TestStruct value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteNumberValue(value.InnerValue);
             }
@@ -27,12 +32,20 @@ namespace System.Text.Json.Serialization.Tests
 
         private class JsonTestStructThrowingConverter : JsonConverter<TestStruct>
         {
-            public override TestStruct Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override TestStruct Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotSupportedException();
             }
 
-            public override void Write(Utf8JsonWriter writer, TestStruct value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                TestStruct value,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotSupportedException();
             }
@@ -82,12 +95,16 @@ namespace System.Text.Json.Serialization.Tests
         public static void NullableCustomValueTypeUsingAttributes()
         {
             {
-                TestStructClass myStructClass = JsonSerializer.Deserialize<TestStructClass>(@"{""MyStruct"":null}");
+                TestStructClass myStructClass = JsonSerializer.Deserialize<TestStructClass>(
+                    @"{""MyStruct"":null}"
+                );
                 Assert.False(myStructClass.MyStruct.HasValue);
             }
 
             {
-                TestStructClass myStructClass = JsonSerializer.Deserialize<TestStructClass>(@"{""MyStruct"":1}");
+                TestStructClass myStructClass = JsonSerializer.Deserialize<TestStructClass>(
+                    @"{""MyStruct"":1}"
+                );
                 Assert.True(myStructClass.MyStruct.HasValue);
                 Assert.Equal(1, myStructClass.MyStruct.Value.InnerValue);
             }
@@ -100,18 +117,27 @@ namespace System.Text.Json.Serialization.Tests
             options.Converters.Add(new JsonTestStructThrowingConverter());
 
             // Chooses JsonTestStructThrowingConverter on options, which will throw.
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<TestStruct?>("1", options));
+            Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Deserialize<TestStruct?>("1", options)
+            );
 
             // Chooses JsonTestStructConverter on attribute, which will not throw.
-            TestStructClass myStructClass = JsonSerializer.Deserialize<TestStructClass>(@"{""MyStruct"":null}", options);
+            TestStructClass myStructClass = JsonSerializer.Deserialize<TestStructClass>(
+                @"{""MyStruct"":null}",
+                options
+            );
             Assert.False(myStructClass.MyStruct.HasValue);
         }
 
         [Fact]
         public static void NullableCustomValueTypeNegativeTest()
         {
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<TestStructInvalidClass>(@"{""MyInt"":null}"));
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<TestStructInvalidClass>(@"{""MyInt"":1}"));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<TestStructInvalidClass>(@"{""MyInt"":null}")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<TestStructInvalidClass>(@"{""MyInt"":1}")
+            );
         }
 
         [Fact]
@@ -134,7 +160,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class NullIntTo42Converter : JsonConverter<int?>
         {
-            public override int? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override int? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
@@ -146,7 +176,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new Exception("not expected");
             }
 
-            public override void Write(Utf8JsonWriter writer, int? value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                int? value,
+                JsonSerializerOptions options
+            )
             {
                 if (value == null)
                 {
@@ -204,7 +238,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class PocoFailOnNullConverter : JsonConverter<PocoSingleInt>
         {
-            public override PocoSingleInt Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override PocoSingleInt Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
@@ -217,11 +255,15 @@ namespace System.Text.Json.Serialization.Tests
                 return new PocoSingleInt()
                 {
                     // Use literal value to differ from the default converter's behavior.
-                    MyInt = 42
+                    MyInt = 42,
                 };
             }
 
-            public override void Write(Utf8JsonWriter writer, PocoSingleInt value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                PocoSingleInt value,
+                JsonSerializerOptions options
+            )
             {
                 if (value == null)
                 {
@@ -253,7 +295,10 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                PocoSingleInt[] pocos = JsonSerializer.Deserialize<PocoSingleInt[]>("[null, null]", options);
+                PocoSingleInt[] pocos = JsonSerializer.Deserialize<PocoSingleInt[]>(
+                    "[null, null]",
+                    options
+                );
                 Assert.Equal(2, pocos.Length);
                 Assert.Null(pocos[0]);
                 Assert.Null(pocos[1]);
@@ -274,11 +319,17 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                string json = JsonSerializer.Serialize<PocoSingleInt[]>(new PocoSingleInt[] { null, null }, options);
+                string json = JsonSerializer.Serialize<PocoSingleInt[]>(
+                    new PocoSingleInt[] { null, null },
+                    options
+                );
                 Assert.Equal(@"[null,null]", json);
 
                 PocoSingleInt poco = new PocoSingleInt();
-                json = JsonSerializer.Serialize<PocoSingleInt[]>(new PocoSingleInt[] { poco, poco }, options);
+                json = JsonSerializer.Serialize<PocoSingleInt[]>(
+                    new PocoSingleInt[] { poco, poco },
+                    options
+                );
                 Assert.Equal(@"[{""MyInt"":42},{""MyInt"":42}]", json);
             }
         }
@@ -291,14 +342,22 @@ namespace System.Text.Json.Serialization.Tests
             string nullableStructTypeAsStr = typeof(TestStruct?).ToString();
 
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize(new ClassWithNullableStruct_ConverterOnProperty { MyStruct = new TestStruct() }));
+                () =>
+                    JsonSerializer.Serialize(
+                        new ClassWithNullableStruct_ConverterOnProperty
+                        {
+                            MyStruct = new TestStruct(),
+                        }
+                    )
+            );
             string exAsStr = ex.ToString();
             Assert.Contains(converterTypeAsStr, exAsStr);
             Assert.Contains(structTypeAsStr, exAsStr);
             Assert.Contains(nullableStructTypeAsStr, exAsStr);
 
-            ex = Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize<ClassWithNullableStruct_ConverterOnProperty>(""));
+            ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<ClassWithNullableStruct_ConverterOnProperty>("")
+            );
             exAsStr = ex.ToString();
             Assert.Contains(converterTypeAsStr, exAsStr);
             Assert.Contains(structTypeAsStr, exAsStr);
@@ -310,23 +369,38 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Converter cannot be applied directly to nullable type, so the serializer wraps the converter it with NullableConverter<T> as expected.
 
-            string serialized = JsonSerializer.Serialize(new ClassWithNullableStruct_ConverterOnType { MyStruct = new TestStructWithConverter { InnerValue = 5 } });
+            string serialized = JsonSerializer.Serialize(
+                new ClassWithNullableStruct_ConverterOnType
+                {
+                    MyStruct = new TestStructWithConverter { InnerValue = 5 },
+                }
+            );
             Assert.Equal(@"{""MyStruct"":{""InnerValue"":10}}", serialized);
 
-            ClassWithNullableStruct_ConverterOnType obj = JsonSerializer.Deserialize<ClassWithNullableStruct_ConverterOnType>(serialized);
+            ClassWithNullableStruct_ConverterOnType obj =
+                JsonSerializer.Deserialize<ClassWithNullableStruct_ConverterOnType>(serialized);
             Assert.Equal(15, obj.MyStruct?.InnerValue);
         }
 
         [Fact]
         public static void StructConverter_SaysCanConvertNullableStruct_ConverterOnOptions()
         {
-            var options = new JsonSerializerOptions { Converters = { new JsonTestStructValueChangingConverter() } };
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new JsonTestStructValueChangingConverter() },
+            };
 
             Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize(new ClassWithNullableStruct { MyStruct = new TestStruct() }, options));
+                () =>
+                    JsonSerializer.Serialize(
+                        new ClassWithNullableStruct { MyStruct = new TestStruct() },
+                        options
+                    )
+            );
 
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize<ClassWithNullableStruct>("", options));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<ClassWithNullableStruct>("", options)
+            );
         }
 
         [Fact]
@@ -345,14 +419,18 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void StructConverter_SaysCanConvertNullableStruct_StructAsRootType_ConverterOnOptions()
         {
-            var options = new JsonSerializerOptions { Converters = { new JsonTestStructValueChangingConverter() } };
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new JsonTestStructValueChangingConverter() },
+            };
 
             TestStruct? obj = new TestStruct { InnerValue = 5 };
 
             Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(obj, options));
 
-            Assert.Throws<InvalidOperationException>(() =>
-                JsonSerializer.Deserialize<TestStruct?>("", options));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize<TestStruct?>("", options)
+            );
         }
 
         private class ClassWithNullableStruct_ConverterOnProperty
@@ -382,19 +460,31 @@ namespace System.Text.Json.Serialization.Tests
             public override bool CanConvert(Type typeToConvert) =>
                 typeToConvert == typeof(TestStruct) || typeToConvert == typeof(TestStruct?);
 
-            public override TestStruct Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-                throw new NotImplementedException();
+            public override TestStruct Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => throw new NotImplementedException();
 
-            public override void Write(Utf8JsonWriter writer, TestStruct value, JsonSerializerOptions options) =>
-                throw new NotImplementedException();
+            public override void Write(
+                Utf8JsonWriter writer,
+                TestStruct value,
+                JsonSerializerOptions options
+            ) => throw new NotImplementedException();
         }
 
-        private class JsonTestStructWithConverterValueChangingConverter : JsonConverter<TestStructWithConverter>
+        private class JsonTestStructWithConverterValueChangingConverter
+            : JsonConverter<TestStructWithConverter>
         {
             public override bool CanConvert(Type typeToConvert) =>
-                typeToConvert == typeof(TestStructWithConverter) || typeToConvert == typeof(TestStructWithConverter?);
+                typeToConvert == typeof(TestStructWithConverter)
+                || typeToConvert == typeof(TestStructWithConverter?);
 
-            public override TestStructWithConverter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override TestStructWithConverter Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType != JsonTokenType.StartObject)
                 {
@@ -403,17 +493,17 @@ namespace System.Text.Json.Serialization.Tests
 
                 reader.Read();
 
-                if (reader.TokenType != JsonTokenType.PropertyName || reader.GetString() != "InnerValue")
+                if (
+                    reader.TokenType != JsonTokenType.PropertyName
+                    || reader.GetString() != "InnerValue"
+                )
                 {
                     throw new JsonException();
                 }
 
                 reader.Read();
 
-                var obj = new TestStructWithConverter
-                {
-                    InnerValue = reader.GetInt32() + 5
-                };
+                var obj = new TestStructWithConverter { InnerValue = reader.GetInt32() + 5 };
 
                 reader.Read();
 
@@ -425,7 +515,11 @@ namespace System.Text.Json.Serialization.Tests
                 return obj;
             }
 
-            public override void Write(Utf8JsonWriter writer, TestStructWithConverter value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                TestStructWithConverter value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteStartObject();
                 writer.WriteNumber("InnerValue", value.InnerValue + 5);
@@ -436,7 +530,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void NonNullableConverter_ReturnedByJsonConverterFactory_CanBeUsedAsFallback_ForNullableProperty()
         {
-            string json = @"{
+            string json =
+                @"{
 ""Property"": {
 ""Item1"":1,
 ""Item2"":2
@@ -447,19 +542,24 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(0, obj0.Property.Item1);
             Assert.Equal(0, obj0.Property.Item2);
 
-            obj0 = JsonSerializer.Deserialize<ClassWithValueTuple>(json, new JsonSerializerOptions { IncludeFields = true });
+            obj0 = JsonSerializer.Deserialize<ClassWithValueTuple>(
+                json,
+                new JsonSerializerOptions { IncludeFields = true }
+            );
             Assert.Equal(1, obj0.Property.Item1);
             Assert.Equal(2, obj0.Property.Item2);
 
             // Baseline: converter returned from factory can be used for non-nullable property.
-            ClassWithFactoryOn_NonNullableProperty obj1 = JsonSerializer.Deserialize<ClassWithFactoryOn_NonNullableProperty>(json);
+            ClassWithFactoryOn_NonNullableProperty obj1 =
+                JsonSerializer.Deserialize<ClassWithFactoryOn_NonNullableProperty>(json);
             Assert.Equal(1, obj1.Property.Item1);
             Assert.Equal(2, obj1.Property.Item2);
 
             JsonTestHelper.AssertJsonEqual(json, JsonSerializer.Serialize(obj1));
 
             // Test: converter returned from factory can be used for nullable property.
-            ClassWithFactoryOn_NullableProperty obj2 = JsonSerializer.Deserialize<ClassWithFactoryOn_NullableProperty>(json);
+            ClassWithFactoryOn_NullableProperty obj2 =
+                JsonSerializer.Deserialize<ClassWithFactoryOn_NullableProperty>(json);
             Assert.Equal(1, obj2.Property?.Item1);
             Assert.Equal(2, obj2.Property?.Item2);
 
@@ -487,7 +587,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             public override bool CanConvert(Type typeToConvert) => IsValueTupleType(typeToConvert);
 
-            public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+            public override JsonConverter CreateConverter(
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 Debug.Assert(CanConvert(typeToConvert));
 
@@ -495,12 +598,16 @@ namespace System.Text.Json.Serialization.Tests
                 Type item1Type = genericArgs[0];
                 Type item2Type = genericArgs[1];
 
-                JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                    typeof(ValueTupleConverter<,>).MakeGenericType(new Type[] { item1Type, item2Type }),
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    args: new object[] { },
-                    culture: null);
+                JsonConverter converter = (JsonConverter)
+                    Activator.CreateInstance(
+                        typeof(ValueTupleConverter<,>).MakeGenericType(
+                            new Type[] { item1Type, item2Type }
+                        ),
+                        BindingFlags.Instance | BindingFlags.Public,
+                        binder: null,
+                        args: new object[] { },
+                        culture: null
+                    );
 
                 return converter;
             }
@@ -508,9 +615,14 @@ namespace System.Text.Json.Serialization.Tests
             protected static bool IsValueTupleType(Type type) =>
                 type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ValueTuple<,>);
 
-            protected class ValueTupleConverter<TItem1, TItem2> : JsonConverter<ValueTuple<TItem1, TItem2>>
+            protected class ValueTupleConverter<TItem1, TItem2>
+                : JsonConverter<ValueTuple<TItem1, TItem2>>
             {
-                public override (TItem1, TItem2) Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+                public override (TItem1, TItem2) Read(
+                    ref Utf8JsonReader reader,
+                    Type typeToConvert,
+                    JsonSerializerOptions options
+                )
                 {
                     Debug.Assert(reader.TokenType == JsonTokenType.StartObject);
 
@@ -552,7 +664,11 @@ namespace System.Text.Json.Serialization.Tests
                     return value;
                 }
 
-                public override void Write(Utf8JsonWriter writer, (TItem1, TItem2) value, JsonSerializerOptions options)
+                public override void Write(
+                    Utf8JsonWriter writer,
+                    (TItem1, TItem2) value,
+                    JsonSerializerOptions options
+                )
                 {
                     writer.WriteStartObject();
 

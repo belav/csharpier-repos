@@ -11,45 +11,114 @@ namespace BMI1Intrinsics
         {
             // bmi1 expression are folded to hwintrinsics that return identical results
 
-            var values = new (uint input1, uint input2, uint andnExpected, uint blsiExpected, uint blsrExpected, uint blmskExpected)[] {
-                (0, 0, 0, 0 ,0 ,0xFFFFFFFF),
-                (1, 0, 1, 1 ,0 ,1),
-                (uint.MaxValue / 2, 0, 0x7fffffff, 0x1 ,0x7ffffffe ,1),
-                ((uint.MaxValue / 2) - 1,  0, 0x7FFFFFFE, 2 ,0x7FFFFFFC ,3),
-                ((uint.MaxValue / 2) + 1, 0, 0x80000000, 0x80000000 ,0 ,0xFFFFFFFF),
-                (uint.MaxValue - 1, 0, 0xFFFFFFFE, 2 ,0xFFFFFFFC ,3),
-                (uint.MaxValue , 0, 0xFFFFFFFF, 1 ,0xFFFFFFFE ,1),
-                (0xAAAAAAAA,0xAAAAAAAA,0,2,0xAAAAAAA8,3),
-                (0xAAAAAAAA,0x55555555,0xAAAAAAAA,2,0xAAAAAAA8,3),
+            var values = new (
+                uint input1,
+                uint input2,
+                uint andnExpected,
+                uint blsiExpected,
+                uint blsrExpected,
+                uint blmskExpected
+            )[]
+            {
+                (0, 0, 0, 0, 0, 0xFFFFFFFF),
+                (1, 0, 1, 1, 0, 1),
+                (uint.MaxValue / 2, 0, 0x7fffffff, 0x1, 0x7ffffffe, 1),
+                ((uint.MaxValue / 2) - 1, 0, 0x7FFFFFFE, 2, 0x7FFFFFFC, 3),
+                ((uint.MaxValue / 2) + 1, 0, 0x80000000, 0x80000000, 0, 0xFFFFFFFF),
+                (uint.MaxValue - 1, 0, 0xFFFFFFFE, 2, 0xFFFFFFFC, 3),
+                (uint.MaxValue, 0, 0xFFFFFFFF, 1, 0xFFFFFFFE, 1),
+                (0xAAAAAAAA, 0xAAAAAAAA, 0, 2, 0xAAAAAAA8, 3),
+                (0xAAAAAAAA, 0x55555555, 0xAAAAAAAA, 2, 0xAAAAAAA8, 3),
             };
 
             foreach (var value in values)
             {
-                Test(value.input1, AndNot_32bit(value.input1, value.input2), value.andnExpected, nameof(AndNot_32bit));
-                Test(value.input1, ExtractLowestSetIsolatedBit_32bit(value.input1), value.blsiExpected, nameof(ExtractLowestSetIsolatedBit_32bit));
-                Test(value.input1, ResetLowestSetBit_32bit(value.input1), value.blsrExpected, nameof(ResetLowestSetBit_32bit));
-                Test(value.input1, GetMaskUpToLowestSetBit_32bit(value.input1), value.blmskExpected, nameof(GetMaskUpToLowestSetBit_32bit));
+                Test(
+                    value.input1,
+                    AndNot_32bit(value.input1, value.input2),
+                    value.andnExpected,
+                    nameof(AndNot_32bit)
+                );
+                Test(
+                    value.input1,
+                    ExtractLowestSetIsolatedBit_32bit(value.input1),
+                    value.blsiExpected,
+                    nameof(ExtractLowestSetIsolatedBit_32bit)
+                );
+                Test(
+                    value.input1,
+                    ResetLowestSetBit_32bit(value.input1),
+                    value.blsrExpected,
+                    nameof(ResetLowestSetBit_32bit)
+                );
+                Test(
+                    value.input1,
+                    GetMaskUpToLowestSetBit_32bit(value.input1),
+                    value.blmskExpected,
+                    nameof(GetMaskUpToLowestSetBit_32bit)
+                );
             }
 
-
-            var values2 = new (ulong input1, ulong input2, ulong andnExpected, ulong blsiExpected, ulong blsrExpected, ulong blmskExpected)[] {
-                (0,                                    0,                  0,                  0,                  0,0xFFFFFFFF_FFFFFFFF),
-                (1,                                    0,                  1,                  1,                  0,                  1),
-                (ulong.MaxValue / 2,                   0,0x7FFFFFFF_FFFFFFFF,                  1,0x7FFFFFFF_FFFFFFFE,                  1),
-                ((ulong.MaxValue / 2) - 1,             0,0x7FFFFFFF_FFFFFFFE,                  2,0x7FFFFFFF_FFFFFFFC,                  3),
-                ((ulong.MaxValue / 2) + 1,             0,0x80000000_00000000,0x80000000_00000000,                  0,0xFFFFFFFF_FFFFFFFF),
-                (ulong.MaxValue - 1,                   0,0xFFFFFFFF_FFFFFFFE,                  2,0xFFFFFFFF_FFFFFFFC,                  3),
-                (ulong.MaxValue,                       0,0xFFFFFFFF_FFFFFFFF,                  1,0xFFFFFFFF_FFFFFFFE,                  1),
-                (0xAAAAAAAA_AAAAAAAA,0xAAAAAAAA_AAAAAAAA,                  0,                  2,0xAAAAAAAA_AAAAAAA8,                  3),
-                (0xAAAAAAAA_AAAAAAAA,0x55555555_55555555,0xAAAAAAAA_AAAAAAAA,                  2,0xAAAAAAAA_AAAAAAA8,                  3),
+            var values2 = new (
+                ulong input1,
+                ulong input2,
+                ulong andnExpected,
+                ulong blsiExpected,
+                ulong blsrExpected,
+                ulong blmskExpected
+            )[]
+            {
+                (0, 0, 0, 0, 0, 0xFFFFFFFF_FFFFFFFF),
+                (1, 0, 1, 1, 0, 1),
+                (ulong.MaxValue / 2, 0, 0x7FFFFFFF_FFFFFFFF, 1, 0x7FFFFFFF_FFFFFFFE, 1),
+                ((ulong.MaxValue / 2) - 1, 0, 0x7FFFFFFF_FFFFFFFE, 2, 0x7FFFFFFF_FFFFFFFC, 3),
+                (
+                    (ulong.MaxValue / 2) + 1,
+                    0,
+                    0x80000000_00000000,
+                    0x80000000_00000000,
+                    0,
+                    0xFFFFFFFF_FFFFFFFF
+                ),
+                (ulong.MaxValue - 1, 0, 0xFFFFFFFF_FFFFFFFE, 2, 0xFFFFFFFF_FFFFFFFC, 3),
+                (ulong.MaxValue, 0, 0xFFFFFFFF_FFFFFFFF, 1, 0xFFFFFFFF_FFFFFFFE, 1),
+                (0xAAAAAAAA_AAAAAAAA, 0xAAAAAAAA_AAAAAAAA, 0, 2, 0xAAAAAAAA_AAAAAAA8, 3),
+                (
+                    0xAAAAAAAA_AAAAAAAA,
+                    0x55555555_55555555,
+                    0xAAAAAAAA_AAAAAAAA,
+                    2,
+                    0xAAAAAAAA_AAAAAAA8,
+                    3
+                ),
             };
 
             foreach (var value in values2)
             {
-                Test(value.input1, AndNot_64bit(value.input1, value.input2), value.andnExpected, nameof(AndNot_64bit));
-                Test(value.input1, ExtractLowestSetIsolatedBit_64bit(value.input1), value.blsiExpected, nameof(ExtractLowestSetIsolatedBit_64bit));
-                Test(value.input1, ResetLowestSetBit_64bit(value.input1), value.blsrExpected, nameof(ResetLowestSetBit_64bit));
-                Test(value.input1, GetMaskUpToLowestSetBit_64bit(value.input1), value.blmskExpected, nameof(GetMaskUpToLowestSetBit_64bit));
+                Test(
+                    value.input1,
+                    AndNot_64bit(value.input1, value.input2),
+                    value.andnExpected,
+                    nameof(AndNot_64bit)
+                );
+                Test(
+                    value.input1,
+                    ExtractLowestSetIsolatedBit_64bit(value.input1),
+                    value.blsiExpected,
+                    nameof(ExtractLowestSetIsolatedBit_64bit)
+                );
+                Test(
+                    value.input1,
+                    ResetLowestSetBit_64bit(value.input1),
+                    value.blsrExpected,
+                    nameof(ResetLowestSetBit_64bit)
+                );
+                Test(
+                    value.input1,
+                    GetMaskUpToLowestSetBit_64bit(value.input1),
+                    value.blmskExpected,
+                    nameof(GetMaskUpToLowestSetBit_64bit)
+                );
             }
 
             return _errorCode;

@@ -16,7 +16,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "key",
-                () => X509SignatureGenerator.CreateForECDsa(null));
+                () => X509SignatureGenerator.CreateForECDsa(null)
+            );
         }
 
         [Theory]
@@ -27,20 +28,24 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             using (ECDsa ecdsa = ECDsa.Create(keyParameters))
             {
-                X509SignatureGenerator signatureGenerator =
-                    X509SignatureGenerator.CreateForECDsa(ecdsa);
+                X509SignatureGenerator signatureGenerator = X509SignatureGenerator.CreateForECDsa(
+                    ecdsa
+                );
 
                 PublicKey publicKey = signatureGenerator.PublicKey;
 
                 Assert.Equal(
                     testData.CurveEncodedOidHex,
-                    publicKey.EncodedParameters.RawData.ByteArrayToHex());
+                    publicKey.EncodedParameters.RawData.ByteArrayToHex()
+                );
 
                 string expectedKeyHex =
                     // Uncompressed Point
-                    "04" +
+                    "04"
+                    +
                     // Qx
-                    keyParameters.Q.X.ByteArrayToHex() +
+                    keyParameters.Q.X.ByteArrayToHex()
+                    +
                     // Qy
                     keyParameters.Q.Y.ByteArrayToHex();
 
@@ -85,7 +90,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                 Assert.Throws<ArgumentOutOfRangeException>(
                     "hashAlgorithm",
-                    () => generator.GetSignatureAlgorithmIdentifier(hashAlgorithm));
+                    () => generator.GetSignatureAlgorithmIdentifier(hashAlgorithm)
+                );
             }
         }
 

@@ -15,10 +15,12 @@ public class StartupHelloWorld : StartupBase
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public override void Configure(IApplicationBuilder app)
     {
-        app.Run(async (context) =>
-        {
-            await context.Response.WriteAsync("Hello World!");
-        });
+        app.Run(
+            async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
+            }
+        );
     }
 
     // Entry point for the application.
@@ -27,9 +29,7 @@ public class StartupHelloWorld : StartupBase
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                    .UseKestrel()
-                    .UseStartup<StartupHelloWorld>();
+                webHostBuilder.UseKestrel().UseStartup<StartupHelloWorld>();
             })
             .Build();
 

@@ -16,7 +16,11 @@ public class ServerLogScope : IDisposable
     private readonly object _lock;
     private bool _disposed;
 
-    public ServerLogScope(InProcessTestServer serverFixture, ILoggerFactory loggerFactory, IDisposable wrappedDisposable)
+    public ServerLogScope(
+        InProcessTestServer serverFixture,
+        ILoggerFactory loggerFactory,
+        IDisposable wrappedDisposable
+    )
     {
         _loggerFactory = loggerFactory;
         _serverFixture = serverFixture;
@@ -54,7 +58,10 @@ public class ServerLogScope : IDisposable
 
             // Create (or get) a logger with the same name as the server logger
             // Call in the lock to avoid ODE where LoggerFactory could be disposed by the wrapped disposable
-            logger = _serverLoggers.GetOrAdd(write.LoggerName, loggerName => _loggerFactory.CreateLogger("SERVER " + loggerName));
+            logger = _serverLoggers.GetOrAdd(
+                write.LoggerName,
+                loggerName => _loggerFactory.CreateLogger("SERVER " + loggerName)
+            );
         }
 
         logger.Log(write.LogLevel, write.EventId, write.State, write.Exception, write.Formatter);

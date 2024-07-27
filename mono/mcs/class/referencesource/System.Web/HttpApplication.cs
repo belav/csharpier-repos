@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web {
+namespace System.Web
+{
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -37,7 +38,6 @@ namespace System.Web {
     using System.Web.Util;
     using IIS = System.Web.Hosting.UnsafeIISMethods;
 
-
     //
     // Async EventHandler support
     //
@@ -46,7 +46,12 @@ namespace System.Web {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public delegate IAsyncResult BeginEventHandler(object sender, EventArgs e, AsyncCallback cb, object extraData);
+    public delegate IAsyncResult BeginEventHandler(
+        object sender,
+        EventArgs e,
+        AsyncCallback cb,
+        object extraData
+    );
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
@@ -56,17 +61,19 @@ namespace System.Web {
     // Represents an event handler using TAP (Task Asynchronous Pattern).
     public delegate Task TaskEventHandler(object sender, EventArgs e);
 
-
     /// <devdoc>
     ///    <para>
     ///       The  HttpApplication class defines the methods, properties and events common to all
     ///       HttpApplication objects within the ASP.NET Framework.
     ///    </para>
     /// </devdoc>
-    [
-    ToolboxItem(false)
-    ]
-    public class HttpApplication : IComponent, IHttpAsyncHandler, IRequestCompletedNotifier, ISyncContext {
+    [ToolboxItem(false)]
+    public class HttpApplication
+        : IComponent,
+            IHttpAsyncHandler,
+            IRequestCompletedNotifier,
+            ISyncContext
+    {
         // application state dictionary
         private HttpApplicationState _state;
 
@@ -77,8 +84,9 @@ namespace System.Web {
         private HttpAsyncResult _ar; // currently pending async result for call into application
 
         // list of modules
-        private static readonly DynamicModuleRegistry _dynamicModuleRegistry = new DynamicModuleRegistry();
-        private HttpModuleCollection  _moduleCollection;
+        private static readonly DynamicModuleRegistry _dynamicModuleRegistry =
+            new DynamicModuleRegistry();
+        private HttpModuleCollection _moduleCollection;
 
         // event handlers
         private static readonly object EventDisposed = new object();
@@ -117,9 +125,9 @@ namespace System.Web {
         private StepManager _stepManager;
 
         // callback for Application ResumeSteps
-        #pragma warning disable 0649
+#pragma warning disable 0649
         private WaitCallback _resumeStepsWaitCallback;
-        #pragma warning restore 0649
+#pragma warning restore 0649
 
         // event passed to modules
         private EventArgs _appEvent;
@@ -135,7 +143,7 @@ namespace System.Web {
 
         // application execution variables
         private HttpContext _context;
-        private Exception _lastError;  // placeholder for the error when context not avail
+        private Exception _lastError; // placeholder for the error when context not avail
         private bool _timeoutManagerInitialized;
 
         // session (supplied by session-on-end outside of context)
@@ -151,7 +159,6 @@ namespace System.Web {
 
         // pipeline event mappings
         private Dictionary<string, RequestNotification> _pipelineEventMasks;
-
 
         // IComponent support
         private ISite _site;
@@ -201,18 +208,24 @@ namespace System.Web {
         ///       </para>
         ///    </devdoc>
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public HttpContext Context {
-            get {
-                return(_context != null) ? _context : _initContext;
-            }
+        public HttpContext Context
+        {
+            get { return (_context != null) ? _context : _initContext; }
         }
 
-        private bool IsContainerInitalizationAllowed {
-            get {
-                if (HttpRuntime.UseIntegratedPipeline && _initSpecialCompleted && !_initInternalCompleted) {
+        private bool IsContainerInitalizationAllowed
+        {
+            get
+            {
+                if (
+                    HttpRuntime.UseIntegratedPipeline
+                    && _initSpecialCompleted
+                    && !_initInternalCompleted
+                )
+                {
                     // return true if
                     //      i) this is integrated pipeline mode,
                     //     ii) InitSpecial has been called at least once in this AppDomain to register events with IIS,
@@ -223,18 +236,29 @@ namespace System.Web {
             }
         }
 
-        private void ThrowIfEventBindingDisallowed() {
-            if (HttpRuntime.UseIntegratedPipeline && _initSpecialCompleted && _initInternalCompleted) {
+        private void ThrowIfEventBindingDisallowed()
+        {
+            if (
+                HttpRuntime.UseIntegratedPipeline
+                && _initSpecialCompleted
+                && _initInternalCompleted
+            )
+            {
                 // throw if we're using the integrated pipeline and both InitSpecial and InitInternal have completed.
                 throw new InvalidOperationException(SR.GetString(SR.Event_Binding_Disallowed));
             }
         }
 
-        private PipelineModuleStepContainer[] ModuleContainers {
-            get {
-                if (_moduleContainers == null) {
-
-                    Debug.Assert(_moduleIndexMap != null && _moduleIndexMap.Count > 0, "_moduleIndexMap != null && _moduleIndexMap.Count > 0");
+        private PipelineModuleStepContainer[] ModuleContainers
+        {
+            get
+            {
+                if (_moduleContainers == null)
+                {
+                    Debug.Assert(
+                        _moduleIndexMap != null && _moduleIndexMap.Count > 0,
+                        "_moduleIndexMap != null && _moduleIndexMap.Count > 0"
+                    );
 
                     // At this point, all modules have been registered with IIS via RegisterIntegratedEvent.
                     // Now we need to create a container for each module and add execution steps.
@@ -243,10 +267,10 @@ namespace System.Web {
 
                     _moduleContainers = new PipelineModuleStepContainer[_moduleIndexMap.Count];
 
-                    for (int i = 0; i < _moduleContainers.Length; i++) {
+                    for (int i = 0; i < _moduleContainers.Length; i++)
+                    {
                         _moduleContainers[i] = new PipelineModuleStepContainer();
                     }
-
                 }
 
                 return _moduleContainers;
@@ -256,39 +280,41 @@ namespace System.Web {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public event EventHandler Disposed {
-            add {
-                Events.AddHandler(EventDisposed, value);
-            }
-
-            remove {
-                Events.RemoveHandler(EventDisposed, value);
-            }
+        public event EventHandler Disposed
+        {
+            add { Events.AddHandler(EventDisposed, value); }
+            remove { Events.RemoveHandler(EventDisposed, value); }
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected EventHandlerList Events {
-            get {
-                if (_events == null) {
+        protected EventHandlerList Events
+        {
+            get
+            {
+                if (_events == null)
+                {
                     _events = new EventHandlerList();
                 }
                 return _events;
             }
         }
 
-        internal IExecutionStep CreateImplicitAsyncPreloadExecutionStep() {
-            ImplicitAsyncPreloadModule implicitAsyncPreloadModule = new ImplicitAsyncPreloadModule();
+        internal IExecutionStep CreateImplicitAsyncPreloadExecutionStep()
+        {
+            ImplicitAsyncPreloadModule implicitAsyncPreloadModule =
+                new ImplicitAsyncPreloadModule();
             BeginEventHandler beginHandler = null;
             EndEventHandler endHandler = null;
             implicitAsyncPreloadModule.GetEventHandlers(out beginHandler, out endHandler);
-            return new AsyncEventExecutionStep(this, beginHandler, endHandler, null);            
+            return new AsyncEventExecutionStep(this, beginHandler, endHandler, null);
         }
 
-        private AsyncAppEventHandlersTable AsyncEvents {
-            get {
+        private AsyncAppEventHandlersTable AsyncEvents
+        {
+            get
+            {
                 if (_asyncEvents == null)
                     _asyncEvents = new AsyncAppEventHandlersTable();
                 return _asyncEvents;
@@ -296,12 +322,13 @@ namespace System.Web {
         }
 
         // Last error during the processing of the current request.
-        internal Exception LastError {
-            get {
+        internal Exception LastError
+        {
+            get
+            {
                 // only temporaraly public (will be internal and not related context)
                 return (_context != null) ? _context.Error : _lastError;
             }
-
         }
 
         // Used by HttpRequest.GetEntireRawContent. Windows OS Bug 1632921
@@ -322,14 +349,23 @@ namespace System.Web {
         //   1) Eliminates global locks - access to HttpApplication instance is lock free and no concurrent access is expected (by design).
         //      36+ cores show really bad spin lock characteristics for short locks.
         //   2) Better lifetime dynamics - Buffers increase/decrease as HttpApplication instances grow/shrink on demand.
-        internal IAllocatorProvider AllocatorProvider {
-            get {
-                if (_allocator == null) {
+        internal IAllocatorProvider AllocatorProvider
+        {
+            get
+            {
+                if (_allocator == null)
+                {
                     AllocatorProvider alloc = new AllocatorProvider();
 
-                    alloc.CharBufferAllocator = new SimpleBufferAllocator<char>(BufferingParams.CHAR_BUFFER_SIZE);
-                    alloc.IntBufferAllocator = new SimpleBufferAllocator<int>(BufferingParams.INT_BUFFER_SIZE);
-                    alloc.IntPtrBufferAllocator = new SimpleBufferAllocator<IntPtr>(BufferingParams.INTPTR_BUFFER_SIZE);
+                    alloc.CharBufferAllocator = new SimpleBufferAllocator<char>(
+                        BufferingParams.CHAR_BUFFER_SIZE
+                    );
+                    alloc.IntBufferAllocator = new SimpleBufferAllocator<int>(
+                        BufferingParams.INT_BUFFER_SIZE
+                    );
+                    alloc.IntPtrBufferAllocator = new SimpleBufferAllocator<IntPtr>(
+                        BufferingParams.INTPTR_BUFFER_SIZE
+                    );
 
                     Interlocked.CompareExchange(ref _allocator, alloc, null);
                 }
@@ -338,7 +374,8 @@ namespace System.Web {
             }
         }
 
-        internal void ClearError() {
+        internal void ClearError()
+        {
             _lastError = null;
         }
 
@@ -346,12 +383,11 @@ namespace System.Web {
         ///    <para>HTTPRuntime provided request intrinsic object that provides access to incoming HTTP
         ///       request data.</para>
         /// </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public HttpRequest Request {
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpRequest Request
+        {
+            get
+            {
                 HttpRequest request = null;
 
                 if (_context != null && !_hideRequestResponse)
@@ -364,18 +400,16 @@ namespace System.Web {
             }
         }
 
-
         /// <devdoc>
         ///    <para>HTTPRuntime provided
         ///       response intrinsic object that allows transmission of HTTP response data to a
         ///       client.</para>
         /// </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public HttpResponse Response {
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpResponse Response
+        {
+            get
+            {
                 HttpResponse response = null;
 
                 if (_context != null && !_hideRequestResponse)
@@ -388,18 +422,16 @@ namespace System.Web {
             }
         }
 
-
         /// <devdoc>
         ///    <para>
         ///    HTTPRuntime provided session intrinsic.
         ///    </para>
         /// </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public HttpSessionState Session {
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpSessionState Session
+        {
+            get
+            {
                 HttpSessionState session = null;
 
                 if (_session != null)
@@ -414,34 +446,30 @@ namespace System.Web {
             }
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       Returns
         ///          a reference to an HTTPApplication state bag instance.
         ///       </para>
         ///    </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public HttpApplicationState Application {
-            get {
-                Debug.Assert(_state != null);  // app state always available
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpApplicationState Application
+        {
+            get
+            {
+                Debug.Assert(_state != null); // app state always available
                 return _state;
             }
         }
 
-
         /// <devdoc>
         ///    <para>Provides the web server Intrinsic object.</para>
         /// </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public HttpServerUtility Server {
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpServerUtility Server
+        {
+            get
+            {
                 if (_context != null)
                     return _context.Server;
                 else
@@ -449,16 +477,14 @@ namespace System.Web {
             }
         }
 
-
         /// <devdoc>
         ///    <para>Provides the User Intrinsic object.</para>
         /// </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public IPrincipal User {
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IPrincipal User
+        {
+            get
+            {
                 if (_context == null)
                     throw new HttpException(SR.GetString(SR.User_not_available));
 
@@ -466,20 +492,21 @@ namespace System.Web {
             }
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       Collection
         ///          of all IHTTPModules configured for the current application.
         ///       </para>
         ///    </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public HttpModuleCollection Modules {
-            [AspNetHostingPermission(SecurityAction.Demand, Level=AspNetHostingPermissionLevel.High)]
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HttpModuleCollection Modules
+        {
+            [AspNetHostingPermission(
+                SecurityAction.Demand,
+                Level = AspNetHostingPermissionLevel.High
+            )]
+            get
+            {
                 if (_moduleCollection == null)
                     _moduleCollection = new HttpModuleCollection();
                 return _moduleCollection;
@@ -487,27 +514,30 @@ namespace System.Web {
         }
 
         // event passed to all modules
-        internal EventArgs AppEvent {
-            get {
+        internal EventArgs AppEvent
+        {
+            get
+            {
                 if (_appEvent == null)
                     _appEvent = EventArgs.Empty;
 
                 return _appEvent;
             }
-
-            set {
-                _appEvent = null;
-            }
+            set { _appEvent = null; }
         }
 
-        private ISessionStateModule FindISessionStateModule() {
+        private ISessionStateModule FindISessionStateModule()
+        {
             if (!HttpRuntime.UseIntegratedPipeline)
                 return null;
 
-            if (_moduleCollection != null) {
-                for (int i = 0; i < _moduleCollection.Count; i++) {
+            if (_moduleCollection != null)
+            {
+                for (int i = 0; i < _moduleCollection.Count; i++)
+                {
                     ISessionStateModule module = _moduleCollection.Get(i) as ISessionStateModule;
-                    if (module != null) {
+                    if (module != null)
+                    {
                         return module;
                     }
                 }
@@ -517,16 +547,20 @@ namespace System.Web {
         }
 
         // DevDiv Bugs 151914: Release session state before executing child request
-        internal void EnsureReleaseState() {
+        internal void EnsureReleaseState()
+        {
             ISessionStateModule module = FindISessionStateModule();
-            if (module != null) {
+            if (module != null)
+            {
                 module.ReleaseSessionState(Context);
             }
         }
 
-        internal Task EnsureReleaseStateAsync() {
+        internal Task EnsureReleaseStateAsync()
+        {
             ISessionStateModule module = FindISessionStateModule();
-            if (module != null) {
+            if (module != null)
+            {
                 return module.ReleaseSessionStateAsync(Context);
             }
 
@@ -536,16 +570,20 @@ namespace System.Web {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CompleteRequest() {
+        public void CompleteRequest()
+        {
             //
             // Request completion (force skipping all steps until RequestEnd
             //
             _stepManager.CompleteRequest();
         }
 
-        internal bool IsRequestCompleted {
-            get {
-                if (null == _stepManager) {
+        internal bool IsRequestCompleted
+        {
+            get
+            {
+                if (null == _stepManager)
+                {
                     return false;
                 }
 
@@ -553,153 +591,216 @@ namespace System.Web {
             }
         }
 
-        bool IRequestCompletedNotifier.IsRequestCompleted {
-            get {
-                return IsRequestCompleted;
-            }
+        bool IRequestCompletedNotifier.IsRequestCompleted
+        {
+            get { return IsRequestCompleted; }
         }
 
         // Dev10 745301: Asynchronous pipeline steps can start a new thread that triggers
         // a SendResponse notification.  E.g., it might call Flush when a module is registered
         // for PreSendRequestHeaders/Content.  If the async pipeline step returns from ExecuteStep
-        // while the SendResponse notification is executing, the NotificationContext can 
+        // while the SendResponse notification is executing, the NotificationContext can
         // be corrupted.  To fix this, a lock is now taken to prevent multi-threaded access when
-        // the async pipeline step sets the NotificationContext.PendingAsyncCompletion field.  
-        // The SendResponse notification also acquires the lock when it enters managed code and 
+        // the async pipeline step sets the NotificationContext.PendingAsyncCompletion field.
+        // The SendResponse notification also acquires the lock when it enters managed code and
         // releases the lock when it leaves.
-        internal void AcquireNotifcationContextLock(ref bool locked) {
+        internal void AcquireNotifcationContextLock(ref bool locked)
+        {
             Debug.Assert(HttpRuntime.UseIntegratedPipeline, "HttpRuntime.UseIntegratedPipeline");
             Monitor.Enter(_stepManager, ref locked);
         }
 
-        internal void ReleaseNotifcationContextLock() {
+        internal void ReleaseNotifcationContextLock()
+        {
             Debug.Assert(HttpRuntime.UseIntegratedPipeline, "HttpRuntime.UseIntegratedPipeline");
             Monitor.Exit(_stepManager);
         }
 
-        // Some frameworks built on top of the integrated pipeline call Flush() on background thread which will trigger nested 
+        // Some frameworks built on top of the integrated pipeline call Flush() on background thread which will trigger nested
         // RQ_SEND_RESPONSE notification and replace the old context.NotificationContext with the new context.NotificationContext.
-        // In order to maintain proper synchronization logic at the time when the completion callback is called we need to make sure 
+        // In order to maintain proper synchronization logic at the time when the completion callback is called we need to make sure
         // we access the original context.NotificationContext (and don't touch the nested one).
         // It will make sure that we read the correct NotificationContext
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private void GetNotifcationContextPropertiesUnderLock(ref bool isReentry, ref int eventCount) {
+        private void GetNotifcationContextPropertiesUnderLock(
+            ref bool isReentry,
+            ref int eventCount
+        )
+        {
             bool locked = false;
-            try {
+            try
+            {
                 AcquireNotifcationContextLock(ref locked);
                 isReentry = Context.NotificationContext.IsReEntry;
-                eventCount = CurrentModuleContainer.GetEventCount(Context.CurrentNotification, Context.IsPostNotification) - 1;
+                eventCount =
+                    CurrentModuleContainer.GetEventCount(
+                        Context.CurrentNotification,
+                        Context.IsPostNotification
+                    ) - 1;
             }
-            finally {
-                if (locked) {
+            finally
+            {
+                if (locked)
+                {
                     ReleaseNotifcationContextLock();
                 }
             }
         }
-        
+
         [MethodImpl(MethodImplOptions.NoInlining)] // Iniling this causes throughtput regression in ResumeStep
-        private void GetNotifcationContextProperties(ref bool isReentry, ref int eventCount) {
+        private void GetNotifcationContextProperties(ref bool isReentry, ref int eventCount)
+        {
             // Read optimistically (without lock)
             var nc = Context.NotificationContext;
             isReentry = nc.IsReEntry;
             // We can continue optimistic read only if this is not reentry
-            if (!isReentry) {
-                eventCount = ModuleContainers[nc.CurrentModuleIndex].GetEventCount(nc.CurrentNotification, nc.IsPostNotification) - 1;
+            if (!isReentry)
+            {
+                eventCount =
+                    ModuleContainers[nc.CurrentModuleIndex]
+                        .GetEventCount(nc.CurrentNotification, nc.IsPostNotification) - 1;
                 // Check if the optimistic read was consistent
-                if (object.ReferenceEquals(nc, Context.NotificationContext)) {
+                if (object.ReferenceEquals(nc, Context.NotificationContext))
+                {
                     return;
                 }
             }
             GetNotifcationContextPropertiesUnderLock(ref isReentry, ref eventCount);
         }
 
-        private void RaiseOnError() {
+        private void RaiseOnError()
+        {
             EventHandler handler = (EventHandler)Events[EventErrorRecorded];
-            if (handler != null) {
-                try {
+            if (handler != null)
+            {
+                try
+                {
                     handler(this, AppEvent);
                 }
-                catch (Exception e) {
-                    if (_context != null) {
+                catch (Exception e)
+                {
+                    if (_context != null)
+                    {
                         _context.AddError(e);
                     }
                 }
             }
         }
 
-        private void RaiseOnRequestCompleted() {
+        private void RaiseOnRequestCompleted()
+        {
             EventHandler handler = (EventHandler)Events[EventRequestCompleted];
-            if (handler != null) {
-                try {
+            if (handler != null)
+            {
+                try
+                {
                     handler(this, AppEvent);
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     WebBaseEvent.RaiseRuntimeError(e, this);
                 }
             }
         }
 
-        internal void RaiseOnPreSendRequestHeaders() {
+        internal void RaiseOnPreSendRequestHeaders()
+        {
             EventHandler handler = (EventHandler)Events[EventPreSendRequestHeaders];
-            if (handler != null) {
-                try {
+            if (handler != null)
+            {
+                try
+                {
                     handler(this, AppEvent);
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     RecordError(e);
                 }
             }
         }
 
-        internal void RaiseOnPreSendRequestContent() {
+        internal void RaiseOnPreSendRequestContent()
+        {
             EventHandler handler = (EventHandler)Events[EventPreSendRequestContent];
-            if (handler != null) {
-                try {
+            if (handler != null)
+            {
+                try
+                {
                     handler(this, AppEvent);
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     RecordError(e);
                 }
             }
         }
 
-        internal HttpAsyncResult AsyncResult {
-            get {
-                if (HttpRuntime.UseIntegratedPipeline) {
-                    return (_context.NotificationContext != null) ? _context.NotificationContext.AsyncResult : null;
+        internal HttpAsyncResult AsyncResult
+        {
+            get
+            {
+                if (HttpRuntime.UseIntegratedPipeline)
+                {
+                    return (_context.NotificationContext != null)
+                        ? _context.NotificationContext.AsyncResult
+                        : null;
                 }
-                else {
+                else
+                {
                     return _ar;
                 }
             }
-            set {
-                if (HttpRuntime.UseIntegratedPipeline) {
+            set
+            {
+                if (HttpRuntime.UseIntegratedPipeline)
+                {
                     _context.NotificationContext.AsyncResult = value;
                 }
-                else {
+                else
+                {
                     _ar = value;
                 }
             }
         }
 
-        internal void AddSyncEventHookup(object key, Delegate handler, RequestNotification notification) {
+        internal void AddSyncEventHookup(
+            object key,
+            Delegate handler,
+            RequestNotification notification
+        )
+        {
             AddSyncEventHookup(key, handler, notification, false);
         }
 
-        private PipelineModuleStepContainer CurrentModuleContainer { get { return ModuleContainers[_context.CurrentModuleIndex]; } }
+        private PipelineModuleStepContainer CurrentModuleContainer
+        {
+            get { return ModuleContainers[_context.CurrentModuleIndex]; }
+        }
 
-        private PipelineModuleStepContainer GetModuleContainer(string moduleName) {
+        private PipelineModuleStepContainer GetModuleContainer(string moduleName)
+        {
             object value = _moduleIndexMap[moduleName];
 
-            if (value == null) {
+            if (value == null)
+            {
                 return null;
             }
 
             int moduleIndex = (int)value;
 
 #if DBG
-            Debug.Trace("PipelineRuntime", "GetModuleContainer: moduleName=" + moduleName + ", index=" + moduleIndex.ToString(CultureInfo.InvariantCulture) + "\r\n");
-            Debug.Assert(moduleIndex >= 0 && moduleIndex < ModuleContainers.Length, "moduleIndex >= 0 && moduleIndex < ModuleContainers.Length");
+            Debug.Trace(
+                "PipelineRuntime",
+                "GetModuleContainer: moduleName="
+                    + moduleName
+                    + ", index="
+                    + moduleIndex.ToString(CultureInfo.InvariantCulture)
+                    + "\r\n"
+            );
+            Debug.Assert(
+                moduleIndex >= 0 && moduleIndex < ModuleContainers.Length,
+                "moduleIndex >= 0 && moduleIndex < ModuleContainers.Length"
+            );
 #endif
 
             PipelineModuleStepContainer container = ModuleContainers[moduleIndex];
@@ -709,7 +810,13 @@ namespace System.Web {
             return container;
         }
 
-        private void AddSyncEventHookup(object key, Delegate handler, RequestNotification notification, bool isPostNotification) {
+        private void AddSyncEventHookup(
+            object key,
+            Delegate handler,
+            RequestNotification notification,
+            bool isPostNotification
+        )
+        {
             ThrowIfEventBindingDisallowed();
 
             // add the event to the delegate invocation list
@@ -718,39 +825,62 @@ namespace System.Web {
 
             // For integrated pipeline mode, add events to the IExecutionStep containers only if
             // InitSpecial has completed and InitInternal has not completed.
-            if (IsContainerInitalizationAllowed) {
+            if (IsContainerInitalizationAllowed)
+            {
                 // lookup the module index and add this notification
-                PipelineModuleStepContainer container = GetModuleContainer(CurrentModuleCollectionKey);
+                PipelineModuleStepContainer container = GetModuleContainer(
+                    CurrentModuleCollectionKey
+                );
                 //WOS 1985878: HttpModule unsubscribing an event handler causes AV in Integrated Mode
-                if (container != null) {
+                if (container != null)
+                {
 #if DBG
                     container.DebugModuleName = CurrentModuleCollectionKey;
 #endif
-                    SyncEventExecutionStep step = new SyncEventExecutionStep(this, (EventHandler)handler);
+                    SyncEventExecutionStep step = new SyncEventExecutionStep(
+                        this,
+                        (EventHandler)handler
+                    );
                     container.AddEvent(notification, isPostNotification, step);
                 }
             }
         }
 
-        internal void RemoveSyncEventHookup(object key, Delegate handler, RequestNotification notification) {
+        internal void RemoveSyncEventHookup(
+            object key,
+            Delegate handler,
+            RequestNotification notification
+        )
+        {
             RemoveSyncEventHookup(key, handler, notification, false);
         }
 
-        internal void RemoveSyncEventHookup(object key, Delegate handler, RequestNotification notification, bool isPostNotification) {
+        internal void RemoveSyncEventHookup(
+            object key,
+            Delegate handler,
+            RequestNotification notification,
+            bool isPostNotification
+        )
+        {
             ThrowIfEventBindingDisallowed();
 
             Events.RemoveHandler(key, handler);
 
-            if (IsContainerInitalizationAllowed) {
-                PipelineModuleStepContainer container = GetModuleContainer(CurrentModuleCollectionKey);
+            if (IsContainerInitalizationAllowed)
+            {
+                PipelineModuleStepContainer container = GetModuleContainer(
+                    CurrentModuleCollectionKey
+                );
                 //WOS 1985878: HttpModule unsubscribing an event handler causes AV in Integrated Mode
-                if (container != null) {
+                if (container != null)
+                {
                     container.RemoveEvent(notification, isPostNotification, handler);
                 }
             }
         }
 
-        private void AddSendResponseEventHookup(object key, Delegate handler) {
+        private void AddSendResponseEventHookup(object key, Delegate handler)
+        {
             ThrowIfEventBindingDisallowed();
 
             // add the event to the delegate invocation list
@@ -759,31 +889,54 @@ namespace System.Web {
 
             // For integrated pipeline mode, add events to the IExecutionStep containers only if
             // InitSpecial has completed and InitInternal has not completed.
-            if (IsContainerInitalizationAllowed) {
+            if (IsContainerInitalizationAllowed)
+            {
                 // lookup the module index and add this notification
-                PipelineModuleStepContainer container = GetModuleContainer(CurrentModuleCollectionKey);
+                PipelineModuleStepContainer container = GetModuleContainer(
+                    CurrentModuleCollectionKey
+                );
                 //WOS 1985878: HttpModule unsubscribing an event handler causes AV in Integrated Mode
-                if (container != null) {
+                if (container != null)
+                {
 #if DBG
                     container.DebugModuleName = CurrentModuleCollectionKey;
 #endif
                     bool isHeaders = (key == EventPreSendRequestHeaders);
-                    SendResponseExecutionStep step = new SendResponseExecutionStep(this, (EventHandler)handler, isHeaders);
-                    container.AddEvent(RequestNotification.SendResponse, false /*isPostNotification*/, step);
+                    SendResponseExecutionStep step = new SendResponseExecutionStep(
+                        this,
+                        (EventHandler)handler,
+                        isHeaders
+                    );
+                    container.AddEvent(
+                        RequestNotification.SendResponse,
+                        false /*isPostNotification*/
+                        ,
+                        step
+                    );
                 }
             }
         }
 
-        private void RemoveSendResponseEventHookup(object key, Delegate handler) {
+        private void RemoveSendResponseEventHookup(object key, Delegate handler)
+        {
             ThrowIfEventBindingDisallowed();
 
             Events.RemoveHandler(key, handler);
 
-            if (IsContainerInitalizationAllowed) {
-                PipelineModuleStepContainer container = GetModuleContainer(CurrentModuleCollectionKey);
+            if (IsContainerInitalizationAllowed)
+            {
+                PipelineModuleStepContainer container = GetModuleContainer(
+                    CurrentModuleCollectionKey
+                );
                 //WOS 1985878: HttpModule unsubscribing an event handler causes AV in Integrated Mode
-                if (container != null) {
-                    container.RemoveEvent(RequestNotification.SendResponse, false /*isPostNotification*/, handler);
+                if (container != null)
+                {
+                    container.RemoveEvent(
+                        RequestNotification.SendResponse,
+                        false /*isPostNotification*/
+                        ,
+                        handler
+                    );
                 }
             }
         }
@@ -794,199 +947,494 @@ namespace System.Web {
 
 
         /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler BeginRequest {
+        public event EventHandler BeginRequest
+        {
             add { AddSyncEventHookup(EventBeginRequest, value, RequestNotification.BeginRequest); }
-            remove { RemoveSyncEventHookup(EventBeginRequest, value, RequestNotification.BeginRequest); }
+            remove
+            {
+                RemoveSyncEventHookup(EventBeginRequest, value, RequestNotification.BeginRequest);
+            }
         }
 
-
         /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler AuthenticateRequest {
-            add { AddSyncEventHookup(EventAuthenticateRequest, value, RequestNotification.AuthenticateRequest); }
-            remove { RemoveSyncEventHookup(EventAuthenticateRequest, value, RequestNotification.AuthenticateRequest); }
+        public event EventHandler AuthenticateRequest
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventAuthenticateRequest,
+                    value,
+                    RequestNotification.AuthenticateRequest
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventAuthenticateRequest,
+                    value,
+                    RequestNotification.AuthenticateRequest
+                );
+            }
         }
 
         // internal - for back-stop module only
-        internal event EventHandler DefaultAuthentication {
-            add { AddSyncEventHookup(EventDefaultAuthentication, value, RequestNotification.AuthenticateRequest); }
-            remove { RemoveSyncEventHookup(EventDefaultAuthentication, value, RequestNotification.AuthenticateRequest); }
-        }
-
-
-        /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler PostAuthenticateRequest {
-            add { AddSyncEventHookup(EventPostAuthenticateRequest, value, RequestNotification.AuthenticateRequest, true); }
-            remove { RemoveSyncEventHookup(EventPostAuthenticateRequest, value, RequestNotification.AuthenticateRequest, true); }
-        }
-
-
-        /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler AuthorizeRequest {
-            add { AddSyncEventHookup(EventAuthorizeRequest, value, RequestNotification.AuthorizeRequest); }
-            remove { RemoveSyncEventHookup(EventAuthorizeRequest, value, RequestNotification.AuthorizeRequest); }
-        }
-
-
-        /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler PostAuthorizeRequest {
-            add { AddSyncEventHookup(EventPostAuthorizeRequest, value, RequestNotification.AuthorizeRequest, true); }
-            remove { RemoveSyncEventHookup(EventPostAuthorizeRequest, value, RequestNotification.AuthorizeRequest, true); }
-        }
-
-
-        /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler ResolveRequestCache {
-            add { AddSyncEventHookup(EventResolveRequestCache, value, RequestNotification.ResolveRequestCache); }
-            remove { RemoveSyncEventHookup(EventResolveRequestCache, value, RequestNotification.ResolveRequestCache); }
-        }
-
-
-        /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler PostResolveRequestCache {
-            add { AddSyncEventHookup(EventPostResolveRequestCache, value, RequestNotification.ResolveRequestCache, true); }
-            remove { RemoveSyncEventHookup(EventPostResolveRequestCache, value, RequestNotification.ResolveRequestCache, true); }
-        }
-
-        public event EventHandler MapRequestHandler {
-            add {
-                if (!HttpRuntime.UseIntegratedPipeline) {
-                    throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
-                }
-                AddSyncEventHookup(EventMapRequestHandler, value, RequestNotification.MapRequestHandler);
+        internal event EventHandler DefaultAuthentication
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventDefaultAuthentication,
+                    value,
+                    RequestNotification.AuthenticateRequest
+                );
             }
-            remove {
-                if (!HttpRuntime.UseIntegratedPipeline) {
-                    throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
-                }
-                RemoveSyncEventHookup(EventMapRequestHandler, value, RequestNotification.MapRequestHandler);
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventDefaultAuthentication,
+                    value,
+                    RequestNotification.AuthenticateRequest
+                );
             }
         }
 
         /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler PostMapRequestHandler {
-            add { AddSyncEventHookup(EventPostMapRequestHandler, value, RequestNotification.MapRequestHandler, true); }
-            remove { RemoveSyncEventHookup(EventPostMapRequestHandler, value, RequestNotification.MapRequestHandler); }
-        }
-
-
-        /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler AcquireRequestState {
-            add { AddSyncEventHookup(EventAcquireRequestState, value, RequestNotification.AcquireRequestState); }
-            remove { RemoveSyncEventHookup(EventAcquireRequestState, value, RequestNotification.AcquireRequestState); }
-        }
-
-
-        /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler PostAcquireRequestState {
-            add { AddSyncEventHookup(EventPostAcquireRequestState, value, RequestNotification.AcquireRequestState, true); }
-            remove { RemoveSyncEventHookup(EventPostAcquireRequestState, value, RequestNotification.AcquireRequestState, true); }
-        }
-
-
-        /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler PreRequestHandlerExecute {
-            add { AddSyncEventHookup(EventPreRequestHandlerExecute, value, RequestNotification.PreExecuteRequestHandler); }
-            remove { RemoveSyncEventHookup(EventPreRequestHandlerExecute, value, RequestNotification.PreExecuteRequestHandler); }
+        public event EventHandler PostAuthenticateRequest
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventPostAuthenticateRequest,
+                    value,
+                    RequestNotification.AuthenticateRequest,
+                    true
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventPostAuthenticateRequest,
+                    value,
+                    RequestNotification.AuthenticateRequest,
+                    true
+                );
+            }
         }
 
         /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler PostRequestHandlerExecute {
-            add { AddSyncEventHookup(EventPostRequestHandlerExecute, value, RequestNotification.ExecuteRequestHandler, true); }
-            remove { RemoveSyncEventHookup(EventPostRequestHandlerExecute, value, RequestNotification.ExecuteRequestHandler, true); }
+        public event EventHandler AuthorizeRequest
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventAuthorizeRequest,
+                    value,
+                    RequestNotification.AuthorizeRequest
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventAuthorizeRequest,
+                    value,
+                    RequestNotification.AuthorizeRequest
+                );
+            }
         }
-
 
         /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler ReleaseRequestState {
-            add { AddSyncEventHookup(EventReleaseRequestState, value, RequestNotification.ReleaseRequestState ); }
-            remove { RemoveSyncEventHookup(EventReleaseRequestState, value, RequestNotification.ReleaseRequestState); }
+        public event EventHandler PostAuthorizeRequest
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventPostAuthorizeRequest,
+                    value,
+                    RequestNotification.AuthorizeRequest,
+                    true
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventPostAuthorizeRequest,
+                    value,
+                    RequestNotification.AuthorizeRequest,
+                    true
+                );
+            }
         }
-
 
         /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler PostReleaseRequestState {
-            add { AddSyncEventHookup(EventPostReleaseRequestState, value, RequestNotification.ReleaseRequestState, true); }
-            remove { RemoveSyncEventHookup(EventPostReleaseRequestState, value, RequestNotification.ReleaseRequestState, true); }
+        public event EventHandler ResolveRequestCache
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventResolveRequestCache,
+                    value,
+                    RequestNotification.ResolveRequestCache
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventResolveRequestCache,
+                    value,
+                    RequestNotification.ResolveRequestCache
+                );
+            }
         }
-
 
         /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler UpdateRequestCache {
-            add { AddSyncEventHookup(EventUpdateRequestCache, value, RequestNotification.UpdateRequestCache); }
-            remove { RemoveSyncEventHookup(EventUpdateRequestCache, value, RequestNotification.UpdateRequestCache); }
+        public event EventHandler PostResolveRequestCache
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventPostResolveRequestCache,
+                    value,
+                    RequestNotification.ResolveRequestCache,
+                    true
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventPostResolveRequestCache,
+                    value,
+                    RequestNotification.ResolveRequestCache,
+                    true
+                );
+            }
         }
 
+        public event EventHandler MapRequestHandler
+        {
+            add
+            {
+                if (!HttpRuntime.UseIntegratedPipeline)
+                {
+                    throw new PlatformNotSupportedException(
+                        SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                    );
+                }
+                AddSyncEventHookup(
+                    EventMapRequestHandler,
+                    value,
+                    RequestNotification.MapRequestHandler
+                );
+            }
+            remove
+            {
+                if (!HttpRuntime.UseIntegratedPipeline)
+                {
+                    throw new PlatformNotSupportedException(
+                        SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                    );
+                }
+                RemoveSyncEventHookup(
+                    EventMapRequestHandler,
+                    value,
+                    RequestNotification.MapRequestHandler
+                );
+            }
+        }
 
         /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler PostUpdateRequestCache {
-            add { AddSyncEventHookup(EventPostUpdateRequestCache, value, RequestNotification.UpdateRequestCache, true); }
-            remove { RemoveSyncEventHookup(EventPostUpdateRequestCache, value, RequestNotification.UpdateRequestCache, true); }
+        public event EventHandler PostMapRequestHandler
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventPostMapRequestHandler,
+                    value,
+                    RequestNotification.MapRequestHandler,
+                    true
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventPostMapRequestHandler,
+                    value,
+                    RequestNotification.MapRequestHandler
+                );
+            }
         }
 
-        public event EventHandler LogRequest {
-            add {
-                if (!HttpRuntime.UseIntegratedPipeline) {
-                    throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+        /// <devdoc><para>[To be supplied.]</para></devdoc>
+        public event EventHandler AcquireRequestState
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventAcquireRequestState,
+                    value,
+                    RequestNotification.AcquireRequestState
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventAcquireRequestState,
+                    value,
+                    RequestNotification.AcquireRequestState
+                );
+            }
+        }
+
+        /// <devdoc><para>[To be supplied.]</para></devdoc>
+        public event EventHandler PostAcquireRequestState
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventPostAcquireRequestState,
+                    value,
+                    RequestNotification.AcquireRequestState,
+                    true
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventPostAcquireRequestState,
+                    value,
+                    RequestNotification.AcquireRequestState,
+                    true
+                );
+            }
+        }
+
+        /// <devdoc><para>[To be supplied.]</para></devdoc>
+        public event EventHandler PreRequestHandlerExecute
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventPreRequestHandlerExecute,
+                    value,
+                    RequestNotification.PreExecuteRequestHandler
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventPreRequestHandlerExecute,
+                    value,
+                    RequestNotification.PreExecuteRequestHandler
+                );
+            }
+        }
+
+        /// <devdoc><para>[To be supplied.]</para></devdoc>
+        public event EventHandler PostRequestHandlerExecute
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventPostRequestHandlerExecute,
+                    value,
+                    RequestNotification.ExecuteRequestHandler,
+                    true
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventPostRequestHandlerExecute,
+                    value,
+                    RequestNotification.ExecuteRequestHandler,
+                    true
+                );
+            }
+        }
+
+        /// <devdoc><para>[To be supplied.]</para></devdoc>
+        public event EventHandler ReleaseRequestState
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventReleaseRequestState,
+                    value,
+                    RequestNotification.ReleaseRequestState
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventReleaseRequestState,
+                    value,
+                    RequestNotification.ReleaseRequestState
+                );
+            }
+        }
+
+        /// <devdoc><para>[To be supplied.]</para></devdoc>
+        public event EventHandler PostReleaseRequestState
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventPostReleaseRequestState,
+                    value,
+                    RequestNotification.ReleaseRequestState,
+                    true
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventPostReleaseRequestState,
+                    value,
+                    RequestNotification.ReleaseRequestState,
+                    true
+                );
+            }
+        }
+
+        /// <devdoc><para>[To be supplied.]</para></devdoc>
+        public event EventHandler UpdateRequestCache
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventUpdateRequestCache,
+                    value,
+                    RequestNotification.UpdateRequestCache
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventUpdateRequestCache,
+                    value,
+                    RequestNotification.UpdateRequestCache
+                );
+            }
+        }
+
+        /// <devdoc><para>[To be supplied.]</para></devdoc>
+        public event EventHandler PostUpdateRequestCache
+        {
+            add
+            {
+                AddSyncEventHookup(
+                    EventPostUpdateRequestCache,
+                    value,
+                    RequestNotification.UpdateRequestCache,
+                    true
+                );
+            }
+            remove
+            {
+                RemoveSyncEventHookup(
+                    EventPostUpdateRequestCache,
+                    value,
+                    RequestNotification.UpdateRequestCache,
+                    true
+                );
+            }
+        }
+
+        public event EventHandler LogRequest
+        {
+            add
+            {
+                if (!HttpRuntime.UseIntegratedPipeline)
+                {
+                    throw new PlatformNotSupportedException(
+                        SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                    );
                 }
                 AddSyncEventHookup(EventLogRequest, value, RequestNotification.LogRequest);
             }
-            remove {
-                if (!HttpRuntime.UseIntegratedPipeline) {
-                    throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+            remove
+            {
+                if (!HttpRuntime.UseIntegratedPipeline)
+                {
+                    throw new PlatformNotSupportedException(
+                        SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                    );
                 }
                 RemoveSyncEventHookup(EventLogRequest, value, RequestNotification.LogRequest);
             }
         }
 
-        public event EventHandler PostLogRequest {
-            add {
-                if (!HttpRuntime.UseIntegratedPipeline) {
-                    throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+        public event EventHandler PostLogRequest
+        {
+            add
+            {
+                if (!HttpRuntime.UseIntegratedPipeline)
+                {
+                    throw new PlatformNotSupportedException(
+                        SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                    );
                 }
-                AddSyncEventHookup(EventPostLogRequest, value, RequestNotification.LogRequest, true);
+                AddSyncEventHookup(
+                    EventPostLogRequest,
+                    value,
+                    RequestNotification.LogRequest,
+                    true
+                );
             }
-            remove {
-                if (!HttpRuntime.UseIntegratedPipeline) {
-                    throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+            remove
+            {
+                if (!HttpRuntime.UseIntegratedPipeline)
+                {
+                    throw new PlatformNotSupportedException(
+                        SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                    );
                 }
-                RemoveSyncEventHookup(EventPostLogRequest, value, RequestNotification.LogRequest, true);
+                RemoveSyncEventHookup(
+                    EventPostLogRequest,
+                    value,
+                    RequestNotification.LogRequest,
+                    true
+                );
             }
         }
 
         /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler EndRequest {
+        public event EventHandler EndRequest
+        {
             add { AddSyncEventHookup(EventEndRequest, value, RequestNotification.EndRequest); }
-            remove { RemoveSyncEventHookup(EventEndRequest, value, RequestNotification.EndRequest); }
+            remove
+            {
+                RemoveSyncEventHookup(EventEndRequest, value, RequestNotification.EndRequest);
+            }
         }
 
-
         /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler Error {
+        public event EventHandler Error
+        {
             add { Events.AddHandler(EventErrorRecorded, value); }
             remove { Events.RemoveHandler(EventErrorRecorded, value); }
         }
 
-
-        // Dev10 902404: a new HttpApplication.RequestCompleted event raised when the managed objects associated with 
+        // Dev10 902404: a new HttpApplication.RequestCompleted event raised when the managed objects associated with
         // the request are being released.  It allows modules to cleanup resources after all managed modules and handlers
-        // have executed.  This may occur before the native processing of the request has completed; for example, before 
-        // the final response bytes have been sent to the client.  The HttpContext is not available during this event 
+        // have executed.  This may occur before the native processing of the request has completed; for example, before
+        // the final response bytes have been sent to the client.  The HttpContext is not available during this event
         // because it has already been released.
-        public event EventHandler RequestCompleted {
+        public event EventHandler RequestCompleted
+        {
             add { Events.AddHandler(EventRequestCompleted, value); }
             remove { Events.RemoveHandler(EventRequestCompleted, value); }
         }
 
-
         /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler PreSendRequestHeaders {
+        public event EventHandler PreSendRequestHeaders
+        {
             add { AddSendResponseEventHookup(EventPreSendRequestHeaders, value); }
             remove { RemoveSendResponseEventHookup(EventPreSendRequestHeaders, value); }
         }
 
-
         /// <devdoc><para>[To be supplied.]</para></devdoc>
-        public event EventHandler PreSendRequestContent {
+        public event EventHandler PreSendRequestContent
+        {
             add { AddSendResponseEventHookup(EventPreSendRequestContent, value); }
             remove { RemoveSendResponseEventHookup(EventPreSendRequestContent, value); }
         }
@@ -995,201 +1443,480 @@ namespace System.Web {
         // Async event hookup
         //
 
-        public void AddOnBeginRequestAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnBeginRequestAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnBeginRequestAsync(bh, eh, null);
         }
 
-        public void AddOnBeginRequestAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventBeginRequest, beginHandler, endHandler, state, RequestNotification.BeginRequest, false, this);
+        public void AddOnBeginRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventBeginRequest,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.BeginRequest,
+                false,
+                this
+            );
         }
 
-        public void AddOnAuthenticateRequestAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnAuthenticateRequestAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnAuthenticateRequestAsync(bh, eh, null);
         }
 
-        public void AddOnAuthenticateRequestAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventAuthenticateRequest, beginHandler, endHandler, state,
-                                   RequestNotification.AuthenticateRequest, false, this);
+        public void AddOnAuthenticateRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventAuthenticateRequest,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.AuthenticateRequest,
+                false,
+                this
+            );
         }
 
-        public void AddOnPostAuthenticateRequestAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnPostAuthenticateRequestAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnPostAuthenticateRequestAsync(bh, eh, null);
         }
 
-        public void AddOnPostAuthenticateRequestAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventPostAuthenticateRequest, beginHandler, endHandler, state,
-                                   RequestNotification.AuthenticateRequest, true, this);
+        public void AddOnPostAuthenticateRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventPostAuthenticateRequest,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.AuthenticateRequest,
+                true,
+                this
+            );
         }
 
-        public void AddOnAuthorizeRequestAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnAuthorizeRequestAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnAuthorizeRequestAsync(bh, eh, null);
         }
 
-        public void AddOnAuthorizeRequestAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventAuthorizeRequest, beginHandler, endHandler, state,
-                                   RequestNotification.AuthorizeRequest, false, this);
+        public void AddOnAuthorizeRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventAuthorizeRequest,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.AuthorizeRequest,
+                false,
+                this
+            );
         }
 
-        public void AddOnPostAuthorizeRequestAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnPostAuthorizeRequestAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnPostAuthorizeRequestAsync(bh, eh, null);
         }
 
-        public void AddOnPostAuthorizeRequestAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventPostAuthorizeRequest, beginHandler, endHandler, state,
-                                   RequestNotification.AuthorizeRequest, true, this);
+        public void AddOnPostAuthorizeRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventPostAuthorizeRequest,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.AuthorizeRequest,
+                true,
+                this
+            );
         }
 
-        public void AddOnResolveRequestCacheAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnResolveRequestCacheAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnResolveRequestCacheAsync(bh, eh, null);
         }
 
-        public void AddOnResolveRequestCacheAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventResolveRequestCache, beginHandler, endHandler, state,
-                                   RequestNotification.ResolveRequestCache, false, this);
+        public void AddOnResolveRequestCacheAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventResolveRequestCache,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.ResolveRequestCache,
+                false,
+                this
+            );
         }
 
-        public void AddOnPostResolveRequestCacheAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnPostResolveRequestCacheAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnPostResolveRequestCacheAsync(bh, eh, null);
         }
 
-        public void AddOnPostResolveRequestCacheAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventPostResolveRequestCache, beginHandler, endHandler, state,
-                                   RequestNotification.ResolveRequestCache, true, this);
+        public void AddOnPostResolveRequestCacheAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventPostResolveRequestCache,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.ResolveRequestCache,
+                true,
+                this
+            );
         }
 
-        public void AddOnMapRequestHandlerAsync(BeginEventHandler bh, EndEventHandler eh) {
-            if (!HttpRuntime.UseIntegratedPipeline) {
-                throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+        public void AddOnMapRequestHandlerAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            if (!HttpRuntime.UseIntegratedPipeline)
+            {
+                throw new PlatformNotSupportedException(
+                    SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                );
             }
             AddOnMapRequestHandlerAsync(bh, eh, null);
         }
 
-        public void AddOnMapRequestHandlerAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            if (!HttpRuntime.UseIntegratedPipeline) {
-                throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+        public void AddOnMapRequestHandlerAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            if (!HttpRuntime.UseIntegratedPipeline)
+            {
+                throw new PlatformNotSupportedException(
+                    SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                );
             }
-            AsyncEvents.AddHandler(EventMapRequestHandler, beginHandler, endHandler, state,
-                                   RequestNotification.MapRequestHandler, false, this);
+            AsyncEvents.AddHandler(
+                EventMapRequestHandler,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.MapRequestHandler,
+                false,
+                this
+            );
         }
 
-        public void AddOnPostMapRequestHandlerAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnPostMapRequestHandlerAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnPostMapRequestHandlerAsync(bh, eh, null);
         }
 
-        public void AddOnPostMapRequestHandlerAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventPostMapRequestHandler, beginHandler, endHandler, state,
-                                   RequestNotification.MapRequestHandler, true, this);
+        public void AddOnPostMapRequestHandlerAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventPostMapRequestHandler,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.MapRequestHandler,
+                true,
+                this
+            );
         }
 
-        public void AddOnAcquireRequestStateAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnAcquireRequestStateAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnAcquireRequestStateAsync(bh, eh, null);
         }
 
-        public void AddOnAcquireRequestStateAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventAcquireRequestState, beginHandler, endHandler, state,
-                                   RequestNotification.AcquireRequestState, false, this);
+        public void AddOnAcquireRequestStateAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventAcquireRequestState,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.AcquireRequestState,
+                false,
+                this
+            );
         }
 
-        public void AddOnPostAcquireRequestStateAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnPostAcquireRequestStateAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnPostAcquireRequestStateAsync(bh, eh, null);
         }
 
-        public void AddOnPostAcquireRequestStateAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventPostAcquireRequestState, beginHandler, endHandler, state,
-                                   RequestNotification.AcquireRequestState, true, this);
+        public void AddOnPostAcquireRequestStateAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventPostAcquireRequestState,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.AcquireRequestState,
+                true,
+                this
+            );
         }
 
-        public void AddOnPreRequestHandlerExecuteAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnPreRequestHandlerExecuteAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnPreRequestHandlerExecuteAsync(bh, eh, null);
         }
 
-        public void AddOnPreRequestHandlerExecuteAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventPreRequestHandlerExecute, beginHandler, endHandler, state,
-                                   RequestNotification.PreExecuteRequestHandler, false, this);
+        public void AddOnPreRequestHandlerExecuteAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventPreRequestHandlerExecute,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.PreExecuteRequestHandler,
+                false,
+                this
+            );
         }
 
-        public void AddOnPostRequestHandlerExecuteAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnPostRequestHandlerExecuteAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnPostRequestHandlerExecuteAsync(bh, eh, null);
         }
 
-        public void AddOnPostRequestHandlerExecuteAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventPostRequestHandlerExecute, beginHandler, endHandler, state,
-                                   RequestNotification.ExecuteRequestHandler, true, this);
+        public void AddOnPostRequestHandlerExecuteAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventPostRequestHandlerExecute,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.ExecuteRequestHandler,
+                true,
+                this
+            );
         }
 
-        public void AddOnReleaseRequestStateAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnReleaseRequestStateAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnReleaseRequestStateAsync(bh, eh, null);
         }
 
-        public void AddOnReleaseRequestStateAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventReleaseRequestState, beginHandler, endHandler, state,
-                                   RequestNotification.ReleaseRequestState, false, this);
+        public void AddOnReleaseRequestStateAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventReleaseRequestState,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.ReleaseRequestState,
+                false,
+                this
+            );
         }
 
-        public void AddOnPostReleaseRequestStateAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnPostReleaseRequestStateAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnPostReleaseRequestStateAsync(bh, eh, null);
         }
 
-        public void AddOnPostReleaseRequestStateAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventPostReleaseRequestState, beginHandler, endHandler, state,
-                                   RequestNotification.ReleaseRequestState, true, this);
+        public void AddOnPostReleaseRequestStateAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventPostReleaseRequestState,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.ReleaseRequestState,
+                true,
+                this
+            );
         }
 
-        public void AddOnUpdateRequestCacheAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnUpdateRequestCacheAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnUpdateRequestCacheAsync(bh, eh, null);
         }
 
-        public void AddOnUpdateRequestCacheAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventUpdateRequestCache, beginHandler, endHandler, state,
-                                   RequestNotification.UpdateRequestCache , false, this);
+        public void AddOnUpdateRequestCacheAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventUpdateRequestCache,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.UpdateRequestCache,
+                false,
+                this
+            );
         }
 
-        public void AddOnPostUpdateRequestCacheAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnPostUpdateRequestCacheAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnPostUpdateRequestCacheAsync(bh, eh, null);
         }
 
-        public void AddOnPostUpdateRequestCacheAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventPostUpdateRequestCache, beginHandler, endHandler, state,
-                                   RequestNotification.UpdateRequestCache , true, this);
+        public void AddOnPostUpdateRequestCacheAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventPostUpdateRequestCache,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.UpdateRequestCache,
+                true,
+                this
+            );
         }
 
-        public void AddOnLogRequestAsync(BeginEventHandler bh, EndEventHandler eh) {
-            if (!HttpRuntime.UseIntegratedPipeline) {
-                throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+        public void AddOnLogRequestAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            if (!HttpRuntime.UseIntegratedPipeline)
+            {
+                throw new PlatformNotSupportedException(
+                    SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                );
             }
             AddOnLogRequestAsync(bh, eh, null);
         }
 
-        public void AddOnLogRequestAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            if (!HttpRuntime.UseIntegratedPipeline) {
-                throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+        public void AddOnLogRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            if (!HttpRuntime.UseIntegratedPipeline)
+            {
+                throw new PlatformNotSupportedException(
+                    SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                );
             }
-            AsyncEvents.AddHandler(EventLogRequest, beginHandler, endHandler, state,
-                                   RequestNotification.LogRequest, false, this);
+            AsyncEvents.AddHandler(
+                EventLogRequest,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.LogRequest,
+                false,
+                this
+            );
         }
 
-        public void AddOnPostLogRequestAsync(BeginEventHandler bh, EndEventHandler eh) {
-            if (!HttpRuntime.UseIntegratedPipeline) {
-                throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+        public void AddOnPostLogRequestAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
+            if (!HttpRuntime.UseIntegratedPipeline)
+            {
+                throw new PlatformNotSupportedException(
+                    SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                );
             }
             AddOnPostLogRequestAsync(bh, eh, null);
         }
 
-        public void AddOnPostLogRequestAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            if (!HttpRuntime.UseIntegratedPipeline) {
-                throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+        public void AddOnPostLogRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            if (!HttpRuntime.UseIntegratedPipeline)
+            {
+                throw new PlatformNotSupportedException(
+                    SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                );
             }
-            AsyncEvents.AddHandler(EventPostLogRequest, beginHandler, endHandler, state,
-                                   RequestNotification.LogRequest, true, this);
+            AsyncEvents.AddHandler(
+                EventPostLogRequest,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.LogRequest,
+                true,
+                this
+            );
         }
 
-        public void AddOnEndRequestAsync(BeginEventHandler bh, EndEventHandler eh) {
+        public void AddOnEndRequestAsync(BeginEventHandler bh, EndEventHandler eh)
+        {
             AddOnEndRequestAsync(bh, eh, null);
         }
 
-        public void AddOnEndRequestAsync(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
-            AsyncEvents.AddHandler(EventEndRequest, beginHandler, endHandler, state,
-                                   RequestNotification.EndRequest, false, this);
+        public void AddOnEndRequestAsync(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            Object state
+        )
+        {
+            AsyncEvents.AddHandler(
+                EventEndRequest,
+                beginHandler,
+                endHandler,
+                state,
+                RequestNotification.EndRequest,
+                false,
+                this
+            );
         }
 
         //
@@ -1204,10 +1931,10 @@ namespace System.Web {
         ///          the hosting HttpApplication.
         ///       </para>
         ///    </devdoc>
-        public virtual void Init() {
+        public virtual void Init()
+        {
             // derived class implements this
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -1215,63 +1942,81 @@ namespace System.Web {
         ///          to clean up an HttpModule?s instance variables
         ///       </para>
         ///    </devdoc>
-        public virtual void Dispose() {
+        public virtual void Dispose()
+        {
             // also part of IComponent
             // derived class implements this
             _site = null;
-            if (_events != null) {
-                try {
+            if (_events != null)
+            {
+                try
+                {
                     EventHandler handler = (EventHandler)_events[EventDisposed];
                     if (handler != null)
                         handler(this, EventArgs.Empty);
                 }
-                finally {
+                finally
+                {
                     _events.Dispose();
                 }
             }
         }
 
         [SecurityPermission(SecurityAction.Assert, ControlPrincipal = true)]
-        internal static void SetCurrentPrincipalWithAssert(IPrincipal user) {
+        internal static void SetCurrentPrincipalWithAssert(IPrincipal user)
+        {
             Thread.CurrentPrincipal = user;
         }
 
         [SecurityPermission(SecurityAction.Assert, ControlPrincipal = true)]
-        internal static WindowsIdentity GetCurrentWindowsIdentityWithAssert() {
+        internal static WindowsIdentity GetCurrentWindowsIdentityWithAssert()
+        {
             return WindowsIdentity.GetCurrent();
         }
 
-        private HttpHandlerAction GetHandlerMapping(HttpContext context, String requestType, VirtualPath path, bool useAppConfig) {
+        private HttpHandlerAction GetHandlerMapping(
+            HttpContext context,
+            String requestType,
+            VirtualPath path,
+            bool useAppConfig
+        )
+        {
             CachedPathData pathData = null;
             HandlerMappingMemo memo = null;
             HttpHandlerAction mapping = null;
 
             // Check if cached handler could be used
-            if (!useAppConfig) {
+            if (!useAppConfig)
+            {
                 // Grab mapping from cache - verify that the verb matches exactly
                 pathData = context.GetPathData(path);
                 memo = pathData.CachedHandler;
 
                 // Invalidate cache on missmatch
-                if (memo != null && !memo.IsMatch(requestType, path)) {
+                if (memo != null && !memo.IsMatch(requestType, path))
+                {
                     memo = null;
                 }
             }
 
             // Get new mapping
-            if (memo == null) {
+            if (memo == null)
+            {
                 // Load from config
-                HttpHandlersSection map = useAppConfig ? RuntimeConfig.GetAppConfig().HttpHandlers
-                                                       : RuntimeConfig.GetConfig(context).HttpHandlers;
+                HttpHandlersSection map = useAppConfig
+                    ? RuntimeConfig.GetAppConfig().HttpHandlers
+                    : RuntimeConfig.GetConfig(context).HttpHandlers;
                 mapping = map.FindMapping(requestType, path);
 
                 // Add cache entry
-                if (!useAppConfig) {
+                if (!useAppConfig)
+                {
                     memo = new HandlerMappingMemo(mapping, requestType, path);
                     pathData.CachedHandler = memo;
                 }
             }
-            else {
+            else
+            {
                 // Get mapping from the cache
                 mapping = memo.Mapping;
             }
@@ -1279,10 +2024,19 @@ namespace System.Web {
             return mapping;
         }
 
-        internal IHttpHandler MapIntegratedHttpHandler(HttpContext context, String requestType, VirtualPath path, String pathTranslated, bool useAppConfig, bool convertNativeStaticFileModule) {
+        internal IHttpHandler MapIntegratedHttpHandler(
+            HttpContext context,
+            String requestType,
+            VirtualPath path,
+            String pathTranslated,
+            bool useAppConfig,
+            bool convertNativeStaticFileModule
+        )
+        {
             IHttpHandler handler = null;
 
-            using (new ApplicationImpersonationContext()) {
+            using (new ApplicationImpersonationContext())
+            {
                 string type;
 
                 // vpath is a non-relative virtual path
@@ -1290,54 +2044,77 @@ namespace System.Web {
 
                 // If we're using app config, modify vpath by appending the path after the last slash
                 // to the app's virtual path.  This will force IIS IHttpContext::MapHandler to use app configuration.
-                if (useAppConfig) {
+                if (useAppConfig)
+                {
                     int index = vpath.LastIndexOf('/');
                     index++;
-                    if (index != 0 && index < vpath.Length) {
-                        vpath = UrlPath.SimpleCombine(HttpRuntime.AppDomainAppVirtualPathString, vpath.Substring(index));
+                    if (index != 0 && index < vpath.Length)
+                    {
+                        vpath = UrlPath.SimpleCombine(
+                            HttpRuntime.AppDomainAppVirtualPathString,
+                            vpath.Substring(index)
+                        );
                     }
-                    else {
+                    else
+                    {
                         vpath = HttpRuntime.AppDomainAppVirtualPathString;
                     }
                 }
 
-
                 IIS7WorkerRequest wr = context.WorkerRequest as IIS7WorkerRequest;
-                type = wr.MapHandlerAndGetHandlerTypeString(method: requestType, path: vpath, convertNativeStaticFileModule: convertNativeStaticFileModule, ignoreWildcardMappings: false);
+                type = wr.MapHandlerAndGetHandlerTypeString(
+                    method: requestType,
+                    path: vpath,
+                    convertNativeStaticFileModule: convertNativeStaticFileModule,
+                    ignoreWildcardMappings: false
+                );
 
                 // If a page developer has removed the default mappings with <handlers><clear>
                 // without replacing them then we need to give a more descriptive error than
                 // a null parameter exception.
-                if (type == null) {
+                if (type == null)
+                {
                     PerfCounters.IncrementCounter(AppPerfCounter.REQUESTS_NOT_FOUND);
                     PerfCounters.IncrementCounter(AppPerfCounter.REQUESTS_FAILED);
-                    throw new HttpException(SR.GetString(SR.Http_handler_not_found_for_request_type, requestType));
+                    throw new HttpException(
+                        SR.GetString(SR.Http_handler_not_found_for_request_type, requestType)
+                    );
                 }
 
                 // if it's a native type, don't go any further
-                if(String.IsNullOrEmpty(type)) {
+                if (String.IsNullOrEmpty(type))
+                {
                     return handler;
                 }
 
                 // Get factory from the mapping
                 IHttpHandlerFactory factory = GetFactory(type);
 
-                try {
-                    handler = factory.GetHandler(context, requestType, path.VirtualPathString, pathTranslated);
+                try
+                {
+                    handler = factory.GetHandler(
+                        context,
+                        requestType,
+                        path.VirtualPathString,
+                        pathTranslated
+                    );
                 }
-                catch (FileNotFoundException e) {
+                catch (FileNotFoundException e)
+                {
                     if (HttpRuntime.HasPathDiscoveryPermission(pathTranslated))
                         throw new HttpException(404, null, e);
                     else
                         throw new HttpException(404, null);
                 }
-                catch (DirectoryNotFoundException e) {
+                catch (DirectoryNotFoundException e)
+                {
                     if (HttpRuntime.HasPathDiscoveryPermission(pathTranslated))
                         throw new HttpException(404, null, e);
                     else
                         throw new HttpException(404, null);
                 }
-                catch (PathTooLongException e) {
+                catch (PathTooLongException e)
+                {
                     if (HttpRuntime.HasPathDiscoveryPermission(pathTranslated))
                         throw new HttpException(414, null, e);
                     else
@@ -1353,58 +2130,86 @@ namespace System.Web {
             return handler;
         }
 
-        internal IHttpHandler MapHttpHandler(HttpContext context, String requestType, VirtualPath path, String pathTranslated, bool useAppConfig) {
+        internal IHttpHandler MapHttpHandler(
+            HttpContext context,
+            String requestType,
+            VirtualPath path,
+            String pathTranslated,
+            bool useAppConfig
+        )
+        {
             // Don't use remap handler when HttpServerUtility.Execute called
-            IHttpHandler handler = (context.ServerExecuteDepth == 0) ? context.RemapHandlerInstance : null;
+            IHttpHandler handler =
+                (context.ServerExecuteDepth == 0) ? context.RemapHandlerInstance : null;
 
-            using (new ApplicationImpersonationContext()) {
+            using (new ApplicationImpersonationContext())
+            {
                 // Use remap handler if possible
-                if (handler != null){
+                if (handler != null)
+                {
                     return handler;
                 }
 
                 // Map new handler
-                HttpHandlerAction mapping = GetHandlerMapping(context, requestType, path, useAppConfig);
+                HttpHandlerAction mapping = GetHandlerMapping(
+                    context,
+                    requestType,
+                    path,
+                    useAppConfig
+                );
 
                 // If a page developer has removed the default mappings with <httpHandlers><clear>
                 // without replacing them then we need to give a more descriptive error than
                 // a null parameter exception.
-                if (mapping == null) {
+                if (mapping == null)
+                {
                     PerfCounters.IncrementCounter(AppPerfCounter.REQUESTS_NOT_FOUND);
                     PerfCounters.IncrementCounter(AppPerfCounter.REQUESTS_FAILED);
-                    throw new HttpException(SR.GetString(SR.Http_handler_not_found_for_request_type, requestType));
+                    throw new HttpException(
+                        SR.GetString(SR.Http_handler_not_found_for_request_type, requestType)
+                    );
                 }
 
                 // Get factory from the mapping
                 IHttpHandlerFactory factory = GetFactory(mapping);
 
-
                 // Get factory from the mapping
-                try {
+                try
+                {
                     // Check if it supports the more efficient GetHandler call that can avoid
                     // a VirtualPath object creation.
                     IHttpHandlerFactory2 factory2 = factory as IHttpHandlerFactory2;
 
-                    if (factory2 != null) {
+                    if (factory2 != null)
+                    {
                         handler = factory2.GetHandler(context, requestType, path, pathTranslated);
                     }
-                    else {
-                        handler = factory.GetHandler(context, requestType, path.VirtualPathString, pathTranslated);
+                    else
+                    {
+                        handler = factory.GetHandler(
+                            context,
+                            requestType,
+                            path.VirtualPathString,
+                            pathTranslated
+                        );
                     }
                 }
-                catch (FileNotFoundException e) {
+                catch (FileNotFoundException e)
+                {
                     if (HttpRuntime.HasPathDiscoveryPermission(pathTranslated))
                         throw new HttpException(404, null, e);
                     else
                         throw new HttpException(404, null);
                 }
-                catch (DirectoryNotFoundException e) {
+                catch (DirectoryNotFoundException e)
+                {
                     if (HttpRuntime.HasPathDiscoveryPermission(pathTranslated))
                         throw new HttpException(404, null, e);
                     else
                         throw new HttpException(404, null);
                 }
-                catch (PathTooLongException e) {
+                catch (PathTooLongException e)
+                {
                     if (HttpRuntime.HasPathDiscoveryPermission(pathTranslated))
                         throw new HttpException(414, null, e);
                     else
@@ -1420,20 +2225,21 @@ namespace System.Web {
             return handler;
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public virtual string GetVaryByCustomString(HttpContext context, string custom) {
-
-            if (StringUtil.EqualsIgnoreCase(custom, "browser")) {
+        public virtual string GetVaryByCustomString(HttpContext context, string custom)
+        {
+            if (StringUtil.EqualsIgnoreCase(custom, "browser"))
+            {
                 return context.Request.Browser.Type;
             }
 
             return null;
         }
 
-        public virtual string GetOutputCacheProviderName(HttpContext context) {
+        public virtual string GetOutputCacheProviderName(HttpContext context)
+        {
             // default implementation
             return System.Web.Caching.OutputCache.DefaultProviderName;
         }
@@ -1447,12 +2253,13 @@ namespace System.Web {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public ISite Site {
-            get { return _site;}
-            set { _site = value;}
+        public ISite Site
+        {
+            get { return _site; }
+            set { _site = value; }
         }
 
         //
@@ -1461,7 +2268,12 @@ namespace System.Web {
 
 
         /// <internalonly/>
-        IAsyncResult IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData) {
+        IAsyncResult IHttpAsyncHandler.BeginProcessRequest(
+            HttpContext context,
+            AsyncCallback cb,
+            Object extraData
+        )
+        {
             HttpAsyncResult result;
 
             // Setup the asynchronous stuff and application variables
@@ -1489,9 +2301,9 @@ namespace System.Web {
             return result;
         }
 
-
         /// <internalonly/>
-        void IHttpAsyncHandler.EndProcessRequest(IAsyncResult result) {
+        void IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+        {
             // throw error caught during execution
             HttpAsyncResult ar = (HttpAsyncResult)result;
             if (ar.Error != null)
@@ -1504,13 +2316,14 @@ namespace System.Web {
 
 
         /// <internalonly/>
-        void IHttpHandler.ProcessRequest(HttpContext context) {
+        void IHttpHandler.ProcessRequest(HttpContext context)
+        {
             throw new HttpException(SR.GetString(SR.Sync_not_supported));
         }
 
-
         /// <internalonly/>
-        bool IHttpHandler.IsReusable {
+        bool IHttpHandler.IsReusable
+        {
             get { return true; }
         }
 
@@ -1518,40 +2331,59 @@ namespace System.Web {
         // Support for external calls into the application like app_onStart
         //
 
-        [ReflectionPermission(SecurityAction.Assert, Flags=ReflectionPermissionFlag.RestrictedMemberAccess)]
-        private void InvokeMethodWithAssert(MethodInfo method, int paramCount, object eventSource, EventArgs eventArgs) {
-            if (paramCount == 0) {
+        [ReflectionPermission(
+            SecurityAction.Assert,
+            Flags = ReflectionPermissionFlag.RestrictedMemberAccess
+        )]
+        private void InvokeMethodWithAssert(
+            MethodInfo method,
+            int paramCount,
+            object eventSource,
+            EventArgs eventArgs
+        )
+        {
+            if (paramCount == 0)
+            {
                 method.Invoke(this, new Object[0]);
             }
-            else {
+            else
+            {
                 Debug.Assert(paramCount == 2);
 
                 method.Invoke(this, new Object[2] { eventSource, eventArgs });
             }
         }
 
-        internal void ProcessSpecialRequest(HttpContext context,
-                                            MethodInfo method,
-                                            int paramCount,
-                                            Object eventSource,
-                                            EventArgs eventArgs,
-                                            HttpSessionState session) {
+        internal void ProcessSpecialRequest(
+            HttpContext context,
+            MethodInfo method,
+            int paramCount,
+            Object eventSource,
+            EventArgs eventArgs,
+            HttpSessionState session
+        )
+        {
             _context = context;
-            if (HttpRuntime.UseIntegratedPipeline && _context != null) {
+            if (HttpRuntime.UseIntegratedPipeline && _context != null)
+            {
                 _context.HideRequestResponse = true;
             }
             _hideRequestResponse = true;
             _session = session;
             _lastError = null;
 
-            using (new DisposableHttpContextWrapper(context)) {
-                using (new ApplicationImpersonationContext()) {
-                    try {
+            using (new DisposableHttpContextWrapper(context))
+            {
+                using (new ApplicationImpersonationContext())
+                {
+                    try
+                    {
                         // set culture on the current thread
                         SetAppLevelCulture();
                         InvokeMethodWithAssert(method, paramCount, eventSource, eventArgs);
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         // dereference reflection invocation exceptions
                         Exception eActual;
                         if (e is TargetInvocationException)
@@ -1561,17 +2393,17 @@ namespace System.Web {
 
                         RecordError(eActual);
 
-                        if (context == null) {
-                            try {
+                        if (context == null)
+                        {
+                            try
+                            {
                                 WebBaseEvent.RaiseRuntimeError(eActual, this);
                             }
-                            catch {
-                            }
+                            catch { }
                         }
-
                     }
-                    finally {
-
+                    finally
+                    {
                         // this thread should not be locking app state
                         if (_state != null)
                             _state.EnsureUnLock();
@@ -1579,7 +2411,8 @@ namespace System.Web {
                         // restore culture
                         RestoreAppLevelCulture();
 
-                        if (HttpRuntime.UseIntegratedPipeline && _context != null) {
+                        if (HttpRuntime.UseIntegratedPipeline && _context != null)
+                        {
                             _context.HideRequestResponse = false;
                         }
                         _hideRequestResponse = false;
@@ -1596,15 +2429,19 @@ namespace System.Web {
         // Report context-less error
         //
 
-        internal void RaiseErrorWithoutContext(Exception error) {
-            try {
-                try {
+        internal void RaiseErrorWithoutContext(Exception error)
+        {
+            try
+            {
+                try
+                {
                     SetAppLevelCulture();
                     _lastError = error;
 
                     RaiseOnError();
                 }
-                finally {
+                finally
+                {
                     // this thread should not be locking app state
                     if (_state != null)
                         _state.EnsureUnLock();
@@ -1614,7 +2451,8 @@ namespace System.Web {
                     _appEvent = null;
                 }
             }
-            catch { // Protect against exception filters
+            catch
+            { // Protect against exception filters
                 throw;
             }
         }
@@ -1623,7 +2461,12 @@ namespace System.Web {
         //
         //
 
-        internal void InitInternal(HttpContext context, HttpApplicationState state, MethodInfo[] handlers) {
+        internal void InitInternal(
+            HttpContext context,
+            HttpApplicationState state,
+            MethodInfo[] handlers
+        )
+        {
             Debug.Assert(context != null, "context != null");
 
             // Remember state
@@ -1631,8 +2474,10 @@ namespace System.Web {
 
             PerfCounters.IncrementCounter(AppPerfCounter.PIPELINES);
 
-            try {
-                try {
+            try
+            {
+                try
+                {
                     // Remember context for config lookups
                     _initContext = context;
                     _initContext.ApplicationInstance = this;
@@ -1641,25 +2486,31 @@ namespace System.Web {
                     context.ConfigurationPath = context.Request.ApplicationPathObject;
 
                     // keep HttpContext.Current working while running user code
-                    using (new DisposableHttpContextWrapper(context)) {
-
+                    using (new DisposableHttpContextWrapper(context))
+                    {
                         // Build module list from config
-                        if (HttpRuntime.UseIntegratedPipeline) {
-
+                        if (HttpRuntime.UseIntegratedPipeline)
+                        {
                             Debug.Assert(_moduleConfigInfo != null, "_moduleConfigInfo != null");
-                            Debug.Assert(_moduleConfigInfo.Count >= 0, "_moduleConfigInfo.Count >= 0");
+                            Debug.Assert(
+                                _moduleConfigInfo.Count >= 0,
+                                "_moduleConfigInfo.Count >= 0"
+                            );
 
-                            try {
+                            try
+                            {
                                 context.HideRequestResponse = true;
                                 _hideRequestResponse = true;
                                 InitIntegratedModules();
                             }
-                            finally {
+                            finally
+                            {
                                 context.HideRequestResponse = false;
                                 _hideRequestResponse = false;
                             }
                         }
-                        else {
+                        else
+                        {
                             InitModules();
 
                             // this is used exclusively for integrated mode
@@ -1672,37 +2523,44 @@ namespace System.Web {
 
                         // Initialization of the derived class
                         _context = context;
-                        if (HttpRuntime.UseIntegratedPipeline && _context != null) {
+                        if (HttpRuntime.UseIntegratedPipeline && _context != null)
+                        {
                             _context.HideRequestResponse = true;
                         }
                         _hideRequestResponse = true;
 
-                        try {
+                        try
+                        {
                             Init();
                         }
-                        catch (Exception e) {
+                        catch (Exception e)
+                        {
                             RecordError(e);
                         }
                     }
 
-                    if (HttpRuntime.UseIntegratedPipeline && _context != null) {
+                    if (HttpRuntime.UseIntegratedPipeline && _context != null)
+                    {
                         _context.HideRequestResponse = false;
                     }
                     _hideRequestResponse = false;
                     _context = null;
-                    _resumeStepsWaitCallback= new WaitCallback(this.ResumeStepsWaitCallback);
+                    _resumeStepsWaitCallback = new WaitCallback(this.ResumeStepsWaitCallback);
 
                     // Construct the execution steps array
-                    if (HttpRuntime.UseIntegratedPipeline) {
+                    if (HttpRuntime.UseIntegratedPipeline)
+                    {
                         _stepManager = new PipelineStepManager(this);
                     }
-                    else {
+                    else
+                    {
                         _stepManager = new ApplicationStepManager(this);
                     }
 
                     _stepManager.BuildSteps(_resumeStepsWaitCallback);
                 }
-                finally {
+                finally
+                {
                     _initInternalCompleted = true;
 
                     // Reset config path
@@ -1713,167 +2571,205 @@ namespace System.Web {
                     _initContext = null;
                 }
             }
-            catch { // Protect against exception filters
+            catch
+            { // Protect against exception filters
                 throw;
             }
         }
 
         // helper to expand an event handler into application steps
-        private void CreateEventExecutionSteps(Object eventIndex, ArrayList steps) {
+        private void CreateEventExecutionSteps(Object eventIndex, ArrayList steps)
+        {
             // async
             AsyncAppEventHandler asyncHandler = AsyncEvents[eventIndex];
 
-            if (asyncHandler != null) {
+            if (asyncHandler != null)
+            {
                 asyncHandler.CreateExecutionSteps(this, steps);
             }
 
             // sync
             EventHandler handler = (EventHandler)Events[eventIndex];
 
-            if (handler != null) {
+            if (handler != null)
+            {
                 Delegate[] handlers = handler.GetInvocationList();
 
-                for (int i = 0; i < handlers.Length; i++)  {
+                for (int i = 0; i < handlers.Length; i++)
+                {
                     steps.Add(new SyncEventExecutionStep(this, (EventHandler)handlers[i]));
                 }
             }
         }
 
-        internal void InitSpecial(HttpApplicationState state, MethodInfo[] handlers, IntPtr appContext, HttpContext context) {
+        internal void InitSpecial(
+            HttpApplicationState state,
+            MethodInfo[] handlers,
+            IntPtr appContext,
+            HttpContext context
+        )
+        {
             // Remember state
             _state = state;
 
-            try {
+            try
+            {
                 //  Remember the context for the initialization
-                if (context != null) {
+                if (context != null)
+                {
                     _initContext = context;
                     _initContext.ApplicationInstance = this;
                 }
 
                 // if we're doing integrated pipeline wireup, then appContext is non-null and we need to init modules and register event subscriptions with IIS
-                if (appContext != IntPtr.Zero) {
+                if (appContext != IntPtr.Zero)
+                {
                     // 1694356: app_offline.htm and <httpRuntime enabled=/> require that we make this check here for integrated mode
-                    using (new ApplicationImpersonationContext()) {
+                    using (new ApplicationImpersonationContext())
+                    {
                         HttpRuntime.CheckApplicationEnabled();
                     }
 
                     // retrieve app level culture
                     InitAppLevelCulture();
 
-                    Debug.Trace("PipelineRuntime", "InitSpecial for " + appContext.ToString() + "\n");
+                    Debug.Trace(
+                        "PipelineRuntime",
+                        "InitSpecial for " + appContext.ToString() + "\n"
+                    );
                     RegisterEventSubscriptionsWithIIS(appContext, context, handlers);
                 }
-                else {
+                else
+                {
                     // retrieve app level culture
                     InitAppLevelCulture();
 
                     // Hookup event handlers via reflection
-                    if (handlers != null) {
+                    if (handlers != null)
+                    {
                         HookupEventHandlersForApplicationAndModules(handlers);
                     }
                 }
 
                 // if we're doing integrated pipeline wireup, then appContext is non-null and we need to register the application (global.asax) event handlers
-                if (appContext != IntPtr.Zero) {
-                    if (_appPostNotifications != 0 || _appRequestNotifications != 0) {
-                        RegisterIntegratedEvent(appContext,
-                                                HttpApplicationFactory.applicationFileName,
-                                                _appRequestNotifications,
-                                                _appPostNotifications,
-                                                this.GetType().FullName,
-                                                MANAGED_PRECONDITION,
-                                                false);
+                if (appContext != IntPtr.Zero)
+                {
+                    if (_appPostNotifications != 0 || _appRequestNotifications != 0)
+                    {
+                        RegisterIntegratedEvent(
+                            appContext,
+                            HttpApplicationFactory.applicationFileName,
+                            _appRequestNotifications,
+                            _appPostNotifications,
+                            this.GetType().FullName,
+                            MANAGED_PRECONDITION,
+                            false
+                        );
                     }
                 }
             }
-            finally  {
+            finally
+            {
                 _initSpecialCompleted = true;
 
                 //  Do not hold on to the context
-                if (_initContext != null) {
+                if (_initContext != null)
+                {
                     _initContext.ApplicationInstance = null;
                     _initContext = null;
                 }
             }
         }
 
-        internal void DisposeInternal() {
+        internal void DisposeInternal()
+        {
             PerfCounters.DecrementCounter(AppPerfCounter.PIPELINES);
 
             // call derived class
 
-            try {
+            try
+            {
                 Dispose();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 RecordError(e);
             }
 
             // dispose modules
 
-            if (_moduleCollection != null) {
+            if (_moduleCollection != null)
+            {
                 int numModules = _moduleCollection.Count;
 
-                for (int i = 0; i < numModules; i++) {
-                    try {
+                for (int i = 0; i < numModules; i++)
+                {
+                    try
+                    {
                         // set the init key during Dispose for modules
                         // that try to unregister events
-                        if (HttpRuntime.UseIntegratedPipeline) {
+                        if (HttpRuntime.UseIntegratedPipeline)
+                        {
                             _currentModuleCollectionKey = _moduleCollection.GetKey(i);
                         }
                         _moduleCollection[i].Dispose();
                     }
-                    catch {
-                    }
+                    catch { }
                 }
 
                 _moduleCollection = null;
             }
 
             // Release buffers
-            if (_allocator != null) {
+            if (_allocator != null)
+            {
                 _allocator.TrimMemory();
             }
         }
 
-        private void BuildEventMaskDictionary(Dictionary<string, RequestNotification> eventMask) {
-            eventMask["BeginRequest"]              = RequestNotification.BeginRequest;
-            eventMask["AuthenticateRequest"]       = RequestNotification.AuthenticateRequest;
-            eventMask["PostAuthenticateRequest"]   = RequestNotification.AuthenticateRequest;
-            eventMask["AuthorizeRequest"]          = RequestNotification.AuthorizeRequest;
-            eventMask["PostAuthorizeRequest"]      = RequestNotification.AuthorizeRequest;
-            eventMask["ResolveRequestCache"]       = RequestNotification.ResolveRequestCache;
-            eventMask["PostResolveRequestCache"]   = RequestNotification.ResolveRequestCache;
-            eventMask["MapRequestHandler"]         = RequestNotification.MapRequestHandler;
-            eventMask["PostMapRequestHandler"]     = RequestNotification.MapRequestHandler;
-            eventMask["AcquireRequestState"]       = RequestNotification.AcquireRequestState;
-            eventMask["PostAcquireRequestState"]   = RequestNotification.AcquireRequestState;
-            eventMask["PreRequestHandlerExecute"]  = RequestNotification.PreExecuteRequestHandler;
+        private void BuildEventMaskDictionary(Dictionary<string, RequestNotification> eventMask)
+        {
+            eventMask["BeginRequest"] = RequestNotification.BeginRequest;
+            eventMask["AuthenticateRequest"] = RequestNotification.AuthenticateRequest;
+            eventMask["PostAuthenticateRequest"] = RequestNotification.AuthenticateRequest;
+            eventMask["AuthorizeRequest"] = RequestNotification.AuthorizeRequest;
+            eventMask["PostAuthorizeRequest"] = RequestNotification.AuthorizeRequest;
+            eventMask["ResolveRequestCache"] = RequestNotification.ResolveRequestCache;
+            eventMask["PostResolveRequestCache"] = RequestNotification.ResolveRequestCache;
+            eventMask["MapRequestHandler"] = RequestNotification.MapRequestHandler;
+            eventMask["PostMapRequestHandler"] = RequestNotification.MapRequestHandler;
+            eventMask["AcquireRequestState"] = RequestNotification.AcquireRequestState;
+            eventMask["PostAcquireRequestState"] = RequestNotification.AcquireRequestState;
+            eventMask["PreRequestHandlerExecute"] = RequestNotification.PreExecuteRequestHandler;
             eventMask["PostRequestHandlerExecute"] = RequestNotification.ExecuteRequestHandler;
-            eventMask["ReleaseRequestState"]       = RequestNotification.ReleaseRequestState;
-            eventMask["PostReleaseRequestState"]   = RequestNotification.ReleaseRequestState;
-            eventMask["UpdateRequestCache"]        = RequestNotification.UpdateRequestCache;
-            eventMask["PostUpdateRequestCache"]    = RequestNotification.UpdateRequestCache;
-            eventMask["LogRequest"]                = RequestNotification.LogRequest;
-            eventMask["PostLogRequest"]            = RequestNotification.LogRequest;
-            eventMask["EndRequest"]                = RequestNotification.EndRequest;
-            eventMask["PreSendRequestHeaders"]     = RequestNotification.SendResponse;
-            eventMask["PreSendRequestContent"]     = RequestNotification.SendResponse;
+            eventMask["ReleaseRequestState"] = RequestNotification.ReleaseRequestState;
+            eventMask["PostReleaseRequestState"] = RequestNotification.ReleaseRequestState;
+            eventMask["UpdateRequestCache"] = RequestNotification.UpdateRequestCache;
+            eventMask["PostUpdateRequestCache"] = RequestNotification.UpdateRequestCache;
+            eventMask["LogRequest"] = RequestNotification.LogRequest;
+            eventMask["PostLogRequest"] = RequestNotification.LogRequest;
+            eventMask["EndRequest"] = RequestNotification.EndRequest;
+            eventMask["PreSendRequestHeaders"] = RequestNotification.SendResponse;
+            eventMask["PreSendRequestContent"] = RequestNotification.SendResponse;
         }
 
-        private void HookupEventHandlersForApplicationAndModules(MethodInfo[] handlers) {
+        private void HookupEventHandlersForApplicationAndModules(MethodInfo[] handlers)
+        {
             _currentModuleCollectionKey = HttpApplicationFactory.applicationFileName;
 
-            if(null == _pipelineEventMasks) {
-                Dictionary<string, RequestNotification> dict = new Dictionary<string, RequestNotification>();
+            if (null == _pipelineEventMasks)
+            {
+                Dictionary<string, RequestNotification> dict =
+                    new Dictionary<string, RequestNotification>();
                 BuildEventMaskDictionary(dict);
-                if(null == _pipelineEventMasks) {
+                if (null == _pipelineEventMasks)
+                {
                     _pipelineEventMasks = dict;
                 }
             }
 
-
-            for (int i = 0; i < handlers.Length; i++) {
+            for (int i = 0; i < handlers.Length; i++)
+            {
                 MethodInfo appMethod = handlers[i];
                 String appMethodName = appMethod.Name;
                 int namePosIndex = appMethodName.IndexOf('_');
@@ -1893,21 +2789,25 @@ namespace System.Web {
                 // Find event on the module type
                 Type targetType = target.GetType();
                 EventDescriptorCollection events = TypeDescriptor.GetEvents(targetType);
-                string eventName = appMethodName.Substring(namePosIndex+1);
+                string eventName = appMethodName.Substring(namePosIndex + 1);
 
                 EventDescriptor foundEvent = events.Find(eventName, true);
-                if (foundEvent == null
-                    && StringUtil.EqualsIgnoreCase(eventName.Substring(0, 2), "on")) {
-
+                if (
+                    foundEvent == null
+                    && StringUtil.EqualsIgnoreCase(eventName.Substring(0, 2), "on")
+                )
+                {
                     eventName = eventName.Substring(2);
                     foundEvent = events.Find(eventName, true);
                 }
 
                 MethodInfo addMethod = null;
-                if (foundEvent != null) {
+                if (foundEvent != null)
+                {
                     EventInfo reflectionEvent = targetType.GetEvent(foundEvent.Name);
                     Debug.Assert(reflectionEvent != null);
-                    if (reflectionEvent != null) {
+                    if (reflectionEvent != null)
+                    {
                         addMethod = reflectionEvent.GetAddMethod();
                     }
                 }
@@ -1926,7 +2826,8 @@ namespace System.Web {
 
                 ParameterInfo[] appMethodParams = appMethod.GetParameters();
 
-                if (appMethodParams.Length == 0) {
+                if (appMethodParams.Length == 0)
+                {
                     // If the app method doesn't have arguments --
                     // -- hookup via intermidiate handler
 
@@ -1937,13 +2838,20 @@ namespace System.Web {
                     ArglessEventHandlerProxy proxy = new ArglessEventHandlerProxy(this, appMethod);
                     handlerDelegate = proxy.Handler;
                 }
-                else {
+                else
+                {
                     // Hookup directly to the app methods hoping all types match
 
-                    try {
-                        handlerDelegate = Delegate.CreateDelegate(addMethodParams[0].ParameterType, this, appMethodName);
+                    try
+                    {
+                        handlerDelegate = Delegate.CreateDelegate(
+                            addMethodParams[0].ParameterType,
+                            this,
+                            appMethodName
+                        );
                     }
-                    catch {
+                    catch
+                    {
                         // some type mismatch
                         continue;
                     }
@@ -1951,21 +2859,28 @@ namespace System.Web {
 
                 // Call the AddXXX() to hook up the delegate
 
-                try {
-                    addMethod.Invoke(target, new Object[1]{handlerDelegate});
+                try
+                {
+                    addMethod.Invoke(target, new Object[1] { handlerDelegate });
                 }
-                catch {
-                    if (HttpRuntime.UseIntegratedPipeline) {
+                catch
+                {
+                    if (HttpRuntime.UseIntegratedPipeline)
+                    {
                         throw;
                     }
                 }
 
-                if (eventName != null) {
-                    if (_pipelineEventMasks.ContainsKey(eventName)) {
-                        if (!StringUtil.StringStartsWith(eventName, "Post")) {
+                if (eventName != null)
+                {
+                    if (_pipelineEventMasks.ContainsKey(eventName))
+                    {
+                        if (!StringUtil.StringStartsWith(eventName, "Post"))
+                        {
                             _appRequestNotifications |= _pipelineEventMasks[eventName];
                         }
-                        else {
+                        else
+                        {
                             _appPostNotifications |= _pipelineEventMasks[eventName];
                         }
                     }
@@ -1973,74 +2888,105 @@ namespace System.Web {
             }
         }
 
-        private void RegisterIntegratedEvent(IntPtr appContext,
-                                             string moduleName,
-                                             RequestNotification requestNotifications,
-                                             RequestNotification postRequestNotifications,
-                                             string moduleType,
-                                             string modulePrecondition,
-                                             bool useHighPriority) {
-
+        private void RegisterIntegratedEvent(
+            IntPtr appContext,
+            string moduleName,
+            RequestNotification requestNotifications,
+            RequestNotification postRequestNotifications,
+            string moduleType,
+            string modulePrecondition,
+            bool useHighPriority
+        )
+        {
             // lookup the modules event index, if it already exists
             // use it, otherwise, bump the global count
             // the module is used for event dispatch
 
             int moduleIndex;
-            if (_moduleIndexMap.ContainsKey(moduleName)) {
-                moduleIndex = (int) _moduleIndexMap[moduleName];
+            if (_moduleIndexMap.ContainsKey(moduleName))
+            {
+                moduleIndex = (int)_moduleIndexMap[moduleName];
             }
-            else {
+            else
+            {
                 moduleIndex = _moduleIndexMap.Count;
                 _moduleIndexMap[moduleName] = moduleIndex;
             }
 
 #if DBG
             Debug.Assert(moduleIndex >= 0, "moduleIndex >= 0");
-            Debug.Trace("PipelineRuntime", "RegisterIntegratedEvent:"
-                        + " module=" + moduleName
-                        + ", index=" + moduleIndex.ToString(CultureInfo.InvariantCulture)
-                        + ", rq_notify=" + requestNotifications
-                        + ", post_rq_notify=" + postRequestNotifications
-                        + ", preconditon=" + modulePrecondition + "\r\n");
+            Debug.Trace(
+                "PipelineRuntime",
+                "RegisterIntegratedEvent:"
+                    + " module="
+                    + moduleName
+                    + ", index="
+                    + moduleIndex.ToString(CultureInfo.InvariantCulture)
+                    + ", rq_notify="
+                    + requestNotifications
+                    + ", post_rq_notify="
+                    + postRequestNotifications
+                    + ", preconditon="
+                    + modulePrecondition
+                    + "\r\n"
+            );
 #endif
 
-            int result = UnsafeIISMethods.MgdRegisterEventSubscription(appContext,
-                                                                       moduleName,
-                                                                       requestNotifications,
-                                                                       postRequestNotifications,
-                                                                       moduleType,
-                                                                       modulePrecondition,
-                                                                       new IntPtr(moduleIndex),
-                                                                       useHighPriority);
+            int result = UnsafeIISMethods.MgdRegisterEventSubscription(
+                appContext,
+                moduleName,
+                requestNotifications,
+                postRequestNotifications,
+                moduleType,
+                modulePrecondition,
+                new IntPtr(moduleIndex),
+                useHighPriority
+            );
 
-            if(result < 0) {
+            if (result < 0)
+            {
                 throw new HttpException(SR.GetString(SR.Failed_Pipeline_Subscription, moduleName));
             }
         }
 
-
-        private void SetAppLevelCulture() {
+        private void SetAppLevelCulture()
+        {
             CultureInfo culture = null;
             CultureInfo uiculture = null;
             CultureInfo browserCulture = null;
             //get the language from the browser
             //DevDivBugs 2001091: Request object is not available in integrated mode during Application_Start,
             //so don't try to access it if it is hidden
-            if((_appLevelAutoCulture || _appLevelAutoUICulture) && _context != null && _context.HideRequestResponse == false) {
+            if (
+                (_appLevelAutoCulture || _appLevelAutoUICulture)
+                && _context != null
+                && _context.HideRequestResponse == false
+            )
+            {
                 string[] userLanguages = _context.UserLanguagesFromContext();
-                if (userLanguages != null) {
-                    try { browserCulture = CultureUtil.CreateReadOnlyCulture(userLanguages, requireSpecific: true); }
+                if (userLanguages != null)
+                {
+                    try
+                    {
+                        browserCulture = CultureUtil.CreateReadOnlyCulture(
+                            userLanguages,
+                            requireSpecific: true
+                        );
+                    }
                     catch { }
                 }
             }
 
             culture = _appLevelCulture;
             uiculture = _appLevelUICulture;
-            if(browserCulture != null) {
-                if(_appLevelAutoCulture) {
+            if (browserCulture != null)
+            {
+                if (_appLevelAutoCulture)
+                {
                     culture = browserCulture;
                 }
-                if(_appLevelAutoUICulture) {
+                if (_appLevelAutoUICulture)
+                {
                     uiculture = browserCulture;
                 }
             }
@@ -2048,31 +2994,38 @@ namespace System.Web {
             _savedAppLevelCulture = Thread.CurrentThread.CurrentCulture;
             _savedAppLevelUICulture = Thread.CurrentThread.CurrentUICulture;
 
-            if (culture != null && culture != Thread.CurrentThread.CurrentCulture) {
+            if (culture != null && culture != Thread.CurrentThread.CurrentCulture)
+            {
                 HttpRuntime.SetCurrentThreadCultureWithAssert(culture);
             }
 
-            if (uiculture != null && uiculture != Thread.CurrentThread.CurrentUICulture) {
+            if (uiculture != null && uiculture != Thread.CurrentThread.CurrentUICulture)
+            {
                 Thread.CurrentThread.CurrentUICulture = uiculture;
             }
         }
 
-        private void RestoreAppLevelCulture() {
+        private void RestoreAppLevelCulture()
+        {
             CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
             CultureInfo currentUICulture = Thread.CurrentThread.CurrentUICulture;
 
-            if (_savedAppLevelCulture != null) {
+            if (_savedAppLevelCulture != null)
+            {
                 // Avoid the cost of the Demand when setting the culture by comparing the cultures first
-                if (currentCulture != _savedAppLevelCulture) {
+                if (currentCulture != _savedAppLevelCulture)
+                {
                     HttpRuntime.SetCurrentThreadCultureWithAssert(_savedAppLevelCulture);
                 }
 
                 _savedAppLevelCulture = null;
             }
 
-            if (_savedAppLevelUICulture != null) {
+            if (_savedAppLevelUICulture != null)
+            {
                 // Avoid the cost of the Demand when setting the culture by comparing the cultures first
-                if (currentUICulture  != _savedAppLevelUICulture) {
+                if (currentUICulture != _savedAppLevelUICulture)
+                {
                     Thread.CurrentThread.CurrentUICulture = _savedAppLevelUICulture;
                 }
 
@@ -2108,13 +3061,15 @@ namespace System.Web {
         // synchronize the values that are stored on the HttpContext with what
         // is on the thread.  Because of this, the next notification will end up using
         // the Culture/UICulture set by user-code, just as it did on IIS6.
-        private ThreadContext OnThreadEnterPrivate(bool setImpersonationContext) {
+        private ThreadContext OnThreadEnterPrivate(bool setImpersonationContext)
+        {
             ThreadContext threadContext = new ThreadContext(_context);
             threadContext.AssociateWithCurrentThread(setImpersonationContext);
 
             // An entry is added to the request timeout manager once per request
             // and removed in ReleaseAppInstance.
-            if (!_timeoutManagerInitialized) {
+            if (!_timeoutManagerInitialized)
+            {
                 // ensure Timeout is set (see ASURT 148698)
                 // to avoid ---- getting config later (ASURT 127388)
                 _context.EnsureTimeout();
@@ -2127,110 +3082,148 @@ namespace System.Web {
         }
 
         // consumed by AppVerifier when it is enabled
-        HttpContext ISyncContext.HttpContext {
-            get {
-                return _context;
-            }
+        HttpContext ISyncContext.HttpContext
+        {
+            get { return _context; }
         }
 
         // consumed by AspNetSynchronizationContext
-        ISyncContextLock ISyncContext.Enter() {
+        ISyncContextLock ISyncContext.Enter()
+        {
             return OnThreadEnter();
         }
 
-        internal ThreadContext OnThreadEnter() {
-            return OnThreadEnterPrivate(true /* setImpersonationContext */);
+        internal ThreadContext OnThreadEnter()
+        {
+            return OnThreadEnterPrivate(
+                true /* setImpersonationContext */
+            );
         }
 
-        internal ThreadContext OnThreadEnter(bool setImpersonationContext) {
+        internal ThreadContext OnThreadEnter(bool setImpersonationContext)
+        {
             return OnThreadEnterPrivate(setImpersonationContext);
         }
 
         private StepInvoker _stepInvoker;
 
-        public void OnExecuteRequestStep(Action<HttpContextBase, Action> callback) {
-            if (callback == null) {
+        public void OnExecuteRequestStep(Action<HttpContextBase, Action> callback)
+        {
+            if (callback == null)
+            {
                 throw new ArgumentNullException("callback");
             }
 
-            if (!HttpRuntime.UseIntegratedPipeline) {
-                throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_Integrated_Mode));
+            if (!HttpRuntime.UseIntegratedPipeline)
+            {
+                throw new PlatformNotSupportedException(
+                    SR.GetString(SR.Requires_Iis_Integrated_Mode)
+                );
             }
 
-            if (_initSpecialCompleted && _initInternalCompleted) {
+            if (_initSpecialCompleted && _initInternalCompleted)
+            {
                 //throw if both InitSpecial and InitInternal have completed.
-                throw new InvalidOperationException(SR.GetString(SR.OnExecuteRequestStep_Cannot_Be_Called));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.OnExecuteRequestStep_Cannot_Be_Called)
+                );
             }
 
-            if (_stepInvoker == null) {
+            if (_stepInvoker == null)
+            {
                 _stepInvoker = new StepInvoker();
             }
 
             var nextStep = _stepInvoker;
-            _stepInvoker = new StepInvoker((nextStepAction) => callback(new HttpContextWrapper(_context), nextStepAction), nextStep);
+            _stepInvoker = new StepInvoker(
+                (nextStepAction) => callback(new HttpContextWrapper(_context), nextStepAction),
+                nextStep
+            );
         }
 
-        private void ExecuteStepImpl(IExecutionStep step) {
-            if(_stepInvoker != null) {
+        private void ExecuteStepImpl(IExecutionStep step)
+        {
+            if (_stepInvoker != null)
+            {
                 bool stepCalled = false;
 
-                _stepInvoker.Invoke(() => {
-                    if (!stepCalled) {
+                _stepInvoker.Invoke(() =>
+                {
+                    if (!stepCalled)
+                    {
                         stepCalled = true;
                         step.Execute();
                     }
                 });
 
-                if (!stepCalled) {
+                if (!stepCalled)
+                {
                     step.Execute();
                 }
-            } else {
+            }
+            else
+            {
                 step.Execute();
             }
         }
+
         /*
          * Execute single step catching exceptions in a fancy way (see below)
          */
-        internal Exception ExecuteStep(IExecutionStep step, ref bool completedSynchronously) {
+        internal Exception ExecuteStep(IExecutionStep step, ref bool completedSynchronously)
+        {
             Exception error = null;
 
-            try {
-                try {
-                    if (step.IsCancellable) {
-                        _context.BeginCancellablePeriod();  // request can be cancelled from this point
+            try
+            {
+                try
+                {
+                    if (step.IsCancellable)
+                    {
+                        _context.BeginCancellablePeriod(); // request can be cancelled from this point
 
-                        try {
+                        try
+                        {
                             ExecuteStepImpl(step);
                         }
-                        finally {
-                            _context.EndCancellablePeriod();  // request can be cancelled until this point
+                        finally
+                        {
+                            _context.EndCancellablePeriod(); // request can be cancelled until this point
                         }
 
-                        _context.WaitForExceptionIfCancelled();  // wait outside of finally
+                        _context.WaitForExceptionIfCancelled(); // wait outside of finally
                     }
-                    else {
+                    else
+                    {
                         ExecuteStepImpl(step);
                     }
 
-                    if (!step.CompletedSynchronously) {
+                    if (!step.CompletedSynchronously)
+                    {
                         completedSynchronously = false;
                         return null;
                     }
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     error = e;
 
                     // Since we will leave the context later, we need to remember if we are impersonating
                     // before we lose that info - VSWhidbey 494476
-                    if (ImpersonationContext.CurrentThreadTokenExists) {
-                        e.Data[System.Web.Management.WebThreadInformation.IsImpersonatingKey] = String.Empty;
+                    if (ImpersonationContext.CurrentThreadTokenExists)
+                    {
+                        e.Data[System.Web.Management.WebThreadInformation.IsImpersonatingKey] =
+                            String.Empty;
                     }
                     // This might force ThreadAbortException to be thrown
                     // automatically, because we consumed an exception that was
                     // hiding ThreadAbortException behind it
 
-                    if (e is ThreadAbortException &&
-                        ((Thread.CurrentThread.ThreadState & ThreadState.AbortRequested) == 0))  {
+                    if (
+                        e is ThreadAbortException
+                        && ((Thread.CurrentThread.ThreadState & ThreadState.AbortRequested) == 0)
+                    )
+                    {
                         // Response.End from a COM+ component that re-throws ThreadAbortException
                         // It is not a real ThreadAbort
                         // VSWhidbey 178556
@@ -2239,29 +3232,37 @@ namespace System.Web {
                     }
                 }
 #pragma warning disable 1058
-                catch {
+                catch
+                {
                     // ignore non-Exception objects that could be thrown
                 }
 #pragma warning restore 1058
             }
-            catch (ThreadAbortException e) {
+            catch (ThreadAbortException e)
+            {
                 // ThreadAbortException could be masked as another one
                 // the try-catch above consumes all exceptions, only
                 // ThreadAbortException can filter up here because it gets
                 // auto rethrown if no other exception is thrown on catch
 
-                if (e.ExceptionState != null && e.ExceptionState is CancelModuleException) {
+                if (e.ExceptionState != null && e.ExceptionState is CancelModuleException)
+                {
                     // one of ours (Response.End or timeout) -- cancel abort
 
                     CancelModuleException cancelException = (CancelModuleException)e.ExceptionState;
 
-                    if (cancelException.Timeout) {
+                    if (cancelException.Timeout)
+                    {
                         // Timed out
-                        error = new HttpException(SR.GetString(SR.Request_timed_out),
-                                            null, WebEventCodes.RuntimeErrorRequestAbort);
+                        error = new HttpException(
+                            SR.GetString(SR.Request_timed_out),
+                            null,
+                            WebEventCodes.RuntimeErrorRequestAbort
+                        );
                         PerfCounters.IncrementCounter(AppPerfCounter.REQUESTS_TIMED_OUT);
                     }
-                    else {
+                    else
+                    {
                         // Response.End
                         error = null;
                         _stepManager.CompleteRequest();
@@ -2279,39 +3280,46 @@ namespace System.Web {
          * Resume execution of the app steps
          */
 
-        private void ResumeStepsFromThreadPoolThread(Exception error) {
-            if (Thread.CurrentThread.IsThreadPoolThread) {
+        private void ResumeStepsFromThreadPoolThread(Exception error)
+        {
+            if (Thread.CurrentThread.IsThreadPoolThread)
+            {
                 // if on thread pool thread, use the current thread
                 ResumeSteps(error);
             }
-            else {
+            else
+            {
                 // if on a non-threadpool thread, requeue
                 ThreadPool.QueueUserWorkItem(_resumeStepsWaitCallback, error);
             }
         }
 
-        private void ResumeStepsWaitCallback(Object error) {
+        private void ResumeStepsWaitCallback(Object error)
+        {
             ResumeSteps(error as Exception);
         }
 
-        private void ResumeSteps(Exception error) {
+        private void ResumeSteps(Exception error)
+        {
             _stepManager.ResumeSteps(error);
         }
-
 
         /*
          * Add error to the context fire OnError on first error
          */
-        private void RecordError(Exception error) {
+        private void RecordError(Exception error)
+        {
             bool firstError = true;
 
-            if (_context != null) {
+            if (_context != null)
+            {
                 if (_context.Error != null)
                     firstError = false;
 
                 _context.AddError(error);
             }
-            else {
+            else
+            {
                 if (_lastError != null)
                     firstError = false;
 
@@ -2322,15 +3330,16 @@ namespace System.Web {
                 RaiseOnError();
         }
 
-
         //
         // Init module list
         //
 
-        private void InitModulesCommon() {
+        private void InitModulesCommon()
+        {
             int n = _moduleCollection.Count;
 
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++)
+            {
                 // remember the module being inited for event subscriptions
                 // we'll later use this for routing
                 _currentModuleCollectionKey = _moduleCollection.GetKey(i);
@@ -2341,13 +3350,15 @@ namespace System.Web {
             InitAppLevelCulture();
         }
 
-        private void InitIntegratedModules() {
+        private void InitIntegratedModules()
+        {
             Debug.Assert(null != _moduleConfigInfo, "null != _moduleConfigInfo");
             _moduleCollection = BuildIntegratedModuleCollection(_moduleConfigInfo);
             InitModulesCommon();
         }
 
-        private void InitModules() {
+        private void InitModules()
+        {
             HttpModulesSection pconfig = RuntimeConfig.GetAppConfig().HttpModules;
 
             // get the static list, then add the dynamic members
@@ -2361,10 +3372,12 @@ namespace System.Web {
         }
 
         // instantiates modules that have been added to the dynamic registry (classic pipeline)
-        private HttpModuleCollection CreateDynamicModules() {
+        private HttpModuleCollection CreateDynamicModules()
+        {
             HttpModuleCollection moduleCollection = new HttpModuleCollection();
 
-            foreach (DynamicModuleRegistryEntry entry in _dynamicModuleRegistry.LockAndFetchList()) {
+            foreach (DynamicModuleRegistryEntry entry in _dynamicModuleRegistry.LockAndFetchList())
+            {
                 HttpModuleAction modAction = new HttpModuleAction(entry.Name, entry.Type);
                 moduleCollection.AddModule(modAction.Entry.ModuleName, modAction.Entry.Create());
             }
@@ -2372,44 +3385,65 @@ namespace System.Web {
             return moduleCollection;
         }
 
-        internal string CurrentModuleCollectionKey {
-            get {
-                return (null == _currentModuleCollectionKey) ? "UnknownModule" : _currentModuleCollectionKey;
+        internal string CurrentModuleCollectionKey
+        {
+            get
+            {
+                return (null == _currentModuleCollectionKey)
+                    ? "UnknownModule"
+                    : _currentModuleCollectionKey;
             }
         }
 
-        internal static void RegisterModuleInternal(Type moduleType) {
+        internal static void RegisterModuleInternal(Type moduleType)
+        {
             _dynamicModuleRegistry.Add(moduleType);
         }
 
-        public static void RegisterModule(Type moduleType) {
+        public static void RegisterModule(Type moduleType)
+        {
             RuntimeConfig config = RuntimeConfig.GetAppConfig();
             HttpRuntimeSection runtimeSection = config.HttpRuntime;
-            if (runtimeSection.AllowDynamicModuleRegistration) {
+            if (runtimeSection.AllowDynamicModuleRegistration)
+            {
                 RegisterModuleInternal(moduleType);
             }
-            else {
+            else
+            {
                 throw new InvalidOperationException(SR.GetString(SR.DynamicModuleRegistrationOff));
             }
         }
 
-        private void RegisterEventSubscriptionsWithIIS(IntPtr appContext, HttpContext context, MethodInfo[] handlers) {
+        private void RegisterEventSubscriptionsWithIIS(
+            IntPtr appContext,
+            HttpContext context,
+            MethodInfo[] handlers
+        )
+        {
             RequestNotification requestNotifications;
             RequestNotification postRequestNotifications;
 
             // register an implicit filter module
-            RegisterIntegratedEvent(appContext,
-                                    IMPLICIT_FILTER_MODULE,
-                                    RequestNotification.UpdateRequestCache| RequestNotification.LogRequest  /*requestNotifications*/,
-                                    0 /*postRequestNotifications*/,
-                                    String.Empty /*type*/,
-                                    String.Empty /*precondition*/,
-                                    true /*useHighPriority*/);
+            RegisterIntegratedEvent(
+                appContext,
+                IMPLICIT_FILTER_MODULE,
+                RequestNotification.UpdateRequestCache
+                    | RequestNotification.LogRequest /*requestNotifications*/
+                ,
+                0 /*postRequestNotifications*/
+                ,
+                String.Empty /*type*/
+                ,
+                String.Empty /*precondition*/
+                ,
+                true /*useHighPriority*/
+            );
 
             // integrated pipeline will always use serverModules instead of <httpModules>
             _moduleCollection = GetModuleCollection(appContext);
 
-            if (handlers != null) {
+            if (handlers != null)
+            {
                 HookupEventHandlersForApplicationAndModules(handlers);
             }
 
@@ -2425,20 +3459,24 @@ namespace System.Web {
             // so we MUST call ProcessEventSubscriptions on it first, before the other modules.
             _currentModuleCollectionKey = HttpApplicationFactory.applicationFileName;
 
-            try {
+            try
+            {
                 _hideRequestResponse = true;
                 context.HideRequestResponse = true;
                 _context = context;
                 Init();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 RecordError(e);
                 Exception error = context.Error;
-                if (error != null) {
+                if (error != null)
+                {
                     throw error;
                 }
             }
-            finally {
+            finally
+            {
                 _context = null;
                 context.HideRequestResponse = false;
                 _hideRequestResponse = false;
@@ -2449,19 +3487,29 @@ namespace System.Web {
             // Save the notification subscriptions so we can register them with IIS later, after
             // we call HookupEventHandlersForApplicationAndModules and process global.asax event handlers.
             _appRequestNotifications |= requestNotifications;
-            _appPostNotifications    |= postRequestNotifications;
+            _appPostNotifications |= postRequestNotifications;
 
-            for (int i = 0; i < _moduleCollection.Count; i++) {
+            for (int i = 0; i < _moduleCollection.Count; i++)
+            {
                 _currentModuleCollectionKey = _moduleCollection.GetKey(i);
                 IHttpModule httpModule = _moduleCollection.Get(i);
                 ModuleConfigurationInfo moduleInfo = _moduleConfigInfo[i];
 
 #if DBG
-                Debug.Trace("PipelineRuntime", "RegisterEventSubscriptionsWithIIS: name=" + CurrentModuleCollectionKey
-                            + ", type=" + httpModule.GetType().FullName + "\n");
+                Debug.Trace(
+                    "PipelineRuntime",
+                    "RegisterEventSubscriptionsWithIIS: name="
+                        + CurrentModuleCollectionKey
+                        + ", type="
+                        + httpModule.GetType().FullName
+                        + "\n"
+                );
 
                 // make sure collections are in sync
-                Debug.Assert(moduleInfo.Name == _currentModuleCollectionKey, "moduleInfo.Name == _currentModuleCollectionKey");
+                Debug.Assert(
+                    moduleInfo.Name == _currentModuleCollectionKey,
+                    "moduleInfo.Name == _currentModuleCollectionKey"
+                );
 #endif
 
                 httpModule.Init(this);
@@ -2469,126 +3517,160 @@ namespace System.Web {
                 ProcessEventSubscriptions(out requestNotifications, out postRequestNotifications);
 
                 // are any events wired up?
-                if (requestNotifications != 0 || postRequestNotifications != 0) {
-
-                    RegisterIntegratedEvent(appContext,
-                                            moduleInfo.Name,
-                                            requestNotifications,
-                                            postRequestNotifications,
-                                            moduleInfo.Type,
-                                            moduleInfo.Precondition,
-                                            false /*useHighPriority*/);
+                if (requestNotifications != 0 || postRequestNotifications != 0)
+                {
+                    RegisterIntegratedEvent(
+                        appContext,
+                        moduleInfo.Name,
+                        requestNotifications,
+                        postRequestNotifications,
+                        moduleInfo.Type,
+                        moduleInfo.Precondition,
+                        false /*useHighPriority*/
+                    );
                 }
             }
 
             // WOS 1728067: RewritePath does not remap the handler when rewriting from a non-ASP.NET request
             // register a default implicit handler
-            RegisterIntegratedEvent(appContext,
-                                    IMPLICIT_HANDLER,
-                                    RequestNotification.ExecuteRequestHandler | RequestNotification.MapRequestHandler /*requestNotifications*/,
-                                    RequestNotification.EndRequest /*postRequestNotifications*/,
-                                    String.Empty /*type*/,
-                                    String.Empty /*precondition*/,
-                                    false /*useHighPriority*/);
+            RegisterIntegratedEvent(
+                appContext,
+                IMPLICIT_HANDLER,
+                RequestNotification.ExecuteRequestHandler
+                    | RequestNotification.MapRequestHandler /*requestNotifications*/
+                ,
+                RequestNotification.EndRequest /*postRequestNotifications*/
+                ,
+                String.Empty /*type*/
+                ,
+                String.Empty /*precondition*/
+                ,
+                false /*useHighPriority*/
+            );
         }
 
-        private void ProcessEventSubscriptions(out RequestNotification requestNotifications,
-                                               out RequestNotification postRequestNotifications) {
+        private void ProcessEventSubscriptions(
+            out RequestNotification requestNotifications,
+            out RequestNotification postRequestNotifications
+        )
+        {
             requestNotifications = 0;
             postRequestNotifications = 0;
 
             // Begin
-            if(HasEventSubscription(EventBeginRequest)) {
+            if (HasEventSubscription(EventBeginRequest))
+            {
                 requestNotifications |= RequestNotification.BeginRequest;
             }
 
             // Authenticate
-            if(HasEventSubscription(EventAuthenticateRequest)) {
+            if (HasEventSubscription(EventAuthenticateRequest))
+            {
                 requestNotifications |= RequestNotification.AuthenticateRequest;
             }
 
-            if(HasEventSubscription(EventPostAuthenticateRequest)) {
+            if (HasEventSubscription(EventPostAuthenticateRequest))
+            {
                 postRequestNotifications |= RequestNotification.AuthenticateRequest;
             }
 
             // Authorize
-            if(HasEventSubscription(EventAuthorizeRequest)) {
+            if (HasEventSubscription(EventAuthorizeRequest))
+            {
                 requestNotifications |= RequestNotification.AuthorizeRequest;
             }
-            if(HasEventSubscription(EventPostAuthorizeRequest)) {
+            if (HasEventSubscription(EventPostAuthorizeRequest))
+            {
                 postRequestNotifications |= RequestNotification.AuthorizeRequest;
             }
 
             // ResolveRequestCache
-            if(HasEventSubscription(EventResolveRequestCache)) {
+            if (HasEventSubscription(EventResolveRequestCache))
+            {
                 requestNotifications |= RequestNotification.ResolveRequestCache;
             }
-            if(HasEventSubscription(EventPostResolveRequestCache)) {
+            if (HasEventSubscription(EventPostResolveRequestCache))
+            {
                 postRequestNotifications |= RequestNotification.ResolveRequestCache;
             }
 
             // MapRequestHandler
-            if(HasEventSubscription(EventMapRequestHandler)) {
+            if (HasEventSubscription(EventMapRequestHandler))
+            {
                 requestNotifications |= RequestNotification.MapRequestHandler;
             }
-            if(HasEventSubscription(EventPostMapRequestHandler)) {
+            if (HasEventSubscription(EventPostMapRequestHandler))
+            {
                 postRequestNotifications |= RequestNotification.MapRequestHandler;
             }
 
             // AcquireRequestState
-            if(HasEventSubscription(EventAcquireRequestState)) {
+            if (HasEventSubscription(EventAcquireRequestState))
+            {
                 requestNotifications |= RequestNotification.AcquireRequestState;
             }
-            if(HasEventSubscription(EventPostAcquireRequestState)) {
+            if (HasEventSubscription(EventPostAcquireRequestState))
+            {
                 postRequestNotifications |= RequestNotification.AcquireRequestState;
             }
 
             // PreExecuteRequestHandler
-            if(HasEventSubscription(EventPreRequestHandlerExecute)) {
+            if (HasEventSubscription(EventPreRequestHandlerExecute))
+            {
                 requestNotifications |= RequestNotification.PreExecuteRequestHandler;
             }
 
             // PostRequestHandlerExecute
-            if (HasEventSubscription(EventPostRequestHandlerExecute)) {
+            if (HasEventSubscription(EventPostRequestHandlerExecute))
+            {
                 postRequestNotifications |= RequestNotification.ExecuteRequestHandler;
             }
 
             // ReleaseRequestState
-            if(HasEventSubscription(EventReleaseRequestState)) {
+            if (HasEventSubscription(EventReleaseRequestState))
+            {
                 requestNotifications |= RequestNotification.ReleaseRequestState;
             }
-            if(HasEventSubscription(EventPostReleaseRequestState)) {
+            if (HasEventSubscription(EventPostReleaseRequestState))
+            {
                 postRequestNotifications |= RequestNotification.ReleaseRequestState;
             }
 
             // UpdateRequestCache
-            if(HasEventSubscription(EventUpdateRequestCache)) {
+            if (HasEventSubscription(EventUpdateRequestCache))
+            {
                 requestNotifications |= RequestNotification.UpdateRequestCache;
             }
-            if(HasEventSubscription(EventPostUpdateRequestCache)) {
+            if (HasEventSubscription(EventPostUpdateRequestCache))
+            {
                 postRequestNotifications |= RequestNotification.UpdateRequestCache;
             }
 
             // LogRequest
-            if(HasEventSubscription(EventLogRequest)) {
+            if (HasEventSubscription(EventLogRequest))
+            {
                 requestNotifications |= RequestNotification.LogRequest;
             }
-            if(HasEventSubscription(EventPostLogRequest)) {
+            if (HasEventSubscription(EventPostLogRequest))
+            {
                 postRequestNotifications |= RequestNotification.LogRequest;
             }
 
             // EndRequest
-            if(HasEventSubscription(EventEndRequest)) {
+            if (HasEventSubscription(EventEndRequest))
+            {
                 requestNotifications |= RequestNotification.EndRequest;
             }
 
             // PreSendRequestHeaders
-            if(HasEventSubscription(EventPreSendRequestHeaders)) {
+            if (HasEventSubscription(EventPreSendRequestHeaders))
+            {
                 requestNotifications |= RequestNotification.SendResponse;
             }
 
             // PreSendRequestContent
-            if(HasEventSubscription(EventPreSendRequestContent)) {
+            if (HasEventSubscription(EventPreSendRequestContent))
+            {
                 requestNotifications |= RequestNotification.SendResponse;
             }
         }
@@ -2597,13 +3679,15 @@ namespace System.Web {
         // and *reset* them if so
         // this is used only for special app instances
         // and not for processing requests
-        private bool HasEventSubscription(Object eventIndex) {
+        private bool HasEventSubscription(Object eventIndex)
+        {
             bool hasEvents = false;
 
             // async
             AsyncAppEventHandler asyncHandler = AsyncEvents[eventIndex];
 
-            if (asyncHandler != null && asyncHandler.Count > 0) {
+            if (asyncHandler != null && asyncHandler.Count > 0)
+            {
                 asyncHandler.Reset();
                 hasEvents = true;
             }
@@ -2611,13 +3695,16 @@ namespace System.Web {
             // sync
             EventHandler handler = (EventHandler)Events[eventIndex];
 
-            if (handler != null) {
+            if (handler != null)
+            {
                 Delegate[] handlers = handler.GetInvocationList();
-                if( handlers.Length > 0 ) {
+                if (handlers.Length > 0)
+                {
                     hasEvents = true;
                 }
 
-                foreach(Delegate d in handlers) {
+                foreach (Delegate d in handlers)
+                {
                     Events.RemoveHandler(eventIndex, d);
                 }
             }
@@ -2625,46 +3712,63 @@ namespace System.Web {
             return hasEvents;
         }
 
-
         //
         // Get app-level culture info (needed to context-less 'global' methods)
         //
 
-        private void InitAppLevelCulture() {
+        private void InitAppLevelCulture()
+        {
             GlobalizationSection globConfig = RuntimeConfig.GetAppConfig().Globalization;
             string culture = globConfig.Culture;
             string uiCulture = globConfig.UICulture;
-            if (!String.IsNullOrEmpty(culture)) {
-                if (StringUtil.StringStartsWithIgnoreCase(culture, AutoCulture)) {
+            if (!String.IsNullOrEmpty(culture))
+            {
+                if (StringUtil.StringStartsWithIgnoreCase(culture, AutoCulture))
+                {
                     _appLevelAutoCulture = true;
                     string appLevelCulture = GetFallbackCulture(culture);
-                    if(appLevelCulture != null) {
-                        _appLevelCulture = HttpServerUtility.CreateReadOnlyCultureInfo(culture.Substring(5));
+                    if (appLevelCulture != null)
+                    {
+                        _appLevelCulture = HttpServerUtility.CreateReadOnlyCultureInfo(
+                            culture.Substring(5)
+                        );
                     }
                 }
-                else {
+                else
+                {
                     _appLevelAutoCulture = false;
-                    _appLevelCulture = HttpServerUtility.CreateReadOnlyCultureInfo(globConfig.Culture);
+                    _appLevelCulture = HttpServerUtility.CreateReadOnlyCultureInfo(
+                        globConfig.Culture
+                    );
                 }
             }
-            if (!String.IsNullOrEmpty(uiCulture)) {
+            if (!String.IsNullOrEmpty(uiCulture))
+            {
                 if (StringUtil.StringStartsWithIgnoreCase(uiCulture, AutoCulture))
                 {
                     _appLevelAutoUICulture = true;
                     string appLevelUICulture = GetFallbackCulture(uiCulture);
-                    if(appLevelUICulture != null) {
-                        _appLevelUICulture = HttpServerUtility.CreateReadOnlyCultureInfo(uiCulture.Substring(5));
+                    if (appLevelUICulture != null)
+                    {
+                        _appLevelUICulture = HttpServerUtility.CreateReadOnlyCultureInfo(
+                            uiCulture.Substring(5)
+                        );
                     }
                 }
-                else {
+                else
+                {
                     _appLevelAutoUICulture = false;
-                    _appLevelUICulture = HttpServerUtility.CreateReadOnlyCultureInfo(globConfig.UICulture);
+                    _appLevelUICulture = HttpServerUtility.CreateReadOnlyCultureInfo(
+                        globConfig.UICulture
+                    );
                 }
             }
         }
 
-        internal static string GetFallbackCulture(string culture) {
-            if((culture.Length > 5) && (culture.IndexOf(':') == 4)) {
+        internal static string GetFallbackCulture(string culture)
+        {
+            if ((culture.Length > 5) && (culture.IndexOf(':') == 4))
+            {
                 return culture.Substring(5);
             }
             return null;
@@ -2674,9 +3778,11 @@ namespace System.Web {
         // Request mappings management functions
         //
 
-        private IHttpHandlerFactory GetFactory(HttpHandlerAction mapping) {
+        private IHttpHandlerFactory GetFactory(HttpHandlerAction mapping)
+        {
             HandlerFactoryCache entry = (HandlerFactoryCache)_handlerFactories[mapping.Type];
-            if (entry == null) {
+            if (entry == null)
+            {
                 entry = new HandlerFactoryCache(mapping);
                 _handlerFactories[mapping.Type] = entry;
             }
@@ -2684,9 +3790,11 @@ namespace System.Web {
             return entry.Factory;
         }
 
-        private IHttpHandlerFactory GetFactory(string type) {
+        private IHttpHandlerFactory GetFactory(string type)
+        {
             HandlerFactoryCache entry = (HandlerFactoryCache)_handlerFactories[type];
-            if (entry == null) {
+            if (entry == null)
+            {
                 entry = new HandlerFactoryCache(type);
                 _handlerFactories[type] = entry;
             }
@@ -2694,12 +3802,13 @@ namespace System.Web {
             return entry.Factory;
         }
 
-
         /*
          * Recycle all handlers mapped during the request processing
          */
-        private void RecycleHandlers() {
-            if (_handlerRecycleList != null) {
+        private void RecycleHandlers()
+        {
+            if (_handlerRecycleList != null)
+            {
                 int numHandlers = _handlerRecycleList.Count;
 
                 for (int i = 0; i < numHandlers; i++)
@@ -2713,22 +3822,29 @@ namespace System.Web {
          * Special exception to cancel module execution (not really an exception)
          * used in Response.End and when cancelling requests
          */
-        internal class CancelModuleException {
+        internal class CancelModuleException
+        {
             private bool _timeout;
 
-            internal CancelModuleException(bool timeout) {
+            internal CancelModuleException(bool timeout)
+            {
                 _timeout = timeout;
             }
 
-            internal bool Timeout { get { return _timeout;}}
+            internal bool Timeout
+            {
+                get { return _timeout; }
+            }
         }
 
         // Setup the asynchronous stuff and application variables
         // context for the entire deal is already rooted for native handler
-        internal void AssignContext(HttpContext context) {
+        internal void AssignContext(HttpContext context)
+        {
             Debug.Assert(HttpRuntime.UseIntegratedPipeline, "HttpRuntime.UseIntegratedPipeline");
 
-            if (null == _context) {
+            if (null == _context)
+            {
                 _stepManager.InitRequest();
 
                 _context = context;
@@ -2742,13 +3858,15 @@ namespace System.Web {
             }
         }
 
-        internal IAsyncResult BeginProcessRequestNotification(HttpContext context, AsyncCallback cb) {
+        internal IAsyncResult BeginProcessRequestNotification(HttpContext context, AsyncCallback cb)
+        {
             Debug.Trace("PipelineRuntime", "BeginProcessRequestNotification");
 
             HttpAsyncResult result;
 
-            if (_context == null) {
-                // 
+            if (_context == null)
+            {
+                //
                 AssignContext(context);
             }
 
@@ -2769,7 +3887,8 @@ namespace System.Web {
             return result;
         }
 
-        internal RequestNotificationStatus EndProcessRequestNotification(IAsyncResult result) {
+        internal RequestNotificationStatus EndProcessRequestNotification(IAsyncResult result)
+        {
             HttpAsyncResult ar = (HttpAsyncResult)result;
             if (ar.Error != null)
                 throw ar.Error;
@@ -2777,62 +3896,78 @@ namespace System.Web {
             return ar.Status;
         }
 
-        internal void ReleaseAppInstance() {
+        internal void ReleaseAppInstance()
+        {
             if (_context != null)
             {
-                if (_context.TraceIsEnabled) {
+                if (_context.TraceIsEnabled)
+                {
                     HttpRuntime.Profile.EndRequest(_context);
                 }
                 _context.ClearReferences();
-                if (_timeoutManagerInitialized) {
+                if (_timeoutManagerInitialized)
+                {
                     HttpRuntime.RequestTimeoutManager.Remove(_context);
                     _timeoutManagerInitialized = false;
                 }
 
-                if(HttpRuntime.EnablePrefetchOptimization && 
-                   HttpRuntime.InitializationException == null && 
-                   _context.FirstRequest && 
-                   _context.Error == null) {
-                       UnsafeNativeMethods.EndPrefetchActivity((uint)StringUtil.GetNonRandomizedHashCode(HttpRuntime.AppDomainAppId));
+                if (
+                    HttpRuntime.EnablePrefetchOptimization
+                    && HttpRuntime.InitializationException == null
+                    && _context.FirstRequest
+                    && _context.Error == null
+                )
+                {
+                    UnsafeNativeMethods.EndPrefetchActivity(
+                        (uint)StringUtil.GetNonRandomizedHashCode(HttpRuntime.AppDomainAppId)
+                    );
                 }
             }
             RecycleHandlers();
-            if (AsyncResult != null) {
+            if (AsyncResult != null)
+            {
                 AsyncResult = null;
             }
             _context = null;
             RaiseOnRequestCompleted();
             AppEvent = null;
 
-            if (ApplicationInstanceConsumersCounter != null) {
+            if (ApplicationInstanceConsumersCounter != null)
+            {
                 ApplicationInstanceConsumersCounter.MarkOperationCompleted(); // ReleaseAppInstance call complete
             }
-            else {
+            else
+            {
                 HttpApplicationFactory.RecycleApplicationInstance(this);
             }
         }
 
-        private void AddEventMapping(string moduleName,
-                                      RequestNotification requestNotification,
-                                      bool isPostNotification,
-                                      IExecutionStep step) {
-
+        private void AddEventMapping(
+            string moduleName,
+            RequestNotification requestNotification,
+            bool isPostNotification,
+            IExecutionStep step
+        )
+        {
             ThrowIfEventBindingDisallowed();
 
             // Add events to the IExecutionStep containers only if
             // InitSpecial has completed and InitInternal has not completed.
-            if (!IsContainerInitalizationAllowed) {
+            if (!IsContainerInitalizationAllowed)
+            {
                 return;
             }
 
             Debug.Assert(!String.IsNullOrEmpty(moduleName), "!String.IsNullOrEmpty(moduleName)");
-            Debug.Trace("PipelineRuntime", "AddEventMapping: for " + moduleName +
-                        " for " + requestNotification + "\r\n" );
-
+            Debug.Trace(
+                "PipelineRuntime",
+                "AddEventMapping: for " + moduleName + " for " + requestNotification + "\r\n"
+            );
 
             PipelineModuleStepContainer container = GetModuleContainer(moduleName);
             //WOS 1985878: HttpModule unsubscribing an event handler causes AV in Integrated Mode
-            if (container != null) {
+            if (container != null)
+            {
 #if DBG
                 container.DebugModuleName = moduleName;
 #endif
@@ -2840,14 +3975,15 @@ namespace System.Web {
             }
         }
 
-        static internal List<ModuleConfigurationInfo> IntegratedModuleList {
-            get {
-                return _moduleConfigInfo;
-            }
+        internal static List<ModuleConfigurationInfo> IntegratedModuleList
+        {
+            get { return _moduleConfigInfo; }
         }
 
-        private HttpModuleCollection GetModuleCollection(IntPtr appContext) {
-            if (_moduleConfigInfo != null) {
+        private HttpModuleCollection GetModuleCollection(IntPtr appContext)
+        {
+            if (_moduleConfigInfo != null)
+            {
                 return BuildIntegratedModuleCollection(_moduleConfigInfo);
             }
 
@@ -2860,25 +3996,62 @@ namespace System.Web {
             int cBstrModuleType = 0;
             IntPtr pBstrModulePrecondition = IntPtr.Zero;
             int cBstrModulePrecondition = 0;
-            try {
+            try
+            {
                 int count = 0;
-                int result = UnsafeIISMethods.MgdGetModuleCollection(IntPtr.Zero, appContext, out pModuleCollection, out count);
-                if (result < 0) {
-                    throw new HttpException(SR.GetString(SR.Cant_Read_Native_Modules, result.ToString("X8", CultureInfo.InvariantCulture)));
+                int result = UnsafeIISMethods.MgdGetModuleCollection(
+                    IntPtr.Zero,
+                    appContext,
+                    out pModuleCollection,
+                    out count
+                );
+                if (result < 0)
+                {
+                    throw new HttpException(
+                        SR.GetString(
+                            SR.Cant_Read_Native_Modules,
+                            result.ToString("X8", CultureInfo.InvariantCulture)
+                        )
+                    );
                 }
                 moduleList = new List<ModuleConfigurationInfo>(count);
 
-                for (uint index = 0; index < count; index++) {
-                    result = UnsafeIISMethods.MgdGetNextModule(pModuleCollection, ref index,
-                                                               out pBstrModuleName, out cBstrModuleName,
-                                                               out pBstrModuleType, out cBstrModuleType,
-                                                               out pBstrModulePrecondition, out cBstrModulePrecondition);
-                    if (result < 0) {
-                        throw new HttpException(SR.GetString(SR.Cant_Read_Native_Modules, result.ToString("X8", CultureInfo.InvariantCulture)));
+                for (uint index = 0; index < count; index++)
+                {
+                    result = UnsafeIISMethods.MgdGetNextModule(
+                        pModuleCollection,
+                        ref index,
+                        out pBstrModuleName,
+                        out cBstrModuleName,
+                        out pBstrModuleType,
+                        out cBstrModuleType,
+                        out pBstrModulePrecondition,
+                        out cBstrModulePrecondition
+                    );
+                    if (result < 0)
+                    {
+                        throw new HttpException(
+                            SR.GetString(
+                                SR.Cant_Read_Native_Modules,
+                                result.ToString("X8", CultureInfo.InvariantCulture)
+                            )
+                        );
                     }
-                    string moduleName = (cBstrModuleName > 0) ? StringUtil.StringFromWCharPtr(pBstrModuleName, cBstrModuleName) : null;
-                    string moduleType = (cBstrModuleType > 0) ? StringUtil.StringFromWCharPtr(pBstrModuleType, cBstrModuleType) : null;
-                    string modulePrecondition = (cBstrModulePrecondition > 0) ? StringUtil.StringFromWCharPtr(pBstrModulePrecondition, cBstrModulePrecondition) : String.Empty;
+                    string moduleName =
+                        (cBstrModuleName > 0)
+                            ? StringUtil.StringFromWCharPtr(pBstrModuleName, cBstrModuleName)
+                            : null;
+                    string moduleType =
+                        (cBstrModuleType > 0)
+                            ? StringUtil.StringFromWCharPtr(pBstrModuleType, cBstrModuleType)
+                            : null;
+                    string modulePrecondition =
+                        (cBstrModulePrecondition > 0)
+                            ? StringUtil.StringFromWCharPtr(
+                                pBstrModulePrecondition,
+                                cBstrModulePrecondition
+                            )
+                            : String.Empty;
                     Marshal.FreeBSTR(pBstrModuleName);
                     pBstrModuleName = IntPtr.Zero;
                     cBstrModuleName = 0;
@@ -2889,25 +4062,33 @@ namespace System.Web {
                     pBstrModulePrecondition = IntPtr.Zero;
                     cBstrModulePrecondition = 0;
 
-                    if (!String.IsNullOrEmpty(moduleName) && !String.IsNullOrEmpty(moduleType)) {
-                        moduleList.Add(new ModuleConfigurationInfo(moduleName, moduleType, modulePrecondition));
+                    if (!String.IsNullOrEmpty(moduleName) && !String.IsNullOrEmpty(moduleType))
+                    {
+                        moduleList.Add(
+                            new ModuleConfigurationInfo(moduleName, moduleType, modulePrecondition)
+                        );
                     }
                 }
             }
-            finally {
-                if (pModuleCollection != IntPtr.Zero) {
+            finally
+            {
+                if (pModuleCollection != IntPtr.Zero)
+                {
                     Marshal.Release(pModuleCollection);
                     pModuleCollection = IntPtr.Zero;
                 }
-                if (pBstrModuleName != IntPtr.Zero) {
+                if (pBstrModuleName != IntPtr.Zero)
+                {
                     Marshal.FreeBSTR(pBstrModuleName);
                     pBstrModuleName = IntPtr.Zero;
                 }
-                if (pBstrModuleType != IntPtr.Zero) {
+                if (pBstrModuleType != IntPtr.Zero)
+                {
                     Marshal.FreeBSTR(pBstrModuleType);
                     pBstrModuleType = IntPtr.Zero;
                 }
-                if (pBstrModulePrecondition != IntPtr.Zero) {
+                if (pBstrModulePrecondition != IntPtr.Zero)
+                {
                     Marshal.FreeBSTR(pBstrModulePrecondition);
                     pBstrModulePrecondition = IntPtr.Zero;
                 }
@@ -2921,17 +4102,29 @@ namespace System.Web {
         }
 
         // gets configuration for modules that have been added to the dynamic registry (integrated pipeline)
-        private IEnumerable<ModuleConfigurationInfo> GetConfigInfoForDynamicModules() {
+        private IEnumerable<ModuleConfigurationInfo> GetConfigInfoForDynamicModules()
+        {
             return from entry in _dynamicModuleRegistry.LockAndFetchList()
-                   select new ModuleConfigurationInfo(entry.Name, entry.Type, "managedHandler" /* condition */);
+                select new ModuleConfigurationInfo(
+                    entry.Name,
+                    entry.Type,
+                    "managedHandler" /* condition */
+                );
         }
 
-        HttpModuleCollection BuildIntegratedModuleCollection(List<ModuleConfigurationInfo> moduleList) {
+        HttpModuleCollection BuildIntegratedModuleCollection(
+            List<ModuleConfigurationInfo> moduleList
+        )
+        {
             HttpModuleCollection modules = new HttpModuleCollection();
 
-            foreach(ModuleConfigurationInfo mod in moduleList) {
+            foreach (ModuleConfigurationInfo mod in moduleList)
+            {
 #if DBG
-                Debug.Trace("NativeConfig", "Runtime module: " + mod.Name + " of type " + mod.Type + "\n");
+                Debug.Trace(
+                    "NativeConfig",
+                    "Runtime module: " + mod.Name + " of type " + mod.Type + "\n"
+                );
 #endif
                 ModulesEntry currentModule = new ModulesEntry(mod.Name, mod.Type, "type", null);
 
@@ -2945,82 +4138,111 @@ namespace System.Web {
         // Internal classes to support [asynchronous] app execution logic
         //
 
-        internal class AsyncAppEventHandler {
+        internal class AsyncAppEventHandler
+        {
             int _count;
             ArrayList _beginHandlers;
             ArrayList _endHandlers;
             ArrayList _stateObjects;
 
-            internal AsyncAppEventHandler() {
+            internal AsyncAppEventHandler()
+            {
                 _count = 0;
                 _beginHandlers = new ArrayList();
-                _endHandlers   = new ArrayList();
-                _stateObjects  = new ArrayList();
+                _endHandlers = new ArrayList();
+                _stateObjects = new ArrayList();
             }
 
-            internal void Reset() {
+            internal void Reset()
+            {
                 _count = 0;
                 _beginHandlers.Clear();
                 _endHandlers.Clear();
                 _stateObjects.Clear();
             }
 
-            internal int Count {
-                get {
-                    return _count;
-                }
+            internal int Count
+            {
+                get { return _count; }
             }
 
-            internal void Add(BeginEventHandler beginHandler, EndEventHandler endHandler, Object state) {
+            internal void Add(
+                BeginEventHandler beginHandler,
+                EndEventHandler endHandler,
+                Object state
+            )
+            {
                 _beginHandlers.Add(beginHandler);
                 _endHandlers.Add(endHandler);
                 _stateObjects.Add(state);
                 _count++;
             }
 
-            internal void CreateExecutionSteps(HttpApplication app, ArrayList steps) {
-                for (int i = 0; i < _count; i++) {
-                    steps.Add(new AsyncEventExecutionStep(
-                        app,
-                        (BeginEventHandler)_beginHandlers[i],
-                        (EndEventHandler)_endHandlers[i],
-                        _stateObjects[i]));
+            internal void CreateExecutionSteps(HttpApplication app, ArrayList steps)
+            {
+                for (int i = 0; i < _count; i++)
+                {
+                    steps.Add(
+                        new AsyncEventExecutionStep(
+                            app,
+                            (BeginEventHandler)_beginHandlers[i],
+                            (EndEventHandler)_endHandlers[i],
+                            _stateObjects[i]
+                        )
+                    );
                 }
             }
         }
 
-        internal class AsyncAppEventHandlersTable {
+        internal class AsyncAppEventHandlersTable
+        {
             private Hashtable _table;
 
-            internal void AddHandler(Object eventId, BeginEventHandler beginHandler,
-                                     EndEventHandler endHandler, Object state,
-                                     RequestNotification requestNotification,
-                                     bool isPost, HttpApplication app) {
+            internal void AddHandler(
+                Object eventId,
+                BeginEventHandler beginHandler,
+                EndEventHandler endHandler,
+                Object state,
+                RequestNotification requestNotification,
+                bool isPost,
+                HttpApplication app
+            )
+            {
                 if (_table == null)
                     _table = new Hashtable();
 
                 AsyncAppEventHandler asyncHandler = (AsyncAppEventHandler)_table[eventId];
 
-                if (asyncHandler == null) {
+                if (asyncHandler == null)
+                {
                     asyncHandler = new AsyncAppEventHandler();
                     _table[eventId] = asyncHandler;
                 }
 
                 asyncHandler.Add(beginHandler, endHandler, state);
 
-                if (HttpRuntime.UseIntegratedPipeline) {
-                    AsyncEventExecutionStep step =
-                        new AsyncEventExecutionStep(app,
-                                                    beginHandler,
-                                                    endHandler,
-                                                    state);
+                if (HttpRuntime.UseIntegratedPipeline)
+                {
+                    AsyncEventExecutionStep step = new AsyncEventExecutionStep(
+                        app,
+                        beginHandler,
+                        endHandler,
+                        state
+                    );
 
-                    app.AddEventMapping(app.CurrentModuleCollectionKey, requestNotification, isPost, step);
+                    app.AddEventMapping(
+                        app.CurrentModuleCollectionKey,
+                        requestNotification,
+                        isPost,
+                        step
+                    );
                 }
             }
 
-            internal AsyncAppEventHandler this[Object eventId] {
-                get {
+            internal AsyncAppEventHandler this[Object eventId]
+            {
+                get
+                {
                     if (_table == null)
                         return null;
                     return (AsyncAppEventHandler)_table[eventId];
@@ -3029,86 +4251,113 @@ namespace System.Web {
         }
 
         // interface to represent one execution step
-        internal interface IExecutionStep {
+        internal interface IExecutionStep
+        {
             void Execute();
-            bool CompletedSynchronously { get;}
+            bool CompletedSynchronously { get; }
             bool IsCancellable { get; }
         }
 
         // execution step -- stub
-        internal class NoopExecutionStep : IExecutionStep {
-            internal NoopExecutionStep() {
+        internal class NoopExecutionStep : IExecutionStep
+        {
+            internal NoopExecutionStep() { }
+
+            void IExecutionStep.Execute() { }
+
+            bool IExecutionStep.CompletedSynchronously
+            {
+                get { return true; }
             }
 
-            void IExecutionStep.Execute() {
-            }
-
-            bool IExecutionStep.CompletedSynchronously {
-                get { return true;}
-            }
-
-            bool IExecutionStep.IsCancellable {
+            bool IExecutionStep.IsCancellable
+            {
                 get { return false; }
             }
         }
 
         // execution step -- call synchronous event
-        internal class SyncEventExecutionStep : IExecutionStep {
+        internal class SyncEventExecutionStep : IExecutionStep
+        {
             private HttpApplication _application;
-            private EventHandler    _handler;
+            private EventHandler _handler;
 
-            internal SyncEventExecutionStep(HttpApplication app, EventHandler handler) {
+            internal SyncEventExecutionStep(HttpApplication app, EventHandler handler)
+            {
                 _application = app;
                 _handler = handler;
             }
 
-            internal EventHandler Handler {
-                get {
-                    return _handler;
-                }
+            internal EventHandler Handler
+            {
+                get { return _handler; }
             }
 
-            void IExecutionStep.Execute() {
+            void IExecutionStep.Execute()
+            {
                 string targetTypeStr = null;
 
-                if (_handler != null) {
-                    if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module)) {
+                if (_handler != null)
+                {
+                    if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module))
+                    {
                         targetTypeStr = _handler.Method.ReflectedType.ToString();
 
-                        EtwTrace.Trace(EtwTraceType.ETW_TYPE_PIPELINE_ENTER, _application.Context.WorkerRequest, targetTypeStr);
+                        EtwTrace.Trace(
+                            EtwTraceType.ETW_TYPE_PIPELINE_ENTER,
+                            _application.Context.WorkerRequest,
+                            targetTypeStr
+                        );
                     }
                     _handler(_application, _application.AppEvent);
-                    if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_PIPELINE_LEAVE, _application.Context.WorkerRequest, targetTypeStr);
+                    if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module))
+                        EtwTrace.Trace(
+                            EtwTraceType.ETW_TYPE_PIPELINE_LEAVE,
+                            _application.Context.WorkerRequest,
+                            targetTypeStr
+                        );
                 }
             }
 
-            bool IExecutionStep.CompletedSynchronously {
-                get { return true;}
+            bool IExecutionStep.CompletedSynchronously
+            {
+                get { return true; }
             }
 
-            bool IExecutionStep.IsCancellable {
+            bool IExecutionStep.IsCancellable
+            {
                 get { return true; }
             }
         }
 
         // execution step -- call asynchronous event
-        internal class AsyncEventExecutionStep : IExecutionStep {
-            private HttpApplication     _application;
-            private BeginEventHandler   _beginHandler;
-            private EndEventHandler     _endHandler;
-            private Object              _state;
-            private AsyncCallback       _completionCallback;
+        internal class AsyncEventExecutionStep : IExecutionStep
+        {
+            private HttpApplication _application;
+            private BeginEventHandler _beginHandler;
+            private EndEventHandler _endHandler;
+            private Object _state;
+            private AsyncCallback _completionCallback;
             private AsyncStepCompletionInfo _asyncStepCompletionInfo; // per call
-            private bool                _sync;          // per call
-            private string              _targetTypeStr;
+            private bool _sync; // per call
+            private string _targetTypeStr;
 
-            internal AsyncEventExecutionStep(HttpApplication app, BeginEventHandler beginHandler, EndEventHandler endHandler, Object state)
-                :this(app, beginHandler, endHandler, state, HttpRuntime.UseIntegratedPipeline)
-                {
-                }
+            internal AsyncEventExecutionStep(
+                HttpApplication app,
+                BeginEventHandler beginHandler,
+                EndEventHandler endHandler,
+                Object state
+            )
+                : this(app, beginHandler, endHandler, state, HttpRuntime.UseIntegratedPipeline) { }
 
-            internal AsyncEventExecutionStep(HttpApplication app, BeginEventHandler beginHandler, EndEventHandler endHandler, Object state, bool useIntegratedPipeline) {
-
+            internal AsyncEventExecutionStep(
+                HttpApplication app,
+                BeginEventHandler beginHandler,
+                EndEventHandler endHandler,
+                Object state,
+                bool useIntegratedPipeline
+            )
+            {
                 _application = app;
                 // Instrument the beginHandler method if AppVerifier is enabled.
                 // If AppVerifier not enabled, we just get back the original delegate to beginHandler uninstrumented.
@@ -3118,8 +4367,10 @@ namespace System.Web {
                 _completionCallback = new AsyncCallback(this.OnAsyncEventCompletion);
             }
 
-            private void OnAsyncEventCompletion(IAsyncResult ar) {
-                if (ar.CompletedSynchronously) {
+            private void OnAsyncEventCompletion(IAsyncResult ar)
+            {
+                if (ar.CompletedSynchronously)
+                {
                     // Synchronous completions will be handled by IExecutionStep.Execute.
                     return;
                 }
@@ -3137,65 +4388,93 @@ namespace System.Web {
                 // async operations until the next step.
                 context.SyncContext.ProhibitVoidAsyncOperations();
 
-                try {
+                try
+                {
                     InvokeEndHandler(ar);
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     error = e;
                 }
 
-                bool shouldCallResumeSteps = _asyncStepCompletionInfo.RegisterAsyncCompletion(error);
-                if (!shouldCallResumeSteps) {
+                bool shouldCallResumeSteps = _asyncStepCompletionInfo.RegisterAsyncCompletion(
+                    error
+                );
+                if (!shouldCallResumeSteps)
+                {
                     return;
                 }
 
-                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_PIPELINE_LEAVE, context.WorkerRequest, _targetTypeStr);
+                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module))
+                    EtwTrace.Trace(
+                        EtwTraceType.ETW_TYPE_PIPELINE_LEAVE,
+                        context.WorkerRequest,
+                        _targetTypeStr
+                    );
 
                 // re-set start time after an async completion (see VSWhidbey 231010)
                 context.SetStartTime();
 
                 // Assert to disregard the user code up the stack
-                if (HttpRuntime.IsLegacyCas) {
+                if (HttpRuntime.IsLegacyCas)
+                {
                     ResumeStepsWithAssert(error);
                 }
-                else {
+                else
+                {
                     ResumeSteps(error);
                 }
             }
 
-            private void InvokeEndHandler(IAsyncResult ar) {
-                if (_application._stepInvoker != null) {
+            private void InvokeEndHandler(IAsyncResult ar)
+            {
+                if (_application._stepInvoker != null)
+                {
                     bool stepCalled = false;
 
-                    _application._stepInvoker.Invoke(() => {
-                        if (!stepCalled) {
+                    _application._stepInvoker.Invoke(() =>
+                    {
+                        if (!stepCalled)
+                        {
                             stepCalled = true;
                             _endHandler(ar);
                         }
                     });
 
-                    if (!stepCalled) {
+                    if (!stepCalled)
+                    {
                         _endHandler(ar);
                     }
-                } else {
+                }
+                else
+                {
                     _endHandler(ar);
                 }
             }
 
             [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
-            void ResumeStepsWithAssert(Exception error) {
+            void ResumeStepsWithAssert(Exception error)
+            {
                 ResumeSteps(error);
             }
 
-            void ResumeSteps(Exception error) {
+            void ResumeSteps(Exception error)
+            {
                 _application.ResumeStepsFromThreadPoolThread(error);
             }
 
-            void IExecutionStep.Execute() {
+            void IExecutionStep.Execute()
+            {
                 _sync = false;
 
-                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module)) {
+                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module))
+                {
                     _targetTypeStr = _beginHandler.Method.ReflectedType.ToString();
-                    EtwTrace.Trace(EtwTraceType.ETW_TYPE_PIPELINE_ENTER, _application.Context.WorkerRequest, _targetTypeStr);
+                    EtwTrace.Trace(
+                        EtwTraceType.ETW_TYPE_PIPELINE_ENTER,
+                        _application.Context.WorkerRequest,
+                        _targetTypeStr
+                    );
                 }
 
                 HttpContext context = _application.Context;
@@ -3203,10 +4482,17 @@ namespace System.Web {
                 _asyncStepCompletionInfo.Reset();
                 context.SyncContext.AllowVoidAsyncOperations();
                 IAsyncResult ar;
-                try {
-                    ar = _beginHandler(_application, _application.AppEvent, _completionCallback, _state);
+                try
+                {
+                    ar = _beginHandler(
+                        _application,
+                        _application.AppEvent,
+                        _completionCallback,
+                        _state
+                    );
                 }
-                catch {
+                catch
+                {
                     // The asynchronous step has completed, so we should disallow further
                     // async operations until the next step.
                     context.SyncContext.ProhibitVoidAsyncOperations();
@@ -3215,12 +4501,18 @@ namespace System.Web {
 
                 bool operationCompleted;
                 bool mustCallEndHandler;
-                _asyncStepCompletionInfo.RegisterBeginUnwound(ar, out operationCompleted, out mustCallEndHandler);
+                _asyncStepCompletionInfo.RegisterBeginUnwound(
+                    ar,
+                    out operationCompleted,
+                    out mustCallEndHandler
+                );
 
-                if (operationCompleted) {
+                if (operationCompleted)
+                {
                     _sync = true;
 
-                    if (mustCallEndHandler) {
+                    if (mustCallEndHandler)
+                    {
                         // The asynchronous step has completed, so we should disallow further
                         // async operations until the next step.
                         context.SyncContext.ProhibitVoidAsyncOperations();
@@ -3229,57 +4521,74 @@ namespace System.Web {
 
                     _asyncStepCompletionInfo.ReportError();
 
-                    if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_PIPELINE_LEAVE, _application.Context.WorkerRequest, _targetTypeStr);
+                    if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module))
+                        EtwTrace.Trace(
+                            EtwTraceType.ETW_TYPE_PIPELINE_LEAVE,
+                            _application.Context.WorkerRequest,
+                            _targetTypeStr
+                        );
                 }
             }
 
-            bool IExecutionStep.CompletedSynchronously {
-                get { return _sync;}
+            bool IExecutionStep.CompletedSynchronously
+            {
+                get { return _sync; }
             }
 
-            bool IExecutionStep.IsCancellable {
+            bool IExecutionStep.IsCancellable
+            {
                 get { return false; }
             }
         }
 
         // execution step -- validate the path for canonicalization issues
-        internal class ValidatePathExecutionStep : IExecutionStep {
+        internal class ValidatePathExecutionStep : IExecutionStep
+        {
             private HttpApplication _application;
 
-            internal ValidatePathExecutionStep(HttpApplication app) {
+            internal ValidatePathExecutionStep(HttpApplication app)
+            {
                 _application = app;
             }
 
-            void IExecutionStep.Execute() {
+            void IExecutionStep.Execute()
+            {
                 _application.Context.ValidatePath();
             }
 
-            bool IExecutionStep.CompletedSynchronously {
+            bool IExecutionStep.CompletedSynchronously
+            {
                 get { return true; }
             }
 
-            bool IExecutionStep.IsCancellable {
+            bool IExecutionStep.IsCancellable
+            {
                 get { return false; }
             }
         }
 
         // execution step -- validate request (virtual path, query string, entity body, etc)
-        internal class ValidateRequestExecutionStep : IExecutionStep {
+        internal class ValidateRequestExecutionStep : IExecutionStep
+        {
             private HttpApplication _application;
 
-            internal ValidateRequestExecutionStep(HttpApplication app) {
+            internal ValidateRequestExecutionStep(HttpApplication app)
+            {
                 _application = app;
             }
 
-            void IExecutionStep.Execute() {
+            void IExecutionStep.Execute()
+            {
                 _application.Context.Request.ValidateInputIfRequiredByConfig();
             }
 
-            bool IExecutionStep.CompletedSynchronously {
+            bool IExecutionStep.CompletedSynchronously
+            {
                 get { return true; }
             }
 
-            bool IExecutionStep.IsCancellable {
+            bool IExecutionStep.IsCancellable
+            {
                 get { return false; }
             }
         }
@@ -3288,62 +4597,90 @@ namespace System.Web {
         // this does not map handler, rather that's done by the core
         // this does instantiate the managed type so that things that need to
         // look at it can
-        internal class MaterializeHandlerExecutionStep : IExecutionStep {
+        internal class MaterializeHandlerExecutionStep : IExecutionStep
+        {
             private HttpApplication _application;
 
-            internal MaterializeHandlerExecutionStep(HttpApplication app) {
+            internal MaterializeHandlerExecutionStep(HttpApplication app)
+            {
                 _application = app;
             }
 
-            void IExecutionStep.Execute() {
+            void IExecutionStep.Execute()
+            {
                 HttpContext context = _application.Context;
                 HttpRequest request = context.Request;
                 IHttpHandler handler = null;
                 string configType = null;
 
-                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_MAPHANDLER_ENTER, context.WorkerRequest);
+                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure))
+                    EtwTrace.Trace(EtwTraceType.ETW_TYPE_MAPHANDLER_ENTER, context.WorkerRequest);
 
                 IIS7WorkerRequest wr = context.WorkerRequest as IIS7WorkerRequest;
 
                 // Get handler
-                if (context.RemapHandlerInstance != null){
+                if (context.RemapHandlerInstance != null)
+                {
                     //RemapHandler overrides all
                     wr.SetScriptMapForRemapHandler();
                     context.Handler = context.RemapHandlerInstance;
                 }
-                else if (request.RewrittenUrl != null) {
+                else if (request.RewrittenUrl != null)
+                {
                     // RewritePath, we need to re-map the handler
                     bool handlerExists;
-                    configType = wr.ReMapHandlerAndGetHandlerTypeString(context, request.Path, out handlerExists);
-                    if (!handlerExists) {
+                    configType = wr.ReMapHandlerAndGetHandlerTypeString(
+                        context,
+                        request.Path,
+                        out handlerExists
+                    );
+                    if (!handlerExists)
+                    {
                         // WOS 1973590: When RewritePath is used with missing handler in Integrated Mode,an empty response 200 is returned instead of 404
-                        throw new HttpException(404, SR.GetString(SR.Http_handler_not_found_for_request_type, request.RequestType));
+                        throw new HttpException(
+                            404,
+                            SR.GetString(
+                                SR.Http_handler_not_found_for_request_type,
+                                request.RequestType
+                            )
+                        );
                     }
                 }
-                else {
+                else
+                {
                     configType = wr.GetManagedHandlerType();
                 }
 
-                if (!String.IsNullOrEmpty(configType)) {
+                if (!String.IsNullOrEmpty(configType))
+                {
                     IHttpHandlerFactory factory = _application.GetFactory(configType);
                     string pathTranslated = request.PhysicalPathInternal;
 
-                    try {
-                        handler = factory.GetHandler(context, request.RequestType, request.FilePath, pathTranslated);
+                    try
+                    {
+                        handler = factory.GetHandler(
+                            context,
+                            request.RequestType,
+                            request.FilePath,
+                            pathTranslated
+                        );
                     }
-                    catch (FileNotFoundException e) {
+                    catch (FileNotFoundException e)
+                    {
                         if (HttpRuntime.HasPathDiscoveryPermission(pathTranslated))
                             throw new HttpException(404, null, e);
                         else
                             throw new HttpException(404, null);
                     }
-                    catch (DirectoryNotFoundException e) {
+                    catch (DirectoryNotFoundException e)
+                    {
                         if (HttpRuntime.HasPathDiscoveryPermission(pathTranslated))
                             throw new HttpException(404, null, e);
                         else
                             throw new HttpException(404, null);
                     }
-                    catch (PathTooLongException e) {
+                    catch (PathTooLongException e)
+                    {
                         if (HttpRuntime.HasPathDiscoveryPermission(pathTranslated))
                             throw new HttpException(414, null, e);
                         else
@@ -3358,69 +4695,89 @@ namespace System.Web {
                     _application._handlerRecycleList.Add(new HandlerWithFactory(handler, factory));
                 }
 
-                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_MAPHANDLER_LEAVE, context.WorkerRequest);
+                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure))
+                    EtwTrace.Trace(EtwTraceType.ETW_TYPE_MAPHANDLER_LEAVE, context.WorkerRequest);
             }
 
-            bool IExecutionStep.CompletedSynchronously {
-                get { return true;}
+            bool IExecutionStep.CompletedSynchronously
+            {
+                get { return true; }
             }
 
-            bool IExecutionStep.IsCancellable {
+            bool IExecutionStep.IsCancellable
+            {
                 get { return false; }
             }
         }
 
-
         // execution step -- map HTTP handler (used to be a separate module)
-        internal class MapHandlerExecutionStep : IExecutionStep {
+        internal class MapHandlerExecutionStep : IExecutionStep
+        {
             private HttpApplication _application;
 
-            internal MapHandlerExecutionStep(HttpApplication app) {
+            internal MapHandlerExecutionStep(HttpApplication app)
+            {
                 _application = app;
             }
 
-            void IExecutionStep.Execute() {
+            void IExecutionStep.Execute()
+            {
                 HttpContext context = _application.Context;
                 HttpRequest request = context.Request;
 
-                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_MAPHANDLER_ENTER, context.WorkerRequest);
+                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure))
+                    EtwTrace.Trace(EtwTraceType.ETW_TYPE_MAPHANDLER_ENTER, context.WorkerRequest);
 
                 context.Handler = _application.MapHttpHandler(
                     context,
                     request.RequestType,
                     request.FilePathObject,
                     request.PhysicalPathInternal,
-                    false /*useAppConfig*/);
-                Debug.Assert(context.ConfigurationPath == context.Request.FilePathObject, "context.ConfigurationPath (" +
-                             context.ConfigurationPath + ") != context.Request.FilePath (" + context.Request.FilePath + ")");
+                    false /*useAppConfig*/
+                );
+                Debug.Assert(
+                    context.ConfigurationPath == context.Request.FilePathObject,
+                    "context.ConfigurationPath ("
+                        + context.ConfigurationPath
+                        + ") != context.Request.FilePath ("
+                        + context.Request.FilePath
+                        + ")"
+                );
 
-                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_MAPHANDLER_LEAVE, context.WorkerRequest);
+                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure))
+                    EtwTrace.Trace(EtwTraceType.ETW_TYPE_MAPHANDLER_LEAVE, context.WorkerRequest);
             }
 
-            bool IExecutionStep.CompletedSynchronously {
-                get { return true;}
+            bool IExecutionStep.CompletedSynchronously
+            {
+                get { return true; }
             }
 
-            bool IExecutionStep.IsCancellable {
+            bool IExecutionStep.IsCancellable
+            {
                 get { return false; }
             }
         }
 
         // execution step -- call HTTP handler (used to be a separate module)
-        internal class CallHandlerExecutionStep : IExecutionStep {
-            private HttpApplication   _application;
-            private AsyncCallback     _completionCallback;
-            private IHttpAsyncHandler _handler;       // per call
+        internal class CallHandlerExecutionStep : IExecutionStep
+        {
+            private HttpApplication _application;
+            private AsyncCallback _completionCallback;
+            private IHttpAsyncHandler _handler; // per call
             private AsyncStepCompletionInfo _asyncStepCompletionInfo; // per call
-            private bool              _sync;          // per call
+            private bool _sync; // per call
 
-            internal CallHandlerExecutionStep(HttpApplication app) {
+            internal CallHandlerExecutionStep(HttpApplication app)
+            {
                 _application = app;
                 _completionCallback = new AsyncCallback(this.OnAsyncHandlerCompletion);
             }
 
-            private void OnAsyncHandlerCompletion(IAsyncResult ar) {
-                if (ar.CompletedSynchronously) {
+            private void OnAsyncHandlerCompletion(IAsyncResult ar)
+            {
+                if (ar.CompletedSynchronously)
+                {
                     // Synchronous completions will be handled by IExecutionStep.Execute.
                     return;
                 }
@@ -3437,10 +4794,14 @@ namespace System.Web {
                 // async operations until the next step.
                 context.SyncContext.ProhibitVoidAsyncOperations();
 
-                try {
-                    try {
+                try
+                {
+                    try
+                    {
                         InvokeEndHandler(ar);
-                    } finally {
+                    }
+                    finally
+                    {
                         SuppressPostEndRequestIfNecessary(context);
 
                         // In Integrated mode, generate the necessary response headers
@@ -3449,22 +4810,32 @@ namespace System.Web {
                         context.Response.GenerateResponseHeadersForHandler();
                     }
                 }
-                catch (Exception e) {
-                    if (e is ThreadAbortException || e.InnerException != null && e.InnerException is ThreadAbortException) {
+                catch (Exception e)
+                {
+                    if (
+                        e is ThreadAbortException
+                        || e.InnerException != null && e.InnerException is ThreadAbortException
+                    )
+                    {
                         // Response.End happened during async operation
                         _application.CompleteRequest();
                     }
-                    else {
+                    else
+                    {
                         error = e;
                     }
                 }
 
-                bool shouldCallResumeSteps = _asyncStepCompletionInfo.RegisterAsyncCompletion(error);
-                if (!shouldCallResumeSteps) {
+                bool shouldCallResumeSteps = _asyncStepCompletionInfo.RegisterAsyncCompletion(
+                    error
+                );
+                if (!shouldCallResumeSteps)
+                {
                     return;
                 }
 
-                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.Page)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_HTTPHANDLER_LEAVE, context.WorkerRequest);
+                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.Page))
+                    EtwTrace.Trace(EtwTraceType.ETW_TYPE_HTTPHANDLER_LEAVE, context.WorkerRequest);
 
                 _handler = null; // not to remember
 
@@ -3472,76 +4843,107 @@ namespace System.Web {
                 context.SetStartTime();
 
                 // Assert to disregard the user code up the stack
-                if (HttpRuntime.IsLegacyCas) {
+                if (HttpRuntime.IsLegacyCas)
+                {
                     ResumeStepsWithAssert(error);
                 }
-                else {
+                else
+                {
                     ResumeSteps(error);
                 }
             }
 
-            private void InvokeEndHandler(IAsyncResult ar) {
-                if (_application._stepInvoker != null) {
+            private void InvokeEndHandler(IAsyncResult ar)
+            {
+                if (_application._stepInvoker != null)
+                {
                     bool stepCalled = false;
 
-                    _application._stepInvoker.Invoke(() => {
-                        if (!stepCalled) {
+                    _application._stepInvoker.Invoke(() =>
+                    {
+                        if (!stepCalled)
+                        {
                             stepCalled = true;
                             _handler.EndProcessRequest(ar);
                         }
                     });
 
-                    if (!stepCalled) {
+                    if (!stepCalled)
+                    {
                         _handler.EndProcessRequest(ar);
                     }
-                } else {
+                }
+                else
+                {
                     _handler.EndProcessRequest(ar);
                 }
             }
 
             [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
-            void ResumeStepsWithAssert(Exception error) {
+            void ResumeStepsWithAssert(Exception error)
+            {
                 ResumeSteps(error);
             }
 
-            void ResumeSteps(Exception error) {
+            void ResumeSteps(Exception error)
+            {
                 _application.ResumeStepsFromThreadPoolThread(error);
             }
 
-            private static void SuppressPostEndRequestIfNecessary(HttpContext context) {
+            private static void SuppressPostEndRequestIfNecessary(HttpContext context)
+            {
                 // DevDiv #245124 - ASP.NET now hooks PostEndRequest in order to kick off the WebSocket pipeline.
                 // If this is not a WebSocket request or the handshake was not completed, then we can suppress
                 // this pipeline event. This allows us to send the appropriate cache headers to the client,
                 // and it also gives a small perf boost.
 
-                if (!context.IsWebSocketRequestUpgrading) {
+                if (!context.IsWebSocketRequestUpgrading)
+                {
                     IIS7WorkerRequest wr = context.WorkerRequest as IIS7WorkerRequest;
-                    if (wr != null) {
-                        wr.DisableNotifications(notifications: 0, postNotifications: RequestNotification.EndRequest);
+                    if (wr != null)
+                    {
+                        wr.DisableNotifications(
+                            notifications: 0,
+                            postNotifications: RequestNotification.EndRequest
+                        );
                     }
                 }
             }
 
-            void IExecutionStep.Execute() {
+            void IExecutionStep.Execute()
+            {
                 HttpContext context = _application.Context;
                 IHttpHandler handler = context.Handler;
 
-                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.Page)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_HTTPHANDLER_ENTER, context.WorkerRequest);
+                if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.Page))
+                    EtwTrace.Trace(EtwTraceType.ETW_TYPE_HTTPHANDLER_ENTER, context.WorkerRequest);
 
-                if (handler != null && HttpRuntime.UseIntegratedPipeline) {
+                if (handler != null && HttpRuntime.UseIntegratedPipeline)
+                {
                     IIS7WorkerRequest wr = context.WorkerRequest as IIS7WorkerRequest;
-                    if (wr != null && wr.IsHandlerExecutionDenied()) {
+                    if (wr != null && wr.IsHandlerExecutionDenied())
+                    {
                         _sync = true;
-                        HttpException error = new HttpException(403, SR.GetString(SR.Handler_access_denied));
-                        error.SetFormatter(new PageForbiddenErrorFormatter(context.Request.Path, SR.GetString(SR.Handler_access_denied)));
+                        HttpException error = new HttpException(
+                            403,
+                            SR.GetString(SR.Handler_access_denied)
+                        );
+                        error.SetFormatter(
+                            new PageForbiddenErrorFormatter(
+                                context.Request.Path,
+                                SR.GetString(SR.Handler_access_denied)
+                            )
+                        );
                         throw error;
                     }
                 }
 
-                if (handler == null) {
+                if (handler == null)
+                {
                     _sync = true;
                 }
-                else if (handler is IHttpAsyncHandler) {
+                else if (handler is IHttpAsyncHandler)
+                {
                     // asynchronous handler
                     IHttpAsyncHandler asyncHandler = (IHttpAsyncHandler)handler;
 
@@ -3550,15 +4952,20 @@ namespace System.Web {
 
                     // Instrument the BeginProcessRequest method if AppVerifier is enabled.
                     // If AppVerifier not enabled, we just get back the original delegate to BeginProcessRequest uninstrumented.
-                    var beginProcessRequestDelegate = AppVerifier.WrapBeginMethod<HttpContext>(_application, asyncHandler.BeginProcessRequest);
+                    var beginProcessRequestDelegate = AppVerifier.WrapBeginMethod<HttpContext>(
+                        _application,
+                        asyncHandler.BeginProcessRequest
+                    );
 
                     _asyncStepCompletionInfo.Reset();
                     context.SyncContext.AllowVoidAsyncOperations();
                     IAsyncResult ar;
-                    try {
+                    try
+                    {
                         ar = beginProcessRequestDelegate(context, _completionCallback, null);
                     }
-                    catch {
+                    catch
+                    {
                         // The asynchronous step has completed, so we should disallow further
                         // async operations until the next step.
                         context.SyncContext.ProhibitVoidAsyncOperations();
@@ -3567,9 +4974,14 @@ namespace System.Web {
 
                     bool operationCompleted;
                     bool mustCallEndHandler;
-                    _asyncStepCompletionInfo.RegisterBeginUnwound(ar, out operationCompleted, out mustCallEndHandler);
+                    _asyncStepCompletionInfo.RegisterBeginUnwound(
+                        ar,
+                        out operationCompleted,
+                        out mustCallEndHandler
+                    );
 
-                    if (operationCompleted) {
+                    if (operationCompleted)
+                    {
                         _sync = true;
                         _handler = null; // not to remember
 
@@ -3577,14 +4989,17 @@ namespace System.Web {
                         // async operations until the next step.
                         context.SyncContext.ProhibitVoidAsyncOperations();
 
-                        try {
-                            if (mustCallEndHandler) {
+                        try
+                        {
+                            if (mustCallEndHandler)
+                            {
                                 asyncHandler.EndProcessRequest(ar);
                             }
 
                             _asyncStepCompletionInfo.ReportError();
                         }
-                        finally {
+                        finally
+                        {
                             SuppressPostEndRequestIfNecessary(context);
 
                             //  In Integrated mode, generate the necessary response headers
@@ -3592,10 +5007,15 @@ namespace System.Web {
                             context.Response.GenerateResponseHeadersForHandler();
                         }
 
-                        if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.Page)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_HTTPHANDLER_LEAVE, context.WorkerRequest);
+                        if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.Page))
+                            EtwTrace.Trace(
+                                EtwTraceType.ETW_TYPE_HTTPHANDLER_LEAVE,
+                                context.WorkerRequest
+                            );
                     }
                 }
-                else {
+                else
+                {
                     // synchronous handler
                     _sync = true;
 
@@ -3608,12 +5028,18 @@ namespace System.Web {
                     // for v2.0 RTM, so it's now legacy behavior and cannot be changed.
                     context.SyncContext.SetSyncCaller();
 
-                    try {
+                    try
+                    {
                         handler.ProcessRequest(context);
                     }
-                    finally {
+                    finally
+                    {
                         context.SyncContext.ResetSyncCaller();
-                        if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.Page)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_HTTPHANDLER_LEAVE, context.WorkerRequest);
+                        if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.Page))
+                            EtwTrace.Trace(
+                                EtwTraceType.ETW_TYPE_HTTPHANDLER_LEAVE,
+                                context.WorkerRequest
+                            );
 
                         SuppressPostEndRequestIfNecessary(context);
 
@@ -3624,39 +5050,49 @@ namespace System.Web {
                 }
             }
 
-            bool IExecutionStep.CompletedSynchronously {
-                get { return _sync;}
+            bool IExecutionStep.CompletedSynchronously
+            {
+                get { return _sync; }
             }
 
-            bool IExecutionStep.IsCancellable {
+            bool IExecutionStep.IsCancellable
+            {
                 // launching of async handler should not be cancellable
                 get { return (_application.Context.Handler is IHttpAsyncHandler) ? false : true; }
             }
         }
 
         // execution step -- initiate the transition to a WebSocket request
-        internal class TransitionToWebSocketsExecutionStep : IExecutionStep {
+        internal class TransitionToWebSocketsExecutionStep : IExecutionStep
+        {
             private readonly HttpApplication _application;
 
-            internal TransitionToWebSocketsExecutionStep(HttpApplication app) {
+            internal TransitionToWebSocketsExecutionStep(HttpApplication app)
+            {
                 _application = app;
             }
 
-            void IExecutionStep.Execute() {
+            void IExecutionStep.Execute()
+            {
                 HttpContext context = _application.Context;
 
-                if (context.RootedObjects == null
+                if (
+                    context.RootedObjects == null
                     || context.RootedObjects.WebSocketPipeline == null
-                    || context.Response.StatusCode != (int)HttpStatusCode.SwitchingProtocols) {
-
+                    || context.Response.StatusCode != (int)HttpStatusCode.SwitchingProtocols
+                )
+                {
                     // If this isn't a WebSocket request or something has caused the status code
                     // not to be HTTP 101 (such as an error, redirect, or something else), no-op.
                     CompletedSynchronously = true;
                 }
-                else {
+                else
+                {
                     // DevDiv #273639: Let the HttpRequest instance maintain a reference to the response
                     // cookie collection, as the HttpResponse instance won't be available after the transition.
-                    context.Request.StoreReferenceToResponseCookies(context.Response.GetCookiesNoCreate());
+                    context.Request.StoreReferenceToResponseCookies(
+                        context.Response.GetCookiesNoCreate()
+                    );
 
                     // If this is a WebSocket request, mark as transitioned so that asynchronous events (like SendRequest)
                     // don't execute. We also need to mark ourselves as not having completed synchronously so that the
@@ -3669,128 +5105,173 @@ namespace System.Web {
                 }
             }
 
-            public bool CompletedSynchronously {
-                get;
-                private set;
-            }
+            public bool CompletedSynchronously { get; private set; }
 
-            public bool IsCancellable {
+            public bool IsCancellable
+            {
                 // launching of async operation should not be cancellable
                 get { return false; }
             }
         }
 
         // execution step -- call response filter
-        internal class CallFilterExecutionStep : IExecutionStep {
+        internal class CallFilterExecutionStep : IExecutionStep
+        {
             private HttpApplication _application;
 
-            internal CallFilterExecutionStep(HttpApplication app) {
+            internal CallFilterExecutionStep(HttpApplication app)
+            {
                 _application = app;
             }
 
-            void IExecutionStep.Execute() {
-                try {
+            void IExecutionStep.Execute()
+            {
+                try
+                {
                     _application.Context.Response.FilterOutput();
                 }
-                finally {
+                finally
+                {
                     // if this is the UpdateCache notification, then disable the LogRequest notification (which handles the error case)
-                    if (HttpRuntime.UseIntegratedPipeline && (_application.Context.CurrentNotification == RequestNotification.UpdateRequestCache)) {
-                        _application.Context.DisableNotifications(RequestNotification.LogRequest, 0 /*postNotifications*/);
+                    if (
+                        HttpRuntime.UseIntegratedPipeline
+                        && (
+                            _application.Context.CurrentNotification
+                            == RequestNotification.UpdateRequestCache
+                        )
+                    )
+                    {
+                        _application.Context.DisableNotifications(
+                            RequestNotification.LogRequest,
+                            0 /*postNotifications*/
+                        );
                     }
                 }
             }
 
-            bool IExecutionStep.CompletedSynchronously {
-                get { return true;}
+            bool IExecutionStep.CompletedSynchronously
+            {
+                get { return true; }
             }
 
-            bool IExecutionStep.IsCancellable {
+            bool IExecutionStep.IsCancellable
+            {
                 get { return true; }
             }
         }
 
         // integrated pipeline execution step for RaiseOnPreSendRequestHeaders and RaiseOnPreSendRequestContent
-        internal class SendResponseExecutionStep : IExecutionStep {
+        internal class SendResponseExecutionStep : IExecutionStep
+        {
             private HttpApplication _application;
             private EventHandler _handler;
             private bool _isHeaders;
 
-            internal SendResponseExecutionStep(HttpApplication app, EventHandler handler, bool isHeaders) {
+            internal SendResponseExecutionStep(
+                HttpApplication app,
+                EventHandler handler,
+                bool isHeaders
+            )
+            {
                 _application = app;
                 _handler = handler;
                 _isHeaders = isHeaders;
             }
 
-            void IExecutionStep.Execute() {
-
+            void IExecutionStep.Execute()
+            {
                 // IIS only has a SendResponse notification, so we check the flags
                 // to determine whether this notification is for headers or content.
                 // The step uses _isHeaders to keep track of whether this is for headers or content.
-                if (_application.Context.IsSendResponseHeaders && _isHeaders
-                    || !_isHeaders) {
-
+                if (_application.Context.IsSendResponseHeaders && _isHeaders || !_isHeaders)
+                {
                     string targetTypeStr = null;
 
-                    if (_handler != null) {
-                        if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module)) {
+                    if (_handler != null)
+                    {
+                        if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module))
+                        {
                             targetTypeStr = _handler.Method.ReflectedType.ToString();
 
-                            EtwTrace.Trace(EtwTraceType.ETW_TYPE_PIPELINE_ENTER, _application.Context.WorkerRequest, targetTypeStr);
+                            EtwTrace.Trace(
+                                EtwTraceType.ETW_TYPE_PIPELINE_ENTER,
+                                _application.Context.WorkerRequest,
+                                targetTypeStr
+                            );
                         }
                         _handler(_application, _application.AppEvent);
-                        if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module)) EtwTrace.Trace(EtwTraceType.ETW_TYPE_PIPELINE_LEAVE, _application.Context.WorkerRequest, targetTypeStr);
+                        if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Module))
+                            EtwTrace.Trace(
+                                EtwTraceType.ETW_TYPE_PIPELINE_LEAVE,
+                                _application.Context.WorkerRequest,
+                                targetTypeStr
+                            );
                     }
                 }
             }
 
-            bool IExecutionStep.CompletedSynchronously {
-                get { return true;}
+            bool IExecutionStep.CompletedSynchronously
+            {
+                get { return true; }
             }
 
-            bool IExecutionStep.IsCancellable {
+            bool IExecutionStep.IsCancellable
+            {
                 get { return true; }
             }
         }
 
-        internal class UrlMappingsExecutionStep : IExecutionStep {
+        internal class UrlMappingsExecutionStep : IExecutionStep
+        {
             private HttpApplication _application;
 
-
-            internal UrlMappingsExecutionStep(HttpApplication app) {
+            internal UrlMappingsExecutionStep(HttpApplication app)
+            {
                 _application = app;
             }
 
-            void IExecutionStep.Execute() {
+            void IExecutionStep.Execute()
+            {
                 HttpContext context = _application.Context;
                 UrlMappingsModule.UrlMappingRewritePath(context);
             }
 
-            bool IExecutionStep.CompletedSynchronously {
-                get { return true;}
+            bool IExecutionStep.CompletedSynchronously
+            {
+                get { return true; }
             }
 
-            bool IExecutionStep.IsCancellable {
+            bool IExecutionStep.IsCancellable
+            {
                 get { return false; }
             }
         }
 
-        internal abstract class StepManager {
+        internal abstract class StepManager
+        {
             protected HttpApplication _application;
             protected bool _requestCompleted;
 
-            internal StepManager(HttpApplication application) {
+            internal StepManager(HttpApplication application)
+            {
                 _application = application;
             }
 
-            internal bool IsCompleted { get { return _requestCompleted; } }
+            internal bool IsCompleted
+            {
+                get { return _requestCompleted; }
+            }
 
             internal abstract void BuildSteps(WaitCallback stepCallback);
 
-            internal void CompleteRequest() {
+            internal void CompleteRequest()
+            {
                 _requestCompleted = true;
-                if (HttpRuntime.UseIntegratedPipeline) {
+                if (HttpRuntime.UseIntegratedPipeline)
+                {
                     HttpContext context = _application.Context;
-                    if (context != null && context.NotificationContext != null) {
+                    if (context != null && context.NotificationContext != null)
+                    {
                         context.NotificationContext.RequestCompleted = true;
                     }
                 }
@@ -3801,7 +5282,8 @@ namespace System.Web {
             internal abstract void ResumeSteps(Exception error);
         }
 
-        internal class ApplicationStepManager : StepManager {
+        internal class ApplicationStepManager : StepManager
+        {
             private IExecutionStep[] _execSteps;
             private WaitCallback _resumeStepsWaitCallback;
             private int _currentStepIndex;
@@ -3809,16 +5291,17 @@ namespace System.Web {
             private int _numSyncStepCalls;
             private int _endRequestStepIndex;
 
-            internal ApplicationStepManager(HttpApplication app): base(app) {
-            }
+            internal ApplicationStepManager(HttpApplication app)
+                : base(app) { }
 
-            internal override void BuildSteps(WaitCallback stepCallback ) {
+            internal override void BuildSteps(WaitCallback stepCallback)
+            {
                 ArrayList steps = new ArrayList();
                 HttpApplication app = _application;
 
                 bool urlMappingsEnabled = false;
                 UrlMappingsSection urlMappings = RuntimeConfig.GetConfig().UrlMappings;
-                urlMappingsEnabled = urlMappings.IsEnabled && ( urlMappings.UrlMappings.Count > 0 );
+                urlMappingsEnabled = urlMappings.IsEnabled && (urlMappings.UrlMappings.Count > 0);
 
                 steps.Add(new ValidateRequestExecutionStep(app));
                 steps.Add(new ValidatePathExecutionStep(app));
@@ -3834,17 +5317,20 @@ namespace System.Web {
                 app.CreateEventExecutionSteps(HttpApplication.EventPostAuthorizeRequest, steps);
                 app.CreateEventExecutionSteps(HttpApplication.EventResolveRequestCache, steps);
                 app.CreateEventExecutionSteps(HttpApplication.EventPostResolveRequestCache, steps);
-                steps.Add(new MapHandlerExecutionStep(app));     // map handler
+                steps.Add(new MapHandlerExecutionStep(app)); // map handler
                 app.CreateEventExecutionSteps(HttpApplication.EventPostMapRequestHandler, steps);
                 app.CreateEventExecutionSteps(HttpApplication.EventAcquireRequestState, steps);
                 app.CreateEventExecutionSteps(HttpApplication.EventPostAcquireRequestState, steps);
                 app.CreateEventExecutionSteps(HttpApplication.EventPreRequestHandlerExecute, steps);
                 steps.Add(app.CreateImplicitAsyncPreloadExecutionStep()); // implict async preload step
-                steps.Add(new CallHandlerExecutionStep(app));  // execute handler
-                app.CreateEventExecutionSteps(HttpApplication.EventPostRequestHandlerExecute, steps);
+                steps.Add(new CallHandlerExecutionStep(app)); // execute handler
+                app.CreateEventExecutionSteps(
+                    HttpApplication.EventPostRequestHandlerExecute,
+                    steps
+                );
                 app.CreateEventExecutionSteps(HttpApplication.EventReleaseRequestState, steps);
                 app.CreateEventExecutionSteps(HttpApplication.EventPostReleaseRequestState, steps);
-                steps.Add(new CallFilterExecutionStep(app));  // filtering
+                steps.Add(new CallFilterExecutionStep(app)); // filtering
                 app.CreateEventExecutionSteps(HttpApplication.EventUpdateRequestCache, steps);
                 app.CreateEventExecutionSteps(HttpApplication.EventPostUpdateRequestCache, steps);
                 _endRequestStepIndex = steps.Count;
@@ -3858,16 +5344,18 @@ namespace System.Web {
                 _resumeStepsWaitCallback = stepCallback;
             }
 
-            internal override void InitRequest() {
-                _currentStepIndex   = -1;
-                _numStepCalls       = 0;
-                _numSyncStepCalls   = 0;
-                _requestCompleted   = false;
+            internal override void InitRequest()
+            {
+                _currentStepIndex = -1;
+                _numStepCalls = 0;
+                _numSyncStepCalls = 0;
+                _requestCompleted = false;
             }
 
             // This attribute prevents undesirable 'just-my-code' debugging behavior (VSWhidbey 404406/VSWhidbey 609188)
             [System.Diagnostics.DebuggerStepperBoundaryAttribute]
-            internal override void ResumeSteps(Exception error) {
+            internal override void ResumeSteps(Exception error)
+            {
                 bool appCompleted = false;
                 bool stepCompletedSynchronously = true;
                 HttpApplication app = _application;
@@ -3878,100 +5366,124 @@ namespace System.Web {
 
                 Debug.Trace("Async", "HttpApplication.ResumeSteps");
 
-                try {
-                    if (appInstanceConsumersCounter != null) {
+                try
+                {
+                    if (appInstanceConsumersCounter != null)
+                    {
                         appInstanceConsumersCounter.MarkOperationPending(); // ResumeSteps call started
                     }
 
-                    using (syncContext.AcquireThreadLock()) {
+                    using (syncContext.AcquireThreadLock())
+                    {
                         // avoid ---- between the app code and fast async completion from a module
 
 
-                        try {
+                        try
+                        {
                             threadContext = app.OnThreadEnter();
                         }
-                        catch (Exception e) {
+                        catch (Exception e)
+                        {
                             if (error == null)
                                 error = e;
                         }
 
-                        try {
-                            try {
-                                for (; ; ) {
+                        try
+                        {
+                            try
+                            {
+                                for (; ; )
+                                {
                                     // record error
 
-                                    if (syncContext.Error != null) {
+                                    if (syncContext.Error != null)
+                                    {
                                         error = syncContext.Error;
                                         syncContext.ClearError();
                                     }
 
-                                    if (error != null) {
+                                    if (error != null)
+                                    {
                                         app.RecordError(error);
                                         error = null;
                                     }
 
                                     // check for any outstanding async operations
 
-                                    if (syncContext.PendingCompletion(_resumeStepsWaitCallback)) {
+                                    if (syncContext.PendingCompletion(_resumeStepsWaitCallback))
+                                    {
                                         // wait until all pending async operations complete
                                         break;
                                     }
 
                                     // advance to next step
 
-                                    if (_currentStepIndex < _endRequestStepIndex && (context.Error != null || _requestCompleted)) {
+                                    if (
+                                        _currentStepIndex < _endRequestStepIndex
+                                        && (context.Error != null || _requestCompleted)
+                                    )
+                                    {
                                         // end request
                                         context.Response.FilterOutput();
                                         _currentStepIndex = _endRequestStepIndex;
                                     }
-                                    else {
+                                    else
+                                    {
                                         _currentStepIndex++;
                                     }
 
-                                    if (_currentStepIndex >= _execSteps.Length) {
+                                    if (_currentStepIndex >= _execSteps.Length)
+                                    {
                                         appCompleted = true;
                                         break;
                                     }
 
                                     // execute the current step
 
-                                    _numStepCalls++;          // count all calls
+                                    _numStepCalls++; // count all calls
 
                                     // enable launching async operations before each new step
                                     syncContext.Enable();
 
                                     // call to execute current step catching thread abort exception
-                                    error = app.ExecuteStep(_execSteps[_currentStepIndex], ref stepCompletedSynchronously);
+                                    error = app.ExecuteStep(
+                                        _execSteps[_currentStepIndex],
+                                        ref stepCompletedSynchronously
+                                    );
 
                                     // unwind the stack in the async case
                                     if (!stepCompletedSynchronously)
                                         break;
 
-                                    _numSyncStepCalls++;      // count synchronous calls
+                                    _numSyncStepCalls++; // count synchronous calls
                                 }
                             }
-                            finally {
-                                if (appCompleted) {
+                            finally
+                            {
+                                if (appCompleted)
+                                {
                                     // need to raise OnRequestCompleted while within the ThreadContext so that things like User, CurrentCulture, etc. are available
                                     context.RaiseOnRequestCompleted();
                                 }
 
-                                if (threadContext != null) {
-                                    try {
+                                if (threadContext != null)
+                                {
+                                    try
+                                    {
                                         threadContext.DisassociateFromCurrentThread();
                                     }
-                                    catch {
-                                    }
+                                    catch { }
                                 }
                             }
                         }
-                        catch { // Protect against exception filters
+                        catch
+                        { // Protect against exception filters
                             throw;
                         }
+                    } // using
 
-                    }   // using
-
-                    if (appCompleted) {
+                    if (appCompleted)
+                    {
                         // need to raise OnPipelineCompleted outside of the ThreadContext so that HttpContext.Current, User, etc. are unavailable
                         context.RaiseOnPipelineCompleted();
 
@@ -3983,24 +5495,27 @@ namespace System.Web {
                         app.ReleaseAppInstance();
                     }
                 }
-                finally {
-                    if (appInstanceConsumersCounter != null) {
+                finally
+                {
+                    if (appInstanceConsumersCounter != null)
+                    {
                         appInstanceConsumersCounter.MarkOperationCompleted(); // ResumeSteps call complete
                     }
                 }
             }
         }
 
-        internal class PipelineStepManager : StepManager {
-
+        internal class PipelineStepManager : StepManager
+        {
             WaitCallback _resumeStepsWaitCallback;
             bool _validatePathCalled;
             bool _validateInputCalled;
 
-            internal PipelineStepManager(HttpApplication app): base(app) {
-            }
+            internal PipelineStepManager(HttpApplication app)
+                : base(app) { }
 
-            internal override void BuildSteps(WaitCallback stepCallback) {
+            internal override void BuildSteps(WaitCallback stepCallback)
+            {
                 Debug.Trace("PipelineRuntime", "BuildSteps");
                 //ArrayList steps = new ArrayList();
                 HttpApplication app = _application;
@@ -4014,13 +5529,17 @@ namespace System.Web {
                 app.AddEventMapping(
                     HttpApplication.IMPLICIT_HANDLER,
                     RequestNotification.MapRequestHandler,
-                    false, materializeStep);
+                    false,
+                    materializeStep
+                );
 
                 // implicit async preload step
                 app.AddEventMapping(
                     HttpApplication.IMPLICIT_HANDLER,
                     RequestNotification.ExecuteRequestHandler,
-                    false, app.CreateImplicitAsyncPreloadExecutionStep());
+                    false,
+                    app.CreateImplicitAsyncPreloadExecutionStep()
+                );
 
                 // implicit handler routing step
                 IExecutionStep handlerStep = new CallHandlerExecutionStep(app);
@@ -4028,7 +5547,9 @@ namespace System.Web {
                 app.AddEventMapping(
                     HttpApplication.IMPLICIT_HANDLER,
                     RequestNotification.ExecuteRequestHandler,
-                    false, handlerStep);
+                    false,
+                    handlerStep
+                );
 
                 // implicit handler WebSockets step
                 IExecutionStep webSocketsStep = new TransitionToWebSocketsExecutionStep(app);
@@ -4036,7 +5557,10 @@ namespace System.Web {
                 app.AddEventMapping(
                     HttpApplication.IMPLICIT_HANDLER,
                     RequestNotification.EndRequest,
-                    true /* isPostNotification */, webSocketsStep);
+                    true /* isPostNotification */
+                    ,
+                    webSocketsStep
+                );
 
                 // add implicit request filtering step
                 IExecutionStep filterStep = new CallFilterExecutionStep(app);
@@ -4045,18 +5569,23 @@ namespace System.Web {
                 app.AddEventMapping(
                     HttpApplication.IMPLICIT_FILTER_MODULE,
                     RequestNotification.UpdateRequestCache,
-                    false, filterStep);
+                    false,
+                    filterStep
+                );
 
                 // for error conditions, this executes during LogRequest as a high priority module
                 app.AddEventMapping(
                     HttpApplication.IMPLICIT_FILTER_MODULE,
                     RequestNotification.LogRequest,
-                    false, filterStep);
+                    false,
+                    filterStep
+                );
 
                 _resumeStepsWaitCallback = stepCallback;
             }
 
-            internal override void InitRequest() {
+            internal override void InitRequest()
+            {
                 _requestCompleted = false;
                 _validatePathCalled = false;
                 _validateInputCalled = false;
@@ -4067,7 +5596,8 @@ namespace System.Web {
             // or from an async completion (on CLR thread) via HttpApplication::ResumeStepsFromThreadPoolThread
             // This attribute prevents undesirable 'just-my-code' debugging behavior (VSWhidbey 404406/VSWhidbey 609188)
             [System.Diagnostics.DebuggerStepperBoundaryAttribute]
-            internal override void ResumeSteps(Exception error) {
+            internal override void ResumeSteps(Exception error)
+            {
                 HttpContext context = _application.Context;
                 IIS7WorkerRequest wr = context.WorkerRequest as IIS7WorkerRequest;
                 AspNetSynchronizationContextBase syncContext = context.SyncContext;
@@ -4080,23 +5610,31 @@ namespace System.Web {
                 bool stepCompletedSynchronously = false;
                 bool isReEntry = false;
                 int currentModuleLastEventIndex = -1;
-                _application.GetNotifcationContextProperties(ref isReEntry, ref currentModuleLastEventIndex);
+                _application.GetNotifcationContextProperties(
+                    ref isReEntry,
+                    ref currentModuleLastEventIndex
+                );
 
-                CountdownTask appInstanceConsumersCounter = _application.ApplicationInstanceConsumersCounter;
+                CountdownTask appInstanceConsumersCounter =
+                    _application.ApplicationInstanceConsumersCounter;
 
-                using (context.RootedObjects.WithinTraceBlock()) {
+                using (context.RootedObjects.WithinTraceBlock())
+                {
                     // DevDiv Bugs 187441: IIS7 Integrated Mode: Problem flushing Response from background threads in IIS7 integrated mode
                     if (!isReEntry) // currently we only re-enter for SendResponse
                     {
                         syncContext.AssociateWithCurrentThread();
                     }
-                    try {
-                        if (appInstanceConsumersCounter != null) {
+                    try
+                    {
+                        if (appInstanceConsumersCounter != null)
+                        {
                             appInstanceConsumersCounter.MarkOperationPending(); // ResumeSteps call started
                         }
 
                         bool locked = false;
-                        try {
+                        try
+                        {
                             // As a performance optimization, ASP.NET uses the IIS IHttpContext::IndicateCompletion function to continue executing notifications
                             // on a thread that is associated with the AppDomain.  This is done by calling IndicateCompletion from within the AppDomain, instead
                             // of returning to native code.  This technique can only be used for notifications that complete synchronously.
@@ -4106,46 +5644,65 @@ namespace System.Web {
                             // IndicateCompletion.  Note that SendResponse notifications occur on-demand, i.e., they happen when another notification triggers
                             // a SendResponse, at which point it blocks until the SendResponse notification completes.
 
-                            if (!isReEntry) { // currently we only re-enter for SendResponse
+                            if (!isReEntry)
+                            { // currently we only re-enter for SendResponse
                                 // DevDiv 482614 (Sharepoint Bug 3137123)
                                 // Async completion or SendResponse can happen on a background thread while the thread that called IndicateCompletion has not unwound yet
                                 // Therefore (InIndicateCompletion == true) is not a sufficient evidence that we can use the ThreadContext stored in IndicateCompletionContext
                                 // To avoid using other thread's ThreadContext we use IndicateCompletionContext only if ThreadInsideIndicateCompletion is indeed our thread
-                                if (context.InIndicateCompletion && context.ThreadInsideIndicateCompletion == Thread.CurrentThread) {
+                                if (
+                                    context.InIndicateCompletion
+                                    && context.ThreadInsideIndicateCompletion
+                                        == Thread.CurrentThread
+                                )
+                                {
                                     // we already have a ThreadContext
                                     threadContext = context.IndicateCompletionContext;
-                                    if (context.UsesImpersonation) {
+                                    if (context.UsesImpersonation)
+                                    {
                                         // UsesImpersonation is set to true after RQ_AUTHENTICATE_REQUEST
                                         threadContext.SetImpersonationContext();
                                     }
                                 }
-                                else {
+                                else
+                                {
                                     // we need to create a new ThreadContext
-                                    threadContext = _application.OnThreadEnter(context.UsesImpersonation);
+                                    threadContext = _application.OnThreadEnter(
+                                        context.UsesImpersonation
+                                    );
                                     // keep track if we need to disassociate it later
                                     needToDisassociateThreadContext = true;
                                 }
                             }
 
-                            for (; ; ) {
+                            for (; ; )
+                            {
 #if DBG
-                                Debug.Trace("PipelineRuntime", "ResumeSteps: CurrentModuleEventIndex=" + context.CurrentModuleEventIndex);
+                                Debug.Trace(
+                                    "PipelineRuntime",
+                                    "ResumeSteps: CurrentModuleEventIndex="
+                                        + context.CurrentModuleEventIndex
+                                );
 #endif
 
                                 // check and record errors into the HttpContext
-                                if (syncContext.Error != null) {
+                                if (syncContext.Error != null)
+                                {
                                     error = syncContext.Error;
                                     syncContext.ClearError();
                                 }
-                                if (error != null) {
+                                if (error != null)
+                                {
                                     // the error can be cleared by the user
                                     _application.RecordError(error);
                                     error = null;
                                 }
 
-                                if (!_validateInputCalled || !_validatePathCalled) {
+                                if (!_validateInputCalled || !_validatePathCalled)
+                                {
                                     error = ValidateHelper(context);
-                                    if (error != null) {
+                                    if (error != null)
+                                    {
                                         continue;
                                     }
                                 }
@@ -4154,7 +5711,11 @@ namespace System.Web {
                                 // DevDiv 1020085: User code may leave pending async completions on the synchronization context
                                 // while processing nested (isReEntry == true) and not nested (isReEntry == false) notifications.
                                 // In both cases only the non nested notification which has proper synchronization should handle it.
-                                if (!isReEntry && syncContext.PendingCompletion(_resumeStepsWaitCallback)) {
+                                if (
+                                    !isReEntry
+                                    && syncContext.PendingCompletion(_resumeStepsWaitCallback)
+                                )
+                                {
                                     // Background flushes may trigger RQ_SEND_RESPONSE notifications which will set new context.NotificationContext
                                     // Synchronize access to context.NotificationContext to make sure we update the correct NotificationContext instance
                                     _application.AcquireNotifcationContextLock(ref locked);
@@ -4167,17 +5728,29 @@ namespace System.Web {
                                 }
 
                                 // LogRequest and EndRequest never report errors, and never return a status of FinishRequest.
-                                bool needToFinishRequest = (context.NotificationContext.Error != null || context.NotificationContext.RequestCompleted)
+                                bool needToFinishRequest =
+                                    (
+                                        context.NotificationContext.Error != null
+                                        || context.NotificationContext.RequestCompleted
+                                    )
                                     && context.CurrentNotification != RequestNotification.LogRequest
-                                    && context.CurrentNotification != RequestNotification.EndRequest;
+                                    && context.CurrentNotification
+                                        != RequestNotification.EndRequest;
 
-                                if (needToFinishRequest || context.CurrentModuleEventIndex == currentModuleLastEventIndex) {
-
+                                if (
+                                    needToFinishRequest
+                                    || context.CurrentModuleEventIndex
+                                        == currentModuleLastEventIndex
+                                )
+                                {
                                     // if an error occured or someone completed the request, set the status to FinishRequest
-                                    status = needToFinishRequest ? RequestNotificationStatus.FinishRequest : RequestNotificationStatus.Continue;
+                                    status = needToFinishRequest
+                                        ? RequestNotificationStatus.FinishRequest
+                                        : RequestNotificationStatus.Continue;
 
                                     // async case
-                                    if (context.NotificationContext.PendingAsyncCompletion) {
+                                    if (context.NotificationContext.PendingAsyncCompletion)
+                                    {
                                         context.Response.SyncStatusIntegrated();
                                         context.NotificationContext.PendingAsyncCompletion = false;
                                         isSynchronousCompletion = false;
@@ -4186,7 +5759,14 @@ namespace System.Web {
                                     }
 
                                     // sync case (we might be able to stay in managed code and execute another notification)
-                                    if (needToFinishRequest || UnsafeIISMethods.MgdGetNextNotification(wr.RequestContext, RequestNotificationStatus.Continue) != 1) {
+                                    if (
+                                        needToFinishRequest
+                                        || UnsafeIISMethods.MgdGetNextNotification(
+                                            wr.RequestContext,
+                                            RequestNotificationStatus.Continue
+                                        ) != 1
+                                    )
+                                    {
                                         isSynchronousCompletion = true;
                                         needToComplete = true;
                                         break;
@@ -4196,39 +5776,66 @@ namespace System.Web {
                                     bool isPostNotification = false;
                                     int currentNotification = 0;
 
-                                    UnsafeIISMethods.MgdGetCurrentNotificationInfo(wr.RequestContext, out currentModuleIndex, out isPostNotification, out currentNotification);
+                                    UnsafeIISMethods.MgdGetCurrentNotificationInfo(
+                                        wr.RequestContext,
+                                        out currentModuleIndex,
+                                        out isPostNotification,
+                                        out currentNotification
+                                    );
 
                                     // setup the HttpContext for this event/module combo
                                     context.CurrentModuleIndex = currentModuleIndex;
                                     context.IsPostNotification = isPostNotification;
-                                    context.CurrentNotification = (RequestNotification)currentNotification;
+                                    context.CurrentNotification =
+                                        (RequestNotification)currentNotification;
                                     context.CurrentModuleEventIndex = -1;
-                                    currentModuleLastEventIndex = _application.CurrentModuleContainer.GetEventCount(context.CurrentNotification, context.IsPostNotification) - 1;
+                                    currentModuleLastEventIndex =
+                                        _application.CurrentModuleContainer.GetEventCount(
+                                            context.CurrentNotification,
+                                            context.IsPostNotification
+                                        ) - 1;
                                 }
 
                                 context.CurrentModuleEventIndex++;
 
-                                IExecutionStep step = _application.CurrentModuleContainer.GetNextEvent(context.CurrentNotification, context.IsPostNotification,
-                                                                                                       context.CurrentModuleEventIndex);
+                                IExecutionStep step =
+                                    _application.CurrentModuleContainer.GetNextEvent(
+                                        context.CurrentNotification,
+                                        context.IsPostNotification,
+                                        context.CurrentModuleEventIndex
+                                    );
 
                                 // enable launching async operations before each new step
                                 context.SyncContext.Enable();
 
                                 stepCompletedSynchronously = false;
-                                error = _application.ExecuteStep(step, ref stepCompletedSynchronously);
+                                error = _application.ExecuteStep(
+                                    step,
+                                    ref stepCompletedSynchronously
+                                );
 
 #if DBG
-                                Debug.Trace("PipelineRuntime", "ResumeSteps: notification=" + context.CurrentNotification.ToString()
-                                            + ", isPost=" + context.IsPostNotification
-                                            + ", step=" + step.GetType().FullName
-                                            + ", completedSync=" + stepCompletedSynchronously
-                                            + ", moduleName=" + _application.CurrentModuleContainer.DebugModuleName
-                                            + ", moduleIndex=" + context.CurrentModuleIndex
-                                            + ", eventIndex=" + context.CurrentModuleEventIndex);
+                                Debug.Trace(
+                                    "PipelineRuntime",
+                                    "ResumeSteps: notification="
+                                        + context.CurrentNotification.ToString()
+                                        + ", isPost="
+                                        + context.IsPostNotification
+                                        + ", step="
+                                        + step.GetType().FullName
+                                        + ", completedSync="
+                                        + stepCompletedSynchronously
+                                        + ", moduleName="
+                                        + _application.CurrentModuleContainer.DebugModuleName
+                                        + ", moduleIndex="
+                                        + context.CurrentModuleIndex
+                                        + ", eventIndex="
+                                        + context.CurrentModuleEventIndex
+                                );
 #endif
 
-
-                                if (!stepCompletedSynchronously) {
+                                if (!stepCompletedSynchronously)
+                                {
                                     // Since the step completed asynchronously, this thread must return RequestNotificationStatus.Pending to IIS,
                                     // and the async completion of this step must call IIS7WorkerRequest::PostCompletion.  The async completion of
                                     // this step will call ResumeSteps again.
@@ -4237,18 +5844,24 @@ namespace System.Web {
                                     context.NotificationContext.PendingAsyncCompletion = true;
                                     break;
                                 }
-                                else {
+                                else
+                                {
                                     context.Response.SyncStatusIntegrated();
                                 }
                             }
                         }
-                        finally {
-                            if (locked) {
+                        finally
+                        {
+                            if (locked)
+                            {
                                 _application.ReleaseNotifcationContextLock();
                             }
-                            if (threadContext != null) {
-                                if (context.InIndicateCompletion) {
-                                    if (isSynchronousCompletion) {
+                            if (threadContext != null)
+                            {
+                                if (context.InIndicateCompletion)
+                                {
+                                    if (isSynchronousCompletion)
+                                    {
                                         // this is a sync completion on an IIS thread
                                         threadContext.Synchronize();
                                         // Note for DevDiv 482614 fix:
@@ -4263,13 +5876,17 @@ namespace System.Web {
                                         //always undo impersonation so that the token is removed before returning to IIS (DDB 156421)
                                         threadContext.UndoImpersonationContext();
                                     }
-                                    else {
+                                    else
+                                    {
                                         // We're returning pending on an IIS thread in a call to IndicateCompletion.
                                         // Leave the thread context now while we're still under the lock so that the
                                         // async completion does not corrupt the state of HttpContext or IndicateCompletionContext.
-                                        if (!threadContext.HasBeenDisassociatedFromThread) {
-                                            lock (threadContext) {
-                                                if (!threadContext.HasBeenDisassociatedFromThread) {
+                                        if (!threadContext.HasBeenDisassociatedFromThread)
+                                        {
+                                            lock (threadContext)
+                                            {
+                                                if (!threadContext.HasBeenDisassociatedFromThread)
+                                                {
                                                     threadContext.DisassociateFromCurrentThread();
                                                     // remember to not disassociate again
                                                     needToDisassociateThreadContext = false;
@@ -4278,7 +5895,11 @@ namespace System.Web {
                                                     // We do not clear IndicateCompletionContext if it belongs to another thread
                                                     // (otherwise future notifications on the thread that called IndicateCompletion won't have
                                                     // context.IndicateCompletionContext pointing to their not yet disassociated ThreadContext)
-                                                    if (context.ThreadInsideIndicateCompletion == Thread.CurrentThread) {
+                                                    if (
+                                                        context.ThreadInsideIndicateCompletion
+                                                        == Thread.CurrentThread
+                                                    )
+                                                    {
                                                         context.IndicateCompletionContext = null;
                                                     }
                                                 }
@@ -4286,24 +5907,32 @@ namespace System.Web {
                                         }
                                     }
                                 }
-                                else if (isSynchronousCompletion) {
-                                    Debug.Assert(needToDisassociateThreadContext == true, "needToDisassociateThreadContext MUST BE true");
+                                else if (isSynchronousCompletion)
+                                {
+                                    Debug.Assert(
+                                        needToDisassociateThreadContext == true,
+                                        "needToDisassociateThreadContext MUST BE true"
+                                    );
                                     // this is a sync completion on an IIS thread
                                     threadContext.Synchronize();
                                     // get ready to call IndicateCompletion
                                     context.IndicateCompletionContext = threadContext;
                                     // Note for DevDiv 482614 fix:
-                                    // This thread created a new ThreadContext if it did not call IndicateCompletion yet or if there was 
-                                    // another thread already in IndicateCompletion (a background flush from native code or a completion 
-                                    // on another thread). In either case if currently there is no thread in IndicateCompletion 
+                                    // This thread created a new ThreadContext if it did not call IndicateCompletion yet or if there was
+                                    // another thread already in IndicateCompletion (a background flush from native code or a completion
+                                    // on another thread). In either case if currently there is no thread in IndicateCompletion
                                     // then we can reuse this thread and its threadContext and call IndicateCompletion on the current thread.
                                     // In this case we will not disassociate this threadContext now
                                     needToDisassociateThreadContext = false;
                                     //always undo impersonation so that the token is removed before returning to IIS (DDB 156421)
                                     threadContext.UndoImpersonationContext();
                                 }
-                                else {
-                                    Debug.Assert(needToDisassociateThreadContext == true, "needToDisassociateThreadContext MUST BE true");
+                                else
+                                {
+                                    Debug.Assert(
+                                        needToDisassociateThreadContext == true,
+                                        "needToDisassociateThreadContext MUST BE true"
+                                    );
                                     // We're not in a call to IndicateCompletion.  We're either returning pending or
                                     // we're in an async completion, and therefore we must clean-up the thread state. Impersonation is reverted
                                     threadContext.DisassociateFromCurrentThread();
@@ -4312,45 +5941,64 @@ namespace System.Web {
                                 }
 
                                 // Cleanup the thread state unless we prepared to call IndicateCompletion or already cleaned up
-                                if (needToDisassociateThreadContext) {
+                                if (needToDisassociateThreadContext)
+                                {
                                     threadContext.DisassociateFromCurrentThread();
                                 }
                             }
                         }
 
                         // WOS #1703315: we cannot complete until after OnThreadLeave is called.
-                        if (needToComplete) {
+                        if (needToComplete)
+                        {
                             // call HttpRuntime::OnRequestNotificationCompletion
-                            _application.AsyncResult.Complete(isSynchronousCompletion, null /*result*/, null /*error*/, status);
+                            _application.AsyncResult.Complete(
+                                isSynchronousCompletion,
+                                null /*result*/
+                                ,
+                                null /*error*/
+                                ,
+                                status
+                            );
                         }
                     } // end of try statement that begins after AssociateWithCurrentThread
-                    finally {
-                        if (!isReEntry) {
+                    finally
+                    {
+                        if (!isReEntry)
+                        {
                             syncContext.DisassociateFromCurrentThread();
                         }
-                        if (appInstanceConsumersCounter != null) {
+                        if (appInstanceConsumersCounter != null)
+                        {
                             appInstanceConsumersCounter.MarkOperationCompleted(); // ResumeSteps call completed
                         }
                     }
                 }
             }
-            
-            private Exception ValidateHelper(HttpContext context) {
-                if (!_validateInputCalled) {
+
+            private Exception ValidateHelper(HttpContext context)
+            {
+                if (!_validateInputCalled)
+                {
                     _validateInputCalled = true;
-                    try {
+                    try
+                    {
                         context.Request.ValidateInputIfRequiredByConfig();
                     }
-                    catch(Exception e) {
+                    catch (Exception e)
+                    {
                         return e;
                     }
                 }
-                if (!_validatePathCalled) {
+                if (!_validatePathCalled)
+                {
                     _validatePathCalled = true;
-                    try {
+                    try
+                    {
                         context.ValidatePath();
                     }
-                    catch(Exception e) {
+                    catch (Exception e)
+                    {
                         return e;
                     }
                 }
@@ -4359,7 +6007,8 @@ namespace System.Web {
         }
 
         // WARNING: Mutable struct for performance reasons; exercise caution when using this type.
-        private struct AsyncStepCompletionInfo {
+        private struct AsyncStepCompletionInfo
+        {
 #pragma warning disable 420 // volatile passed by reference; our uses are safe
             // state for async execution steps
             private const int ASYNC_STATE_NONE = 0;
@@ -4371,7 +6020,8 @@ namespace System.Web {
 
             // Invoked from the callback to signal that the End* method has run to completion.
             // Returns 'true' if the current thread should call ResumeSteps, 'false' if not.
-            public bool RegisterAsyncCompletion(Exception error) {
+            public bool RegisterAsyncCompletion(Exception error)
+            {
                 // Before the call to Exchange below, the _asyncCompletionInfo field will have the value
                 // ASYNC_STATE_NONE or ASYNC_STATE_BEGIN_UNWOUND. If it's the former, then the Begin* method
                 // hasn't yet returned control to IExecutionStep.Execute. From this step's point of view,
@@ -4388,8 +6038,12 @@ namespace System.Web {
                 // Interlocked performs a volatile write; all processors will see the write to _error as being
                 // no later than the write to _asyncState.
                 _error = (error != null) ? ExceptionDispatchInfo.Capture(error) : null;
-                int originalState = Interlocked.Exchange(ref _asyncState, ASYNC_STATE_CALLBACK_COMPLETED);
-                if (originalState == ASYNC_STATE_NONE) {
+                int originalState = Interlocked.Exchange(
+                    ref _asyncState,
+                    ASYNC_STATE_CALLBACK_COMPLETED
+                );
+                if (originalState == ASYNC_STATE_NONE)
+                {
                     return false; // IExecutionStep.Execute should call ResumeSteps
                 }
 
@@ -4398,13 +6052,23 @@ namespace System.Web {
                 return true; // this thread should call ResumeSteps
             }
 
-            public void RegisterBeginUnwound(IAsyncResult asyncResult, out bool operationCompleted, out bool mustCallEndHandler) {
+            public void RegisterBeginUnwound(
+                IAsyncResult asyncResult,
+                out bool operationCompleted,
+                out bool mustCallEndHandler
+            )
+            {
                 operationCompleted = false;
                 mustCallEndHandler = false;
 
-                int originalState = Interlocked.Exchange(ref _asyncState, ASYNC_STATE_BEGIN_UNWOUND);
-                if (originalState == ASYNC_STATE_NONE) {
-                    if (asyncResult.CompletedSynchronously) {
+                int originalState = Interlocked.Exchange(
+                    ref _asyncState,
+                    ASYNC_STATE_BEGIN_UNWOUND
+                );
+                if (originalState == ASYNC_STATE_NONE)
+                {
+                    if (asyncResult.CompletedSynchronously)
+                    {
                         // Synchronous completion; the callback either wasn't called or was a no-op.
                         // In either case, we should call the End* method from this thread.
                         operationCompleted = true;
@@ -4414,8 +6078,12 @@ namespace System.Web {
                     // Otherwise, this is an asynchronous completion, and the callback hasn't yet been invoked or hasn't fully completed.
                     // We'll let the thread that invokes the callback call the End* method.
                 }
-                else {
-                    Debug.Assert(originalState == ASYNC_STATE_CALLBACK_COMPLETED, "Unexpected state.");
+                else
+                {
+                    Debug.Assert(
+                        originalState == ASYNC_STATE_CALLBACK_COMPLETED,
+                        "Unexpected state."
+                    );
 
                     // The operation completed, and the callback already invoked the End* method.
                     // The only thing we need to do is to report to our caller that the operation completed synchronously
@@ -4427,16 +6095,19 @@ namespace System.Web {
                 // the thread will see the correct value for the _error field.
             }
 
-            public void ReportError() {
+            public void ReportError()
+            {
                 // Using ExceptionDispatchInfo preserves the Exception's stack trace when rethrowing.
                 ExceptionDispatchInfo error = _error;
-                if (error != null) {
+                if (error != null)
+                {
                     _error = null; // prevent long-lived Exception objects on the heap
                     error.Throw();
                 }
             }
 
-            public void Reset() {
+            public void Reset()
+            {
                 // All processors see the _error field write as being no later than the _asyncState field write.
                 _error = null;
                 _asyncState = ASYNC_STATE_NONE;
@@ -4444,27 +6115,33 @@ namespace System.Web {
 #pragma warning restore 420 // volatile passed by reference
         }
 
-        private class StepInvoker {
+        private class StepInvoker
+        {
             private Action<Action> _action;
             private StepInvoker _nextStep;
 
             public StepInvoker() { }
 
-            public StepInvoker(Action<Action> action, StepInvoker step) {
+            public StepInvoker(Action<Action> action, StepInvoker step)
+            {
                 _action = action;
                 _nextStep = step;
             }
 
-            public void Invoke(Action executionStep) {
+            public void Invoke(Action executionStep)
+            {
                 Debug.Assert(executionStep != null);
 
                 // Call the chained nextStep.
                 // The ExecutionStep is garuanteed to execute in HttpApplication,
                 // since ExecutionStep could cause reEntry to the pipeline and
                 // there is only one StepInvoker instance per HttpApplication instance.
-                if (_action != null) {
+                if (_action != null)
+                {
                     _action(() => _nextStep.Invoke(executionStep));
-                } else {
+                }
+                else
+                {
                     executionStep();
                 }
             }

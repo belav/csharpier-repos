@@ -18,16 +18,14 @@ public class AutoincrementTest : IClassFixture<AutoincrementTest.AutoincrementFi
     public void Autoincrement_prevents_reusing_rowid()
     {
         using var context = CreateContext();
-        context.People.Add(
-            new PersonA { Name = "Bruce" });
+        context.People.Add(new PersonA { Name = "Bruce" });
         context.SaveChanges();
 
         var hero = context.People.First(p => p.Id == 1);
 
         context.People.Remove(hero);
         context.SaveChanges();
-        context.People.Add(
-            new PersonA { Name = "Batman" });
+        context.People.Add(new PersonA { Name = "Batman" });
         context.SaveChanges();
         var gone = context.People.FirstOrDefault(p => p.Id == 1);
         var begins = context.People.FirstOrDefault(p => p.Id == 2);
@@ -36,27 +34,21 @@ public class AutoincrementTest : IClassFixture<AutoincrementTest.AutoincrementFi
         Assert.NotNull(begins);
     }
 
-    private BatContext CreateContext()
-        => (BatContext)Fixture.CreateContext();
+    private BatContext CreateContext() => (BatContext)Fixture.CreateContext();
 
     public class AutoincrementFixture : SharedStoreFixtureBase<DbContext>
     {
-        protected override string StoreName
-            => "AutoincrementTest";
+        protected override string StoreName => "AutoincrementTest";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-        protected override Type ContextType
-            => typeof(BatContext);
+        protected override Type ContextType => typeof(BatContext);
     }
 
     protected class BatContext : PoolableDbContext
     {
         public BatContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<PersonA> People { get; set; }
     }

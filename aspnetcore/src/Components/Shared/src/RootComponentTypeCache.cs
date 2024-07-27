@@ -21,11 +21,19 @@ internal sealed class RootComponentTypeCache
         }
         else
         {
-            return _typeToKeyLookUp.GetOrAdd(key, ResolveType, AppDomain.CurrentDomain.GetAssemblies());
+            return _typeToKeyLookUp.GetOrAdd(
+                key,
+                ResolveType,
+                AppDomain.CurrentDomain.GetAssemblies()
+            );
         }
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Root components are expected to be defined in assemblies that do not get trimmed.")]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "Root components are expected to be defined in assemblies that do not get trimmed."
+    )]
     private static Type? ResolveType(Key key, Assembly[] assemblies)
     {
         Assembly? assembly = null;
@@ -65,8 +73,7 @@ internal sealed class RootComponentTypeCache
 
     private readonly struct Key : IEquatable<Key>
     {
-        public Key(string assembly, string type) =>
-            (Assembly, Type) = (assembly, type);
+        public Key(string assembly, string type) => (Assembly, Type) = (assembly, type);
 
         public string Assembly { get; }
 
@@ -74,8 +81,9 @@ internal sealed class RootComponentTypeCache
 
         public override bool Equals(object? obj) => obj is Key key && Equals(key);
 
-        public bool Equals(Key other) => string.Equals(Assembly, other.Assembly, StringComparison.Ordinal) &&
-            string.Equals(Type, other.Type, StringComparison.Ordinal);
+        public bool Equals(Key other) =>
+            string.Equals(Assembly, other.Assembly, StringComparison.Ordinal)
+            && string.Equals(Type, other.Type, StringComparison.Ordinal);
 
         public override int GetHashCode() => HashCode.Combine(Assembly, Type);
     }

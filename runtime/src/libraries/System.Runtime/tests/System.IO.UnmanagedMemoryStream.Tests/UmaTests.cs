@@ -17,11 +17,17 @@ namespace System.IO.Tests
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() => uma.ReadChar(-1));
                 Assert.Throws<ArgumentOutOfRangeException>(() => uma.ReadDecimal(capacity));
-                AssertExtensions.Throws<ArgumentException>("position", () => uma.ReadSingle(capacity - 1));
+                AssertExtensions.Throws<ArgumentException>(
+                    "position",
+                    () => uma.ReadSingle(capacity - 1)
+                );
 
                 Assert.Throws<ArgumentOutOfRangeException>(() => uma.Write(-1, true));
                 Assert.Throws<ArgumentOutOfRangeException>(() => uma.Write(capacity, 12345));
-                AssertExtensions.Throws<ArgumentException>("position", () => uma.Write(capacity - 1, 0.123));
+                AssertExtensions.Throws<ArgumentException>(
+                    "position",
+                    () => uma.Write(capacity - 1, 0.123)
+                );
 
                 uma.Dispose();
                 Assert.Throws<ObjectDisposedException>(() => uma.ReadByte(0));

@@ -28,14 +28,12 @@ public class MessagePackHubProtocolOptions
             {
                 // The default set of resolvers trigger a static constructor that throws on AOT environments.
                 // This gives users the chance to use an AOT friendly formatter.
-                _messagePackSerializerOptions = MessagePackHubProtocol.CreateDefaultMessagePackSerializerOptions();
+                _messagePackSerializerOptions =
+                    MessagePackHubProtocol.CreateDefaultMessagePackSerializerOptions();
             }
 
             return _messagePackSerializerOptions;
         }
-        set
-        {
-            _messagePackSerializerOptions = value;
-        }
+        set { _messagePackSerializerOptions = value; }
     }
 }

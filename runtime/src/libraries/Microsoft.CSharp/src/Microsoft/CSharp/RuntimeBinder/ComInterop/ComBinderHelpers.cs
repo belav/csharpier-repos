@@ -19,13 +19,15 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         {
             Debug.Assert(type != null);
 
-            if (type.IsValueType
+            if (
+                type.IsValueType
                 || type.IsArray
                 || type == typeof(string)
                 || type == typeof(DBNull)
                 || holdsNull
                 || type == typeof(System.Reflection.Missing)
-                || type == typeof(CurrencyWrapper))
+                || type == typeof(CurrencyWrapper)
+            )
             {
                 return true;
             }
@@ -77,10 +79,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
                         // we have restricted this argument to LimitType so we can convert and conversion will be trivial cast.
                         Expression boxedValueAccessor = Expression.Field(
-                            Helpers.Convert(
-                                curArgument.Expression,
-                                curArgument.LimitType
-                            ),
+                            Helpers.Convert(curArgument.Expression, curArgument.LimitType),
                             curArgument.LimitType.GetField("Value")
                         );
 
@@ -107,7 +106,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             return isByRefArg;
         }
 
-        internal static BindingRestrictions GetTypeRestrictionForDynamicMetaObject(DynamicMetaObject obj)
+        internal static BindingRestrictions GetTypeRestrictionForDynamicMetaObject(
+            DynamicMetaObject obj
+        )
         {
             if (obj.Value == null && obj.HasValue)
             {

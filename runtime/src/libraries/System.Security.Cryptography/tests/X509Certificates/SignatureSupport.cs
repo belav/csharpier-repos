@@ -15,7 +15,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         // the logic here will need to get more complicated.
         public static bool SupportsX509Sha1Signatures { get; } = GetSupportsX509Sha1Signatures();
 
-
         private static bool GetSupportsX509Sha1Signatures()
         {
             RSA rsa;

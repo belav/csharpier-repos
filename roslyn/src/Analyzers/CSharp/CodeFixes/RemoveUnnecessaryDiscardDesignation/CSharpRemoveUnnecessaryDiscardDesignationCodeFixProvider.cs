@@ -21,33 +21,49 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryDiscardDesignation), Shared]
-    internal partial class CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryDiscardDesignation
+        ),
+        Shared
+    ]
+    internal partial class CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider()
-        {
-        }
+        public CSharpRemoveUnnecessaryDiscardDesignationCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.RemoveUnnecessaryDiscardDesignationDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.RemoveUnnecessaryDiscardDesignationDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, CSharpAnalyzersResources.Remove_unnessary_discard, nameof(CSharpAnalyzersResources.Remove_unnessary_discard));
+            RegisterCodeFix(
+                context,
+                CSharpAnalyzersResources.Remove_unnessary_discard,
+                nameof(CSharpAnalyzersResources.Remove_unnessary_discard)
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var generator = editor.Generator;
 
             foreach (var diagnostic in diagnostics)
             {
-                var discard = diagnostic.Location.FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var discard = diagnostic.Location.FindNode(
+                    getInnermostNodeForTie: true,
+                    cancellationToken
+                );
                 switch (discard.Parent)
                 {
                     case DeclarationPatternSyntax declarationPattern:
@@ -58,21 +74,26 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
                                 (current, _) =>
                                 {
                                     var currentIsPattern = (IsPatternExpressionSyntax)current;
-                                    return SyntaxFactory.BinaryExpression(
-                                        SyntaxKind.IsExpression,
-                                        currentIsPattern.Expression,
-                                        currentIsPattern.IsKeyword,
-                                        ((DeclarationPatternSyntax)isPattern.Pattern).Type)
-                                            .WithAdditionalAnnotations(Formatter.Annotation);
-                                });
+                                    return SyntaxFactory
+                                        .BinaryExpression(
+                                            SyntaxKind.IsExpression,
+                                            currentIsPattern.Expression,
+                                            currentIsPattern.IsKeyword,
+                                            ((DeclarationPatternSyntax)isPattern.Pattern).Type
+                                        )
+                                        .WithAdditionalAnnotations(Formatter.Annotation);
+                                }
+                            );
                         }
                         else
                         {
                             editor.ReplaceNode(
                                 declarationPattern,
                                 (current, _) =>
-                                    SyntaxFactory.TypePattern(((DeclarationPatternSyntax)current).Type)
-                                                 .WithAdditionalAnnotations(Formatter.Annotation));
+                                    SyntaxFactory
+                                        .TypePattern(((DeclarationPatternSyntax)current).Type)
+                                        .WithAdditionalAnnotations(Formatter.Annotation)
+                            );
                         }
 
                         break;
@@ -80,8 +101,10 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
                         editor.ReplaceNode(
                             recursivePattern,
                             (current, _) =>
-                                ((RecursivePatternSyntax)current).WithDesignation(null)
-                                                                 .WithAdditionalAnnotations(Formatter.Annotation));
+                                ((RecursivePatternSyntax)current)
+                                    .WithDesignation(null)
+                                    .WithAdditionalAnnotations(Formatter.Annotation)
+                        );
                         break;
                 }
             }

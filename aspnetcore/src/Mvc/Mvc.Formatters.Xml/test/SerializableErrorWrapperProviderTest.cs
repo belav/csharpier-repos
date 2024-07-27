@@ -43,13 +43,15 @@ public class SerializableErrorWrapperProviderTest
         var wrapperProvider = new SerializableErrorWrapperProvider();
         var person = new Person() { Id = 10, Name = "John" };
 
-        var expectedMessage = "The object to be wrapped must be of type " +
-            $"'{nameof(SerializableErrorWrapper)}' but was of type 'Person'.";
+        var expectedMessage =
+            "The object to be wrapped must be of type "
+            + $"'{nameof(SerializableErrorWrapper)}' but was of type 'Person'.";
 
         // Act and Assert
         ExceptionAssert.ThrowsArgument(
             () => wrapperProvider.Wrap(person),
             "original",
-            expectedMessage);
+            expectedMessage
+        );
     }
 }

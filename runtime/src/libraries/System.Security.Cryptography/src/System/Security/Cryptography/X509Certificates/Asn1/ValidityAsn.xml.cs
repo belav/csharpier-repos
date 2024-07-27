@@ -33,7 +33,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static ValidityAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static ValidityAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -54,7 +58,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Decode(ref reader, Asn1Tag.Sequence, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, out ValidityAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            out ValidityAsn decoded
+        )
         {
             try
             {
@@ -66,13 +74,23 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, out ValidityAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            out ValidityAsn decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
 
-            System.Security.Cryptography.X509Certificates.Asn1.TimeAsn.Decode(ref sequenceReader, out decoded.NotBefore);
-            System.Security.Cryptography.X509Certificates.Asn1.TimeAsn.Decode(ref sequenceReader, out decoded.NotAfter);
+            System.Security.Cryptography.X509Certificates.Asn1.TimeAsn.Decode(
+                ref sequenceReader,
+                out decoded.NotBefore
+            );
+            System.Security.Cryptography.X509Certificates.Asn1.TimeAsn.Decode(
+                ref sequenceReader,
+                out decoded.NotAfter
+            );
 
             sequenceReader.ThrowIfNotEmpty();
         }

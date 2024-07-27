@@ -12,7 +12,7 @@ namespace System.Xml
 {
     internal sealed class XPathNodePointer : IXmlDataVirtualNode
     {
-        private readonly WeakReference _owner;  // Owner of this pointer (an DataDocumentXPathNavigator). When the associated DataDocumentXPathNavigator (the owner) goes away, this XPathNodePointer can go away as well.
+        private readonly WeakReference _owner; // Owner of this pointer (an DataDocumentXPathNavigator). When the associated DataDocumentXPathNavigator (the owner) goes away, this XPathNodePointer can go away as well.
         private readonly XmlDataDocument _doc;
         private XmlNode _node;
         private DataColumn? _column;
@@ -24,26 +24,26 @@ namespace System.Xml
         private bool _bNeedFoliate;
 
         internal static ReadOnlySpan<int> XmlNodeTypeToXpathNodeTypeMap =>
-        [
-            /*XmlNodeType.None*/ -1,
-            /*XmlNodeType.Element*/ (int)XPathNodeType.Element,
-            /*XmlNodeType.Attribute*/ (int)XPathNodeType.Attribute,
-            /*XmlNodeType.Text*/ (int)XPathNodeType.Text,
-            /*XmlNodeType.CDATA*/ (int)XPathNodeType.Text,
-            /*XmlNodeType.EntityReference*/ -1,
-            /*XmlNodeType.Entity*/ -1,
-            /*XmlNodeType.ProcessingInstruction*/ (int)XPathNodeType.ProcessingInstruction,
-            /*XmlNodeType.Comment*/ (int)XPathNodeType.Comment,
-            /*XmlNodeType.Document*/ (int)XPathNodeType.Root,
-            /*XmlNodeType.DocumentType*/ -1,
-            /*XmlNodeType.DocumentFragment*/ (int)XPathNodeType.Root,
-            /*XmlNodeType.Notation*/ -1,
-            /*XmlNodeType.Whitespace*/ (int)XPathNodeType.Whitespace,
-            /*XmlNodeType.SignificantWhitespace*/ (int)XPathNodeType.SignificantWhitespace,
-            /*XmlNodeType.EndElement*/ -1,
-            /*XmlNodeType.EndEntity*/ -1,
-            /*XmlNodeType.XmlDeclaration*/ -1,
-        ];
+            [
+                /*XmlNodeType.None*/-1,
+                /*XmlNodeType.Element*/(int)XPathNodeType.Element,
+                /*XmlNodeType.Attribute*/(int)XPathNodeType.Attribute,
+                /*XmlNodeType.Text*/(int)XPathNodeType.Text,
+                /*XmlNodeType.CDATA*/(int)XPathNodeType.Text,
+                /*XmlNodeType.EntityReference*/-1,
+                /*XmlNodeType.Entity*/-1,
+                /*XmlNodeType.ProcessingInstruction*/(int)XPathNodeType.ProcessingInstruction,
+                /*XmlNodeType.Comment*/(int)XPathNodeType.Comment,
+                /*XmlNodeType.Document*/(int)XPathNodeType.Root,
+                /*XmlNodeType.DocumentType*/-1,
+                /*XmlNodeType.DocumentFragment*/(int)XPathNodeType.Root,
+                /*XmlNodeType.Notation*/-1,
+                /*XmlNodeType.Whitespace*/(int)XPathNodeType.Whitespace,
+                /*XmlNodeType.SignificantWhitespace*/(int)XPathNodeType.SignificantWhitespace,
+                /*XmlNodeType.EndElement*/-1,
+                /*XmlNodeType.EndEntity*/-1,
+                /*XmlNodeType.XmlDeclaration*/-1,
+            ];
 
         private XPathNodeType DecideXPNodeTypeForTextNodes(XmlNode node)
         {
@@ -88,21 +88,36 @@ namespace System.Xml
             return (XPathNodeType)xnt;
         }
 
-        private static bool IsNamespaceNode(XmlNodeType nt, string ns) => nt == XmlNodeType.Attribute && ns == StrReservedXmlns;
+        private static bool IsNamespaceNode(XmlNodeType nt, string ns) =>
+            nt == XmlNodeType.Attribute && ns == StrReservedXmlns;
 
         //when the constructor is called, the node has to be a valid XPath node at the valid location ( for example, the first
         //text/WS/SWS/CData nodes of a series continuous text-like nodes.
-        internal XPathNodePointer(DataDocumentXPathNavigator owner, XmlDataDocument doc, XmlNode node) :
-            this(owner, doc, node, null, false, null)
-        {
-        }
+        internal XPathNodePointer(
+            DataDocumentXPathNavigator owner,
+            XmlDataDocument doc,
+            XmlNode node
+        )
+            : this(owner, doc, node, null, false, null) { }
 
-        internal XPathNodePointer(DataDocumentXPathNavigator owner, XPathNodePointer pointer) :
-            this(owner, pointer._doc, pointer._node, pointer._column, pointer._fOnValue, pointer._parentOfNS)
-        {
-        }
+        internal XPathNodePointer(DataDocumentXPathNavigator owner, XPathNodePointer pointer)
+            : this(
+                owner,
+                pointer._doc,
+                pointer._node,
+                pointer._column,
+                pointer._fOnValue,
+                pointer._parentOfNS
+            ) { }
 
-        private XPathNodePointer(DataDocumentXPathNavigator owner, XmlDataDocument doc, XmlNode node, DataColumn? c, bool bOnValue, XmlBoundElement? parentOfNS)
+        private XPathNodePointer(
+            DataDocumentXPathNavigator owner,
+            XmlDataDocument doc,
+            XmlNode node,
+            DataColumn? c,
+            bool bOnValue,
+            XmlBoundElement? parentOfNS
+        )
         {
             Debug.Assert(owner != null);
             _owner = new WeakReference(owner);
@@ -190,7 +205,11 @@ namespace System.Xml
                     XmlNodeType nt = _node.NodeType;
                     if (IsNamespaceNode(nt, _node.NamespaceURI) && _node.LocalName == StrXmlNS)
                         return string.Empty;
-                    if (nt == XmlNodeType.Element || nt == XmlNodeType.Attribute || nt == XmlNodeType.ProcessingInstruction)
+                    if (
+                        nt == XmlNodeType.Element
+                        || nt == XmlNodeType.Attribute
+                        || nt == XmlNodeType.ProcessingInstruction
+                    )
                         return _node.LocalName;
                     return string.Empty;
                 }
@@ -224,7 +243,11 @@ namespace System.Xml
                         else
                             return _node.LocalName;
                     }
-                    if (nt == XmlNodeType.Element || nt == XmlNodeType.Attribute || nt == XmlNodeType.ProcessingInstruction)
+                    if (
+                        nt == XmlNodeType.Element
+                        || nt == XmlNodeType.Attribute
+                        || nt == XmlNodeType.ProcessingInstruction
+                    )
                         return _node.Name;
                     return string.Empty;
                 }
@@ -253,7 +276,11 @@ namespace System.Xml
                 else if (_column == null)
                 {
                     XPathNodeType xnt = ConvertNodeType(_node);
-                    if (xnt == XPathNodeType.Element || xnt == XPathNodeType.Root || xnt == XPathNodeType.Attribute)
+                    if (
+                        xnt == XPathNodeType.Element
+                        || xnt == XPathNodeType.Root
+                        || xnt == XPathNodeType.Attribute
+                    )
                         return _node.NamespaceURI;
                     return string.Empty;
                 }
@@ -325,7 +352,10 @@ namespace System.Xml
                 else if (_column.ColumnMapping == MappingType.Attribute || _fOnValue)
                 {
                     DataRow row = Row!;
-                    DataRowVersion rowVersion = (row.RowState == DataRowState.Detached) ? DataRowVersion.Proposed : DataRowVersion.Current;
+                    DataRowVersion rowVersion =
+                        (row.RowState == DataRowState.Detached)
+                            ? DataRowVersion.Proposed
+                            : DataRowVersion.Current;
                     object value = row[_column, rowVersion];
                     if (!Convert.IsDBNull(value))
                         return _column.ConvertObjectToXml(value);
@@ -363,7 +393,10 @@ namespace System.Xml
                 else
                 {
                     DataRow row = Row!;
-                    DataRowVersion rowVersion = (row.RowState == DataRowState.Detached) ? DataRowVersion.Proposed : DataRowVersion.Current;
+                    DataRowVersion rowVersion =
+                        (row.RowState == DataRowState.Detached)
+                            ? DataRowVersion.Proposed
+                            : DataRowVersion.Current;
                     object value = row[_column, rowVersion];
                     if (!Convert.IsDBNull(value))
                         return _column.ConvertObjectToXml(value);
@@ -545,12 +578,19 @@ namespace System.Xml
             DataColumnCollection columns = table.Columns;
             int iColumn = (col != null) ? col.Ordinal + 1 : 0;
             int cColumns = columns.Count;
-            DataRowVersion rowVersion = (row.RowState == DataRowState.Detached) ? DataRowVersion.Proposed : DataRowVersion.Current;
+            DataRowVersion rowVersion =
+                (row.RowState == DataRowState.Detached)
+                    ? DataRowVersion.Proposed
+                    : DataRowVersion.Current;
 
             for (; iColumn < cColumns; iColumn++)
             {
                 DataColumn c = columns[iColumn];
-                if (!_doc.IsNotMapped(c) && (c.ColumnMapping == MappingType.Attribute) == fAttribute && !Convert.IsDBNull(row[c, rowVersion]))
+                if (
+                    !_doc.IsNotMapped(c)
+                    && (c.ColumnMapping == MappingType.Attribute) == fAttribute
+                    && !Convert.IsDBNull(row[c, rowVersion])
+                )
                     return c;
             }
 
@@ -565,12 +605,19 @@ namespace System.Xml
             DataTable table = row.Table;
             DataColumnCollection columns = table.Columns;
             int iColumn = (col != null) ? col.Ordinal - 1 : columns.Count - 1;
-            DataRowVersion rowVersion = (row.RowState == DataRowState.Detached) ? DataRowVersion.Proposed : DataRowVersion.Current;
+            DataRowVersion rowVersion =
+                (row.RowState == DataRowState.Detached)
+                    ? DataRowVersion.Proposed
+                    : DataRowVersion.Current;
 
             for (; iColumn >= 0; iColumn--)
             {
                 DataColumn c = columns[iColumn];
-                if (!_doc.IsNotMapped(c) && (c.ColumnMapping == MappingType.Attribute) == fAttribute && !Convert.IsDBNull(row[c, rowVersion]))
+                if (
+                    !_doc.IsNotMapped(c)
+                    && (c.ColumnMapping == MappingType.Attribute) == fAttribute
+                    && !Convert.IsDBNull(row[c, rowVersion])
+                )
                     return c;
             }
 
@@ -587,7 +634,10 @@ namespace System.Xml
             {
                 //_column.ColumnMapping checkin below is not really needed since the pointer should be pointing at the node before this
                 // function should even be called ( there is always a call MoveToOwnerElement() before MoveToAttribute(..)
-                if ((_column == null || _column.ColumnMapping == MappingType.Attribute) && _node.NodeType == XmlNodeType.Element)
+                if (
+                    (_column == null || _column.ColumnMapping == MappingType.Attribute)
+                    && _node.NodeType == XmlNodeType.Element
+                )
                 {
                     if (!IsFoliated(_node))
                     {
@@ -660,7 +710,9 @@ namespace System.Xml
                     }
                     else
                     {
-                        XmlAttributeCollection attrs = ((XmlAttribute)_node).OwnerElement!.Attributes;
+                        XmlAttributeCollection attrs = ((XmlAttribute)_node)
+                            .OwnerElement!
+                            .Attributes;
                         bool bFound = false;
                         foreach (XmlAttribute attr in attrs)
                         {
@@ -688,18 +740,22 @@ namespace System.Xml
             Debug.Assert(xntInt != -1);
             return xntInt switch
             {
-                (int)XPathNodeType.Root =>
-                    (xntChildInt == (int)XPathNodeType.Element ||
-                     xntChildInt == (int)XPathNodeType.Comment ||
-                     xntChildInt == (int)XPathNodeType.ProcessingInstruction),
+                (int)XPathNodeType.Root
+                    => (
+                        xntChildInt == (int)XPathNodeType.Element
+                        || xntChildInt == (int)XPathNodeType.Comment
+                        || xntChildInt == (int)XPathNodeType.ProcessingInstruction
+                    ),
 
-                (int)XPathNodeType.Element =>
-                    (xntChildInt == (int)XPathNodeType.Element ||
-                     xntChildInt == (int)XPathNodeType.Text ||
-                     xntChildInt == (int)XPathNodeType.Comment ||
-                     xntChildInt == (int)XPathNodeType.Whitespace ||
-                     xntChildInt == (int)XPathNodeType.SignificantWhitespace ||
-                     xntChildInt == (int)XPathNodeType.ProcessingInstruction),
+                (int)XPathNodeType.Element
+                    => (
+                        xntChildInt == (int)XPathNodeType.Element
+                        || xntChildInt == (int)XPathNodeType.Text
+                        || xntChildInt == (int)XPathNodeType.Comment
+                        || xntChildInt == (int)XPathNodeType.Whitespace
+                        || xntChildInt == (int)XPathNodeType.SignificantWhitespace
+                        || xntChildInt == (int)XPathNodeType.ProcessingInstruction
+                    ),
 
                 _ => false,
             };
@@ -712,7 +768,11 @@ namespace System.Xml
             return xntInt switch
             {
                 (int)XPathNodeType.Root => c.ColumnMapping == MappingType.Element,
-                (int)XPathNodeType.Element => (c.ColumnMapping == MappingType.Element || c.ColumnMapping == MappingType.SimpleContent),
+                (int)XPathNodeType.Element
+                    => (
+                        c.ColumnMapping == MappingType.Element
+                        || c.ColumnMapping == MappingType.SimpleContent
+                    ),
                 _ => false,
             };
         }
@@ -728,7 +788,10 @@ namespace System.Xml
                     if (_fOnValue)
                     {
                         // _fOnValue could be true only when the column is mapped as simplecontent or element
-                        Debug.Assert(_column.ColumnMapping != MappingType.Attribute && _column.ColumnMapping != MappingType.Hidden);
+                        Debug.Assert(
+                            _column.ColumnMapping != MappingType.Attribute
+                                && _column.ColumnMapping != MappingType.Hidden
+                        );
                         return false;
                     }
                     DataRow curRow = Row!;
@@ -893,7 +956,10 @@ namespace System.Xml
 
                 if (_column != null)
                 {
-                    if (_column.ColumnMapping == MappingType.Attribute || _column.ColumnMapping == MappingType.Hidden)
+                    if (
+                        _column.ColumnMapping == MappingType.Attribute
+                        || _column.ColumnMapping == MappingType.Hidden
+                    )
                         return false;
                     return !_fOnValue;
                 }
@@ -931,7 +997,10 @@ namespace System.Xml
 
             if (_column != null)
             {
-                if (_column.ColumnMapping == MappingType.Attribute || _column.ColumnMapping == MappingType.Hidden)
+                if (
+                    _column.ColumnMapping == MappingType.Attribute
+                    || _column.ColumnMapping == MappingType.Hidden
+                )
                     return false;
                 if (_fOnValue) //text node has no children to move to
                     return false;
@@ -1044,11 +1113,13 @@ namespace System.Xml
             if (_column == null && pointer._column == null)
                 return (pointer._node == _node && pointer._parentOfNS == _parentOfNS);
 
-            return (pointer._doc == _doc
-                    && pointer._node == _node
-                    && pointer._column == _column
-                    && pointer._fOnValue == _fOnValue
-                    && pointer._parentOfNS == _parentOfNS);
+            return (
+                pointer._doc == _doc
+                && pointer._node == _node
+                && pointer._column == _column
+                && pointer._fOnValue == _fOnValue
+                && pointer._parentOfNS == _parentOfNS
+            );
         }
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
@@ -1068,7 +1139,11 @@ namespace System.Xml
         {
             depth = 0;
             XmlNode curNode = node;
-            XmlNode? parent = ((curNode.NodeType == XmlNodeType.Attribute) ? (((XmlAttribute)curNode).OwnerElement) : (curNode.ParentNode));
+            XmlNode? parent = (
+                (curNode.NodeType == XmlNodeType.Attribute)
+                    ? (((XmlAttribute)curNode).OwnerElement)
+                    : (curNode.ParentNode)
+            );
             for (; parent != null; depth++)
             {
                 curNode = parent;
@@ -1085,7 +1160,8 @@ namespace System.Xml
 
             if (IsSamePosition(other))
                 return XmlNodeOrder.Same;
-            XmlNode? curNode1, curNode2;
+            XmlNode? curNode1,
+                curNode2;
 
             //deal with namespace node first
             if (NodeType == XPathNodeType.Namespace && other.NodeType == XPathNodeType.Namespace)
@@ -1165,8 +1241,8 @@ namespace System.Xml
                 return XmlNodeOrder.Unknown;
             }
 
-
-            int depth1 = -1, depth2 = -1;
+            int depth1 = -1,
+                depth2 = -1;
             XmlNode root1 = XPathNodePointer.GetRoot(curNode1, ref depth1);
             XmlNode root2 = XPathNodePointer.GetRoot(curNode2, ref depth2);
             if (root1 != root2)
@@ -1176,7 +1252,11 @@ namespace System.Xml
             {
                 while (curNode1 != null && depth1 > depth2)
                 {
-                    curNode1 = ((curNode1.NodeType == XmlNodeType.Attribute) ? (((XmlAttribute)curNode1).OwnerElement) : (curNode1.ParentNode));
+                    curNode1 = (
+                        (curNode1.NodeType == XmlNodeType.Attribute)
+                            ? (((XmlAttribute)curNode1).OwnerElement)
+                            : (curNode1.ParentNode)
+                    );
                     depth1--;
                 }
                 if (curNode1 == curNode2)
@@ -1186,7 +1266,11 @@ namespace System.Xml
             {
                 while (curNode2 != null && depth2 > depth1)
                 {
-                    curNode2 = ((curNode2.NodeType == XmlNodeType.Attribute) ? (((XmlAttribute)curNode2).OwnerElement) : (curNode2.ParentNode));
+                    curNode2 = (
+                        (curNode2.NodeType == XmlNodeType.Attribute)
+                            ? (((XmlAttribute)curNode2).OwnerElement)
+                            : (curNode2.ParentNode)
+                    );
                     depth2--;
                 }
                 if (curNode1 == curNode2)
@@ -1285,13 +1369,19 @@ namespace System.Xml
             {
                 if (_column.ColumnMapping == MappingType.Attribute)
                 {
-                    n = _node.Attributes!.GetNamedItem(_column.EncodedColumnName, _column.Namespace);
+                    n = _node.Attributes!.GetNamedItem(
+                        _column.EncodedColumnName,
+                        _column.Namespace
+                    );
                 }
                 else
                 {
                     for (n = _node.FirstChild; n != null; n = n.NextSibling)
                     {
-                        if (n.LocalName == _column.EncodedColumnName && n.NamespaceURI == _column.Namespace)
+                        if (
+                            n.LocalName == _column.EncodedColumnName
+                            && n.NamespaceURI == _column.Namespace
+                        )
                             break;
                     }
                 }
@@ -1310,7 +1400,6 @@ namespace System.Xml
             AssertValid();
             _bNeedFoliate = false;
         }
-
 
         //The function only helps to find out if there is a namespace declaration of given name is defined on the given node
         //It will not check the ancestor of the given node.
@@ -1339,7 +1428,10 @@ namespace System.Xml
                 {
                     if (curCol.Namespace == StrReservedXmlns)
                     {
-                        DataRowVersion rowVersion = (curRow.RowState == DataRowState.Detached) ? DataRowVersion.Proposed : DataRowVersion.Current;
+                        DataRowVersion rowVersion =
+                            (curRow.RowState == DataRowState.Detached)
+                                ? DataRowVersion.Proposed
+                                : DataRowVersion.Current;
                         return curCol.ConvertObjectToXml(curRow[curCol, rowVersion]);
                     }
                     curCol = PreviousColumn(curRow, curCol, true);
@@ -1413,7 +1505,7 @@ namespace System.Xml
                         }
                     }
                     else
-                    {//defoliated so that we need to search through its column
+                    { //defoliated so that we need to search through its column
                         DataRow? curRow = be.Row;
                         if (curRow == null)
                             return false;
@@ -1444,7 +1536,11 @@ namespace System.Xml
         //the function will find the next namespace node on the given bound element starting with the given column or attribute
         // whether to use column or attribute depends on if the bound element is foliated or not.
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        private bool MoveToNextNamespace(XmlBoundElement? be, DataColumn? col, XmlAttribute? curAttr)
+        private bool MoveToNextNamespace(
+            XmlBoundElement? be,
+            DataColumn? col,
+            XmlAttribute? curAttr
+        )
         {
             if (be != null)
             {
@@ -1465,7 +1561,11 @@ namespace System.Xml
                     {
                         attrInd--;
                         attr = attrs[attrInd];
-                        if (bFound && attr.NamespaceURI == StrReservedXmlns && !DuplicateNS(be, attr.LocalName))
+                        if (
+                            bFound
+                            && attr.NamespaceURI == StrReservedXmlns
+                            && !DuplicateNS(be, attr.LocalName)
+                        )
                         {
                             MoveTo(attr);
                             return true;
@@ -1475,7 +1575,7 @@ namespace System.Xml
                     }
                 }
                 else
-                {//defoliated so that we need to search through its column
+                { //defoliated so that we need to search through its column
                     DataRow? curRow = be.Row;
                     if (curRow == null)
                         return false;
@@ -1483,7 +1583,10 @@ namespace System.Xml
                     DataColumn? curCol = PreviousColumn(curRow, col, true);
                     while (curCol != null)
                     {
-                        if (curCol.Namespace == StrReservedXmlns && !DuplicateNS(be, curCol.ColumnName))
+                        if (
+                            curCol.Namespace == StrReservedXmlns
+                            && !DuplicateNS(be, curCol.ColumnName)
+                        )
                         {
                             MoveTo(be, curCol, false);
                             return true;
@@ -1525,7 +1628,7 @@ namespace System.Xml
                 MoveTo(_doc._attrXml, null, false);
                 return true;
             }
-        labelNoNS:
+            labelNoNS:
             //didn't find one namespace node
             _parentOfNS = null;
             return false;
@@ -1646,17 +1749,25 @@ namespace System.Xml
                 Debug.Assert(row != null);
 
                 // We cannot be on a column for which the value is DBNull
-                DataRowVersion rowVersion = (row.RowState == DataRowState.Detached) ? DataRowVersion.Proposed : DataRowVersion.Current;
+                DataRowVersion rowVersion =
+                    (row.RowState == DataRowState.Detached)
+                        ? DataRowVersion.Proposed
+                        : DataRowVersion.Current;
                 Debug.Assert(!Convert.IsDBNull(row[_column, rowVersion]));
 
                 // If we are on the Text column, we should always have _fOnValue == true
-                Debug.Assert((_column.ColumnMapping == MappingType.SimpleContent) ? _fOnValue : true);
+                Debug.Assert(
+                    (_column.ColumnMapping == MappingType.SimpleContent) ? _fOnValue : true
+                );
             }
             if (_column == null)
                 Debug.Assert(!_fOnValue);
         }
 
-        internal XmlDataDocument Document { get { return _doc; } }
+        internal XmlDataDocument Document
+        {
+            get { return _doc; }
+        }
 
         bool IXmlDataVirtualNode.IsInUse()
         {

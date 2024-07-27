@@ -8,5 +8,5 @@ internal enum TransferCoding
 {
     None,
     Chunked,
-    Other
+    Other,
 }

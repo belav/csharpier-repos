@@ -4,9 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-#if FEATURE_DYNAMIC
-using System.Dynamic;
-#endif
 using System.Globalization;
 using System.IO;
 using System.Linq.Expressions;
@@ -14,17 +11,25 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
+#if FEATURE_DYNAMIC
+using System.Dynamic;
+#endif
 
 namespace System.Json
 {
     /// <summary>
-    /// This is the base class for JavaScript Object Notation (JSON) common language runtime (CLR) types. 
+    /// This is the base class for JavaScript Object Notation (JSON) common language runtime (CLR) types.
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
-        Justification = "JsonValue is by definition either a collection or a single object.")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "JsonValue is by definition either a collection or a single object."
+    )]
     [DataContract]
 #if FEATURE_DYNAMIC
-    public class JsonValue : IEnumerable<KeyValuePair<string, JsonValue>>, IDynamicMetaObjectProvider
+    public class JsonValue
+        : IEnumerable<KeyValuePair<string, JsonValue>>,
+            IDynamicMetaObjectProvider
 #else
     public class JsonValue : IEnumerable<KeyValuePair<string, JsonValue>>
 #endif
@@ -33,9 +38,7 @@ namespace System.Json
         private int changingListenersCount;
         private int changedListenersCount;
 
-        internal JsonValue()
-        {
-        }
+        internal JsonValue() { }
 
         /// <summary>
         /// Raised when this <see cref="System.Json.JsonValue"/> or any of its members have changed.
@@ -57,7 +60,6 @@ namespace System.Json
                 changedListenersCount++;
                 OnChanged += value;
             }
-
             remove
             {
                 changedListenersCount--;
@@ -85,7 +87,6 @@ namespace System.Json
                 changingListenersCount++;
                 OnChanging += value;
             }
-
             remove
             {
                 changingListenersCount--;
@@ -129,7 +130,7 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Gets the default JsonValue instance.  
+        /// Gets the default JsonValue instance.
         /// This instance enables safe-chaining of JsonValue operations and resolves to 'null'
         /// when this instance is used as dynamic, mapping to the JavaScript 'null' value.
         /// </summary>
@@ -148,9 +149,26 @@ namespace System.Json
         /// class, which inherits from this class.</remarks>
         public virtual JsonValue this[string key]
         {
-            get { throw new InvalidOperationException(RS.Format(Properties.Resources.IndexerNotSupportedOnJsonType, typeof(string), JsonType)); }
-
-            set { throw new InvalidOperationException(RS.Format(Properties.Resources.IndexerNotSupportedOnJsonType, typeof(string), JsonType)); }
+            get
+            {
+                throw new InvalidOperationException(
+                    RS.Format(
+                        Properties.Resources.IndexerNotSupportedOnJsonType,
+                        typeof(string),
+                        JsonType
+                    )
+                );
+            }
+            set
+            {
+                throw new InvalidOperationException(
+                    RS.Format(
+                        Properties.Resources.IndexerNotSupportedOnJsonType,
+                        typeof(string),
+                        JsonType
+                    )
+                );
+            }
         }
 
         /// <summary>
@@ -163,9 +181,26 @@ namespace System.Json
         /// class, which inherits from this class.</remarks>
         public virtual JsonValue this[int index]
         {
-            get { throw new InvalidOperationException(RS.Format(Properties.Resources.IndexerNotSupportedOnJsonType, typeof(int), JsonType)); }
-
-            set { throw new InvalidOperationException(RS.Format(Properties.Resources.IndexerNotSupportedOnJsonType, typeof(int), JsonType)); }
+            get
+            {
+                throw new InvalidOperationException(
+                    RS.Format(
+                        Properties.Resources.IndexerNotSupportedOnJsonType,
+                        typeof(int),
+                        JsonType
+                    )
+                );
+            }
+            set
+            {
+                throw new InvalidOperationException(
+                    RS.Format(
+                        Properties.Resources.IndexerNotSupportedOnJsonType,
+                        typeof(int),
+                        JsonType
+                    )
+                );
+            }
         }
 
         /// <summary>
@@ -227,13 +262,19 @@ namespace System.Json
         /// <returns>An object of type T initialized with the <see cref="System.Json.JsonValue"/> value specified.</returns>
         /// <remarks>This method is to support the framework and is not intended to be used externally, use explicit type cast instead.</remarks>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "The generic parameter is used to specify the output type")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "The generic parameter is used to specify the output type"
+        )]
         public static T CastValue<T>(JsonValue value)
         {
             Type typeofT = typeof(T);
 
-            if ((value != null && typeofT.IsAssignableFrom(value.GetType())) || typeofT == typeof(object))
+            if (
+                (value != null && typeofT.IsAssignableFrom(value.GetType()))
+                || typeofT == typeof(object)
+            )
             {
                 return (T)(object)value;
             }
@@ -242,7 +283,9 @@ namespace System.Json
             {
                 if (typeofT.IsValueType)
                 {
-                    throw new InvalidCastException(RS.Format(Properties.Resources.InvalidCastNonNullable, typeofT.FullName));
+                    throw new InvalidCastException(
+                        RS.Format(Properties.Resources.InvalidCastNonNullable, typeofT.FullName)
+                    );
                 }
                 else
                 {
@@ -256,9 +299,20 @@ namespace System.Json
             }
             catch (Exception ex)
             {
-                if (ex is FormatException || ex is NotSupportedException || ex is InvalidCastException)
+                if (
+                    ex is FormatException
+                    || ex is NotSupportedException
+                    || ex is InvalidCastException
+                )
                 {
-                    throw new InvalidCastException(RS.Format(Properties.Resources.CannotCastJsonValue, value.GetType().FullName, typeofT.FullName), ex);
+                    throw new InvalidCastException(
+                        RS.Format(
+                            Properties.Resources.CannotCastJsonValue,
+                            value.GetType().FullName,
+                            typeofT.FullName
+                        ),
+                        ex
+                    );
                 }
 
                 throw;
@@ -321,8 +375,11 @@ namespace System.Json
         /// <typeparam name="T">The type to which the conversion is being performed.</typeparam>
         /// <returns>An instance of T initialized with the value from the conversion of this instance.</returns>
         /// <exception cref="System.NotSupportedException">If this <see cref="System.Json.JsonValue"/> value cannot be converted into the type T.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "The generic parameter is used to specify the output type")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "The generic parameter is used to specify the output type"
+        )]
         public T ReadAs<T>()
         {
             return (T)ReadAs(typeof(T));
@@ -382,7 +439,9 @@ namespace System.Json
                 return result;
             }
 
-            throw new NotSupportedException(RS.Format(Properties.Resources.CannotReadAsType, GetType().FullName, type.FullName));
+            throw new NotSupportedException(
+                RS.Format(Properties.Resources.CannotReadAsType, GetType().FullName, type.FullName)
+            );
         }
 
         /// <summary>
@@ -391,8 +450,11 @@ namespace System.Json
         /// <param name="type">The type to which the conversion is being performed.</param>
         /// <param name="value">An object to be initialized with this instance or null if the conversion cannot be performed.</param>
         /// <returns>true if this <see cref="System.Json.JsonValue"/> instance can be read as the specified type; otherwise, false.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate",
-            Justification = "This is the non-generic version of the method.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1007:UseGenericsWhereAppropriate",
+            Justification = "This is the non-generic version of the method."
+        )]
         public virtual bool TryReadAs(Type type, out object value)
         {
             if (type == null)
@@ -426,7 +488,13 @@ namespace System.Json
                 throw new ArgumentNullException("stream");
             }
 
-            using (XmlDictionaryWriter jsonWriter = JsonReaderWriterFactory.CreateJsonWriter(stream, Encoding.UTF8, false))
+            using (
+                XmlDictionaryWriter jsonWriter = JsonReaderWriterFactory.CreateJsonWriter(
+                    stream,
+                    Encoding.UTF8,
+                    false
+                )
+            )
             {
                 jsonWriter.WriteStartElement(JXmlToJsonValueConverter.RootElementName);
                 Save(jsonWriter);
@@ -546,7 +614,7 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Safe string indexer for the <see cref="System.Json.JsonValue"/> type. 
+        /// Safe string indexer for the <see cref="System.Json.JsonValue"/> type.
         /// </summary>
         /// <param name="key">The key of the element to get.</param>
         /// <returns>If this is an instance of <see cref="System.Json.JsonObject"/>, it contains
@@ -559,7 +627,7 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Safe indexer for the <see cref="System.Json.JsonValue"/> type. 
+        /// Safe indexer for the <see cref="System.Json.JsonValue"/> type.
         /// </summary>
         /// <param name="index">The zero-based index of the element to get.</param>
         /// <returns>If this is an instance of <see cref="System.Json.JsonArray"/>, the index is within the array
@@ -612,7 +680,11 @@ namespace System.Json
                     case TypeCode.UInt16:
                     case TypeCode.Byte:
                     case TypeCode.SByte:
-                        index = System.Convert.ChangeType(index, typeof(int), CultureInfo.InvariantCulture);
+                        index = System.Convert.ChangeType(
+                            index,
+                            typeof(int),
+                            CultureInfo.InvariantCulture
+                        );
                         goto case TypeCode.Int32;
 
                     case TypeCode.Int32:
@@ -624,7 +696,10 @@ namespace System.Json
                         break;
 
                     default:
-                        throw new ArgumentException(RS.Format(Properties.Resources.InvalidIndexType, index.GetType()), "indexes");
+                        throw new ArgumentException(
+                            RS.Format(Properties.Resources.InvalidIndexType, index.GetType()),
+                            "indexes"
+                        );
                 }
             }
 
@@ -632,8 +707,11 @@ namespace System.Json
         }
 
 #if FEATURE_DYNAMIC
-        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes",
-            Justification = "Cannot make this class sealed, it needs to have subclasses. But its subclasses are sealed themselves.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1033:InterfaceMethodsShouldBeCallableByChildTypes",
+            Justification = "Cannot make this class sealed, it needs to have subclasses. But its subclasses are sealed themselves."
+        )]
         DynamicMetaObject IDynamicMetaObjectProvider.GetMetaObject(Expression parameter)
         {
             if (parameter == null)
@@ -703,9 +781,13 @@ namespace System.Json
                     return true;
 
                 default:
-                    return type == typeof(DateTimeOffset) || type == typeof(Guid) || type == typeof(Uri) ||
-                           type == typeof(List<object>) || type == typeof(Array) || type == typeof(object[]) ||
-                           type == typeof(Dictionary<string, object>);
+                    return type == typeof(DateTimeOffset)
+                        || type == typeof(Guid)
+                        || type == typeof(Uri)
+                        || type == typeof(List<object>)
+                        || type == typeof(Array)
+                        || type == typeof(object[])
+                        || type == typeof(Dictionary<string, object>);
             }
         }
 
@@ -742,7 +824,10 @@ namespace System.Json
             {
                 if (currentValue.Count > currentIndex)
                 {
-                    JsonValue nextValue = currentValue.WriteStartElementAndGetNext(jsonWriter, currentIndex);
+                    JsonValue nextValue = currentValue.WriteStartElementAndGetNext(
+                        jsonWriter,
+                        currentIndex
+                    );
 
                     if (JsonValue.IsJsonCollection(nextValue))
                     {
@@ -758,7 +843,10 @@ namespace System.Json
                     {
                         if (nextValue == null)
                         {
-                            jsonWriter.WriteAttributeString(JXmlToJsonValueConverter.TypeAttributeName, JXmlToJsonValueConverter.NullAttributeValue);
+                            jsonWriter.WriteAttributeString(
+                                JXmlToJsonValueConverter.TypeAttributeName,
+                                JXmlToJsonValueConverter.NullAttributeValue
+                            );
                         }
                         else
                         {
@@ -789,12 +877,18 @@ namespace System.Json
         /// Returns an enumerator which iterates through the values in this object.
         /// </summary>
         /// <returns>An <see cref="System.Collections.IEnumerator"/> which iterates through the values in this object.</returns>
-        /// <remarks>This method is the virtual version of the IEnumerator.GetEnumerator method and is provided to allow derived classes to implement the 
+        /// <remarks>This method is the virtual version of the IEnumerator.GetEnumerator method and is provided to allow derived classes to implement the
         /// appropriate version of the generic interface (enumerator of values or key/value pairs).</remarks>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate",
-            Justification = "This method is a virtual version of the IEnumerable.GetEnumerator method.")]
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "This class is a collection that is properly represented by the nested generic type.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method is a virtual version of the IEnumerable.GetEnumerator method."
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This class is a collection that is properly represented by the nested generic type."
+        )]
         protected virtual IEnumerator<KeyValuePair<string, JsonValue>> GetKeyValuePairEnumerator()
         {
             yield break;
@@ -807,7 +901,10 @@ namespace System.Json
         /// <param name="jsonWriter">The JXML writer used to write JSON.</param>
         /// <param name="index">The index within this collection.</param>
         /// <returns>The next item in the collection, or null of there are no more items.</returns>
-        internal virtual JsonValue WriteStartElementAndGetNext(XmlDictionaryWriter jsonWriter, int index)
+        internal virtual JsonValue WriteStartElementAndGetNext(
+            XmlDictionaryWriter jsonWriter,
+            int index
+        )
         {
             return null;
         }
@@ -817,33 +914,33 @@ namespace System.Json
         /// instance.
         /// </summary>
         /// <param name="jsonWriter">The JXML writer used to write JSON.</param>
-        internal virtual void WriteAttributeString(XmlDictionaryWriter jsonWriter)
-        {
-        }
+        internal virtual void WriteAttributeString(XmlDictionaryWriter jsonWriter) { }
 
         /// <summary>
         /// Callback method called when a Save operation is starting for this instance.
         /// </summary>
-        protected virtual void OnSaveStarted()
-        {
-        }
+        protected virtual void OnSaveStarted() { }
 
         /// <summary>
         /// Callback method called when a Save operation is finished for this instance.
         /// </summary>
-        protected virtual void OnSaveEnded()
-        {
-        }
+        protected virtual void OnSaveEnded() { }
 
         /// <summary>
         /// Called internally to raise the <see cref="Changing"/> event.
         /// </summary>
         /// <param name="sender">The object which caused the event to be raised.</param>
         /// <param name="eventArgs">The arguments to the event.</param>
-        [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate",
-            Justification = "This is a helper function used to raise the event.")]
-        [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers",
-            Justification = "This is not externally visible, since the constructor for this class is internal (cannot be directly derived) and all its subclasses are sealed.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1030:UseEventsWhereAppropriate",
+            Justification = "This is a helper function used to raise the event."
+        )]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2109:ReviewVisibleEventHandlers",
+            Justification = "This is not externally visible, since the constructor for this class is internal (cannot be directly derived) and all its subclasses are sealed."
+        )]
         protected void RaiseChangingEvent(object sender, JsonValueChangeEventArgs eventArgs)
         {
             EventHandler<JsonValueChangeEventArgs> changing = OnChanging;
@@ -858,10 +955,16 @@ namespace System.Json
         /// </summary>
         /// <param name="sender">The object which caused the event to be raised.</param>
         /// <param name="eventArgs">The arguments to the event.</param>
-        [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate",
-            Justification = "This is a helper function used to raise the event.")]
-        [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers",
-            Justification = "This is not externally visible, since the constructor for this class is internal (cannot be directly derived) and all its subclasses are sealed.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1030:UseEventsWhereAppropriate",
+            Justification = "This is a helper function used to raise the event."
+        )]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2109:ReviewVisibleEventHandlers",
+            Justification = "This is not externally visible, since the constructor for this class is internal (cannot be directly derived) and all its subclasses are sealed."
+        )]
         protected void RaiseChangedEvent(object sender, JsonValueChangeEventArgs eventArgs)
         {
             EventHandler<JsonValueChangeEventArgs> changed = OnChanged;
@@ -873,7 +976,8 @@ namespace System.Json
 
         private static bool IsJsonCollection(JsonValue value)
         {
-            return value != null && (value.JsonType == JsonType.Array || value.JsonType == JsonType.Object);
+            return value != null
+                && (value.JsonType == JsonType.Array || value.JsonType == JsonType.Object);
         }
 
         /// <summary>
@@ -1145,8 +1249,11 @@ namespace System.Json
         /// </summary>
         /// <param name="value">The <see cref="System.String"/> instance used to initialize the <see cref="System.Json.JsonPrimitive"/>.</param>
         /// <returns>The <see cref="System.Json.JsonValue"/> initialized with the <see cref="System.String"/> specified, or null if the value is null.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads",
-            Justification = "This operator does not intend to represent a Uri overload.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1057:StringUriOverloadsCallSystemUriOverloads",
+            Justification = "This operator does not intend to represent a Uri overload."
+        )]
         public static implicit operator JsonValue(string value)
         {
             return value == null ? null : new JsonPrimitive(value);

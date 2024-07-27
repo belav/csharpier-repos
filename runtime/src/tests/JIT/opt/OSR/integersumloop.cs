@@ -24,14 +24,14 @@ public class IntegerSumLoop
     {
         int final = 1_000_000;
         long frequency = Stopwatch.Frequency;
-        long nanosecPerTick = (1000L*1000L*1000L) / frequency;
+        long nanosecPerTick = (1000L * 1000L * 1000L) / frequency;
         F(0, 10);
         Stopwatch s = new Stopwatch();
         s.Start();
         int result = F(0, final);
         s.Stop();
-        double elapsedTime = 1000.0 * (double) s.ElapsedTicks / (double) frequency;
+        double elapsedTime = 1000.0 * (double)s.ElapsedTicks / (double)frequency;
         Console.WriteLine($"{final} iterations took {elapsedTime:F2}ms");
         return result == 1783293664 ? 100 : -1;
-    }  
+    }
 }

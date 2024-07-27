@@ -3,13 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text;
 using CoreFXTestLibrary;
 using TypeOfRepo;
-
 
 public class FieldReflectionTests
 {
@@ -20,14 +19,19 @@ public class FieldReflectionTests
         public short _f2;
         public long _f3;
     }
-    public struct Type2 
+
+    public struct Type2
     {
         public float _f1;
         public double _f2;
         public byte _f3;
         public string _f4;
     }
-    public struct SomeGenericType<T> { public T _myTField; }
+
+    public struct SomeGenericType<T>
+    {
+        public T _myTField;
+    }
 #else
     public class Type1
     {
@@ -35,14 +39,19 @@ public class FieldReflectionTests
         public short _f2;
         public long _f3;
     }
-    public class Type2 
+
+    public class Type2
     {
         public float _f1;
         public double _f2;
         public byte _f3;
         public string _f4;
     }
-    public class SomeGenericType<T> { public T _myTField; }
+
+    public class SomeGenericType<T>
+    {
+        public T _myTField;
+    }
 #endif
 
     public class BaseType1
@@ -50,6 +59,7 @@ public class FieldReflectionTests
         public float _f1;
         public string _f2;
     }
+
     public class BaseType2<T> : BaseType1
     {
         public T _f3;
@@ -57,6 +67,7 @@ public class FieldReflectionTests
         public byte _f5;
         public T _f6;
     }
+
     public class DerivedTypeWithVariousFields<T, U> : BaseType2<T>
     {
         public T InstanceFieldOfT;
@@ -208,16 +219,30 @@ public class FieldReflectionTests
         }
     }
 
-
     [TestMethod]
     public static void TestInstanceFieldsOnDerivedType()
     {
-        Type1 srt1 = new Type1 { _f1 = "111", _f2 = 0x222, _f3 = 0x333 };
-        Type2 srt2 = new Type2 { _f1 = 11.11f, _f2 = 22.22, _f3 = 0x33, _f4 = "444" };
+        Type1 srt1 = new Type1
+        {
+            _f1 = "111",
+            _f2 = 0x222,
+            _f3 = 0x333,
+        };
+        Type2 srt2 = new Type2
+        {
+            _f1 = 11.11f,
+            _f2 = 22.22,
+            _f3 = 0x33,
+            _f4 = "444",
+        };
 
         TestInstanceFieldsOnDerivedType_Inner<Type1, Type2>(srt1, srt2);
-        TestInstanceFieldsOnDerivedType_Inner<CommonType1, CommonType2>(new CommonType1(), new CommonType2());
+        TestInstanceFieldsOnDerivedType_Inner<CommonType1, CommonType2>(
+            new CommonType1(),
+            new CommonType2()
+        );
     }
+
     public static void TestInstanceFieldsOnDerivedType_Inner<T1, T2>(T1 srt1, T2 srt2)
     {
         Type t = TypeOf.FRT_DerivedTypeWithVariousFields.MakeGenericType(typeof(T1), typeof(T2));
@@ -239,7 +264,13 @@ public class FieldReflectionTests
         base2_f5.SetValue(o, (byte)0x99);
         base2_f6.SetValue(o, srt1);
 
-        TestInstanceFields_Inner<T1, T2>(TypeOf.FRT_DerivedTypeWithVariousFields, srt1, srt2, ti, o);
+        TestInstanceFields_Inner<T1, T2>(
+            TypeOf.FRT_DerivedTypeWithVariousFields,
+            srt1,
+            srt2,
+            ti,
+            o
+        );
 
         float f1 = (float)base1_f1.GetValue(o);
         string f2 = (string)base1_f2.GetValue(o);
@@ -258,15 +289,39 @@ public class FieldReflectionTests
     [TestMethod]
     public static void TestInstanceFields()
     {
-        Type1 srt1 = new Type1 { _f1 = "111", _f2 = 0x222, _f3 = 0x333 };
-        Type2 srt2 = new Type2 { _f1 = 11.11f, _f2 = 22.22, _f3 = 0x33, _f4 = "444" };
+        Type1 srt1 = new Type1
+        {
+            _f1 = "111",
+            _f2 = 0x222,
+            _f3 = 0x333,
+        };
+        Type2 srt2 = new Type2
+        {
+            _f1 = 11.11f,
+            _f2 = 22.22,
+            _f3 = 0x33,
+            _f4 = "444",
+        };
 
-        TestInstanceFields_Inner<Type1, Type2>(TypeOf.FRT_ReferenceTypeWithVariousFields, srt1, srt2);
-        TestInstanceFields_Inner<CommonType1, CommonType2>(TypeOf.FRT_ReferenceTypeWithVariousFields, new CommonType1(), new CommonType2());
+        TestInstanceFields_Inner<Type1, Type2>(
+            TypeOf.FRT_ReferenceTypeWithVariousFields,
+            srt1,
+            srt2
+        );
+        TestInstanceFields_Inner<CommonType1, CommonType2>(
+            TypeOf.FRT_ReferenceTypeWithVariousFields,
+            new CommonType1(),
+            new CommonType2()
+        );
 
         TestInstanceFields_Inner<Type1, Type2>(TypeOf.FRT_ValueTypeWithVariousFields, srt1, srt2);
-        TestInstanceFields_Inner<CommonType1, CommonType2>(TypeOf.FRT_ValueTypeWithVariousFields, new CommonType1(), new CommonType2());
+        TestInstanceFields_Inner<CommonType1, CommonType2>(
+            TypeOf.FRT_ValueTypeWithVariousFields,
+            new CommonType1(),
+            new CommonType2()
+        );
     }
+
     public static void TestInstanceFields_Inner<T1, T2>(Type genTypeToUse, T1 srt1, T2 srt2)
     {
         Type t = genTypeToUse.MakeGenericType(typeof(T1), typeof(T2));
@@ -275,9 +330,18 @@ public class FieldReflectionTests
 
         TestInstanceFields_Inner<T1, T2>(genTypeToUse, srt1, srt2, ti, o);
     }
-    public static void TestInstanceFields_Inner<T1, T2>(Type genTypeToUse, T1 srt1, T2 srt2, TypeInfo ti, object o)
+
+    public static void TestInstanceFields_Inner<T1, T2>(
+        Type genTypeToUse,
+        T1 srt1,
+        T2 srt2,
+        TypeInfo ti,
+        object o
+    )
     {
-        Func<int, object> ReadValue = (Func<int, object>)ti.GetDeclaredMethod("ReadInstance").CreateDelegate(typeof(Func<int, object>), o);
+        Func<int, object> ReadValue =
+            (Func<int, object>)
+                ti.GetDeclaredMethod("ReadInstance").CreateDelegate(typeof(Func<int, object>), o);
 
         {
             FieldInfo fi_T = ti.GetDeclaredField("InstanceFieldOfT");
@@ -317,21 +381,43 @@ public class FieldReflectionTests
     [TestMethod]
     public static void TestStaticFields()
     {
-        Type1 srt1 = new Type1 { _f1 = "111", _f2 = 0x222, _f3 = 0x333 };
-        Type2 srt2 = new Type2 { _f1 = 11.11f, _f2 = 22.22, _f3 = 0x33, _f4 = "444" };
+        Type1 srt1 = new Type1
+        {
+            _f1 = "111",
+            _f2 = 0x222,
+            _f3 = 0x333,
+        };
+        Type2 srt2 = new Type2
+        {
+            _f1 = 11.11f,
+            _f2 = 22.22,
+            _f3 = 0x33,
+            _f4 = "444",
+        };
 
         TestStaticFields_Inner<Type1, Type2>(TypeOf.FRT_ReferenceTypeWithVariousFields, srt1, srt2);
         TestStaticFields_Inner<Type1, Type2>(TypeOf.FRT_ValueTypeWithVariousFields, srt1, srt2);
 
-        TestStaticFields_Inner<CommonType1, CommonType2>(TypeOf.FRT_ReferenceTypeWithVariousFields, new CommonType1(), new CommonType2());
-        TestStaticFields_Inner<CommonType1, CommonType2>(TypeOf.FRT_ValueTypeWithVariousFields, new CommonType1(), new CommonType2());
+        TestStaticFields_Inner<CommonType1, CommonType2>(
+            TypeOf.FRT_ReferenceTypeWithVariousFields,
+            new CommonType1(),
+            new CommonType2()
+        );
+        TestStaticFields_Inner<CommonType1, CommonType2>(
+            TypeOf.FRT_ValueTypeWithVariousFields,
+            new CommonType1(),
+            new CommonType2()
+        );
     }
+
     public static void TestStaticFields_Inner<T1, T2>(Type genTypeToUse, T1 srt1, T2 srt2)
     {
         {
             Type t = genTypeToUse.MakeGenericType(typeof(T1), typeof(T2));
             TypeInfo ti = t.GetTypeInfo();
-            Func<int, object> ReadValue = (Func<int, object>)ti.GetDeclaredMethod("ReadStatic").CreateDelegate(typeof(Func<int, object>));
+            Func<int, object> ReadValue =
+                (Func<int, object>)
+                    ti.GetDeclaredMethod("ReadStatic").CreateDelegate(typeof(Func<int, object>));
 
             {
                 FieldInfo fi_T = ti.GetDeclaredField("StaticFieldOfT");
@@ -399,12 +485,13 @@ public class FieldReflectionTests
         }
     }
 
-// Bug 253515 - FieldInfo.SetValue on some instantiations throws MissingRuntimeArtifactException
+    // Bug 253515 - FieldInfo.SetValue on some instantiations throws MissingRuntimeArtifactException
     public class MyGenericClass<T>
     {
         [ThreadStatic]
         public static T MyThreadStaticField;
         public static T MyGenericField;
+
         public static void SetField(T someParam)
         {
             MyGenericField = someParam;
@@ -416,6 +503,7 @@ public class FieldReflectionTests
         [ThreadStatic]
         public static T MyThreadStaticField;
         public static T MyGenericField;
+
         public static void SetField(T someParam)
         {
             MyGenericField = someParam;
@@ -429,32 +517,42 @@ public class FieldReflectionTests
         // The int instantiation is visible to both nutc and analysis, MyGenericClass<int>.MyGenericField appears in RequiredGenericFields.
         // This works.
         MyGenericClass<int>.SetField(3);
-        FieldInfo intField = typeof(MyGenericClass<int>).GetTypeInfo().GetDeclaredField("MyGenericField");
+        FieldInfo intField = typeof(MyGenericClass<int>)
+            .GetTypeInfo()
+            .GetDeclaredField("MyGenericField");
         intField.SetValue(null, 4);
 
         // The object instantiation is visible to both nutc and analysis, MyGenericClass<object>.MyGenericField appears in RequiredGenericFields.
         // This works.
         MyOtherGenericClass<object>.SetField(3);
-        FieldInfo objectField = typeof(MyGenericClass<object>).GetTypeInfo().GetDeclaredField("MyGenericField");
+        FieldInfo objectField = typeof(MyGenericClass<object>)
+            .GetTypeInfo()
+            .GetDeclaredField("MyGenericField");
         objectField.SetValue(null, 4);
-
 
         // The double instantiation isn't visible to either nutc or analysis. Confirmed that SetField uses USG code.
         // This works.
         Type obfuscatedDoubleType = TypeOf.Double;
         Type doubleInstantiation = typeof(MyGenericClass<>).MakeGenericType(obfuscatedDoubleType);
-        MethodInfo doubleSetterMethod = doubleInstantiation.GetTypeInfo().GetDeclaredMethod("SetField");
+        MethodInfo doubleSetterMethod = doubleInstantiation
+            .GetTypeInfo()
+            .GetDeclaredMethod("SetField");
         doubleSetterMethod.Invoke(null, new object[] { 1.0 });
-        FieldInfo doubleField = doubleInstantiation.GetTypeInfo().GetDeclaredField("MyGenericField");
+        FieldInfo doubleField = doubleInstantiation
+            .GetTypeInfo()
+            .GetDeclaredField("MyGenericField");
         doubleField.SetValue(null, 2.0);
-
 
         // The string instantiation isn't visible to either nutc or analysis. Confirmed that SetField uses USG (__UniversalCanon, not __Canon).
         Type obfuscatedStringType = TypeOf.String;
         Type stringInstantiation = typeof(MyGenericClass<>).MakeGenericType(obfuscatedStringType);
-        MethodInfo stringSetterMethod = stringInstantiation.GetTypeInfo().GetDeclaredMethod("SetField");
+        MethodInfo stringSetterMethod = stringInstantiation
+            .GetTypeInfo()
+            .GetDeclaredMethod("SetField");
         stringSetterMethod.Invoke(null, new object[] { "bar" });
-        FieldInfo stringField = stringInstantiation.GetTypeInfo().GetDeclaredField("MyGenericField");
+        FieldInfo stringField = stringInstantiation
+            .GetTypeInfo()
+            .GetDeclaredField("MyGenericField");
         stringField.SetValue(null, "foo");
 
         // The stringbuilder instantiation is visible to nutc, but analysis doesn't know it needs reflection. Even though the type has compiled code (__Canon shared generic),
@@ -479,30 +577,39 @@ public class FieldReflectionTests
         obfuscatedFloatName = obfuscatedFloatName.Remove(obfuscatedFloatName.Length - 1);
         Type obfuscatedFloatType = Type.GetType(obfuscatedFloatName);
         Type floatInstantiation = typeof(MyGenericClass<>).MakeGenericType(obfuscatedFloatType);
-        MethodInfo floatSetterMethod = floatInstantiation.GetTypeInfo().GetDeclaredMethod("SetField");
+        MethodInfo floatSetterMethod = floatInstantiation
+            .GetTypeInfo()
+            .GetDeclaredMethod("SetField");
         floatSetterMethod.Invoke(null, new object[] { 3.0f }); // Uses __UniversalCanon implementation
         FieldInfo floatField = floatInstantiation.GetTypeInfo().GetDeclaredField("MyGenericField");
 
         floatField.SetValue(null, 2.0f); // Throws a MissingRuntimeArtifactException
         Assert.AreEqual(2.0f, MyGenericClass<float>.MyGenericField);
 
-        FieldInfo threadStaticFloatField = floatInstantiation.GetTypeInfo().GetDeclaredField("MyThreadStaticField");
+        FieldInfo threadStaticFloatField = floatInstantiation
+            .GetTypeInfo()
+            .GetDeclaredField("MyThreadStaticField");
 
         threadStaticFloatField.SetValue(null, 6.0f); // Throws a MissingRuntimeArtifactException
         Assert.AreEqual(6.0f, MyGenericClass<float>.MyThreadStaticField);
 
-
         // The stringbuilder instantiation is visible to nutc, but analysis doesn't know it needs reflection.
         MyOtherGenericClass<StringBuilder>.SetField(new StringBuilder("baz")); // Uses __Canon implementation
         Type sbInstantiationOther = typeof(MyOtherGenericClass<>).MakeGenericType(obfuscatedSbType);
-        MethodInfo sbOtherSetterMethod = sbInstantiationOther.GetTypeInfo().GetDeclaredMethod("SetField");
+        MethodInfo sbOtherSetterMethod = sbInstantiationOther
+            .GetTypeInfo()
+            .GetDeclaredMethod("SetField");
         sbOtherSetterMethod.Invoke(null, new object[] { new StringBuilder("bar") }); // Uses __Canon implementation
-        FieldInfo otherField = sbInstantiationOther.GetTypeInfo().GetDeclaredField("MyGenericField");
+        FieldInfo otherField = sbInstantiationOther
+            .GetTypeInfo()
+            .GetDeclaredField("MyGenericField");
 
         otherField.SetValue(null, newStringBuilder); // Throws a MissingRuntimeArtifactException
         Assert.AreEqual(newStringBuilder, MyOtherGenericClass<StringBuilder>.MyGenericField);
 
-        FieldInfo threadStaticSbOtherField = sbInstantiationOther.GetTypeInfo().GetDeclaredField("MyThreadStaticField");
+        FieldInfo threadStaticSbOtherField = sbInstantiationOther
+            .GetTypeInfo()
+            .GetDeclaredField("MyThreadStaticField");
 
         threadStaticSbOtherField.SetValue(null, newStringBuilder); // Throws a MissingRuntimeArtifactException
         Assert.AreEqual(newStringBuilder, MyOtherGenericClass<StringBuilder>.MyThreadStaticField);

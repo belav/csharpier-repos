@@ -30,5 +30,6 @@ public interface IMigrationsSqlGenerator
     IReadOnlyList<MigrationCommand> Generate(
         IReadOnlyList<MigrationOperation> operations,
         IModel? model = null,
-        MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default);
+        MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
+    );
 }

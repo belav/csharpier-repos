@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs

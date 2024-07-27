@@ -14,7 +14,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal;
 /// </summary>
 public partial class InMemoryShapedQueryCompilingExpressionVisitor
 {
-    private sealed class QueryingEnumerable<T> : IAsyncEnumerable<T>, IEnumerable<T>, IQueryingEnumerable
+    private sealed class QueryingEnumerable<T>
+        : IAsyncEnumerable<T>,
+            IEnumerable<T>,
+            IQueryingEnumerable
     {
         private readonly QueryContext _queryContext;
         private readonly IEnumerable<ValueBuffer> _innerEnumerable;
@@ -30,7 +33,8 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
             Func<QueryContext, ValueBuffer, T> shaper,
             Type contextType,
             bool standAloneStateManager,
-            bool threadSafetyChecksEnabled)
+            bool threadSafetyChecksEnabled
+        )
         {
             _queryContext = queryContext;
             _innerEnumerable = innerEnumerable;
@@ -41,17 +45,15 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
             _threadSafetyChecksEnabled = threadSafetyChecksEnabled;
         }
 
-        public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
-            => new Enumerator(this, cancellationToken);
+        public IAsyncEnumerator<T> GetAsyncEnumerator(
+            CancellationToken cancellationToken = default
+        ) => new Enumerator(this, cancellationToken);
 
-        public IEnumerator<T> GetEnumerator()
-            => new Enumerator(this);
+        public IEnumerator<T> GetEnumerator() => new Enumerator(this);
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public string ToQueryString()
-            => InMemoryStrings.NoQueryStrings;
+        public string ToQueryString() => InMemoryStrings.NoQueryStrings;
 
         private sealed class Enumerator : IEnumerator<T>, IAsyncEnumerator<T>
         {
@@ -67,7 +69,10 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
 
             private IEnumerator<ValueBuffer>? _enumerator;
 
-            public Enumerator(QueryingEnumerable<T> queryingEnumerable, CancellationToken cancellationToken = default)
+            public Enumerator(
+                QueryingEnumerable<T> queryingEnumerable,
+                CancellationToken cancellationToken = default
+            )
             {
                 _queryContext = queryingEnumerable._queryContext;
                 _innerEnumerable = queryingEnumerable._innerEnumerable;
@@ -86,8 +91,7 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
 
             public T Current { get; private set; }
 
-            object IEnumerator.Current
-                => Current!;
+            object IEnumerator.Current => Current!;
 
             public bool MoveNext()
             {
@@ -163,9 +167,7 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
 
                 var hasNext = _enumerator.MoveNext();
 
-                Current = hasNext
-                    ? _shaper(_queryContext, _enumerator.Current)
-                    : default!;
+                Current = hasNext ? _shaper(_queryContext, _enumerator.Current) : default!;
 
                 return hasNext;
             }
@@ -184,8 +186,8 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
                 return enumerator.DisposeAsyncIfAvailable();
             }
 
-            public void Reset()
-                => throw new NotSupportedException(CoreStrings.EnumerableResetNotSupported);
+            public void Reset() =>
+                throw new NotSupportedException(CoreStrings.EnumerableResetNotSupported);
         }
     }
 }

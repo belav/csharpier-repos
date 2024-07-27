@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,90 +32,104 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    public sealed class SqlCacheDependencyDatabase : ConfigurationElement
+    {
+        static ConfigurationProperty connectionStringNameProp;
+        static ConfigurationProperty nameProp;
+        static ConfigurationProperty pollTimeProp;
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static ConfigurationElementProperty elementProperty;
 
-	public sealed class SqlCacheDependencyDatabase : ConfigurationElement
-	{
-		static ConfigurationProperty connectionStringNameProp;
-		static ConfigurationProperty nameProp;
-		static ConfigurationProperty pollTimeProp;
-		static ConfigurationPropertyCollection properties;
+        static SqlCacheDependencyDatabase()
+        {
+            connectionStringNameProp = new ConfigurationProperty(
+                "connectionStringName",
+                typeof(string),
+                null,
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired
+            );
+            nameProp = new ConfigurationProperty(
+                "name",
+                typeof(string),
+                null,
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            pollTimeProp = new ConfigurationProperty("pollTime", typeof(int), 60000);
+            properties = new ConfigurationPropertyCollection();
 
-		static ConfigurationElementProperty elementProperty;
+            properties.Add(connectionStringNameProp);
+            properties.Add(nameProp);
+            properties.Add(pollTimeProp);
 
-		static SqlCacheDependencyDatabase ()
-		{
-			connectionStringNameProp = new ConfigurationProperty ("connectionStringName", typeof (string), null,
-									      TypeDescriptor.GetConverter (typeof (string)),
-									      PropertyHelper.NonEmptyStringValidator,
-									      ConfigurationPropertyOptions.IsRequired);
-			nameProp = new ConfigurationProperty ("name", typeof (string), null,
-							      TypeDescriptor.GetConverter (typeof (string)),
-							      PropertyHelper.NonEmptyStringValidator,
-							      ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-			pollTimeProp = new ConfigurationProperty ("pollTime", typeof (int), 60000);
-			properties = new ConfigurationPropertyCollection ();
+            elementProperty = new ConfigurationElementProperty(
+                new CallbackValidator(typeof(SqlCacheDependencyDatabase), ValidateElement)
+            );
+        }
 
-			properties.Add (connectionStringNameProp);
-			properties.Add (nameProp);
-			properties.Add (pollTimeProp);
+        internal SqlCacheDependencyDatabase() { }
 
-			elementProperty = new ConfigurationElementProperty (new CallbackValidator (typeof (SqlCacheDependencyDatabase), ValidateElement));
-		}
+        public SqlCacheDependencyDatabase(string name, string connectionStringName)
+        {
+            this.Name = name;
+            this.ConnectionStringName = name;
+        }
 
-		internal SqlCacheDependencyDatabase ()
-		{
-		}
+        public SqlCacheDependencyDatabase(string name, string connectionStringName, int pollTime)
+        {
+            this.Name = name;
+            this.ConnectionStringName = name;
+            this.PollTime = pollTime;
+        }
 
-		public SqlCacheDependencyDatabase (string name, string connectionStringName)
-		{
-			this.Name = name;
-			this.ConnectionStringName = name;
-		}
+        static void ValidateElement(object o)
+        {
+            /* XXX do some sort of element validation here? */
+        }
 
-		public SqlCacheDependencyDatabase (string name, string connectionStringName, int pollTime)
-		{
-			this.Name = name;
-			this.ConnectionStringName = name;
-			this.PollTime = pollTime;
-		}
+        protected internal override ConfigurationElementProperty ElementProperty
+        {
+            get { return elementProperty; }
+        }
 
-		static void ValidateElement (object o)
-		{
-			/* XXX do some sort of element validation here? */
-		}
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "connectionStringName",
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string ConnectionStringName
+        {
+            get { return (string)base[connectionStringNameProp]; }
+            set { base[connectionStringNameProp] = value; }
+        }
 
-		protected internal override ConfigurationElementProperty ElementProperty {
-			get { return elementProperty; }
-		}
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "name",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Name
+        {
+            get { return (string)base[nameProp]; }
+            set { base[nameProp] = value; }
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("connectionStringName", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string ConnectionStringName {
-			get { return (string) base [connectionStringNameProp];}
-			set { base[connectionStringNameProp] = value; }
-		}
+        [ConfigurationProperty("pollTime", DefaultValue = "60000")]
+        public int PollTime
+        {
+            get { return (int)base[pollTimeProp]; }
+            set { base[pollTimeProp] = value; }
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("name", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Name {
-			get { return (string) base [nameProp];}
-			set { base[nameProp] = value; }
-		}
-
-		[ConfigurationProperty ("pollTime", DefaultValue = "60000")]
-		public int PollTime {
-			get { return (int) base [pollTimeProp];}
-			set { base[pollTimeProp] = value; }
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-	}
-
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-
-

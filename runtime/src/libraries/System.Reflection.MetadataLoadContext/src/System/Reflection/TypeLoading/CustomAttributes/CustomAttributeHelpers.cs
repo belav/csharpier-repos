@@ -12,24 +12,41 @@ namespace System.Reflection.TypeLoading
         /// <summary>
         /// Helper for creating a CustomAttributeNamedArgument.
         /// </summary>
-        public static CustomAttributeNamedArgument ToCustomAttributeNamedArgument(this Type attributeType, string name, Type? argumentType, object? value)
+        public static CustomAttributeNamedArgument ToCustomAttributeNamedArgument(
+            this Type attributeType,
+            string name,
+            Type? argumentType,
+            object? value
+        )
         {
-            MemberInfo[] members = attributeType.GetMember(name, MemberTypes.Field | MemberTypes.Property, BindingFlags.Public | BindingFlags.Instance);
+            MemberInfo[] members = attributeType.GetMember(
+                name,
+                MemberTypes.Field | MemberTypes.Property,
+                BindingFlags.Public | BindingFlags.Instance
+            );
             if (members.Length == 0)
                 throw new MissingMemberException(attributeType.FullName, name);
             MemberInfo match = members[0];
             if (members.Length > 1)
                 throw ThrowHelper.GetAmbiguousMatchException(match);
-            return new CustomAttributeNamedArgument(match, new CustomAttributeTypedArgument(argumentType!, value));
+            return new CustomAttributeNamedArgument(
+                match,
+                new CustomAttributeTypedArgument(argumentType!, value)
+            );
         }
 
         /// <summary>
         /// Clones a cached CustomAttributeTypedArgument list into a freshly allocated one suitable for direct return through an api.
         /// </summary>
-        public static ReadOnlyCollection<CustomAttributeTypedArgument> CloneForApiReturn(this IList<CustomAttributeTypedArgument> cats)
+        public static ReadOnlyCollection<CustomAttributeTypedArgument> CloneForApiReturn(
+            this IList<CustomAttributeTypedArgument> cats
+        )
         {
             int count = cats.Count;
-            CustomAttributeTypedArgument[] clones = count != 0 ? new CustomAttributeTypedArgument[count] : Array.Empty<CustomAttributeTypedArgument>();
+            CustomAttributeTypedArgument[] clones =
+                count != 0
+                    ? new CustomAttributeTypedArgument[count]
+                    : Array.Empty<CustomAttributeTypedArgument>();
             for (int i = 0; i < count; i++)
             {
                 clones[i] = cats[i].CloneForApiReturn();
@@ -40,10 +57,15 @@ namespace System.Reflection.TypeLoading
         /// <summary>
         /// Clones a cached CustomAttributeNamedArgument list into a freshly allocated one suitable for direct return through an api.
         /// </summary>
-        public static ReadOnlyCollection<CustomAttributeNamedArgument> CloneForApiReturn(this IList<CustomAttributeNamedArgument> cans)
+        public static ReadOnlyCollection<CustomAttributeNamedArgument> CloneForApiReturn(
+            this IList<CustomAttributeNamedArgument> cans
+        )
         {
             int count = cans.Count;
-            CustomAttributeNamedArgument[] clones = count != 0 ? new CustomAttributeNamedArgument[count] : Array.Empty<CustomAttributeNamedArgument>();
+            CustomAttributeNamedArgument[] clones =
+                count != 0
+                    ? new CustomAttributeNamedArgument[count]
+                    : Array.Empty<CustomAttributeNamedArgument>();
             for (int i = 0; i < count; i++)
             {
                 clones[i] = cans[i].CloneForApiReturn();
@@ -54,7 +76,9 @@ namespace System.Reflection.TypeLoading
         /// <summary>
         /// Clones a cached CustomAttributeTypedArgument into a freshly allocated one suitable for direct return through an api.
         /// </summary>
-        private static CustomAttributeTypedArgument CloneForApiReturn(this CustomAttributeTypedArgument cat)
+        private static CustomAttributeTypedArgument CloneForApiReturn(
+            this CustomAttributeTypedArgument cat
+        )
         {
             Type type = cat.ArgumentType;
             object? value = cat.Value;
@@ -63,7 +87,10 @@ namespace System.Reflection.TypeLoading
                 return cat;
 
             int count = cats.Count;
-            CustomAttributeTypedArgument[] cads = count != 0 ? new CustomAttributeTypedArgument[count] : Array.Empty<CustomAttributeTypedArgument>();
+            CustomAttributeTypedArgument[] cads =
+                count != 0
+                    ? new CustomAttributeTypedArgument[count]
+                    : Array.Empty<CustomAttributeTypedArgument>();
             for (int i = 0; i < count; i++)
             {
                 cads[i] = cats[i].CloneForApiReturn();
@@ -74,74 +101,132 @@ namespace System.Reflection.TypeLoading
         /// <summary>
         /// Clones a cached CustomAttributeNamedArgument into a freshly allocated one suitable for direct return through an api.
         /// </summary>
-        private static CustomAttributeNamedArgument CloneForApiReturn(this CustomAttributeNamedArgument can)
+        private static CustomAttributeNamedArgument CloneForApiReturn(
+            this CustomAttributeNamedArgument can
+        )
         {
-            return new CustomAttributeNamedArgument(can.MemberInfo, can.TypedValue.CloneForApiReturn());
+            return new CustomAttributeNamedArgument(
+                can.MemberInfo,
+                can.TypedValue.CloneForApiReturn()
+            );
         }
 
         /// <summary>
         /// Convert MarshalAsAttribute data into CustomAttributeData form. Returns null if the core assembly cannot be loaded or if the necessary
         /// types aren't in the core assembly.
         /// </summary>
-        public static CustomAttributeData? TryComputeMarshalAsCustomAttributeData(Func<MarshalAsAttribute> marshalAsAttributeComputer, MetadataLoadContext loader)
+        public static CustomAttributeData? TryComputeMarshalAsCustomAttributeData(
+            Func<MarshalAsAttribute> marshalAsAttributeComputer,
+            MetadataLoadContext loader
+        )
         {
             // Make sure all the necessary framework types exist in this MetadataLoadContext's core assembly. If one doesn't, skip.
             CoreTypes ct = loader.GetAllFoundCoreTypes();
-            if (ct[CoreType.String] == null ||
-                ct[CoreType.Boolean] == null ||
-                ct[CoreType.UnmanagedType] == null ||
-                ct[CoreType.VarEnum] == null ||
-                ct[CoreType.Type] == null ||
-                ct[CoreType.Int16] == null ||
-                ct[CoreType.Int32] == null)
+            if (
+                ct[CoreType.String] == null
+                || ct[CoreType.Boolean] == null
+                || ct[CoreType.UnmanagedType] == null
+                || ct[CoreType.VarEnum] == null
+                || ct[CoreType.Type] == null
+                || ct[CoreType.Int16] == null
+                || ct[CoreType.Int32] == null
+            )
                 return null;
             ConstructorInfo? ci = loader.TryGetMarshalAsCtor();
             if (ci == null)
                 return null;
 
-            Func<CustomAttributeArguments> argumentsPromise =
-                () =>
+            Func<CustomAttributeArguments> argumentsPromise = () =>
+            {
+                // The expensive work goes in here. It will not execute unless someone invokes the Constructor/NamedArguments properties on
+                // the CustomAttributeData.
+
+                MarshalAsAttribute ma = marshalAsAttributeComputer();
+
+                Type attributeType = ci.DeclaringType!;
+
+                CustomAttributeTypedArgument[] cats =
                 {
-                    // The expensive work goes in here. It will not execute unless someone invokes the Constructor/NamedArguments properties on
-                    // the CustomAttributeData.
-
-                    MarshalAsAttribute ma = marshalAsAttributeComputer();
-
-                    Type attributeType = ci.DeclaringType!;
-
-                    CustomAttributeTypedArgument[] cats = { new CustomAttributeTypedArgument(ct[CoreType.UnmanagedType]!, (int)(ma.Value)) };
-                    List<CustomAttributeNamedArgument> cans = new List<CustomAttributeNamedArgument>();
-                    cans.AddRange(new CustomAttributeNamedArgument[]
-                    {
-                        attributeType.ToCustomAttributeNamedArgument(nameof(MarshalAsAttribute.ArraySubType), ct[CoreType.UnmanagedType], (int)ma.ArraySubType),
-                        attributeType.ToCustomAttributeNamedArgument(nameof(MarshalAsAttribute.IidParameterIndex), ct[CoreType.Int32], ma.IidParameterIndex),
-                        attributeType.ToCustomAttributeNamedArgument(nameof(MarshalAsAttribute.SafeArraySubType), ct[CoreType.VarEnum], (int)ma.SafeArraySubType),
-                        attributeType.ToCustomAttributeNamedArgument(nameof(MarshalAsAttribute.SizeConst), ct[CoreType.Int32], ma.SizeConst),
-                        attributeType.ToCustomAttributeNamedArgument(nameof(MarshalAsAttribute.SizeParamIndex), ct[CoreType.Int16], ma.SizeParamIndex),
-                    });
-
-                    if (ma.SafeArrayUserDefinedSubType != null)
-                    {
-                        cans.Add(attributeType.ToCustomAttributeNamedArgument(nameof(MarshalAsAttribute.SafeArrayUserDefinedSubType), ct[CoreType.Type], ma.SafeArrayUserDefinedSubType));
-                    }
-
-                    if (ma.MarshalType != null)
-                    {
-                        cans.Add(attributeType.ToCustomAttributeNamedArgument(nameof(MarshalAsAttribute.MarshalType), ct[CoreType.String], ma.MarshalType));
-                    }
-
-                    if (ma.MarshalTypeRef != null)
-                    {
-                        cans.Add(attributeType.ToCustomAttributeNamedArgument(nameof(MarshalAsAttribute.MarshalTypeRef), ct[CoreType.Type], ma.MarshalTypeRef));
-                    }
-
-                    if (ma.MarshalCookie != null)
-                    {
-                        cans.Add(attributeType.ToCustomAttributeNamedArgument(nameof(MarshalAsAttribute.MarshalCookie), ct[CoreType.String], ma.MarshalCookie));
-                    }
-
-                    return new CustomAttributeArguments(cats, cans);
+                    new CustomAttributeTypedArgument(ct[CoreType.UnmanagedType]!, (int)(ma.Value)),
                 };
+                List<CustomAttributeNamedArgument> cans = new List<CustomAttributeNamedArgument>();
+                cans.AddRange(
+                    new CustomAttributeNamedArgument[]
+                    {
+                        attributeType.ToCustomAttributeNamedArgument(
+                            nameof(MarshalAsAttribute.ArraySubType),
+                            ct[CoreType.UnmanagedType],
+                            (int)ma.ArraySubType
+                        ),
+                        attributeType.ToCustomAttributeNamedArgument(
+                            nameof(MarshalAsAttribute.IidParameterIndex),
+                            ct[CoreType.Int32],
+                            ma.IidParameterIndex
+                        ),
+                        attributeType.ToCustomAttributeNamedArgument(
+                            nameof(MarshalAsAttribute.SafeArraySubType),
+                            ct[CoreType.VarEnum],
+                            (int)ma.SafeArraySubType
+                        ),
+                        attributeType.ToCustomAttributeNamedArgument(
+                            nameof(MarshalAsAttribute.SizeConst),
+                            ct[CoreType.Int32],
+                            ma.SizeConst
+                        ),
+                        attributeType.ToCustomAttributeNamedArgument(
+                            nameof(MarshalAsAttribute.SizeParamIndex),
+                            ct[CoreType.Int16],
+                            ma.SizeParamIndex
+                        ),
+                    }
+                );
+
+                if (ma.SafeArrayUserDefinedSubType != null)
+                {
+                    cans.Add(
+                        attributeType.ToCustomAttributeNamedArgument(
+                            nameof(MarshalAsAttribute.SafeArrayUserDefinedSubType),
+                            ct[CoreType.Type],
+                            ma.SafeArrayUserDefinedSubType
+                        )
+                    );
+                }
+
+                if (ma.MarshalType != null)
+                {
+                    cans.Add(
+                        attributeType.ToCustomAttributeNamedArgument(
+                            nameof(MarshalAsAttribute.MarshalType),
+                            ct[CoreType.String],
+                            ma.MarshalType
+                        )
+                    );
+                }
+
+                if (ma.MarshalTypeRef != null)
+                {
+                    cans.Add(
+                        attributeType.ToCustomAttributeNamedArgument(
+                            nameof(MarshalAsAttribute.MarshalTypeRef),
+                            ct[CoreType.Type],
+                            ma.MarshalTypeRef
+                        )
+                    );
+                }
+
+                if (ma.MarshalCookie != null)
+                {
+                    cans.Add(
+                        attributeType.ToCustomAttributeNamedArgument(
+                            nameof(MarshalAsAttribute.MarshalCookie),
+                            ct[CoreType.String],
+                            ma.MarshalCookie
+                        )
+                    );
+                }
+
+                return new CustomAttributeArguments(cats, cans);
+            };
 
             return new RoPseudoCustomAttributeData(ci, argumentsPromise);
         }

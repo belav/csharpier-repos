@@ -58,7 +58,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                         break;
                     case Operation.AddRange:
                         int inputLength = random.Next(100);
-                        int[] values = Enumerable.Range(0, inputLength).Select(i => random.Next()).ToArray();
+                        int[] values = Enumerable
+                            .Range(0, inputLength)
+                            .Select(i => random.Next())
+                            .ToArray();
                         Debug.WriteLine("Adding {0} elements to the list.", inputLength);
                         expected.AddRange(values);
                         actual = actual.AddRange(values);
@@ -66,15 +69,26 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     case Operation.Insert:
                         int position = random.Next(expected.Count + 1);
                         value = random.Next();
-                        Debug.WriteLine("Adding \"{0}\" to position {1} in the list.", value, position);
+                        Debug.WriteLine(
+                            "Adding \"{0}\" to position {1} in the list.",
+                            value,
+                            position
+                        );
                         expected.Insert(position, value);
                         actual = actual.Insert(position, value);
                         break;
                     case Operation.InsertRange:
                         inputLength = random.Next(100);
-                        values = Enumerable.Range(0, inputLength).Select(i => random.Next()).ToArray();
+                        values = Enumerable
+                            .Range(0, inputLength)
+                            .Select(i => random.Next())
+                            .ToArray();
                         position = random.Next(expected.Count + 1);
-                        Debug.WriteLine("Adding {0} elements to position {1} in the list.", inputLength, position);
+                        Debug.WriteLine(
+                            "Adding {0} elements to position {1} in the list.",
+                            inputLength,
+                            position
+                        );
                         expected.InsertRange(position, values);
                         actual = actual.InsertRange(position, values);
                         break;
@@ -82,7 +96,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                         if (expected.Count > 0)
                         {
                             position = random.Next(expected.Count);
-                            Debug.WriteLine("Removing element at position {0} from the list.", position);
+                            Debug.WriteLine(
+                                "Removing element at position {0} from the list.",
+                                position
+                            );
                             expected.RemoveAt(position);
                             actual = actual.RemoveAt(position);
                         }
@@ -91,7 +108,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     case Operation.RemoveRange:
                         position = random.Next(expected.Count);
                         inputLength = random.Next(expected.Count - position);
-                        Debug.WriteLine("Removing {0} elements starting at position {1} from the list.", inputLength, position);
+                        Debug.WriteLine(
+                            "Removing {0} elements starting at position {1} from the list.",
+                            inputLength,
+                            position
+                        );
                         expected.RemoveRange(position, inputLength);
                         actual = actual.RemoveRange(position, inputLength);
                         break;
@@ -107,7 +128,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var empty = ImmutableSegmentedList<GenericParameterHelper?>.Empty;
             Assert.True(IsSame(empty, ImmutableSegmentedList<GenericParameterHelper>.Empty));
             Assert.True(IsSame(empty, empty.Clear()));
-            Assert.True(IsSame(empty, ((System.Collections.Immutable.IImmutableList<GenericParameterHelper>)empty).Clear()));
+            Assert.True(
+                IsSame(
+                    empty,
+                    (
+                        (System.Collections.Immutable.IImmutableList<GenericParameterHelper>)empty
+                    ).Clear()
+                )
+            );
             Assert.True(empty.IsEmpty);
             Assert.Equal(0, empty.Count);
             Assert.Equal(-1, empty.IndexOf(new GenericParameterHelper()));
@@ -117,7 +145,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void GetHashCodeVariesByInstance()
         {
-            Assert.NotEqual(ImmutableSegmentedList.Create<int>().GetHashCode(), ImmutableSegmentedList.Create(5).GetHashCode());
+            Assert.NotEqual(
+                ImmutableSegmentedList.Create<int>().GetHashCode(),
+                ImmutableSegmentedList.Create(5).GetHashCode()
+            );
         }
 
         [Fact]
@@ -136,7 +167,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(i * 10, list[i - 1]);
             }
 
-            var bulkList = ImmutableSegmentedList<int>.Empty.AddRange(Enumerable.Range(1, 10).Select(i => i * 10));
+            var bulkList = ImmutableSegmentedList<int>.Empty.AddRange(
+                Enumerable.Range(1, 10).Select(i => i * 10)
+            );
             Assert.Equal<int>(list.ToArray(), bulkList.ToArray());
         }
 
@@ -148,7 +181,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             list = list.AddRange(Enumerable.Range(4, 2));
             list = list.AddRange(ImmutableSegmentedList<int>.Empty.AddRange(new[] { 6, 7, 8 }));
             list = list.AddRange(new int[0]);
-            list = list.AddRange(ImmutableSegmentedList<int>.Empty.AddRange(Enumerable.Range(9, 1000)));
+            list = list.AddRange(
+                ImmutableSegmentedList<int>.Empty.AddRange(Enumerable.Range(9, 1000))
+            );
             Assert.Equal(Enumerable.Range(1, 1008), list);
         }
 
@@ -156,7 +191,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void AddRange_IOrderedCollection()
         {
             var list = ImmutableSegmentedList<int>.Empty;
-            ImmutableSegmentedList<int>.Builder builder = ImmutableSegmentedList.CreateBuilder<int>();
+            ImmutableSegmentedList<int>.Builder builder =
+                ImmutableSegmentedList.CreateBuilder<int>();
             builder.Add(1);
 
             list = list.AddRange(builder);
@@ -174,11 +210,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             // Adding a non-empty immutable list to an empty one should return the added list.
             var nonEmptyListDefaultComparer = ImmutableSegmentedList.Create("5");
-            Assert.True(IsSame(nonEmptyListDefaultComparer, emptyList.AddRange(nonEmptyListDefaultComparer)));
+            Assert.True(
+                IsSame(nonEmptyListDefaultComparer, emptyList.AddRange(nonEmptyListDefaultComparer))
+            );
 
             // Adding a Builder instance to an empty list should be seen through.
             var builderOfNonEmptyListDefaultComparer = nonEmptyListDefaultComparer.ToBuilder();
-            Assert.True(IsSame(nonEmptyListDefaultComparer, emptyList.AddRange(builderOfNonEmptyListDefaultComparer)));
+            Assert.True(
+                IsSame(
+                    nonEmptyListDefaultComparer,
+                    emptyList.AddRange(builderOfNonEmptyListDefaultComparer)
+                )
+            );
         }
 
         [Fact]
@@ -276,16 +319,28 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void InsertRangeTest()
         {
             var list = ImmutableSegmentedList<int>.Empty;
-            Assert.Throws<ArgumentOutOfRangeException>("index", () => list.InsertRange(1, new[] { 1 }));
-            Assert.Throws<ArgumentOutOfRangeException>("index", () => list.InsertRange(-1, new[] { 1 }));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => list.InsertRange(1, new[] { 1 })
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => list.InsertRange(-1, new[] { 1 })
+            );
 
             list = list.InsertRange(0, new[] { 1, 4, 5 });
             list = list.InsertRange(1, new[] { 2, 3 });
             list = list.InsertRange(2, new int[0]);
             Assert.Equal(Enumerable.Range(1, 5), list);
 
-            Assert.Throws<ArgumentOutOfRangeException>("index", () => list.InsertRange(6, new[] { 1 }));
-            Assert.Throws<ArgumentOutOfRangeException>("index", () => list.InsertRange(-1, new[] { 1 }));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => list.InsertRange(6, new[] { 1 })
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => list.InsertRange(-1, new[] { 1 })
+            );
         }
 
         [Fact]
@@ -293,17 +348,32 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             var list = ImmutableSegmentedList<int>.Empty;
             var nonEmptyList = ImmutableSegmentedList.Create(1);
-            Assert.Throws<ArgumentOutOfRangeException>("index", () => list.InsertRange(1, nonEmptyList));
-            Assert.Throws<ArgumentOutOfRangeException>("index", () => list.InsertRange(-1, nonEmptyList));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => list.InsertRange(1, nonEmptyList)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => list.InsertRange(-1, nonEmptyList)
+            );
 
             list = list.InsertRange(0, ImmutableSegmentedList.Create(1, 104, 105));
             list = list.InsertRange(1, ImmutableSegmentedList.Create(2, 3));
             list = list.InsertRange(2, ImmutableSegmentedList<int>.Empty);
-            list = list.InsertRange(3, ImmutableSegmentedList<int>.Empty.InsertRange(0, Enumerable.Range(4, 100)));
+            list = list.InsertRange(
+                3,
+                ImmutableSegmentedList<int>.Empty.InsertRange(0, Enumerable.Range(4, 100))
+            );
             Assert.Equal(Enumerable.Range(1, 105), list);
 
-            Assert.Throws<ArgumentOutOfRangeException>("index", () => list.InsertRange(106, nonEmptyList));
-            Assert.Throws<ArgumentOutOfRangeException>("index", () => list.InsertRange(-1, nonEmptyList));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => list.InsertRange(106, nonEmptyList)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => list.InsertRange(-1, nonEmptyList)
+            );
         }
 
         [Fact]
@@ -366,7 +436,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.False(list.Contains(20));
             Assert.False(list.Contains(70));
 
-            System.Collections.Immutable.IImmutableList<int> list2 = ImmutableSegmentedList<int>.Empty;
+            System.Collections.Immutable.IImmutableList<int> list2 =
+                ImmutableSegmentedList<int>.Empty;
             for (int i = 1; i <= 10; i++)
             {
                 list2 = list2.Add(i * 10);
@@ -413,7 +484,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void RemoveRangeDoesNotEnumerateSequenceIfThisIsEmpty()
         {
             var list = ImmutableSegmentedList<int>.Empty;
-            list.RemoveRange(Enumerable.Range(1, 1).Select<int, int>(n => { throw ExceptionUtilities.Unreachable(); }));
+            list.RemoveRange(
+                Enumerable
+                    .Range(1, 1)
+                    .Select<int, int>(n =>
+                    {
+                        throw ExceptionUtilities.Unreachable();
+                    })
+            );
         }
 
         [Fact]
@@ -445,7 +523,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void IndexOfAndContainsTest()
         {
-            var expectedList = new List<string>(new[] { "Microsoft", "Windows", "Bing", "Visual Studio", "Comics", "Computers", "Laptops" });
+            var expectedList = new List<string>(
+                new[]
+                {
+                    "Microsoft",
+                    "Windows",
+                    "Bing",
+                    "Visual Studio",
+                    "Comics",
+                    "Computers",
+                    "Laptops",
+                }
+            );
 
             var list = ImmutableSegmentedList<string>.Empty;
             foreach (string newElement in expectedList)
@@ -454,14 +543,31 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 list = list.Add(newElement);
                 Assert.True(list.Contains(newElement));
                 Assert.Equal(expectedList.IndexOf(newElement), list.IndexOf(newElement));
-                Assert.Equal(expectedList.IndexOf(newElement), System.Collections.Immutable.ImmutableList.IndexOf(list, newElement.ToUpperInvariant(), StringComparer.OrdinalIgnoreCase));
+                Assert.Equal(
+                    expectedList.IndexOf(newElement),
+                    System.Collections.Immutable.ImmutableList.IndexOf(
+                        list,
+                        newElement.ToUpperInvariant(),
+                        StringComparer.OrdinalIgnoreCase
+                    )
+                );
                 Assert.Equal(-1, list.IndexOf(newElement.ToUpperInvariant()));
 
                 foreach (string existingElement in expectedList.TakeWhile(v => v != newElement))
                 {
                     Assert.True(list.Contains(existingElement));
-                    Assert.Equal(expectedList.IndexOf(existingElement), list.IndexOf(existingElement));
-                    Assert.Equal(expectedList.IndexOf(existingElement), System.Collections.Immutable.ImmutableList.IndexOf(list, existingElement.ToUpperInvariant(), StringComparer.OrdinalIgnoreCase));
+                    Assert.Equal(
+                        expectedList.IndexOf(existingElement),
+                        list.IndexOf(existingElement)
+                    );
+                    Assert.Equal(
+                        expectedList.IndexOf(existingElement),
+                        System.Collections.Immutable.ImmutableList.IndexOf(
+                            list,
+                            existingElement.ToUpperInvariant(),
+                            StringComparer.OrdinalIgnoreCase
+                        )
+                    );
                     Assert.Equal(-1, list.IndexOf(existingElement.ToUpperInvariant()));
                 }
             }
@@ -490,13 +596,17 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 (b, v) => b.IndexOf(v),
                 (b, v, i) => System.Collections.Immutable.ImmutableList.IndexOf(b, v, i),
                 (b, v, i, c) => System.Collections.Immutable.ImmutableList.IndexOf(b, v, i, c),
-                (b, v, i, c, eq) => b.IndexOf(v, i, c, eq));
+                (b, v, i, c, eq) => b.IndexOf(v, i, c, eq)
+            );
             IndexOfTests.IndexOfTest(
-                seq => (System.Collections.Immutable.IImmutableList<int>)ImmutableSegmentedList.CreateRange(seq),
+                seq =>
+                    (System.Collections.Immutable.IImmutableList<int>)
+                        ImmutableSegmentedList.CreateRange(seq),
                 (b, v) => b.IndexOf(v),
                 (b, v, i) => System.Collections.Immutable.ImmutableList.IndexOf(b, v, i),
                 (b, v, i, c) => System.Collections.Immutable.ImmutableList.IndexOf(b, v, i, c),
-                (b, v, i, c, eq) => b.IndexOf(v, i, c, eq));
+                (b, v, i, c, eq) => b.IndexOf(v, i, c, eq)
+            );
         }
 
         [Fact]
@@ -508,14 +618,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 (b, v, eq) => System.Collections.Immutable.ImmutableList.LastIndexOf(b, v, eq),
                 (b, v, i) => System.Collections.Immutable.ImmutableList.LastIndexOf(b, v, i),
                 (b, v, i, c) => System.Collections.Immutable.ImmutableList.LastIndexOf(b, v, i, c),
-                (b, v, i, c, eq) => b.LastIndexOf(v, i, c, eq));
+                (b, v, i, c, eq) => b.LastIndexOf(v, i, c, eq)
+            );
             IndexOfTests.LastIndexOfTest(
-                seq => (System.Collections.Immutable.IImmutableList<int>)ImmutableSegmentedList.CreateRange(seq),
+                seq =>
+                    (System.Collections.Immutable.IImmutableList<int>)
+                        ImmutableSegmentedList.CreateRange(seq),
                 (b, v) => System.Collections.Immutable.ImmutableList.LastIndexOf(b, v),
                 (b, v, eq) => System.Collections.Immutable.ImmutableList.LastIndexOf(b, v, eq),
                 (b, v, i) => System.Collections.Immutable.ImmutableList.LastIndexOf(b, v, i),
                 (b, v, i, c) => System.Collections.Immutable.ImmutableList.LastIndexOf(b, v, i, c),
-                (b, v, i, c, eq) => b.LastIndexOf(v, i, c, eq));
+                (b, v, i, c, eq) => b.LastIndexOf(v, i, c, eq)
+            );
         }
 
         [Fact]
@@ -526,16 +640,55 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal<int>(new[] { 4, 5, 8 }, list.Replace(3, 4));
             Assert.Equal<int>(new[] { 3, 6, 8 }, list.Replace(5, 6));
             Assert.Equal<int>(new[] { 3, 5, 9 }, list.Replace(8, 9));
-            Assert.Equal<int>(new[] { 4, 5, 8 }, System.Collections.Immutable.ImmutableList.Replace((System.Collections.Immutable.IImmutableList<int>)list, 3, 4));
-            Assert.Equal<int>(new[] { 3, 6, 8 }, System.Collections.Immutable.ImmutableList.Replace((System.Collections.Immutable.IImmutableList<int>)list, 5, 6));
-            Assert.Equal<int>(new[] { 3, 5, 9 }, System.Collections.Immutable.ImmutableList.Replace((System.Collections.Immutable.IImmutableList<int>)list, 8, 9));
+            Assert.Equal<int>(
+                new[] { 4, 5, 8 },
+                System.Collections.Immutable.ImmutableList.Replace(
+                    (System.Collections.Immutable.IImmutableList<int>)list,
+                    3,
+                    4
+                )
+            );
+            Assert.Equal<int>(
+                new[] { 3, 6, 8 },
+                System.Collections.Immutable.ImmutableList.Replace(
+                    (System.Collections.Immutable.IImmutableList<int>)list,
+                    5,
+                    6
+                )
+            );
+            Assert.Equal<int>(
+                new[] { 3, 5, 9 },
+                System.Collections.Immutable.ImmutableList.Replace(
+                    (System.Collections.Immutable.IImmutableList<int>)list,
+                    8,
+                    9
+                )
+            );
 
             // Verify replacement of first element when there are duplicates.
             list = ImmutableSegmentedList<int>.Empty.Add(3).Add(3).Add(5);
             Assert.Equal<int>(new[] { 4, 3, 5 }, list.Replace(3, 4));
             Assert.Equal<int>(new[] { 4, 4, 5 }, list.Replace(3, 4).Replace(3, 4));
-            Assert.Equal<int>(new[] { 4, 3, 5 }, System.Collections.Immutable.ImmutableList.Replace((System.Collections.Immutable.IImmutableList<int>)list, 3, 4));
-            Assert.Equal<int>(new[] { 4, 4, 5 }, System.Collections.Immutable.ImmutableList.Replace(System.Collections.Immutable.ImmutableList.Replace((System.Collections.Immutable.IImmutableList<int>)list, 3, 4), 3, 4));
+            Assert.Equal<int>(
+                new[] { 4, 3, 5 },
+                System.Collections.Immutable.ImmutableList.Replace(
+                    (System.Collections.Immutable.IImmutableList<int>)list,
+                    3,
+                    4
+                )
+            );
+            Assert.Equal<int>(
+                new[] { 4, 4, 5 },
+                System.Collections.Immutable.ImmutableList.Replace(
+                    System.Collections.Immutable.ImmutableList.Replace(
+                        (System.Collections.Immutable.IImmutableList<int>)list,
+                        3,
+                        4
+                    ),
+                    3,
+                    4
+                )
+            );
         }
 
         [Fact]
@@ -552,14 +705,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             // Finally, try one last time using the interface implementation.
             System.Collections.Immutable.IImmutableList<Person> iface = list;
-            var updatedIface = System.Collections.Immutable.ImmutableList.Replace(iface, list[0], newAge);
+            var updatedIface = System.Collections.Immutable.ImmutableList.Replace(
+                iface,
+                list[0],
+                newAge
+            );
             Assert.NotSame(iface, updatedIface);
         }
 
         [Fact]
         public void ReplaceMissingThrowsTest()
         {
-            Assert.Throws<ArgumentException>("oldValue", () => ImmutableSegmentedList<int>.Empty.Replace(5, 3));
+            Assert.Throws<ArgumentException>(
+                "oldValue",
+                () => ImmutableSegmentedList<int>.Empty.Replace(5, 3)
+            );
         }
 
         [Fact]
@@ -567,8 +727,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             Assert.False(ImmutableSegmentedList<int>.Empty.Equals(null));
             Assert.False(ImmutableSegmentedList<int>.Empty.Equals("hi"));
-            Assert.True(ImmutableSegmentedList<int>.Empty.Equals(ImmutableSegmentedList<int>.Empty));
-            Assert.False(ImmutableSegmentedList<int>.Empty.Add(3).Equals(ImmutableSegmentedList<int>.Empty.Add(3)));
+            Assert.True(
+                ImmutableSegmentedList<int>.Empty.Equals(ImmutableSegmentedList<int>.Empty)
+            );
+            Assert.False(
+                ImmutableSegmentedList<int>
+                    .Empty.Add(3)
+                    .Equals(ImmutableSegmentedList<int>.Empty.Add(3))
+            );
         }
 
         [Fact]
@@ -609,7 +775,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void RemoveAllNullTest()
         {
-            Assert.Throws<ArgumentNullException>("match", () => ImmutableSegmentedList<int>.Empty.RemoveAll(null!));
+            Assert.Throws<ArgumentNullException>(
+                "match",
+                () => ImmutableSegmentedList<int>.Empty.RemoveAll(null!)
+            );
         }
 
         [Fact]
@@ -648,17 +817,43 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             ImmutableSegmentedList<int> removed13 = list.RemoveRange(new[] { 1, 3, 5 });
             Assert.Equal(1, removed13.Count);
             Assert.Equal(new[] { 2 }, removed13);
-            Assert.Equal(new[] { 2 }, System.Collections.Immutable.ImmutableList.RemoveRange((System.Collections.Immutable.IImmutableList<int>)list, new[] { 1, 3, 5 }));
+            Assert.Equal(
+                new[] { 2 },
+                System.Collections.Immutable.ImmutableList.RemoveRange(
+                    (System.Collections.Immutable.IImmutableList<int>)list,
+                    new[] { 1, 3, 5 }
+                )
+            );
 
             Assert.True(IsSame(list, list.RemoveRange(new[] { 5 })));
-            Assert.True(IsSame(ImmutableSegmentedList.Create<int>(), ImmutableSegmentedList.Create<int>().RemoveRange(new[] { 1 })));
+            Assert.True(
+                IsSame(
+                    ImmutableSegmentedList.Create<int>(),
+                    ImmutableSegmentedList.Create<int>().RemoveRange(new[] { 1 })
+                )
+            );
 
             var listWithDuplicates = ImmutableSegmentedList.Create(1, 2, 2, 3);
             Assert.Equal(new[] { 1, 2, 3 }, listWithDuplicates.RemoveRange(new[] { 2 }));
             Assert.Equal(new[] { 1, 3 }, listWithDuplicates.RemoveRange(new[] { 2, 2 }));
 
-            Assert.Throws<ArgumentNullException>("items", () => System.Collections.Immutable.ImmutableList.RemoveRange((System.Collections.Immutable.IImmutableList<int>)ImmutableSegmentedList.Create(1, 2, 3), null!));
-            Assert.Equal(new[] { 1, 3 }, System.Collections.Immutable.ImmutableList.RemoveRange((System.Collections.Immutable.IImmutableList<int>)ImmutableSegmentedList.Create(1, 2, 3), new[] { 2 }));
+            Assert.Throws<ArgumentNullException>(
+                "items",
+                () =>
+                    System.Collections.Immutable.ImmutableList.RemoveRange(
+                        (System.Collections.Immutable.IImmutableList<int>)
+                            ImmutableSegmentedList.Create(1, 2, 3),
+                        null!
+                    )
+            );
+            Assert.Equal(
+                new[] { 1, 3 },
+                System.Collections.Immutable.ImmutableList.RemoveRange(
+                    (System.Collections.Immutable.IImmutableList<int>)
+                        ImmutableSegmentedList.Create(1, 2, 3),
+                    new[] { 2 }
+                )
+            );
         }
 
         [Fact]
@@ -769,13 +964,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact(Skip = "Not implemented: https://github.com/dotnet/roslyn/issues/54429")]
         public void DebuggerAttributesValid()
         {
-            DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableSegmentedList.Create<int>());
+            DebuggerAttributes.ValidateDebuggerDisplayReferences(
+                ImmutableSegmentedList.Create<int>()
+            );
             ImmutableSegmentedList<double> list = ImmutableSegmentedList.Create<double>(1, 2, 3);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(list);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                list
+            );
 
-            object? rootNode = DebuggerAttributes.GetFieldValue(ImmutableSegmentedList.Create<string>("1", "2", "3"), "_root")!;
+            object? rootNode = DebuggerAttributes.GetFieldValue(
+                ImmutableSegmentedList.Create<string>("1", "2", "3"),
+                "_root"
+            )!;
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State == DebuggerBrowsableState.RootHidden);
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
+                == DebuggerBrowsableState.RootHidden
+            );
             double[]? items = itemProperty.GetValue(info.Instance) as double[];
             Assert.Equal(list, items);
         }
@@ -783,8 +988,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact(Skip = "Not implemented: https://github.com/dotnet/roslyn/issues/54429")]
         public static void TestDebuggerAttributes_Null()
         {
-            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableSegmentedList.Create<double>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object?)null));
+            Type proxyType = DebuggerAttributes.GetProxyType(
+                ImmutableSegmentedList.Create<double>()
+            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object?)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
@@ -792,18 +1001,30 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void UsableWithCollectibleAssemblies()
         {
-            var assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("dynamic_assembly"), AssemblyBuilderAccess.RunAndCollect);
+            var assembly = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("dynamic_assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             var module = assembly.DefineDynamicModule("dynamic");
             var typeBuilder = module.DefineType("Dummy");
 
             typeBuilder.DefineDefaultConstructor(MethodAttributes.Public);
             var dummType = typeBuilder.CreateTypeInfo();
 
-            var createMethod = typeof(ImmutableSegmentedList).GetMethods().Where(m => m.Name == "Create" && m.GetParameters().Length == 0).Single().MakeGenericMethod(dummType!.AsType());
+            var createMethod = typeof(ImmutableSegmentedList)
+                .GetMethods()
+                .Where(m => m.Name == "Create" && m.GetParameters().Length == 0)
+                .Single()
+                .MakeGenericMethod(dummType!.AsType());
             var list = Assert.IsAssignableFrom<IEnumerable>(createMethod.Invoke(null, null));
 
             var addMethod = list.GetType().GetMethod("Add");
-            list = Assert.IsAssignableFrom<IEnumerable>(addMethod!.Invoke(list, new object?[] { Activator.CreateInstance(dummType.AsType()) }));
+            list = Assert.IsAssignableFrom<IEnumerable>(
+                addMethod!.Invoke(
+                    list,
+                    new object?[] { Activator.CreateInstance(dummType.AsType()) }
+                )
+            );
 
             list.GetEnumerator(); // ensure this doesn't throw
         }
@@ -837,7 +1058,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return ImmutableSegmentedList<T>.Empty.AddRange(contents);
         }
 
-        private protected override void RemoveAllTestHelper<T>(ImmutableSegmentedList<T> list, Predicate<T> test)
+        private protected override void RemoveAllTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> test
+        )
         {
             var expected = list.ToList();
             expected.RemoveAll(test);
@@ -845,7 +1069,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal<T>(expected, actual.ToList());
         }
 
-        private protected override void ReverseTestHelper<T>(ImmutableSegmentedList<T> list, int index, int count)
+        private protected override void ReverseTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            int count
+        )
         {
             var expected = list.ToList();
             expected.Reverse(index, count);
@@ -858,17 +1086,28 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return list.Sort().ToList();
         }
 
-        private protected override List<T> SortTestHelper<T>(ImmutableSegmentedList<T> list, Comparison<T> comparison)
+        private protected override List<T> SortTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            Comparison<T> comparison
+        )
         {
             return list.Sort(comparison).ToList();
         }
 
-        private protected override List<T> SortTestHelper<T>(ImmutableSegmentedList<T> list, IComparer<T>? comparer)
+        private protected override List<T> SortTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            IComparer<T>? comparer
+        )
         {
             return list.Sort(comparer).ToList();
         }
 
-        private protected override List<T> SortTestHelper<T>(ImmutableSegmentedList<T> list, int index, int count, IComparer<T>? comparer)
+        private protected override List<T> SortTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            int count,
+            IComparer<T>? comparer
+        )
         {
             return list.Sort(index, count, comparer).ToList();
         }
@@ -878,67 +1117,120 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return list;
         }
 
-        private protected override ImmutableSegmentedList<TOutput> ConvertAllImpl<T, TOutput>(ImmutableSegmentedList<T> list, Converter<T, TOutput> converter)
-            => list.ConvertAll(converter);
+        private protected override ImmutableSegmentedList<TOutput> ConvertAllImpl<T, TOutput>(
+            ImmutableSegmentedList<T> list,
+            Converter<T, TOutput> converter
+        ) => list.ConvertAll(converter);
 
-        private protected override void ForEachImpl<T>(ImmutableSegmentedList<T> list, Action<T> action)
-            => list.ForEach(action);
+        private protected override void ForEachImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Action<T> action
+        ) => list.ForEach(action);
 
-        private protected override ImmutableSegmentedList<T> GetRangeImpl<T>(ImmutableSegmentedList<T> list, int index, int count)
-            => list.GetRange(index, count);
+        private protected override ImmutableSegmentedList<T> GetRangeImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            int count
+        ) => list.GetRange(index, count);
 
-        private protected override void CopyToImpl<T>(ImmutableSegmentedList<T> list, T[] array)
-            => list.CopyTo(array);
+        private protected override void CopyToImpl<T>(ImmutableSegmentedList<T> list, T[] array) =>
+            list.CopyTo(array);
 
-        private protected override void CopyToImpl<T>(ImmutableSegmentedList<T> list, T[] array, int arrayIndex)
-            => list.CopyTo(array, arrayIndex);
+        private protected override void CopyToImpl<T>(
+            ImmutableSegmentedList<T> list,
+            T[] array,
+            int arrayIndex
+        ) => list.CopyTo(array, arrayIndex);
 
-        private protected override void CopyToImpl<T>(ImmutableSegmentedList<T> list, int index, T[] array, int arrayIndex, int count)
-            => list.CopyTo(index, array, arrayIndex, count);
+        private protected override void CopyToImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            T[] array,
+            int arrayIndex,
+            int count
+        ) => list.CopyTo(index, array, arrayIndex, count);
 
-        private protected override bool ExistsImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match)
-            => list.Exists(match);
+        private protected override bool ExistsImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        ) => list.Exists(match);
 
-        private protected override T? FindImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match)
-            where T : default
-            => list.Find(match);
+        private protected override T? FindImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        )
+            where T : default => list.Find(match);
 
-        private protected override ImmutableSegmentedList<T> FindAllImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match)
-            => list.FindAll(match);
+        private protected override ImmutableSegmentedList<T> FindAllImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        ) => list.FindAll(match);
 
-        private protected override int FindIndexImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match)
-            => list.FindIndex(match);
+        private protected override int FindIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        ) => list.FindIndex(match);
 
-        private protected override int FindIndexImpl<T>(ImmutableSegmentedList<T> list, int startIndex, Predicate<T> match)
-            => list.FindIndex(startIndex, match);
+        private protected override int FindIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int startIndex,
+            Predicate<T> match
+        ) => list.FindIndex(startIndex, match);
 
-        private protected override int FindIndexImpl<T>(ImmutableSegmentedList<T> list, int startIndex, int count, Predicate<T> match)
-            => list.FindIndex(startIndex, count, match);
+        private protected override int FindIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int startIndex,
+            int count,
+            Predicate<T> match
+        ) => list.FindIndex(startIndex, count, match);
 
-        private protected override T? FindLastImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match)
-            where T : default
-            => list.FindLast(match);
+        private protected override T? FindLastImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        )
+            where T : default => list.FindLast(match);
 
-        private protected override int FindLastIndexImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match)
-            => list.FindLastIndex(match);
+        private protected override int FindLastIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        ) => list.FindLastIndex(match);
 
-        private protected override int FindLastIndexImpl<T>(ImmutableSegmentedList<T> list, int startIndex, Predicate<T> match)
-            => list.FindLastIndex(startIndex, match);
+        private protected override int FindLastIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int startIndex,
+            Predicate<T> match
+        ) => list.FindLastIndex(startIndex, match);
 
-        private protected override int FindLastIndexImpl<T>(ImmutableSegmentedList<T> list, int startIndex, int count, Predicate<T> match)
-            => list.FindLastIndex(startIndex, count, match);
+        private protected override int FindLastIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int startIndex,
+            int count,
+            Predicate<T> match
+        ) => list.FindLastIndex(startIndex, count, match);
 
-        private protected override bool TrueForAllImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> test)
-            => list.TrueForAll(test);
+        private protected override bool TrueForAllImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> test
+        ) => list.TrueForAll(test);
 
-        private protected override int BinarySearchImpl<T>(ImmutableSegmentedList<T> list, T item)
-            => list.BinarySearch(item);
+        private protected override int BinarySearchImpl<T>(
+            ImmutableSegmentedList<T> list,
+            T item
+        ) => list.BinarySearch(item);
 
-        private protected override int BinarySearchImpl<T>(ImmutableSegmentedList<T> list, T item, IComparer<T>? comparer)
-            => list.BinarySearch(item, comparer);
+        private protected override int BinarySearchImpl<T>(
+            ImmutableSegmentedList<T> list,
+            T item,
+            IComparer<T>? comparer
+        ) => list.BinarySearch(item, comparer);
 
-        private protected override int BinarySearchImpl<T>(ImmutableSegmentedList<T> list, int index, int count, T item, IComparer<T>? comparer)
-            => list.BinarySearch(index, count, item, comparer);
+        private protected override int BinarySearchImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            int count,
+            T item,
+            IComparer<T>? comparer
+        ) => list.BinarySearch(index, count, item, comparer);
 
         private struct Person
         {

@@ -9,21 +9,23 @@ using System;
 
 namespace IntPtr_Conv
 {
-	struct FooStruct {
-		int x;
-	}
+    struct FooStruct
+    {
+        int x;
+    }
 
-	class Class1 {
-		
-		public static int Main(string[] args)
-		{
-			IntPtr p = IntPtr.Zero;
+    class Class1
+    {
+        public static int Main(string[] args)
+        {
+            IntPtr p = IntPtr.Zero;
 
-			unsafe {
-				FooStruct* s = (FooStruct*) (p);
-			}
+            unsafe
+            {
+                FooStruct* s = (FooStruct*)(p);
+            }
 
-			return 0;
-		}
-	}
+            return 0;
+        }
+    }
 }

@@ -13,26 +13,28 @@ namespace Microsoft.Web.Mvc.ModelBinding
 {
     public sealed class ModelBinderProviderCollection : Collection<ModelBinderProvider>
     {
-        public ModelBinderProviderCollection()
-        {
-        }
+        public ModelBinderProviderCollection() { }
 
         public ModelBinderProviderCollection(IList<ModelBinderProvider> list)
-            : base(list)
-        {
-        }
+            : base(list) { }
 
         private static void EnsureNoBindAttribute(Type modelType)
         {
             if (TypeDescriptorHelper.Get(modelType).GetAttributes().OfType<BindAttribute>().Any())
             {
-                string errorMessage = String.Format(CultureInfo.CurrentCulture, MvcResources.ModelBinderProviderCollection_TypeCannotHaveBindAttribute,
-                                                    modelType);
+                string errorMessage = String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.ModelBinderProviderCollection_TypeCannotHaveBindAttribute,
+                    modelType
+                );
                 throw new InvalidOperationException(errorMessage);
             }
         }
 
-        public IExtensibleModelBinder GetBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+        public IExtensibleModelBinder GetBinder(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        )
         {
             if (controllerContext == null)
             {
@@ -51,18 +53,25 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 return providerFromAttr.GetBinder(controllerContext, bindingContext);
             }
 
-            return (from provider in this
-                    let binder = provider.GetBinder(controllerContext, bindingContext)
-                    where binder != null
-                    select binder).FirstOrDefault();
+            return (
+                from provider in this
+                let binder = provider.GetBinder(controllerContext, bindingContext)
+                where binder != null
+                select binder
+            ).FirstOrDefault();
         }
 
-        internal IExtensibleModelBinder GetRequiredBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+        internal IExtensibleModelBinder GetRequiredBinder(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        )
         {
             IExtensibleModelBinder binder = GetBinder(controllerContext, bindingContext);
             if (binder == null)
             {
-                throw Error.ModelBinderProviderCollection_BinderForTypeNotFound(bindingContext.ModelType);
+                throw Error.ModelBinderProviderCollection_BinderForTypeNotFound(
+                    bindingContext.ModelType
+                );
             }
             return binder;
         }
@@ -99,9 +108,14 @@ namespace Microsoft.Web.Mvc.ModelBinding
             InsertSimpleProviderAtFront(new GenericModelBinderProvider(modelType, modelBinder));
         }
 
-        public void RegisterBinderForGenericType(Type modelType, Func<Type[], IExtensibleModelBinder> modelBinderFactory)
+        public void RegisterBinderForGenericType(
+            Type modelType,
+            Func<Type[], IExtensibleModelBinder> modelBinderFactory
+        )
         {
-            InsertSimpleProviderAtFront(new GenericModelBinderProvider(modelType, modelBinderFactory));
+            InsertSimpleProviderAtFront(
+                new GenericModelBinderProvider(modelType, modelBinderFactory)
+            );
         }
 
         public void RegisterBinderForGenericType(Type modelType, Type modelBinderType)
@@ -111,21 +125,37 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
         public void RegisterBinderForType(Type modelType, IExtensibleModelBinder modelBinder)
         {
-            RegisterBinderForType(modelType, modelBinder, false /* suppressPrefixCheck */);
+            RegisterBinderForType(
+                modelType,
+                modelBinder,
+                false /* suppressPrefixCheck */
+            );
         }
 
-        internal void RegisterBinderForType(Type modelType, IExtensibleModelBinder modelBinder, bool suppressPrefixCheck)
+        internal void RegisterBinderForType(
+            Type modelType,
+            IExtensibleModelBinder modelBinder,
+            bool suppressPrefixCheck
+        )
         {
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(modelType, modelBinder)
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                modelType,
+                modelBinder
+            )
             {
-                SuppressPrefixCheck = suppressPrefixCheck
+                SuppressPrefixCheck = suppressPrefixCheck,
             };
             InsertSimpleProviderAtFront(provider);
         }
 
-        public void RegisterBinderForType(Type modelType, Func<IExtensibleModelBinder> modelBinderFactory)
+        public void RegisterBinderForType(
+            Type modelType,
+            Func<IExtensibleModelBinder> modelBinderFactory
+        )
         {
-            InsertSimpleProviderAtFront(new SimpleModelBinderProvider(modelType, modelBinderFactory));
+            InsertSimpleProviderAtFront(
+                new SimpleModelBinderProvider(modelType, modelBinderFactory)
+            );
         }
 
         protected override void SetItem(int index, ModelBinderProvider item)
@@ -140,17 +170,28 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
         private static bool ShouldProviderGoFirst(ModelBinderProvider provider)
         {
-            ModelBinderProviderOptionsAttribute options = provider.GetType()
-                .GetCustomAttributes(typeof(ModelBinderProviderOptionsAttribute), true /* inherit */)
+            ModelBinderProviderOptionsAttribute options = provider
+                .GetType()
+                .GetCustomAttributes(
+                    typeof(ModelBinderProviderOptionsAttribute),
+                    true /* inherit */
+                )
                 .OfType<ModelBinderProviderOptionsAttribute>()
                 .FirstOrDefault();
 
             return (options != null) ? options.FrontOfList : false;
         }
 
-        private static bool TryGetProviderFromAttributes(Type modelType, out ModelBinderProvider provider)
+        private static bool TryGetProviderFromAttributes(
+            Type modelType,
+            out ModelBinderProvider provider
+        )
         {
-            ExtensibleModelBinderAttribute attr = TypeDescriptorHelper.Get(modelType).GetAttributes().OfType<ExtensibleModelBinderAttribute>().FirstOrDefault();
+            ExtensibleModelBinderAttribute attr = TypeDescriptorHelper
+                .Get(modelType)
+                .GetAttributes()
+                .OfType<ExtensibleModelBinderAttribute>()
+                .FirstOrDefault();
             if (attr == null)
             {
                 provider = null;
@@ -163,14 +204,27 @@ namespace Microsoft.Web.Mvc.ModelBinding
             }
             else if (typeof(IExtensibleModelBinder).IsAssignableFrom(attr.BinderType))
             {
-                Type closedBinderType = (attr.BinderType.IsGenericTypeDefinition) ? attr.BinderType.MakeGenericType(modelType.GetGenericArguments()) : attr.BinderType;
-                IExtensibleModelBinder binderInstance = (IExtensibleModelBinder)CreateInstance(closedBinderType);
-                provider = new SimpleModelBinderProvider(modelType, binderInstance) { SuppressPrefixCheck = attr.SuppressPrefixCheck };
+                Type closedBinderType =
+                    (attr.BinderType.IsGenericTypeDefinition)
+                        ? attr.BinderType.MakeGenericType(modelType.GetGenericArguments())
+                        : attr.BinderType;
+                IExtensibleModelBinder binderInstance = (IExtensibleModelBinder)CreateInstance(
+                    closedBinderType
+                );
+                provider = new SimpleModelBinderProvider(modelType, binderInstance)
+                {
+                    SuppressPrefixCheck = attr.SuppressPrefixCheck,
+                };
             }
             else
             {
-                string errorMessage = String.Format(CultureInfo.CurrentCulture, MvcResources.ModelBinderProviderCollection_InvalidBinderType,
-                                                    attr.BinderType, typeof(ModelBinderProvider), typeof(IExtensibleModelBinder));
+                string errorMessage = String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.ModelBinderProviderCollection_InvalidBinderType,
+                    attr.BinderType,
+                    typeof(ModelBinderProvider),
+                    typeof(IExtensibleModelBinder)
+                );
                 throw new InvalidOperationException(errorMessage);
             }
 

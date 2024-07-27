@@ -14,10 +14,7 @@ public class Program
             .UseContentRoot(Directory.GetCurrentDirectory())
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                    .UseStartup<Startup>()
-                    .UseKestrel()
-                    .UseIISIntegration();
+                webHostBuilder.UseStartup<Startup>().UseKestrel().UseIISIntegration();
             });
 }
 

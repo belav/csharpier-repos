@@ -21,23 +21,30 @@ namespace Microsoft.CodeAnalysis.AddImport
             /// This code action only works by adding a reference.  As such, it requires a non document change (and is
             /// thus restricted in which hosts it can run).
             /// </summary>
-            public AssemblyReferenceCodeAction(
-                Document originalDocument,
-                AddImportFixData fixData)
+            public AssemblyReferenceCodeAction(Document originalDocument, AddImportFixData fixData)
                 : base(originalDocument, fixData, RequiresNonDocumentChangeTags)
             {
                 Contract.ThrowIfFalse(fixData.Kind == AddImportFixKind.ReferenceAssemblySymbol);
             }
 
-            protected override async Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(CancellationToken cancellationToken)
-                => await ComputeOperationsAsync(isPreview: true, cancellationToken).ConfigureAwait(false);
+            protected override async Task<
+                IEnumerable<CodeActionOperation>
+            > ComputePreviewOperationsAsync(CancellationToken cancellationToken) =>
+                await ComputeOperationsAsync(isPreview: true, cancellationToken)
+                    .ConfigureAwait(false);
 
-            protected override Task<ImmutableArray<CodeActionOperation>> ComputeOperationsAsync(IProgress<CodeAnalysisProgress> progress, CancellationToken cancellationToken)
-                => ComputeOperationsAsync(isPreview: false, cancellationToken);
+            protected override Task<ImmutableArray<CodeActionOperation>> ComputeOperationsAsync(
+                IProgress<CodeAnalysisProgress> progress,
+                CancellationToken cancellationToken
+            ) => ComputeOperationsAsync(isPreview: false, cancellationToken);
 
-            private async Task<ImmutableArray<CodeActionOperation>> ComputeOperationsAsync(bool isPreview, CancellationToken cancellationToken)
+            private async Task<ImmutableArray<CodeActionOperation>> ComputeOperationsAsync(
+                bool isPreview,
+                CancellationToken cancellationToken
+            )
             {
-                var newDocument = await GetUpdatedDocumentAsync(cancellationToken).ConfigureAwait(false);
+                var newDocument = await GetUpdatedDocumentAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var newProject = newDocument.Project;
 
                 if (isPreview)
@@ -52,7 +59,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                     var operation = new AddAssemblyReferenceCodeActionOperation(
                         FixData.AssemblyReferenceAssemblyName,
                         FixData.AssemblyReferenceFullyQualifiedTypeName,
-                        newProject);
+                        newProject
+                    );
                     return ImmutableArray.Create<CodeActionOperation>(operation);
                 }
             }
@@ -60,10 +68,13 @@ namespace Microsoft.CodeAnalysis.AddImport
             private sealed class AddAssemblyReferenceCodeActionOperation(
                 string assemblyReferenceAssemblyName,
                 string assemblyReferenceFullyQualifiedTypeName,
-                Project newProject) : CodeActionOperation
+                Project newProject
+            ) : CodeActionOperation
             {
-                private readonly string _assemblyReferenceAssemblyName = assemblyReferenceAssemblyName;
-                private readonly string _assemblyReferenceFullyQualifiedTypeName = assemblyReferenceFullyQualifiedTypeName;
+                private readonly string _assemblyReferenceAssemblyName =
+                    assemblyReferenceAssemblyName;
+                private readonly string _assemblyReferenceFullyQualifiedTypeName =
+                    assemblyReferenceFullyQualifiedTypeName;
                 private readonly Project _newProject = newProject;
 
                 internal override bool ApplyDuringTests => true;
@@ -78,13 +89,22 @@ namespace Microsoft.CodeAnalysis.AddImport
                 }
 
                 internal override Task<bool> TryApplyAsync(
-                    Workspace workspace, Solution originalSolution, IProgress<CodeAnalysisProgress> progressTracker, CancellationToken cancellationToken)
+                    Workspace workspace,
+                    Solution originalSolution,
+                    IProgress<CodeAnalysisProgress> progressTracker,
+                    CancellationToken cancellationToken
+                )
                 {
                     var operation = GetApplyChangesOperation(workspace);
                     if (operation is null)
                         return SpecializedTasks.False;
 
-                    return operation.TryApplyAsync(workspace, originalSolution, progressTracker, cancellationToken);
+                    return operation.TryApplyAsync(
+                        workspace,
+                        originalSolution,
+                        progressTracker,
+                        cancellationToken
+                    );
                 }
 
                 private ApplyChangesOperation? GetApplyChangesOperation(Workspace workspace)
@@ -94,21 +114,27 @@ namespace Microsoft.CodeAnalysis.AddImport
                         return null;
 
                     var service = workspace.Services.GetRequiredService<IMetadataService>();
-                    var reference = service.GetReference(resolvedPath, MetadataReferenceProperties.Assembly);
+                    var reference = service.GetReference(
+                        resolvedPath,
+                        MetadataReferenceProperties.Assembly
+                    );
                     var newProject = _newProject.WithMetadataReferences(
-                        _newProject.MetadataReferences.Concat(reference));
+                        _newProject.MetadataReferences.Concat(reference)
+                    );
 
                     return new ApplyChangesOperation(newProject.Solution);
                 }
 
                 private string? ResolvePath(Workspace workspace)
                 {
-                    var assemblyResolverService = workspace.Services.GetRequiredService<IFrameworkAssemblyPathResolver>();
+                    var assemblyResolverService =
+                        workspace.Services.GetRequiredService<IFrameworkAssemblyPathResolver>();
 
                     return assemblyResolverService.ResolveAssemblyPath(
                         _newProject.Id,
                         _assemblyReferenceAssemblyName,
-                        _assemblyReferenceFullyQualifiedTypeName);
+                        _assemblyReferenceFullyQualifiedTypeName
+                    );
                 }
             }
         }

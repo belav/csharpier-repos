@@ -19,12 +19,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         protected readonly SmallDictionary<TypeParameterSymbol, TypeWithAnnotations> Mapping;
 
-        protected AbstractTypeParameterMap(SmallDictionary<TypeParameterSymbol, TypeWithAnnotations> mapping)
+        protected AbstractTypeParameterMap(
+            SmallDictionary<TypeParameterSymbol, TypeWithAnnotations> mapping
+        )
         {
             this.Mapping = mapping;
         }
 
-        protected sealed override TypeWithAnnotations SubstituteTypeParameter(TypeParameterSymbol typeParameter)
+        protected sealed override TypeWithAnnotations SubstituteTypeParameter(
+            TypeParameterSymbol typeParameter
+        )
         {
             // It might need to be substituted directly.
             TypeWithAnnotations result;

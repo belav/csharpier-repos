@@ -14,24 +14,39 @@ namespace Microsoft.CodeAnalysis.UnitTests
 {
     internal static class SolutionTestHelpers
     {
-        public static Workspace CreateWorkspace(Type[]? additionalParts = null, TestHost testHost = TestHost.InProcess)
-            => new AdhocWorkspace(FeaturesTestCompositions.Features.AddParts(additionalParts).WithTestHostParts(testHost).GetHostServices());
+        public static Workspace CreateWorkspace(
+            Type[]? additionalParts = null,
+            TestHost testHost = TestHost.InProcess
+        ) =>
+            new AdhocWorkspace(
+                FeaturesTestCompositions
+                    .Features.AddParts(additionalParts)
+                    .WithTestHostParts(testHost)
+                    .GetHostServices()
+            );
 
-        public static Workspace CreateWorkspaceWithNormalText()
-            => CreateWorkspace(
-            [
-                typeof(TestTemporaryStorageServiceFactory)
-            ]);
+        public static Workspace CreateWorkspaceWithNormalText() =>
+            CreateWorkspace([typeof(TestTemporaryStorageServiceFactory)]);
 
-        public static Workspace CreateWorkspaceWithRecoverableText()
-            => CreateWorkspace();
+        public static Workspace CreateWorkspaceWithRecoverableText() => CreateWorkspace();
 
-        public static Workspace CreateWorkspaceWithPartialSemantics(TestHost testHost = TestHost.InProcess)
-            => WorkspaceTestUtilities.CreateWorkspaceWithPartialSemantics([typeof(TestTemporaryStorageServiceFactory)], testHost);
+        public static Workspace CreateWorkspaceWithPartialSemantics(
+            TestHost testHost = TestHost.InProcess
+        ) =>
+            WorkspaceTestUtilities.CreateWorkspaceWithPartialSemantics(
+                [typeof(TestTemporaryStorageServiceFactory)],
+                testHost
+            );
 
 #nullable disable
 
-        public static void TestProperty<T, TValue>(T instance, Func<T, TValue, T> factory, Func<T, TValue> getter, TValue validNonDefaultValue, bool defaultThrows = false)
+        public static void TestProperty<T, TValue>(
+            T instance,
+            Func<T, TValue, T> factory,
+            Func<T, TValue> getter,
+            TValue validNonDefaultValue,
+            bool defaultThrows = false
+        )
             where T : class
         {
             Assert.NotEqual(getter(instance), validNonDefaultValue);
@@ -53,7 +68,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
         }
 
-        public static void TestListProperty<T, TValue>(T instance, Func<T, IEnumerable<TValue>, T> factory, Func<T, IEnumerable<TValue>> getter, TValue item, bool allowDuplicates)
+        public static void TestListProperty<T, TValue>(
+            T instance,
+            Func<T, IEnumerable<TValue>, T> factory,
+            Func<T, IEnumerable<TValue>> getter,
+            TValue item,
+            bool allowDuplicates
+        )
             where T : class
         {
             var boxedItems = (IEnumerable<TValue>)ImmutableArray.Create(item);
@@ -69,7 +90,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Same(instanceWithNoItem, factory(instanceWithNoItem, null));
             Assert.Same(instanceWithNoItem, factory(instanceWithNoItem, Array.Empty<TValue>()));
-            Assert.Same(instanceWithNoItem, factory(instanceWithNoItem, ImmutableArray<TValue>.Empty));
+            Assert.Same(
+                instanceWithNoItem,
+                factory(instanceWithNoItem, ImmutableArray<TValue>.Empty)
+            );
 
             // the factory makes an immutable copy if given a mutable list:
             var mutableItems = new[] { item };
@@ -78,7 +102,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.NotSame(mutableItems, items);
 
             // null item:
-            Assert.Throws<ArgumentNullException>(() => factory(instanceWithNoItem, new TValue[] { item, default }));
+            Assert.Throws<ArgumentNullException>(
+                () => factory(instanceWithNoItem, new TValue[] { item, default })
+            );
 
             // duplicate item:
             if (allowDuplicates)
@@ -88,7 +114,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
             else
             {
-                Assert.Throws<ArgumentException>(() => factory(instanceWithNoItem, new TValue[] { item, item }));
+                Assert.Throws<ArgumentException>(
+                    () => factory(instanceWithNoItem, new TValue[] { item, item })
+                );
             }
         }
     }

@@ -31,7 +31,8 @@ internal sealed class VisualStudioOptionPersister : IOptionPersister
     public VisualStudioOptionPersister(
         VisualStudioSettingsOptionPersister visualStudioSettingsOptionPersister,
         LocalUserRegistryOptionPersister localUserRegistryPersister,
-        FeatureFlagPersister featureFlagPersister)
+        FeatureFlagPersister featureFlagPersister
+    )
     {
         _visualStudioSettingsOptionPersister = visualStudioSettingsOptionPersister;
         _localUserRegistryPersister = localUserRegistryPersister;
@@ -41,21 +42,36 @@ internal sealed class VisualStudioOptionPersister : IOptionPersister
     public bool TryFetch(OptionKey2 optionKey, out object? value)
     {
         value = null;
-        return VisualStudioOptionStorage.Storages.TryGetValue(optionKey.Option.Definition.ConfigName, out var storage) && TryFetch(storage, optionKey, out value);
+        return VisualStudioOptionStorage.Storages.TryGetValue(
+                optionKey.Option.Definition.ConfigName,
+                out var storage
+            ) && TryFetch(storage, optionKey, out value);
     }
 
-    public bool TryFetch(VisualStudioOptionStorage storage, OptionKey2 optionKey, out object? value)
-        => storage switch
+    public bool TryFetch(
+        VisualStudioOptionStorage storage,
+        OptionKey2 optionKey,
+        out object? value
+    ) =>
+        storage switch
         {
-            VisualStudioOptionStorage.RoamingProfileStorage roaming => roaming.TryFetch(_visualStudioSettingsOptionPersister, optionKey, out value),
-            VisualStudioOptionStorage.FeatureFlagStorage featureFlags => featureFlags.TryFetch(_featureFlagPersister, optionKey, out value),
-            VisualStudioOptionStorage.LocalUserProfileStorage local => local.TryFetch(_localUserRegistryPersister, optionKey, out value),
-            _ => throw ExceptionUtilities.UnexpectedValue(storage)
+            VisualStudioOptionStorage.RoamingProfileStorage roaming
+                => roaming.TryFetch(_visualStudioSettingsOptionPersister, optionKey, out value),
+            VisualStudioOptionStorage.FeatureFlagStorage featureFlags
+                => featureFlags.TryFetch(_featureFlagPersister, optionKey, out value),
+            VisualStudioOptionStorage.LocalUserProfileStorage local
+                => local.TryFetch(_localUserRegistryPersister, optionKey, out value),
+            _ => throw ExceptionUtilities.UnexpectedValue(storage),
         };
 
     public bool TryPersist(OptionKey2 optionKey, object? value)
     {
-        if (!VisualStudioOptionStorage.Storages.TryGetValue(optionKey.Option.Definition.ConfigName, out var storage))
+        if (
+            !VisualStudioOptionStorage.Storages.TryGetValue(
+                optionKey.Option.Definition.ConfigName,
+                out var storage
+            )
+        )
         {
             return false;
         }
@@ -65,12 +81,19 @@ internal sealed class VisualStudioOptionPersister : IOptionPersister
         return true;
     }
 
-    public Task PersistAsync(VisualStudioOptionStorage storage, OptionKey2 optionKey, object? value)
-        => storage switch
+    public Task PersistAsync(
+        VisualStudioOptionStorage storage,
+        OptionKey2 optionKey,
+        object? value
+    ) =>
+        storage switch
         {
-            VisualStudioOptionStorage.RoamingProfileStorage roaming => roaming.PersistAsync(_visualStudioSettingsOptionPersister, optionKey, value),
-            VisualStudioOptionStorage.FeatureFlagStorage featureFlags => featureFlags.PersistAsync(_featureFlagPersister, value),
-            VisualStudioOptionStorage.LocalUserProfileStorage local => local.PersistAsync(_localUserRegistryPersister, optionKey, value),
-            _ => throw ExceptionUtilities.UnexpectedValue(storage)
+            VisualStudioOptionStorage.RoamingProfileStorage roaming
+                => roaming.PersistAsync(_visualStudioSettingsOptionPersister, optionKey, value),
+            VisualStudioOptionStorage.FeatureFlagStorage featureFlags
+                => featureFlags.PersistAsync(_featureFlagPersister, value),
+            VisualStudioOptionStorage.LocalUserProfileStorage local
+                => local.PersistAsync(_localUserRegistryPersister, optionKey, value),
+            _ => throw ExceptionUtilities.UnexpectedValue(storage),
         };
 }

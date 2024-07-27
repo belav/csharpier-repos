@@ -13,9 +13,7 @@ public class TestLogger : ILogger
     private readonly Func<LogLevel, bool> _filter;
 
     public TestLogger(string name, ITestSink sink, bool enabled)
-        : this(name, sink, _ => enabled)
-    {
-    }
+        : this(name, sink, _ => enabled) { }
 
     public TestLogger(string name, ITestSink sink, Func<LogLevel, bool> filter)
     {
@@ -30,32 +28,36 @@ public class TestLogger : ILogger
     {
         _scope = state;
 
-        _sink.Begin(new BeginScopeContext()
-        {
-            LoggerName = _name,
-            Scope = state,
-        });
+        _sink.Begin(new BeginScopeContext() { LoggerName = _name, Scope = state });
 
         return TestDisposable.Instance;
     }
 
-    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+    public void Log<TState>(
+        LogLevel logLevel,
+        EventId eventId,
+        TState state,
+        Exception exception,
+        Func<TState, Exception, string> formatter
+    )
     {
         if (!IsEnabled(logLevel))
         {
             return;
         }
 
-        _sink.Write(new WriteContext()
-        {
-            LogLevel = logLevel,
-            EventId = eventId,
-            State = state,
-            Exception = exception,
-            Formatter = (s, e) => formatter((TState)s, e),
-            LoggerName = _name,
-            Scope = _scope
-        });
+        _sink.Write(
+            new WriteContext()
+            {
+                LogLevel = logLevel,
+                EventId = eventId,
+                State = state,
+                Exception = exception,
+                Formatter = (s, e) => formatter((TState)s, e),
+                LoggerName = _name,
+                Scope = _scope,
+            }
+        );
     }
 
     public bool IsEnabled(LogLevel logLevel)

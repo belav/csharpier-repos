@@ -27,22 +27,35 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
 {
     internal partial class CSharpMetadataAsSourceService : AbstractMetadataAsSourceService
     {
-        private static readonly AbstractFormattingRule s_memberSeparationRule = new FormattingRule();
-        public static readonly CSharpMetadataAsSourceService Instance = new CSharpMetadataAsSourceService();
+        private static readonly AbstractFormattingRule s_memberSeparationRule =
+            new FormattingRule();
+        public static readonly CSharpMetadataAsSourceService Instance =
+            new CSharpMetadataAsSourceService();
 
-        private CSharpMetadataAsSourceService()
-        {
-        }
+        private CSharpMetadataAsSourceService() { }
 
-        protected override async Task<Document> AddAssemblyInfoRegionAsync(Document document, Compilation symbolCompilation, ISymbol symbol, CancellationToken cancellationToken)
+        protected override async Task<Document> AddAssemblyInfoRegionAsync(
+            Document document,
+            Compilation symbolCompilation,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             var assemblyInfo = MetadataAsSourceHelpers.GetAssemblyInfo(symbol.ContainingAssembly);
-            var assemblyPath = MetadataAsSourceHelpers.GetAssemblyDisplay(symbolCompilation, symbol.ContainingAssembly);
+            var assemblyPath = MetadataAsSourceHelpers.GetAssemblyDisplay(
+                symbolCompilation,
+                symbol.ContainingAssembly
+            );
 
-            var regionTrivia = SyntaxFactory.RegionDirectiveTrivia(true)
-                .WithTrailingTrivia(new[] { SyntaxFactory.Space, SyntaxFactory.PreprocessingMessage(assemblyInfo) });
+            var regionTrivia = SyntaxFactory
+                .RegionDirectiveTrivia(true)
+                .WithTrailingTrivia(
+                    new[] { SyntaxFactory.Space, SyntaxFactory.PreprocessingMessage(assemblyInfo) }
+                );
 
-            var oldRoot = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var oldRoot = await document
+                .GetSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var newRoot = oldRoot.WithPrependedLeadingTrivia(
                 SyntaxFactory.Trivia(regionTrivia),
                 SyntaxFactory.CarriageReturnLineFeed,
@@ -50,30 +63,43 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
                 SyntaxFactory.CarriageReturnLineFeed,
                 SyntaxFactory.Trivia(SyntaxFactory.EndRegionDirectiveTrivia(true)),
                 SyntaxFactory.CarriageReturnLineFeed,
-                SyntaxFactory.CarriageReturnLineFeed);
+                SyntaxFactory.CarriageReturnLineFeed
+            );
 
             return document.WithSyntaxRoot(newRoot);
         }
 
-        protected override IEnumerable<AbstractFormattingRule> GetFormattingRules(Document document)
-            => s_memberSeparationRule.Concat(Formatter.GetDefaultFormattingRules(document));
+        protected override IEnumerable<AbstractFormattingRule> GetFormattingRules(
+            Document document
+        ) => s_memberSeparationRule.Concat(Formatter.GetDefaultFormattingRules(document));
 
-        protected override async Task<Document> ConvertDocCommentsToRegularCommentsAsync(Document document, IDocumentationCommentFormattingService docCommentFormattingService, CancellationToken cancellationToken)
+        protected override async Task<Document> ConvertDocCommentsToRegularCommentsAsync(
+            Document document,
+            IDocumentationCommentFormattingService docCommentFormattingService,
+            CancellationToken cancellationToken
+        )
         {
-            var syntaxRoot = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxRoot = await document
+                .GetSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var newSyntaxRoot = DocCommentConverter.ConvertToRegularComments(syntaxRoot, docCommentFormattingService, cancellationToken);
+            var newSyntaxRoot = DocCommentConverter.ConvertToRegularComments(
+                syntaxRoot,
+                docCommentFormattingService,
+                cancellationToken
+            );
 
             return document.WithSyntaxRoot(newSyntaxRoot);
         }
 
-        protected override ImmutableArray<AbstractReducer> GetReducers()
-            => ImmutableArray.Create<AbstractReducer>(
+        protected override ImmutableArray<AbstractReducer> GetReducers() =>
+            ImmutableArray.Create<AbstractReducer>(
                 new CSharpNameReducer(),
                 new CSharpEscapingReducer(),
                 new CSharpParenthesizedExpressionReducer(),
                 new CSharpParenthesizedPatternReducer(),
-                new CSharpDefaultExpressionReducer());
+                new CSharpDefaultExpressionReducer()
+            );
 
         /// <summary>
         /// Adds <c>#nullable enable</c> and <c>#nullable disable</c> annotations to the file as necessary.  Note that
@@ -84,7 +110,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
         /// <para/>
         /// This is technically innacurate for possible, but very uncommon cases.  For example, if the user's code
         /// explicitly did something like this:
-        /// 
+        ///
         /// <code>
         /// public void Goo(string goo,
         ///                 #nullable disable
@@ -92,12 +118,15 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
         ///                 #nullable enable
         ///                 string baz);
         /// </code>
-        /// 
+        ///
         /// Then we would be unable to handle that.  However, this is highly unlikely to happen, and so we accept the
         /// inaccuracy for the purpose of simplicity and for handling the much more common cases of either the entire
         /// file being annotated, or the user individually disabling annotations at the member level.
         /// </summary>
-        protected override async Task<Document> AddNullableRegionsAsync(Document document, CancellationToken cancellationToken)
+        protected override async Task<Document> AddNullableRegionsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             var options = (CSharpParseOptions)tree.Options;
@@ -120,10 +149,14 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
             return document.WithSyntaxRoot(newRoot);
         }
 
-        private static (bool oblivious, bool annotatedOrNotAnnotated) GetNullableAnnotations(SyntaxNode node)
+        private static (bool oblivious, bool annotatedOrNotAnnotated) GetNullableAnnotations(
+            SyntaxNode node
+        )
         {
-            return (HasAnnotation(node, NullableSyntaxAnnotation.Oblivious),
-                    HasAnnotation(node, NullableSyntaxAnnotation.AnnotatedOrNotAnnotated));
+            return (
+                HasAnnotation(node, NullableSyntaxAnnotation.Oblivious),
+                HasAnnotation(node, NullableSyntaxAnnotation.AnnotatedOrNotAnnotated)
+            );
         }
 
         private static bool HasAnnotation(SyntaxNode node, SyntaxAnnotation annotation)
@@ -139,27 +172,45 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
             var keyword = enable ? SyntaxKind.EnableKeyword : SyntaxKind.DisableKeyword;
             return
             [
-                SyntaxFactory.Trivia(SyntaxFactory.NullableDirectiveTrivia(SyntaxFactory.Token(keyword), isActive: enable)),
+                SyntaxFactory.Trivia(
+                    SyntaxFactory.NullableDirectiveTrivia(
+                        SyntaxFactory.Token(keyword),
+                        isActive: enable
+                    )
+                ),
                 SyntaxFactory.ElasticCarriageReturnLineFeed,
                 SyntaxFactory.ElasticCarriageReturnLineFeed,
             ];
         }
 
-        private TSyntax AddNullableRegions<TSyntax>(TSyntax node, CancellationToken cancellationToken)
+        private TSyntax AddNullableRegions<TSyntax>(
+            TSyntax node,
+            CancellationToken cancellationToken
+        )
             where TSyntax : SyntaxNode
         {
             return node switch
             {
-                CompilationUnitSyntax compilationUnit => (TSyntax)(object)compilationUnit.WithMembers(AddNullableRegions(compilationUnit.Members, cancellationToken)),
-                NamespaceDeclarationSyntax ns => (TSyntax)(object)ns.WithMembers(AddNullableRegions(ns.Members, cancellationToken)),
-                TypeDeclarationSyntax type => (TSyntax)(object)AddNullableRegionsAroundTypeMembers(type, cancellationToken),
+                CompilationUnitSyntax compilationUnit
+                    => (TSyntax)
+                        (object)
+                            compilationUnit.WithMembers(
+                                AddNullableRegions(compilationUnit.Members, cancellationToken)
+                            ),
+                NamespaceDeclarationSyntax ns
+                    => (TSyntax)
+                        (object)ns.WithMembers(AddNullableRegions(ns.Members, cancellationToken)),
+                TypeDeclarationSyntax type
+                    => (TSyntax)
+                        (object)AddNullableRegionsAroundTypeMembers(type, cancellationToken),
                 _ => node,
             };
         }
 
         private SyntaxList<MemberDeclarationSyntax> AddNullableRegions(
             SyntaxList<MemberDeclarationSyntax> members,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<MemberDeclarationSyntax>.GetInstance(out var builder);
 
@@ -170,7 +221,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
         }
 
         private TypeDeclarationSyntax AddNullableRegionsAroundTypeMembers(
-            TypeDeclarationSyntax type, CancellationToken cancellationToken)
+            TypeDeclarationSyntax type,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<MemberDeclarationSyntax>.GetInstance(out var builder);
 
@@ -184,7 +237,13 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
                 {
                     // if we hit a type, and we're currently disabled, then switch us back to enabled for that type.
                     // This ensures whenever we walk into a type-decl, we're always in the enabled-state.
-                    builder.Add(TransitionTo(AddNullableRegions(member, cancellationToken), enabled: true, ref currentlyEnabled));
+                    builder.Add(
+                        TransitionTo(
+                            AddNullableRegions(member, cancellationToken),
+                            enabled: true,
+                            ref currentlyEnabled
+                        )
+                    );
                     continue;
                 }
 
@@ -214,13 +273,20 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
             {
                 // switch us back to enabled as we leave the type.
                 result = result.WithCloseBraceToken(
-                    result.CloseBraceToken.WithPrependedLeadingTrivia(CreateNullableTrivia(enable: true)));
+                    result.CloseBraceToken.WithPrependedLeadingTrivia(
+                        CreateNullableTrivia(enable: true)
+                    )
+                );
             }
 
             return result;
         }
 
-        private static MemberDeclarationSyntax TransitionTo(MemberDeclarationSyntax member, bool enabled, ref bool currentlyEnabled)
+        private static MemberDeclarationSyntax TransitionTo(
+            MemberDeclarationSyntax member,
+            bool enabled,
+            ref bool currentlyEnabled
+        )
         {
             if (enabled == currentlyEnabled)
             {

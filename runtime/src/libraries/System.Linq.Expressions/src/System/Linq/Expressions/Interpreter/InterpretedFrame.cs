@@ -135,14 +135,19 @@ namespace System.Linq.Expressions.Interpreter
             InterpretedFrame? frame = this;
             do
             {
-                yield return new InterpretedFrameInfo(frame.Name, frame.GetDebugInfo(frame.InstructionIndex));
+                yield return new InterpretedFrameInfo(
+                    frame.Name,
+                    frame.GetDebugInfo(frame.InstructionIndex)
+                );
                 frame = frame.Parent;
             } while (frame != null);
         }
 
         internal void SaveTraceToException(Exception exception)
         {
-            exception.Data[typeof(InterpretedFrameInfo)] ??= new List<InterpretedFrameInfo>(GetStackTraceDebugInfo()).ToArray();
+            exception.Data[typeof(InterpretedFrameInfo)] ??= new List<InterpretedFrameInfo>(
+                GetStackTraceDebugInfo()
+            ).ToArray();
         }
 
         public static InterpretedFrameInfo[]? GetExceptionStackTrace(Exception exception)
@@ -216,7 +221,9 @@ namespace System.Linq.Expressions.Interpreter
             // the current continuation might have higher priority (continuationIndex is the depth of the current continuation):
             if (pendingTarget.ContinuationStackDepth < _continuationIndex)
             {
-                RuntimeLabel currentTarget = Interpreter._labels[_continuations![_continuationIndex - 1]];
+                RuntimeLabel currentTarget = Interpreter._labels[
+                    _continuations![_continuationIndex - 1]
+                ];
                 SetStackDepth(currentTarget.StackDepth);
                 return currentTarget.Index - InstructionIndex;
             }
@@ -252,8 +259,13 @@ namespace System.Linq.Expressions.Interpreter
         {
             // TODO: we know this at compile time (except for compiled loop):
             RuntimeLabel target = Interpreter._labels[labelIndex];
-            Debug.Assert(!gotoExceptionHandler || (gotoExceptionHandler && _continuationIndex == target.ContinuationStackDepth),
-                "When it's time to jump to the exception handler, all previous finally blocks should already be processed");
+            Debug.Assert(
+                !gotoExceptionHandler
+                    || (
+                        gotoExceptionHandler && _continuationIndex == target.ContinuationStackDepth
+                    ),
+                "When it's time to jump to the exception handler, all previous finally blocks should already be processed"
+            );
 
             if (_continuationIndex == target.ContinuationStackDepth)
             {

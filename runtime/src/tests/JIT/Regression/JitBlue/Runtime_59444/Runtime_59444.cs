@@ -917,7 +917,7 @@ public class Program
         Unsafe.InitBlockUnaligned(ref bytes[0], Value, len);
         return BitConverter.ToString(bytes);
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static byte[] TestData()
     {

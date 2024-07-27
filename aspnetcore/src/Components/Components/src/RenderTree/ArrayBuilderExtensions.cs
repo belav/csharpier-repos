@@ -9,8 +9,8 @@ internal static class ArrayBuilderExtensions
     /// Produces an <see cref="ArrayRange{T}"/> structure describing the current contents.
     /// </summary>
     /// <returns>The <see cref="ArrayRange{T}"/>.</returns>
-    public static ArrayRange<T> ToRange<T>(this ArrayBuilder<T> builder)
-        => new ArrayRange<T>(builder.Buffer, builder.Count);
+    public static ArrayRange<T> ToRange<T>(this ArrayBuilder<T> builder) =>
+        new ArrayRange<T>(builder.Buffer, builder.Count);
 
     /// <summary>
     /// Produces an <see cref="ArrayBuilderSegment{T}"/> structure describing the selected contents.
@@ -19,7 +19,14 @@ internal static class ArrayBuilderExtensions
     /// <param name="fromIndexInclusive">The index of the first item in the segment.</param>
     /// <param name="toIndexExclusive">One plus the index of the last item in the segment.</param>
     /// <returns>The <see cref="ArraySegment{T}"/>.</returns>
-    public static ArrayBuilderSegment<T> ToSegment<T>(this ArrayBuilder<T> builder, int fromIndexInclusive, int toIndexExclusive)
-        => new ArrayBuilderSegment<T>(builder, fromIndexInclusive, toIndexExclusive - fromIndexInclusive);
+    public static ArrayBuilderSegment<T> ToSegment<T>(
+        this ArrayBuilder<T> builder,
+        int fromIndexInclusive,
+        int toIndexExclusive
+    ) =>
+        new ArrayBuilderSegment<T>(
+            builder,
+            fromIndexInclusive,
+            toIndexExclusive - fromIndexInclusive
+        );
 }
-

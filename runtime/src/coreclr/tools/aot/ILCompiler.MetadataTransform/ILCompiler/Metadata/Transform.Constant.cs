@@ -2,18 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.Metadata.NativeFormat.Writer;
-
+using ConstantTypeCode = System.Reflection.Metadata.ConstantTypeCode;
 using Cts = Internal.TypeSystem;
 using Ecma = System.Reflection.Metadata;
-using ConstantTypeCode = System.Reflection.Metadata.ConstantTypeCode;
 
 namespace ILCompiler.Metadata
 {
     internal partial class Transform<TPolicy>
     {
-        private MetadataRecord HandleConstant(Cts.Ecma.EcmaModule module, Ecma.ConstantHandle constantHandle)
+        private MetadataRecord HandleConstant(
+            Cts.Ecma.EcmaModule module,
+            Ecma.ConstantHandle constantHandle
+        )
         {
             Ecma.MetadataReader reader = module.MetadataReader;
             Ecma.Constant constant = reader.GetConstant(constantHandle);

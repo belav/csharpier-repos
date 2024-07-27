@@ -50,7 +50,7 @@ internal static partial class Interop
             TokenRestrictedDeviceGroups,
             TokenSecurityAttributes,
             TokenIsRestricted,
-            MaxTokenInfoClass
+            MaxTokenInfoClass,
         }
     }
 }

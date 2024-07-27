@@ -1,5 +1,5 @@
 //
-// GeneratedCodeAttributeTest.cs 
+// GeneratedCodeAttributeTest.cs
 //	- Unit tests for System.CodeDom.Compiler.GeneratedCodeAttribute
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,39 +28,37 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom.Compiler;
+using NUnit.Framework;
 
-namespace MonoTests.System.CodeDom.Compiler {
+namespace MonoTests.System.CodeDom.Compiler
+{
+    [TestFixture]
+    public class GeneratedCodeAttributeTest
+    {
+        [Test]
+        public void Constructor()
+        {
+            GeneratedCodeAttribute gca = new GeneratedCodeAttribute("Mono", "1.2");
+            Assert.AreEqual("Mono", gca.Tool, "Tool");
+            Assert.AreEqual("1.2", gca.Version, "Version");
+        }
 
-	[TestFixture]
-	public class GeneratedCodeAttributeTest {
+        [Test]
+        public void Constructor_Null_Tool()
+        {
+            GeneratedCodeAttribute gca = new GeneratedCodeAttribute(null, "1.2");
+            Assert.IsNull(gca.Tool, "Tool");
+            Assert.AreEqual("1.2", gca.Version, "Version");
+        }
 
-		[Test]
-		public void Constructor ()
-		{
-			GeneratedCodeAttribute gca = new GeneratedCodeAttribute ("Mono", "1.2");
-			Assert.AreEqual ("Mono", gca.Tool, "Tool");
-			Assert.AreEqual ("1.2", gca.Version, "Version");
-		}
-
-		[Test]
-		public void Constructor_Null_Tool ()
-		{
-			GeneratedCodeAttribute gca = new GeneratedCodeAttribute (null, "1.2");
-			Assert.IsNull (gca.Tool, "Tool");
-			Assert.AreEqual ("1.2", gca.Version, "Version");
-		}
-
-		[Test]
-		public void Constructor_Null_Version ()
-		{
-			GeneratedCodeAttribute gca = new GeneratedCodeAttribute ("Mono", null);
-			Assert.AreEqual ("Mono", gca.Tool, "Tool");
-			Assert.IsNull (gca.Version, "Version");
-		}
-	}
+        [Test]
+        public void Constructor_Null_Version()
+        {
+            GeneratedCodeAttribute gca = new GeneratedCodeAttribute("Mono", null);
+            Assert.AreEqual("Mono", gca.Tool, "Tool");
+            Assert.IsNull(gca.Version, "Version");
+        }
+    }
 }
-

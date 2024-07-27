@@ -29,31 +29,37 @@ public static class WebHostBuilderIISExtensions
         {
             var iisConfigData = NativeMethods.HttpGetApplicationProperties();
             // Trim trailing slash to be consistent with other servers
-            var contentRoot = iisConfigData.pwzFullApplicationPath.TrimEnd(Path.DirectorySeparatorChar);
+            var contentRoot = iisConfigData.pwzFullApplicationPath.TrimEnd(
+                Path.DirectorySeparatorChar
+            );
             hostBuilder.UseContentRoot(contentRoot);
-            return hostBuilder.ConfigureServices(
-                services =>
+            return hostBuilder.ConfigureServices(services =>
+            {
+                services.AddSingleton(
+                    new IISNativeApplication(new NativeSafeHandle(iisConfigData.pNativeApplication))
+                );
+                services.AddSingleton<IServer, IISHttpServer>();
+                services.AddTransient<IISServerAuthenticationHandlerInternal>();
+                services.AddSingleton<IStartupFilter, IISServerSetupFilter>();
+                services.AddAuthenticationCore();
+                services.AddSingleton<IServerIntegratedAuth>(_ => new ServerIntegratedAuth()
                 {
-                    services.AddSingleton(new IISNativeApplication(new NativeSafeHandle(iisConfigData.pNativeApplication)));
-                    services.AddSingleton<IServer, IISHttpServer>();
-                    services.AddTransient<IISServerAuthenticationHandlerInternal>();
-                    services.AddSingleton<IStartupFilter, IISServerSetupFilter>();
-                    services.AddAuthenticationCore();
-                    services.AddSingleton<IServerIntegratedAuth>(_ => new ServerIntegratedAuth()
-                    {
-                        IsEnabled = iisConfigData.fWindowsAuthEnabled || iisConfigData.fBasicAuthEnabled,
-                        AuthenticationScheme = IISServerDefaults.AuthenticationScheme
-                    });
-                    services.Configure<IISServerOptions>(
-                        options =>
-                        {
-                            options.ServerAddresses = iisConfigData.pwzBindings.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                            options.ForwardWindowsAuthentication = iisConfigData.fWindowsAuthEnabled || iisConfigData.fBasicAuthEnabled;
-                            options.MaxRequestBodySize = iisConfigData.maxRequestBodySize;
-                            options.IisMaxRequestSizeLimit = iisConfigData.maxRequestBodySize;
-                        }
-                    );
+                    IsEnabled =
+                        iisConfigData.fWindowsAuthEnabled || iisConfigData.fBasicAuthEnabled,
+                    AuthenticationScheme = IISServerDefaults.AuthenticationScheme,
                 });
+                services.Configure<IISServerOptions>(options =>
+                {
+                    options.ServerAddresses = iisConfigData.pwzBindings.Split(
+                        new[] { ';' },
+                        StringSplitOptions.RemoveEmptyEntries
+                    );
+                    options.ForwardWindowsAuthentication =
+                        iisConfigData.fWindowsAuthEnabled || iisConfigData.fBasicAuthEnabled;
+                    options.MaxRequestBodySize = iisConfigData.maxRequestBodySize;
+                    options.IisMaxRequestSizeLimit = iisConfigData.maxRequestBodySize;
+                });
+            });
         }
 
         return hostBuilder;

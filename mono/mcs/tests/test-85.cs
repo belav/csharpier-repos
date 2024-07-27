@@ -7,17 +7,17 @@
 //
 using System.Runtime.InteropServices;
 
-class X {
-	static UnmanagedType UnmanagedType;
+class X
+{
+    static UnmanagedType UnmanagedType;
 
-	public static int Main ()
-	{
-		UnmanagedType = (UnmanagedType) 0;
+    public static int Main()
+    {
+        UnmanagedType = (UnmanagedType)0;
 
-		if (UnmanagedType != 0)
-			return 1;
+        if (UnmanagedType != 0)
+            return 1;
 
-		return 0;
-	}
+        return 0;
+    }
 }
-

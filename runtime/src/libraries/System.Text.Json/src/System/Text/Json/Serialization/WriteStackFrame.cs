@@ -75,6 +75,7 @@ namespace System.Text.Json
 
         // Serialization state for the child value serialized by the current frame.
         public PolymorphicSerializationState PolymorphicSerializationState;
+
         // Holds the entered polymorphic type info and acts as an LRU cache for element/field serializations.
         public JsonTypeInfo? PolymorphicTypeInfo;
 
@@ -107,7 +108,9 @@ namespace System.Text.Json
         /// </summary>
         public readonly JsonTypeInfo GetNestedJsonTypeInfo()
         {
-            return PolymorphicSerializationState is PolymorphicSerializationState.PolymorphicReEntryStarted
+            return
+                PolymorphicSerializationState
+                is PolymorphicSerializationState.PolymorphicReEntryStarted
                 ? PolymorphicTypeInfo!
                 : JsonPropertyInfo!.JsonTypeInfo;
         }
@@ -115,7 +118,10 @@ namespace System.Text.Json
         /// <summary>
         /// Configures the next stack frame for a polymorphic converter.
         /// </summary>
-        public JsonTypeInfo InitializePolymorphicReEntry(Type runtimeType, JsonSerializerOptions options)
+        public JsonTypeInfo InitializePolymorphicReEntry(
+            Type runtimeType,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(PolymorphicSerializationState == PolymorphicSerializationState.None);
 
@@ -126,7 +132,10 @@ namespace System.Text.Json
                 // To determine the contract for an object value:
                 // 1. Find the JsonTypeInfo for the runtime type with fallback to the nearest ancestor, if not available.
                 // 2. If the resolved type is deriving from a polymorphic type, use the contract of the polymorphic type instead.
-                JsonTypeInfo typeInfo = options.GetTypeInfoInternal(runtimeType, fallBackToNearestAncestorType: true);
+                JsonTypeInfo typeInfo = options.GetTypeInfoInternal(
+                    runtimeType,
+                    fallBackToNearestAncestorType: true
+                );
                 PolymorphicTypeInfo = typeInfo.AncestorPolymorphicType ?? typeInfo;
             }
 
@@ -139,7 +148,11 @@ namespace System.Text.Json
         /// </summary>
         public JsonConverter InitializePolymorphicReEntry(JsonTypeInfo derivedJsonTypeInfo)
         {
-            Debug.Assert(PolymorphicSerializationState is PolymorphicSerializationState.None or PolymorphicSerializationState.PolymorphicReEntryStarted);
+            Debug.Assert(
+                PolymorphicSerializationState
+                    is PolymorphicSerializationState.None
+                        or PolymorphicSerializationState.PolymorphicReEntryStarted
+            );
 
             PolymorphicTypeInfo = derivedJsonTypeInfo;
             PolymorphicSerializationState = PolymorphicSerializationState.PolymorphicReEntryStarted;
@@ -151,7 +164,10 @@ namespace System.Text.Json
         /// </summary>
         public JsonConverter ResumePolymorphicReEntry()
         {
-            Debug.Assert(PolymorphicSerializationState == PolymorphicSerializationState.PolymorphicReEntrySuspended);
+            Debug.Assert(
+                PolymorphicSerializationState
+                    == PolymorphicSerializationState.PolymorphicReEntrySuspended
+            );
             Debug.Assert(PolymorphicTypeInfo is not null);
             PolymorphicSerializationState = PolymorphicSerializationState.PolymorphicReEntryStarted;
             return PolymorphicTypeInfo.Converter;
@@ -162,10 +178,13 @@ namespace System.Text.Json
         /// </summary>
         public void ExitPolymorphicConverter(bool success)
         {
-            PolymorphicSerializationState = success ? PolymorphicSerializationState.None : PolymorphicSerializationState.PolymorphicReEntrySuspended;
+            PolymorphicSerializationState = success
+                ? PolymorphicSerializationState.None
+                : PolymorphicSerializationState.PolymorphicReEntrySuspended;
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly string DebuggerDisplay => $"ConverterStrategy.{JsonTypeInfo?.Converter.ConverterStrategy}, {JsonTypeInfo?.Type.Name}";
+        private readonly string DebuggerDisplay =>
+            $"ConverterStrategy.{JsonTypeInfo?.Converter.ConverterStrategy}, {JsonTypeInfo?.Type.Name}";
     }
 }

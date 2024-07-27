@@ -42,15 +42,30 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
     // Always soft-select these completion items.  Also, never filter down.
     private static readonly CompletionItemRules s_rules = CompletionItemRules.Create(
         selectionBehavior: CompletionItemSelectionBehavior.SoftSelection,
-        filterCharacterRules: ImmutableArray.Create(CharacterSetModificationRule.Create(CharacterSetModificationKind.Replace, Array.Empty<char>())));
+        filterCharacterRules: ImmutableArray.Create(
+            CharacterSetModificationRule.Create(
+                CharacterSetModificationKind.Replace,
+                Array.Empty<char>()
+            )
+        )
+    );
 
     // The space between type and parameter name.
     // void TestMethod(int // <- space after type name
     public ImmutableHashSet<char> TriggerCharacters { get; } = ImmutableHashSet.Create(' ');
 
-    public override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options)
+    public override bool ShouldTriggerCompletion(
+        SourceText text,
+        int caretPosition,
+        CompletionTrigger trigger,
+        OptionSet options
+    )
     {
-        if (trigger.Kind is CompletionTriggerKind.Invoke or CompletionTriggerKind.InvokeAndCommitIfUnique)
+        if (
+            trigger.Kind
+            is CompletionTriggerKind.Invoke
+                or CompletionTriggerKind.InvokeAndCommitIfUnique
+        )
         {
             return true;
         }
@@ -63,18 +78,30 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         return false;
     }
 
-    public override Task<CompletionDescription?> GetDescriptionAsync(Document document, CompletionItem item, CancellationToken cancellationToken)
+    public override Task<CompletionDescription?> GetDescriptionAsync(
+        Document document,
+        CompletionItem item,
+        CancellationToken cancellationToken
+    )
     {
         if (!item.Properties.TryGetValue(DescriptionKey, out var description))
         {
             return Task.FromResult<CompletionDescription?>(null);
         }
 
-        return Task.FromResult<CompletionDescription?>(CompletionDescription.Create(
-            ImmutableArray.Create(new TaggedText(TextTags.Text, description))));
+        return Task.FromResult<CompletionDescription?>(
+            CompletionDescription.Create(
+                ImmutableArray.Create(new TaggedText(TextTags.Text, description))
+            )
+        );
     }
 
-    public override Task<CompletionChange> GetChangeAsync(Document document, CompletionItem item, char? commitKey, CancellationToken cancellationToken)
+    public override Task<CompletionChange> GetChangeAsync(
+        Document document,
+        CompletionItem item,
+        char? commitKey,
+        CancellationToken cancellationToken
+    )
     {
         // These values have always been added by us.
         var startString = item.Properties[StartKey];
@@ -84,16 +111,29 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         // This value is optionally added in some cases and may not always be there.
         item.Properties.TryGetValue(NewPositionKey, out var newPositionString);
 
-        return Task.FromResult(CompletionChange.Create(
-            new TextChange(new TextSpan(int.Parse(startString, CultureInfo.InvariantCulture), int.Parse(lengthString, CultureInfo.InvariantCulture)), newText),
-            newPositionString == null ? null : int.Parse(newPositionString, CultureInfo.InvariantCulture)));
+        return Task.FromResult(
+            CompletionChange.Create(
+                new TextChange(
+                    new TextSpan(
+                        int.Parse(startString, CultureInfo.InvariantCulture),
+                        int.Parse(lengthString, CultureInfo.InvariantCulture)
+                    ),
+                    newText
+                ),
+                newPositionString == null
+                    ? null
+                    : int.Parse(newPositionString, CultureInfo.InvariantCulture)
+            )
+        );
     }
 
     public override async Task ProvideCompletionsAsync(CompletionContext context)
     {
         var position = context.Position;
 
-        var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+        var root = await context
+            .Document.GetSyntaxRootAsync(context.CancellationToken)
+            .ConfigureAwait(false);
         if (root == null)
         {
             return;
@@ -115,13 +155,16 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
             return;
         }
 
-        var container = TryFindMinimalApiArgument(token.Parent) ?? TryFindMvcActionParameter(token.Parent);
+        var container =
+            TryFindMinimalApiArgument(token.Parent) ?? TryFindMvcActionParameter(token.Parent);
         if (container == null)
         {
             return;
         }
 
-        var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+        var semanticModel = await context
+            .Document.GetSemanticModelAsync(context.CancellationToken)
+            .ConfigureAwait(false);
         if (semanticModel == null)
         {
             return;
@@ -131,14 +174,26 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
 
         // Don't offer route parameter names when the parameter type can't be bound to route parameters.
         // e.g. special types like HttpContext, non-primitive types that don't have a static TryParse method.
-        if (!IsCurrentParameterBindable(token, semanticModel, wellKnownTypes, context.CancellationToken))
+        if (
+            !IsCurrentParameterBindable(
+                token,
+                semanticModel,
+                wellKnownTypes,
+                context.CancellationToken
+            )
+        )
         {
             return;
         }
 
         // Don't offer route parameter names when the parameter has an attribute that can't be bound to route parameters.
         // e.g [AsParameters] or [IFromBodyMetadata].
-        var hasNonRouteAttribute = HasNonRouteAttribute(token, semanticModel, wellKnownTypes, context.CancellationToken);
+        var hasNonRouteAttribute = HasNonRouteAttribute(
+            token,
+            semanticModel,
+            wellKnownTypes,
+            context.CancellationToken
+        );
         if (hasNonRouteAttribute)
         {
             return;
@@ -149,7 +204,12 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         if (container.Parent.IsKind(SyntaxKind.Argument))
         {
             // Minimal API
-            var mapMethodParts = RouteUsageDetector.FindMapMethodParts(semanticModel, wellKnownTypes, container, context.CancellationToken);
+            var mapMethodParts = RouteUsageDetector.FindMapMethodParts(
+                semanticModel,
+                wellKnownTypes,
+                container,
+                context.CancellationToken
+            );
             if (mapMethodParts == null)
             {
                 return;
@@ -162,14 +222,23 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
             // Incomplete inline delegate syntax is very messy and arguments are mixed together.
             // Examine tokens to figure out wether the current token is the argument name.
             var previous = token.GetPreviousToken();
-            if (previous.IsKind(SyntaxKind.CommaToken) ||
-                previous.IsKind(SyntaxKind.OpenParenToken) ||
-                previous.IsKind(SyntaxKind.OutKeyword) ||
-                previous.IsKind(SyntaxKind.InKeyword) ||
-                previous.IsKind(SyntaxKind.RefKeyword) ||
-                previous.IsKind(SyntaxKind.ParamsKeyword) ||
-                (previous.IsKind(SyntaxKind.CloseBracketToken) && previous.GetRequiredParent().FirstAncestorOrSelf<AttributeListSyntax>() != null) ||
-                (previous.IsKind(SyntaxKind.LessThanToken) && previous.GetRequiredParent().FirstAncestorOrSelf<GenericNameSyntax>() != null))
+            if (
+                previous.IsKind(SyntaxKind.CommaToken)
+                || previous.IsKind(SyntaxKind.OpenParenToken)
+                || previous.IsKind(SyntaxKind.OutKeyword)
+                || previous.IsKind(SyntaxKind.InKeyword)
+                || previous.IsKind(SyntaxKind.RefKeyword)
+                || previous.IsKind(SyntaxKind.ParamsKeyword)
+                || (
+                    previous.IsKind(SyntaxKind.CloseBracketToken)
+                    && previous.GetRequiredParent().FirstAncestorOrSelf<AttributeListSyntax>()
+                        != null
+                )
+                || (
+                    previous.IsKind(SyntaxKind.LessThanToken)
+                    && previous.GetRequiredParent().FirstAncestorOrSelf<GenericNameSyntax>() != null
+                )
+            )
             {
                 // Positioned after type token. Don't replace current.
             }
@@ -193,12 +262,17 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
                 return;
             }
 
-            var methodSymbol = semanticModel.GetDeclaredSymbol(methodSyntax, context.CancellationToken);
+            var methodSymbol = semanticModel.GetDeclaredSymbol(
+                methodSyntax,
+                context.CancellationToken
+            );
 
             // Check method is a valid MVC action.
-            if (methodSymbol?.ContainingType is not INamedTypeSymbol typeSymbol ||
-                !MvcDetector.IsController(typeSymbol, wellKnownTypes) ||
-                !MvcDetector.IsAction(methodSymbol, wellKnownTypes))
+            if (
+                methodSymbol?.ContainingType is not INamedTypeSymbol typeSymbol
+                || !MvcDetector.IsController(typeSymbol, wellKnownTypes)
+                || !MvcDetector.IsAction(methodSymbol, wellKnownTypes)
+            )
             {
                 return;
             }
@@ -235,7 +309,10 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
             return;
         }
 
-        var routePatternCompletionContext = new EmbeddedCompletionContext(context, routeUsage.RoutePattern);
+        var routePatternCompletionContext = new EmbeddedCompletionContext(
+            context,
+            routeUsage.RoutePattern
+        );
 
         var existingParameterNames = GetExistingParameterNames(methodNode);
         foreach (var parameterName in existingParameterNames)
@@ -245,7 +322,10 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
 
         ProvideCompletions(routePatternCompletionContext, parentOpt);
 
-        if (routePatternCompletionContext.Items == null || routePatternCompletionContext.Items.Count == 0)
+        if (
+            routePatternCompletionContext.Items == null
+            || routePatternCompletionContext.Items.Count == 0
+        )
         {
             return;
         }
@@ -257,40 +337,58 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
 
             var properties = ImmutableDictionary.CreateBuilder<string, string>();
             properties.Add(StartKey, textChange.Span.Start.ToString(CultureInfo.InvariantCulture));
-            properties.Add(LengthKey, textChange.Span.Length.ToString(CultureInfo.InvariantCulture));
+            properties.Add(
+                LengthKey,
+                textChange.Span.Length.ToString(CultureInfo.InvariantCulture)
+            );
             properties.Add(NewTextKey, textChange.NewText ?? string.Empty);
             properties.Add(DescriptionKey, embeddedItem.FullDescription);
 
             if (change.NewPosition != null)
             {
-                properties.Add(NewPositionKey, change.NewPosition.Value.ToString(CultureInfo.InvariantCulture));
+                properties.Add(
+                    NewPositionKey,
+                    change.NewPosition.Value.ToString(CultureInfo.InvariantCulture)
+                );
             }
 
             // Keep everything sorted in the order we just produced the items in.
-            var sortText = routePatternCompletionContext.Items.Count.ToString("0000", CultureInfo.InvariantCulture);
-            context.AddItem(CompletionItem.Create(
-                displayText: embeddedItem.DisplayText,
-                inlineDescription: "",
-                sortText: sortText,
-                properties: properties.ToImmutable(),
-                rules: s_rules,
-                tags: ImmutableArray.Create(embeddedItem.Glyph)));
+            var sortText = routePatternCompletionContext.Items.Count.ToString(
+                "0000",
+                CultureInfo.InvariantCulture
+            );
+            context.AddItem(
+                CompletionItem.Create(
+                    displayText: embeddedItem.DisplayText,
+                    inlineDescription: "",
+                    sortText: sortText,
+                    properties: properties.ToImmutable(),
+                    rules: s_rules,
+                    tags: ImmutableArray.Create(embeddedItem.Glyph)
+                )
+            );
         }
 
         context.SuggestionModeItem = CompletionItem.Create(
             displayText: "<Name>",
             inlineDescription: "",
-            rules: CompletionItemRules.Default);
+            rules: CompletionItemRules.Default
+        );
 
         context.IsExclusive = true;
     }
 
     private static bool IsArgumentTypeToken(SyntaxToken token)
     {
-        return SyntaxFacts.IsPredefinedType(token.Kind()) || token.IsKind(SyntaxKind.IdentifierToken);
+        return SyntaxFacts.IsPredefinedType(token.Kind())
+            || token.IsKind(SyntaxKind.IdentifierToken);
     }
 
-    private static SyntaxToken? TryGetMvcActionRouteToken(CompletionContext context, SemanticModel semanticModel, MethodDeclarationSyntax method)
+    private static SyntaxToken? TryGetMvcActionRouteToken(
+        CompletionContext context,
+        SemanticModel semanticModel,
+        MethodDeclarationSyntax method
+    )
     {
         foreach (var attributeList in method.AttributeLists)
         {
@@ -300,13 +398,17 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
                 {
                     foreach (var attributeArgument in attribute.ArgumentList.Arguments)
                     {
-                        if (RouteStringSyntaxDetector.IsArgumentToAttributeParameterWithMatchingStringSyntaxAttribute(
-                            semanticModel,
-                            attributeArgument,
-                            context.CancellationToken,
-                            out var identifer) &&
-                            identifer == "Route" &&
-                            attributeArgument.Expression is LiteralExpressionSyntax literalExpression)
+                        if (
+                            RouteStringSyntaxDetector.IsArgumentToAttributeParameterWithMatchingStringSyntaxAttribute(
+                                semanticModel,
+                                attributeArgument,
+                                context.CancellationToken,
+                                out var identifer
+                            )
+                            && identifer == "Route"
+                            && attributeArgument.Expression
+                                is LiteralExpressionSyntax literalExpression
+                        )
                         {
                             return literalExpression.Token;
                         }
@@ -353,7 +455,12 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         return null;
     }
 
-    private static bool HasNonRouteAttribute(SyntaxToken token, SemanticModel semanticModel, WellKnownTypes wellKnownTypes, CancellationToken cancellationToken)
+    private static bool HasNonRouteAttribute(
+        SyntaxToken token,
+        SemanticModel semanticModel,
+        WellKnownTypes wellKnownTypes,
+        CancellationToken cancellationToken
+    )
     {
         if (token.Parent?.Parent is ParameterSyntax parameter)
         {
@@ -361,17 +468,31 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
             {
                 foreach (var attribute in attributeList.Attributes)
                 {
-                    var attributeTypeSymbol = semanticModel.GetSymbolInfo(attribute, cancellationToken).GetAnySymbol();
+                    var attributeTypeSymbol = semanticModel
+                        .GetSymbolInfo(attribute, cancellationToken)
+                        .GetAnySymbol();
 
                     if (attributeTypeSymbol != null)
                     {
-                        if (attributeTypeSymbol.ContainingSymbol is ITypeSymbol typeSymbol &&
-                            wellKnownTypes.Implements(typeSymbol, RouteWellKnownTypes.NonRouteMetadataTypes))
+                        if (
+                            attributeTypeSymbol.ContainingSymbol is ITypeSymbol typeSymbol
+                            && wellKnownTypes.Implements(
+                                typeSymbol,
+                                RouteWellKnownTypes.NonRouteMetadataTypes
+                            )
+                        )
                         {
                             return true;
                         }
 
-                        if (SymbolEqualityComparer.Default.Equals(attributeTypeSymbol.ContainingSymbol, wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_AsParametersAttribute)))
+                        if (
+                            SymbolEqualityComparer.Default.Equals(
+                                attributeTypeSymbol.ContainingSymbol,
+                                wellKnownTypes.Get(
+                                    WellKnownType.Microsoft_AspNetCore_Http_AsParametersAttribute
+                                )
+                            )
+                        )
                         {
                             return true;
                         }
@@ -383,18 +504,25 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         return false;
     }
 
-    private static bool IsCurrentParameterBindable(SyntaxToken token, SemanticModel semanticModel, WellKnownTypes wellKnownTypes, CancellationToken cancellationToken)
+    private static bool IsCurrentParameterBindable(
+        SyntaxToken token,
+        SemanticModel semanticModel,
+        WellKnownTypes wellKnownTypes,
+        CancellationToken cancellationToken
+    )
     {
         if (token.Parent.IsKind(SyntaxKind.PredefinedType))
         {
             return true;
         }
 
-        var parameterTypeSymbol = semanticModel.GetSymbolInfo(token.Parent!, cancellationToken).GetAnySymbol();
+        var parameterTypeSymbol = semanticModel
+            .GetSymbolInfo(token.Parent!, cancellationToken)
+            .GetAnySymbol();
         if (parameterTypeSymbol is INamedTypeSymbol typeSymbol)
         {
-            return ParsabilityHelper.GetParsability(typeSymbol, wellKnownTypes) == Parsability.Parsable;
-
+            return ParsabilityHelper.GetParsability(typeSymbol, wellKnownTypes)
+                == Parsability.Parsable;
         }
         else if (parameterTypeSymbol is IMethodSymbol)
         {
@@ -414,9 +542,12 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         {
             foreach (var argument in tupleExpression.Arguments)
             {
-                if (argument.Expression is DeclarationExpressionSyntax declarationExpression &&
-                    declarationExpression.Designation is SingleVariableDesignationSyntax variableDesignationSyntax &&
-                    variableDesignationSyntax.Identifier is { IsMissing: false } identifer)
+                if (
+                    argument.Expression is DeclarationExpressionSyntax declarationExpression
+                    && declarationExpression.Designation
+                        is SingleVariableDesignationSyntax variableDesignationSyntax
+                    && variableDesignationSyntax.Identifier is { IsMissing: false } identifer
+                )
                 {
                     builder.Add(identifer.ValueText);
                 }
@@ -426,17 +557,20 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         {
             var parameterList = node switch
             {
-                ParenthesizedLambdaExpressionSyntax parenthesizedLambdaExpression => parenthesizedLambdaExpression.ParameterList,
+                ParenthesizedLambdaExpressionSyntax parenthesizedLambdaExpression
+                    => parenthesizedLambdaExpression.ParameterList,
                 MethodDeclarationSyntax methodDeclaration => methodDeclaration.ParameterList,
-                _ => null
+                _ => null,
             };
 
             if (parameterList != null)
             {
                 foreach (var p in parameterList.Parameters)
                 {
-                    if (p is ParameterSyntax parameter &&
-                        parameter.Identifier is { IsMissing: false } identifer)
+                    if (
+                        p is ParameterSyntax parameter
+                        && parameter.Identifier is { IsMissing: false } identifer
+                    )
                     {
                         builder.Add(identifer.ValueText);
                     }
@@ -447,11 +581,20 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         return builder.ToImmutable();
     }
 
-    private static void ProvideCompletions(EmbeddedCompletionContext context, SyntaxToken? parentOpt)
+    private static void ProvideCompletions(
+        EmbeddedCompletionContext context,
+        SyntaxToken? parentOpt
+    )
     {
         foreach (var routeParameter in context.Tree.RouteParameters)
         {
-            context.AddIfMissing(routeParameter.Name, suffix: string.Empty, description: "(Route parameter)", WellKnownTags.Parameter, parentOpt);
+            context.AddIfMissing(
+                routeParameter.Name,
+                suffix: string.Empty,
+                description: "(Route parameter)",
+                WellKnownTags.Parameter,
+                parentOpt
+            );
         }
     }
 
@@ -464,7 +607,12 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         public readonly CompletionChange Change;
 
         public RoutePatternItem(
-            string displayText, string inlineDescription, string fullDescription, string glyph, CompletionChange change)
+            string displayText,
+            string inlineDescription,
+            string fullDescription,
+            string glyph,
+            CompletionChange change
+        )
         {
             DisplayText = displayText;
             InlineDescription = inlineDescription;
@@ -491,9 +639,7 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
             public TextSpan? Value { get; set; }
         }
 
-        public EmbeddedCompletionContext(
-            CompletionContext context,
-            RoutePatternTree tree)
+        public EmbeddedCompletionContext(CompletionContext context, RoutePatternTree tree)
         {
             _context = context;
             Tree = tree;
@@ -508,26 +654,37 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         }
 
         public void AddIfMissing(
-            string displayText, string suffix, string description, string glyph,
-            SyntaxToken? parentOpt, int? positionOffset = null, string? insertionText = null)
+            string displayText,
+            string suffix,
+            string description,
+            string glyph,
+            SyntaxToken? parentOpt,
+            int? positionOffset = null,
+            string? insertionText = null
+        )
         {
-            var replacementStart = parentOpt != null
-                ? parentOpt.Value.GetLocation().SourceSpan.Start
-                : Position;
-            var replacementEnd = parentOpt != null
-                ? parentOpt.Value.GetLocation().SourceSpan.End
-                : Position;
+            var replacementStart =
+                parentOpt != null ? parentOpt.Value.GetLocation().SourceSpan.Start : Position;
+            var replacementEnd =
+                parentOpt != null ? parentOpt.Value.GetLocation().SourceSpan.End : Position;
 
             var replacementSpan = TextSpan.FromBounds(replacementStart, replacementEnd);
             var newPosition = replacementStart + positionOffset;
 
             insertionText ??= displayText;
 
-            AddIfMissing(new RoutePatternItem(
-                displayText, suffix, description, glyph,
-                CompletionChange.Create(
-                    new TextChange(replacementSpan, insertionText),
-                    newPosition)));
+            AddIfMissing(
+                new RoutePatternItem(
+                    displayText,
+                    suffix,
+                    description,
+                    glyph,
+                    CompletionChange.Create(
+                        new TextChange(replacementSpan, insertionText),
+                        newPosition
+                    )
+                )
+            );
         }
 
         public void AddIfMissing(RoutePatternItem item)
@@ -547,9 +704,7 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
             // a normal string and not a verbatim string.  There are no other regex characters
             // that completion will produce that need any escaping.
             Debug.Assert(token.IsKind(SyntaxKind.StringLiteralToken));
-            return token.IsVerbatimStringLiteral()
-                ? text
-                : text.Replace(@"\", @"\\");
+            return token.IsVerbatimStringLiteral() ? text : text.Replace(@"\", @"\\");
         }
     }
 }

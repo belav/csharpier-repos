@@ -20,7 +20,11 @@ namespace System.IdentityModel.Selectors
             SecurityToken token;
             if (!this.TryResolveTokenCore(keyIdentifier, out token))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR.GetString(SR.UnableToResolveTokenReference, keyIdentifier)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnableToResolveTokenReference, keyIdentifier)
+                    )
+                );
             }
             return token;
         }
@@ -38,21 +42,32 @@ namespace System.IdentityModel.Selectors
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
             SecurityToken token;
             if (!this.TryResolveTokenCore(keyIdentifierClause, out token))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR.GetString(SR.UnableToResolveTokenReference, keyIdentifierClause)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnableToResolveTokenReference, keyIdentifierClause)
+                    )
+                );
             }
             return token;
         }
 
-        public bool TryResolveToken(SecurityKeyIdentifierClause keyIdentifierClause, out SecurityToken token)
+        public bool TryResolveToken(
+            SecurityKeyIdentifierClause keyIdentifierClause,
+            out SecurityToken token
+        )
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
             return this.TryResolveTokenCore(keyIdentifierClause, out token);
         }
@@ -61,21 +76,32 @@ namespace System.IdentityModel.Selectors
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
             SecurityKey key;
             if (!this.TryResolveSecurityKeyCore(keyIdentifierClause, out key))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR.GetString(SR.UnableToResolveKeyReference, keyIdentifierClause)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnableToResolveKeyReference, keyIdentifierClause)
+                    )
+                );
             }
             return key;
         }
 
-        public bool TryResolveSecurityKey(SecurityKeyIdentifierClause keyIdentifierClause, out SecurityKey key)
+        public bool TryResolveSecurityKey(
+            SecurityKeyIdentifierClause keyIdentifierClause,
+            out SecurityKey key
+        )
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
             return this.TryResolveSecurityKeyCore(keyIdentifierClause, out key);
         }
@@ -86,16 +112,31 @@ namespace System.IdentityModel.Selectors
         /// <param name="nodelist">Custom configuration elements</param>
         public virtual void LoadCustomConfiguration(XmlNodeList nodelist)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException(SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)
+                )
+            );
         }
 
         // protected methods
-        protected abstract bool TryResolveTokenCore(SecurityKeyIdentifier keyIdentifier, out SecurityToken token);
-        protected abstract bool TryResolveTokenCore(SecurityKeyIdentifierClause keyIdentifierClause, out SecurityToken token);
-        protected abstract bool TryResolveSecurityKeyCore(SecurityKeyIdentifierClause keyIdentifierClause, out SecurityKey key);
+        protected abstract bool TryResolveTokenCore(
+            SecurityKeyIdentifier keyIdentifier,
+            out SecurityToken token
+        );
+        protected abstract bool TryResolveTokenCore(
+            SecurityKeyIdentifierClause keyIdentifierClause,
+            out SecurityToken token
+        );
+        protected abstract bool TryResolveSecurityKeyCore(
+            SecurityKeyIdentifierClause keyIdentifierClause,
+            out SecurityKey key
+        );
 
-
-        public static SecurityTokenResolver CreateDefaultSecurityTokenResolver(ReadOnlyCollection<SecurityToken> tokens, bool canMatchLocalId)
+        public static SecurityTokenResolver CreateDefaultSecurityTokenResolver(
+            ReadOnlyCollection<SecurityToken> tokens,
+            bool canMatchLocalId
+        )
         {
             return new SimpleTokenResolver(tokens, canMatchLocalId);
         }
@@ -105,7 +146,10 @@ namespace System.IdentityModel.Selectors
             ReadOnlyCollection<SecurityToken> tokens;
             bool canMatchLocalId;
 
-            public SimpleTokenResolver(ReadOnlyCollection<SecurityToken> tokens, bool canMatchLocalId)
+            public SimpleTokenResolver(
+                ReadOnlyCollection<SecurityToken> tokens,
+                bool canMatchLocalId
+            )
             {
                 if (tokens == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokens");
@@ -114,15 +158,21 @@ namespace System.IdentityModel.Selectors
                 this.canMatchLocalId = canMatchLocalId;
             }
 
-            protected override bool TryResolveSecurityKeyCore(SecurityKeyIdentifierClause keyIdentifierClause, out SecurityKey key)
+            protected override bool TryResolveSecurityKeyCore(
+                SecurityKeyIdentifierClause keyIdentifierClause,
+                out SecurityKey key
+            )
             {
                 if (keyIdentifierClause == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "keyIdentifierClause"
+                    );
 
                 key = null;
                 for (int i = 0; i < this.tokens.Count; ++i)
                 {
-                    SecurityKey securityKey = this.tokens[i].ResolveKeyIdentifierClause(keyIdentifierClause);
+                    SecurityKey securityKey = this.tokens[i]
+                        .ResolveKeyIdentifierClause(keyIdentifierClause);
                     if (securityKey != null)
                     {
                         key = securityKey;
@@ -132,7 +182,8 @@ namespace System.IdentityModel.Selectors
 
                 if (keyIdentifierClause is EncryptedKeyIdentifierClause)
                 {
-                    EncryptedKeyIdentifierClause keyClause = (EncryptedKeyIdentifierClause)keyIdentifierClause;
+                    EncryptedKeyIdentifierClause keyClause =
+                        (EncryptedKeyIdentifierClause)keyIdentifierClause;
                     SecurityKeyIdentifier keyIdentifier = keyClause.EncryptingKeyIdentifier;
                     if (keyIdentifier != null && keyIdentifier.Count > 0)
                     {
@@ -143,7 +194,10 @@ namespace System.IdentityModel.Selectors
                             {
                                 byte[] wrappedKey = keyClause.GetEncryptedKey();
                                 string wrappingAlgorithm = keyClause.EncryptionMethod;
-                                byte[] unwrappedKey = unwrappingSecurityKey.DecryptKey(wrappingAlgorithm, wrappedKey);
+                                byte[] unwrappedKey = unwrappingSecurityKey.DecryptKey(
+                                    wrappingAlgorithm,
+                                    wrappedKey
+                                );
                                 key = new InMemorySymmetricSecurityKey(unwrappedKey, false);
                                 return true;
                             }
@@ -154,15 +208,19 @@ namespace System.IdentityModel.Selectors
                 return key != null;
             }
 
-            protected override bool TryResolveTokenCore(SecurityKeyIdentifier keyIdentifier, out SecurityToken token)
+            protected override bool TryResolveTokenCore(
+                SecurityKeyIdentifier keyIdentifier,
+                out SecurityToken token
+            )
             {
                 if (keyIdentifier == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifier");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "keyIdentifier"
+                    );
 
                 token = null;
                 for (int i = 0; i < keyIdentifier.Count; ++i)
                 {
-
                     SecurityToken securityToken = ResolveSecurityToken(keyIdentifier[i]);
                     if (securityToken != null)
                     {
@@ -174,10 +232,15 @@ namespace System.IdentityModel.Selectors
                 return (token != null);
             }
 
-            protected override bool TryResolveTokenCore(SecurityKeyIdentifierClause keyIdentifierClause, out SecurityToken token)
+            protected override bool TryResolveTokenCore(
+                SecurityKeyIdentifierClause keyIdentifierClause,
+                out SecurityToken token
+            )
             {
                 if (keyIdentifierClause == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "keyIdentifierClause"
+                    );
 
                 token = null;
 
@@ -191,8 +254,10 @@ namespace System.IdentityModel.Selectors
             SecurityToken ResolveSecurityToken(SecurityKeyIdentifierClause keyIdentifierClause)
             {
                 if (keyIdentifierClause == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
-                
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "keyIdentifierClause"
+                    );
+
                 if (!this.canMatchLocalId && keyIdentifierClause is LocalIdKeyIdentifierClause)
                     return null;
 
@@ -204,8 +269,6 @@ namespace System.IdentityModel.Selectors
 
                 return null;
             }
-
         }
-
     }
 }

@@ -17,16 +17,18 @@ namespace System.Reflection
 
             Type? declaringType = DeclaringType;
 
-            if (declaringType == typeof(void)
-                || declaringType != null && declaringType.ContainsGenericParameters  // Enclosing type has unbound generics
+            if (
+                declaringType == typeof(void)
+                || declaringType != null && declaringType.ContainsGenericParameters // Enclosing type has unbound generics
                 || (CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs // Managed varargs
-                )
+            )
             {
                 invocationFlags |= InvocationFlags.NoInvoke;
             }
             else if (IsStatic)
             {
-                invocationFlags |= InvocationFlags.RunClassConstructor | InvocationFlags.NoConstructorInvoke;
+                invocationFlags |=
+                    InvocationFlags.RunClassConstructor | InvocationFlags.NoConstructorInvoke;
             }
             else if (declaringType != null && declaringType.IsAbstract)
             {
@@ -53,29 +55,21 @@ namespace System.Reflection
 
             // ctor is declared on interface class
             if (declaringType.IsInterface)
-                throw new MemberAccessException(
-                    SR.Format(SR.Acc_CreateInterfaceEx, declaringType));
-
+                throw new MemberAccessException(SR.Format(SR.Acc_CreateInterfaceEx, declaringType));
             // ctor is on an abstract class
             else if (declaringType.IsAbstract)
-                throw new MemberAccessException(
-                    SR.Format(SR.Acc_CreateAbstEx, declaringType));
-
+                throw new MemberAccessException(SR.Format(SR.Acc_CreateAbstEx, declaringType));
             // ctor is on a class that contains stack pointers
             else if (declaringType.GetRootElementType() == typeof(ArgIterator))
                 throw new NotSupportedException();
-
             // ctor is vararg
             else if (isVarArg)
                 throw new NotSupportedException();
-
             // ctor is generic or on a generic class
             else if (declaringType.ContainsGenericParameters)
             {
-                throw new MemberAccessException(
-                    SR.Format(SR.Acc_CreateGenericEx, declaringType));
+                throw new MemberAccessException(SR.Format(SR.Acc_CreateGenericEx, declaringType));
             }
-
             // ctor is declared on System.Void
             else if (declaringType == typeof(void))
                 throw new MemberAccessException(SR.Access_Void);
@@ -84,7 +78,10 @@ namespace System.Reflection
         [DoesNotReturn]
         internal void ThrowNoInvokeException()
         {
-            CheckCanCreateInstance(DeclaringType!, (CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs);
+            CheckCanCreateInstance(
+                DeclaringType!,
+                (CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs
+            );
 
             // ctor is .cctor
             if ((Attributes & MethodAttributes.Static) == MethodAttributes.Static)
@@ -101,7 +98,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             object?[]? parameters,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
             if ((InvocationFlags & InvocationFlags.NoInvoke) != 0)
                 ThrowNoInvokeException();
@@ -126,16 +124,39 @@ namespace System.Reflection
                 return null;
             }
 
-            return argCount == 0 ?
-                Invoker.InvokeConstructorWithoutAlloc(obj!, (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0) :
-                Invoker.InvokeConstructorWithoutAlloc(obj!, invokeAttr, binder, parameters!, culture);
+            return argCount == 0
+                ? Invoker.InvokeConstructorWithoutAlloc(
+                    obj!,
+                    (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0
+                )
+                : Invoker.InvokeConstructorWithoutAlloc(
+                    obj!,
+                    invokeAttr,
+                    binder,
+                    parameters!,
+                    culture
+                );
         }
 
         [DebuggerStepThrough]
         [DebuggerHidden]
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
-            if ((InvocationFlags & (InvocationFlags.NoInvoke | InvocationFlags.ContainsStackPointers | InvocationFlags.NoConstructorInvoke)) != 0)
+            if (
+                (
+                    InvocationFlags
+                    & (
+                        InvocationFlags.NoInvoke
+                        | InvocationFlags.ContainsStackPointers
+                        | InvocationFlags.NoConstructorInvoke
+                    )
+                ) != 0
+            )
             {
                 ThrowNoInvokeException();
             }
@@ -155,13 +176,31 @@ namespace System.Reflection
                 case 0:
                     return Invoker.InvokeWithNoArgs(obj: null, invokeAttr)!;
                 case 1:
-                    return Invoker.InvokeWithOneArg(obj: null, invokeAttr, binder, parameters!, culture)!;
+                    return Invoker.InvokeWithOneArg(
+                        obj: null,
+                        invokeAttr,
+                        binder,
+                        parameters!,
+                        culture
+                    )!;
                 case 2:
                 case 3:
                 case 4:
-                    return Invoker.InvokeWithFewArgs(obj: null, invokeAttr, binder, parameters!, culture)!;
+                    return Invoker.InvokeWithFewArgs(
+                        obj: null,
+                        invokeAttr,
+                        binder,
+                        parameters!,
+                        culture
+                    )!;
                 default:
-                    return Invoker.InvokeWithManyArgs(obj: null, invokeAttr, binder, parameters!, culture)!;
+                    return Invoker.InvokeWithManyArgs(
+                        obj: null,
+                        invokeAttr,
+                        binder,
+                        parameters!,
+                        culture
+                    )!;
             }
         }
     }

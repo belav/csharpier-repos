@@ -11,18 +11,20 @@ namespace System.Text.Encodings.Web.Tests
     public class HtmlEncoderDefaultCommonTests : InboxEncoderCommonTestBase
     {
         public HtmlEncoderDefaultCommonTests()
-            : base(HtmlEncoder.Default, allowedChar: 'a', disallowedChar: '&')
-        {
-        }
+            : base(HtmlEncoder.Default, allowedChar: 'a', disallowedChar: '&') { }
 
         private protected override string GetExpectedEscapedRepresentation(Rune value)
         {
             switch (value.Value)
             {
-                case '<': return "&lt;";
-                case '>': return "&gt;";
-                case '&': return "&amp;";
-                case '\"': return "&quot;";
+                case '<':
+                    return "&lt;";
+                case '>':
+                    return "&gt;";
+                case '&':
+                    return "&amp;";
+                case '\"':
+                    return "&quot;";
                 default:
                     return FormattableString.Invariant($"&#x{(uint)value.Value:X};");
             }
@@ -104,20 +106,24 @@ namespace System.Text.Encodings.Web.Tests
     public class JavaScriptEncoderDefaultCommonTests : InboxEncoderCommonTestBase
     {
         public JavaScriptEncoderDefaultCommonTests()
-           : base(JavaScriptEncoder.Default, allowedChar: 'a', disallowedChar: '\"')
-        {
-        }
+            : base(JavaScriptEncoder.Default, allowedChar: 'a', disallowedChar: '\"') { }
 
         private protected override string GetExpectedEscapedRepresentation(Rune value)
         {
             switch (value.Value)
             {
-                case '\b': return "\\b";
-                case '\t': return "\\t";
-                case '\n': return "\\n";
-                case '\f': return "\\f";
-                case '\r': return "\\r";
-                case '\\': return "\\\\";
+                case '\b':
+                    return "\\b";
+                case '\t':
+                    return "\\t";
+                case '\n':
+                    return "\\n";
+                case '\f':
+                    return "\\f";
+                case '\r':
+                    return "\\r";
+                case '\\':
+                    return "\\\\";
                 default:
                     if (value.IsBmp)
                     {
@@ -126,10 +132,15 @@ namespace System.Text.Encodings.Web.Tests
                     else
                     {
                         Span<char> asUtf16 = stackalloc char[2];
-                        bool succeeded = value.TryEncodeToUtf16(asUtf16, out int utf16CodeUnitCount);
+                        bool succeeded = value.TryEncodeToUtf16(
+                            asUtf16,
+                            out int utf16CodeUnitCount
+                        );
                         Assert.True(succeeded);
                         Assert.Equal(2, utf16CodeUnitCount);
-                        return FormattableString.Invariant($"\\u{(uint)asUtf16[0]:X4}\\u{(uint)asUtf16[1]:X4}");
+                        return FormattableString.Invariant(
+                            $"\\u{(uint)asUtf16[0]:X4}\\u{(uint)asUtf16[1]:X4}"
+                        );
                     }
             }
         }
@@ -206,21 +217,30 @@ namespace System.Text.Encodings.Web.Tests
     public class JavaScriptEncoderRelaxedCommonTests : InboxEncoderCommonTestBase
     {
         public JavaScriptEncoderRelaxedCommonTests()
-           : base(JavaScriptEncoder.UnsafeRelaxedJsonEscaping, allowedChar: 'a', disallowedChar: '\"')
-        {
-        }
+            : base(
+                JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                allowedChar: 'a',
+                disallowedChar: '\"'
+            ) { }
 
         private protected override string GetExpectedEscapedRepresentation(Rune value)
         {
             switch (value.Value)
             {
-                case '\b': return "\\b";
-                case '\t': return "\\t";
-                case '\n': return "\\n";
-                case '\f': return "\\f";
-                case '\r': return "\\r";
-                case '\\': return "\\\\";
-                case '\"': return "\\\"";
+                case '\b':
+                    return "\\b";
+                case '\t':
+                    return "\\t";
+                case '\n':
+                    return "\\n";
+                case '\f':
+                    return "\\f";
+                case '\r':
+                    return "\\r";
+                case '\\':
+                    return "\\\\";
+                case '\"':
+                    return "\\\"";
                 default:
                     if (value.IsBmp)
                     {
@@ -229,10 +249,15 @@ namespace System.Text.Encodings.Web.Tests
                     else
                     {
                         Span<char> asUtf16 = stackalloc char[2];
-                        bool succeeded = value.TryEncodeToUtf16(asUtf16, out int utf16CodeUnitCount);
+                        bool succeeded = value.TryEncodeToUtf16(
+                            asUtf16,
+                            out int utf16CodeUnitCount
+                        );
                         Assert.True(succeeded);
                         Assert.Equal(2, utf16CodeUnitCount);
-                        return FormattableString.Invariant($"\\u{(uint)asUtf16[0]:X4}\\u{(uint)asUtf16[1]:X4}");
+                        return FormattableString.Invariant(
+                            $"\\u{(uint)asUtf16[0]:X4}\\u{(uint)asUtf16[1]:X4}"
+                        );
                     }
             }
         }
@@ -333,9 +358,7 @@ namespace System.Text.Encodings.Web.Tests
     public class UrlEncoderDefaultCommonTests : InboxEncoderCommonTestBase
     {
         public UrlEncoderDefaultCommonTests()
-          : base(UrlEncoder.Default, allowedChar: 'a', disallowedChar: '?')
-        {
-        }
+            : base(UrlEncoder.Default, allowedChar: 'a', disallowedChar: '?') { }
 
         private protected override string GetExpectedEscapedRepresentation(Rune value)
         {
@@ -443,25 +466,40 @@ namespace System.Text.Encodings.Web.Tests
         // the future, this could cause unit tests to fail, but we'll deal with that problem when (if?) the time comes.
         private const char BmpExtendedDisallowedChar = '\u2d2e';
 
-        protected InboxEncoderCommonTestBase(TextEncoder encoder, char allowedChar, char disallowedChar)
+        protected InboxEncoderCommonTestBase(
+            TextEncoder encoder,
+            char allowedChar,
+            char disallowedChar
+        )
         {
             Assert.NotNull(encoder);
             _encoder = encoder;
 
             Assert.True(allowedChar <= 0x7F, "Test setup failure: Allowed char should be ASCII.");
-            Assert.False(encoder.WillEncode(allowedChar), "Test setup failure: Encoder must say this character is allowed.");
+            Assert.False(
+                encoder.WillEncode(allowedChar),
+                "Test setup failure: Encoder must say this character is allowed."
+            );
             _allowedChar = allowedChar;
 
-            Assert.True(disallowedChar <= 0x7F, "Test setup failure: Disallowed char should be ASCII.");
-            Assert.True(encoder.WillEncode(disallowedChar), "Test setup failure: Encoder must say this character is disallowed.");
+            Assert.True(
+                disallowedChar <= 0x7F,
+                "Test setup failure: Disallowed char should be ASCII."
+            );
+            Assert.True(
+                encoder.WillEncode(disallowedChar),
+                "Test setup failure: Encoder must say this character is disallowed."
+            );
             _disallowedChar = disallowedChar;
         }
 
         [Fact]
-        public void GetIndexOfFirstCharacterToEncodeUtf16_AllDataValid()
-            => _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedValidCharsOnly(_allowedChar);
+        public void GetIndexOfFirstCharacterToEncodeUtf16_AllDataValid() =>
+            _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedValidCharsOnly(_allowedChar);
 
-        protected void _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedValidCharsOnly(char bmpAllowedChar)
+        protected void _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedValidCharsOnly(
+            char bmpAllowedChar
+        )
         {
             // Loop from 96 elements all the way down to 0 elements, which tests that we're
             // not overrunning our read buffers.
@@ -474,7 +512,10 @@ namespace System.Text.Encodings.Web.Tests
 
             for (int i = 96; i >= 0; i--)
             {
-                Assert.Equal(-1, _encoder.FindFirstCharacterToEncodeUtf16(span.Slice(span.Length - i)));
+                Assert.Equal(
+                    -1,
+                    _encoder.FindFirstCharacterToEncodeUtf16(span.Slice(span.Length - i))
+                );
             }
 
             // Also check from the beginning of the buffer just in case there's some alignment weirdness
@@ -490,10 +531,14 @@ namespace System.Text.Encodings.Web.Tests
         }
 
         [Fact]
-        public void GetIndexOfFirstCharacterToEncodeUtf16_SomeCharsNeedEscaping()
-            => _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedSomeCharsNeedEscaping(_allowedChar);
+        public void GetIndexOfFirstCharacterToEncodeUtf16_SomeCharsNeedEscaping() =>
+            _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedSomeCharsNeedEscaping(
+                _allowedChar
+            );
 
-        protected void _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedSomeCharsNeedEscaping(char bmpAllowedChar)
+        protected void _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedSomeCharsNeedEscaping(
+            char bmpAllowedChar
+        )
         {
             // Use a 31-element buffer since it will exercise all the different unrolled code paths.
 
@@ -552,7 +597,10 @@ namespace System.Text.Encodings.Web.Tests
 
             for (int i = 96; i >= 0; i--)
             {
-                Assert.Equal(-1, _encoder.FindFirstCharacterToEncodeUtf8(span.Slice(span.Length - i)));
+                Assert.Equal(
+                    -1,
+                    _encoder.FindFirstCharacterToEncodeUtf8(span.Slice(span.Length - i))
+                );
             }
 
             // Also check from the beginning of the buffer just in case there's some alignment weirdness
@@ -599,10 +647,17 @@ namespace System.Text.Encodings.Web.Tests
             }
         }
 
-        protected void _RunGetIndexOfFirstCharacterToEncodeUtf8_BmpExtendedAllValidChars(char bmpAllowedChar)
+        protected void _RunGetIndexOfFirstCharacterToEncodeUtf8_BmpExtendedAllValidChars(
+            char bmpAllowedChar
+        )
         {
             Span<byte> allowedCharAsUtf8 = stackalloc byte[3];
-            Assert.True(new Rune(bmpAllowedChar).TryEncodeToUtf8(allowedCharAsUtf8, out int allowedCharUtf8CodeUnitCount));
+            Assert.True(
+                new Rune(bmpAllowedChar).TryEncodeToUtf8(
+                    allowedCharAsUtf8,
+                    out int allowedCharUtf8CodeUnitCount
+                )
+            );
             allowedCharAsUtf8 = allowedCharAsUtf8.Slice(0, allowedCharUtf8CodeUnitCount);
 
             // Copy this character to the end of the buffer 12 times
@@ -622,16 +677,28 @@ namespace System.Text.Encodings.Web.Tests
 
             for (int i = 0; i < 12; i++)
             {
-                Assert.Equal(-1, _encoder.FindFirstCharacterToEncodeUtf8(span.Slice(allowedCharAsUtf8.Length * i)));
+                Assert.Equal(
+                    -1,
+                    _encoder.FindFirstCharacterToEncodeUtf8(
+                        span.Slice(allowedCharAsUtf8.Length * i)
+                    )
+                );
             }
         }
 
-        protected void _RunGetIndexOfFirstCharacterToEncodeUtf8_BmpExtendedSomeCharsNeedEncoding(char bmpAllowedChar)
+        protected void _RunGetIndexOfFirstCharacterToEncodeUtf8_BmpExtendedSomeCharsNeedEncoding(
+            char bmpAllowedChar
+        )
         {
             Assert.True(bmpAllowedChar >= 0x80, "Must be a non-ASCII char.");
 
             Span<byte> allowedCharAsUtf8 = stackalloc byte[3];
-            Assert.True(new Rune(bmpAllowedChar).TryEncodeToUtf8(allowedCharAsUtf8, out int allowedCharUtf8CodeUnitCount));
+            Assert.True(
+                new Rune(bmpAllowedChar).TryEncodeToUtf8(
+                    allowedCharAsUtf8,
+                    out int allowedCharUtf8CodeUnitCount
+                )
+            );
             allowedCharAsUtf8 = allowedCharAsUtf8.Slice(0, allowedCharUtf8CodeUnitCount);
 
             // Copy this character to the end of the buffer 12 times
@@ -654,12 +721,22 @@ namespace System.Text.Encodings.Web.Tests
             {
                 // First, corrupt the element by making it a standalone continuation byte.
                 span[span.Length - allowedCharAsUtf8.Length] = 0xBF;
-                Assert.Equal((11 - i) * allowedCharAsUtf8.Length, _encoder.FindFirstCharacterToEncodeUtf8(span.Slice(allowedCharAsUtf8.Length * i)));
+                Assert.Equal(
+                    (11 - i) * allowedCharAsUtf8.Length,
+                    _encoder.FindFirstCharacterToEncodeUtf8(
+                        span.Slice(allowedCharAsUtf8.Length * i)
+                    )
+                );
 
                 // Then, uncorrupt the element by making it a well-formed but never-allowed code point (U+009F is a never-allowed C1 control code point)
                 span[span.Length - allowedCharAsUtf8.Length] = 0xC2;
                 span[span.Length - allowedCharAsUtf8.Length + 1] = 0x9F;
-                Assert.Equal((11 - i) * allowedCharAsUtf8.Length, _encoder.FindFirstCharacterToEncodeUtf8(span.Slice(allowedCharAsUtf8.Length * i)));
+                Assert.Equal(
+                    (11 - i) * allowedCharAsUtf8.Length,
+                    _encoder.FindFirstCharacterToEncodeUtf8(
+                        span.Slice(allowedCharAsUtf8.Length * i)
+                    )
+                );
             }
         }
 
@@ -676,7 +753,12 @@ namespace System.Text.Encodings.Web.Tests
 
             fixed (char* pBuf = &MemoryMarshal.GetReference(destination))
             {
-                bool succeeded = _encoder.TryEncodeUnicodeScalar(_allowedChar, pBuf, destination.Length, out int numCharsWritten);
+                bool succeeded = _encoder.TryEncodeUnicodeScalar(
+                    _allowedChar,
+                    pBuf,
+                    destination.Length,
+                    out int numCharsWritten
+                );
                 Assert.True(succeeded);
                 Assert.Equal(1, numCharsWritten);
                 Assert.Equal(_allowedChar, destination[0]); // Should reflect char as-is
@@ -689,7 +771,12 @@ namespace System.Text.Encodings.Web.Tests
 
             fixed (char* pBuf = &MemoryMarshal.GetReference(destination))
             {
-                bool succeeded = _encoder.TryEncodeUnicodeScalar(_allowedChar, pBuf, destination.Length, out int numCharsWritten);
+                bool succeeded = _encoder.TryEncodeUnicodeScalar(
+                    _allowedChar,
+                    pBuf,
+                    destination.Length,
+                    out int numCharsWritten
+                );
                 Assert.True(succeeded);
                 Assert.Equal(1, numCharsWritten);
                 Assert.Equal(_allowedChar, destination[0]); // Should reflect char as-is
@@ -702,7 +789,12 @@ namespace System.Text.Encodings.Web.Tests
 
             fixed (char* pBuf = &MemoryMarshal.GetReference(destination)) // use MemoryMarshal so as to get a valid pointer
             {
-                bool succeeded = _encoder.TryEncodeUnicodeScalar(_allowedChar, pBuf, destination.Length, out int numCharsWritten);
+                bool succeeded = _encoder.TryEncodeUnicodeScalar(
+                    _allowedChar,
+                    pBuf,
+                    destination.Length,
+                    out int numCharsWritten
+                );
                 Assert.False(succeeded);
                 Assert.Equal(0, numCharsWritten);
             }
@@ -733,10 +825,18 @@ namespace System.Text.Encodings.Web.Tests
 
             fixed (char* pBuf = &MemoryMarshal.GetReference(destination))
             {
-                bool succeeded = _encoder.TryEncodeUnicodeScalar(value.Value, pBuf, destination.Length, out int numCharsWritten);
+                bool succeeded = _encoder.TryEncodeUnicodeScalar(
+                    value.Value,
+                    pBuf,
+                    destination.Length,
+                    out int numCharsWritten
+                );
                 Assert.True(succeeded);
                 Assert.Equal(expectedEscaping.Length, numCharsWritten);
-                Assert.Equal(expectedEscaping, destination.Slice(0, expectedEscaping.Length).ToString());
+                Assert.Equal(
+                    expectedEscaping,
+                    destination.Slice(0, expectedEscaping.Length).ToString()
+                );
             }
 
             // Then, try with enough space +0 in the destination buffer
@@ -746,7 +846,12 @@ namespace System.Text.Encodings.Web.Tests
 
             fixed (char* pBuf = &MemoryMarshal.GetReference(destination))
             {
-                bool succeeded = _encoder.TryEncodeUnicodeScalar(value.Value, pBuf, destination.Length, out int numCharsWritten);
+                bool succeeded = _encoder.TryEncodeUnicodeScalar(
+                    value.Value,
+                    pBuf,
+                    destination.Length,
+                    out int numCharsWritten
+                );
                 Assert.True(succeeded);
                 Assert.Equal(expectedEscaping.Length, numCharsWritten);
                 Assert.Equal(expectedEscaping, destination.ToString());
@@ -759,7 +864,12 @@ namespace System.Text.Encodings.Web.Tests
 
             fixed (char* pBuf = &MemoryMarshal.GetReference(destination)) // use MemoryMarshal so as to get a valid pointer
             {
-                bool succeeded = _encoder.TryEncodeUnicodeScalar(value.Value, pBuf, destination.Length, out int numCharsWritten);
+                bool succeeded = _encoder.TryEncodeUnicodeScalar(
+                    value.Value,
+                    pBuf,
+                    destination.Length,
+                    out int numCharsWritten
+                );
                 Assert.False(succeeded);
                 Assert.Equal(0, numCharsWritten);
             }
@@ -768,11 +878,18 @@ namespace System.Text.Encodings.Web.Tests
         protected void _RunEncodeUtf16_Battery(string[] inputs, string[] expectedOutputs)
         {
             string accumInput = _disallowedChar.ToString();
-            string accumExpectedOutput = GetExpectedEscapedRepresentation(new Rune(_disallowedChar));
+            string accumExpectedOutput = GetExpectedEscapedRepresentation(
+                new Rune(_disallowedChar)
+            );
 
             // First, make sure we handle the simple "can't escape a single char to the buffer" case
 
-            OperationStatus opStatus = _encoder.Encode(accumInput.AsSpan(), new char[accumExpectedOutput.Length - 1], out int charsConsumed, out int charsWritten);
+            OperationStatus opStatus = _encoder.Encode(
+                accumInput.AsSpan(),
+                new char[accumExpectedOutput.Length - 1],
+                out int charsConsumed,
+                out int charsWritten
+            );
             Assert.Equal(OperationStatus.DestinationTooSmall, opStatus);
             Assert.Equal(0, charsConsumed);
             Assert.Equal(0, charsWritten);
@@ -781,7 +898,12 @@ namespace System.Text.Encodings.Web.Tests
             // This skips the "find the first char to encode" fast path in TextEncoder.cs.
 
             char[] destination = new char[accumExpectedOutput.Length];
-            opStatus = _encoder.Encode(accumInput.AsSpan(), destination, out charsConsumed, out charsWritten);
+            opStatus = _encoder.Encode(
+                accumInput.AsSpan(),
+                destination,
+                out charsConsumed,
+                out charsWritten
+            );
             Assert.Equal(OperationStatus.Done, opStatus);
             Assert.Equal(1, charsConsumed);
             Assert.Equal(destination.Length, charsWritten);
@@ -800,7 +922,12 @@ namespace System.Text.Encodings.Web.Tests
                 // the very last thing we appended to the input.
 
                 destination = new char[accumExpectedOutput.Length + outputToAppend.Length - 1];
-                opStatus = _encoder.Encode(accumInput.AsSpan(), destination, out charsConsumed, out charsWritten);
+                opStatus = _encoder.Encode(
+                    accumInput.AsSpan(),
+                    destination,
+                    out charsConsumed,
+                    out charsWritten
+                );
                 Assert.Equal(OperationStatus.DestinationTooSmall, opStatus);
                 Assert.Equal(accumInput.Length - inputs[i].Length, charsConsumed); // should've consumed everything except the most recent appended data
                 Assert.Equal(accumExpectedOutput.Length, charsWritten); // should've escaped everything we consumed
@@ -810,7 +937,12 @@ namespace System.Text.Encodings.Web.Tests
 
                 accumExpectedOutput += outputToAppend;
                 destination = new char[accumExpectedOutput.Length];
-                opStatus = _encoder.Encode(accumInput.AsSpan(), destination, out charsConsumed, out charsWritten);
+                opStatus = _encoder.Encode(
+                    accumInput.AsSpan(),
+                    destination,
+                    out charsConsumed,
+                    out charsWritten
+                );
                 Assert.Equal(OperationStatus.Done, opStatus);
                 Assert.Equal(accumInput.Length, charsConsumed);
                 Assert.Equal(accumExpectedOutput.Length, charsWritten);
@@ -819,7 +951,12 @@ namespace System.Text.Encodings.Web.Tests
                 // Now test destination oversized - we should consume the entire buffer successfully.
 
                 destination = new char[accumExpectedOutput.Length + 1];
-                opStatus = _encoder.Encode(accumInput.AsSpan(), destination, out charsConsumed, out charsWritten);
+                opStatus = _encoder.Encode(
+                    accumInput.AsSpan(),
+                    destination,
+                    out charsConsumed,
+                    out charsWritten
+                );
                 Assert.Equal(OperationStatus.Done, opStatus);
                 Assert.Equal(accumInput.Length, charsConsumed);
                 Assert.Equal(accumExpectedOutput.Length, charsWritten);
@@ -832,11 +969,23 @@ namespace System.Text.Encodings.Web.Tests
                 if (EndsWithValidSurrogatePair(accumInput))
                 {
                     destination.AsSpan().Clear();
-                    opStatus = _encoder.Encode(accumInput.AsSpan(0, accumInput.Length - 1), destination, out charsConsumed, out charsWritten, isFinalBlock: false);
+                    opStatus = _encoder.Encode(
+                        accumInput.AsSpan(0, accumInput.Length - 1),
+                        destination,
+                        out charsConsumed,
+                        out charsWritten,
+                        isFinalBlock: false
+                    );
                     Assert.Equal(OperationStatus.NeedMoreData, opStatus);
                     Assert.Equal(accumInput.Length - 2, charsConsumed);
                     Assert.Equal(accumExpectedOutput.Length - outputToAppend.Length, charsWritten);
-                    Assert.Equal(accumExpectedOutput.Substring(0, accumExpectedOutput.Length - outputToAppend.Length), new string(destination, 0, charsWritten));
+                    Assert.Equal(
+                        accumExpectedOutput.Substring(
+                            0,
+                            accumExpectedOutput.Length - outputToAppend.Length
+                        ),
+                        new string(destination, 0, charsWritten)
+                    );
                 }
             }
         }
@@ -844,12 +993,21 @@ namespace System.Text.Encodings.Web.Tests
         protected void _RunEncodeUtf8_Battery(byte[][] inputs, string[] expectedOutputsAsUtf16)
         {
             byte[] accumInput = new byte[] { (byte)_disallowedChar };
-            byte[] accumExpectedOutput = Encoding.UTF8.GetBytes(GetExpectedEscapedRepresentation(new Rune(_disallowedChar)));
-            byte[][] expectedOutputs = expectedOutputsAsUtf16.Select(Encoding.UTF8.GetBytes).ToArray();
+            byte[] accumExpectedOutput = Encoding.UTF8.GetBytes(
+                GetExpectedEscapedRepresentation(new Rune(_disallowedChar))
+            );
+            byte[][] expectedOutputs = expectedOutputsAsUtf16
+                .Select(Encoding.UTF8.GetBytes)
+                .ToArray();
 
             // First, make sure we handle the simple "can't escape a single char to the buffer" case
 
-            OperationStatus opStatus = _encoder.EncodeUtf8(accumInput, new byte[accumExpectedOutput.Length - 1], out int bytesConsumed, out int bytesWritten);
+            OperationStatus opStatus = _encoder.EncodeUtf8(
+                accumInput,
+                new byte[accumExpectedOutput.Length - 1],
+                out int bytesConsumed,
+                out int bytesWritten
+            );
             Assert.Equal(OperationStatus.DestinationTooSmall, opStatus);
             Assert.Equal(0, bytesConsumed);
             Assert.Equal(0, bytesWritten);
@@ -858,7 +1016,12 @@ namespace System.Text.Encodings.Web.Tests
             // This skips the "find the first char to encode" fast path in TextEncoder.cs.
 
             byte[] destination = new byte[accumExpectedOutput.Length];
-            opStatus = _encoder.EncodeUtf8(accumInput, destination, out bytesConsumed, out bytesWritten);
+            opStatus = _encoder.EncodeUtf8(
+                accumInput,
+                destination,
+                out bytesConsumed,
+                out bytesWritten
+            );
             Assert.Equal(OperationStatus.Done, opStatus);
             Assert.Equal(1, bytesConsumed);
             Assert.Equal(destination.Length, bytesWritten);
@@ -877,7 +1040,12 @@ namespace System.Text.Encodings.Web.Tests
                 // the very last thing we appended to the input.
 
                 destination = new byte[accumExpectedOutput.Length + outputToAppend.Length - 1];
-                opStatus = _encoder.EncodeUtf8(accumInput, destination, out bytesConsumed, out bytesWritten);
+                opStatus = _encoder.EncodeUtf8(
+                    accumInput,
+                    destination,
+                    out bytesConsumed,
+                    out bytesWritten
+                );
                 Assert.Equal(OperationStatus.DestinationTooSmall, opStatus);
                 Assert.Equal(accumInput.Length - inputs[i].Length, bytesConsumed); // should've consumed everything except the most recent appended data
                 Assert.Equal(accumExpectedOutput.Length, bytesWritten); // should've escaped everything we consumed
@@ -887,7 +1055,12 @@ namespace System.Text.Encodings.Web.Tests
 
                 accumExpectedOutput = accumExpectedOutput.Concat(outputToAppend).ToArray();
                 destination = new byte[accumExpectedOutput.Length];
-                opStatus = _encoder.EncodeUtf8(accumInput, destination, out bytesConsumed, out bytesWritten);
+                opStatus = _encoder.EncodeUtf8(
+                    accumInput,
+                    destination,
+                    out bytesConsumed,
+                    out bytesWritten
+                );
                 Assert.Equal(OperationStatus.Done, opStatus);
                 Assert.Equal(accumInput.Length, bytesConsumed);
                 Assert.Equal(accumExpectedOutput.Length, bytesWritten);
@@ -896,7 +1069,12 @@ namespace System.Text.Encodings.Web.Tests
                 // Now test destination oversized - we should consume the entire buffer successfully.
 
                 destination = new byte[accumExpectedOutput.Length + 1];
-                opStatus = _encoder.EncodeUtf8(accumInput, destination, out bytesConsumed, out bytesWritten);
+                opStatus = _encoder.EncodeUtf8(
+                    accumInput,
+                    destination,
+                    out bytesConsumed,
+                    out bytesWritten
+                );
                 Assert.Equal(OperationStatus.Done, opStatus);
                 Assert.Equal(accumInput.Length, bytesConsumed);
                 Assert.Equal(accumExpectedOutput.Length, bytesWritten);
@@ -909,11 +1087,22 @@ namespace System.Text.Encodings.Web.Tests
                 if (EndsWithValidMultiByteUtf8Sequence(accumInput))
                 {
                     destination.AsSpan().Clear();
-                    opStatus = _encoder.EncodeUtf8(accumInput.AsSpan(0, accumInput.Length - 1), destination, out bytesConsumed, out bytesWritten, isFinalBlock: false);
+                    opStatus = _encoder.EncodeUtf8(
+                        accumInput.AsSpan(0, accumInput.Length - 1),
+                        destination,
+                        out bytesConsumed,
+                        out bytesWritten,
+                        isFinalBlock: false
+                    );
                     Assert.Equal(OperationStatus.NeedMoreData, opStatus);
                     Assert.Equal(accumInput.Length - inputs[i].Length, bytesConsumed);
                     Assert.Equal(accumExpectedOutput.Length - outputToAppend.Length, bytesWritten);
-                    Assert.Equal(accumExpectedOutput.AsSpan(0, accumExpectedOutput.Length - outputToAppend.Length).ToArray(), destination.AsSpan(0, bytesWritten).ToArray());
+                    Assert.Equal(
+                        accumExpectedOutput
+                            .AsSpan(0, accumExpectedOutput.Length - outputToAppend.Length)
+                            .ToArray(),
+                        destination.AsSpan(0, bytesWritten).ToArray()
+                    );
                 }
             }
         }
@@ -931,7 +1120,8 @@ namespace System.Text.Encodings.Web.Tests
             {
                 if (input[i] >= 0xC0)
                 {
-                    return Rune.DecodeFromUtf8(input.AsSpan(i), out _, out int bytesConsumed) == OperationStatus.Done
+                    return Rune.DecodeFromUtf8(input.AsSpan(i), out _, out int bytesConsumed)
+                            == OperationStatus.Done
                         && i + bytesConsumed == input.Length;
                 }
             }
@@ -944,7 +1134,7 @@ namespace System.Text.Encodings.Web.Tests
         private string GetExpectedEscapedRepresentation(string value)
         {
             StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < value.Length;)
+            for (int i = 0; i < value.Length; )
             {
                 Rune.DecodeFromUtf16(value.AsSpan(i), out Rune nextRune, out int charsConsumed);
                 builder.Append(GetExpectedEscapedRepresentation(nextRune));

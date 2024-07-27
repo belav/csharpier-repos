@@ -12,10 +12,7 @@ public class OAuthChallengePropertiesTest
     [Fact]
     public void ScopeProperty()
     {
-        var properties = new OAuthChallengeProperties
-        {
-            Scope = new string[] { "foo", "bar" }
-        };
+        var properties = new OAuthChallengeProperties { Scope = new string[] { "foo", "bar" } };
         Assert.Equal(new string[] { "foo", "bar" }, properties.Scope);
         Assert.Equal(new string[] { "foo", "bar" }, properties.Parameters["scope"]);
     }
@@ -45,7 +42,7 @@ public class OAuthChallengePropertiesTest
     {
         var properties = new OpenIdConnectChallengeProperties()
         {
-            MaxAge = TimeSpan.FromSeconds(200)
+            MaxAge = TimeSpan.FromSeconds(200),
         };
         Assert.Equal(TimeSpan.FromSeconds(200), properties.MaxAge);
     }
@@ -64,10 +61,7 @@ public class OAuthChallengePropertiesTest
     [Fact]
     public void OidcPrompt()
     {
-        var properties = new OpenIdConnectChallengeProperties()
-        {
-            Prompt = "login"
-        };
+        var properties = new OpenIdConnectChallengeProperties() { Prompt = "login" };
         Assert.Equal("login", properties.Prompt);
         Assert.Equal("login", properties.Parameters["prompt"]);
     }
@@ -132,10 +126,7 @@ public class OAuthChallengePropertiesTest
     [Fact]
     public void GoogleIncludeGrantedScopes()
     {
-        var properties = new GoogleChallengeProperties()
-        {
-            IncludeGrantedScopes = true
-        };
+        var properties = new GoogleChallengeProperties() { IncludeGrantedScopes = true };
         Assert.True(properties.IncludeGrantedScopes);
         Assert.Equal(true, properties.Parameters["include_granted_scopes"]);
 

@@ -43,16 +43,33 @@ public class FileLoggerTests : IDisposable
 
         await provider.IntervalControl.Pause;
 
-        logger.Log(_timestampOne, LogLevel.Information, 0, "Info message", null, (state, ex) => state);
-        logger.Log(_timestampOne.AddHours(1), LogLevel.Error, 0, "Error message", null, (state, ex) => state);
+        logger.Log(
+            _timestampOne,
+            LogLevel.Information,
+            0,
+            "Info message",
+            null,
+            (state, ex) => state
+        );
+        logger.Log(
+            _timestampOne.AddHours(1),
+            LogLevel.Error,
+            0,
+            "Error message",
+            null,
+            (state, ex) => state
+        );
 
         provider.IntervalControl.Resume();
         await provider.IntervalControl.Pause;
 
         Assert.Equal(
-            "2016-05-04 03:02:01.000 +00:00 [Information] Cat: Info message" + Environment.NewLine +
-            "2016-05-04 04:02:01.000 +00:00 [Error] Cat: Error message" + Environment.NewLine,
-            File.ReadAllText(Path.Combine(TempPath, "LogFile.20160504.txt")));
+            "2016-05-04 03:02:01.000 +00:00 [Information] Cat: Info message"
+                + Environment.NewLine
+                + "2016-05-04 04:02:01.000 +00:00 [Error] Cat: Error message"
+                + Environment.NewLine,
+            File.ReadAllText(Path.Combine(TempPath, "LogFile.20160504.txt"))
+        );
     }
 
     [Fact]
@@ -63,19 +80,35 @@ public class FileLoggerTests : IDisposable
 
         await provider.IntervalControl.Pause;
 
-        logger.Log(_timestampOne, LogLevel.Information, 0, "Info message", null, (state, ex) => state);
-        logger.Log(_timestampOne.AddDays(1), LogLevel.Error, 0, "Error message", null, (state, ex) => state);
+        logger.Log(
+            _timestampOne,
+            LogLevel.Information,
+            0,
+            "Info message",
+            null,
+            (state, ex) => state
+        );
+        logger.Log(
+            _timestampOne.AddDays(1),
+            LogLevel.Error,
+            0,
+            "Error message",
+            null,
+            (state, ex) => state
+        );
 
         provider.IntervalControl.Resume();
         await provider.IntervalControl.Pause;
 
         Assert.Equal(
             "2016-05-04 03:02:01.000 +00:00 [Information] Cat: Info message" + Environment.NewLine,
-            File.ReadAllText(Path.Combine(TempPath, "LogFile.20160504.txt")));
+            File.ReadAllText(Path.Combine(TempPath, "LogFile.20160504.txt"))
+        );
 
         Assert.Equal(
             "2016-05-05 03:02:01.000 +00:00 [Error] Cat: Error message" + Environment.NewLine,
-            File.ReadAllText(Path.Combine(TempPath, "LogFile.20160505.txt")));
+            File.ReadAllText(Path.Combine(TempPath, "LogFile.20160505.txt"))
+        );
     }
 
     [Fact]
@@ -92,8 +125,22 @@ public class FileLoggerTests : IDisposable
 
         for (int i = 0; i < 10; i++)
         {
-            logger.Log(timestamp, LogLevel.Information, 0, "Info message", null, (state, ex) => state);
-            logger.Log(timestamp.AddHours(1), LogLevel.Error, 0, "Error message", null, (state, ex) => state);
+            logger.Log(
+                timestamp,
+                LogLevel.Information,
+                0,
+                "Info message",
+                null,
+                (state, ex) => state
+            );
+            logger.Log(
+                timestamp.AddHours(1),
+                LogLevel.Error,
+                0,
+                "Error message",
+                null,
+                (state, ex) => state
+            );
 
             timestamp = timestamp.AddDays(1);
         }
@@ -108,13 +155,17 @@ public class FileLoggerTests : IDisposable
             .ToArray();
 
         Assert.Equal(6, actualFiles.Length);
-        Assert.Equal(new[] {
+        Assert.Equal(
+            new[]
+            {
                 "LogFile.20160509.txt",
                 "LogFile.20160510.txt",
                 "LogFile.20160511.txt",
                 "LogFile.20160512.txt",
                 "LogFile.20160513.txt",
-                "randomFile.txt"
-            }, actualFiles);
+                "randomFile.txt",
+            },
+            actualFiles
+        );
     }
 }

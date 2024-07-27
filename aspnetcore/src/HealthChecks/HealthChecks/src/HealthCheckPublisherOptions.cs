@@ -34,7 +34,10 @@ public sealed class HealthCheckPublisherOptions
         {
             if (value == System.Threading.Timeout.InfiniteTimeSpan)
             {
-                throw new ArgumentException($"The {nameof(Delay)} must not be infinite.", nameof(value));
+                throw new ArgumentException(
+                    $"The {nameof(Delay)} must not be infinite.",
+                    nameof(value)
+                );
             }
 
             _delay = value;
@@ -55,12 +58,18 @@ public sealed class HealthCheckPublisherOptions
         {
             if (value < TimeSpan.FromSeconds(1))
             {
-                throw new ArgumentException($"The {nameof(Period)} must be greater than or equal to one second.", nameof(value));
+                throw new ArgumentException(
+                    $"The {nameof(Period)} must be greater than or equal to one second.",
+                    nameof(value)
+                );
             }
 
             if (value == System.Threading.Timeout.InfiniteTimeSpan)
             {
-                throw new ArgumentException($"The {nameof(Period)} must not be infinite.", nameof(value));
+                throw new ArgumentException(
+                    $"The {nameof(Period)} must not be infinite.",
+                    nameof(value)
+                );
             }
 
             _period = value;

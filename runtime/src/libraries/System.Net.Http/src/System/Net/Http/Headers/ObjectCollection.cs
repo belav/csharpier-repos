@@ -7,7 +7,8 @@ using System.Diagnostics;
 
 namespace System.Net.Http.Headers
 {
-    internal sealed class UnvalidatedObjectCollection<T> : ObjectCollection<T> where T : class
+    internal sealed class UnvalidatedObjectCollection<T> : ObjectCollection<T>
+        where T : class
     {
         public override void Validate(T item)
         {
@@ -18,12 +19,14 @@ namespace System.Net.Http.Headers
     /// <summary>An <see cref="ICollection{T}"/> list that prohibits null elements and that is optimized for a small number of elements.</summary>
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(ObjectCollection<>.DebugView))]
-    internal abstract class ObjectCollection<T> : ICollection<T> where T : class
+    internal abstract class ObjectCollection<T> : ICollection<T>
+        where T : class
     {
         private const int DefaultSize = 4;
 
         /// <summary>null, a T, or a T[].</summary>
         internal object? _items;
+
         /// <summary>Number of elements stored in the collection.</summary>
         internal int _size;
 
@@ -88,9 +91,9 @@ namespace System.Net.Http.Headers
         }
 
         public bool Contains(T item) =>
-            _size <= 0 ? false :
-            _items is T o ? o.Equals(item) :
-            _items is T[] items && Array.IndexOf(items, item, 0, _size) != -1;
+            _size <= 0 ? false
+            : _items is T o ? o.Equals(item)
+            : _items is T[] items && Array.IndexOf(items, item, 0, _size) != -1;
 
         public void CopyTo(T[] array, int arrayIndex)
         {
@@ -144,7 +147,9 @@ namespace System.Net.Http.Headers
         }
 
         public Enumerator GetEnumerator() => new Enumerator(this);
+
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public struct Enumerator : IEnumerator<T>

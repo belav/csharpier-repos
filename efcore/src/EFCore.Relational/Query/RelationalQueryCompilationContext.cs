@@ -23,11 +23,14 @@ public class RelationalQueryCompilationContext : QueryCompilationContext
     public RelationalQueryCompilationContext(
         QueryCompilationContextDependencies dependencies,
         RelationalQueryCompilationContextDependencies relationalDependencies,
-        bool async)
+        bool async
+    )
         : base(dependencies, async)
     {
         RelationalDependencies = relationalDependencies;
-        QuerySplittingBehavior = RelationalOptionsExtension.Extract(ContextOptions).QuerySplittingBehavior;
+        QuerySplittingBehavior = RelationalOptionsExtension
+            .Extract(ContextOptions)
+            .QuerySplittingBehavior;
     }
 
     /// <summary>

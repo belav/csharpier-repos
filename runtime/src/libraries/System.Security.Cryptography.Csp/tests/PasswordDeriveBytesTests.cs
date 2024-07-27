@@ -30,7 +30,9 @@ namespace System.Security.Cryptography.DeriveBytesTests
         [Fact]
         public static void Ctor_NullPasswordString()
         {
-            Assert.Throws<ArgumentNullException>(() => new PasswordDeriveBytes((string)null, s_testSalt));
+            Assert.Throws<ArgumentNullException>(
+                () => new PasswordDeriveBytes((string)null, s_testSalt)
+            );
         }
 
         [Fact]
@@ -69,15 +71,23 @@ namespace System.Security.Cryptography.DeriveBytesTests
         [Fact]
         public static void Ctor_TooFewIterations()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", 0));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", 0)
+            );
         }
 
         [Fact]
         public static void Ctor_NegativeIterations()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", int.MinValue));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", int.MinValue / 2));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", int.MinValue)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", int.MinValue / 2)
+            );
         }
 
         [Fact]
@@ -101,10 +111,38 @@ namespace System.Security.Cryptography.DeriveBytesTests
         [Fact]
         public static void Ctor_CspParameters()
         {
-            using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt, new CspParameters())) { }
-            using (var deriveBytes = new PasswordDeriveBytes(string.Empty, s_testSalt, new CspParameters())) { }
-            using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", 100, new CspParameters())) { }
-            using (var deriveBytes = new PasswordDeriveBytes(string.Empty, s_testSalt, "SHA1", 100, new CspParameters())) { }
+            using (
+                var deriveBytes = new PasswordDeriveBytes(
+                    TestPassword,
+                    s_testSalt,
+                    new CspParameters()
+                )
+            ) { }
+            using (
+                var deriveBytes = new PasswordDeriveBytes(
+                    string.Empty,
+                    s_testSalt,
+                    new CspParameters()
+                )
+            ) { }
+            using (
+                var deriveBytes = new PasswordDeriveBytes(
+                    TestPassword,
+                    s_testSalt,
+                    "SHA1",
+                    100,
+                    new CspParameters()
+                )
+            ) { }
+            using (
+                var deriveBytes = new PasswordDeriveBytes(
+                    string.Empty,
+                    s_testSalt,
+                    "SHA1",
+                    100,
+                    new CspParameters()
+                )
+            ) { }
         }
 
         [Fact]
@@ -112,8 +150,24 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt, null)) { }
             using (var deriveBytes = new PasswordDeriveBytes(string.Empty, s_testSalt, null)) { }
-            using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", 100, null)) { }
-            using (var deriveBytes = new PasswordDeriveBytes(string.Empty, s_testSalt, "SHA1", 100, null)) { }
+            using (
+                var deriveBytes = new PasswordDeriveBytes(
+                    TestPassword,
+                    s_testSalt,
+                    "SHA1",
+                    100,
+                    null
+                )
+            ) { }
+            using (
+                var deriveBytes = new PasswordDeriveBytes(
+                    string.Empty,
+                    s_testSalt,
+                    "SHA1",
+                    100,
+                    null
+                )
+            ) { }
         }
 
         [Fact]
@@ -121,7 +175,14 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             byte[] saltIn = (byte[])s_testSalt.Clone();
 
-            using (var deriveBytes = new PasswordDeriveBytes(TestPassword, saltIn, "SHA1", DefaultIterationCount))
+            using (
+                var deriveBytes = new PasswordDeriveBytes(
+                    TestPassword,
+                    saltIn,
+                    "SHA1",
+                    DefaultIterationCount
+                )
+            )
             {
                 byte[] saltOut = deriveBytes.Salt;
 
@@ -144,7 +205,14 @@ namespace System.Security.Cryptography.DeriveBytesTests
             byte[] first;
             byte[] second;
 
-            using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt, "SHA1", DefaultIterationCount))
+            using (
+                var deriveBytes = new PasswordDeriveBytes(
+                    TestPassword,
+                    s_testSalt,
+                    "SHA1",
+                    DefaultIterationCount
+                )
+            )
             {
                 first = deriveBytes.Salt;
                 second = deriveBytes.Salt;
@@ -266,10 +334,18 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 // in GetBytes(); that issue is tested in GetBytes_StreamLike_Bug_Compat.
 
                 // Request 20 'extra' bytes in one call
-                byte[] secondSecondHalf = deriveBytes.GetBytes(first.Length - secondFirstHalf.Length);
+                byte[] secondSecondHalf = deriveBytes.GetBytes(
+                    first.Length - secondFirstHalf.Length
+                );
 
                 Buffer.BlockCopy(secondFirstHalf, 0, second, 0, secondFirstHalf.Length);
-                Buffer.BlockCopy(secondSecondHalf, 0, second, secondFirstHalf.Length, secondSecondHalf.Length);
+                Buffer.BlockCopy(
+                    secondSecondHalf,
+                    0,
+                    second,
+                    secondFirstHalf.Length,
+                    secondSecondHalf.Length
+                );
             }
 
             Assert.Equal(first, second);
@@ -340,10 +416,16 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 TestPassword,
                 s_testSalt,
                 DefaultIterationCount,
-                ByteUtils.HexToByteArray("F8D88E9DAFC828DA2400F5144271C2F630A1C061C654FC9DE2E7900E121461B9"));
+                ByteUtils.HexToByteArray(
+                    "F8D88E9DAFC828DA2400F5144271C2F630A1C061C654FC9DE2E7900E121461B9"
+                )
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotBuiltWithAggressiveTrimming)
+        )]
         public static void GetBytes_KnownValues_SHA256_40()
         {
             TestKnownValue_GetBytes(
@@ -351,7 +433,10 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 TestPassword,
                 s_testSalt,
                 DefaultIterationCount,
-                ByteUtils.HexToByteArray("3774A17468276057717A90C25B72915921D8F8C046F7868868DBB99BB4C4031CADE9E26BE77BEA39"));
+                ByteUtils.HexToByteArray(
+                    "3774A17468276057717A90C25B72915921D8F8C046F7868868DBB99BB4C4031CADE9E26BE77BEA39"
+                )
+            );
         }
 
         [Fact]
@@ -362,7 +447,10 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 TestPassword,
                 s_testSalt,
                 DefaultIterationCount,
-                ByteUtils.HexToByteArray("12F2497EC3EB78B0EA32AABFD8B9515FBC800BEEB6316A4DDF4EA62518341488A116DA3BBC26C685"));
+                ByteUtils.HexToByteArray(
+                    "12F2497EC3EB78B0EA32AABFD8B9515FBC800BEEB6316A4DDF4EA62518341488A116DA3BBC26C685"
+                )
+            );
         }
 
         [Fact]
@@ -373,7 +461,10 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 TestPassword,
                 s_testSalt,
                 DefaultIterationCount + 1,
-                ByteUtils.HexToByteArray("FB6199E4D9BB017D2F3AF6964F3299971607C6B984934A9E43140631957429160C33A6630EF12E31"));
+                ByteUtils.HexToByteArray(
+                    "FB6199E4D9BB017D2F3AF6964F3299971607C6B984934A9E43140631957429160C33A6630EF12E31"
+                )
+            );
         }
 
         [Fact]
@@ -384,7 +475,10 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 TestPassword,
                 s_testSaltB,
                 DefaultIterationCount,
-                ByteUtils.HexToByteArray("DCA4851AB3C9960CF387E64DE7A1B2E09616BEA6A4666AAFAC31F1670F23530E38BD4BF4D9248A08"));
+                ByteUtils.HexToByteArray(
+                    "DCA4851AB3C9960CF387E64DE7A1B2E09616BEA6A4666AAFAC31F1670F23530E38BD4BF4D9248A08"
+                )
+            );
         }
 
         [Fact]
@@ -395,7 +489,10 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 TestPasswordB,
                 s_testSalt,
                 DefaultIterationCount,
-                ByteUtils.HexToByteArray("1DCA2A3405E93D9E3F7CD10653444F2FD93F5BE32C4B1BEDDF94D0D67461CBE86B5BDFEB32071E96"));
+                ByteUtils.HexToByteArray(
+                    "1DCA2A3405E93D9E3F7CD10653444F2FD93F5BE32C4B1BEDDF94D0D67461CBE86B5BDFEB32071E96"
+                )
+            );
         }
 
         [Fact]
@@ -408,7 +505,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 "TripleDES",
                 192,
                 s_testSalt,
-                ByteUtils.HexToByteArray("97628A641949D99DCED35DB0ABCE20F21FF4DA9B46E00BCE"));
+                ByteUtils.HexToByteArray("97628A641949D99DCED35DB0ABCE20F21FF4DA9B46E00BCE")
+            );
 
             // Verify key is valid
             using (var alg = new TripleDESCryptoServiceProvider())
@@ -418,13 +516,16 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 alg.Padding = PaddingMode.None;
                 alg.Mode = CipherMode.CBC;
 
-                byte[] plainText = "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
+                byte[] plainText =
+                    "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
                 byte[] cipher = alg.Encrypt(plainText);
-                byte[] expectedCipher = "9DC863445642B88AC46B3B107CB5A0ACC1596A176962EE8F".HexToByteArray();
+                byte[] expectedCipher =
+                    "9DC863445642B88AC46B3B107CB5A0ACC1596A176962EE8F".HexToByteArray();
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted = "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
+                byte[] expectedDecrypted =
+                    "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
@@ -439,7 +540,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 "RC2",
                 128,
                 s_testSalt,
-                ByteUtils.HexToByteArray("B0695D8D98F5844B9650A9F68EFF105B"));
+                ByteUtils.HexToByteArray("B0695D8D98F5844B9650A9F68EFF105B")
+            );
 
             TestKnownValue_CryptDeriveKey(
                 HashAlgorithmName.SHA256,
@@ -447,7 +549,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 "RC2",
                 128,
                 s_testSalt,
-                ByteUtils.HexToByteArray("CF4A1CA60093E71D6B740DBB962B3C66"));
+                ByteUtils.HexToByteArray("CF4A1CA60093E71D6B740DBB962B3C66")
+            );
 
             TestKnownValue_CryptDeriveKey(
                 HashAlgorithmName.MD5,
@@ -455,7 +558,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 "RC2",
                 128,
                 s_testSalt,
-                ByteUtils.HexToByteArray("84F4B6854CDF896A86FB493B852B6E1F"));
+                ByteUtils.HexToByteArray("84F4B6854CDF896A86FB493B852B6E1F")
+            );
         }
 
         [Fact]
@@ -468,7 +572,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 "RC2",
                 128,
                 null, // Salt is not used here so we should get same key value
-                ByteUtils.HexToByteArray("B0695D8D98F5844B9650A9F68EFF105B"));
+                ByteUtils.HexToByteArray("B0695D8D98F5844B9650A9F68EFF105B")
+            );
         }
 
         [Fact]
@@ -481,7 +586,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 "DES",
                 64,
                 s_testSalt,
-                ByteUtils.HexToByteArray("B0685D8C98F4854A"));
+                ByteUtils.HexToByteArray("B0685D8C98F4854A")
+            );
         }
 
         [Fact]
@@ -490,8 +596,12 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt))
             {
-                Assert.ThrowsAny<CryptographicException>(() => deriveBytes.CryptDeriveKey("RC2", "SHA1", 127, s_testSalt));
-                Assert.ThrowsAny<CryptographicException>(() => deriveBytes.CryptDeriveKey("RC2", "SHA1", 129, s_testSalt));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => deriveBytes.CryptDeriveKey("RC2", "SHA1", 127, s_testSalt)
+                );
+                Assert.ThrowsAny<CryptographicException>(
+                    () => deriveBytes.CryptDeriveKey("RC2", "SHA1", 129, s_testSalt)
+                );
             }
         }
 
@@ -501,7 +611,9 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt))
             {
-                Assert.Throws<CryptographicException>(() => deriveBytes.CryptDeriveKey("BADALG", "SHA1", 128, s_testSalt));
+                Assert.Throws<CryptographicException>(
+                    () => deriveBytes.CryptDeriveKey("BADALG", "SHA1", 128, s_testSalt)
+                );
             }
         }
 
@@ -511,7 +623,9 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt))
             {
-                Assert.Throws<CryptographicException>(() => deriveBytes.CryptDeriveKey("RC2", "BADALG", 128, s_testSalt));
+                Assert.Throws<CryptographicException>(
+                    () => deriveBytes.CryptDeriveKey("RC2", "BADALG", 128, s_testSalt)
+                );
             }
         }
 
@@ -521,8 +635,12 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt))
             {
-                Assert.Throws<CryptographicException>(() => deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, null));
-                Assert.Throws<CryptographicException>(() => deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, new byte[1]));
+                Assert.Throws<CryptographicException>(
+                    () => deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, null)
+                );
+                Assert.Throws<CryptographicException>(
+                    () => deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, new byte[1])
+                );
             }
         }
 
@@ -532,11 +650,20 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             using (var deriveBytes = new PasswordDeriveBytes(TestPassword, s_testSalt))
             {
-                Assert.Throws<PlatformNotSupportedException>(() => (deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, null)));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => (deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, null))
+                );
             }
         }
 
-        private static byte[] TestKnownValue_CryptDeriveKey(HashAlgorithmName hashName, string password, string alg, int keySize, byte[] salt, byte[] expected)
+        private static byte[] TestKnownValue_CryptDeriveKey(
+            HashAlgorithmName hashName,
+            string password,
+            string alg,
+            int keySize,
+            byte[] salt,
+            byte[] expected
+        )
         {
             byte[] output;
             byte[] iv = new byte[8];
@@ -554,11 +681,24 @@ namespace System.Security.Cryptography.DeriveBytesTests
             return output;
         }
 
-        private static void TestKnownValue_GetBytes(HashAlgorithmName hashName, string password, byte[] salt, int iterationCount, byte[] expected)
+        private static void TestKnownValue_GetBytes(
+            HashAlgorithmName hashName,
+            string password,
+            byte[] salt,
+            int iterationCount,
+            byte[] expected
+        )
         {
             byte[] output;
 
-            using (var deriveBytes = new PasswordDeriveBytes(password, salt, hashName.Name, iterationCount))
+            using (
+                var deriveBytes = new PasswordDeriveBytes(
+                    password,
+                    salt,
+                    hashName.Name,
+                    iterationCount
+                )
+            )
             {
                 output = deriveBytes.GetBytes(expected.Length);
             }

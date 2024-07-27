@@ -69,11 +69,14 @@ namespace System.Xml.Serialization
                 {
                     _schemaSet = new XmlSchemaSet();
                     _schemaSet.XmlResolver = null;
-                    _schemaSet.ValidationEventHandler += new ValidationEventHandler(IgnoreCompileErrors);
+                    _schemaSet.ValidationEventHandler += new ValidationEventHandler(
+                        IgnoreCompileErrors
+                    );
                 }
                 return _schemaSet;
             }
         }
+
         internal int Add(XmlSchema schema, bool delay)
         {
             if (delay)
@@ -170,7 +173,8 @@ namespace System.Xml.Serialization
 
         private void AddName(XmlSchema schema)
         {
-            if (_isCompiled) throw new InvalidOperationException(SR.XmlSchemaCompiled);
+            if (_isCompiled)
+                throw new InvalidOperationException(SR.XmlSchemaCompiled);
             if (SchemaSet.Contains(schema))
                 SchemaSet.Reprocess(schema);
             else
@@ -210,6 +214,7 @@ namespace System.Xml.Serialization
         {
             return Find(name, type, true);
         }
+
         internal object? Find(XmlQualifiedName name, Type type, bool checkCache)
         {
             if (!IsCompiled)
@@ -220,7 +225,8 @@ namespace System.Xml.Serialization
                 }
             }
             IList values = (IList)SchemaSet.Schemas(name.Namespace);
-            if (values == null) return null;
+            if (values == null)
+                return null;
 
             foreach (XmlSchema schema in values)
             {
@@ -259,7 +265,12 @@ namespace System.Xml.Serialization
                 else
                 {
                     // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
-                    throw new InvalidOperationException(SR.Format(SR.XmlInternalErrorDetails, "XmlSchemas.Find: Invalid object type " + type.FullName));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.XmlInternalErrorDetails,
+                            "XmlSchemas.Find: Invalid object type " + type.FullName
+                        )
+                    );
                 }
 #endif
 
@@ -285,7 +296,11 @@ namespace System.Xml.Serialization
                 try
                 {
                     XmlNameTable nameTable = new System.Xml.NameTable();
-                    Preprocessor prep = new Preprocessor(nameTable, new SchemaNames(nameTable), null);
+                    Preprocessor prep = new Preprocessor(
+                        nameTable,
+                        new SchemaNames(nameTable),
+                        null
+                    );
                     prep.SchemaLocations = new Hashtable();
                     prep.Execute(schema, schema.TargetNamespace, false);
                 }
@@ -306,10 +321,14 @@ namespace System.Xml.Serialization
                     {
                         foreach (XmlAttribute a in e.UnhandledAttributes)
                         {
-                            if (a.LocalName == "IsDataSet" && a.NamespaceURI == "urn:schemas-microsoft-com:xml-msdata")
+                            if (
+                                a.LocalName == "IsDataSet"
+                                && a.NamespaceURI == "urn:schemas-microsoft-com:xml-msdata"
+                            )
                             {
                                 // currently the msdata:IsDataSet uses its own format for the boolean values
-                                if (a.Value == "True" || a.Value == "true" || a.Value == "1") return true;
+                                if (a.Value == "True" || a.Value == "true" || a.Value == "1")
+                                    return true;
                             }
                         }
                     }
@@ -390,7 +409,13 @@ namespace System.Xml.Serialization
                         // we do not process includes or redefines by the schemaLocation
                         if (external.SchemaLocation != null)
                         {
-                            throw new InvalidOperationException(SR.Format(SR.XmlSchemaIncludeLocation, this.GetType().Name, external.SchemaLocation));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlSchemaIncludeLocation,
+                                    this.GetType().Name,
+                                    external.SchemaLocation
+                                )
+                            );
                         }
                     }
                     else
@@ -412,7 +437,9 @@ namespace System.Xml.Serialization
                 {
                     if (!Cache.Match(dest, o, _shareTypes))
                     {
-                        throw new InvalidOperationException(MergeFailedMessage(o, dest, schema.TargetNamespace));
+                        throw new InvalidOperationException(
+                            MergeFailedMessage(o, dest, schema.TargetNamespace)
+                        );
                     }
                     matchedItems[i] = true;
                     count++;
@@ -504,11 +531,23 @@ namespace System.Xml.Serialization
             string? item;
             if (o is XmlSchemaNotation)
             {
-                item = SR.Format(SR.XmlSchemaNamedItem, ns, "notation", ((XmlSchemaNotation)o).Name, details);
+                item = SR.Format(
+                    SR.XmlSchemaNamedItem,
+                    ns,
+                    "notation",
+                    ((XmlSchemaNotation)o).Name,
+                    details
+                );
             }
             else if (o is XmlSchemaGroup)
             {
-                item = SR.Format(SR.XmlSchemaNamedItem, ns, "group", ((XmlSchemaGroup)o).Name, details);
+                item = SR.Format(
+                    SR.XmlSchemaNamedItem,
+                    ns,
+                    "group",
+                    ((XmlSchemaGroup)o).Name,
+                    details
+                );
             }
             else if (o is XmlSchemaElement e)
             {
@@ -516,7 +555,12 @@ namespace System.Xml.Serialization
                 {
                     XmlQualifiedName parentName = XmlSchemas.GetParentName(o);
                     // Element reference '{0}' declared in schema type '{1}' from namespace '{2}'
-                    item = SR.Format(SR.XmlSchemaElementReference, e.RefName.ToString(), parentName.Name, parentName.Namespace);
+                    item = SR.Format(
+                        SR.XmlSchemaElementReference,
+                        e.RefName.ToString(),
+                        parentName.Name,
+                        parentName.Namespace
+                    );
                 }
                 else
                 {
@@ -525,11 +569,23 @@ namespace System.Xml.Serialization
             }
             else if (o is XmlSchemaType)
             {
-                item = SR.Format(SR.XmlSchemaNamedItem, ns, o.GetType() == typeof(XmlSchemaSimpleType) ? "simpleType" : "complexType", ((XmlSchemaType)o).Name, null);
+                item = SR.Format(
+                    SR.XmlSchemaNamedItem,
+                    ns,
+                    o.GetType() == typeof(XmlSchemaSimpleType) ? "simpleType" : "complexType",
+                    ((XmlSchemaType)o).Name,
+                    null
+                );
             }
             else if (o is XmlSchemaAttributeGroup)
             {
-                item = SR.Format(SR.XmlSchemaNamedItem, ns, "attributeGroup", ((XmlSchemaAttributeGroup)o).Name, details);
+                item = SR.Format(
+                    SR.XmlSchemaNamedItem,
+                    ns,
+                    "attributeGroup",
+                    ((XmlSchemaAttributeGroup)o).Name,
+                    details
+                );
             }
             else if (o is XmlSchemaAttribute a)
             {
@@ -537,7 +593,12 @@ namespace System.Xml.Serialization
                 {
                     XmlQualifiedName parentName = XmlSchemas.GetParentName(o);
                     // Attribure reference '{0}' declared in schema type '{1}' from namespace '{2}'
-                    return SR.Format(SR.XmlSchemaAttributeReference, a.RefName.ToString(), parentName.Name, parentName.Namespace);
+                    return SR.Format(
+                        SR.XmlSchemaAttributeReference,
+                        a.RefName.ToString(),
+                        parentName.Name,
+                        parentName.Namespace
+                    );
                 }
                 else
                 {
@@ -548,11 +609,20 @@ namespace System.Xml.Serialization
             {
                 XmlQualifiedName parentName = XmlSchemas.GetParentName(o);
                 // Check content definition of schema type '{0}' from namespace '{1}'. {2}
-                item = SR.Format(SR.XmlSchemaContentDef, parentName.Name, parentName.Namespace, null);
+                item = SR.Format(
+                    SR.XmlSchemaContentDef,
+                    parentName.Name,
+                    parentName.Namespace,
+                    null
+                );
             }
             else if (o is XmlSchemaExternal)
             {
-                string itemType = o is XmlSchemaImport ? "import" : o is XmlSchemaInclude ? "include" : o is XmlSchemaRedefine ? "redefine" : o.GetType().Name;
+                string itemType =
+                    o is XmlSchemaImport ? "import"
+                    : o is XmlSchemaInclude ? "include"
+                    : o is XmlSchemaRedefine ? "redefine"
+                    : o.GetType().Name;
                 item = SR.Format(SR.XmlSchemaItem, ns, itemType, details);
             }
             else if (o is XmlSchema)
@@ -583,7 +653,11 @@ namespace System.Xml.Serialization
         }
 
         [RequiresUnreferencedCode("calls Dump")]
-        private static string MergeFailedMessage(XmlSchemaObject src, XmlSchemaObject dest, string? ns)
+        private static string MergeFailedMessage(
+            XmlSchemaObject src,
+            XmlSchemaObject dest,
+            string? ns
+        )
         {
             string err = SR.Format(SR.XmlSerializableMergeItem, ns, GetSchemaItem(src, ns, null));
             err += $"{Environment.NewLine}{Dump(src)}{Environment.NewLine}{Dump(dest)}";
@@ -667,7 +741,11 @@ namespace System.Xml.Serialization
                 try
                 {
                     XmlNameTable nameTable = new System.Xml.NameTable();
-                    Preprocessor prep = new Preprocessor(nameTable, new SchemaNames(nameTable), null);
+                    Preprocessor prep = new Preprocessor(
+                        nameTable,
+                        new SchemaNames(nameTable),
+                        null
+                    );
                     prep.XmlResolver = null;
                     prep.SchemaLocations = new Hashtable();
                     prep.ChameleonSchemas = new Hashtable();
@@ -683,12 +761,18 @@ namespace System.Xml.Serialization
             }
         }
 
-        internal static Exception CreateValidationException(XmlSchemaException exception, string message)
+        internal static Exception CreateValidationException(
+            XmlSchemaException exception,
+            string message
+        )
         {
             XmlSchemaObject? source = exception.SourceSchemaObject;
             if (exception.LineNumber == 0 && exception.LinePosition == 0)
             {
-                throw new InvalidOperationException(GetSchemaItem(source, null, message), exception);
+                throw new InvalidOperationException(
+                    GetSchemaItem(source, null, message),
+                    exception
+                );
             }
             else
             {
@@ -704,7 +788,16 @@ namespace System.Xml.Serialization
                         ns = ((XmlSchema)source).TargetNamespace;
                     }
                 }
-                throw new InvalidOperationException(SR.Format(SR.XmlSchemaSyntaxErrorDetails, ns, message, exception.LineNumber, exception.LinePosition), exception);
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.XmlSchemaSyntaxErrorDetails,
+                        ns,
+                        message,
+                        exception.LineNumber,
+                        exception.LinePosition
+                    ),
+                    exception
+                );
             }
         }
 
@@ -759,7 +852,8 @@ namespace System.Xml.Serialization
             return References.Contains(parent);
         }
 
-        internal const string xmlSchema = @"<?xml version='1.0' encoding='UTF-8' ?>
+        internal const string xmlSchema =
+            @"<?xml version='1.0' encoding='UTF-8' ?>
 <xs:schema targetNamespace='http://www.w3.org/XML/1998/namespace' xmlns:xs='http://www.w3.org/2001/XMLSchema' xml:lang='en'>
  <xs:attribute name='lang' type='xs:language'/>
  <xs:attribute name='space'>
@@ -793,9 +887,7 @@ namespace System.Xml.Serialization
             _end = list.Count - 1;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public bool MoveNext()
         {

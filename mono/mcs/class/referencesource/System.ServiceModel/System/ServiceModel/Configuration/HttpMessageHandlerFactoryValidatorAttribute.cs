@@ -12,10 +12,7 @@ namespace System.ServiceModel.Configuration
     {
         public override ConfigurationValidatorBase ValidatorInstance
         {
-            get
-            {
-                return new HttpMessageHandlerFactoryValidator();
-            }
+            get { return new HttpMessageHandlerFactoryValidator(); }
         }
     }
 }

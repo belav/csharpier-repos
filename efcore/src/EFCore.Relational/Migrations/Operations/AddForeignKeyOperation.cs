@@ -77,7 +77,7 @@ public class AddForeignKeyOperation : MigrationOperation, ITableMigrationOperati
             PrincipalSchema = foreignKey.PrincipalTable.Schema,
             PrincipalTable = foreignKey.PrincipalTable.Name,
             PrincipalColumns = foreignKey.PrincipalColumns.Select(c => c.Name).ToArray(),
-            OnDelete = foreignKey.OnDeleteAction
+            OnDelete = foreignKey.OnDeleteAction,
         };
         operation.AddAnnotations(foreignKey.GetAnnotations());
 

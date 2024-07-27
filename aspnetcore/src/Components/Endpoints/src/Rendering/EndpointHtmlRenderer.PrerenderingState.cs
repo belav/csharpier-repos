@@ -20,9 +20,12 @@ internal partial class EndpointHtmlRenderer
     {
         SetHttpContext(httpContext);
 
-        var manager = _httpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager =
+            _httpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
 
-        var renderModesMetadata = httpContext.GetEndpoint()?.Metadata.GetMetadata<ConfiguredRenderModesMetadata>();
+        var renderModesMetadata = httpContext
+            .GetEndpoint()
+            ?.Metadata.GetMetadata<ConfiguredRenderModesMetadata>();
 
         IPersistentComponentStateStore? store = null;
 
@@ -41,7 +44,10 @@ internal partial class EndpointHtmlRenderer
             {
                 store = renderModesMetadata.ConfiguredRenderModes[0] switch
                 {
-                    InteractiveServerRenderMode => new ProtectedPrerenderComponentApplicationStore(_httpContext.RequestServices.GetRequiredService<IDataProtectionProvider>()),
+                    InteractiveServerRenderMode
+                        => new ProtectedPrerenderComponentApplicationStore(
+                            _httpContext.RequestServices.GetRequiredService<IDataProtectionProvider>()
+                        ),
                     InteractiveWebAssemblyRenderMode => new PrerenderComponentApplicationStore(),
                     _ => throw new InvalidOperationException("Invalid configured render mode."),
                 };
@@ -53,8 +59,10 @@ internal partial class EndpointHtmlRenderer
             await manager.PersistStateAsync(store, this);
             return store switch
             {
-                ProtectedPrerenderComponentApplicationStore protectedStore => new ComponentStateHtmlContent(protectedStore, null),
-                PrerenderComponentApplicationStore prerenderStore => new ComponentStateHtmlContent(null, prerenderStore),
+                ProtectedPrerenderComponentApplicationStore protectedStore
+                    => new ComponentStateHtmlContent(protectedStore, null),
+                PrerenderComponentApplicationStore prerenderStore
+                    => new ComponentStateHtmlContent(null, prerenderStore),
                 _ => throw new InvalidOperationException("Invalid store."),
             };
         }
@@ -62,7 +70,9 @@ internal partial class EndpointHtmlRenderer
         {
             // We were not able to resolve a store from the configured render modes metadata, we need to capture
             // all possible destinations for the state and persist it in all of them.
-            var serverStore = new ProtectedPrerenderComponentApplicationStore(_httpContext.RequestServices.GetRequiredService<IDataProtectionProvider>());
+            var serverStore = new ProtectedPrerenderComponentApplicationStore(
+                _httpContext.RequestServices.GetRequiredService<IDataProtectionProvider>()
+            );
             var webAssemblyStore = new PrerenderComponentApplicationStore();
 
             // The persistence state manager checks if the store implements
@@ -89,26 +99,30 @@ internal partial class EndpointHtmlRenderer
             }
 
             // Persist state only if there is state to persist
-            var saveServerTask = server.Saved.Count > 0
-                ? serverStore.PersistStateAsync(server.Saved)
-                : Task.CompletedTask;
+            var saveServerTask =
+                server.Saved.Count > 0
+                    ? serverStore.PersistStateAsync(server.Saved)
+                    : Task.CompletedTask;
 
-            var saveWebAssemblyTask = webAssembly.Saved.Count > 0
-                ? webAssemblyStore.PersistStateAsync(webAssembly.Saved)
-                : Task.CompletedTask;
+            var saveWebAssemblyTask =
+                webAssembly.Saved.Count > 0
+                    ? webAssemblyStore.PersistStateAsync(webAssembly.Saved)
+                    : Task.CompletedTask;
 
-            await Task.WhenAll(
-                saveServerTask,
-                saveWebAssemblyTask);
+            await Task.WhenAll(saveServerTask, saveWebAssemblyTask);
 
             // Do not return any HTML content if there is no state to persist for a given mode.
             return new ComponentStateHtmlContent(
                 server.Saved.Count > 0 ? serverStore : null,
-                webAssembly.Saved.Count > 0 ? webAssemblyStore : null);
+                webAssembly.Saved.Count > 0 ? webAssemblyStore : null
+            );
         }
     }
 
-    public async ValueTask<IHtmlContent> PrerenderPersistedStateAsync(HttpContext httpContext, PersistedStateSerializationMode serializationMode)
+    public async ValueTask<IHtmlContent> PrerenderPersistedStateAsync(
+        HttpContext httpContext,
+        PersistedStateSerializationMode serializationMode
+    )
     {
         SetHttpContext(httpContext);
 
@@ -121,7 +135,8 @@ internal partial class EndpointHtmlRenderer
                     return ComponentStateHtmlContent.Empty;
                 case InvokedRenderModes.Mode.ServerAndWebAssembly:
                     throw new InvalidOperationException(
-                        Resources.FailedToInferComponentPersistenceMode);
+                        Resources.FailedToInferComponentPersistenceMode
+                    );
                 case InvokedRenderModes.Mode.Server:
                     serializationMode = PersistedStateSerializationMode.Server;
                     break;
@@ -133,14 +148,17 @@ internal partial class EndpointHtmlRenderer
             }
         }
 
-        var manager = _httpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager =
+            _httpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
 
         // Now given the mode, we obtain a particular store for that mode
         // and persist the state and return the HTML content
         switch (serializationMode)
         {
             case PersistedStateSerializationMode.Server:
-                var protectedStore = new ProtectedPrerenderComponentApplicationStore(_httpContext.RequestServices.GetRequiredService<IDataProtectionProvider>());
+                var protectedStore = new ProtectedPrerenderComponentApplicationStore(
+                    _httpContext.RequestServices.GetRequiredService<IDataProtectionProvider>()
+                );
                 await manager.PersistStateAsync(protectedStore, this);
                 return new ComponentStateHtmlContent(protectedStore, null);
 
@@ -155,7 +173,10 @@ internal partial class EndpointHtmlRenderer
     }
 
     // Internal for test only
-    internal static void UpdateSaveStateRenderMode(HttpContext httpContext, IComponentRenderMode? mode)
+    internal static void UpdateSaveStateRenderMode(
+        HttpContext httpContext,
+        IComponentRenderMode? mode
+    )
     {
         // TODO: This will all have to change when we support multiple render modes in the same response
         if (ModeEnablesPrerendering(mode))
@@ -164,13 +185,22 @@ internal partial class EndpointHtmlRenderer
             {
                 InteractiveServerRenderMode => InvokedRenderModes.Mode.Server,
                 InteractiveWebAssemblyRenderMode => InvokedRenderModes.Mode.WebAssembly,
-                InteractiveAutoRenderMode => throw new NotImplementedException("TODO: To be able to support InteractiveAutoRenderMode, we have to serialize persisted state in both WebAssembly and Server formats, or unify the two formats."),
-                _ => throw new ArgumentException(Resources.FormatUnsupportedRenderMode(mode), nameof(mode)),
+                InteractiveAutoRenderMode
+                    => throw new NotImplementedException(
+                        "TODO: To be able to support InteractiveAutoRenderMode, we have to serialize persisted state in both WebAssembly and Server formats, or unify the two formats."
+                    ),
+                _
+                    => throw new ArgumentException(
+                        Resources.FormatUnsupportedRenderMode(mode),
+                        nameof(mode)
+                    ),
             };
 
             if (!httpContext.Items.TryGetValue(InvokedRenderModesKey, out var result))
             {
-                httpContext.Items[InvokedRenderModesKey] = new InvokedRenderModes(currentInvocation);
+                httpContext.Items[InvokedRenderModesKey] = new InvokedRenderModes(
+                    currentInvocation
+                );
             }
             else
             {
@@ -183,13 +213,14 @@ internal partial class EndpointHtmlRenderer
         }
     }
 
-    private static bool ModeEnablesPrerendering(IComponentRenderMode? mode) => mode switch
-    {
-        InteractiveServerRenderMode { Prerender: true } => true,
-        InteractiveWebAssemblyRenderMode { Prerender: true } => true,
-        InteractiveAutoRenderMode { Prerender: true } => true,
-        _ => false
-    };
+    private static bool ModeEnablesPrerendering(IComponentRenderMode? mode) =>
+        mode switch
+        {
+            InteractiveServerRenderMode { Prerender: true } => true,
+            InteractiveWebAssemblyRenderMode { Prerender: true } => true,
+            InteractiveAutoRenderMode { Prerender: true } => true,
+            _ => false,
+        };
 
     internal static InvokedRenderModes.Mode GetPersistStateRenderMode(HttpContext httpContext)
     {
@@ -206,7 +237,10 @@ internal partial class EndpointHtmlRenderer
 
         internal PrerenderComponentApplicationStore? WebAssemblyStore { get; }
 
-        public ComponentStateHtmlContent(PrerenderComponentApplicationStore? serverStore, PrerenderComponentApplicationStore? webAssemblyStore)
+        public ComponentStateHtmlContent(
+            PrerenderComponentApplicationStore? serverStore,
+            PrerenderComponentApplicationStore? webAssemblyStore
+        )
         {
             WebAssemblyStore = webAssemblyStore;
             ServerStore = serverStore;
@@ -230,12 +264,15 @@ internal partial class EndpointHtmlRenderer
         }
     }
 
-    internal class CompositeStore : IPersistentComponentStateStore, IEnumerable<IPersistentComponentStateStore>
+    internal class CompositeStore
+        : IPersistentComponentStateStore,
+            IEnumerable<IPersistentComponentStateStore>
     {
         public CompositeStore(
             CopyOnlyStore<InteractiveServerRenderMode> server,
             CopyOnlyStore<InteractiveAutoRenderMode> auto,
-            CopyOnlyStore<InteractiveWebAssemblyRenderMode> webassembly)
+            CopyOnlyStore<InteractiveWebAssemblyRenderMode> webassembly
+        )
         {
             Server = server;
             Auto = auto;
@@ -253,18 +290,22 @@ internal partial class EndpointHtmlRenderer
             yield return Webassembly;
         }
 
-        public Task<IDictionary<string, byte[]>> GetPersistedStateAsync() => throw new NotImplementedException();
+        public Task<IDictionary<string, byte[]>> GetPersistedStateAsync() =>
+            throw new NotImplementedException();
 
-        public Task PersistStateAsync(IReadOnlyDictionary<string, byte[]> state) => Task.CompletedTask;
+        public Task PersistStateAsync(IReadOnlyDictionary<string, byte[]> state) =>
+            Task.CompletedTask;
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
-    internal class CopyOnlyStore<T> : IPersistentComponentStateStore where T : IComponentRenderMode
+    internal class CopyOnlyStore<T> : IPersistentComponentStateStore
+        where T : IComponentRenderMode
     {
         public Dictionary<string, byte[]> Saved { get; private set; } = new();
 
-        public Task<IDictionary<string, byte[]>> GetPersistedStateAsync() => throw new NotImplementedException();
+        public Task<IDictionary<string, byte[]>> GetPersistedStateAsync() =>
+            throw new NotImplementedException();
 
         public Task PersistStateAsync(IReadOnlyDictionary<string, byte[]> state)
         {

@@ -6,6 +6,4 @@ using System.Text.Json.Serialization;
 namespace Microsoft.AspNetCore.Authentication.BearerToken;
 
 [JsonSerializable(typeof(AccessTokenResponse))]
-internal sealed partial class BearerTokenJsonSerializerContext : JsonSerializerContext
-{
-}
+internal sealed partial class BearerTokenJsonSerializerContext : JsonSerializerContext { }

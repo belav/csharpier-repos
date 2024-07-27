@@ -20,14 +20,19 @@ internal abstract partial class AbstractUseNullPropagationDiagnosticAnalyzer<
     TElementAccessExpressionSyntax,
     TMemberAccessExpressionSyntax,
     TIfStatementSyntax,
-    TExpressionStatementSyntax>
+    TExpressionStatementSyntax
+>
 {
     protected abstract bool TryGetPartsOfIfStatement(
-        TIfStatementSyntax ifStatement, [NotNullWhen(true)] out TExpressionSyntax? condition, [NotNullWhen(true)] out TStatementSyntax? trueStatement);
+        TIfStatementSyntax ifStatement,
+        [NotNullWhen(true)] out TExpressionSyntax? condition,
+        [NotNullWhen(true)] out TStatementSyntax? trueStatement
+    );
 
     private void AnalyzeIfStatement(
         SyntaxNodeAnalysisContext context,
-        IMethodSymbol? referenceEqualsMethod)
+        IMethodSymbol? referenceEqualsMethod
+    )
     {
         var cancellationToken = context.CancellationToken;
         var option = context.GetAnalyzerOptions().PreferNullPropagation;
@@ -45,7 +50,16 @@ internal abstract partial class AbstractUseNullPropagationDiagnosticAnalyzer<
             return;
 
         // Now see if the `if (<condition>)` looks like an appropriate null check.
-        if (!TryAnalyzeCondition(context, syntaxFacts, referenceEqualsMethod, condition, out var conditionPartToCheck, out var isEquals))
+        if (
+            !TryAnalyzeCondition(
+                context,
+                syntaxFacts,
+                referenceEqualsMethod,
+                condition,
+                out var conditionPartToCheck,
+                out var isEquals
+            )
+        )
             return;
 
         // Ok, we have `if (<expr2> == null)` or `if (<expr2> != null)` (or some similar form of that.  `conditionPartToCheck` will be `<expr2>` here.
@@ -55,16 +69,19 @@ internal abstract partial class AbstractUseNullPropagationDiagnosticAnalyzer<
 
         var semanticModel = context.SemanticModel;
         var whenPartMatch = GetWhenPartMatch(
-            syntaxFacts, semanticModel, conditionPartToCheck,
+            syntaxFacts,
+            semanticModel,
+            conditionPartToCheck,
             (TExpressionSyntax)syntaxFacts.GetExpressionOfExpressionStatement(expressionStatement),
-            cancellationToken);
+            cancellationToken
+        );
         if (whenPartMatch == null)
             return;
 
         // If we have:
         //
         // D D { get; }
-        // 
+        //
         // public void Test()
         // {
         //     if (D != null)
@@ -76,7 +93,9 @@ internal abstract partial class AbstractUseNullPropagationDiagnosticAnalyzer<
         // Then `D.Method` is actually an access of a static member, and cannot be converted to `D?.Method`.
         if (whenPartMatch.Parent is TMemberAccessExpressionSyntax memberAccess)
         {
-            var memberSymbol = semanticModel.GetSymbolInfo(memberAccess, cancellationToken).GetAnySymbol();
+            var memberSymbol = semanticModel
+                .GetSymbolInfo(memberAccess, cancellationToken)
+                .GetAnySymbol();
             if (memberSymbol?.IsStatic is true)
                 return;
         }
@@ -86,19 +105,25 @@ internal abstract partial class AbstractUseNullPropagationDiagnosticAnalyzer<
         if (whenPartType is IPointerTypeSymbol or IFunctionPointerTypeSymbol)
             return;
 
-        var whenPartIsNullable = semanticModel.GetTypeInfo(whenPartMatch).Type?.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T;
+        var whenPartIsNullable =
+            semanticModel.GetTypeInfo(whenPartMatch).Type?.OriginalDefinition.SpecialType
+            == SpecialType.System_Nullable_T;
         var properties = whenPartIsNullable
             ? s_whenPartIsNullableProperties
             : ImmutableDictionary<string, string?>.Empty;
 
-        context.ReportDiagnostic(DiagnosticHelper.Create(
-            Descriptor,
-            ifStatement.GetFirstToken().GetLocation(),
-            option.Notification,
-            ImmutableArray.Create(
-                ifStatement.GetLocation(),
-                trueStatement.GetLocation(),
-                whenPartMatch.GetLocation()),
-            properties));
+        context.ReportDiagnostic(
+            DiagnosticHelper.Create(
+                Descriptor,
+                ifStatement.GetFirstToken().GetLocation(),
+                option.Notification,
+                ImmutableArray.Create(
+                    ifStatement.GetLocation(),
+                    trueStatement.GetLocation(),
+                    whenPartMatch.GetLocation()
+                ),
+                properties
+            )
+        );
     }
 }

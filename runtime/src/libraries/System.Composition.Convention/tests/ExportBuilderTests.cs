@@ -13,14 +13,16 @@ namespace System.Composition.Convention.Tests
 
         private class FooImpl : IFoo { }
 
-
         [Fact]
         public void ExportInterfaceWithTypeOf1()
         {
             var builder = new ConventionBuilder();
             builder.ForType<FooImpl>().Export<IFoo>();
 
-            Collections.Generic.IEnumerable<ExportAttribute> exports = builder.GetCustomAttributes(typeof(FooImpl), typeof(FooImpl).GetTypeInfo()).Where<Attribute>(e => e is ExportAttribute).Cast<ExportAttribute>();
+            Collections.Generic.IEnumerable<ExportAttribute> exports = builder
+                .GetCustomAttributes(typeof(FooImpl), typeof(FooImpl).GetTypeInfo())
+                .Where<Attribute>(e => e is ExportAttribute)
+                .Cast<ExportAttribute>();
             Assert.Equal(1, exports.Count());
             Assert.Equal(typeof(IFoo), exports.First().ContractType);
         }
@@ -31,11 +33,13 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForType(typeof(FooImpl)).Export((c) => c.AsContractType(typeof(IFoo)));
 
-            Collections.Generic.IEnumerable<ExportAttribute> exports = builder.GetDeclaredAttributes(typeof(FooImpl), typeof(FooImpl).GetTypeInfo()).Where<Attribute>(e => e is ExportAttribute).Cast<ExportAttribute>();
+            Collections.Generic.IEnumerable<ExportAttribute> exports = builder
+                .GetDeclaredAttributes(typeof(FooImpl), typeof(FooImpl).GetTypeInfo())
+                .Where<Attribute>(e => e is ExportAttribute)
+                .Cast<ExportAttribute>();
             Assert.Equal(1, exports.Count());
             Assert.Equal(typeof(IFoo), exports.First().ContractType);
         }
-
 
         [Fact]
         public void AsContractTypeOfT_SetsContractType()
@@ -74,7 +78,9 @@ namespace System.Composition.Convention.Tests
         public void AsContractName_AndContractType_SetsContractNameAndType()
         {
             var builder = new ConventionBuilder();
-            builder.ForTypesDerivedFrom<IFoo>().Export((e) => e.AsContractName("hey").AsContractType(typeof(IFoo)));
+            builder
+                .ForTypesDerivedFrom<IFoo>()
+                .Export((e) => e.AsContractName("hey").AsContractType(typeof(IFoo)));
 
             ExportAttribute exportAtt = GetExportAttribute(builder);
             Assert.Equal("hey", exportAtt.ContractName);
@@ -85,7 +91,11 @@ namespace System.Composition.Convention.Tests
         public void AsContractName_AndContractType_ComputeContractNameFromType()
         {
             var builder = new ConventionBuilder();
-            builder.ForTypesDerivedFrom<IFoo>().Export(e => e.AsContractName(t => "Contract:" + t.FullName).AsContractType<IFoo>());
+            builder
+                .ForTypesDerivedFrom<IFoo>()
+                .Export(e =>
+                    e.AsContractName(t => "Contract:" + t.FullName).AsContractType<IFoo>()
+                );
 
             ExportAttribute exportAtt = GetExportAttribute(builder);
             Assert.Equal("Contract:" + typeof(FooImpl).FullName, exportAtt.ContractName);
@@ -116,14 +126,20 @@ namespace System.Composition.Convention.Tests
 
         private static ExportAttribute GetExportAttribute(ConventionBuilder builder)
         {
-            Attribute[] list = builder.GetDeclaredAttributes(typeof(FooImpl), typeof(FooImpl).GetTypeInfo());
+            Attribute[] list = builder.GetDeclaredAttributes(
+                typeof(FooImpl),
+                typeof(FooImpl).GetTypeInfo()
+            );
             Assert.Equal(1, list.Length);
             return list[0] as ExportAttribute;
         }
 
         private static ExportMetadataAttribute GetExportMetadataAttribute(ConventionBuilder builder)
         {
-            Attribute[] list = builder.GetDeclaredAttributes(typeof(FooImpl), typeof(FooImpl).GetTypeInfo());
+            Attribute[] list = builder.GetDeclaredAttributes(
+                typeof(FooImpl),
+                typeof(FooImpl).GetTypeInfo()
+            );
             Assert.Equal(2, list.Length);
             return list[1] as ExportMetadataAttribute;
         }

@@ -16,7 +16,12 @@ namespace Microsoft.Extensions.Primitives
     /// </summary>
     [DebuggerDisplay("{ToString()}")]
     [DebuggerTypeProxy(typeof(StringValuesDebugView))]
-    public readonly struct StringValues : IList<string?>, IReadOnlyList<string?>, IEquatable<StringValues>, IEquatable<string?>, IEquatable<string?[]?>
+    public readonly struct StringValues
+        : IList<string?>,
+            IReadOnlyList<string?>,
+            IEquatable<StringValues>,
+            IEquatable<string?>,
+            IEquatable<string?[]?>
     {
         /// <summary>
         /// A readonly instance of the <see cref="StringValues"/> struct whose value is an empty string array.
@@ -71,7 +76,7 @@ namespace Microsoft.Extensions.Primitives
         /// Returns <c>null</c> where <see cref="StringValues"/> has been initialized from an empty string array or is <see cref="StringValues.Empty"/>.
         /// </remarks>
         /// <param name="values">A <see cref="StringValues"/> to implicitly convert.</param>
-        public static implicit operator string? (StringValues values)
+        public static implicit operator string?(StringValues values)
         {
             return values.GetStringValue();
         }
@@ -80,7 +85,7 @@ namespace Microsoft.Extensions.Primitives
         /// Defines an implicit conversion of a given <see cref="StringValues"/> to a string array.
         /// </summary>
         /// <param name="value">A <see cref="StringValues"/> to implicitly convert.</param>
-        public static implicit operator string?[]? (StringValues value)
+        public static implicit operator string?[]?(StringValues value)
         {
             return value.GetArrayValue();
         }
@@ -221,26 +226,31 @@ namespace Microsoft.Extensions.Primitives
                 }
 #if NETCOREAPP
                 // Create the new string
-                return string.Create(length, values, (span, strings) => {
-                    int offset = 0;
-                    // Skip null and empty values
-                    for (int i = 0; i < strings.Length; i++)
+                return string.Create(
+                    length,
+                    values,
+                    (span, strings) =>
                     {
-                        string? value = strings[i];
-                        if (value != null && value.Length > 0)
+                        int offset = 0;
+                        // Skip null and empty values
+                        for (int i = 0; i < strings.Length; i++)
                         {
-                            if (offset > 0)
+                            string? value = strings[i];
+                            if (value != null && value.Length > 0)
                             {
-                                // Add separator
-                                span[offset] = ',';
-                                offset++;
-                            }
+                                if (offset > 0)
+                                {
+                                    // Add separator
+                                    span[offset] = ',';
+                                    offset++;
+                                }
 
-                            value.AsSpan().CopyTo(span.Slice(offset));
-                            offset += value.Length;
+                                value.AsSpan().CopyTo(span.Slice(offset));
+                                offset += value.Length;
+                            }
                         }
                     }
-                });
+                );
 #else
                 var sb = new ValueStringBuilder(length);
                 bool hasAdded = false;
@@ -327,7 +337,9 @@ namespace Microsoft.Extensions.Primitives
             if (value != null)
             {
                 // value not array, can only be string
-                return string.Equals(Unsafe.As<string>(value), item, StringComparison.Ordinal) ? 0 : -1;
+                return string.Equals(Unsafe.As<string>(value), item, StringComparison.Ordinal)
+                    ? 0
+                    : -1;
             }
 
             return -1;
@@ -377,7 +389,8 @@ namespace Microsoft.Extensions.Primitives
                 if (array.Length - arrayIndex < 1)
                 {
                     throw new ArgumentException(
-                        $"'{nameof(array)}' is not long enough to copy all the items in the collection. Check '{nameof(arrayIndex)}' and '{nameof(array)}' length.");
+                        $"'{nameof(array)}' is not long enough to copy all the items in the collection. Check '{nameof(arrayIndex)}' and '{nameof(array)}' length."
+                    );
                 }
 
                 // value not array, can only be string
@@ -580,7 +593,8 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="left">The <see cref="string"/> to compare.</param>
         /// <param name="right">The <see cref="StringValues"/> to compare.</param>
         /// <returns><c>true</c> if the value of <paramref name="left"/> is the same as the value of <paramref name="right"/>; otherwise, <c>false</c>. If <paramref name="left"/> is <c>null</c>, the method returns <c>false</c>.</returns>
-        public static bool Equals(string? left, StringValues right) => Equals(new StringValues(left), right);
+        public static bool Equals(string? left, StringValues right) =>
+            Equals(new StringValues(left), right);
 
         /// <summary>
         /// Determines whether the specified <see cref="StringValues"/> and <see cref="string"/> objects have the same values.
@@ -588,7 +602,8 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="left">The <see cref="StringValues"/> to compare.</param>
         /// <param name="right">The <see cref="string"/> to compare.</param>
         /// <returns><c>true</c> if the value of <paramref name="left"/> is the same as the value of <paramref name="right"/>; otherwise, <c>false</c>. If <paramref name="right"/> is <c>null</c>, the method returns <c>false</c>.</returns>
-        public static bool Equals(StringValues left, string? right) => Equals(left, new StringValues(right));
+        public static bool Equals(StringValues left, string? right) =>
+            Equals(left, new StringValues(right));
 
         /// <summary>
         /// Determines whether this instance and a specified <see cref="string"/>, have the same value.
@@ -603,7 +618,8 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="left">The string array to compare.</param>
         /// <param name="right">The <see cref="StringValues"/> to compare.</param>
         /// <returns><c>true</c> if the value of <paramref name="left"/> is the same as the value of <paramref name="right"/>; otherwise, <c>false</c>.</returns>
-        public static bool Equals(string?[]? left, StringValues right) => Equals(new StringValues(left), right);
+        public static bool Equals(string?[]? left, StringValues right) =>
+            Equals(new StringValues(left), right);
 
         /// <summary>
         /// Determines whether the specified <see cref="StringValues"/> and string array objects have the same values.
@@ -611,7 +627,8 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="left">The <see cref="StringValues"/> to compare.</param>
         /// <param name="right">The string array to compare.</param>
         /// <returns><c>true</c> if the value of <paramref name="left"/> is the same as the value of <paramref name="right"/>; otherwise, <c>false</c>.</returns>
-        public static bool Equals(StringValues left, string?[]? right) => Equals(left, new StringValues(right));
+        public static bool Equals(StringValues left, string?[]? right) =>
+            Equals(left, new StringValues(right));
 
         /// <summary>
         /// Determines whether this instance and a specified string array have the same values.
@@ -621,7 +638,8 @@ namespace Microsoft.Extensions.Primitives
         public bool Equals(string?[]? other) => Equals(this, new StringValues(other));
 
         /// <inheritdoc cref="Equals(StringValues, string)" />
-        public static bool operator ==(StringValues left, string? right) => Equals(left, new StringValues(right));
+        public static bool operator ==(StringValues left, string? right) =>
+            Equals(left, new StringValues(right));
 
         /// <summary>
         /// Determines whether the specified <see cref="StringValues"/> and <see cref="string"/> objects have different values.
@@ -629,10 +647,12 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="left">The <see cref="StringValues"/> to compare.</param>
         /// <param name="right">The <see cref="string"/> to compare.</param>
         /// <returns><c>true</c> if the value of <paramref name="left"/> is different to the value of <paramref name="right"/>; otherwise, <c>false</c>.</returns>
-        public static bool operator !=(StringValues left, string? right) => !Equals(left, new StringValues(right));
+        public static bool operator !=(StringValues left, string? right) =>
+            !Equals(left, new StringValues(right));
 
         /// <inheritdoc cref="Equals(string, StringValues)" />
-        public static bool operator ==(string? left, StringValues right) => Equals(new StringValues(left), right);
+        public static bool operator ==(string? left, StringValues right) =>
+            Equals(new StringValues(left), right);
 
         /// <summary>
         /// Determines whether the specified <see cref="string"/> and <see cref="StringValues"/> objects have different values.
@@ -640,10 +660,12 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="left">The <see cref="string"/> to compare.</param>
         /// <param name="right">The <see cref="StringValues"/> to compare.</param>
         /// <returns><c>true</c> if the value of <paramref name="left"/> is different to the value of <paramref name="right"/>; otherwise, <c>false</c>.</returns>
-        public static bool operator !=(string? left, StringValues right) => !Equals(new StringValues(left), right);
+        public static bool operator !=(string? left, StringValues right) =>
+            !Equals(new StringValues(left), right);
 
         /// <inheritdoc cref="Equals(StringValues, string[])" />
-        public static bool operator ==(StringValues left, string?[]? right) => Equals(left, new StringValues(right));
+        public static bool operator ==(StringValues left, string?[]? right) =>
+            Equals(left, new StringValues(right));
 
         /// <summary>
         /// Determines whether the specified <see cref="StringValues"/> and string array have different values.
@@ -651,10 +673,12 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="left">The <see cref="StringValues"/> to compare.</param>
         /// <param name="right">The string array to compare.</param>
         /// <returns><c>true</c> if the value of <paramref name="left"/> is different to the value of <paramref name="right"/>; otherwise, <c>false</c>.</returns>
-        public static bool operator !=(StringValues left, string?[]? right) => !Equals(left, new StringValues(right));
+        public static bool operator !=(StringValues left, string?[]? right) =>
+            !Equals(left, new StringValues(right));
 
         /// <inheritdoc cref="Equals(string[], StringValues)" />
-        public static bool operator ==(string?[]? left, StringValues right) => Equals(new StringValues(left), right);
+        public static bool operator ==(string?[]? left, StringValues right) =>
+            Equals(new StringValues(left), right);
 
         /// <summary>
         /// Determines whether the specified string array and <see cref="StringValues"/> have different values.
@@ -662,7 +686,8 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="left">The string array to compare.</param>
         /// <param name="right">The <see cref="StringValues"/> to compare.</param>
         /// <returns><c>true</c> if the value of <paramref name="left"/> is different to the value of <paramref name="right"/>; otherwise, <c>false</c>.</returns>
-        public static bool operator !=(string?[]? left, StringValues right) => !Equals(new StringValues(left), right);
+        public static bool operator !=(string?[]? left, StringValues right) =>
+            !Equals(new StringValues(left), right);
 
         /// <summary>
         /// Determines whether the specified <see cref="StringValues"/> and <see cref="object"/>, which must be a
@@ -785,8 +810,8 @@ namespace Microsoft.Extensions.Primitives
             /// Instantiates an <see cref="Enumerator"/> using a <see cref="StringValues"/>.
             /// </summary>
             /// <param name="values">The <see cref="StringValues"/> to enumerate.</param>
-            public Enumerator(ref StringValues values) : this(values._values)
-            { }
+            public Enumerator(ref StringValues values)
+                : this(values._values) { }
 
             /// <summary>
             /// Advances the enumerator to the next element of the <see cref="StringValues"/>.
@@ -833,9 +858,7 @@ namespace Microsoft.Extensions.Primitives
             /// <summary>
             /// Releases all resources used by the <see cref="Enumerator" />.
             /// </summary>
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
 
         private sealed class StringValuesDebugView(StringValues values)

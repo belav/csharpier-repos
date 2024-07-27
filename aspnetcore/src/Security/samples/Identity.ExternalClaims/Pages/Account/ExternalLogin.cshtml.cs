@@ -23,7 +23,8 @@ public class ExternalLoginModel : PageModel
     public ExternalLoginModel(
         SignInManager<ApplicationUser> signInManager,
         UserManager<ApplicationUser> userManager,
-        ILogger<ExternalLoginModel> logger)
+        ILogger<ExternalLoginModel> logger
+    )
     {
         _signInManager = signInManager;
         _userManager = userManager;
@@ -55,12 +56,22 @@ public class ExternalLoginModel : PageModel
     public IActionResult OnPost(string provider, string returnUrl = null)
     {
         // Request a redirect to the external login provider.
-        var redirectUrl = Url.Page("./ExternalLogin", pageHandler: "Callback", values: new { returnUrl });
-        var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+        var redirectUrl = Url.Page(
+            "./ExternalLogin",
+            pageHandler: "Callback",
+            values: new { returnUrl }
+        );
+        var properties = _signInManager.ConfigureExternalAuthenticationProperties(
+            provider,
+            redirectUrl
+        );
         return new ChallengeResult(provider, properties);
     }
 
-    public async Task<IActionResult> OnGetCallbackAsync(string returnUrl = null, string remoteError = null)
+    public async Task<IActionResult> OnGetCallbackAsync(
+        string returnUrl = null,
+        string remoteError = null
+    )
     {
         if (remoteError != null)
         {
@@ -74,7 +85,12 @@ public class ExternalLoginModel : PageModel
         }
 
         // Sign in the user with this external login provider if the user already has a login.
-        var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+        var result = await _signInManager.ExternalLoginSignInAsync(
+            info.LoginProvider,
+            info.ProviderKey,
+            isPersistent: false,
+            bypassTwoFactor: true
+        );
         if (result.Succeeded)
         {
             // Store the access token and resign in so the token is included in the cookie
@@ -83,7 +99,11 @@ public class ExternalLoginModel : PageModel
             props.StoreTokens(info.AuthenticationTokens);
             await _signInManager.SignInAsync(user, props, info.LoginProvider);
 
-            _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
+            _logger.LogInformation(
+                "{Name} logged in with {LoginProvider} provider.",
+                info.Principal.Identity.Name,
+                info.LoginProvider
+            );
             return LocalRedirect(Url.GetLocalUrl(returnUrl));
         }
         if (result.IsLockedOut)
@@ -97,10 +117,7 @@ public class ExternalLoginModel : PageModel
             LoginProvider = info.LoginProvider;
             if (info.Principal.HasClaim(c => c.Type == ClaimTypes.Email))
             {
-                Input = new InputModel
-                {
-                    Email = info.Principal.FindFirstValue(ClaimTypes.Email)
-                };
+                Input = new InputModel { Email = info.Principal.FindFirstValue(ClaimTypes.Email) };
             }
             return Page();
         }
@@ -114,7 +131,9 @@ public class ExternalLoginModel : PageModel
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                throw new ApplicationException("Error loading external login information during confirmation.");
+                throw new ApplicationException(
+                    "Error loading external login information during confirmation."
+                );
             }
             var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
             var result = await _userManager.CreateAsync(user);
@@ -124,14 +143,24 @@ public class ExternalLoginModel : PageModel
                 if (result.Succeeded)
                 {
                     // Copy over the gender claim as well
-                    await _userManager.AddClaimAsync(user, info.Principal.FindFirst(ClaimTypes.Gender));
+                    await _userManager.AddClaimAsync(
+                        user,
+                        info.Principal.FindFirst(ClaimTypes.Gender)
+                    );
 
                     // Include the access token in the properties
                     var props = new AuthenticationProperties();
                     props.StoreTokens(info.AuthenticationTokens);
 
-                    await _signInManager.SignInAsync(user, props, authenticationMethod: info.LoginProvider);
-                    _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+                    await _signInManager.SignInAsync(
+                        user,
+                        props,
+                        authenticationMethod: info.LoginProvider
+                    );
+                    _logger.LogInformation(
+                        "User created an account using {Name} provider.",
+                        info.LoginProvider
+                    );
                     return LocalRedirect(Url.GetLocalUrl(returnUrl));
                 }
             }

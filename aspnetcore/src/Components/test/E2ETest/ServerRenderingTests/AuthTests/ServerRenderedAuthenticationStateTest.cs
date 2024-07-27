@@ -2,25 +2,24 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Components.TestServer.RazorComponents;
-using Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 using Microsoft.AspNetCore.Components.E2ETest.Infrastructure;
-using TestServer;
+using Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 using Microsoft.AspNetCore.E2ETesting;
-using Xunit.Abstractions;
 using OpenQA.Selenium;
+using TestServer;
+using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests.AuthTests;
 
 public class ServerRenderedAuthenticationStateTest
-     : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
+    : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
 {
     public ServerRenderedAuthenticationStateTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     [Fact]
     public void CanUseServerAuthenticationState_Static()
@@ -30,7 +29,7 @@ public class ServerRenderedAuthenticationStateTest
         Browser.Equal("False", () => Browser.FindElement(By.Id("identity-authenticated")).Text);
         Browser.Equal("", () => Browser.FindElement(By.Id("identity-name")).Text);
         Browser.Equal("(none)", () => Browser.FindElement(By.Id("test-claim")).Text);
-        
+
         Browser.Click(By.LinkText("Log in"));
 
         Browser.Equal("True", () => Browser.FindElement(By.Id("identity-authenticated")).Text);

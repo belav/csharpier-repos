@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 //112256
-// [karimf] If we happen to have a try that is in nested CATCHs, and the try has a nonLocalGoto 
-// [only legal if it gos all the way back to the root!], then we replace the nonlocal 
+// [karimf] If we happen to have a try that is in nested CATCHs, and the try has a nonLocalGoto
+// [only legal if it gos all the way back to the root!], then we replace the nonlocal
 // LEAVE with an OPGOTO to the beginning of the cascading CATCHRET chain to unwind the stack...
 
 using System;
@@ -27,6 +27,7 @@ public class simple
         // Create and initialize test log object
         testLog = new TestUtil.TestLog(expectedOut);
     }
+
     [Fact]
     public static int TestEntryPoint()
     {

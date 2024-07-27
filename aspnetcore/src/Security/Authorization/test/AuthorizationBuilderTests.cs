@@ -14,11 +14,15 @@ public class AuthorizationBuilderTests
     {
         // Arrange
         var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-        var builder = TestHelpers.CreateAuthorizationBuilder()
-        // Act
+        var builder = TestHelpers
+            .CreateAuthorizationBuilder()
+            // Act
             .SetFallbackPolicy(policy);
 
-        var options = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<AuthorizationOptions>>().Value;
+        var options = builder
+            .Services.BuildServiceProvider()
+            .GetRequiredService<IOptions<AuthorizationOptions>>()
+            .Value;
 
         // Assert
         Assert.Equal(policy, options.FallbackPolicy);
@@ -29,12 +33,16 @@ public class AuthorizationBuilderTests
     {
         // Arrange
         var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-        var builder = TestHelpers.CreateAuthorizationBuilder()
+        var builder = TestHelpers
+            .CreateAuthorizationBuilder()
             .SetFallbackPolicy(policy)
-        // Act
+            // Act
             .SetFallbackPolicy(null);
 
-        var options = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<AuthorizationOptions>>().Value;
+        var options = builder
+            .Services.BuildServiceProvider()
+            .GetRequiredService<IOptions<AuthorizationOptions>>()
+            .Value;
 
         // Assert
         Assert.Null(options.FallbackPolicy);
@@ -45,11 +53,15 @@ public class AuthorizationBuilderTests
     {
         // Arrange
         var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-        var builder = TestHelpers.CreateAuthorizationBuilder()
-        // Act
+        var builder = TestHelpers
+            .CreateAuthorizationBuilder()
+            // Act
             .SetDefaultPolicy(policy);
 
-        var options = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<AuthorizationOptions>>().Value;
+        var options = builder
+            .Services.BuildServiceProvider()
+            .GetRequiredService<IOptions<AuthorizationOptions>>()
+            .Value;
 
         // Assert
         Assert.Equal(policy, options.DefaultPolicy);
@@ -61,11 +73,15 @@ public class AuthorizationBuilderTests
     public void CanSetInvokeHandlersAfterFailure(bool invoke)
     {
         // Arrange
-        var builder = TestHelpers.CreateAuthorizationBuilder()
-        // Act
+        var builder = TestHelpers
+            .CreateAuthorizationBuilder()
+            // Act
             .SetInvokeHandlersAfterFailure(invoke);
 
-        var options = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<AuthorizationOptions>>().Value;
+        var options = builder
+            .Services.BuildServiceProvider()
+            .GetRequiredService<IOptions<AuthorizationOptions>>()
+            .Value;
 
         // Assert
         Assert.Equal(invoke, options.InvokeHandlersAfterFailure);
@@ -76,11 +92,15 @@ public class AuthorizationBuilderTests
     {
         // Arrange
         var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-        var builder = TestHelpers.CreateAuthorizationBuilder()
-        // Act
+        var builder = TestHelpers
+            .CreateAuthorizationBuilder()
+            // Act
             .AddPolicy("name", policy);
 
-        var options = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<AuthorizationOptions>>().Value;
+        var options = builder
+            .Services.BuildServiceProvider()
+            .GetRequiredService<IOptions<AuthorizationOptions>>()
+            .Value;
 
         // Assert
         Assert.Equal(policy, options.GetPolicy("name"));
@@ -90,11 +110,15 @@ public class AuthorizationBuilderTests
     public void CanAddPolicyDelegate()
     {
         // Arrange
-        var builder = TestHelpers.CreateAuthorizationBuilder()
-        // Act
+        var builder = TestHelpers
+            .CreateAuthorizationBuilder()
+            // Act
             .AddPolicy("name", p => p.RequireAssertion(_ => true));
 
-        var options = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<AuthorizationOptions>>().Value;
+        var options = builder
+            .Services.BuildServiceProvider()
+            .GetRequiredService<IOptions<AuthorizationOptions>>()
+            .Value;
 
         // Assert
         var policy = options.GetPolicy("name");

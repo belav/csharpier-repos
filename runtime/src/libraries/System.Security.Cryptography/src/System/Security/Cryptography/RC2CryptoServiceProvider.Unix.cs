@@ -6,7 +6,11 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography
 {
-    [Obsolete(Obsoletions.DerivedCryptographicTypesMessage, DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.DerivedCryptographicTypesMessage,
+        DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed partial class RC2CryptoServiceProvider : RC2
     {
@@ -14,10 +18,19 @@ namespace System.Security.Cryptography
 
         private static readonly KeySizes[] s_legalKeySizes =
         {
-            new KeySizes(40, 128, 8)  // csp implementation only goes up to 128
+            new KeySizes(
+                40,
+                128,
+                8
+            ) // csp implementation only goes up to 128
+            ,
         };
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of RC2CryptoServiceProvider")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of RC2CryptoServiceProvider"
+        )]
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
         public RC2CryptoServiceProvider()
@@ -33,6 +46,7 @@ namespace System.Security.Cryptography
         }
 
         public override ICryptoTransform CreateDecryptor() => _impl.CreateDecryptor();
+
         public override ICryptoTransform CreateEncryptor() => _impl.CreateEncryptor();
 
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) =>
@@ -63,6 +77,7 @@ namespace System.Security.Cryptography
         }
 
         public override void GenerateIV() => _impl.GenerateIV();
+
         public override void GenerateKey() => _impl.GenerateKey();
 
         public override byte[] IV
@@ -113,7 +128,9 @@ namespace System.Security.Cryptography
             {
                 // Don't allow a true value
                 if (value)
-                    throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CAPI_Required, nameof(UseSalt)));
+                    throw new PlatformNotSupportedException(
+                        SR.Format(SR.Cryptography_CAPI_Required, nameof(UseSalt))
+                    );
             }
         }
     }

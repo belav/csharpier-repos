@@ -28,7 +28,9 @@ public class RequestBodyTests
 
             var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
             byte[] input = new byte[100];
-            Assert.Throws<InvalidOperationException>(() => context.Request.Body.Read(input, 0, input.Length));
+            Assert.Throws<InvalidOperationException>(
+                () => context.Request.Body.Read(input, 0, input.Length)
+            );
 
             context.AllowSynchronousIO = true;
 
@@ -179,10 +181,23 @@ public class RequestBodyTests
 
             var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
             byte[] input = new byte[10];
-            int read = await context.Request.Body.ReadAsync(input, 0, input.Length, context.DisconnectToken);
+            int read = await context.Request.Body.ReadAsync(
+                input,
+                0,
+                input.Length,
+                context.DisconnectToken
+            );
             Assert.False(context.DisconnectToken.IsCancellationRequested);
             // The client should timeout and disconnect, making this read fail.
-            var assertTask = Assert.ThrowsAsync<IOException>(async () => await context.Request.Body.ReadAsync(input, 0, input.Length, context.DisconnectToken));
+            var assertTask = Assert.ThrowsAsync<IOException>(
+                async () =>
+                    await context.Request.Body.ReadAsync(
+                        input,
+                        0,
+                        input.Length,
+                        context.DisconnectToken
+                    )
+            );
             client.CancelPendingRequests();
             await assertTask;
             content.Block.Release();
@@ -217,7 +232,10 @@ public class RequestBodyTests
 
         public SemaphoreSlim Block { get; private set; }
 
-        protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
+        protected override async Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext context
+        )
         {
             await stream.WriteAsync(new byte[5], 0, 5);
             await stream.FlushAsync();

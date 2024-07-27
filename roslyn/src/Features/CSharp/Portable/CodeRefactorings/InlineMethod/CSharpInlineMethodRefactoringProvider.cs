@@ -14,19 +14,30 @@ using Microsoft.CodeAnalysis.InlineMethod;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.InlineMethod), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.InlineMethod
+        ),
+        Shared
+    ]
     [Export(typeof(CSharpInlineMethodRefactoringProvider))]
     internal sealed class CSharpInlineMethodRefactoringProvider
-        : AbstractInlineMethodRefactoringProvider<BaseMethodDeclarationSyntax, StatementSyntax, ExpressionSyntax, InvocationExpressionSyntax>
+        : AbstractInlineMethodRefactoringProvider<
+            BaseMethodDeclarationSyntax,
+            StatementSyntax,
+            ExpressionSyntax,
+            InvocationExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpInlineMethodRefactoringProvider()
-            : base(CSharpSyntaxFacts.Instance, CSharpSemanticFactsService.Instance)
-        {
-        }
+            : base(CSharpSyntaxFacts.Instance, CSharpSemanticFactsService.Instance) { }
 
-        protected override ExpressionSyntax? GetRawInlineExpression(BaseMethodDeclarationSyntax methodDeclarationSyntax)
+        protected override ExpressionSyntax? GetRawInlineExpression(
+            BaseMethodDeclarationSyntax methodDeclarationSyntax
+        )
         {
             var blockSyntaxNode = methodDeclarationSyntax.Body;
             if (blockSyntaxNode != null)
@@ -40,10 +51,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
                         // void Caller() { Callee(); }
                         // void Callee() { return; }
                         // Refactoring won't be provided for this case.
-                        ReturnStatementSyntax returnStatementSyntax => returnStatementSyntax.Expression,
-                        ExpressionStatementSyntax expressionStatementSyntax => expressionStatementSyntax.Expression,
-                        ThrowStatementSyntax throwStatementSyntax => throwStatementSyntax.Expression,
-                        _ => null
+                        ReturnStatementSyntax returnStatementSyntax
+                            => returnStatementSyntax.Expression,
+                        ExpressionStatementSyntax expressionStatementSyntax
+                            => expressionStatementSyntax.Expression,
+                        ThrowStatementSyntax throwStatementSyntax
+                            => throwStatementSyntax.Expression,
+                        _ => null,
                     };
                 }
             }
@@ -56,16 +70,26 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
             return null;
         }
 
-        protected override SyntaxNode GenerateTypeSyntax(ITypeSymbol symbol, bool allowVar)
-            => symbol.GenerateTypeSyntax(allowVar);
+        protected override SyntaxNode GenerateTypeSyntax(ITypeSymbol symbol, bool allowVar) =>
+            symbol.GenerateTypeSyntax(allowVar);
 
-        protected override ExpressionSyntax GenerateLiteralExpression(ITypeSymbol typeSymbol, object? value)
-            => ExpressionGenerator.GenerateExpression(CSharpSyntaxGenerator.Instance, typeSymbol, value, canUseFieldReference: true);
+        protected override ExpressionSyntax GenerateLiteralExpression(
+            ITypeSymbol typeSymbol,
+            object? value
+        ) =>
+            ExpressionGenerator.GenerateExpression(
+                CSharpSyntaxGenerator.Instance,
+                typeSymbol,
+                value,
+                canUseFieldReference: true
+            );
 
-        protected override bool IsFieldDeclarationSyntax(SyntaxNode node)
-            => node.IsKind(SyntaxKind.FieldDeclaration);
+        protected override bool IsFieldDeclarationSyntax(SyntaxNode node) =>
+            node.IsKind(SyntaxKind.FieldDeclaration);
 
-        protected override bool IsValidExpressionUnderExpressionStatement(ExpressionSyntax expressionNode)
+        protected override bool IsValidExpressionUnderExpressionStatement(
+            ExpressionSyntax expressionNode
+        )
         {
             // C# Expression Statements defined in the language reference
             // expression_statement
@@ -83,13 +107,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
             //     | pre_decrement_expression
             //     | await_expression
             //     ;
-            var isNullConditionalInvocationExpression = IsNullConditionalInvocationExpression(expressionNode);
+            var isNullConditionalInvocationExpression = IsNullConditionalInvocationExpression(
+                expressionNode
+            );
 
             return expressionNode.IsKind(SyntaxKind.InvocationExpression)
-                   || isNullConditionalInvocationExpression
-                   || expressionNode is AssignmentExpressionSyntax
-                   || expressionNode.Kind()
-                        is SyntaxKind.InvocationExpression
+                || isNullConditionalInvocationExpression
+                || expressionNode is AssignmentExpressionSyntax
+                || expressionNode.Kind()
+                    is SyntaxKind.InvocationExpression
                         or SyntaxKind.ObjectCreationExpression
                         or SyntaxKind.PreIncrementExpression
                         or SyntaxKind.PreDecrementExpression
@@ -108,8 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
             return syntaxNode.Parent switch
             {
                 ConditionalExpressionSyntax conditionalExpressionSyntax
-                    => syntaxNode.Equals(conditionalExpressionSyntax.WhenTrue) ||
-                       syntaxNode.Equals(conditionalExpressionSyntax.WhenFalse),
+                    => syntaxNode.Equals(conditionalExpressionSyntax.WhenTrue)
+                        || syntaxNode.Equals(conditionalExpressionSyntax.WhenFalse),
                 BinaryExpressionSyntax(kind: SyntaxKind.CoalesceExpression) binaryExpressionSyntax
                     => syntaxNode.Equals(binaryExpressionSyntax.Right),
                 LambdaExpressionSyntax lambdaExpressionSyntax
@@ -130,8 +156,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
             // And in case of example like a?.b?.d?.c();
             // This is case it would be
             // ConditionalAccessExpressionSyntax -> ConditionalAccessExpressionSyntax -> ... -> InvocationExpression.
-            return expressionSyntax is ConditionalAccessExpressionSyntax { WhenNotNull: var whenNotNull } &&
-                (whenNotNull.IsKind(SyntaxKind.InvocationExpression) || IsNullConditionalInvocationExpression(whenNotNull));
+            return expressionSyntax
+                    is ConditionalAccessExpressionSyntax { WhenNotNull: var whenNotNull }
+                && (
+                    whenNotNull.IsKind(SyntaxKind.InvocationExpression)
+                    || IsNullConditionalInvocationExpression(whenNotNull)
+                );
         }
     }
 }

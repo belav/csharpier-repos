@@ -9,5 +9,6 @@ namespace DebuggerTests;
 
 internal static class TestOptions
 {
-    internal static readonly bool LogToConsole        = Environment.GetEnvironmentVariable("SKIP_LOG_TO_CONSOLE") != "1";
+    internal static readonly bool LogToConsole =
+        Environment.GetEnvironmentVariable("SKIP_LOG_TO_CONSOLE") != "1";
 }

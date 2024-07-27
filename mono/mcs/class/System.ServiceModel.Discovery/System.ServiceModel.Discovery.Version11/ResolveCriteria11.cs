@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,51 +35,53 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Discovery.Version11
 {
-	[XmlSchemaProvider ("GetSchema")]
-	public class ResolveCriteria11 : IXmlSerializable
-	{
-		public static ResolveCriteria11 FromResolveCriteria (ResolveCriteria resolveCriteria)
-		{
-			return new ResolveCriteria11 (resolveCriteria);
-		}
+    [XmlSchemaProvider("GetSchema")]
+    public class ResolveCriteria11 : IXmlSerializable
+    {
+        public static ResolveCriteria11 FromResolveCriteria(ResolveCriteria resolveCriteria)
+        {
+            return new ResolveCriteria11(resolveCriteria);
+        }
 
-		static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscovery11;
-		static XmlSchema schema = ResolveCriteria.BuildSchema (version);
+        static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscovery11;
+        static XmlSchema schema = ResolveCriteria.BuildSchema(version);
 
-		public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
-		{
-			EndpointAddress10.GetSchema (schemaSet);
-			schemaSet.Add (schema);
-			return new XmlQualifiedName ("ResolveType", version.Namespace);
-		}
+        public static XmlQualifiedName GetSchema(XmlSchemaSet schemaSet)
+        {
+            EndpointAddress10.GetSchema(schemaSet);
+            schemaSet.Add(schema);
+            return new XmlQualifiedName("ResolveType", version.Namespace);
+        }
 
-		internal ResolveCriteria11 (ResolveCriteria source)
-		{
-			this.source = source;
-		}
-		
-		ResolveCriteria source;
+        internal ResolveCriteria11(ResolveCriteria source)
+        {
+            this.source = source;
+        }
 
-		public XmlSchema GetSchema ()
-		{
-			return null;
-		}
+        ResolveCriteria source;
 
-		public void ReadXml (XmlReader reader)
-		{
-			source = ResolveCriteria.ReadXml (reader, version);
-		}
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
 
-		public ResolveCriteria ToResolveCriteria ()
-		{
-			if (source == null)
-				throw new InvalidOperationException ("Call ReadXml method first before calling this method");
-			return source;
-		}
+        public void ReadXml(XmlReader reader)
+        {
+            source = ResolveCriteria.ReadXml(reader, version);
+        }
 
-		public void WriteXml (XmlWriter writer)
-		{
-			source.WriteXml (writer, version);
-		}
-	}
+        public ResolveCriteria ToResolveCriteria()
+        {
+            if (source == null)
+                throw new InvalidOperationException(
+                    "Call ReadXml method first before calling this method"
+                );
+            return source;
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            source.WriteXml(writer, version);
+        }
+    }
 }

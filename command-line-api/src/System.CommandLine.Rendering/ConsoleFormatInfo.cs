@@ -11,17 +11,11 @@ namespace System.CommandLine.Rendering
         private bool _isReadOnly;
         private bool _supportsAnsiCodes;
 
-        public ConsoleFormatInfo()
-        {
-        }
+        public ConsoleFormatInfo() { }
 
         public static ConsoleFormatInfo CurrentInfo
         {
-            get
-            {
-                return s_currentInfo ??=
-                    InitializeCurrentInfo();
-            }
+            get { return s_currentInfo ??= InitializeCurrentInfo(); }
             set
             {
                 if (value == null)
@@ -47,16 +41,17 @@ namespace System.CommandLine.Rendering
 
         public static ConsoleFormatInfo GetInstance(IFormatProvider formatProvider)
         {
-            return formatProvider == null ?
-                CurrentInfo : // Fast path for a null provider
+            return formatProvider == null
+                ? CurrentInfo
+                : // Fast path for a null provider
                 GetProviderNonNull(formatProvider);
 
             static ConsoleFormatInfo GetProviderNonNull(IFormatProvider provider)
             {
-                return
-                    provider as ConsoleFormatInfo ?? // Fast path for an CFI
-                    provider.GetFormat(typeof(ConsoleFormatInfo)) as ConsoleFormatInfo ??
-                    CurrentInfo;
+                return provider as ConsoleFormatInfo
+                    ?? // Fast path for an CFI
+                    provider.GetFormat(typeof(ConsoleFormatInfo)) as ConsoleFormatInfo
+                    ?? CurrentInfo;
             }
         }
 
@@ -82,14 +77,12 @@ namespace System.CommandLine.Rendering
 
         private static ConsoleFormatInfo InitializeCurrentInfo()
         {
-            bool supportsAnsi = 
-                !Console.IsOutputRedirected &&
-                DoesOperatingSystemSupportAnsi();
+            bool supportsAnsi = !Console.IsOutputRedirected && DoesOperatingSystemSupportAnsi();
 
             return new ConsoleFormatInfo()
             {
                 _isReadOnly = true,
-                _supportsAnsiCodes = supportsAnsi
+                _supportsAnsiCodes = supportsAnsi,
             };
         }
 
@@ -107,7 +100,8 @@ namespace System.CommandLine.Rendering
                 return false;
             }
 
-            return (consoleMode & Interop.ENABLE_VIRTUAL_TERMINAL_PROCESSING) == Interop.ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+            return (consoleMode & Interop.ENABLE_VIRTUAL_TERMINAL_PROCESSING)
+                == Interop.ENABLE_VIRTUAL_TERMINAL_PROCESSING;
         }
 
         private void VerifyWritable()

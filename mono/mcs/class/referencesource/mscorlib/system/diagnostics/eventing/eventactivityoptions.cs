@@ -35,6 +35,6 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Allows event activity to live beyond its parent.
         /// </summary>
-        Detachable = 0x8
+        Detachable = 0x8,
     }
 }

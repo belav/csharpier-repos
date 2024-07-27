@@ -12,9 +12,7 @@ namespace System.ServiceModel.Activation.Configuration
     public sealed partial class SecurityIdentifierElement : ConfigurationElement
     {
         public SecurityIdentifierElement()
-            : base()
-        {
-        }
+            : base() { }
 
         public SecurityIdentifierElement(SecurityIdentifier sid)
             : this()
@@ -22,7 +20,11 @@ namespace System.ServiceModel.Activation.Configuration
             this.SecurityIdentifier = sid;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SecurityIdentifier, DefaultValue = null, Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.SecurityIdentifier,
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         [TypeConverter(typeof(SecurityIdentifierConverter))]
         public SecurityIdentifier SecurityIdentifier
         {

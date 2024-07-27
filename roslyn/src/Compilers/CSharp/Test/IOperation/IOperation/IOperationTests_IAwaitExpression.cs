@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestAwaitExpression()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -31,7 +32,8 @@ class C
     static Task M2() => null;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IAwaitOperation (OperationKind.Await, Type: System.Void) (Syntax: 'await M2()')
   Expression: 
     IInvocationOperation (System.Threading.Tasks.Task C.M2()) (OperationKind.Invocation, Type: System.Threading.Tasks.Task) (Syntax: 'M2()')
@@ -41,14 +43,20 @@ IAwaitOperation (OperationKind.Await, Type: System.Void) (Syntax: 'await M2()')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: TargetFramework.Mscorlib46Extended);
+            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: TargetFramework.Mscorlib46Extended
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestAwaitExpression_ParameterReference()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -59,21 +67,28 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IAwaitOperation (OperationKind.Await, Type: System.Void) (Syntax: 'await t')
   Expression: 
     IParameterReferenceOperation: t (OperationKind.ParameterReference, Type: System.Threading.Tasks.Task) (Syntax: 't')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: TargetFramework.Mscorlib46Extended);
+            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: TargetFramework.Mscorlib46Extended
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestAwaitExpression_InLambda()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -86,21 +101,28 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IAwaitOperation (OperationKind.Await, Type: System.Int32) (Syntax: 'await t')
   Expression: 
     IParameterReferenceOperation: t (OperationKind.ParameterReference, Type: System.Threading.Tasks.Task<System.Int32>) (Syntax: 't')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: TargetFramework.Mscorlib46Extended);
+            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: TargetFramework.Mscorlib46Extended
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestAwaitExpression_ErrorArgument()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -112,26 +134,36 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IAwaitOperation (OperationKind.Await, Type: ?, IsInvalid) (Syntax: 'await UndefinedTask')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'UndefinedTask')
       Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0103: The name 'UndefinedTask' does not exist in the current context
                 //         /*<bind>*/await UndefinedTask/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "UndefinedTask").WithArguments("UndefinedTask").WithLocation(9, 25)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "UndefinedTask")
+                    .WithArguments("UndefinedTask")
+                    .WithLocation(9, 25),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: TargetFramework.Mscorlib46Extended);
+            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: TargetFramework.Mscorlib46Extended
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestAwaitExpression_ValueArgument()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -143,25 +175,35 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IAwaitOperation (OperationKind.Await, Type: ?, IsInvalid) (Syntax: 'await i')
   Expression: 
     IParameterReferenceOperation: i (OperationKind.ParameterReference, Type: System.Int32, IsInvalid) (Syntax: 'i')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1061: 'int' does not contain a definition for 'GetAwaiter' and no extension method 'GetAwaiter' accepting a first argument of type 'int' could be found (are you missing a using directive or an assembly reference?)
                 //         /*<bind>*/await i/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "await i").WithArguments("int", "GetAwaiter").WithLocation(9, 19)
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "await i")
+                    .WithArguments("int", "GetAwaiter")
+                    .WithLocation(9, 19),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: TargetFramework.Mscorlib46Extended);
+            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: TargetFramework.Mscorlib46Extended
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestAwaitExpression_MissingArgument()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -173,26 +215,36 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IAwaitOperation (OperationKind.Await, Type: ?, IsInvalid) (Syntax: 'await /*</bind>*/')
   Expression: 
     IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
       Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ';'
                 //         /*<bind>*/await /*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(9, 36)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(9, 36),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: TargetFramework.Mscorlib46Extended);
+            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: TargetFramework.Mscorlib46Extended
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestAwaitExpression_NonAsyncMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -204,7 +256,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'await t;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'await t')
     Declarators:
@@ -214,26 +267,43 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0246: The type or namespace name 'await' could not be found (are you missing a using directive or an assembly reference?)
                 //         /*<bind>*/await t;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "await").WithArguments("await").WithLocation(9, 19),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "await")
+                    .WithArguments("await")
+                    .WithLocation(9, 19),
                 // CS0136: A local or parameter named 't' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         /*<bind>*/await t;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "t").WithArguments("t").WithLocation(9, 25),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "t")
+                    .WithArguments("t")
+                    .WithLocation(9, 25),
                 // CS0168: The variable 't' is declared but never used
                 //         /*<bind>*/await t;/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "t").WithArguments("t").WithLocation(9, 25)
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "t")
+                    .WithArguments("t")
+                    .WithLocation(9, 25),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: TargetFramework.Mscorlib46Extended);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: TargetFramework.Mscorlib46Extended
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.AsyncStreams)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.AsyncStreams
+        )]
         [Fact]
         public void AwaitFlow_AsyncIterator()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -247,16 +317,22 @@ class C
     static Task M2() => null;
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(24,32): error CS0234: The type or namespace name 'ValueTask<>' does not exist in the namespace 'System.Threading.Tasks' (are you missing an assembly reference?)
                 //         System.Threading.Tasks.ValueTask<bool> MoveNextAsync();
-                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "ValueTask<bool>").WithArguments("ValueTask<>", "System.Threading.Tasks").WithLocation(24, 32),
+                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "ValueTask<bool>")
+                    .WithArguments("ValueTask<>", "System.Threading.Tasks")
+                    .WithLocation(24, 32),
                 // file.cs(32,32): error CS0234: The type or namespace name 'ValueTask' does not exist in the namespace 'System.Threading.Tasks' (are you missing an assembly reference?)
                 //         System.Threading.Tasks.ValueTask DisposeAsync();
-                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "ValueTask").WithArguments("ValueTask", "System.Threading.Tasks").WithLocation(32, 32)
+                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "ValueTask")
+                    .WithArguments("ValueTask", "System.Threading.Tasks")
+                    .WithLocation(32, 32),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -281,14 +357,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + s_IAsyncEnumerable, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + s_IAsyncEnumerable,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void AwaitFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -304,7 +385,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -325,14 +407,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void AwaitFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -348,7 +435,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -421,14 +509,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void AwaitFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -444,7 +537,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -508,14 +602,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67616")]
         public void TestAwaitExpression_InStatement()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -528,7 +627,8 @@ class C
     static Task<string> M2() => throw null;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IAwaitOperation (OperationKind.Await, Type: System.String) (Syntax: 'await M2()')
   Expression:
     IInvocationOperation (System.Threading.Tasks.Task<System.String> C.M2()) (OperationKind.Invocation, Type: System.Threading.Tasks.Task<System.String>) (Syntax: 'M2()')
@@ -538,7 +638,11 @@ IAwaitOperation (OperationKind.Await, Type: System.String) (Syntax: 'await M2()'
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
     }
 }

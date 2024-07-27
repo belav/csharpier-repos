@@ -16,16 +16,34 @@ namespace System.Reflection.Metadata.Tests
             List<int> source = new List<int>(new int[] { 9, 9, 9, 9, 9, 9 });
             int[] expected = { 9, 9, 9, 9, 9, 9 };
 
-            Assert.Equal(expected, source.OrderBy((int x, int y) => { return Comparer<int>.Default.Compare(x, y); }));
+            Assert.Equal(
+                expected,
+                source.OrderBy(
+                    (int x, int y) =>
+                    {
+                        return Comparer<int>.Default.Compare(x, y);
+                    }
+                )
+            );
         }
 
         [Fact]
         public void FirstAndLastAreDuplicatesCustomComparer()
         {
-            List<string> source = new List<string>(new string[] { "prakash", "Alpha", "dan", "DAN", "Prakash" });
+            List<string> source = new List<string>(
+                new string[] { "prakash", "Alpha", "dan", "DAN", "Prakash" }
+            );
             string[] expected = { "Alpha", "dan", "DAN", "prakash", "Prakash" };
 
-            Assert.Equal(expected, source.OrderBy((string left, string right) => { return StringComparer.OrdinalIgnoreCase.Compare(left, right); }));
+            Assert.Equal(
+                expected,
+                source.OrderBy(
+                    (string left, string right) =>
+                    {
+                        return StringComparer.OrdinalIgnoreCase.Compare(left, right);
+                    }
+                )
+            );
         }
     }
 }

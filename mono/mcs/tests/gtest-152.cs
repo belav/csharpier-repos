@@ -2,46 +2,39 @@ using System;
 
 public interface IFoo
 {
-	IFoo Hello ();
+    IFoo Hello();
 }
 
 public interface IFoo<T> : IFoo
 {
-	new IFoo<T> Hello ();
+    new IFoo<T> Hello();
 }
 
-public interface ICollectionValue<T>: IFoo<T>
-{
-}
+public interface ICollectionValue<T> : IFoo<T> { }
 
-public interface ICollection<T>: ICollectionValue<T>
-{ }
+public interface ICollection<T> : ICollectionValue<T> { }
 
 public abstract class EnumerableBase<T> : IFoo<T>
 {
-	public abstract IFoo<T> Hello();
+    public abstract IFoo<T> Hello();
 
-	IFoo IFoo.Hello ()
-	{
-		return Hello ();
-	}
+    IFoo IFoo.Hello()
+    {
+        return Hello();
+    }
 }
 
-public abstract class CollectionBase<T> : EnumerableBase<T>
-{
-}
+public abstract class CollectionBase<T> : EnumerableBase<T> { }
 
-public class HashBag<T>: CollectionBase<T>, ICollection<T>
+public class HashBag<T> : CollectionBase<T>, ICollection<T>
 {
-	public override IFoo<T> Hello ()
-	{
-		return this;
-	}
+    public override IFoo<T> Hello()
+    {
+        return this;
+    }
 }
 
 class X
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

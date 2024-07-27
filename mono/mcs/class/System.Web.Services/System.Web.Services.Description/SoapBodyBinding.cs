@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.SoapBodyBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,80 +32,94 @@ using System.ComponentModel;
 using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-	[XmlFormatExtension ("body", "http://schemas.xmlsoap.org/wsdl/soap/", typeof (InputBinding), typeof (OutputBinding), typeof (MimePart))]
-	public class SoapBodyBinding : ServiceDescriptionFormatExtension {
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtension(
+        "body",
+        "http://schemas.xmlsoap.org/wsdl/soap/",
+        typeof(InputBinding),
+        typeof(OutputBinding),
+        typeof(MimePart)
+    )]
+    public class SoapBodyBinding : ServiceDescriptionFormatExtension
+    {
+        #region Fields
 
-		#region Fields
-		
-		string encoding;
-		string ns;
-		string[] parts;
-		string partsString;
-		SoapBindingUse use;
+        string encoding;
+        string ns;
+        string[] parts;
+        string partsString;
+        SoapBindingUse use;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public SoapBodyBinding ()
-		{
-			encoding = String.Empty;
-			ns = String.Empty;
-			parts = null;
-			partsString = null;
-			use = SoapBindingUse.Default;
-		}
-		
-		#endregion // Constructors
+        #region Constructors
 
-		#region Properties
+        public SoapBodyBinding()
+        {
+            encoding = String.Empty;
+            ns = String.Empty;
+            parts = null;
+            partsString = null;
+            use = SoapBindingUse.Default;
+        }
 
-		[DefaultValue ("")]
-		[XmlAttribute ("encodingStyle")]
-		public string Encoding {
-			get { return encoding; }
-			set { encoding = value; }
-		}
+        #endregion // Constructors
 
-		[DefaultValue ("")]
-		[XmlAttribute ("namespace")]
-		public string Namespace {
-			get { return ns; }
-			set { ns = value; }
-		}
+        #region Properties
 
-		[XmlIgnore]
-		public string[] Parts {
-			get { return parts; }
-			set {
-				parts = value;
-				if (value == null)
-					partsString = null;
-				else
-					partsString = String.Join(" ", value);
-			}
-		}
+        [DefaultValue("")]
+        [XmlAttribute("encodingStyle")]
+        public string Encoding
+        {
+            get { return encoding; }
+            set { encoding = value; }
+        }
 
-		[XmlAttribute ("parts")]
-		public string PartsString {
-			get { return partsString; }
-			set {
-				partsString = value;
-				if (value == null)
-					parts = null;
-				else
-					parts = value.Split(' ');
-			}
-		}
+        [DefaultValue("")]
+        [XmlAttribute("namespace")]
+        public string Namespace
+        {
+            get { return ns; }
+            set { ns = value; }
+        }
 
-		[DefaultValue (SoapBindingUse.Default)]
-		[XmlAttribute ("use")]
-		public SoapBindingUse Use {
-			get { return use; }
-			set { use = value; }
-		}
+        [XmlIgnore]
+        public string[] Parts
+        {
+            get { return parts; }
+            set
+            {
+                parts = value;
+                if (value == null)
+                    partsString = null;
+                else
+                    partsString = String.Join(" ", value);
+            }
+        }
 
-		#endregion // Properties
-	}
+        [XmlAttribute("parts")]
+        public string PartsString
+        {
+            get { return partsString; }
+            set
+            {
+                partsString = value;
+                if (value == null)
+                    parts = null;
+                else
+                    parts = value.Split(' ');
+            }
+        }
+
+        [DefaultValue(SoapBindingUse.Default)]
+        [XmlAttribute("use")]
+        public SoapBindingUse Use
+        {
+            get { return use; }
+            set { use = value; }
+        }
+
+        #endregion // Properties
+    }
 }

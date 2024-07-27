@@ -159,7 +159,10 @@ namespace System.Threading
             //
             if (_owningThreadId == currentThreadId)
             {
-                checked { _recursionCount++; }
+                checked
+                {
+                    _recursionCount++;
+                }
                 return true;
             }
 
@@ -198,14 +201,21 @@ namespace System.Threading
             }
         }
 
-        internal bool TryAcquireSlow(int currentThreadId, int millisecondsTimeout, bool trackContentions = false)
+        internal bool TryAcquireSlow(
+            int currentThreadId,
+            int millisecondsTimeout,
+            bool trackContentions = false
+        )
         {
             //
             // If we already own the lock, just increment the recursion count.
             //
             if (_owningThreadId == currentThreadId)
             {
-                checked { _recursionCount++; }
+                checked
+                {
+                    _recursionCount++;
+                }
                 return true;
             }
 
@@ -252,14 +262,16 @@ namespace System.Threading
                     // waiter progress.
                     //
                     int oldState = _state;
-                    bool canAcquire = ((oldState & Locked) == 0) &&
-                        (hasWaited || ((oldState & YieldToWaiters) == 0));
+                    bool canAcquire =
+                        ((oldState & Locked) == 0)
+                        && (hasWaited || ((oldState & YieldToWaiters) == 0));
 
                     if (canAcquire)
                     {
                         int newState = oldState | Locked;
                         if (hasWaited)
-                            newState = (newState - WaiterCountIncrement) & ~(WaiterWoken | YieldToWaiters);
+                            newState =
+                                (newState - WaiterCountIncrement) & ~(WaiterWoken | YieldToWaiters);
 
                         if (Interlocked.CompareExchange(ref _state, newState, oldState) == oldState)
                         {
@@ -479,7 +491,10 @@ namespace System.Threading
                     int newState = oldState | WaiterWoken;
 
                     short lastWakeTicks = _wakeWatchDog;
-                    if (lastWakeTicks != 0 && (short)Environment.TickCount - lastWakeTicks > WaiterWatchdogTicks)
+                    if (
+                        lastWakeTicks != 0
+                        && (short)Environment.TickCount - lastWakeTicks > WaiterWatchdogTicks
+                    )
                     {
                         newState |= YieldToWaiters;
                     }

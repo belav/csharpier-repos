@@ -24,14 +24,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Services
         private readonly ImmutableDictionary<string, Assembly> _loadedAssemblies;
         private readonly ILogger? _logger;
 
-        private AssemblyLoadContextWrapper(AssemblyLoadContext assemblyLoadContext, ImmutableDictionary<string, Assembly> loadedFiles, ILogger? logger)
+        private AssemblyLoadContextWrapper(
+            AssemblyLoadContext assemblyLoadContext,
+            ImmutableDictionary<string, Assembly> loadedFiles,
+            ILogger? logger
+        )
         {
             _assemblyLoadContext = assemblyLoadContext;
             _loadedAssemblies = loadedFiles;
             _logger = logger;
         }
 
-        public static bool TryLoadExtension(string assemblyFilePath, ILogger? logger, [NotNullWhen(true)] out Assembly? assembly)
+        public static bool TryLoadExtension(
+            string assemblyFilePath,
+            ILogger? logger,
+            [NotNullWhen(true)] out Assembly? assembly
+        )
         {
             var dir = Path.GetDirectoryName(assemblyFilePath);
             var fileName = Path.GetFileName(assemblyFilePath);
@@ -52,7 +60,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Services
             return false;
         }
 
-        public static AssemblyLoadContextWrapper? TryCreate(string name, string assembliesDirectoryPath, ILogger? logger)
+        public static AssemblyLoadContextWrapper? TryCreate(
+            string name,
+            string assembliesDirectoryPath,
+            ILogger? logger
+        )
         {
             try
             {
@@ -64,7 +76,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Services
                     builder.Add(file.Name, loadContext.LoadFromAssemblyPath(file.FullName));
                 }
 
-                return new AssemblyLoadContextWrapper(loadContext, builder.ToImmutableDictionary(), logger);
+                return new AssemblyLoadContextWrapper(
+                    loadContext,
+                    builder.ToImmutableDictionary(),
+                    logger
+                );
             }
             catch (Exception ex)
             {
@@ -81,7 +97,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Services
 
         public Assembly GetAssembly(string name) => _loadedAssemblies[name];
 
-        public MethodInfo? TryGetMethodInfo(string assemblyName, string className, string methodName)
+        public MethodInfo? TryGetMethodInfo(
+            string assemblyName,
+            string className,
+            string methodName
+        )
         {
             try
             {
@@ -89,7 +109,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Services
             }
             catch (Exception ex)
             {
-                _logger?.LogError(ex, "Failed to get method information from {assembly} for {class}.{method}", assemblyName, className, methodName);
+                _logger?.LogError(
+                    ex,
+                    "Failed to get method information from {assembly} for {class}.{method}",
+                    assemblyName,
+                    className,
+                    methodName
+                );
                 return null;
             }
         }
@@ -100,12 +126,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Services
             var completionHelperType = assembly.GetType(className);
             if (completionHelperType == null)
             {
-                throw new ArgumentException($"{assembly.FullName} assembly did not contain {className} class");
+                throw new ArgumentException(
+                    $"{assembly.FullName} assembly did not contain {className} class"
+                );
             }
             var createCompletionProviderMethodInto = completionHelperType?.GetMethod(methodName);
             if (createCompletionProviderMethodInto == null)
             {
-                throw new ArgumentException($"{className} from {assembly.FullName} assembly did not contain {methodName} method");
+                throw new ArgumentException(
+                    $"{className} from {assembly.FullName} assembly did not contain {methodName} method"
+                );
             }
             return createCompletionProviderMethodInto;
         }
@@ -129,13 +159,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Services
                     return false;
 
                 return string.Equals(x.Name, y.Name, StringComparison.OrdinalIgnoreCase)
-                    && string.Equals(x.CultureName, y.CultureName, StringComparison.OrdinalIgnoreCase);
+                    && string.Equals(
+                        x.CultureName,
+                        y.CultureName,
+                        StringComparison.OrdinalIgnoreCase
+                    );
             }
 
-            public int GetHashCode(AssemblyName obj)
-                => HashCode.Combine(
+            public int GetHashCode(AssemblyName obj) =>
+                HashCode.Combine(
                     StringComparer.OrdinalIgnoreCase.GetHashCode(obj.Name ?? string.Empty),
-                    StringComparer.OrdinalIgnoreCase.GetHashCode(obj.CultureName ?? string.Empty));
+                    StringComparer.OrdinalIgnoreCase.GetHashCode(obj.CultureName ?? string.Empty)
+                );
         }
     }
 }

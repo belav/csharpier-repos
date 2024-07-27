@@ -10,8 +10,8 @@ using Microsoft.CodeAnalysis.EmbeddedLanguages.Common;
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 {
     using JsonNodeOrToken = EmbeddedSyntaxNodeOrToken<JsonKind, JsonNode>;
-    using JsonToken = EmbeddedSyntaxToken<JsonKind>;
     using JsonSeparatedList = EmbeddedSeparatedSyntaxNodeList<JsonKind, JsonNode, JsonValueNode>;
+    using JsonToken = EmbeddedSyntaxToken<JsonKind>;
 
     internal sealed class JsonCompilationUnit : JsonNode
     {
@@ -41,8 +41,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             return Sequence[index];
         }
 
-        public override void Accept(IJsonNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IJsonNodeVisitor visitor) => visitor.Visit(this);
     }
 
     /// <summary>
@@ -51,9 +50,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
     internal abstract class JsonValueNode : JsonNode
     {
         protected JsonValueNode(JsonKind kind)
-            : base(kind)
-        {
-        }
+            : base(kind) { }
     }
 
     /// <summary>
@@ -73,15 +70,14 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 
         internal override int ChildCount => 1;
 
-        internal override JsonNodeOrToken ChildAt(int index)
-            => index switch
+        internal override JsonNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => TextToken,
                 _ => throw new InvalidOperationException(),
             };
 
-        public override void Accept(IJsonNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IJsonNodeVisitor visitor) => visitor.Visit(this);
     }
 
     internal sealed class JsonObjectNode : JsonValueNode
@@ -89,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         public JsonObjectNode(
             JsonToken openBraceToken,
             JsonSeparatedList sequence,
-            JsonToken closeBraceToken)
+            JsonToken closeBraceToken
+        )
             : base(JsonKind.Object)
         {
             Debug.Assert(openBraceToken.Kind == JsonKind.OpenBraceToken);
@@ -117,8 +114,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             return Sequence.NodesAndTokens[index - 1];
         }
 
-        public override void Accept(IJsonNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IJsonNodeVisitor visitor) => visitor.Visit(this);
     }
 
     internal sealed class JsonArrayNode : JsonValueNode
@@ -126,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         public JsonArrayNode(
             JsonToken openBracketToken,
             ImmutableArray<JsonValueNode> sequence,
-            JsonToken closeBracketToken)
+            JsonToken closeBracketToken
+        )
             : base(JsonKind.Array)
         {
             Debug.Assert(openBracketToken.Kind == JsonKind.OpenBracketToken);
@@ -155,8 +152,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             return Sequence[index - 1];
         }
 
-        public override void Accept(IJsonNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IJsonNodeVisitor visitor) => visitor.Visit(this);
     }
 
     internal sealed class JsonNegativeLiteralNode : JsonValueNode
@@ -174,16 +170,15 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 
         internal override int ChildCount => 2;
 
-        internal override JsonNodeOrToken ChildAt(int index)
-            => index switch
+        internal override JsonNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => MinusToken,
                 1 => LiteralToken,
                 _ => throw new InvalidOperationException(),
             };
 
-        public override void Accept(IJsonNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IJsonNodeVisitor visitor) => visitor.Visit(this);
     }
 
     internal sealed class JsonLiteralNode(JsonToken literalToken) : JsonValueNode(JsonKind.Literal)
@@ -192,15 +187,14 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 
         internal override int ChildCount => 1;
 
-        internal override JsonNodeOrToken ChildAt(int index)
-            => index switch
+        internal override JsonNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => LiteralToken,
                 _ => throw new InvalidOperationException(),
             };
 
-        public override void Accept(IJsonNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IJsonNodeVisitor visitor) => visitor.Visit(this);
     }
 
     /// <summary>
@@ -219,15 +213,14 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 
         internal override int ChildCount => 1;
 
-        internal override JsonNodeOrToken ChildAt(int index)
-            => index switch
+        internal override JsonNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => CommaToken,
                 _ => throw new InvalidOperationException(),
             };
 
-        public override void Accept(IJsonNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IJsonNodeVisitor visitor) => visitor.Visit(this);
     }
 
     internal sealed class JsonPropertyNode : JsonValueNode
@@ -237,7 +230,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         {
             // Note: the name is allowed by json.net to just be a text token, not a string.  e.g. `goo: 0` as opposed to
             // `"goo": 0`.  Strict json does not allow this.
-            Debug.Assert(nameToken.Kind == JsonKind.StringToken || nameToken.Kind == JsonKind.TextToken);
+            Debug.Assert(
+                nameToken.Kind == JsonKind.StringToken || nameToken.Kind == JsonKind.TextToken
+            );
             Debug.Assert(colonToken.Kind == JsonKind.ColonToken);
             Debug.Assert(value != null);
             NameToken = nameToken;
@@ -251,8 +246,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 
         internal override int ChildCount => 3;
 
-        internal override JsonNodeOrToken ChildAt(int index)
-            => index switch
+        internal override JsonNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => NameToken,
                 1 => ColonToken,
@@ -260,12 +255,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 _ => throw new InvalidOperationException(),
             };
 
-        public override void Accept(IJsonNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IJsonNodeVisitor visitor) => visitor.Visit(this);
     }
 
     /// <summary>
-    /// Json.net construction.  It allows things like <c>new Date(1, 2, 3)</c>.  This is not allowed in strict mode.  
+    /// Json.net construction.  It allows things like <c>new Date(1, 2, 3)</c>.  This is not allowed in strict mode.
     /// </summary>
     internal sealed class JsonConstructorNode : JsonValueNode
     {
@@ -274,7 +268,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             JsonToken nameToken,
             JsonToken openParenToken,
             ImmutableArray<JsonValueNode> sequence,
-            JsonToken closeParenToken)
+            JsonToken closeParenToken
+        )
             : base(JsonKind.Constructor)
         {
             Debug.Assert(newKeyword.Kind == JsonKind.NewKeyword);
@@ -314,7 +309,6 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             return Sequence[index - 3];
         }
 
-        public override void Accept(IJsonNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IJsonNodeVisitor visitor) => visitor.Visit(this);
     }
 }

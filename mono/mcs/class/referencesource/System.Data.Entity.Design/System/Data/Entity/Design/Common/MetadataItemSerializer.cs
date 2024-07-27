@@ -7,17 +7,17 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System;
-using System.Data.Common;
 using System.Collections.Generic;
-using System.Text;
+using System.Data.Common;
+using System.Data.Entity.Design.SsdlGenerator;
 using System.Data.Metadata.Edm;
-using System.Reflection;
 using System.Diagnostics;
-using System.Xml;
 using System.Globalization;
 using System.IO;
-using System.Data.Entity.Design.SsdlGenerator;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Xml;
 
 namespace System.Data.Entity.Design.Common
 {
@@ -26,14 +26,21 @@ namespace System.Data.Entity.Design.Common
     /// </summary>
     internal class MetadataItemSerializer
     {
-        public static readonly EdmType NoSpecificTypeSentinal = MetadataItem.GetBuiltInType(BuiltInTypeKind.EdmType);
+        public static readonly EdmType NoSpecificTypeSentinal = MetadataItem.GetBuiltInType(
+            BuiltInTypeKind.EdmType
+        );
 
         private bool _isModel;
         private ErrorsLookup _errorsLookup;
         private XmlWriter _writer;
         private Version _schemaVersion;
 
-        private MetadataItemSerializer(XmlWriter writer, bool isModel, ErrorsLookup errorsLookup, Version schemaVersion)
+        private MetadataItemSerializer(
+            XmlWriter writer,
+            bool isModel,
+            ErrorsLookup errorsLookup,
+            Version schemaVersion
+        )
         {
             _writer = writer;
             _isModel = isModel;
@@ -45,22 +52,61 @@ namespace System.Data.Entity.Design.Common
 
         internal readonly string EdmNamespace = "Edm";
 
-        public static void WriteXml(XmlWriter writer, ItemCollection collection, string namespaceToWrite, Version schemaVersion, params KeyValuePair<string, string> [] xmlPrefixToNamespaces)
+        public static void WriteXml(
+            XmlWriter writer,
+            ItemCollection collection,
+            string namespaceToWrite,
+            Version schemaVersion,
+            params KeyValuePair<string, string>[] xmlPrefixToNamespaces
+        )
         {
-            WriteXml(writer, collection, namespaceToWrite, new ErrorsLookup(), new List<EdmType>(), null, null, schemaVersion, xmlPrefixToNamespaces);
+            WriteXml(
+                writer,
+                collection,
+                namespaceToWrite,
+                new ErrorsLookup(),
+                new List<EdmType>(),
+                null,
+                null,
+                schemaVersion,
+                xmlPrefixToNamespaces
+            );
         }
 
-        internal static void WriteXml(XmlWriter writer, ItemCollection collection, string namespaceToWrite, ErrorsLookup errorsLookup, List<EdmType> commentedOutItems, string provider, string providerManifestToken, Version schemaVersion, params KeyValuePair<string, string>[] xmlPrefixToNamespaces)
+        internal static void WriteXml(
+            XmlWriter writer,
+            ItemCollection collection,
+            string namespaceToWrite,
+            ErrorsLookup errorsLookup,
+            List<EdmType> commentedOutItems,
+            string provider,
+            string providerManifestToken,
+            Version schemaVersion,
+            params KeyValuePair<string, string>[] xmlPrefixToNamespaces
+        )
         {
             Debug.Assert(writer != null, "writer parameter is null");
             Debug.Assert(collection != null, "collection parameter is null");
             Debug.Assert(errorsLookup != null, "errorsLookup parameter is null");
-            Debug.Assert(!string.IsNullOrEmpty(namespaceToWrite), "namespaceToWrite parameter is null or empty");
-            
-            MetadataItemSerializer serializer = new MetadataItemSerializer(writer, collection.DataSpace == DataSpace.CSpace, errorsLookup, schemaVersion);
+            Debug.Assert(
+                !string.IsNullOrEmpty(namespaceToWrite),
+                "namespaceToWrite parameter is null or empty"
+            );
+
+            MetadataItemSerializer serializer = new MetadataItemSerializer(
+                writer,
+                collection.DataSpace == DataSpace.CSpace,
+                errorsLookup,
+                schemaVersion
+            );
 
             serializer.ValidateNamespace(namespaceToWrite);
-            serializer.WriteSchemaElement(namespaceToWrite, provider, providerManifestToken, xmlPrefixToNamespaces);
+            serializer.WriteSchemaElement(
+                namespaceToWrite,
+                provider,
+                providerManifestToken,
+                xmlPrefixToNamespaces
+            );
             serializer.WriteErrorsComment(NoSpecificTypeSentinal);
             foreach (EntityContainer item in collection.GetItems<EntityContainer>())
             {
@@ -77,7 +123,7 @@ namespace System.Data.Entity.Design.Common
                 }
             }
 
-            if(commentedOutItems.Count > 0)
+            if (commentedOutItems.Count > 0)
             {
                 StringWriter stringWriter = new StringWriter(CultureInfo.InvariantCulture);
                 XmlWriterSettings settings = new XmlWriterSettings();
@@ -87,13 +133,18 @@ namespace System.Data.Entity.Design.Common
                 // which will look like multiple root elements, so this is a fragment
                 settings.ConformanceLevel = ConformanceLevel.Fragment;
                 XmlWriter commentWriter = XmlWriter.Create(stringWriter, settings);
-                MetadataItemSerializer commmentSerializer = new MetadataItemSerializer(commentWriter, collection.DataSpace == DataSpace.CSpace, errorsLookup, schemaVersion);
+                MetadataItemSerializer commmentSerializer = new MetadataItemSerializer(
+                    commentWriter,
+                    collection.DataSpace == DataSpace.CSpace,
+                    errorsLookup,
+                    schemaVersion
+                );
                 foreach (EdmType type in commentedOutItems)
                 {
                     commmentSerializer.WriteTypeElement(type);
                 }
                 commentWriter.Flush();
-                //This is not the cleanest thing to do but XmlTextWriter 
+                //This is not the cleanest thing to do but XmlTextWriter
                 //does not allow writing xml comment characters while writing a comment.
                 //and since we know exactly the string we write, this is pretty safe.
                 string comment = RemoveXmlCommentCharacters(stringWriter);
@@ -118,7 +169,12 @@ namespace System.Data.Entity.Design.Common
 
         private void ValidateNamespace(string namespaceToWrite)
         {
-            if (EdmItemCollection.IsSystemNamespace(MetadataItem.EdmProviderManifest, namespaceToWrite))
+            if (
+                EdmItemCollection.IsSystemNamespace(
+                    MetadataItem.EdmProviderManifest,
+                    namespaceToWrite
+                )
+            )
             {
                 throw EDesignUtil.EdmReservedNamespace(namespaceToWrite);
             }
@@ -151,7 +207,9 @@ namespace System.Data.Entity.Design.Common
 
         private void WriteFunctionElement(EdmFunction function)
         {
-            _writer.WriteStartElement(function.IsFunctionImport ? XmlConstants.FunctionImport : XmlConstants.Function);
+            _writer.WriteStartElement(
+                function.IsFunctionImport ? XmlConstants.FunctionImport : XmlConstants.Function
+            );
             _writer.WriteAttributeString(XmlConstants.Name, function.Name);
 
             // Write function ReturnType as attribute if possible.
@@ -159,13 +217,20 @@ namespace System.Data.Entity.Design.Common
             if (function.ReturnParameter != null)
             {
                 var returnTypeUsage = function.ReturnParameter.TypeUsage;
-                bool collection = returnTypeUsage.EdmType.BuiltInTypeKind == BuiltInTypeKind.CollectionType;
+                bool collection =
+                    returnTypeUsage.EdmType.BuiltInTypeKind == BuiltInTypeKind.CollectionType;
                 if (collection)
                 {
-                    Debug.Assert(_schemaVersion >= EntityFrameworkVersions.Version3, "_schemaVersion >= EntityFrameworkVersions.Version3");
+                    Debug.Assert(
+                        _schemaVersion >= EntityFrameworkVersions.Version3,
+                        "_schemaVersion >= EntityFrameworkVersions.Version3"
+                    );
                     returnTypeUsage = ((CollectionType)returnTypeUsage.EdmType).TypeUsage;
                 }
-                if (TypeSemantics.IsPrimitiveType(returnTypeUsage) || TypeSemantics.IsNominalType(returnTypeUsage))
+                if (
+                    TypeSemantics.IsPrimitiveType(returnTypeUsage)
+                    || TypeSemantics.IsNominalType(returnTypeUsage)
+                )
                 {
                     string typeName = GetFullName(returnTypeUsage.EdmType);
                     if (collection)
@@ -179,27 +244,57 @@ namespace System.Data.Entity.Design.Common
 
             if (!_isModel)
             {
-                _writer.WriteAttributeString(XmlConstants.AggregateAttribute, GetAttributeValueString(function.AggregateAttribute));
-                _writer.WriteAttributeString(XmlConstants.BuiltInAttribute, GetAttributeValueString(function.BuiltInAttribute));
-                _writer.WriteAttributeString(XmlConstants.NiladicFunction, GetAttributeValueString(function.NiladicFunctionAttribute));
-                _writer.WriteAttributeString(XmlConstants.IsComposable, GetAttributeValueString(function.IsComposableAttribute));
-                _writer.WriteAttributeString(XmlConstants.ParameterTypeSemantics, GetAttributeValueString(function.ParameterTypeSemanticsAttribute));
+                _writer.WriteAttributeString(
+                    XmlConstants.AggregateAttribute,
+                    GetAttributeValueString(function.AggregateAttribute)
+                );
+                _writer.WriteAttributeString(
+                    XmlConstants.BuiltInAttribute,
+                    GetAttributeValueString(function.BuiltInAttribute)
+                );
+                _writer.WriteAttributeString(
+                    XmlConstants.NiladicFunction,
+                    GetAttributeValueString(function.NiladicFunctionAttribute)
+                );
+                _writer.WriteAttributeString(
+                    XmlConstants.IsComposable,
+                    GetAttributeValueString(function.IsComposableAttribute)
+                );
+                _writer.WriteAttributeString(
+                    XmlConstants.ParameterTypeSemantics,
+                    GetAttributeValueString(function.ParameterTypeSemanticsAttribute)
+                );
             }
             else if (function.IsFunctionImport && function.IsComposableAttribute)
             {
-                Debug.Assert(_schemaVersion >= EntityFrameworkVersions.Version3, "_schemaVersion >= EntityFrameworkVersions.Version3");
-                _writer.WriteAttributeString(XmlConstants.IsComposable, GetAttributeValueString(true));
+                Debug.Assert(
+                    _schemaVersion >= EntityFrameworkVersions.Version3,
+                    "_schemaVersion >= EntityFrameworkVersions.Version3"
+                );
+                _writer.WriteAttributeString(
+                    XmlConstants.IsComposable,
+                    GetAttributeValueString(true)
+                );
             }
-            
+
             if (function.StoreFunctionNameAttribute != null)
             {
-                _writer.WriteAttributeString(XmlConstants.StoreFunctionName, function.StoreFunctionNameAttribute);
+                _writer.WriteAttributeString(
+                    XmlConstants.StoreFunctionName,
+                    function.StoreFunctionNameAttribute
+                );
             }
-            
-            if(function.CommandTextAttribute != null)
+
+            if (function.CommandTextAttribute != null)
             {
-                Debug.Assert(!_isModel, "Serialization of CommandTextAttribute is not supported for CSDL.");
-                _writer.WriteAttributeString(XmlConstants.CommandText, function.CommandTextAttribute);
+                Debug.Assert(
+                    !_isModel,
+                    "Serialization of CommandTextAttribute is not supported for CSDL."
+                );
+                _writer.WriteAttributeString(
+                    XmlConstants.CommandText,
+                    function.CommandTextAttribute
+                );
             }
 
             if (function.Schema != null)
@@ -216,11 +311,22 @@ namespace System.Data.Entity.Design.Common
             if (function.ReturnParameter != null && !returnParameterHandled)
             {
                 // Handle a TVF in s-space: Collection(RowType)
-                if (function.ReturnParameter.TypeUsage.EdmType.BuiltInTypeKind == BuiltInTypeKind.CollectionType)
+                if (
+                    function.ReturnParameter.TypeUsage.EdmType.BuiltInTypeKind
+                    == BuiltInTypeKind.CollectionType
+                )
                 {
-                    Debug.Assert(_schemaVersion >= EntityFrameworkVersions.Version3 && !_isModel, "_schemaVersion >= EntityFrameworkVersions.Version3 && !_isModel");
-                    var elementType = ((CollectionType)function.ReturnParameter.TypeUsage.EdmType).TypeUsage.EdmType;
-                    Debug.Assert(elementType.BuiltInTypeKind == BuiltInTypeKind.RowType, "TVF return type is expected to be Collection(RowType)");
+                    Debug.Assert(
+                        _schemaVersion >= EntityFrameworkVersions.Version3 && !_isModel,
+                        "_schemaVersion >= EntityFrameworkVersions.Version3 && !_isModel"
+                    );
+                    var elementType = ((CollectionType)function.ReturnParameter.TypeUsage.EdmType)
+                        .TypeUsage
+                        .EdmType;
+                    Debug.Assert(
+                        elementType.BuiltInTypeKind == BuiltInTypeKind.RowType,
+                        "TVF return type is expected to be Collection(RowType)"
+                    );
                     var rowType = (RowType)elementType;
                     _writer.WriteStartElement(XmlConstants.ReturnType);
                     _writer.WriteStartElement(XmlConstants.CollectionType);
@@ -231,7 +337,10 @@ namespace System.Data.Entity.Design.Common
                 }
             }
 
-            Debug.Assert(function.ReturnParameter == null || returnParameterHandled, "ReturnParameter was not handled.");
+            Debug.Assert(
+                function.ReturnParameter == null || returnParameterHandled,
+                "ReturnParameter was not handled."
+            );
             _writer.WriteEndElement();
         }
 
@@ -239,14 +348,19 @@ namespace System.Data.Entity.Design.Common
         {
             _writer.WriteStartElement(XmlConstants.Parameter);
             _writer.WriteAttributeString(XmlConstants.Name, parameter.Name);
-            _writer.WriteAttributeString(XmlConstants.TypeAttribute, GetFullName(parameter.TypeUsage.EdmType));
+            _writer.WriteAttributeString(
+                XmlConstants.TypeAttribute,
+                GetFullName(parameter.TypeUsage.EdmType)
+            );
             if (!_isModel)
             {
-                _writer.WriteAttributeString(XmlConstants.Mode, GetAttributeValueString(parameter.Mode));
+                _writer.WriteAttributeString(
+                    XmlConstants.Mode,
+                    GetAttributeValueString(parameter.Mode)
+                );
             }
             _writer.WriteEndElement();
         }
-
 
         private void WriteComplexTypeElement(ComplexType complexType)
         {
@@ -254,7 +368,10 @@ namespace System.Data.Entity.Design.Common
             _writer.WriteAttributeString(XmlConstants.Name, complexType.Name);
             if (complexType.BaseType != null)
             {
-                _writer.WriteAttributeString(XmlConstants.BaseType, GetFullName(complexType.BaseType));
+                _writer.WriteAttributeString(
+                    XmlConstants.BaseType,
+                    GetFullName(complexType.BaseType)
+                );
             }
 
             foreach (EdmMember member in complexType.GetDeclaredOnlyMembers<EdmMember>())
@@ -294,12 +411,24 @@ namespace System.Data.Entity.Design.Common
         private void WriteReferentialConstraintElement(ReferentialConstraint constraint)
         {
             _writer.WriteStartElement(XmlConstants.ReferentialConstraint);
-            WriteReferentialConstraintRoleElement(XmlConstants.PrincipalRole, constraint.FromRole, constraint.FromProperties);
-            WriteReferentialConstraintRoleElement(XmlConstants.DependentRole, constraint.ToRole, constraint.ToProperties);
+            WriteReferentialConstraintRoleElement(
+                XmlConstants.PrincipalRole,
+                constraint.FromRole,
+                constraint.FromProperties
+            );
+            WriteReferentialConstraintRoleElement(
+                XmlConstants.DependentRole,
+                constraint.ToRole,
+                constraint.ToProperties
+            );
             _writer.WriteEndElement();
         }
 
-        private void WriteReferentialConstraintRoleElement(string nodeName, RelationshipEndMember end, IList<EdmProperty> properties)
+        private void WriteReferentialConstraintRoleElement(
+            string nodeName,
+            RelationshipEndMember end,
+            IList<EdmProperty> properties
+        )
         {
             // Generate the principal and dependent role nodes
             _writer.WriteStartElement(nodeName);
@@ -320,7 +449,10 @@ namespace System.Data.Entity.Design.Common
 
             string typeName = GetFullName(((RefType)end.TypeUsage.EdmType).ElementType);
             _writer.WriteAttributeString(XmlConstants.TypeAttribute, typeName);
-            _writer.WriteAttributeString(XmlConstants.Multiplicity, GetXmlMultiplicity(end.RelationshipMultiplicity));
+            _writer.WriteAttributeString(
+                XmlConstants.Multiplicity,
+                GetXmlMultiplicity(end.RelationshipMultiplicity)
+            );
             if (end.DeleteBehavior != OperationAction.None)
             {
                 WriteOperationActionElement(XmlConstants.OnDelete, end.DeleteBehavior);
@@ -328,7 +460,10 @@ namespace System.Data.Entity.Design.Common
             _writer.WriteEndElement();
         }
 
-        private void WriteOperationActionElement(string elementName, OperationAction operationAction)
+        private void WriteOperationActionElement(
+            string elementName,
+            OperationAction operationAction
+        )
         {
             _writer.WriteStartElement(elementName);
             _writer.WriteAttributeString(XmlConstants.Action, operationAction.ToString());
@@ -337,7 +472,7 @@ namespace System.Data.Entity.Design.Common
 
         private string GetXmlMultiplicity(RelationshipMultiplicity relationshipMultiplicity)
         {
-            switch(relationshipMultiplicity)
+            switch (relationshipMultiplicity)
             {
                 case RelationshipMultiplicity.Many:
                     return "*";
@@ -357,7 +492,10 @@ namespace System.Data.Entity.Design.Common
             _writer.WriteAttributeString(XmlConstants.Name, entityType.Name);
             if (entityType.BaseType != null)
             {
-                _writer.WriteAttributeString(XmlConstants.BaseType, GetFullName(entityType.BaseType));
+                _writer.WriteAttributeString(
+                    XmlConstants.BaseType,
+                    GetFullName(entityType.BaseType)
+                );
             }
 
             if (entityType.Abstract)
@@ -365,8 +503,10 @@ namespace System.Data.Entity.Design.Common
                 _writer.WriteAttributeString(XmlConstants.Abstract, XmlConstants.True);
             }
 
-            if (entityType.KeyMembers.Count != 0 && 
-                entityType.KeyMembers[0].DeclaringType == entityType) // they are declared on this entity
+            if (
+                entityType.KeyMembers.Count != 0
+                && entityType.KeyMembers[0].DeclaringType == entityType
+            ) // they are declared on this entity
             {
                 _writer.WriteStartElement(XmlConstants.Key);
                 for (int i = 0; i < entityType.KeyMembers.Count; i++)
@@ -382,8 +522,8 @@ namespace System.Data.Entity.Design.Common
             {
                 WritePropertyElement(member);
             }
-            
-            foreach (NavigationProperty navigationProperty in entityType.NavigationProperties )
+
+            foreach (NavigationProperty navigationProperty in entityType.NavigationProperties)
             {
                 if (navigationProperty.DeclaringType == entityType)
                 {
@@ -414,7 +554,10 @@ namespace System.Data.Entity.Design.Common
         {
             _writer.WriteStartElement(XmlConstants.NavigationProperty);
             _writer.WriteAttributeString(XmlConstants.Name, member.Name);
-            _writer.WriteAttributeString(XmlConstants.Relationship, member.RelationshipType.FullName);
+            _writer.WriteAttributeString(
+                XmlConstants.Relationship,
+                member.RelationshipType.FullName
+            );
             _writer.WriteAttributeString(XmlConstants.FromRole, member.FromEndMember.Name);
             _writer.WriteAttributeString(XmlConstants.ToRole, member.ToEndMember.Name);
             _writer.WriteEndElement();
@@ -430,14 +573,28 @@ namespace System.Data.Entity.Design.Common
             //
             // Generate "annotation:StoreGeneratedPattern="Identity"" for model schema
             //
-            if (_isModel && member.MetadataProperties.Contains(DesignXmlConstants.EdmAnnotationNamespace + ":" + DesignXmlConstants.StoreGeneratedPattern))
+            if (
+                _isModel
+                && member.MetadataProperties.Contains(
+                    DesignXmlConstants.EdmAnnotationNamespace
+                        + ":"
+                        + DesignXmlConstants.StoreGeneratedPattern
+                )
+            )
             {
                 _writer.WriteAttributeString(
-                    TranslateFacetNameToAttributeName(
-                        DesignXmlConstants.StoreGeneratedPattern),
-                    DesignXmlConstants.EdmAnnotationNamespace, 
+                    TranslateFacetNameToAttributeName(DesignXmlConstants.StoreGeneratedPattern),
+                    DesignXmlConstants.EdmAnnotationNamespace,
                     GetAttributeValueString(
-                        member.MetadataProperties[DesignXmlConstants.EdmAnnotationNamespace + ":" + DesignXmlConstants.StoreGeneratedPattern].Value));
+                        member
+                            .MetadataProperties[
+                                DesignXmlConstants.EdmAnnotationNamespace
+                                    + ":"
+                                    + DesignXmlConstants.StoreGeneratedPattern
+                            ]
+                            .Value
+                    )
+                );
             }
 
             _writer.WriteEndElement();
@@ -448,7 +605,9 @@ namespace System.Data.Entity.Design.Common
             // we need to use the facets for this particular provider, not the ones that they type
             // may have been converted to (think CSDL types converted to provider types)
             EdmType type = GetEdmType(typeUsage);
-            IEnumerable<FacetDescription> providerDescriptions = GetAssociatedFacetDescriptions(type);
+            IEnumerable<FacetDescription> providerDescriptions = GetAssociatedFacetDescriptions(
+                type
+            );
 
             foreach (Facet facet in typeUsage.Facets)
             {
@@ -480,29 +639,37 @@ namespace System.Data.Entity.Design.Common
                 //
                 // Special case for MaxLength facet value of "Max"
                 //
-                if (_isModel && 
-                    type.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType)
+                if (_isModel && type.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType)
                 {
                     PrimitiveType primitiveType = (PrimitiveType)type;
 
-                    if ((primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.String ||
-                         primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.Binary) &&
-                        facet.Name == DbProviderManifest.MaxLengthFacetName &&
-                        Helper.IsUnboundedFacetValue(facet))
+                    if (
+                        (
+                            primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.String
+                            || primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.Binary
+                        )
+                        && facet.Name == DbProviderManifest.MaxLengthFacetName
+                        && Helper.IsUnboundedFacetValue(facet)
+                    )
                     {
-                        _writer.WriteAttributeString(TranslateFacetNameToAttributeName(facet.Name), XmlConstants.Max);
+                        _writer.WriteAttributeString(
+                            TranslateFacetNameToAttributeName(facet.Name),
+                            XmlConstants.Max
+                        );
                         continue;
                     }
                 }
 
-                _writer.WriteAttributeString(TranslateFacetNameToAttributeName(facet.Name), GetAttributeValueString(facet.Value));
+                _writer.WriteAttributeString(
+                    TranslateFacetNameToAttributeName(facet.Name),
+                    GetAttributeValueString(facet.Value)
+                );
             }
         }
 
-        
         private string TranslateFacetNameToAttributeName(string facetName)
         {
-            if(DbProviderManifest.DefaultValueFacetName == facetName)
+            if (DbProviderManifest.DefaultValueFacetName == facetName)
             {
                 return XmlConstants.DefaultValueAttribute;
             }
@@ -529,7 +696,7 @@ namespace System.Data.Entity.Design.Common
             // if the provider doesn't recognize it, it will complain
             // when it sees it; so don't put it in
             //
-            if (providerFacetDescription == null) 
+            if (providerFacetDescription == null)
             {
                 return true;
             }
@@ -550,8 +717,10 @@ namespace System.Data.Entity.Design.Common
             //
             // skip if it is not required, and has the default value
             //
-            if (!providerFacetDescription.IsRequired &&
-                facet.Value.Equals(providerFacetDescription.DefaultValue))
+            if (
+                !providerFacetDescription.IsRequired
+                && facet.Value.Equals(providerFacetDescription.DefaultValue)
+            )
             {
                 return true;
             }
@@ -561,28 +730,38 @@ namespace System.Data.Entity.Design.Common
 
         private bool IsSpecialFacet(Facet facet)
         {
-            if(_isModel)
+            if (_isModel)
             {
-                return (facet.Name == "ClientAutoGenerated" ||
-                        facet.Name == EdmProviderManifest.ConcurrencyModeFacetName ||
-                        facet.Name == XmlConstants.StoreGeneratedPattern ||
-                        facet.Name == DbProviderManifest.CollationFacetName);
+                return (
+                    facet.Name == "ClientAutoGenerated"
+                    || facet.Name == EdmProviderManifest.ConcurrencyModeFacetName
+                    || facet.Name == XmlConstants.StoreGeneratedPattern
+                    || facet.Name == DbProviderManifest.CollationFacetName
+                );
             }
             else
             {
-                return (facet.Name == EdmProviderManifest.StoreGeneratedPatternFacetName || 
-                        facet.Name == DbProviderManifest.CollationFacetName);
+                return (
+                    facet.Name == EdmProviderManifest.StoreGeneratedPatternFacetName
+                    || facet.Name == DbProviderManifest.CollationFacetName
+                );
             }
         }
 
         private IEnumerable<FacetDescription> GetAssociatedFacetDescriptions(EdmType type)
         {
-            MethodInfo mi = typeof(EdmType).GetMethod("GetAssociatedFacetDescriptions", BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo mi = typeof(EdmType).GetMethod(
+                "GetAssociatedFacetDescriptions",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Debug.Assert(mi != null, "Method GetAssociatedFacetDescriptions is missing");
             return (IEnumerable<FacetDescription>)mi.Invoke(type, new object[0]);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
         private string GetAttributeValueString(object o)
         {
             if (o.GetType() == typeof(bool))
@@ -606,6 +785,7 @@ namespace System.Data.Entity.Design.Common
                 return typeUsage.EdmType;
             }
         }
+
         private string GetTypeName(TypeUsage typeUsage)
         {
             EdmType type = GetEdmType(typeUsage);
@@ -634,15 +814,27 @@ namespace System.Data.Entity.Design.Common
             return edmType;
         }
 
-        private void WriteSchemaElement(string schemaNamespace, string provider, string providerManifestToken, params KeyValuePair<string, string>[] xmlPrefixToNamespaces)
+        private void WriteSchemaElement(
+            string schemaNamespace,
+            string provider,
+            string providerManifestToken,
+            params KeyValuePair<string, string>[] xmlPrefixToNamespaces
+        )
         {
-            string xmlNamespace = EntityFrameworkVersions.GetSchemaNamespace(_schemaVersion, _isModel ? DataSpace.CSpace : DataSpace.SSpace);
+            string xmlNamespace = EntityFrameworkVersions.GetSchemaNamespace(
+                _schemaVersion,
+                _isModel ? DataSpace.CSpace : DataSpace.SSpace
+            );
             _writer.WriteStartElement(XmlConstants.Schema, xmlNamespace);
             _writer.WriteAttributeString(XmlConstants.Namespace, schemaNamespace);
             _writer.WriteAttributeString(XmlConstants.Alias, "Self");
             if (_isModel && _schemaVersion >= EntityFrameworkVersions.Version3)
             {
-                _writer.WriteAttributeString(XmlConstants.UseStrongSpatialTypes, XmlConstants.AnnotationNamespace, XmlConstants.False);
+                _writer.WriteAttributeString(
+                    XmlConstants.UseStrongSpatialTypes,
+                    XmlConstants.AnnotationNamespace,
+                    XmlConstants.False
+                );
             }
             if (!_isModel)
             {
@@ -653,7 +845,10 @@ namespace System.Data.Entity.Design.Common
 
                 if (!string.IsNullOrEmpty(providerManifestToken))
                 {
-                    _writer.WriteAttributeString(XmlConstants.ProviderManifestToken, providerManifestToken);
+                    _writer.WriteAttributeString(
+                        XmlConstants.ProviderManifestToken,
+                        providerManifestToken
+                    );
                 }
             }
 
@@ -661,7 +856,12 @@ namespace System.Data.Entity.Design.Common
             foreach (KeyValuePair<string, string> xmlPrefixToNamespace in xmlPrefixToNamespaces)
             {
                 // see http://www.w3.org/TR/2006/REC-xml-names-20060816/
-                _writer.WriteAttributeString("xmlns", xmlPrefixToNamespace.Key, null, xmlPrefixToNamespace.Value);
+                _writer.WriteAttributeString(
+                    "xmlns",
+                    xmlPrefixToNamespace.Key,
+                    null,
+                    xmlPrefixToNamespace.Value
+                );
             }
         }
 
@@ -673,14 +873,28 @@ namespace System.Data.Entity.Design.Common
             //
             // Generate "annotation:LazyLoadingEnabled="true"" for model schema
             //
-            if (_isModel && container.MetadataProperties.Contains(DesignXmlConstants.EdmAnnotationNamespace + ":" + DesignXmlConstants.LazyLoadingEnabled))
+            if (
+                _isModel
+                && container.MetadataProperties.Contains(
+                    DesignXmlConstants.EdmAnnotationNamespace
+                        + ":"
+                        + DesignXmlConstants.LazyLoadingEnabled
+                )
+            )
             {
                 _writer.WriteAttributeString(
-                    TranslateFacetNameToAttributeName(
-                        DesignXmlConstants.LazyLoadingEnabled),
+                    TranslateFacetNameToAttributeName(DesignXmlConstants.LazyLoadingEnabled),
                     DesignXmlConstants.EdmAnnotationNamespace,
                     GetAttributeValueString(
-                        container.MetadataProperties[DesignXmlConstants.EdmAnnotationNamespace + ":" + DesignXmlConstants.LazyLoadingEnabled].Value));
+                        container
+                            .MetadataProperties[
+                                DesignXmlConstants.EdmAnnotationNamespace
+                                    + ":"
+                                    + DesignXmlConstants.LazyLoadingEnabled
+                            ]
+                            .Value
+                    )
+                );
             }
 
             foreach (EntitySetBase set in container.BaseEntitySets)
@@ -698,11 +912,15 @@ namespace System.Data.Entity.Design.Common
                 }
             }
 
-            foreach (EdmFunction functionImport in container.FunctionImports.Where(fi => fi.IsComposableAttribute))
+            foreach (
+                EdmFunction functionImport in container.FunctionImports.Where(fi =>
+                    fi.IsComposableAttribute
+                )
+            )
             {
                 WriteFunctionElement(functionImport);
             }
-            
+
             _writer.WriteEndElement();
         }
 
@@ -710,8 +928,11 @@ namespace System.Data.Entity.Design.Common
         {
             _writer.WriteStartElement(XmlConstants.AssociationSet);
             _writer.WriteAttributeString(XmlConstants.Name, associationSet.Name);
-            _writer.WriteAttributeString(XmlConstants.Association, GetFullName(associationSet.ElementType));
-            
+            _writer.WriteAttributeString(
+                XmlConstants.Association,
+                GetFullName(associationSet.ElementType)
+            );
+
             foreach (AssociationSetEnd end in associationSet.AssociationSetEnds)
             {
                 WriteAssociationSetEndElement(end);
@@ -731,12 +952,21 @@ namespace System.Data.Entity.Design.Common
         {
             _writer.WriteStartElement(XmlConstants.EntitySet);
             _writer.WriteAttributeString(XmlConstants.Name, entitySet.Name);
-            _writer.WriteAttributeString(XmlConstants.EntityType, GetFullName(entitySet.ElementType));
+            _writer.WriteAttributeString(
+                XmlConstants.EntityType,
+                GetFullName(entitySet.ElementType)
+            );
             WriteExtendedPropertyAttributes(entitySet);
 
             MetadataProperty property;
-            if (entitySet.MetadataProperties.TryGetValue(XmlConstants.DefiningQuery, false, out property) &&
-                property.Value != null)
+            if (
+                entitySet.MetadataProperties.TryGetValue(
+                    XmlConstants.DefiningQuery,
+                    false,
+                    out property
+                )
+                && property.Value != null
+            )
             {
                 _writer.WriteStartElement(XmlConstants.DefiningQuery);
                 _writer.WriteString(entitySet.DefiningQuery);
@@ -744,31 +974,57 @@ namespace System.Data.Entity.Design.Common
             }
             else
             {
-                if (entitySet.MetadataProperties.TryGetValue(XmlConstants.Schema, false, out property) &&
-                    property.Value != null)
+                if (
+                    entitySet.MetadataProperties.TryGetValue(
+                        XmlConstants.Schema,
+                        false,
+                        out property
+                    )
+                    && property.Value != null
+                )
                 {
                     _writer.WriteAttributeString(property.Name, property.Value.ToString());
                 }
 
-                if (entitySet.MetadataProperties.TryGetValue(XmlConstants.Table, false, out property) &&
-                    property.Value != null)
+                if (
+                    entitySet.MetadataProperties.TryGetValue(
+                        XmlConstants.Table,
+                        false,
+                        out property
+                    )
+                    && property.Value != null
+                )
                 {
                     _writer.WriteAttributeString(property.Name, property.Value.ToString());
                 }
             }
-
 
             _writer.WriteEndElement();
         }
 
         private void WriteExtendedPropertyAttributes(MetadataItem item)
         {
-            foreach (MetadataProperty property in item.MetadataProperties.Where(p => p.PropertyKind == PropertyKind.Extended))
+            foreach (
+                MetadataProperty property in item.MetadataProperties.Where(p =>
+                    p.PropertyKind == PropertyKind.Extended
+                )
+            )
             {
-                string xmlNamespace, attributeName;
-                if (MetadataUtil.TrySplitExtendedMetadataPropertyName(property.Name, out xmlNamespace, out attributeName))
+                string xmlNamespace,
+                    attributeName;
+                if (
+                    MetadataUtil.TrySplitExtendedMetadataPropertyName(
+                        property.Name,
+                        out xmlNamespace,
+                        out attributeName
+                    )
+                )
                 {
-                    _writer.WriteAttributeString(attributeName, xmlNamespace, property.Value.ToString());
+                    _writer.WriteAttributeString(
+                        attributeName,
+                        xmlNamespace,
+                        property.Value.ToString()
+                    );
                 }
             }
         }
@@ -787,7 +1043,7 @@ namespace System.Data.Entity.Design.Common
 
             if (type.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType)
             {
-                // primitive types are not required to be qualified   
+                // primitive types are not required to be qualified
                 name = type.Name;
             }
             else
@@ -808,11 +1064,14 @@ namespace System.Data.Entity.Design.Common
 
             if (modifierFormat != null)
             {
-                qualifiedTypeName = string.Format(CultureInfo.InvariantCulture, modifierFormat, qualifiedTypeName);
+                qualifiedTypeName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    modifierFormat,
+                    qualifiedTypeName
+                );
             }
 
             return qualifiedTypeName;
-         }
-
+        }
     }
 }

@@ -16,7 +16,13 @@ namespace System.Reflection
     //
     public sealed class RuntimeAssemblyName : IEquatable<RuntimeAssemblyName>
     {
-        public RuntimeAssemblyName(string name, Version? version, string? cultureName, AssemblyNameFlags flags, byte[]? publicKeyOrToken)
+        public RuntimeAssemblyName(
+            string name,
+            Version? version,
+            string? cultureName,
+            AssemblyNameFlags flags,
+            byte[]? publicKeyOrToken
+        )
         {
             Debug.Assert(name != null);
             this.Name = name;
@@ -37,7 +43,13 @@ namespace System.Reflection
         public static RuntimeAssemblyName Parse(string name)
         {
             AssemblyNameParser.AssemblyNameParts parts = AssemblyNameParser.Parse(name);
-            return new RuntimeAssemblyName(parts._name, parts._version, parts._cultureName, parts._flags, parts._publicKeyOrToken);
+            return new RuntimeAssemblyName(
+                parts._name,
+                parts._version,
+                parts._cultureName,
+                parts._flags,
+                parts._publicKeyOrToken
+            );
         }
 
         // Simple name.
@@ -167,18 +179,30 @@ namespace System.Reflection
         {
             get
             {
-                byte[]? pkt = (0 != (Flags & AssemblyNameFlags.PublicKey)) ? AssemblyNameHelpers.ComputePublicKeyToken(PublicKeyOrToken) : PublicKeyOrToken;
-                return AssemblyNameFormatter.ComputeDisplayName(Name, Version, CultureName, pkt, ExtractAssemblyNameFlags(Flags), ExtractAssemblyContentType(Flags));
+                byte[]? pkt =
+                    (0 != (Flags & AssemblyNameFlags.PublicKey))
+                        ? AssemblyNameHelpers.ComputePublicKeyToken(PublicKeyOrToken)
+                        : PublicKeyOrToken;
+                return AssemblyNameFormatter.ComputeDisplayName(
+                    Name,
+                    Version,
+                    CultureName,
+                    pkt,
+                    ExtractAssemblyNameFlags(Flags),
+                    ExtractAssemblyContentType(Flags)
+                );
             }
         }
 
-        private static AssemblyNameFlags ExtractAssemblyNameFlags(AssemblyNameFlags combinedFlags)
-            => combinedFlags & unchecked((AssemblyNameFlags)0xFFFFF10F);
+        private static AssemblyNameFlags ExtractAssemblyNameFlags(
+            AssemblyNameFlags combinedFlags
+        ) => combinedFlags & unchecked((AssemblyNameFlags)0xFFFFF10F);
 
-        private static AssemblyContentType ExtractAssemblyContentType(AssemblyNameFlags flags)
-            => (AssemblyContentType)((((int)flags) >> 9) & 0x7);
+        private static AssemblyContentType ExtractAssemblyContentType(AssemblyNameFlags flags) =>
+            (AssemblyContentType)((((int)flags) >> 9) & 0x7);
 
-        private static ProcessorArchitecture ExtractProcessorArchitecture(AssemblyNameFlags flags)
-            => (ProcessorArchitecture)((((int)flags) >> 4) & 0x7);
+        private static ProcessorArchitecture ExtractProcessorArchitecture(
+            AssemblyNameFlags flags
+        ) => (ProcessorArchitecture)((((int)flags) >> 4) & 0x7);
     }
 }

@@ -35,7 +35,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
             UpdateAbstractColumnVisibility();
         }
 
-        private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ViewModel_PropertyChanged(
+            object sender,
+            System.ComponentModel.PropertyChangedEventArgs e
+        )
         {
             if (e.PropertyName == nameof(MemberSelectionViewModel.ShowMakeAbstract))
             {
@@ -45,19 +48,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
 
         private void UpdateAbstractColumnVisibility()
         {
-            AbstractColumn.Visibility = ViewModel.ShowMakeAbstract ? Visibility.Visible : Visibility.Collapsed;
+            AbstractColumn.Visibility = ViewModel.ShowMakeAbstract
+                ? Visibility.Visible
+                : Visibility.Collapsed;
         }
 
-        private void SelectDependentsButton_Click(object sender, RoutedEventArgs e)
-            => ViewModel.SelectDependents();
+        private void SelectDependentsButton_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.SelectDependents();
 
-        private void SelectPublic_Click(object sender, RoutedEventArgs e)
-            => ViewModel.SelectPublic();
+        private void SelectPublic_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.SelectPublic();
 
-        private void SelectAllButton_Click(object sender, RoutedEventArgs e)
-            => ViewModel.SelectAll();
+        private void SelectAllButton_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.SelectAll();
 
-        private void DeselectAllButton_Click(object sender, RoutedEventArgs e)
-            => ViewModel.DeselectAll();
+        private void DeselectAllButton_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.DeselectAll();
     }
 }

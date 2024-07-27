@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ListComponentEditor.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -20,20 +20,21 @@ namespace System.Web.UI.Design.MobileControls
     /// </summary>
     /// <seealso cref='System.Web.UI.MobileControls.List'/>
     /// <seealso cref='System.Web.UI.Design.MobileControls.ListDesigner'/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class ListComponentEditor : BaseTemplatedMobileComponentEditor 
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class ListComponentEditor : BaseTemplatedMobileComponentEditor
     {
-
         // The set of pages used within the List ComponentEditor
         private static Type[] _editorPages = new Type[]
-                                             {
-                                                 typeof(ListGeneralPage),
-                                                 typeof(ListItemsPage)
-                                             };
+        {
+            typeof(ListGeneralPage),
+            typeof(ListItemsPage),
+        };
 
         internal const int IDX_GENERAL = 0;
         internal const int IDX_ITEMS = 1;
@@ -43,9 +44,8 @@ namespace System.Web.UI.Design.MobileControls
         ///       Initializes a new instance of <see cref='System.Web.UI.Design.MobileControls.ListComponentEditor'/>.
         ///    </para>
         /// </summary>
-        public ListComponentEditor() : base(IDX_GENERAL)
-        {
-        }
+        public ListComponentEditor()
+            : base(IDX_GENERAL) { }
 
         /// <summary>
         ///    <para>
@@ -55,9 +55,8 @@ namespace System.Web.UI.Design.MobileControls
         /// <param name='initialPage'>
         ///    The index of the initial page.
         /// </param>
-        public ListComponentEditor(int initialPage) : base(initialPage)
-        {
-        }
+        public ListComponentEditor(int initialPage)
+            : base(initialPage) { }
 
         /// <summary>
         ///    <para>

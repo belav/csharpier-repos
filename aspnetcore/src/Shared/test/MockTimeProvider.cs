@@ -47,12 +47,19 @@ public class MockTimeProvider : TimeProvider
     {
         if (timeSpan < TimeSpan.Zero)
         {
-            throw new ArgumentOutOfRangeException(nameof(timeSpan), timeSpan, "Cannot go back in time.");
+            throw new ArgumentOutOfRangeException(
+                nameof(timeSpan),
+                timeSpan,
+                "Cannot go back in time."
+            );
         }
         Interlocked.Add(ref _utcTicks, timeSpan.Ticks);
         checked
         {
-            Interlocked.Add(ref _timestamp, (long)(timeSpan.Ticks * ((double)_timestampFrequency / TimeSpan.TicksPerSecond)));
+            Interlocked.Add(
+                ref _timestamp,
+                (long)(timeSpan.Ticks * ((double)_timestampFrequency / TimeSpan.TicksPerSecond))
+            );
         }
     }
 
@@ -63,10 +70,16 @@ public class MockTimeProvider : TimeProvider
         if (priorTicks > nowTicks)
         {
             var priorTime = new DateTimeOffset(priorTicks, TimeSpan.Zero);
-            throw new ArgumentOutOfRangeException(nameof(newUtcNow), newUtcNow, $"Cannot go back in time. The prior time was {priorTime}");
+            throw new ArgumentOutOfRangeException(
+                nameof(newUtcNow),
+                newUtcNow,
+                $"Cannot go back in time. The prior time was {priorTime}"
+            );
         }
         // Advance Timestamp by the same amount.
-        var timestampOffset = (long)((nowTicks - priorTicks) * ((double)_timestampFrequency / TimeSpan.TicksPerSecond));
+        var timestampOffset = (long)(
+            (nowTicks - priorTicks) * ((double)_timestampFrequency / TimeSpan.TicksPerSecond)
+        );
         Interlocked.Add(ref _timestamp, timestampOffset);
     }
 
@@ -75,16 +88,27 @@ public class MockTimeProvider : TimeProvider
         var priorTimestamp = Interlocked.Exchange(ref _timestamp, timestamp);
         if (priorTimestamp > timestamp)
         {
-            throw new ArgumentOutOfRangeException(nameof(timestamp), timestamp, $"Cannot go back in time. The prior timestamp was {priorTimestamp}");
+            throw new ArgumentOutOfRangeException(
+                nameof(timestamp),
+                timestamp,
+                $"Cannot go back in time. The prior timestamp was {priorTimestamp}"
+            );
         }
         // Advance UtcNow by the same amount.
         checked
         {
-            var utcOffset = (long)((timestamp - priorTimestamp) * ((double)TimeSpan.TicksPerSecond / _timestampFrequency));
+            var utcOffset = (long)(
+                (timestamp - priorTimestamp)
+                * ((double)TimeSpan.TicksPerSecond / _timestampFrequency)
+            );
             Interlocked.Add(ref _utcTicks, utcOffset);
         }
     }
 
-    public override ITimer CreateTimer(TimerCallback callback, object state, TimeSpan dueTime, TimeSpan period)
-        => throw new NotImplementedException();
+    public override ITimer CreateTimer(
+        TimerCallback callback,
+        object state,
+        TimeSpan dueTime,
+        TimeSpan period
+    ) => throw new NotImplementedException();
 }

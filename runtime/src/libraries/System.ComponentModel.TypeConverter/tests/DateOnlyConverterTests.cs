@@ -18,8 +18,16 @@ namespace System.ComponentModel.Tests
             yield return ConvertTest.Valid("", DateOnly.MinValue);
             yield return ConvertTest.Valid("    ", DateOnly.MinValue);
             yield return ConvertTest.Valid(dateOnly.ToString(), dateOnly);
-            yield return ConvertTest.Valid(dateOnly.ToString(CultureInfo.InvariantCulture.DateTimeFormat), dateOnly, CultureInfo.InvariantCulture);
-            yield return ConvertTest.Valid(" " + dateOnly.ToString(CultureInfo.InvariantCulture.DateTimeFormat) + " ", dateOnly, CultureInfo.InvariantCulture);
+            yield return ConvertTest.Valid(
+                dateOnly.ToString(CultureInfo.InvariantCulture.DateTimeFormat),
+                dateOnly,
+                CultureInfo.InvariantCulture
+            );
+            yield return ConvertTest.Valid(
+                " " + dateOnly.ToString(CultureInfo.InvariantCulture.DateTimeFormat) + " ",
+                dateOnly,
+                CultureInfo.InvariantCulture
+            );
 
             yield return ConvertTest.Throws<FormatException>("invalid");
 
@@ -33,16 +41,52 @@ namespace System.ComponentModel.Tests
             CultureInfo polandCulture = new CultureInfo("pl-PL");
             DateTimeFormatInfo formatInfo = CultureInfo.CurrentCulture.DateTimeFormat;
             DateOnly dateOnly = new DateOnly(1998, 12, 5);
-            yield return ConvertTest.Valid(dateOnly, dateOnly.ToString(formatInfo.ShortDatePattern));
-            yield return ConvertTest.Valid(dateOnly, dateOnly.ToString(frenchCulture.DateTimeFormat.ShortDatePattern, frenchCulture.DateTimeFormat), frenchCulture)
+            yield return ConvertTest.Valid(
+                dateOnly,
+                dateOnly.ToString(formatInfo.ShortDatePattern)
+            );
+            yield return ConvertTest
+                .Valid(
+                    dateOnly,
+                    dateOnly.ToString(
+                        frenchCulture.DateTimeFormat.ShortDatePattern,
+                        frenchCulture.DateTimeFormat
+                    ),
+                    frenchCulture
+                )
                 .WithRemoteInvokeCulture(frenchCulture);
-            yield return ConvertTest.Valid(dateOnly, dateOnly.ToString(frenchCulture.DateTimeFormat.ShortDatePattern, frenchCulture.DateTimeFormat), frenchCulture)
+            yield return ConvertTest
+                .Valid(
+                    dateOnly,
+                    dateOnly.ToString(
+                        frenchCulture.DateTimeFormat.ShortDatePattern,
+                        frenchCulture.DateTimeFormat
+                    ),
+                    frenchCulture
+                )
                 .WithRemoteInvokeCulture(polandCulture);
-            yield return ConvertTest.Valid(dateOnly, dateOnly.ToString(polandCulture.DateTimeFormat.ShortDatePattern, polandCulture.DateTimeFormat), polandCulture)
+            yield return ConvertTest
+                .Valid(
+                    dateOnly,
+                    dateOnly.ToString(
+                        polandCulture.DateTimeFormat.ShortDatePattern,
+                        polandCulture.DateTimeFormat
+                    ),
+                    polandCulture
+                )
                 .WithRemoteInvokeCulture(polandCulture);
-            yield return ConvertTest.Valid(dateOnly, dateOnly.ToString(polandCulture.DateTimeFormat.ShortDatePattern, polandCulture.DateTimeFormat), polandCulture)
+            yield return ConvertTest
+                .Valid(
+                    dateOnly,
+                    dateOnly.ToString(
+                        polandCulture.DateTimeFormat.ShortDatePattern,
+                        polandCulture.DateTimeFormat
+                    ),
+                    polandCulture
+                )
                 .WithRemoteInvokeCulture(frenchCulture);
-            yield return ConvertTest.Valid(dateOnly, "1998-12-05", CultureInfo.InvariantCulture)
+            yield return ConvertTest
+                .Valid(dateOnly, "1998-12-05", CultureInfo.InvariantCulture)
                 .WithRemoteInvokeCulture(polandCulture);
 
             yield return ConvertTest.Valid(DateOnly.MinValue, string.Empty);
@@ -50,7 +94,9 @@ namespace System.ComponentModel.Tests
             yield return ConvertTest.Valid(
                 dateOnly,
                 new InstanceDescriptor(
-                    typeof(DateOnly).GetConstructor(new Type[] { typeof(int), typeof(int), typeof(int) }),
+                    typeof(DateOnly).GetConstructor(
+                        new Type[] { typeof(int), typeof(int), typeof(int) }
+                    ),
                     new object[] { 1998, 12, 5 }
                 )
             );
@@ -64,7 +110,9 @@ namespace System.ComponentModel.Tests
         [InlineData(typeof(int))]
         public void ConvertTo_InvalidValue_ThrowsNotSupportedException(Type destinationType)
         {
-            Assert.Throws<NotSupportedException>(() => Converter.ConvertTo(new object(), destinationType));
+            Assert.Throws<NotSupportedException>(
+                () => Converter.ConvertTo(new object(), destinationType)
+            );
         }
     }
 }

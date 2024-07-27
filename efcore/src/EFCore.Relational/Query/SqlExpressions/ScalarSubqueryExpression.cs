@@ -34,7 +34,9 @@ public class ScalarSubqueryExpression : SqlExpression
     {
         if (selectExpression.Projection.Count != 1)
         {
-            throw new InvalidOperationException(CoreStrings.TranslationFailed(selectExpression.Print()));
+            throw new InvalidOperationException(
+                CoreStrings.TranslationFailed(selectExpression.Print())
+            );
         }
 
 #if DEBUG
@@ -57,12 +59,12 @@ public class ScalarSubqueryExpression : SqlExpression
     /// </summary>
     /// <param name="typeMapping">A relational type mapping to apply.</param>
     /// <returns>A new expression which has supplied type mapping.</returns>
-    public virtual SqlExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping)
-        => new ScalarSubqueryExpression(Subquery, typeMapping);
+    public virtual SqlExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping) =>
+        new ScalarSubqueryExpression(Subquery, typeMapping);
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => Update((SelectExpression)visitor.Visit(Subquery));
+    protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+        Update((SelectExpression)visitor.Visit(Subquery));
 
     /// <summary>
     ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -70,10 +72,8 @@ public class ScalarSubqueryExpression : SqlExpression
     /// </summary>
     /// <param name="subquery">The <see cref="Subquery" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual ScalarSubqueryExpression Update(SelectExpression subquery)
-        => subquery != Subquery
-            ? new ScalarSubqueryExpression(subquery)
-            : this;
+    public virtual ScalarSubqueryExpression Update(SelectExpression subquery) =>
+        subquery != Subquery ? new ScalarSubqueryExpression(subquery) : this;
 
     /// <inheritdoc />
     protected override void Print(ExpressionPrinter expressionPrinter)
@@ -88,17 +88,17 @@ public class ScalarSubqueryExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is ScalarSubqueryExpression scalarSubqueryExpression
-                && Equals(scalarSubqueryExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is ScalarSubqueryExpression scalarSubqueryExpression
+                && Equals(scalarSubqueryExpression)
+        );
 
-    private bool Equals(ScalarSubqueryExpression scalarSubqueryExpression)
-        => base.Equals(scalarSubqueryExpression)
-            && Subquery.Equals(scalarSubqueryExpression.Subquery);
+    private bool Equals(ScalarSubqueryExpression scalarSubqueryExpression) =>
+        base.Equals(scalarSubqueryExpression) && Subquery.Equals(scalarSubqueryExpression.Subquery);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Subquery);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Subquery);
 }

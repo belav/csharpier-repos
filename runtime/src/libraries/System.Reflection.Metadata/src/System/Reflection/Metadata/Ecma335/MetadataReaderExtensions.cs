@@ -111,7 +111,10 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="reader"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="tableIndex"/> is not a valid table index.</exception>
-        public static unsafe int GetTableMetadataOffset(this MetadataReader reader, TableIndex tableIndex)
+        public static unsafe int GetTableMetadataOffset(
+            this MetadataReader reader,
+            TableIndex tableIndex
+        )
         {
             if (reader is null)
             {
@@ -121,7 +124,10 @@ namespace System.Reflection.Metadata.Ecma335
             return (int)(reader.GetTableMetadataBlock(tableIndex).Pointer - reader.Block.Pointer);
         }
 
-        private static MemoryBlock GetTableMetadataBlock(this MetadataReader reader, TableIndex tableIndex)
+        private static MemoryBlock GetTableMetadataBlock(
+            this MetadataReader reader,
+            TableIndex tableIndex
+        )
         {
             Debug.Assert(reader != null);
 
@@ -207,7 +213,10 @@ namespace System.Reflection.Metadata.Ecma335
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="reader"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="heapIndex"/> is not a valid heap index.</exception>
-        public static unsafe int GetHeapMetadataOffset(this MetadataReader reader, HeapIndex heapIndex)
+        public static unsafe int GetHeapMetadataOffset(
+            this MetadataReader reader,
+            HeapIndex heapIndex
+        )
         {
             if (reader is null)
             {
@@ -240,7 +249,10 @@ namespace System.Reflection.Metadata.Ecma335
         /// Returns the a handle to the UserString that follows the given one in the UserString heap or a nil handle if it is the last one.
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="reader"/> is null.</exception>
-        public static UserStringHandle GetNextHandle(this MetadataReader reader, UserStringHandle handle)
+        public static UserStringHandle GetNextHandle(
+            this MetadataReader reader,
+            UserStringHandle handle
+        )
         {
             if (reader is null)
             {
@@ -282,7 +294,9 @@ namespace System.Reflection.Metadata.Ecma335
         /// Enumerates entries of EnC log.
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="reader"/> is null.</exception>
-        public static IEnumerable<EditAndContinueLogEntry> GetEditAndContinueLogEntries(this MetadataReader reader)
+        public static IEnumerable<EditAndContinueLogEntry> GetEditAndContinueLogEntries(
+            this MetadataReader reader
+        )
         {
             if (reader is null)
             {
@@ -297,7 +311,8 @@ namespace System.Reflection.Metadata.Ecma335
                 {
                     yield return new EditAndContinueLogEntry(
                         new EntityHandle(reader.EncLogTable.GetToken(rid)),
-                        reader.EncLogTable.GetFuncCode(rid));
+                        reader.EncLogTable.GetFuncCode(rid)
+                    );
                 }
             }
         }
@@ -306,7 +321,9 @@ namespace System.Reflection.Metadata.Ecma335
         /// Enumerates entries of EnC map.
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="reader"/> is null.</exception>
-        public static IEnumerable<EntityHandle> GetEditAndContinueMapEntries(this MetadataReader reader)
+        public static IEnumerable<EntityHandle> GetEditAndContinueMapEntries(
+            this MetadataReader reader
+        )
         {
             if (reader is null)
             {
@@ -331,7 +348,9 @@ namespace System.Reflection.Metadata.Ecma335
         /// The resulting sequence corresponds exactly to entries in PropertyMap table,
         /// i.e. n-th returned <see cref="TypeDefinitionHandle"/> is stored in n-th row of PropertyMap.
         /// </returns>
-        public static IEnumerable<TypeDefinitionHandle> GetTypesWithProperties(this MetadataReader reader)
+        public static IEnumerable<TypeDefinitionHandle> GetTypesWithProperties(
+            this MetadataReader reader
+        )
         {
             if (reader is null)
             {
@@ -356,7 +375,9 @@ namespace System.Reflection.Metadata.Ecma335
         /// The resulting sequence corresponds exactly to entries in EventMap table,
         /// i.e. n-th returned <see cref="TypeDefinitionHandle"/> is stored in n-th row of EventMap.
         /// </returns>
-        public static IEnumerable<TypeDefinitionHandle> GetTypesWithEvents(this MetadataReader reader)
+        public static IEnumerable<TypeDefinitionHandle> GetTypesWithEvents(
+            this MetadataReader reader
+        )
         {
             if (reader is null)
             {
@@ -377,7 +398,11 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Given a type handle and a raw type kind found in a signature blob determines whether the target type is a value type or a reference type.
         /// </summary>
-        public static SignatureTypeKind ResolveSignatureTypeKind(this MetadataReader reader, EntityHandle typeHandle, byte rawTypeKind)
+        public static SignatureTypeKind ResolveSignatureTypeKind(
+            this MetadataReader reader,
+            EntityHandle typeHandle,
+            byte rawTypeKind
+        )
         {
             if (reader is null)
             {
@@ -408,11 +433,14 @@ namespace System.Reflection.Metadata.Ecma335
                     return typeKind;
 
                 case HandleKind.TypeReference:
-                    var treatment = reader.GetTypeReference((TypeReferenceHandle)typeHandle).SignatureTreatment;
+                    var treatment = reader
+                        .GetTypeReference((TypeReferenceHandle)typeHandle)
+                        .SignatureTreatment;
                     return treatment switch
                     {
                         TypeRefSignatureTreatment.ProjectedToClass => SignatureTypeKind.Class,
-                        TypeRefSignatureTreatment.ProjectedToValueType => SignatureTypeKind.ValueType,
+                        TypeRefSignatureTreatment.ProjectedToValueType
+                            => SignatureTypeKind.ValueType,
                         TypeRefSignatureTreatment.None => typeKind,
                         _ => throw ExceptionUtilities.UnexpectedValue(treatment),
                     };
@@ -425,7 +453,10 @@ namespace System.Reflection.Metadata.Ecma335
                     return SignatureTypeKind.Unknown;
 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(typeHandle), SR.Format(SR.UnexpectedHandleKind, typeHandle.Kind));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(typeHandle),
+                        SR.Format(SR.UnexpectedHandleKind, typeHandle.Kind)
+                    );
             }
         }
     }

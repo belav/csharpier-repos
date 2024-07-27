@@ -79,13 +79,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             public BasicBlock ToImmutable()
             {
                 Debug.Assert(Region != null);
-                var block = new BasicBlock(Kind,
-                                           _statements?.ToImmutableAndFree() ?? ImmutableArray<IOperation>.Empty,
-                                           BranchValue,
-                                           ConditionKind,
-                                           Ordinal,
-                                           IsReachable,
-                                           Region);
+                var block = new BasicBlock(
+                    Kind,
+                    _statements?.ToImmutableAndFree() ?? ImmutableArray<IOperation>.Empty,
+                    BranchValue,
+                    ConditionKind,
+                    Ordinal,
+                    IsReachable,
+                    Region
+                );
                 _statements = null;
                 return block;
             }
@@ -224,7 +226,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 }
             }
 
-            public ImmutableArray<ControlFlowBranch> ConvertPredecessorsToBranches(ArrayBuilder<BasicBlock> blocks)
+            public ImmutableArray<ControlFlowBranch> ConvertPredecessorsToBranches(
+                ArrayBuilder<BasicBlock> blocks
+            )
             {
                 if (!HasPredecessors)
                 {
@@ -235,7 +239,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 BasicBlock block = blocks[Ordinal];
 
-                var branches = ArrayBuilder<ControlFlowBranch>.GetInstance(_predecessors?.Count ?? 2);
+                var branches = ArrayBuilder<ControlFlowBranch>.GetInstance(
+                    _predecessors?.Count ?? 2
+                );
 
                 if (_predecessors != null)
                 {
@@ -266,23 +272,25 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 }
 
                 // Order predecessors by source ordinal and conditional first to ensure deterministic predecessor ordering.
-                branches.Sort((x, y) =>
-                {
-                    int result = x.Source.Ordinal - y.Source.Ordinal;
-                    if (result == 0 && x.IsConditionalSuccessor != y.IsConditionalSuccessor)
+                branches.Sort(
+                    (x, y) =>
                     {
-                        if (x.IsConditionalSuccessor)
+                        int result = x.Source.Ordinal - y.Source.Ordinal;
+                        if (result == 0 && x.IsConditionalSuccessor != y.IsConditionalSuccessor)
                         {
-                            result = -1;
+                            if (x.IsConditionalSuccessor)
+                            {
+                                result = -1;
+                            }
+                            else
+                            {
+                                result = 1;
+                            }
                         }
-                        else
-                        {
-                            result = 1;
-                        }
-                    }
 
-                    return result;
-                });
+                        return result;
+                    }
+                );
 
                 return branches.ToImmutableAndFree();
 

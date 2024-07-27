@@ -6,5 +6,5 @@ namespace HtmlGenerationWebSite.Models;
 public enum Gender
 {
     Male,
-    Female
+    Female,
 }

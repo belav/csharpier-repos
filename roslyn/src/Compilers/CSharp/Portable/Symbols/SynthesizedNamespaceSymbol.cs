@@ -4,11 +4,11 @@
 
 #nullable disable
 
-using System.Collections.Immutable;
-using Roslyn.Utilities;
-using System.Diagnostics;
 using System;
+using System.Collections.Immutable;
+using System.Diagnostics;
 using Microsoft.CodeAnalysis.Emit;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
@@ -30,11 +30,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _name = name;
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(_containingSymbol.GetHashCode(), _name.GetHashCode());
+        public override int GetHashCode() =>
+            Hash.Combine(_containingSymbol.GetHashCode(), _name.GetHashCode());
 
-        public override bool Equals(Symbol obj, TypeCompareKind compareKind)
-            => obj is SynthesizedNamespaceSymbol other && Equals(other);
+        public override bool Equals(Symbol obj, TypeCompareKind compareKind) =>
+            obj is SynthesizedNamespaceSymbol other && Equals(other);
 
         public bool Equals(SynthesizedNamespaceSymbol other)
         {
@@ -43,40 +43,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return true;
             }
 
-            return other is object && _name.Equals(other._name) && _containingSymbol.Equals(other._containingSymbol);
+            return other is object
+                && _name.Equals(other._name)
+                && _containingSymbol.Equals(other._containingSymbol);
         }
 
-        internal override NamespaceExtent Extent
-            => _containingSymbol.Extent;
+        internal override NamespaceExtent Extent => _containingSymbol.Extent;
 
-        public override string Name
-            => _name;
+        public override string Name => _name;
 
-        public override Symbol ContainingSymbol
-            => _containingSymbol;
+        public override Symbol ContainingSymbol => _containingSymbol;
 
-        public override AssemblySymbol ContainingAssembly
-            => _containingSymbol.ContainingAssembly;
+        public override AssemblySymbol ContainingAssembly => _containingSymbol.ContainingAssembly;
 
-        public override ImmutableArray<Location> Locations
-            => ImmutableArray<Location>.Empty;
+        public override ImmutableArray<Location> Locations => ImmutableArray<Location>.Empty;
 
-        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
-            => ImmutableArray<SyntaxReference>.Empty;
+        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+            ImmutableArray<SyntaxReference>.Empty;
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers()
-            => ImmutableArray<NamedTypeSymbol>.Empty;
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers() =>
+            ImmutableArray<NamedTypeSymbol>.Empty;
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name)
-            => ImmutableArray<NamedTypeSymbol>.Empty;
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name) =>
+            ImmutableArray<NamedTypeSymbol>.Empty;
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name, int arity)
-            => ImmutableArray<NamedTypeSymbol>.Empty;
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(
+            ReadOnlyMemory<char> name,
+            int arity
+        ) => ImmutableArray<NamedTypeSymbol>.Empty;
 
-        public override ImmutableArray<Symbol> GetMembers()
-            => ImmutableArray<Symbol>.Empty;
+        public override ImmutableArray<Symbol> GetMembers() => ImmutableArray<Symbol>.Empty;
 
-        public override ImmutableArray<Symbol> GetMembers(ReadOnlyMemory<char> name)
-            => ImmutableArray<Symbol>.Empty;
+        public override ImmutableArray<Symbol> GetMembers(ReadOnlyMemory<char> name) =>
+            ImmutableArray<Symbol>.Empty;
     }
 }

@@ -4,13 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
+using System.Text;
 using TestLibrary;
-
 using Xunit;
 
 // This test shares its logic with the managed type system test suite, and seeks to ensure the runtime agrees with it
@@ -43,7 +41,10 @@ namespace istypeequivalent
             return null;
         }
 
-        private static Dictionary<string, Type> GetTypeIdentifierAssociatedTypesInNamespace(Module module, string @namespace)
+        private static Dictionary<string, Type> GetTypeIdentifierAssociatedTypesInNamespace(
+            Module module,
+            string @namespace
+        )
         {
             Dictionary<string, Type> result = new Dictionary<string, Type>();
             foreach (var typeDef in GetAllTypesInNamespace(module, @namespace))
@@ -57,10 +58,18 @@ namespace istypeequivalent
             return result;
         }
 
-        private static IEnumerable<ValueTuple<Type, Type>> GetTypesWhichClaimMatchingTypeIdentifiersInNamespace(string @namespace)
+        private static IEnumerable<
+            ValueTuple<Type, Type>
+        > GetTypesWhichClaimMatchingTypeIdentifiersInNamespace(string @namespace)
         {
-            var module1Types = GetTypeIdentifierAssociatedTypesInNamespace(typeof(TypeEquivalenceAssembly1).Module, @namespace);
-            var module2Types = GetTypeIdentifierAssociatedTypesInNamespace(typeof(TypeEquivalenceAssembly2).Module, @namespace);
+            var module1Types = GetTypeIdentifierAssociatedTypesInNamespace(
+                typeof(TypeEquivalenceAssembly1).Module,
+                @namespace
+            );
+            var module2Types = GetTypeIdentifierAssociatedTypesInNamespace(
+                typeof(TypeEquivalenceAssembly2).Module,
+                @namespace
+            );
 
             foreach (var data in module1Types)
             {
@@ -74,7 +83,11 @@ namespace istypeequivalent
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows))]
         public static void TestTypesWhichShouldMatch()
         {
-            foreach (var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace("TypesWhichMatch"))
+            foreach (
+                var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace(
+                    "TypesWhichMatch"
+                )
+            )
             {
                 Console.WriteLine($"Comparing {typePair.Item1} to {typePair.Item2}");
                 Assert.NotEqual(typePair.Item1, typePair.Item2);
@@ -85,7 +98,11 @@ namespace istypeequivalent
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows))]
         public static void TestTypesWhichShouldNotMatch()
         {
-            foreach (var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace("TypesWhichDoNotMatch"))
+            foreach (
+                var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace(
+                    "TypesWhichDoNotMatch"
+                )
+            )
             {
                 Console.WriteLine($"Comparing {typePair.Item1} to {typePair.Item2}");
                 Assert.False(typePair.Item1.IsEquivalentTo(typePair.Item2));

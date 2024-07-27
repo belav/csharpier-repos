@@ -1,29 +1,23 @@
-using SomeOtherNS;
 using LocalNS;
 using OneMoreNS;
+using SomeOtherNS;
 
-namespace SomeOtherNS.Compiler
-{
-}
+namespace SomeOtherNS.Compiler { }
 
-namespace OneMoreNS.Compiler
-{
-}
+namespace OneMoreNS.Compiler { }
 
 namespace LocalNS
 {
-	public class Compiler
-	{
-	}
+    public class Compiler { }
 }
 
 namespace System.Local
 {
-	class M
-	{
-		public static void Main ()
-		{
-			Compiler c = new LocalNS.Compiler ();
-		}
-	}
+    class M
+    {
+        public static void Main()
+        {
+            Compiler c = new LocalNS.Compiler();
+        }
+    }
 }

@@ -13,6 +13,7 @@ namespace System.ServiceModel
     public class NetTcpBinding : Binding, IBindingRuntimePreferences
     {
         OptionalReliableSession reliableSession;
+
         // private BindingElements
         TcpTransportBindingElement transport;
         BinaryMessageEncodingBindingElement encoding;
@@ -20,7 +21,11 @@ namespace System.ServiceModel
         ReliableSessionBindingElement session;
         NetTcpSecurity security = new NetTcpSecurity();
 
-        public NetTcpBinding() { Initialize(); }
+        public NetTcpBinding()
+        {
+            Initialize();
+        }
+
         public NetTcpBinding(SecurityMode securityMode)
             : this()
         {
@@ -39,7 +44,13 @@ namespace System.ServiceModel
             ApplyConfiguration(configurationName);
         }
 
-        NetTcpBinding(TcpTransportBindingElement transport, BinaryMessageEncodingBindingElement encoding, TransactionFlowBindingElement context, ReliableSessionBindingElement session, NetTcpSecurity security)
+        NetTcpBinding(
+            TcpTransportBindingElement transport,
+            BinaryMessageEncodingBindingElement encoding,
+            TransactionFlowBindingElement context,
+            ReliableSessionBindingElement session,
+            NetTcpSecurity security
+        )
             : this()
         {
             this.security = security;
@@ -78,10 +89,7 @@ namespace System.ServiceModel
         public long MaxBufferPoolSize
         {
             get { return transport.MaxBufferPoolSize; }
-            set
-            {
-                transport.MaxBufferPoolSize = value;
-            }
+            set { transport.MaxBufferPoolSize = value; }
         }
 
         [DefaultValue(TransportDefaults.MaxBufferSize)]
@@ -149,21 +157,23 @@ namespace System.ServiceModel
 
         public OptionalReliableSession ReliableSession
         {
-            get
-            {
-                return reliableSession;
-            }
+            get { return reliableSession; }
             set
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
                 this.reliableSession.CopySettings(value);
             }
         }
 
-        public override string Scheme { get { return transport.Scheme; } }
+        public override string Scheme
+        {
+            get { return transport.Scheme; }
+        }
 
         public EnvelopeVersion EnvelopeVersion
         {
@@ -195,7 +205,12 @@ namespace System.ServiceModel
             this.reliableSession = new OptionalReliableSession(session);
         }
 
-        void InitializeFrom(TcpTransportBindingElement transport, BinaryMessageEncodingBindingElement encoding, TransactionFlowBindingElement context, ReliableSessionBindingElement session)
+        void InitializeFrom(
+            TcpTransportBindingElement transport,
+            BinaryMessageEncodingBindingElement encoding,
+            TransactionFlowBindingElement context,
+            ReliableSessionBindingElement session
+        )
         {
             Fx.Assert(transport != null, "Invalid (null) transport value.");
             Fx.Assert(encoding != null, "Invalid (null) encoding value.");
@@ -208,11 +223,11 @@ namespace System.ServiceModel
             this.MaxBufferSize = transport.MaxBufferSize;
             if (transport.IsMaxPendingConnectionsSet)
             {
-                this.MaxConnections = transport.MaxPendingConnections;    
+                this.MaxConnections = transport.MaxPendingConnections;
             }
             if (transport.IsListenBacklogSet)
             {
-                this.ListenBacklog = transport.ListenBacklog;    
+                this.ListenBacklog = transport.ListenBacklog;
             }
             this.MaxReceivedMessageSize = transport.MaxReceivedMessageSize;
             this.PortSharingEnabled = transport.PortSharingEnabled;
@@ -234,10 +249,15 @@ namespace System.ServiceModel
             }
         }
 
-        // check that properties of the HttpTransportBindingElement and 
-        // MessageEncodingBindingElement not exposed as properties on BasicHttpBinding 
+        // check that properties of the HttpTransportBindingElement and
+        // MessageEncodingBindingElement not exposed as properties on BasicHttpBinding
         // match default values of the binding elements
-        bool IsBindingElementsMatch(TcpTransportBindingElement transport, BinaryMessageEncodingBindingElement encoding, TransactionFlowBindingElement context, ReliableSessionBindingElement session)
+        bool IsBindingElementsMatch(
+            TcpTransportBindingElement transport,
+            BinaryMessageEncodingBindingElement encoding,
+            TransactionFlowBindingElement context,
+            ReliableSessionBindingElement session
+        )
         {
             if (!this.transport.IsMatch(transport))
                 return false;
@@ -258,14 +278,20 @@ namespace System.ServiceModel
 
         void ApplyConfiguration(string configurationName)
         {
-            NetTcpBindingCollectionElement section = NetTcpBindingCollectionElement.GetBindingCollectionElement();
+            NetTcpBindingCollectionElement section =
+                NetTcpBindingCollectionElement.GetBindingCollectionElement();
             NetTcpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                    SR.GetString(SR.ConfigInvalidBindingConfigurationName,
-                                 configurationName,
-                                 ConfigurationStrings.NetTcpBindingCollectionElementName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            ConfigurationStrings.NetTcpBindingCollectionElementName
+                        )
+                    )
+                );
             }
             else
             {
@@ -294,7 +320,11 @@ namespace System.ServiceModel
             }
             else if (mode == SecurityMode.Message)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.UnsupportedSecuritySetting, "Mode", mode)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.UnsupportedSecuritySetting, "Mode", mode)
+                    )
+                );
             }
 
             // Message.ClientCredentialType = Certificate, IssuedToken or Windows are not supported.
@@ -304,26 +334,53 @@ namespace System.ServiceModel
                 if (message != null)
                 {
                     MessageCredentialType mct = message.ClientCredentialType;
-                    if ((mct == MessageCredentialType.Certificate) || (mct == MessageCredentialType.IssuedToken) || (mct == MessageCredentialType.Windows))
+                    if (
+                        (mct == MessageCredentialType.Certificate)
+                        || (mct == MessageCredentialType.IssuedToken)
+                        || (mct == MessageCredentialType.Windows)
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.UnsupportedSecuritySetting, "Message.ClientCredentialType", mct)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.UnsupportedSecuritySetting,
+                                    "Message.ClientCredentialType",
+                                    mct
+                                )
+                            )
+                        );
                     }
                 }
             }
 
             // Transport.ClientCredentialType = Certificate is not supported.
-            Fx.Assert((mode == SecurityMode.Transport) || (mode == SecurityMode.TransportWithMessageCredential), "Unexpected SecurityMode value: " + mode);
+            Fx.Assert(
+                (mode == SecurityMode.Transport)
+                    || (mode == SecurityMode.TransportWithMessageCredential),
+                "Unexpected SecurityMode value: " + mode
+            );
             TcpTransportSecurity transport = security.Transport;
-            if ((transport != null) && (transport.ClientCredentialType == TcpClientCredentialType.Certificate))
+            if (
+                (transport != null)
+                && (transport.ClientCredentialType == TcpClientCredentialType.Certificate)
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.UnsupportedSecuritySetting, "Transport.ClientCredentialType", transport.ClientCredentialType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(
+                            SR.UnsupportedSecuritySetting,
+                            "Transport.ClientCredentialType",
+                            transport.ClientCredentialType
+                        )
+                    )
+                );
             }
         }
 
         public override BindingElementCollection CreateBindingElements()
         {
             this.CheckSettings();
-            
+
             // return collection of BindingElements
             BindingElementCollection bindingElements = new BindingElementCollection();
             // order of BindingElements is important
@@ -396,13 +453,28 @@ namespace System.ServiceModel
             UnifiedSecurityMode mode = GetModeFromTransportSecurity(transportSecurity);
 
             NetTcpSecurity security;
-            if (!TryCreateSecurity(wsSecurity, mode, session != null, transportSecurity, tcpTransportSecurity, out security))
+            if (
+                !TryCreateSecurity(
+                    wsSecurity,
+                    mode,
+                    session != null,
+                    transportSecurity,
+                    tcpTransportSecurity,
+                    out security
+                )
+            )
                 return false;
 
             if (!SetTransportSecurity(transportSecurity, security.Mode, tcpTransportSecurity))
                 return false;
 
-            NetTcpBinding netTcpBinding = new NetTcpBinding(transport, encoding, context, session, security);
+            NetTcpBinding netTcpBinding = new NetTcpBinding(
+                transport,
+                encoding,
+                context,
+                session,
+                security
+            );
             if (!netTcpBinding.IsBindingElementsMatch(transport, encoding, context, session))
                 return false;
 
@@ -420,14 +492,21 @@ namespace System.ServiceModel
             return NetTcpSecurity.GetModeFromTransportSecurity(transport);
         }
 
-        static bool SetTransportSecurity(BindingElement transport, SecurityMode mode, TcpTransportSecurity transportSecurity)
+        static bool SetTransportSecurity(
+            BindingElement transport,
+            SecurityMode mode,
+            TcpTransportSecurity transportSecurity
+        )
         {
             return NetTcpSecurity.SetTransportSecurity(transport, mode, transportSecurity);
         }
 
         SecurityBindingElement CreateMessageSecurity()
         {
-            if (this.security.Mode == SecurityMode.Message || this.security.Mode == SecurityMode.TransportWithMessageCredential)
+            if (
+                this.security.Mode == SecurityMode.Message
+                || this.security.Mode == SecurityMode.TransportWithMessageCredential
+            )
             {
                 return this.security.CreateMessageSecurity(this.ReliableSession.Enabled);
             }
@@ -437,17 +516,40 @@ namespace System.ServiceModel
             }
         }
 
-        static bool TryCreateSecurity(SecurityBindingElement sbe, UnifiedSecurityMode mode, bool isReliableSession, BindingElement transportSecurity, TcpTransportSecurity tcpTransportSecurity, out NetTcpSecurity security)
+        static bool TryCreateSecurity(
+            SecurityBindingElement sbe,
+            UnifiedSecurityMode mode,
+            bool isReliableSession,
+            BindingElement transportSecurity,
+            TcpTransportSecurity tcpTransportSecurity,
+            out NetTcpSecurity security
+        )
         {
             if (sbe != null)
-                mode &= UnifiedSecurityMode.Message | UnifiedSecurityMode.TransportWithMessageCredential;
+                mode &=
+                    UnifiedSecurityMode.Message
+                    | UnifiedSecurityMode.TransportWithMessageCredential;
             else
-                mode &= ~(UnifiedSecurityMode.Message | UnifiedSecurityMode.TransportWithMessageCredential);
+                mode &= ~(
+                    UnifiedSecurityMode.Message | UnifiedSecurityMode.TransportWithMessageCredential
+                );
 
             SecurityMode securityMode = SecurityModeHelper.ToSecurityMode(mode);
-            Fx.Assert(SecurityModeHelper.IsDefined(securityMode), string.Format("Invalid SecurityMode value: {0}.", securityMode.ToString()));
+            Fx.Assert(
+                SecurityModeHelper.IsDefined(securityMode),
+                string.Format("Invalid SecurityMode value: {0}.", securityMode.ToString())
+            );
 
-            if (NetTcpSecurity.TryCreate(sbe, securityMode, isReliableSession, transportSecurity, tcpTransportSecurity, out security))
+            if (
+                NetTcpSecurity.TryCreate(
+                    sbe,
+                    securityMode,
+                    isReliableSession,
+                    transportSecurity,
+                    tcpTransportSecurity,
+                    out security
+                )
+            )
                 return true;
 
             return false;
@@ -474,9 +576,12 @@ namespace System.ServiceModel
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool ShouldSerializeReliableSession()
         {
-            return (this.ReliableSession.Ordered != ReliableSessionDefaults.Ordered
-                || this.ReliableSession.InactivityTimeout != ReliableSessionDefaults.InactivityTimeout
-                || this.ReliableSession.Enabled != ReliableSessionDefaults.Enabled);
+            return (
+                this.ReliableSession.Ordered != ReliableSessionDefaults.Ordered
+                || this.ReliableSession.InactivityTimeout
+                    != ReliableSessionDefaults.InactivityTimeout
+                || this.ReliableSession.Enabled != ReliableSessionDefaults.Enabled
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]

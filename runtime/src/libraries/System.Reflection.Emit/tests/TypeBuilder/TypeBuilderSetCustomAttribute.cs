@@ -17,7 +17,12 @@ namespace System.Reflection.Emit.Tests
             ConstructorInfo attriubteConstructor = attributeType.GetConstructors()[0];
             FieldInfo attributeField = attributeType.GetField("Field12345");
 
-            CustomAttributeBuilder attribute = new CustomAttributeBuilder(attriubteConstructor, new object[] { 4 }, new FieldInfo[] { attributeField }, new object[] { "hello" });
+            CustomAttributeBuilder attribute = new CustomAttributeBuilder(
+                attriubteConstructor,
+                new object[] { 4 },
+                new FieldInfo[] { attributeField },
+                new object[] { "hello" }
+            );
             type.SetCustomAttribute(attribute);
             type.CreateType();
 
@@ -33,15 +38,23 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_CustomAttributeBuilder_NullBuilder_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () => type.SetCustomAttribute(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "customBuilder",
+                () => type.SetCustomAttribute(null)
+            );
         }
 
         [Fact]
         public void SetCustomAttribute()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            ConstructorInfo constructor = typeof(TypeBuilderStringAttribute).GetConstructor(new Type[] { typeof(string) });
-            CustomAttributeBuilder cuatbu = new CustomAttributeBuilder(constructor, new object[] { "hello" });
+            ConstructorInfo constructor = typeof(TypeBuilderStringAttribute).GetConstructor(
+                new Type[] { typeof(string) }
+            );
+            CustomAttributeBuilder cuatbu = new CustomAttributeBuilder(
+                constructor,
+                new object[] { "hello" }
+            );
             type.SetCustomAttribute(cuatbu);
 
             type.CreateType();
@@ -55,7 +68,10 @@ namespace System.Reflection.Emit.Tests
         public class TypeBuilderStringAttribute : Attribute
         {
             private string _creator;
-            public string Creator { get { return _creator; } }
+            public string Creator
+            {
+                get { return _creator; }
+            }
 
             public TypeBuilderStringAttribute(string name)
             {
@@ -73,6 +89,5 @@ namespace System.Reflection.Emit.Tests
             public string Field12345;
             public int m_ctorType2;
         }
-
     }
 }

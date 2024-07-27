@@ -29,14 +29,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         where TSyntax : SyntaxNode
         where TSimplifiedSyntax : SyntaxNode
     {
-        private static readonly ConditionalWeakTable<SemanticModel, StrongBox<bool>> s_modelToHasUsingAliasesMap = new();
+        private static readonly ConditionalWeakTable<
+            SemanticModel,
+            StrongBox<bool>
+        > s_modelToHasUsingAliasesMap = new();
 
         /// <summary>
         /// Returns the predefined keyword kind for a given <see cref="SpecialType"/>.
         /// </summary>
         /// <param name="specialType">The <see cref="SpecialType"/> of this type.</param>
         /// <returns>The keyword kind for a given special type, or SyntaxKind.None if the type name is not a predefined type.</returns>
-        protected static SyntaxToken? TryGetPredefinedKeywordToken(SemanticModel semanticModel, SpecialType specialType)
+        protected static SyntaxToken? TryGetPredefinedKeywordToken(
+            SemanticModel semanticModel,
+            SpecialType specialType
+        )
         {
             var kind = specialType switch
             {
@@ -62,11 +68,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             if (kind != SyntaxKind.None)
                 return SyntaxFactory.Token(kind);
 
-            if (specialType is SpecialType.System_IntPtr or SpecialType.System_UIntPtr &&
-                semanticModel.SyntaxTree.Options.LanguageVersion() >= LanguageVersion.CSharp9 &&
-                    semanticModel.Compilation.SupportsRuntimeCapability(RuntimeCapability.NumericIntPtr))
+            if (
+                specialType is SpecialType.System_IntPtr or SpecialType.System_UIntPtr
+                && semanticModel.SyntaxTree.Options.LanguageVersion() >= LanguageVersion.CSharp9
+                && semanticModel.Compilation.SupportsRuntimeCapability(
+                    RuntimeCapability.NumericIntPtr
+                )
+            )
             {
-                return SyntaxFactory.Identifier(specialType == SpecialType.System_IntPtr ? "nint" : "nuint");
+                return SyntaxFactory.Identifier(
+                    specialType == SpecialType.System_IntPtr ? "nint" : "nuint"
+                );
             }
 
             return null;
@@ -74,10 +86,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 
         [PerformanceSensitive(
             "https://github.com/dotnet/roslyn/issues/23582",
-            Constraint = "Most trees do not have using alias directives, so avoid the expensive " + nameof(CSharpExtensions.GetSymbolInfo) + " call for this case.")]
+            Constraint = "Most trees do not have using alias directives, so avoid the expensive "
+                + nameof(CSharpExtensions.GetSymbolInfo)
+                + " call for this case."
+        )]
         protected static bool TryReplaceExpressionWithAlias(
-            ExpressionSyntax node, SemanticModel semanticModel,
-            ISymbol symbol, CancellationToken cancellationToken, out IAliasSymbol aliasReplacement)
+            ExpressionSyntax node,
+            SemanticModel semanticModel,
+            ISymbol symbol,
+            CancellationToken cancellationToken,
+            out IAliasSymbol aliasReplacement
+        )
         {
             aliasReplacement = null;
 
@@ -109,7 +128,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 {
                     if (qualifiedNameNode.Right.Identifier.HasAnnotations(AliasAnnotation.Kind))
                     {
-                        aliasAnnotationInfo = qualifiedNameNode.Right.Identifier.GetAnnotations(AliasAnnotation.Kind).Single();
+                        aliasAnnotationInfo = qualifiedNameNode
+                            .Right.Identifier.GetAnnotations(AliasAnnotation.Kind)
+                            .Single();
                     }
                 }
 
@@ -117,7 +138,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 {
                     if (aliasQualifiedNameNode.Name.Identifier.HasAnnotations(AliasAnnotation.Kind))
                     {
-                        aliasAnnotationInfo = aliasQualifiedNameNode.Name.Identifier.GetAnnotations(AliasAnnotation.Kind).Single();
+                        aliasAnnotationInfo = aliasQualifiedNameNode
+                            .Name.Identifier.GetAnnotations(AliasAnnotation.Kind)
+                            .Single();
                     }
                 }
 
@@ -126,25 +149,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     var aliasName = AliasAnnotation.GetAliasName(aliasAnnotationInfo);
                     var aliasIdentifier = SyntaxFactory.IdentifierName(aliasName);
 
-                    var aliasTypeInfo = semanticModel.GetSpeculativeAliasInfo(node.SpanStart, aliasIdentifier, SpeculativeBindingOption.BindAsTypeOrNamespace);
+                    var aliasTypeInfo = semanticModel.GetSpeculativeAliasInfo(
+                        node.SpanStart,
+                        aliasIdentifier,
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    );
 
                     if (aliasTypeInfo != null)
                     {
                         aliasReplacement = aliasTypeInfo;
-                        return ValidateAliasForTarget(aliasReplacement, semanticModel, node, symbol);
+                        return ValidateAliasForTarget(
+                            aliasReplacement,
+                            semanticModel,
+                            node,
+                            symbol
+                        );
                     }
                 }
             }
 
-            if (node.Kind() == SyntaxKind.IdentifierName &&
-                semanticModel.GetAliasInfo((IdentifierNameSyntax)node, cancellationToken) != null)
+            if (
+                node.Kind() == SyntaxKind.IdentifierName
+                && semanticModel.GetAliasInfo((IdentifierNameSyntax)node, cancellationToken) != null
+            )
             {
                 return false;
             }
 
             // an alias can only replace a type or namespace
-            if (symbol == null ||
-                (symbol.Kind != SymbolKind.Namespace && symbol.Kind != SymbolKind.NamedType))
+            if (
+                symbol == null
+                || (symbol.Kind != SymbolKind.Namespace && symbol.Kind != SymbolKind.NamedType)
+            )
             {
                 return false;
             }
@@ -157,7 +193,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     var type = semanticModel.GetTypeInfo(node, cancellationToken).Type;
                     if (type != null)
                     {
-                        var keywordToken = TryGetPredefinedKeywordToken(semanticModel, type.SpecialType);
+                        var keywordToken = TryGetPredefinedKeywordToken(
+                            semanticModel,
+                            type.SpecialType
+                        );
                         if (keywordToken != null)
                             preferAliasToQualifiedName = false;
                     }
@@ -171,14 +210,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     var type = semanticModel.GetTypeInfo(node, cancellationToken).Type;
                     if (type != null)
                     {
-                        var keywordToken = TryGetPredefinedKeywordToken(semanticModel, type.SpecialType);
+                        var keywordToken = TryGetPredefinedKeywordToken(
+                            semanticModel,
+                            type.SpecialType
+                        );
                         if (keywordToken != null)
                             preferAliasToQualifiedName = false;
                     }
                 }
             }
 
-            aliasReplacement = GetAliasForSymbol((INamespaceOrTypeSymbol)symbol, node.GetFirstToken(), semanticModel, cancellationToken);
+            aliasReplacement = GetAliasForSymbol(
+                (INamespaceOrTypeSymbol)symbol,
+                node.GetFirstToken(),
+                semanticModel,
+                cancellationToken
+            );
             if (aliasReplacement != null && preferAliasToQualifiedName)
             {
                 return ValidateAliasForTarget(aliasReplacement, semanticModel, node, symbol);
@@ -189,21 +236,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             static bool IsAliasReplaceableExpression(ExpressionSyntax expression)
             {
                 var current = expression;
-                while (current is MemberAccessExpressionSyntax(SyntaxKind.SimpleMemberAccessExpression) currentMember)
+                while (
+                    current
+                        is MemberAccessExpressionSyntax
+                        (SyntaxKind.SimpleMemberAccessExpression) currentMember
+                )
                 {
                     current = currentMember.Expression;
                     continue;
                 }
 
-                return current.Kind() is SyntaxKind.AliasQualifiedName or SyntaxKind.IdentifierName or SyntaxKind.GenericName or SyntaxKind.QualifiedName;
+                return current.Kind()
+                    is SyntaxKind.AliasQualifiedName
+                        or SyntaxKind.IdentifierName
+                        or SyntaxKind.GenericName
+                        or SyntaxKind.QualifiedName;
             }
         }
 
-        private static bool HasUsingAliases(SemanticModel semanticModel, CancellationToken cancellationToken)
+        private static bool HasUsingAliases(
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             if (!s_modelToHasUsingAliasesMap.TryGetValue(semanticModel, out var hasAliases))
             {
-                hasAliases = new StrongBox<bool>(ComputeHasUsingAliases(semanticModel, cancellationToken));
+                hasAliases = new StrongBox<bool>(
+                    ComputeHasUsingAliases(semanticModel, cancellationToken)
+                );
                 lock (s_modelToHasUsingAliasesMap)
                 {
                     s_modelToHasUsingAliasesMap.Remove(semanticModel);
@@ -214,7 +274,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             return hasAliases.Value;
         }
 
-        private static bool ComputeHasUsingAliases(SemanticModel model, CancellationToken cancellationToken)
+        private static bool ComputeHasUsingAliases(
+            SemanticModel model,
+            CancellationToken cancellationToken
+        )
         {
             if (!model.SyntaxTree.HasCompilationUnitRoot)
                 return false;
@@ -224,8 +287,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 return true;
 
             var firstMember =
-                root.Members.Count > 0 ? root.Members[0] :
-                root.AttributeLists.Count > 0 ? root.AttributeLists[0] : (SyntaxNode)null;
+                root.Members.Count > 0 ? root.Members[0]
+                : root.AttributeLists.Count > 0 ? root.AttributeLists[0]
+                : (SyntaxNode)null;
             if (firstMember == null)
                 return false;
 
@@ -237,7 +301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 var (usings, members) = syntax switch
                 {
                     BaseNamespaceDeclarationSyntax ns => (ns.Usings, ns.Members),
-                    CompilationUnitSyntax compilationUnit => (compilationUnit.Usings, compilationUnit.Members),
+                    CompilationUnitSyntax compilationUnit
+                        => (compilationUnit.Usings, compilationUnit.Members),
                     _ => default,
                 };
 
@@ -260,7 +325,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         // We must verify that the alias actually binds back to the thing it's aliasing.
         // It's possible there's another symbol with the same name as the alias that binds
         // first
-        private static bool ValidateAliasForTarget(IAliasSymbol aliasReplacement, SemanticModel semanticModel, ExpressionSyntax node, ISymbol symbol)
+        private static bool ValidateAliasForTarget(
+            IAliasSymbol aliasReplacement,
+            SemanticModel semanticModel,
+            ExpressionSyntax node,
+            ISymbol symbol
+        )
         {
             var aliasName = aliasReplacement.Name;
 
@@ -274,8 +344,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     return false;
                 }
 
-                if (nameofValueOpt.Value is string existingVal &&
-                    existingVal != aliasName)
+                if (nameofValueOpt.Value is string existingVal && existingVal != aliasName)
                 {
                     return false;
                 }
@@ -287,12 +356,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             {
                 var aliasIdentifier = SyntaxFactory.IdentifierName(aliasName);
 
-                var symbolInfo = semanticModel.GetSpeculativeSymbolInfo(node.SpanStart, aliasIdentifier, SpeculativeBindingOption.BindAsExpression);
+                var symbolInfo = semanticModel.GetSpeculativeSymbolInfo(
+                    node.SpanStart,
+                    aliasIdentifier,
+                    SpeculativeBindingOption.BindAsExpression
+                );
                 if (symbolInfo.Symbol is not INamespaceOrTypeSymbol)
                 {
                     // We bound the alias to something other than a namespace or a type, which is normally not good, but if the
                     // types are the same then it is okay.
-                    var typeInfo = semanticModel.GetSpeculativeTypeInfo(node.SpanStart, aliasIdentifier, SpeculativeBindingOption.BindAsExpression);
+                    var typeInfo = semanticModel.GetSpeculativeTypeInfo(
+                        node.SpanStart,
+                        aliasIdentifier,
+                        SpeculativeBindingOption.BindAsExpression
+                    );
                     if (!symbol.Equals(typeInfo.Type))
                     {
                         return false;
@@ -300,7 +377,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 }
             }
 
-            var boundSymbols = semanticModel.LookupNamespacesAndTypes(node.SpanStart, name: aliasName);
+            var boundSymbols = semanticModel.LookupNamespacesAndTypes(
+                node.SpanStart,
+                name: aliasName
+            );
 
             if (boundSymbols.Length == 1)
             {
@@ -313,7 +393,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             return false;
         }
 
-        private static IAliasSymbol GetAliasForSymbol(INamespaceOrTypeSymbol symbol, SyntaxToken token, SemanticModel semanticModel, CancellationToken cancellationToken)
+        private static IAliasSymbol GetAliasForSymbol(
+            INamespaceOrTypeSymbol symbol,
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             var originalSemanticModel = semanticModel.GetOriginalSemanticModel();
             if (!originalSemanticModel.SyntaxTree.HasCompilationUnitRoot)
@@ -323,20 +408,39 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             if (namespaceId == null)
                 return null;
 
-            if (!AliasSymbolCache.TryGetAliasSymbol(originalSemanticModel, namespaceId.Value, symbol, out var aliasSymbol))
+            if (
+                !AliasSymbolCache.TryGetAliasSymbol(
+                    originalSemanticModel,
+                    namespaceId.Value,
+                    symbol,
+                    out var aliasSymbol
+                )
+            )
             {
                 // add cache
                 AliasSymbolCache.AddAliasSymbols(
-                    originalSemanticModel, namespaceId.Value, semanticModel.LookupNamespacesAndTypes(token.SpanStart).OfType<IAliasSymbol>());
+                    originalSemanticModel,
+                    namespaceId.Value,
+                    semanticModel.LookupNamespacesAndTypes(token.SpanStart).OfType<IAliasSymbol>()
+                );
 
                 // retry
-                AliasSymbolCache.TryGetAliasSymbol(originalSemanticModel, namespaceId.Value, symbol, out aliasSymbol);
+                AliasSymbolCache.TryGetAliasSymbol(
+                    originalSemanticModel,
+                    namespaceId.Value,
+                    symbol,
+                    out aliasSymbol
+                );
             }
 
             return aliasSymbol;
         }
 
-        private static int? GetNamespaceIdForAliasSearch(SemanticModel semanticModel, SyntaxToken token, CancellationToken cancellationToken)
+        private static int? GetNamespaceIdForAliasSearch(
+            SemanticModel semanticModel,
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        )
         {
             var startNode = GetStartNodeForNamespaceId(semanticModel, token, cancellationToken);
             if (!startNode.SyntaxTree.HasCompilationUnitRoot)
@@ -363,55 +467,84 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             return -1;
         }
 
-        private static SyntaxNode GetStartNodeForNamespaceId(SemanticModel semanticModel, SyntaxToken token, CancellationToken cancellationToken)
+        private static SyntaxNode GetStartNodeForNamespaceId(
+            SemanticModel semanticModel,
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        )
         {
             if (!semanticModel.IsSpeculativeSemanticModel)
                 return token.Parent;
 
             var originalSemanticMode = semanticModel.GetOriginalSemanticModel();
-            token = originalSemanticMode.SyntaxTree.GetRoot(cancellationToken).FindToken(semanticModel.OriginalPositionForSpeculation);
+            token = originalSemanticMode
+                .SyntaxTree.GetRoot(cancellationToken)
+                .FindToken(semanticModel.OriginalPositionForSpeculation);
 
             return token.Parent;
         }
 
-        protected static TypeSyntax CreatePredefinedTypeSyntax(SyntaxNode nodeToReplace, SyntaxToken token)
+        protected static TypeSyntax CreatePredefinedTypeSyntax(
+            SyntaxNode nodeToReplace,
+            SyntaxToken token
+        )
         {
-            TypeSyntax node = token.Kind() == SyntaxKind.IdentifierToken
-                ? SyntaxFactory.IdentifierName(token)
-                : SyntaxFactory.PredefinedType(token);
+            TypeSyntax node =
+                token.Kind() == SyntaxKind.IdentifierToken
+                    ? SyntaxFactory.IdentifierName(token)
+                    : SyntaxFactory.PredefinedType(token);
             return node.WithTriviaFrom(nodeToReplace);
         }
 
-        protected static bool InsideNameOfExpression(ExpressionSyntax expression, SemanticModel semanticModel)
+        protected static bool InsideNameOfExpression(
+            ExpressionSyntax expression,
+            SemanticModel semanticModel
+        )
         {
             var nameOfInvocationExpr = expression.FirstAncestorOrSelf<InvocationExpressionSyntax>(
                 invocationExpr =>
                 {
-                    return invocationExpr.Expression is IdentifierNameSyntax identifierName &&
-                        identifierName.Identifier.Text == "nameof" &&
-                        semanticModel.GetConstantValue(invocationExpr).HasValue &&
-                        semanticModel.GetTypeInfo(invocationExpr).Type.SpecialType == SpecialType.System_String;
-                });
+                    return invocationExpr.Expression is IdentifierNameSyntax identifierName
+                        && identifierName.Identifier.Text == "nameof"
+                        && semanticModel.GetConstantValue(invocationExpr).HasValue
+                        && semanticModel.GetTypeInfo(invocationExpr).Type.SpecialType
+                            == SpecialType.System_String;
+                }
+            );
 
             return nameOfInvocationExpr != null;
         }
 
-        protected static bool PreferPredefinedTypeKeywordInMemberAccess(ExpressionSyntax expression, CSharpSimplifierOptions options, SemanticModel semanticModel)
+        protected static bool PreferPredefinedTypeKeywordInMemberAccess(
+            ExpressionSyntax expression,
+            CSharpSimplifierOptions options,
+            SemanticModel semanticModel
+        )
         {
             if (!options.PreferPredefinedTypeKeywordInMemberAccess.Value)
                 return false;
 
-            return (expression.IsDirectChildOfMemberAccessExpression() || expression.InsideCrefReference()) &&
-                   !InsideNameOfExpression(expression, semanticModel);
+            return (
+                    expression.IsDirectChildOfMemberAccessExpression()
+                    || expression.InsideCrefReference()
+                ) && !InsideNameOfExpression(expression, semanticModel);
         }
 
         protected static bool WillConflictWithExistingLocal(
-            ExpressionSyntax expression, ExpressionSyntax simplifiedNode, SemanticModel semanticModel)
+            ExpressionSyntax expression,
+            ExpressionSyntax simplifiedNode,
+            SemanticModel semanticModel
+        )
         {
-            if (simplifiedNode is IdentifierNameSyntax identifierName &&
-                !SyntaxFacts.IsInNamespaceOrTypeContext(expression))
+            if (
+                simplifiedNode is IdentifierNameSyntax identifierName
+                && !SyntaxFacts.IsInNamespaceOrTypeContext(expression)
+            )
             {
-                var symbols = semanticModel.LookupSymbols(expression.SpanStart, name: identifierName.Identifier.ValueText);
+                var symbols = semanticModel.LookupSymbols(
+                    expression.SpanStart,
+                    name: identifierName.Identifier.ValueText
+                );
                 return symbols.Any(static s => s is ILocalSymbol);
             }
 

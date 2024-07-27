@@ -6,5 +6,4 @@ namespace Microsoft.AspNetCore.Components.Routing;
 internal readonly struct PathString(string? value)
 {
     public string? Value { get; } = value;
-
 }

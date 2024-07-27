@@ -20,47 +20,48 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     private readonly QueryCompilationContext _queryCompilationContext;
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
-    private static readonly HashSet<string> DateTimeDataTypes
-        = new()
-        {
-            "time",
-            "date",
-            "datetime",
-            "datetime2",
-            "datetimeoffset"
-        };
+    private static readonly HashSet<string> DateTimeDataTypes =
+        new() { "time", "date", "datetime", "datetime2", "datetimeoffset" };
 
-    private static readonly HashSet<Type> DateTimeClrTypes
-        = new()
+    private static readonly HashSet<Type> DateTimeClrTypes =
+        new()
         {
             typeof(TimeOnly),
             typeof(DateOnly),
             typeof(TimeSpan),
             typeof(DateTime),
-            typeof(DateTimeOffset)
+            typeof(DateTimeOffset),
         };
 
-    private static readonly HashSet<ExpressionType> ArithmeticOperatorTypes
-        = new()
+    private static readonly HashSet<ExpressionType> ArithmeticOperatorTypes =
+        new()
         {
             ExpressionType.Add,
             ExpressionType.Subtract,
             ExpressionType.Multiply,
             ExpressionType.Divide,
-            ExpressionType.Modulo
+            ExpressionType.Modulo,
         };
 
-    private static readonly MethodInfo StringStartsWithMethodInfo
-        = typeof(string).GetRuntimeMethod(nameof(string.StartsWith), new[] { typeof(string) })!;
+    private static readonly MethodInfo StringStartsWithMethodInfo = typeof(string).GetRuntimeMethod(
+        nameof(string.StartsWith),
+        new[] { typeof(string) }
+    )!;
 
-    private static readonly MethodInfo StringEndsWithMethodInfo
-        = typeof(string).GetRuntimeMethod(nameof(string.EndsWith), new[] { typeof(string) })!;
+    private static readonly MethodInfo StringEndsWithMethodInfo = typeof(string).GetRuntimeMethod(
+        nameof(string.EndsWith),
+        new[] { typeof(string) }
+    )!;
 
-    private static readonly MethodInfo StringContainsMethodInfo
-        = typeof(string).GetRuntimeMethod(nameof(string.Contains), new[] { typeof(string) })!;
+    private static readonly MethodInfo StringContainsMethodInfo = typeof(string).GetRuntimeMethod(
+        nameof(string.Contains),
+        new[] { typeof(string) }
+    )!;
 
     private static readonly MethodInfo EscapeLikePatternParameterMethod =
-        typeof(SqlServerSqlTranslatingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(ConstructLikePatternParameter))!;
+        typeof(SqlServerSqlTranslatingExpressionVisitor)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(ConstructLikePatternParameter))!;
 
     private const char LikeEscapeChar = '\\';
     private const string LikeEscapeString = "\\";
@@ -74,7 +75,8 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     public SqlServerSqlTranslatingExpressionVisitor(
         RelationalSqlTranslatingExpressionVisitorDependencies dependencies,
         QueryCompilationContext queryCompilationContext,
-        QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor)
+        QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor
+    )
         : base(dependencies, queryCompilationContext, queryableMethodTranslatingExpressionVisitor)
     {
         _queryCompilationContext = queryCompilationContext;
@@ -89,21 +91,28 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     /// </summary>
     protected override Expression VisitBinary(BinaryExpression binaryExpression)
     {
-        if (binaryExpression.NodeType == ExpressionType.ArrayIndex
-            && binaryExpression.Left.Type == typeof(byte[]))
+        if (
+            binaryExpression.NodeType == ExpressionType.ArrayIndex
+            && binaryExpression.Left.Type == typeof(byte[])
+        )
         {
             return TranslateByteArrayElementAccess(
                 binaryExpression.Left,
                 binaryExpression.Right,
-                binaryExpression.Type);
+                binaryExpression.Type
+            );
         }
 
         var visitedExpression = base.VisitBinary(binaryExpression);
 
-        if (visitedExpression is SqlBinaryExpression sqlBinaryExpression
-            && ArithmeticOperatorTypes.Contains(sqlBinaryExpression.OperatorType))
+        if (
+            visitedExpression is SqlBinaryExpression sqlBinaryExpression
+            && ArithmeticOperatorTypes.Contains(sqlBinaryExpression.OperatorType)
+        )
         {
-            var inferredProviderType = GetProviderType(sqlBinaryExpression.Left) ?? GetProviderType(sqlBinaryExpression.Right);
+            var inferredProviderType =
+                GetProviderType(sqlBinaryExpression.Left)
+                ?? GetProviderType(sqlBinaryExpression.Right);
             if (inferredProviderType != null)
             {
                 if (DateTimeDataTypes.Contains(inferredProviderType))
@@ -115,8 +124,7 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
             {
                 var leftType = sqlBinaryExpression.Left.Type;
                 var rightType = sqlBinaryExpression.Right.Type;
-                if (DateTimeClrTypes.Contains(leftType)
-                    || DateTimeClrTypes.Contains(rightType))
+                if (DateTimeClrTypes.Contains(leftType) || DateTimeClrTypes.Contains(rightType))
                 {
                     return QueryCompilationContext.NotTranslatedExpression;
                 }
@@ -134,21 +142,26 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     /// </summary>
     protected override Expression VisitUnary(UnaryExpression unaryExpression)
     {
-        if (unaryExpression.NodeType == ExpressionType.ArrayLength
-            && unaryExpression.Operand.Type == typeof(byte[]))
+        if (
+            unaryExpression.NodeType == ExpressionType.ArrayLength
+            && unaryExpression.Operand.Type == typeof(byte[])
+        )
         {
             if (!(base.Visit(unaryExpression.Operand) is SqlExpression sqlExpression))
             {
                 return QueryCompilationContext.NotTranslatedExpression;
             }
 
-            var isBinaryMaxDataType = GetProviderType(sqlExpression) == "varbinary(max)" || sqlExpression is SqlParameterExpression;
+            var isBinaryMaxDataType =
+                GetProviderType(sqlExpression) == "varbinary(max)"
+                || sqlExpression is SqlParameterExpression;
             var dataLengthSqlFunction = Dependencies.SqlExpressionFactory.Function(
                 "DATALENGTH",
                 new[] { sqlExpression },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true },
-                isBinaryMaxDataType ? typeof(long) : typeof(int));
+                isBinaryMaxDataType ? typeof(long) : typeof(int)
+            );
 
             return isBinaryMaxDataType
                 ? Dependencies.SqlExpressionFactory.Convert(dataLengthSqlFunction, typeof(int))
@@ -168,33 +181,54 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     {
         var method = methodCallExpression.Method;
 
-        if (method.IsGenericMethod
+        if (
+            method.IsGenericMethod
             && method.GetGenericMethodDefinition() == EnumerableMethods.ElementAt
-            && methodCallExpression.Arguments[0].Type == typeof(byte[]))
+            && methodCallExpression.Arguments[0].Type == typeof(byte[])
+        )
         {
             return TranslateByteArrayElementAccess(
                 methodCallExpression.Arguments[0],
                 methodCallExpression.Arguments[1],
-                methodCallExpression.Type);
+                methodCallExpression.Type
+            );
         }
 
-        if (method == StringStartsWithMethodInfo
+        if (
+            method == StringStartsWithMethodInfo
             && TryTranslateStartsEndsWithContains(
-                methodCallExpression.Object!, methodCallExpression.Arguments[0], StartsEndsWithContains.StartsWith, out var translation1))
+                methodCallExpression.Object!,
+                methodCallExpression.Arguments[0],
+                StartsEndsWithContains.StartsWith,
+                out var translation1
+            )
+        )
         {
             return translation1;
         }
 
-        if (method == StringEndsWithMethodInfo
+        if (
+            method == StringEndsWithMethodInfo
             && TryTranslateStartsEndsWithContains(
-                methodCallExpression.Object!, methodCallExpression.Arguments[0], StartsEndsWithContains.EndsWith, out var translation2))
+                methodCallExpression.Object!,
+                methodCallExpression.Arguments[0],
+                StartsEndsWithContains.EndsWith,
+                out var translation2
+            )
+        )
         {
             return translation2;
         }
 
-        if (method == StringContainsMethodInfo
+        if (
+            method == StringContainsMethodInfo
             && TryTranslateStartsEndsWithContains(
-                methodCallExpression.Object!, methodCallExpression.Arguments[0], StartsEndsWithContains.Contains, out var translation3))
+                methodCallExpression.Object!,
+                methodCallExpression.Arguments[0],
+                StartsEndsWithContains.Contains,
+                out var translation3
+            )
+        )
         {
             return translation3;
         }
@@ -205,19 +239,31 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
             Expression instance,
             Expression pattern,
             StartsEndsWithContains methodType,
-            [NotNullWhen(true)] out SqlExpression? translation)
+            [NotNullWhen(true)] out SqlExpression? translation
+        )
         {
-            if (Visit(instance) is not SqlExpression translatedInstance
-                || Visit(pattern) is not SqlExpression translatedPattern)
+            if (
+                Visit(instance) is not SqlExpression translatedInstance
+                || Visit(pattern) is not SqlExpression translatedPattern
+            )
             {
                 translation = null;
                 return false;
             }
 
-            var stringTypeMapping = ExpressionExtensions.InferTypeMapping(translatedInstance, translatedPattern);
+            var stringTypeMapping = ExpressionExtensions.InferTypeMapping(
+                translatedInstance,
+                translatedPattern
+            );
 
-            translatedInstance = _sqlExpressionFactory.ApplyTypeMapping(translatedInstance, stringTypeMapping);
-            translatedPattern = _sqlExpressionFactory.ApplyTypeMapping(translatedPattern, stringTypeMapping);
+            translatedInstance = _sqlExpressionFactory.ApplyTypeMapping(
+                translatedInstance,
+                stringTypeMapping
+            );
+            translatedPattern = _sqlExpressionFactory.ApplyTypeMapping(
+                translatedPattern,
+                stringTypeMapping
+            );
 
             switch (translatedPattern)
             {
@@ -227,47 +273,76 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                     // simple LIKE
                     translation = patternConstant.Value switch
                     {
-                        null => _sqlExpressionFactory.Like(translatedInstance, _sqlExpressionFactory.Constant(null, stringTypeMapping)),
+                        null
+                            => _sqlExpressionFactory.Like(
+                                translatedInstance,
+                                _sqlExpressionFactory.Constant(null, stringTypeMapping)
+                            ),
 
                         // In .NET, all strings start with/end with/contain the empty string, but SQL LIKE return false for empty patterns.
                         // Return % which always matches instead.
                         // Note that we don't just return a true constant, since null strings shouldn't match even an empty string
                         // (but SqlNullabilityProcess will convert this to a true constant if the instance is non-nullable)
-                        "" => _sqlExpressionFactory.Like(translatedInstance, _sqlExpressionFactory.Constant("%")),
-
-                        string s => s.Any(IsLikeWildChar)
-                            ? _sqlExpressionFactory.Like(
+                        ""
+                            => _sqlExpressionFactory.Like(
                                 translatedInstance,
-                                _sqlExpressionFactory.Constant(
-                                    methodType switch
-                                    {
-                                        StartsEndsWithContains.StartsWith => EscapeLikePattern(s) + '%',
-                                        StartsEndsWithContains.EndsWith => '%' + EscapeLikePattern(s),
-                                        StartsEndsWithContains.Contains => $"%{EscapeLikePattern(s)}%",
+                                _sqlExpressionFactory.Constant("%")
+                            ),
 
-                                        _ => throw new ArgumentOutOfRangeException(nameof(methodType), methodType, null)
-                                    }),
-                                _sqlExpressionFactory.Constant(LikeEscapeString))
-                            : _sqlExpressionFactory.Like(
-                                translatedInstance,
-                                _sqlExpressionFactory.Constant(
-                                    methodType switch
-                                    {
-                                        StartsEndsWithContains.StartsWith => s + '%',
-                                        StartsEndsWithContains.EndsWith => '%' + s,
-                                        StartsEndsWithContains.Contains => $"%{s}%",
+                        string s
+                            => s.Any(IsLikeWildChar)
+                                ? _sqlExpressionFactory.Like(
+                                    translatedInstance,
+                                    _sqlExpressionFactory.Constant(
+                                        methodType switch
+                                        {
+                                            StartsEndsWithContains.StartsWith
+                                                => EscapeLikePattern(s) + '%',
+                                            StartsEndsWithContains.EndsWith
+                                                => '%' + EscapeLikePattern(s),
+                                            StartsEndsWithContains.Contains
+                                                => $"%{EscapeLikePattern(s)}%",
 
-                                        _ => throw new ArgumentOutOfRangeException(nameof(methodType), methodType, null)
-                                    })),
+                                            _
+                                                => throw new ArgumentOutOfRangeException(
+                                                    nameof(methodType),
+                                                    methodType,
+                                                    null
+                                                ),
+                                        }
+                                    ),
+                                    _sqlExpressionFactory.Constant(LikeEscapeString)
+                                )
+                                : _sqlExpressionFactory.Like(
+                                    translatedInstance,
+                                    _sqlExpressionFactory.Constant(
+                                        methodType switch
+                                        {
+                                            StartsEndsWithContains.StartsWith => s + '%',
+                                            StartsEndsWithContains.EndsWith => '%' + s,
+                                            StartsEndsWithContains.Contains => $"%{s}%",
 
-                        _ => throw new UnreachableException()
+                                            _
+                                                => throw new ArgumentOutOfRangeException(
+                                                    nameof(methodType),
+                                                    methodType,
+                                                    null
+                                                ),
+                                        }
+                                    )
+                                ),
+
+                        _ => throw new UnreachableException(),
                     };
 
                     return true;
                 }
 
                 case SqlParameterExpression patternParameter
-                    when patternParameter.Name.StartsWith(QueryCompilationContext.QueryParameterPrefix, StringComparison.Ordinal):
+                    when patternParameter.Name.StartsWith(
+                        QueryCompilationContext.QueryParameterPrefix,
+                        StringComparison.Ordinal
+                    ):
                 {
                     // The pattern is a parameter, register a runtime parameter that will contain the rewritten LIKE pattern, where
                     // all special characters have been escaped.
@@ -276,17 +351,25 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                             EscapeLikePatternParameterMethod,
                             QueryCompilationContext.QueryContextParameter,
                             Expression.Constant(patternParameter.Name),
-                            Expression.Constant(methodType)),
-                        QueryCompilationContext.QueryContextParameter);
+                            Expression.Constant(methodType)
+                        ),
+                        QueryCompilationContext.QueryContextParameter
+                    );
 
-                    var escapedPatternParameter =
-                        _queryCompilationContext.RegisterRuntimeParameter(
-                            $"{patternParameter.Name}_{methodType.ToString().ToLower(CultureInfo.InvariantCulture)}", lambda);
+                    var escapedPatternParameter = _queryCompilationContext.RegisterRuntimeParameter(
+                        $"{patternParameter.Name}_{methodType.ToString().ToLower(CultureInfo.InvariantCulture)}",
+                        lambda
+                    );
 
                     translation = _sqlExpressionFactory.Like(
                         translatedInstance,
-                        new SqlParameterExpression(escapedPatternParameter.Name!, escapedPatternParameter.Type, stringTypeMapping),
-                        _sqlExpressionFactory.Constant(LikeEscapeString));
+                        new SqlParameterExpression(
+                            escapedPatternParameter.Name!,
+                            escapedPatternParameter.Type,
+                            stringTypeMapping
+                        ),
+                        _sqlExpressionFactory.Constant(LikeEscapeString)
+                    );
 
                     return true;
                 }
@@ -301,14 +384,17 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                         // This is less efficient than LIKE (i.e. StartsWith does an index scan instead of seek), but we have no choice.
                         // Note that we compensate for the case where both the instance and the pattern are null (null.StartsWith(null)); a
                         // simple equality would yield true in that case, but we want false. We technically
-                        StartsEndsWithContains.StartsWith or StartsEndsWithContains.EndsWith
+                        StartsEndsWithContains.StartsWith
+                        or StartsEndsWithContains.EndsWith
                             => _sqlExpressionFactory.AndAlso(
                                 _sqlExpressionFactory.IsNotNull(translatedInstance),
                                 _sqlExpressionFactory.AndAlso(
                                     _sqlExpressionFactory.IsNotNull(translatedPattern),
                                     _sqlExpressionFactory.Equal(
                                         _sqlExpressionFactory.Function(
-                                            methodType is StartsEndsWithContains.StartsWith ? "LEFT" : "RIGHT",
+                                            methodType is StartsEndsWithContains.StartsWith
+                                                ? "LEFT"
+                                                : "RIGHT",
                                             new[]
                                             {
                                                 translatedInstance,
@@ -317,13 +403,18 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                                                     new[] { translatedPattern },
                                                     nullable: true,
                                                     argumentsPropagateNullability: new[] { true },
-                                                    typeof(int))
+                                                    typeof(int)
+                                                ),
                                             },
                                             nullable: true,
                                             argumentsPropagateNullability: new[] { true, true },
                                             typeof(string),
-                                            stringTypeMapping),
-                                        translatedPattern))),
+                                            stringTypeMapping
+                                        ),
+                                        translatedPattern
+                                    )
+                                )
+                            ),
 
                         // For Contains, just use CHARINDEX and check if the result is greater than 0.
                         // Add a check to return null when the pattern is an empty string (and the string isn't null)
@@ -339,13 +430,22 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                                                 new[] { translatedPattern, translatedInstance },
                                                 nullable: true,
                                                 argumentsPropagateNullability: new[] { true, true },
-                                                typeof(int)),
-                                            _sqlExpressionFactory.Constant(0)),
+                                                typeof(int)
+                                            ),
+                                            _sqlExpressionFactory.Constant(0)
+                                        ),
                                         _sqlExpressionFactory.Like(
                                             translatedPattern,
-                                            _sqlExpressionFactory.Constant(string.Empty, stringTypeMapping))))),
+                                            _sqlExpressionFactory.Constant(
+                                                string.Empty,
+                                                stringTypeMapping
+                                            )
+                                        )
+                                    )
+                                )
+                            ),
 
-                        _ => throw new UnreachableException()
+                        _ => throw new UnreachableException(),
                     };
 
                     return true;
@@ -356,8 +456,9 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     private static string? ConstructLikePatternParameter(
         QueryContext queryContext,
         string baseParameterName,
-        StartsEndsWithContains methodType)
-        => queryContext.ParameterValues[baseParameterName] switch
+        StartsEndsWithContains methodType
+    ) =>
+        queryContext.ParameterValues[baseParameterName] switch
         {
             null => null,
 
@@ -365,22 +466,28 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
             // Return % which always matches instead.
             "" => "%",
 
-            string s => methodType switch
-            {
-                StartsEndsWithContains.StartsWith => EscapeLikePattern(s) + '%',
-                StartsEndsWithContains.EndsWith => '%' + EscapeLikePattern(s),
-                StartsEndsWithContains.Contains => $"%{EscapeLikePattern(s)}%",
-                _ => throw new ArgumentOutOfRangeException(nameof(methodType), methodType, null)
-            },
+            string s
+                => methodType switch
+                {
+                    StartsEndsWithContains.StartsWith => EscapeLikePattern(s) + '%',
+                    StartsEndsWithContains.EndsWith => '%' + EscapeLikePattern(s),
+                    StartsEndsWithContains.Contains => $"%{EscapeLikePattern(s)}%",
+                    _
+                        => throw new ArgumentOutOfRangeException(
+                            nameof(methodType),
+                            methodType,
+                            null
+                        ),
+                },
 
-            _ => throw new UnreachableException()
+            _ => throw new UnreachableException(),
         };
 
     private enum StartsEndsWithContains
     {
         StartsWith,
         EndsWith,
-        Contains
+        Contains,
     }
 
     /// <summary>
@@ -389,8 +496,7 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    private static bool IsLikeWildChar(char c)
-        => c is '%' or '_' or '['; // See https://docs.microsoft.com/en-us/sql/t-sql/language-elements/like-transact-sql
+    private static bool IsLikeWildChar(char c) => c is '%' or '_' or '['; // See https://docs.microsoft.com/en-us/sql/t-sql/language-elements/like-transact-sql
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -420,8 +526,7 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
         for (; i < pattern.Length; i++)
         {
             var c = pattern[i];
-            if (IsLikeWildChar(c)
-                || c == LikeEscapeChar)
+            if (IsLikeWildChar(c) || c == LikeEscapeChar)
             {
                 builder.Append(LikeEscapeChar);
             }
@@ -432,31 +537,37 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
         return builder.ToString();
     }
 
-    private Expression TranslateByteArrayElementAccess(Expression array, Expression index, Type resultType)
+    private Expression TranslateByteArrayElementAccess(
+        Expression array,
+        Expression index,
+        Type resultType
+    )
     {
         var visitedArray = Visit(array);
         var visitedIndex = Visit(index);
 
-        return visitedArray is SqlExpression sqlArray
-            && visitedIndex is SqlExpression sqlIndex
-                ? Dependencies.SqlExpressionFactory.Convert(
-                    Dependencies.SqlExpressionFactory.Function(
-                        "SUBSTRING",
-                        new[]
-                        {
-                            sqlArray,
-                            Dependencies.SqlExpressionFactory.Add(
-                                Dependencies.SqlExpressionFactory.ApplyDefaultTypeMapping(sqlIndex),
-                                Dependencies.SqlExpressionFactory.Constant(1)),
+        return visitedArray is SqlExpression sqlArray && visitedIndex is SqlExpression sqlIndex
+            ? Dependencies.SqlExpressionFactory.Convert(
+                Dependencies.SqlExpressionFactory.Function(
+                    "SUBSTRING",
+                    new[]
+                    {
+                        sqlArray,
+                        Dependencies.SqlExpressionFactory.Add(
+                            Dependencies.SqlExpressionFactory.ApplyDefaultTypeMapping(sqlIndex),
                             Dependencies.SqlExpressionFactory.Constant(1)
-                        },
-                        nullable: true,
-                        argumentsPropagateNullability: new[] { true, true, true },
-                        typeof(byte[])),
-                    resultType)
-                : QueryCompilationContext.NotTranslatedExpression;
+                        ),
+                        Dependencies.SqlExpressionFactory.Constant(1),
+                    },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { true, true, true },
+                    typeof(byte[])
+                ),
+                resultType
+            )
+            : QueryCompilationContext.NotTranslatedExpression;
     }
 
-    private static string? GetProviderType(SqlExpression expression)
-        => expression.TypeMapping?.StoreType;
+    private static string? GetProviderType(SqlExpression expression) =>
+        expression.TypeMapping?.StoreType;
 }

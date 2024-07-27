@@ -1,15 +1,15 @@
 using System;
-using System.IO;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Collections;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Windows.Forms;
-using System.Diagnostics;
 using System.ComponentModel.Design.Serialization;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
+using System.Windows.Forms;
 using System.Workflow.ComponentModel.Serialization;
 
 namespace System.Workflow.ComponentModel.Design
@@ -20,17 +20,17 @@ namespace System.Workflow.ComponentModel.Design
         private ConnectionPoint connectionPoint;
 
         internal ConnectionPointHitTestInfo(ConnectionPoint connectionPoint)
-            : base(connectionPoint.AssociatedDesigner, HitTestLocations.Designer | HitTestLocations.Connector)
+            : base(
+                connectionPoint.AssociatedDesigner,
+                HitTestLocations.Designer | HitTestLocations.Connector
+            )
         {
             this.connectionPoint = connectionPoint;
         }
 
         internal ConnectionPoint ConnectionPoint
         {
-            get
-            {
-                return this.connectionPoint;
-            }
+            get { return this.connectionPoint; }
         }
     }
     #endregion
@@ -39,7 +39,9 @@ namespace System.Workflow.ComponentModel.Design
     public delegate void ConnectorEventHandler(object sender, ConnectorEventArgs e);
 
     #region Class ConnectorEventArgs
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ConnectorEventArgs : EventArgs
     {
         private Connector connector;
@@ -51,30 +53,39 @@ namespace System.Workflow.ComponentModel.Design
 
         public Connector Connector
         {
-            get
-            {
-                return this.connector;
-            }
+            get { return this.connector; }
         }
     }
     #endregion
     #endregion
 
     #region Class ConnectionPoint
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ConnectionPoint
     {
         private ActivityDesigner associatedDesigner;
         private DesignerEdges designerEdge;
         private int connectionIndex;
 
-        public ConnectionPoint(ActivityDesigner associatedDesigner, DesignerEdges designerEdge, int connectionIndex)
+        public ConnectionPoint(
+            ActivityDesigner associatedDesigner,
+            DesignerEdges designerEdge,
+            int connectionIndex
+        )
         {
             if (associatedDesigner == null)
                 throw new ArgumentNullException("associatedDesigner");
 
-            if (connectionIndex < 0 || connectionIndex >= associatedDesigner.GetConnections(designerEdge).Count)
-                throw new ArgumentException(DR.GetString(DR.Error_ConnectionPoint), "connectionIndex");
+            if (
+                connectionIndex < 0
+                || connectionIndex >= associatedDesigner.GetConnections(designerEdge).Count
+            )
+                throw new ArgumentException(
+                    DR.GetString(DR.Error_ConnectionPoint),
+                    "connectionIndex"
+                );
 
             this.associatedDesigner = associatedDesigner;
             this.designerEdge = designerEdge;
@@ -83,18 +94,12 @@ namespace System.Workflow.ComponentModel.Design
 
         public ActivityDesigner AssociatedDesigner
         {
-            get
-            {
-                return this.associatedDesigner;
-            }
+            get { return this.associatedDesigner; }
         }
 
         public int ConnectionIndex
         {
-            get
-            {
-                return this.connectionIndex;
-            }
+            get { return this.connectionIndex; }
         }
 
         public DesignerEdges ConnectionEdge
@@ -103,10 +108,18 @@ namespace System.Workflow.ComponentModel.Design
             {
                 DesignerEdges designerEdge = this.designerEdge;
 
-                if (designerEdge != DesignerEdges.Left && designerEdge != DesignerEdges.Right &&
-                    designerEdge != DesignerEdges.Top && designerEdge != DesignerEdges.Bottom)
+                if (
+                    designerEdge != DesignerEdges.Left
+                    && designerEdge != DesignerEdges.Right
+                    && designerEdge != DesignerEdges.Top
+                    && designerEdge != DesignerEdges.Bottom
+                )
                 {
-                    designerEdge = DesignerGeometryHelper.ClosestEdgeToPoint(Location, this.associatedDesigner.Bounds, designerEdge);
+                    designerEdge = DesignerGeometryHelper.ClosestEdgeToPoint(
+                        Location,
+                        this.associatedDesigner.Bounds,
+                        designerEdge
+                    );
                 }
 
                 return designerEdge;
@@ -117,7 +130,9 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                IList<Point> connections = this.associatedDesigner.GetConnections(this.designerEdge);
+                IList<Point> connections = this.associatedDesigner.GetConnections(
+                    this.designerEdge
+                );
                 if (this.connectionIndex < connections.Count)
                     return connections[this.connectionIndex];
                 else
@@ -129,12 +144,17 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                IList<Point> connections = this.associatedDesigner.GetConnections(DesignerEdges.All);
+                IList<Point> connections = this.associatedDesigner.GetConnections(
+                    DesignerEdges.All
+                );
                 if (connections.Count > 0)
                 {
                     Point location = Location;
                     Size size = DefaultSize;
-                    Rectangle enclosingBounds = new Rectangle(new Point(location.X - size.Width / 2, location.Y - size.Height / 2), size);
+                    Rectangle enclosingBounds = new Rectangle(
+                        new Point(location.X - size.Width / 2, location.Y - size.Height / 2),
+                        size
+                    );
                     return enclosingBounds;
                 }
                 else
@@ -150,9 +170,11 @@ namespace System.Workflow.ComponentModel.Design
             if (connectionPoint == null)
                 return false;
 
-            if (connectionPoint.AssociatedDesigner == this.associatedDesigner &&
-                connectionPoint.designerEdge == this.designerEdge &&
-                connectionPoint.ConnectionIndex == this.connectionIndex)
+            if (
+                connectionPoint.AssociatedDesigner == this.associatedDesigner
+                && connectionPoint.designerEdge == this.designerEdge
+                && connectionPoint.ConnectionIndex == this.connectionIndex
+            )
                 return true;
             else
                 return false;
@@ -160,7 +182,11 @@ namespace System.Workflow.ComponentModel.Design
 
         public override int GetHashCode()
         {
-            return (this.associatedDesigner.GetHashCode() ^ this.designerEdge.GetHashCode() ^ this.connectionIndex.GetHashCode());
+            return (
+                this.associatedDesigner.GetHashCode()
+                ^ this.designerEdge.GetHashCode()
+                ^ this.connectionIndex.GetHashCode()
+            );
         }
 
         public void OnPaint(ActivityDesignerPaintEventArgs e, bool drawHighlighted)
@@ -186,7 +212,16 @@ namespace System.Workflow.ComponentModel.Design
                 defaultSize.Width += defaultSize.Width / 2;
                 defaultSize.Height += defaultSize.Height / 2;
                 if (this.associatedDesigner != null)
-                    defaultSize = new Size(Math.Max(defaultSize.Width, (int)this.associatedDesigner.DesignerTheme.ForegroundPen.Width * 4), Math.Max(defaultSize.Height, (int)this.associatedDesigner.DesignerTheme.ForegroundPen.Width * 4));
+                    defaultSize = new Size(
+                        Math.Max(
+                            defaultSize.Width,
+                            (int)this.associatedDesigner.DesignerTheme.ForegroundPen.Width * 4
+                        ),
+                        Math.Max(
+                            defaultSize.Height,
+                            (int)this.associatedDesigner.DesignerTheme.ForegroundPen.Width * 4
+                        )
+                    );
                 return defaultSize;
             }
         }
@@ -195,7 +230,9 @@ namespace System.Workflow.ComponentModel.Design
 
     #region Class Connector
     [DesignerSerializer(typeof(ConnectorLayoutSerializer), typeof(WorkflowMarkupSerializer))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class Connector : IDisposable
     {
         #region Members, Construction, Dispose
@@ -214,16 +251,17 @@ namespace System.Workflow.ComponentModel.Design
             if (target == null)
                 throw new ArgumentNullException("target");
 
-            if (ConnectionManager.GetConnectorContainer(source.AssociatedDesigner) != ConnectionManager.GetConnectorContainer(target.AssociatedDesigner))
+            if (
+                ConnectionManager.GetConnectorContainer(source.AssociatedDesigner)
+                != ConnectionManager.GetConnectorContainer(target.AssociatedDesigner)
+            )
                 throw new ArgumentException(DR.GetString(DR.Error_Connector1));
 
             this.source = source;
             this.target = target;
         }
 
-        void IDisposable.Dispose()
-        {
-        }
+        void IDisposable.Dispose() { }
         #endregion
 
         #region Properties and Methods
@@ -241,11 +279,7 @@ namespace System.Workflow.ComponentModel.Design
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ConnectionPoint Source
         {
-            get
-            {
-                return this.source;
-            }
-
+            get { return this.source; }
             set
             {
                 if (value == null)
@@ -254,8 +288,14 @@ namespace System.Workflow.ComponentModel.Design
                 if (this.source.Equals(value))
                     return;
 
-                if (ConnectionManager.GetConnectorContainer(value.AssociatedDesigner) != ConnectionManager.GetConnectorContainer(this.target.AssociatedDesigner))
-                    throw new ArgumentException(SR.GetString(SR.Error_InvalidConnectorSource), "value");
+                if (
+                    ConnectionManager.GetConnectorContainer(value.AssociatedDesigner)
+                    != ConnectionManager.GetConnectorContainer(this.target.AssociatedDesigner)
+                )
+                    throw new ArgumentException(
+                        SR.GetString(SR.Error_InvalidConnectorSource),
+                        "value"
+                    );
 
                 this.source = value;
                 PerformLayout();
@@ -265,11 +305,7 @@ namespace System.Workflow.ComponentModel.Design
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ConnectionPoint Target
         {
-            get
-            {
-                return this.target;
-            }
-
+            get { return this.target; }
             set
             {
                 if (value == null)
@@ -278,8 +314,14 @@ namespace System.Workflow.ComponentModel.Design
                 if (this.target.Equals(value))
                     return;
 
-                if (ConnectionManager.GetConnectorContainer(value.AssociatedDesigner) != ConnectionManager.GetConnectorContainer(this.source.AssociatedDesigner))
-                    throw new ArgumentException(SR.GetString(SR.Error_InvalidConnectorSource), "value");
+                if (
+                    ConnectionManager.GetConnectorContainer(value.AssociatedDesigner)
+                    != ConnectionManager.GetConnectorContainer(this.source.AssociatedDesigner)
+                )
+                    throw new ArgumentException(
+                        SR.GetString(SR.Error_InvalidConnectorSource),
+                        "value"
+                    );
 
                 this.target = value;
                 PerformLayout();
@@ -299,7 +341,10 @@ namespace System.Workflow.ComponentModel.Design
 
                     connectorSegments.AddRange(this.segments);
 
-                    if (this.segments.Count == 0 || this.segments[this.segments.Count - 1] != this.target.Location)
+                    if (
+                        this.segments.Count == 0
+                        || this.segments[this.segments.Count - 1] != this.target.Location
+                    )
                         connectorSegments.Add(this.target.Location);
                 }
 
@@ -311,7 +356,9 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                Rectangle bounds = DesignerGeometryHelper.RectangleFromLineSegments(new List<Point>(ConnectorSegments).ToArray());
+                Rectangle bounds = DesignerGeometryHelper.RectangleFromLineSegments(
+                    new List<Point>(ConnectorSegments).ToArray()
+                );
                 bounds.Inflate(1, 1);
                 return bounds;
             }
@@ -319,10 +366,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public FreeformActivityDesigner ParentDesigner
         {
-            get
-            {
-                return this.parentDesigner;
-            }
+            get { return this.parentDesigner; }
         }
 
         public virtual bool HitTest(Point point)
@@ -333,7 +377,13 @@ namespace System.Workflow.ComponentModel.Design
             ReadOnlyCollection<Point> segments = ConnectorSegments;
             for (int i = 1; i < segments.Count; i++)
             {
-                if (DesignerGeometryHelper.PointOnLineSegment(point, new Point[] { segments[i - 1], segments[i] }, selectionSize))
+                if (
+                    DesignerGeometryHelper.PointOnLineSegment(
+                        point,
+                        new Point[] { segments[i - 1], segments[i] },
+                        selectionSize
+                    )
+                )
                     return true;
             }
 
@@ -343,7 +393,10 @@ namespace System.Workflow.ComponentModel.Design
         public virtual void Offset(Size size)
         {
             for (int i = 0; i < this.segments.Count; i++)
-                this.segments[i] = new Point(this.segments[i].X + size.Width, this.segments[i].Y + size.Height);
+                this.segments[i] = new Point(
+                    this.segments[i].X + size.Width,
+                    this.segments[i].Y + size.Height
+                );
         }
 
         public override bool Equals(object obj)
@@ -372,18 +425,12 @@ namespace System.Workflow.ComponentModel.Design
 
         public bool ConnectorModified
         {
-            get
-            {
-                return this.connectorModified;
-            }
+            get { return this.connectorModified; }
         }
 
         protected WorkflowView ParentView
         {
-            get
-            {
-                return GetService(typeof(WorkflowView)) as WorkflowView;
-            }
+            get { return GetService(typeof(WorkflowView)) as WorkflowView; }
         }
 
         protected void PerformLayout()
@@ -395,10 +442,7 @@ namespace System.Workflow.ComponentModel.Design
 
         protected internal virtual ICollection<Rectangle> ExcludedRoutingRectangles
         {
-            get
-            {
-                return new Rectangle[] { };
-            }
+            get { return new Rectangle[] { }; }
         }
 
         //We want to allow framework or the derived classes only to set the connector segments
@@ -423,13 +467,23 @@ namespace System.Workflow.ComponentModel.Design
 
         protected internal virtual void OnLayout(ActivityDesignerLayoutEventArgs e)
         {
-            if (this.segments.Count > 0 &&
-                (this.segments[0] != Source.Location || this.segments[this.segments.Count - 1] != Target.Location))
+            if (
+                this.segments.Count > 0
+                && (
+                    this.segments[0] != Source.Location
+                    || this.segments[this.segments.Count - 1] != Target.Location
+                )
+            )
                 this.connectorModified = false;
 
             if (!connectorModified && ParentDesigner != null)
             {
-                Point[] newSegments = ActivityDesignerConnectorRouter.Route(Source.AssociatedDesigner.Activity.Site, Source, Target, ExcludedRoutingRectangles);
+                Point[] newSegments = ActivityDesignerConnectorRouter.Route(
+                    Source.AssociatedDesigner.Activity.Site,
+                    Source,
+                    Target,
+                    ExcludedRoutingRectangles
+                );
                 this.segments.Clear();
                 this.segments.AddRange(newSegments);
             }
@@ -440,23 +494,54 @@ namespace System.Workflow.ComponentModel.Design
             CompositeDesignerTheme theme = e.DesignerTheme as CompositeDesignerTheme;
             if (theme != null)
             {
-                Size arrowCapSize = new Size(theme.ConnectorSize.Width / 5, theme.ConnectorSize.Height / 5);
+                Size arrowCapSize = new Size(
+                    theme.ConnectorSize.Width / 5,
+                    theme.ConnectorSize.Height / 5
+                );
                 Size maxCapSize = theme.ConnectorSize;
-                ActivityDesignerPaint.DrawConnectors(e.Graphics, e.DesignerTheme.ForegroundPen, new List<Point>(ConnectorSegments).ToArray(), arrowCapSize, maxCapSize, theme.ConnectorStartCap, theme.ConnectorEndCap);
+                ActivityDesignerPaint.DrawConnectors(
+                    e.Graphics,
+                    e.DesignerTheme.ForegroundPen,
+                    new List<Point>(ConnectorSegments).ToArray(),
+                    arrowCapSize,
+                    maxCapSize,
+                    theme.ConnectorStartCap,
+                    theme.ConnectorEndCap
+                );
             }
         }
 
-        protected internal virtual void OnPaintSelected(ActivityDesignerPaintEventArgs e, bool primarySelection, Point[] segmentEditPoints)
+        protected internal virtual void OnPaintSelected(
+            ActivityDesignerPaintEventArgs e,
+            bool primarySelection,
+            Point[] segmentEditPoints
+        )
         {
             CompositeDesignerTheme theme = e.DesignerTheme as CompositeDesignerTheme;
             if (theme == null)
                 return;
 
-            using (Pen lineSelectionPen = new Pen(WorkflowTheme.CurrentTheme.AmbientTheme.SelectionForeColor, 1))
+            using (
+                Pen lineSelectionPen = new Pen(
+                    WorkflowTheme.CurrentTheme.AmbientTheme.SelectionForeColor,
+                    1
+                )
+            )
             {
-                Size arrowCapSize = new Size(theme.ConnectorSize.Width / 5, theme.ConnectorSize.Height / 5);
+                Size arrowCapSize = new Size(
+                    theme.ConnectorSize.Width / 5,
+                    theme.ConnectorSize.Height / 5
+                );
                 Size maxCapSize = theme.ConnectorSize;
-                ActivityDesignerPaint.DrawConnectors(e.Graphics, lineSelectionPen, new List<Point>(ConnectorSegments).ToArray(), arrowCapSize, maxCapSize, theme.ConnectorStartCap, theme.ConnectorEndCap);
+                ActivityDesignerPaint.DrawConnectors(
+                    e.Graphics,
+                    lineSelectionPen,
+                    new List<Point>(ConnectorSegments).ToArray(),
+                    arrowCapSize,
+                    maxCapSize,
+                    theme.ConnectorStartCap,
+                    theme.ConnectorEndCap
+                );
             }
 
             if (this.source != null)
@@ -473,18 +558,38 @@ namespace System.Workflow.ComponentModel.Design
                 this.target.OnPaint(e, false);
         }
 
-        protected internal virtual void OnPaintEdited(ActivityDesignerPaintEventArgs e, Point[] segments, Point[] segmentEditPoints)
+        protected internal virtual void OnPaintEdited(
+            ActivityDesignerPaintEventArgs e,
+            Point[] segments,
+            Point[] segmentEditPoints
+        )
         {
             CompositeDesignerTheme theme = e.DesignerTheme as CompositeDesignerTheme;
             if (theme == null)
                 return;
 
-            using (Pen editableConnectorPen = new Pen(e.AmbientTheme.SelectionForegroundPen.Color, e.AmbientTheme.SelectionForegroundPen.Width))
+            using (
+                Pen editableConnectorPen = new Pen(
+                    e.AmbientTheme.SelectionForegroundPen.Color,
+                    e.AmbientTheme.SelectionForegroundPen.Width
+                )
+            )
             {
                 editableConnectorPen.DashStyle = DashStyle.Dash;
-                Size arrowCapSize = new Size(theme.ConnectorSize.Width / 5, theme.ConnectorSize.Height / 5);
+                Size arrowCapSize = new Size(
+                    theme.ConnectorSize.Width / 5,
+                    theme.ConnectorSize.Height / 5
+                );
                 Size maxCapSize = theme.ConnectorSize;
-                ActivityDesignerPaint.DrawConnectors(e.Graphics, editableConnectorPen, segments, arrowCapSize, maxCapSize, theme.ConnectorStartCap, theme.ConnectorEndCap);
+                ActivityDesignerPaint.DrawConnectors(
+                    e.Graphics,
+                    editableConnectorPen,
+                    segments,
+                    arrowCapSize,
+                    maxCapSize,
+                    theme.ConnectorStartCap,
+                    theme.ConnectorEndCap
+                );
             }
 
             if (this.source != null)
@@ -503,27 +608,52 @@ namespace System.Workflow.ComponentModel.Design
         protected virtual object GetService(Type serviceType)
         {
             object service = null;
-            if (this.parentDesigner != null && this.parentDesigner.Activity != null && this.parentDesigner.Activity.Site != null)
+            if (
+                this.parentDesigner != null
+                && this.parentDesigner.Activity != null
+                && this.parentDesigner.Activity.Site != null
+            )
                 service = this.parentDesigner.Activity.Site.GetService(serviceType);
             return service;
         }
         #endregion
 
         #region Helpers
-        private void PaintEditPoints(ActivityDesignerPaintEventArgs e, Point point, bool drawMidSegmentEditPoint)
+        private void PaintEditPoints(
+            ActivityDesignerPaintEventArgs e,
+            Point point,
+            bool drawMidSegmentEditPoint
+        )
         {
             Size size = (this.source != null) ? this.source.Bounds.Size : Size.Empty;
             if (!size.IsEmpty)
             {
-                Rectangle bounds = new Rectangle(point.X - size.Width / 2, point.Y - size.Height / 2, size.Width, size.Height);
+                Rectangle bounds = new Rectangle(
+                    point.X - size.Width / 2,
+                    point.Y - size.Height / 2,
+                    size.Width,
+                    size.Height
+                );
                 if (drawMidSegmentEditPoint)
                 {
                     using (GraphicsPath path = new GraphicsPath())
                     {
-                        path.AddLine(new Point(bounds.Left + bounds.Width / 2, bounds.Top), new Point(bounds.Right, bounds.Top + bounds.Height / 2));
-                        path.AddLine(new Point(bounds.Right, bounds.Top + bounds.Height / 2), new Point(bounds.Left + bounds.Width / 2, bounds.Bottom));
-                        path.AddLine(new Point(bounds.Left + bounds.Width / 2, bounds.Bottom), new Point(bounds.Left, bounds.Top + bounds.Height / 2));
-                        path.AddLine(new Point(bounds.Left, bounds.Top + bounds.Height / 2), new Point(bounds.Left + bounds.Width / 2, bounds.Top));
+                        path.AddLine(
+                            new Point(bounds.Left + bounds.Width / 2, bounds.Top),
+                            new Point(bounds.Right, bounds.Top + bounds.Height / 2)
+                        );
+                        path.AddLine(
+                            new Point(bounds.Right, bounds.Top + bounds.Height / 2),
+                            new Point(bounds.Left + bounds.Width / 2, bounds.Bottom)
+                        );
+                        path.AddLine(
+                            new Point(bounds.Left + bounds.Width / 2, bounds.Bottom),
+                            new Point(bounds.Left, bounds.Top + bounds.Height / 2)
+                        );
+                        path.AddLine(
+                            new Point(bounds.Left, bounds.Top + bounds.Height / 2),
+                            new Point(bounds.Left + bounds.Width / 2, bounds.Top)
+                        );
 
                         e.Graphics.FillPath(Brushes.White, path);
                         e.Graphics.DrawPath(e.AmbientTheme.SelectionForegroundPen, path);
@@ -558,7 +688,8 @@ namespace System.Workflow.ComponentModel.Design
                 ActivityDesigner designer = this.target.AssociatedDesigner;
                 while (designer != null)
                 {
-                    FreeformActivityDesigner parentFreeFormDesigner = designer as FreeformActivityDesigner;
+                    FreeformActivityDesigner parentFreeFormDesigner =
+                        designer as FreeformActivityDesigner;
                     if (parentFreeFormDesigner != null)
                         targetParents.Add(parentFreeFormDesigner);
                     designer = designer.ParentDesigner;
@@ -569,8 +700,12 @@ namespace System.Workflow.ComponentModel.Design
                 designer = this.source.AssociatedDesigner;
                 while (designer != null)
                 {
-                    FreeformActivityDesigner parentFreeFormDesigner = designer as FreeformActivityDesigner;
-                    if (parentFreeFormDesigner != null && targetParents.Contains(parentFreeFormDesigner))
+                    FreeformActivityDesigner parentFreeFormDesigner =
+                        designer as FreeformActivityDesigner;
+                    if (
+                        parentFreeFormDesigner != null
+                        && targetParents.Contains(parentFreeFormDesigner)
+                    )
                         break;
                     designer = designer.ParentDesigner;
                 }
@@ -598,9 +733,14 @@ namespace System.Workflow.ComponentModel.Design
             ConnectorHitTestInfo connectorHitTestInfo = selectedObject as ConnectorHitTestInfo;
             if (connectorHitTestInfo != null)
             {
-                FreeformActivityDesigner connectorContainer = connectorHitTestInfo.AssociatedDesigner as FreeformActivityDesigner;
+                FreeformActivityDesigner connectorContainer =
+                    connectorHitTestInfo.AssociatedDesigner as FreeformActivityDesigner;
                 int index = connectorHitTestInfo.MapToIndex();
-                if (connectorContainer != null && index >= 0 && index < connectorContainer.Connectors.Count)
+                if (
+                    connectorContainer != null
+                    && index >= 0
+                    && index < connectorContainer.Connectors.Count
+                )
                     connector = connectorContainer.Connectors[index];
             }
 
@@ -620,10 +760,7 @@ namespace System.Workflow.ComponentModel.Design
                     activityName = this.source.AssociatedDesigner.Activity.QualifiedName;
                 return activityName;
             }
-
-            set
-            {
-            }
+            set { }
         }
 
         //NOTE THAT THIS WILL ONLY BE USED FOR SERIALIZATION PURPOSES
@@ -638,10 +775,7 @@ namespace System.Workflow.ComponentModel.Design
                     connectionIndex = this.source.ConnectionIndex;
                 return connectionIndex;
             }
-
-            set
-            {
-            }
+            set { }
         }
 
         //NOTE THAT THIS WILL ONLY BE USED FOR SERIALIZATION PURPOSES
@@ -656,10 +790,7 @@ namespace System.Workflow.ComponentModel.Design
                     connectionEdge = this.source.ConnectionEdge;
                 return connectionEdge;
             }
-
-            set
-            {
-            }
+            set { }
         }
 
         //NOTE THAT THIS WILL ONLY BE USED FOR SERIALIZATION PURPOSES
@@ -674,10 +805,7 @@ namespace System.Workflow.ComponentModel.Design
                     activityName = this.target.AssociatedDesigner.Activity.QualifiedName;
                 return activityName;
             }
-
-            set
-            {
-            }
+            set { }
         }
 
         //NOTE THAT THIS WILL ONLY BE USED FOR SERIALIZATION PURPOSES
@@ -692,10 +820,7 @@ namespace System.Workflow.ComponentModel.Design
                     connectionIndex = this.target.ConnectionIndex;
                 return connectionIndex;
             }
-
-            set
-            {
-            }
+            set { }
         }
 
         //NOTE THAT THIS WILL ONLY BE USED FOR SERIALIZATION PURPOSES
@@ -710,10 +835,7 @@ namespace System.Workflow.ComponentModel.Design
                     connectionEdge = this.target.ConnectionEdge;
                 return connectionEdge;
             }
-
-            set
-            {
-            }
+            set { }
         }
 
         //NOTE THAT THIS WILL ONLY BE USED FOR SERIALIZATION PURPOSES
@@ -721,10 +843,7 @@ namespace System.Workflow.ComponentModel.Design
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         internal List<Point> Segments
         {
-            get
-            {
-                return this.segments;
-            }
+            get { return this.segments; }
         }
         #endregion
 
@@ -734,7 +853,9 @@ namespace System.Workflow.ComponentModel.Design
 
     #region Class ConnectorAccessibleObject
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ConnectorAccessibleObject : AccessibleObject
     {
         private Connector connector;
@@ -752,7 +873,10 @@ namespace System.Workflow.ComponentModel.Design
             {
                 WorkflowView parentView = this.connector.ParentDesigner.ParentView;
                 Rectangle bounds = this.connector.Bounds;
-                return new Rectangle(parentView.LogicalPointToScreen(bounds.Location), parentView.LogicalSizeToClient(bounds.Size));
+                return new Rectangle(
+                    parentView.LogicalPointToScreen(bounds.Location),
+                    parentView.LogicalSizeToClient(bounds.Size)
+                );
             }
         }
 
@@ -767,29 +891,18 @@ namespace System.Workflow.ComponentModel.Design
 
         public override string Name
         {
-            get
-            {
-                return this.connector.GetType().Name;
-            }
-            set
-            {
-            }
+            get { return this.connector.GetType().Name; }
+            set { }
         }
 
         public override AccessibleObject Parent
         {
-            get
-            {
-                return connector.ParentDesigner.AccessibilityObject;
-            }
+            get { return connector.ParentDesigner.AccessibilityObject; }
         }
 
         public override AccessibleRole Role
         {
-            get
-            {
-                return AccessibleRole.Diagram;
-            }
+            get { return AccessibleRole.Diagram; }
         }
     }
 
@@ -823,10 +936,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public Connector EditedConnector
         {
-            get
-            {
-                return this.editedConnector;
-            }
+            get { return this.editedConnector; }
         }
 
         public Cursor GetCursor(Point cursorPoint)
@@ -866,9 +976,15 @@ namespace System.Workflow.ComponentModel.Design
                 }
             }
 
-            if (editPointHit != null &&
-                (editPointHit.EditedConnectionPoint == null ||
-                ConnectionManager.GetConnectorContainer(editPointHit.EditedConnectionPoint.AssociatedDesigner) != null))
+            if (
+                editPointHit != null
+                && (
+                    editPointHit.EditedConnectionPoint == null
+                    || ConnectionManager.GetConnectorContainer(
+                        editPointHit.EditedConnectionPoint.AssociatedDesigner
+                    ) != null
+                )
+            )
             {
                 editPointHit.Location = point;
                 this.activeEditPoint = editPointHit;
@@ -915,9 +1031,17 @@ namespace System.Workflow.ComponentModel.Design
                 bool updateSegments = false;
                 if (activeEditPoint.Type == EditPoint.EditPointTypes.ConnectionEditPoint)
                 {
-                    ConnectionManager connectionManager = GetService(typeof(ConnectionManager)) as ConnectionManager;
-                    FreeformActivityDesigner connectorContainer = ConnectionManager.GetConnectorContainer(activeEditPoint.EditedConnectionPoint.AssociatedDesigner);
-                    if (connectionManager != null && connectionManager.SnappedConnectionPoint != null && connectorContainer != null)
+                    ConnectionManager connectionManager =
+                        GetService(typeof(ConnectionManager)) as ConnectionManager;
+                    FreeformActivityDesigner connectorContainer =
+                        ConnectionManager.GetConnectorContainer(
+                            activeEditPoint.EditedConnectionPoint.AssociatedDesigner
+                        );
+                    if (
+                        connectionManager != null
+                        && connectionManager.SnappedConnectionPoint != null
+                        && connectorContainer != null
+                    )
                     {
                         //Get the original source and targets
                         ConnectionPoint source = this.editedConnector.Source;
@@ -930,17 +1054,27 @@ namespace System.Workflow.ComponentModel.Design
                             source = connectionManager.SnappedConnectionPoint;
 
                         //Check if it is a valid connection ie source can be connected to target
-                        if (connectorContainer == ConnectionManager.GetConnectorContainer(target.AssociatedDesigner) &&
-                            connectorContainer.CanConnectContainedDesigners(source, target))
+                        if (
+                            connectorContainer
+                                == ConnectionManager.GetConnectorContainer(
+                                    target.AssociatedDesigner
+                                )
+                            && connectorContainer.CanConnectContainedDesigners(source, target)
+                        )
                         {
                             this.editedConnector.Source = source;
                             this.editedConnector.Target = target;
 
                             if (this.editedConnector.ParentDesigner == null)
                             {
-                                this.editedConnector = connectorContainer.AddConnector(source, target);
+                                this.editedConnector = connectorContainer.AddConnector(
+                                    source,
+                                    target
+                                );
 
-                                WorkflowDesignerLoader loader = GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+                                WorkflowDesignerLoader loader =
+                                    GetService(typeof(WorkflowDesignerLoader))
+                                    as WorkflowDesignerLoader;
                                 if (loader != null)
                                     loader.SetModified(true);
                             }
@@ -959,12 +1093,17 @@ namespace System.Workflow.ComponentModel.Design
                 //Make sure that we apply the edit points to the connector
                 if (updateSegments)
                 {
-                    this.editedConnector.SetConnectorSegments(GetPointsFromEditPoints(this.editPoints));
+                    this.editedConnector.SetConnectorSegments(
+                        GetPointsFromEditPoints(this.editPoints)
+                    );
                     if (this.editedConnector.ParentDesigner != null)
                     {
-                        this.editedConnector.ParentDesigner.OnConnectorChanged(new ConnectorEventArgs(this.editedConnector));
+                        this.editedConnector.ParentDesigner.OnConnectorChanged(
+                            new ConnectorEventArgs(this.editedConnector)
+                        );
 
-                        WorkflowDesignerLoader loader = GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+                        WorkflowDesignerLoader loader =
+                            GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
                         if (loader != null)
                             loader.SetModified(true);
                     }
@@ -988,15 +1127,21 @@ namespace System.Workflow.ComponentModel.Design
             return false;
         }
 
-        public void OnPaint(ActivityDesignerPaintEventArgs e, bool drawSelected, bool drawPrimarySelection)
+        public void OnPaint(
+            ActivityDesignerPaintEventArgs e,
+            bool drawSelected,
+            bool drawPrimarySelection
+        )
         {
             List<Point> segments = new List<Point>();
             List<Point> segmentEditPoints = new List<Point>();
             for (int i = 0; i < this.editPoints.Count; i++)
             {
                 EditPoint editPoint = this.editPoints[i];
-                if (editPoint.Type == EditPoint.EditPointTypes.ConnectionEditPoint ||
-                    editPoint.Type == EditPoint.EditPointTypes.MultiSegmentEditPoint)
+                if (
+                    editPoint.Type == EditPoint.EditPointTypes.ConnectionEditPoint
+                    || editPoint.Type == EditPoint.EditPointTypes.MultiSegmentEditPoint
+                )
                     segments.Add(editPoint.Location);
                 else
                     segmentEditPoints.Add(editPoint.Location);
@@ -1004,16 +1149,28 @@ namespace System.Workflow.ComponentModel.Design
 
             //If the editing is in progress then we want to draw the dashed lines
             if (drawSelected)
-                this.editedConnector.OnPaintSelected(e, drawPrimarySelection, segmentEditPoints.ToArray());
+                this.editedConnector.OnPaintSelected(
+                    e,
+                    drawPrimarySelection,
+                    segmentEditPoints.ToArray()
+                );
 
             if (this.activeEditPoint != null)
-                this.editedConnector.OnPaintEdited(e, segments.ToArray(), segmentEditPoints.ToArray());
+                this.editedConnector.OnPaintEdited(
+                    e,
+                    segments.ToArray(),
+                    segmentEditPoints.ToArray()
+                );
 
             //
 #if DISPLAYESCAPEREGIONS
-            if (this.activeEditPoint != null && this.activeEditPoint.Type == EditPoint.EditPointTypes.ConnectionEditPoint)
+            if (
+                this.activeEditPoint != null
+                && this.activeEditPoint.Type == EditPoint.EditPointTypes.ConnectionEditPoint
+            )
             {
-                object source = null, target = null;
+                object source = null,
+                    target = null;
                 if (this.activeEditPoint.EditedConnectionPoint.Equals(Target))
                 {
                     target = this.activeEditPoint.Location;
@@ -1024,12 +1181,21 @@ namespace System.Workflow.ComponentModel.Design
                     source = this.activeEditPoint.Location;
                     target = Target;
                 }
-                
-                List<Rectangle> rectanglesToExclude;
-                List<Point> linesToExclude, pointsToExclude;
-                ActivityDesignerConnectorRouter.GetRoutingObstacles(this.serviceProvider, source, target, out rectanglesToExclude, out linesToExclude, out pointsToExclude);
 
-                ICollection<Rectangle> userDefinedObstacles = this.editedConnector.ExcludedRoutingRectangles;
+                List<Rectangle> rectanglesToExclude;
+                List<Point> linesToExclude,
+                    pointsToExclude;
+                ActivityDesignerConnectorRouter.GetRoutingObstacles(
+                    this.serviceProvider,
+                    source,
+                    target,
+                    out rectanglesToExclude,
+                    out linesToExclude,
+                    out pointsToExclude
+                );
+
+                ICollection<Rectangle> userDefinedObstacles =
+                    this.editedConnector.ExcludedRoutingRectangles;
                 if (userDefinedObstacles != null)
                 {
                     foreach (Rectangle rectangle in userDefinedObstacles)
@@ -1037,30 +1203,29 @@ namespace System.Workflow.ComponentModel.Design
                 }
 
                 foreach (Rectangle rectangle in rectanglesToExclude)
-                    e.Graphics.DrawRectangle(Pens.Red, rectangle);        
+                    e.Graphics.DrawRectangle(Pens.Red, rectangle);
 
                 for (int i = 0; i < linesToExclude.Count / 2; i++)
-                    e.Graphics.DrawLine(Pens.Red, linesToExclude[i * 2], linesToExclude[(i * 2) + 1]);
+                    e.Graphics.DrawLine(
+                        Pens.Red,
+                        linesToExclude[i * 2],
+                        linesToExclude[(i * 2) + 1]
+                    );
             }
 #endif
         }
+
         #region Helpers
 
         #region EditPointUpdation Logic
         private ConnectionPoint Source
         {
-            get
-            {
-                return this.editedConnector.Source;
-            }
+            get { return this.editedConnector.Source; }
         }
 
         private ConnectionPoint Target
         {
-            get
-            {
-                return this.editedConnector.Target;
-            }
+            get { return this.editedConnector.Target; }
         }
 
         private void PerformLayout()
@@ -1075,7 +1240,9 @@ namespace System.Workflow.ComponentModel.Design
             WorkflowView workflowView = GetService(typeof(WorkflowView)) as WorkflowView;
             if (workflowView != null)
             {
-                Rectangle bounds = DesignerGeometryHelper.RectangleFromLineSegments(GetPointsFromEditPoints(this.editPoints).ToArray());
+                Rectangle bounds = DesignerGeometryHelper.RectangleFromLineSegments(
+                    GetPointsFromEditPoints(this.editPoints).ToArray()
+                );
                 bounds.Inflate(1, 1);
                 workflowView.InvalidateLogicalRectangle(bounds);
             }
@@ -1103,9 +1270,12 @@ namespace System.Workflow.ComponentModel.Design
 
         private void UpdateEditPoints(Point newPoint)
         {
-            if (this.editPoints.Count < 2 ||
-                this.editPoints[0].Type != EditPoint.EditPointTypes.ConnectionEditPoint ||
-                this.editPoints[this.editPoints.Count - 1].Type != EditPoint.EditPointTypes.ConnectionEditPoint)
+            if (
+                this.editPoints.Count < 2
+                || this.editPoints[0].Type != EditPoint.EditPointTypes.ConnectionEditPoint
+                || this.editPoints[this.editPoints.Count - 1].Type
+                    != EditPoint.EditPointTypes.ConnectionEditPoint
+            )
             {
                 Debug.Assert(false);
                 return;
@@ -1118,42 +1288,111 @@ namespace System.Workflow.ComponentModel.Design
             if (this.activeEditPoint != null)
             {
                 int activeEditPointIndex = this.editPoints.IndexOf(this.activeEditPoint);
-                EditPoint previous = (activeEditPointIndex > 0) ? this.editPoints[activeEditPointIndex - 1] : null;
-                EditPoint next = (activeEditPointIndex < this.editPoints.Count - 1) ? this.editPoints[activeEditPointIndex + 1] : null;
+                EditPoint previous =
+                    (activeEditPointIndex > 0) ? this.editPoints[activeEditPointIndex - 1] : null;
+                EditPoint next =
+                    (activeEditPointIndex < this.editPoints.Count - 1)
+                        ? this.editPoints[activeEditPointIndex + 1]
+                        : null;
 
                 //Note that extra edit points are only added if we are connected to connection point
-                if (previous != null && previous.Type == EditPoint.EditPointTypes.ConnectionEditPoint)
+                if (
+                    previous != null
+                    && previous.Type == EditPoint.EditPointTypes.ConnectionEditPoint
+                )
                 {
-                    float slopeOfLine = DesignerGeometryHelper.SlopeOfLineSegment(previous.Location, this.activeEditPoint.Location);
-                    Orientation orientation = (Math.Abs(slopeOfLine) < 1) ? Orientation.Horizontal : Orientation.Vertical;
+                    float slopeOfLine = DesignerGeometryHelper.SlopeOfLineSegment(
+                        previous.Location,
+                        this.activeEditPoint.Location
+                    );
+                    Orientation orientation =
+                        (Math.Abs(slopeOfLine) < 1) ? Orientation.Horizontal : Orientation.Vertical;
 
-                    int editPointOffset = Convert.ToInt32(DesignerGeometryHelper.DistanceBetweenPoints(previous.Location, (next != null) ? next.Location : this.activeEditPoint.Location)) / 4;
+                    int editPointOffset =
+                        Convert.ToInt32(
+                            DesignerGeometryHelper.DistanceBetweenPoints(
+                                previous.Location,
+                                (next != null) ? next.Location : this.activeEditPoint.Location
+                            )
+                        ) / 4;
                     if (orientation == Orientation.Horizontal)
-                        editPointOffset *= (previous.Location.X < this.activeEditPoint.Location.X) ? 1 : -1;
+                        editPointOffset *=
+                            (previous.Location.X < this.activeEditPoint.Location.X) ? 1 : -1;
                     else
-                        editPointOffset *= (previous.Location.Y < this.activeEditPoint.Location.X) ? 1 : -1;
+                        editPointOffset *=
+                            (previous.Location.Y < this.activeEditPoint.Location.X) ? 1 : -1;
 
                     activeEditPointIndex = this.editPoints.IndexOf(this.activeEditPoint);
-                    Point editPointLocation = (orientation == Orientation.Horizontal) ? new Point(previous.Location.X + editPointOffset, previous.Location.Y) : new Point(previous.Location.X, previous.Location.Y + editPointOffset);
-                    previous = new EditPoint(this, EditPoint.EditPointTypes.MultiSegmentEditPoint, editPointLocation);
-                    this.editPoints.InsertRange(activeEditPointIndex, new EditPoint[] { new EditPoint(this, EditPoint.EditPointTypes.MultiSegmentEditPoint, editPointLocation), previous });
+                    Point editPointLocation =
+                        (orientation == Orientation.Horizontal)
+                            ? new Point(previous.Location.X + editPointOffset, previous.Location.Y)
+                            : new Point(previous.Location.X, previous.Location.Y + editPointOffset);
+                    previous = new EditPoint(
+                        this,
+                        EditPoint.EditPointTypes.MultiSegmentEditPoint,
+                        editPointLocation
+                    );
+                    this.editPoints.InsertRange(
+                        activeEditPointIndex,
+                        new EditPoint[]
+                        {
+                            new EditPoint(
+                                this,
+                                EditPoint.EditPointTypes.MultiSegmentEditPoint,
+                                editPointLocation
+                            ),
+                            previous,
+                        }
+                    );
                 }
 
                 if (next != null && next.Type == EditPoint.EditPointTypes.ConnectionEditPoint)
                 {
-                    float slopeOfLine = DesignerGeometryHelper.SlopeOfLineSegment(this.activeEditPoint.Location, next.Location);
-                    Orientation orientation = (Math.Abs(slopeOfLine) < 1) ? Orientation.Horizontal : Orientation.Vertical;
+                    float slopeOfLine = DesignerGeometryHelper.SlopeOfLineSegment(
+                        this.activeEditPoint.Location,
+                        next.Location
+                    );
+                    Orientation orientation =
+                        (Math.Abs(slopeOfLine) < 1) ? Orientation.Horizontal : Orientation.Vertical;
 
-                    int editPointOffset = Convert.ToInt32(DesignerGeometryHelper.DistanceBetweenPoints((previous != null) ? previous.Location : this.activeEditPoint.Location, next.Location)) / 4;
+                    int editPointOffset =
+                        Convert.ToInt32(
+                            DesignerGeometryHelper.DistanceBetweenPoints(
+                                (previous != null)
+                                    ? previous.Location
+                                    : this.activeEditPoint.Location,
+                                next.Location
+                            )
+                        ) / 4;
                     if (orientation == Orientation.Horizontal)
-                        editPointOffset *= (this.activeEditPoint.Location.X < next.Location.X) ? -1 : 1;
+                        editPointOffset *=
+                            (this.activeEditPoint.Location.X < next.Location.X) ? -1 : 1;
                     else
-                        editPointOffset *= (this.activeEditPoint.Location.Y < next.Location.Y) ? -1 : 1;
+                        editPointOffset *=
+                            (this.activeEditPoint.Location.Y < next.Location.Y) ? -1 : 1;
 
                     activeEditPointIndex = this.editPoints.IndexOf(this.activeEditPoint);
-                    Point editPointLocation = (orientation == Orientation.Horizontal) ? new Point(next.Location.X + editPointOffset, next.Location.Y) : new Point(next.Location.X, next.Location.Y + editPointOffset);
-                    next = new EditPoint(this, EditPoint.EditPointTypes.MultiSegmentEditPoint, editPointLocation);
-                    this.editPoints.InsertRange(activeEditPointIndex + 1, new EditPoint[] { next, new EditPoint(this, EditPoint.EditPointTypes.MultiSegmentEditPoint, editPointLocation) });
+                    Point editPointLocation =
+                        (orientation == Orientation.Horizontal)
+                            ? new Point(next.Location.X + editPointOffset, next.Location.Y)
+                            : new Point(next.Location.X, next.Location.Y + editPointOffset);
+                    next = new EditPoint(
+                        this,
+                        EditPoint.EditPointTypes.MultiSegmentEditPoint,
+                        editPointLocation
+                    );
+                    this.editPoints.InsertRange(
+                        activeEditPointIndex + 1,
+                        new EditPoint[]
+                        {
+                            next,
+                            new EditPoint(
+                                this,
+                                EditPoint.EditPointTypes.MultiSegmentEditPoint,
+                                editPointLocation
+                            ),
+                        }
+                    );
                 }
 
                 //STEP2: UPDATE THE EDIT POINTS
@@ -1164,7 +1403,8 @@ namespace System.Workflow.ComponentModel.Design
                     //When we start editing the end point we need to clear the slate and start over
                     RemoveEditPoints(EditPoint.EditPointTypes.MultiSegmentEditPoint);
 
-                    object source = null, target = null;
+                    object source = null,
+                        target = null;
                     if (this.activeEditPoint.EditedConnectionPoint.Equals(Target))
                     {
                         target = newPoint;
@@ -1178,24 +1418,60 @@ namespace System.Workflow.ComponentModel.Design
 
                     int newEditPointIndex = (this.editPoints.Count == 2) ? 1 : 0;
                     List<EditPoint> newEditPoints = new List<EditPoint>();
-                    Point[] points = ActivityDesignerConnectorRouter.Route(this.serviceProvider, source, target, this.editedConnector.ExcludedRoutingRectangles);
+                    Point[] points = ActivityDesignerConnectorRouter.Route(
+                        this.serviceProvider,
+                        source,
+                        target,
+                        this.editedConnector.ExcludedRoutingRectangles
+                    );
                     for (int i = newEditPointIndex; i < points.Length - newEditPointIndex; i++)
-                        newEditPoints.Add(new EditPoint(this, EditPoint.EditPointTypes.MultiSegmentEditPoint, points[i]));
+                        newEditPoints.Add(
+                            new EditPoint(
+                                this,
+                                EditPoint.EditPointTypes.MultiSegmentEditPoint,
+                                points[i]
+                            )
+                        );
                     this.editPoints.InsertRange(1, newEditPoints.ToArray());
                 }
-                else if (this.activeEditPoint.Type == EditPoint.EditPointTypes.MultiSegmentEditPoint)
+                else if (
+                    this.activeEditPoint.Type == EditPoint.EditPointTypes.MultiSegmentEditPoint
+                )
                 {
-                    if (previous != null && previous.Type != EditPoint.EditPointTypes.ConnectionEditPoint && next != null && next.Type != EditPoint.EditPointTypes.ConnectionEditPoint)
+                    if (
+                        previous != null
+                        && previous.Type != EditPoint.EditPointTypes.ConnectionEditPoint
+                        && next != null
+                        && next.Type != EditPoint.EditPointTypes.ConnectionEditPoint
+                    )
                     {
                         //Update the previous point
-                        float slopeOfLine = DesignerGeometryHelper.SlopeOfLineSegment(previous.Location, this.activeEditPoint.Location);
-                        Orientation orientation = (Math.Abs(slopeOfLine) < 1) ? Orientation.Horizontal : Orientation.Vertical;
-                        previous.Location = (orientation == Orientation.Horizontal) ? new Point(previous.Location.X, newPoint.Y) : new Point(newPoint.X, previous.Location.Y);
+                        float slopeOfLine = DesignerGeometryHelper.SlopeOfLineSegment(
+                            previous.Location,
+                            this.activeEditPoint.Location
+                        );
+                        Orientation orientation =
+                            (Math.Abs(slopeOfLine) < 1)
+                                ? Orientation.Horizontal
+                                : Orientation.Vertical;
+                        previous.Location =
+                            (orientation == Orientation.Horizontal)
+                                ? new Point(previous.Location.X, newPoint.Y)
+                                : new Point(newPoint.X, previous.Location.Y);
 
                         //Update the next point
-                        slopeOfLine = DesignerGeometryHelper.SlopeOfLineSegment(this.activeEditPoint.Location, next.Location);
-                        orientation = (Math.Abs(slopeOfLine) < 1) ? Orientation.Horizontal : Orientation.Vertical;
-                        next.Location = (orientation == Orientation.Horizontal) ? new Point(next.Location.X, newPoint.Y) : new Point(newPoint.X, next.Location.Y);
+                        slopeOfLine = DesignerGeometryHelper.SlopeOfLineSegment(
+                            this.activeEditPoint.Location,
+                            next.Location
+                        );
+                        orientation =
+                            (Math.Abs(slopeOfLine) < 1)
+                                ? Orientation.Horizontal
+                                : Orientation.Vertical;
+                        next.Location =
+                            (orientation == Orientation.Horizontal)
+                                ? new Point(next.Location.X, newPoint.Y)
+                                : new Point(newPoint.X, next.Location.Y);
 
                         //Update the current point
                         this.activeEditPoint.Location = newPoint;
@@ -1207,23 +1483,40 @@ namespace System.Workflow.ComponentModel.Design
                 }
                 else if (this.activeEditPoint.Type == EditPoint.EditPointTypes.MidSegmentEditPoint)
                 {
-                    if (previous != null && previous.Type != EditPoint.EditPointTypes.ConnectionEditPoint && next != null && next.Type != EditPoint.EditPointTypes.ConnectionEditPoint)
+                    if (
+                        previous != null
+                        && previous.Type != EditPoint.EditPointTypes.ConnectionEditPoint
+                        && next != null
+                        && next.Type != EditPoint.EditPointTypes.ConnectionEditPoint
+                    )
                     {
-                        float slopeOfLine = DesignerGeometryHelper.SlopeOfLineSegment(previous.Location, next.Location);
-                        Orientation orientation = (Math.Abs(slopeOfLine) < 1) ? Orientation.Horizontal : Orientation.Vertical;
+                        float slopeOfLine = DesignerGeometryHelper.SlopeOfLineSegment(
+                            previous.Location,
+                            next.Location
+                        );
+                        Orientation orientation =
+                            (Math.Abs(slopeOfLine) < 1)
+                                ? Orientation.Horizontal
+                                : Orientation.Vertical;
 
                         //If the orientation is horizontal then we need to move the points vertically else we need to move the points horizontally
                         if (orientation == Orientation.Horizontal)
                         {
                             previous.Location = new Point(previous.Location.X, newPoint.Y);
                             next.Location = new Point(next.Location.X, newPoint.Y);
-                            this.activeEditPoint.Location = new Point(this.activeEditPoint.Location.X, newPoint.Y);
+                            this.activeEditPoint.Location = new Point(
+                                this.activeEditPoint.Location.X,
+                                newPoint.Y
+                            );
                         }
                         else
                         {
                             previous.Location = new Point(newPoint.X, previous.Location.Y);
                             next.Location = new Point(newPoint.X, next.Location.Y);
-                            this.activeEditPoint.Location = new Point(newPoint.X, this.activeEditPoint.Location.Y);
+                            this.activeEditPoint.Location = new Point(
+                                newPoint.X,
+                                this.activeEditPoint.Location.Y
+                            );
                         }
                     }
                     else
@@ -1248,10 +1541,17 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (editPointType == EditPoint.EditPointTypes.ConnectionEditPoint)
             {
-                if (this.editPoints.Count == 0 || !this.editPoints[0].EditedConnectionPoint.Equals(Source))
+                if (
+                    this.editPoints.Count == 0
+                    || !this.editPoints[0].EditedConnectionPoint.Equals(Source)
+                )
                     this.editPoints.Insert(0, new EditPoint(this, Source));
 
-                if (this.editPoints.Count < 2 || !this.editPoints[this.editPoints.Count - 1].EditedConnectionPoint.Equals(Target))
+                if (
+                    this.editPoints.Count < 2
+                    || !this.editPoints[this.editPoints.Count - 1]
+                        .EditedConnectionPoint.Equals(Target)
+                )
                     editPoints.Add(new EditPoint(this, Target));
             }
             else if (editPointType == EditPoint.EditPointTypes.MidSegmentEditPoint)
@@ -1259,12 +1559,31 @@ namespace System.Workflow.ComponentModel.Design
                 int minLengthForSegmentEditPoint = Source.Bounds.Width * 4;
                 for (int i = 0; i < this.editPoints.Count - 1; i++)
                 {
-                    if (this.editPoints[i].Type != EditPoint.EditPointTypes.MidSegmentEditPoint &&
-                        this.editPoints[i + 1].Type != EditPoint.EditPointTypes.MidSegmentEditPoint &&
-                        DesignerGeometryHelper.DistanceOfLineSegments(new Point[] { this.editPoints[i].Location, this.editPoints[i + 1].Location }) > minLengthForSegmentEditPoint)
+                    if (
+                        this.editPoints[i].Type != EditPoint.EditPointTypes.MidSegmentEditPoint
+                        && this.editPoints[i + 1].Type
+                            != EditPoint.EditPointTypes.MidSegmentEditPoint
+                        && DesignerGeometryHelper.DistanceOfLineSegments(
+                            new Point[]
+                            {
+                                this.editPoints[i].Location,
+                                this.editPoints[i + 1].Location,
+                            }
+                        ) > minLengthForSegmentEditPoint
+                    )
                     {
-                        Point midPoint = DesignerGeometryHelper.MidPointOfLineSegment(this.editPoints[i].Location, this.editPoints[i + 1].Location);
-                        this.editPoints.Insert(i + 1, new EditPoint(this, EditPoint.EditPointTypes.MidSegmentEditPoint, midPoint));
+                        Point midPoint = DesignerGeometryHelper.MidPointOfLineSegment(
+                            this.editPoints[i].Location,
+                            this.editPoints[i + 1].Location
+                        );
+                        this.editPoints.Insert(
+                            i + 1,
+                            new EditPoint(
+                                this,
+                                EditPoint.EditPointTypes.MidSegmentEditPoint,
+                                midPoint
+                            )
+                        );
                     }
                 }
             }
@@ -1280,8 +1599,17 @@ namespace System.Workflow.ComponentModel.Design
 
                     List<EditPoint> editPointsToAdd = new List<EditPoint>();
                     for (int i = 0; i < segments.Count; i++)
-                        editPointsToAdd.Add(new EditPoint(this, EditPoint.EditPointTypes.MultiSegmentEditPoint, segments[i]));
-                    this.editPoints.InsertRange(this.editPoints.Count - 1, editPointsToAdd.ToArray());
+                        editPointsToAdd.Add(
+                            new EditPoint(
+                                this,
+                                EditPoint.EditPointTypes.MultiSegmentEditPoint,
+                                segments[i]
+                            )
+                        );
+                    this.editPoints.InsertRange(
+                        this.editPoints.Count - 1,
+                        editPointsToAdd.ToArray()
+                    );
                 }
                 else
                 {
@@ -1312,10 +1640,16 @@ namespace System.Workflow.ComponentModel.Design
         //Remove points with same slope
         private void RemoveCoincidingEditPoints()
         {
-            if (this.editPoints.Count < 2 ||
-                this.editPoints[0].Type != EditPoint.EditPointTypes.ConnectionEditPoint ||
-                this.editPoints[this.editPoints.Count - 1].Type != EditPoint.EditPointTypes.ConnectionEditPoint ||
-                (this.activeEditPoint != null && this.activeEditPoint.Type == EditPoint.EditPointTypes.ConnectionEditPoint))
+            if (
+                this.editPoints.Count < 2
+                || this.editPoints[0].Type != EditPoint.EditPointTypes.ConnectionEditPoint
+                || this.editPoints[this.editPoints.Count - 1].Type
+                    != EditPoint.EditPointTypes.ConnectionEditPoint
+                || (
+                    this.activeEditPoint != null
+                    && this.activeEditPoint.Type == EditPoint.EditPointTypes.ConnectionEditPoint
+                )
+            )
             {
                 return;
             }
@@ -1327,10 +1661,20 @@ namespace System.Workflow.ComponentModel.Design
             List<EditPoint> editPointsToRetain = new List<EditPoint>();
             for (int i = 0; i < this.editPoints.Count; i++)
             {
-                if (this.editPoints[i].Type != EditPoint.EditPointTypes.MultiSegmentEditPoint ||
-                    this.editPoints[i] == this.activeEditPoint ||
-                    (i > 0 && this.editPoints[i - 1].Type == EditPoint.EditPointTypes.MidSegmentEditPoint) ||
-                    (i < this.editPoints.Count - 1 && this.editPoints[i + 1].Type == EditPoint.EditPointTypes.MidSegmentEditPoint))
+                if (
+                    this.editPoints[i].Type != EditPoint.EditPointTypes.MultiSegmentEditPoint
+                    || this.editPoints[i] == this.activeEditPoint
+                    || (
+                        i > 0
+                        && this.editPoints[i - 1].Type
+                            == EditPoint.EditPointTypes.MidSegmentEditPoint
+                    )
+                    || (
+                        i < this.editPoints.Count - 1
+                        && this.editPoints[i + 1].Type
+                            == EditPoint.EditPointTypes.MidSegmentEditPoint
+                    )
+                )
                 {
                     editPointsToRetain.Add(this.editPoints[i]);
                 }
@@ -1345,21 +1689,43 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (!editPointsToRetain.Contains(current))
                 {
-                    double distance = DesignerGeometryHelper.DistanceOfLineSegments(new Point[] { previous.Location, current.Location });
-                    if ((distance < current.Bounds.Width || distance < current.Bounds.Height) && next.Type == EditPoint.EditPointTypes.MultiSegmentEditPoint)
+                    double distance = DesignerGeometryHelper.DistanceOfLineSegments(
+                        new Point[] { previous.Location, current.Location }
+                    );
+                    if (
+                        (distance < current.Bounds.Width || distance < current.Bounds.Height)
+                        && next.Type == EditPoint.EditPointTypes.MultiSegmentEditPoint
+                    )
                     {
-                        float slope = DesignerGeometryHelper.SlopeOfLineSegment(current.Location, next.Location);
-                        next.Location = (slope < 1) ? new Point(next.Location.X, previous.Location.Y) : new Point(previous.Location.X, next.Location.Y);
+                        float slope = DesignerGeometryHelper.SlopeOfLineSegment(
+                            current.Location,
+                            next.Location
+                        );
+                        next.Location =
+                            (slope < 1)
+                                ? new Point(next.Location.X, previous.Location.Y)
+                                : new Point(previous.Location.X, next.Location.Y);
                         this.editPoints.Remove(current);
                         i -= 1;
                     }
                     else
                     {
-                        distance = DesignerGeometryHelper.DistanceOfLineSegments(new Point[] { current.Location, next.Location });
-                        if ((distance < current.Bounds.Width || distance < current.Bounds.Height) && previous.Type == EditPoint.EditPointTypes.MultiSegmentEditPoint)
+                        distance = DesignerGeometryHelper.DistanceOfLineSegments(
+                            new Point[] { current.Location, next.Location }
+                        );
+                        if (
+                            (distance < current.Bounds.Width || distance < current.Bounds.Height)
+                            && previous.Type == EditPoint.EditPointTypes.MultiSegmentEditPoint
+                        )
                         {
-                            float slope = DesignerGeometryHelper.SlopeOfLineSegment(previous.Location, current.Location);
-                            previous.Location = (slope < 1) ? new Point(previous.Location.X, next.Location.Y) : new Point(next.Location.X, previous.Location.Y);
+                            float slope = DesignerGeometryHelper.SlopeOfLineSegment(
+                                previous.Location,
+                                current.Location
+                            );
+                            previous.Location =
+                                (slope < 1)
+                                    ? new Point(previous.Location.X, next.Location.Y)
+                                    : new Point(next.Location.X, previous.Location.Y);
                             this.editPoints.Remove(current);
                             i -= 1;
                         }
@@ -1376,8 +1742,14 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (!editPointsToRetain.Contains(current))
                 {
-                    float slope1 = DesignerGeometryHelper.SlopeOfLineSegment(previous.Location, current.Location);
-                    float slope2 = DesignerGeometryHelper.SlopeOfLineSegment(current.Location, next.Location);
+                    float slope1 = DesignerGeometryHelper.SlopeOfLineSegment(
+                        previous.Location,
+                        current.Location
+                    );
+                    float slope2 = DesignerGeometryHelper.SlopeOfLineSegment(
+                        current.Location,
+                        next.Location
+                    );
                     if (Math.Abs(slope1) == Math.Abs(slope2))
                     {
                         this.editPoints.Remove(current);
@@ -1392,11 +1764,24 @@ namespace System.Workflow.ComponentModel.Design
                 EditPoint current = this.editPoints[i];
                 EditPoint next = this.editPoints[i + 1];
 
-                float slope = DesignerGeometryHelper.SlopeOfLineSegment(current.Location, next.Location);
+                float slope = DesignerGeometryHelper.SlopeOfLineSegment(
+                    current.Location,
+                    next.Location
+                );
                 if (slope != 0 && slope != float.MaxValue)
                 {
-                    Point location = (slope < 1) ? new Point(next.Location.X, current.Location.Y) : new Point(current.Location.X, next.Location.Y);
-                    this.editPoints.Insert(i + 1, new EditPoint(this, EditPoint.EditPointTypes.MultiSegmentEditPoint, location));
+                    Point location =
+                        (slope < 1)
+                            ? new Point(next.Location.X, current.Location.Y)
+                            : new Point(current.Location.X, next.Location.Y);
+                    this.editPoints.Insert(
+                        i + 1,
+                        new EditPoint(
+                            this,
+                            EditPoint.EditPointTypes.MultiSegmentEditPoint,
+                            location
+                        )
+                    );
                 }
             }
         }
@@ -1410,14 +1795,18 @@ namespace System.Workflow.ComponentModel.Design
             if (sourceConnection == null || !sourceConnection.Equals(Source))
                 return false;
 
-            ConnectionPoint targetConnection = this.editPoints[this.editPoints.Count - 1].EditedConnectionPoint;
+            ConnectionPoint targetConnection = this.editPoints[
+                this.editPoints.Count - 1
+            ].EditedConnectionPoint;
             if (targetConnection == null || !targetConnection.Equals(Target))
                 return false;
 
             for (int i = 0; i < this.editPoints.Count - 1; i++)
             {
-                if (this.editPoints[i].Type == EditPoint.EditPointTypes.MidSegmentEditPoint &&
-                    this.editPoints[i + 1].Type == EditPoint.EditPointTypes.MidSegmentEditPoint)
+                if (
+                    this.editPoints[i].Type == EditPoint.EditPointTypes.MidSegmentEditPoint
+                    && this.editPoints[i + 1].Type == EditPoint.EditPointTypes.MidSegmentEditPoint
+                )
                     return false;
             }
 
@@ -1432,8 +1821,10 @@ namespace System.Workflow.ComponentModel.Design
             for (int i = 0; i < editPoints.Count; i++)
             {
                 EditPoint editPoint = editPoints[i];
-                if (editPoint.Type == EditPoint.EditPointTypes.ConnectionEditPoint ||
-                    editPoint.Type == EditPoint.EditPointTypes.MultiSegmentEditPoint)
+                if (
+                    editPoint.Type == EditPoint.EditPointTypes.ConnectionEditPoint
+                    || editPoint.Type == EditPoint.EditPointTypes.MultiSegmentEditPoint
+                )
                     segments.Add(editPoint.Location);
             }
 
@@ -1444,8 +1835,15 @@ namespace System.Workflow.ComponentModel.Design
         #region Class EditPoint
         private sealed class EditPoint
         {
-            [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-            public enum EditPointTypes { ConnectionEditPoint = 1, MultiSegmentEditPoint, MidSegmentEditPoint };
+            [Obsolete(
+                "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+            )]
+            public enum EditPointTypes
+            {
+                ConnectionEditPoint = 1,
+                MultiSegmentEditPoint,
+                MidSegmentEditPoint,
+            };
 
             private ConnectorEditor owner;
             private EditPointTypes editPointType;
@@ -1469,23 +1867,13 @@ namespace System.Workflow.ComponentModel.Design
 
             public EditPointTypes Type
             {
-                get
-                {
-                    return this.editPointType;
-                }
+                get { return this.editPointType; }
             }
 
             public Point Location
             {
-                get
-                {
-                    return this.point;
-                }
-
-                set
-                {
-                    this.point = value;
-                }
+                get { return this.point; }
+                set { this.point = value; }
             }
 
             public Rectangle Bounds
@@ -1493,16 +1881,18 @@ namespace System.Workflow.ComponentModel.Design
                 get
                 {
                     Size controlPointSize = this.owner.Source.Bounds.Size;
-                    return new Rectangle(this.point.X - controlPointSize.Width / 2, this.point.Y - controlPointSize.Height / 2, controlPointSize.Width, controlPointSize.Height);
+                    return new Rectangle(
+                        this.point.X - controlPointSize.Width / 2,
+                        this.point.Y - controlPointSize.Height / 2,
+                        controlPointSize.Width,
+                        controlPointSize.Height
+                    );
                 }
             }
 
             public ConnectionPoint EditedConnectionPoint
             {
-                get
-                {
-                    return this.connectionPoint;
-                }
+                get { return this.connectionPoint; }
             }
         }
         #endregion
@@ -1512,57 +1902,107 @@ namespace System.Workflow.ComponentModel.Design
     #region Class ActivityDesignerConnectorRouter
     internal static class ActivityDesignerConnectorRouter
     {
-        public static Point[] Route(IServiceProvider serviceProvider, object source, object target, ICollection<Rectangle> userDefinedRoutingObstacles)
+        public static Point[] Route(
+            IServiceProvider serviceProvider,
+            object source,
+            object target,
+            ICollection<Rectangle> userDefinedRoutingObstacles
+        )
         {
             //Now call routing algorithm
             List<Rectangle> rectanglesToExclude;
-            List<Point> linesToExclude, pointsToExclude;
-            ActivityDesignerConnectorRouter.GetRoutingObstacles(serviceProvider, source, target, out rectanglesToExclude, out linesToExclude, out pointsToExclude);
+            List<Point> linesToExclude,
+                pointsToExclude;
+            ActivityDesignerConnectorRouter.GetRoutingObstacles(
+                serviceProvider,
+                source,
+                target,
+                out rectanglesToExclude,
+                out linesToExclude,
+                out pointsToExclude
+            );
 
             if (userDefinedRoutingObstacles != null)
                 rectanglesToExclude.AddRange(userDefinedRoutingObstacles);
 
             ActivityDesigner rootDesigner = ActivityDesigner.GetSafeRootDesigner(serviceProvider);
             AmbientTheme ambientTheme = WorkflowTheme.CurrentTheme.AmbientTheme;
-            Point sourcePoint = (source is ConnectionPoint) ? ((ConnectionPoint)source).Location : (Point)source;
-            Point targetPoint = (target is ConnectionPoint) ? ((ConnectionPoint)target).Location : (Point)target;
+            Point sourcePoint =
+                (source is ConnectionPoint) ? ((ConnectionPoint)source).Location : (Point)source;
+            Point targetPoint =
+                (target is ConnectionPoint) ? ((ConnectionPoint)target).Location : (Point)target;
 
-            Point[] routedPoints = ConnectorRouter.Route(sourcePoint, targetPoint, new Size(2 * ambientTheme.Margin.Width, 2 * ambientTheme.Margin.Height), rootDesigner.Bounds, rectanglesToExclude.ToArray(), linesToExclude.ToArray(), pointsToExclude.ToArray());
+            Point[] routedPoints = ConnectorRouter.Route(
+                sourcePoint,
+                targetPoint,
+                new Size(2 * ambientTheme.Margin.Width, 2 * ambientTheme.Margin.Height),
+                rootDesigner.Bounds,
+                rectanglesToExclude.ToArray(),
+                linesToExclude.ToArray(),
+                pointsToExclude.ToArray()
+            );
 
             //
 
 
 
             if (!AreAllSegmentsVerticalOrHorizontal(routedPoints))
-                routedPoints = ConnectorRouter.Route(sourcePoint, targetPoint, ambientTheme.Margin, rootDesigner.Bounds, new Rectangle[] { }, linesToExclude.ToArray(), new Point[] { });
+                routedPoints = ConnectorRouter.Route(
+                    sourcePoint,
+                    targetPoint,
+                    ambientTheme.Margin,
+                    rootDesigner.Bounds,
+                    new Rectangle[] { },
+                    linesToExclude.ToArray(),
+                    new Point[] { }
+                );
 
             //FALLBACK1
             if (!AreAllSegmentsVerticalOrHorizontal(routedPoints))
             {
                 float slope = DesignerGeometryHelper.SlopeOfLineSegment(sourcePoint, targetPoint);
-                Point intermediatePoint = (slope < 1) ? new Point(targetPoint.X, sourcePoint.Y) : new Point(sourcePoint.X, targetPoint.Y);
+                Point intermediatePoint =
+                    (slope < 1)
+                        ? new Point(targetPoint.X, sourcePoint.Y)
+                        : new Point(sourcePoint.X, targetPoint.Y);
                 routedPoints = new Point[] { sourcePoint, intermediatePoint, targetPoint };
             }
 
             return routedPoints;
         }
 
-        public static void GetRoutingObstacles(IServiceProvider serviceProvider, object source, object target, out List<Rectangle> rectanglesToExclude, out List<Point> linesToExclude, out List<Point> pointsToExclude)
+        public static void GetRoutingObstacles(
+            IServiceProvider serviceProvider,
+            object source,
+            object target,
+            out List<Rectangle> rectanglesToExclude,
+            out List<Point> linesToExclude,
+            out List<Point> pointsToExclude
+        )
         {
             //Source or Targets can be either ConnectionPoint or a Point
             AmbientTheme ambientTheme = WorkflowTheme.CurrentTheme.AmbientTheme;
             ActivityDesigner rootDesigner = ActivityDesigner.GetSafeRootDesigner(serviceProvider);
 
             ConnectionPoint sourceConnectionPoint = source as ConnectionPoint;
-            Point sourcePoint = (sourceConnectionPoint != null) ? sourceConnectionPoint.Location : (Point)source;
-            ActivityDesigner sourceDesigner = (sourceConnectionPoint != null) ? sourceConnectionPoint.AssociatedDesigner : rootDesigner.HitTest(sourcePoint).AssociatedDesigner;
+            Point sourcePoint =
+                (sourceConnectionPoint != null) ? sourceConnectionPoint.Location : (Point)source;
+            ActivityDesigner sourceDesigner =
+                (sourceConnectionPoint != null)
+                    ? sourceConnectionPoint.AssociatedDesigner
+                    : rootDesigner.HitTest(sourcePoint).AssociatedDesigner;
 
             ConnectionPoint targetConnectionPoint = target as ConnectionPoint;
-            Point targetPoint = (targetConnectionPoint != null) ? targetConnectionPoint.Location : (Point)target;
-            ActivityDesigner targetDesigner = (targetConnectionPoint != null) ? targetConnectionPoint.AssociatedDesigner : rootDesigner.HitTest(targetPoint).AssociatedDesigner;
+            Point targetPoint =
+                (targetConnectionPoint != null) ? targetConnectionPoint.Location : (Point)target;
+            ActivityDesigner targetDesigner =
+                (targetConnectionPoint != null)
+                    ? targetConnectionPoint.AssociatedDesigner
+                    : rootDesigner.HitTest(targetPoint).AssociatedDesigner;
 
             //Collect the common parent chain of source and target
-            Dictionary<int, ActivityDesigner> parentDesignerDictionary = new Dictionary<int, ActivityDesigner>();
+            Dictionary<int, ActivityDesigner> parentDesignerDictionary =
+                new Dictionary<int, ActivityDesigner>();
             if (sourceDesigner != null)
             {
                 //Collect designers in the source parent chain
@@ -1596,14 +2036,17 @@ namespace System.Workflow.ComponentModel.Design
             pointsToExclude = new List<Point>();
             foreach (CompositeActivityDesigner parentDesigner in parentDesignerDictionary.Values)
             {
-                ReadOnlyCollection<ActivityDesigner> containedDesigners = parentDesigner.ContainedDesigners;
+                ReadOnlyCollection<ActivityDesigner> containedDesigners =
+                    parentDesigner.ContainedDesigners;
                 for (int j = 0; j < containedDesigners.Count; j++)
                 {
                     ActivityDesigner activityDesigner = containedDesigners[j];
-                    if (activityDesigner.IsVisible &&
-                        !parentDesignerDictionary.ContainsKey(activityDesigner.GetHashCode()) &&
-                        activityDesigner != sourceDesigner &&
-                        activityDesigner != targetDesigner)
+                    if (
+                        activityDesigner.IsVisible
+                        && !parentDesignerDictionary.ContainsKey(activityDesigner.GetHashCode())
+                        && activityDesigner != sourceDesigner
+                        && activityDesigner != targetDesigner
+                    )
                     {
                         Rectangle rectangleToExclude = activityDesigner.Bounds;
                         rectangleToExclude.Inflate(ambientTheme.Margin);
@@ -1612,31 +2055,33 @@ namespace System.Workflow.ComponentModel.Design
                 }
 
                 //
-
-
-
-
-
-
-
             }
 
             //Now get the exclusion paths for source designer and target designer
             linesToExclude = new List<Point>();
-            if (sourceDesigner != null && sourceDesigner == targetDesigner && !sourceDesigner.IsRootDesigner)
+            if (
+                sourceDesigner != null
+                && sourceDesigner == targetDesigner
+                && !sourceDesigner.IsRootDesigner
+            )
             {
-                linesToExclude.AddRange(GetDesignerEscapeCover(sourceDesigner, new object[] { source, target }));
+                linesToExclude.AddRange(
+                    GetDesignerEscapeCover(sourceDesigner, new object[] { source, target })
+                );
             }
             else
             {
                 if (sourceDesigner != null && !sourceDesigner.IsRootDesigner)
-                    linesToExclude.AddRange(GetDesignerEscapeCover(sourceDesigner, new object[] { source }));
+                    linesToExclude.AddRange(
+                        GetDesignerEscapeCover(sourceDesigner, new object[] { source })
+                    );
 
                 if (targetDesigner != null && !targetDesigner.IsRootDesigner)
                 {
                     bool needToEscapeTargetDesigner = true;
 
-                    CompositeActivityDesigner sourceParentDesigner = (sourceDesigner != null) ? sourceDesigner.ParentDesigner : null;
+                    CompositeActivityDesigner sourceParentDesigner =
+                        (sourceDesigner != null) ? sourceDesigner.ParentDesigner : null;
                     while (sourceParentDesigner != null)
                     {
                         if (targetDesigner == sourceParentDesigner)
@@ -1644,22 +2089,29 @@ namespace System.Workflow.ComponentModel.Design
                             needToEscapeTargetDesigner = false;
                             break;
                         }
-                        sourceParentDesigner = (sourceDesigner != null) ? sourceParentDesigner.ParentDesigner : null;
+                        sourceParentDesigner =
+                            (sourceDesigner != null) ? sourceParentDesigner.ParentDesigner : null;
                     }
 
                     //need to escape the target designer only if the source is not inside the parent
                     if (needToEscapeTargetDesigner)
-                        linesToExclude.AddRange(GetDesignerEscapeCover(targetDesigner, new object[] { target }));
+                        linesToExclude.AddRange(
+                            GetDesignerEscapeCover(targetDesigner, new object[] { target })
+                        );
                 }
             }
         }
 
-        private static IList<Point> GetDesignerEscapeCover(ActivityDesigner designer, ICollection<object> escapeLocations)
+        private static IList<Point> GetDesignerEscapeCover(
+            ActivityDesigner designer,
+            ICollection<object> escapeLocations
+        )
         {
             Rectangle bounds = designer.Bounds;
 
             //Create dictionary of escape points
-            Dictionary<DesignerEdges, List<Point>> escapeEdges = new Dictionary<DesignerEdges, List<Point>>();
+            Dictionary<DesignerEdges, List<Point>> escapeEdges =
+                new Dictionary<DesignerEdges, List<Point>>();
             foreach (object escapeLocation in escapeLocations)
             {
                 DesignerEdges escapeEdge = DesignerEdges.None;
@@ -1672,7 +2124,11 @@ namespace System.Workflow.ComponentModel.Design
                 else if (escapeLocation is Point)
                 {
                     escapePoint = (Point)escapeLocation;
-                    escapeEdge = DesignerGeometryHelper.ClosestEdgeToPoint((Point)escapeLocation, bounds, DesignerEdges.All);
+                    escapeEdge = DesignerGeometryHelper.ClosestEdgeToPoint(
+                        (Point)escapeLocation,
+                        bounds,
+                        DesignerEdges.All
+                    );
                 }
 
                 if (escapeEdge != DesignerEdges.None)
@@ -1692,14 +2148,43 @@ namespace System.Workflow.ComponentModel.Design
                 }
             }
 
-            //Create a dictionary of four edges of the designer which will form cover which need to be escaped            
+            //Create a dictionary of four edges of the designer which will form cover which need to be escaped
             Size margin = WorkflowTheme.CurrentTheme.AmbientTheme.Margin;
             bounds.Inflate(margin);
-            Dictionary<DesignerEdges, Point[]> designerEdgeCover = new Dictionary<DesignerEdges, Point[]>();
-            designerEdgeCover.Add(DesignerEdges.Left, new Point[] { new Point(bounds.Left, bounds.Top), new Point(bounds.Left, bounds.Bottom) });
-            designerEdgeCover.Add(DesignerEdges.Top, new Point[] { new Point(bounds.Left, bounds.Top), new Point(bounds.Right, bounds.Top) });
-            designerEdgeCover.Add(DesignerEdges.Right, new Point[] { new Point(bounds.Right, bounds.Top), new Point(bounds.Right, bounds.Bottom) });
-            designerEdgeCover.Add(DesignerEdges.Bottom, new Point[] { new Point(bounds.Left, bounds.Bottom), new Point(bounds.Right, bounds.Bottom) });
+            Dictionary<DesignerEdges, Point[]> designerEdgeCover =
+                new Dictionary<DesignerEdges, Point[]>();
+            designerEdgeCover.Add(
+                DesignerEdges.Left,
+                new Point[]
+                {
+                    new Point(bounds.Left, bounds.Top),
+                    new Point(bounds.Left, bounds.Bottom),
+                }
+            );
+            designerEdgeCover.Add(
+                DesignerEdges.Top,
+                new Point[]
+                {
+                    new Point(bounds.Left, bounds.Top),
+                    new Point(bounds.Right, bounds.Top),
+                }
+            );
+            designerEdgeCover.Add(
+                DesignerEdges.Right,
+                new Point[]
+                {
+                    new Point(bounds.Right, bounds.Top),
+                    new Point(bounds.Right, bounds.Bottom),
+                }
+            );
+            designerEdgeCover.Add(
+                DesignerEdges.Bottom,
+                new Point[]
+                {
+                    new Point(bounds.Left, bounds.Bottom),
+                    new Point(bounds.Right, bounds.Bottom),
+                }
+            );
 
             List<Point> linesToExclude = new List<Point>();
             foreach (DesignerEdges designerEdge in designerEdgeCover.Keys)
@@ -1715,7 +2200,11 @@ namespace System.Workflow.ComponentModel.Design
                         for (int k = 0; k < escapePoints.Count; k++)
                         {
                             Point escapePoint = escapePoints[k];
-                            if (escapePoint.X > edge[0].X && escapePoint.Y > edge[0].Y && escapePoint.Y < edge[1].Y)
+                            if (
+                                escapePoint.X > edge[0].X
+                                && escapePoint.Y > edge[0].Y
+                                && escapePoint.Y < edge[1].Y
+                            )
                             {
                                 escapeCover.Add(new Point(edge[0].X, escapePoint.Y - 1));
                                 escapeCover.Add(new Point(escapePoint.X + 1, escapePoint.Y - 1));
@@ -1731,7 +2220,11 @@ namespace System.Workflow.ComponentModel.Design
                         for (int k = 0; k < escapePoints.Count; k++)
                         {
                             Point escapePoint = escapePoints[k];
-                            if (escapePoint.X < edge[0].X && escapePoint.Y > edge[0].Y && escapePoint.Y < edge[1].Y)
+                            if (
+                                escapePoint.X < edge[0].X
+                                && escapePoint.Y > edge[0].Y
+                                && escapePoint.Y < edge[1].Y
+                            )
                             {
                                 escapeCover.Add(new Point(edge[0].X, escapePoint.Y - 1));
                                 escapeCover.Add(new Point(escapePoint.X - 1, escapePoint.Y - 1));
@@ -1747,7 +2240,11 @@ namespace System.Workflow.ComponentModel.Design
                         for (int k = 0; k < escapePoints.Count; k++)
                         {
                             Point escapePoint = escapePoints[k];
-                            if (escapePoint.Y > edge[0].Y && escapePoint.X > edge[0].X && escapePoint.X < edge[1].X)
+                            if (
+                                escapePoint.Y > edge[0].Y
+                                && escapePoint.X > edge[0].X
+                                && escapePoint.X < edge[1].X
+                            )
                             {
                                 escapeCover.Add(new Point(escapePoint.X - 1, edge[0].Y));
                                 escapeCover.Add(new Point(escapePoint.X - 1, escapePoint.Y + 1));
@@ -1764,7 +2261,11 @@ namespace System.Workflow.ComponentModel.Design
                         for (int k = 0; k < escapePoints.Count; k++)
                         {
                             Point escapePoint = escapePoints[k];
-                            if (escapePoint.Y < edge[0].Y && escapePoint.X > edge[0].X && escapePoint.X < edge[1].X)
+                            if (
+                                escapePoint.Y < edge[0].Y
+                                && escapePoint.X > edge[0].X
+                                && escapePoint.X < edge[1].X
+                            )
                             {
                                 escapeCover.Add(new Point(escapePoint.X - 1, edge[0].Y));
                                 escapeCover.Add(new Point(escapePoint.X - 1, escapePoint.Y - 1));
@@ -1811,19 +2312,34 @@ namespace System.Workflow.ComponentModel.Design
     {
         private static readonly Size DefaultSize = new Size(4, 4);
 
-        public static Point[] Route(Point begin, Point end, Size margin, Rectangle enclosingRectangle, Rectangle[] rectanglesToExclude, Point[] linesToExclude, Point[] pointsToExclude)
+        public static Point[] Route(
+            Point begin,
+            Point end,
+            Size margin,
+            Rectangle enclosingRectangle,
+            Rectangle[] rectanglesToExclude,
+            Point[] linesToExclude,
+            Point[] pointsToExclude
+        )
         {
             List<Rectangle> excludedRectangles = new List<Rectangle>(rectanglesToExclude);
             if (!enclosingRectangle.IsEmpty)
             {
-                begin.X = Math.Min(Math.Max(begin.X, enclosingRectangle.Left + 1), enclosingRectangle.Right - 1);
-                begin.Y = Math.Min(Math.Max(begin.Y, enclosingRectangle.Top + 1), enclosingRectangle.Bottom - 1);
+                begin.X = Math.Min(
+                    Math.Max(begin.X, enclosingRectangle.Left + 1),
+                    enclosingRectangle.Right - 1
+                );
+                begin.Y = Math.Min(
+                    Math.Max(begin.Y, enclosingRectangle.Top + 1),
+                    enclosingRectangle.Bottom - 1
+                );
 
                 excludedRectangles.Insert(0, enclosingRectangle);
             }
 
             List<Point> excludedLines = new List<Point>(linesToExclude);
-            int width = Math.Max(margin.Width / 2, 1), height = Math.Max(margin.Height / 2, 1);
+            int width = Math.Max(margin.Width / 2, 1),
+                height = Math.Max(margin.Height / 2, 1);
             foreach (Point point in pointsToExclude)
             {
                 excludedLines.Add(new Point(point.X - width, point.Y));
@@ -1833,10 +2349,22 @@ namespace System.Workflow.ComponentModel.Design
                 excludedLines.Add(new Point(point.X, point.Y + height));
             }
 
-            return GetRoutedLineSegments(begin, end, margin, excludedRectangles.ToArray(), excludedLines.ToArray());
+            return GetRoutedLineSegments(
+                begin,
+                end,
+                margin,
+                excludedRectangles.ToArray(),
+                excludedLines.ToArray()
+            );
         }
 
-        private static Point[] GetRoutedLineSegments(Point begin, Point end, Size margin, Rectangle[] rectanglesToExclude, Point[] linesToExclude)
+        private static Point[] GetRoutedLineSegments(
+            Point begin,
+            Point end,
+            Size margin,
+            Rectangle[] rectanglesToExclude,
+            Point[] linesToExclude
+        )
         {
             if (rectanglesToExclude == null)
                 throw new ArgumentNullException("rectanglesToExclude");
@@ -1927,9 +2455,21 @@ namespace System.Workflow.ComponentModel.Design
                     Point objectPoint = LeA[LeA.Count - 1];
                     Point targetPoint = B;
 
-                    intersection = EscapeAlgorithm(coverSet, objectPoint, targetPoint,
-                        ref LeA, ref LhA, ref LvA, ref LhB, ref LvB, ref orientationA,
-                        out intersectionSegmentA, out intersectionSegmentB, margin, ref noEscapeA);
+                    intersection = EscapeAlgorithm(
+                        coverSet,
+                        objectPoint,
+                        targetPoint,
+                        ref LeA,
+                        ref LhA,
+                        ref LvA,
+                        ref LhB,
+                        ref LvB,
+                        ref orientationA,
+                        out intersectionSegmentA,
+                        out intersectionSegmentB,
+                        margin,
+                        ref noEscapeA
+                    );
                     if (intersection != null)
                     {
                         break;
@@ -1962,7 +2502,6 @@ namespace System.Workflow.ComponentModel.Design
                         LvB = tempListSegm;
                         #endregion
                     }
-
                 } while (true);
 
                 //we failed
@@ -2011,9 +2550,21 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         #region Escape Algorithm
-        private static Nullable<Point> EscapeAlgorithm(CoverSet coverSet, Point Z, Point targetPoint,
-            ref List<Point> LeA, ref List<ConnectorSegment> LhA, ref List<ConnectorSegment> LvA, ref List<ConnectorSegment> LhB, ref List<ConnectorSegment> LvB,
-            ref Orientation orientationA, out ConnectorSegment intersectionSegmentA, out ConnectorSegment intersectionSegmentB, Size margin, ref bool noEscapeA)
+        private static Nullable<Point> EscapeAlgorithm(
+            CoverSet coverSet,
+            Point Z,
+            Point targetPoint,
+            ref List<Point> LeA,
+            ref List<ConnectorSegment> LhA,
+            ref List<ConnectorSegment> LvA,
+            ref List<ConnectorSegment> LhB,
+            ref List<ConnectorSegment> LvB,
+            ref Orientation orientationA,
+            out ConnectorSegment intersectionSegmentA,
+            out ConnectorSegment intersectionSegmentB,
+            Size margin,
+            ref bool noEscapeA
+        )
         {
             Nullable<Point> intersection = null;
             intersectionSegmentA = null;
@@ -2064,7 +2615,13 @@ namespace System.Workflow.ComponentModel.Design
 
             #region Call Escape Process I
             //Escape process I P1
-            Nullable<Point> escapePoint = EscapeProcessI(coverSet, Z, v, Orientation.Horizontal, margin);
+            Nullable<Point> escapePoint = EscapeProcessI(
+                coverSet,
+                Z,
+                v,
+                Orientation.Horizontal,
+                margin
+            );
             if (escapePoint != null)
             {
                 orientationA = Orientation.Vertical;
@@ -2085,8 +2642,14 @@ namespace System.Workflow.ComponentModel.Design
             #region Call Escape process II
             bool intersectionFlag = false;
             //flags indicating if we can still continue in the given directions
-            bool continue1, continue2, continue3, continue4;
-            Point r1 = Point.Empty, r2 = Point.Empty, r3 = Point.Empty, r4 = Point.Empty;
+            bool continue1,
+                continue2,
+                continue3,
+                continue4;
+            Point r1 = Point.Empty,
+                r2 = Point.Empty,
+                r3 = Point.Empty,
+                r4 = Point.Empty;
 
             if (topCover != null)
                 r1 = new Point(Z.X, topCover.A.Y);
@@ -2106,8 +2669,21 @@ namespace System.Workflow.ComponentModel.Design
                     if (r1.Y > Z.Y)
                     {
                         continue1 = true;
-                        Nullable<Point> escape = EscapeProcessII(coverSet, Orientation.Vertical,
-                            ref LeA, ref LhA, ref LvA, ref LhB, ref LvB, Z, r1, margin, out intersectionFlag, out intersectionSegmentA, out intersectionSegmentB);
+                        Nullable<Point> escape = EscapeProcessII(
+                            coverSet,
+                            Orientation.Vertical,
+                            ref LeA,
+                            ref LhA,
+                            ref LvA,
+                            ref LhB,
+                            ref LvB,
+                            Z,
+                            r1,
+                            margin,
+                            out intersectionFlag,
+                            out intersectionSegmentA,
+                            out intersectionSegmentB
+                        );
                         if (escape != null)
                         {
                             LvA.Add(v);
@@ -2129,8 +2705,21 @@ namespace System.Workflow.ComponentModel.Design
                     if (r2.X > Z.X)
                     {
                         continue2 = true;
-                        Nullable<Point> escape = EscapeProcessII(coverSet, Orientation.Horizontal,
-                            ref LeA, ref LhA, ref LvA, ref LhB, ref LvB, Z, r2, margin, out intersectionFlag, out intersectionSegmentA, out intersectionSegmentB);
+                        Nullable<Point> escape = EscapeProcessII(
+                            coverSet,
+                            Orientation.Horizontal,
+                            ref LeA,
+                            ref LhA,
+                            ref LvA,
+                            ref LhB,
+                            ref LvB,
+                            Z,
+                            r2,
+                            margin,
+                            out intersectionFlag,
+                            out intersectionSegmentA,
+                            out intersectionSegmentB
+                        );
                         if (escape != null)
                         {
                             LhA.Add(h);
@@ -2152,8 +2741,21 @@ namespace System.Workflow.ComponentModel.Design
                     if (r3.Y < Z.Y)
                     {
                         continue3 = true;
-                        Nullable<Point> escape = EscapeProcessII(coverSet, Orientation.Vertical,
-                            ref LeA, ref LhA, ref LvA, ref LhB, ref LvB, Z, r3, margin, out intersectionFlag, out intersectionSegmentA, out intersectionSegmentB);
+                        Nullable<Point> escape = EscapeProcessII(
+                            coverSet,
+                            Orientation.Vertical,
+                            ref LeA,
+                            ref LhA,
+                            ref LvA,
+                            ref LhB,
+                            ref LvB,
+                            Z,
+                            r3,
+                            margin,
+                            out intersectionFlag,
+                            out intersectionSegmentA,
+                            out intersectionSegmentB
+                        );
                         if (escape != null)
                         {
                             LvA.Add(v);
@@ -2175,8 +2777,21 @@ namespace System.Workflow.ComponentModel.Design
                     if (r4.X < Z.X)
                     {
                         continue4 = true;
-                        Nullable<Point> escape = EscapeProcessII(coverSet, Orientation.Horizontal,
-                            ref LeA, ref LhA, ref LvA, ref LhB, ref LvB, Z, r4, margin, out intersectionFlag, out intersectionSegmentA, out intersectionSegmentB);
+                        Nullable<Point> escape = EscapeProcessII(
+                            coverSet,
+                            Orientation.Horizontal,
+                            ref LeA,
+                            ref LhA,
+                            ref LvA,
+                            ref LhB,
+                            ref LvB,
+                            Z,
+                            r4,
+                            margin,
+                            out intersectionFlag,
+                            out intersectionSegmentA,
+                            out intersectionSegmentB
+                        );
                         if (escape != null)
                         {
                             LhA.Add(h);
@@ -2200,8 +2815,13 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         #region Escape Process I
-        private static Nullable<Point> EscapeProcessI(CoverSet coverSet, Point Z,
-            ConnectorSegment escapeLine, Orientation orientation, Size margin)
+        private static Nullable<Point> EscapeProcessI(
+            CoverSet coverSet,
+            Point Z,
+            ConnectorSegment escapeLine,
+            Orientation orientation,
+            Size margin
+        )
         {
             //perform extremity point permutation by the distance from the object point
             //when sorting points store to which segments they belong (this is needed further when
@@ -2209,14 +2829,20 @@ namespace System.Workflow.ComponentModel.Design
             //on abscissa or ordinata axis)
             List<DistanceFromPoint> extremitiesList = new List<DistanceFromPoint>(4); //at most four points
 
-            ConnectorSegment lesserCover = coverSet.GetCover(Z, (orientation == Orientation.Horizontal) ? DesignerEdges.Left : DesignerEdges.Bottom);
+            ConnectorSegment lesserCover = coverSet.GetCover(
+                Z,
+                (orientation == Orientation.Horizontal) ? DesignerEdges.Left : DesignerEdges.Bottom
+            );
             if (lesserCover != null)
             {
                 AddBoundPoint(ref extremitiesList, lesserCover.A, lesserCover, Z);
                 AddBoundPoint(ref extremitiesList, lesserCover.B, lesserCover, Z);
             }
 
-            ConnectorSegment higherCover = coverSet.GetCover(Z, (orientation == Orientation.Horizontal) ? DesignerEdges.Right : DesignerEdges.Top);
+            ConnectorSegment higherCover = coverSet.GetCover(
+                Z,
+                (orientation == Orientation.Horizontal) ? DesignerEdges.Right : DesignerEdges.Top
+            );
             if (higherCover != null)
             {
                 AddBoundPoint(ref extremitiesList, higherCover.A, higherCover, Z);
@@ -2258,9 +2884,13 @@ namespace System.Workflow.ComponentModel.Design
                 //1) lay on the given escape line (except the bounding points since they belong to covers)
                 //2) not lay on any of the already tested escape segments - all points belonging to them are already worthless
                 ConnectorSegment newEscapeLine = new ConnectorSegment(Z, escapePoint);
-                if (!coverSet.EscapeLineHasBeenUsed(newEscapeLine, escapePoint) &&
-                    escapeLine.IsPointOnSegment(escapePoint) && escapeLine.A != escapePoint && escapeLine.B != escapePoint &&
-                    coverSet.IsEscapePoint(Z, escapePoint, side))
+                if (
+                    !coverSet.EscapeLineHasBeenUsed(newEscapeLine, escapePoint)
+                    && escapeLine.IsPointOnSegment(escapePoint)
+                    && escapeLine.A != escapePoint
+                    && escapeLine.B != escapePoint
+                    && coverSet.IsEscapePoint(Z, escapePoint, side)
+                )
                 {
                     coverSet.AddUsedEscapeLine(newEscapeLine);
                     return escapePoint;
@@ -2270,17 +2900,39 @@ namespace System.Workflow.ComponentModel.Design
             return null;
         }
 
-        private static void AddBoundPoint(ref List<DistanceFromPoint> extremitiesList, Point p, ConnectorSegment segment, Point Z)
+        private static void AddBoundPoint(
+            ref List<DistanceFromPoint> extremitiesList,
+            Point p,
+            ConnectorSegment segment,
+            Point Z
+        )
         {
-            if (p.X != int.MinValue && p.X != int.MaxValue && p.Y != int.MinValue && p.Y != int.MaxValue)
+            if (
+                p.X != int.MinValue
+                && p.X != int.MaxValue
+                && p.Y != int.MinValue
+                && p.Y != int.MaxValue
+            )
                 extremitiesList.Add(new DistanceFromPoint(segment, Z, p));
         }
         #endregion
 
         #region Escape Process II
-        private static Nullable<Point> EscapeProcessII(CoverSet coverSet, Orientation orientation, ref List<Point> LeA,
-            ref List<ConnectorSegment> LhA, ref List<ConnectorSegment> LvA, ref List<ConnectorSegment> LhB, ref List<ConnectorSegment> LvB,
-            Point Z, Point R, Size margin, out bool intersectionFlag, out ConnectorSegment intersectionSegmentA, out ConnectorSegment intersectionSegmentB)
+        private static Nullable<Point> EscapeProcessII(
+            CoverSet coverSet,
+            Orientation orientation,
+            ref List<Point> LeA,
+            ref List<ConnectorSegment> LhA,
+            ref List<ConnectorSegment> LvA,
+            ref List<ConnectorSegment> LhB,
+            ref List<ConnectorSegment> LvB,
+            Point Z,
+            Point R,
+            Size margin,
+            out bool intersectionFlag,
+            out ConnectorSegment intersectionSegmentA,
+            out ConnectorSegment intersectionSegmentB
+        )
         {
             intersectionFlag = false;
             intersectionSegmentA = null;
@@ -2367,7 +3019,11 @@ namespace System.Workflow.ComponentModel.Design
 
         #region ConnectorSegment Refinement Algorithms
         //remove all non-corner points
-        private static List<Point> FirstRefinementAlgorithm(List<Point> Le, Point intersection, ConnectorSegment intersectionSegment)
+        private static List<Point> FirstRefinementAlgorithm(
+            List<Point> Le,
+            Point intersection,
+            ConnectorSegment intersectionSegment
+        )
         {
             List<Point> refinedSet = new List<Point>();
             ConnectorSegment k = intersectionSegment;
@@ -2393,7 +3049,7 @@ namespace System.Workflow.ComponentModel.Design
                 while (Le.Count > i)
                     Le.RemoveAt(i);
 
-                //continue with the points lying on the line perpendecular to the previous one and passing through the 
+                //continue with the points lying on the line perpendecular to the previous one and passing through the
                 //found point
                 k = k.PeprendecularThroughPoint(pi);
             }
@@ -2402,7 +3058,11 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         //remove superflous parts from the path
-        private static void SecondRefinementAlgorithm(CoverSet coverSet, ref List<Point> refinedPath, Size margin)
+        private static void SecondRefinementAlgorithm(
+            CoverSet coverSet,
+            ref List<Point> refinedPath,
+            Size margin
+        )
         {
             List<Point> newPath = new List<Point>();
 
@@ -2416,7 +3076,7 @@ namespace System.Workflow.ComponentModel.Design
                 //need to construct a segment through the points that is limited by the covers
                 ConnectorSegment a = ConnectorSegment.ConstructBoundSegment(coverSet, a1, a2);
 
-                //try to intersect it with every segment after the current one 
+                //try to intersect it with every segment after the current one
                 //and the next one (which we know does intersect with the current one)
                 int intersectingSegment = currentSegment + 2;
                 while (intersectingSegment < refinedPath.Count - 1)
@@ -2441,7 +3101,7 @@ namespace System.Workflow.ComponentModel.Design
                         newPath = temp;
                         newPath.Clear();
 
-                        //reset the second segment number and go through all segments once more 
+                        //reset the second segment number and go through all segments once more
                         //until there are no intersections left
                         intersectingSegment = currentSegment + 2;
                     }
@@ -2471,17 +3131,29 @@ namespace System.Workflow.ComponentModel.Design
                     Point direction = new Point(a2.X - a1.X, a2.Y - a1.Y);
 
                     //see how many intemediate points we can construct
-                    int steps = Math.Max(Math.Abs(direction.X / margin.Width), Math.Abs(direction.Y / margin.Height)); //one of the values will be null
+                    int steps = Math.Max(
+                        Math.Abs(direction.X / margin.Width),
+                        Math.Abs(direction.Y / margin.Height)
+                    ); //one of the values will be null
                     direction.X = Math.Sign(direction.X);
                     direction.Y = Math.Sign(direction.Y);
 
                     for (int i = 1; i <= steps; i++)
                     {
-                        Point k = new Point(a1.X + i * margin.Width * direction.X, a1.Y + i * margin.Height * direction.Y);
+                        Point k = new Point(
+                            a1.X + i * margin.Width * direction.X,
+                            a1.Y + i * margin.Height * direction.Y
+                        );
                         if (k == a2)
                             break;
 
-                        ConnectorSegment b = ConnectorSegment.ConstructBoundSegment(coverSet, k, (a.Orientation == Orientation.Horizontal) ? Orientation.Vertical : Orientation.Horizontal);
+                        ConnectorSegment b = ConnectorSegment.ConstructBoundSegment(
+                            coverSet,
+                            k,
+                            (a.Orientation == Orientation.Horizontal)
+                                ? Orientation.Vertical
+                                : Orientation.Horizontal
+                        );
                         //now try to intersect that segment with every segment after the current one and the one after it
                         int intersectingSegment = currentSegment + 2;
                         while (intersectingSegment < refinedPath.Count - 1 && !intersected)
@@ -2562,7 +3234,8 @@ namespace System.Workflow.ComponentModel.Design
                     return 0;
                 else if (lhs.Distance > rhs.Distance)
                     return 1;
-                else return -1;
+                else
+                    return -1;
             }
         }
         #endregion
@@ -2579,35 +3252,30 @@ namespace System.Workflow.ComponentModel.Design
             public ConnectorSegment(Point point1, Point point2)
             {
                 if (point1.X != point2.X && point1.Y != point2.Y)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_InvalidConnectorSegment));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_InvalidConnectorSegment)
+                    );
 
                 this.point1 = point1;
                 this.point2 = point2;
-                this.orientation = ((this.point1.X == this.point2.X) ? Orientation.Vertical : Orientation.Horizontal);
+                this.orientation = (
+                    (this.point1.X == this.point2.X) ? Orientation.Vertical : Orientation.Horizontal
+                );
             }
 
             public Point A
             {
-                get
-                {
-                    return this.point1;
-                }
+                get { return this.point1; }
             }
 
             public Point B
             {
-                get
-                {
-                    return this.point2;
-                }
+                get { return this.point2; }
             }
 
             public Orientation Orientation
             {
-                get
-                {
-                    return this.orientation;
-                }
+                get { return this.orientation; }
             }
 
             //"segment l covers a point p, if the perpendicular from p to the line of which l is a segment intersects l"
@@ -2615,7 +3283,15 @@ namespace System.Workflow.ComponentModel.Design
             //flag to do analyzis
             public bool Covers(Point p)
             {
-                return (this.orientation == Orientation.Horizontal) ? (p.X >= Math.Min(this.point1.X, this.point2.X) && p.X <= Math.Max(this.point1.X, this.point2.X)) : (p.Y >= Math.Min(this.point1.Y, this.point2.Y) && p.Y <= Math.Max(this.point1.Y, this.point2.Y));
+                return (this.orientation == Orientation.Horizontal)
+                    ? (
+                        p.X >= Math.Min(this.point1.X, this.point2.X)
+                        && p.X <= Math.Max(this.point1.X, this.point2.X)
+                    )
+                    : (
+                        p.Y >= Math.Min(this.point1.Y, this.point2.Y)
+                        && p.Y <= Math.Max(this.point1.Y, this.point2.Y)
+                    );
             }
 
             //see if the two segments intersect
@@ -2626,13 +3302,21 @@ namespace System.Workflow.ComponentModel.Design
                 if (this.orientation == segment.Orientation)
                     return null;
 
-                ConnectorSegment vertical = (this.orientation == Orientation.Vertical) ? this : segment;
-                ConnectorSegment horizontal = (this.orientation == Orientation.Vertical) ? segment : this;
+                ConnectorSegment vertical =
+                    (this.orientation == Orientation.Vertical) ? this : segment;
+                ConnectorSegment horizontal =
+                    (this.orientation == Orientation.Vertical) ? segment : this;
 
-                if (vertical.A.X < Math.Min(horizontal.A.X, horizontal.B.X) || vertical.A.X > Math.Max(horizontal.A.X, horizontal.B.X))
+                if (
+                    vertical.A.X < Math.Min(horizontal.A.X, horizontal.B.X)
+                    || vertical.A.X > Math.Max(horizontal.A.X, horizontal.B.X)
+                )
                     return null;
 
-                if (horizontal.A.Y < Math.Min(vertical.A.Y, vertical.B.Y) || horizontal.A.Y > Math.Max(vertical.A.Y, vertical.B.Y))
+                if (
+                    horizontal.A.Y < Math.Min(vertical.A.Y, vertical.B.Y)
+                    || horizontal.A.Y > Math.Max(vertical.A.Y, vertical.B.Y)
+                )
                     return null;
 
                 return new Point(vertical.A.X, horizontal.A.Y);
@@ -2641,18 +3325,25 @@ namespace System.Workflow.ComponentModel.Design
             //we consider the whole line to which this segment belongs for this test
             public bool PointLiesOnThisLine(Point p)
             {
-                return (this.orientation == Orientation.Horizontal) ? p.Y == this.point1.Y : p.X == this.point1.X;
+                return (this.orientation == Orientation.Horizontal)
+                    ? p.Y == this.point1.Y
+                    : p.X == this.point1.X;
             }
 
             //we consider just the segment for this test
             public bool IsPointOnSegment(Point p)
             {
-                if ((this.orientation == Orientation.Horizontal && p.Y != this.point1.Y) || (this.orientation == Orientation.Vertical && p.X != this.point1.X))
+                if (
+                    (this.orientation == Orientation.Horizontal && p.Y != this.point1.Y)
+                    || (this.orientation == Orientation.Vertical && p.X != this.point1.X)
+                )
                     return false;
 
                 int k = (this.orientation == Orientation.Horizontal) ? p.X : p.Y;
-                int k1 = (this.orientation == Orientation.Horizontal) ? this.point1.X : this.point1.Y;
-                int k2 = (this.orientation == Orientation.Horizontal) ? this.point2.X : this.point2.Y;
+                int k1 =
+                    (this.orientation == Orientation.Horizontal) ? this.point1.X : this.point1.Y;
+                int k2 =
+                    (this.orientation == Orientation.Horizontal) ? this.point2.X : this.point2.Y;
                 return k >= Math.Min(k1, k2) && k <= Math.Max(k1, k2);
             }
 
@@ -2689,7 +3380,10 @@ namespace System.Workflow.ComponentModel.Design
 
             public ConnectorSegment PeprendecularThroughPoint(Point p)
             {
-                Orientation newOrientation = (this.orientation == Orientation.Horizontal) ? Orientation.Vertical : Orientation.Horizontal;
+                Orientation newOrientation =
+                    (this.orientation == Orientation.Horizontal)
+                        ? Orientation.Vertical
+                        : Orientation.Horizontal;
                 Point newPoint = new Point(p.X, p.Y);
                 if (newOrientation == Orientation.Horizontal)
                     newPoint.X = int.MaxValue;
@@ -2706,31 +3400,46 @@ namespace System.Workflow.ComponentModel.Design
                     return p;
 
                 int k = (this.orientation == Orientation.Horizontal) ? p.X : p.Y;
-                int k1 = (this.orientation == Orientation.Horizontal) ? this.point1.X : this.point1.Y;
-                int k2 = (this.orientation == Orientation.Horizontal) ? this.point2.X : this.point2.Y;
+                int k1 =
+                    (this.orientation == Orientation.Horizontal) ? this.point1.X : this.point1.Y;
+                int k2 =
+                    (this.orientation == Orientation.Horizontal) ? this.point2.X : this.point2.Y;
 
                 if (k == Math.Min(k1, k2))
                     k--;
                 else
                     k++;
 
-                return new Point((this.orientation == Orientation.Horizontal) ? k : p.X, (this.orientation == Orientation.Horizontal) ? p.Y : k);
+                return new Point(
+                    (this.orientation == Orientation.Horizontal) ? k : p.X,
+                    (this.orientation == Orientation.Horizontal) ? p.Y : k
+                );
             }
 
             public static double DistanceBetweenPoints(Point p, Point q)
             {
-                return Math.Sqrt((double)(p.X - q.X) * (p.X - q.X) + (double)(p.Y - q.Y) * (p.Y - q.Y));
+                return Math.Sqrt(
+                    (double)(p.X - q.X) * (p.X - q.X) + (double)(p.Y - q.Y) * (p.Y - q.Y)
+                );
             }
 
             //given two points construct a segment through them from lesser cover to higher
-            public static ConnectorSegment ConstructBoundSegment(CoverSet coverSet, Point a, Point b)
+            public static ConnectorSegment ConstructBoundSegment(
+                CoverSet coverSet,
+                Point a,
+                Point b
+            )
             {
                 //
 
                 if (a.X != b.X && a.Y != b.Y)
                     return null;
 
-                return ConstructBoundSegment(coverSet, a, (a.X == b.X) ? Orientation.Vertical : Orientation.Horizontal);
+                return ConstructBoundSegment(
+                    coverSet,
+                    a,
+                    (a.X == b.X) ? Orientation.Vertical : Orientation.Horizontal
+                );
             }
 
             public static ConnectorSegment SegmentFromLeftToRightCover(CoverSet coverSet, Point p)
@@ -2751,15 +3460,24 @@ namespace System.Workflow.ComponentModel.Design
                 ConnectorSegment topCover = coverSet.GetCover(p, DesignerEdges.Top);
 
                 //construct vertical escape segment
-                Point bottom = new Point(p.X, (bottomCover != null) ? bottomCover.A.Y : int.MinValue);
+                Point bottom = new Point(
+                    p.X,
+                    (bottomCover != null) ? bottomCover.A.Y : int.MinValue
+                );
                 Point top = new Point(p.X, (topCover != null) ? topCover.A.Y : int.MaxValue);
                 ConnectorSegment v = new ConnectorSegment(bottom, top);
                 return v;
             }
 
-            public static ConnectorSegment ConstructBoundSegment(CoverSet coverSet, Point a, Orientation orientation)
+            public static ConnectorSegment ConstructBoundSegment(
+                CoverSet coverSet,
+                Point a,
+                Orientation orientation
+            )
             {
-                return (orientation == Orientation.Horizontal) ? SegmentFromLeftToRightCover(coverSet, a) : SegmentFromBottomToTopCover(coverSet, a);
+                return (orientation == Orientation.Horizontal)
+                    ? SegmentFromLeftToRightCover(coverSet, a)
+                    : SegmentFromBottomToTopCover(coverSet, a);
             }
 
             public override bool Equals(object obj)
@@ -2767,12 +3485,18 @@ namespace System.Workflow.ComponentModel.Design
                 ConnectorSegment segment = obj as ConnectorSegment;
                 if (segment == null)
                     return false;
-                return (this.point1 == segment.A && this.point2 == segment.B && Orientation == segment.Orientation);
+                return (
+                    this.point1 == segment.A
+                    && this.point2 == segment.B
+                    && Orientation == segment.Orientation
+                );
             }
 
             public override int GetHashCode()
             {
-                return this.point1.GetHashCode() ^ this.point2.GetHashCode() ^ Orientation.GetHashCode();
+                return this.point1.GetHashCode()
+                    ^ this.point2.GetHashCode()
+                    ^ Orientation.GetHashCode();
             }
         }
         #endregion
@@ -2788,15 +3512,37 @@ namespace System.Workflow.ComponentModel.Design
             {
                 foreach (Rectangle rectangle in rectanglesToExclude)
                 {
-                    AddCover(new ConnectorSegment(new Point(rectangle.Left, rectangle.Top), new Point(rectangle.Left, rectangle.Bottom)));
-                    AddCover(new ConnectorSegment(new Point(rectangle.Right, rectangle.Top), new Point(rectangle.Right, rectangle.Bottom)));
-                    AddCover(new ConnectorSegment(new Point(rectangle.Left, rectangle.Top), new Point(rectangle.Right, rectangle.Top)));
-                    AddCover(new ConnectorSegment(new Point(rectangle.Left, rectangle.Bottom), new Point(rectangle.Right, rectangle.Bottom)));
+                    AddCover(
+                        new ConnectorSegment(
+                            new Point(rectangle.Left, rectangle.Top),
+                            new Point(rectangle.Left, rectangle.Bottom)
+                        )
+                    );
+                    AddCover(
+                        new ConnectorSegment(
+                            new Point(rectangle.Right, rectangle.Top),
+                            new Point(rectangle.Right, rectangle.Bottom)
+                        )
+                    );
+                    AddCover(
+                        new ConnectorSegment(
+                            new Point(rectangle.Left, rectangle.Top),
+                            new Point(rectangle.Right, rectangle.Top)
+                        )
+                    );
+                    AddCover(
+                        new ConnectorSegment(
+                            new Point(rectangle.Left, rectangle.Bottom),
+                            new Point(rectangle.Right, rectangle.Bottom)
+                        )
+                    );
                 }
 
                 //Add the linesegments to cover
                 for (int i = 0; i < linesToExclude.Length / 2; i++)
-                    AddCover(new ConnectorSegment(linesToExclude[i * 2], linesToExclude[(i * 2) + 1]));
+                    AddCover(
+                        new ConnectorSegment(linesToExclude[i * 2], linesToExclude[(i * 2) + 1])
+                    );
             }
 
             public void ClearUsedLines()
@@ -2806,18 +3552,27 @@ namespace System.Workflow.ComponentModel.Design
 
             public void AddCover(ConnectorSegment cover)
             {
-                List<ConnectorSegment> covers = (cover.Orientation == Orientation.Vertical) ? this.verticalCovers : this.horizontalCovers;
+                List<ConnectorSegment> covers =
+                    (cover.Orientation == Orientation.Vertical)
+                        ? this.verticalCovers
+                        : this.horizontalCovers;
 
                 for (int i = 0; i < covers.Count; i++)
                 {
                     ConnectorSegment existingCover = covers[i];
-                    if (cover.IsPointOnSegment(existingCover.A) && cover.IsPointOnSegment(existingCover.B))
+                    if (
+                        cover.IsPointOnSegment(existingCover.A)
+                        && cover.IsPointOnSegment(existingCover.B)
+                    )
                     {
                         //both points of vertical are on the new segment, delete the vertical and add the new one instead
                         covers.RemoveAt(i);
                         break;
                     }
-                    else if (existingCover.IsPointOnSegment(cover.A) && existingCover.IsPointOnSegment(cover.B))
+                    else if (
+                        existingCover.IsPointOnSegment(cover.A)
+                        && existingCover.IsPointOnSegment(cover.B)
+                    )
                     {
                         //both points of the new segment are on an existing segment already - skip this one
                         return;
@@ -2895,7 +3650,8 @@ namespace System.Workflow.ComponentModel.Design
                     for (int i = 0; i < this.verticalCovers.Count; i++)
                     {
                         ConnectorSegment segment = this.verticalCovers[i];
-                        int currentDistance = (side == DesignerEdges.Left) ? p.X - segment.A.X : segment.A.X - p.X;
+                        int currentDistance =
+                            (side == DesignerEdges.Left) ? p.X - segment.A.X : segment.A.X - p.X;
                         if (currentDistance > 0 && segment.Covers(p))
                         {
                             if (cover == null || distance > currentDistance)
@@ -2911,7 +3667,8 @@ namespace System.Workflow.ComponentModel.Design
                     for (int i = 0; i < this.horizontalCovers.Count; i++)
                     {
                         ConnectorSegment segment = this.horizontalCovers[i];
-                        int currentDistance = (side == DesignerEdges.Bottom) ? p.Y - segment.A.Y : segment.A.Y - p.Y;
+                        int currentDistance =
+                            (side == DesignerEdges.Bottom) ? p.Y - segment.A.Y : segment.A.Y - p.Y;
                         if (currentDistance > 0 && segment.Covers(p))
                         {
                             if (cover == null || distance > currentDistance)
@@ -2936,7 +3693,8 @@ namespace System.Workflow.ComponentModel.Design
                     for (int i = 0; i < this.verticalCovers.Count; i++)
                     {
                         ConnectorSegment segment = this.verticalCovers[i];
-                        int currentDistance = (side == DesignerEdges.Left) ? p.X - segment.A.X : segment.A.X - p.X;
+                        int currentDistance =
+                            (side == DesignerEdges.Left) ? p.X - segment.A.X : segment.A.X - p.X;
                         if (currentDistance > 0 && segment.Covers(p))
                             covers.Add(segment);
                     }
@@ -2946,7 +3704,8 @@ namespace System.Workflow.ComponentModel.Design
                     for (int i = 0; i < this.horizontalCovers.Count; i++)
                     {
                         ConnectorSegment segment = this.horizontalCovers[i];
-                        int currentDistance = (side == DesignerEdges.Bottom) ? p.Y - segment.A.Y : segment.A.Y - p.Y;
+                        int currentDistance =
+                            (side == DesignerEdges.Bottom) ? p.Y - segment.A.Y : segment.A.Y - p.Y;
                         if (currentDistance > 0 && segment.Covers(p))
                             covers.Add(segment);
                     }
@@ -2984,7 +3743,10 @@ namespace System.Workflow.ComponentModel.Design
                     else
                         newDistance = Math.Abs(newCover.A.Y - escape.Y);
 
-                    if (Math.Sign(newDistance) == Math.Sign(originalDistance) && Math.Abs(newDistance) < Math.Abs(originalDistance))
+                    if (
+                        Math.Sign(newDistance) == Math.Sign(originalDistance)
+                        && Math.Abs(newDistance) < Math.Abs(originalDistance)
+                    )
                         return false;
                 }
 

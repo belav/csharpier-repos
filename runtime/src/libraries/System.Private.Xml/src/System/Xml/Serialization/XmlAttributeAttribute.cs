@@ -10,7 +10,12 @@ namespace System.Xml.Serialization
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue
+    )]
     public class XmlAttributeAttribute : System.Attribute
     {
         private string? _attributeName;
@@ -22,9 +27,7 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAttributeAttribute()
-        {
-        }
+        public XmlAttributeAttribute() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

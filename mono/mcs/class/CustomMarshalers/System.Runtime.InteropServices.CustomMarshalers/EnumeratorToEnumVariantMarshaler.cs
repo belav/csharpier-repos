@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,84 +37,101 @@ using System.Runtime.InteropServices;
 
 namespace System.Runtime.InteropServices.CustomMarshalers
 {
-	public class EnumeratorToEnumVariantMarshaler : ICustomMarshaler
-	{
-		static EnumeratorToEnumVariantMarshaler instance;
-		public void CleanUpManagedData (object pManagedObj) {
-			throw new NotImplementedException ();
-		}
+    public class EnumeratorToEnumVariantMarshaler : ICustomMarshaler
+    {
+        static EnumeratorToEnumVariantMarshaler instance;
 
-		public void CleanUpNativeData (IntPtr pNativeData) {
-			Marshal.Release (pNativeData);
-		}
+        public void CleanUpManagedData(object pManagedObj)
+        {
+            throw new NotImplementedException();
+        }
 
-		public static ICustomMarshaler GetInstance (string pstrCookie) {
-			if (instance == null)
-				instance = new EnumeratorToEnumVariantMarshaler ();
-			return instance;
-		}
+        public void CleanUpNativeData(IntPtr pNativeData)
+        {
+            Marshal.Release(pNativeData);
+        }
 
-		public int GetNativeDataSize () {
-			throw new NotImplementedException ();
-		}
+        public static ICustomMarshaler GetInstance(string pstrCookie)
+        {
+            if (instance == null)
+                instance = new EnumeratorToEnumVariantMarshaler();
+            return instance;
+        }
 
-		public IntPtr MarshalManagedToNative (object pManagedObj) {
-			throw new NotImplementedException ();
-		}
+        public int GetNativeDataSize()
+        {
+            throw new NotImplementedException();
+        }
 
-		public object MarshalNativeToManaged (IntPtr pNativeData) {
-			IEnumVARIANT ienumvariant = (IEnumVARIANT)Marshal.GetObjectForIUnknown (pNativeData);
-			VARIANTEnumerator e = new VARIANTEnumerator (ienumvariant);
-			return e;
-		}
+        public IntPtr MarshalManagedToNative(object pManagedObj)
+        {
+            throw new NotImplementedException();
+        }
 
-		[ComImport]
-		[Guid ("00020404-0000-0000-C000-000000000046")]
-		[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-		interface IEnumVARIANT
-		{
-			[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-			void Next (int celt, [MarshalAs (UnmanagedType.Struct)]out object rgvar, out uint pceltFetched);
-			[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-			void Skip (uint celt);
-			[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-			void Reset ();
-			[return: MarshalAs (UnmanagedType.Interface)]
-			[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-			IEnumVARIANT Clone ();
+        public object MarshalNativeToManaged(IntPtr pNativeData)
+        {
+            IEnumVARIANT ienumvariant = (IEnumVARIANT)Marshal.GetObjectForIUnknown(pNativeData);
+            VARIANTEnumerator e = new VARIANTEnumerator(ienumvariant);
+            return e;
+        }
 
-		}
+        [ComImport]
+        [Guid("00020404-0000-0000-C000-000000000046")]
+        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        interface IEnumVARIANT
+        {
+            [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+            void Next(
+                int celt,
+                [MarshalAs(UnmanagedType.Struct)] out object rgvar,
+                out uint pceltFetched
+            );
 
-		class VARIANTEnumerator : IEnumerator
-		{
-			IEnumVARIANT com_enum;
-			object current;
-			public VARIANTEnumerator (IEnumVARIANT com_enum) {
-				this.com_enum = com_enum;
-			}
-			#region IEnumerator Members
+            [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+            void Skip(uint celt);
 
-			public object Current {
-				get {
-					return current;
-				}
-			}
+            [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+            void Reset();
 
-			public bool MoveNext () {
-				object val;
-				uint fetched = 0;
-				com_enum.Next (1, out val, out fetched);
-				if (fetched == 0)
-					return false;
-				current = val;
-				return true;
-			}
+            [return: MarshalAs(UnmanagedType.Interface)]
+            [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+            IEnumVARIANT Clone();
+        }
 
-			public void Reset () {
-				com_enum.Reset ();
-			}
+        class VARIANTEnumerator : IEnumerator
+        {
+            IEnumVARIANT com_enum;
+            object current;
 
-			#endregion
-		}
-	}
+            public VARIANTEnumerator(IEnumVARIANT com_enum)
+            {
+                this.com_enum = com_enum;
+            }
+
+            #region IEnumerator Members
+
+            public object Current
+            {
+                get { return current; }
+            }
+
+            public bool MoveNext()
+            {
+                object val;
+                uint fetched = 0;
+                com_enum.Next(1, out val, out fetched);
+                if (fetched == 0)
+                    return false;
+                current = val;
+                return true;
+            }
+
+            public void Reset()
+            {
+                com_enum.Reset();
+            }
+
+            #endregion
+        }
+    }
 }

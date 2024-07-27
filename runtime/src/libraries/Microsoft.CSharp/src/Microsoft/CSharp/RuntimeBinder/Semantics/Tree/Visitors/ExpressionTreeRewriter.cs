@@ -10,7 +10,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     internal sealed class ExpressionTreeRewriter : ExprVisitorBase
     {
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public static ExprBinOp Rewrite(ExprBoundLambda expr) => new ExpressionTreeRewriter().VisitBoundLambda(expr);
+        public static ExprBinOp Rewrite(ExprBoundLambda expr) =>
+            new ExpressionTreeRewriter().VisitBoundLambda(expr);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         protected override Expr Dispatch(Expr expr)
@@ -49,12 +50,21 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     //
                     // The LHS becomes Expression.Property(instance, indexerInfo, arguments).
                     Expr instance = Visit(prop.MemberGroup.OptionalObject);
-                    Expr propInfo = ExprFactory.CreatePropertyInfo(prop.PropWithTypeSlot.Prop(), prop.PropWithTypeSlot.Ats);
+                    Expr propInfo = ExprFactory.CreatePropertyInfo(
+                        prop.PropWithTypeSlot.Prop(),
+                        prop.PropWithTypeSlot.Ats
+                    );
                     Expr arguments = GenerateParamsArray(
                         GenerateArgsList(prop.OptionalArguments),
-                        PredefinedType.PT_EXPRESSION);
+                        PredefinedType.PT_EXPRESSION
+                    );
 
-                    lhs = GenerateCall(PREDEFMETH.PM_EXPRESSION_PROPERTY, instance, propInfo, arguments);
+                    lhs = GenerateCall(
+                        PREDEFMETH.PM_EXPRESSION_PROPERTY,
+                        instance,
+                        propInfo,
+                        arguments
+                    );
                 }
             }
             else
@@ -91,7 +101,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             MethodSymbol lambdaMethod = GetPreDefMethod(PREDEFMETH.PM_EXPRESSION_LAMBDA);
             AggregateType delegateType = anonmeth.DelegateType;
             TypeArray lambdaTypeParams = TypeArray.Allocate(delegateType);
-            AggregateType expressionType = SymbolLoader.GetPredefindType(PredefinedType.PT_EXPRESSION);
+            AggregateType expressionType = SymbolLoader.GetPredefindType(
+                PredefinedType.PT_EXPRESSION
+            );
             MethWithInst mwi = new MethWithInst(lambdaMethod, expressionType, lambdaTypeParams);
             Expr createParameters = CreateWraps(anonmeth);
             Debug.Assert(createParameters != null);
@@ -135,7 +147,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             {
                 pObject = Visit(expr.OptionalObject);
             }
-            ExprFieldInfo pFieldInfo = ExprFactory.CreateFieldInfo(expr.FieldWithType.Field(), expr.FieldWithType.GetType());
+            ExprFieldInfo pFieldInfo = ExprFactory.CreateFieldInfo(
+                expr.FieldWithType.Field(),
+                expr.FieldWithType.GetType()
+            );
             return GenerateCall(PREDEFMETH.PM_EXPRESSION_FIELD, pObject, pFieldInfo);
         }
 
@@ -155,18 +170,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             // If we have generated an identity cast or reference cast to a base class
             // we can omit the cast.
-            if (pArgument.Type == pExpr.Type ||
-                    SymbolLoader.IsBaseClassOfClass(pArgument.Type, pExpr.Type) ||
-                    CConversions.FImpRefConv(pArgument.Type, pExpr.Type))
+            if (
+                pArgument.Type == pExpr.Type
+                || SymbolLoader.IsBaseClassOfClass(pArgument.Type, pExpr.Type)
+                || CConversions.FImpRefConv(pArgument.Type, pExpr.Type)
+            )
             {
                 return Visit(pArgument);
             }
 
             // If we have a cast to PredefinedType.PT_G_EXPRESSION and the thing that we're casting is
             // a EXPRBOUNDLAMBDA that is an expression tree, then just visit the expression tree.
-            if (pExpr.Type != null &&
-                    pExpr.Type.IsPredefType(PredefinedType.PT_G_EXPRESSION) &&
-                    pArgument is ExprBoundLambda)
+            if (
+                pExpr.Type != null
+                && pExpr.Type.IsPredefType(PredefinedType.PT_G_EXPRESSION)
+                && pArgument is ExprBoundLambda
+            )
             {
                 return Visit(pArgument);
             }
@@ -185,7 +204,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             Debug.Assert(expr != null);
             PREDEFMETH pdm;
-            if (expr.FirstArgument.Type.IsPredefType(PredefinedType.PT_STRING) && expr.SecondArgument.Type.IsPredefType(PredefinedType.PT_STRING))
+            if (
+                expr.FirstArgument.Type.IsPredefType(PredefinedType.PT_STRING)
+                && expr.SecondArgument.Type.IsPredefType(PredefinedType.PT_STRING)
+            )
             {
                 pdm = PREDEFMETH.PM_STRING_CONCAT_STRING_2;
             }
@@ -196,7 +218,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr p1 = Visit(expr.FirstArgument);
             Expr p2 = Visit(expr.SecondArgument);
             MethodSymbol method = GetPreDefMethod(pdm);
-            Expr methodInfo = ExprFactory.CreateMethodInfo(method, SymbolLoader.GetPredefindType(PredefinedType.PT_STRING), null);
+            Expr methodInfo = ExprFactory.CreateMethodInfo(
+                method,
+                SymbolLoader.GetPredefindType(PredefinedType.PT_STRING),
+                null
+            );
             return GenerateCall(PREDEFMETH.PM_EXPRESSION_ADD_USER_DEFINED, p1, p2, methodInfo);
         }
 
@@ -256,7 +282,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     return GenerateConversion(expr.OptionalArguments, expr.Type, expr.isChecked());
                 case NullableCallLiftKind.NotLiftedIntermediateConversion:
                 case NullableCallLiftKind.UserDefinedConversion:
-                    return GenerateUserDefinedConversion(expr.OptionalArguments, expr.Type, expr.MethWithInst);
+                    return GenerateUserDefinedConversion(
+                        expr.OptionalArguments,
+                        expr.Type,
+                        expr.MethWithInst
+                    );
             }
 
             if (expr.MethWithInst.Meth().IsConstructor())
@@ -302,7 +332,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr args = GenerateArgsList(expr.OptionalArguments);
             Expr Params = GenerateParamsArray(args, PredefinedType.PT_EXPRESSION);
             PREDEFMETH pdm = PREDEFMETH.PM_EXPRESSION_CALL;
-            Debug.Assert(!expr.MethWithInst.Meth().isVirtual || expr.MemberGroup.OptionalObject != null);
+            Debug.Assert(
+                !expr.MethWithInst.Meth().isVirtual || expr.MemberGroup.OptionalObject != null
+            );
 
             return GenerateCall(pdm, pObject, methodInfo, Params);
         }
@@ -320,7 +352,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             {
                 pObject = Visit(expr.MemberGroup.OptionalObject);
             }
-            Expr propInfo = ExprFactory.CreatePropertyInfo(expr.PropWithTypeSlot.Prop(), expr.PropWithTypeSlot.GetType());
+            Expr propInfo = ExprFactory.CreatePropertyInfo(
+                expr.PropWithTypeSlot.Prop(),
+                expr.PropWithTypeSlot.GetType()
+            );
             if (expr.OptionalArguments != null)
             {
                 // It is an indexer property.  Turn it into a virtual method call.
@@ -394,9 +429,18 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionKind.GreaterThan => PREDEFMETH.PM_EXPRESSION_GREATERTHAN,
                 ExpressionKind.Modulo => PREDEFMETH.PM_EXPRESSION_MODULO,
                 ExpressionKind.Divide => PREDEFMETH.PM_EXPRESSION_DIVIDE,
-                ExpressionKind.Multiply => expr.isChecked() ? PREDEFMETH.PM_EXPRESSION_MULTIPLYCHECKED : PREDEFMETH.PM_EXPRESSION_MULTIPLY,
-                ExpressionKind.Subtract => expr.isChecked() ? PREDEFMETH.PM_EXPRESSION_SUBTRACTCHECKED : PREDEFMETH.PM_EXPRESSION_SUBTRACT,
-                ExpressionKind.Add => expr.isChecked() ? PREDEFMETH.PM_EXPRESSION_ADDCHECKED : PREDEFMETH.PM_EXPRESSION_ADD,
+                ExpressionKind.Multiply
+                    => expr.isChecked()
+                        ? PREDEFMETH.PM_EXPRESSION_MULTIPLYCHECKED
+                        : PREDEFMETH.PM_EXPRESSION_MULTIPLY,
+                ExpressionKind.Subtract
+                    => expr.isChecked()
+                        ? PREDEFMETH.PM_EXPRESSION_SUBTRACTCHECKED
+                        : PREDEFMETH.PM_EXPRESSION_SUBTRACT,
+                ExpressionKind.Add
+                    => expr.isChecked()
+                        ? PREDEFMETH.PM_EXPRESSION_ADDCHECKED
+                        : PREDEFMETH.PM_EXPRESSION_ADD,
 
                 _ => throw Error.InternalCompilerError(),
             };
@@ -465,7 +509,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             if (didEnumConversion && expr.Type.StripNubs().IsEnumType)
             {
-                call = GenerateCall(PREDEFMETH.PM_EXPRESSION_CONVERT, call, CreateTypeOf(expr.Type));
+                call = GenerateCall(
+                    PREDEFMETH.PM_EXPRESSION_CONVERT,
+                    call,
+                    CreateTypeOf(expr.Type)
+                );
             }
 
             return call;
@@ -480,10 +528,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             {
                 case ExpressionKind.UnaryPlus:
                     return Visit(expr.Child);
-                case ExpressionKind.BitwiseNot: pdm = PREDEFMETH.PM_EXPRESSION_NOT; break;
-                case ExpressionKind.LogicalNot: pdm = PREDEFMETH.PM_EXPRESSION_NOT; break;
+                case ExpressionKind.BitwiseNot:
+                    pdm = PREDEFMETH.PM_EXPRESSION_NOT;
+                    break;
+                case ExpressionKind.LogicalNot:
+                    pdm = PREDEFMETH.PM_EXPRESSION_NOT;
+                    break;
                 case ExpressionKind.Negate:
-                    pdm = expr.isChecked() ? PREDEFMETH.PM_EXPRESSION_NEGATECHECKED : PREDEFMETH.PM_EXPRESSION_NEGATE;
+                    pdm = expr.isChecked()
+                        ? PREDEFMETH.PM_EXPRESSION_NEGATECHECKED
+                        : PREDEFMETH.PM_EXPRESSION_NEGATE;
                     break;
                 default:
                     throw Error.InternalCompilerError();
@@ -503,15 +557,33 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             switch (expr.Kind)
             {
-                case ExpressionKind.LogicalOr: pdm = PREDEFMETH.PM_EXPRESSION_ORELSE_USER_DEFINED; break;
-                case ExpressionKind.LogicalAnd: pdm = PREDEFMETH.PM_EXPRESSION_ANDALSO_USER_DEFINED; break;
-                case ExpressionKind.LeftShirt: pdm = PREDEFMETH.PM_EXPRESSION_LEFTSHIFT_USER_DEFINED; break;
-                case ExpressionKind.RightShift: pdm = PREDEFMETH.PM_EXPRESSION_RIGHTSHIFT_USER_DEFINED; break;
-                case ExpressionKind.BitwiseExclusiveOr: pdm = PREDEFMETH.PM_EXPRESSION_EXCLUSIVEOR_USER_DEFINED; break;
-                case ExpressionKind.BitwiseOr: pdm = PREDEFMETH.PM_EXPRESSION_OR_USER_DEFINED; break;
-                case ExpressionKind.BitwiseAnd: pdm = PREDEFMETH.PM_EXPRESSION_AND_USER_DEFINED; break;
-                case ExpressionKind.Modulo: pdm = PREDEFMETH.PM_EXPRESSION_MODULO_USER_DEFINED; break;
-                case ExpressionKind.Divide: pdm = PREDEFMETH.PM_EXPRESSION_DIVIDE_USER_DEFINED; break;
+                case ExpressionKind.LogicalOr:
+                    pdm = PREDEFMETH.PM_EXPRESSION_ORELSE_USER_DEFINED;
+                    break;
+                case ExpressionKind.LogicalAnd:
+                    pdm = PREDEFMETH.PM_EXPRESSION_ANDALSO_USER_DEFINED;
+                    break;
+                case ExpressionKind.LeftShirt:
+                    pdm = PREDEFMETH.PM_EXPRESSION_LEFTSHIFT_USER_DEFINED;
+                    break;
+                case ExpressionKind.RightShift:
+                    pdm = PREDEFMETH.PM_EXPRESSION_RIGHTSHIFT_USER_DEFINED;
+                    break;
+                case ExpressionKind.BitwiseExclusiveOr:
+                    pdm = PREDEFMETH.PM_EXPRESSION_EXCLUSIVEOR_USER_DEFINED;
+                    break;
+                case ExpressionKind.BitwiseOr:
+                    pdm = PREDEFMETH.PM_EXPRESSION_OR_USER_DEFINED;
+                    break;
+                case ExpressionKind.BitwiseAnd:
+                    pdm = PREDEFMETH.PM_EXPRESSION_AND_USER_DEFINED;
+                    break;
+                case ExpressionKind.Modulo:
+                    pdm = PREDEFMETH.PM_EXPRESSION_MODULO_USER_DEFINED;
+                    break;
+                case ExpressionKind.Divide:
+                    pdm = PREDEFMETH.PM_EXPRESSION_DIVIDE_USER_DEFINED;
+                    break;
                 case ExpressionKind.StringEq:
                 case ExpressionKind.StringNotEq:
                 case ExpressionKind.DelegateEq:
@@ -525,14 +597,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     return GenerateUserDefinedComparisonOperator(expr);
                 case ExpressionKind.DelegateSubtract:
                 case ExpressionKind.Subtract:
-                    pdm = expr.isChecked() ? PREDEFMETH.PM_EXPRESSION_SUBTRACTCHECKED_USER_DEFINED : PREDEFMETH.PM_EXPRESSION_SUBTRACT_USER_DEFINED;
+                    pdm = expr.isChecked()
+                        ? PREDEFMETH.PM_EXPRESSION_SUBTRACTCHECKED_USER_DEFINED
+                        : PREDEFMETH.PM_EXPRESSION_SUBTRACT_USER_DEFINED;
                     break;
                 case ExpressionKind.DelegateAdd:
                 case ExpressionKind.Add:
-                    pdm = expr.isChecked() ? PREDEFMETH.PM_EXPRESSION_ADDCHECKED_USER_DEFINED : PREDEFMETH.PM_EXPRESSION_ADD_USER_DEFINED;
+                    pdm = expr.isChecked()
+                        ? PREDEFMETH.PM_EXPRESSION_ADDCHECKED_USER_DEFINED
+                        : PREDEFMETH.PM_EXPRESSION_ADD_USER_DEFINED;
                     break;
                 case ExpressionKind.Multiply:
-                    pdm = expr.isChecked() ? PREDEFMETH.PM_EXPRESSION_MULTIPLYCHECKED_USER_DEFINED : PREDEFMETH.PM_EXPRESSION_MULTIPLY_USER_DEFINED;
+                    pdm = expr.isChecked()
+                        ? PREDEFMETH.PM_EXPRESSION_MULTIPLYCHECKED_USER_DEFINED
+                        : PREDEFMETH.PM_EXPRESSION_MULTIPLY_USER_DEFINED;
                     break;
                 default:
                     throw Error.InternalCompilerError();
@@ -542,7 +620,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr udcall = expr.OptionalUserDefinedCall;
             if (udcall != null)
             {
-                Debug.Assert(udcall.Kind == ExpressionKind.Call || udcall.Kind == ExpressionKind.UserLogicalOp);
+                Debug.Assert(
+                    udcall.Kind == ExpressionKind.Call
+                        || udcall.Kind == ExpressionKind.UserLogicalOp
+                );
                 if (udcall is ExprCall ascall)
                 {
                     ExprList args = (ExprList)ascall.OptionalArguments;
@@ -567,7 +648,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr call = GenerateCall(pdm, p1, p2, methodInfo);
             // Delegate add/subtract generates a call to Combine/Remove, which returns System.Delegate,
             // not the operand delegate CType.  We must cast to the delegate CType.
-            if (expr.Kind == ExpressionKind.DelegateSubtract || expr.Kind == ExpressionKind.DelegateAdd)
+            if (
+                expr.Kind == ExpressionKind.DelegateSubtract
+                || expr.Kind == ExpressionKind.DelegateAdd
+            )
             {
                 Expr pTypeOf = CreateTypeOf(expr.Type);
                 return GenerateCall(PREDEFMETH.PM_EXPRESSION_CONVERT, call, pTypeOf);
@@ -598,11 +682,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 case ExpressionKind.UnaryPlus:
                     pdm = PREDEFMETH.PM_EXPRESSION_UNARYPLUS_USER_DEFINED;
                     break;
-                case ExpressionKind.BitwiseNot: pdm = PREDEFMETH.PM_EXPRESSION_NOT_USER_DEFINED; break;
-                case ExpressionKind.LogicalNot: pdm = PREDEFMETH.PM_EXPRESSION_NOT_USER_DEFINED; break;
+                case ExpressionKind.BitwiseNot:
+                    pdm = PREDEFMETH.PM_EXPRESSION_NOT_USER_DEFINED;
+                    break;
+                case ExpressionKind.LogicalNot:
+                    pdm = PREDEFMETH.PM_EXPRESSION_NOT_USER_DEFINED;
+                    break;
                 case ExpressionKind.DecimalNegate:
                 case ExpressionKind.Negate:
-                    pdm = expr.isChecked() ? PREDEFMETH.PM_EXPRESSION_NEGATECHECKED_USER_DEFINED : PREDEFMETH.PM_EXPRESSION_NEGATE_USER_DEFINED;
+                    pdm = expr.isChecked()
+                        ? PREDEFMETH.PM_EXPRESSION_NEGATECHECKED_USER_DEFINED
+                        : PREDEFMETH.PM_EXPRESSION_NEGATE_USER_DEFINED;
                     break;
 
                 case ExpressionKind.Inc:
@@ -618,10 +708,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr op = Visit(arg);
             Expr methodInfo = ExprFactory.CreateMethodInfo(expr.UserDefinedCallMethod);
 
-            if (expr.Kind == ExpressionKind.Inc || expr.Kind == ExpressionKind.Dec ||
-                expr.Kind == ExpressionKind.DecimalInc || expr.Kind == ExpressionKind.DecimalDec)
+            if (
+                expr.Kind == ExpressionKind.Inc
+                || expr.Kind == ExpressionKind.Dec
+                || expr.Kind == ExpressionKind.DecimalInc
+                || expr.Kind == ExpressionKind.DecimalDec
+            )
             {
-                return GenerateCall(pdm, null, methodInfo, GenerateParamsArray(op, PredefinedType.PT_EXPRESSION));
+                return GenerateCall(
+                    pdm,
+                    null,
+                    methodInfo,
+                    GenerateParamsArray(op, PredefinedType.PT_EXPRESSION)
+                );
             }
             return GenerateCall(pdm, op, methodInfo);
         }
@@ -639,9 +738,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionKind.DelegateNotEq => PREDEFMETH.PM_EXPRESSION_NOTEQUAL_USER_DEFINED,
                 ExpressionKind.Eq => PREDEFMETH.PM_EXPRESSION_EQUAL_USER_DEFINED,
                 ExpressionKind.NotEq => PREDEFMETH.PM_EXPRESSION_NOTEQUAL_USER_DEFINED,
-                ExpressionKind.LessThanOrEqual => PREDEFMETH.PM_EXPRESSION_LESSTHANOREQUAL_USER_DEFINED,
+                ExpressionKind.LessThanOrEqual
+                    => PREDEFMETH.PM_EXPRESSION_LESSTHANOREQUAL_USER_DEFINED,
                 ExpressionKind.LessThan => PREDEFMETH.PM_EXPRESSION_LESSTHAN_USER_DEFINED,
-                ExpressionKind.GreaterThanOrEqual => PREDEFMETH.PM_EXPRESSION_GREATERTHANOREQUAL_USER_DEFINED,
+                ExpressionKind.GreaterThanOrEqual
+                    => PREDEFMETH.PM_EXPRESSION_GREATERTHANOREQUAL_USER_DEFINED,
                 ExpressionKind.GreaterThan => PREDEFMETH.PM_EXPRESSION_GREATERTHAN_USER_DEFINED,
                 _ => throw Error.InternalCompilerError(),
             };
@@ -671,7 +772,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private static Expr GenerateConversionWithSource(Expr pTarget, CType pType, bool bChecked)
         {
-            PREDEFMETH pdm = bChecked ? PREDEFMETH.PM_EXPRESSION_CONVERTCHECKED : PREDEFMETH.PM_EXPRESSION_CONVERT;
+            PREDEFMETH pdm = bChecked
+                ? PREDEFMETH.PM_EXPRESSION_CONVERTCHECKED
+                : PREDEFMETH.PM_EXPRESSION_CONVERT;
             Expr pTypeOf = CreateTypeOf(pType);
             return GenerateCall(pdm, pTarget, pTypeOf);
         }
@@ -682,7 +785,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Debug.Assert(pArgument != null);
             CType pStrippedTypeOfArgument = pArgument.Type.StripNubs();
             Expr pStrippedTypeExpr = CreateTypeOf(pStrippedTypeOfArgument);
-            return GenerateCall(PREDEFMETH.PM_EXPRESSION_CONVERT, Visit(pArgument), pStrippedTypeExpr);
+            return GenerateCall(
+                PREDEFMETH.PM_EXPRESSION_CONVERT,
+                Visit(pArgument),
+                pStrippedTypeExpr
+            );
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -693,7 +800,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private static Expr GenerateUserDefinedConversion(Expr arg, CType CType, Expr target, MethWithInst method)
+        private static Expr GenerateUserDefinedConversion(
+            Expr arg,
+            CType CType,
+            Expr target,
+            MethWithInst method
+        )
         {
             // The user-defined explicit conversion from enum? to decimal or decimal? requires
             // that we convert the enum? to its nullable underlying CType.
@@ -716,21 +828,36 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // e.g. if we have a user-defined conversion from int to S? and we have (S)myint, then we need to generate
             // Convert(Convert(myint, typeof(S?), op_implicit), typeof(S))
 
-            CType pMethodReturnType = TypeManager.SubstType(method.Meth().RetType,
-                method.GetType(), method.TypeArgs);
-            bool fDontLiftReturnType = (pMethodReturnType == CType || (IsNullableValueType(arg.Type) && IsNullableValueType(CType)));
+            CType pMethodReturnType = TypeManager.SubstType(
+                method.Meth().RetType,
+                method.GetType(),
+                method.TypeArgs
+            );
+            bool fDontLiftReturnType = (
+                pMethodReturnType == CType
+                || (IsNullableValueType(arg.Type) && IsNullableValueType(CType))
+            );
 
             Expr typeofInner = CreateTypeOf(fDontLiftReturnType ? CType : pMethodReturnType);
             Expr methodInfo = ExprFactory.CreateMethodInfo(method);
-            PREDEFMETH pdmInner = arg.isChecked() ? PREDEFMETH.PM_EXPRESSION_CONVERTCHECKED_USER_DEFINED : PREDEFMETH.PM_EXPRESSION_CONVERT_USER_DEFINED;
-            Expr callUserDefinedConversion = GenerateCall(pdmInner, target, typeofInner, methodInfo);
+            PREDEFMETH pdmInner = arg.isChecked()
+                ? PREDEFMETH.PM_EXPRESSION_CONVERTCHECKED_USER_DEFINED
+                : PREDEFMETH.PM_EXPRESSION_CONVERT_USER_DEFINED;
+            Expr callUserDefinedConversion = GenerateCall(
+                pdmInner,
+                target,
+                typeofInner,
+                methodInfo
+            );
 
             if (fDontLiftReturnType)
             {
                 return callUserDefinedConversion;
             }
 
-            PREDEFMETH pdmOuter = arg.isChecked() ? PREDEFMETH.PM_EXPRESSION_CONVERTCHECKED : PREDEFMETH.PM_EXPRESSION_CONVERT;
+            PREDEFMETH pdmOuter = arg.isChecked()
+                ? PREDEFMETH.PM_EXPRESSION_CONVERTCHECKED
+                : PREDEFMETH.PM_EXPRESSION_CONVERT;
             Expr typeofOuter = CreateTypeOf(CType);
             return GenerateCall(pdmOuter, callUserDefinedConversion, typeofOuter);
         }
@@ -742,8 +869,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr pCastArgument = pExpr.Argument;
             Expr pConversionSource;
 
-            if (!isEnumToDecimalConversion(pArgument.Type, pExpr.Type)
-                && IsNullableValueAccess(pCastArgument, pArgument))
+            if (
+                !isEnumToDecimalConversion(pArgument.Type, pExpr.Type)
+                && IsNullableValueAccess(pCastArgument, pArgument)
+            )
             {
                 // We have an implicit conversion of nullable CType to the value CType, generate a convert node for it.
                 pConversionSource = GenerateValueAccessConversion(pArgument);
@@ -766,7 +895,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             pConversionSource = Visit(pUDConversionArgument);
                         }
 
-                        return GenerateConversionWithSource(pConversionSource, pCastCall.Type, call.isChecked());
+                        return GenerateConversionWithSource(
+                            pConversionSource,
+                            pCastCall.Type,
+                            call.isChecked()
+                        );
                     }
 
                     // This can happen if we have a UD conversion from C to, say, int,
@@ -775,26 +908,35 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     Debug.Assert(pUDConversion is ExprUserDefinedConversion);
 
                     // Just recurse.
-                    return GenerateUserDefinedConversion((ExprUserDefinedConversion)pUDConversion, pArgument);
+                    return GenerateUserDefinedConversion(
+                        (ExprUserDefinedConversion)pUDConversion,
+                        pArgument
+                    );
                 }
 
                 pConversionSource = Visit(pCastArgument);
             }
 
-            return GenerateUserDefinedConversion(pCastArgument, pExpr.Type, pConversionSource, pExpr.UserDefinedCallMethod);
+            return GenerateUserDefinedConversion(
+                pCastArgument,
+                pExpr.Type,
+                pConversionSource,
+                pExpr.UserDefinedCallMethod
+            );
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private static Expr GenerateParameter(string name, CType CType)
         {
-            SymbolLoader.GetPredefindType(PredefinedType.PT_STRING);  // force an ensure state
+            SymbolLoader.GetPredefindType(PredefinedType.PT_STRING); // force an ensure state
             ExprConstant nameString = ExprFactory.CreateStringConstant(name);
             ExprTypeOf pTypeOf = CreateTypeOf(CType);
             return GenerateCall(PREDEFMETH.PM_EXPRESSION_PARAMETER, pTypeOf, nameString);
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private static MethodSymbol GetPreDefMethod(PREDEFMETH pdm) => PredefinedMembers.GetMethod(pdm);
+        private static MethodSymbol GetPreDefMethod(PREDEFMETH pdm) =>
+            PredefinedMembers.GetMethod(pdm);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private static ExprTypeOf CreateTypeOf(CType type) => ExprFactory.CreateTypeOf(type);
@@ -843,7 +985,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             Expr newArgs = null;
             Expr newArgsTail = newArgs;
-            for (ExpressionIterator it = new ExpressionIterator(oldArgs); !it.AtEnd(); it.MoveNext())
+            for (
+                ExpressionIterator it = new ExpressionIterator(oldArgs);
+                !it.AtEnd();
+                it.MoveNext()
+            )
             {
                 Expr oldArg = it.Current();
                 ExprFactory.AppendItemToList(Visit(oldArg), ref newArgs, ref newArgsTail);
@@ -858,7 +1004,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             Expr newIndices = null;
             Expr newIndicesTail = newIndices;
-            for (ExpressionIterator it = new ExpressionIterator(oldIndices); !it.AtEnd(); it.MoveNext())
+            for (
+                ExpressionIterator it = new ExpressionIterator(oldIndices);
+                !it.AtEnd();
+                it.MoveNext()
+            )
             {
                 Expr newIndex = it.Current();
                 if (newIndex.Type != intType)
@@ -905,7 +1055,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // be handling this error
             if (method == null)
                 return null;
-            AggregateType expressionType = SymbolLoader.GetPredefindType(PredefinedType.PT_EXPRESSION);
+            AggregateType expressionType = SymbolLoader.GetPredefindType(
+                PredefinedType.PT_EXPRESSION
+            );
             MethWithInst mwi = new MethWithInst(method, expressionType);
             ExprMemberGroup pMemGroup = ExprFactory.CreateMemGroup(null, mwi);
             ExprCall call = ExprFactory.CreateCall(0, mwi.Meth().RetType, arg1, pMemGroup, mwi);
@@ -919,7 +1071,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             MethodSymbol method = GetPreDefMethod(pdm);
             if (method == null)
                 return null;
-            AggregateType expressionType = SymbolLoader.GetPredefindType(PredefinedType.PT_EXPRESSION);
+            AggregateType expressionType = SymbolLoader.GetPredefindType(
+                PredefinedType.PT_EXPRESSION
+            );
             Expr args = ExprFactory.CreateList(arg1, arg2);
             MethWithInst mwi = new MethWithInst(method, expressionType);
             ExprMemberGroup pMemGroup = ExprFactory.CreateMemGroup(null, mwi);
@@ -934,7 +1088,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             MethodSymbol method = GetPreDefMethod(pdm);
             if (method == null)
                 return null;
-            AggregateType expressionType = SymbolLoader.GetPredefindType(PredefinedType.PT_EXPRESSION);
+            AggregateType expressionType = SymbolLoader.GetPredefindType(
+                PredefinedType.PT_EXPRESSION
+            );
             Expr args = ExprFactory.CreateList(arg1, arg2, arg3);
             MethWithInst mwi = new MethWithInst(method, expressionType);
             ExprMemberGroup pMemGroup = ExprFactory.CreateMemGroup(null, mwi);
@@ -944,12 +1100,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private static ExprCall GenerateCall(PREDEFMETH pdm, Expr arg1, Expr arg2, Expr arg3, Expr arg4)
+        private static ExprCall GenerateCall(
+            PREDEFMETH pdm,
+            Expr arg1,
+            Expr arg2,
+            Expr arg3,
+            Expr arg4
+        )
         {
             MethodSymbol method = GetPreDefMethod(pdm);
             if (method == null)
                 return null;
-            AggregateType expressionType = SymbolLoader.GetPredefindType(PredefinedType.PT_EXPRESSION);
+            AggregateType expressionType = SymbolLoader.GetPredefindType(
+                PredefinedType.PT_EXPRESSION
+            );
             Expr args = ExprFactory.CreateList(arg1, arg2, arg3, arg4);
             MethWithInst mwi = new MethWithInst(method, expressionType);
             ExprMemberGroup pMemGroup = ExprFactory.CreateMemGroup(null, mwi);
@@ -965,11 +1129,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             AggregateType paramsArrayElementType = SymbolLoader.GetPredefindType(pt);
             ArrayType paramsArrayType = TypeManager.GetArray(paramsArrayElementType, 1, true);
             ExprConstant paramsArrayArg = ExprFactory.CreateIntegerConstant(parameterCount);
-            return ExprFactory.CreateArrayInit(paramsArrayType, args, paramsArrayArg, new int[] { parameterCount });
+            return ExprFactory.CreateArrayInit(
+                paramsArrayType,
+                args,
+                paramsArrayArg,
+                new int[] { parameterCount }
+            );
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private static void FixLiftedUserDefinedBinaryOperators(ExprBinOp expr, ref Expr pp1, ref Expr pp2)
+        private static void FixLiftedUserDefinedBinaryOperators(
+            ExprBinOp expr,
+            ref Expr pp1,
+            ref Expr pp2
+        )
         {
             // If we have lifted T1 op T2 to T1? op T2?, and we have an expression T1 op T2? or T1? op T2 then
             // we need to ensure that the unlifted actual arguments are promoted to their nullable CType.
@@ -989,10 +1162,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType aatype1 = orig1.Type;
             CType aatype2 = orig2.Type;
             // Is the operator even a candidate for lifting?
-            if (!(fptype1 is AggregateType fat1)
+            if (
+                !(fptype1 is AggregateType fat1)
                 || !fat1.OwningAggregate.IsValueType()
                 || !(fptype2 is AggregateType fat2)
-                || !fat2.OwningAggregate.IsValueType())
+                || !fat2.OwningAggregate.IsValueType()
+            )
             {
                 return;
             }
@@ -1000,30 +1175,49 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType nubfptype1 = TypeManager.GetNullable(fptype1);
             CType nubfptype2 = TypeManager.GetNullable(fptype2);
             // If we have null op X, or T1 op T2?, or T1 op null, lift first arg to T1?
-            if (aatype1 is NullType || aatype1 == fptype1 && (aatype2 == nubfptype2 || aatype2 is NullType))
+            if (
+                aatype1 is NullType
+                || aatype1 == fptype1 && (aatype2 == nubfptype2 || aatype2 is NullType)
+            )
             {
-                new1 = GenerateCall(PREDEFMETH.PM_EXPRESSION_CONVERT, new1, CreateTypeOf(nubfptype1));
+                new1 = GenerateCall(
+                    PREDEFMETH.PM_EXPRESSION_CONVERT,
+                    new1,
+                    CreateTypeOf(nubfptype1)
+                );
             }
 
             // If we have X op null, or T1? op T2, or null op T2, lift second arg to T2?
-            if (aatype2 is NullType || aatype2 == fptype2 && (aatype1 == nubfptype1 || aatype1 is NullType))
+            if (
+                aatype2 is NullType
+                || aatype2 == fptype2 && (aatype1 == nubfptype1 || aatype1 is NullType)
+            )
             {
-                new2 = GenerateCall(PREDEFMETH.PM_EXPRESSION_CONVERT, new2, CreateTypeOf(nubfptype2));
+                new2 = GenerateCall(
+                    PREDEFMETH.PM_EXPRESSION_CONVERT,
+                    new2,
+                    CreateTypeOf(nubfptype2)
+                );
             }
             pp1 = new1;
             pp2 = new2;
         }
 
         private static bool IsNullableValueType(CType pType) =>
-            pType is NullableType && pType.StripNubs() is AggregateType agg && agg.OwningAggregate.IsValueType();
+            pType is NullableType
+            && pType.StripNubs() is AggregateType agg
+            && agg.OwningAggregate.IsValueType();
 
         private static bool IsNullableValueAccess(Expr pExpr, Expr pObject)
         {
             Debug.Assert(pExpr != null);
-            return pExpr is ExprProperty prop && prop.MemberGroup.OptionalObject == pObject && pObject.Type is NullableType;
+            return pExpr is ExprProperty prop
+                && prop.MemberGroup.OptionalObject == pObject
+                && pObject.Type is NullableType;
         }
 
         private static bool isEnumToDecimalConversion(CType argtype, CType desttype) =>
-            argtype.StripNubs().IsEnumType && desttype.StripNubs().IsPredefType(PredefinedType.PT_DECIMAL);
+            argtype.StripNubs().IsEnumType
+            && desttype.StripNubs().IsPredefType(PredefinedType.PT_DECIMAL);
     }
 }

@@ -10,9 +10,11 @@ using Internal.Runtime.CompilerServices;
 namespace System.Buffers
 {
 #if __MonoCS__
-    public ref partial struct SequenceReader<T> where T : IEquatable<T>
+    public ref partial struct SequenceReader<T>
+        where T : IEquatable<T>
 #else
-    public ref partial struct SequenceReader<T> where T : unmanaged, IEquatable<T>
+    public ref partial struct SequenceReader<T>
+        where T : unmanaged, IEquatable<T>
 #endif
     {
         private SequencePosition _currentPosition;
@@ -69,11 +71,11 @@ namespace System.Buffers
         /// The current position in the <see cref="Sequence"/>.
         /// </summary>
 #if __MonoCS__
-        public SequencePosition Position
-            => Sequence.GetPosition(CurrentSpanIndex, _currentPosition);
+        public SequencePosition Position =>
+            Sequence.GetPosition(CurrentSpanIndex, _currentPosition);
 #else
-        public readonly SequencePosition Position
-            => Sequence.GetPosition(CurrentSpanIndex, _currentPosition);
+        public readonly SequencePosition Position =>
+            Sequence.GetPosition(CurrentSpanIndex, _currentPosition);
 #endif
 
         /// <summary>
@@ -138,9 +140,10 @@ namespace System.Buffers
             {
                 if (_length < 0)
                 {
-                    unsafe {
+                    unsafe
+                    {
                         fixed (long* lenPtr = &_length)
-                             // Cast-away readonly to initialize lazy field
+                            // Cast-away readonly to initialize lazy field
                             Volatile.Write(ref Unsafe.AsRef<long>(lenPtr), Sequence.Length);
                     }
                 }
@@ -271,7 +274,9 @@ namespace System.Buffers
             if (!Sequence.IsSingleSegment)
             {
                 SequencePosition previousNextPosition = _nextPosition;
-                while (Sequence.TryGet(ref _nextPosition, out ReadOnlyMemory<T> memory, advance: true))
+                while (
+                    Sequence.TryGet(ref _nextPosition, out ReadOnlyMemory<T> memory, advance: true)
+                )
                 {
                     _currentPosition = previousNextPosition;
                     if (memory.Length > 0)
@@ -298,7 +303,10 @@ namespace System.Buffers
         public void Advance(long count)
         {
             const long TooBigOrNegative = unchecked((long)0xFFFFFFFF80000000);
-            if ((count & TooBigOrNegative) == 0 && CurrentSpan.Length - CurrentSpanIndex > (int)count)
+            if (
+                (count & TooBigOrNegative) == 0
+                && CurrentSpan.Length - CurrentSpanIndex > (int)count
+            )
             {
                 CurrentSpanIndex += (int)count;
                 Consumed += count;

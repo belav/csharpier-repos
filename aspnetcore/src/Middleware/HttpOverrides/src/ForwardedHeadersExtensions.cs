@@ -47,7 +47,10 @@ public static class ForwardedHeadersExtensions
     /// <param name="builder">The <see cref="IApplicationBuilder" />.</param>
     /// <param name="options">Enables the different forwarding options.</param>
     /// <returns>A reference to <paramref name="builder" /> after the operation has completed.</returns>
-    public static IApplicationBuilder UseForwardedHeaders(this IApplicationBuilder builder, ForwardedHeadersOptions options)
+    public static IApplicationBuilder UseForwardedHeaders(
+        this IApplicationBuilder builder,
+        ForwardedHeadersOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(options);

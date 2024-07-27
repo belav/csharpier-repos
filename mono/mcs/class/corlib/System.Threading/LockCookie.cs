@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,61 +34,66 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-	[ComVisible (true)]
-	public struct LockCookie
-	{
-		internal int ThreadId;
-		internal int ReaderLocks;
-		internal int WriterLocks;
-		
-		internal LockCookie (int thread_id)
-		{
-			ThreadId = thread_id;
-			ReaderLocks = 0;
-			WriterLocks = 0;
-		}
-		
-		internal LockCookie (int thread_id, int reader_locks, int writer_locks)
-		{
-			ThreadId = thread_id;
-			ReaderLocks = reader_locks;
-			WriterLocks = writer_locks;
-		}
+    [ComVisible(true)]
+    public struct LockCookie
+    {
+        internal int ThreadId;
+        internal int ReaderLocks;
+        internal int WriterLocks;
 
-		public override int GetHashCode ()
-		{
-			return(base.GetHashCode ());
-		}
+        internal LockCookie(int thread_id)
+        {
+            ThreadId = thread_id;
+            ReaderLocks = 0;
+            WriterLocks = 0;
+        }
 
-		public bool Equals (LockCookie obj)
-		{
-			if (this.ThreadId == obj.ThreadId &&
-			    this.ReaderLocks == obj.ReaderLocks &&
-			    this.WriterLocks == obj.WriterLocks) {
-				return(true);
-			} else {
-				return(false);
-			}
-		}
-		
-		public override bool Equals (Object obj)
-		{
-			if (!(obj is LockCookie)) {
-				return(false);
-			}
-			
-			return(obj.Equals (this));
-		}
+        internal LockCookie(int thread_id, int reader_locks, int writer_locks)
+        {
+            ThreadId = thread_id;
+            ReaderLocks = reader_locks;
+            WriterLocks = writer_locks;
+        }
 
-		public static bool operator == (LockCookie a, LockCookie b)
-		{
-			return a.Equals (b);
-		}
+        public override int GetHashCode()
+        {
+            return (base.GetHashCode());
+        }
 
-		public static bool operator != (LockCookie a, LockCookie b)
-		{
-			return !a.Equals (b);
-		}
-	}
+        public bool Equals(LockCookie obj)
+        {
+            if (
+                this.ThreadId == obj.ThreadId
+                && this.ReaderLocks == obj.ReaderLocks
+                && this.WriterLocks == obj.WriterLocks
+            )
+            {
+                return (true);
+            }
+            else
+            {
+                return (false);
+            }
+        }
+
+        public override bool Equals(Object obj)
+        {
+            if (!(obj is LockCookie))
+            {
+                return (false);
+            }
+
+            return (obj.Equals(this));
+        }
+
+        public static bool operator ==(LockCookie a, LockCookie b)
+        {
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(LockCookie a, LockCookie b)
+        {
+            return !a.Equals(b);
+        }
+    }
 }
-

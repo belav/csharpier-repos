@@ -9,15 +9,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Data.Common;
 using System.Data.EntityClient;
 using System.Data.Metadata.Edm;
+using System.Data.Objects;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
-using System.Data.Common;
-using System.Data.Objects;
+using System.Text;
 
 namespace System.Web.UI.WebControls
 {
@@ -34,11 +34,16 @@ namespace System.Web.UI.WebControls
         private readonly Type clrType;
         private readonly bool isKey;
 
-        internal EntityDataSourceMemberPath(MetadataWorkspace ocWorkspace, EntityDataSourceMemberPath parent, EdmProperty property, bool isLocallyInteresting)
+        internal EntityDataSourceMemberPath(
+            MetadataWorkspace ocWorkspace,
+            EntityDataSourceMemberPath parent,
+            EdmProperty property,
+            bool isLocallyInteresting
+        )
         {
             EntityDataSourceUtil.CheckArgumentNull(ocWorkspace, "ocWorkspace");
             EntityDataSourceUtil.CheckArgumentNull(property, "property");
-            
+
             this.property = property;
             this.parent = parent;
             this.isLocallyInteresting = isLocallyInteresting;
@@ -49,10 +54,13 @@ namespace System.Web.UI.WebControls
             StructuralType parentType = property.DeclaringType;
             Type parentClrType = EntityDataSourceUtil.GetClrType(ocWorkspace, parentType);
 
-            this.propertyInfo = EntityDataSourceUtil.GetPropertyInfo(parentClrType, this.property.Name);
+            this.propertyInfo = EntityDataSourceUtil.GetPropertyInfo(
+                parentClrType,
+                this.property.Name
+            );
         }
 
-         /// <summary>
+        /// <summary>
         /// Describes the member path in the form 'property1.property2...'. Use to
         /// determine display name for nested properties in the EDSC.
         /// </summary>
@@ -71,7 +79,8 @@ namespace System.Web.UI.WebControls
             get
             {
                 // a member path is interesting if anything along the path is interesting
-                return this.isLocallyInteresting || (null != this.parent && this.parent.IsInteresting);
+                return this.isLocallyInteresting
+                    || (null != this.parent && this.parent.IsInteresting);
             }
         }
 
@@ -106,7 +115,10 @@ namespace System.Web.UI.WebControls
 
         internal object GetValue(EntityDataSourceWrapper entity)
         {
-            object parentObjectValue = GetParentObjectValue(entity, false /* initialize */); 
+            object parentObjectValue = GetParentObjectValue(
+                entity,
+                false /* initialize */
+            );
             if (null == parentObjectValue)
             {
                 // use convention that property of null is null
@@ -115,7 +127,10 @@ namespace System.Web.UI.WebControls
             else
             {
                 // get this property
-                object propertyValue = this.propertyInfo.GetValue(parentObjectValue, new object[] { });
+                object propertyValue = this.propertyInfo.GetValue(
+                    parentObjectValue,
+                    new object[] { }
+                );
 
                 return propertyValue;
             }
@@ -123,7 +138,10 @@ namespace System.Web.UI.WebControls
 
         internal void SetValue(EntityDataSourceWrapper entity, object value)
         {
-            object parentObjectValue = GetParentObjectValue(entity, true /* initialize */);
+            object parentObjectValue = GetParentObjectValue(
+                entity,
+                true /* initialize */
+            );
 
             // set property value on parent
             this.propertyInfo.SetValue(parentObjectValue, value, new object[] { });
@@ -132,7 +150,10 @@ namespace System.Web.UI.WebControls
         private object Initialize(EntityDataSourceWrapper entity)
         {
             // get parent's value
-            object parentObjectValue = GetParentObjectValue(entity, true /* initialize */);
+            object parentObjectValue = GetParentObjectValue(
+                entity,
+                true /* initialize */
+            );
 
             // construct type instance for this property
             object propertyValue = EntityDataSourceUtil.InitializeType(this.ClrType);
@@ -180,7 +201,8 @@ namespace System.Web.UI.WebControls
                 prefix = EntityDataSourceUtil.EntitySqlElementAlias;
             }
 
-            string eSql = prefix + "." + EntityDataSourceUtil.QuoteEntitySqlIdentifier(this.property.Name);
+            string eSql =
+                prefix + "." + EntityDataSourceUtil.QuoteEntitySqlIdentifier(this.property.Name);
 
             return eSql;
         }

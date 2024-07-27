@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,45 +33,45 @@
 
 using System;
 
-namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
+namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
-	[Serializable]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapAnyUri : ISoapXsd
-	{
-		string _value;
-		
-		public SoapAnyUri ()
-		{
-		}
+    [Serializable]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class SoapAnyUri : ISoapXsd
+    {
+        string _value;
 
-		public SoapAnyUri (string value)
-		{
-			_value = value;
-		}
+        public SoapAnyUri() { }
 
-		public string Value {
-			get { return _value; } 
-			set { _value = value; }
-		}
+        public SoapAnyUri(string value)
+        {
+            _value = value;
+        }
 
-		public static string XsdType {
-			get { return "anyUri"; }
-		}
+        public string Value
+        {
+            get { return _value; }
+            set { _value = value; }
+        }
 
-		public string GetXsdType()
-		{
-			return XsdType;
-		}
-		
-		public static SoapAnyUri Parse (string value)
-		{
-			return new SoapAnyUri (value);
-		}
+        public static string XsdType
+        {
+            get { return "anyUri"; }
+        }
 
-		public override string ToString()
-		{
-			return _value;
-		}
-	}
+        public string GetXsdType()
+        {
+            return XsdType;
+        }
+
+        public static SoapAnyUri Parse(string value)
+        {
+            return new SoapAnyUri(value);
+        }
+
+        public override string ToString()
+        {
+            return _value;
+        }
+    }
 }

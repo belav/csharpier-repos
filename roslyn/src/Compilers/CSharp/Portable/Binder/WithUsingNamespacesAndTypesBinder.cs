@@ -32,14 +32,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal bool WithImportChainEntry => _withImportChainEntry;
 #endif
 
-        internal abstract ImmutableArray<NamespaceOrTypeAndUsingDirective> GetUsings(ConsList<TypeSymbol>? basesBeingResolved);
+        internal abstract ImmutableArray<NamespaceOrTypeAndUsingDirective> GetUsings(
+            ConsList<TypeSymbol>? basesBeingResolved
+        );
 
         /// <summary>
         /// Look for a type forwarder for the given type in any referenced assemblies, checking any using namespaces in
         /// the current imports.
         /// </summary>
         /// <param name="name">The metadata name of the (potentially) forwarded type, without qualifiers.</param>
-        /// <param name="qualifierOpt">Will be used to return the namespace of the found forwarder, 
+        /// <param name="qualifierOpt">Will be used to return the namespace of the found forwarder,
         /// if any.</param>
         /// <param name="diagnostics">Will be used to report non-fatal errors during look up.</param>
         /// <param name="location">Location to report errors on.</param>
@@ -48,7 +50,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Since this method is intended to be used for error reporting, it stops as soon as it finds
         /// any type forwarder (or an error to report). It does not check other assemblies for consistency or better results.
         /// </remarks>
-        protected override AssemblySymbol? GetForwardedToAssemblyInUsingNamespaces(string name, ref NamespaceOrTypeSymbol qualifierOpt, BindingDiagnosticBag diagnostics, Location location)
+        protected override AssemblySymbol? GetForwardedToAssemblyInUsingNamespaces(
+            string name,
+            ref NamespaceOrTypeSymbol qualifierOpt,
+            BindingDiagnosticBag diagnostics,
+            Location location
+        )
         {
             foreach (var typeOrNamespace in GetUsings(basesBeingResolved: null))
             {
@@ -61,7 +68,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            return base.GetForwardedToAssemblyInUsingNamespaces(name, ref qualifierOpt, diagnostics, location);
+            return base.GetForwardedToAssemblyInUsingNamespaces(
+                name,
+                ref qualifierOpt,
+                diagnostics,
+                location
+            );
         }
 
         internal override bool SupportsExtensionMethods
@@ -74,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             int arity,
             LookupOptions options,
-            Binder originalBinder)
+            Binder originalBinder
+        )
         {
             Debug.Assert(methods.Count == 0);
 
@@ -90,34 +103,50 @@ namespace Microsoft.CodeAnalysis.CSharp
                 switch (nsOrType.NamespaceOrType.Kind)
                 {
                     case SymbolKind.Namespace:
+                    {
+                        var count = methods.Count;
+                        ((NamespaceSymbol)nsOrType.NamespaceOrType).GetExtensionMethods(
+                            methods,
+                            name,
+                            arity,
+                            options
+                        );
+
+                        // If we found any extension methods, then consider this using as used.
+                        if (methods.Count != count)
                         {
-                            var count = methods.Count;
-                            ((NamespaceSymbol)nsOrType.NamespaceOrType).GetExtensionMethods(methods, name, arity, options);
-
-                            // If we found any extension methods, then consider this using as used.
-                            if (methods.Count != count)
-                            {
-                                MarkImportDirective(nsOrType.UsingDirectiveReference, callerIsSemanticModel);
-                                seenNamespaceWithExtensionMethods = true;
-                            }
-
-                            break;
+                            MarkImportDirective(
+                                nsOrType.UsingDirectiveReference,
+                                callerIsSemanticModel
+                            );
+                            seenNamespaceWithExtensionMethods = true;
                         }
+
+                        break;
+                    }
 
                     case SymbolKind.NamedType:
+                    {
+                        var count = methods.Count;
+                        ((NamedTypeSymbol)nsOrType.NamespaceOrType).GetExtensionMethods(
+                            methods,
+                            name,
+                            arity,
+                            options
+                        );
+
+                        // If we found any extension methods, then consider this using as used.
+                        if (methods.Count != count)
                         {
-                            var count = methods.Count;
-                            ((NamedTypeSymbol)nsOrType.NamespaceOrType).GetExtensionMethods(methods, name, arity, options);
-
-                            // If we found any extension methods, then consider this using as used.
-                            if (methods.Count != count)
-                            {
-                                MarkImportDirective(nsOrType.UsingDirectiveReference, callerIsSemanticModel);
-                                seenStaticClassWithExtensionMethods = true;
-                            }
-
-                            break;
+                            MarkImportDirective(
+                                nsOrType.UsingDirectiveReference,
+                                callerIsSemanticModel
+                            );
+                            seenStaticClassWithExtensionMethods = true;
                         }
+
+                        break;
+                    }
                 }
             }
 
@@ -128,7 +157,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         internal override void LookupSymbolsInSingleBinder(
-            LookupResult result, string name, int arity, ConsList<TypeSymbol>? basesBeingResolved, LookupOptions options, Binder originalBinder, bool diagnose, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            LookupResult result,
+            string name,
+            int arity,
+            ConsList<TypeSymbol>? basesBeingResolved,
+            LookupOptions options,
+            Binder originalBinder,
+            bool diagnose,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(result.IsClear);
 
@@ -136,7 +173,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (var typeOrNamespace in this.GetUsings(basesBeingResolved))
             {
-                ImmutableArray<Symbol> candidates = Binder.GetCandidateMembers(typeOrNamespace.NamespaceOrType, name, options, originalBinder: originalBinder);
+                ImmutableArray<Symbol> candidates = Binder.GetCandidateMembers(
+                    typeOrNamespace.NamespaceOrType,
+                    name,
+                    options,
+                    originalBinder: originalBinder
+                );
                 foreach (Symbol symbol in candidates)
                 {
                     if (!IsValidLookupCandidateInUsings(symbol))
@@ -147,10 +189,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Found a match in our list of normal using directives.  Mark the directive
                     // as being seen so that it won't be reported to the user as something that
                     // can be removed.
-                    var res = originalBinder.CheckViability(symbol, arity, options, null, diagnose, ref useSiteInfo, basesBeingResolved);
+                    var res = originalBinder.CheckViability(
+                        symbol,
+                        arity,
+                        options,
+                        null,
+                        diagnose,
+                        ref useSiteInfo,
+                        basesBeingResolved
+                    );
                     if (res.Kind == LookupResultKind.Viable)
                     {
-                        MarkImportDirective(typeOrNamespace.UsingDirectiveReference, callerIsSemanticModel);
+                        MarkImportDirective(
+                            typeOrNamespace.UsingDirectiveReference,
+                            callerIsSemanticModel
+                        );
                     }
 
                     result.MergeEqual(res);
@@ -193,20 +246,33 @@ namespace Microsoft.CodeAnalysis.CSharp
             return true;
         }
 
-        internal override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo result, LookupOptions options, Binder originalBinder)
+        internal override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo result,
+            LookupOptions options,
+            Binder originalBinder
+        )
         {
             // If we are looking only for labels we do not need to search through the imports.
             if ((options & LookupOptions.LabelsOnly) == 0)
             {
                 // Add types within namespaces imported through usings, but don't add nested namespaces.
-                options = (options & ~(LookupOptions.NamespaceAliasesOnly | LookupOptions.NamespacesOrTypesOnly)) | LookupOptions.MustNotBeNamespace;
+                options =
+                    (
+                        options
+                        & ~(
+                            LookupOptions.NamespaceAliasesOnly | LookupOptions.NamespacesOrTypesOnly
+                        )
+                    ) | LookupOptions.MustNotBeNamespace;
 
                 // look in all using namespaces
                 foreach (var namespaceSymbol in this.GetUsings(basesBeingResolved: null))
                 {
                     foreach (var member in namespaceSymbol.NamespaceOrType.GetMembersUnordered())
                     {
-                        if (IsValidLookupCandidateInUsings(member) && originalBinder.CanAddLookupSymbolInfo(member, options, result, null))
+                        if (
+                            IsValidLookupCandidateInUsings(member)
+                            && originalBinder.CanAddLookupSymbolInfo(member, options, result, null)
+                        )
                         {
                             result.AddSymbol(member, member.Name, member.GetArity());
                         }
@@ -249,17 +315,32 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected abstract Imports GetImports();
 
-        internal static WithUsingNamespacesAndTypesBinder Create(SourceNamespaceSymbol declaringSymbol, CSharpSyntaxNode declarationSyntax, Binder next, bool withPreviousSubmissionImports = false, bool withImportChainEntry = false)
+        internal static WithUsingNamespacesAndTypesBinder Create(
+            SourceNamespaceSymbol declaringSymbol,
+            CSharpSyntaxNode declarationSyntax,
+            Binder next,
+            bool withPreviousSubmissionImports = false,
+            bool withImportChainEntry = false
+        )
         {
             if (withPreviousSubmissionImports)
             {
-                return new FromSyntaxWithPreviousSubmissionImports(declaringSymbol, declarationSyntax, next, withImportChainEntry);
+                return new FromSyntaxWithPreviousSubmissionImports(
+                    declaringSymbol,
+                    declarationSyntax,
+                    next,
+                    withImportChainEntry
+                );
             }
 
             return new FromSyntax(declaringSymbol, declarationSyntax, next, withImportChainEntry);
         }
 
-        internal static WithUsingNamespacesAndTypesBinder Create(ImmutableArray<NamespaceOrTypeAndUsingDirective> namespacesOrTypes, Binder next, bool withImportChainEntry = false)
+        internal static WithUsingNamespacesAndTypesBinder Create(
+            ImmutableArray<NamespaceOrTypeAndUsingDirective> namespacesOrTypes,
+            Binder next,
+            bool withImportChainEntry = false
+        )
         {
             return new FromNamespacesOrTypes(namespacesOrTypes, next, withImportChainEntry);
         }
@@ -270,19 +351,37 @@ namespace Microsoft.CodeAnalysis.CSharp
             private readonly CSharpSyntaxNode _declarationSyntax;
             private ImmutableArray<NamespaceOrTypeAndUsingDirective> _lazyUsings;
 
-            internal FromSyntax(SourceNamespaceSymbol declaringSymbol, CSharpSyntaxNode declarationSyntax, Binder next, bool withImportChainEntry)
+            internal FromSyntax(
+                SourceNamespaceSymbol declaringSymbol,
+                CSharpSyntaxNode declarationSyntax,
+                Binder next,
+                bool withImportChainEntry
+            )
                 : base(next, withImportChainEntry)
             {
-                Debug.Assert(declarationSyntax.Kind() is SyntaxKind.CompilationUnit or SyntaxKind.NamespaceDeclaration or SyntaxKind.FileScopedNamespaceDeclaration);
+                Debug.Assert(
+                    declarationSyntax.Kind()
+                        is SyntaxKind.CompilationUnit
+                            or SyntaxKind.NamespaceDeclaration
+                            or SyntaxKind.FileScopedNamespaceDeclaration
+                );
                 _declaringSymbol = declaringSymbol;
                 _declarationSyntax = declarationSyntax;
             }
 
-            internal override ImmutableArray<NamespaceOrTypeAndUsingDirective> GetUsings(ConsList<TypeSymbol>? basesBeingResolved)
+            internal override ImmutableArray<NamespaceOrTypeAndUsingDirective> GetUsings(
+                ConsList<TypeSymbol>? basesBeingResolved
+            )
             {
                 if (_lazyUsings.IsDefault)
                 {
-                    ImmutableInterlocked.InterlockedInitialize(ref _lazyUsings, _declaringSymbol.GetUsingNamespacesOrTypes(_declarationSyntax, basesBeingResolved));
+                    ImmutableInterlocked.InterlockedInitialize(
+                        ref _lazyUsings,
+                        _declaringSymbol.GetUsingNamespacesOrTypes(
+                            _declarationSyntax,
+                            basesBeingResolved
+                        )
+                    );
                 }
 
                 return _lazyUsings;
@@ -294,21 +393,32 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private sealed class FromSyntaxWithPreviousSubmissionImports : WithUsingNamespacesAndTypesBinder
+        private sealed class FromSyntaxWithPreviousSubmissionImports
+            : WithUsingNamespacesAndTypesBinder
         {
             private readonly SourceNamespaceSymbol _declaringSymbol;
             private readonly CSharpSyntaxNode _declarationSyntax;
             private Imports? _lazyFullImports;
 
-            internal FromSyntaxWithPreviousSubmissionImports(SourceNamespaceSymbol declaringSymbol, CSharpSyntaxNode declarationSyntax, Binder next, bool withImportChainEntry)
+            internal FromSyntaxWithPreviousSubmissionImports(
+                SourceNamespaceSymbol declaringSymbol,
+                CSharpSyntaxNode declarationSyntax,
+                Binder next,
+                bool withImportChainEntry
+            )
                 : base(next, withImportChainEntry)
             {
-                Debug.Assert(declarationSyntax.IsKind(SyntaxKind.CompilationUnit) || declarationSyntax.IsKind(SyntaxKind.NamespaceDeclaration));
+                Debug.Assert(
+                    declarationSyntax.IsKind(SyntaxKind.CompilationUnit)
+                        || declarationSyntax.IsKind(SyntaxKind.NamespaceDeclaration)
+                );
                 _declaringSymbol = declaringSymbol;
                 _declarationSyntax = declarationSyntax;
             }
 
-            internal override ImmutableArray<NamespaceOrTypeAndUsingDirective> GetUsings(ConsList<TypeSymbol>? basesBeingResolved)
+            internal override ImmutableArray<NamespaceOrTypeAndUsingDirective> GetUsings(
+                ConsList<TypeSymbol>? basesBeingResolved
+            )
             {
                 return GetImports(basesBeingResolved).Usings;
             }
@@ -317,9 +427,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_lazyFullImports is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyFullImports,
-                                                _declaringSymbol.DeclaringCompilation.GetPreviousSubmissionImports().Concat(_declaringSymbol.GetImports(_declarationSyntax, basesBeingResolved)),
-                                                null);
+                    Interlocked.CompareExchange(
+                        ref _lazyFullImports,
+                        _declaringSymbol
+                            .DeclaringCompilation.GetPreviousSubmissionImports()
+                            .Concat(
+                                _declaringSymbol.GetImports(_declarationSyntax, basesBeingResolved)
+                            ),
+                        null
+                    );
                 }
 
                 return _lazyFullImports;
@@ -335,21 +451,31 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             private readonly ImmutableArray<NamespaceOrTypeAndUsingDirective> _usings;
 
-            internal FromNamespacesOrTypes(ImmutableArray<NamespaceOrTypeAndUsingDirective> namespacesOrTypes, Binder next, bool withImportChainEntry)
+            internal FromNamespacesOrTypes(
+                ImmutableArray<NamespaceOrTypeAndUsingDirective> namespacesOrTypes,
+                Binder next,
+                bool withImportChainEntry
+            )
                 : base(next, withImportChainEntry)
             {
                 Debug.Assert(!namespacesOrTypes.IsDefault);
                 _usings = namespacesOrTypes;
             }
 
-            internal override ImmutableArray<NamespaceOrTypeAndUsingDirective> GetUsings(ConsList<TypeSymbol>? basesBeingResolved)
+            internal override ImmutableArray<NamespaceOrTypeAndUsingDirective> GetUsings(
+                ConsList<TypeSymbol>? basesBeingResolved
+            )
             {
                 return _usings;
             }
 
             protected override Imports GetImports()
             {
-                return Imports.Create(ImmutableDictionary<string, AliasAndUsingDirective>.Empty, _usings, ImmutableArray<AliasAndExternAliasDirective>.Empty);
+                return Imports.Create(
+                    ImmutableDictionary<string, AliasAndUsingDirective>.Empty,
+                    _usings,
+                    ImmutableArray<AliasAndExternAliasDirective>.Empty
+                );
             }
         }
     }

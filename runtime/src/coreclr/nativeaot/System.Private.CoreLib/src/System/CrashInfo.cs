@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Text;
-
 using Internal.DeveloperExperience;
 
 namespace System
@@ -106,22 +105,40 @@ namespace System
 
             static void Dummy() { }
 
-            if (!WriteHexValue("runtime_base"u8, (ulong)RuntimeImports.RhGetOSModuleFromPointer((nint)(void*)(delegate*<void>)&Dummy)))
+            if (
+                !WriteHexValue(
+                    "runtime_base"u8,
+                    (ulong)
+                        RuntimeImports.RhGetOSModuleFromPointer(
+                            (nint)(void*)(delegate* <void>)&Dummy
+                        )
+                )
+            )
                 return false;
 
             if (!WriteIntValue("runtime_type"u8, (int)RuntimeType.NativeAOT))
                 return false;
 
-            if (!WriteValue("runtime_version"u8, new ReadOnlySpan<byte>(RuntimeImports.RhGetRuntimeVersion(out int cbLength), cbLength)))
+            if (
+                !WriteValue(
+                    "runtime_version"u8,
+                    new ReadOnlySpan<byte>(
+                        RuntimeImports.RhGetRuntimeVersion(out int cbLength),
+                        cbLength
+                    )
+                )
+            )
                 return false;
 
             CrashReason crashReason = reason switch
             {
-                RhFailFastReason.AssertionFailure or
-                RhFailFastReason.EnvironmentFailFast => CrashReason.EnvironmentFailFast,
+                RhFailFastReason.AssertionFailure
+                or RhFailFastReason.EnvironmentFailFast
+                    => CrashReason.EnvironmentFailFast,
                 RhFailFastReason.InternalError => CrashReason.InternalFailFast,
-                RhFailFastReason.UnhandledException or
-                RhFailFastReason.UnhandledExceptionFromPInvoke => CrashReason.UnhandledException,
+                RhFailFastReason.UnhandledException
+                or RhFailFastReason.UnhandledExceptionFromPInvoke
+                    => CrashReason.UnhandledException,
                 _ => CrashReason.Unknown,
             };
 
@@ -147,10 +164,24 @@ namespace System
         /// <param name="maxNumberStackFrames">limits the number of stack frames written to the triage buffer</param>
         /// <param name="maxMethodNameSize">limits the size of the stack frame method name strings</param>
         /// <returns>true - success, false - out of triage buffer space</returns>
-        private bool WriteExceptionWithFallback(ReadOnlySpan<byte> key, Exception exception, int maxMessageSize, int maxNumberStackFrames, int maxMethodNameSize)
+        private bool WriteExceptionWithFallback(
+            ReadOnlySpan<byte> key,
+            Exception exception,
+            int maxMessageSize,
+            int maxNumberStackFrames,
+            int maxMethodNameSize
+        )
         {
             int savedIndex = _currentBufferIndex;
-            if (!WriteExceptionHelper(key, exception, maxMessageSize, maxNumberStackFrames, maxMethodNameSize))
+            if (
+                !WriteExceptionHelper(
+                    key,
+                    exception,
+                    maxMessageSize,
+                    maxNumberStackFrames,
+                    maxMethodNameSize
+                )
+            )
             {
                 _currentBufferIndex = savedIndex;
                 return false;
@@ -167,7 +198,13 @@ namespace System
         /// <param name="maxNumberStackFrames">limits the number of stack frames written to the triage buffer</param>
         /// <param name="maxMethodNameSize">limits the size of the stack frame method name strings</param>
         /// <returns>true - success, false - out of triage buffer space</returns>
-        private bool WriteExceptionHelper(ReadOnlySpan<byte> key, Exception exception, int maxMessageSize, int maxNumberStackFrames, int maxMethodNameSize)
+        private bool WriteExceptionHelper(
+            ReadOnlySpan<byte> key,
+            Exception exception,
+            int maxMessageSize,
+            int maxNumberStackFrames,
+            int maxMethodNameSize
+        )
         {
             if (!OpenValue(key, '{'))
                 return false;
@@ -216,13 +253,27 @@ namespace System
                 {
                     foreach (Exception ex in aggregate.InnerExceptions)
                     {
-                        if (!WriteExceptionWithFallback(default, ex, maxMessageSize, maxNumberStackFrames, maxMethodNameSize))
+                        if (
+                            !WriteExceptionWithFallback(
+                                default,
+                                ex,
+                                maxMessageSize,
+                                maxNumberStackFrames,
+                                maxMethodNameSize
+                            )
+                        )
                             break;
                     }
                 }
                 else
                 {
-                    WriteExceptionWithFallback(default, exception.InnerException, maxMessageSize, maxNumberStackFrames, maxMethodNameSize);
+                    WriteExceptionWithFallback(
+                        default,
+                        exception.InnerException,
+                        maxMessageSize,
+                        maxNumberStackFrames,
+                        maxMethodNameSize
+                    );
                 }
 
                 CloseValue(']');
@@ -266,13 +317,21 @@ namespace System
             return true;
         }
 
-        private bool WriteHexValue(ReadOnlySpan<byte> key, ulong value) => WriteValue(key, $"0x{value:X}".AsSpan());
+        private bool WriteHexValue(ReadOnlySpan<byte> key, ulong value) =>
+            WriteValue(key, $"0x{value:X}".AsSpan());
 
-        private bool WriteHexValue(ReadOnlySpan<byte> key, int value) => WriteValue(key, $"0x{value:X}".AsSpan());
+        private bool WriteHexValue(ReadOnlySpan<byte> key, int value) =>
+            WriteValue(key, $"0x{value:X}".AsSpan());
 
-        private bool WriteIntValue(ReadOnlySpan<byte> key, int value) => WriteValue(key, $"{value}".AsSpan());
+        private bool WriteIntValue(ReadOnlySpan<byte> key, int value) =>
+            WriteValue(key, $"{value}".AsSpan());
 
-        private bool WriteStringValue(ReadOnlySpan<byte> key, string value, int maxChars = int.MaxValue, bool truncateLeft = false)
+        private bool WriteStringValue(
+            ReadOnlySpan<byte> key,
+            string value,
+            int maxChars = int.MaxValue,
+            bool truncateLeft = false
+        )
         {
             if (!OpenValue(key, '"'))
                 return false;
@@ -352,7 +411,7 @@ namespace System
                 if (!WriteChar(':'))
                     return false;
             }
-            _reservedBuffer += 1;           // Reserve 1 byte for closing marker
+            _reservedBuffer += 1; // Reserve 1 byte for closing marker
             if (!WriteChar(marker))
             {
                 _reservedBuffer -= 1;
@@ -364,9 +423,9 @@ namespace System
 
         private void CloseValue(char marker)
         {
-            _reservedBuffer -= 1;           // Make the reserved byte available for the closing marker
+            _reservedBuffer -= 1; // Make the reserved byte available for the closing marker
             bool success = WriteChar(marker);
-            Debug.Assert(success);          // Should never fail because of the reservation
+            Debug.Assert(success); // Should never fail because of the reservation
             _isCommaNeeded = true;
         }
 

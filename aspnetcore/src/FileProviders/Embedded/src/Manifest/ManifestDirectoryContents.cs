@@ -15,7 +15,11 @@ internal sealed class ManifestDirectoryContents : IDirectoryContents
     private readonly DateTimeOffset _lastModified;
     private IFileInfo[]? _entries;
 
-    public ManifestDirectoryContents(Assembly assembly, ManifestDirectory directory, DateTimeOffset lastModified)
+    public ManifestDirectoryContents(
+        Assembly assembly,
+        ManifestDirectory directory,
+        DateTimeOffset lastModified
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(assembly);
         ArgumentNullThrowHelper.ThrowIfNull(directory);
@@ -35,7 +39,8 @@ internal sealed class ManifestDirectoryContents : IDirectoryContents
     {
         return EnsureEntries().GetEnumerator();
 
-        IReadOnlyList<IFileInfo> EnsureEntries() => _entries = _entries ?? ResolveEntries().ToArray();
+        IReadOnlyList<IFileInfo> EnsureEntries() =>
+            _entries = _entries ?? ResolveEntries().ToArray();
 
         IEnumerable<IFileInfo> ResolveEntries()
         {

@@ -29,17 +29,18 @@ namespace Microsoft.CodeAnalysis.Structure
         /// Returns the providers always available to the service.
         /// This does not included providers imported via MEF composition.
         /// </summary>
-        protected virtual ImmutableArray<BlockStructureProvider> GetBuiltInProviders()
-            => ImmutableArray<BlockStructureProvider>.Empty;
+        protected virtual ImmutableArray<BlockStructureProvider> GetBuiltInProviders() =>
+            ImmutableArray<BlockStructureProvider>.Empty;
 
         private ImmutableArray<BlockStructureProvider> GetImportedProviders()
         {
             var language = Language;
             var mefExporter = _services.ExportProvider;
 
-            var providers = mefExporter.GetExports<BlockStructureProvider, LanguageMetadata>()
-                                       .Where(lz => lz.Metadata.Language == language)
-                                       .Select(lz => lz.Value);
+            var providers = mefExporter
+                .GetExports<BlockStructureProvider, LanguageMetadata>()
+                .Where(lz => lz.Metadata.Language == language)
+                .Select(lz => lz.Value);
 
             return providers.ToImmutableArray();
         }
@@ -47,9 +48,12 @@ namespace Microsoft.CodeAnalysis.Structure
         public override async Task<BlockStructure> GetBlockStructureAsync(
             Document document,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             using var context = CreateContext(syntaxTree, options, cancellationToken);
             return GetBlockStructure(context, _providers);
         }
@@ -57,14 +61,16 @@ namespace Microsoft.CodeAnalysis.Structure
         private static BlockStructureContext CreateContext(
             SyntaxTree syntaxTree,
             in BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return new BlockStructureContext(syntaxTree, options, cancellationToken);
         }
 
         private static BlockStructure GetBlockStructure(
             in BlockStructureContext context,
-            ImmutableArray<BlockStructureProvider> providers)
+            ImmutableArray<BlockStructureProvider> providers
+        )
         {
             foreach (var provider in providers)
                 provider.ProvideBlockStructure(context);
@@ -74,14 +80,20 @@ namespace Microsoft.CodeAnalysis.Structure
 
         private static BlockStructure CreateBlockStructure(in BlockStructureContext context)
         {
-            using var _ = ArrayBuilder<BlockSpan>.GetInstance(context.Spans.Count, out var updatedSpans);
+            using var _ = ArrayBuilder<BlockSpan>.GetInstance(
+                context.Spans.Count,
+                out var updatedSpans
+            );
             foreach (var span in context.Spans)
                 updatedSpans.Add(UpdateBlockSpan(span, context.Options));
 
             return new BlockStructure(updatedSpans.ToImmutableAndClear());
         }
 
-        private static BlockSpan UpdateBlockSpan(BlockSpan blockSpan, in BlockStructureOptions options)
+        private static BlockSpan UpdateBlockSpan(
+            BlockSpan blockSpan,
+            in BlockStructureOptions options
+        )
         {
             var type = blockSpan.Type;
 
@@ -89,9 +101,11 @@ namespace Microsoft.CodeAnalysis.Structure
             var isMemberLevel = BlockTypes.IsCodeLevelConstruct(type);
             var isComment = BlockTypes.IsCommentOrPreprocessorRegion(type);
 
-            if ((!options.ShowBlockStructureGuidesForDeclarationLevelConstructs && isTopLevel) ||
-                (!options.ShowBlockStructureGuidesForCodeLevelConstructs && isMemberLevel) ||
-                (!options.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions && isComment))
+            if (
+                (!options.ShowBlockStructureGuidesForDeclarationLevelConstructs && isTopLevel)
+                || (!options.ShowBlockStructureGuidesForCodeLevelConstructs && isMemberLevel)
+                || (!options.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions && isComment)
+            )
             {
                 type = BlockTypes.Nonstructural;
             }
@@ -99,9 +113,11 @@ namespace Microsoft.CodeAnalysis.Structure
             var isCollapsible = blockSpan.IsCollapsible;
             if (isCollapsible)
             {
-                if ((!options.ShowOutliningForDeclarationLevelConstructs && isTopLevel) ||
-                    (!options.ShowOutliningForCodeLevelConstructs && isMemberLevel) ||
-                    (!options.ShowOutliningForCommentsAndPreprocessorRegions && isComment))
+                if (
+                    (!options.ShowOutliningForDeclarationLevelConstructs && isTopLevel)
+                    || (!options.ShowOutliningForCodeLevelConstructs && isMemberLevel)
+                    || (!options.ShowOutliningForCommentsAndPreprocessorRegions && isComment)
+                )
                 {
                     isCollapsible = false;
                 }

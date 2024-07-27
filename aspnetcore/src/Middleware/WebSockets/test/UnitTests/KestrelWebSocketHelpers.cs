@@ -15,34 +15,41 @@ namespace Microsoft.AspNetCore.WebSockets.Test;
 
 public class KestrelWebSocketHelpers
 {
-    public static IAsyncDisposable CreateServer(ILoggerFactory loggerFactory, out int port, Func<HttpContext, Task> app, Action<WebSocketOptions> configure = null)
+    public static IAsyncDisposable CreateServer(
+        ILoggerFactory loggerFactory,
+        out int port,
+        Func<HttpContext, Task> app,
+        Action<WebSocketOptions> configure = null
+    )
     {
         Exception exceptionFromApp = null;
         configure = configure ?? (o => { });
         Action<IApplicationBuilder> startup = builder =>
         {
-            builder.Use(async (ct, next) =>
-            {
-                try
+            builder.Use(
+                async (ct, next) =>
                 {
-                    // Kestrel does not return proper error responses:
-                    // https://github.com/aspnet/KestrelHttpServer/issues/43
-                    await next(ct);
-                }
-                catch (Exception ex)
-                {
-                    // capture the exception from the app, we'll throw this at the end of the test when the server is disposed
-                    exceptionFromApp = ex;
-                    if (ct.Response.HasStarted)
+                    try
                     {
-                        throw;
+                        // Kestrel does not return proper error responses:
+                        // https://github.com/aspnet/KestrelHttpServer/issues/43
+                        await next(ct);
                     }
+                    catch (Exception ex)
+                    {
+                        // capture the exception from the app, we'll throw this at the end of the test when the server is disposed
+                        exceptionFromApp = ex;
+                        if (ct.Response.HasStarted)
+                        {
+                            throw;
+                        }
 
-                    ct.Response.StatusCode = 500;
-                    ct.Response.Headers.Clear();
-                    await ct.Response.WriteAsync(ex.ToString());
+                        ct.Response.StatusCode = 500;
+                        ct.Response.Headers.Clear();
+                        await ct.Response.WriteAsync(ex.ToString());
+                    }
                 }
-            });
+            );
             builder.UseWebSockets();
             builder.Run(c => app(c));
         };
@@ -55,21 +62,23 @@ public class KestrelWebSocketHelpers
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .ConfigureServices(s =>
-                {
-                    s.AddWebSockets(configure);
-                    s.AddSingleton(loggerFactory);
-                })
-                .UseConfiguration(config)
-                .UseKestrel(options =>
-                {
-                    options.Listen(IPAddress.Loopback, 0);
-                })
-                .Configure(startup);
-            }).ConfigureHostOptions(o =>
+                    .ConfigureServices(s =>
+                    {
+                        s.AddWebSockets(configure);
+                        s.AddSingleton(loggerFactory);
+                    })
+                    .UseConfiguration(config)
+                    .UseKestrel(options =>
+                    {
+                        options.Listen(IPAddress.Loopback, 0);
+                    })
+                    .Configure(startup);
+            })
+            .ConfigureHostOptions(o =>
             {
                 o.ShutdownTimeout = TimeSpan.FromSeconds(30);
-            }).Build();
+            })
+            .Build();
 
         host.Start();
         port = host.GetPort();
@@ -100,4 +109,3 @@ public class KestrelWebSocketHelpers
         }
     }
 }
-

@@ -22,22 +22,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [ExportCompletionProvider(nameof(TypeImportCompletionProvider), LanguageNames.CSharp)]
     [ExtensionOrder(After = nameof(PropertySubpatternCompletionProvider))]
     [Shared]
-    internal sealed class TypeImportCompletionProvider : AbstractTypeImportCompletionProvider<UsingDirectiveSyntax>
+    internal sealed class TypeImportCompletionProvider
+        : AbstractTypeImportCompletionProvider<UsingDirectiveSyntax>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TypeImportCompletionProvider()
-        {
-        }
+        public TypeImportCompletionProvider() { }
 
         internal override string Language => LanguageNames.CSharp;
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, CompletionOptions options)
-            => CompletionUtilities.IsTriggerCharacter(text, characterPosition, options);
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            CompletionOptions options
+        ) => CompletionUtilities.IsTriggerCharacter(text, characterPosition, options);
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.CommonTriggerCharacters;
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.CommonTriggerCharacters;
 
-        protected override bool IsFinalSemicolonOfUsingOrExtern(SyntaxNode directive, SyntaxToken token)
+        protected override bool IsFinalSemicolonOfUsingOrExtern(
+            SyntaxNode directive,
+            SyntaxToken token
+        )
         {
             if (token.IsKind(SyntaxKind.None) || token.IsMissing)
                 return false;
@@ -45,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return directive switch
             {
                 UsingDirectiveSyntax usingDirective => usingDirective.SemicolonToken == token,
-                ExternAliasDirectiveSyntax externAliasDirective => externAliasDirective.SemicolonToken == token,
+                ExternAliasDirectiveSyntax externAliasDirective
+                    => externAliasDirective.SemicolonToken == token,
                 _ => false,
             };
         }
@@ -54,23 +61,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             Document document,
             CompletionItem item,
             char? commitKey,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (commitKey is ';' or '.')
             {
                 // Only consider add '()' if the type is used under object creation context
                 var position = item.Span.Start;
-                var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var syntaxTree = await document
+                    .GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var leftToken = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken);
-                return syntaxTree.IsObjectCreationTypeContext(position, leftToken, cancellationToken);
+                return syntaxTree.IsObjectCreationTypeContext(
+                    position,
+                    leftToken,
+                    cancellationToken
+                );
             }
 
             return false;
         }
 
-        protected override ImmutableArray<UsingDirectiveSyntax> GetAliasDeclarationNodes(SyntaxNode node)
-            => node.GetEnclosingUsingDirectives()
-                .Where(n => n.Alias != null)
-                .ToImmutableArray();
+        protected override ImmutableArray<UsingDirectiveSyntax> GetAliasDeclarationNodes(
+            SyntaxNode node
+        ) => node.GetEnclosingUsingDirectives().Where(n => n.Alias != null).ToImmutableArray();
     }
 }

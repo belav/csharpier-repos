@@ -20,7 +20,8 @@ public static class HtmlHelperLinkExtensions
     public static IHtmlContent ActionLink(
         this IHtmlHelper helper,
         string linkText,
-        string actionName)
+        string actionName
+    )
     {
         ArgumentNullException.ThrowIfNull(helper);
         ArgumentNullException.ThrowIfNull(linkText);
@@ -33,7 +34,8 @@ public static class HtmlHelperLinkExtensions
             hostname: null,
             fragment: null,
             routeValues: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -54,7 +56,8 @@ public static class HtmlHelperLinkExtensions
         this IHtmlHelper helper,
         string linkText,
         string actionName,
-        object routeValues)
+        object routeValues
+    )
     {
         ArgumentNullException.ThrowIfNull(helper);
         ArgumentNullException.ThrowIfNull(linkText);
@@ -67,7 +70,8 @@ public static class HtmlHelperLinkExtensions
             hostname: null,
             fragment: null,
             routeValues: routeValues,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -94,7 +98,8 @@ public static class HtmlHelperLinkExtensions
         string linkText,
         string actionName,
         object routeValues,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         ArgumentNullException.ThrowIfNull(helper);
         ArgumentNullException.ThrowIfNull(linkText);
@@ -107,7 +112,8 @@ public static class HtmlHelperLinkExtensions
             hostname: null,
             fragment: null,
             routeValues: routeValues,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <summary>
@@ -122,7 +128,8 @@ public static class HtmlHelperLinkExtensions
         this IHtmlHelper helper,
         string linkText,
         string actionName,
-        string controllerName)
+        string controllerName
+    )
     {
         ArgumentNullException.ThrowIfNull(helper);
         ArgumentNullException.ThrowIfNull(linkText);
@@ -135,7 +142,8 @@ public static class HtmlHelperLinkExtensions
             hostname: null,
             fragment: null,
             routeValues: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -158,7 +166,8 @@ public static class HtmlHelperLinkExtensions
         string linkText,
         string actionName,
         string controllerName,
-        object routeValues)
+        object routeValues
+    )
     {
         ArgumentNullException.ThrowIfNull(helper);
         ArgumentNullException.ThrowIfNull(linkText);
@@ -171,7 +180,8 @@ public static class HtmlHelperLinkExtensions
             hostname: null,
             fragment: null,
             routeValues: routeValues,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -200,7 +210,8 @@ public static class HtmlHelperLinkExtensions
         string actionName,
         string controllerName,
         object routeValues,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         ArgumentNullException.ThrowIfNull(helper);
         ArgumentNullException.ThrowIfNull(linkText);
@@ -213,7 +224,8 @@ public static class HtmlHelperLinkExtensions
             hostname: null,
             fragment: null,
             routeValues: routeValues,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <summary>
@@ -232,19 +244,21 @@ public static class HtmlHelperLinkExtensions
     public static IHtmlContent RouteLink(
         this IHtmlHelper htmlHelper,
         string linkText,
-        object routeValues)
+        object routeValues
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(linkText);
 
         return htmlHelper.RouteLink(
-                            linkText,
-                            routeName: null,
-                            protocol: null,
-                            hostName: null,
-                            fragment: null,
-                            routeValues: routeValues,
-                            htmlAttributes: null);
+            linkText,
+            routeName: null,
+            protocol: null,
+            hostName: null,
+            fragment: null,
+            routeValues: routeValues,
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -257,19 +271,21 @@ public static class HtmlHelperLinkExtensions
     public static IHtmlContent RouteLink(
         this IHtmlHelper htmlHelper,
         string linkText,
-        string routeName)
+        string routeName
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(linkText);
 
         return htmlHelper.RouteLink(
-                            linkText,
-                            routeName,
-                            protocol: null,
-                            hostName: null,
-                            fragment: null,
-                            routeValues: null,
-                            htmlAttributes: null);
+            linkText,
+            routeName,
+            protocol: null,
+            hostName: null,
+            fragment: null,
+            routeValues: null,
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -290,19 +306,21 @@ public static class HtmlHelperLinkExtensions
         this IHtmlHelper htmlHelper,
         string linkText,
         string routeName,
-        object routeValues)
+        object routeValues
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(linkText);
 
         return htmlHelper.RouteLink(
-                            linkText,
-                            routeName,
-                            protocol: null,
-                            hostName: null,
-                            fragment: null,
-                            routeValues: routeValues,
-                            htmlAttributes: null);
+            linkText,
+            routeName,
+            protocol: null,
+            hostName: null,
+            fragment: null,
+            routeValues: routeValues,
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -327,19 +345,21 @@ public static class HtmlHelperLinkExtensions
         this IHtmlHelper htmlHelper,
         string linkText,
         object routeValues,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(linkText);
 
         return htmlHelper.RouteLink(
-                            linkText,
-                            routeName: null,
-                            protocol: null,
-                            hostName: null,
-                            fragment: null,
-                            routeValues: routeValues,
-                            htmlAttributes: htmlAttributes);
+            linkText,
+            routeName: null,
+            protocol: null,
+            hostName: null,
+            fragment: null,
+            routeValues: routeValues,
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <summary>
@@ -366,18 +386,20 @@ public static class HtmlHelperLinkExtensions
         string linkText,
         string routeName,
         object routeValues,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(linkText);
 
         return htmlHelper.RouteLink(
-                             linkText,
-                             routeName,
-                             protocol: null,
-                             hostName: null,
-                             fragment: null,
-                             routeValues: routeValues,
-                             htmlAttributes: htmlAttributes);
+            linkText,
+            routeName,
+            protocol: null,
+            hostName: null,
+            fragment: null,
+            routeValues: routeValues,
+            htmlAttributes: htmlAttributes
+        );
     }
 }

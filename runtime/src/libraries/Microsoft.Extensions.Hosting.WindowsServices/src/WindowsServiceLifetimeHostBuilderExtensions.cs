@@ -42,7 +42,10 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="hostBuilder">The <see cref="IHostBuilder"/> to operate on.</param>
         /// <param name="configure">An <see cref="Action{WindowsServiceLifetimeOptions}"/> to configure the provided <see cref="WindowsServiceLifetimeOptions"/>.</param>
         /// <returns>The <paramref name="hostBuilder"/> instance for chaining.</returns>
-        public static IHostBuilder UseWindowsService(this IHostBuilder hostBuilder, Action<WindowsServiceLifetimeOptions> configure)
+        public static IHostBuilder UseWindowsService(
+            this IHostBuilder hostBuilder,
+            Action<WindowsServiceLifetimeOptions> configure
+        )
         {
             ThrowHelper.ThrowIfNull(hostBuilder);
 
@@ -92,7 +95,10 @@ namespace Microsoft.Extensions.Hosting
         /// </param>
         /// <param name="configure">An <see cref="Action{WindowsServiceLifetimeOptions}"/> to configure the provided <see cref="WindowsServiceLifetimeOptions"/>.</param>
         /// <returns>The <paramref name="services"/> instance for chaining.</returns>
-        public static IServiceCollection AddWindowsService(this IServiceCollection services, Action<WindowsServiceLifetimeOptions> configure)
+        public static IServiceCollection AddWindowsService(
+            this IServiceCollection services,
+            Action<WindowsServiceLifetimeOptions> configure
+        )
         {
             ThrowHelper.ThrowIfNull(services);
 
@@ -104,7 +110,10 @@ namespace Microsoft.Extensions.Hosting
             return services;
         }
 
-        private static void AddWindowsServiceLifetime(IServiceCollection services, Action<WindowsServiceLifetimeOptions> configure)
+        private static void AddWindowsServiceLifetime(
+            IServiceCollection services,
+            Action<WindowsServiceLifetimeOptions> configure
+        )
         {
 #if !NETFRAMEWORK
             Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));

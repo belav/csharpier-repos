@@ -47,7 +47,6 @@ namespace System.Linq.Parallel
             get { return _indexState; }
         }
 
-
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in
         // a similar sequential operation (i.e., in LINQ to Objects).

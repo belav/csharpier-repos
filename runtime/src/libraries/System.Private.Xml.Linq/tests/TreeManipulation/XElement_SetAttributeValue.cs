@@ -22,22 +22,216 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Add attribute") { Params = new object[] { "<A a1='a1' b='b'>text<B/></A>", "{ns}a1", "ns_a1" }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Add attribute (empty elem)") { Params = new object[] { "<A a='a' b='b'/>", "a1", "a1" }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Add attribute (content text only)") { Params = new object[] { "<A a1='a1' b='b'>text</A>", "{ns}a1", "ns_a1" }, Priority = 2 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Replace attribute (empty elem, only one attr.)") { Params = new object[] { "<A a1='original' />", "a1", "a1" }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Replace attribute (empty elem, multiple attr., namespaces)") { Params = new object[] { "<A p:a1='x' a1='original' xmlns:p='ns'/>", "{ns}a1", "ns_a1" }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Replace attribute (multiple attr. (first))") { Params = new object[] { "<A a1='original' x='x' y='y'>text</A>", "a1", "a1" }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Replace attribute (multiple attr. (mIddle))") { Params = new object[] { "<A x='x' a1='original' y='y'>text</A>", "a1", "a1" }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Replace attribute (multiple attr. (last))") { Params = new object[] { "<A x='x' y='y' a1='original'>text</A>", "a1", "a1" }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Remove attribute (only attribute)") { Params = new object[] { "<A a1='original'></A>", "a1", null }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Remove attribute (from multiple attribs)") { Params = new object[] { "<A y='y' a1='original' x='x'></A>", "a1", null }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Remove attribute (from multiple attribs, namespace)") { Params = new object[] { "<A a1='original' p:a1='o' xmlns:p='A' ></A>", "{A}a1", null }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Remove attribute (from multiple attribs, content)") { Params = new object[] { "<A x='t' a1='original' y='r'>trt</A>", "a1", null }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Remove attribute (nonexisting)") { Params = new object[] { "<A x='t' a1='original' y='r'>trt</A>", "nonex", null }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Add attribute (empty elem, namespaces)") { Params = new object[] { "<A a1='a1' b='b'/>", "{ns}a1", "ns_a1" }, Priority = 0 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Add attribute (empty elem I., no attrs)") { Params = new object[] { "<A></A>", "a1", "a1" }, Priority = 1 } });
-            AddChild(new TestVariation(OnXElement) { Attribute = new VariationAttribute("Add attribute (empty elem II., no attrs)") { Params = new object[] { "<A/>", "a1", "a1" }, Priority = 0 } });
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Add attribute")
+                    {
+                        Params = new object[]
+                        {
+                            "<A a1='a1' b='b'>text<B/></A>",
+                            "{ns}a1",
+                            "ns_a1",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Add attribute (empty elem)")
+                    {
+                        Params = new object[] { "<A a='a' b='b'/>", "a1", "a1" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Add attribute (content text only)")
+                    {
+                        Params = new object[] { "<A a1='a1' b='b'>text</A>", "{ns}a1", "ns_a1" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute(
+                        "Replace attribute (empty elem, only one attr.)"
+                    )
+                    {
+                        Params = new object[] { "<A a1='original' />", "a1", "a1" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute(
+                        "Replace attribute (empty elem, multiple attr., namespaces)"
+                    )
+                    {
+                        Params = new object[]
+                        {
+                            "<A p:a1='x' a1='original' xmlns:p='ns'/>",
+                            "{ns}a1",
+                            "ns_a1",
+                        },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Replace attribute (multiple attr. (first))")
+                    {
+                        Params = new object[]
+                        {
+                            "<A a1='original' x='x' y='y'>text</A>",
+                            "a1",
+                            "a1",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute(
+                        "Replace attribute (multiple attr. (mIddle))"
+                    )
+                    {
+                        Params = new object[]
+                        {
+                            "<A x='x' a1='original' y='y'>text</A>",
+                            "a1",
+                            "a1",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Replace attribute (multiple attr. (last))")
+                    {
+                        Params = new object[]
+                        {
+                            "<A x='x' y='y' a1='original'>text</A>",
+                            "a1",
+                            "a1",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Remove attribute (only attribute)")
+                    {
+                        Params = new object[] { "<A a1='original'></A>", "a1", null },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Remove attribute (from multiple attribs)")
+                    {
+                        Params = new object[] { "<A y='y' a1='original' x='x'></A>", "a1", null },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute(
+                        "Remove attribute (from multiple attribs, namespace)"
+                    )
+                    {
+                        Params = new object[]
+                        {
+                            "<A a1='original' p:a1='o' xmlns:p='A' ></A>",
+                            "{A}a1",
+                            null,
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute(
+                        "Remove attribute (from multiple attribs, content)"
+                    )
+                    {
+                        Params = new object[]
+                        {
+                            "<A x='t' a1='original' y='r'>trt</A>",
+                            "a1",
+                            null,
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Remove attribute (nonexisting)")
+                    {
+                        Params = new object[]
+                        {
+                            "<A x='t' a1='original' y='r'>trt</A>",
+                            "nonex",
+                            null,
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Add attribute (empty elem, namespaces)")
+                    {
+                        Params = new object[] { "<A a1='a1' b='b'/>", "{ns}a1", "ns_a1" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Add attribute (empty elem I., no attrs)")
+                    {
+                        Params = new object[] { "<A></A>", "a1", "a1" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OnXElement)
+                {
+                    Attribute = new VariationAttribute("Add attribute (empty elem II., no attrs)")
+                    {
+                        Params = new object[] { "<A/>", "a1", "a1" },
+                        Priority = 0,
+                    },
+                }
+            );
         }
 
         //[Variation(Priority = 1, Desc = "Add attribute (empty elem I., no attrs)", Params = new object[] { "<A></A>", "a1", "a1" })]
@@ -70,8 +264,20 @@ namespace XLinqTests
 
             XAttribute origAttrib = e.Attribute(newName);
             IEnumerable<XAttribute> origAttrs = e.Attributes().ToList();
-            IEnumerable<ExpectedValue> refComparison = getExpectedAttributes(e, newName, newValue, true).ToList();
-            IEnumerable<ExpectedValue> valueComparison = getExpectedAttributes(e, newName, newValue, false).ToList();
+            IEnumerable<ExpectedValue> refComparison = getExpectedAttributes(
+                    e,
+                    newName,
+                    newValue,
+                    true
+                )
+                .ToList();
+            IEnumerable<ExpectedValue> valueComparison = getExpectedAttributes(
+                    e,
+                    newName,
+                    newValue,
+                    false
+                )
+                .ToList();
             IEnumerable<XNode> nodes = e.Nodes().ToList();
 
             if (_runWithEvents)
@@ -104,17 +310,34 @@ namespace XLinqTests
 
             if (newValue != null)
             {
-                TestLog.Compare(origAttrib == null || ReferenceEquals(origAttrib, e.Attribute(newName)), "origAttrib == null || Object.ReferenceEquals (origAttrib, e.Attribute(newName))");
-                TestLog.Compare(e.Attribute(newName).Value, newValue, "e.Attribute(newName), newValue");
+                TestLog.Compare(
+                    origAttrib == null || ReferenceEquals(origAttrib, e.Attribute(newName)),
+                    "origAttrib == null || Object.ReferenceEquals (origAttrib, e.Attribute(newName))"
+                );
+                TestLog.Compare(
+                    e.Attribute(newName).Value,
+                    newValue,
+                    "e.Attribute(newName), newValue"
+                );
             }
             else
             {
-                TestLog.Compare(origAttrib == null || (origAttrib.Parent == null && origAttrib.Document == null), "origAttrib == null || (origAttrib.Parent==null && origAttrib.Document==null)");
+                TestLog.Compare(
+                    origAttrib == null
+                        || (origAttrib.Parent == null && origAttrib.Document == null),
+                    "origAttrib == null || (origAttrib.Parent==null && origAttrib.Document==null)"
+                );
                 TestLog.Compare(e.Attribute(newName), null, "e.Attribute(newName), null");
             }
 
-            TestLog.Compare(refComparison.EqualAllAttributes(e.Attributes(), Helpers.MyAttributeComparer), "refComparison.EqualAllAttributes(e.Attributes(), Helpers.MyAttributeComparer))");
-            TestLog.Compare(valueComparison.EqualAllAttributes(e.Attributes(), Helpers.MyAttributeComparer), "valueComparison.EqualAllAttributes(e.Attributes(), Helpers.MyAttributeComparer))");
+            TestLog.Compare(
+                refComparison.EqualAllAttributes(e.Attributes(), Helpers.MyAttributeComparer),
+                "refComparison.EqualAllAttributes(e.Attributes(), Helpers.MyAttributeComparer))"
+            );
+            TestLog.Compare(
+                valueComparison.EqualAllAttributes(e.Attributes(), Helpers.MyAttributeComparer),
+                "valueComparison.EqualAllAttributes(e.Attributes(), Helpers.MyAttributeComparer))"
+            );
             TestLog.Compare(nodes.SequenceEqual(e.Nodes()), "nodes.EqualAll(e.Nodes())");
 
             e.Verify();
@@ -124,7 +347,12 @@ namespace XLinqTests
 
         #region Methods
 
-        private IEnumerable<ExpectedValue> getExpectedAttributes(XElement e, XName name, string value, bool isRefComparison)
+        private IEnumerable<ExpectedValue> getExpectedAttributes(
+            XElement e,
+            XName name,
+            string value,
+            bool isRefComparison
+        )
         {
             bool wasReported = false;
             foreach (XAttribute a in e.Attributes())
@@ -135,7 +363,10 @@ namespace XLinqTests
                     {
                         continue;
                     }
-                    yield return new ExpectedValue(isRefComparison, isRefComparison ? a : new XAttribute(name, value));
+                    yield return new ExpectedValue(
+                        isRefComparison,
+                        isRefComparison ? a : new XAttribute(name, value)
+                    );
                     wasReported = true;
                 }
                 else

@@ -36,7 +36,9 @@ namespace System.ComponentModel.Tests
             yield return ConvertTest.Valid("!1", (UInt128)1, new CustomPositiveSymbolCulture());
 
             yield return ConvertTest.Throws<ArgumentException, Exception>("-1");
-            yield return ConvertTest.Throws<ArgumentException, Exception>("340282366920938463463374607431768211456");
+            yield return ConvertTest.Throws<ArgumentException, Exception>(
+                "340282366920938463463374607431768211456"
+            );
 
             foreach (ConvertTest test in base.ConvertFromTestData())
             {

@@ -6,12 +6,18 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal sealed class LabelSymbolReferenceFinder : AbstractMemberScopedReferenceFinder<ILabelSymbol>
+    internal sealed class LabelSymbolReferenceFinder
+        : AbstractMemberScopedReferenceFinder<ILabelSymbol>
     {
-        protected override bool TokensMatch(FindReferencesDocumentState state, SyntaxToken token, string name)
+        protected override bool TokensMatch(
+            FindReferencesDocumentState state,
+            SyntaxToken token,
+            string name
+        )
         {
             // Labels in VB can actually be numeric literals.  Wacky.
-            return IdentifiersMatch(state.SyntaxFacts, name, token) || state.SyntaxFacts.IsLiteral(token);
+            return IdentifiersMatch(state.SyntaxFacts, name, token)
+                || state.SyntaxFacts.IsLiteral(token);
         }
     }
 }

@@ -144,7 +144,10 @@ namespace Microsoft.VisualBasic.Tests
         {
             IList coll = CreateCollection(10);
             Assert.Throws<ArgumentOutOfRangeException>("Index", () => coll.Insert(-1, new Foo())); // Index < 0
-            Assert.Throws<ArgumentOutOfRangeException>("Index", () => coll.Insert(coll.Count + 1, new Foo())); // Index > coll.Count
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "Index",
+                () => coll.Insert(coll.Count + 1, new Foo())
+            ); // Index > coll.Count
 
             Assert.Equal(10, coll.Count);
         }
@@ -166,7 +169,7 @@ namespace Microsoft.VisualBasic.Tests
             IList coll = CreateCollection(10);
 
             var firstItem = coll[0];
-            coll.RemoveAt(-10);    // Indexing bug when accessing through the IList interface on non-empty collection
+            coll.RemoveAt(-10); // Indexing bug when accessing through the IList interface on non-empty collection
             Assert.False(coll.Contains(firstItem));
             Assert.Equal(9, coll.Count);
 
@@ -268,7 +271,7 @@ namespace Microsoft.VisualBasic.Tests
         {
             Collection coll = CreateCollection(10);
 
-            Assert.Equal(((IList)coll)[-10], coll[1]);    // Indexing bug when accessing through the IList interface on non-empty collection
+            Assert.Equal(((IList)coll)[-10], coll[1]); // Indexing bug when accessing through the IList interface on non-empty collection
 
             Assert.Throws<IndexOutOfRangeException>(() => coll[0]); // Index <= 0
             Assert.Throws<IndexOutOfRangeException>(() => coll[coll.Count + 1]); // Index < 0
@@ -319,7 +322,10 @@ namespace Microsoft.VisualBasic.Tests
             IList coll = new Collection();
 
             Assert.Throws<ArgumentOutOfRangeException>("Index", () => coll[-1] = new Foo()); // Index < 0
-            Assert.Throws<ArgumentOutOfRangeException>("Index", () => coll[coll.Count + 1] = new Foo()); // Index >= InnerList.Count
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "Index",
+                () => coll[coll.Count + 1] = new Foo()
+            ); // Index >= InnerList.Count
         }
 
         [Fact]
@@ -416,9 +422,7 @@ namespace Microsoft.VisualBasic.Tests
 
         private class Foo
         {
-            public Foo()
-            {
-            }
+            public Foo() { }
 
             public Foo(int intValue, string stringValue)
             {

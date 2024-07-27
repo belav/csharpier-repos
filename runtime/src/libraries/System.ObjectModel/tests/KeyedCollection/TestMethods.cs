@@ -9,49 +9,43 @@ using Xunit;
 namespace System.Collections.ObjectModel.Tests
 {
     public abstract class KeyedCollectionTests<TKey, TValue>
-        where TValue : IComparable<TValue> where TKey : IEquatable<TKey>
+        where TValue : IComparable<TValue>
+        where TKey : IEquatable<TKey>
     {
-        private static readonly bool s_keyNullable = default(TKey)
-                                                     == null;
+        private static readonly bool s_keyNullable = default(TKey) == null;
 
         private static int s_sometimesNullIndex;
 
-        public static Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-            GetNeverNullKeyMethod
+        public static Named<KeyedCollectionGetKeyedValue<TKey, TValue>> GetNeverNullKeyMethod
         {
             get
             {
-                return
-                    new Named
-                        <KeyedCollectionGetKeyedValue<TKey, TValue>>(
-                        "GetNeverNullKey",
-                        GetNeverNullKey);
+                return new Named<KeyedCollectionGetKeyedValue<TKey, TValue>>(
+                    "GetNeverNullKey",
+                    GetNeverNullKey
+                );
             }
         }
 
-        public static Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-            GetSometimesNullKeyMethod
+        public static Named<KeyedCollectionGetKeyedValue<TKey, TValue>> GetSometimesNullKeyMethod
         {
             get
             {
-                return
-                    new Named
-                        <KeyedCollectionGetKeyedValue<TKey, TValue>>(
-                        "GetSometimesNullKey",
-                        GetSometimesNullKey);
+                return new Named<KeyedCollectionGetKeyedValue<TKey, TValue>>(
+                    "GetSometimesNullKey",
+                    GetSometimesNullKey
+                );
             }
         }
 
-        public static Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-            GetAlwaysNullKeyMethod
+        public static Named<KeyedCollectionGetKeyedValue<TKey, TValue>> GetAlwaysNullKeyMethod
         {
             get
             {
-                return
-                    new Named
-                        <KeyedCollectionGetKeyedValue<TKey, TValue>>(
-                        "GetAlwaysNullKey",
-                        GetAlwaysNullKey);
+                return new Named<KeyedCollectionGetKeyedValue<TKey, TValue>>(
+                    "GetAlwaysNullKey",
+                    GetAlwaysNullKey
+                );
             }
         }
 
@@ -59,8 +53,8 @@ namespace System.Collections.ObjectModel.Tests
         {
             get
             {
-                yield return new object[] {0};
-                yield return new object[] {33};
+                yield return new object[] { 0 };
+                yield return new object[] { 33 };
             }
         }
 
@@ -68,8 +62,8 @@ namespace System.Collections.ObjectModel.Tests
         {
             get
             {
-                yield return new object[] {0, GetNeverNullKeyMethod};
-                yield return new object[] {33, GetNeverNullKeyMethod};
+                yield return new object[] { 0, GetNeverNullKeyMethod };
+                yield return new object[] { 33, GetNeverNullKeyMethod };
             }
         }
 
@@ -77,18 +71,14 @@ namespace System.Collections.ObjectModel.Tests
         {
             get
             {
-                yield return new object[] {0, GetNeverNullKeyMethod};
-                yield return new object[] {33, GetNeverNullKeyMethod};
+                yield return new object[] { 0, GetNeverNullKeyMethod };
+                yield return new object[] { 33, GetNeverNullKeyMethod };
                 if (s_keyNullable)
                 {
-                    yield return
-                        new object[] {0, GetSometimesNullKeyMethod};
-                    yield return
-                        new object[] {33, GetSometimesNullKeyMethod};
-                    yield return
-                        new object[] {0, GetAlwaysNullKeyMethod};
-                    yield return
-                        new object[] {33, GetAlwaysNullKeyMethod};
+                    yield return new object[] { 0, GetSometimesNullKeyMethod };
+                    yield return new object[] { 33, GetSometimesNullKeyMethod };
+                    yield return new object[] { 0, GetAlwaysNullKeyMethod };
+                    yield return new object[] { 33, GetAlwaysNullKeyMethod };
                 }
             }
         }
@@ -97,94 +87,70 @@ namespace System.Collections.ObjectModel.Tests
         {
             get
             {
-                yield return
-                    new object[]
-                    {
-                        32,
-                        new Named
-                            <
-                                AddItemsFunc
-                                    <TKey, IKeyedItem<TKey, TValue>>>(
-                            "Add<T>",
-                            Helper.AddItems)
-                    };
-                yield return
-                    new object[]
-                    {
-                        -1,
-                        new Named
-                            <
-                                AddItemsFunc
-                                    <TKey, IKeyedItem<TKey, TValue>>>(
-                            "Add<T>",
-                            Helper.AddItems)
-                    };
-                yield return
-                    new object[]
-                    {
-                        32,
-                        new Named
-                            <
-                                AddItemsFunc
-                                    <TKey, IKeyedItem<TKey, TValue>>>(
-                            "Insert<T>",
-                            Helper.InsertItems)
-                    };
-                yield return
-                    new object[]
-                    {
-                        -1,
-                        new Named
-                            <
-                                AddItemsFunc
-                                    <TKey, IKeyedItem<TKey, TValue>>>(
-                            "Insert<T>",
-                            Helper.InsertItems)
-                    };
-                yield return
-                    new object[]
-                    {
-                        32,
-                        new Named
-                            <
-                                AddItemsFunc
-                                    <TKey, IKeyedItem<TKey, TValue>>>(
-                            "Add",
-                            Helper.AddItemsObject)
-                    };
-                yield return
-                    new object[]
-                    {
-                        -1,
-                        new Named
-                            <
-                                AddItemsFunc
-                                    <TKey, IKeyedItem<TKey, TValue>>>(
-                            "Add",
-                            Helper.AddItemsObject)
-                    };
-                yield return
-                    new object[]
-                    {
-                        32,
-                        new Named
-                            <
-                                AddItemsFunc
-                                    <TKey, IKeyedItem<TKey, TValue>>>(
-                            "Add",
-                            Helper.InsertItemsObject)
-                    };
-                yield return
-                    new object[]
-                    {
-                        -1,
-                        new Named
-                            <
-                                AddItemsFunc
-                                    <TKey, IKeyedItem<TKey, TValue>>>(
-                            "Add",
-                            Helper.InsertItemsObject)
-                    };
+                yield return new object[]
+                {
+                    32,
+                    new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
+                        "Add<T>",
+                        Helper.AddItems
+                    ),
+                };
+                yield return new object[]
+                {
+                    -1,
+                    new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
+                        "Add<T>",
+                        Helper.AddItems
+                    ),
+                };
+                yield return new object[]
+                {
+                    32,
+                    new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
+                        "Insert<T>",
+                        Helper.InsertItems
+                    ),
+                };
+                yield return new object[]
+                {
+                    -1,
+                    new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
+                        "Insert<T>",
+                        Helper.InsertItems
+                    ),
+                };
+                yield return new object[]
+                {
+                    32,
+                    new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
+                        "Add",
+                        Helper.AddItemsObject
+                    ),
+                };
+                yield return new object[]
+                {
+                    -1,
+                    new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
+                        "Add",
+                        Helper.AddItemsObject
+                    ),
+                };
+                yield return new object[]
+                {
+                    32,
+                    new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
+                        "Add",
+                        Helper.InsertItemsObject
+                    ),
+                };
+                yield return new object[]
+                {
+                    -1,
+                    new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
+                        "Add",
+                        Helper.InsertItemsObject
+                    ),
+                };
             }
         }
 
@@ -194,31 +160,26 @@ namespace System.Collections.ObjectModel.Tests
             {
                 var sizes = new[]
                 {
-                    new object[] {0},
-                    new object[] {1},
-                    new object[] {16},
-                    new object[] {33}
+                    new object[] { 0 },
+                    new object[] { 1 },
+                    new object[] { 16 },
+                    new object[] { 33 },
                 };
                 object[][] generatorMethods;
                 if (s_keyNullable)
                 {
                     generatorMethods = new[]
                     {
-                        new object[] {GetNeverNullKeyMethod},
-                        new object[] {GetSometimesNullKeyMethod},
-                        new object[] {GetAlwaysNullKeyMethod}
+                        new object[] { GetNeverNullKeyMethod },
+                        new object[] { GetSometimesNullKeyMethod },
+                        new object[] { GetAlwaysNullKeyMethod },
                     };
                 }
                 else
                 {
-                    generatorMethods = new[]
-                    {
-                        new object[] {GetNeverNullKeyMethod}
-                    };
+                    generatorMethods = new[] { new object[] { GetNeverNullKeyMethod } };
                 }
-                return from size in sizes
-                       from method in generatorMethods
-                       select size.Push(method);
+                return from size in sizes from method in generatorMethods select size.Push(method);
             }
         }
 
@@ -226,28 +187,28 @@ namespace System.Collections.ObjectModel.Tests
         {
             get
             {
-                yield return new object[] {10, 0, 0, 0, 0};
-                yield return new object[] {0, 10, 0, 0, 0};
-                yield return new object[] {10, 0, 5, 0, 0};
-                yield return new object[] {0, 10, 5, 0, 0};
-                yield return new object[] {10, 10, 10, 0, 0};
-                yield return new object[] {10, 0, 0, 5, 0};
-                yield return new object[] {0, 10, 0, 5, 0};
-                yield return new object[] {10, 10, 0, 10, 0};
-                yield return new object[] {10, 0, 3, 3, 0};
-                yield return new object[] {0, 10, 3, 3, 0};
-                yield return new object[] {10, 10, 5, 5, 0};
-                yield return new object[] {10, 0, 0, 0, 32};
-                yield return new object[] {0, 10, 0, 0, 32};
-                yield return new object[] {10, 0, 5, 0, 32};
-                yield return new object[] {0, 10, 5, 0, 32};
-                yield return new object[] {10, 10, 10, 0, 32};
-                yield return new object[] {10, 0, 0, 5, 32};
-                yield return new object[] {0, 10, 0, 5, 32};
-                yield return new object[] {10, 10, 0, 10, 32};
-                yield return new object[] {10, 0, 3, 3, 32};
-                yield return new object[] {0, 10, 3, 3, 32};
-                yield return new object[] {10, 10, 5, 5, 32};
+                yield return new object[] { 10, 0, 0, 0, 0 };
+                yield return new object[] { 0, 10, 0, 0, 0 };
+                yield return new object[] { 10, 0, 5, 0, 0 };
+                yield return new object[] { 0, 10, 5, 0, 0 };
+                yield return new object[] { 10, 10, 10, 0, 0 };
+                yield return new object[] { 10, 0, 0, 5, 0 };
+                yield return new object[] { 0, 10, 0, 5, 0 };
+                yield return new object[] { 10, 10, 0, 10, 0 };
+                yield return new object[] { 10, 0, 3, 3, 0 };
+                yield return new object[] { 0, 10, 3, 3, 0 };
+                yield return new object[] { 10, 10, 5, 5, 0 };
+                yield return new object[] { 10, 0, 0, 0, 32 };
+                yield return new object[] { 0, 10, 0, 0, 32 };
+                yield return new object[] { 10, 0, 5, 0, 32 };
+                yield return new object[] { 0, 10, 5, 0, 32 };
+                yield return new object[] { 10, 10, 10, 0, 32 };
+                yield return new object[] { 10, 0, 0, 5, 32 };
+                yield return new object[] { 0, 10, 0, 5, 32 };
+                yield return new object[] { 10, 10, 0, 10, 32 };
+                yield return new object[] { 10, 0, 3, 3, 32 };
+                yield return new object[] { 0, 10, 3, 3, 32 };
+                yield return new object[] { 10, 10, 5, 5, 32 };
             }
         }
 
@@ -261,42 +222,39 @@ namespace System.Collections.ObjectModel.Tests
 
         private static IKeyedItem<TKey, TValue> GetNeverNullKey(
             Func<TValue> getValue,
-            Func<TValue, TKey> getKeyForItem)
+            Func<TValue, TKey> getKeyForItem
+        )
         {
             TValue item = getValue();
-            return new KeyedItem<TKey, TValue>(
-                getKeyForItem(item),
-                item);
+            return new KeyedItem<TKey, TValue>(getKeyForItem(item), item);
         }
 
         private static IKeyedItem<TKey, TValue> GetSometimesNullKey(
             Func<TValue> getValue,
-            Func<TValue, TKey> getKeyForItem)
+            Func<TValue, TKey> getKeyForItem
+        )
         {
             TValue item = getValue();
-            return
-                new KeyedItem<TKey, TValue>(
-                    (s_sometimesNullIndex++ & 1) == 0
-                        ? default(TKey)
-                        : getKeyForItem(item),
-                    item);
+            return new KeyedItem<TKey, TValue>(
+                (s_sometimesNullIndex++ & 1) == 0 ? default(TKey) : getKeyForItem(item),
+                item
+            );
         }
 
         private static IKeyedItem<TKey, TValue> GetAlwaysNullKey(
             Func<TValue> getValue,
-            Func<TValue, TKey> getKeyForItem)
+            Func<TValue, TKey> getKeyForItem
+        )
         {
-            return new KeyedItem<TKey, TValue>(
-                default(TKey),
-                getValue());
+            return new KeyedItem<TKey, TValue>(default(TKey), getValue());
         }
 
         [Theory]
         [MemberData(nameof(ClassData))]
         public void AddNullKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TValue item1 = GenerateValue();
             TValue item3 = GenerateValue();
@@ -304,24 +262,20 @@ namespace System.Collections.ObjectModel.Tests
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
 
             // Verify Adding a value where the key is null
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
 
-            var tmpKeyedItem = new KeyedItem<TKey, TValue>(
-                default(TKey),
-                item3);
+            var tmpKeyedItem = new KeyedItem<TKey, TValue>(default(TKey), item3);
             keys = keys.Push(key1);
             items = items.Push(keyedItem1, tmpKeyedItem);
             itemsWithKeys = itemsWithKeys.Push(keyedItem1);
@@ -336,8 +290,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void AddExistingKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TValue item1 = GenerateValue();
             TValue item3 = GenerateValue();
@@ -345,20 +299,18 @@ namespace System.Collections.ObjectModel.Tests
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
 
             //[] Verify setting a value where the key already exists in the collection
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
 
             var tmpKeyedItem = new KeyedItem<TKey, TValue>(key1, item3);
             keys = keys.Push(key1);
@@ -367,8 +319,17 @@ namespace System.Collections.ObjectModel.Tests
 
             collection.Add(keyedItem1);
 
-            string expectedParamName = collectionSize < 32 || generateKeyedItem.Name != KeyedCollectionTests<TKey, TValue>.GetNeverNullKeyMethod.Name ? "key" : null;
-            AssertExtensions.Throws<ArgumentException>(expectedParamName, null, () => collection.Add(tmpKeyedItem));
+            string expectedParamName =
+                collectionSize < 32
+                || generateKeyedItem.Name
+                    != KeyedCollectionTests<TKey, TValue>.GetNeverNullKeyMethod.Name
+                    ? "key"
+                    : null;
+            AssertExtensions.Throws<ArgumentException>(
+                expectedParamName,
+                null,
+                () => collection.Add(tmpKeyedItem)
+            );
 
             collection.Verify(keys, items, itemsWithKeys);
         }
@@ -377,8 +338,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void AddUniqueKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TValue item1 = GenerateValue();
             TValue item3 = GenerateValue();
@@ -387,20 +348,18 @@ namespace System.Collections.ObjectModel.Tests
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
 
             //[] Verify setting a value where the key is unique
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
 
             var tmpKeyedItem = new KeyedItem<TKey, TValue>(key3, item3);
             keys = keys.Push(key1, key3);
@@ -417,31 +376,27 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void NonGenericAddNullKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TValue item1 = GenerateValue();
             TValue item3 = GenerateValue();
             TKey key1 = GetKeyForItem(item1);
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             IList nonGenericCollection = collection;
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
-            var tmpKeyedItem = new KeyedItem<TKey, TValue>(
-                default(TKey),
-                item3);
+                out itemsWithKeys
+            );
+            var tmpKeyedItem = new KeyedItem<TKey, TValue>(default(TKey), item3);
             keys = keys.Push(key1);
             items = items.Push(keyedItem1, tmpKeyedItem);
             itemsWithKeys = itemsWithKeys.Push(keyedItem1);
@@ -456,28 +411,26 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void NonGenericAddExistingKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TValue item1 = GenerateValue();
             TValue item3 = GenerateValue();
             TKey key1 = GetKeyForItem(item1);
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             IList nonGenericCollection = collection;
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
             var tmpKeyedItem = new KeyedItem<TKey, TValue>(key1, item3);
             keys = keys.Push(key1);
             items = items.Push(keyedItem1);
@@ -485,8 +438,17 @@ namespace System.Collections.ObjectModel.Tests
 
             collection.Add(keyedItem1);
 
-            string expectedParamName = collectionSize < 32 || generateKeyedItem.Name != KeyedCollectionTests<TKey, TValue>.GetNeverNullKeyMethod.Name ? "key" : null;
-            AssertExtensions.Throws<ArgumentException>(expectedParamName, null, () => nonGenericCollection.Add(tmpKeyedItem));
+            string expectedParamName =
+                collectionSize < 32
+                || generateKeyedItem.Name
+                    != KeyedCollectionTests<TKey, TValue>.GetNeverNullKeyMethod.Name
+                    ? "key"
+                    : null;
+            AssertExtensions.Throws<ArgumentException>(
+                expectedParamName,
+                null,
+                () => nonGenericCollection.Add(tmpKeyedItem)
+            );
             collection.Verify(keys, items, itemsWithKeys);
         }
 
@@ -494,29 +456,27 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void NonGenericAddUniqueKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TValue item1 = GenerateValue();
             TValue item3 = GenerateValue();
             TKey key1 = GetKeyForItem(item1);
             TKey key3 = GetKeyForItem(item3);
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             IList nonGenericCollection = collection;
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
             var tmpKeyedItem = new KeyedItem<TKey, TValue>(key3, item3);
             keys = keys.Push(key1, key3);
             items = items.Push(keyedItem1, tmpKeyedItem);
@@ -531,8 +491,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void ChangeItemKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
@@ -545,27 +505,24 @@ namespace System.Collections.ObjectModel.Tests
             TKey key3 = GetKeyForItem(item3);
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
             var keyedItem2 = new KeyedItem<TKey, TValue>(key2, item2);
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
             collection.Add(keyedItem1);
             collection.Add(keyedItem2);
             keys = keys.Push(key1, key2);
             items = items.Push(keyedItem1, keyedItem2);
-            itemsWithKeys =
-                itemsWithKeys.Push(
-                    new[] {keyedItem1, keyedItem2}.Where(
-                        ki => ki.Key != null)
-                                                  .ToArray
-                        <IKeyedItem<TKey, TValue>>());
+            itemsWithKeys = itemsWithKeys.Push(
+                new[] { keyedItem1, keyedItem2 }
+                    .Where(ki => ki.Key != null)
+                    .ToArray<IKeyedItem<TKey, TValue>>()
+            );
 
             collection.MyChangeItemKey(keyedItem2, key3);
             keyedItem2.Key = key3;
@@ -577,8 +534,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void ChangeItemKeyThrowsPreexistingKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
@@ -589,30 +546,36 @@ namespace System.Collections.ObjectModel.Tests
             TKey key2 = GetKeyForItem(item2);
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
             var keyedItem2 = new KeyedItem<TKey, TValue>(key2, item2);
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
             collection.Add(keyedItem1);
             collection.Add(keyedItem2);
             keys = keys.Push(key1, key2);
             items = items.Push(keyedItem1, keyedItem2);
-            itemsWithKeys =
-                itemsWithKeys.Push(
-                    new[] {keyedItem1, keyedItem2}.Where(
-                        ki => ki.Key != null)
-                                                  .ToArray
-                        <IKeyedItem<TKey, TValue>>());
+            itemsWithKeys = itemsWithKeys.Push(
+                new[] { keyedItem1, keyedItem2 }
+                    .Where(ki => ki.Key != null)
+                    .ToArray<IKeyedItem<TKey, TValue>>()
+            );
 
-            string expectedParamName = collectionSize < 32 || generateKeyedItem.Name != KeyedCollectionTests<TKey, TValue>.GetNeverNullKeyMethod.Name ? "key" : null;
-            AssertExtensions.Throws<ArgumentException>(expectedParamName, null, () => collection.MyChangeItemKey(keyedItem2, key1));
+            string expectedParamName =
+                collectionSize < 32
+                || generateKeyedItem.Name
+                    != KeyedCollectionTests<TKey, TValue>.GetNeverNullKeyMethod.Name
+                    ? "key"
+                    : null;
+            AssertExtensions.Throws<ArgumentException>(
+                expectedParamName,
+                null,
+                () => collection.MyChangeItemKey(keyedItem2, key1)
+            );
             collection.Verify(keys, items, itemsWithKeys);
         }
 
@@ -620,8 +583,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void ChangeItemKeySameKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
@@ -632,27 +595,24 @@ namespace System.Collections.ObjectModel.Tests
             TKey key2 = GetKeyForItem(item2);
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
             var keyedItem2 = new KeyedItem<TKey, TValue>(key2, item2);
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
             collection.Add(keyedItem1);
             collection.Add(keyedItem2);
             keys = keys.Push(key1, key2);
             items = items.Push(keyedItem1, keyedItem2);
-            itemsWithKeys =
-                itemsWithKeys.Push(
-                    new[] {keyedItem1, keyedItem2}.Where(
-                        ki => ki.Key != null)
-                                                  .ToArray
-                        <IKeyedItem<TKey, TValue>>());
+            itemsWithKeys = itemsWithKeys.Push(
+                new[] { keyedItem1, keyedItem2 }
+                    .Where(ki => ki.Key != null)
+                    .ToArray<IKeyedItem<TKey, TValue>>()
+            );
 
             collection.MyChangeItemKey(keyedItem2, key2);
 
@@ -663,8 +623,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void ChangeItemDoesNotExistThrows(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
@@ -678,31 +638,40 @@ namespace System.Collections.ObjectModel.Tests
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
             var keyedItem2 = new KeyedItem<TKey, TValue>(key2, item2);
             var keyedItem3 = new KeyedItem<TKey, TValue>(key3, item3);
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
             collection.Add(keyedItem1);
             collection.Add(keyedItem2);
             keys = keys.Push(key1, key2);
             items = items.Push(keyedItem1, keyedItem2);
-            itemsWithKeys =
-                itemsWithKeys.Push(
-                    new[] {keyedItem1, keyedItem2}.Where(
-                        ki => ki.Key != null)
-                                                  .ToArray
-                        <IKeyedItem<TKey, TValue>>());
-            AssertExtensions.Throws<ArgumentException>("item", null, () => collection.MyChangeItemKey(keyedItem3, key3));
-            AssertExtensions.Throws<ArgumentException>("item", null, () => collection.MyChangeItemKey(keyedItem3, key2));
+            itemsWithKeys = itemsWithKeys.Push(
+                new[] { keyedItem1, keyedItem2 }
+                    .Where(ki => ki.Key != null)
+                    .ToArray<IKeyedItem<TKey, TValue>>()
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "item",
+                null,
+                () => collection.MyChangeItemKey(keyedItem3, key3)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "item",
+                null,
+                () => collection.MyChangeItemKey(keyedItem3, key2)
+            );
             var tempKeyedItem = new KeyedItem<TKey, TValue>(key1, item2);
-            AssertExtensions.Throws<ArgumentException>("item", null, () => collection.MyChangeItemKey(tempKeyedItem, key2));
+            AssertExtensions.Throws<ArgumentException>(
+                "item",
+                null,
+                () => collection.MyChangeItemKey(tempKeyedItem, key2)
+            );
             collection.Verify(keys, items, itemsWithKeys);
         }
 
@@ -710,8 +679,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void ChangeItemKeyNullToNull(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             if (default(TKey) == null)
             {
@@ -721,31 +690,26 @@ namespace System.Collections.ObjectModel.Tests
                 TValue item1 = GenerateValue();
                 TValue item2 = GenerateValue();
                 TKey key1 = GetKeyForItem(item1);
-                var keyedItem1 = new KeyedItem<TKey, TValue>(
-                    key1,
-                    item1);
-                var collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+                var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
+                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
                 collection.AddItems(
-                    generateKeyedItem.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
                 collection.Add(keyedItem1);
-                var tempKeyedItem =
-                    new KeyedItem<TKey, TValue>(default(TKey), item2);
+                var tempKeyedItem = new KeyedItem<TKey, TValue>(default(TKey), item2);
                 collection.Add(tempKeyedItem);
                 keys = keys.Push(key1);
                 items = items.Push(keyedItem1, tempKeyedItem);
-                itemsWithKeys =
-                    itemsWithKeys.Push(
-                        new[] {keyedItem1}.Where(ki => ki.Key != null)
-                                          .ToArray
-                            <IKeyedItem<TKey, TValue>>());
+                itemsWithKeys = itemsWithKeys.Push(
+                    new[] { keyedItem1 }
+                        .Where(ki => ki.Key != null)
+                        .ToArray<IKeyedItem<TKey, TValue>>()
+                );
 
                 collection.MyChangeItemKey(tempKeyedItem, default(TKey));
                 collection.Verify(keys, items, itemsWithKeys);
@@ -756,8 +720,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void ChangeItemKeyNullToNonNull(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             if (default(TKey) == null)
             {
@@ -768,32 +732,26 @@ namespace System.Collections.ObjectModel.Tests
                 TValue item2 = GenerateValue();
                 TKey key1 = GetKeyForItem(item1);
                 TKey key2 = GetKeyForItem(item2);
-                var keyedItem1 = new KeyedItem<TKey, TValue>(
-                    key1,
-                    item1);
-                var collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+                var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
+                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
                 collection.AddItems(
-                    generateKeyedItem.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
                 collection.Add(keyedItem1);
-                var tempKeyedItem =
-                    new KeyedItem<TKey, TValue>(default(TKey), item2);
+                var tempKeyedItem = new KeyedItem<TKey, TValue>(default(TKey), item2);
                 collection.Add(tempKeyedItem);
                 keys = keys.Push(key1);
                 items = items.Push(keyedItem1, tempKeyedItem);
-                itemsWithKeys =
-                    itemsWithKeys.Push(
-                        new[] {keyedItem1, tempKeyedItem}.Where(
-                            ki => ki.Key != null)
-                                                         .ToArray
-                            <IKeyedItem<TKey, TValue>>());
+                itemsWithKeys = itemsWithKeys.Push(
+                    new[] { keyedItem1, tempKeyedItem }
+                        .Where(ki => ki.Key != null)
+                        .ToArray<IKeyedItem<TKey, TValue>>()
+                );
 
                 collection.MyChangeItemKey(tempKeyedItem, key2);
                 tempKeyedItem.Key = key2;
@@ -805,8 +763,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void ChangeItemKeyNonNullToNull(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             if (default(TKey) == null)
             {
@@ -817,32 +775,26 @@ namespace System.Collections.ObjectModel.Tests
                 TValue item2 = GenerateValue();
                 TKey key1 = GetKeyForItem(item1);
                 TKey key2 = GetKeyForItem(item2);
-                var keyedItem1 = new KeyedItem<TKey, TValue>(
-                    key1,
-                    item1);
-                var keyedItem2 = new KeyedItem<TKey, TValue>(
-                    key2,
-                    item2);
-                var collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+                var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
+                var keyedItem2 = new KeyedItem<TKey, TValue>(key2, item2);
+                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
                 collection.AddItems(
-                    generateKeyedItem.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
                 collection.Add(keyedItem1);
                 collection.Add(keyedItem2);
                 keys = keys.Push(key1);
                 items = items.Push(keyedItem1, keyedItem2);
-                itemsWithKeys =
-                    itemsWithKeys.Push(
-                        new[] {keyedItem1}.Where(ki => ki.Key != null)
-                                          .ToArray
-                            <IKeyedItem<TKey, TValue>>());
+                itemsWithKeys = itemsWithKeys.Push(
+                    new[] { keyedItem1 }
+                        .Where(ki => ki.Key != null)
+                        .ToArray<IKeyedItem<TKey, TValue>>()
+                );
 
                 collection.MyChangeItemKey(keyedItem2, default(TKey));
                 collection.Verify(keys, items, itemsWithKeys);
@@ -862,21 +814,22 @@ namespace System.Collections.ObjectModel.Tests
                 TValue item2 = GenerateValue();
                 TKey key1 = GetKeyForItem(item1);
                 TKey key2 = GetKeyForItem(item2);
-                var collection =
-                    new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
+                var collection = new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
                 collection.AddItems(
                     GenerateValue,
                     GetKeyForItem,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
                 collection.Add(item1);
-                AssertExtensions.Throws<ArgumentException>("item", null, () => collection.MyChangeItemKey(default(TValue), key2));
-                collection.Verify(
-                    keys.Push(key1),
-                    items.Push(item1),
-                    itemsWithKeys.Push(item1));
+                AssertExtensions.Throws<ArgumentException>(
+                    "item",
+                    null,
+                    () => collection.MyChangeItemKey(default(TValue), key2)
+                );
+                collection.Verify(keys.Push(key1), items.Push(item1), itemsWithKeys.Push(item1));
             }
         }
 
@@ -893,22 +846,23 @@ namespace System.Collections.ObjectModel.Tests
                 TValue item2 = GenerateValue();
                 TKey key1 = GetKeyForItem(item1);
                 TKey key2 = GetKeyForItem(item2);
-                var collection =
-                    new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
+                var collection = new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
                 collection.AddItems(
                     GenerateValue,
                     GetKeyForItem,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
                 collection.Add(item1);
                 collection.Add(default(TValue));
                 collection.MyChangeItemKey(default(TValue), key2);
                 collection.Verify(
                     keys.Push(key1),
                     items.Push(item1, default(TValue)),
-                    itemsWithKeys.Push(item1));
+                    itemsWithKeys.Push(item1)
+                );
             }
         }
 
@@ -922,21 +876,18 @@ namespace System.Collections.ObjectModel.Tests
                 TValue[] items;
                 TValue[] itemsWithKeys;
                 TValue item1 = GenerateValue();
-                var collection =
-                    new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
+                var collection = new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
                 collection.AddItems(
                     GenerateValue,
                     GetKeyForItem,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
                 collection.Add(item1);
                 collection.MyChangeItemKey(item1, default(TKey));
-                collection.Verify(
-                    keys,
-                    items.Push(item1),
-                    itemsWithKeys);
+                collection.Verify(keys, items.Push(item1), itemsWithKeys);
             }
         }
 
@@ -950,29 +901,25 @@ namespace System.Collections.ObjectModel.Tests
                 TValue[] items;
                 TValue[] itemsWithKeys;
                 TValue item1 = GenerateValue();
-                var collection =
-                    new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
+                var collection = new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
                 collection.AddItems(
                     GenerateValue,
                     GetKeyForItem,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
                 collection.Add(item1);
                 collection.Add(default(TValue));
                 collection.MyChangeItemKey(item1, default(TKey));
-                collection.Verify(
-                    keys,
-                    items.Push(item1, default(TValue)),
-                    itemsWithKeys);
+                collection.Verify(keys, items.Push(item1, default(TValue)), itemsWithKeys);
             }
         }
 
         [Theory]
         [MemberData(nameof(CollectionSizes))]
-        public void ChangeItemKeyNullItemNullKeyPresent(
-            int collectionSize)
+        public void ChangeItemKeyNullItemNullKeyPresent(int collectionSize)
         {
             if (default(TKey) == null)
             {
@@ -980,24 +927,19 @@ namespace System.Collections.ObjectModel.Tests
                 TValue[] items;
                 TValue[] itemsWithKeys;
                 TValue item1 = GenerateValue();
-                var collection =
-                    new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
+                var collection = new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
                 collection.AddItems(
                     GenerateValue,
                     GetKeyForItem,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
                 collection.Add(item1);
                 collection.Add(default(TValue));
-                collection.MyChangeItemKey(
-                    default(TValue),
-                    default(TKey));
-                collection.Verify(
-                    keys,
-                    items.Push(item1, default(TValue)),
-                    itemsWithKeys);
+                collection.MyChangeItemKey(default(TValue), default(TKey));
+                collection.Verify(keys, items.Push(item1, default(TValue)), itemsWithKeys);
             }
         }
 
@@ -1005,8 +947,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData2))]
         public void ChangeItemKeyKeyAlreadyChanged(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
@@ -1019,17 +961,15 @@ namespace System.Collections.ObjectModel.Tests
             TKey key3 = GetKeyForItem(item3);
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
             var keyedItem2 = new KeyedItem<TKey, TValue>(key2, item2);
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
 
             collection.Add(keyedItem1);
             collection.Add(keyedItem2);
@@ -1039,7 +979,11 @@ namespace System.Collections.ObjectModel.Tests
             keyedItem2.Key = key3;
             if (collectionSize >= 32)
             {
-                AssertExtensions.Throws<ArgumentException>("item", null, () => collection.MyChangeItemKey(keyedItem2, key3));
+                AssertExtensions.Throws<ArgumentException>(
+                    "item",
+                    null,
+                    () => collection.MyChangeItemKey(keyedItem2, key3)
+                );
             }
             else
             {
@@ -1052,8 +996,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData2))]
         public void ChangeItemKeyKeyAlreadyChangedNewKeyIsOldKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
@@ -1066,17 +1010,15 @@ namespace System.Collections.ObjectModel.Tests
             TKey key3 = GetKeyForItem(item3);
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
             var keyedItem2 = new KeyedItem<TKey, TValue>(key2, item2);
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
 
             collection.Add(keyedItem1);
             collection.Add(keyedItem2);
@@ -1086,7 +1028,11 @@ namespace System.Collections.ObjectModel.Tests
             keyedItem2.Key = key3;
             if (collectionSize >= 32)
             {
-                AssertExtensions.Throws<ArgumentException>("item", null, () => collection.MyChangeItemKey(keyedItem2, key2));
+                AssertExtensions.Throws<ArgumentException>(
+                    "item",
+                    null,
+                    () => collection.MyChangeItemKey(keyedItem2, key2)
+                );
             }
             else
             {
@@ -1099,8 +1045,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData2))]
         public void ChangeItemKeyKeyAlreadyChangedNewKeyIsDifferent(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
@@ -1115,17 +1061,15 @@ namespace System.Collections.ObjectModel.Tests
             TKey key4 = GetKeyForItem(item4);
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
             var keyedItem2 = new KeyedItem<TKey, TValue>(key2, item2);
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
 
             collection.Add(keyedItem1);
             collection.Add(keyedItem2);
@@ -1135,7 +1079,11 @@ namespace System.Collections.ObjectModel.Tests
             keyedItem2.Key = key3;
             if (collectionSize >= 32)
             {
-                AssertExtensions.Throws<ArgumentException>("item", null, () => collection.MyChangeItemKey(keyedItem2, key4));
+                AssertExtensions.Throws<ArgumentException>(
+                    "item",
+                    null,
+                    () => collection.MyChangeItemKey(keyedItem2, key4)
+                );
             }
             else
             {
@@ -1148,8 +1096,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData2))]
         public void ChangeItemKeyNullToNewKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             if (default(TKey) == null)
             {
@@ -1161,24 +1109,19 @@ namespace System.Collections.ObjectModel.Tests
                 TValue item3 = GenerateValue();
                 TKey key1 = GetKeyForItem(item1);
                 TKey key3 = GetKeyForItem(item3);
-                var keyedItem1 = new KeyedItem<TKey, TValue>(
-                    key1,
-                    item1);
-                var collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+                var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
+                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
                 collection.AddItems(
-                    generateKeyedItem.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
 
                 collection.Add(keyedItem1);
-                var tempKeyedItem =
-                    new KeyedItem<TKey, TValue>(default(TKey), item2);
+                var tempKeyedItem = new KeyedItem<TKey, TValue>(default(TKey), item2);
                 collection.Add(tempKeyedItem);
                 keys = keys.Push(key1);
                 if (collectionSize < 32)
@@ -1194,7 +1137,11 @@ namespace System.Collections.ObjectModel.Tests
                 tempKeyedItem.Key = key3;
                 if (collectionSize >= 32)
                 {
-                    AssertExtensions.Throws<ArgumentException>("item", null, () => collection.MyChangeItemKey(tempKeyedItem, key3));
+                    AssertExtensions.Throws<ArgumentException>(
+                        "item",
+                        null,
+                        () => collection.MyChangeItemKey(tempKeyedItem, key3)
+                    );
                 }
                 else
                 {
@@ -1208,8 +1155,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData2))]
         public void ChangeItemKeyNullToOldKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             if (default(TKey) == null)
             {
@@ -1221,24 +1168,19 @@ namespace System.Collections.ObjectModel.Tests
                 TValue item3 = GenerateValue();
                 TKey key1 = GetKeyForItem(item1);
                 TKey key3 = GetKeyForItem(item3);
-                var keyedItem1 = new KeyedItem<TKey, TValue>(
-                    key1,
-                    item1);
-                var collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+                var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
+                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
                 collection.AddItems(
-                    generateKeyedItem.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
 
                 collection.Add(keyedItem1);
-                var tempKeyedItem =
-                    new KeyedItem<TKey, TValue>(default(TKey), item2);
+                var tempKeyedItem = new KeyedItem<TKey, TValue>(default(TKey), item2);
                 collection.Add(tempKeyedItem);
                 keys = keys.Push(key1);
                 if (collectionSize < 32)
@@ -1254,13 +1196,15 @@ namespace System.Collections.ObjectModel.Tests
                 tempKeyedItem.Key = key3;
                 if (collectionSize >= 32)
                 {
-                    AssertExtensions.Throws<ArgumentException>("item", null, () => collection.MyChangeItemKey(tempKeyedItem, default(TKey)));
+                    AssertExtensions.Throws<ArgumentException>(
+                        "item",
+                        null,
+                        () => collection.MyChangeItemKey(tempKeyedItem, default(TKey))
+                    );
                 }
                 else
                 {
-                    collection.MyChangeItemKey(
-                        tempKeyedItem,
-                        default(TKey));
+                    collection.MyChangeItemKey(tempKeyedItem, default(TKey));
                 }
                 collection.Verify(keys, items, itemsWithKeys);
             }
@@ -1270,8 +1214,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData2))]
         public void ChangeItemKeyNullToOtherKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             if (default(TKey) == null)
             {
@@ -1285,24 +1229,19 @@ namespace System.Collections.ObjectModel.Tests
                 TKey key1 = GetKeyForItem(item1);
                 TKey key3 = GetKeyForItem(item3);
                 TKey key4 = GetKeyForItem(item4);
-                var keyedItem1 = new KeyedItem<TKey, TValue>(
-                    key1,
-                    item1);
-                var collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+                var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
+                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
                 collection.AddItems(
-                    generateKeyedItem.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
 
                 collection.Add(keyedItem1);
-                var tempKeyedItem =
-                    new KeyedItem<TKey, TValue>(default(TKey), item2);
+                var tempKeyedItem = new KeyedItem<TKey, TValue>(default(TKey), item2);
                 collection.Add(tempKeyedItem);
                 keys = keys.Push(key1);
                 if (collectionSize < 32)
@@ -1318,7 +1257,11 @@ namespace System.Collections.ObjectModel.Tests
                 tempKeyedItem.Key = key3;
                 if (collectionSize >= 32)
                 {
-                    AssertExtensions.Throws<ArgumentException>("item", null, () => collection.MyChangeItemKey(tempKeyedItem, key4));
+                    AssertExtensions.Throws<ArgumentException>(
+                        "item",
+                        null,
+                        () => collection.MyChangeItemKey(tempKeyedItem, key4)
+                    );
                 }
                 else
                 {
@@ -1332,8 +1275,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData2))]
         public void ChangeItemKeySetKeyNonNullToNull(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             if (default(TKey) == null)
             {
@@ -1344,23 +1287,17 @@ namespace System.Collections.ObjectModel.Tests
                 TValue item2 = GenerateValue();
                 TKey key1 = GetKeyForItem(item1);
                 TKey key2 = GetKeyForItem(item2);
-                var keyedItem1 = new KeyedItem<TKey, TValue>(
-                    key1,
-                    item1);
-                var keyedItem2 = new KeyedItem<TKey, TValue>(
-                    key2,
-                    item2);
-                var collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+                var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
+                var keyedItem2 = new KeyedItem<TKey, TValue>(key2, item2);
+                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
                 collection.AddItems(
-                    generateKeyedItem.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
 
                 collection.Add(keyedItem1);
                 collection.Add(keyedItem2);
@@ -1377,8 +1314,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData2))]
         public void ChangeItemKeySetKeyNonNullToNullChangeKeyNonNull(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             if (default(TKey) == null)
             {
@@ -1389,23 +1326,17 @@ namespace System.Collections.ObjectModel.Tests
                 TValue item2 = GenerateValue();
                 TKey key1 = GetKeyForItem(item1);
                 TKey key2 = GetKeyForItem(item2);
-                var keyedItem1 = new KeyedItem<TKey, TValue>(
-                    key1,
-                    item1);
-                var keyedItem2 = new KeyedItem<TKey, TValue>(
-                    key2,
-                    item2);
-                var collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+                var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
+                var keyedItem2 = new KeyedItem<TKey, TValue>(key2, item2);
+                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
                 collection.AddItems(
-                    generateKeyedItem.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
 
                 collection.Add(keyedItem1);
                 collection.Add(keyedItem2);
@@ -1415,7 +1346,10 @@ namespace System.Collections.ObjectModel.Tests
                 keyedItem2.Key = default(TKey);
                 if (collectionSize >= 32)
                 {
-                    AssertExtensions.Throws<ArgumentException>(null, () => collection.MyChangeItemKey(keyedItem2, key2));
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () => collection.MyChangeItemKey(keyedItem2, key2)
+                    );
                 }
                 else
                 {
@@ -1427,11 +1361,10 @@ namespace System.Collections.ObjectModel.Tests
 
         [Theory]
         [MemberData(nameof(ClassData2))]
-        public void
-            ChangeItemKeySetKeyNonNullToNullChangeKeySomethingElse(
+        public void ChangeItemKeySetKeyNonNullToNullChangeKeySomethingElse(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             if (default(TKey) == null)
             {
@@ -1444,23 +1377,17 @@ namespace System.Collections.ObjectModel.Tests
                 TKey key1 = GetKeyForItem(item1);
                 TKey key2 = GetKeyForItem(item2);
                 TKey key4 = GetKeyForItem(item4);
-                var keyedItem1 = new KeyedItem<TKey, TValue>(
-                    key1,
-                    item1);
-                var keyedItem2 = new KeyedItem<TKey, TValue>(
-                    key2,
-                    item2);
-                var collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+                var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
+                var keyedItem2 = new KeyedItem<TKey, TValue>(key2, item2);
+                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
                 collection.AddItems(
-                    generateKeyedItem.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     collectionSize,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
 
                 collection.Add(keyedItem1);
                 collection.Add(keyedItem2);
@@ -1470,7 +1397,11 @@ namespace System.Collections.ObjectModel.Tests
                 keyedItem2.Key = default(TKey);
                 if (collectionSize >= 32 && keyedItem2.Key != null)
                 {
-                    AssertExtensions.Throws<ArgumentException>("item", null, () => collection.MyChangeItemKey(keyedItem2, key4));
+                    AssertExtensions.Throws<ArgumentException>(
+                        "item",
+                        null,
+                        () => collection.MyChangeItemKey(keyedItem2, key4)
+                    );
                 }
                 else
                 {
@@ -1490,23 +1421,22 @@ namespace System.Collections.ObjectModel.Tests
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             collection.AddItems(
-                GetNeverNullKeyMethod.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                GetNeverNullKeyMethod.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
             bool haveDict = collection.GetDictionary() != null;
             collection.Clear();
             collection.Verify(
                 new TKey[0],
                 new IKeyedItem<TKey, TValue>[0],
-                new IKeyedItem<TKey, TValue>[0]);
+                new IKeyedItem<TKey, TValue>[0]
+            );
             Assert.Equal(haveDict, collection.GetDictionary() != null);
         }
 
@@ -1514,26 +1444,27 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void Contains(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
             if (s_keyNullable)
             {
-                AssertExtensions.Throws<ArgumentNullException>("key", () => collection.Contains(default(TKey)));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "key",
+                    () => collection.Contains(default(TKey))
+                );
             }
             else
             {
@@ -1544,7 +1475,8 @@ namespace System.Collections.ObjectModel.Tests
         private void VerifyDictionary(
             KeyedCollection<TKey, IKeyedItem<TKey, TValue>> dictionary,
             TKey[] expectedKeys,
-            IKeyedItem<TKey, TValue>[] expectedItems)
+            IKeyedItem<TKey, TValue>[] expectedItems
+        )
         {
             if (dictionary == null)
             {
@@ -1553,15 +1485,14 @@ namespace System.Collections.ObjectModel.Tests
             if (expectedKeys.Length != expectedItems.Length)
             {
                 throw new ArgumentException(
-                    "Expected keys length and expected items length must be the same.");
+                    "Expected keys length and expected items length must be the same."
+                );
             }
             Assert.Equal(expectedItems.Length, dictionary.Count);
 
             for (var i = 0; i < expectedKeys.Length; ++i)
             {
-                Assert.Equal(
-                    expectedItems[i],
-                    dictionary[expectedKeys[i]]);
+                Assert.Equal(expectedItems[i], dictionary[expectedKeys[i]]);
             }
         }
 
@@ -1569,76 +1500,73 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ThresholdData))]
         public void Threshold(
             int collectionDictionaryThreshold,
-            Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>> addItems)
+            Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>> addItems
+        )
         {
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
             if (collectionDictionaryThreshold >= 0)
             {
-                var collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
-                        collectionDictionaryThreshold);
+                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
+                    collectionDictionaryThreshold
+                );
                 // dictionary is created when the threshold is exceeded
                 addItems.Value(
                     collection,
-                    GetNeverNullKeyMethod.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    GetNeverNullKeyMethod.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     collectionDictionaryThreshold,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
                 Assert.Null(collection.GetDictionary());
 
-                collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
-                        collectionDictionaryThreshold);
+                collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
+                    collectionDictionaryThreshold
+                );
                 addItems.Value(
                     collection,
-                    GetNeverNullKeyMethod.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    GetNeverNullKeyMethod.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     collectionDictionaryThreshold + 1,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
                 Assert.NotNull(collection.GetDictionary());
                 VerifyDictionary(collection, keys, itemsWithKeys);
             }
             else
             {
-                var collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
-                        collectionDictionaryThreshold);
+                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
+                    collectionDictionaryThreshold
+                );
                 // dictionary is created when the threshold is exceeded
                 addItems.Value(
                     collection,
-                    GetNeverNullKeyMethod.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    GetNeverNullKeyMethod.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     1024,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
                 Assert.Null(collection.GetDictionary());
 
-                collection =
-                    new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
-                        collectionDictionaryThreshold);
+                collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
+                    collectionDictionaryThreshold
+                );
                 addItems.Value(
                     collection,
-                    GetNeverNullKeyMethod.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    GetNeverNullKeyMethod.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     2048,
                     out keys,
                     out items,
-                    out itemsWithKeys);
+                    out itemsWithKeys
+                );
                 Assert.Null(collection.GetDictionary());
             }
         }
@@ -1647,30 +1575,33 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ContainsKeyData))]
         public void ContainsKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
-            IKeyedItem<TKey, TValue> itemNotIn =
-                generateKeyedItem.Value(GenerateValue, GetKeyForItem);
+                out itemsWithKeys
+            );
+            IKeyedItem<TKey, TValue> itemNotIn = generateKeyedItem.Value(
+                GenerateValue,
+                GetKeyForItem
+            );
             // this is to make overload resolution pick the correct Contains function. replacing keyNotIn with null causes the Contains<TValue> overload to be used. We want the Contains<TKey> version.
             TKey keyNotIn = itemNotIn.Key;
             if (keyNotIn == null)
             {
-                AssertExtensions.Throws<ArgumentNullException>("key", () => collection.Contains(keyNotIn));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "key",
+                    () => collection.Contains(keyNotIn)
+                );
             }
             else
             {
@@ -1681,7 +1612,10 @@ namespace System.Collections.ObjectModel.Tests
                 TKey key = k;
                 if (key == null)
                 {
-                    AssertExtensions.Throws<ArgumentNullException>("key", () => collection.Contains(key));
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        "key",
+                        () => collection.Contains(key)
+                    );
                     continue;
                 }
                 Assert.True(collection.Contains(key));
@@ -1692,65 +1626,63 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ContainsKeyData))]
         public void RemoveKey(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
             collection.Verify(keys, items, itemsWithKeys);
 
-            IKeyedItem<TKey, TValue> itemNotIn =
-                generateKeyedItem.Value(GenerateValue, GetKeyForItem);
+            IKeyedItem<TKey, TValue> itemNotIn = generateKeyedItem.Value(
+                GenerateValue,
+                GetKeyForItem
+            );
             // this is to make overload resolution pick the correct Contains function. replacing keyNotIn with null causes the Contains<TValue> overload to be used. We want the Contains<TKey> version.
             TKey keyNotIn = itemNotIn.Key;
             if (keyNotIn == null)
             {
-                AssertExtensions.Throws<ArgumentNullException>("key", () => collection.Remove(keyNotIn));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "key",
+                    () => collection.Remove(keyNotIn)
+                );
             }
             else
             {
                 Assert.False(collection.Remove(keyNotIn));
             }
             collection.Verify(keys, items, itemsWithKeys);
-            var tempKeys = (TKey[]) keys.Clone();
-            var tempItems = (IKeyedItem<TKey, TValue>[]) items.Clone();
-            var tempItemsWithKeys =
-                (IKeyedItem<TKey, TValue>[]) itemsWithKeys.Clone();
+            var tempKeys = (TKey[])keys.Clone();
+            var tempItems = (IKeyedItem<TKey, TValue>[])items.Clone();
+            var tempItemsWithKeys = (IKeyedItem<TKey, TValue>[])itemsWithKeys.Clone();
 
             for (var i = 0; i < itemsWithKeys.Length; i++)
             {
                 TKey key = keys[i];
                 if (key == null)
                 {
-                    AssertExtensions.Throws<ArgumentNullException>("key", () => collection.Remove(key));
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        "key",
+                        () => collection.Remove(key)
+                    );
                 }
                 else
                 {
                     Assert.True(collection.Remove(key));
-                    tempItems =
-                        tempItems.RemoveAt(
-                            Array.IndexOf(tempItems, itemsWithKeys[i]));
-                    tempItemsWithKeys = itemsWithKeys.Slice(
-                        i + 1,
-                        itemsWithKeys.Length - i - 1);
+                    tempItems = tempItems.RemoveAt(Array.IndexOf(tempItems, itemsWithKeys[i]));
+                    tempItemsWithKeys = itemsWithKeys.Slice(i + 1, itemsWithKeys.Length - i - 1);
                     tempKeys = keys.Slice(i + 1, keys.Length - i - 1);
                 }
-                collection.Verify(
-                    tempKeys,
-                    tempItems,
-                    tempItemsWithKeys);
+                collection.Verify(tempKeys, tempItems, tempItemsWithKeys);
             }
         }
 
@@ -1758,25 +1690,25 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ContainsKeyData))]
         public void KeyIndexer(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
-            IKeyedItem<TKey, TValue> itemNotIn =
-                generateKeyedItem.Value(GenerateValue, GetKeyForItem);
+                out itemsWithKeys
+            );
+            IKeyedItem<TKey, TValue> itemNotIn = generateKeyedItem.Value(
+                GenerateValue,
+                GetKeyForItem
+            );
             // this is to make overload resolution pick the correct Contains function. replacing keyNotIn with null causes the Contains<TValue> overload to be used. We want the Contains<TKey> version.
             TKey keyNotIn = itemNotIn.Key;
             if (keyNotIn == null)
@@ -1785,8 +1717,7 @@ namespace System.Collections.ObjectModel.Tests
             }
             else
             {
-                Assert.Throws<KeyNotFoundException>(
-                    () => collection[keyNotIn]);
+                Assert.Throws<KeyNotFoundException>(() => collection[keyNotIn]);
             }
             foreach (TKey k in keys)
             {
@@ -1807,15 +1738,15 @@ namespace System.Collections.ObjectModel.Tests
             TKey[] keys;
             TValue[] items;
             TValue[] itemsWithKeys;
-            var collection =
-                new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
+            var collection = new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
             collection.AddItems(
                 GenerateValue,
                 GetKeyForItem,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
+                out itemsWithKeys
+            );
             foreach (TValue item in itemsWithKeys)
             {
                 collection[collection.IndexOf(item)] = item;
@@ -1829,11 +1760,12 @@ namespace System.Collections.ObjectModel.Tests
             int insertCount,
             int removeCount,
             int removeKeyCount,
-            int collectionDictionaryThreshold)
+            int collectionDictionaryThreshold
+        )
         {
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
-                    collectionDictionaryThreshold);
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
+                collectionDictionaryThreshold
+            );
             TKey[] tempKeys;
             IKeyedItem<TKey, TValue>[] tempItems;
             IKeyedItem<TKey, TValue>[] tempItemsWithKeys;
@@ -1843,14 +1775,13 @@ namespace System.Collections.ObjectModel.Tests
             if (addCount > 0)
             {
                 collection.AddItems(
-                    GetNeverNullKeyMethod.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    GetNeverNullKeyMethod.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     addCount,
                     out tempKeys,
                     out tempItems,
-                    out tempItemsWithKeys);
+                    out tempItemsWithKeys
+                );
                 keys = keys.Push(tempKeys);
                 itemsWithKeys = itemsWithKeys.Push(tempItemsWithKeys);
                 VerifyDictionary(collection, keys, itemsWithKeys);
@@ -1858,14 +1789,13 @@ namespace System.Collections.ObjectModel.Tests
             if (insertCount > 0)
             {
                 collection.InsertItems(
-                    GetNeverNullKeyMethod.Value.Bind(
-                        GenerateValue,
-                        GetKeyForItem),
+                    GetNeverNullKeyMethod.Value.Bind(GenerateValue, GetKeyForItem),
                     ki => ki.Key,
                     insertCount,
                     out tempKeys,
                     out tempItems,
-                    out tempItemsWithKeys);
+                    out tempItemsWithKeys
+                );
                 keys = keys.Push(tempKeys);
                 itemsWithKeys = itemsWithKeys.Push(tempItemsWithKeys);
                 VerifyDictionary(collection, keys, itemsWithKeys);
@@ -1875,8 +1805,7 @@ namespace System.Collections.ObjectModel.Tests
             {
                 for (var i = 0; i < removeCount; i++)
                 {
-                    int index = (((i*43691 << 2)/7 >> 1)*5039)
-                                %collection.Count;
+                    int index = (((i * 43691 << 2) / 7 >> 1) * 5039) % collection.Count;
                     collection.RemoveAt(index);
                     keys = keys.RemoveAt(index);
                     itemsWithKeys = itemsWithKeys.RemoveAt(index);
@@ -1888,8 +1817,7 @@ namespace System.Collections.ObjectModel.Tests
             {
                 for (var i = 0; i < removeCount; i++)
                 {
-                    int index = (((i*127 << 2)/7 >> 1)*5039)
-                                %collection.Count;
+                    int index = (((i * 127 << 2) / 7 >> 1) * 5039) % collection.Count;
                     IKeyedItem<TKey, TValue> item = collection[index];
                     collection.Remove(item.Key);
                     keys = keys.RemoveAt(index);
@@ -1903,8 +1831,8 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ClassData))]
         public void Insert(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TValue item1 = GenerateValue();
             TValue item3 = GenerateValue();
@@ -1912,44 +1840,44 @@ namespace System.Collections.ObjectModel.Tests
             TKey key3 = GetKeyForItem(item3);
             var keyedItem1 = new KeyedItem<TKey, TValue>(key1, item1);
 
-            var inserts =
-                new Action
-                    <KeyedCollection<TKey, IKeyedItem<TKey, TValue>>,
-                        int, IKeyedItem<TKey, TValue>>[]
-                {
-                    (c, i, item) => c.Insert(i, item),
-                    (c, i, item) => ((IList) c).Insert(i, item)
-                };
+            var inserts = new Action<
+                KeyedCollection<TKey, IKeyedItem<TKey, TValue>>,
+                int,
+                IKeyedItem<TKey, TValue>
+            >[]
+            {
+                (c, i, item) => c.Insert(i, item),
+                (c, i, item) => ((IList)c).Insert(i, item),
+            };
 
             foreach (
-                Action
-                    <KeyedCollection<TKey, IKeyedItem<TKey, TValue>>,
-                        int, IKeyedItem<TKey, TValue>> i in inserts)
+                Action<
+                    KeyedCollection<TKey, IKeyedItem<TKey, TValue>>,
+                    int,
+                    IKeyedItem<TKey, TValue>
+                > i in inserts
+            )
             {
-                Action
-                    <KeyedCollection<TKey, IKeyedItem<TKey, TValue>>,
-                        int, IKeyedItem<TKey, TValue>> insert = i;
+                Action<
+                    KeyedCollection<TKey, IKeyedItem<TKey, TValue>>,
+                    int,
+                    IKeyedItem<TKey, TValue>
+                > insert = i;
                 {
                     // Insert key is null
                     TKey[] keys;
                     IKeyedItem<TKey, TValue>[] items;
                     IKeyedItem<TKey, TValue>[] itemsWithKeys;
-                    var collection =
-                        new TestKeyedCollectionOfIKeyedItem
-                            <TKey, TValue>();
+                    var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
                     collection.AddItems(
-                        generateKeyedItem.Value.Bind(
-                            GenerateValue,
-                            GetKeyForItem),
+                        generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                         ki => ki.Key,
                         collectionSize,
                         out keys,
                         out items,
-                        out itemsWithKeys);
-                    var tempKeyedItem =
-                        new KeyedItem<TKey, TValue>(
-                            default(TKey),
-                            item3);
+                        out itemsWithKeys
+                    );
+                    var tempKeyedItem = new KeyedItem<TKey, TValue>(default(TKey), item3);
                     keys = keys.Push(key1);
                     items = items.Push(keyedItem1, tempKeyedItem);
                     itemsWithKeys = itemsWithKeys.Push(keyedItem1);
@@ -1963,27 +1891,31 @@ namespace System.Collections.ObjectModel.Tests
                     TKey[] keys;
                     IKeyedItem<TKey, TValue>[] items;
                     IKeyedItem<TKey, TValue>[] itemsWithKeys;
-                    var collection =
-                        new TestKeyedCollectionOfIKeyedItem
-                            <TKey, TValue>();
+                    var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
                     collection.AddItems(
-                        generateKeyedItem.Value.Bind(
-                            GenerateValue,
-                            GetKeyForItem),
+                        generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                         ki => ki.Key,
                         collectionSize,
                         out keys,
                         out items,
-                        out itemsWithKeys);
-                    var tempKeyedItem = new KeyedItem<TKey, TValue>(
-                        key1,
-                        item3);
+                        out itemsWithKeys
+                    );
+                    var tempKeyedItem = new KeyedItem<TKey, TValue>(key1, item3);
                     keys = keys.Push(key1);
                     items = items.Push(keyedItem1);
                     itemsWithKeys = itemsWithKeys.Push(keyedItem1);
                     insert(collection, collection.Count, keyedItem1);
-                    string expectedParamName = collectionSize < 32 || generateKeyedItem.Name != KeyedCollectionTests<TKey, TValue>.GetNeverNullKeyMethod.Name ? "key" : null;
-                    AssertExtensions.Throws<ArgumentException>(expectedParamName, null, () => insert(collection, collection.Count, tempKeyedItem));
+                    string expectedParamName =
+                        collectionSize < 32
+                        || generateKeyedItem.Name
+                            != KeyedCollectionTests<TKey, TValue>.GetNeverNullKeyMethod.Name
+                            ? "key"
+                            : null;
+                    AssertExtensions.Throws<ArgumentException>(
+                        expectedParamName,
+                        null,
+                        () => insert(collection, collection.Count, tempKeyedItem)
+                    );
                     collection.Verify(keys, items, itemsWithKeys);
                 }
 
@@ -1992,26 +1924,19 @@ namespace System.Collections.ObjectModel.Tests
                     TKey[] keys;
                     IKeyedItem<TKey, TValue>[] items;
                     IKeyedItem<TKey, TValue>[] itemsWithKeys;
-                    var collection =
-                        new TestKeyedCollectionOfIKeyedItem
-                            <TKey, TValue>();
+                    var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
                     collection.AddItems(
-                        generateKeyedItem.Value.Bind(
-                            GenerateValue,
-                            GetKeyForItem),
+                        generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                         ki => ki.Key,
                         collectionSize,
                         out keys,
                         out items,
-                        out itemsWithKeys);
-                    var tempKeyedItem = new KeyedItem<TKey, TValue>(
-                        key3,
-                        item3);
+                        out itemsWithKeys
+                    );
+                    var tempKeyedItem = new KeyedItem<TKey, TValue>(key3, item3);
                     keys = keys.Push(key1, key3);
                     items = items.Push(keyedItem1, tempKeyedItem);
-                    itemsWithKeys = itemsWithKeys.Push(
-                        keyedItem1,
-                        tempKeyedItem);
+                    itemsWithKeys = itemsWithKeys.Push(keyedItem1, tempKeyedItem);
                     insert(collection, collection.Count, keyedItem1);
                     insert(collection, collection.Count, tempKeyedItem);
                     collection.Verify(keys, items, itemsWithKeys);
@@ -2023,31 +1948,34 @@ namespace System.Collections.ObjectModel.Tests
         [MemberData(nameof(ContainsKeyData))]
         public void TryGetValue(
             int collectionSize,
-            Named<KeyedCollectionGetKeyedValue<TKey, TValue>>
-                generateKeyedItem)
+            Named<KeyedCollectionGetKeyedValue<TKey, TValue>> generateKeyedItem
+        )
         {
             TKey[] keys;
             IKeyedItem<TKey, TValue>[] items;
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
-            var collection =
-                new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
+            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>();
             collection.AddItems(
-                generateKeyedItem.Value.Bind(
-                    GenerateValue,
-                    GetKeyForItem),
+                generateKeyedItem.Value.Bind(GenerateValue, GetKeyForItem),
                 ki => ki.Key,
                 collectionSize,
                 out keys,
                 out items,
-                out itemsWithKeys);
-            IKeyedItem<TKey, TValue> itemNotIn =
-                generateKeyedItem.Value(GenerateValue, GetKeyForItem);
+                out itemsWithKeys
+            );
+            IKeyedItem<TKey, TValue> itemNotIn = generateKeyedItem.Value(
+                GenerateValue,
+                GetKeyForItem
+            );
 
             TKey keyNotIn = itemNotIn.Key;
             if (keyNotIn == null)
             {
                 IKeyedItem<TKey, TValue> item;
-                AssertExtensions.Throws<ArgumentNullException>("key", () => collection.TryGetValue(keyNotIn, out item));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "key",
+                    () => collection.TryGetValue(keyNotIn, out item)
+                );
             }
             else
             {
@@ -2060,7 +1988,10 @@ namespace System.Collections.ObjectModel.Tests
                 TKey key = k;
                 if (key == null)
                 {
-                    AssertExtensions.Throws<ArgumentNullException>("key", () => collection.TryGetValue(key, out item));
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        "key",
+                        () => collection.TryGetValue(key, out item)
+                    );
                     continue;
                 }
                 Assert.True(collection.TryGetValue(key, out item));
@@ -2069,13 +2000,11 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public abstract class IListTestKeyedCollection<TKey, TValue> :
-        IListTest<KeyedCollection<TKey, TValue>, TValue>
+    public abstract class IListTestKeyedCollection<TKey, TValue>
+        : IListTest<KeyedCollection<TKey, TValue>, TValue>
     {
         protected IListTestKeyedCollection()
-            : base(false, false, false, false, true, true)
-        {
-        }
+            : base(false, false, false, false, true, true) { }
 
         protected abstract TKey GetKeyForItem(TValue item);
 
@@ -2084,11 +2013,9 @@ namespace System.Collections.ObjectModel.Tests
         /// </summary>
         /// <param name="items">The items to initialize the list with.</param>
         /// <returns>An instance of the list under test containing the given items.</returns>
-        protected override KeyedCollection<TKey, TValue> CreateList(
-            IEnumerable<TValue> items)
+        protected override KeyedCollection<TKey, TValue> CreateList(IEnumerable<TValue> items)
         {
-            var ret =
-                new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
+            var ret = new TestKeyedCollection<TKey, TValue>(GetKeyForItem);
             if (items == null)
             {
                 return ret;
@@ -2106,7 +2033,8 @@ namespace System.Collections.ObjectModel.Tests
         /// <param name="list">The list to invalidate enumerators for.</param>
         /// <returns>The new contents of the list.</returns>
         protected override IEnumerable<TValue> InvalidateEnumerator(
-            KeyedCollection<TKey, TValue> list)
+            KeyedCollection<TKey, TValue> list
+        )
         {
             TValue item = CreateItem();
             list.Add(item);
@@ -2114,27 +2042,26 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public abstract class IListTestKeyedCollectionBadKey<TKey, TValue> :
-        IListTest<KeyedCollection<BadKey<TKey>, TValue>, TValue>
+    public abstract class IListTestKeyedCollectionBadKey<TKey, TValue>
+        : IListTest<KeyedCollection<BadKey<TKey>, TValue>, TValue>
         where TKey : IEquatable<TKey>
     {
         protected IListTestKeyedCollectionBadKey()
-            : base(false, false, false, false, true, true)
-        {
-        }
+            : base(false, false, false, false, true, true) { }
 
         /// <summary>
         ///     When overridden in a derived class, Gets an instance of the list under test containing the given items.
         /// </summary>
         /// <param name="items">The items to initialize the list with.</param>
         /// <returns>An instance of the list under test containing the given items.</returns>
-        protected override KeyedCollection<BadKey<TKey>, TValue>
-            CreateList(IEnumerable<TValue> items)
+        protected override KeyedCollection<BadKey<TKey>, TValue> CreateList(
+            IEnumerable<TValue> items
+        )
         {
-            var ret =
-                new TestKeyedCollection<BadKey<TKey>, TValue>(
-                    item => new BadKey<TKey>(GetKeyForItem(item)),
-                    new BadKeyComparer<TKey>());
+            var ret = new TestKeyedCollection<BadKey<TKey>, TValue>(
+                item => new BadKey<TKey>(GetKeyForItem(item)),
+                new BadKeyComparer<TKey>()
+            );
             if (items == null)
             {
                 return ret;
@@ -2152,7 +2079,8 @@ namespace System.Collections.ObjectModel.Tests
         /// <param name="list">The list to invalidate enumerators for.</param>
         /// <returns>The new contents of the list.</returns>
         protected override IEnumerable<TValue> InvalidateEnumerator(
-            KeyedCollection<BadKey<TKey>, TValue> list)
+            KeyedCollection<BadKey<TKey>, TValue> list
+        )
         {
             TValue item = CreateItem();
             list.Add(item);

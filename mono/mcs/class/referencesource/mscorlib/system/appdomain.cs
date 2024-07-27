@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -10,52 +10,57 @@
 ** <OWNER>Microsoft</OWNER>
 **
 **
-** Purpose: Domains represent an application within the runtime. Objects can 
+** Purpose: Domains represent an application within the runtime. Objects can
 **          not be shared between domains and each domain can be configured
-**          independently. 
+**          independently.
 **
 **
 =============================================================================*/
 
-namespace System {
+namespace System
+{
     using System;
-#if FEATURE_CLICKONCE    
-    using System.Deployment.Internal.Isolation;
-    using System.Deployment.Internal.Isolation.Manifest;
-    using System.Runtime.Hosting;    
-#endif    
-    using System.Reflection;
-    using System.Runtime;
-    using System.Runtime.CompilerServices;
-#if FEATURE_REMOTING    
-    using System.Runtime.Remoting.Channels;
-    using System.Runtime.Remoting.Contexts;
-#endif    
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Security.Principal;
-    using System.Security.Policy;
-    using System.Security.Util;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Threading;
+    using System.Diagnostics.Contracts;
+    using System.IO;
+    using System.Reflection;
+    using System.Reflection.Emit;
+    using System.Runtime;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
-    using System.Runtime.Remoting;   
-#if FEATURE_REMOTING        
+    using System.Runtime.Remoting;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Security.Principal;
+    using System.Security.Util;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32;
+    using AssemblyHashAlgorithm = System.Configuration.Assemblies.AssemblyHashAlgorithm;
+    using CultureInfo = System.Globalization.CultureInfo;
+#if FEATURE_REMOTING
     using Context = System.Runtime.Remoting.Contexts.Context;
 #endif
-    using System.Reflection.Emit;
-    using CultureInfo = System.Globalization.CultureInfo;
+
+#if FEATURE_REMOTING
+    using System.Runtime.Remoting.Channels;
+    using System.Runtime.Remoting.Contexts;
+#endif
+
+#if FEATURE_CLICKONCE
+    using System.Deployment.Internal.Isolation;
+    using System.Deployment.Internal.Isolation.Manifest;
+    using System.Runtime.Hosting;
+#endif
+
 #if !FEATURE_CORECLR
     using System.Globalization;
 #endif
-    using System.IO;
-    using AssemblyHashAlgorithm = System.Configuration.Assemblies.AssemblyHashAlgorithm;
-    using System.Text;
-    using Microsoft.Win32;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+
 #if FEATURE_EXCEPTION_NOTIFICATIONS
     using System.Runtime.ExceptionServices;
 #endif // FEATURE_EXCEPTION_NOTIFICATIONS
@@ -66,18 +71,14 @@ namespace System {
         private String _Name;
         private Assembly _RequestingAssembly;
 
-        public String Name {
-            get {
-                return _Name;
-            }
+        public String Name
+        {
+            get { return _Name; }
         }
 
-        public Assembly RequestingAssembly 
+        public Assembly RequestingAssembly
         {
-            get
-            {
-                return _RequestingAssembly;
-            }
+            get { return _RequestingAssembly; }
         }
 
         public ResolveEventArgs(String name)
@@ -97,10 +98,9 @@ namespace System {
     {
         private Assembly _LoadedAssembly;
 
-        public Assembly LoadedAssembly {
-            get {
-                return _LoadedAssembly;
-            }
+        public Assembly LoadedAssembly
+        {
+            get { return _LoadedAssembly; }
         }
 
         public AssemblyLoadEventArgs(Assembly loadedAssembly)
@@ -109,10 +109,9 @@ namespace System {
         }
     }
 
-
-    #if FEATURE_CORECLR
+#if FEATURE_CORECLR
     [System.Security.SecurityCritical] // auto-generated
-    #endif
+#endif
     [Serializable]
     [ComVisible(true)]
     public delegate Assembly ResolveEventHandler(Object sender, ResolveEventArgs args);
@@ -138,69 +137,77 @@ namespace System {
 
         internal AppDomainInitializerInfo(AppDomainInitializer init)
         {
-            Info=null;
-            if (init==null)
+            Info = null;
+            if (init == null)
                 return;
             List<ItemInfo> itemInfo = new List<ItemInfo>();
             List<AppDomainInitializer> nestedDelegates = new List<AppDomainInitializer>();
             nestedDelegates.Add(init);
-            int idx=0;
- 
-            while (nestedDelegates.Count>idx)
+            int idx = 0;
+
+            while (nestedDelegates.Count > idx)
             {
                 AppDomainInitializer curr = nestedDelegates[idx++];
-                Delegate[] list= curr.GetInvocationList();
-                for (int i=0;i<list.Length;i++)
+                Delegate[] list = curr.GetInvocationList();
+                for (int i = 0; i < list.Length; i++)
                 {
-                    if (!list[i].Method.IsStatic) 
+                    if (!list[i].Method.IsStatic)
                     {
-                        if(list[i].Target==null)
+                        if (list[i].Target == null)
                             continue;
-                    
+
                         AppDomainInitializer nested = list[i].Target as AppDomainInitializer;
-                        if (nested!=null)
+                        if (nested != null)
                             nestedDelegates.Add(nested);
                         else
-                            throw new ArgumentException(Environment.GetResourceString("Arg_MustBeStatic"),
-                               list[i].Method.ReflectedType.FullName+"::"+list[i].Method.Name);
+                            throw new ArgumentException(
+                                Environment.GetResourceString("Arg_MustBeStatic"),
+                                list[i].Method.ReflectedType.FullName + "::" + list[i].Method.Name
+                            );
                     }
                     else
                     {
-                        ItemInfo info=new ItemInfo();
-                        info.TargetTypeAssembly=list[i].Method.ReflectedType.Module.Assembly.FullName;
-                        info.TargetTypeName=list[i].Method.ReflectedType.FullName;
-                        info.MethodName=list[i].Method.Name;
+                        ItemInfo info = new ItemInfo();
+                        info.TargetTypeAssembly = list[i]
+                            .Method
+                            .ReflectedType
+                            .Module
+                            .Assembly
+                            .FullName;
+                        info.TargetTypeName = list[i].Method.ReflectedType.FullName;
+                        info.MethodName = list[i].Method.Name;
                         itemInfo.Add(info);
                     }
-                    
                 }
             }
 
-            Info = itemInfo.ToArray();            
+            Info = itemInfo.ToArray();
         }
-        
-        [System.Security.SecuritySafeCritical]  // auto-generated
+
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal AppDomainInitializer Unwrap()
         {
-            if (Info==null)
+            if (Info == null)
                 return null;
-            AppDomainInitializer retVal=null;
+            AppDomainInitializer retVal = null;
             new ReflectionPermission(ReflectionPermissionFlag.MemberAccess).Assert();
-            for (int i=0;i<Info.Length;i++)
+            for (int i = 0; i < Info.Length; i++)
             {
-                Assembly assembly=Assembly.Load(Info[i].TargetTypeAssembly);
-                AppDomainInitializer newVal=(AppDomainInitializer)Delegate.CreateDelegate(typeof(AppDomainInitializer),
+                Assembly assembly = Assembly.Load(Info[i].TargetTypeAssembly);
+                AppDomainInitializer newVal = (AppDomainInitializer)
+                    Delegate.CreateDelegate(
+                        typeof(AppDomainInitializer),
                         assembly.GetType(Info[i].TargetTypeName),
-                        Info[i].MethodName);
-                if(retVal==null)
-                    retVal=newVal;
+                        Info[i].MethodName
+                    );
+                if (retVal == null)
+                    retVal = newVal;
                 else
-                    retVal+=newVal;
+                    retVal += newVal;
             }
             return retVal;
         }
     }
-
 
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(System._AppDomain))]
@@ -212,17 +219,17 @@ namespace System {
         _AppDomain, IEvidenceFactory
     {
         // Domain security information
-        // These fields initialized from the other side only. (NOTE: order 
-        // of these fields cannot be changed without changing the layout in 
+        // These fields initialized from the other side only. (NOTE: order
+        // of these fields cannot be changed without changing the layout in
         // the EE)
 
         [System.Security.SecurityCritical] // auto-generated
         private AppDomainManager _domainManager;
         private Dictionary<String, Object[]> _LocalStore;
-        private AppDomainSetup   _FusionStore;
-        private Evidence         _SecurityIdentity;
+        private AppDomainSetup _FusionStore;
+        private Evidence _SecurityIdentity;
 #pragma warning disable 169
-        private Object[]         _Policies; // Called from the VM.
+        private Object[] _Policies; // Called from the VM.
 #pragma warning restore 169
         [method: System.Security.SecurityCritical]
         public event AssemblyLoadEventHandler AssemblyLoad;
@@ -240,7 +247,6 @@ namespace System {
                     _TypeResolve += value;
                 }
             }
-
             [System.Security.SecurityCritical]
             remove
             {
@@ -264,7 +270,6 @@ namespace System {
                     _ResourceResolve += value;
                 }
             }
-
             [System.Security.SecurityCritical]
             remove
             {
@@ -288,7 +293,6 @@ namespace System {
                     _AssemblyResolve += value;
                 }
             }
-
             [System.Security.SecurityCritical]
             remove
             {
@@ -304,58 +308,57 @@ namespace System {
         public event ResolveEventHandler ReflectionOnlyAssemblyResolve;
 #endif // FEATURE_REFLECTION_ONLY
 
-#if FEATURE_REMOTING        
-        private Context          _DefaultContext;
+#if FEATURE_REMOTING
+        private Context _DefaultContext;
 #endif
 
 #if !FEATURE_PAL
 #if FEATURE_CLICKONCE
-        private ActivationContext _activationContext;        
-        private ApplicationIdentity _applicationIdentity;        
+        private ActivationContext _activationContext;
+        private ApplicationIdentity _applicationIdentity;
 #endif
 #endif // !FEATURE_PAL
         private ApplicationTrust _applicationTrust;
 
 #if FEATURE_IMPERSONATION
-        private IPrincipal       _DefaultPrincipal;
+        private IPrincipal _DefaultPrincipal;
 #endif // FEATURE_IMPERSONATION
 #if FEATURE_REMOTING
         private DomainSpecificRemotingData _RemotingData;
 #endif
-        private EventHandler     _processExit;
+        private EventHandler _processExit;
 
-        #if FEATURE_CORECLR
-        [System.Security.SecurityCritical] 
-        #endif
-        private EventHandler     _domainUnload;
+#if FEATURE_CORECLR
+        [System.Security.SecurityCritical]
+#endif
+        private EventHandler _domainUnload;
 
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         private UnhandledExceptionEventHandler _unhandledException;
 
 #if FEATURE_APTCA
-        private String[]         _aptcaVisibleAssemblies;
+        private String[] _aptcaVisibleAssemblies;
 #endif
 
         // The compat flags are set at domain creation time to indicate that the given breaking
-        // changes (named in the strings) should not be used in this domain. We only use the 
+        // changes (named in the strings) should not be used in this domain. We only use the
         // keys, the vhe values are ignored.
-        private Dictionary<String, object>  _compatFlags;
+        private Dictionary<String, object> _compatFlags;
 
 #if FEATURE_EXCEPTION_NOTIFICATIONS
         // Delegate that will hold references to FirstChance exception notifications
         private EventHandler<FirstChanceExceptionEventArgs> _firstChanceException;
 #endif // FEATURE_EXCEPTION_NOTIFICATIONS
 
-        private IntPtr           _pDomain;                      // this is an unmanaged pointer (AppDomain * m_pDomain)` used from the VM.
-
+        private IntPtr _pDomain; // this is an unmanaged pointer (AppDomain * m_pDomain)` used from the VM.
 #if FEATURE_CAS_POLICY
-        private PrincipalPolicy  _PrincipalPolicy;              // this is an enum
-#endif        
-        private bool             _HasSetPolicy;
-        private bool             _IsFastFullTrustDomain;        // quick check to see if the AppDomain is fully trusted and homogenous
-        private bool             _compatFlagsInitialized;
+        private PrincipalPolicy _PrincipalPolicy; // this is an enum
+#endif
+        private bool _HasSetPolicy;
+        private bool _IsFastFullTrustDomain; // quick check to see if the AppDomain is fully trusted and homogenous
+        private bool _compatFlagsInitialized;
 
         internal const String TargetFrameworkNameAppCompatSetting = "TargetFrameworkName";
 
@@ -368,16 +371,15 @@ namespace System {
         [Flags]
         private enum APPX_FLAGS
         {
-            APPX_FLAGS_INITIALIZED =        0x01,
+            APPX_FLAGS_INITIALIZED = 0x01,
 
-            APPX_FLAGS_APPX_MODEL =         0x02,
-            APPX_FLAGS_APPX_DESIGN_MODE =   0x04,
-            APPX_FLAGS_APPX_NGEN =          0x08,
-            APPX_FLAGS_APPX_MASK =          APPX_FLAGS_APPX_MODEL |
-                                            APPX_FLAGS_APPX_DESIGN_MODE |
-                                            APPX_FLAGS_APPX_NGEN,
+            APPX_FLAGS_APPX_MODEL = 0x02,
+            APPX_FLAGS_APPX_DESIGN_MODE = 0x04,
+            APPX_FLAGS_APPX_NGEN = 0x08,
+            APPX_FLAGS_APPX_MASK =
+                APPX_FLAGS_APPX_MODEL | APPX_FLAGS_APPX_DESIGN_MODE | APPX_FLAGS_APPX_NGEN,
 
-            APPX_FLAGS_API_CHECK =          0x10,
+            APPX_FLAGS_API_CHECK = 0x10,
         }
 
         private static APPX_FLAGS Flags
@@ -396,19 +398,13 @@ namespace System {
         internal static bool ProfileAPICheck
         {
             [SecuritySafeCritical]
-            get
-            {
-                return (Flags & APPX_FLAGS.APPX_FLAGS_API_CHECK) != 0;
-            }
+            get { return (Flags & APPX_FLAGS.APPX_FLAGS_API_CHECK) != 0; }
         }
 
         internal static bool IsAppXNGen
         {
             [SecuritySafeCritical]
-            get
-            {
-                return (Flags & APPX_FLAGS.APPX_FLAGS_APPX_NGEN) != 0;
-            }
+            get { return (Flags & APPX_FLAGS.APPX_FLAGS_APPX_NGEN) != 0; }
         }
 #endif // FEATURE_APPX
 
@@ -432,29 +428,35 @@ namespace System {
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void GetAppDomainManagerType(AppDomainHandle domain,
-                                                           StringHandleOnStack retAssembly,
-                                                           StringHandleOnStack retType);
+        private static extern void GetAppDomainManagerType(
+            AppDomainHandle domain,
+            StringHandleOnStack retAssembly,
+            StringHandleOnStack retType
+        );
 
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void SetAppDomainManagerType(AppDomainHandle domain,
-                                                           string assembly,
-                                                           string type);
+        private static extern void SetAppDomainManagerType(
+            AppDomainHandle domain,
+            string assembly,
+            string type
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void nSetHostSecurityManagerFlags (HostSecurityManagerOptions flags);
+        private static extern void nSetHostSecurityManagerFlags(HostSecurityManagerOptions flags);
 
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void SetSecurityHomogeneousFlag(AppDomainHandle domain,
-                                                              [MarshalAs(UnmanagedType.Bool)] bool runtimeSuppliedHomogenousGrantSet);
+        private static extern void SetSecurityHomogeneousFlag(
+            AppDomainHandle domain,
+            [MarshalAs(UnmanagedType.Bool)] bool runtimeSuppliedHomogenousGrantSet
+        );
 
 #if FEATURE_CAS_POLICY
         [SecurityCritical]
@@ -479,11 +481,16 @@ namespace System {
             // uninitialized object through remoting, etc.
             if (_pDomain.IsNull())
             {
-                throw new InvalidOperationException(Environment.GetResourceString("Argument_InvalidHandle"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("Argument_InvalidHandle")
+                );
             }
 
 #if FEATURE_REMOTING
-            BCLDebug.Assert(!RemotingServices.IsTransparentProxy(this), "QCalls should be made with the real AppDomain object rather than a transparent proxy");
+            BCLDebug.Assert(
+                !RemotingServices.IsTransparentProxy(this),
+                "QCalls should be made with the real AppDomain object rather than a transparent proxy"
+            );
 #endif // FEATURE_REMOTING
             return new AppDomainHandle(_pDomain);
         }
@@ -525,7 +532,13 @@ namespace System {
                 {
                     appLocalWinMD = String.Empty;
                 }
-                SetupBindingPaths(trustedPlatformAssemblies, platformResourceRoots, appPaths, appNiPaths, appLocalWinMD);
+                SetupBindingPaths(
+                    trustedPlatformAssemblies,
+                    platformResourceRoots,
+                    appPaths,
+                    appNiPaths,
+                    appLocalWinMD
+                );
             }
 #endif // FEATURE_VERSIONING
 
@@ -538,25 +551,38 @@ namespace System {
                 try
                 {
                     new PermissionSet(PermissionState.Unrestricted).Assert();
-                    _domainManager = CreateInstanceAndUnwrap(domainManagerAssembly, domainManagerType) as AppDomainManager;
+                    _domainManager =
+                        CreateInstanceAndUnwrap(domainManagerAssembly, domainManagerType)
+                        as AppDomainManager;
                     CodeAccessPermission.RevertAssert();
                 }
                 catch (FileNotFoundException e)
                 {
-                    throw new TypeLoadException(Environment.GetResourceString("Argument_NoDomainManager"), e);
+                    throw new TypeLoadException(
+                        Environment.GetResourceString("Argument_NoDomainManager"),
+                        e
+                    );
                 }
                 catch (SecurityException e)
                 {
-                    throw new TypeLoadException(Environment.GetResourceString("Argument_NoDomainManager"), e);
+                    throw new TypeLoadException(
+                        Environment.GetResourceString("Argument_NoDomainManager"),
+                        e
+                    );
                 }
                 catch (TypeLoadException e)
                 {
-                    throw new TypeLoadException(Environment.GetResourceString("Argument_NoDomainManager"), e);
+                    throw new TypeLoadException(
+                        Environment.GetResourceString("Argument_NoDomainManager"),
+                        e
+                    );
                 }
 
                 if (_domainManager == null)
                 {
-                    throw new TypeLoadException(Environment.GetResourceString("Argument_NoDomainManager"));
+                    throw new TypeLoadException(
+                        Environment.GetResourceString("Argument_NoDomainManager")
+                    );
                 }
 
                 // If this domain was not created by a managed call to CreateDomain, then the AppDomainSetup
@@ -564,9 +590,9 @@ namespace System {
                 FusionStore.AppDomainManagerAssembly = domainManagerAssembly;
                 FusionStore.AppDomainManagerType = domainManagerType;
 
-                bool notifyFusion = _domainManager.GetType() != typeof(System.AppDomainManager) && !DisableFusionUpdatesFromADManager();
-
-
+                bool notifyFusion =
+                    _domainManager.GetType() != typeof(System.AppDomainManager)
+                    && !DisableFusionUpdatesFromADManager();
 
                 AppDomainSetup FusionStoreOld = null;
                 if (notifyFusion)
@@ -577,17 +603,19 @@ namespace System {
 
                 if (notifyFusion)
                     SetupFusionStore(_FusionStore, FusionStoreOld); // Notify Fusion about the changes the user implementation of InitializeNewDomain may have made to the FusionStore object.
-                                
-#if FEATURE_APPDOMAINMANAGER_INITOPTIONS                
+#if FEATURE_APPDOMAINMANAGER_INITOPTIONS
                 AppDomainManagerInitializationOptions flags = _domainManager.InitializationFlags;
-                if ((flags & AppDomainManagerInitializationOptions.RegisterWithHost) == AppDomainManagerInitializationOptions.RegisterWithHost)
+                if (
+                    (flags & AppDomainManagerInitializationOptions.RegisterWithHost)
+                    == AppDomainManagerInitializationOptions.RegisterWithHost
+                )
                 {
                     _domainManager.RegisterWithHost();
                 }
 #endif // FEATURE_APPDOMAINMANAGER_INITOPTIONS
             }
 
-            InitializeCompatibilityFlags();       
+            InitializeCompatibilityFlags();
         }
 
         /// <summary>
@@ -597,14 +625,17 @@ namespace System {
         private void InitializeCompatibilityFlags()
         {
             AppDomainSetup adSetup = FusionStore;
-            
+
             // set up shim flags regardless of whether we create a DomainManager in this method.
             if (adSetup.GetCompatibilityFlags() != null)
             {
-                _compatFlags = new Dictionary<String, object>(adSetup.GetCompatibilityFlags(), StringComparer.OrdinalIgnoreCase);
+                _compatFlags = new Dictionary<String, object>(
+                    adSetup.GetCompatibilityFlags(),
+                    StringComparer.OrdinalIgnoreCase
+                );
             }
 
-            // for perf, we don't intialize the _compatFlags dictionary when we don't need to.  However, we do need to make a 
+            // for perf, we don't intialize the _compatFlags dictionary when we don't need to.  However, we do need to make a
             // note that we've run this method, because IsCompatibilityFlagsSet needs to return different values for the
             // case where the compat flags have been setup.
             Contract.Assert(!_compatFlagsInitialized);
@@ -614,7 +645,7 @@ namespace System {
         }
 
         // Retrieves a possibly-cached target framework name for this appdomain.  This could be set
-        // either by a host in native, a host in managed using an AppDomainSetup, or by the 
+        // either by a host in native, a host in managed using an AppDomainSetup, or by the
         // TargetFrameworkAttribute on the executable (VS emits its target framework moniker using this
         // attribute starting in version 4).
         [SecuritySafeCritical]
@@ -622,14 +653,19 @@ namespace System {
         {
             String targetFrameworkName = _FusionStore.TargetFrameworkName;
 
-            if (targetFrameworkName == null && IsDefaultAppDomain() && !_FusionStore.CheckedForTargetFrameworkName)
+            if (
+                targetFrameworkName == null
+                && IsDefaultAppDomain()
+                && !_FusionStore.CheckedForTargetFrameworkName
+            )
             {
                 // This should only be run in the default appdomain.  All other appdomains should have
                 // values copied from the default appdomain and/or specified by the host.
                 Assembly assembly = Assembly.GetEntryAssembly();
                 if (assembly != null)
                 {
-                    TargetFrameworkAttribute[] attrs = (TargetFrameworkAttribute[])assembly.GetCustomAttributes(typeof(TargetFrameworkAttribute));
+                    TargetFrameworkAttribute[] attrs = (TargetFrameworkAttribute[])
+                        assembly.GetCustomAttributes(typeof(TargetFrameworkAttribute));
                     if (attrs != null && attrs.Length > 0)
                     {
                         Contract.Assert(attrs.Length == 1);
@@ -684,7 +720,8 @@ namespace System {
         internal static bool IsAppXDesignMode()
         {
 #if FEATURE_APPX
-            return (Flags & APPX_FLAGS.APPX_FLAGS_APPX_MASK) == (APPX_FLAGS.APPX_FLAGS_APPX_MODEL | APPX_FLAGS.APPX_FLAGS_APPX_DESIGN_MODE);
+            return (Flags & APPX_FLAGS.APPX_FLAGS_APPX_MASK)
+                == (APPX_FLAGS.APPX_FLAGS_APPX_MODEL | APPX_FLAGS.APPX_FLAGS_APPX_DESIGN_MODE);
 #else
             return false;
 #endif
@@ -699,7 +736,9 @@ namespace System {
         {
 #if FEATURE_APPX
             if (IsAppXModel())
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_AppX", "Assembly.LoadFrom"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_AppX", "Assembly.LoadFrom")
+                );
 #endif
         }
 
@@ -712,7 +751,9 @@ namespace System {
         {
 #if FEATURE_APPX
             if (IsAppXModel())
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_AppX", "Assembly.LoadFile"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_AppX", "Assembly.LoadFile")
+                );
 #endif
         }
 
@@ -725,7 +766,12 @@ namespace System {
         {
 #if FEATURE_APPX
             if (IsAppXModel())
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_AppX", "Assembly.ReflectionOnlyLoad"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString(
+                        "NotSupported_AppX",
+                        "Assembly.ReflectionOnlyLoad"
+                    )
+                );
 #endif
         }
 
@@ -739,11 +785,19 @@ namespace System {
 #if FEATURE_APPX
             if (IsAppXModel())
             {
-                RuntimeAssembly callingAssembly = RuntimeAssembly.GetExecutingAssembly(ref stackMark);
-                bool callerIsFxAssembly = callingAssembly != null && callingAssembly.IsFrameworkAssembly();
+                RuntimeAssembly callingAssembly = RuntimeAssembly.GetExecutingAssembly(
+                    ref stackMark
+                );
+                bool callerIsFxAssembly =
+                    callingAssembly != null && callingAssembly.IsFrameworkAssembly();
                 if (!callerIsFxAssembly)
                 {
-                    throw new NotSupportedException(Environment.GetResourceString("NotSupported_AppX", "Assembly.LoadWithPartialName"));
+                    throw new NotSupportedException(
+                        Environment.GetResourceString(
+                            "NotSupported_AppX",
+                            "Assembly.LoadWithPartialName"
+                        )
+                    );
                 }
             }
 #endif
@@ -759,7 +813,9 @@ namespace System {
             // We don't want users to use DefinePInvokeMethod in RefEmit to bypass app store validation on allowed native libraries.
 #if FEATURE_APPX
             if (IsAppXModel())
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_AppX", "DefinePInvokeMethod"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_AppX", "DefinePInvokeMethod")
+                );
 #endif
         }
 
@@ -772,7 +828,9 @@ namespace System {
         {
 #if FEATURE_APPX
             if (IsAppXModel())
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_AppX", "Assembly.Load(byte[], ...)"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_AppX", "Assembly.Load(byte[], ...)")
+                );
 #endif
         }
 
@@ -787,11 +845,13 @@ namespace System {
             // Can create a new domain in an AppX process only when DevMode is enabled and
             // AssemblyLoadingCompat is not enabled (since there is no multi-domain support
             // for LoadFrom and LoadFile in AppX.
-            if(IsAppXModel())
+            if (IsAppXModel())
             {
                 if (!IsAppXDesignMode())
                 {
-                    throw new NotSupportedException(Environment.GetResourceString("NotSupported_AppX", "AppDomain.CreateDomain"));
+                    throw new NotSupportedException(
+                        Environment.GetResourceString("NotSupported_AppX", "AppDomain.CreateDomain")
+                    );
                 }
             }
 #endif
@@ -808,9 +868,11 @@ namespace System {
             string localAssembly = null;
             string localType = null;
 
-            GetAppDomainManagerType(GetNativeHandle(),
-                                    JitHelpers.GetStringHandleOnStack(ref localAssembly),
-                                    JitHelpers.GetStringHandleOnStack(ref localType));
+            GetAppDomainManagerType(
+                GetNativeHandle(),
+                JitHelpers.GetStringHandleOnStack(ref localAssembly),
+                JitHelpers.GetStringHandleOnStack(ref localType)
+            );
 
             assembly = localAssembly;
             type = localType;
@@ -831,7 +893,6 @@ namespace System {
         internal String[] PartialTrustVisibleAssemblies
         {
             get { return _aptcaVisibleAssemblies; }
-
             [SecuritySafeCritical]
             set
             {
@@ -855,7 +916,9 @@ namespace System {
                         }
                     }
 
-                    canonicalConditionalAptcaList = StringBuilderCache.GetStringAndRelease(conditionalAptcaListBuilder);
+                    canonicalConditionalAptcaList = StringBuilderCache.GetStringAndRelease(
+                        conditionalAptcaListBuilder
+                    );
                 }
 
                 SetCanonicalConditionalAptcaList(canonicalConditionalAptcaList);
@@ -866,7 +929,10 @@ namespace System {
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void SetCanonicalConditionalAptcaList(AppDomainHandle appDomain, string canonicalList);
+        private static extern void SetCanonicalConditionalAptcaList(
+            AppDomainHandle appDomain,
+            string canonicalList
+        );
 
         [SecurityCritical]
         private void SetCanonicalConditionalAptcaList(string canonicalList)
@@ -880,10 +946,18 @@ namespace System {
         ///    If the CLR is being started up to run a ClickOnce applicaiton, setup the default AppDomain
         ///    with information about that application.
         /// </summary>
-        private void SetupDefaultClickOnceDomain(string fullName, string[] manifestPaths, string[] activationData)
+        private void SetupDefaultClickOnceDomain(
+            string fullName,
+            string[] manifestPaths,
+            string[] activationData
+        )
         {
             Contract.Requires(fullName != null, "fullName != null");
-            FusionStore.ActivationArguments = new ActivationArguments(fullName, manifestPaths, activationData);
+            FusionStore.ActivationArguments = new ActivationArguments(
+                fullName,
+                manifestPaths,
+                activationData
+            );
         }
 #endif // FEATURE_CLICKONCE
 
@@ -891,11 +965,13 @@ namespace System {
         ///     Called for every AppDomain (including the default domain) to initialize the security of the AppDomain)
         /// </summary>
         [SecurityCritical]
-        private void InitializeDomainSecurity(Evidence providedSecurityInfo,
-                                              Evidence creatorsSecurityInfo,
-                                              bool generateDefaultEvidence,
-                                              IntPtr parentSecurityDescriptor,
-                                              bool publishAppDomain)
+        private void InitializeDomainSecurity(
+            Evidence providedSecurityInfo,
+            Evidence creatorsSecurityInfo,
+            bool generateDefaultEvidence,
+            IntPtr parentSecurityDescriptor,
+            bool publishAppDomain
+        )
         {
             AppDomainSetup adSetup = FusionStore;
 
@@ -912,52 +988,73 @@ namespace System {
 
             // Check if the domain manager set an ActivationContext (Debug-In-Zone for example)
             // or if this is an AppDomain with an ApplicationTrust.
-            if (adSetup.ActivationArguments != null) {
+            if (adSetup.ActivationArguments != null)
+            {
                 // Merge the new evidence with the manifest's evidence if applicable
                 ActivationContext activationContext = null;
                 ApplicationIdentity appIdentity = null;
                 string[] activationData = null;
-                CmsUtils.CreateActivationContext(adSetup.ActivationArguments.ApplicationFullName,
-                                                 adSetup.ActivationArguments.ApplicationManifestPaths,
-                                                 adSetup.ActivationArguments.UseFusionActivationContext,
-                                                 out appIdentity, out activationContext);
+                CmsUtils.CreateActivationContext(
+                    adSetup.ActivationArguments.ApplicationFullName,
+                    adSetup.ActivationArguments.ApplicationManifestPaths,
+                    adSetup.ActivationArguments.UseFusionActivationContext,
+                    out appIdentity,
+                    out activationContext
+                );
                 activationData = adSetup.ActivationArguments.ActivationData;
-                providedSecurityInfo = CmsUtils.MergeApplicationEvidence(providedSecurityInfo,
-                                                                         appIdentity,
-                                                                         activationContext,
-                                                                         activationData,
-                                                                         adSetup.ApplicationTrust);
-                SetupApplicationHelper(providedSecurityInfo, creatorsSecurityInfo, appIdentity, activationContext, activationData);
+                providedSecurityInfo = CmsUtils.MergeApplicationEvidence(
+                    providedSecurityInfo,
+                    appIdentity,
+                    activationContext,
+                    activationData,
+                    adSetup.ApplicationTrust
+                );
+                SetupApplicationHelper(
+                    providedSecurityInfo,
+                    creatorsSecurityInfo,
+                    appIdentity,
+                    activationContext,
+                    activationData
+                );
             }
-            else 
+            else
 #endif // FEATURE_CLICKONCE
             {
                 bool runtimeSuppliedHomogenousGrant = false;
                 ApplicationTrust appTrust = adSetup.ApplicationTrust;
-                
+
 #if FEATURE_CAS_POLICY
                 // In non-legacy CAS mode, domains should be homogenous.  If the host has not specified a sandbox
                 // of their own, we'll set it up to be fully trusted.  We must read the IsLegacyCasPolicy
                 // enabled property here rathern than just reading the switch from above because the entire
                 // process may also be opted into legacy CAS policy mode.
-                if (appTrust == null && !IsLegacyCasPolicyEnabled) {
+                if (appTrust == null && !IsLegacyCasPolicyEnabled)
+                {
                     _IsFastFullTrustDomain = true;
                     runtimeSuppliedHomogenousGrant = true;
                 }
 #endif // FEATURE_CAS_POLICY
 
-                if (appTrust != null) {
-                    SetupDomainSecurityForHomogeneousDomain(appTrust, runtimeSuppliedHomogenousGrant);
+                if (appTrust != null)
+                {
+                    SetupDomainSecurityForHomogeneousDomain(
+                        appTrust,
+                        runtimeSuppliedHomogenousGrant
+                    );
                 }
-                else if (_IsFastFullTrustDomain) {
+                else if (_IsFastFullTrustDomain)
+                {
                     SetSecurityHomogeneousFlag(GetNativeHandle(), runtimeSuppliedHomogenousGrant);
                 }
             }
 
             // Get the evidence supplied for the domain.  If no evidence was supplied, it means that we want
             // to use the default evidence creation strategy for this domain
-            Evidence newAppDomainEvidence = (providedSecurityInfo != null ? providedSecurityInfo : creatorsSecurityInfo);
-            if (newAppDomainEvidence == null && generateDefaultEvidence) {
+            Evidence newAppDomainEvidence = (
+                providedSecurityInfo != null ? providedSecurityInfo : creatorsSecurityInfo
+            );
+            if (newAppDomainEvidence == null && generateDefaultEvidence)
+            {
 #if FEATURE_CAS_POLICY
                 newAppDomainEvidence = new Evidence(new AppDomainEvidenceFactory(this));
 #else // !FEATURE_CAS_POLICY
@@ -966,16 +1063,25 @@ namespace System {
             }
 
 #if FEATURE_CAS_POLICY
-            if (_domainManager != null) {
+            if (_domainManager != null)
+            {
                 // Give the host a chance to alter the AppDomain evidence
                 HostSecurityManager securityManager = _domainManager.HostSecurityManager;
-                if (securityManager != null) {
-                    nSetHostSecurityManagerFlags (securityManager.Flags);
-                    if ((securityManager.Flags & HostSecurityManagerOptions.HostAppDomainEvidence) == HostSecurityManagerOptions.HostAppDomainEvidence) {
-                        newAppDomainEvidence = securityManager.ProvideAppDomainEvidence(newAppDomainEvidence);
+                if (securityManager != null)
+                {
+                    nSetHostSecurityManagerFlags(securityManager.Flags);
+                    if (
+                        (securityManager.Flags & HostSecurityManagerOptions.HostAppDomainEvidence)
+                        == HostSecurityManagerOptions.HostAppDomainEvidence
+                    )
+                    {
+                        newAppDomainEvidence = securityManager.ProvideAppDomainEvidence(
+                            newAppDomainEvidence
+                        );
                         // If this is a disconnected evidence collection, then attach it to the AppDomain,
                         // allowing the host security manager to get callbacks for delay generated evidence
-                        if (newAppDomainEvidence != null && newAppDomainEvidence.Target == null) {
+                        if (newAppDomainEvidence != null && newAppDomainEvidence.Target == null)
+                        {
                             newAppDomainEvidence.Target = new AppDomainEvidenceFactory(this);
                         }
                     }
@@ -990,9 +1096,7 @@ namespace System {
             // Set the evidence of the AppDomain in the VM.
             // Also, now that the initialization is complete, signal that to the security system.
             // Finish the AppDomain initialization and resolve the policy for the AppDomain evidence.
-            SetupDomainSecurity(newAppDomainEvidence,
-                                parentSecurityDescriptor,
-                                publishAppDomain);
+            SetupDomainSecurity(newAppDomainEvidence, parentSecurityDescriptor, publishAppDomain);
 
 #if FEATURE_CAS_POLICY
             // The AppDomain is now resolved. Go ahead and set the PolicyLevel
@@ -1003,8 +1107,8 @@ namespace System {
         }
 
 #if FEATURE_CAS_POLICY
-        [System.Security.SecurityCritical]  // auto-generated
-        private void RunDomainManagerPostInitialization (AppDomainManager domainManager)
+        [System.Security.SecurityCritical] // auto-generated
+        private void RunDomainManagerPostInitialization(AppDomainManager domainManager)
         {
             // force creation of the HostExecutionContextManager for the current AppDomain
             HostExecutionContextManager contextManager = domainManager.HostExecutionContextManager;
@@ -1015,7 +1119,10 @@ namespace System {
                 HostSecurityManager securityManager = domainManager.HostSecurityManager;
                 if (securityManager != null)
                 {
-                    if ((securityManager.Flags & HostSecurityManagerOptions.HostPolicyLevel) == HostSecurityManagerOptions.HostPolicyLevel)
+                    if (
+                        (securityManager.Flags & HostSecurityManagerOptions.HostPolicyLevel)
+                        == HostSecurityManagerOptions.HostPolicyLevel
+                    )
                     {
                         // set AppDomain policy if specified
                         PolicyLevel level = securityManager.DomainPolicy;
@@ -1026,20 +1133,32 @@ namespace System {
 #pragma warning restore 618
             }
         }
-#endif 
-
+#endif
 
 #if FEATURE_CLICKONCE
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private void SetupApplicationHelper (Evidence providedSecurityInfo, Evidence creatorsSecurityInfo, ApplicationIdentity appIdentity, ActivationContext activationContext, string[] activationData) {
+        [System.Security.SecurityCritical] // auto-generated
+        private void SetupApplicationHelper(
+            Evidence providedSecurityInfo,
+            Evidence creatorsSecurityInfo,
+            ApplicationIdentity appIdentity,
+            ActivationContext activationContext,
+            string[] activationData
+        )
+        {
             Contract.Requires(providedSecurityInfo != null);
             HostSecurityManager securityManager = AppDomain.CurrentDomain.HostSecurityManager;
-            ApplicationTrust appTrust = securityManager.DetermineApplicationTrust(providedSecurityInfo, creatorsSecurityInfo, new TrustManagerContext());
+            ApplicationTrust appTrust = securityManager.DetermineApplicationTrust(
+                providedSecurityInfo,
+                creatorsSecurityInfo,
+                new TrustManagerContext()
+            );
             if (appTrust == null || !appTrust.IsApplicationTrustedToRun)
-                throw new PolicyException(Environment.GetResourceString("Policy_NoExecutionPermission"),
-                                          System.__HResults.CORSEC_E_NO_EXEC_PERM,
-                                          null);
+                throw new PolicyException(
+                    Environment.GetResourceString("Policy_NoExecutionPermission"),
+                    System.__HResults.CORSEC_E_NO_EXEC_PERM,
+                    null
+                );
 
             // The application is trusted to run. Set up the AppDomain according to the manifests.
             if (activationContext != null)
@@ -1047,15 +1166,23 @@ namespace System {
             SetupDomainSecurityForApplication(appIdentity, appTrust);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private void SetupDomainForApplication(ActivationContext activationContext, string[] activationData) {
+        private void SetupDomainForApplication(
+            ActivationContext activationContext,
+            string[] activationData
+        )
+        {
             Contract.Requires(activationContext != null);
-            if (IsDefaultAppDomain()) {
+            if (IsDefaultAppDomain())
+            {
                 // make the ActivationArguments available off the AppDomain object.
                 AppDomainSetup adSetup = this.FusionStore;
-                adSetup.ActivationArguments = new ActivationArguments(activationContext, activationData);
+                adSetup.ActivationArguments = new ActivationArguments(
+                    activationContext,
+                    activationData
+                );
 
                 // set the application base to point at where the application resides
                 string entryPointPath = CmsUtils.GetEntryPointFullPath(activationContext);
@@ -1078,15 +1205,20 @@ namespace System {
             IPermission permission = null;
             string dataDirectory = activationContext.DataDirectory;
             if (dataDirectory != null && dataDirectory.Length > 0)
-                permission = new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dataDirectory);
+                permission = new FileIOPermission(
+                    FileIOPermissionAccess.PathDiscovery,
+                    dataDirectory
+                );
             this.SetData("DataDirectory", dataDirectory, permission);
 
             _activationContext = activationContext;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private void SetupDomainSecurityForApplication(ApplicationIdentity appIdentity,
-                                                       ApplicationTrust appTrust)
+        [System.Security.SecurityCritical] // auto-generated
+        private void SetupDomainSecurityForApplication(
+            ApplicationIdentity appIdentity,
+            ApplicationTrust appTrust
+        )
         {
             // Set the Application trust on the managed side.
             _applicationIdentity = appIdentity;
@@ -1094,20 +1226,25 @@ namespace System {
         }
 #endif // FEATURE_CLICKONCE
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private void SetupDomainSecurityForHomogeneousDomain(ApplicationTrust appTrust,
-                                                             bool runtimeSuppliedHomogenousGrantSet)
+        [System.Security.SecurityCritical] // auto-generated
+        private void SetupDomainSecurityForHomogeneousDomain(
+            ApplicationTrust appTrust,
+            bool runtimeSuppliedHomogenousGrantSet
+        )
         {
             // If the CLR has supplied the homogenous grant set (that is, this domain would have been
             // heterogenous in v2.0), then we need to strip the ApplicationTrust from the AppDomainSetup of
             // the current domain.  This prevents code which does:
             //   AppDomain.CreateDomain(..., AppDomain.CurrentDomain.SetupInformation);
-            // 
+            //
             // From looking like it is trying to create a homogenous domain intentionally, and therefore
             // having its evidence check bypassed.
             if (runtimeSuppliedHomogenousGrantSet)
             {
-                BCLDebug.Assert(_FusionStore.ApplicationTrust != null, "Expected to find runtime supplied ApplicationTrust");
+                BCLDebug.Assert(
+                    _FusionStore.ApplicationTrust != null,
+                    "Expected to find runtime supplied ApplicationTrust"
+                );
 #if FEATURE_CAS_POLICY
                 _FusionStore.ApplicationTrust = null;
 #endif // FEATURE_CAS_POLICY
@@ -1116,30 +1253,31 @@ namespace System {
             _applicationTrust = appTrust;
 
             // Set the homogeneous bit in the VM's ApplicationSecurityDescriptor.
-            SetSecurityHomogeneousFlag(GetNativeHandle(),
-                                       runtimeSuppliedHomogenousGrantSet);
+            SetSecurityHomogeneousFlag(GetNativeHandle(), runtimeSuppliedHomogenousGrantSet);
         }
 
         // This method is called from CorHost2::ExecuteApplication to activate a ClickOnce application in the default AppDomain.
 #if FEATURE_CLICKONCE
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        private int ActivateApplication () {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        private int ActivateApplication()
+        {
             ObjectHandle oh = Activator.CreateInstance(AppDomain.CurrentDomain.ActivationContext);
-            return (int) oh.Unwrap();
+            return (int)oh.Unwrap();
         }
 #endif //FEATURE_CLICKONCE
 
-        public AppDomainManager DomainManager {
-            [System.Security.SecurityCritical]  // auto-generated_required
-            get {
-                return _domainManager;
-            }
+        public AppDomainManager DomainManager
+        {
+            [System.Security.SecurityCritical] // auto-generated_required
+            get { return _domainManager; }
         }
 
 #if FEATURE_CAS_POLICY
-        internal HostSecurityManager HostSecurityManager {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {
+        internal HostSecurityManager HostSecurityManager
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get
+            {
                 HostSecurityManager securityManager = null;
                 AppDomainManager domainManager = AppDomain.CurrentDomain.DomainManager;
                 if (domainManager != null)
@@ -1151,354 +1289,467 @@ namespace System {
             }
         }
 #endif // FEATURE_CAS_POLICY
-#if FEATURE_REFLECTION_ONLY_LOAD        
+#if FEATURE_REFLECTION_ONLY_LOAD
         private Assembly ResolveAssemblyForIntrospection(Object sender, ResolveEventArgs args)
         {
             Contract.Requires(args != null);
             return Assembly.ReflectionOnlyLoad(ApplyPolicy(args.Name));
         }
-        
+
         // Helper class for method code:EnableResolveAssembliesForIntrospection
         private class NamespaceResolverForIntrospection
         {
             private IEnumerable<string> _packageGraphFilePaths;
+
             public NamespaceResolverForIntrospection(IEnumerable<string> packageGraphFilePaths)
             {
                 _packageGraphFilePaths = packageGraphFilePaths;
             }
-            
+
             [System.Security.SecurityCritical]
             public void ResolveNamespace(
-                object sender, 
-                System.Runtime.InteropServices.WindowsRuntime.NamespaceResolveEventArgs args)
+                object sender,
+                System.Runtime.InteropServices.WindowsRuntime.NamespaceResolveEventArgs args
+            )
             {
                 Contract.Requires(args != null);
-                
-                IEnumerable<string> fileNames = System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.ResolveNamespace(
-                    args.NamespaceName,
-                    null,   // windowsSdkFilePath ... Use OS installed .winmd files
-                    _packageGraphFilePaths);
+
+                IEnumerable<string> fileNames =
+                    System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.ResolveNamespace(
+                        args.NamespaceName,
+                        null, // windowsSdkFilePath ... Use OS installed .winmd files
+                        _packageGraphFilePaths
+                    );
                 foreach (string fileName in fileNames)
                 {
                     args.ResolvedAssemblies.Add(Assembly.ReflectionOnlyLoadFrom(fileName));
                 }
             }
         }
-        
+
         // Called only by native function code:ValidateWorker
         [System.Security.SecuritySafeCritical]
         private void EnableResolveAssembliesForIntrospection(string verifiedFileDirectory)
         {
-            CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(ResolveAssemblyForIntrospection);
-            
+            CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(
+                ResolveAssemblyForIntrospection
+            );
+
             string[] packageGraphFilePaths = null;
             if (verifiedFileDirectory != null)
                 packageGraphFilePaths = new string[] { verifiedFileDirectory };
-            NamespaceResolverForIntrospection namespaceResolver = new NamespaceResolverForIntrospection(packageGraphFilePaths);
-            
-            System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.ReflectionOnlyNamespaceResolve += 
-                new EventHandler<System.Runtime.InteropServices.WindowsRuntime.NamespaceResolveEventArgs>(namespaceResolver.ResolveNamespace);
+            NamespaceResolverForIntrospection namespaceResolver =
+                new NamespaceResolverForIntrospection(packageGraphFilePaths);
+
+            System
+                .Runtime
+                .InteropServices
+                .WindowsRuntime
+                .WindowsRuntimeMetadata
+                .ReflectionOnlyNamespaceResolve +=
+                new EventHandler<System.Runtime.InteropServices.WindowsRuntime.NamespaceResolveEventArgs>(
+                    namespaceResolver.ResolveNamespace
+                );
         }
 #endif // FEATURE_REFLECTION_ONLY_LOAD
-
 
         /**********************************************
         * If an AssemblyName has a public key specified, the assembly is assumed
         * to have a strong name and a hash will be computed when the assembly
         * is saved.
         **********************************************/
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public AssemblyBuilder DefineDynamicAssembly(
-            AssemblyName            name,
-            AssemblyBuilderAccess   access)
+            AssemblyName name,
+            AssemblyBuilderAccess access
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name, access, null,
-                                                 null, null, null, null, ref stackMark, null, SecurityContextSource.CurrentAssembly);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                null,
+                null,
+                null,
+                null,
+                null,
+                ref stackMark,
+                null,
+                SecurityContextSource.CurrentAssembly
+            );
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public AssemblyBuilder DefineDynamicAssembly(
-            AssemblyName            name,
-            AssemblyBuilderAccess   access,
-            IEnumerable<CustomAttributeBuilder> assemblyAttributes)
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            IEnumerable<CustomAttributeBuilder> assemblyAttributes
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name,
-                                                 access,
-                                                 null, null, null, null, null,
-                                                 ref stackMark,
-                                                 assemblyAttributes, SecurityContextSource.CurrentAssembly);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                null,
+                null,
+                null,
+                null,
+                null,
+                ref stackMark,
+                assemblyAttributes,
+                SecurityContextSource.CurrentAssembly
+            );
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Due to the stack crawl mark
         [SecuritySafeCritical]
-        public AssemblyBuilder DefineDynamicAssembly(AssemblyName name,
-                                                     AssemblyBuilderAccess access,
-                                                     IEnumerable<CustomAttributeBuilder> assemblyAttributes,
-                                                     SecurityContextSource securityContextSource)
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            IEnumerable<CustomAttributeBuilder> assemblyAttributes,
+            SecurityContextSource securityContextSource
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name,
-                                                 access,
-                                                 null, null, null, null, null,
-                                                 ref stackMark,
-                                                 assemblyAttributes,
-                                                 securityContextSource);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                null,
+                null,
+                null,
+                null,
+                null,
+                ref stackMark,
+                assemblyAttributes,
+                securityContextSource
+            );
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public AssemblyBuilder DefineDynamicAssembly(
-            AssemblyName            name,
-            AssemblyBuilderAccess   access,
-            String                  dir)
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            String dir
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name, access, dir,
-                                                 null, null, null, null,
-                                                 ref stackMark,
-                                                 null,
-                                                 SecurityContextSource.CurrentAssembly);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                dir,
+                null,
+                null,
+                null,
+                null,
+                ref stackMark,
+                null,
+                SecurityContextSource.CurrentAssembly
+            );
         }
-    
-        [System.Security.SecuritySafeCritical]  // auto-generated
+
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        [Obsolete("Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.  See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
+        [Obsolete(
+            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.  See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
         public AssemblyBuilder DefineDynamicAssembly(
-            AssemblyName            name,
-            AssemblyBuilderAccess   access,
-            Evidence                evidence)
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            Evidence evidence
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name, access, null,
-                                                 evidence, null, null, null,
-                                                 ref stackMark,
-                                                 null,
-                                                 SecurityContextSource.CurrentAssembly);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                null,
+                evidence,
+                null,
+                null,
+                null,
+                ref stackMark,
+                null,
+                SecurityContextSource.CurrentAssembly
+            );
         }
-    
-        [System.Security.SecuritySafeCritical]  // auto-generated
+
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        [Obsolete("Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.  See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
+        [Obsolete(
+            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.  See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
         public AssemblyBuilder DefineDynamicAssembly(
-            AssemblyName            name,
-            AssemblyBuilderAccess   access,
-            PermissionSet           requiredPermissions,
-            PermissionSet           optionalPermissions,
-            PermissionSet           refusedPermissions)
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            PermissionSet requiredPermissions,
+            PermissionSet optionalPermissions,
+            PermissionSet refusedPermissions
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name, access, null, null,
-                                                 requiredPermissions,
-                                                 optionalPermissions,
-                                                 refusedPermissions,
-                                                 ref stackMark,
-                                                 null,
-                                                 SecurityContextSource.CurrentAssembly);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                null,
+                null,
+                requiredPermissions,
+                optionalPermissions,
+                refusedPermissions,
+                ref stackMark,
+                null,
+                SecurityContextSource.CurrentAssembly
+            );
         }
-    
-        [System.Security.SecuritySafeCritical]  // auto-generated
+
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of DefineDynamicAssembly which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkId=155570 for more information.")]
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of DefineDynamicAssembly which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkId=155570 for more information."
+        )]
         public AssemblyBuilder DefineDynamicAssembly(
-            AssemblyName            name,
-            AssemblyBuilderAccess   access,
-            String                  dir,
-            Evidence                evidence)
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            String dir,
+            Evidence evidence
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name, access, dir, evidence,
-                                                 null, null, null, ref stackMark, null, SecurityContextSource.CurrentAssembly);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                dir,
+                evidence,
+                null,
+                null,
+                null,
+                ref stackMark,
+                null,
+                SecurityContextSource.CurrentAssembly
+            );
         }
-    
-        [System.Security.SecuritySafeCritical]  // auto-generated
+
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        [Obsolete("Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
+        [Obsolete(
+            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
         public AssemblyBuilder DefineDynamicAssembly(
-            AssemblyName            name,
-            AssemblyBuilderAccess   access,
-            String                  dir,
-            PermissionSet           requiredPermissions,
-            PermissionSet           optionalPermissions,
-            PermissionSet           refusedPermissions)
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            String dir,
+            PermissionSet requiredPermissions,
+            PermissionSet optionalPermissions,
+            PermissionSet refusedPermissions
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name, access, dir, null,
-                                                 requiredPermissions,
-                                                 optionalPermissions,
-                                                 refusedPermissions,
-                                                 ref stackMark,
-                                                 null,
-                                                 SecurityContextSource.CurrentAssembly);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                dir,
+                null,
+                requiredPermissions,
+                optionalPermissions,
+                refusedPermissions,
+                ref stackMark,
+                null,
+                SecurityContextSource.CurrentAssembly
+            );
         }
-    
-        [System.Security.SecuritySafeCritical]  // auto-generated
+
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        [Obsolete("Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
+        [Obsolete(
+            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
         public AssemblyBuilder DefineDynamicAssembly(
-            AssemblyName            name,
-            AssemblyBuilderAccess   access,
-            Evidence                evidence,
-            PermissionSet           requiredPermissions,
-            PermissionSet           optionalPermissions,
-            PermissionSet           refusedPermissions)
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            Evidence evidence,
+            PermissionSet requiredPermissions,
+            PermissionSet optionalPermissions,
+            PermissionSet refusedPermissions
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name, access, null,
-                                                 evidence,
-                                                 requiredPermissions,
-                                                 optionalPermissions,
-                                                 refusedPermissions,
-                                                 ref stackMark,
-                                                 null,
-                                                 SecurityContextSource.CurrentAssembly);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                null,
+                evidence,
+                requiredPermissions,
+                optionalPermissions,
+                refusedPermissions,
+                ref stackMark,
+                null,
+                SecurityContextSource.CurrentAssembly
+            );
         }
-    
-        [System.Security.SecuritySafeCritical]  // auto-generated
+
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        [Obsolete("Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.  Please see http://go.microsoft.com/fwlink/?LinkId=155570 for more information.")]
+        [Obsolete(
+            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.  Please see http://go.microsoft.com/fwlink/?LinkId=155570 for more information."
+        )]
         public AssemblyBuilder DefineDynamicAssembly(
-            AssemblyName            name,
-            AssemblyBuilderAccess   access,
-            String                  dir,
-            Evidence                evidence,
-            PermissionSet           requiredPermissions,
-            PermissionSet           optionalPermissions,
-            PermissionSet           refusedPermissions)
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            String dir,
+            Evidence evidence,
+            PermissionSet requiredPermissions,
+            PermissionSet optionalPermissions,
+            PermissionSet refusedPermissions
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name, access, dir,
-                                                 evidence,
-                                                 requiredPermissions,
-                                                 optionalPermissions,
-                                                 refusedPermissions,
-                                                 ref stackMark,
-                                                 null,
-                                                 SecurityContextSource.CurrentAssembly);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                dir,
+                evidence,
+                requiredPermissions,
+                optionalPermissions,
+                refusedPermissions,
+                ref stackMark,
+                null,
+                SecurityContextSource.CurrentAssembly
+            );
         }
 
-
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        [Obsolete("Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
+        [Obsolete(
+            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
         public AssemblyBuilder DefineDynamicAssembly(
-            AssemblyName            name,
-            AssemblyBuilderAccess   access,
-            String                  dir,
-            Evidence                evidence,
-            PermissionSet           requiredPermissions,
-            PermissionSet           optionalPermissions,
-            PermissionSet           refusedPermissions,
-            bool                    isSynchronized)
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            String dir,
+            Evidence evidence,
+            PermissionSet requiredPermissions,
+            PermissionSet optionalPermissions,
+            PermissionSet refusedPermissions,
+            bool isSynchronized
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name,
-                                                 access,
-                                                 dir,
-                                                 evidence,
-                                                 requiredPermissions,
-                                                 optionalPermissions,
-                                                 refusedPermissions,
-                                                 ref stackMark,
-                                                 null,
-                                                 SecurityContextSource.CurrentAssembly);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                dir,
+                evidence,
+                requiredPermissions,
+                optionalPermissions,
+                refusedPermissions,
+                ref stackMark,
+                null,
+                SecurityContextSource.CurrentAssembly
+            );
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        [Obsolete("Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
+        [Obsolete(
+            "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
         public AssemblyBuilder DefineDynamicAssembly(
-                    AssemblyName name,
-                    AssemblyBuilderAccess access,
-                    String dir,
-                    Evidence evidence,
-                    PermissionSet requiredPermissions,
-                    PermissionSet optionalPermissions,
-                    PermissionSet refusedPermissions,
-                    bool isSynchronized,
-                    IEnumerable<CustomAttributeBuilder> assemblyAttributes)
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            String dir,
+            Evidence evidence,
+            PermissionSet requiredPermissions,
+            PermissionSet optionalPermissions,
+            PermissionSet refusedPermissions,
+            bool isSynchronized,
+            IEnumerable<CustomAttributeBuilder> assemblyAttributes
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name,
-                                                 access,
-                                                 dir,
-                                                 evidence,
-                                                 requiredPermissions,
-                                                 optionalPermissions,
-                                                 refusedPermissions,
-                                                 ref stackMark,
-                                                 assemblyAttributes,
-                                                 SecurityContextSource.CurrentAssembly);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                dir,
+                evidence,
+                requiredPermissions,
+                optionalPermissions,
+                refusedPermissions,
+                ref stackMark,
+                assemblyAttributes,
+                SecurityContextSource.CurrentAssembly
+            );
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public AssemblyBuilder DefineDynamicAssembly(
-                    AssemblyName name,
-                    AssemblyBuilderAccess access,
-                    String dir,
-                    bool isSynchronized,
-                    IEnumerable<CustomAttributeBuilder> assemblyAttributes)
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            String dir,
+            bool isSynchronized,
+            IEnumerable<CustomAttributeBuilder> assemblyAttributes
+        )
         {
             Contract.Ensures(Contract.Result<AssemblyBuilder>() != null);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return InternalDefineDynamicAssembly(name,
-                                                 access,
-                                                 dir,
-                                                 null,
-                                                 null,
-                                                 null,
-                                                 null,
-                                                 ref stackMark,
-                                                 assemblyAttributes,
-                                                 SecurityContextSource.CurrentAssembly);
+            return InternalDefineDynamicAssembly(
+                name,
+                access,
+                dir,
+                null,
+                null,
+                null,
+                null,
+                ref stackMark,
+                assemblyAttributes,
+                SecurityContextSource.CurrentAssembly
+            );
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         private AssemblyBuilder InternalDefineDynamicAssembly(
             AssemblyName name,
@@ -1510,30 +1761,33 @@ namespace System {
             PermissionSet refusedPermissions,
             ref StackCrawlMark stackMark,
             IEnumerable<CustomAttributeBuilder> assemblyAttributes,
-            SecurityContextSource securityContextSource)
+            SecurityContextSource securityContextSource
+        )
         {
-            return AssemblyBuilder.InternalDefineDynamicAssembly(name,
-                                                                 access,
-                                                                 dir,
-                                                                 evidence,
-                                                                 requiredPermissions,
-                                                                 optionalPermissions,
-                                                                 refusedPermissions,
-                                                                 ref stackMark,
-                                                                 assemblyAttributes,
-                                                                 securityContextSource);
+            return AssemblyBuilder.InternalDefineDynamicAssembly(
+                name,
+                access,
+                dir,
+                evidence,
+                requiredPermissions,
+                optionalPermissions,
+                refusedPermissions,
+                ref stackMark,
+                assemblyAttributes,
+                securityContextSource
+            );
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern String nApplyPolicy(AssemblyName an);
-       
+
         // Return the assembly name that results from applying policy.
         [ComVisible(false)]
         public String ApplyPolicy(String assemblyName)
         {
-            AssemblyName asmName = new AssemblyName(assemblyName);  
+            AssemblyName asmName = new AssemblyName(assemblyName);
 
             byte[] pk = asmName.GetPublicKeyToken();
             if (pk == null)
@@ -1547,10 +1801,7 @@ namespace System {
                 return nApplyPolicy(asmName);
         }
 
-
-        public ObjectHandle CreateInstance(String assemblyName,
-                                           String typeName)
-                                         
+        public ObjectHandle CreateInstance(String assemblyName, String typeName)
         {
             // jit does not check for that, so we should do it ...
             if (this == null)
@@ -1560,80 +1811,84 @@ namespace System {
                 throw new ArgumentNullException("assemblyName");
             Contract.EndContractBlock();
 
-            return Activator.CreateInstance(assemblyName,
-                                            typeName);
+            return Activator.CreateInstance(assemblyName, typeName);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal ObjectHandle InternalCreateInstanceWithNoSecurity (string assemblyName, string typeName) {
+        [System.Security.SecurityCritical] // auto-generated
+        internal ObjectHandle InternalCreateInstanceWithNoSecurity(
+            string assemblyName,
+            string typeName
+        )
+        {
             PermissionSet.s_fullTrust.Assert();
             return CreateInstance(assemblyName, typeName);
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public ObjectHandle CreateInstanceFrom(String assemblyFile,
-                                               String typeName)
-                                         
+        public ObjectHandle CreateInstanceFrom(String assemblyFile, String typeName)
         {
             // jit does not check for that, so we should do it ...
             if (this == null)
                 throw new NullReferenceException();
             Contract.EndContractBlock();
 
-            return Activator.CreateInstanceFrom(assemblyFile,
-                                                typeName);
+            return Activator.CreateInstanceFrom(assemblyFile, typeName);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal ObjectHandle InternalCreateInstanceFromWithNoSecurity (string assemblyName, string typeName) {
+        internal ObjectHandle InternalCreateInstanceFromWithNoSecurity(
+            string assemblyName,
+            string typeName
+        )
+        {
             PermissionSet.s_fullTrust.Assert();
             return CreateInstanceFrom(assemblyName, typeName);
         }
 
 #if FEATURE_COMINTEROP
-        // The first parameter should be named assemblyFile, but it was incorrectly named in a previous 
+        // The first parameter should be named assemblyFile, but it was incorrectly named in a previous
         //  release, and the compatibility police won't let us change the name now.
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public ObjectHandle CreateComInstanceFrom(String assemblyName,
-                                                  String typeName)
-                                         
+        public ObjectHandle CreateComInstanceFrom(String assemblyName, String typeName)
         {
             if (this == null)
                 throw new NullReferenceException();
             Contract.EndContractBlock();
 
-            return Activator.CreateComInstanceFrom(assemblyName,
-                                                   typeName);
+            return Activator.CreateComInstanceFrom(assemblyName, typeName);
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public ObjectHandle CreateComInstanceFrom(String assemblyFile,
-                                                  String typeName,
-                                                  byte[] hashValue, 
-                                                  AssemblyHashAlgorithm hashAlgorithm)
-                                         
+        public ObjectHandle CreateComInstanceFrom(
+            String assemblyFile,
+            String typeName,
+            byte[] hashValue,
+            AssemblyHashAlgorithm hashAlgorithm
+        )
         {
             if (this == null)
                 throw new NullReferenceException();
             Contract.EndContractBlock();
 
-            return Activator.CreateComInstanceFrom(assemblyFile,
-                                                   typeName,
-                                                   hashValue, 
-                                                   hashAlgorithm);
+            return Activator.CreateComInstanceFrom(
+                assemblyFile,
+                typeName,
+                hashValue,
+                hashAlgorithm
+            );
         }
-
 #endif // FEATURE_COMINTEROP
 
-        public ObjectHandle CreateInstance(String assemblyName,
-                                           String typeName,
-                                           Object[] activationAttributes)
-                                         
+        public ObjectHandle CreateInstance(
+            String assemblyName,
+            String typeName,
+            Object[] activationAttributes
+        )
         {
             // jit does not check for that, so we should do it ...
             if (this == null)
@@ -1643,43 +1898,44 @@ namespace System {
                 throw new ArgumentNullException("assemblyName");
             Contract.EndContractBlock();
 
-            return Activator.CreateInstance(assemblyName,
-                                            typeName,
-                                            activationAttributes);
+            return Activator.CreateInstance(assemblyName, typeName, activationAttributes);
         }
-                                  
+
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public ObjectHandle CreateInstanceFrom(String assemblyFile,
-                                               String typeName,
-                                               Object[] activationAttributes)
-                                               
+        public ObjectHandle CreateInstanceFrom(
+            String assemblyFile,
+            String typeName,
+            Object[] activationAttributes
+        )
         {
             // jit does not check for that, so we should do it ...
             if (this == null)
                 throw new NullReferenceException();
             Contract.EndContractBlock();
 
-            return Activator.CreateInstanceFrom(assemblyFile,
-                                                typeName,
-                                                activationAttributes);
+            return Activator.CreateInstanceFrom(assemblyFile, typeName, activationAttributes);
         }
-                                         
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of CreateInstance which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-        public ObjectHandle CreateInstance(String assemblyName, 
-                                           String typeName, 
-                                           bool ignoreCase,
-                                           BindingFlags bindingAttr, 
-                                           Binder binder,
-                                           Object[] args,
-                                           CultureInfo culture,
-                                           Object[] activationAttributes,
-                                           Evidence securityAttributes)
+
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of CreateInstance which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
+        public ObjectHandle CreateInstance(
+            String assemblyName,
+            String typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Object[] args,
+            CultureInfo culture,
+            Object[] activationAttributes,
+            Evidence securityAttributes
+        )
         {
             // jit does not check for that, so we should do it ...
             if (this == null)
                 throw new NullReferenceException();
-            
+
             if (assemblyName == null)
                 throw new ArgumentNullException("assemblyName");
             Contract.EndContractBlock();
@@ -1687,31 +1943,37 @@ namespace System {
 #if FEATURE_CAS_POLICY
             if (securityAttributes != null && !IsLegacyCasPolicyEnabled)
             {
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit"));   
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit")
+                );
             }
 #endif // FEATURE_CAS_POLICY
 
 #pragma warning disable 618
-            return Activator.CreateInstance(assemblyName,
-                                            typeName,
-                                            ignoreCase,
-                                            bindingAttr,
-                                            binder,
-                                            args,
-                                            culture,
-                                            activationAttributes,
-                                            securityAttributes);
+            return Activator.CreateInstance(
+                assemblyName,
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes,
+                securityAttributes
+            );
 #pragma warning restore 618
         }
 
-        public ObjectHandle CreateInstance(string assemblyName,
-                                           string typeName,
-                                           bool ignoreCase,
-                                           BindingFlags bindingAttr,
-                                           Binder binder,
-                                           object[] args,
-                                           CultureInfo culture,
-                                           object[] activationAttributes)
+        public ObjectHandle CreateInstance(
+            string assemblyName,
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            object[] args,
+            CultureInfo culture,
+            object[] activationAttributes
+        )
         {
             // jit does not check for that, so we should do it ...
             if (this == null)
@@ -1721,26 +1983,30 @@ namespace System {
                 throw new ArgumentNullException("assemblyName");
             Contract.EndContractBlock();
 
-            return Activator.CreateInstance(assemblyName,
-                                            typeName,
-                                            ignoreCase,
-                                            bindingAttr,
-                                            binder,
-                                            args,
-                                            culture,
-                                            activationAttributes);
+            return Activator.CreateInstance(
+                assemblyName,
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes
+            );
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal ObjectHandle InternalCreateInstanceWithNoSecurity (string assemblyName, 
-                                                                    string typeName,
-                                                                    bool ignoreCase,
-                                                                    BindingFlags bindingAttr,
-                                                                    Binder binder,
-                                                                    Object[] args,
-                                                                    CultureInfo culture,
-                                                                    Object[] activationAttributes,
-                                                                    Evidence securityAttributes)
+        [System.Security.SecurityCritical] // auto-generated
+        internal ObjectHandle InternalCreateInstanceWithNoSecurity(
+            string assemblyName,
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Object[] args,
+            CultureInfo culture,
+            Object[] activationAttributes,
+            Evidence securityAttributes
+        )
         {
 #if FEATURE_CAS_POLICY
             Contract.Assert(IsLegacyCasPolicyEnabled || securityAttributes == null);
@@ -1748,23 +2014,36 @@ namespace System {
 
             PermissionSet.s_fullTrust.Assert();
 #pragma warning disable 618
-            return CreateInstance(assemblyName, typeName, ignoreCase, bindingAttr, binder, args, culture, activationAttributes, securityAttributes);
+            return CreateInstance(
+                assemblyName,
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes,
+                securityAttributes
+            );
 #pragma warning restore 618
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of CreateInstanceFrom which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-        public ObjectHandle CreateInstanceFrom(String assemblyFile,
-                                               String typeName, 
-                                               bool ignoreCase,
-                                               BindingFlags bindingAttr, 
-                                               Binder binder,
-                                               Object[] args,
-                                               CultureInfo culture,
-                                               Object[] activationAttributes,
-                                               Evidence securityAttributes)
-
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of CreateInstanceFrom which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
+        public ObjectHandle CreateInstanceFrom(
+            String assemblyFile,
+            String typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Object[] args,
+            CultureInfo culture,
+            Object[] activationAttributes,
+            Evidence securityAttributes
+        )
         {
             // jit does not check for that, so we should do it ...
             if (this == null)
@@ -1774,59 +2053,69 @@ namespace System {
 #if FEATURE_CAS_POLICY
             if (securityAttributes != null && !IsLegacyCasPolicyEnabled)
             {
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit")
+                );
             }
 #endif // FEATURE_CAS_POLICY
 
-            return Activator.CreateInstanceFrom(assemblyFile,
-                                                typeName,
-                                                ignoreCase,
-                                                bindingAttr,
-                                                binder,
-                                                args,
-                                                culture,
-                                                activationAttributes,
-                                                securityAttributes);
+            return Activator.CreateInstanceFrom(
+                assemblyFile,
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes,
+                securityAttributes
+            );
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public ObjectHandle CreateInstanceFrom(string assemblyFile,
-                                               string typeName,
-                                               bool ignoreCase,
-                                               BindingFlags bindingAttr,
-                                               Binder binder,
-                                               object[] args,
-                                               CultureInfo culture,
-                                               object[] activationAttributes)
+        public ObjectHandle CreateInstanceFrom(
+            string assemblyFile,
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            object[] args,
+            CultureInfo culture,
+            object[] activationAttributes
+        )
         {
             // jit does not check for that, so we should do it ...
             if (this == null)
                 throw new NullReferenceException();
             Contract.EndContractBlock();
 
-            return Activator.CreateInstanceFrom(assemblyFile,
-                                                typeName,
-                                                ignoreCase,
-                                                bindingAttr,
-                                                binder,
-                                                args,
-                                                culture,
-                                                activationAttributes);
+            return Activator.CreateInstanceFrom(
+                assemblyFile,
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes
+            );
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal ObjectHandle InternalCreateInstanceFromWithNoSecurity (string assemblyName, 
-                                                                        string typeName,
-                                                                        bool ignoreCase,
-                                                                        BindingFlags bindingAttr,
-                                                                        Binder binder,
-                                                                        Object[] args,
-                                                                        CultureInfo culture,
-                                                                        Object[] activationAttributes,
-                                                                        Evidence securityAttributes)
+        internal ObjectHandle InternalCreateInstanceFromWithNoSecurity(
+            string assemblyName,
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Object[] args,
+            CultureInfo culture,
+            Object[] activationAttributes,
+            Evidence securityAttributes
+        )
         {
 #if FEATURE_CAS_POLICY
             Contract.Assert(IsLegacyCasPolicyEnabled || securityAttributes == null);
@@ -1834,19 +2123,38 @@ namespace System {
 
             PermissionSet.s_fullTrust.Assert();
 #pragma warning disable 618
-            return CreateInstanceFrom(assemblyName, typeName, ignoreCase, bindingAttr, binder, args, culture, activationAttributes, securityAttributes);
+            return CreateInstanceFrom(
+                assemblyName,
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes,
+                securityAttributes
+            );
 #pragma warning restore 618
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public Assembly Load(AssemblyName assemblyRef)
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return RuntimeAssembly.InternalLoadAssemblyName(assemblyRef, null, null, ref stackMark, true /*thrownOnFileNotFound*/, false, false);
+            return RuntimeAssembly.InternalLoadAssemblyName(
+                assemblyRef,
+                null,
+                null,
+                ref stackMark,
+                true /*thrownOnFileNotFound*/
+                ,
+                false,
+                false
+            );
         }
-        
-        [System.Security.SecuritySafeCritical]  // auto-generated
+
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public Assembly Load(String assemblyString)
         {
@@ -1854,78 +2162,100 @@ namespace System {
             return RuntimeAssembly.InternalLoad(assemblyString, null, ref stackMark, false);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public Assembly Load(byte[] rawAssembly)
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return RuntimeAssembly.nLoadImage(rawAssembly,
-                                       null, // symbol store
-                                       null, // evidence
-                                       ref stackMark,
-                                       false,
-                                       SecurityContextSource.CurrentAssembly);
-
+            return RuntimeAssembly.nLoadImage(
+                rawAssembly,
+                null, // symbol store
+                null, // evidence
+                ref stackMark,
+                false,
+                SecurityContextSource.CurrentAssembly
+            );
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        public Assembly Load(byte[] rawAssembly,
-                             byte[] rawSymbolStore)
+        public Assembly Load(byte[] rawAssembly, byte[] rawSymbolStore)
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return RuntimeAssembly.nLoadImage(rawAssembly,
-                                       rawSymbolStore,
-                                       null, // evidence
-                                       ref stackMark,
-                                       false, // fIntrospection
-                                       SecurityContextSource.CurrentAssembly);
+            return RuntimeAssembly.nLoadImage(
+                rawAssembly,
+                rawSymbolStore,
+                null, // evidence
+                ref stackMark,
+                false, // fIntrospection
+                SecurityContextSource.CurrentAssembly
+            );
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
 #pragma warning disable 618
         [SecurityPermissionAttribute(SecurityAction.Demand, ControlEvidence = true)]
 #pragma warning restore 618
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of Load which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkId=155570 for more information.")]
-        public Assembly Load(byte[] rawAssembly,
-                             byte[] rawSymbolStore,
-                             Evidence securityEvidence)
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of Load which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkId=155570 for more information."
+        )]
+        public Assembly Load(byte[] rawAssembly, byte[] rawSymbolStore, Evidence securityEvidence)
         {
 #if FEATURE_CAS_POLICY
             if (securityEvidence != null && !IsLegacyCasPolicyEnabled)
             {
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit")
+                );
             }
 #endif // FEATURE_CAS_POLICY
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return RuntimeAssembly.nLoadImage(rawAssembly,
-                                       rawSymbolStore,
-                                       securityEvidence,
-                                       ref stackMark,
-                                       false, // fIntrospection
-                                       SecurityContextSource.CurrentAssembly);
+            return RuntimeAssembly.nLoadImage(
+                rawAssembly,
+                rawSymbolStore,
+                securityEvidence,
+                ref stackMark,
+                false, // fIntrospection
+                SecurityContextSource.CurrentAssembly
+            );
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of Load which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-        public Assembly Load(AssemblyName assemblyRef,
-                             Evidence assemblySecurity)
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of Load which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
+        public Assembly Load(AssemblyName assemblyRef, Evidence assemblySecurity)
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return RuntimeAssembly.InternalLoadAssemblyName(assemblyRef, assemblySecurity, null, ref stackMark, true /*thrownOnFileNotFound*/, false, false);
+            return RuntimeAssembly.InternalLoadAssemblyName(
+                assemblyRef,
+                assemblySecurity,
+                null,
+                ref stackMark,
+                true /*thrownOnFileNotFound*/
+                ,
+                false,
+                false
+            );
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of Load which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-        public Assembly Load(String assemblyString,
-                             Evidence assemblySecurity)
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of Load which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
+        public Assembly Load(String assemblyString, Evidence assemblySecurity)
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return RuntimeAssembly.InternalLoad(assemblyString, assemblySecurity, ref stackMark, false);
+            return RuntimeAssembly.InternalLoad(
+                assemblyString,
+                assemblySecurity,
+                ref stackMark,
+                false
+            );
         }
 
         [ResourceExposure(ResourceScope.Machine)]
@@ -1937,29 +2267,33 @@ namespace System {
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of ExecuteAssembly which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-        public int ExecuteAssembly(String assemblyFile,
-                                   Evidence assemblySecurity)
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of ExecuteAssembly which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
+        public int ExecuteAssembly(String assemblyFile, Evidence assemblySecurity)
         {
             return ExecuteAssembly(assemblyFile, assemblySecurity, null);
         }
-    
+
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of ExecuteAssembly which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-        public int ExecuteAssembly(String assemblyFile,
-                                   Evidence assemblySecurity,
-                                   String[] args)
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of ExecuteAssembly which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
+        public int ExecuteAssembly(String assemblyFile, Evidence assemblySecurity, String[] args)
         {
 #if FEATURE_CAS_POLICY
             if (assemblySecurity != null && !IsLegacyCasPolicyEnabled)
             {
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit")
+                );
             }
 #endif // FEATURE_CAS_POLICY
 
-            RuntimeAssembly assembly = (RuntimeAssembly)Assembly.LoadFrom(assemblyFile, assemblySecurity);
-    
+            RuntimeAssembly assembly = (RuntimeAssembly)
+                Assembly.LoadFrom(assemblyFile, assemblySecurity);
+
             if (args == null)
                 args = new String[0];
 
@@ -1980,24 +2314,28 @@ namespace System {
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of ExecuteAssembly which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-        public int ExecuteAssembly(String assemblyFile,
-                                   Evidence assemblySecurity,
-                                   String[] args,
-                                   byte[] hashValue, 
-                                   AssemblyHashAlgorithm hashAlgorithm)
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of ExecuteAssembly which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
+        public int ExecuteAssembly(
+            String assemblyFile,
+            Evidence assemblySecurity,
+            String[] args,
+            byte[] hashValue,
+            AssemblyHashAlgorithm hashAlgorithm
+        )
         {
 #if FEATURE_CAS_POLICY
             if (assemblySecurity != null && !IsLegacyCasPolicyEnabled)
             {
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit")
+                );
             }
 #endif // FEATURE_CAS_POLICY
 
-            RuntimeAssembly assembly = (RuntimeAssembly)Assembly.LoadFrom(assemblyFile, 
-                                                                          assemblySecurity,
-                                                                          hashValue,
-                                                                          hashAlgorithm);
+            RuntimeAssembly assembly = (RuntimeAssembly)
+                Assembly.LoadFrom(assemblyFile, assemblySecurity, hashValue, hashAlgorithm);
             if (args == null)
                 args = new String[0];
 
@@ -2006,51 +2344,60 @@ namespace System {
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public int ExecuteAssembly(string assemblyFile,
-                                   string[] args,
-                                   byte[] hashValue,
-                                   AssemblyHashAlgorithm hashAlgorithm)
+        public int ExecuteAssembly(
+            string assemblyFile,
+            string[] args,
+            byte[] hashValue,
+            AssemblyHashAlgorithm hashAlgorithm
+        )
         {
-            RuntimeAssembly assembly = (RuntimeAssembly)Assembly.LoadFrom(assemblyFile,
-                                                                          hashValue,
-                                                                          hashAlgorithm);
+            RuntimeAssembly assembly = (RuntimeAssembly)
+                Assembly.LoadFrom(assemblyFile, hashValue, hashAlgorithm);
             if (args == null)
                 args = new String[0];
 
             return nExecuteAssembly(assembly, args);
         }
 
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         public int ExecuteAssemblyByName(String assemblyName)
         {
             return ExecuteAssemblyByName(assemblyName, (string[])null);
         }
 
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of ExecuteAssemblyByName which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-        public int ExecuteAssemblyByName(String assemblyName,
-                                         Evidence assemblySecurity)
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of ExecuteAssemblyByName which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
+        public int ExecuteAssemblyByName(String assemblyName, Evidence assemblySecurity)
         {
 #pragma warning disable 618
             return ExecuteAssemblyByName(assemblyName, assemblySecurity, null);
 #pragma warning restore 618
         }
 
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of ExecuteAssemblyByName which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-        public int ExecuteAssemblyByName(String assemblyName,
-                                         Evidence assemblySecurity,
-                                         params String[] args)
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of ExecuteAssemblyByName which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
+        public int ExecuteAssemblyByName(
+            String assemblyName,
+            Evidence assemblySecurity,
+            params String[] args
+        )
         {
 #if FEATURE_CAS_POLICY
             if (assemblySecurity != null && !IsLegacyCasPolicyEnabled)
             {
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit")
+                );
             }
 #endif // FEATURE_CAS_POLICY
 
-            RuntimeAssembly assembly = (RuntimeAssembly)Assembly.Load(assemblyName, assemblySecurity);
-    
+            RuntimeAssembly assembly = (RuntimeAssembly)
+                Assembly.Load(assemblyName, assemblySecurity);
+
             if (args == null)
                 args = new String[0];
 
@@ -2067,20 +2414,27 @@ namespace System {
             return nExecuteAssembly(assembly, args);
         }
 
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of ExecuteAssemblyByName which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-        public int ExecuteAssemblyByName(AssemblyName assemblyName,
-                                         Evidence assemblySecurity,
-                                         params String[] args)
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of ExecuteAssemblyByName which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
+        public int ExecuteAssemblyByName(
+            AssemblyName assemblyName,
+            Evidence assemblySecurity,
+            params String[] args
+        )
         {
 #if FEATURE_CAS_POLICY
             if (assemblySecurity != null && !IsLegacyCasPolicyEnabled)
             {
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit")
+                );
             }
 #endif // FEATURE_CAS_POLICY
 
-            RuntimeAssembly assembly = (RuntimeAssembly)Assembly.Load(assemblyName, assemblySecurity);
-    
+            RuntimeAssembly assembly = (RuntimeAssembly)
+                Assembly.Load(assemblyName, assemblySecurity);
+
             if (args == null)
                 args = new String[0];
 
@@ -2099,7 +2453,8 @@ namespace System {
 
         public static AppDomain CurrentDomain
         {
-            get {
+            get
+            {
                 Contract.Ensures(Contract.Result<AppDomain>() != null);
                 return Thread.GetDomain();
             }
@@ -2108,40 +2463,44 @@ namespace System {
 #if FEATURE_CAS_POLICY
         public Evidence Evidence
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+            [System.Security.SecuritySafeCritical] // auto-generated
             [SecurityPermissionAttribute(SecurityAction.Demand, ControlEvidence = true)]
-            get {
-                return EvidenceNoDemand;
-            }
+            get { return EvidenceNoDemand; }
         }
 
-        internal Evidence EvidenceNoDemand {
+        internal Evidence EvidenceNoDemand
+        {
             [SecurityCritical]
-            get {
-                if (_SecurityIdentity == null) {
-                    if (!IsDefaultAppDomain() && nIsDefaultAppDomainForEvidence()) {
-#if !FEATURE_CORECLR                         
+            get
+            {
+                if (_SecurityIdentity == null)
+                {
+                    if (!IsDefaultAppDomain() && nIsDefaultAppDomainForEvidence())
+                    {
+#if !FEATURE_CORECLR
                         //
-                        // V1.x compatibility: If this is an AppDomain created 
+                        // V1.x compatibility: If this is an AppDomain created
                         // by the default appdomain without an explicit evidence
                         // then reuse the evidence of the default AppDomain.
                         //
                         return GetDefaultDomain().Evidence;
 #else
-                       Contract.Assert(false,"This code should not be called for core CLR");
-                        
+                        Contract.Assert(false, "This code should not be called for core CLR");
+
                         // This operation is not allowed
                         throw new InvalidOperationException();
 #endif
                     }
-                    else {
+                    else
+                    {
                         // We can't cache this value, since the VM needs to differentiate between AppDomains
                         // which have no user supplied evidence and those which do and it uses the presence
                         // of Evidence on the domain to make that switch.
                         return new Evidence(new AppDomainEvidenceFactory(this));
                     }
                 }
-                else {
+                else
+                {
                     return _SecurityIdentity.Clone();
                 }
             }
@@ -2149,9 +2508,7 @@ namespace System {
 
         internal Evidence InternalEvidence
         {
-            get {
-                    return _SecurityIdentity;
-            }
+            get { return _SecurityIdentity; }
         }
 
         internal EvidenceBase GetHostEvidence(Type type)
@@ -2169,20 +2526,18 @@ namespace System {
 
         public String FriendlyName
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+            [System.Security.SecuritySafeCritical] // auto-generated
             get { return nGetFriendlyName(); }
-        } 
+        }
 
         public String BaseDirectory
         {
 #if FEATURE_CORECLR
             [System.Security.SecurityCritical]
-#endif        
+#endif
             [ResourceExposure(ResourceScope.Machine)]
             [ResourceConsumption(ResourceScope.Machine)]
-            get {
-                return FusionStore.ApplicationBase;
-            }
+            get { return FusionStore.ApplicationBase; }
         }
 
 #if FEATURE_FUSION
@@ -2195,10 +2550,13 @@ namespace System {
 
         public bool ShadowCopyFiles
         {
-            get {
+            get
+            {
                 String s = FusionStore.ShadowCopyFiles;
-                if((s != null) && 
-                   (String.Compare(s, "true", StringComparison.OrdinalIgnoreCase) == 0))
+                if (
+                    (s != null)
+                    && (String.Compare(s, "true", StringComparison.OrdinalIgnoreCase) == 0)
+                )
                     return true;
                 else
                     return false;
@@ -2206,85 +2564,102 @@ namespace System {
         }
 #endif
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public override String ToString()
         {
             StringBuilder sb = StringBuilderCache.Acquire();
-            
+
             String fn = nGetFriendlyName();
-            if (fn != null) {
+            if (fn != null)
+            {
                 sb.Append(Environment.GetResourceString("Loader_Name") + fn);
                 sb.Append(Environment.NewLine);
             }
-    
-            if(_Policies == null || _Policies.Length == 0) 
-                sb.Append(Environment.GetResourceString("Loader_NoContextPolicies")
-                          + Environment.NewLine);
-            else {
-                sb.Append(Environment.GetResourceString("Loader_ContextPolicies")
-                          + Environment.NewLine);
-                for(int i = 0;i < _Policies.Length; i++) {
+
+            if (_Policies == null || _Policies.Length == 0)
+                sb.Append(
+                    Environment.GetResourceString("Loader_NoContextPolicies") + Environment.NewLine
+                );
+            else
+            {
+                sb.Append(
+                    Environment.GetResourceString("Loader_ContextPolicies") + Environment.NewLine
+                );
+                for (int i = 0; i < _Policies.Length; i++)
+                {
                     sb.Append(_Policies[i]);
                     sb.Append(Environment.NewLine);
                 }
             }
-    
+
             return StringBuilderCache.GetStringAndRelease(sb);
         }
-        
+
         public Assembly[] GetAssemblies()
         {
-            return nGetAssemblies(false /* forIntrospection */);
+            return nGetAssemblies(
+                false /* forIntrospection */
+            );
         }
-
 
         public Assembly[] ReflectionOnlyGetAssemblies()
         {
-            return nGetAssemblies(true /* forIntrospection */);
+            return nGetAssemblies(
+                true /* forIntrospection */
+            );
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern Assembly[] nGetAssemblies(bool forIntrospection);
 
         // this is true when we've removed the handles etc so really can't do anything
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern bool IsUnloadingForcedFinalize();
 
-    // this is true when we've just started going through the finalizers and are forcing objects to finalize
-    // so must be aware that certain infrastructure may have gone away
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        // this is true when we've just started going through the finalizers and are forcing objects to finalize
+        // so must be aware that certain infrastructure may have gone away
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern bool IsFinalizingForUnload();
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void PublishAnonymouslyHostedDynamicMethodsAssembly(RuntimeAssembly assemblyHandle);
+        internal static extern void PublishAnonymouslyHostedDynamicMethodsAssembly(
+            RuntimeAssembly assemblyHandle
+        );
 
 #if  FEATURE_FUSION
         // Appends the following string to the private path. Valid paths
         // are of the form "bin;util/i386" etc.
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("AppDomain.AppendPrivatePath has been deprecated. Please investigate the use of AppDomainSetup.PrivateBinPath instead. http://go.microsoft.com/fwlink/?linkid=14202")]
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "AppDomain.AppendPrivatePath has been deprecated. Please investigate the use of AppDomainSetup.PrivateBinPath instead. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public void AppendPrivatePath(String path)
         {
-            if(path == null || path.Length == 0)
+            if (path == null || path.Length == 0)
                 return;
 
-            String current = FusionStore.Value[(int) AppDomainSetup.LoaderInformation.PrivateBinPathValue];
+            String current = FusionStore.Value[
+                (int)AppDomainSetup.LoaderInformation.PrivateBinPathValue
+            ];
             StringBuilder appendPath = StringBuilderCache.Acquire();
 
-            if(current != null && current.Length > 0) {
+            if (current != null && current.Length > 0)
+            {
                 // See if the last character is a separator
                 appendPath.Append(current);
-                if((current[current.Length-1] != Path.PathSeparator) &&
-                   (path[0] != Path.PathSeparator))
+                if (
+                    (current[current.Length - 1] != Path.PathSeparator)
+                    && (path[0] != Path.PathSeparator)
+                )
                     appendPath.Append(Path.PathSeparator);
             }
             appendPath.Append(path);
@@ -2293,9 +2668,10 @@ namespace System {
             InternalSetPrivateBinPath(result);
         }
 
-        
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("AppDomain.ClearPrivatePath has been deprecated. Please investigate the use of AppDomainSetup.PrivateBinPath instead. http://go.microsoft.com/fwlink/?linkid=14202")]
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "AppDomain.ClearPrivatePath has been deprecated. Please investigate the use of AppDomainSetup.PrivateBinPath instead. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         public void ClearPrivatePath()
@@ -2303,8 +2679,10 @@ namespace System {
             InternalSetPrivateBinPath(String.Empty);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("AppDomain.ClearShadowCopyPath has been deprecated. Please investigate the use of AppDomainSetup.ShadowCopyDirectories instead. http://go.microsoft.com/fwlink/?linkid=14202")]
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "AppDomain.ClearShadowCopyPath has been deprecated. Please investigate the use of AppDomainSetup.ShadowCopyDirectories instead. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         public void ClearShadowCopyPath()
@@ -2312,8 +2690,10 @@ namespace System {
             InternalSetShadowCopyPath(String.Empty);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("AppDomain.SetCachePath has been deprecated. Please investigate the use of AppDomainSetup.CachePath instead. http://go.microsoft.com/fwlink/?linkid=14202")]
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "AppDomain.SetCachePath has been deprecated. Please investigate the use of AppDomainSetup.CachePath instead. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public void SetCachePath(String path)
@@ -2322,38 +2702,45 @@ namespace System {
         }
 #endif // FEATURE_FUSION
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.AppDomain)]
         [ResourceConsumption(ResourceScope.AppDomain)]
-        public void SetData (string name, object data) {
-#if FEATURE_CORECLR        
+        public void SetData(string name, object data)
+        {
+#if FEATURE_CORECLR
             if (!name.Equals("LOCATION_URI"))
             {
                 // Only LOCATION_URI can be set using AppDomain.SetData
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_SetData_OnlyLocationURI", name));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_SetData_OnlyLocationURI", name)
+                );
             }
-#endif // FEATURE_CORECLR            
+#endif // FEATURE_CORECLR
             SetDataHelper(name, data, null);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.AppDomain)]
         [ResourceConsumption(ResourceScope.AppDomain)]
-        public void SetData (string name, object data, IPermission permission) {
-#if FEATURE_CORECLR        
+        public void SetData(string name, object data, IPermission permission)
+        {
+#if FEATURE_CORECLR
             if (!name.Equals("LOCATION_URI"))
             {
                 // Only LOCATION_URI can be set using AppDomain.SetData
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_SetData_OnlyLocationURI", name));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_SetData_OnlyLocationURI", name)
+                );
             }
-#endif // FEATURE_CORECLR                    
+#endif // FEATURE_CORECLR
             SetDataHelper(name, data, permission);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.AppDomain)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.AppDomain)]
-        private void SetDataHelper (string name, object data, IPermission permission) {
+        private void SetDataHelper(string name, object data, IPermission permission)
+        {
             if (name == null)
                 throw new ArgumentNullException("name");
             Contract.EndContractBlock();
@@ -2372,71 +2759,82 @@ namespace System {
             //   switch can be set on the AppDomain.
             //
 #if FEATURE_FUSION
-            if (name.Equals(TargetFrameworkNameAppCompatSetting)) {
-                _FusionStore.TargetFrameworkName = (String) data;
+            if (name.Equals(TargetFrameworkNameAppCompatSetting))
+            {
+                _FusionStore.TargetFrameworkName = (String)data;
                 return;
             }
 #if FEATURE_CAS_POLICY
-            if (name.Equals("IgnoreSystemPolicy")) {
-                lock (this) {
+            if (name.Equals("IgnoreSystemPolicy"))
+            {
+                lock (this)
+                {
                     if (!_HasSetPolicy)
-                        throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_SetData"));
+                        throw new InvalidOperationException(
+                            Environment.GetResourceString("InvalidOperation_SetData")
+                        );
                 }
                 new PermissionSet(PermissionState.Unrestricted).Demand();
             }
 #endif
             int key = AppDomainSetup.Locate(name);
 
-            if(key == -1) {
-                lock (((ICollection)LocalStore).SyncRoot) {
-                    LocalStore[name] = new object[] {data, permission};
+            if (key == -1)
+            {
+                lock (((ICollection)LocalStore).SyncRoot)
+                {
+                    LocalStore[name] = new object[] { data, permission };
                 }
             }
-            else {
+            else
+            {
                 if (permission != null)
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_SetData"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_SetData")
+                    );
                 // Be sure to call these properties, not Value, since
                 // these do more than call Value.
-                switch(key) {
-                case (int) AppDomainSetup.LoaderInformation.DynamicBaseValue:
-                    FusionStore.DynamicBase = (string) data;
-                    break;
-                case (int) AppDomainSetup.LoaderInformation.DevPathValue:
-                    FusionStore.DeveloperPath = (string) data;
-                    break;
-                case (int) AppDomainSetup.LoaderInformation.ShadowCopyDirectoriesValue:
-                    FusionStore.ShadowCopyDirectories = (string) data;
-                    break;
-                case (int) AppDomainSetup.LoaderInformation.DisallowPublisherPolicyValue:
-                    if(data != null)
-                        FusionStore.DisallowPublisherPolicy = true;
-                    else
-                        FusionStore.DisallowPublisherPolicy = false;
-                    break;
-                case (int) AppDomainSetup.LoaderInformation.DisallowCodeDownloadValue:
-                    if (data != null)
-                         FusionStore.DisallowCodeDownload = true;
-                    else
-                        FusionStore.DisallowCodeDownload = false;
-                    break;
-                case (int) AppDomainSetup.LoaderInformation.DisallowBindingRedirectsValue:
-                    if(data != null)
-                        FusionStore.DisallowBindingRedirects = true;
-                    else
-                        FusionStore.DisallowBindingRedirects = false;
-                    break;
-                case (int) AppDomainSetup.LoaderInformation.DisallowAppBaseProbingValue:
-                    if(data != null)
-                        FusionStore.DisallowApplicationBaseProbing = true;
-                    else
-                        FusionStore.DisallowApplicationBaseProbing = false;
-                    break;
-                case (int) AppDomainSetup.LoaderInformation.ConfigurationBytesValue:
-                    FusionStore.SetConfigurationBytes((byte[]) data);
-                    break;
-                default:
-                    FusionStore.Value[key] = (string) data;
-                    break;
+                switch (key)
+                {
+                    case (int)AppDomainSetup.LoaderInformation.DynamicBaseValue:
+                        FusionStore.DynamicBase = (string)data;
+                        break;
+                    case (int)AppDomainSetup.LoaderInformation.DevPathValue:
+                        FusionStore.DeveloperPath = (string)data;
+                        break;
+                    case (int)AppDomainSetup.LoaderInformation.ShadowCopyDirectoriesValue:
+                        FusionStore.ShadowCopyDirectories = (string)data;
+                        break;
+                    case (int)AppDomainSetup.LoaderInformation.DisallowPublisherPolicyValue:
+                        if (data != null)
+                            FusionStore.DisallowPublisherPolicy = true;
+                        else
+                            FusionStore.DisallowPublisherPolicy = false;
+                        break;
+                    case (int)AppDomainSetup.LoaderInformation.DisallowCodeDownloadValue:
+                        if (data != null)
+                            FusionStore.DisallowCodeDownload = true;
+                        else
+                            FusionStore.DisallowCodeDownload = false;
+                        break;
+                    case (int)AppDomainSetup.LoaderInformation.DisallowBindingRedirectsValue:
+                        if (data != null)
+                            FusionStore.DisallowBindingRedirects = true;
+                        else
+                            FusionStore.DisallowBindingRedirects = false;
+                        break;
+                    case (int)AppDomainSetup.LoaderInformation.DisallowAppBaseProbingValue:
+                        if (data != null)
+                            FusionStore.DisallowApplicationBaseProbing = true;
+                        else
+                            FusionStore.DisallowApplicationBaseProbing = false;
+                        break;
+                    case (int)AppDomainSetup.LoaderInformation.ConfigurationBytesValue:
+                        FusionStore.SetConfigurationBytes((byte[])data);
+                        break;
+                    default:
+                        FusionStore.Value[key] = (string)data;
+                        break;
                 }
             }
 #else // FEATURE_FUSION
@@ -2444,103 +2842,112 @@ namespace System {
             // SetData should only be used to set values that don't already exist.
             {
                 object[] currentVal;
-                lock (((ICollection)LocalStore).SyncRoot) {
+                lock (((ICollection)LocalStore).SyncRoot)
+                {
                     LocalStore.TryGetValue(name, out currentVal);
                 }
                 if (currentVal != null && currentVal[0] != null)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_SetData_OnlyOnce"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_SetData_OnlyOnce")
+                    );
                 }
             }
 
 #endif // FEATURE_CORECLR
-            lock (((ICollection)LocalStore).SyncRoot) {
-                LocalStore[name] = new object[] {data, permission};
+            lock (((ICollection)LocalStore).SyncRoot)
+            {
+                LocalStore[name] = new object[] { data, permission };
             }
 #endif // FEATURE_FUSION
         }
 
         [Pure]
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #else
+#else
         [System.Security.SecuritySafeCritical]
-        #endif
+#endif
         [ResourceExposure(ResourceScope.AppDomain)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         public Object GetData(string name)
         {
-            if(name == null)
+            if (name == null)
                 throw new ArgumentNullException("name");
             Contract.EndContractBlock();
 
             int key = AppDomainSetup.Locate(name);
-            if(key == -1) 
+            if (key == -1)
             {
 #if FEATURE_LOADER_OPTIMIZATION
-                if(name.Equals(AppDomainSetup.LoaderOptimizationKey))
+                if (name.Equals(AppDomainSetup.LoaderOptimizationKey))
                     return FusionStore.LoaderOptimization;
-                else 
-#endif // FEATURE_LOADER_OPTIMIZATION                    
+                else
+#endif // FEATURE_LOADER_OPTIMIZATION
                 {
                     object[] data;
-                    lock (((ICollection)LocalStore).SyncRoot) {
+                    lock (((ICollection)LocalStore).SyncRoot)
+                    {
                         LocalStore.TryGetValue(name, out data);
                     }
                     if (data == null)
                         return null;
-                    if (data[1] != null) {
-                        IPermission permission = (IPermission) data[1];
+                    if (data[1] != null)
+                    {
+                        IPermission permission = (IPermission)data[1];
                         permission.Demand();
                     }
                     return data[0];
                 }
             }
-           else {
+            else
+            {
                 // Be sure to call these properties, not Value, so
                 // that the appropriate permission demand will be done
-                switch(key) {
-                case (int) AppDomainSetup.LoaderInformation.ApplicationBaseValue:
-                    return FusionStore.ApplicationBase;
-                case (int) AppDomainSetup.LoaderInformation.ApplicationNameValue:
-                    return FusionStore.ApplicationName;
+                switch (key)
+                {
+                    case (int)AppDomainSetup.LoaderInformation.ApplicationBaseValue:
+                        return FusionStore.ApplicationBase;
+                    case (int)AppDomainSetup.LoaderInformation.ApplicationNameValue:
+                        return FusionStore.ApplicationName;
 #if FEATURE_FUSION
-                case (int) AppDomainSetup.LoaderInformation.ConfigurationFileValue:
-                    return FusionStore.ConfigurationFile;
-                case (int) AppDomainSetup.LoaderInformation.DynamicBaseValue:
-                    return FusionStore.DynamicBase;
-                case (int) AppDomainSetup.LoaderInformation.DevPathValue:
-                    return FusionStore.DeveloperPath;
-                case (int) AppDomainSetup.LoaderInformation.PrivateBinPathValue:
-                    return FusionStore.PrivateBinPath;
-                case (int) AppDomainSetup.LoaderInformation.PrivateBinPathProbeValue:
-                    return FusionStore.PrivateBinPathProbe;
-                case (int) AppDomainSetup.LoaderInformation.ShadowCopyDirectoriesValue:
-                    return FusionStore.ShadowCopyDirectories;
-                case (int) AppDomainSetup.LoaderInformation.ShadowCopyFilesValue:
-                    return FusionStore.ShadowCopyFiles;
-                case (int) AppDomainSetup.LoaderInformation.CachePathValue:
-                    return FusionStore.CachePath;
-                case (int) AppDomainSetup.LoaderInformation.LicenseFileValue:
-                    return FusionStore.LicenseFile;
-                case (int) AppDomainSetup.LoaderInformation.DisallowPublisherPolicyValue:
-                    return FusionStore.DisallowPublisherPolicy;
-                case (int) AppDomainSetup.LoaderInformation.DisallowCodeDownloadValue:
-                    return FusionStore.DisallowCodeDownload;
-                case (int) AppDomainSetup.LoaderInformation.DisallowBindingRedirectsValue:
-                    return FusionStore.DisallowBindingRedirects;
-                case (int) AppDomainSetup.LoaderInformation.DisallowAppBaseProbingValue:
-                    return FusionStore.DisallowApplicationBaseProbing;
-                case (int) AppDomainSetup.LoaderInformation.ConfigurationBytesValue:
-                    return FusionStore.GetConfigurationBytes();
+                    case (int)AppDomainSetup.LoaderInformation.ConfigurationFileValue:
+                        return FusionStore.ConfigurationFile;
+                    case (int)AppDomainSetup.LoaderInformation.DynamicBaseValue:
+                        return FusionStore.DynamicBase;
+                    case (int)AppDomainSetup.LoaderInformation.DevPathValue:
+                        return FusionStore.DeveloperPath;
+                    case (int)AppDomainSetup.LoaderInformation.PrivateBinPathValue:
+                        return FusionStore.PrivateBinPath;
+                    case (int)AppDomainSetup.LoaderInformation.PrivateBinPathProbeValue:
+                        return FusionStore.PrivateBinPathProbe;
+                    case (int)AppDomainSetup.LoaderInformation.ShadowCopyDirectoriesValue:
+                        return FusionStore.ShadowCopyDirectories;
+                    case (int)AppDomainSetup.LoaderInformation.ShadowCopyFilesValue:
+                        return FusionStore.ShadowCopyFiles;
+                    case (int)AppDomainSetup.LoaderInformation.CachePathValue:
+                        return FusionStore.CachePath;
+                    case (int)AppDomainSetup.LoaderInformation.LicenseFileValue:
+                        return FusionStore.LicenseFile;
+                    case (int)AppDomainSetup.LoaderInformation.DisallowPublisherPolicyValue:
+                        return FusionStore.DisallowPublisherPolicy;
+                    case (int)AppDomainSetup.LoaderInformation.DisallowCodeDownloadValue:
+                        return FusionStore.DisallowCodeDownload;
+                    case (int)AppDomainSetup.LoaderInformation.DisallowBindingRedirectsValue:
+                        return FusionStore.DisallowBindingRedirects;
+                    case (int)AppDomainSetup.LoaderInformation.DisallowAppBaseProbingValue:
+                        return FusionStore.DisallowApplicationBaseProbing;
+                    case (int)AppDomainSetup.LoaderInformation.ConfigurationBytesValue:
+                        return FusionStore.GetConfigurationBytes();
 #endif //FEATURE_FUSION
-                    
-                default:
-                    Contract.Assert(false, "Need to handle new LoaderInformation value in AppDomain.GetData()");
-                    return null;
+                    default:
+                        Contract.Assert(
+                            false,
+                            "Need to handle new LoaderInformation value in AppDomain.GetData()"
+                        );
+                        return null;
                 }
             }
-                   
         }
 
         // The compat flags are set at domain creation time to indicate that the given breaking
@@ -2548,46 +2955,55 @@ namespace System {
         //
         // After the domain has been created, this Nullable boolean returned by this method should
         // always have a value.  Code in the runtime uses this to know if it is safe to cache values
-        // that might change if the compatibility switches have not been set yet.    
+        // that might change if the compatibility switches have not been set yet.
         public Nullable<bool> IsCompatibilitySwitchSet(String value)
         {
             Nullable<bool> fReturn;
 
-            if (_compatFlagsInitialized == false) 
+            if (_compatFlagsInitialized == false)
             {
                 fReturn = new Nullable<bool>();
-            } 
+            }
             else
             {
-                fReturn  = new Nullable<bool>(_compatFlags != null && _compatFlags.ContainsKey(value));
+                fReturn = new Nullable<bool>(
+                    _compatFlags != null && _compatFlags.ContainsKey(value)
+                );
             }
 
             return fReturn;
         }
-        
-        [Obsolete("AppDomain.GetCurrentThreadId has been deprecated because it does not provide a stable Id when managed threads are running on fibers (aka lightweight threads). To get a stable identifier for a managed thread, use the ManagedThreadId property on Thread.  http://go.microsoft.com/fwlink/?linkid=14202", false)]
+
+        [Obsolete(
+            "AppDomain.GetCurrentThreadId has been deprecated because it does not provide a stable Id when managed threads are running on fibers (aka lightweight threads). To get a stable identifier for a managed thread, use the ManagedThreadId property on Thread.  http://go.microsoft.com/fwlink/?linkid=14202",
+            false
+        )]
         [DllImport(Microsoft.Win32.Win32Native.KERNEL32)]
         [ResourceExposure(ResourceScope.Process)]
         public static extern int GetCurrentThreadId();
 
 #if FEATURE_REMOTING
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute( SecurityAction.Demand, ControlAppDomain = true ),
-         ReliabilityContract(Consistency.MayCorruptAppDomain, Cer.MayFail)]            
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [
+            SecurityPermissionAttribute(SecurityAction.Demand, ControlAppDomain = true),
+            ReliabilityContract(Consistency.MayCorruptAppDomain, Cer.MayFail)
+        ]
         public static void Unload(AppDomain domain)
         {
             if (domain == null)
                 throw new ArgumentNullException("domain");
             Contract.EndContractBlock();
 
-            try {
+            try
+            {
                 Int32 domainID = AppDomain.GetIdForUnload(domain);
-                if (domainID==0)
+                if (domainID == 0)
                     throw new CannotUnloadAppDomainException();
                 AppDomain.nUnload(domainID);
             }
-            catch(Exception e) {
-                throw e;    // throw it again to reset stack trace
+            catch (Exception e)
+            {
+                throw e; // throw it again to reset stack trace
             }
         }
 #endif
@@ -2596,9 +3012,11 @@ namespace System {
         // previously). Making this call will guarantee that previously loaded
         // assemblies will be granted permissions based on the default machine
         // policy that was in place prior to this call.
-#if FEATURE_CAS_POLICY        
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("AppDomain policy levels are obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
+#if FEATURE_CAS_POLICY
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "AppDomain policy levels are obsolete and will be removed in a future release of the .NET Framework. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
         public void SetAppDomainPolicy(PolicyLevel domainPolicy)
         {
             if (domainPolicy == null)
@@ -2607,13 +3025,18 @@ namespace System {
 
             if (!IsLegacyCasPolicyEnabled)
             {
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_RequiresCasPolicyExplicit"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_RequiresCasPolicyExplicit")
+                );
             }
 
             // Check that policy has not been set previously.
-            lock (this) {
+            lock (this)
+            {
                 if (_HasSetPolicy)
-                    throw new PolicyException(Environment.GetResourceString("Policy_PolicyAlreadySet"));
+                    throw new PolicyException(
+                        Environment.GetResourceString("Policy_PolicyAlreadySet")
+                    );
                 _HasSetPolicy = true;
 
                 // Make sure that the loader allows us to change security policy
@@ -2626,31 +3049,34 @@ namespace System {
         }
 #endif //#if !FEATURE_CAS_POLICY
 #if FEATURE_CLICKONCE
-        public ActivationContext ActivationContext {
-            [System.Security.SecurityCritical]  // auto-generated_required
-            get {
-                return _activationContext;
-            }
+        public ActivationContext ActivationContext
+        {
+            [System.Security.SecurityCritical] // auto-generated_required
+            get { return _activationContext; }
         }
 
-        public ApplicationIdentity ApplicationIdentity {
-            [System.Security.SecurityCritical]  // auto-generated_required
-            get {
-                return _applicationIdentity;
-            }
+        public ApplicationIdentity ApplicationIdentity
+        {
+            [System.Security.SecurityCritical] // auto-generated_required
+            get { return _applicationIdentity; }
         }
 #endif // FEATURE_CLICKONCE
-
 
 #if FEATURE_CLICKONCE
-        public ApplicationTrust ApplicationTrust {
-            [System.Security.SecurityCritical]  // auto-generated_required
+        public ApplicationTrust ApplicationTrust
+        {
+            [System.Security.SecurityCritical] // auto-generated_required
 #else // FEATURE_CLICKONCE
-        internal ApplicationTrust ApplicationTrust {
+        internal ApplicationTrust ApplicationTrust
+        {
 #endif // FEATURE_CLICKONCE
-            get {
-                if (_applicationTrust == null && _IsFastFullTrustDomain) {
-                    _applicationTrust = new ApplicationTrust(new PermissionSet(PermissionState.Unrestricted));
+            get
+            {
+                if (_applicationTrust == null && _IsFastFullTrustDomain)
+                {
+                    _applicationTrust = new ApplicationTrust(
+                        new PermissionSet(PermissionState.Unrestricted)
+                    );
                 }
 
                 return _applicationTrust;
@@ -2661,18 +3087,24 @@ namespace System {
         // Set the default principal object to be attached to threads if they
         // attempt to bind to a principal while executing in this appdomain. The
         // default can only be set once.
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.ControlPrincipal)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.ControlPrincipal
+        )]
         public void SetThreadPrincipal(IPrincipal principal)
         {
             if (principal == null)
                 throw new ArgumentNullException("principal");
             Contract.EndContractBlock();
 
-            lock (this) {
+            lock (this)
+            {
                 // Check that principal has not been set previously.
                 if (_DefaultPrincipal != null)
-                    throw new PolicyException(Environment.GetResourceString("Policy_PrincipalTwice"));
+                    throw new PolicyException(
+                        Environment.GetResourceString("Policy_PrincipalTwice")
+                    );
 
                 _DefaultPrincipal = principal;
             }
@@ -2682,26 +3114,29 @@ namespace System {
 #if FEATURE_CAS_POLICY
         // Similar to the above, but sets the class of principal to be created
         // instead.
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.ControlPrincipal)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.ControlPrincipal
+        )]
         public void SetPrincipalPolicy(PrincipalPolicy policy)
         {
             _PrincipalPolicy = policy;
         }
 #endif
 
-
-#if FEATURE_REMOTING        
+#if FEATURE_REMOTING
         // This method gives AppDomain an infinite life time by preventing a lease from being
         // created
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public override Object InitializeLifetimeService()
         {
             return null;
         }
+
         // This is useful for requesting execution of some code
-        // in another appDomain ... the delegate may be defined 
-        // on a marshal-by-value object or a marshal-by-ref or 
+        // in another appDomain ... the delegate may be defined
+        // on a marshal-by-value object or a marshal-by-ref or
         // contextBound object.
         public void DoCallBack(CrossAppDomainDelegate callBackDelegate)
         {
@@ -2709,17 +3144,17 @@ namespace System {
                 throw new ArgumentNullException("callBackDelegate");
             Contract.EndContractBlock();
 
-            callBackDelegate();        
+            callBackDelegate();
         }
 #endif
 
-
         public String DynamicDirectory
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+            [System.Security.SecuritySafeCritical] // auto-generated
             [ResourceExposure(ResourceScope.Machine)]
             [ResourceConsumption(ResourceScope.Machine)]
-            get {
+            get
+            {
                 String dyndir = GetDynamicDir();
                 if (dyndir != null)
                     FileIOPermission.QuickDemand(FileIOPermissionAccess.PathDiscovery, dyndir);
@@ -2731,43 +3166,39 @@ namespace System {
 #if FEATURE_CAS_POLICY
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        public static AppDomain CreateDomain(String friendlyName,
-                                             Evidence securityInfo) // Optional
+        public static AppDomain CreateDomain(String friendlyName, Evidence securityInfo) // Optional
         {
-            return CreateDomain(friendlyName,
-                                securityInfo,
-                                null);
+            return CreateDomain(friendlyName, securityInfo, null);
         }
-    
+
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static AppDomain CreateDomain(String friendlyName,
-                                             Evidence securityInfo, // Optional
-                                             String appBasePath,
-                                             String appRelativeSearchPath,
-                                             bool shadowCopyFiles)
-        {            
+        public static AppDomain CreateDomain(
+            String friendlyName,
+            Evidence securityInfo, // Optional
+            String appBasePath,
+            String appRelativeSearchPath,
+            bool shadowCopyFiles
+        )
+        {
             AppDomainSetup info = new AppDomainSetup();
             info.ApplicationBase = appBasePath;
             info.PrivateBinPath = appRelativeSearchPath;
-            if(shadowCopyFiles)
+            if (shadowCopyFiles)
                 info.ShadowCopyFiles = "true";
 
-            return CreateDomain(friendlyName,
-                                securityInfo,
-                                info);
+            return CreateDomain(friendlyName, securityInfo, info);
         }
 #endif // #if FEATURE_CAS_POLICY    (not exposed in core)
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        extern private String GetDynamicDir();
+        private extern String GetDynamicDir();
 
         // Private helpers called from unmanaged code.
 
-#if FEATURE_REMOTING        
+#if FEATURE_REMOTING
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
@@ -2776,9 +3207,8 @@ namespace System {
             return CreateDomain(friendlyName, null, null);
         }
 
-
         // Marshal a single object into a serialized blob.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static byte[] MarshalObject(Object o)
         {
             CodeAccessPermission.Assert(true);
@@ -2787,7 +3217,7 @@ namespace System {
         }
 
         // Marshal two objects into serialized blobs.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static byte[] MarshalObjects(Object o1, Object o2, out byte[] blob2)
         {
             CodeAccessPermission.Assert(true);
@@ -2798,7 +3228,7 @@ namespace System {
         }
 
         // Unmarshal a single object from a serialized blob.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static Object UnmarshalObject(byte[] blob)
         {
             CodeAccessPermission.Assert(true);
@@ -2807,7 +3237,7 @@ namespace System {
         }
 
         // Unmarshal two objects from serialized blobs.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static Object UnmarshalObjects(byte[] blob1, byte[] blob2, out Object o2)
         {
             CodeAccessPermission.Assert(true);
@@ -2818,7 +3248,7 @@ namespace System {
         }
 
         // Helper routines.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static byte[] Serialize(Object o)
         {
             if (o == null)
@@ -2828,23 +3258,23 @@ namespace System {
             else if (o is ISecurityEncodable)
             {
                 SecurityElement element = ((ISecurityEncodable)o).ToXml();
-                MemoryStream ms = new MemoryStream( 4096 );
-                ms.WriteByte( 0 );
-                StreamWriter writer = new StreamWriter( ms, Encoding.UTF8 );
-                element.ToWriter( writer );
+                MemoryStream ms = new MemoryStream(4096);
+                ms.WriteByte(0);
+                StreamWriter writer = new StreamWriter(ms, Encoding.UTF8);
+                element.ToWriter(writer);
                 writer.Flush();
                 return ms.ToArray();
             }
             else
             {
                 MemoryStream ms = new MemoryStream();
-                ms.WriteByte( 1 );
+                ms.WriteByte(1);
                 CrossAppDomainSerializer.SerializeObject(o, ms);
                 return ms.ToArray();
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static Object Deserialize(byte[] blob)
         {
             if (blob == null)
@@ -2852,34 +3282,38 @@ namespace System {
 
             if (blob[0] == 0)
             {
-                Parser parser = new Parser( blob, Tokenizer.ByteTokenEncoding.UTF8Tokens, 1 );
+                Parser parser = new Parser(blob, Tokenizer.ByteTokenEncoding.UTF8Tokens, 1);
                 SecurityElement root = parser.GetTopElement();
-                if (root.Tag.Equals( "IPermission" ) || root.Tag.Equals( "Permission" ))
+                if (root.Tag.Equals("IPermission") || root.Tag.Equals("Permission"))
                 {
-                    IPermission ip = System.Security.Util.XMLUtil.CreatePermission( root, PermissionState.None, false );
+                    IPermission ip = System.Security.Util.XMLUtil.CreatePermission(
+                        root,
+                        PermissionState.None,
+                        false
+                    );
 
                     if (ip == null)
                     {
                         return null;
                     }
 
-                    ip.FromXml( root );
+                    ip.FromXml(root);
 
                     return ip;
                 }
-                else if (root.Tag.Equals( "PermissionSet" ))
+                else if (root.Tag.Equals("PermissionSet"))
                 {
                     PermissionSet permissionSet = new PermissionSet();
 
-                    permissionSet.FromXml( root, false, false );
+                    permissionSet.FromXml(root, false, false);
 
                     return permissionSet;
                 }
-                else if (root.Tag.Equals( "PermissionToken" ))
+                else if (root.Tag.Equals("PermissionToken"))
                 {
                     PermissionToken pToken = new PermissionToken();
 
-                    pToken.FromXml( root );
+                    pToken.FromXml(root);
 
                     return pToken;
                 }
@@ -2887,32 +3321,32 @@ namespace System {
                 {
                     return null;
                 }
-
             }
             else
             {
                 Object obj = null;
-                using(MemoryStream stream = new MemoryStream( blob, 1, blob.Length - 1 )) {
+                using (MemoryStream stream = new MemoryStream(blob, 1, blob.Length - 1))
+                {
                     obj = CrossAppDomainSerializer.DeserializeObject(stream);
                 }
 
-                Contract.Assert( !(obj is IPermission), "IPermission should be xml deserialized" );
-                Contract.Assert( !(obj is PermissionSet), "PermissionSet should be xml deserialized" );
+                Contract.Assert(!(obj is IPermission), "IPermission should be xml deserialized");
+                Contract.Assert(
+                    !(obj is PermissionSet),
+                    "PermissionSet should be xml deserialized"
+                );
 
                 return obj;
             }
         }
 
-#endif // FEATURE_REMOTING        
+#endif // FEATURE_REMOTING
 
 #if FEATURE_LEGACYNETCFFAS
         public static IAppDomainPauseManager PauseManager
         {
             [System.Security.SecurityCritical]
-            get
-            {
-                return AppDomainPauseManager.Instance;
-            }
+            get { return AppDomainPauseManager.Instance; }
         }
 #endif // FEATURE_LEGACYNETCFFAS
 
@@ -2930,7 +3364,7 @@ namespace System {
         }
 
         //
-        // Called by the VM if ICLRExecutionManager::Resume is called after ICLRExecutionManager::Pause 
+        // Called by the VM if ICLRExecutionManager::Resume is called after ICLRExecutionManager::Pause
         // was called with the PAUSE_APP_DOMAINS flag.
         // This mimics the behavior of the CoreCLR FAS (fast application switching) model, to ensure
         // that code that depends on things happening in a particular order will work.
@@ -2946,14 +3380,18 @@ namespace System {
         }
 #endif
 
-        private AppDomain() {
-            throw new NotSupportedException(Environment.GetResourceString(ResId.NotSupported_Constructor));
+        private AppDomain()
+        {
+            throw new NotSupportedException(
+                Environment.GetResourceString(ResId.NotSupported_Constructor)
+            );
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern int _nExecuteAssembly(RuntimeAssembly assembly, String[] args);
+
         internal int nExecuteAssembly(RuntimeAssembly assembly, String[] args)
         {
             return _nExecuteAssembly(assembly, args);
@@ -2967,31 +3405,50 @@ namespace System {
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void nSetupBindingPaths(String trustedPlatformAssemblies, String platformResourceRoots, String appPath, String appNiPaths, String appLocalWinMD);
+        private static extern void nSetupBindingPaths(
+            String trustedPlatformAssemblies,
+            String platformResourceRoots,
+            String appPath,
+            String appNiPaths,
+            String appLocalWinMD
+        );
 
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
-        internal void SetupBindingPaths(String trustedPlatformAssemblies, String platformResourceRoots, String appPath, String appNiPaths, String appLocalWinMD)
+#endif
+        internal void SetupBindingPaths(
+            String trustedPlatformAssemblies,
+            String platformResourceRoots,
+            String appPath,
+            String appNiPaths,
+            String appLocalWinMD
+        )
         {
-            nSetupBindingPaths(trustedPlatformAssemblies, platformResourceRoots, appPath, appNiPaths, appLocalWinMD);
+            nSetupBindingPaths(
+                trustedPlatformAssemblies,
+                platformResourceRoots,
+                appPath,
+                appNiPaths,
+                appLocalWinMD
+            );
         }
 #endif // FEATURE_VERSIONING
 
 #if FEATURE_REMOTING
         internal void CreateRemotingData()
         {
-                    lock(this) {
-                        if (_RemotingData == null)
-                            _RemotingData = new DomainSpecificRemotingData();
-                    }
+            lock (this)
+            {
+                if (_RemotingData == null)
+                    _RemotingData = new DomainSpecificRemotingData();
+            }
         }
-        
+
         internal DomainSpecificRemotingData RemotingData
         {
-            get 
-            { 
-                if (_RemotingData == null) 
+            get
+            {
+                if (_RemotingData == null)
                     CreateRemotingData();
 
                 return _RemotingData;
@@ -2999,11 +3456,12 @@ namespace System {
         }
 #endif // FEATURE_REMOTING
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern String nGetFriendlyName();
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern bool nIsDefaultAppDomainForEvidence();
@@ -3016,88 +3474,86 @@ namespace System {
 
         public event EventHandler ProcessExit
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated_required
+            [System.Security.SecuritySafeCritical] // auto-generated_required
             add
             {
                 if (value != null)
                 {
                     RuntimeHelpers.PrepareContractedDelegate(value);
-                    lock(this)
+                    lock (this)
                         _processExit += value;
                 }
             }
             remove
             {
-                lock(this)
+                lock (this)
                     _processExit -= value;
             }
         }
 
-
         public event EventHandler DomainUnload
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated_required
+            [System.Security.SecuritySafeCritical] // auto-generated_required
             add
             {
                 if (value != null)
                 {
                     RuntimeHelpers.PrepareContractedDelegate(value);
-                    lock(this)
+                    lock (this)
                         _domainUnload += value;
                 }
             }
 #if FEATURE_CORECLR
-            [System.Security.SecuritySafeCritical] 
+            [System.Security.SecuritySafeCritical]
 #endif
             remove
             {
-                lock(this)
+                lock (this)
                     _domainUnload -= value;
             }
         }
 
-
         public event UnhandledExceptionEventHandler UnhandledException
         {
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             add
             {
                 if (value != null)
                 {
                     RuntimeHelpers.PrepareContractedDelegate(value);
-                    lock(this)
+                    lock (this)
                         _unhandledException += value;
                 }
             }
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             remove
             {
-                lock(this)
+                lock (this)
                     _unhandledException -= value;
             }
         }
 
 #if FEATURE_EXCEPTION_NOTIFICATIONS
         // This is the event managed code can wireup against to be notified
-        // about first chance exceptions. 
+        // about first chance exceptions.
         //
         // To register/unregister the callback, the code must be SecurityCritical.
         public event EventHandler<FirstChanceExceptionEventArgs> FirstChanceException
         {
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             add
             {
                 if (value != null)
                 {
                     RuntimeHelpers.PrepareContractedDelegate(value);
-                    lock(this)
+                    lock (this)
                         _firstChanceException += value;
                 }
             }
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             remove
             {
-                lock(this)
+                lock (this)
                     _firstChanceException -= value;
             }
         }
@@ -3106,24 +3562,32 @@ namespace System {
         private void OnAssemblyLoadEvent(RuntimeAssembly LoadedAssembly)
         {
             AssemblyLoadEventHandler eventHandler = AssemblyLoad;
-            if (eventHandler != null) {
+            if (eventHandler != null)
+            {
                 AssemblyLoadEventArgs ea = new AssemblyLoadEventArgs(LoadedAssembly);
                 eventHandler(this, ea);
             }
         }
-    
+
         // This method is called by the VM.
         [System.Security.SecurityCritical]
-        private RuntimeAssembly OnResourceResolveEvent(RuntimeAssembly assembly, String resourceName)
+        private RuntimeAssembly OnResourceResolveEvent(
+            RuntimeAssembly assembly,
+            String resourceName
+        )
         {
             ResolveEventHandler eventHandler = _ResourceResolve;
-            if ( eventHandler == null)
+            if (eventHandler == null)
                 return null;
 
             Delegate[] ds = eventHandler.GetInvocationList();
             int len = ds.Length;
-            for (int i = 0; i < len; i++) {
-                Assembly asm = ((ResolveEventHandler)ds[i])(this, new ResolveEventArgs(resourceName, assembly));
+            for (int i = 0; i < len; i++)
+            {
+                Assembly asm = ((ResolveEventHandler)ds[i])(
+                    this,
+                    new ResolveEventArgs(resourceName, assembly)
+                );
                 RuntimeAssembly ret = GetRuntimeAssembly(asm);
                 if (ret != null)
                     return ret;
@@ -3131,7 +3595,7 @@ namespace System {
 
             return null;
         }
-        
+
         // This method is called by the VM
         [System.Security.SecurityCritical]
         private RuntimeAssembly OnTypeResolveEvent(RuntimeAssembly assembly, String typeName)
@@ -3142,8 +3606,12 @@ namespace System {
 
             Delegate[] ds = eventHandler.GetInvocationList();
             int len = ds.Length;
-            for (int i = 0; i < len; i++) {
-                Assembly asm = ((ResolveEventHandler)ds[i])(this, new ResolveEventArgs(typeName, assembly));
+            for (int i = 0; i < len; i++)
+            {
+                Assembly asm = ((ResolveEventHandler)ds[i])(
+                    this,
+                    new ResolveEventArgs(typeName, assembly)
+                );
                 RuntimeAssembly ret = GetRuntimeAssembly(asm);
                 if (ret != null)
                     return ret;
@@ -3154,7 +3622,10 @@ namespace System {
 
         // This method is called by the VM.
         [System.Security.SecurityCritical]
-        private RuntimeAssembly OnAssemblyResolveEvent(RuntimeAssembly assembly, String assemblyFullName)
+        private RuntimeAssembly OnAssemblyResolveEvent(
+            RuntimeAssembly assembly,
+            String assemblyFullName
+        )
         {
             ResolveEventHandler eventHandler = _AssemblyResolve;
 
@@ -3165,27 +3636,38 @@ namespace System {
 
             Delegate[] ds = eventHandler.GetInvocationList();
             int len = ds.Length;
-            for (int i = 0; i < len; i++) {
-                Assembly asm = ((ResolveEventHandler)ds[i])(this, new ResolveEventArgs(assemblyFullName, assembly));
+            for (int i = 0; i < len; i++)
+            {
+                Assembly asm = ((ResolveEventHandler)ds[i])(
+                    this,
+                    new ResolveEventArgs(assemblyFullName, assembly)
+                );
                 RuntimeAssembly ret = GetRuntimeAssembly(asm);
                 if (ret != null)
                     return ret;
             }
-            
+
             return null;
         }
 
 #if FEATURE_REFLECTION_ONLY_LOAD
-        
-        private RuntimeAssembly OnReflectionOnlyAssemblyResolveEvent(RuntimeAssembly  assembly, String assemblyFullName)
+
+        private RuntimeAssembly OnReflectionOnlyAssemblyResolveEvent(
+            RuntimeAssembly assembly,
+            String assemblyFullName
+        )
         {
             ResolveEventHandler eventHandler = ReflectionOnlyAssemblyResolve;
-            if (eventHandler != null) {
-
+            if (eventHandler != null)
+            {
                 Delegate[] ds = eventHandler.GetInvocationList();
                 int len = ds.Length;
-                for (int i = 0; i < len; i++) {
-                    Assembly asm = ((ResolveEventHandler)ds[i])(this, new ResolveEventArgs(assemblyFullName, assembly));
+                for (int i = 0; i < len; i++)
+                {
+                    Assembly asm = ((ResolveEventHandler)ds[i])(
+                        this,
+                        new ResolveEventArgs(assemblyFullName, assembly)
+                    );
                     RuntimeAssembly ret = GetRuntimeAssembly(asm);
                     if (ret != null)
                         return ret;
@@ -3194,12 +3676,19 @@ namespace System {
 
             return null;
         }
-        
+
 #if FEATURE_COMINTEROP
         // Called by VM - code:CLRPrivTypeCacheReflectionOnlyWinRT::RaiseNamespaceResolveEvent
-        private RuntimeAssembly[] OnReflectionOnlyNamespaceResolveEvent(RuntimeAssembly assembly, string namespaceName)
+        private RuntimeAssembly[] OnReflectionOnlyNamespaceResolveEvent(
+            RuntimeAssembly assembly,
+            string namespaceName
+        )
         {
-            return System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.OnReflectionOnlyNamespaceResolveEvent(this, assembly, namespaceName);
+            return System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.OnReflectionOnlyNamespaceResolveEvent(
+                this,
+                assembly,
+                namespaceName
+            );
         }
 #endif // FEATURE_COMINTEROP
 
@@ -3209,15 +3698,21 @@ namespace System {
         // Called by VM - code:CLRPrivTypeCacheWinRT::RaiseDesignerNamespaceResolveEvent
         private string[] OnDesignerNamespaceResolveEvent(string namespaceName)
         {
-            return System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.OnDesignerNamespaceResolveEvent(this, namespaceName);
+            return System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.OnDesignerNamespaceResolveEvent(
+                this,
+                namespaceName
+            );
         }
 #endif // FEATURE_COMINTEROP
 
         internal AppDomainSetup FusionStore
         {
-            get {
-                Contract.Assert(_FusionStore != null, 
-                                "Fusion store has not been correctly setup in this domain");
+            get
+            {
+                Contract.Assert(
+                    _FusionStore != null,
+                    "Fusion store has not been correctly setup in this domain"
+                );
                 return _FusionStore;
             }
         }
@@ -3241,10 +3736,12 @@ namespace System {
         [ResourceExposure(ResourceScope.AppDomain)]
         private Dictionary<String, Object[]> LocalStore
         {
-            get { 
+            get
+            {
                 if (_LocalStore != null)
                     return _LocalStore;
-                else {
+                else
+                {
                     _LocalStore = new Dictionary<String, Object[]>();
                     return _LocalStore;
                 }
@@ -3260,9 +3757,9 @@ namespace System {
 
         // This will throw a CannotUnloadAppDomainException if the appdomain is
         // in another process.
-#if FEATURE_REMOTING        
-        [System.Security.SecurityCritical]  // auto-generated
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]  
+#if FEATURE_REMOTING
+        [System.Security.SecurityCritical] // auto-generated
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         internal static Int32 GetIdForUnload(AppDomain domain)
         {
             if (RemotingServices.IsTransparentProxy(domain))
@@ -3276,17 +3773,17 @@ namespace System {
 
         // Used to determine if server object context is valid in
         // x-domain remoting scenarios.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         internal static extern bool IsDomainIdValid(Int32 id);
-        
-#if FEATURE_REMOTING        
-        [System.Security.SecurityCritical]  // auto-generated
+
+#if FEATURE_REMOTING
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static internal extern AppDomain GetDefaultDomain();
+        internal static extern AppDomain GetDefaultDomain();
 #endif
 
 #if FEATURE_IMPERSONATION
@@ -3297,28 +3794,31 @@ namespace System {
         internal IPrincipal GetThreadPrincipal()
         {
             IPrincipal principal = null;
-            if (_DefaultPrincipal == null) {
-#if FEATURE_CAS_POLICY                    
-                switch (_PrincipalPolicy) {
-                case PrincipalPolicy.NoPrincipal:
-                    principal = null;
-                    break;
-                case PrincipalPolicy.UnauthenticatedPrincipal:
-                    principal = new GenericPrincipal(new GenericIdentity("", ""),
-                                                     new String[] {""});
-                    break;
+            if (_DefaultPrincipal == null)
+            {
+#if FEATURE_CAS_POLICY
+                switch (_PrincipalPolicy)
+                {
+                    case PrincipalPolicy.NoPrincipal:
+                        principal = null;
+                        break;
+                    case PrincipalPolicy.UnauthenticatedPrincipal:
+                        principal = new GenericPrincipal(
+                            new GenericIdentity("", ""),
+                            new String[] { "" }
+                        );
+                        break;
 #if !FEATURE_PAL && FEATURE_IMPERSONATION
-                case PrincipalPolicy.WindowsPrincipal:
-                    principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
-                    break;
+                    case PrincipalPolicy.WindowsPrincipal:
+                        principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+                        break;
 #endif // !FEATURE_PAL && FEATURE_IMPERSONATION
-                default:
-                    principal = null;
-                    break;
-                    }
+                    default:
+                        principal = null;
+                        break;
+                }
 #else
-                principal = new GenericPrincipal(new GenericIdentity("", ""),
-                                                 new String[] {""});
+                principal = new GenericPrincipal(new GenericIdentity("", ""), new String[] { "" });
 
 #endif
             }
@@ -3329,20 +3829,21 @@ namespace System {
         }
 #endif // FEATURE_IMPERSONATION
 
-#if FEATURE_REMOTING        
+#if FEATURE_REMOTING
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void CreateDefaultContext()
         {
-                lock(this) {
-                    // if it has not been created we ask the Context class to 
-                    // create a new default context for this appdomain.
-                    if (_DefaultContext == null)
-                        _DefaultContext = Context.CreateDefaultContext();
-                }            
+            lock (this)
+            {
+                // if it has not been created we ask the Context class to
+                // create a new default context for this appdomain.
+                if (_DefaultContext == null)
+                    _DefaultContext = Context.CreateDefaultContext();
+            }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal Context GetDefaultContext()
         {
             if (_DefaultContext == null)
@@ -3355,8 +3856,10 @@ namespace System {
         // mode, then we throw an exception to prevent acciental creation of unsandboxed domains where a
         // sandbox would have been expected.
         [SecuritySafeCritical]
-        internal static void CheckDomainCreationEvidence(AppDomainSetup creationDomainSetup,
-                                                         Evidence creationEvidence)
+        internal static void CheckDomainCreationEvidence(
+            AppDomainSetup creationDomainSetup,
+            Evidence creationEvidence
+        )
         {
             if (creationEvidence != null && !CurrentDomain.IsLegacyCasPolicyEnabled)
             {
@@ -3370,17 +3873,22 @@ namespace System {
                     // current domain's evidence and we would capturce people who copied and pasted these
                     // samples without intending to sandbox.
                     Zone creatorsZone = CurrentDomain.EvidenceNoDemand.GetHostEvidence<Zone>();
-                    SecurityZone creatorsSecurityZone = creatorsZone != null ?
-                        creatorsZone.SecurityZone :
-                        SecurityZone.MyComputer;
+                    SecurityZone creatorsSecurityZone =
+                        creatorsZone != null ? creatorsZone.SecurityZone : SecurityZone.MyComputer;
 
                     Zone suppliedZone = creationEvidence.GetHostEvidence<Zone>();
                     if (suppliedZone != null)
                     {
-                        if (suppliedZone.SecurityZone != creatorsSecurityZone &&
-                            suppliedZone.SecurityZone != SecurityZone.MyComputer)
+                        if (
+                            suppliedZone.SecurityZone != creatorsSecurityZone
+                            && suppliedZone.SecurityZone != SecurityZone.MyComputer
+                        )
                         {
-                            throw new NotSupportedException(Environment.GetResourceString("NotSupported_RequiresCasPolicyImplicit"));
+                            throw new NotSupportedException(
+                                Environment.GetResourceString(
+                                    "NotSupported_RequiresCasPolicyImplicit"
+                                )
+                            );
                         }
                     }
                 }
@@ -3388,30 +3896,38 @@ namespace System {
         }
 
 #if FEATURE_CAS_POLICY
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute( SecurityAction.Demand, ControlAppDomain = true )]
-        public static AppDomain CreateDomain(String friendlyName,
-                                      Evidence securityInfo,
-                                      AppDomainSetup info)
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermissionAttribute(SecurityAction.Demand, ControlAppDomain = true)]
+        public static AppDomain CreateDomain(
+            String friendlyName,
+            Evidence securityInfo,
+            AppDomainSetup info
+        )
         {
             return InternalCreateDomain(friendlyName, securityInfo, info);
         }
 #else
-        internal static AppDomain CreateDomain(String friendlyName,
-                                      Evidence securityInfo,
-                                      AppDomainSetup info)
+        internal static AppDomain CreateDomain(
+            String friendlyName,
+            Evidence securityInfo,
+            AppDomainSetup info
+        )
         {
             return InternalCreateDomain(friendlyName, securityInfo, info);
         }
 #endif
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static AppDomain InternalCreateDomain(String friendlyName,
-                                      Evidence securityInfo,
-                                      AppDomainSetup info)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static AppDomain InternalCreateDomain(
+            String friendlyName,
+            Evidence securityInfo,
+            AppDomainSetup info
+        )
         {
             if (friendlyName == null)
-                throw new ArgumentNullException(Environment.GetResourceString("ArgumentNull_String"));
+                throw new ArgumentNullException(
+                    Environment.GetResourceString("ArgumentNull_String")
+                );
 
             Contract.EndContractBlock();
 
@@ -3428,7 +3944,7 @@ namespace System {
 
             // No AppDomainManager is set up for this domain
 
-            // If evidence is provided, we check to make sure that is allowed.    
+            // If evidence is provided, we check to make sure that is allowed.
             if (securityInfo != null)
             {
                 new SecurityPermission(SecurityPermissionFlag.ControlEvidence).Demand();
@@ -3438,29 +3954,37 @@ namespace System {
                 CheckDomainCreationEvidence(info, securityInfo);
             }
 
-            return nCreateDomain(friendlyName,
-                                 info,
-                                 securityInfo,
-                                 securityInfo == null ? AppDomain.CurrentDomain.InternalEvidence : null,
-                                 AppDomain.CurrentDomain.GetSecurityDescriptor());
+            return nCreateDomain(
+                friendlyName,
+                info,
+                securityInfo,
+                securityInfo == null ? AppDomain.CurrentDomain.InternalEvidence : null,
+                AppDomain.CurrentDomain.GetSecurityDescriptor()
+            );
         }
 #endif // FEATURE_REMOTING
 
-#if FEATURE_CAS_POLICY   
+#if FEATURE_CAS_POLICY
 
 #if !FEATURE_PAL
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        public static AppDomain CreateDomain (string friendlyName,
-                                              Evidence securityInfo,
-                                              AppDomainSetup info,
-                                              PermissionSet grantSet,
-                                              params StrongName[] fullTrustAssemblies)
+        public static AppDomain CreateDomain(
+            string friendlyName,
+            Evidence securityInfo,
+            AppDomainSetup info,
+            PermissionSet grantSet,
+            params StrongName[] fullTrustAssemblies
+        )
         {
             if (info == null)
                 throw new ArgumentNullException("info");
             if (info.ApplicationBase == null)
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_AppDomainSandboxAPINeedsExplicitAppBase"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString(
+                        "InvalidOperation_AppDomainSandboxAPINeedsExplicitAppBase"
+                    )
+                );
             Contract.EndContractBlock();
 
             if (fullTrustAssemblies == null)
@@ -3471,30 +3995,29 @@ namespace System {
             info.ApplicationTrust = new ApplicationTrust(grantSet, fullTrustAssemblies);
             return CreateDomain(friendlyName, securityInfo, info);
         }
-
 #endif // !FEATURE_PAL
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static AppDomain CreateDomain(String friendlyName,
-                                             Evidence securityInfo, // Optional
-                                             String appBasePath,
-                                             String appRelativeSearchPath,
-                                             bool shadowCopyFiles,
-                                             AppDomainInitializer adInit, 
-                                             string[] adInitArgs) 
+        public static AppDomain CreateDomain(
+            String friendlyName,
+            Evidence securityInfo, // Optional
+            String appBasePath,
+            String appRelativeSearchPath,
+            bool shadowCopyFiles,
+            AppDomainInitializer adInit,
+            string[] adInitArgs
+        )
         {
             AppDomainSetup info = new AppDomainSetup();
             info.ApplicationBase = appBasePath;
             info.PrivateBinPath = appRelativeSearchPath;
-            info.AppDomainInitializer=adInit;
-            info.AppDomainInitializerArguments=adInitArgs;
-            if(shadowCopyFiles)
+            info.AppDomainInitializer = adInit;
+            info.AppDomainInitializerArguments = adInitArgs;
+            if (shadowCopyFiles)
                 info.ShadowCopyFiles = "true";
 
-            return CreateDomain(friendlyName,
-                                securityInfo,
-                                info);
+            return CreateDomain(friendlyName, securityInfo, info);
         }
 #endif // FEATURE_CAS_POLICY
 
@@ -3506,7 +4029,7 @@ namespace System {
         private static extern void nSetNativeDllSearchDirectories(string paths);
 #endif
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         private void SetupFusionStore(AppDomainSetup info, AppDomainSetup oldInfo)
@@ -3518,52 +4041,78 @@ namespace System {
             _FusionStore = info;
 
 #if FEATURE_FUSION
-            if (oldInfo == null) {
-                        
-       // Create the application base and configuration file from the imagelocation
-            // passed in or use the Win32 Image name.
-            if(info.Value[(int) AppDomainSetup.LoaderInformation.ApplicationBaseValue] == null ||
-               info.Value[(int) AppDomainSetup.LoaderInformation.ConfigurationFileValue] == null ) 
-#else        
+            if (oldInfo == null)
+            {
+                // Create the application base and configuration file from the imagelocation
+                // passed in or use the Win32 Image name.
+                if (
+                    info.Value[(int)AppDomainSetup.LoaderInformation.ApplicationBaseValue] == null
+                    || info.Value[(int)AppDomainSetup.LoaderInformation.ConfigurationFileValue]
+                        == null
+                )
+#else
             if (info.ApplicationBase == null)
-#endif                
+#endif
 
             {
 #if FEATURE_FUSION
-                AppDomain defaultDomain = GetDefaultDomain();
-                if (this == defaultDomain) {
-                    // The default domain gets its defaults from the main process.
-                    info.SetupDefaults(RuntimeEnvironment.GetModuleFileName(), imageLocationAlreadyNormalized : true);
-                }
-                else {
-                    // Other domains get their defaults from the default domain. This way, a host process
-                    // can use AppDomainManager to set up the defaults for every domain created in the process.
-                    if (info.Value[(int) AppDomainSetup.LoaderInformation.ConfigurationFileValue] == null)
-                        info.ConfigurationFile = defaultDomain.FusionStore.Value[(int) AppDomainSetup.LoaderInformation.ConfigurationFileValue];
-                    if (info.Value[(int) AppDomainSetup.LoaderInformation.ApplicationBaseValue] == null)
-                        info.ApplicationBase = defaultDomain.FusionStore.Value[(int) AppDomainSetup.LoaderInformation.ApplicationBaseValue];
-                    if (info.Value[(int) AppDomainSetup.LoaderInformation.ApplicationNameValue] == null)
-                        info.ApplicationName = defaultDomain.FusionStore.Value[(int) AppDomainSetup.LoaderInformation.ApplicationNameValue];
-                }
+                    AppDomain defaultDomain = GetDefaultDomain();
+                    if (this == defaultDomain)
+                    {
+                        // The default domain gets its defaults from the main process.
+                        info.SetupDefaults(
+                            RuntimeEnvironment.GetModuleFileName(),
+                            imageLocationAlreadyNormalized: true
+                        );
+                    }
+                    else
+                    {
+                        // Other domains get their defaults from the default domain. This way, a host process
+                        // can use AppDomainManager to set up the defaults for every domain created in the process.
+                        if (
+                            info.Value[(int)AppDomainSetup.LoaderInformation.ConfigurationFileValue]
+                            == null
+                        )
+                            info.ConfigurationFile = defaultDomain.FusionStore.Value[
+                                (int)AppDomainSetup.LoaderInformation.ConfigurationFileValue
+                            ];
+                        if (
+                            info.Value[(int)AppDomainSetup.LoaderInformation.ApplicationBaseValue]
+                            == null
+                        )
+                            info.ApplicationBase = defaultDomain.FusionStore.Value[
+                                (int)AppDomainSetup.LoaderInformation.ApplicationBaseValue
+                            ];
+                        if (
+                            info.Value[(int)AppDomainSetup.LoaderInformation.ApplicationNameValue]
+                            == null
+                        )
+                            info.ApplicationName = defaultDomain.FusionStore.Value[
+                                (int)AppDomainSetup.LoaderInformation.ApplicationNameValue
+                            ];
+                    }
 #else
-                info.SetupDefaults(RuntimeEnvironment.GetModuleFileName(), imageLocationAlreadyNormalized : true);
+                info.SetupDefaults(
+                    RuntimeEnvironment.GetModuleFileName(),
+                    imageLocationAlreadyNormalized: true
+                );
 #endif
-                
             }
 
 #if FEATURE_FUSION
-            // If there is no relative path then check the
-            // environment
-            if(info.Value[(int) AppDomainSetup.LoaderInformation.PrivateBinPathValue] == null)
-                info.PrivateBinPath = Environment.nativeGetEnvironmentVariable(AppDomainSetup.PrivateBinPathEnvironmentVariable);
+                // If there is no relative path then check the
+                // environment
+                if (info.Value[(int)AppDomainSetup.LoaderInformation.PrivateBinPathValue] == null)
+                    info.PrivateBinPath = Environment.nativeGetEnvironmentVariable(
+                        AppDomainSetup.PrivateBinPathEnvironmentVariable
+                    );
 
-            // Add the developer path if it exists on this
-            // machine.
-            if(info.DeveloperPath == null)
-                info.DeveloperPath = RuntimeEnvironment.GetDeveloperPath();
-
+                // Add the developer path if it exists on this
+                // machine.
+                if (info.DeveloperPath == null)
+                    info.DeveloperPath = RuntimeEnvironment.GetDeveloperPath();
             }
-                        
+
             // Set up the fusion context
             IntPtr fusionContext = GetFusionContext();
             info.SetupFusionContext(fusionContext, oldInfo);
@@ -3576,9 +4125,12 @@ namespace System {
 #endif // FEATURE_FUSION
 
 #if FEATURE_LOADER_OPTIMIZATION
-            if (info.LoaderOptimization != LoaderOptimization.NotSpecified || (oldInfo != null && info.LoaderOptimization != oldInfo.LoaderOptimization))
+            if (
+                info.LoaderOptimization != LoaderOptimization.NotSpecified
+                || (oldInfo != null && info.LoaderOptimization != oldInfo.LoaderOptimization)
+            )
                 UpdateLoaderOptimization(info.LoaderOptimization);
-#endif                        
+#endif
         }
 
         // used to package up evidence, so it can be serialized
@@ -3592,11 +4144,11 @@ namespace System {
 
         private static void RunInitializer(AppDomainSetup setup)
         {
-            if (setup.AppDomainInitializer!=null)
+            if (setup.AppDomainInitializer != null)
             {
-                string[] args=null;
-                if (setup.AppDomainInitializerArguments!=null)
-                    args=(string[])setup.AppDomainInitializerArguments.Clone();
+                string[] args = null;
+                if (setup.AppDomainInitializerArguments != null)
+                    args = (string[])setup.AppDomainInitializerArguments.Clone();
                 setup.AppDomainInitializer(args);
             }
         }
@@ -3606,15 +4158,17 @@ namespace System {
         //   are any remoting sinks registered, they can add non-mscorlib
         //   objects to the message (causing an assembly load exception when
         //   we try to deserialize it on the other side)
-        [System.Security.SecurityCritical]  // auto-generated
-        private static object PrepareDataForSetup(String friendlyName,
-                                                        AppDomainSetup setup,
-                                                        Evidence providedSecurityInfo,
-                                                        Evidence creatorsSecurityInfo,
-                                                        IntPtr parentSecurityDescriptor,
-                                                        string sandboxName,
-                                                        string[] propertyNames,
-                                                        string[] propertyValues)
+        [System.Security.SecurityCritical] // auto-generated
+        private static object PrepareDataForSetup(
+            String friendlyName,
+            AppDomainSetup setup,
+            Evidence providedSecurityInfo,
+            Evidence creatorsSecurityInfo,
+            IntPtr parentSecurityDescriptor,
+            string sandboxName,
+            string[] propertyNames,
+            string[] propertyValues
+        )
         {
             byte[] serializedEvidence = null;
             bool generateDefaultEvidence = false;
@@ -3630,48 +4184,59 @@ namespace System {
                 // deserializing it back -- instead, we can recreate a new AppDomainEvidenceFactory in the new
                 // domain.  We only want to do this if there is no HostSecurityManager, otherwise the
                 // HostSecurityManager could have added additional evidence on top of our standard factory.
-                HostSecurityManager hsm = CurrentDomain.DomainManager != null ? CurrentDomain.DomainManager.HostSecurityManager : null;
-                bool hostMayContributeEvidence = hsm != null &&
-                                                 hsm.GetType() != typeof(HostSecurityManager) &&
-                                                 (hsm.Flags & HostSecurityManagerOptions.HostAppDomainEvidence) == HostSecurityManagerOptions.HostAppDomainEvidence;
+                HostSecurityManager hsm =
+                    CurrentDomain.DomainManager != null
+                        ? CurrentDomain.DomainManager.HostSecurityManager
+                        : null;
+                bool hostMayContributeEvidence =
+                    hsm != null
+                    && hsm.GetType() != typeof(HostSecurityManager)
+                    && (hsm.Flags & HostSecurityManagerOptions.HostAppDomainEvidence)
+                        == HostSecurityManagerOptions.HostAppDomainEvidence;
                 if (!hostMayContributeEvidence)
                 {
-                    if (providedSecurityInfo != null &&
-                        providedSecurityInfo.IsUnmodified &&
-                        providedSecurityInfo.Target != null &&
-                        providedSecurityInfo.Target is AppDomainEvidenceFactory)
+                    if (
+                        providedSecurityInfo != null
+                        && providedSecurityInfo.IsUnmodified
+                        && providedSecurityInfo.Target != null
+                        && providedSecurityInfo.Target is AppDomainEvidenceFactory
+                    )
                     {
                         providedSecurityInfo = null;
                         generateDefaultEvidence = true;
                     }
-                    if (creatorsSecurityInfo != null &&
-                        creatorsSecurityInfo.IsUnmodified &&
-                        creatorsSecurityInfo.Target != null &&
-                        creatorsSecurityInfo.Target is AppDomainEvidenceFactory)
+                    if (
+                        creatorsSecurityInfo != null
+                        && creatorsSecurityInfo.IsUnmodified
+                        && creatorsSecurityInfo.Target != null
+                        && creatorsSecurityInfo.Target is AppDomainEvidenceFactory
+                    )
                     {
                         creatorsSecurityInfo = null;
                         generateDefaultEvidence = true;
                     }
                 }
             }
-            if ((providedSecurityInfo != null) ||
-                (creatorsSecurityInfo != null)) {
+            if ((providedSecurityInfo != null) || (creatorsSecurityInfo != null))
+            {
                 evidenceCollection = new EvidenceCollection();
                 evidenceCollection.ProvidedSecurityInfo = providedSecurityInfo;
                 evidenceCollection.CreatorsSecurityInfo = creatorsSecurityInfo;
             }
 
-            if (evidenceCollection != null) {
-                serializedEvidence =
-                    CrossAppDomainSerializer.SerializeObject(evidenceCollection).GetBuffer();                
+            if (evidenceCollection != null)
+            {
+                serializedEvidence = CrossAppDomainSerializer
+                    .SerializeObject(evidenceCollection)
+                    .GetBuffer();
             }
 #endif // FEATURE_CAS_POLICY
 
             AppDomainInitializerInfo initializerInfo = null;
-            if (setup!=null && setup.AppDomainInitializer!=null)
-                initializerInfo=new AppDomainInitializerInfo(setup.AppDomainInitializer);
+            if (setup != null && setup.AppDomainInitializer != null)
+                initializerInfo = new AppDomainInitializerInfo(setup.AppDomainInitializer);
 
-            // will travel x-Ad, drop non-agile data 
+            // will travel x-Ad, drop non-agile data
             AppDomainSetup newSetup = new AppDomainSetup(setup, false);
 
 #if FEATURE_CORECLR
@@ -3679,138 +4244,156 @@ namespace System {
             // And add them to the AppDomainSetup
             //
             // This is only supported on CoreCLR through ICLRRuntimeHost2.CreateAppDomainWithManager
-            // Desktop code should use System.AppDomain.CreateDomain() or 
+            // Desktop code should use System.AppDomain.CreateDomain() or
             // System.AppDomainManager.CreateDomain() and add the flags to the AppDomainSetup
             List<String> compatList = new List<String>();
-                        
-            if(propertyNames!=null && propertyValues != null)
+
+            if (propertyNames != null && propertyValues != null)
             {
-                for (int i=0; i<propertyNames.Length; i++)
+                for (int i = 0; i < propertyNames.Length; i++)
                 {
-                    if(String.Compare(propertyNames[i], "AppDomainCompatSwitch", StringComparison.OrdinalIgnoreCase) == 0) 
+                    if (
+                        String.Compare(
+                            propertyNames[i],
+                            "AppDomainCompatSwitch",
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                     {
                         compatList.Add(propertyValues[i]);
-                        propertyNames[i] = null;                        
+                        propertyNames[i] = null;
                         propertyValues[i] = null;
                     }
-
                 }
-                
+
                 if (compatList.Count > 0)
                 {
                     newSetup.SetCompatibilitySwitches(compatList);
-                }            
+                }
             }
 #endif // FEATURE_CORECLR
 
-
-            return new Object[] 
+            return new Object[]
             {
-                friendlyName, 
-                newSetup, 
-                parentSecurityDescriptor, 
+                friendlyName,
+                newSetup,
+                parentSecurityDescriptor,
                 generateDefaultEvidence,
                 serializedEvidence,
                 initializerInfo,
                 sandboxName,
                 propertyNames,
-                propertyValues
-            };  
+                propertyValues,
+            };
         } // PrepareDataForSetup
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         private static Object Setup(Object arg)
         {
             Contract.Requires(arg != null && arg is Object[]);
             Contract.Requires(((Object[])arg).Length >= 8);
 
-            Object[] args=(Object[])arg;
-            String           friendlyName               = (String)args[0];
-            AppDomainSetup   setup                      = (AppDomainSetup)args[1];
-            IntPtr           parentSecurityDescriptor   = (IntPtr)args[2];
-            bool             generateDefaultEvidence    = (bool)args[3];
-            byte[]           serializedEvidence         = (byte[])args[4];
-            AppDomainInitializerInfo initializerInfo    = (AppDomainInitializerInfo)args[5];
-            string           sandboxName                = (string)args[6];
-            string[]         propertyNames              = (string[])args[7]; // can contain null elements
-            string[]         propertyValues             = (string[])args[8]; // can contain null elements
+            Object[] args = (Object[])arg;
+            String friendlyName = (String)args[0];
+            AppDomainSetup setup = (AppDomainSetup)args[1];
+            IntPtr parentSecurityDescriptor = (IntPtr)args[2];
+            bool generateDefaultEvidence = (bool)args[3];
+            byte[] serializedEvidence = (byte[])args[4];
+            AppDomainInitializerInfo initializerInfo = (AppDomainInitializerInfo)args[5];
+            string sandboxName = (string)args[6];
+            string[] propertyNames = (string[])args[7]; // can contain null elements
+            string[] propertyValues = (string[])args[8]; // can contain null elements
             // extract evidence
             Evidence providedSecurityInfo = null;
             Evidence creatorsSecurityInfo = null;
 
-
             AppDomain ad = AppDomain.CurrentDomain;
-            AppDomainSetup newSetup=new AppDomainSetup(setup,false);
+            AppDomainSetup newSetup = new AppDomainSetup(setup, false);
 
-            if(propertyNames!=null && propertyValues != null)
+            if (propertyNames != null && propertyValues != null)
             {
-                for (int i=0; i<propertyNames.Length; i++)
+                for (int i = 0; i < propertyNames.Length; i++)
                 {
-                    
-                    if(propertyNames[i]=="APPBASE") // make sure in sync with Fusion
+                    if (propertyNames[i] == "APPBASE") // make sure in sync with Fusion
                     {
-                        if(propertyValues[i]==null)
+                        if (propertyValues[i] == null)
                             throw new ArgumentNullException("APPBASE");
-                            
-                        if (Path.IsRelative(propertyValues[i]))
-                            throw new ArgumentException( Environment.GetResourceString( "Argument_AbsolutePathRequired" ) );
 
-                        newSetup.ApplicationBase = NormalizePath(propertyValues[i], fullCheck: true);
+                        if (Path.IsRelative(propertyValues[i]))
+                            throw new ArgumentException(
+                                Environment.GetResourceString("Argument_AbsolutePathRequired")
+                            );
+
+                        newSetup.ApplicationBase = NormalizePath(
+                            propertyValues[i],
+                            fullCheck: true
+                        );
                     }
 #if FEATURE_CAS_POLICY
-                    else if(propertyNames[i]=="LOCATION_URI" && providedSecurityInfo==null)
+                    else if (propertyNames[i] == "LOCATION_URI" && providedSecurityInfo == null)
                     {
-                        providedSecurityInfo=new Evidence();
+                        providedSecurityInfo = new Evidence();
                         providedSecurityInfo.AddHostEvidence(new Url(propertyValues[i]));
-                        ad.SetDataHelper(propertyNames[i],propertyValues[i],null);
+                        ad.SetDataHelper(propertyNames[i], propertyValues[i], null);
                     }
 #endif // FEATURE_CAS_POLICY
 #if FEATURE_LOADER_OPTIMIZATION
-                    else
-                    if(propertyNames[i]=="LOADER_OPTIMIZATION")
+                    else if (propertyNames[i] == "LOADER_OPTIMIZATION")
                     {
-                        if(propertyValues[i]==null)
+                        if (propertyValues[i] == null)
                             throw new ArgumentNullException("LOADER_OPTIMIZATION");
 
-                        switch(propertyValues[i])
+                        switch (propertyValues[i])
                         {
-                            case "SingleDomain": newSetup.LoaderOptimization=LoaderOptimization.SingleDomain;break;
-                            case "MultiDomain": newSetup.LoaderOptimization=LoaderOptimization.MultiDomain;break;
-                            case "MultiDomainHost": newSetup.LoaderOptimization=LoaderOptimization.MultiDomainHost;break;
-                            case "NotSpecified": newSetup.LoaderOptimization=LoaderOptimization.NotSpecified;break;
-                            default: throw new ArgumentException(Environment.GetResourceString("Argument_UnrecognizedLoaderOptimization"), "LOADER_OPTIMIZATION");
+                            case "SingleDomain":
+                                newSetup.LoaderOptimization = LoaderOptimization.SingleDomain;
+                                break;
+                            case "MultiDomain":
+                                newSetup.LoaderOptimization = LoaderOptimization.MultiDomain;
+                                break;
+                            case "MultiDomainHost":
+                                newSetup.LoaderOptimization = LoaderOptimization.MultiDomainHost;
+                                break;
+                            case "NotSpecified":
+                                newSetup.LoaderOptimization = LoaderOptimization.NotSpecified;
+                                break;
+                            default:
+                                throw new ArgumentException(
+                                    Environment.GetResourceString(
+                                        "Argument_UnrecognizedLoaderOptimization"
+                                    ),
+                                    "LOADER_OPTIMIZATION"
+                                );
                         }
                     }
 #endif // FEATURE_LOADER_OPTIMIZATION
 #if FEATURE_CORECLR
-                    else
-                    if(propertyNames[i]=="NATIVE_DLL_SEARCH_DIRECTORIES")
+                    else if (propertyNames[i] == "NATIVE_DLL_SEARCH_DIRECTORIES")
                     {
-                        if(propertyValues[i]==null)
+                        if (propertyValues[i] == null)
                             throw new ArgumentNullException("NATIVE_DLL_SEARCH_DIRECTORIES");
-                        ad.SetDataHelper(propertyNames[i],propertyValues[i],null);
+                        ad.SetDataHelper(propertyNames[i], propertyValues[i], null);
                         string paths = (string)propertyValues[i];
-                        if( paths.Length==0 )
+                        if (paths.Length == 0)
                             continue;
                         nSetNativeDllSearchDirectories(paths);
                     }
-                    else
-                    if(propertyNames[i]=="TRUSTED_PLATFORM_ASSEMBLIES")
+                    else if (propertyNames[i] == "TRUSTED_PLATFORM_ASSEMBLIES")
                     {
-                        if(propertyValues[i]==null)
+                        if (propertyValues[i] == null)
                             throw new ArgumentNullException("TRUSTED_PLATFORM_ASSEMBLIES");
 
                         StringBuilder normalisedAppPathList = new StringBuilder();
-                        foreach(string path in propertyValues[i].Split(Path.PathSeparator))
+                        foreach (string path in propertyValues[i].Split(Path.PathSeparator))
                         {
-
-                            if( path.Length==0 )                  // skip empty dirs
+                            if (path.Length == 0) // skip empty dirs
                                 continue;
-                               
+
                             if (Path.IsRelative(path))
-                                throw new ArgumentException( Environment.GetResourceString( "Argument_AbsolutePathRequired" ) );
+                                throw new ArgumentException(
+                                    Environment.GetResourceString("Argument_AbsolutePathRequired")
+                                );
 
                             string appPath = NormalizePath(path, fullCheck: true);
 
@@ -3822,23 +4405,23 @@ namespace System {
                         {
                             normalisedAppPathList.Remove(normalisedAppPathList.Length - 1, 1);
                         }
-                        ad.SetDataHelper(propertyNames[i],normalisedAppPathList.ToString(),null);        // not supported by fusion, so set explicitly
+                        ad.SetDataHelper(propertyNames[i], normalisedAppPathList.ToString(), null); // not supported by fusion, so set explicitly
                     }
-                    else
-                    if(propertyNames[i]=="PLATFORM_RESOURCE_ROOTS")
+                    else if (propertyNames[i] == "PLATFORM_RESOURCE_ROOTS")
                     {
-                        if(propertyValues[i]==null)
+                        if (propertyValues[i] == null)
                             throw new ArgumentNullException("PLATFORM_RESOURCE_ROOTS");
 
                         StringBuilder normalisedAppPathList = new StringBuilder();
-                        foreach(string path in propertyValues[i].Split(Path.PathSeparator))
+                        foreach (string path in propertyValues[i].Split(Path.PathSeparator))
                         {
-
-                            if( path.Length==0 )                  // skip empty dirs
+                            if (path.Length == 0) // skip empty dirs
                                 continue;
-                               
+
                             if (Path.IsRelative(path))
-                                throw new ArgumentException( Environment.GetResourceString( "Argument_AbsolutePathRequired" ) );
+                                throw new ArgumentException(
+                                    Environment.GetResourceString("Argument_AbsolutePathRequired")
+                                );
 
                             string appPath = NormalizePath(path, fullCheck: true);
 
@@ -3850,23 +4433,23 @@ namespace System {
                         {
                             normalisedAppPathList.Remove(normalisedAppPathList.Length - 1, 1);
                         }
-                        ad.SetDataHelper(propertyNames[i],normalisedAppPathList.ToString(),null);        // not supported by fusion, so set explicitly
+                        ad.SetDataHelper(propertyNames[i], normalisedAppPathList.ToString(), null); // not supported by fusion, so set explicitly
                     }
-                    else
-                    if(propertyNames[i]=="APP_PATHS")
+                    else if (propertyNames[i] == "APP_PATHS")
                     {
-                        if(propertyValues[i]==null)
+                        if (propertyValues[i] == null)
                             throw new ArgumentNullException("APP_PATHS");
 
                         StringBuilder normalisedAppPathList = new StringBuilder();
-                        foreach(string path in propertyValues[i].Split(Path.PathSeparator))
+                        foreach (string path in propertyValues[i].Split(Path.PathSeparator))
                         {
-
-                            if( path.Length==0 )                  // skip empty dirs
+                            if (path.Length == 0) // skip empty dirs
                                 continue;
-                               
+
                             if (Path.IsRelative(path))
-                                throw new ArgumentException( Environment.GetResourceString( "Argument_AbsolutePathRequired" ) );
+                                throw new ArgumentException(
+                                    Environment.GetResourceString("Argument_AbsolutePathRequired")
+                                );
 
                             string appPath = NormalizePath(path, fullCheck: true);
 
@@ -3878,23 +4461,23 @@ namespace System {
                         {
                             normalisedAppPathList.Remove(normalisedAppPathList.Length - 1, 1);
                         }
-                        ad.SetDataHelper(propertyNames[i],normalisedAppPathList.ToString(),null);        // not supported by fusion, so set explicitly
+                        ad.SetDataHelper(propertyNames[i], normalisedAppPathList.ToString(), null); // not supported by fusion, so set explicitly
                     }
-                    else
-                    if(propertyNames[i]=="APP_NI_PATHS")
+                    else if (propertyNames[i] == "APP_NI_PATHS")
                     {
-                        if(propertyValues[i]==null)
+                        if (propertyValues[i] == null)
                             throw new ArgumentNullException("APP_NI_PATHS");
 
                         StringBuilder normalisedAppPathList = new StringBuilder();
-                        foreach(string path in propertyValues[i].Split(Path.PathSeparator))
+                        foreach (string path in propertyValues[i].Split(Path.PathSeparator))
                         {
-
-                            if( path.Length==0 )                  // skip empty dirs
+                            if (path.Length == 0) // skip empty dirs
                                 continue;
-                               
+
                             if (Path.IsRelative(path))
-                                throw new ArgumentException( Environment.GetResourceString( "Argument_AbsolutePathRequired" ) );
+                                throw new ArgumentException(
+                                    Environment.GetResourceString("Argument_AbsolutePathRequired")
+                                );
 
                             string appPath = NormalizePath(path, fullCheck: true);
 
@@ -3906,43 +4489,57 @@ namespace System {
                         {
                             normalisedAppPathList.Remove(normalisedAppPathList.Length - 1, 1);
                         }
-                        ad.SetDataHelper(propertyNames[i],normalisedAppPathList.ToString(),null);        // not supported by fusion, so set explicitly
+                        ad.SetDataHelper(propertyNames[i], normalisedAppPathList.ToString(), null); // not supported by fusion, so set explicitly
                     }
-                    else
-                    if(propertyNames[i]!= null)
+                    else if (propertyNames[i] != null)
                     {
-                        ad.SetDataHelper(propertyNames[i],propertyValues[i],null);     // just propagate
+                        ad.SetDataHelper(propertyNames[i], propertyValues[i], null); // just propagate
                     }
 #endif
-
                 }
             }
 
 #if !FEATURE_CORECLR
             AppDomainSortingSetupInfo sortingSetup = newSetup._AppDomainSortingSetupInfo;
 
-            if(sortingSetup != null)
-            {          
-                if(sortingSetup._pfnIsNLSDefinedString == IntPtr.Zero || sortingSetup._pfnCompareStringEx == IntPtr.Zero || sortingSetup._pfnLCMapStringEx == IntPtr.Zero || sortingSetup._pfnFindNLSStringEx == IntPtr.Zero
-                    || sortingSetup._pfnCompareStringOrdinal == IntPtr.Zero || sortingSetup._pfnGetNLSVersionEx == IntPtr.Zero) 
+            if (sortingSetup != null)
+            {
+                if (
+                    sortingSetup._pfnIsNLSDefinedString == IntPtr.Zero
+                    || sortingSetup._pfnCompareStringEx == IntPtr.Zero
+                    || sortingSetup._pfnLCMapStringEx == IntPtr.Zero
+                    || sortingSetup._pfnFindNLSStringEx == IntPtr.Zero
+                    || sortingSetup._pfnCompareStringOrdinal == IntPtr.Zero
+                    || sortingSetup._pfnGetNLSVersionEx == IntPtr.Zero
+                )
                 {
-             
-                    if(!(sortingSetup._pfnIsNLSDefinedString == IntPtr.Zero && sortingSetup._pfnCompareStringEx == IntPtr.Zero && sortingSetup._pfnLCMapStringEx == IntPtr.Zero && sortingSetup._pfnFindNLSStringEx == IntPtr.Zero
-                        && sortingSetup._pfnCompareStringOrdinal == IntPtr.Zero && sortingSetup._pfnGetNLSVersionEx == IntPtr.Zero)) 
+                    if (
+                        !(
+                            sortingSetup._pfnIsNLSDefinedString == IntPtr.Zero
+                            && sortingSetup._pfnCompareStringEx == IntPtr.Zero
+                            && sortingSetup._pfnLCMapStringEx == IntPtr.Zero
+                            && sortingSetup._pfnFindNLSStringEx == IntPtr.Zero
+                            && sortingSetup._pfnCompareStringOrdinal == IntPtr.Zero
+                            && sortingSetup._pfnGetNLSVersionEx == IntPtr.Zero
+                        )
+                    )
                     {
                         // Some functions defined but not all of them.
-                        throw new ArgumentException(Environment.GetResourceString("ArgumentException_NotAllCustomSortingFuncsDefined"));
+                        throw new ArgumentException(
+                            Environment.GetResourceString(
+                                "ArgumentException_NotAllCustomSortingFuncsDefined"
+                            )
+                        );
                     }
-
                 }
             }
 #endif
 
             ad.SetupFusionStore(newSetup, null); // makes FusionStore a ref to newSetup
-            
-            // technically, we don't need this, newSetup refers to the same object as FusionStore 
+
+            // technically, we don't need this, newSetup refers to the same object as FusionStore
             // but it's confusing since it isn't immediately obvious whether we have a ref or a copy
-            AppDomainSetup adSetup = ad.FusionStore; 
+            AppDomainSetup adSetup = ad.FusionStore;
 
 #if FEATURE_CORECLR
 
@@ -3954,11 +4551,14 @@ namespace System {
 #endif // FEATURE_CORECLR
 
 #if !FEATURE_CORECLR  // not used by coreclr
-            if (serializedEvidence != null) {
+            if (serializedEvidence != null)
+            {
                 EvidenceCollection evidenceCollection = (EvidenceCollection)
-                    CrossAppDomainSerializer.DeserializeObject(new MemoryStream(serializedEvidence));
-                providedSecurityInfo  = evidenceCollection.ProvidedSecurityInfo;
-                creatorsSecurityInfo  = evidenceCollection.CreatorsSecurityInfo;
+                    CrossAppDomainSerializer.DeserializeObject(
+                        new MemoryStream(serializedEvidence)
+                    );
+                providedSecurityInfo = evidenceCollection.ProvidedSecurityInfo;
+                creatorsSecurityInfo = evidenceCollection.CreatorsSecurityInfo;
             }
 #endif
             // set up the friendly name
@@ -3974,7 +4574,10 @@ namespace System {
             // set up the AppDomainManager for this domain and initialize security.
             if (adSetup.AppDomainManagerAssembly != null && adSetup.AppDomainManagerType != null)
             {
-                ad.SetAppDomainManagerType(adSetup.AppDomainManagerAssembly, adSetup.AppDomainManagerType);
+                ad.SetAppDomainManagerType(
+                    adSetup.AppDomainManagerAssembly,
+                    adSetup.AppDomainManagerType
+                );
             }
 
 #if FEATURE_APTCA
@@ -3983,19 +4586,21 @@ namespace System {
 #endif // FEATURE_APTCA
 
             ad.CreateAppDomainManager(); // could modify FusionStore's object
-            ad.InitializeDomainSecurity(providedSecurityInfo,
-                                        creatorsSecurityInfo,
-                                        generateDefaultEvidence,
-                                        parentSecurityDescriptor,
-                                        true);
-            
+            ad.InitializeDomainSecurity(
+                providedSecurityInfo,
+                creatorsSecurityInfo,
+                generateDefaultEvidence,
+                parentSecurityDescriptor,
+                true
+            );
+
             // can load user code now
-            if(initializerInfo!=null)
-                adSetup.AppDomainInitializer=initializerInfo.Unwrap();
+            if (initializerInfo != null)
+                adSetup.AppDomainInitializer = initializerInfo.Unwrap();
             RunInitializer(adSetup);
 
             // Activate the application if needed.
-#if FEATURE_CLICKONCE 
+#if FEATURE_CLICKONCE
             ObjectHandle oh = null;
             if (adSetup.ActivationArguments != null && adSetup.ActivationArguments.ActivateInstance)
                 oh = Activator.CreateInstance(ad.ActivationContext);
@@ -4012,11 +4617,12 @@ namespace System {
             // the AppDomain. (Once we have runtime support for long paths we can
             // use the new normalization in path, but we still need to go in directly
             // to avoid quirks.)
-            return  Path.LegacyNormalizePath(
+            return Path.LegacyNormalizePath(
                 path: path,
                 fullCheck: fullCheck,
                 maxPathLength: PathInternal.MaxShortPath,
-                expandShortPaths: true);
+                expandShortPaths: true
+            );
         }
 
 #if FEATURE_APTCA
@@ -4033,23 +4639,32 @@ namespace System {
 
             name = name.ToUpperInvariant();
 
-            int index = Array.BinarySearch<string>(_aptcaVisibleAssemblies, name,
-                                                   StringComparer.OrdinalIgnoreCase);
-            return (index >=0);
-
+            int index = Array.BinarySearch<string>(
+                _aptcaVisibleAssemblies,
+                name,
+                StringComparer.OrdinalIgnoreCase
+            );
+            return (index >= 0);
         }
 
         //Used to binary search the list of C-APTCA strings for an AssemblyName.  It compares assembly name
         //and public key token.
         private class CAPTCASearcher : IComparer
         {
-            int IComparer.Compare(object /*string*/lhs, object /*AssemblyName*/rhs)
+            int IComparer.Compare(
+                object /*string*/
+                lhs,
+                object /*AssemblyName*/
+                rhs
+            )
             {
                 AssemblyName captcaEntry = new AssemblyName((string)lhs);
                 AssemblyName comparand = (AssemblyName)rhs;
-                int nameComp = string.Compare(captcaEntry.Name,
-                                              comparand.Name,
-                                              StringComparison.OrdinalIgnoreCase);
+                int nameComp = string.Compare(
+                    captcaEntry.Name,
+                    comparand.Name,
+                    StringComparison.OrdinalIgnoreCase
+                );
                 if (nameComp != 0)
                 {
                     return nameComp;
@@ -4099,8 +4714,12 @@ namespace System {
         }
 
         [System.Security.SecurityCritical]
-        private unsafe bool IsAssemblyOnAptcaVisibleListRaw(char * namePtr, int nameLen, byte * keyTokenPtr,
-                                                            int keyTokenLen)
+        private unsafe bool IsAssemblyOnAptcaVisibleListRaw(
+            char* namePtr,
+            int nameLen,
+            byte* keyTokenPtr,
+            int keyTokenLen
+        )
         {
             //This version is used for checking ngen dependencies against the C-APTCA list.  It lets us
             //reject ngen images that depend on an assembly that has been disabled in the current domain.
@@ -4113,7 +4732,7 @@ namespace System {
 
             string name = new string(namePtr, 0, nameLen);
             byte[] keyToken = new byte[keyTokenLen];
-            for( int i = 0; i < keyToken.Length; ++i )
+            for (int i = 0; i < keyToken.Length; ++i)
                 keyToken[i] = keyTokenPtr[i];
 
             AssemblyName asmName = new AssemblyName();
@@ -4121,35 +4740,54 @@ namespace System {
             asmName.SetPublicKeyToken(keyToken);
             try
             {
-                int index = Array.BinarySearch(_aptcaVisibleAssemblies, asmName, new CAPTCASearcher());
+                int index = Array.BinarySearch(
+                    _aptcaVisibleAssemblies,
+                    asmName,
+                    new CAPTCASearcher()
+                );
                 return (index >= 0);
             }
-            catch (InvalidOperationException) { /* Can happen for poorly formed assembly names */ return false; }
+            catch (InvalidOperationException)
+            { /* Can happen for poorly formed assembly names */
+                return false;
+            }
         }
-
 #endif
 
         // This routine is called from unmanaged code to
         // set the default fusion context.
-        [System.Security.SecurityCritical]  // auto-generated
-        private void SetupDomain(bool allowRedirects, String path, String configFile, String[] propertyNames, String[] propertyValues)
+        [System.Security.SecurityCritical] // auto-generated
+        private void SetupDomain(
+            bool allowRedirects,
+            String path,
+            String configFile,
+            String[] propertyNames,
+            String[] propertyValues
+        )
         {
             // It is possible that we could have multiple threads initializing
             // the default domain. We will just take the winner of these two.
             // (eg. one thread doing a com call and another doing attach for IJW)
-            lock (this) {
-                if(_FusionStore == null) {
+            lock (this)
+            {
+                if (_FusionStore == null)
+                {
                     AppDomainSetup setup = new AppDomainSetup();
 #if FEATURE_CORECLR
                     // always use internet permission set
                     setup.InternalSetApplicationTrust("Internet");
 #endif // FEATURE_CORECLR
 #if FEATURE_FUSION
-                    setup.SetupDefaults(RuntimeEnvironment.GetModuleFileName(), imageLocationAlreadyNormalized : true);
-                    if(path != null)
-                        setup.Value[(int) AppDomainSetup.LoaderInformation.ApplicationBaseValue] = path;
-                    if(configFile != null)
-                        setup.Value[(int) AppDomainSetup.LoaderInformation.ConfigurationFileValue] = configFile;
+                    setup.SetupDefaults(
+                        RuntimeEnvironment.GetModuleFileName(),
+                        imageLocationAlreadyNormalized: true
+                    );
+                    if (path != null)
+                        setup.Value[(int)AppDomainSetup.LoaderInformation.ApplicationBaseValue] =
+                            path;
+                    if (configFile != null)
+                        setup.Value[(int)AppDomainSetup.LoaderInformation.ConfigurationFileValue] =
+                            configFile;
 
                     // Default fusion context starts with binding redirects turned off.
                     if (!allowRedirects)
@@ -4157,29 +4795,46 @@ namespace System {
 #endif
 
 #if !FEATURE_CORECLR
-                    if (propertyNames != null) {
+                    if (propertyNames != null)
+                    {
                         BCLDebug.Assert(propertyValues != null, "propertyValues != null");
-                        BCLDebug.Assert(propertyNames.Length == propertyValues.Length, "propertyNames.Length == propertyValues.Length");
+                        BCLDebug.Assert(
+                            propertyNames.Length == propertyValues.Length,
+                            "propertyNames.Length == propertyValues.Length"
+                        );
 
-                        for (int i = 0; i < propertyNames.Length; ++i) {
-                            if (String.Equals(propertyNames[i], "PARTIAL_TRUST_VISIBLE_ASSEMBLIES", StringComparison.Ordinal)) {
+                        for (int i = 0; i < propertyNames.Length; ++i)
+                        {
+                            if (
+                                String.Equals(
+                                    propertyNames[i],
+                                    "PARTIAL_TRUST_VISIBLE_ASSEMBLIES",
+                                    StringComparison.Ordinal
+                                )
+                            )
+                            {
                                 // The value of the PARTIAL_TRUST_VISIBLE_ASSEMBLIES property is a semicolon
                                 // delimited list of assembly names to add to the
                                 // PartialTrustVisibleAssemblies setting of the domain setup
-                                if (propertyValues[i] != null) {
-                                    if (propertyValues[i].Length > 0) {
-                                        setup.PartialTrustVisibleAssemblies = propertyValues[i].Split(';');
+                                if (propertyValues[i] != null)
+                                {
+                                    if (propertyValues[i].Length > 0)
+                                    {
+                                        setup.PartialTrustVisibleAssemblies = propertyValues[i]
+                                            .Split(';');
                                     }
-                                    else {
+                                    else
+                                    {
                                         setup.PartialTrustVisibleAssemblies = new string[0];
                                     }
                                 }
                             }
-                            else {
+                            else
+                            {
                                 // In v4 we disallow anything but PARTIAL_TRUST_VISIBLE_ASSEMBLIES to come
                                 // in via the default domain properties.  That restriction could be lifted
                                 // in a future release, at which point this assert should be removed.
-                                // 
+                                //
                                 // This should be kept in sync with the real externally facing filter code
                                 // in CorHost2::SetPropertiesForDefaultAppDomain
                                 BCLDebug.Assert(false, "Unexpected default domain property");
@@ -4200,74 +4855,85 @@ namespace System {
         }
 
 #if FEATURE_LOADER_OPTIMIZATION
-       [System.Security.SecurityCritical]  // auto-generated
-       private void SetupLoaderOptimization(LoaderOptimization policy)
+        [System.Security.SecurityCritical] // auto-generated
+        private void SetupLoaderOptimization(LoaderOptimization policy)
         {
-            if(policy != LoaderOptimization.NotSpecified) {
-                Contract.Assert(FusionStore.LoaderOptimization == LoaderOptimization.NotSpecified,
-                                "It is illegal to change the Loader optimization on a domain");
+            if (policy != LoaderOptimization.NotSpecified)
+            {
+                Contract.Assert(
+                    FusionStore.LoaderOptimization == LoaderOptimization.NotSpecified,
+                    "It is illegal to change the Loader optimization on a domain"
+                );
 
                 FusionStore.LoaderOptimization = policy;
                 UpdateLoaderOptimization(FusionStore.LoaderOptimization);
             }
         }
 #endif
-           
 #if FEATURE_FUSION
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern IntPtr GetFusionContext();
 #endif // FEATURE_FUSION
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern IntPtr GetSecurityDescriptor();
 
-#if FEATURE_REMOTING        
-        [System.Security.SecurityCritical]  // auto-generated
+#if FEATURE_REMOTING
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern AppDomain nCreateDomain(String friendlyName,
-                                                      AppDomainSetup setup,
-                                                      Evidence providedSecurityInfo,
-                                                      Evidence creatorsSecurityInfo,
-                                                      IntPtr parentSecurityDescriptor);
+        internal static extern AppDomain nCreateDomain(
+            String friendlyName,
+            AppDomainSetup setup,
+            Evidence providedSecurityInfo,
+            Evidence creatorsSecurityInfo,
+            IntPtr parentSecurityDescriptor
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern ObjRef nCreateInstance(String friendlyName,
-                                                      AppDomainSetup setup,
-                                                      Evidence providedSecurityInfo,
-                                                      Evidence creatorsSecurityInfo,
-                                                      IntPtr parentSecurityDescriptor);
+        internal static extern ObjRef nCreateInstance(
+            String friendlyName,
+            AppDomainSetup setup,
+            Evidence providedSecurityInfo,
+            Evidence creatorsSecurityInfo,
+            IntPtr parentSecurityDescriptor
+        );
 #endif
 
         [SecurityCritical]
-        private void SetupDomainSecurity(Evidence appDomainEvidence,
-                                         IntPtr creatorsSecurityDescriptor,
-                                         bool publishAppDomain)
+        private void SetupDomainSecurity(
+            Evidence appDomainEvidence,
+            IntPtr creatorsSecurityDescriptor,
+            bool publishAppDomain
+        )
         {
             Evidence stackEvidence = appDomainEvidence;
-            SetupDomainSecurity(GetNativeHandle(),
-                                JitHelpers.GetObjectHandleOnStack(ref stackEvidence),
-                                creatorsSecurityDescriptor,
-                                publishAppDomain);
-
+            SetupDomainSecurity(
+                GetNativeHandle(),
+                JitHelpers.GetObjectHandleOnStack(ref stackEvidence),
+                creatorsSecurityDescriptor,
+                publishAppDomain
+            );
         }
 
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void SetupDomainSecurity(AppDomainHandle appDomain,
-                                                       ObjectHandleOnStack appDomainEvidence,
-                                                       IntPtr creatorsSecurityDescriptor,
-                                                       [MarshalAs(UnmanagedType.Bool)] bool publishAppDomain);
+        private static extern void SetupDomainSecurity(
+            AppDomainHandle appDomain,
+            ObjectHandleOnStack appDomainEvidence,
+            IntPtr creatorsSecurityDescriptor,
+            [MarshalAs(UnmanagedType.Bool)] bool publishAppDomain
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void nSetupFriendlyName(string friendlyName);
@@ -4279,20 +4945,22 @@ namespace System {
 #endif // FEATURE_COMINTEROP
 
 #if FEATURE_LOADER_OPTIMIZATION
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern void UpdateLoaderOptimization(LoaderOptimization optimization);
 #endif
 
-#if FEATURE_FUSION       
+#if FEATURE_FUSION
         //
         // This is just designed to prevent compiler warnings.
         // This field is used from native, but we need to prevent the compiler warnings.
         //
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("AppDomain.SetShadowCopyPath has been deprecated. Please investigate the use of AppDomainSetup.ShadowCopyDirectories instead. http://go.microsoft.com/fwlink/?linkid=14202")]
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "AppDomain.SetShadowCopyPath has been deprecated. Please investigate the use of AppDomainSetup.ShadowCopyDirectories instead. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public void SetShadowCopyPath(String path)
@@ -4300,15 +4968,19 @@ namespace System {
             InternalSetShadowCopyPath(path);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("AppDomain.SetShadowCopyFiles has been deprecated. Please investigate the use of AppDomainSetup.ShadowCopyFiles instead. http://go.microsoft.com/fwlink/?linkid=14202")]
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "AppDomain.SetShadowCopyFiles has been deprecated. Please investigate the use of AppDomainSetup.ShadowCopyFiles instead. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public void SetShadowCopyFiles()
         {
             InternalSetShadowCopyFiles();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("AppDomain.SetDynamicBase has been deprecated. Please investigate the use of AppDomainSetup.DynamicBase instead. http://go.microsoft.com/fwlink/?linkid=14202")]
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "AppDomain.SetDynamicBase has been deprecated. Please investigate the use of AppDomainSetup.DynamicBase instead. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public void SetDynamicBase(String path)
@@ -4319,13 +4991,11 @@ namespace System {
 
         public AppDomainSetup SetupInformation
         {
-            get {
-                return new AppDomainSetup(FusionStore,true);
-            }
+            get { return new AppDomainSetup(FusionStore, true); }
         }
 
 #if FEATURE_FUSION
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal void InternalSetShadowCopyPath(String path)
@@ -4333,73 +5003,94 @@ namespace System {
             if (path != null)
             {
                 IntPtr fusionContext = GetFusionContext();
-                AppDomainSetup.UpdateContextProperty(fusionContext, AppDomainSetup.ShadowCopyDirectoriesKey, path);
+                AppDomainSetup.UpdateContextProperty(
+                    fusionContext,
+                    AppDomainSetup.ShadowCopyDirectoriesKey,
+                    path
+                );
             }
             FusionStore.ShadowCopyDirectories = path;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void InternalSetShadowCopyFiles()
         {
             IntPtr fusionContext = GetFusionContext();
-            AppDomainSetup.UpdateContextProperty(fusionContext, AppDomainSetup.ShadowCopyFilesKey, "true");
+            AppDomainSetup.UpdateContextProperty(
+                fusionContext,
+                AppDomainSetup.ShadowCopyFilesKey,
+                "true"
+            );
             FusionStore.ShadowCopyFiles = "true";
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal void InternalSetCachePath(String path)
         {
             FusionStore.CachePath = path;
-            if (FusionStore.Value[(int) AppDomainSetup.LoaderInformation.CachePathValue] != null)
+            if (FusionStore.Value[(int)AppDomainSetup.LoaderInformation.CachePathValue] != null)
             {
                 IntPtr fusionContext = GetFusionContext();
-                AppDomainSetup.UpdateContextProperty(fusionContext, AppDomainSetup.CachePathKey,
-                                                     FusionStore.Value[(int) AppDomainSetup.LoaderInformation.CachePathValue]);
+                AppDomainSetup.UpdateContextProperty(
+                    fusionContext,
+                    AppDomainSetup.CachePathKey,
+                    FusionStore.Value[(int)AppDomainSetup.LoaderInformation.CachePathValue]
+                );
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal void InternalSetPrivateBinPath(String path)
         {
             IntPtr fusionContext = GetFusionContext();
-            AppDomainSetup.UpdateContextProperty(fusionContext, AppDomainSetup.PrivateBinPathKey, path);
+            AppDomainSetup.UpdateContextProperty(
+                fusionContext,
+                AppDomainSetup.PrivateBinPathKey,
+                path
+            );
             FusionStore.PrivateBinPath = path;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal void InternalSetDynamicBase(String path)
         {
             FusionStore.DynamicBase = path;
-            if (FusionStore.Value[(int) AppDomainSetup.LoaderInformation.DynamicBaseValue] != null)
+            if (FusionStore.Value[(int)AppDomainSetup.LoaderInformation.DynamicBaseValue] != null)
             {
                 IntPtr fusionContext = GetFusionContext();
-                AppDomainSetup.UpdateContextProperty(fusionContext, AppDomainSetup.DynamicBaseKey,
-                                                     FusionStore.Value[(int) AppDomainSetup.LoaderInformation.DynamicBaseValue]);
+                AppDomainSetup.UpdateContextProperty(
+                    fusionContext,
+                    AppDomainSetup.DynamicBaseKey,
+                    FusionStore.Value[(int)AppDomainSetup.LoaderInformation.DynamicBaseValue]
+                );
             }
         }
 #endif // FEATURE_FUSION
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern String IsStringInterned(String str);
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern String GetOrInternString(String str);
-        
+
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetGrantSet(AppDomainHandle domain, ObjectHandleOnStack retGrantSet);
+        private static extern void GetGrantSet(
+            AppDomainHandle domain,
+            ObjectHandleOnStack retGrantSet
+        );
 
 #if FEATURE_CAS_POLICY
         [SecurityCritical]
@@ -4455,10 +5146,7 @@ namespace System {
         internal bool IsLegacyCasPolicyEnabled
         {
             [SecuritySafeCritical]
-            get
-            {
-                return GetIsLegacyCasPolicyEnabled(GetNativeHandle());
-            }
+            get { return GetIsLegacyCasPolicyEnabled(GetNativeHandle()); }
         }
 
         // Determine what this homogenous domain thinks the grant set should be for a specific set of evidence
@@ -4479,14 +5167,17 @@ namespace System {
             {
                 foreach (StrongName fullTrustAssembly in ApplicationTrust.FullTrustAssemblies)
                 {
-                    StrongNameMembershipCondition sn = new StrongNameMembershipCondition(fullTrustAssembly.PublicKey,
-                                                                                         fullTrustAssembly.Name,
-                                                                                         fullTrustAssembly.Version);
+                    StrongNameMembershipCondition sn = new StrongNameMembershipCondition(
+                        fullTrustAssembly.PublicKey,
+                        fullTrustAssembly.Name,
+                        fullTrustAssembly.Version
+                    );
 
                     object usedEvidence = null;
                     if ((sn as IReportMatchMembershipCondition).Check(evidence, out usedEvidence))
                     {
-                        IDelayEvaluatedEvidence delayEvidence = usedEvidence as IDelayEvaluatedEvidence;
+                        IDelayEvaluatedEvidence delayEvidence =
+                            usedEvidence as IDelayEvaluatedEvidence;
                         if (usedEvidence != null)
                         {
                             delayEvidence.MarkUsed();
@@ -4502,19 +5193,20 @@ namespace System {
         }
 #endif // FEATURE_CAS_POLICY
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void nChangeSecurityPolicy();
 
-        [System.Security.SecurityCritical]  // auto-generated
-        [MethodImplAttribute(MethodImplOptions.InternalCall),
-         ReliabilityContract(Consistency.MayCorruptAppDomain, Cer.MayFail),
-         ResourceExposure(ResourceScope.None)]
+        [System.Security.SecurityCritical] // auto-generated
+        [
+            MethodImplAttribute(MethodImplOptions.InternalCall),
+            ReliabilityContract(Consistency.MayCorruptAppDomain, Cer.MayFail),
+            ResourceExposure(ResourceScope.None)
+        ]
         internal static extern void nUnload(Int32 domainInternal);
-           
-        public Object CreateInstanceAndUnwrap(String assemblyName,
-                                              String typeName)
+
+        public Object CreateInstanceAndUnwrap(String assemblyName, String typeName)
         {
             ObjectHandle oh = CreateInstance(assemblyName, typeName);
             if (oh == null)
@@ -4523,58 +5215,75 @@ namespace System {
             return oh.Unwrap();
         } // CreateInstanceAndUnwrap
 
-
-        public Object CreateInstanceAndUnwrap(String assemblyName, 
-                                              String typeName,
-                                              Object[] activationAttributes)
+        public Object CreateInstanceAndUnwrap(
+            String assemblyName,
+            String typeName,
+            Object[] activationAttributes
+        )
         {
             ObjectHandle oh = CreateInstance(assemblyName, typeName, activationAttributes);
             if (oh == null)
-                return null; 
+                return null;
 
             return oh.Unwrap();
         } // CreateInstanceAndUnwrap
 
-
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of CreateInstanceAndUnwrap which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-        public Object CreateInstanceAndUnwrap(String assemblyName, 
-                                              String typeName, 
-                                              bool ignoreCase,
-                                              BindingFlags bindingAttr, 
-                                              Binder binder,
-                                              Object[] args,
-                                              CultureInfo culture,
-                                              Object[] activationAttributes,
-                                              Evidence securityAttributes)
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of CreateInstanceAndUnwrap which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
+        public Object CreateInstanceAndUnwrap(
+            String assemblyName,
+            String typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Object[] args,
+            CultureInfo culture,
+            Object[] activationAttributes,
+            Evidence securityAttributes
+        )
         {
 #pragma warning disable 618
-            ObjectHandle oh = CreateInstance(assemblyName, typeName, ignoreCase, bindingAttr,
-                binder, args, culture, activationAttributes, securityAttributes);
+            ObjectHandle oh = CreateInstance(
+                assemblyName,
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes,
+                securityAttributes
+            );
 #pragma warning restore 618
 
             if (oh == null)
-                return null; 
-            
+                return null;
+
             return oh.Unwrap();
         } // CreateInstanceAndUnwrap
 
-        public object CreateInstanceAndUnwrap(string assemblyName,
-                                              string typeName,
-                                              bool ignoreCase,
-                                              BindingFlags bindingAttr,
-                                              Binder binder,
-                                              object[] args,
-                                              CultureInfo culture,
-                                              object[] activationAttributes)
+        public object CreateInstanceAndUnwrap(
+            string assemblyName,
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            object[] args,
+            CultureInfo culture,
+            object[] activationAttributes
+        )
         {
-            ObjectHandle oh = CreateInstance(assemblyName,
-                                             typeName,
-                                             ignoreCase,
-                                             bindingAttr,
-                                             binder,
-                                             args,
-                                             culture,
-                                             activationAttributes);
+            ObjectHandle oh = CreateInstance(
+                assemblyName,
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes
+            );
 
             if (oh == null)
             {
@@ -4584,109 +5293,123 @@ namespace System {
             return oh.Unwrap();
         }
 
-        // The first parameter should be named assemblyFile, but it was incorrectly named in a previous 
+        // The first parameter should be named assemblyFile, but it was incorrectly named in a previous
         //  release, and the compatibility police won't let us change the name now.
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public Object CreateInstanceFromAndUnwrap(String assemblyName,
-                                                  String typeName)
+        public Object CreateInstanceFromAndUnwrap(String assemblyName, String typeName)
         {
             ObjectHandle oh = CreateInstanceFrom(assemblyName, typeName);
             if (oh == null)
-                return null;  
+                return null;
 
-            return oh.Unwrap();                
+            return oh.Unwrap();
         } // CreateInstanceAndUnwrap
 
-
-        // The first parameter should be named assemblyFile, but it was incorrectly named in a previous 
+        // The first parameter should be named assemblyFile, but it was incorrectly named in a previous
         //  release, and the compatibility police won't let us change the name now.
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public Object CreateInstanceFromAndUnwrap(String assemblyName,
-                                                  String typeName,
-                                                  Object[] activationAttributes)
+        public Object CreateInstanceFromAndUnwrap(
+            String assemblyName,
+            String typeName,
+            Object[] activationAttributes
+        )
         {
             ObjectHandle oh = CreateInstanceFrom(assemblyName, typeName, activationAttributes);
             if (oh == null)
-                return null; 
+                return null;
 
             return oh.Unwrap();
         } // CreateInstanceAndUnwrap
 
-
-        // The first parameter should be named assemblyFile, but it was incorrectly named in a previous 
+        // The first parameter should be named assemblyFile, but it was incorrectly named in a previous
         //  release, and the compatibility police won't let us change the name now.
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        [Obsolete("Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of CreateInstanceFromAndUnwrap which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.")]
-        public Object CreateInstanceFromAndUnwrap(String assemblyName, 
-                                                  String typeName, 
-                                                  bool ignoreCase,
-                                                  BindingFlags bindingAttr, 
-                                                  Binder binder,
-                                                  Object[] args,
-                                                  CultureInfo culture,
-                                                  Object[] activationAttributes,
-                                                  Evidence securityAttributes)
+        [Obsolete(
+            "Methods which use evidence to sandbox are obsolete and will be removed in a future release of the .NET Framework. Please use an overload of CreateInstanceFromAndUnwrap which does not take an Evidence parameter. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
+        )]
+        public Object CreateInstanceFromAndUnwrap(
+            String assemblyName,
+            String typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Object[] args,
+            CultureInfo culture,
+            Object[] activationAttributes,
+            Evidence securityAttributes
+        )
         {
 #pragma warning disable 618
-            ObjectHandle oh = CreateInstanceFrom(assemblyName, typeName, ignoreCase, bindingAttr,
-                binder, args, culture, activationAttributes, securityAttributes);
+            ObjectHandle oh = CreateInstanceFrom(
+                assemblyName,
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes,
+                securityAttributes
+            );
 #pragma warning restore 618
 
             if (oh == null)
-                return null; 
+                return null;
 
             return oh.Unwrap();
         } // CreateInstanceAndUnwrap
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public object CreateInstanceFromAndUnwrap(string assemblyFile,
-                                                  string typeName,
-                                                  bool ignoreCase,
-                                                  BindingFlags bindingAttr,
-                                                  Binder binder,
-                                                  object[] args,
-                                                  CultureInfo culture,
-                                                  object[] activationAttributes)
+        public object CreateInstanceFromAndUnwrap(
+            string assemblyFile,
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder binder,
+            object[] args,
+            CultureInfo culture,
+            object[] activationAttributes
+        )
         {
-            ObjectHandle oh = CreateInstanceFrom(assemblyFile,
-                                                 typeName,
-                                                 ignoreCase,
-                                                 bindingAttr,
-                                                 binder,
-                                                 args,
-                                                 culture,
-                                                 activationAttributes);
+            ObjectHandle oh = CreateInstanceFrom(
+                assemblyFile,
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes
+            );
             if (oh == null)
             {
                 return null;
             }
-            
+
             return oh.Unwrap();
         }
 
         public Int32 Id
         {
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]  
-            get {
-                return GetId();
-            }
+            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+            get { return GetId(); }
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         internal extern Int32 GetId();
-        
+
         internal const Int32 DefaultADID = 1;
-        
+
         public bool IsDefaultAppDomain()
         {
-            if (GetId()==DefaultADID)
+            if (GetId() == DefaultADID)
                 return true;
             return false;
         }
@@ -4696,14 +5419,14 @@ namespace System {
         private static AppDomainSetup InternalCreateDomainSetup(String imageLocation)
         {
             int i = imageLocation.LastIndexOf('\\');
- 
+
             Contract.Assert(i != -1, "invalid image location");
 
             AppDomainSetup info = new AppDomainSetup();
 
-            info.ApplicationBase = imageLocation.Substring(0, i+1);
+            info.ApplicationBase = imageLocation.Substring(0, i + 1);
 
-            StringBuilder config = new StringBuilder(imageLocation.Substring(i+1));
+            StringBuilder config = new StringBuilder(imageLocation.Substring(i + 1));
             config.Append(AppDomainSetup.ConfigurationExtension);
             info.ConfigurationFile = config.ToString();
 
@@ -4717,43 +5440,41 @@ namespace System {
         private static AppDomain InternalCreateDomain(String imageLocation)
         {
             AppDomainSetup info = InternalCreateDomainSetup(imageLocation);
-            return CreateDomain("Validator",
-                                null,
-                                info);
+            return CreateDomain("Validator", null, info);
         }
 #endif
 
 #if FEATURE_APPDOMAIN_RESOURCE_MONITORING
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void nEnableMonitoring();
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern bool nMonitoringIsEnabled();
 
         // return -1 if ARM is not supported.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern Int64 nGetTotalProcessorTime();
 
         // return -1 if ARM is not supported.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern Int64 nGetTotalAllocatedMemorySize();
 
         // return -1 if ARM is not supported.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern Int64 nGetLastSurvivedMemorySize();
 
         // return -1 if ARM is not supported.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern Int64 nGetLastSurvivedProcessMemorySize();
@@ -4761,12 +5482,10 @@ namespace System {
         public static bool MonitoringIsEnabled
         {
             [System.Security.SecurityCritical]
-            get {
-                return nMonitoringIsEnabled();
-            }
-            
+            get { return nMonitoringIsEnabled(); }
             [System.Security.SecurityCritical]
-            set {
+            set
+            {
                 if (value == false)
                 {
                     throw new ArgumentException(Environment.GetResourceString("Arg_MustBeTrue"));
@@ -4780,14 +5499,17 @@ namespace System {
 
         // Gets the total processor time for this AppDomain.
         // Throws NotSupportedException if ARM is not enabled.
-        public TimeSpan MonitoringTotalProcessorTime 
+        public TimeSpan MonitoringTotalProcessorTime
         {
             [System.Security.SecurityCritical]
-            get {
+            get
+            {
                 Int64 i64ProcessorTime = nGetTotalProcessorTime();
                 if (i64ProcessorTime == -1)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_WithoutARM"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_WithoutARM")
+                    );
                 }
                 return new TimeSpan(i64ProcessorTime);
             }
@@ -4796,52 +5518,61 @@ namespace System {
         // Gets the number of bytes allocated in this AppDomain since
         // the AppDomain was created.
         // Throws NotSupportedException if ARM is not enabled.
-        public Int64 MonitoringTotalAllocatedMemorySize 
+        public Int64 MonitoringTotalAllocatedMemorySize
         {
             [System.Security.SecurityCritical]
-            get {
+            get
+            {
                 Int64 i64AllocatedMemory = nGetTotalAllocatedMemorySize();
                 if (i64AllocatedMemory == -1)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_WithoutARM"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_WithoutARM")
+                    );
                 }
                 return i64AllocatedMemory;
             }
         }
 
         // Gets the number of bytes survived after the last collection
-        // that are known to be held by this AppDomain. After a full 
-        // collection this number is accurate and complete. After an 
+        // that are known to be held by this AppDomain. After a full
+        // collection this number is accurate and complete. After an
         // ephemeral collection this number is potentially incomplete.
         // Throws NotSupportedException if ARM is not enabled.
         public Int64 MonitoringSurvivedMemorySize
         {
             [System.Security.SecurityCritical]
-            get {
+            get
+            {
                 Int64 i64LastSurvivedMemory = nGetLastSurvivedMemorySize();
                 if (i64LastSurvivedMemory == -1)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_WithoutARM"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_WithoutARM")
+                    );
                 }
                 return i64LastSurvivedMemory;
             }
         }
 
-        // Gets the total bytes survived from the last collection. After 
-        // a full collection this number represents the number of the bytes 
-        // being held live in managed heaps. (This number should be close 
+        // Gets the total bytes survived from the last collection. After
+        // a full collection this number represents the number of the bytes
+        // being held live in managed heaps. (This number should be close
         // to the number obtained from GC.GetTotalMemory for a full collection.)
-        // After an ephemeral collection this number represents the number 
+        // After an ephemeral collection this number represents the number
         // of bytes being held live in ephemeral generations.
         // Throws NotSupportedException if ARM is not enabled.
         public static Int64 MonitoringSurvivedProcessMemorySize
         {
             [System.Security.SecurityCritical]
-            get {
+            get
+            {
                 Int64 i64LastSurvivedProcessMemory = nGetLastSurvivedProcessMemorySize();
                 if (i64LastSurvivedProcessMemory == -1)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_WithoutARM"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_WithoutARM")
+                    );
                 }
                 return i64LastSurvivedProcessMemory;
             }
@@ -4849,7 +5580,7 @@ namespace System {
 #endif
 
 #if FEATURE_FUSION
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         private void InternalSetDomainContext(String imageLocation)
@@ -4876,14 +5607,29 @@ namespace System {
             throw new NotImplementedException();
         }
 
-        void _AppDomain.GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId)
+        void _AppDomain.GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        )
         {
             throw new NotImplementedException();
         }
 
-        // If you implement this method, make sure to include _AppDomain.Invoke in VM\DangerousAPIs.h and 
+        // If you implement this method, make sure to include _AppDomain.Invoke in VM\DangerousAPIs.h and
         // include _AppDomain in SystemDomain::IsReflectionInvocationMethod in AppDomain.cpp.
-        void _AppDomain.Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr)
+        void _AppDomain.Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        )
         {
             throw new NotImplementedException();
         }
@@ -4892,11 +5638,11 @@ namespace System {
 
     //  CallBacks provide a facility to request execution of some code
     //  in another context/appDomain.
-    //  CrossAppDomainDelegate type is defined for appdomain call backs. 
+    //  CrossAppDomainDelegate type is defined for appdomain call backs.
     //  The delegate used to request a callbak through the DoCallBack method
     //  must be of CrossContextDelegate type.
-#if FEATURE_REMOTING    
-[System.Runtime.InteropServices.ComVisible(true)]
+#if FEATURE_REMOTING
+    [System.Runtime.InteropServices.ComVisible(true)]
     public delegate void CrossAppDomainDelegate();
 #endif
 

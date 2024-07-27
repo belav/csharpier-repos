@@ -15,14 +15,14 @@ namespace System.Tests.Types
         [ActiveIssue("https://github.com/dotnet/runtime/issues/90308", TestRuntimes.Mono)]
         public static unsafe void CompileTimeIdentity_Managed()
         {
-            object obj = new delegate*<int>[1];
-            Assert.True(obj is delegate*<int>[]);
-            Assert.False(obj is delegate*<bool>[]);
+            object obj = new delegate* <int>[1];
+            Assert.True(obj is delegate* <int>[]);
+            Assert.False(obj is delegate* <bool>[]);
 
-            var fn = new delegate*<int>[1];
-            Assert.True(fn is delegate*<int>[]);
+            var fn = new delegate* <int>[1];
+            Assert.True(fn is delegate* <int>[]);
 #pragma warning disable CS0184 // 'is' expression's given expression is never of the provided type
-            Assert.False(fn is delegate*<bool>[]);
+            Assert.False(fn is delegate* <bool>[]);
 #pragma warning restore CS0184
         }
 
@@ -30,14 +30,14 @@ namespace System.Tests.Types
         [ActiveIssue("https://github.com/dotnet/runtime/issues/90308", TestRuntimes.Mono)]
         public static unsafe void CompileTimeIdentity_ManagedWithMods()
         {
-            object obj = new delegate*<ref int, void>[1];
-            Assert.True(obj is delegate*<out int, void>[]);
-            Assert.True(obj is delegate*<in int, void>[]);
+            object obj = new delegate* <ref int, void>[1];
+            Assert.True(obj is delegate* <out int, void>[]);
+            Assert.True(obj is delegate* <in int, void>[]);
 
-            var fn = new delegate*<ref int, void>[1];
+            var fn = new delegate* <ref int, void>[1];
 #pragma warning disable CS0184
-            Assert.False(fn is delegate*<out int, void>[]);
-            Assert.False(fn is delegate*<in int, void>[]);
+            Assert.False(fn is delegate* <out int, void>[]);
+            Assert.False(fn is delegate* <in int, void>[]);
 #pragma warning restore CS0184
         }
 
@@ -63,22 +63,20 @@ namespace System.Tests.Types
         public static unsafe void CompileTimeIdentity_UnmanagedIsPartOfIdentity()
         {
             object obj = new delegate* unmanaged[MemberFunction]<void>[1];
-            Assert.False(obj is delegate*<void>[]);
+            Assert.False(obj is delegate* <void>[]);
 
             var fn = new delegate* unmanaged[MemberFunction]<void>[1];
 #pragma warning disable CS0184
-            Assert.False(fn is delegate*<void>[]);
+            Assert.False(fn is delegate* <void>[]);
 #pragma warning restore CS0184
 
             object obj2 = new delegate* unmanaged[Cdecl]<void>[1];
-            Assert.False(obj2 is delegate*<void>[]);
+            Assert.False(obj2 is delegate* <void>[]);
 
             var fn2 = new delegate* unmanaged[Cdecl]<void>[1];
 #pragma warning disable CS0184
-            Assert.False(fn2 is delegate*<void>[]);
+            Assert.False(fn2 is delegate* <void>[]);
 #pragma warning restore CS0184
         }
     }
 }
-
-

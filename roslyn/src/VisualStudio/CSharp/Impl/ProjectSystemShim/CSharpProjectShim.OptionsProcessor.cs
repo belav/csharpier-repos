@@ -26,7 +26,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             private string? _mainTypeName;
             private OutputKind _outputKind;
 
-            public OptionsProcessor(ProjectSystemProject projectSystemProject, SolutionServices workspaceServices)
+            public OptionsProcessor(
+                ProjectSystemProject projectSystemProject,
+                SolutionServices workspaceServices
+            )
                 : base(projectSystemProject, workspaceServices)
             {
                 _projectSystemProject = projectSystemProject;
@@ -34,11 +37,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 
             public object this[CompilerOptions compilerOption]
             {
-                get
-                {
-                    return _options[(int)compilerOption];
-                }
-
+                get { return _options[(int)compilerOption]; }
                 set
                 {
                     if (object.Equals(_options[(int)compilerOption], value))
@@ -51,7 +50,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 }
             }
 
-            protected override CompilationOptions ComputeCompilationOptionsWithHostValues(CompilationOptions compilationOptions, IRuleSetFile? ruleSetFile)
+            protected override CompilationOptions ComputeCompilationOptionsWithHostValues(
+                CompilationOptions compilationOptions,
+                IRuleSetFile? ruleSetFile
+            )
             {
                 IDictionary<string, ReportDiagnostic>? ruleSetSpecificDiagnosticOptions;
 
@@ -64,7 +66,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 if (ruleSetFile != null)
                 {
                     ruleSetGeneralDiagnosticOption = ruleSetFile.GetGeneralDiagnosticOption();
-                    ruleSetSpecificDiagnosticOptions = new Dictionary<string, ReportDiagnostic>(ruleSetFile.GetSpecificDiagnosticOptions());
+                    ruleSetSpecificDiagnosticOptions = new Dictionary<string, ReportDiagnostic>(
+                        ruleSetFile.GetSpecificDiagnosticOptions()
+                    );
                 }
                 else
                 {
@@ -72,10 +76,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 }
 
                 ReportDiagnostic generalDiagnosticOption;
-                var warningsAreErrors = GetNullableBooleanOption(CompilerOptions.OPTID_WARNINGSAREERRORS);
+                var warningsAreErrors = GetNullableBooleanOption(
+                    CompilerOptions.OPTID_WARNINGSAREERRORS
+                );
                 if (warningsAreErrors.HasValue)
                 {
-                    generalDiagnosticOption = warningsAreErrors.Value ? ReportDiagnostic.Error : ReportDiagnostic.Default;
+                    generalDiagnosticOption = warningsAreErrors.Value
+                        ? ReportDiagnostic.Error
+                        : ReportDiagnostic.Default;
                 }
                 else if (ruleSetGeneralDiagnosticOption.HasValue)
                 {
@@ -87,7 +95,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 }
 
                 // Start with the rule set options
-                var diagnosticOptions = new Dictionary<string, ReportDiagnostic>(ruleSetSpecificDiagnosticOptions);
+                var diagnosticOptions = new Dictionary<string, ReportDiagnostic>(
+                    ruleSetSpecificDiagnosticOptions
+                );
 
                 // Update the specific options based on the general settings
                 if (warningsAreErrors.HasValue && warningsAreErrors.Value == true)
@@ -102,14 +112,23 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 }
 
                 // Update the specific options based on the specific settings
-                foreach (var diagnosticID in ParseWarningCodes(CompilerOptions.OPTID_WARNASERRORLIST))
+                foreach (
+                    var diagnosticID in ParseWarningCodes(CompilerOptions.OPTID_WARNASERRORLIST)
+                )
                 {
                     diagnosticOptions[diagnosticID] = ReportDiagnostic.Error;
                 }
 
-                foreach (var diagnosticID in ParseWarningCodes(CompilerOptions.OPTID_WARNNOTASERRORLIST))
+                foreach (
+                    var diagnosticID in ParseWarningCodes(CompilerOptions.OPTID_WARNNOTASERRORLIST)
+                )
                 {
-                    if (ruleSetSpecificDiagnosticOptions.TryGetValue(diagnosticID, out var ruleSetOption))
+                    if (
+                        ruleSetSpecificDiagnosticOptions.TryGetValue(
+                            diagnosticID,
+                            out var ruleSetOption
+                        )
+                    )
                     {
                         diagnosticOptions[diagnosticID] = ruleSetOption;
                     }
@@ -124,44 +143,69 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                     diagnosticOptions[diagnosticID] = ReportDiagnostic.Suppress;
                 }
 
-                if (!Enum.TryParse(GetStringOption(CompilerOptions.OPTID_PLATFORM, ""), ignoreCase: true, result: out Platform platform))
+                if (
+                    !Enum.TryParse(
+                        GetStringOption(CompilerOptions.OPTID_PLATFORM, ""),
+                        ignoreCase: true,
+                        result: out Platform platform
+                    )
+                )
                 {
                     platform = Platform.AnyCpu;
                 }
 
-                if (!int.TryParse(GetStringOption(CompilerOptions.OPTID_WARNINGLEVEL, defaultValue: ""), out var warningLevel))
+                if (
+                    !int.TryParse(
+                        GetStringOption(CompilerOptions.OPTID_WARNINGLEVEL, defaultValue: ""),
+                        out var warningLevel
+                    )
+                )
                 {
                     warningLevel = 4;
                 }
 
                 // TODO: appConfigPath: GetFilePathOption(CompilerOptions.OPTID_FUSIONCONFIG), bug #869604
 
-                return ((CSharpCompilationOptions)compilationOptions).WithAllowUnsafe(GetBooleanOption(CompilerOptions.OPTID_UNSAFE))
+                return ((CSharpCompilationOptions)compilationOptions)
+                    .WithAllowUnsafe(GetBooleanOption(CompilerOptions.OPTID_UNSAFE))
                     .WithOverflowChecks(GetBooleanOption(CompilerOptions.OPTID_CHECKED))
-                    .WithCryptoKeyContainer(GetStringOption(CompilerOptions.OPTID_KEYNAME, defaultValue: null))
+                    .WithCryptoKeyContainer(
+                        GetStringOption(CompilerOptions.OPTID_KEYNAME, defaultValue: null)
+                    )
                     .WithCryptoKeyFile(GetFilePathRelativeOption(CompilerOptions.OPTID_KEYFILE))
                     .WithDelaySign(GetNullableBooleanOption(CompilerOptions.OPTID_DELAYSIGN))
                     .WithGeneralDiagnosticOption(generalDiagnosticOption)
                     .WithMainTypeName(_mainTypeName)
-                    .WithModuleName(GetStringOption(CompilerOptions.OPTID_MODULEASSEMBLY, defaultValue: null))
-                    .WithOptimizationLevel(GetBooleanOption(CompilerOptions.OPTID_OPTIMIZATIONS) ? OptimizationLevel.Release : OptimizationLevel.Debug)
+                    .WithModuleName(
+                        GetStringOption(CompilerOptions.OPTID_MODULEASSEMBLY, defaultValue: null)
+                    )
+                    .WithOptimizationLevel(
+                        GetBooleanOption(CompilerOptions.OPTID_OPTIMIZATIONS)
+                            ? OptimizationLevel.Release
+                            : OptimizationLevel.Debug
+                    )
                     .WithOutputKind(_outputKind)
                     .WithPlatform(platform)
                     .WithSpecificDiagnosticOptions(diagnosticOptions)
                     .WithWarningLevel(warningLevel);
             }
 
-            private static string GetIdForErrorCode(int errorCode)
-                => "CS" + errorCode.ToString("0000");
+            private static string GetIdForErrorCode(int errorCode) =>
+                "CS" + errorCode.ToString("0000");
 
             private IEnumerable<string> ParseWarningCodes(CompilerOptions compilerOptions)
             {
                 Contract.ThrowIfFalse(
-                    compilerOptions is CompilerOptions.OPTID_NOWARNLIST or
-                    CompilerOptions.OPTID_WARNASERRORLIST or
-                    CompilerOptions.OPTID_WARNNOTASERRORLIST);
+                    compilerOptions
+                        is CompilerOptions.OPTID_NOWARNLIST
+                            or CompilerOptions.OPTID_WARNASERRORLIST
+                            or CompilerOptions.OPTID_WARNNOTASERRORLIST
+                );
 
-                foreach (var warning in GetStringOption(compilerOptions, defaultValue: "").Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (
+                    var warning in GetStringOption(compilerOptions, defaultValue: "")
+                        .Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
+                )
                 {
                     var warningStringID = warning;
                     if (int.TryParse(warning, out var warningId))
@@ -173,11 +217,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 }
             }
 
-            private bool? GetNullableBooleanOption(CompilerOptions optionID)
-                => (bool?)_options[(int)optionID];
+            private bool? GetNullableBooleanOption(CompilerOptions optionID) =>
+                (bool?)_options[(int)optionID];
 
-            private bool GetBooleanOption(CompilerOptions optionID)
-                => GetNullableBooleanOption(optionID).GetValueOrDefault(defaultValue: false);
+            private bool GetBooleanOption(CompilerOptions optionID) =>
+                GetNullableBooleanOption(optionID).GetValueOrDefault(defaultValue: false);
 
             private string? GetFilePathRelativeOption(CompilerOptions optionID)
             {
@@ -213,9 +257,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 }
             }
 
-            protected override ParseOptions ComputeParseOptionsWithHostValues(ParseOptions parseOptions)
+            protected override ParseOptions ComputeParseOptionsWithHostValues(
+                ParseOptions parseOptions
+            )
             {
-                var symbols = GetStringOption(CompilerOptions.OPTID_CCSYMBOLS, defaultValue: "").Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                var symbols = GetStringOption(CompilerOptions.OPTID_CCSYMBOLS, defaultValue: "")
+                    .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 
                 // The base implementation of OptionsProcessor already tried this, but it didn't have the real documentation
                 // path so we have to do it a second time
@@ -225,9 +272,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                     documentationMode = DocumentationMode.Diagnose;
                 }
 
-                LanguageVersionFacts.TryParse(GetStringOption(CompilerOptions.OPTID_COMPATIBILITY, defaultValue: ""), out var languageVersion);
+                LanguageVersionFacts.TryParse(
+                    GetStringOption(CompilerOptions.OPTID_COMPATIBILITY, defaultValue: ""),
+                    out var languageVersion
+                );
 
-                return ((CSharpParseOptions)parseOptions).WithKind(SourceCodeKind.Regular)
+                return ((CSharpParseOptions)parseOptions)
+                    .WithKind(SourceCodeKind.Regular)
                     .WithLanguageVersion(languageVersion)
                     .WithPreprocessorSymbols(symbols.AsImmutable())
                     .WithDocumentationMode(documentationMode);
@@ -243,7 +294,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                     OutputFileType.Module => OutputKind.NetModule,
                     OutputFileType.AppContainer => OutputKind.WindowsRuntimeApplication,
                     OutputFileType.WinMDObj => OutputKind.WindowsRuntimeMetadata,
-                    _ => throw new ArgumentException("fileType was not a valid OutputFileType", nameof(fileType)),
+                    _
+                        => throw new ArgumentException(
+                            "fileType was not a valid OutputFileType",
+                            nameof(fileType)
+                        ),
                 };
 
                 if (_outputKind != newOutputKind)

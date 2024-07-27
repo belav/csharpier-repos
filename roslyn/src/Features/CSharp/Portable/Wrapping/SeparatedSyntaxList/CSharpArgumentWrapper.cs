@@ -19,9 +19,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
     {
         protected override string Align_wrapped_items => FeaturesResources.Align_wrapped_arguments;
         protected override string Indent_all_items => FeaturesResources.Indent_all_arguments;
-        protected override string Indent_wrapped_items => FeaturesResources.Indent_wrapped_arguments;
+        protected override string Indent_wrapped_items =>
+            FeaturesResources.Indent_wrapped_arguments;
         protected override string Unwrap_all_items => FeaturesResources.Unwrap_all_arguments;
-        protected override string Unwrap_and_indent_all_items => FeaturesResources.Unwrap_and_indent_all_arguments;
+        protected override string Unwrap_and_indent_all_items =>
+            FeaturesResources.Unwrap_and_indent_all_arguments;
         protected override string Unwrap_list => FeaturesResources.Unwrap_argument_list;
         protected override string Wrap_every_item => FeaturesResources.Wrap_every_argument;
         protected override string Wrap_long_list => FeaturesResources.Wrap_long_argument_list;
@@ -30,28 +32,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
         public override bool Supports_WrapEveryGroup_UnwrapFirst => true;
         public override bool Supports_WrapLongGroup_UnwrapFirst => true;
 
-        protected override bool ShouldMoveOpenBraceToNewLine(SyntaxWrappingOptions options)
-            => false;
+        protected override bool ShouldMoveOpenBraceToNewLine(SyntaxWrappingOptions options) =>
+            false;
 
-        protected override bool ShouldMoveCloseBraceToNewLine
-            => false;
+        protected override bool ShouldMoveCloseBraceToNewLine => false;
 
-        protected override SyntaxToken FirstToken(BaseArgumentListSyntax listSyntax)
-            => listSyntax.GetOpenToken();
+        protected override SyntaxToken FirstToken(BaseArgumentListSyntax listSyntax) =>
+            listSyntax.GetOpenToken();
 
-        protected override SyntaxToken LastToken(BaseArgumentListSyntax listSyntax)
-            => listSyntax.GetCloseToken();
+        protected override SyntaxToken LastToken(BaseArgumentListSyntax listSyntax) =>
+            listSyntax.GetCloseToken();
 
-        protected override SeparatedSyntaxList<ArgumentSyntax> GetListItems(BaseArgumentListSyntax listSyntax)
-            => listSyntax.Arguments;
+        protected override SeparatedSyntaxList<ArgumentSyntax> GetListItems(
+            BaseArgumentListSyntax listSyntax
+        ) => listSyntax.Arguments;
 
-        protected override BaseArgumentListSyntax? TryGetApplicableList(SyntaxNode node)
-            => node switch
+        protected override BaseArgumentListSyntax? TryGetApplicableList(SyntaxNode node) =>
+            node switch
             {
-                InvocationExpressionSyntax invocationExpression => invocationExpression.ArgumentList,
-                ElementAccessExpressionSyntax elementAccessExpression => elementAccessExpression.ArgumentList,
-                BaseObjectCreationExpressionSyntax objectCreationExpression => objectCreationExpression.ArgumentList,
-                ConstructorInitializerSyntax constructorInitializer => constructorInitializer.ArgumentList,
+                InvocationExpressionSyntax invocationExpression
+                    => invocationExpression.ArgumentList,
+                ElementAccessExpressionSyntax elementAccessExpression
+                    => elementAccessExpression.ArgumentList,
+                BaseObjectCreationExpressionSyntax objectCreationExpression
+                    => objectCreationExpression.ArgumentList,
+                ConstructorInitializerSyntax constructorInitializer
+                    => constructorInitializer.ArgumentList,
                 _ => null,
             };
 
@@ -60,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
             int position,
             SyntaxNode declaration,
             bool containsSyntaxError,
-            BaseArgumentListSyntax listSyntax)
+            BaseArgumentListSyntax listSyntax
+        )
         {
             if (containsSyntaxError)
                 return false;
@@ -71,8 +78,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
             {
                 // If we have something like  Foo(...)  or  this.Foo(...)  allow anywhere in the Foo(...)
                 // section.
-                var expr = (declaration as InvocationExpressionSyntax)?.Expression ??
-                           ((ElementAccessExpressionSyntax)declaration).Expression;
+                var expr =
+                    (declaration as InvocationExpressionSyntax)?.Expression
+                    ?? ((ElementAccessExpressionSyntax)declaration).Expression;
                 var name = TryGetInvokedName(expr);
 
                 startToken = name == null ? listSyntax.GetFirstToken() : name.GetFirstToken();
@@ -122,8 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
             // All up through the 'Foo' portion.
             //
             // Otherwise, only allow in the arg list.
-            return (expr as MemberAccessExpressionSyntax)?.Name ??
-                   (expr as MemberBindingExpressionSyntax)?.Name;
+            return (expr as MemberAccessExpressionSyntax)?.Name
+                ?? (expr as MemberBindingExpressionSyntax)?.Name;
         }
     }
 }

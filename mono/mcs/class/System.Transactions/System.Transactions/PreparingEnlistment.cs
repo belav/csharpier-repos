@@ -14,73 +14,74 @@ using System.Threading;
 
 namespace System.Transactions
 {
-	public class PreparingEnlistment : Enlistment
-	{
-		bool prepared = false;
-		Transaction tx;
-		IEnlistmentNotification enlisted;
-		WaitHandle waitHandle;
-		Exception ex;
+    public class PreparingEnlistment : Enlistment
+    {
+        bool prepared = false;
+        Transaction tx;
+        IEnlistmentNotification enlisted;
+        WaitHandle waitHandle;
+        Exception ex;
 
-		internal PreparingEnlistment (Transaction tx, IEnlistmentNotification enlisted)
-		{
-			this.tx = tx;
-			this.enlisted = enlisted;
-			waitHandle = new ManualResetEvent (false);
-		}
+        internal PreparingEnlistment(Transaction tx, IEnlistmentNotification enlisted)
+        {
+            this.tx = tx;
+            this.enlisted = enlisted;
+            waitHandle = new ManualResetEvent(false);
+        }
 
-		public void ForceRollback ()
-		{
-			ForceRollback (null);
-		}
+        public void ForceRollback()
+        {
+            ForceRollback(null);
+        }
 
-		internal override void InternalOnDone ()
-		{
-			this.Prepared();			
-		}
+        internal override void InternalOnDone()
+        {
+            this.Prepared();
+        }
 
-		[MonoTODO]
-		public void ForceRollback (Exception e)
-		{
-			tx.Rollback (e, enlisted);
-			/* See test RMFail2 */
-			((ManualResetEvent) waitHandle).Set ();
-		}
+        [MonoTODO]
+        public void ForceRollback(Exception e)
+        {
+            tx.Rollback(e, enlisted);
+            /* See test RMFail2 */
+            ((ManualResetEvent)waitHandle).Set();
+        }
 
-		[MonoTODO]
-		public void Prepared ()
-		{
-			prepared = true;
-			/* See test RMFail2 */
-			((ManualResetEvent) waitHandle).Set ();
-		}
+        [MonoTODO]
+        public void Prepared()
+        {
+            prepared = true;
+            /* See test RMFail2 */
+            ((ManualResetEvent)waitHandle).Set();
+        }
 
-		[MonoTODO]
-		public byte [] RecoveryInformation ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public byte[] RecoveryInformation()
+        {
+            throw new NotImplementedException();
+        }
 
-		internal bool IsPrepared {
-			get { return prepared; }
-		}
+        internal bool IsPrepared
+        {
+            get { return prepared; }
+        }
 
-		internal WaitHandle WaitHandle {
-			get { return waitHandle; }
-		}
+        internal WaitHandle WaitHandle
+        {
+            get { return waitHandle; }
+        }
 
-		internal IEnlistmentNotification EnlistmentNotification
-		{
-			get { return enlisted; }
-		}
+        internal IEnlistmentNotification EnlistmentNotification
+        {
+            get { return enlisted; }
+        }
 
-		// Uncatched exceptions thrown during prepare will
-		// be saved here so they can be retrieved by TM.
-		internal Exception Exception
-		{
-			get { return ex; }
-			set { ex = value; }
-		}
-	}
+        // Uncatched exceptions thrown during prepare will
+        // be saved here so they can be retrieved by TM.
+        internal Exception Exception
+        {
+            get { return ex; }
+            set { ex = value; }
+        }
+    }
 }
-

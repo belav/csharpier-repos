@@ -38,7 +38,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
         }
 
-        private void TestParseVersion(string value, int major, int minor, int build, int revision, AssemblyIdentityParts expectedParts)
+        private void TestParseVersion(
+            string value,
+            int major,
+            int minor,
+            int build,
+            int revision,
+            AssemblyIdentityParts expectedParts
+        )
         {
             AssemblyIdentityParts actualParts;
             ulong actual;
@@ -73,7 +80,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private void TestParseVersion(string value)
         {
             string displayName = "Goo, Version=" + value;
-            var fusion = FusionAssemblyIdentity.ToAssemblyIdentity(FusionAssemblyIdentity.ToAssemblyNameObject(displayName));
+            var fusion = FusionAssemblyIdentity.ToAssemblyIdentity(
+                FusionAssemblyIdentity.ToAssemblyNameObject(displayName)
+            );
 
             AssemblyIdentity id = null;
             bool success = AssemblyIdentity.TryParseDisplayName(displayName, out id);
@@ -102,62 +111,127 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(expected, actual);
         }
 
-        private void TestParseDisplayName(string displayName, AssemblyIdentity expected, AssemblyIdentityParts expectedParts = 0)
+        private void TestParseDisplayName(
+            string displayName,
+            AssemblyIdentity expected,
+            AssemblyIdentityParts expectedParts = 0
+        )
         {
             TestParseDisplayName(displayName, expected, expectedParts, expected);
         }
 
-        private void TestParseDisplayName(string displayName, AssemblyIdentity expected, AssemblyIdentityParts expectedParts, AssemblyIdentity expectedFusion)
+        private void TestParseDisplayName(
+            string displayName,
+            AssemblyIdentity expected,
+            AssemblyIdentityParts expectedParts,
+            AssemblyIdentity expectedFusion
+        )
         {
-            var fusion = FusionAssemblyIdentity.ToAssemblyIdentity(FusionAssemblyIdentity.ToAssemblyNameObject(displayName));
+            var fusion = FusionAssemblyIdentity.ToAssemblyIdentity(
+                FusionAssemblyIdentity.ToAssemblyNameObject(displayName)
+            );
             Assert.Equal(expectedFusion, fusion);
 
             AssemblyIdentity id = null;
             AssemblyIdentityParts actualParts;
-            bool success = AssemblyIdentity.TryParseDisplayName(displayName, out id, out actualParts);
+            bool success = AssemblyIdentity.TryParseDisplayName(
+                displayName,
+                out id,
+                out actualParts
+            );
             Assert.Equal(expected, id);
             Assert.Equal(success, id != null);
             Assert.Equal(expectedParts, actualParts);
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void GetDisplayName()
         {
             var id = new AssemblyIdentity("goo");
-            Assert.Equal("goo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", id.GetDisplayName());
+            Assert.Equal(
+                "goo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                id.GetDisplayName()
+            );
 
             id = new AssemblyIdentity("goo", new Version(1, 2, 3, 4));
-            Assert.Equal("goo, Version=1.2.3.4, Culture=neutral, PublicKeyToken=null", id.GetDisplayName());
+            Assert.Equal(
+                "goo, Version=1.2.3.4, Culture=neutral, PublicKeyToken=null",
+                id.GetDisplayName()
+            );
 
             id = new AssemblyIdentity("goo", cultureName: "en-US");
-            Assert.Equal("goo, Version=0.0.0.0, Culture=en-US, PublicKeyToken=null", id.GetDisplayName());
+            Assert.Equal(
+                "goo, Version=0.0.0.0, Culture=en-US, PublicKeyToken=null",
+                id.GetDisplayName()
+            );
 
-            id = new AssemblyIdentity("goo", publicKeyOrToken: new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF }.AsImmutableOrNull());
-            Assert.Equal("goo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=0123456789abcdef", id.GetDisplayName(), StringComparer.OrdinalIgnoreCase);
+            id = new AssemblyIdentity(
+                "goo",
+                publicKeyOrToken: new byte[]
+                {
+                    0x01,
+                    0x23,
+                    0x45,
+                    0x67,
+                    0x89,
+                    0xAB,
+                    0xCD,
+                    0xEF,
+                }.AsImmutableOrNull()
+            );
+            Assert.Equal(
+                "goo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=0123456789abcdef",
+                id.GetDisplayName(),
+                StringComparer.OrdinalIgnoreCase
+            );
 
             id = new AssemblyIdentity("goo", isRetargetable: true);
-            Assert.Equal("goo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null, Retargetable=Yes", id.GetDisplayName());
+            Assert.Equal(
+                "goo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null, Retargetable=Yes",
+                id.GetDisplayName()
+            );
 
             id = new AssemblyIdentity("goo", contentType: AssemblyContentType.WindowsRuntime);
-            Assert.Equal("goo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime", id.GetDisplayName());
+            Assert.Equal(
+                "goo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime",
+                id.GetDisplayName()
+            );
 
             id = new AssemblyIdentity("Goo", publicKeyOrToken: RoPublicKey1, hasPublicKey: true);
             string dn1 = id.GetDisplayName();
             string dn2 = id.GetDisplayName(fullKey: false);
             Assert.True(ReferenceEquals(dn1, dn2), "cached full name expected");
-            Assert.Equal("Goo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=" + StrPublicKeyToken1, dn1);
+            Assert.Equal(
+                "Goo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=" + StrPublicKeyToken1,
+                dn1
+            );
 
             string dnFull = id.GetDisplayName(fullKey: true);
-            Assert.Equal("Goo, Version=0.0.0.0, Culture=neutral, PublicKey=" + StrPublicKey1, dnFull);
+            Assert.Equal(
+                "Goo, Version=0.0.0.0, Culture=neutral, PublicKey=" + StrPublicKey1,
+                dnFull
+            );
 
             id = new AssemblyIdentity("Goo", cultureName: "neutral");
-            Assert.Equal("Goo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", id.GetDisplayName());
+            Assert.Equal(
+                "Goo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                id.GetDisplayName()
+            );
 
             id = new AssemblyIdentity("Goo", cultureName: "  '\t\r\n\\=,  ");
-            Assert.Equal(@"Goo, Version=0.0.0.0, Culture=""  \'\t\r\n\\\=\,  "", PublicKeyToken=null", id.GetDisplayName());
+            Assert.Equal(
+                @"Goo, Version=0.0.0.0, Culture=""  \'\t\r\n\\\=\,  "", PublicKeyToken=null",
+                id.GetDisplayName()
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void TryParseDisplayName_QuotingAndEscaping()
         {
             // escapes:
@@ -199,7 +273,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TestParseSimpleName("\\\"aa\\\", Version=1.0.0.0", expected: "\"aa\"");
             TestParseSimpleName("\\\"a'a\\\", Version=1.0.0.0", expected: null);
             TestParseSimpleName("\\\"a, Version=1.0.0.0", expected: "\"a");
-            TestParseSimpleName("\", Version=1.0.0.0\", Version=1.0.0.0", expected: ", Version=1.0.0.0");
+            TestParseSimpleName(
+                "\", Version=1.0.0.0\", Version=1.0.0.0",
+                expected: ", Version=1.0.0.0"
+            );
             TestParseSimpleName("\", Version=1.0.0.0", expected: ", Version=1.0.0.0");
             TestParseSimpleName("\\\", Version=1.0.0.0", expected: "\"");
             TestParseSimpleName("xx\\\"abc\\\"xx", expected: "xx\"abc\"xx");
@@ -222,7 +299,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TestParseSimpleName("\\'aa\\', Version=1.0.0.0", expected: "'aa'");
             TestParseSimpleName("\\'a\"a\\', Version=1.0.0.0", expected: null);
             TestParseSimpleName("\\'a,Version=1.0.0.0", expected: "'a");
-            TestParseSimpleName("', Version=1.0.0.0', Version=1.0.0.0", expected: ", Version=1.0.0.0");
+            TestParseSimpleName(
+                "', Version=1.0.0.0', Version=1.0.0.0",
+                expected: ", Version=1.0.0.0"
+            );
             TestParseSimpleName("', Version=1.0.0.0", expected: ", Version=1.0.0.0");
             TestParseSimpleName("\\', Version=1.0.0.0", expected: "'");
             TestParseSimpleName("xx\\'abc\\'xx", expected: "xx'abc'xx");
@@ -325,12 +405,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var ai = new AssemblyIdentity(simpleName);
             var dn = ai.GetDisplayName();
-            Assert.Equal(expectedSimpleName + ", Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", dn);
+            Assert.Equal(
+                expectedSimpleName + ", Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                dn
+            );
 
             TestParseSimpleName(dn, simpleName);
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void GetDisplayName_QuotingAndEscaping()
         {
             TestQuotingAndEscaping(",", "\\,");
@@ -353,46 +439,94 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TestQuotingAndEscaping("\u2000", "\u2000");
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void TryParseDisplayName()
         {
             string V = "\\u" + ((int)'V').ToString("X4") + ";";
 
-            TestParseDisplayName("  \"fo'o\"  , " + V + "ersion=1.0.0.0\t, \rCulture=zz-ZZ\n, PublicKeyToken=" + StrPublicKeyToken1,
-                new AssemblyIdentity("fo'o", new Version(1, 0, 0, 0), "zz-ZZ", RoPublicKeyToken1, hasPublicKey: false, isRetargetable: false, contentType: AssemblyContentType.Default),
-                NVCT);
+            TestParseDisplayName(
+                "  \"fo'o\"  , "
+                    + V
+                    + "ersion=1.0.0.0\t, \rCulture=zz-ZZ\n, PublicKeyToken="
+                    + StrPublicKeyToken1,
+                new AssemblyIdentity(
+                    "fo'o",
+                    new Version(1, 0, 0, 0),
+                    "zz-ZZ",
+                    RoPublicKeyToken1,
+                    hasPublicKey: false,
+                    isRetargetable: false,
+                    contentType: AssemblyContentType.Default
+                ),
+                NVCT
+            );
 
             // invalid:
             AssemblyIdentity id;
-            Assert.Throws<ArgumentNullException>(() => AssemblyIdentity.TryParseDisplayName(null, out id));
+            Assert.Throws<ArgumentNullException>(
+                () => AssemblyIdentity.TryParseDisplayName(null, out id)
+            );
 
             TestParseDisplayName("", null);
             TestParseDisplayName("fo=o, Culture=neutral, Version=1.0.0.0", null);
             TestParseDisplayName("goo, Culture=neutral, Version,1.0.0.0", null);
 
             // custom properties:
-            TestParseDisplayName("goo, A=B",
-                new AssemblyIdentity("goo"), N | AssemblyIdentityParts.Unknown);
+            TestParseDisplayName(
+                "goo, A=B",
+                new AssemblyIdentity("goo"),
+                N | AssemblyIdentityParts.Unknown
+            );
 
             // we don't allow CT=WinRT + Retargetable, fusion does.
             Assert.False(
-                AssemblyIdentity.TryParseDisplayName("goo, Version=1.0.0.0, Culture=en-US, Retargetable=Yes, ContentType=WindowsRuntime, PublicKeyToken=" + StrPublicKeyToken1, out id));
+                AssemblyIdentity.TryParseDisplayName(
+                    "goo, Version=1.0.0.0, Culture=en-US, Retargetable=Yes, ContentType=WindowsRuntime, PublicKeyToken="
+                        + StrPublicKeyToken1,
+                    out id
+                )
+            );
 
             // order
-            TestParseDisplayName("goo, Culture=neutral, Version=1.0.0.0",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 0)), NVC);
+            TestParseDisplayName(
+                "goo, Culture=neutral, Version=1.0.0.0",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 0)),
+                NVC
+            );
 
-            TestParseDisplayName("goo, Version=1.0.0.0, Culture=en-US, Retargetable=Yes, PublicKeyToken=" + StrPublicKeyToken1,
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 0), "en-US", RoPublicKeyToken1, hasPublicKey: false, isRetargetable: true),
-                NVCT | AssemblyIdentityParts.Retargetability);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.0, Culture=en-US, Retargetable=Yes, PublicKeyToken="
+                    + StrPublicKeyToken1,
+                new AssemblyIdentity(
+                    "goo",
+                    new Version(1, 0, 0, 0),
+                    "en-US",
+                    RoPublicKeyToken1,
+                    hasPublicKey: false,
+                    isRetargetable: true
+                ),
+                NVCT | AssemblyIdentityParts.Retargetability
+            );
 
-            TestParseDisplayName("goo, PublicKey=" + StrPublicKey1 + ", Version=1.0.0.1",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1), publicKeyOrToken: RoPublicKey1, hasPublicKey: true),
-                NVK);
+            TestParseDisplayName(
+                "goo, PublicKey=" + StrPublicKey1 + ", Version=1.0.0.1",
+                new AssemblyIdentity(
+                    "goo",
+                    new Version(1, 0, 0, 1),
+                    publicKeyOrToken: RoPublicKey1,
+                    hasPublicKey: true
+                ),
+                NVK
+            );
 
-            TestParseDisplayName(@"Goo, Version=0.0.0.0, Culture=""  \'\t\r\n\\\=\,  "", PublicKeyToken=null",
+            TestParseDisplayName(
+                @"Goo, Version=0.0.0.0, Culture=""  \'\t\r\n\\\=\,  "", PublicKeyToken=null",
                 new AssemblyIdentity("Goo", cultureName: "  '\t\r\n\\=,  "),
-                NVCT);
+                NVCT
+            );
 
             // duplicates
             TestParseDisplayName("goo, Version=1.0.0.0, Version=1.0.0.0", null);
@@ -410,7 +544,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.False(AssemblyIdentity.TryParseDisplayName(name, out _));
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void TryParseDisplayName_Version()
         {
             TestParseDisplayName("Version=1.2.3.4, goo", null);
@@ -420,19 +557,27 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TestParseDisplayName("goo, Version=", null);
             TestParseDisplayName("goo, Version", null);
 
-            TestParseDisplayName("goo, Version=1",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 0)), N | AssemblyIdentityParts.VersionMajor);
+            TestParseDisplayName(
+                "goo, Version=1",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 0)),
+                N | AssemblyIdentityParts.VersionMajor
+            );
 
             TestParseDisplayName("goo, Version=.", new AssemblyIdentity("goo"), N);
             TestParseDisplayName("goo, Version=..", new AssemblyIdentity("goo"), N);
             TestParseDisplayName("goo, Version=...", new AssemblyIdentity("goo"), N);
 
-            TestParseDisplayName("goo, Version=*, Culture=en-US",
+            TestParseDisplayName(
+                "goo, Version=*, Culture=en-US",
                 new AssemblyIdentity("goo", cultureName: "en-US"),
-                AssemblyIdentityParts.Name | AssemblyIdentityParts.Culture);
+                AssemblyIdentityParts.Name | AssemblyIdentityParts.Culture
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void TestParseVersion_Parts()
         {
             TestParseVersionInvalid("a");
@@ -448,30 +593,134 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             TestParseVersion(".", 0, 0, 0, 0, 0);
             TestParseVersion("1.", 1, 0, 0, 0, AssemblyIdentityParts.VersionMajor);
-            TestParseVersion("0.1", 0, 1, 0, 0, AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor);
-            TestParseVersion("1.2", 1, 2, 0, 0, AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor);
+            TestParseVersion(
+                "0.1",
+                0,
+                1,
+                0,
+                0,
+                AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor
+            );
+            TestParseVersion(
+                "1.2",
+                1,
+                2,
+                0,
+                0,
+                AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor
+            );
             TestParseVersionInvalid("1. 2");
             TestParseVersionInvalid("1 . 2");
 
             TestParseVersion("1..", 1, 0, 0, 0, AssemblyIdentityParts.VersionMajor);
-            TestParseVersion("1.2.", 1, 2, 0, 0, AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor);
-            TestParseVersion("1.2.3", 1, 2, 3, 0, AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor | AssemblyIdentityParts.VersionBuild);
-            TestParseVersion(".2.3", 0, 2, 3, 0, AssemblyIdentityParts.VersionMinor | AssemblyIdentityParts.VersionBuild);
-            TestParseVersion("1..3", 1, 0, 3, 0, AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionBuild);
+            TestParseVersion(
+                "1.2.",
+                1,
+                2,
+                0,
+                0,
+                AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor
+            );
+            TestParseVersion(
+                "1.2.3",
+                1,
+                2,
+                3,
+                0,
+                AssemblyIdentityParts.VersionMajor
+                    | AssemblyIdentityParts.VersionMinor
+                    | AssemblyIdentityParts.VersionBuild
+            );
+            TestParseVersion(
+                ".2.3",
+                0,
+                2,
+                3,
+                0,
+                AssemblyIdentityParts.VersionMinor | AssemblyIdentityParts.VersionBuild
+            );
+            TestParseVersion(
+                "1..3",
+                1,
+                0,
+                3,
+                0,
+                AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionBuild
+            );
 
-            TestParseVersion("1.2.3.", 1, 2, 3, 0, AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor | AssemblyIdentityParts.VersionBuild);
-            TestParseVersion("1.2..4", 1, 2, 0, 4, AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor | AssemblyIdentityParts.VersionRevision);
-            TestParseVersion("1.2..", 1, 2, 0, 0, AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor);
-            TestParseVersion("1.2.3.4", 1, 2, 3, 4, AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor | AssemblyIdentityParts.VersionBuild | AssemblyIdentityParts.VersionRevision);
+            TestParseVersion(
+                "1.2.3.",
+                1,
+                2,
+                3,
+                0,
+                AssemblyIdentityParts.VersionMajor
+                    | AssemblyIdentityParts.VersionMinor
+                    | AssemblyIdentityParts.VersionBuild
+            );
+            TestParseVersion(
+                "1.2..4",
+                1,
+                2,
+                0,
+                4,
+                AssemblyIdentityParts.VersionMajor
+                    | AssemblyIdentityParts.VersionMinor
+                    | AssemblyIdentityParts.VersionRevision
+            );
+            TestParseVersion(
+                "1.2..",
+                1,
+                2,
+                0,
+                0,
+                AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor
+            );
+            TestParseVersion(
+                "1.2.3.4",
+                1,
+                2,
+                3,
+                4,
+                AssemblyIdentityParts.VersionMajor
+                    | AssemblyIdentityParts.VersionMinor
+                    | AssemblyIdentityParts.VersionBuild
+                    | AssemblyIdentityParts.VersionRevision
+            );
             TestParseVersionInvalid("1. 2.3.4");
             TestParseVersionInvalid("1.2.3. 4");
-            TestParseVersion("65535.65535.65535.65535", 65535, 65535, 65535, 65535,
-                AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor | AssemblyIdentityParts.VersionBuild | AssemblyIdentityParts.VersionRevision);
+            TestParseVersion(
+                "65535.65535.65535.65535",
+                65535,
+                65535,
+                65535,
+                65535,
+                AssemblyIdentityParts.VersionMajor
+                    | AssemblyIdentityParts.VersionMinor
+                    | AssemblyIdentityParts.VersionBuild
+                    | AssemblyIdentityParts.VersionRevision
+            );
             TestParseVersionInvalid("65535.65535.65535.65536");
 
             TestParseVersion("*", 0, 0, 0, 0, AssemblyIdentityParts.VersionMajor);
-            TestParseVersion("1.*", 1, 0, 0, 0, AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor);
-            TestParseVersion("1.2.*", 1, 2, 0, 0, AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor | AssemblyIdentityParts.VersionBuild);
+            TestParseVersion(
+                "1.*",
+                1,
+                0,
+                0,
+                0,
+                AssemblyIdentityParts.VersionMajor | AssemblyIdentityParts.VersionMinor
+            );
+            TestParseVersion(
+                "1.2.*",
+                1,
+                2,
+                0,
+                0,
+                AssemblyIdentityParts.VersionMajor
+                    | AssemblyIdentityParts.VersionMinor
+                    | AssemblyIdentityParts.VersionBuild
+            );
             TestParseVersion("1.2.3.*", 1, 2, 3, 0, AssemblyIdentityParts.Version);
             TestParseVersion("1.*.2.*", 1, 0, 2, 0, AssemblyIdentityParts.Version);
 
@@ -479,7 +728,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TestParseVersionInvalid("1.2.3.4.5");
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void TestParseVersionAll()
         {
             // all combinations:
@@ -493,60 +745,97 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         foreach (var part4 in possibleParts)
                         {
                             TestParseVersion(
-                                (part1 ?? "") +
-                                (part2 != null ? "." + part2 : "") +
-                                (part3 != null ? "." + part3 : "") +
-                                (part4 != null ? "." + part4 : ""));
+                                (part1 ?? "")
+                                    + (part2 != null ? "." + part2 : "")
+                                    + (part3 != null ? "." + part3 : "")
+                                    + (part4 != null ? "." + part4 : "")
+                            );
                         }
                     }
                 }
             }
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void TryParseDisplayName_Culture()
         {
-            TestParseDisplayName("goo, Version=1.0.0.1, Culture=null",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1), cultureName: "null"), NVC);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.1, Culture=null",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1), cultureName: "null"),
+                NVC
+            );
 
-            TestParseDisplayName("goo, Version=1.0.0.1, cULture=en-US",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1), cultureName: "en-US"), NVC);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.1, cULture=en-US",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1), cultureName: "en-US"),
+                NVC
+            );
 
-            TestParseDisplayName("goo, Version=1.0.0.1, Language=en-US",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1), cultureName: "en-US"), NVC);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.1, Language=en-US",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1), cultureName: "en-US"),
+                NVC
+            );
 
-            TestParseDisplayName("goo, Version=1.0.0.1, languagE=en-US",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1), cultureName: "en-US"), NVC);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.1, languagE=en-US",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1), cultureName: "en-US"),
+                NVC
+            );
 
-            TestParseDisplayName("goo, Culture=*, Version=1.0.0.1",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)), NV);
+            TestParseDisplayName(
+                "goo, Culture=*, Version=1.0.0.1",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)),
+                NV
+            );
 
             TestParseDisplayName("goo, Culture=*", new AssemblyIdentity("goo"), N);
 
             TestParseDisplayName("goo, Culture=*, Culture=en-US, Version=1.0.0.1", null);
 
-            TestParseDisplayName("Goo, Version=1.0.0.0, Culture='neutral', PublicKeyToken=null",
-                new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), cultureName: null), NVCT);
+            TestParseDisplayName(
+                "Goo, Version=1.0.0.0, Culture='neutral', PublicKeyToken=null",
+                new AssemblyIdentity("Goo", new Version(1, 0, 0, 0), cultureName: null),
+                NVCT
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void TryParseDisplayName_Keys()
         {
             // empty keys:
-            TestParseDisplayName("goo, PublicKeyToken=null, Version=1.0.0.1",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)), NVT);
+            TestParseDisplayName(
+                "goo, PublicKeyToken=null, Version=1.0.0.1",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)),
+                NVT
+            );
 
-            TestParseDisplayName("goo, PublicKeyToken=neutral, Version=1.0.0.1",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)), NVT);
+            TestParseDisplayName(
+                "goo, PublicKeyToken=neutral, Version=1.0.0.1",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)),
+                NVT
+            );
 
-            TestParseDisplayName("goo, PublicKeyToken=*, Version=1.0.0.1",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)), NV);
+            TestParseDisplayName(
+                "goo, PublicKeyToken=*, Version=1.0.0.1",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)),
+                NV
+            );
 
             TestParseDisplayName("goo, PublicKey=null, Version=1.0.0.1", null);
             TestParseDisplayName("goo, PublicKey=neutral, Version=1.0.0.1", null);
 
-            TestParseDisplayName("goo, PublicKey=*, Version=1.0.0.1",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)), NV);
+            TestParseDisplayName(
+                "goo, PublicKey=*, Version=1.0.0.1",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)),
+                NV
+            );
 
             // keys
             TestParseDisplayName("goo, PublicKeyToken=, Version=1.0.0.1", null);
@@ -564,55 +853,124 @@ namespace Microsoft.CodeAnalysis.UnitTests
             //    expected: new AssemblyIdentity("goo", hasPublicKey: true, publicKeyOrToken: new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0 }.AsImmutable()));
 
             // if public key token calculated from public key matches, then it's ok to specify both
-            TestParseDisplayName("goo, Culture=neutral, Version=1.0.0.0, PublicKey=" + StrPublicKey1 + ", PublicKeyToken=" + StrPublicKeyToken1,
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 0), publicKeyOrToken: RoPublicKey1, hasPublicKey: true), NVC | AssemblyIdentityParts.PublicKeyOrToken);
+            TestParseDisplayName(
+                "goo, Culture=neutral, Version=1.0.0.0, PublicKey="
+                    + StrPublicKey1
+                    + ", PublicKeyToken="
+                    + StrPublicKeyToken1,
+                new AssemblyIdentity(
+                    "goo",
+                    new Version(1, 0, 0, 0),
+                    publicKeyOrToken: RoPublicKey1,
+                    hasPublicKey: true
+                ),
+                NVC | AssemblyIdentityParts.PublicKeyOrToken
+            );
 
-            TestParseDisplayName("goo, Culture=neutral, Version=1.0.0.0, PublicKey=" + StrPublicKey1 + ", PublicKeyToken=1111111111111111", null);
+            TestParseDisplayName(
+                "goo, Culture=neutral, Version=1.0.0.0, PublicKey="
+                    + StrPublicKey1
+                    + ", PublicKeyToken=1111111111111111",
+                null
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void TryParseDisplayName_ContentType()
         {
-            TestParseDisplayName("goo, Version=1.0.0.1, ContentType=WindowsRuntime",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1), contentType: AssemblyContentType.WindowsRuntime), NV | AssemblyIdentityParts.ContentType);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.1, ContentType=WindowsRuntime",
+                new AssemblyIdentity(
+                    "goo",
+                    new Version(1, 0, 0, 1),
+                    contentType: AssemblyContentType.WindowsRuntime
+                ),
+                NV | AssemblyIdentityParts.ContentType
+            );
 
-            TestParseDisplayName("goo, Version=1.0.0.1, ContentType=*",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)), NV);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.1, ContentType=*",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)),
+                NV
+            );
 
             TestParseDisplayName("goo, Version=1.0.0.1, ContentType=Default", null);
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsFusion)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsFusion
+        )]
         public void TryParseDisplayName_Retargetable()
         {
             // for some reason the Fusion rejects to parse Retargetable if they are not full names
 
-            TestParseDisplayName("goo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=" + StrPublicKeyToken1 + ", Retargetable=yEs",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 0), publicKeyOrToken: RoPublicKeyToken1, isRetargetable: true),
-                NVCT | AssemblyIdentityParts.Retargetability);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.0, Culture=neutral, PublicKeyToken="
+                    + StrPublicKeyToken1
+                    + ", Retargetable=yEs",
+                new AssemblyIdentity(
+                    "goo",
+                    new Version(1, 0, 0, 0),
+                    publicKeyOrToken: RoPublicKeyToken1,
+                    isRetargetable: true
+                ),
+                NVCT | AssemblyIdentityParts.Retargetability
+            );
 
-            TestParseDisplayName("goo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=" + StrPublicKeyToken1 + ", Retargetable=*",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 0), publicKeyOrToken: RoPublicKeyToken1),
-                NVCT);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.0, Culture=neutral, PublicKeyToken="
+                    + StrPublicKeyToken1
+                    + ", Retargetable=*",
+                new AssemblyIdentity(
+                    "goo",
+                    new Version(1, 0, 0, 0),
+                    publicKeyOrToken: RoPublicKeyToken1
+                ),
+                NVCT
+            );
 
-            TestParseDisplayName("goo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=" + StrPublicKeyToken1 + ", retargetable=NO",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 0), publicKeyOrToken: RoPublicKeyToken1),
-                NVCT | AssemblyIdentityParts.Retargetability);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.0, Culture=neutral, PublicKeyToken="
+                    + StrPublicKeyToken1
+                    + ", retargetable=NO",
+                new AssemblyIdentity(
+                    "goo",
+                    new Version(1, 0, 0, 0),
+                    publicKeyOrToken: RoPublicKeyToken1
+                ),
+                NVCT | AssemblyIdentityParts.Retargetability
+            );
 
-            TestParseDisplayName("goo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=" + StrPublicKeyToken1 + ", Retargetable=Bar",
-                null);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.0, Culture=neutral, PublicKeyToken="
+                    + StrPublicKeyToken1
+                    + ", Retargetable=Bar",
+                null
+            );
 
-            TestParseDisplayName("goo, Version=1.0.0.1, Retargetable=*",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)), NV);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.1, Retargetable=*",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)),
+                NV
+            );
 
-            TestParseDisplayName("goo, Version=1.0.0.1, Retargetable=No",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)), NV | AssemblyIdentityParts.Retargetability,
-                expectedFusion: null);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.1, Retargetable=No",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1)),
+                NV | AssemblyIdentityParts.Retargetability,
+                expectedFusion: null
+            );
 
-            TestParseDisplayName("goo, Version=1.0.0.1, retargetable=YEs",
-                new AssemblyIdentity("goo", new Version(1, 0, 0, 1), isRetargetable: true), NV | AssemblyIdentityParts.Retargetability,
-                expectedFusion: null);
+            TestParseDisplayName(
+                "goo, Version=1.0.0.1, retargetable=YEs",
+                new AssemblyIdentity("goo", new Version(1, 0, 0, 1), isRetargetable: true),
+                NV | AssemblyIdentityParts.Retargetability,
+                expectedFusion: null
+            );
         }
     }
 }
-

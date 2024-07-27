@@ -48,19 +48,13 @@ namespace System.Workflow.Activities
         [Browsable(false)]
         public string ConfigurationName
         {
-            get
-            {
-                return this.configurationName;
-            }
+            get { return this.configurationName; }
         }
 
         [Browsable(false)]
         public IDictionary<string, string> Context
         {
-            get
-            {
-                return this.context;
-            }
+            get { return this.context; }
             set
             {
                 if (value != null)
@@ -78,48 +72,33 @@ namespace System.Workflow.Activities
         [Browsable(false)]
         public Type ContractType
         {
-            get
-            {
-                return this.contractType;
-            }
+            get { return this.contractType; }
         }
 
         [DefaultValue(null)]
         [Browsable(false)]
         public string CustomAddress
         {
-            get
-            {
-                return this.customAddress;
-            }
+            get { return this.customAddress; }
         }
 
         [DefaultValue(false)]
         [Browsable(false)]
         public bool Initialized
         {
-            get
-            {
-                return this.initialized;
-            }
+            get { return this.initialized; }
         }
 
         [DefaultValue(null)]
         [Browsable(false)]
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         internal Guid InstanceId
         {
-            get
-            {
-                return this.instanceId;
-            }
+            get { return this.instanceId; }
         }
 
         public void Initialize(string configurationName, string customAddress)
@@ -127,7 +106,10 @@ namespace System.Workflow.Activities
             if (this.Initialized)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_LogicalChannelAlreadyInitialized, this.Name)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_LogicalChannelAlreadyInitialized, this.Name)
+                    )
+                );
             }
             this.configurationName = configurationName ?? string.Empty;
             this.customAddress = customAddress;

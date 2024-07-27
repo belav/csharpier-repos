@@ -20,7 +20,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryReadPrimitiveBitStringValue_Fails(
             string description,
             AsnEncodingRules ruleSet,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
@@ -28,7 +29,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             bool didRead = reader.TryReadPrimitiveBitString(
                 out int unusedBitCount,
-                out ReadOnlyMemory<byte> contents);
+                out ReadOnlyMemory<byte> contents
+            );
 
             Assert.False(didRead, "reader.TryReadBitStringBytes");
             Assert.Equal(0, unusedBitCount);
@@ -45,14 +47,16 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             int expectedUnusedBitCount,
             int expectedLength,
-            string inputHex)
+            string inputHex
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
             bool didRead = reader.TryReadPrimitiveBitString(
                 out int unusedBitCount,
-                out ReadOnlyMemory<byte> contents);
+                out ReadOnlyMemory<byte> contents
+            );
 
             Assert.True(didRead, "reader.TryReadBitStringBytes");
             Assert.Equal(expectedUnusedBitCount, unusedBitCount);
@@ -73,31 +77,31 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryReadPrimitiveBitStringValue_Throws(
             string description,
             AsnEncodingRules ruleSet,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadPrimitiveBitString(
-                        out int unusedBitCount,
-                        out ReadOnlyMemory<byte> contents);
-                });
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadPrimitiveBitString(
+                    out int unusedBitCount,
+                    out ReadOnlyMemory<byte> contents
+                );
+            });
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadBitString(
-                        new byte[inputData.Length],
-                        out int unusedBitCount,
-                        out int written);
-                });
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadBitString(
+                    new byte[inputData.Length],
+                    out int unusedBitCount,
+                    out int written
+                );
+            });
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadBitString(out int unusedBitCount));
+            Assert.Throws<AsnContentException>(() => reader.ReadBitString(out int unusedBitCount));
         }
 
         [Fact]
@@ -117,25 +121,24 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(input, AsnEncodingRules.CER);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadPrimitiveBitString(
-                        out int unusedBitCount,
-                        out ReadOnlyMemory<byte> contents);
-                });
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadPrimitiveBitString(
+                    out int unusedBitCount,
+                    out ReadOnlyMemory<byte> contents
+                );
+            });
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadBitString(
-                        new byte[input.Length],
-                        out int unusedBitCount,
-                        out int written);
-                });
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadBitString(
+                    new byte[input.Length],
+                    out int unusedBitCount,
+                    out int written
+                );
+            });
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadBitString(out int unusedBitCount));
+            Assert.Throws<AsnContentException>(() => reader.ReadBitString(out int unusedBitCount));
         }
 
         [Fact]
@@ -165,7 +168,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             bool success = reader.TryReadPrimitiveBitString(
                 out int unusedBitCount,
-                out ReadOnlyMemory<byte> contents);
+                out ReadOnlyMemory<byte> contents
+            );
 
             Assert.True(success, "reader.TryReadBitStringBytes");
             Assert.Equal(input[4], unusedBitCount);
@@ -173,9 +177,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             // Check that it is, in fact, the same memory. No copies with this API.
             Assert.True(
-                Unsafe.AreSame(
-                    ref MemoryMarshal.GetReference(contents.Span),
-                    ref input[5]));
+                Unsafe.AreSame(ref MemoryMarshal.GetReference(contents.Span), ref input[5])
+            );
         }
 
         [Theory]
@@ -183,13 +186,7 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData(AsnEncodingRules.BER, "030207FF")]
         [InlineData(AsnEncodingRules.CER, "03020780")]
         [InlineData(AsnEncodingRules.DER, "03020780")]
-        [InlineData(
-            AsnEncodingRules.BER,
-            "2380" +
-              "2380" +
-                "0000" +
-              "03020000" +
-              "0000")]
+        [InlineData(AsnEncodingRules.BER, "2380" + "2380" + "0000" + "03020000" + "0000")]
         public static void TryCopyBitStringBytes_Fails(AsnEncodingRules ruleSet, string inputHex)
         {
             byte[] inputData = inputHex.HexToByteArray();
@@ -198,7 +195,8 @@ namespace System.Formats.Asn1.Tests.Reader
             bool didRead = reader.TryReadBitString(
                 Span<byte>.Empty,
                 out int unusedBitCount,
-                out int bytesWritten);
+                out int bytesWritten
+            );
 
             Assert.False(didRead, "reader.TryReadBitString");
             Assert.Equal(0, unusedBitCount);
@@ -214,51 +212,41 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData(AsnEncodingRules.BER, "2300", "", 0)]
         [InlineData(AsnEncodingRules.BER, "2300" + "0500", "", 0)]
         [InlineData(AsnEncodingRules.BER, "0303010203" + "0500", "0202", 1)]
+        [InlineData(AsnEncodingRules.BER, "2380" + "2380" + "0000" + "03020000" + "0000", "00", 0)]
         [InlineData(
             AsnEncodingRules.BER,
-            "2380" +
-              "2380" +
-                "0000" +
-              "03020000" +
-              "0000",
+            "230C" + "2380" + "2380" + "0000" + "03020000" + "0000",
             "00",
-            0)]
+            0
+        )]
         [InlineData(
             AsnEncodingRules.BER,
-            "230C" +
-              "2380" +
-                "2380" +
-                  "0000" +
-                "03020000" +
-                "0000",
-            "00",
-            0)]
-        [InlineData(
-            AsnEncodingRules.BER,
-            "2380" +
-              "2308" +
-                "030200FA" +
-                "030200CE" +
-              "2380" +
-                "2380" +
-                  "2380" +
-                    "030300F00D" +
-                    "0000" +
-                  "0000" +
-                "03020001" +
-                "0000" +
-              "0303000203" +
-              "030203FF" +
-              "2380" +
-                "0000" +
-              "0000",
+            "2380"
+                + "2308"
+                + "030200FA"
+                + "030200CE"
+                + "2380"
+                + "2380"
+                + "2380"
+                + "030300F00D"
+                + "0000"
+                + "0000"
+                + "03020001"
+                + "0000"
+                + "0303000203"
+                + "030203FF"
+                + "2380"
+                + "0000"
+                + "0000",
             "FACEF00D010203F8",
-            3)]
+            3
+        )]
         public static void TryCopyBitStringBytes_Success(
             AsnEncodingRules ruleSet,
             string inputHex,
             string expectedHex,
-            int expectedUnusedBitCount)
+            int expectedUnusedBitCount
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             byte[] output = new byte[expectedHex.Length / 2];
@@ -267,32 +255,29 @@ namespace System.Formats.Asn1.Tests.Reader
             bool didRead = reader.TryReadBitString(
                 output,
                 out int unusedBitCount,
-                out int bytesWritten);
+                out int bytesWritten
+            );
 
             Assert.True(didRead, "reader.TryReadBitString");
             Assert.Equal(expectedUnusedBitCount, unusedBitCount);
             Assert.Equal(expectedHex, output.AsSpan(0, bytesWritten).ByteArrayToHex());
         }
 
-        private static void TryReadBitString_Throws_Helper(
-            AsnEncodingRules ruleSet,
-            byte[] input)
+        private static void TryReadBitString_Throws_Helper(AsnEncodingRules ruleSet, byte[] input)
         {
             AsnReader reader = new AsnReader(input, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadBitString(
-                        Span<byte>.Empty,
-                        out int unusedBitCount,
-                        out int bytesWritten);
-                });
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadBitString(
+                    Span<byte>.Empty,
+                    out int unusedBitCount,
+                    out int bytesWritten
+                );
+            });
         }
 
-        private static void ReadBitString_Throws(
-            AsnEncodingRules ruleSet,
-            byte[] input)
+        private static void ReadBitString_Throws(AsnEncodingRules ruleSet, byte[] input)
         {
             AsnReader reader = new AsnReader(input, ruleSet);
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out int unusedBitCount));
@@ -330,7 +315,11 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData("Nested boolean", AsnEncodingRules.BER, "2303010100")]
         [InlineData("Nested boolean (indef)", AsnEncodingRules.BER, "23800101000000")]
         [InlineData("Nested boolean (indef)", AsnEncodingRules.CER, "23800101000000")]
-        [InlineData("Nested constructed form", AsnEncodingRules.CER, "2380" + "2380" + "03010" + "000000000")]
+        [InlineData(
+            "Nested constructed form",
+            AsnEncodingRules.CER,
+            "2380" + "2380" + "03010" + "000000000"
+        )]
         [InlineData("No terminator", AsnEncodingRules.BER, "2380" + "03020000" + "")]
         [InlineData("No terminator", AsnEncodingRules.CER, "2380" + "03020000" + "")]
         [InlineData("No content", AsnEncodingRules.BER, "2380")]
@@ -338,15 +327,16 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData("No nested content", AsnEncodingRules.CER, "23800000")]
         [InlineData("Nested value too long", AsnEncodingRules.BER, "2380030A00")]
         [InlineData("Nested value too long - constructed", AsnEncodingRules.BER, "2380230A00")]
-        [InlineData("Nested value too long - simple", AsnEncodingRules.BER, "2303" + "03050000000000")]
+        [InlineData(
+            "Nested value too long - simple",
+            AsnEncodingRules.BER,
+            "2303" + "03050000000000"
+        )]
         [InlineData(
             "Unused bits in intermediate segment",
             AsnEncodingRules.BER,
-            "2380" +
-              "0303000102" +
-              "0303020304" +
-              "0303010506" +
-              "0000")]
+            "2380" + "0303000102" + "0303020304" + "0303010506" + "0000"
+        )]
         [InlineData("Constructed Null", AsnEncodingRules.BER, "238020000000")]
         [InlineData("Constructed Null", AsnEncodingRules.CER, "238020000000")]
         [InlineData("NonEmpty Null", AsnEncodingRules.BER, "2380000100")]
@@ -356,7 +346,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryCopyBitStringBytes_Throws(
             string description,
             AsnEncodingRules ruleSet,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
@@ -482,15 +473,14 @@ namespace System.Formats.Asn1.Tests.Reader
             bool success = reader.TryReadBitString(
                 output,
                 out int unusedBitCount,
-                out int bytesWritten);
+                out int bytesWritten
+            );
 
             Assert.True(success, "reader.TryReadBitString");
             Assert.Equal(input[4], unusedBitCount);
             Assert.Equal(999, bytesWritten);
 
-            Assert.Equal(
-                input.AsSpan(5).ByteArrayToHex(),
-                output.ByteArrayToHex());
+            Assert.Equal(input.AsSpan(5).ByteArrayToHex(), output.ByteArrayToHex());
 
             reader = new AsnReader(input, AsnEncodingRules.CER);
             byte[] output2 = reader.ReadBitString(out int ubc2);
@@ -562,15 +552,14 @@ namespace System.Formats.Asn1.Tests.Reader
             bool success = reader.TryReadBitString(
                 output,
                 out int unusedBitCount,
-                out int bytesWritten);
+                out int bytesWritten
+            );
 
             Assert.True(success, "reader.TryReadBitString");
             Assert.Equal(input[1006], unusedBitCount);
             Assert.Equal(1000, bytesWritten);
 
-            Assert.Equal(
-                expected.ByteArrayToHex(),
-                output.ByteArrayToHex());
+            Assert.Equal(expected.ByteArrayToHex(), output.ByteArrayToHex());
 
             reader = new AsnReader(input, AsnEncodingRules.CER);
             byte[] output2 = reader.ReadBitString(out int ubc2);
@@ -589,16 +578,28 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.TryReadPrimitiveBitString(out _, out _, Asn1Tag.Null));
+                () => reader.TryReadPrimitiveBitString(out _, out _, Asn1Tag.Null)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
             Assert.Throws<AsnContentException>(
-                () => reader.TryReadPrimitiveBitString(out _, out _, new Asn1Tag(TagClass.ContextSpecific, 0)));
+                () =>
+                    reader.TryReadPrimitiveBitString(
+                        out _,
+                        out _,
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    )
+            );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
-            Assert.True(reader.TryReadPrimitiveBitString(out int unusedBitCount, out ReadOnlyMemory<byte> contents));
+            Assert.True(
+                reader.TryReadPrimitiveBitString(
+                    out int unusedBitCount,
+                    out ReadOnlyMemory<byte> contents
+                )
+            );
             Assert.Equal("7E", contents.ByteArrayToHex());
             Assert.Equal(1, unusedBitCount);
             Assert.False(reader.HasData, "HasData after read");
@@ -620,28 +621,41 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.TryReadPrimitiveBitString(out _, out _, Asn1Tag.Null));
+                () => reader.TryReadPrimitiveBitString(out _, out _, Asn1Tag.Null)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.TryReadBitString(output, out _, out _, Asn1Tag.Null));
+                () => reader.TryReadBitString(output, out _, out _, Asn1Tag.Null)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.ReadBitString(out _, Asn1Tag.Null));
+                () => reader.ReadBitString(out _, Asn1Tag.Null)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(() => reader.TryReadPrimitiveBitString(out _, out _));
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadPrimitiveBitString(out _, out _)
+            );
             Assert.Throws<AsnContentException>(() => reader.TryReadBitString(output, out _, out _));
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out _));
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(() => reader.TryReadPrimitiveBitString(out _, out _, wrongTag1));
-            Assert.Throws<AsnContentException>(() => reader.TryReadBitString(output, out _, out _, wrongTag1));
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadPrimitiveBitString(out _, out _, wrongTag1)
+            );
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadBitString(output, out _, out _, wrongTag1)
+            );
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out _, wrongTag1));
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(() => reader.TryReadPrimitiveBitString(out _, out _, wrongTag2));
-            Assert.Throws<AsnContentException>(() => reader.TryReadBitString(output, out _, out _, wrongTag2));
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadPrimitiveBitString(out _, out _, wrongTag2)
+            );
+            Assert.Throws<AsnContentException>(
+                () => reader.TryReadBitString(output, out _, out _, wrongTag2)
+            );
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out _, wrongTag2));
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 
@@ -649,7 +663,9 @@ namespace System.Formats.Asn1.Tests.Reader
                 reader.TryReadPrimitiveBitString(
                     out int unusedBitCount,
                     out ReadOnlyMemory<byte> contents,
-                    correctTag));
+                    correctTag
+                )
+            );
 
             Assert.Equal("80", contents.ByteArrayToHex());
             Assert.Equal(0, unusedBitCount);
@@ -662,7 +678,9 @@ namespace System.Formats.Asn1.Tests.Reader
                     output.AsSpan(1),
                     out unusedBitCount,
                     out int written,
-                    correctTag));
+                    correctTag
+                )
+            );
 
             Assert.Equal("80", output.AsSpan(1, written).ByteArrayToHex());
             Assert.Equal(0, unusedBitCount);
@@ -687,7 +705,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             TagClass tagClass,
-            int tagValue)
+            int tagValue
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -698,7 +717,9 @@ namespace System.Formats.Asn1.Tests.Reader
                 reader.TryReadPrimitiveBitString(
                     out int ubc1,
                     out ReadOnlyMemory<byte> val1,
-                    correctConstructed));
+                    correctConstructed
+                )
+            );
 
             Assert.False(reader.HasData);
 
@@ -708,7 +729,9 @@ namespace System.Formats.Asn1.Tests.Reader
                 reader.TryReadPrimitiveBitString(
                     out int ubc2,
                     out ReadOnlyMemory<byte> val2,
-                    correctPrimitive));
+                    correctPrimitive
+                )
+            );
 
             Assert.False(reader.HasData);
 
@@ -719,14 +742,23 @@ namespace System.Formats.Asn1.Tests.Reader
             reader = new AsnReader(inputData, ruleSet);
             byte[] output1 = new byte[inputData.Length];
 
-            Assert.True(reader.TryReadBitString(output1.AsSpan(1), out ubc1, out int written, correctConstructed));
+            Assert.True(
+                reader.TryReadBitString(
+                    output1.AsSpan(1),
+                    out ubc1,
+                    out int written,
+                    correctConstructed
+                )
+            );
             Assert.Equal(ubc2, ubc1);
             Assert.Equal(val1Hex, output1.AsSpan(1, written).ByteArrayToHex());
             Assert.False(reader.HasData);
 
             reader = new AsnReader(inputData, ruleSet);
 
-            Assert.True(reader.TryReadBitString(output1.AsSpan(2), out ubc1, out written, correctPrimitive));
+            Assert.True(
+                reader.TryReadBitString(output1.AsSpan(2), out ubc1, out written, correctPrimitive)
+            );
             Assert.Equal(ubc2, ubc1);
             Assert.Equal(val1Hex, output1.AsSpan(2, written).ByteArrayToHex());
             Assert.False(reader.HasData);
@@ -773,7 +805,8 @@ namespace System.Formats.Asn1.Tests.Reader
             int unusedBitCount;
 
             Assert.True(
-                reader.TryReadBitString(Span<byte>.Empty, out unusedBitCount, out bytesWritten));
+                reader.TryReadBitString(Span<byte>.Empty, out unusedBitCount, out bytesWritten)
+            );
 
             Assert.Equal(0, bytesWritten);
             Assert.Equal(0, unusedBitCount);

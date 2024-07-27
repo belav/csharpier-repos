@@ -12,6 +12,7 @@ namespace Microsoft.NET.HostModel.AppHost
     public class PlaceHolderNotFoundInAppHostException : AppHostUpdateException
     {
         public byte[] MissingPattern { get; }
+
         public PlaceHolderNotFoundInAppHostException(byte[] pattern)
         {
             MissingPattern = pattern;

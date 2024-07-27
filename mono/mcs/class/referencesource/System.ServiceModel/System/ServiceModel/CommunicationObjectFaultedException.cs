@@ -11,8 +11,17 @@ namespace System.ServiceModel
     public class CommunicationObjectFaultedException : CommunicationException
     {
         public CommunicationObjectFaultedException() { }
-        public CommunicationObjectFaultedException(string message) : base(message) { }
-        public CommunicationObjectFaultedException(string message, Exception innerException) : base(message, innerException) { }
-        protected CommunicationObjectFaultedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
+        public CommunicationObjectFaultedException(string message)
+            : base(message) { }
+
+        public CommunicationObjectFaultedException(string message, Exception innerException)
+            : base(message, innerException) { }
+
+        protected CommunicationObjectFaultedException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
     }
 }

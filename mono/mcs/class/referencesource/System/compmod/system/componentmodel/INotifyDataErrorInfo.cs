@@ -4,15 +4,15 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
     using System.Collections;
 
     /// <devdoc>
     /// </devdoc>
-    public interface INotifyDataErrorInfo {
-
+    public interface INotifyDataErrorInfo
+    {
         /// <devdoc>
         /// </devdoc>
         bool HasErrors { get; }

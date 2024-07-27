@@ -12,14 +12,15 @@ namespace System.Web.Http.WebHost
     public class HttpControllerRouteHandler : IRouteHandler
     {
         private static readonly Lazy<HttpControllerRouteHandler> _instance =
-            new Lazy<HttpControllerRouteHandler>(() => new HttpControllerRouteHandler(), isThreadSafe: true);
+            new Lazy<HttpControllerRouteHandler>(
+                () => new HttpControllerRouteHandler(),
+                isThreadSafe: true
+            );
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpControllerRouteHandler"/> class.
         /// </summary>
-        protected HttpControllerRouteHandler()
-        {
-        }
+        protected HttpControllerRouteHandler() { }
 
         /// <summary>
         /// Gets the singleton <see cref="HttpControllerRouteHandler"/> instance.

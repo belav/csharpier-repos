@@ -74,7 +74,10 @@ namespace System.Reflection.Context.Projection
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
-            return Projector.Project(base.GetCustomAttributesData(), Projector.ProjectCustomAttributeData);
+            return Projector.Project(
+                base.GetCustomAttributesData(),
+                Projector.ProjectCustomAttributeData
+            );
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -104,10 +107,14 @@ namespace System.Reflection.Context.Projection
             return Projector.Project(base.GetParameters(), Projector.ProjectParameter);
         }
 
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override MethodInfo MakeGenericMethod(params Type[] typeArguments)
         {
-            return Projector.ProjectMethod(base.MakeGenericMethod(Projector.Unproject(typeArguments)));
+            return Projector.ProjectMethod(
+                base.MakeGenericMethod(Projector.Unproject(typeArguments))
+            );
         }
 
         public override Delegate CreateDelegate(Type delegateType)
@@ -122,9 +129,9 @@ namespace System.Reflection.Context.Projection
 
         public override bool Equals([NotNullWhen(true)] object? o)
         {
-            return o is ProjectingMethodInfo other &&
-                   Projector == other.Projector &&
-                   UnderlyingMethod.Equals(other.UnderlyingMethod);
+            return o is ProjectingMethodInfo other
+                && Projector == other.Projector
+                && UnderlyingMethod.Equals(other.UnderlyingMethod);
         }
 
         public override int GetHashCode()

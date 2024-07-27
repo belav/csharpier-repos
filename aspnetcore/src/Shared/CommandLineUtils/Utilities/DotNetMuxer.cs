@@ -35,8 +35,7 @@ internal static class DotNetMuxer
     /// or returns a string containing the default name of the .NET Core muxer ('dotnet').
     /// </summary>
     /// <returns>The path or a string named 'dotnet'.</returns>
-    public static string MuxerPathOrDefault()
-        => MuxerPath ?? MuxerName;
+    public static string MuxerPathOrDefault() => MuxerPath ?? MuxerName;
 
     internal static string? TryFindMuxerPath(string? mainModule)
     {
@@ -46,8 +45,14 @@ internal static class DotNetMuxer
             fileName += ".exe";
         }
 
-        if (!string.IsNullOrEmpty(mainModule)
-            && string.Equals(Path.GetFileName(mainModule!), fileName, StringComparison.OrdinalIgnoreCase))
+        if (
+            !string.IsNullOrEmpty(mainModule)
+            && string.Equals(
+                Path.GetFileName(mainModule!),
+                fileName,
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             return mainModule;
         }

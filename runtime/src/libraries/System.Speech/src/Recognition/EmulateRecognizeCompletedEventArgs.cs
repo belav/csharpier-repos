@@ -9,7 +9,12 @@ namespace System.Speech.Recognition
     {
         #region Constructors
 
-        internal EmulateRecognizeCompletedEventArgs(RecognitionResult result, Exception error, bool cancelled, object userState)
+        internal EmulateRecognizeCompletedEventArgs(
+            RecognitionResult result,
+            Exception error,
+            bool cancelled,
+            object userState
+        )
             : base(error, cancelled, userState)
         {
             _result = result;

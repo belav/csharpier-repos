@@ -13,7 +13,9 @@ namespace System.Reflection
             return (AssemblyContentType)((((int)flags) >> 9) & 0x7);
         }
 
-        public static AssemblyNameFlags ExtractAssemblyNameFlags(this AssemblyNameFlags combinedFlags)
+        public static AssemblyNameFlags ExtractAssemblyNameFlags(
+            this AssemblyNameFlags combinedFlags
+        )
         {
             return combinedFlags & unchecked((AssemblyNameFlags)0xFFFFF10F);
         }

@@ -15,6 +15,6 @@ internal static class AnalyzerDebug
 
     /// <inheritdoc cref="Debug.Assert(bool, string)"/>
     [Conditional("DEBUG")]
-    public static void Assert([DoesNotReturnIf(false)] bool b, string message)
-        => Debug.Assert(b, message);
+    public static void Assert([DoesNotReturnIf(false)] bool b, string message) =>
+        Debug.Assert(b, message);
 }

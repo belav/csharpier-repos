@@ -9,6 +9,6 @@ namespace System.Data.Common
         NotSupported = 1,
         Unrelated = 2,
         MustContainAll = 3,
-        ExactMatch = 4
+        ExactMatch = 4,
     }
 }

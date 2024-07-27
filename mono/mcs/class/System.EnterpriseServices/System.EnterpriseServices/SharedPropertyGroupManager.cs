@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.SharedPropertyGroupManager.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,38 +32,42 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-	[ComVisible (false)]
-	public sealed class SharedPropertyGroupManager : IEnumerable {
+namespace System.EnterpriseServices
+{
+    [ComVisible(false)]
+    public sealed class SharedPropertyGroupManager : IEnumerable
+    {
+        #region Constructors
 
-		#region Constructors
+        public SharedPropertyGroupManager() { }
 
-		public SharedPropertyGroupManager ()
-		{
-		}
+        #endregion // Constructors
 
-		#endregion // Constructors
+        #region Methods
 
-		#region Methods
+        [MonoTODO]
+        public SharedPropertyGroup CreatePropertyGroup(
+            string name,
+            ref PropertyLockMode dwIsoMode,
+            ref PropertyReleaseMode dwRelMode,
+            out bool fExist
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public SharedPropertyGroup CreatePropertyGroup (string name, ref PropertyLockMode dwIsoMode, ref PropertyReleaseMode dwRelMode, out bool fExist)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public IEnumerator GetEnumerator ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public SharedPropertyGroup Group(string name)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public SharedPropertyGroup Group (string name)
-		{
-			throw new NotImplementedException ();
-		}
-
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

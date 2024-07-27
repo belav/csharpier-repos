@@ -7,22 +7,20 @@ public class CosmosTestStoreFactory : ITestStoreFactory
 {
     public static CosmosTestStoreFactory Instance { get; } = new();
 
-    protected CosmosTestStoreFactory()
-    {
-    }
+    protected CosmosTestStoreFactory() { }
 
-    public IServiceCollection AddProviderServices(IServiceCollection serviceCollection)
-        => serviceCollection
+    public IServiceCollection AddProviderServices(IServiceCollection serviceCollection) =>
+        serviceCollection
             .AddEntityFrameworkCosmos()
             .AddSingleton<ILoggerFactory>(new TestSqlLoggerFactory())
             .AddSingleton<TestStoreIndex>();
 
-    public TestStore Create(string storeName)
-        => CosmosTestStore.Create(storeName);
+    public TestStore Create(string storeName) => CosmosTestStore.Create(storeName);
 
-    public virtual TestStore GetOrCreate(string storeName)
-        => CosmosTestStore.GetOrCreate(storeName);
+    public virtual TestStore GetOrCreate(string storeName) =>
+        CosmosTestStore.GetOrCreate(storeName);
 
-    public virtual ListLoggerFactory CreateListLoggerFactory(Func<string, bool> shouldLogCategory)
-        => new TestSqlLoggerFactory(shouldLogCategory);
+    public virtual ListLoggerFactory CreateListLoggerFactory(
+        Func<string, bool> shouldLogCategory
+    ) => new TestSqlLoggerFactory(shouldLogCategory);
 }

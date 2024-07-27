@@ -21,7 +21,6 @@ using System.Reflection;
 using System.Security;
 using System.Threading;
 using Xunit;
-
 // System.Text.Json is a .NET Core 3.0 specific library
 #if NETCOREAPP
 using System.Text.Json;
@@ -35,25 +34,32 @@ namespace System.Runtime.Serialization.Formatters.Tests
         {
             if (extendedType.IsGenericType)
             {
-                IEnumerable<MethodInfo> x = typeof(EqualityExtensions).GetMethods()
+                IEnumerable<MethodInfo> x = typeof(EqualityExtensions)
+                    .GetMethods()
                     ?.Where(m =>
-                        m.Name == "IsEqual" &&
-                        m.GetParameters().Length == 3 &&
-                        m.IsGenericMethodDefinition);
+                        m.Name == "IsEqual"
+                        && m.GetParameters().Length == 3
+                        && m.IsGenericMethodDefinition
+                    );
 
-                MethodInfo method = typeof(EqualityExtensions).GetMethods()
+                MethodInfo method = typeof(EqualityExtensions)
+                    .GetMethods()
                     ?.SingleOrDefault(m =>
-                        m.Name == "IsEqual" &&
-                        m.GetParameters().Length == 3 &&
-                        m.GetParameters()[0].ParameterType.Name == extendedType.Name &&
-                        m.IsGenericMethodDefinition);
+                        m.Name == "IsEqual"
+                        && m.GetParameters().Length == 3
+                        && m.GetParameters()[0].ParameterType.Name == extendedType.Name
+                        && m.IsGenericMethodDefinition
+                    );
 
                 // If extension method found, make it generic and return
                 if (method != null)
                     return method.MakeGenericMethod(extendedType.GenericTypeArguments[0]);
             }
 
-            return typeof(EqualityExtensions).GetMethod("IsEqual", new[] { extendedType, extendedType, typeof(bool) });
+            return typeof(EqualityExtensions).GetMethod(
+                "IsEqual",
+                new[] { extendedType, extendedType, typeof(bool) }
+            );
         }
 
         public static void CheckEquals(object objA, object objB, bool isSamePlatform)
@@ -76,12 +82,17 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 else
                 {
                     // Check if object.Equals(object) is overridden and if not check if there is a more concrete equality check implementation
-                    bool equalsNotOverridden = objType.GetMethod("Equals", new Type[] { typeof(object) }).DeclaringType == typeof(object);
+                    bool equalsNotOverridden =
+                        objType.GetMethod("Equals", new Type[] { typeof(object) }).DeclaringType
+                        == typeof(object);
                     if (equalsNotOverridden)
                     {
                         // If type doesn't override Equals(object) method then check if there is a more concrete implementation
                         // e.g. if type implements IEquatable<T>.
-                        MethodInfo equalsMethod = objType.GetMethod("Equals", new Type[] { objType });
+                        MethodInfo equalsMethod = objType.GetMethod(
+                            "Equals",
+                            new Type[] { objType }
+                        );
                         if (equalsMethod.DeclaringType != typeof(object))
                         {
                             equalityResult = equalsMethod.Invoke(objA, new object[] { objB });
@@ -101,7 +112,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.True(objA.Equals(objB));
         }
 
-        public static void CheckSequenceEquals(this IEnumerable @this, IEnumerable other, bool isSamePlatform)
+        public static void CheckSequenceEquals(
+            this IEnumerable @this,
+            IEnumerable other,
+            bool isSamePlatform
+        )
         {
             if (@this == null || other == null)
             {
@@ -135,7 +150,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static void IsEqual(this WeakReference @this, WeakReference other, bool isSamePlatform)
+        public static void IsEqual(
+            this WeakReference @this,
+            WeakReference other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -157,7 +176,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static void IsEqual<T>(this WeakReference<T> @this, WeakReference<T> other, bool isSamePlatform)
+        public static void IsEqual<T>(
+            this WeakReference<T> @this,
+            WeakReference<T> other,
+            bool isSamePlatform
+        )
             where T : class
         {
             if (@this == null && other == null)
@@ -192,13 +215,21 @@ namespace System.Runtime.Serialization.Formatters.Tests
             CheckEquals(thisVal, otherVal, isSamePlatform);
         }
 
-        public static void IsEqual(this StreamingContext @this, StreamingContext other, bool isSamePlatform)
+        public static void IsEqual(
+            this StreamingContext @this,
+            StreamingContext other,
+            bool isSamePlatform
+        )
         {
             Assert.Equal(@this.State, other.State);
             CheckEquals(@this.Context, other.Context, isSamePlatform);
         }
 
-        public static void IsEqual(this CookieContainer @this, CookieContainer other, bool isSamePlatform)
+        public static void IsEqual(
+            this CookieContainer @this,
+            CookieContainer other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -261,24 +292,40 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
             // The compareInfos are internal and get reflection blocked on .NET Native, so use
             // GetObjectData to get them
-            SerializationInfo thisInfo = new SerializationInfo(typeof(Comparer), new FormatterConverter());
+            SerializationInfo thisInfo = new SerializationInfo(
+                typeof(Comparer),
+                new FormatterConverter()
+            );
             @this.GetObjectData(thisInfo, new StreamingContext());
-            CompareInfo thisCompareInfo = (CompareInfo)thisInfo.GetValue("CompareInfo", typeof(CompareInfo));
+            CompareInfo thisCompareInfo = (CompareInfo)
+                thisInfo.GetValue("CompareInfo", typeof(CompareInfo));
 
-            SerializationInfo otherInfo = new SerializationInfo(typeof(Comparer), new FormatterConverter());
+            SerializationInfo otherInfo = new SerializationInfo(
+                typeof(Comparer),
+                new FormatterConverter()
+            );
             other.GetObjectData(otherInfo, new StreamingContext());
-            CompareInfo otherCompareInfo = (CompareInfo)otherInfo.GetValue("CompareInfo", typeof(CompareInfo));
+            CompareInfo otherCompareInfo = (CompareInfo)
+                otherInfo.GetValue("CompareInfo", typeof(CompareInfo));
 
             Assert.Equal(thisCompareInfo, otherCompareInfo);
         }
 
-        public static void IsEqual(this DictionaryEntry @this, DictionaryEntry other, bool isSamePlatform)
+        public static void IsEqual(
+            this DictionaryEntry @this,
+            DictionaryEntry other,
+            bool isSamePlatform
+        )
         {
             CheckEquals(@this.Key, other.Key, isSamePlatform);
             CheckEquals(@this.Value, other.Value, isSamePlatform);
         }
 
-        public static void IsEqual(this StringDictionary @this, StringDictionary other, bool isSamePlatform)
+        public static void IsEqual(
+            this StringDictionary @this,
+            StringDictionary other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -321,7 +368,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             CheckSequenceEquals(@this, other, isSamePlatform);
         }
 
-        public static void IsEqual(this Dictionary<int, string> @this, Dictionary<int, string> other, bool isSamePlatform)
+        public static void IsEqual(
+            this Dictionary<int, string> @this,
+            Dictionary<int, string> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -339,7 +390,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static void IsEqual(this PointEqualityComparer @this, PointEqualityComparer other, bool isSamePlatform)
+        public static void IsEqual(
+            this PointEqualityComparer @this,
+            PointEqualityComparer other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -348,7 +403,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.NotNull(other);
         }
 
-        public static void IsEqual(this HashSet<Point> @this, HashSet<Point> other, bool isSamePlatform)
+        public static void IsEqual(
+            this HashSet<Point> @this,
+            HashSet<Point> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -360,7 +419,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             @this.CheckSequenceEquals(other, isSamePlatform);
         }
 
-        public static void IsEqual(this LinkedListNode<Point> @this, LinkedListNode<Point> other, bool isSamePlatform)
+        public static void IsEqual(
+            this LinkedListNode<Point> @this,
+            LinkedListNode<Point> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -370,7 +433,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             CheckEquals(@this.Value, other.Value, isSamePlatform);
         }
 
-        public static void IsEqual(this LinkedList<Point> @this, LinkedList<Point> other, bool isSamePlatform)
+        public static void IsEqual(
+            this LinkedList<Point> @this,
+            LinkedList<Point> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -406,7 +473,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             @this.CheckSequenceEquals(other, isSamePlatform);
         }
 
-        public static void IsEqual(this SortedList<int, Point> @this, SortedList<int, Point> other, bool isSamePlatform)
+        public static void IsEqual(
+            this SortedList<int, Point> @this,
+            SortedList<int, Point> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -421,7 +492,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             @this.CheckSequenceEquals(other, isSamePlatform);
         }
 
-        public static void IsEqual(this SortedSet<Point> @this, SortedSet<Point> other, bool isSamePlatform)
+        public static void IsEqual(
+            this SortedSet<Point> @this,
+            SortedSet<Point> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -466,7 +541,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static void IsEqual(this Collection<int> @this, Collection<int> other, bool isSamePlatform)
+        public static void IsEqual(
+            this Collection<int> @this,
+            Collection<int> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -477,7 +556,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             @this.CheckSequenceEquals(other, isSamePlatform);
         }
 
-        public static void IsEqual(this ObservableCollection<int> @this, ObservableCollection<int> other, bool isSamePlatform)
+        public static void IsEqual(
+            this ObservableCollection<int> @this,
+            ObservableCollection<int> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -488,7 +571,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             @this.CheckSequenceEquals(other, isSamePlatform);
         }
 
-        public static void IsEqual(this ReadOnlyCollection<int> @this, ReadOnlyCollection<int> other, bool isSamePlatform)
+        public static void IsEqual(
+            this ReadOnlyCollection<int> @this,
+            ReadOnlyCollection<int> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -499,7 +586,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             @this.CheckSequenceEquals(other, isSamePlatform);
         }
 
-        public static void IsEqual(this ReadOnlyDictionary<int, string> @this, ReadOnlyDictionary<int, string> other, bool isSamePlatform)
+        public static void IsEqual(
+            this ReadOnlyDictionary<int, string> @this,
+            ReadOnlyDictionary<int, string> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -516,7 +607,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static void IsEqual(this ReadOnlyObservableCollection<int> @this, ReadOnlyObservableCollection<int> other, bool isSamePlatform)
+        public static void IsEqual(
+            this ReadOnlyObservableCollection<int> @this,
+            ReadOnlyObservableCollection<int> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -556,7 +651,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             @this.CheckSequenceEquals(other, isSamePlatform);
         }
 
-        public static void IsEqual(this HybridDictionary @this, HybridDictionary other, bool isSamePlatform)
+        public static void IsEqual(
+            this HybridDictionary @this,
+            HybridDictionary other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -576,7 +675,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static void IsEqual(this ListDictionary @this, ListDictionary other, bool isSamePlatform)
+        public static void IsEqual(
+            this ListDictionary @this,
+            ListDictionary other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -596,7 +699,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static void IsEqual(this NameValueCollection @this, NameValueCollection other, bool isSamePlatform)
+        public static void IsEqual(
+            this NameValueCollection @this,
+            NameValueCollection other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -613,7 +720,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static void IsEqual(this OrderedDictionary @this, OrderedDictionary other, bool isSamePlatform)
+        public static void IsEqual(
+            this OrderedDictionary @this,
+            OrderedDictionary other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -631,7 +742,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static void IsEqual(this StringCollection @this, StringCollection other, bool isSamePlatform)
+        public static void IsEqual(
+            this StringCollection @this,
+            StringCollection other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -656,7 +771,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             @this.CheckSequenceEquals(other, isSamePlatform);
         }
 
-        public static void IsEqual(this BindingList<int> @this, BindingList<int> other, bool isSamePlatform)
+        public static void IsEqual(
+            this BindingList<int> @this,
+            BindingList<int> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -671,7 +790,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             @this.CheckSequenceEquals(other, isSamePlatform);
         }
 
-        public static void IsEqual(this BindingList<Point> @this, BindingList<Point> other, bool isSamePlatform)
+        public static void IsEqual(
+            this BindingList<Point> @this,
+            BindingList<Point> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -686,7 +809,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             @this.CheckSequenceEquals(other, isSamePlatform);
         }
 
-        public static void IsEqual(this PropertyCollection @this, PropertyCollection other, bool isSamePlatform)
+        public static void IsEqual(
+            this PropertyCollection @this,
+            PropertyCollection other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -752,7 +879,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal(@this.Version, other.Version);
         }
 
-        public static void IsEqual(this CookieCollection @this, CookieCollection other, bool isSamePlatform)
+        public static void IsEqual(
+            this CookieCollection @this,
+            CookieCollection other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -763,7 +894,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             @this.CheckSequenceEquals(other, isSamePlatform);
         }
 
-        public static void IsEqual(this BasicISerializableObject @this, BasicISerializableObject other, bool isSamePlatform)
+        public static void IsEqual(
+            this BasicISerializableObject @this,
+            BasicISerializableObject other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -772,7 +907,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.NotNull(other);
         }
 
-        public static void IsEqual(this DerivedISerializableWithNonPublicDeserializationCtor @this, DerivedISerializableWithNonPublicDeserializationCtor other, bool isSamePlatform)
+        public static void IsEqual(
+            this DerivedISerializableWithNonPublicDeserializationCtor @this,
+            DerivedISerializableWithNonPublicDeserializationCtor other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -793,7 +932,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        private static Dictionary<int, Graph<int>> InvertDictionary(Dictionary<Graph<int>, int> dict)
+        private static Dictionary<int, Graph<int>> InvertDictionary(
+            Dictionary<Graph<int>, int> dict
+        )
         {
             var ret = new Dictionary<int, Graph<int>>();
             foreach (KeyValuePair<Graph<int>, int> kv in dict)
@@ -810,7 +951,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
         /// </summary>
         /// <param name="n">node of a graph</param>
         /// <returns>returns ((id -> node), (node -> node[]))</returns>
-        private static Tuple<Dictionary<int, Graph<int>>, List<List<int>>> FlattenGraph(Graph<int> n)
+        private static Tuple<Dictionary<int, Graph<int>>, List<List<int>>> FlattenGraph(
+            Graph<int> n
+        )
         {
             // ref -> id
             var nodes = new Dictionary<Graph<int>, int>(ReferenceEqualityComparer.Instance);
@@ -832,13 +975,18 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 }
             }
 
-            return new Tuple<Dictionary<int, Graph<int>>, List<List<int>>>(InvertDictionary(nodes), edges);
+            return new Tuple<Dictionary<int, Graph<int>>, List<List<int>>>(
+                InvertDictionary(nodes),
+                edges
+            );
         }
 
         public static void IsEqual(this Graph<int> @this, Graph<int> other, bool isSamePlatform)
         {
             Tuple<Dictionary<int, Graph<int>>, List<List<int>>> thisFlattened = FlattenGraph(@this);
-            Tuple<Dictionary<int, Graph<int>>, List<List<int>>> otherFlattened = FlattenGraph(other);
+            Tuple<Dictionary<int, Graph<int>>, List<List<int>>> otherFlattened = FlattenGraph(
+                other
+            );
 
             Assert.Equal(thisFlattened.Item1.Count, otherFlattened.Item1.Count);
             Assert.Equal(thisFlattened.Item2.Count, otherFlattened.Item2.Count);
@@ -846,7 +994,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             CheckEquals(thisFlattened.Item2, otherFlattened.Item2, isSamePlatform);
         }
 
-        public static void IsEqual(this ArraySegment<int> @this, ArraySegment<int> other, bool isSamePlatform)
+        public static void IsEqual(
+            this ArraySegment<int> @this,
+            ArraySegment<int> other,
+            bool isSamePlatform
+        )
         {
             Assert.True((@this.Array != null) == (other.Array != null));
             Assert.Equal(@this.Count, other.Count);
@@ -857,7 +1009,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static void IsEqual(this ObjectWithArrays @this, ObjectWithArrays other, bool isSamePlatform)
+        public static void IsEqual(
+            this ObjectWithArrays @this,
+            ObjectWithArrays other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -872,7 +1028,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             CheckEquals(@this.MultiDimensionalArray, other.MultiDimensionalArray, isSamePlatform);
         }
 
-        public static void IsEqual(this ObjectWithIntStringUShortUIntULongAndCustomObjectFields @this, ObjectWithIntStringUShortUIntULongAndCustomObjectFields other, bool isSamePlatform)
+        public static void IsEqual(
+            this ObjectWithIntStringUShortUIntULongAndCustomObjectFields @this,
+            ObjectWithIntStringUShortUIntULongAndCustomObjectFields other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -912,7 +1072,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.True(@this.IsNull || @this.Value == other.Value);
         }
 
-        public static void IsEqual(this SealedObjectWithIntStringFields @this, SealedObjectWithIntStringFields other, bool isSamePlatform)
+        public static void IsEqual(
+            this SealedObjectWithIntStringFields @this,
+            SealedObjectWithIntStringFields other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -924,7 +1088,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal(@this.Member3, other.Member3);
         }
 
-        public static void IsEqual(this SimpleKeyedCollection @this, SimpleKeyedCollection other, bool isSamePlatform)
+        public static void IsEqual(
+            this SimpleKeyedCollection @this,
+            SimpleKeyedCollection other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -979,7 +1147,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal(@this.Item1, other.Item1);
         }
 
-        public static void IsEqual(this Tuple<int, string> @this, Tuple<int, string> other, bool isSamePlatform)
+        public static void IsEqual(
+            this Tuple<int, string> @this,
+            Tuple<int, string> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -990,7 +1162,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal(@this.Item2, other.Item2);
         }
 
-        public static void IsEqual(this Tuple<int, string, uint> @this, Tuple<int, string, uint> other, bool isSamePlatform)
+        public static void IsEqual(
+            this Tuple<int, string, uint> @this,
+            Tuple<int, string, uint> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -1002,7 +1178,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal(@this.Item3, other.Item3);
         }
 
-        public static void IsEqual(this Tuple<int, string, uint, long> @this, Tuple<int, string, uint, long> other, bool isSamePlatform)
+        public static void IsEqual(
+            this Tuple<int, string, uint, long> @this,
+            Tuple<int, string, uint, long> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -1015,7 +1195,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal(@this.Item4, other.Item4);
         }
 
-        public static void IsEqual(this Tuple<int, string, uint, long, double> @this, Tuple<int, string, uint, long, double> other, bool isSamePlatform)
+        public static void IsEqual(
+            this Tuple<int, string, uint, long, double> @this,
+            Tuple<int, string, uint, long, double> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -1029,7 +1213,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal(@this.Item5, other.Item5);
         }
 
-        public static void IsEqual(this Tuple<int, string, uint, long, double, float> @this, Tuple<int, string, uint, long, double, float> other, bool isSamePlatform)
+        public static void IsEqual(
+            this Tuple<int, string, uint, long, double, float> @this,
+            Tuple<int, string, uint, long, double, float> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -1044,7 +1232,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal(@this.Item6, other.Item6);
         }
 
-        public static void IsEqual(this Tuple<int, string, uint, long, double, float, decimal> @this, Tuple<int, string, uint, long, double, float, decimal> other, bool isSamePlatform)
+        public static void IsEqual(
+            this Tuple<int, string, uint, long, double, float, decimal> @this,
+            Tuple<int, string, uint, long, double, float, decimal> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -1060,7 +1252,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal(@this.Item7, other.Item7);
         }
 
-        public static void IsEqual(this Tuple<int, string, uint, long, double, float, decimal, Tuple<Tuple<int>>> @this, Tuple<int, string, uint, long, double, float, decimal, Tuple<Tuple<int>>> other, bool isSamePlatform)
+        public static void IsEqual(
+            this Tuple<int, string, uint, long, double, float, decimal, Tuple<Tuple<int>>> @this,
+            Tuple<int, string, uint, long, double, float, decimal, Tuple<Tuple<int>>> other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -1132,13 +1328,23 @@ namespace System.Runtime.Serialization.Formatters.Tests
             @this.Data.CheckSequenceEquals(other.Data, isSamePlatform);
 
             // Different by design for those exceptions
-            if (!((@this is SecurityException ||
-                @this is XmlSyntaxException ||
-                @this is ThreadAbortException) && !isSamePlatform))
+            if (
+                !(
+                    (
+                        @this is SecurityException
+                        || @this is XmlSyntaxException
+                        || @this is ThreadAbortException
+                    ) && !isSamePlatform
+                )
+            )
             {
-                if (!(@this is ActiveDirectoryServerDownException ||
-                    @this is SocketException ||
-                    @this is NetworkInformationException))
+                if (
+                    !(
+                        @this is ActiveDirectoryServerDownException
+                        || @this is SocketException
+                        || @this is NetworkInformationException
+                    )
+                )
                 {
                     Assert.Equal(@this.Message, other.Message);
                 }
@@ -1157,20 +1363,34 @@ namespace System.Runtime.Serialization.Formatters.Tests
             if (!PlatformDetection.IsNetFramework)
             {
                 // Different by design for those exceptions
-                if (!((@this is NetworkInformationException || @this is SocketException) && !isSamePlatform))
+                if (
+                    !(
+                        (@this is NetworkInformationException || @this is SocketException)
+                        && !isSamePlatform
+                    )
+                )
                 {
                     Assert.Equal(@this.StackTrace, other.StackTrace);
                 }
 
-
                 // Different by design for those exceptions
-                if (!((@this is SecurityException ||
-                    @this is XmlSyntaxException ||
-                    @this is ThreadAbortException) && !isSamePlatform))
+                if (
+                    !(
+                        (
+                            @this is SecurityException
+                            || @this is XmlSyntaxException
+                            || @this is ThreadAbortException
+                        ) && !isSamePlatform
+                    )
+                )
                 {
-                    if (!(@this is ActiveDirectoryServerDownException ||
-                        @this is NetworkInformationException ||
-                        @this is SocketException))
+                    if (
+                        !(
+                            @this is ActiveDirectoryServerDownException
+                            || @this is NetworkInformationException
+                            || @this is SocketException
+                        )
+                    )
                     {
                         Assert.Equal(@this.ToString(), other.ToString());
                     }
@@ -1178,13 +1398,22 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
 
             // Different by design for those exceptions
-            if (!((@this is NetworkInformationException || @this is SocketException) && !isSamePlatform))
+            if (
+                !(
+                    (@this is NetworkInformationException || @this is SocketException)
+                    && !isSamePlatform
+                )
+            )
             {
                 Assert.Equal(@this.HResult, other.HResult);
             }
         }
 
-        public static void IsEqual(this AggregateException @this, AggregateException other, bool isSamePlatform)
+        public static void IsEqual(
+            this AggregateException @this,
+            AggregateException other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;
@@ -1196,7 +1425,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
         }
 
 #if NETCOREAPP
-        public static void IsEqual(this JsonException @this, JsonException other, bool isSamePlatform)
+        public static void IsEqual(
+            this JsonException @this,
+            JsonException other,
+            bool isSamePlatform
+        )
         {
             if (@this == null && other == null)
                 return;

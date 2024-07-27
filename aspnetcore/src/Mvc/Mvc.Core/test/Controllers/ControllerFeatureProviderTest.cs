@@ -92,7 +92,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         public void UserDefinedControllerClass_IsNotController()
         {
             // Arrange
-            var controllerType = typeof(ControllerFeatureProviderControllers.Controller).GetTypeInfo();
+            var controllerType =
+                typeof(ControllerFeatureProviderControllers.Controller).GetTypeInfo();
             var manager = GetApplicationPartManager(controllerType);
             var feature = new ControllerFeature();
 
@@ -300,10 +301,11 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                 .Setup(t => t.Types)
                 .Returns(new[] { typeof(PocoController).GetTypeInfo() });
 
-            var parts = new[] {
+            var parts = new[]
+            {
                 Mock.Of<ApplicationPart>(),
                 new TestApplicationPart(typeof(NoSuffix).GetTypeInfo()),
-                otherPart.Object
+                otherPart.Object,
             };
 
             var feature = new ControllerFeature();
@@ -311,7 +313,7 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var expected = new List<TypeInfo>
             {
                 typeof(NoSuffix).GetTypeInfo(),
-                typeof(PocoController).GetTypeInfo()
+                typeof(PocoController).GetTypeInfo(),
             };
 
             var provider = new ControllerFeatureProvider();
@@ -333,10 +335,11 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                 .Setup(t => t.Types)
                 .Returns(new[] { typeof(PocoController).GetTypeInfo() });
 
-            var parts = new[] {
+            var parts = new[]
+            {
                 Mock.Of<ApplicationPart>(),
                 new TestApplicationPart(typeof(NoSuffix)),
-                otherPart.Object
+                otherPart.Object,
             };
 
             var feature = new ControllerFeature();
@@ -344,7 +347,7 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var expected = new List<TypeInfo>
             {
                 typeof(NoSuffix).GetTypeInfo(),
-                typeof(PocoController).GetTypeInfo()
+                typeof(PocoController).GetTypeInfo(),
             };
 
             var provider = new ControllerFeatureProvider();
@@ -398,143 +401,70 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
 // independent.
 namespace Microsoft.AspNetCore.Mvc.ControllerFeatureProviderControllers
 {
-    public abstract class AbstractController : Controller
-    {
-    }
+    public abstract class AbstractController : Controller { }
 
-    public class DerivedAbstractController : AbstractController
-    {
-    }
+    public class DerivedAbstractController : AbstractController { }
 
-    public class StoreController : Controller
-    {
-    }
+    public class StoreController : Controller { }
 
-    public class ProductsController : ControllerBase
-    {
-    }
+    public class ProductsController : ControllerBase { }
 
-    public class Products : ControllerBase
-    {
-    }
+    public class Products : ControllerBase { }
 
     [Controller]
-    public abstract class Controller
-    {
-    }
+    public abstract class Controller { }
 
-    public abstract class NoControllerAttributeBaseController
-    {
-    }
+    public abstract class NoControllerAttributeBaseController { }
 
-    public class NoSuffixNoControllerAttribute : NoControllerAttributeBaseController
-    {
-    }
+    public class NoSuffixNoControllerAttribute : NoControllerAttributeBaseController { }
 
-    public class OpenGenericController<T> : Controller
-    {
-    }
+    public class OpenGenericController<T> : Controller { }
 
-    public class DerivedGenericController : OpenGenericController<string>
-    {
-    }
+    public class DerivedGenericController : OpenGenericController<string> { }
 
-    public interface ITestController
-    {
-    }
+    public interface ITestController { }
 
-    public class NoSuffix : Controller
-    {
-    }
+    public class NoSuffix : Controller { }
 
-    public class NoSuffixPoco
-    {
+    public class NoSuffixPoco { }
 
-    }
-
-    public class PocoController
-    {
-    }
+    public class PocoController { }
 
     [Controller]
-    public class CustomBase
-    {
-
-    }
+    public class CustomBase { }
 
     [Controller]
-    public abstract class CustomAbstractBaseController
-    {
+    public abstract class CustomAbstractBaseController { }
 
-    }
+    public class DescendantLevel1 : CustomBase { }
 
-    public class DescendantLevel1 : CustomBase
-    {
+    public class DescendantLevel2 : DescendantLevel1 { }
 
-    }
-
-    public class DescendantLevel2 : DescendantLevel1
-    {
-
-    }
-
-    public class AbstractChildWithoutSuffix : CustomAbstractBaseController
-    {
-
-    }
+    public class AbstractChildWithoutSuffix : CustomAbstractBaseController { }
 
     [NonController]
-    public class BasePocoNonControllerController
-    {
-
-    }
+    public class BasePocoNonControllerController { }
 
     [Controller]
-    public class BaseNonControllerAttributeChildControllerControllerAttributeController : BaseNonControllerController
-    {
+    public class BaseNonControllerAttributeChildControllerControllerAttributeController
+        : BaseNonControllerController { }
 
-    }
-
-    public class BasePocoNonControllerControllerChild : BasePocoNonControllerController
-    {
-
-    }
+    public class BasePocoNonControllerControllerChild : BasePocoNonControllerController { }
 
     [NonController]
-    public class BaseNonControllerController : Controller
-    {
+    public class BaseNonControllerController : Controller { }
 
-    }
-
-    public class BaseNonControllerControllerChild : BaseNonControllerController
-    {
-
-    }
+    public class BaseNonControllerControllerChild : BaseNonControllerController { }
 
     [NonController]
-    public class NonControllerChild : Controller
-    {
-
-    }
+    public class NonControllerChild : Controller { }
 
     [NonController]
-    public class NonController : Controller
-    {
+    public class NonController : Controller { }
 
-    }
+    public class DataModelBase { }
 
-    public class DataModelBase
-    {
+    public class EntityDataModel : DataModelBase { }
 
-    }
-
-    public class EntityDataModel : DataModelBase
-    {
-
-    }
-
-    public class PersonModel : EntityDataModel
-    {
-
-    }
+    public class PersonModel : EntityDataModel { }
 }

@@ -20,19 +20,22 @@ namespace Microsoft.CodeAnalysis.Simplification
             SyntaxAnnotation? annotationForReplacedAliasIdentifier,
             Func<SyntaxNode, bool>? expandInsideNode,
             bool expandParameter,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         SyntaxToken Expand(
             SyntaxToken token,
             SemanticModel semanticModel,
             Func<SyntaxNode, bool>? expandInsideNode,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         Task<Document> ReduceAsync(
             Document document,
             ImmutableArray<TextSpan> spans,
             SimplifierOptions options,
             ImmutableArray<AbstractReducer> reducers = default,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
     }
 }

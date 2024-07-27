@@ -18,9 +18,12 @@ namespace System.Security.Cryptography.Xml
                 throw new ArgumentException();
             bool nodeAdefault = Utils.IsDefaultNamespaceNode(nodeA);
             bool nodeBdefault = Utils.IsDefaultNamespaceNode(nodeB);
-            if (nodeAdefault && nodeBdefault) return 0;
-            if (nodeAdefault) return -1;
-            if (nodeBdefault) return 1;
+            if (nodeAdefault && nodeBdefault)
+                return 0;
+            if (nodeAdefault)
+                return -1;
+            if (nodeBdefault)
+                return 1;
             return string.CompareOrdinal(nodeA.LocalName, nodeB.LocalName);
         }
     }

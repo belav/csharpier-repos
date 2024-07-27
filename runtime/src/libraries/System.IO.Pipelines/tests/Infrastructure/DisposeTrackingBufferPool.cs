@@ -15,9 +15,7 @@ namespace System.IO.Pipelines.Tests
             return new DisposeTrackingMemoryManager(new byte[size], this);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-        }
+        protected override void Dispose(bool disposing) { }
 
         private class DisposeTrackingMemoryManager : MemoryManager<byte>
         {

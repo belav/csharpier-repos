@@ -20,9 +20,7 @@ public class StructuralEntryCurrentValueComparer : EntryCurrentValueComparer
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public StructuralEntryCurrentValueComparer(IProperty property)
-        : base(property, StructuralComparisons.StructuralComparer)
-    {
-    }
+        : base(property, StructuralComparisons.StructuralComparer) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -50,10 +48,8 @@ public class StructuralEntryCurrentValueComparer : EntryCurrentValueComparer
         var xValue = GetPropertyValue(x);
         var yValue = GetPropertyValue(y);
 
-        return xValue is Array xArray
-            && yValue is Array yArray
-            && xArray.Length != yArray.Length
-                ? xArray.Length - yArray.Length
-                : base.ComparePropertyValues(xValue, yValue);
+        return xValue is Array xArray && yValue is Array yArray && xArray.Length != yArray.Length
+            ? xArray.Length - yArray.Length
+            : base.ComparePropertyValues(xValue, yValue);
     }
 }

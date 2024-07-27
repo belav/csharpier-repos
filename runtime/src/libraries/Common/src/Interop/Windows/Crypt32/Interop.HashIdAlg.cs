@@ -13,14 +13,21 @@ internal static partial class Interop
         /// Version used for a buffer containing a scalar integer (not an IntPtr)
         /// </summary>
         [LibraryImport(Libraries.Crypt32)]
-        private static unsafe partial CRYPT_OID_INFO* CryptFindOIDInfo(CryptOidInfoKeyType dwKeyType, void* pvKey, OidGroup group);
+        private static unsafe partial CRYPT_OID_INFO* CryptFindOIDInfo(
+            CryptOidInfoKeyType dwKeyType,
+            void* pvKey,
+            OidGroup group
+        );
 
-        public static unsafe CRYPT_OID_INFO FindAlgIdOidInfo(Interop.BCrypt.ECC_CURVE_ALG_ID_ENUM algId)
+        public static unsafe CRYPT_OID_INFO FindAlgIdOidInfo(
+            Interop.BCrypt.ECC_CURVE_ALG_ID_ENUM algId
+        )
         {
             CRYPT_OID_INFO* fullOidInfo = CryptFindOIDInfo(
                 CryptOidInfoKeyType.CRYPT_OID_INFO_ALGID_KEY,
                 &algId,
-                OidGroup.HashAlgorithm);
+                OidGroup.HashAlgorithm
+            );
 
             if (fullOidInfo != null)
             {

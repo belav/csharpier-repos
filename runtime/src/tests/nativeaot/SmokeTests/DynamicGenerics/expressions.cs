@@ -2,14 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Linq.Expressions;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
 using CoreFXTestLibrary;
 using TypeOfRepo;
-
 
 namespace Expressions
 {
@@ -49,13 +48,21 @@ namespace Expressions
         {
             return typeof(T) + "::" + parameter.ToString();
         }
+
         public string MethodWithParameter(U parameter)
         {
             return typeof(U) + "::" + parameter.ToString();
         }
+
         public string MethodWithParameter<M, N>(M m_parameter, N n_parameter)
         {
-            return typeof(M) + "::" + m_parameter.ToString() + "~" + typeof(N) + "::" + n_parameter.ToString();
+            return typeof(M)
+                + "::"
+                + m_parameter.ToString()
+                + "~"
+                + typeof(N)
+                + "::"
+                + n_parameter.ToString();
         }
 
         public void Method() { }
@@ -65,6 +72,7 @@ namespace Expressions
             Expression<Func<T, string>> expr = x => this.MethodWithParameter(x);
             return expr.Compile()(value);
         }
+
         public string CheckMethodExpression(U value)
         {
             Expression<Func<U, string>> expr = x => this.MethodWithParameter(x);
@@ -77,6 +85,7 @@ namespace Expressions
             Expression<Func<T>> expr = () => this.GenericField1;
             return expr.Compile()();
         }
+
         public U CheckFieldExpression(U value)
         {
             GenericField2 = value;
@@ -99,6 +108,7 @@ namespace Expressions
             Expression<Func<string>> e = () => ConcatList1<List<T>>(new List<T> { One, Two });
             return e.Compile()();
         }
+
         public static string CheckInternalGenericExpression(U three, U four)
         {
             Three = three;
@@ -116,6 +126,7 @@ namespace Expressions
             }
             return null;
         }
+
         public static string ConcatList2<M>(M m)
         {
             List<U> x = m as List<U>;
@@ -127,9 +138,7 @@ namespace Expressions
         }
     }
 
-    public class SomeDerivedGenericClass<T, U> : SomeGenericClass<T, U>
-    {
-    }
+    public class SomeDerivedGenericClass<T, U> : SomeGenericClass<T, U> { }
 
     public struct SomeGenericStruct<T, U>
     {
@@ -139,27 +148,61 @@ namespace Expressions
     public class MyType1
     {
         private string _n;
-        public MyType1(string s) { _n = s; }
-        public override string ToString() { return "MyType1::" + _n; }
+
+        public MyType1(string s)
+        {
+            _n = s;
+        }
+
+        public override string ToString()
+        {
+            return "MyType1::" + _n;
+        }
     }
+
     public class MyType2
     {
         private int _n;
-        public MyType2(int s) { _n = s; }
-        public override string ToString() { return "MyType2::" + _n; }
+
+        public MyType2(int s)
+        {
+            _n = s;
+        }
+
+        public override string ToString()
+        {
+            return "MyType2::" + _n;
+        }
     }
 
     public struct MyStructType1
     {
         private string _n;
-        public MyStructType1(string s) { _n = s; }
-        public override string ToString() { return "MyStructType1::" + _n; }
+
+        public MyStructType1(string s)
+        {
+            _n = s;
+        }
+
+        public override string ToString()
+        {
+            return "MyStructType1::" + _n;
+        }
     }
+
     public struct MyStructType2
     {
         private int _n;
-        public MyStructType2(int s) { _n = s; }
-        public override string ToString() { return "MyStructType2::" + _n; }
+
+        public MyStructType2(int s)
+        {
+            _n = s;
+        }
+
+        public override string ToString()
+        {
+            return "MyStructType2::" + _n;
+        }
     }
     #endregion
 
@@ -229,42 +272,79 @@ namespace Expressions
                 Assert.AreEqual(sgc.CheckFieldExpression(uval1), uval1);
             }
 
-
             // METHODS
             {
-                Expression<Func<SomeGenericClass<T, U>, T, string>> expr1 = (x, y) => x.MethodWithParameter(y);
-                Expression<Func<SomeGenericClass<T, U>, U, string>> expr2 = (x, y) => x.MethodWithParameter(y);
-                Assert.AreEqual(expr1.Compile()(new SomeGenericClass<T, U>(), tval2), typeof(T) + "::" + tval2.ToString());
-                Assert.AreEqual(expr2.Compile()(new SomeGenericClass<T, U>(), uval2), typeof(U) + "::" + uval2.ToString());
+                Expression<Func<SomeGenericClass<T, U>, T, string>> expr1 = (x, y) =>
+                    x.MethodWithParameter(y);
+                Expression<Func<SomeGenericClass<T, U>, U, string>> expr2 = (x, y) =>
+                    x.MethodWithParameter(y);
+                Assert.AreEqual(
+                    expr1.Compile()(new SomeGenericClass<T, U>(), tval2),
+                    typeof(T) + "::" + tval2.ToString()
+                );
+                Assert.AreEqual(
+                    expr2.Compile()(new SomeGenericClass<T, U>(), uval2),
+                    typeof(U) + "::" + uval2.ToString()
+                );
             }
 
             {
                 SomeGenericClass<U, T> sgc = new SomeGenericClass<U, T>();
-                Assert.AreEqual(sgc.CheckMethodExpression(tval1), tval1.GetType() + "::" + tval1.ToString());
-                Assert.AreEqual(sgc.CheckMethodExpression(uval1), uval1.GetType() + "::" + uval1.ToString());
+                Assert.AreEqual(
+                    sgc.CheckMethodExpression(tval1),
+                    tval1.GetType() + "::" + tval1.ToString()
+                );
+                Assert.AreEqual(
+                    sgc.CheckMethodExpression(uval1),
+                    uval1.GetType() + "::" + uval1.ToString()
+                );
             }
 
             {
-                Expression<Func<SomeGenericClass<T, U>, T, U, string>> expr1 = (x, y, z) => x.MethodWithParameter<T, U>(y, z);
-                Assert.AreEqual(expr1.Compile()(new SomeGenericClass<T, U>(), tval1, uval1), typeof(T) + "::" + tval1 + "~" + typeof(U) + "::" + uval1);
+                Expression<Func<SomeGenericClass<T, U>, T, U, string>> expr1 = (x, y, z) =>
+                    x.MethodWithParameter<T, U>(y, z);
+                Assert.AreEqual(
+                    expr1.Compile()(new SomeGenericClass<T, U>(), tval1, uval1),
+                    typeof(T) + "::" + tval1 + "~" + typeof(U) + "::" + uval1
+                );
 
-                Expression<Func<SomeGenericClass<T, U>, U, T, string>> expr2 = (x, y, z) => x.MethodWithParameter<U, T>(y, z);
-                Assert.AreEqual(expr2.Compile()(new SomeGenericClass<T, U>(), uval2, tval2), typeof(U) + "::" + uval2 + "~" + typeof(T) + "::" + tval2);
+                Expression<Func<SomeGenericClass<T, U>, U, T, string>> expr2 = (x, y, z) =>
+                    x.MethodWithParameter<U, T>(y, z);
+                Assert.AreEqual(
+                    expr2.Compile()(new SomeGenericClass<T, U>(), uval2, tval2),
+                    typeof(U) + "::" + uval2 + "~" + typeof(T) + "::" + tval2
+                );
 
-                Expression<Func<SomeGenericClass<T, T>, U, U, string>> expr3 = (x, y, z) => x.MethodWithParameter<U, U>(y, z);
-                Assert.AreEqual(expr3.Compile()(new SomeGenericClass<T, T>(), uval1, uval2), typeof(U) + "::" + uval1 + "~" + typeof(U) + "::" + uval2);
+                Expression<Func<SomeGenericClass<T, T>, U, U, string>> expr3 = (x, y, z) =>
+                    x.MethodWithParameter<U, U>(y, z);
+                Assert.AreEqual(
+                    expr3.Compile()(new SomeGenericClass<T, T>(), uval1, uval2),
+                    typeof(U) + "::" + uval1 + "~" + typeof(U) + "::" + uval2
+                );
             }
 
             {
-                Assert.AreEqual(SomeGenericClass2<T, U>.CheckInternalGenericExpression(uval1, uval2), uval1.ToString() + uval2.ToString());
-                Assert.AreEqual(SomeGenericClass2<U, T>.CheckInternalGenericExpression(uval1, uval2), uval1.ToString() + uval2.ToString());
-                Assert.AreEqual(SomeGenericClass2<T, U>.CheckInternalGenericExpression(tval2, tval1), tval2.ToString() + tval1.ToString());
-                Assert.AreEqual(SomeGenericClass2<U, T>.CheckInternalGenericExpression(tval2, tval1), tval2.ToString() + tval1.ToString());
+                Assert.AreEqual(
+                    SomeGenericClass2<T, U>.CheckInternalGenericExpression(uval1, uval2),
+                    uval1.ToString() + uval2.ToString()
+                );
+                Assert.AreEqual(
+                    SomeGenericClass2<U, T>.CheckInternalGenericExpression(uval1, uval2),
+                    uval1.ToString() + uval2.ToString()
+                );
+                Assert.AreEqual(
+                    SomeGenericClass2<T, U>.CheckInternalGenericExpression(tval2, tval1),
+                    tval2.ToString() + tval1.ToString()
+                );
+                Assert.AreEqual(
+                    SomeGenericClass2<U, T>.CheckInternalGenericExpression(tval2, tval1),
+                    tval2.ToString() + tval1.ToString()
+                );
             }
 
 #if UNIVERSAL_GENERICS
             {
-                Expression<Func<U>> expr1 = ()=>default(U);
+                Expression<Func<U>> expr1 = () => default(U);
                 Assert.AreEqual(expr1.Compile()(), default(U));
             }
             RunTestDefaultExpression<U>();
@@ -282,10 +362,12 @@ namespace Expressions
             }
 #endif
         }
+
         public int ARG;
+
         public void RunTestDefaultExpression<U>()
         {
-            Expression<Func<U>> expr1 = ()=>ARG == 0 ? default(U) : (U)(object)null;
+            Expression<Func<U>> expr1 = () => ARG == 0 ? default(U) : (U)(object)null;
 
             if (ARG != 0)
             {
@@ -306,7 +388,16 @@ namespace Expressions
             var testMethod = dynamicType.GetTypeInfo().GetDeclaredMethod("RunTest");
             testMethod = testMethod.MakeGenericMethod(TypeOf.E_MyType2);
 
-            testMethod.Invoke(instance, new object[] { new MyType1("Dynamic1"), new MyType1("Dynamic2"), new MyType2(123), new MyType2(456) });
+            testMethod.Invoke(
+                instance,
+                new object[]
+                {
+                    new MyType1("Dynamic1"),
+                    new MyType1("Dynamic2"),
+                    new MyType2(123),
+                    new MyType2(456),
+                }
+            );
         }
 
         [TestMethod]
@@ -319,7 +410,16 @@ namespace Expressions
             var testMethod = dynamicType.GetTypeInfo().GetDeclaredMethod("RunTest");
             testMethod = testMethod.MakeGenericMethod(typeof(MyStructType2));
 
-            testMethod.Invoke(instance, new object[] { new MyStructType1("Dynamic1"), new MyStructType1("Dynamic2"), new MyStructType2(123), new MyStructType2(456) });
+            testMethod.Invoke(
+                instance,
+                new object[]
+                {
+                    new MyStructType1("Dynamic1"),
+                    new MyStructType1("Dynamic2"),
+                    new MyStructType2(123),
+                    new MyStructType2(456),
+                }
+            );
 #endif
         }
     }

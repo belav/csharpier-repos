@@ -16,8 +16,12 @@ namespace System.Net.Http
         private readonly Uri? _httpProxy;
         private readonly Uri? _httpsProxy;
 
-        public HttpEnvironmentProxyCredentials(Uri? httpProxy, NetworkCredential? httpCred,
-                                                Uri? httpsProxy, NetworkCredential? httpsCred)
+        public HttpEnvironmentProxyCredentials(
+            Uri? httpProxy,
+            NetworkCredential? httpCred,
+            Uri? httpsProxy,
+            NetworkCredential? httpsCred
+        )
         {
             _httpCred = httpCred;
             _httpsCred = httpsCred;
@@ -31,8 +35,9 @@ namespace System.Net.Http
             {
                 return null;
             }
-            return uri.Equals(_httpProxy) ? _httpCred :
-                   uri.Equals(_httpsProxy) ? _httpsCred : null;
+            return uri.Equals(_httpProxy) ? _httpCred
+                : uri.Equals(_httpsProxy) ? _httpsCred
+                : null;
         }
 
         public static HttpEnvironmentProxyCredentials? TryCreate(Uri? httpProxy, Uri? httpsProxy)
@@ -100,9 +105,9 @@ namespace System.Net.Http
         private const string EnvNoProxyUC = "NO_PROXY";
         private const string EnvCGI = "GATEWAY_INTERFACE"; // Running in a CGI environment.
 
-        private readonly Uri? _httpProxyUri;       // String URI for HTTP requests
-        private readonly Uri? _httpsProxyUri;      // String URI for HTTPS requests
-        private readonly string[]? _bypass;        // list of domains not to proxy
+        private readonly Uri? _httpProxyUri; // String URI for HTTP requests
+        private readonly Uri? _httpsProxyUri; // String URI for HTTPS requests
+        private readonly string[]? _bypass; // list of domains not to proxy
         private ICredentials? _credentials;
 
         private HttpEnvironmentProxy(Uri? httpProxy, Uri? httpsProxy, string? bypassList)
@@ -111,7 +116,10 @@ namespace System.Net.Http
             _httpsProxyUri = httpsProxy;
 
             _credentials = HttpEnvironmentProxyCredentials.TryCreate(httpProxy, httpsProxy);
-            _bypass = bypassList?.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            _bypass = bypassList?.Split(
+                ',',
+                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries
+            );
         }
 
         /// <summary>
@@ -179,7 +187,8 @@ namespace System.Net.Http
                 {
                     auth = Uri.UnescapeDataString(auth);
                 }
-                catch { };
+                catch { }
+                ;
 
                 value = value.Substring(separatorIndex + 1);
                 separatorIndex = auth.IndexOf(':');
@@ -215,7 +224,12 @@ namespace System.Net.Http
                     endIndex += 1;
                 }
 
-                if (!ushort.TryParse(value.AsSpan(separatorIndex + 1, endIndex - separatorIndex - 1), out port))
+                if (
+                    !ushort.TryParse(
+                        value.AsSpan(separatorIndex + 1, endIndex - separatorIndex - 1),
+                        out port
+                    )
+                )
                 {
                     return null;
                 }
@@ -250,7 +264,8 @@ namespace System.Net.Http
 
                 return uri;
             }
-            catch { };
+            catch { }
+            ;
             return null;
         }
 
@@ -268,8 +283,17 @@ namespace System.Net.Http
                     {
                         // This should match either domain it self or any subdomain or host
                         // .foo.com will match foo.com it self or *.foo.com
-                        if ((s.Length - 1) == input.Host.Length &&
-                            string.Compare(s, 1, input.Host, 0, input.Host.Length, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (
+                            (s.Length - 1) == input.Host.Length
+                            && string.Compare(
+                                s,
+                                1,
+                                input.Host,
+                                0,
+                                input.Host.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
                             return true;
                         }
@@ -277,7 +301,6 @@ namespace System.Net.Http
                         {
                             return true;
                         }
-
                     }
                     else
                     {
@@ -296,7 +319,9 @@ namespace System.Net.Http
         /// </summary>
         public Uri? GetProxy(Uri uri)
         {
-            return HttpUtilities.IsSupportedNonSecureScheme(uri.Scheme) ? _httpProxyUri : _httpsProxyUri;
+            return HttpUtilities.IsSupportedNonSecureScheme(uri.Scheme)
+                ? _httpProxyUri
+                : _httpsProxyUri;
         }
 
         /// <summary>
@@ -309,14 +334,8 @@ namespace System.Net.Http
 
         public ICredentials? Credentials
         {
-            get
-            {
-                return _credentials;
-            }
-            set
-            {
-                _credentials = value;
-            }
+            get { return _credentials; }
+            set { _credentials = value; }
         }
     }
 }

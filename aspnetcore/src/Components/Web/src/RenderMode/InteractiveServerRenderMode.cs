@@ -11,9 +11,8 @@ public class InteractiveServerRenderMode : IComponentRenderMode
     /// <summary>
     /// Constructs an instance of <see cref="InteractiveServerRenderMode"/>.
     /// </summary>
-    public InteractiveServerRenderMode() : this(true)
-    {
-    }
+    public InteractiveServerRenderMode()
+        : this(true) { }
 
     /// <summary>
     /// Constructs an instance of <see cref="InteractiveServerRenderMode"/>

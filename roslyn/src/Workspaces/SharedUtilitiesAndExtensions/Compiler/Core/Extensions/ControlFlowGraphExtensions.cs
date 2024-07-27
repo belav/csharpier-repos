@@ -24,11 +24,14 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             return lastBlock;
         }
 
-        public static IEnumerable<IOperation> DescendantOperations(this ControlFlowGraph cfg)
-            => cfg.Blocks.SelectMany(b => b.DescendantOperations());
+        public static IEnumerable<IOperation> DescendantOperations(this ControlFlowGraph cfg) =>
+            cfg.Blocks.SelectMany(b => b.DescendantOperations());
 
-        public static IEnumerable<T> DescendantOperations<T>(this ControlFlowGraph cfg, OperationKind operationKind)
-            where T : IOperation
-            => cfg.DescendantOperations().Where(d => d?.Kind == operationKind).Cast<T>();
+        public static IEnumerable<T> DescendantOperations<T>(
+            this ControlFlowGraph cfg,
+            OperationKind operationKind
+        )
+            where T : IOperation =>
+            cfg.DescendantOperations().Where(d => d?.Kind == operationKind).Cast<T>();
     }
 }

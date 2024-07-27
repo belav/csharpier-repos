@@ -17,6 +17,7 @@ public class Arrayclass
         a3d = new double[size, size + 5, size + 10];
     }
 }
+
 public class class1
 {
     public static Random rand;
@@ -38,7 +39,8 @@ public class class1
 
     public static void Init2DMatrix(out double[,] m, out double[][] refm)
     {
-        int i, j;
+        int i,
+            j;
         i = 0;
         double temp;
 
@@ -65,41 +67,42 @@ public class class1
     public static void Process2DArray(ref double[,] a2d)
     {
         for (int i = 3; i < size + 3; i++)
-            for (int j = -10; j < size - 10; j++)
-            {
-                int b = j + 5;
-                a2d[i - 3, b + 5] += a2d[0, b + 5] + a2d[1, b + 5];
-                a2d[i - 3, b + 5] *= a2d[i - 3, j + 10] + a2d[2, b + 5];
-                a2d[i - 3, j + 10] -= a2d[i - 3, b + 5] * a2d[3, j + 10];
-                if ((a2d[i - 3, b + 5] + a2d[4, j + 10]) != 0)
-                    a2d[i - 3, b + 5] /= a2d[i - 3, b + 5] + a2d[4, b + 5];
-                else
-                    a2d[i - 3, j + 10] += a2d[i - 3, j + 10] * a2d[4, j + 10];
-                for (int k = 5; k < size; k++)
-                    a2d[i - 3, b + 5] += a2d[k, j + 10];
-            }
+        for (int j = -10; j < size - 10; j++)
+        {
+            int b = j + 5;
+            a2d[i - 3, b + 5] += a2d[0, b + 5] + a2d[1, b + 5];
+            a2d[i - 3, b + 5] *= a2d[i - 3, j + 10] + a2d[2, b + 5];
+            a2d[i - 3, j + 10] -= a2d[i - 3, b + 5] * a2d[3, j + 10];
+            if ((a2d[i - 3, b + 5] + a2d[4, j + 10]) != 0)
+                a2d[i - 3, b + 5] /= a2d[i - 3, b + 5] + a2d[4, b + 5];
+            else
+                a2d[i - 3, j + 10] += a2d[i - 3, j + 10] * a2d[4, j + 10];
+            for (int k = 5; k < size; k++)
+                a2d[i - 3, b + 5] += a2d[k, j + 10];
+        }
     }
 
     public static void ProcessJagged2DArray(ref double[][] a2d)
     {
         for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-            {
-                a2d[i][j] += a2d[0][j] + a2d[1][j];
-                a2d[i][j] *= a2d[i][j] + a2d[2][j];
-                a2d[i][j] -= a2d[i][j] * a2d[3][j];
-                if ((a2d[i][j] + a2d[4][j]) != 0)
-                    a2d[i][j] /= a2d[i][j] + a2d[4][j];
-                else
-                    a2d[i][j] += a2d[i][j] * a2d[4][j];
-                for (int k = 5; k < size; k++)
-                    a2d[i][j] += a2d[k][j];
-            }
+        for (int j = 0; j < size; j++)
+        {
+            a2d[i][j] += a2d[0][j] + a2d[1][j];
+            a2d[i][j] *= a2d[i][j] + a2d[2][j];
+            a2d[i][j] -= a2d[i][j] * a2d[3][j];
+            if ((a2d[i][j] + a2d[4][j]) != 0)
+                a2d[i][j] /= a2d[i][j] + a2d[4][j];
+            else
+                a2d[i][j] += a2d[i][j] * a2d[4][j];
+            for (int k = 5; k < size; k++)
+                a2d[i][j] += a2d[k][j];
+        }
     }
 
     public static void Init3DMatrix(double[,,] m, double[][] refm)
     {
-        int i, j;
+        int i,
+            j;
         i = 0;
         double temp;
 
@@ -126,35 +129,35 @@ public class class1
     public static void Process3DArray(double[,,] a3d)
     {
         for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-            {
-                a3d[i, j, size] += a3d[0, j, size] + a3d[1, j, size];
-                a3d[i, j, size] *= a3d[i, j, size] + a3d[2, j, size];
-                a3d[i, j, size] -= a3d[i, j, size] * a3d[3, j, size];
-                if ((a3d[i, j, size] + a3d[4, j, size]) != 0)
-                    a3d[i, j, size] /= a3d[i, j, size] + a3d[4, j, size];
-                else
-                    a3d[i, j, size] += a3d[i, j, size] * a3d[4, j, size];
-                for (int k = 5; k < size; k++)
-                    a3d[i, j, size] *= a3d[k, j, size];
-            }
+        for (int j = 0; j < size; j++)
+        {
+            a3d[i, j, size] += a3d[0, j, size] + a3d[1, j, size];
+            a3d[i, j, size] *= a3d[i, j, size] + a3d[2, j, size];
+            a3d[i, j, size] -= a3d[i, j, size] * a3d[3, j, size];
+            if ((a3d[i, j, size] + a3d[4, j, size]) != 0)
+                a3d[i, j, size] /= a3d[i, j, size] + a3d[4, j, size];
+            else
+                a3d[i, j, size] += a3d[i, j, size] * a3d[4, j, size];
+            for (int k = 5; k < size; k++)
+                a3d[i, j, size] *= a3d[k, j, size];
+        }
     }
 
     public static void ProcessJagged3DArray(double[][] a3d)
     {
         for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-            {
-                a3d[i][j] += a3d[0][j] + a3d[1][j];
-                a3d[i][j] *= a3d[i][j] + a3d[2][j];
-                a3d[i][j] -= a3d[i][j] * a3d[3][j];
-                if ((a3d[i][j] + a3d[4][j]) != 0)
-                    a3d[i][j] /= a3d[i][j] + a3d[4][j];
-                else
-                    a3d[i][j] += a3d[i][j] * a3d[4][j];
-                for (int k = 5; k < size; k++)
-                    a3d[i][j] *= a3d[k][j];
-            }
+        for (int j = 0; j < size; j++)
+        {
+            a3d[i][j] += a3d[0][j] + a3d[1][j];
+            a3d[i][j] *= a3d[i][j] + a3d[2][j];
+            a3d[i][j] -= a3d[i][j] * a3d[3][j];
+            if ((a3d[i][j] + a3d[4][j]) != 0)
+                a3d[i][j] /= a3d[i][j] + a3d[4][j];
+            else
+                a3d[i][j] += a3d[i][j] * a3d[4][j];
+            for (int k = 5; k < size; k++)
+                a3d[i][j] *= a3d[k][j];
+        }
     }
 
     [Fact]
@@ -164,9 +167,10 @@ public class class1
 
         int seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
+                => new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
+            _ => DefaultSeed,
         };
 
         rand = new Random(seed);
@@ -174,8 +178,14 @@ public class class1
 
         Console.WriteLine();
         Console.WriteLine("2D Array");
-        Console.WriteLine("Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce", seed);
-        Console.WriteLine("Element manipulation of {0} by {0} matrices with different arithmetic operations", size);
+        Console.WriteLine(
+            "Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce",
+            seed
+        );
+        Console.WriteLine(
+            "Element manipulation of {0} by {0} matrices with different arithmetic operations",
+            size
+        );
         Console.WriteLine("Matrix is member of class, element stores random double");
         Console.WriteLine("array set/get, ref/out param are used");
 
@@ -206,7 +216,13 @@ public class class1
                 if (ima.a2d[i, j] != refa2d[i][j])
                     if (!Double.IsNaN(ima.a2d[i, j]) || !Double.IsNaN(refa2d[i][j]))
                     {
-                        Console.WriteLine("i={0}, j={1}, ima.a2d[i,j] {2}!=refa2d[i][j] {3}", i, j, ima.a2d[i, j], refa2d[i][j]);
+                        Console.WriteLine(
+                            "i={0}, j={1}, ima.a2d[i,j] {2}!=refa2d[i][j] {3}",
+                            i,
+                            j,
+                            ima.a2d[i, j],
+                            refa2d[i][j]
+                        );
                         pass = false;
                     }
         }
@@ -218,13 +234,17 @@ public class class1
                 ima.a2d[size, 0] = 5;
                 pass = false;
             }
-            catch (IndexOutOfRangeException)
-            { }
+            catch (IndexOutOfRangeException) { }
         }
 
         Console.WriteLine();
         Console.WriteLine("3D Array");
-        Console.WriteLine("Element manipulation of {0} by {1} by {2} matrices with different arithmetic operations", size, size + 5, size + 10);
+        Console.WriteLine(
+            "Element manipulation of {0} by {1} by {2} matrices with different arithmetic operations",
+            size,
+            size + 5,
+            size + 10
+        );
         Console.WriteLine("Matrix is member of class, element stores random double");
 
         double[][] refa3d = new double[size][];
@@ -255,7 +275,13 @@ public class class1
                 if (ima.a3d[i, j, size] != refa3d[i][j])
                     if (!Double.IsNaN(ima.a3d[i, j, size]) || !Double.IsNaN(refa3d[i][j]))
                     {
-                        Console.WriteLine("i={0}, j={1}, ima.a3d[i,j,size] {2}!=refa3d[i][j] {3}", i, j, ima.a3d[i, j, size], refa3d[i][j]);
+                        Console.WriteLine(
+                            "i={0}, j={1}, ima.a3d[i,j,size] {2}!=refa3d[i][j] {3}",
+                            i,
+                            j,
+                            ima.a3d[i, j, size],
+                            refa3d[i][j]
+                        );
                         pass = false;
                     }
         }
@@ -267,8 +293,7 @@ public class class1
                 ima.a3d[-1, 0, 0] = 5;
                 pass = false;
             }
-            catch (IndexOutOfRangeException)
-            { }
+            catch (IndexOutOfRangeException) { }
         }
 
         Console.WriteLine();

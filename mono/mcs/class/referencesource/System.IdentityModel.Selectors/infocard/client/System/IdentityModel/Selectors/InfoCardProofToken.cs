@@ -5,11 +5,11 @@
 namespace System.IdentityModel.Selectors
 {
     using System;
-    using System.IdentityModel.Tokens;
-    using System.IdentityModel.Policy;
-    using System.IdentityModel.Claims;   
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Policy;
+    using System.IdentityModel.Tokens;
 
     //
     // Summary:
@@ -23,17 +23,20 @@ namespace System.IdentityModel.Selectors
         ReadOnlyCollection<SecurityKey> m_securityKeys;
         SecurityKey m_securityKey;
 
-        public InfoCardProofToken( AsymmetricCryptoHandle cryptoHandle, DateTime expiration ) : this( expiration )
+        public InfoCardProofToken(AsymmetricCryptoHandle cryptoHandle, DateTime expiration)
+            : this(expiration)
         {
-            InitCrypto( new InfoCardAsymmetricCrypto( cryptoHandle ) );
+            InitCrypto(new InfoCardAsymmetricCrypto(cryptoHandle));
         }
 
-        public InfoCardProofToken( SymmetricCryptoHandle cryptoHandle, DateTime expiration ) : this( expiration )
+        public InfoCardProofToken(SymmetricCryptoHandle cryptoHandle, DateTime expiration)
+            : this(expiration)
         {
-            InitCrypto( new InfoCardSymmetricCrypto( cryptoHandle ) );
+            InitCrypto(new InfoCardSymmetricCrypto(cryptoHandle));
         }
 
-        private InfoCardProofToken( DateTime expiration ) : base()
+        private InfoCardProofToken(DateTime expiration)
+            : base()
         {
             m_id = Guid.NewGuid().ToString();
             m_expiration = expiration.ToUniversalTime();
@@ -46,10 +49,7 @@ namespace System.IdentityModel.Selectors
 
         public override ReadOnlyCollection<SecurityKey> SecurityKeys
         {
-            get
-            {
-                return m_securityKeys;
-            }
+            get { return m_securityKeys; }
         }
 
         public override DateTime ValidTo

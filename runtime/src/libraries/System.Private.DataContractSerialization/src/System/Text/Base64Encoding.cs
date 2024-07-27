@@ -12,25 +12,149 @@ namespace System.Text
     internal sealed class Base64Encoding : Encoding
     {
         private static ReadOnlySpan<byte> Char2val => // 128
-        [
-            /*    0-15 */ 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-            /*   16-31 */ 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-            /*   32-47 */ 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,   62, 0xFF, 0xFF, 0xFF,   63,
-            /*   48-63 */   52,   53,   54,   55,   56,   57,   58,   59,   60,   61, 0xFF, 0xFF, 0xFF,   64, 0xFF, 0xFF,
-            /*   64-79 */ 0xFF,    0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,
-            /*   80-95 */   15,   16,   17,   18,   19,   20,   21,   22,   23,   24,   25, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-            /*  96-111 */ 0xFF,   26,   27,   28,   29,   30,   31,   32,   33,   34,   35,   36,   37,   38,   39,   40,
-            /* 112-127 */   41,   42,   43,   44,   45,   46,   47,   48,   49,   50,   51, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-        ];
+            [
+                /*    0-15 */0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                /*   16-31 */0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                /*   32-47 */0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                62,
+                0xFF,
+                0xFF,
+                0xFF,
+                63,
+                /*   48-63 */52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                0xFF,
+                0xFF,
+                0xFF,
+                64,
+                0xFF,
+                0xFF,
+                /*   64-79 */0xFF,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                /*   80-95 */15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                /*  96-111 */0xFF,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                /* 112-127 */41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+                0xFF,
+            ];
 
-        private const string Val2Char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-        private static ReadOnlySpan<byte> Val2byte => "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"u8;
+        private const string Val2Char =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        private static ReadOnlySpan<byte> Val2byte =>
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"u8;
 
         public override int GetMaxByteCount(int charCount)
         {
             ArgumentOutOfRangeException.ThrowIfNegative(charCount);
             if ((charCount % 4) != 0)
-                throw new FormatException(SR.Format(SR.XmlInvalidBase64Length, charCount.ToString()));
+                throw new FormatException(
+                    SR.Format(SR.XmlInvalidBase64Length, charCount.ToString())
+                );
             return charCount / 4 * 3;
         }
 
@@ -52,10 +176,16 @@ namespace System.Text
 
             ArgumentOutOfRangeException.ThrowIfNegative(index);
             if (index > chars.Length)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.Format(SR.OffsetExceedsBufferSize, chars.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.Format(SR.OffsetExceedsBufferSize, chars.Length)
+                );
             ArgumentOutOfRangeException.ThrowIfNegative(count);
             if (count > chars.Length - index)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, chars.Length - index));
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.Format(SR.SizeExceedsRemainingBufferSpace, chars.Length - index)
+                );
 
             if (count == 0)
                 return 0;
@@ -77,7 +207,13 @@ namespace System.Text
                         char pch3 = pch[3];
 
                         if ((pch0 | pch1 | pch2 | pch3) >= 128)
-                            throw new FormatException(SR.Format(SR.XmlInvalidBase64Sequence, new string(pch, 0, 4), index + (int)(pch - _chars)));
+                            throw new FormatException(
+                                SR.Format(
+                                    SR.XmlInvalidBase64Sequence,
+                                    new string(pch, 0, 4),
+                                    index + (int)(pch - _chars)
+                                )
+                            );
 
                         // xx765432 xx107654 xx321076 xx543210
                         // 76543210 76543210 76543210
@@ -87,7 +223,13 @@ namespace System.Text
                         int v4 = _char2val[pch3];
 
                         if (!IsValidLeadBytes(v1, v2, v3, v4) || !IsValidTailBytes(v3, v4))
-                            throw new FormatException(SR.Format(SR.XmlInvalidBase64Sequence, new string(pch, 0, 4), index + (int)(pch - _chars)));
+                            throw new FormatException(
+                                SR.Format(
+                                    SR.XmlInvalidBase64Sequence,
+                                    new string(pch, 0, 4),
+                                    index + (int)(pch - _chars)
+                                )
+                            );
 
                         int byteCount = (v4 != 64 ? 3 : (v3 != 64 ? 2 : 1));
                         totalCount += byteCount;
@@ -98,26 +240,43 @@ namespace System.Text
             }
         }
 
-        public override unsafe int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        public override unsafe int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             ArgumentNullException.ThrowIfNull(chars);
             ArgumentOutOfRangeException.ThrowIfNegative(charIndex);
             if (charIndex > chars.Length)
-                throw new ArgumentOutOfRangeException(nameof(charIndex), SR.Format(SR.OffsetExceedsBufferSize, chars.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(charIndex),
+                    SR.Format(SR.OffsetExceedsBufferSize, chars.Length)
+                );
 
             ArgumentOutOfRangeException.ThrowIfNegative(charCount);
             if (charCount > chars.Length - charIndex)
-                throw new ArgumentOutOfRangeException(nameof(charCount), SR.Format(SR.SizeExceedsRemainingBufferSpace, chars.Length - charIndex));
+                throw new ArgumentOutOfRangeException(
+                    nameof(charCount),
+                    SR.Format(SR.SizeExceedsRemainingBufferSpace, chars.Length - charIndex)
+                );
 
             ArgumentNullException.ThrowIfNull(bytes);
             ArgumentOutOfRangeException.ThrowIfNegative(byteIndex);
             if (byteIndex > bytes.Length)
-                throw new ArgumentOutOfRangeException(nameof(byteIndex), SR.Format(SR.OffsetExceedsBufferSize, bytes.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteIndex),
+                    SR.Format(SR.OffsetExceedsBufferSize, bytes.Length)
+                );
 
             if (charCount == 0)
                 return 0;
             if ((charCount % 4) != 0)
-                throw new FormatException(SR.Format(SR.XmlInvalidBase64Length, charCount.ToString()));
+                throw new FormatException(
+                    SR.Format(SR.XmlInvalidBase64Length, charCount.ToString())
+                );
             fixed (byte* _char2val = &Char2val[0])
             {
                 fixed (char* _chars = &chars[charIndex])
@@ -137,7 +296,13 @@ namespace System.Text
                             char pch3 = pch[3];
 
                             if ((pch0 | pch1 | pch2 | pch3) >= 128)
-                                throw new FormatException(SR.Format(SR.XmlInvalidBase64Sequence, new string(pch, 0, 4), charIndex + (int)(pch - _chars)));
+                                throw new FormatException(
+                                    SR.Format(
+                                        SR.XmlInvalidBase64Sequence,
+                                        new string(pch, 0, 4),
+                                        charIndex + (int)(pch - _chars)
+                                    )
+                                );
                             // xx765432 xx107654 xx321076 xx543210
                             // 76543210 76543210 76543210
 
@@ -147,7 +312,13 @@ namespace System.Text
                             int v4 = _char2val[pch3];
 
                             if (!IsValidLeadBytes(v1, v2, v3, v4) || !IsValidTailBytes(v3, v4))
-                                throw new FormatException(SR.Format(SR.XmlInvalidBase64Sequence, new string(pch, 0, 4), charIndex + (int)(pch - _chars)));
+                                throw new FormatException(
+                                    SR.Format(
+                                        SR.XmlInvalidBase64Sequence,
+                                        new string(pch, 0, 4),
+                                        charIndex + (int)(pch - _chars)
+                                    )
+                                );
 
                             int byteCount = (v4 != 64 ? 3 : (v3 != 64 ? 2 : 1));
                             if (pb + byteCount > pbMax)
@@ -171,26 +342,43 @@ namespace System.Text
             }
         }
 
-        public unsafe int GetBytes(byte[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        public unsafe int GetBytes(
+            byte[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             ArgumentNullException.ThrowIfNull(chars);
             ArgumentOutOfRangeException.ThrowIfNegative(charIndex);
             if (charIndex > chars.Length)
-                throw new ArgumentOutOfRangeException(nameof(charIndex), SR.Format(SR.OffsetExceedsBufferSize, chars.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(charIndex),
+                    SR.Format(SR.OffsetExceedsBufferSize, chars.Length)
+                );
 
             ArgumentOutOfRangeException.ThrowIfNegative(charCount);
             if (charCount > chars.Length - charIndex)
-                throw new ArgumentOutOfRangeException(nameof(charCount), SR.Format(SR.SizeExceedsRemainingBufferSpace, chars.Length - charIndex));
+                throw new ArgumentOutOfRangeException(
+                    nameof(charCount),
+                    SR.Format(SR.SizeExceedsRemainingBufferSpace, chars.Length - charIndex)
+                );
 
             ArgumentNullException.ThrowIfNull(bytes);
             ArgumentOutOfRangeException.ThrowIfNegative(byteIndex);
             if (byteIndex > bytes.Length)
-                throw new ArgumentOutOfRangeException(nameof(byteIndex), SR.Format(SR.OffsetExceedsBufferSize, bytes.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteIndex),
+                    SR.Format(SR.OffsetExceedsBufferSize, bytes.Length)
+                );
 
             if (charCount == 0)
                 return 0;
             if ((charCount % 4) != 0)
-                throw new FormatException(SR.Format(SR.XmlInvalidBase64Length, charCount.ToString()));
+                throw new FormatException(
+                    SR.Format(SR.XmlInvalidBase64Length, charCount.ToString())
+                );
             fixed (byte* _char2val = &Char2val[0])
             {
                 fixed (byte* _chars = &chars[charIndex])
@@ -209,7 +397,13 @@ namespace System.Text
                             byte pch2 = pch[2];
                             byte pch3 = pch[3];
                             if ((pch0 | pch1 | pch2 | pch3) >= 128)
-                                throw new FormatException(SR.Format(SR.XmlInvalidBase64Sequence, "?", charIndex + (int)(pch - _chars)));
+                                throw new FormatException(
+                                    SR.Format(
+                                        SR.XmlInvalidBase64Sequence,
+                                        "?",
+                                        charIndex + (int)(pch - _chars)
+                                    )
+                                );
                             // xx765432 xx107654 xx321076 xx543210
                             // 76543210 76543210 76543210
 
@@ -219,7 +413,13 @@ namespace System.Text
                             int v4 = _char2val[pch3];
 
                             if (!IsValidLeadBytes(v1, v2, v3, v4) || !IsValidTailBytes(v3, v4))
-                                throw new FormatException(SR.Format(SR.XmlInvalidBase64Sequence, "?", charIndex + (int)(pch - _chars)));
+                                throw new FormatException(
+                                    SR.Format(
+                                        SR.XmlInvalidBase64Sequence,
+                                        "?",
+                                        charIndex + (int)(pch - _chars)
+                                    )
+                                );
 
                             int byteCount = (v4 != 64 ? 3 : (v3 != 64 ? 2 : 1));
                             if (pb + byteCount > pbMax)
@@ -242,10 +442,14 @@ namespace System.Text
                 }
             }
         }
+
         public override int GetMaxCharCount(int byteCount)
         {
             if (byteCount < 0 || byteCount > int.MaxValue / 4 * 3 - 2)
-                throw new ArgumentOutOfRangeException(nameof(byteCount), SR.Format(SR.ValueMustBeInRange, 0, int.MaxValue / 4 * 3 - 2));
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteCount),
+                    SR.Format(SR.ValueMustBeInRange, 0, int.MaxValue / 4 * 3 - 2)
+                );
             return ((byteCount + 2) / 3) * 4;
         }
 
@@ -254,21 +458,36 @@ namespace System.Text
             return GetMaxCharCount(count);
         }
 
-        public override unsafe int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        public override unsafe int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             ArgumentNullException.ThrowIfNull(bytes);
             ArgumentOutOfRangeException.ThrowIfNegative(byteIndex);
             if (byteIndex > bytes.Length)
-                throw new ArgumentOutOfRangeException(nameof(byteIndex), SR.Format(SR.OffsetExceedsBufferSize, bytes.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteIndex),
+                    SR.Format(SR.OffsetExceedsBufferSize, bytes.Length)
+                );
             ArgumentOutOfRangeException.ThrowIfNegative(byteCount);
             if (byteCount > bytes.Length - byteIndex)
-                throw new ArgumentOutOfRangeException(nameof(byteCount), SR.Format(SR.SizeExceedsRemainingBufferSpace, bytes.Length - byteIndex));
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteCount),
+                    SR.Format(SR.SizeExceedsRemainingBufferSpace, bytes.Length - byteIndex)
+                );
 
             int charCount = GetCharCount(bytes, byteIndex, byteCount);
             ArgumentNullException.ThrowIfNull(chars);
             ArgumentOutOfRangeException.ThrowIfNegative(charIndex);
             if (charIndex > chars.Length)
-                throw new ArgumentOutOfRangeException(nameof(charIndex), SR.Format(SR.OffsetExceedsBufferSize, chars.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(charIndex),
+                    SR.Format(SR.OffsetExceedsBufferSize, chars.Length)
+                );
             if (charCount < 0 || charCount > chars.Length - charIndex)
                 throw new ArgumentException(SR.XmlArrayTooSmall, nameof(chars));
 
@@ -338,21 +557,36 @@ namespace System.Text
             return charCount;
         }
 
-        public unsafe int GetChars(byte[] bytes, int byteIndex, int byteCount, byte[] chars, int charIndex)
+        public unsafe int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            byte[] chars,
+            int charIndex
+        )
         {
             ArgumentNullException.ThrowIfNull(bytes);
             ArgumentOutOfRangeException.ThrowIfNegative(byteIndex);
             if (byteIndex > bytes.Length)
-                throw new ArgumentOutOfRangeException(nameof(byteIndex), SR.Format(SR.OffsetExceedsBufferSize, bytes.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteIndex),
+                    SR.Format(SR.OffsetExceedsBufferSize, bytes.Length)
+                );
             ArgumentOutOfRangeException.ThrowIfNegative(byteCount);
             if (byteCount > bytes.Length - byteIndex)
-                throw new ArgumentOutOfRangeException(nameof(byteCount), SR.Format(SR.SizeExceedsRemainingBufferSpace, bytes.Length - byteIndex));
+                throw new ArgumentOutOfRangeException(
+                    nameof(byteCount),
+                    SR.Format(SR.SizeExceedsRemainingBufferSpace, bytes.Length - byteIndex)
+                );
 
             int charCount = GetCharCount(bytes, byteIndex, byteCount);
             ArgumentNullException.ThrowIfNull(chars);
             ArgumentOutOfRangeException.ThrowIfNegative(charIndex);
             if (charIndex > chars.Length)
-                throw new ArgumentOutOfRangeException(nameof(charIndex), SR.Format(SR.OffsetExceedsBufferSize, chars.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(charIndex),
+                    SR.Format(SR.OffsetExceedsBufferSize, chars.Length)
+                );
 
             if (charCount < 0 || charCount > chars.Length - charIndex)
                 throw new ArgumentException(SR.XmlArrayTooSmall, nameof(chars));

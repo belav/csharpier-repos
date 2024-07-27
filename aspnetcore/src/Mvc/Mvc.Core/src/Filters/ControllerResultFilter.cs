@@ -15,9 +15,7 @@ internal sealed class ControllerResultFilter : IAsyncResultFilter, IOrderedFilte
     public int Order { get; set; } = int.MinValue;
 
     /// <inheritdoc />
-    public Task OnResultExecutionAsync(
-        ResultExecutingContext context,
-        ResultExecutionDelegate next)
+    public Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(next);
@@ -25,9 +23,12 @@ internal sealed class ControllerResultFilter : IAsyncResultFilter, IOrderedFilte
         var controller = context.Controller;
         if (controller == null)
         {
-            throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(context.Controller),
-                nameof(ResultExecutingContext)));
+            throw new InvalidOperationException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(context.Controller),
+                    nameof(ResultExecutingContext)
+                )
+            );
         }
 
         if (controller is IAsyncResultFilter asyncResultFilter)
@@ -47,7 +48,8 @@ internal sealed class ControllerResultFilter : IAsyncResultFilter, IOrderedFilte
     private static async Task ExecuteResultFilter(
         ResultExecutingContext context,
         ResultExecutionDelegate next,
-        IResultFilter resultFilter)
+        IResultFilter resultFilter
+    )
     {
         resultFilter.OnResultExecuting(context);
         if (!context.Cancel)

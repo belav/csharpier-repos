@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,12 +26,14 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms {
-	public enum ColorDepth {
-		Depth4Bit	= 4,
-		Depth8Bit	= 8,
-		Depth16Bit	= 16,
-		Depth24Bit	= 24,
-		Depth32Bit	= 32
-	}
+namespace System.Windows.Forms
+{
+    public enum ColorDepth
+    {
+        Depth4Bit = 4,
+        Depth8Bit = 8,
+        Depth16Bit = 16,
+        Depth24Bit = 24,
+        Depth32Bit = 32,
+    }
 }

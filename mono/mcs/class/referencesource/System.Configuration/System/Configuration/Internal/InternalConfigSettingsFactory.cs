@@ -4,22 +4,28 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration.Internal {
-
+namespace System.Configuration.Internal
+{
     using System.Configuration;
 
     //
-    // Called by System.Web.HttpConfigurationSystem to set the configuration system 
+    // Called by System.Web.HttpConfigurationSystem to set the configuration system
     // in the ConfigurationSettings class.
     //
-    internal sealed class InternalConfigSettingsFactory : IInternalConfigSettingsFactory {
-        private InternalConfigSettingsFactory() {}
+    internal sealed class InternalConfigSettingsFactory : IInternalConfigSettingsFactory
+    {
+        private InternalConfigSettingsFactory() { }
 
-        void IInternalConfigSettingsFactory.SetConfigurationSystem(IInternalConfigSystem configSystem, bool initComplete) {
+        void IInternalConfigSettingsFactory.SetConfigurationSystem(
+            IInternalConfigSystem configSystem,
+            bool initComplete
+        )
+        {
             ConfigurationManager.SetConfigurationSystem(configSystem, initComplete);
         }
 
-        void IInternalConfigSettingsFactory.CompleteInit() {
+        void IInternalConfigSettingsFactory.CompleteInit()
+        {
             ConfigurationManager.CompleteConfigInit();
         }
     }

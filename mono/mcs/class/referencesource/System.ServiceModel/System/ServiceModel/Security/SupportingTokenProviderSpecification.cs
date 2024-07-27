@@ -14,7 +14,11 @@ namespace System.ServiceModel.Security
         SecurityTokenProvider tokenProvider;
         SecurityTokenParameters tokenParameters;
 
-        public SupportingTokenProviderSpecification(SecurityTokenProvider tokenProvider, SecurityTokenAttachmentMode attachmentMode, SecurityTokenParameters tokenParameters)
+        public SupportingTokenProviderSpecification(
+            SecurityTokenProvider tokenProvider,
+            SecurityTokenAttachmentMode attachmentMode,
+            SecurityTokenParameters tokenParameters
+        )
         {
             if (tokenProvider == null)
             {

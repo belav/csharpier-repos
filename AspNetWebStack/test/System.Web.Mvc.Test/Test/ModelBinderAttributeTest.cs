@@ -15,8 +15,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Throws<ArgumentException>(
-                delegate { new ModelBinderAttribute(badType); },
-                "The type 'System.String' does not implement the IModelBinder interface.\r\nParameter name: binderType");
+                delegate
+                {
+                    new ModelBinderAttribute(badType);
+                },
+                "The type 'System.String' does not implement the IModelBinder interface.\r\nParameter name: binderType"
+            );
         }
 
         [Fact]
@@ -24,7 +28,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { new ModelBinderAttribute(null); }, "binderType");
+                delegate
+                {
+                    new ModelBinderAttribute(null);
+                },
+                "binderType"
+            );
         }
 
         [Fact]
@@ -59,13 +68,20 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { attr.GetBinder(); },
-                "An error occurred when trying to create the IModelBinder 'System.Web.Mvc.Test.ModelBinderAttributeTest+BadConverter'. Make sure that the binder has a public parameterless constructor.");
+                delegate
+                {
+                    attr.GetBinder();
+                },
+                "An error occurred when trying to create the IModelBinder 'System.Web.Mvc.Test.ModelBinderAttributeTest+BadConverter'. Make sure that the binder has a public parameterless constructor."
+            );
         }
 
         private class GoodConverter : IModelBinder
         {
-            public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+            public object BindModel(
+                ControllerContext controllerContext,
+                ModelBindingContext bindingContext
+            )
             {
                 throw new NotImplementedException();
             }
@@ -74,11 +90,12 @@ namespace System.Web.Mvc.Test
         private class BadConverter : IModelBinder
         {
             // no public parameterless constructor
-            public BadConverter(string s)
-            {
-            }
+            public BadConverter(string s) { }
 
-            public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+            public object BindModel(
+                ControllerContext controllerContext,
+                ModelBindingContext bindingContext
+            )
             {
                 throw new NotImplementedException();
             }

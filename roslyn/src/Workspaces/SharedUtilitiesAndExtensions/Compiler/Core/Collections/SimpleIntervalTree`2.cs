@@ -40,40 +40,47 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         /// <summary>
         /// Warning.  Mutates the tree in place.
         /// </summary>
-        public void ClearInPlace()
-            => this.root = null;
+        public void ClearInPlace() => this.root = null;
 
-        public ImmutableArray<T> GetIntervalsThatOverlapWith(int start, int length)
-            => GetIntervalsThatOverlapWith(start, length, in _introspector);
+        public ImmutableArray<T> GetIntervalsThatOverlapWith(int start, int length) =>
+            GetIntervalsThatOverlapWith(start, length, in _introspector);
 
-        public ImmutableArray<T> GetIntervalsThatIntersectWith(int start, int length)
-            => GetIntervalsThatIntersectWith(start, length, in _introspector);
+        public ImmutableArray<T> GetIntervalsThatIntersectWith(int start, int length) =>
+            GetIntervalsThatIntersectWith(start, length, in _introspector);
 
-        public ImmutableArray<T> GetIntervalsThatContain(int start, int length)
-            => GetIntervalsThatContain(start, length, in _introspector);
+        public ImmutableArray<T> GetIntervalsThatContain(int start, int length) =>
+            GetIntervalsThatContain(start, length, in _introspector);
 
-        public void FillWithIntervalsThatOverlapWith(int start, int length, ref TemporaryArray<T> builder)
-            => FillWithIntervalsThatOverlapWith(start, length, ref builder, in _introspector);
+        public void FillWithIntervalsThatOverlapWith(
+            int start,
+            int length,
+            ref TemporaryArray<T> builder
+        ) => FillWithIntervalsThatOverlapWith(start, length, ref builder, in _introspector);
 
-        public void FillWithIntervalsThatIntersectWith(int start, int length, ref TemporaryArray<T> builder)
-            => FillWithIntervalsThatIntersectWith(start, length, ref builder, in _introspector);
+        public void FillWithIntervalsThatIntersectWith(
+            int start,
+            int length,
+            ref TemporaryArray<T> builder
+        ) => FillWithIntervalsThatIntersectWith(start, length, ref builder, in _introspector);
 
-        public void FillWithIntervalsThatContain(int start, int length, ref TemporaryArray<T> builder)
-            => FillWithIntervalsThatContain(start, length, ref builder, in _introspector);
+        public void FillWithIntervalsThatContain(
+            int start,
+            int length,
+            ref TemporaryArray<T> builder
+        ) => FillWithIntervalsThatContain(start, length, ref builder, in _introspector);
 
-        public bool HasIntervalThatIntersectsWith(int position)
-            => HasIntervalThatIntersectsWith(position, in _introspector);
+        public bool HasIntervalThatIntersectsWith(int position) =>
+            HasIntervalThatIntersectsWith(position, in _introspector);
 
-        public bool HasIntervalThatOverlapsWith(int start, int length)
-            => HasIntervalThatOverlapsWith(start, length, in _introspector);
+        public bool HasIntervalThatOverlapsWith(int start, int length) =>
+            HasIntervalThatOverlapsWith(start, length, in _introspector);
 
-        public bool HasIntervalThatIntersectsWith(int start, int length)
-            => HasIntervalThatIntersectsWith(start, length, in _introspector);
+        public bool HasIntervalThatIntersectsWith(int start, int length) =>
+            HasIntervalThatIntersectsWith(start, length, in _introspector);
 
-        public bool HasIntervalThatContains(int start, int length)
-            => HasIntervalThatContains(start, length, in _introspector);
+        public bool HasIntervalThatContains(int start, int length) =>
+            HasIntervalThatContains(start, length, in _introspector);
 
-        protected int MaxEndValue(Node node)
-            => GetEnd(node.MaxEndNode.Value, in _introspector);
+        protected int MaxEndValue(Node node) => GetEnd(node.MaxEndNode.Value, in _introspector);
     }
 }

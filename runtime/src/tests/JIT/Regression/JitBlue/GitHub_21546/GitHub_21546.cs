@@ -5,9 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-
-using Point = System.Numerics.Vector2;
 using Xunit;
+using Point = System.Numerics.Vector2;
 
 namespace GitHub_21546
 {
@@ -16,14 +15,15 @@ namespace GitHub_21546
         static Point checkA;
         static Point checkB;
         static Point checkC;
-        static int   returnVal;
+        static int returnVal;
 
         public const int DefaultSeed = 20010415;
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
+                => new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
+            _ => DefaultSeed,
         };
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -59,16 +59,13 @@ namespace GitHub_21546
 
         static Point NextPoint(Random random)
         {
-            return new Point(
-                (float)random.NextDouble(),
-                (float)random.NextDouble()
-            );
+            return new Point((float)random.NextDouble(), (float)random.NextDouble());
         }
 
         [Fact]
         public static int TestEntryPoint()
         {
-            returnVal     = 100;
+            returnVal = 100;
             Random random = new Random(Seed);
             List<Point> p = new List<Point>();
 

@@ -13,9 +13,7 @@ public abstract class TemplatedModelGenerator : ModelCodeGenerator
     /// </summary>
     /// <param name="dependencies">The dependencies.</param>
     protected TemplatedModelGenerator(ModelCodeGeneratorDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     Gets the subdirectory under the project to look for templates in.
@@ -24,8 +22,7 @@ public abstract class TemplatedModelGenerator : ModelCodeGenerator
     protected static string TemplatesDirectory { get; } = Path.Combine("CodeTemplates", "EFCore");
 
     /// <inheritdoc />
-    public override string? Language
-        => null;
+    public override string? Language => null;
 
     /// <summary>
     ///     Checks whether the templates required for this generator are present.

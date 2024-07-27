@@ -147,7 +147,8 @@ namespace System.Xml.Xsl.Qil
 
                 QilNodeType.XsltGenerateId => CheckXsltGenerateId((QilUnary)n),
                 QilNodeType.XsltInvokeLateBound => CheckXsltInvokeLateBound((QilInvokeLateBound)n),
-                QilNodeType.XsltInvokeEarlyBound => CheckXsltInvokeEarlyBound((QilInvokeEarlyBound)n),
+                QilNodeType.XsltInvokeEarlyBound
+                    => CheckXsltInvokeEarlyBound((QilInvokeEarlyBound)n),
                 QilNodeType.XsltCopy => CheckXsltCopy((QilBinary)n),
                 QilNodeType.XsltCopyOf => CheckXsltCopyOf((QilUnary)n),
                 QilNodeType.XsltConvert => CheckXsltConvert((QilTargetType)n),
@@ -163,7 +164,11 @@ namespace System.Xml.Xsl.Qil
         //-----------------------------------------------
         public static XmlQueryType CheckQilExpression(QilExpression node)
         {
-            Check(node[0].NodeType == QilNodeType.False || node[0].NodeType == QilNodeType.True, node, "IsDebug must either be True or False");
+            Check(
+                node[0].NodeType == QilNodeType.False || node[0].NodeType == QilNodeType.True,
+                node,
+                "IsDebug must either be True or False"
+            );
             CheckLiteralValue(node[1], typeof(XmlWriterSettings));
             CheckLiteralValue(node[2], typeof(IList<WhitespaceRule>));
             CheckClassAndNodeType(node[3], typeof(QilList), QilNodeType.GlobalParameterList);
@@ -279,7 +284,11 @@ namespace System.Xml.Xsl.Qil
 
         public static XmlQueryType CheckParameter(QilParameter node)
         {
-            Check(node.Binding == null || node.Binding.XmlType!.IsSubtypeOf(node.XmlType!), node, "Parameter binding's xml type must be a subtype of the parameter's type");
+            Check(
+                node.Binding == null || node.Binding.XmlType!.IsSubtypeOf(node.XmlType!),
+                node,
+                "Parameter binding's xml type must be a subtype of the parameter's type"
+            );
             return node.XmlType!;
         }
 
@@ -418,7 +427,9 @@ namespace System.Xml.Xsl.Qil
         {
             CheckXmlType(node.Left, XmlQueryTypeFactory.NodeNotRtfS);
             CheckXmlType(node.Right, XmlQueryTypeFactory.NodeNotRtfS);
-            return DistinctType(XmlQueryTypeFactory.Sequence(node.Left.XmlType!, node.Right.XmlType!));
+            return DistinctType(
+                XmlQueryTypeFactory.Sequence(node.Left.XmlType!, node.Right.XmlType!)
+            );
         }
 
         public static XmlQueryType CheckIntersection(QilBinary node)
@@ -437,7 +448,10 @@ namespace System.Xml.Xsl.Qil
         {
             XmlQueryType xmlType = node.Child.XmlType!;
             CheckNumericXS(node.Child);
-            return XmlQueryTypeFactory.PrimeProduct(xmlType, xmlType.MaybeEmpty ? XmlQueryCardinality.ZeroOrOne : XmlQueryCardinality.One);
+            return XmlQueryTypeFactory.PrimeProduct(
+                xmlType,
+                xmlType.MaybeEmpty ? XmlQueryCardinality.ZeroOrOne : XmlQueryCardinality.One
+            );
         }
 
         public static XmlQueryType CheckSum(QilUnary node)
@@ -472,7 +486,9 @@ namespace System.Xml.Xsl.Qil
             CheckNumericX(node.Left);
             CheckNumericX(node.Right);
             CheckNotDisjoint(node);
-            return node.Left.XmlType!.TypeCode == XmlTypeCode.None ? node.Right.XmlType! : node.Left.XmlType!;
+            return node.Left.XmlType!.TypeCode == XmlTypeCode.None
+                ? node.Right.XmlType!
+                : node.Left.XmlType!;
         }
 
         public static XmlQueryType CheckSubtract(QilBinary node)
@@ -517,8 +533,12 @@ namespace System.Xml.Xsl.Qil
         public static XmlQueryType CheckStrParseQName(QilBinary node)
         {
             CheckXmlType(node.Left, XmlQueryTypeFactory.StringX);
-            Check(node.Right.XmlType!.IsSubtypeOf(XmlQueryTypeFactory.StringX) || node.Right.XmlType.IsSubtypeOf(XmlQueryTypeFactory.NamespaceS),
-                  node, "StrParseQName must take either a string or a list of namespace as its second argument");
+            Check(
+                node.Right.XmlType!.IsSubtypeOf(XmlQueryTypeFactory.StringX)
+                    || node.Right.XmlType.IsSubtypeOf(XmlQueryTypeFactory.NamespaceS),
+                node,
+                "StrParseQName must take either a string or a list of namespace as its second argument"
+            );
             return XmlQueryTypeFactory.QNameX;
         }
 
@@ -593,10 +613,18 @@ namespace System.Xml.Xsl.Qil
         public static XmlQueryType CheckLoop(QilLoop node)
         {
             CheckClass(node[0], typeof(QilIterator));
-            Check(node.Variable.NodeType == QilNodeType.For || node.Variable.NodeType == QilNodeType.Let, node, "Loop variable must be a For or Let iterator");
+            Check(
+                node.Variable.NodeType == QilNodeType.For
+                    || node.Variable.NodeType == QilNodeType.Let,
+                node,
+                "Loop variable must be a For or Let iterator"
+            );
 
             XmlQueryType bodyType = node.Body.XmlType!;
-            XmlQueryCardinality variableCard = node.Variable.NodeType == QilNodeType.Let ? XmlQueryCardinality.One : node.Variable.Binding!.XmlType!.Cardinality;
+            XmlQueryCardinality variableCard =
+                node.Variable.NodeType == QilNodeType.Let
+                    ? XmlQueryCardinality.One
+                    : node.Variable.Binding!.XmlType!.Cardinality;
 
             // Loops do not preserve DocOrderDistinct
             return XmlQueryTypeFactory.PrimeProduct(bodyType, variableCard * bodyType.Cardinality);
@@ -605,7 +633,12 @@ namespace System.Xml.Xsl.Qil
         public static XmlQueryType CheckFilter(QilLoop node)
         {
             CheckClass(node[0], typeof(QilIterator));
-            Check(node.Variable.NodeType == QilNodeType.For || node.Variable.NodeType == QilNodeType.Let, node, "Filter variable must be a For or Let iterator");
+            Check(
+                node.Variable.NodeType == QilNodeType.For
+                    || node.Variable.NodeType == QilNodeType.Let,
+                node,
+                "Filter variable must be a For or Let iterator"
+            );
             CheckXmlType(node.Body, XmlQueryTypeFactory.BooleanX);
 
             // Attempt to restrict filter's type by checking condition
@@ -613,7 +646,10 @@ namespace System.Xml.Xsl.Qil
             if (filterType != null)
                 return filterType;
 
-            return XmlQueryTypeFactory.AtMost(node.Variable.Binding!.XmlType!, node.Variable.Binding.XmlType!.Cardinality);
+            return XmlQueryTypeFactory.AtMost(
+                node.Variable.Binding!.XmlType!,
+                node.Variable.Binding.XmlType!.Cardinality
+            );
         }
 
         #endregion // loops
@@ -655,8 +691,16 @@ namespace System.Xml.Xsl.Qil
         public static XmlQueryType CheckFunction(QilFunction node)
         {
             CheckClassAndNodeType(node[0], typeof(QilList), QilNodeType.FormalParameterList);
-            Check(node[2].NodeType == QilNodeType.False || node[2].NodeType == QilNodeType.True, node, "SideEffects must either be True or False");
-            Check(node.Definition.XmlType!.IsSubtypeOf(node.XmlType!), node, "Function definition's xml type must be a subtype of the function's return type");
+            Check(
+                node[2].NodeType == QilNodeType.False || node[2].NodeType == QilNodeType.True,
+                node,
+                "SideEffects must either be True or False"
+            );
+            Check(
+                node.Definition.XmlType!.IsSubtypeOf(node.XmlType!),
+                node,
+                "Function definition's xml type must be a subtype of the function's return type"
+            );
             return node.XmlType!;
         }
 
@@ -667,10 +711,18 @@ namespace System.Xml.Xsl.Qil
 
             QilList actualArgs = node.Arguments;
             QilList formalArgs = node.Function.Arguments;
-            Check(actualArgs.Count == formalArgs.Count, actualArgs, "Invoke argument count must match function's argument count");
+            Check(
+                actualArgs.Count == formalArgs.Count,
+                actualArgs,
+                "Invoke argument count must match function's argument count"
+            );
 
             for (int i = 0; i < actualArgs.Count; i++)
-                Check(actualArgs[i].XmlType!.IsSubtypeOf(formalArgs[i].XmlType!), actualArgs[i], "Invoke argument must be a subtype of the invoked function's argument");
+                Check(
+                    actualArgs[i].XmlType!.IsSubtypeOf(formalArgs[i].XmlType!),
+                    actualArgs[i],
+                    "Invoke argument must be a subtype of the invoked function's argument"
+                );
 #endif
 
             return node.Function.XmlType!;
@@ -733,7 +785,10 @@ namespace System.Xml.Xsl.Qil
         public static XmlQueryType CheckAncestorOrSelf(QilUnary node)
         {
             CheckXmlType(node.Child, XmlQueryTypeFactory.NodeNotRtf);
-            return XmlQueryTypeFactory.Choice(node.Child.XmlType!, XmlQueryTypeFactory.DocumentOrElementS);
+            return XmlQueryTypeFactory.Choice(
+                node.Child.XmlType!,
+                XmlQueryTypeFactory.DocumentOrElementS
+            );
         }
 
         public static XmlQueryType CheckPreceding(QilUnary node)
@@ -758,7 +813,11 @@ namespace System.Xml.Xsl.Qil
         {
             CheckXmlType(node.Left, XmlQueryTypeFactory.NodeNotRtf);
             CheckXmlType(node.Right, XmlQueryTypeFactory.NodeNotRtf);
-            return XmlQueryTypeFactory.Choice(node.Left.XmlType!, XmlQueryTypeFactory.ContentS, node.Right.XmlType!);
+            return XmlQueryTypeFactory.Choice(
+                node.Left.XmlType!,
+                XmlQueryTypeFactory.ContentS,
+                node.Right.XmlType!
+            );
         }
 
         public static XmlQueryType CheckDeref(QilBinary node)
@@ -945,13 +1004,25 @@ namespace System.Xml.Xsl.Qil
             CheckLiteralValue(node[1], typeof(MethodInfo));
             CheckClassAndNodeType(node[2], typeof(QilList), QilNodeType.ActualParameterList);
 
-            XmlExtensionFunction extFunc = new XmlExtensionFunction(node.Name.LocalName, node.Name.NamespaceUri, node.ClrMethod);
+            XmlExtensionFunction extFunc = new XmlExtensionFunction(
+                node.Name.LocalName,
+                node.Name.NamespaceUri,
+                node.ClrMethod
+            );
             QilList actualArgs = node.Arguments;
-            Check(actualArgs.Count == extFunc.Method!.GetParameters().Length, actualArgs, "InvokeEarlyBound argument count must match function's argument count");
+            Check(
+                actualArgs.Count == extFunc.Method!.GetParameters().Length,
+                actualArgs,
+                "InvokeEarlyBound argument count must match function's argument count"
+            );
 
             for (int i = 0; i < actualArgs.Count; i++)
             {
-                Check(actualArgs[i].XmlType!.IsSubtypeOf(extFunc.GetXmlArgumentType(i)), actualArgs[i], "InvokeEarlyBound argument must be a subtype of the invoked function's argument type");
+                Check(
+                    actualArgs[i].XmlType!.IsSubtypeOf(extFunc.GetXmlArgumentType(i)),
+                    actualArgs[i],
+                    "InvokeEarlyBound argument must be a subtype of the invoked function's argument type"
+                );
             }
 #endif
 
@@ -1000,17 +1071,29 @@ namespace System.Xml.Xsl.Qil
             Check(node is QilLiteral, node, "Node must be instance of QilLiteral");
 
             Type clrType = ((QilLiteral)node).Value!.GetType();
-            Check(clrTypeValue.IsAssignableFrom(clrType), node, $"Literal value must be of type {clrTypeValue.Name}");
+            Check(
+                clrTypeValue.IsAssignableFrom(clrType),
+                node,
+                $"Literal value must be of type {clrTypeValue.Name}"
+            );
         }
 
         [Conditional("DEBUG")]
         private static void CheckClass(QilNode node, Type clrTypeClass)
         {
-            Check(clrTypeClass.IsAssignableFrom(node.GetType()), node, $"Node must be instance of {clrTypeClass.Name}");
+            Check(
+                clrTypeClass.IsAssignableFrom(node.GetType()),
+                node,
+                $"Node must be instance of {clrTypeClass.Name}"
+            );
         }
 
         [Conditional("DEBUG")]
-        private static void CheckClassAndNodeType(QilNode node, Type clrTypeClass, QilNodeType nodeType)
+        private static void CheckClassAndNodeType(
+            QilNode node,
+            Type clrTypeClass,
+            QilNodeType nodeType
+        )
         {
             CheckClass(node, clrTypeClass);
             Check(node.NodeType == nodeType, node, $"Node must have QilNodeType.{nodeType}");
@@ -1019,32 +1102,52 @@ namespace System.Xml.Xsl.Qil
         [Conditional("DEBUG")]
         private static void CheckXmlType(QilNode node, XmlQueryType xmlType)
         {
-            Check(node.XmlType!.IsSubtypeOf(xmlType), node, $"Node's type {node.XmlType} is not a subtype of {xmlType}");
+            Check(
+                node.XmlType!.IsSubtypeOf(xmlType),
+                node,
+                $"Node's type {node.XmlType} is not a subtype of {xmlType}"
+            );
         }
 
         [Conditional("DEBUG")]
         private static void CheckNumericX(QilNode node)
         {
-            Check(node.XmlType!.IsNumeric && node.XmlType.IsSingleton && node.XmlType.IsStrict, node, $"Node's type {node.XmlType} must be a strict singleton numeric type");
+            Check(
+                node.XmlType!.IsNumeric && node.XmlType.IsSingleton && node.XmlType.IsStrict,
+                node,
+                $"Node's type {node.XmlType} must be a strict singleton numeric type"
+            );
         }
 
         [Conditional("DEBUG")]
         private static void CheckNumericXS(QilNode node)
         {
-            Check(node.XmlType!.IsNumeric && node.XmlType.IsStrict, node, $"Node's type {node.XmlType} must be a strict numeric type");
+            Check(
+                node.XmlType!.IsNumeric && node.XmlType.IsStrict,
+                node,
+                $"Node's type {node.XmlType} must be a strict numeric type"
+            );
         }
 
         [Conditional("DEBUG")]
         private static void CheckAtomicX(QilNode node)
         {
-            Check(node.XmlType!.IsAtomicValue && node.XmlType.IsStrict, node, $"Node's type {node.XmlType} must be a strict atomic value type");
+            Check(
+                node.XmlType!.IsAtomicValue && node.XmlType.IsStrict,
+                node,
+                $"Node's type {node.XmlType} must be a strict atomic value type"
+            );
         }
 
         [Conditional("DEBUG")]
         private static void CheckNotDisjoint(QilBinary node)
         {
-            Check(node.Left.XmlType!.IsSubtypeOf(node.Right.XmlType!) || node.Right.XmlType!.IsSubtypeOf(node.Left.XmlType), node,
-                  $"Node must not have arguments with disjoint types {node.Left.XmlType} and {node.Right.XmlType}");
+            Check(
+                node.Left.XmlType!.IsSubtypeOf(node.Right.XmlType!)
+                    || node.Right.XmlType!.IsSubtypeOf(node.Left.XmlType),
+                node,
+                $"Node must not have arguments with disjoint types {node.Left.XmlType} and {node.Right.XmlType}"
+            );
         }
 
         private static XmlQueryType DistinctType(XmlQueryType type)
@@ -1074,7 +1177,10 @@ namespace System.Xml.Xsl.Qil
                 case QilNodeType.IsType:
                     // If testing the type of "variable", then filter type can be restricted
                     if ((object)((QilTargetType)body).Source == (object)variable)
-                        return XmlQueryTypeFactory.AtMost(((QilTargetType)body).TargetType, variable.Binding!.XmlType!.Cardinality);
+                        return XmlQueryTypeFactory.AtMost(
+                            ((QilTargetType)body).TargetType,
+                            variable.Binding!.XmlType!.Cardinality
+                        );
                     break;
 
                 case QilNodeType.And:
@@ -1091,7 +1197,10 @@ namespace System.Xml.Xsl.Qil
                     if (binary.Left.NodeType == QilNodeType.PositionOf)
                     {
                         if ((object)((QilUnary)binary.Left).Child == (object)variable)
-                            return XmlQueryTypeFactory.AtMost(variable.Binding!.XmlType!, XmlQueryCardinality.ZeroOrOne);
+                            return XmlQueryTypeFactory.AtMost(
+                                variable.Binding!.XmlType!,
+                                XmlQueryCardinality.ZeroOrOne
+                            );
                     }
                     break;
             }

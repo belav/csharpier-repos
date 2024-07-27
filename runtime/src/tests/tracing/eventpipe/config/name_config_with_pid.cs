@@ -10,6 +10,7 @@ using System.Threading;
 class NameConfigWithPid
 {
     private const string WaitForInput = "waitforinput";
+
     static int Main(string[] args)
     {
         if (args.Length == 0)
@@ -43,8 +44,12 @@ class NameConfigWithPid
 
             // Use app directory as temp directory
             string tempDir = AppContext.BaseDirectory;
-            string outputPathBaseName = $"eventPipeStream{Thread.CurrentThread.ManagedThreadId}_{(ulong)Stopwatch.GetTimestamp()}";
-            string outputPathPattern = Path.Combine(tempDir, outputPathBaseName + "_{pid}_{pid}.nettrace");
+            string outputPathBaseName =
+                $"eventPipeStream{Thread.CurrentThread.ManagedThreadId}_{(ulong)Stopwatch.GetTimestamp()}";
+            string outputPathPattern = Path.Combine(
+                tempDir,
+                outputPathBaseName + "_{pid}_{pid}.nettrace"
+            );
 
             process.StartInfo.FileName = Process.GetCurrentProcess().MainModule.FileName;
             process.StartInfo.Arguments = TestLibrary.Utilities.IsNativeAot
@@ -55,11 +60,16 @@ class NameConfigWithPid
             process.StartInfo.RedirectStandardError = true;
 
             process.StartInfo.Environment.Add("DOTNET_EnableEventPipe", "1");
-            process.StartInfo.Environment.Add("DOTNET_EventPipeConfig", "Microsoft-Windows-DotNETRuntime:4c14fccbd:4");
+            process.StartInfo.Environment.Add(
+                "DOTNET_EventPipeConfig",
+                "Microsoft-Windows-DotNETRuntime:4c14fccbd:4"
+            );
             process.StartInfo.Environment.Add("DOTNET_EventPipeOutputPath", outputPathPattern);
             process.StartInfo.Environment.Add("CORE_ROOT", coreRoot);
 
-            Console.WriteLine($"Starting process '{process.StartInfo.FileName}' '{process.StartInfo.Arguments}'");
+            Console.WriteLine(
+                $"Starting process '{process.StartInfo.FileName}' '{process.StartInfo.Arguments}'"
+            );
             Console.Out.Flush();
             process.Start();
 
@@ -80,7 +90,9 @@ class NameConfigWithPid
             process.StandardInput.Flush();
             process.WaitForExit();
 
-            Console.WriteLine($"StdErr ReadToEnd from child process '{process.StandardError.ReadToEnd()}'");
+            Console.WriteLine(
+                $"StdErr ReadToEnd from child process '{process.StandardError.ReadToEnd()}'"
+            );
             if (!File.Exists(expectedPath))
             {
                 Console.WriteLine($"{expectedPath} not found");

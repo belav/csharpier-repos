@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void DynamicIndexerAccessExpression_DynamicArgument()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c, dynamic d)
@@ -27,7 +28,8 @@ class C
     public int this[int i] => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: 'c[d]')
   Expression: 
     IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C) (Syntax: 'c')
@@ -38,14 +40,19 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DynamicIndexerAccessExpression_MultipleApplicableSymbols()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c, dynamic d)
@@ -58,7 +65,8 @@ class C
     public int this[long i] => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: 'c[d]')
   Expression: 
     IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C) (Syntax: 'c')
@@ -69,14 +77,19 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DynamicIndexerAccessExpression_MultipleArgumentsAndApplicableSymbols()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c, dynamic d)
@@ -90,7 +103,8 @@ class C
     public int this[long i, char ch] => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: 'c[d, ch]')
   Expression: 
     IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C) (Syntax: 'c')
@@ -102,14 +116,19 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DynamicIndexerAccessExpression_ArgumentNames()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c, dynamic d, dynamic e)
@@ -122,7 +141,8 @@ class C
     public int this[long i, char ch] => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: 'c[i: d, ch: e]')
   Expression: 
     IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C) (Syntax: 'c')
@@ -136,14 +156,19 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DynamicIndexerAccessExpression_ArgumentRefKinds()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c, dynamic d, dynamic e)
@@ -154,7 +179,8 @@ class C
     public int this[int i, ref dynamic ch] => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: 'c[i: d, ch: ref e]')
   Expression: 
     IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C) (Syntax: 'c')
@@ -168,20 +194,26 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
     None
     Ref
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0631: ref and out are not valid in this context
                 //     public int this[int i, ref dynamic ch] => 0;
-                Diagnostic(ErrorCode.ERR_IllegalRefParam, "ref").WithLocation(9, 28)
+                Diagnostic(ErrorCode.ERR_IllegalRefParam, "ref").WithLocation(9, 28),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DynamicIndexerAccessExpression_WithDynamicReceiver()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(dynamic d, int i)
@@ -190,7 +222,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: 'd[i]')
   Expression: 
     IParameterReferenceOperation: d (OperationKind.ParameterReference, Type: dynamic) (Syntax: 'd')
@@ -201,14 +234,19 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DynamicIndexerAccessExpression_WithDynamicMemberReceiver()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(dynamic c, int i)
@@ -217,7 +255,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: 'c.M2[i]')
   Expression: 
     IDynamicMemberReferenceOperation (Member Name: ""M2"", Containing Type: null) (OperationKind.DynamicMemberReference, Type: dynamic) (Syntax: 'c.M2')
@@ -231,14 +270,19 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DynamicIndexerAccessExpression_WithDynamicTypedMemberReceiver()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     dynamic M2 = null;
@@ -249,7 +293,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: 'c.M2[i]')
   Expression: 
     IFieldReferenceOperation: dynamic C.M2 (OperationKind.FieldReference, Type: dynamic) (Syntax: 'c.M2')
@@ -262,14 +307,19 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DynamicIndexerAccessExpression_AllFields()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c, dynamic d)
@@ -282,7 +332,8 @@ class C
     public int this[ref int i, long c] => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic) (Syntax: 'c[ref i, c: d]')
   Expression: 
     IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C) (Syntax: 'c')
@@ -296,23 +347,29 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
     Ref
     None
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0631: ref and out are not valid in this context
                 //     public int this[ref int i, char c] => 0;
                 Diagnostic(ErrorCode.ERR_IllegalRefParam, "ref").WithLocation(10, 21),
                 // CS0631: ref and out are not valid in this context
                 //     public int this[ref int i, long c] => 0;
-                Diagnostic(ErrorCode.ERR_IllegalRefParam, "ref").WithLocation(11, 21)
+                Diagnostic(ErrorCode.ERR_IllegalRefParam, "ref").WithLocation(11, 21),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DynamicIndexerAccessExpression_ErrorBadDynamicMethodArgLambda()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -326,7 +383,8 @@ class C
     public int this[Action a, Action y] => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynamic, IsInvalid) (Syntax: 'c[delegate { }, y]')
   Expression: 
     IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C) (Syntax: 'c')
@@ -340,20 +398,27 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
   ArgumentNames(0)
   ArgumentRefKinds(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1977: Cannot use a lambda expression as an argument to a dynamically dispatched operation without first casting it to a delegate or expression tree type.
                 //         var x = /*<bind>*/c[delegate { }, y]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadDynamicMethodArgLambda, "delegate { }").WithLocation(9, 29)
+                Diagnostic(ErrorCode.ERR_BadDynamicMethodArgLambda, "delegate { }")
+                    .WithLocation(9, 29),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DynamicIndexerAccessExpression_OverloadResolutionFailure()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -367,26 +432,35 @@ class C
     public int this[int i, int j, int k] => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: System.Int32, IsInvalid) (Syntax: 'c[d]')
   Children(2):
       IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C, IsInvalid) (Syntax: 'c')
       IParameterReferenceOperation: d (OperationKind.ParameterReference, Type: dynamic, IsInvalid) (Syntax: 'd')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1501: No overload for method 'this' takes 1 arguments
                 //         var x = /*<bind>*/c[d]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadArgCount, "c[d]").WithArguments("this", "1").WithLocation(8, 27)
+                Diagnostic(ErrorCode.ERR_BadArgCount, "c[d]")
+                    .WithArguments("this", "1")
+                    .WithLocation(8, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void DynamicIndexerAccess_NoControlFlow()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c, dynamic d, dynamic p)
@@ -397,7 +471,8 @@ class C
     public int this[int i] => 0;
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -425,14 +500,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void DynamicIndexerAccess_NullReceiver()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(dynamic d, dynamic p)
@@ -443,7 +523,8 @@ class C
     public static int this[int i] => 0;
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -472,23 +553,33 @@ Block[B2] - Exit
     Statements (0)
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {                
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(9,23): error CS0106: The modifier 'static' is not valid for this item
                 //     public static int this[int i] => 0;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "this").WithArguments("static").WithLocation(9, 23),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "this")
+                    .WithArguments("static")
+                    .WithLocation(9, 23),
                 // file.cs(6,13): error CS0119: 'C' is a type, which is not valid in the given context
                 //         p = C[d];
-                Diagnostic(ErrorCode.ERR_BadSKunknown, "C").WithArguments("C", "type").WithLocation(6, 13)
+                Diagnostic(ErrorCode.ERR_BadSKunknown, "C")
+                    .WithArguments("C", "type")
+                    .WithLocation(6, 13),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void DynamicIndexerAccess_ControlFlowInReceiver()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c1, C c2, dynamic d, dynamic p)
@@ -499,7 +590,8 @@ class C
     public int this[int i] => 0;
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -581,14 +673,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void DynamicIndexerAccess_ControlFlowInArgument()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c, dynamic d1, dynamic d2, dynamic p)
@@ -599,7 +696,8 @@ class C
     public int this[int i] => 0;
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -685,14 +783,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void DynamicIndexerAccess_ControlFlowInReceiverAndArgument()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c1, C c2, dynamic d1, dynamic d2, dynamic p)
@@ -703,7 +806,8 @@ class C
     public int this[int i] => 0;
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -824,14 +928,19 @@ Block[B9] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void DynamicIndexerAccess_ControlFlowInFirstArgument()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c, dynamic d1, dynamic d2, dynamic p, int j)
@@ -842,7 +951,8 @@ class C
     public int this[int i, int j] => 0;
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -929,14 +1039,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void DynamicIndexerAccess_ControlFlowInSecondArgument()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c, dynamic d1, dynamic d2, dynamic p, int j)
@@ -947,7 +1062,8 @@ class C
     public int this[int i, int j] => 0;
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1038,14 +1154,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void DynamicIndexerAccess_ControlFlowInMultipleArguments()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C c, dynamic d1, dynamic d2, dynamic p, int? j1, int j2)
@@ -1056,7 +1177,8 @@ class C
     public int this[int i, int j] => 0;
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1185,14 +1307,19 @@ Block[B9] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void DynamicIndexerAccess_ControlFlowWithDynamicReceiver()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(dynamic d, int? i1, int i2, dynamic p)
@@ -1201,7 +1328,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1293,7 +1421,11 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

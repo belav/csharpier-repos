@@ -17,11 +17,10 @@ namespace System.Net.Http.Headers
 
         public string Value => _value;
 
-        public ICollection<NameValueHeaderValue> Parameters => _parameters ??= new UnvalidatedObjectCollection<NameValueHeaderValue>();
+        public ICollection<NameValueHeaderValue> Parameters =>
+            _parameters ??= new UnvalidatedObjectCollection<NameValueHeaderValue>();
 
-        internal TransferCodingHeaderValue()
-        {
-        }
+        internal TransferCodingHeaderValue() { }
 
         protected TransferCodingHeaderValue(TransferCodingHeaderValue source)
         {
@@ -40,16 +39,26 @@ namespace System.Net.Http.Headers
         public static TransferCodingHeaderValue Parse(string input)
         {
             int index = 0;
-            return (TransferCodingHeaderValue)TransferCodingHeaderParser.SingleValueParser.ParseValue(
-                input, null, ref index);
+            return (TransferCodingHeaderValue)
+                TransferCodingHeaderParser.SingleValueParser.ParseValue(input, null, ref index);
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out TransferCodingHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out TransferCodingHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (TransferCodingHeaderParser.SingleValueParser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                TransferCodingHeaderParser.SingleValueParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (TransferCodingHeaderValue)output!;
                 return true;
@@ -57,8 +66,12 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        internal static int GetTransferCodingLength(string input, int startIndex,
-            Func<TransferCodingHeaderValue> transferCodingCreator, out TransferCodingHeaderValue? parsedValue)
+        internal static int GetTransferCodingLength(
+            string input,
+            int startIndex,
+            Func<TransferCodingHeaderValue> transferCodingCreator,
+            out TransferCodingHeaderValue? parsedValue
+        )
         {
             Debug.Assert(transferCodingCreator != null);
             Debug.Assert(startIndex >= 0);
@@ -90,8 +103,13 @@ namespace System.Net.Http.Headers
                 transferCodingHeader._value = value;
 
                 current++; // skip delimiter.
-                int parameterLength = NameValueHeaderValue.GetNameValueListLength(input, current, ';',
-                    (UnvalidatedObjectCollection<NameValueHeaderValue>)transferCodingHeader.Parameters);
+                int parameterLength = NameValueHeaderValue.GetNameValueListLength(
+                    input,
+                    current,
+                    ';',
+                    (UnvalidatedObjectCollection<NameValueHeaderValue>)
+                        transferCodingHeader.Parameters
+                );
 
                 if (parameterLength == 0)
                 {
@@ -126,14 +144,15 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            return string.Equals(_value, other._value, StringComparison.OrdinalIgnoreCase) &&
-                HeaderUtilities.AreEqualCollections(_parameters, other._parameters);
+            return string.Equals(_value, other._value, StringComparison.OrdinalIgnoreCase)
+                && HeaderUtilities.AreEqualCollections(_parameters, other._parameters);
         }
 
         public override int GetHashCode()
         {
             // The value string is case-insensitive.
-            return StringComparer.OrdinalIgnoreCase.GetHashCode(_value) ^ NameValueHeaderValue.GetHashCode(_parameters);
+            return StringComparer.OrdinalIgnoreCase.GetHashCode(_value)
+                ^ NameValueHeaderValue.GetHashCode(_parameters);
         }
 
         // Implement ICloneable explicitly to allow derived types to "override" the implementation.

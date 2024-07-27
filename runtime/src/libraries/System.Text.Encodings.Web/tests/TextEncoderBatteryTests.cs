@@ -25,10 +25,21 @@ namespace System.Text.Encodings.Web.Tests
                 yield return ("xyz", "x[0079]z");
                 yield return ("bdf", "bdf");
                 yield return ("bdfbdfbdfbdfbdf", "bdfbdfbdfbdfbdf");
-                yield return ("\U0001F600" /* grinning face */, "\U0001F600"); // not escaped since scalar value is even
-                yield return ("\U0001F601" /* grinning face with smiling eyes */, "[1F601]"); // escaped since scalar value is odd
-                yield return ("\U0001F3C0\U0001F3C1\U0001F3C2\U0001F3C3\U0001F3C4" /* various sports emoji */,
-                    "\U0001F3C0[1F3C1]\U0001F3C2[1F3C3]\U0001F3C4");
+                yield return (
+                    "\U0001F600" /* grinning face */
+                    ,
+                    "\U0001F600"
+                ); // not escaped since scalar value is even
+                yield return (
+                    "\U0001F601" /* grinning face with smiling eyes */
+                    ,
+                    "[1F601]"
+                ); // escaped since scalar value is odd
+                yield return (
+                    "\U0001F3C0\U0001F3C1\U0001F3C2\U0001F3C3\U0001F3C4" /* various sports emoji */
+                    ,
+                    "\U0001F3C0[1F3C1]\U0001F3C2[1F3C3]\U0001F3C4"
+                );
                 yield return ("bd\ud800fh", "bd[FFFD]fh"); // standalone high surrogate char
                 yield return ("bd\udffffh", "bd[FFFD]fh"); // standalone low surrogate char
                 yield return ("bd\ue000fh", "bd\ue000fh");
@@ -214,7 +225,9 @@ namespace System.Text.Encodings.Web.Tests
             StringBuilder sb = new StringBuilder(value.Length);
             foreach (char ch in value)
             {
-                sb.Append(char.IsSurrogate(ch) ? FormattableString.Invariant($@"@{(int)ch:X4}") : ch);
+                sb.Append(
+                    char.IsSurrogate(ch) ? FormattableString.Invariant($@"@{(int)ch:X4}") : ch
+                );
             }
             return sb.ToString();
         }
@@ -231,7 +244,14 @@ namespace System.Text.Encodings.Web.Tests
                 }
                 else
                 {
-                    sb.Append((char)ushort.Parse(value.Substring(i + 1, 4), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture));
+                    sb.Append(
+                        (char)
+                            ushort.Parse(
+                                value.Substring(i + 1, 4),
+                                NumberStyles.AllowHexSpecifier,
+                                CultureInfo.InvariantCulture
+                            )
+                    );
                     i += 4;
                 }
             }

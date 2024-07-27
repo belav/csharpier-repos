@@ -20,16 +20,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///         <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
 ///     </para>
 /// </remarks>
-public class StoreKeyConvention :
-    IEntityTypeAddedConvention,
-    IPropertyAnnotationChangedConvention,
-    IForeignKeyOwnershipChangedConvention,
-    IForeignKeyRemovedConvention,
-    IKeyAddedConvention,
-    IKeyRemovedConvention,
-    IEntityTypePrimaryKeyChangedConvention,
-    IEntityTypeAnnotationChangedConvention,
-    IEntityTypeBaseTypeChangedConvention
+public class StoreKeyConvention
+    : IEntityTypeAddedConvention,
+        IPropertyAnnotationChangedConvention,
+        IForeignKeyOwnershipChangedConvention,
+        IForeignKeyRemovedConvention,
+        IKeyAddedConvention,
+        IKeyRemovedConvention,
+        IEntityTypePrimaryKeyChangedConvention,
+        IEntityTypeAnnotationChangedConvention,
+        IEntityTypeBaseTypeChangedConvention
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -77,14 +77,21 @@ public class StoreKeyConvention :
         IConventionKey? newKey = null;
         IConventionProperty? idProperty;
         var entityType = entityTypeBuilder.Metadata;
-        if (entityType.BaseType == null
-            && entityType.IsDocumentRoot()
-            && !entityType.IsKeyless)
+        if (entityType.BaseType == null && entityType.IsDocumentRoot() && !entityType.IsKeyless)
         {
-            idProperty = entityType.FindDeclaredProperty(DefaultIdPropertyName)
-                ?? entityType.GetDeclaredProperties().FirstOrDefault(p => p.GetJsonPropertyName() == IdPropertyJsonName)
-                ?? entityTypeBuilder.Property(typeof(string), DefaultIdPropertyName, setTypeConfigurationSource: false)
-                    ?.ToJsonProperty(IdPropertyJsonName)?.Metadata;
+            idProperty =
+                entityType.FindDeclaredProperty(DefaultIdPropertyName)
+                ?? entityType
+                    .GetDeclaredProperties()
+                    .FirstOrDefault(p => p.GetJsonPropertyName() == IdPropertyJsonName)
+                ?? entityTypeBuilder
+                    .Property(
+                        typeof(string),
+                        DefaultIdPropertyName,
+                        setTypeConfigurationSource: false
+                    )
+                    ?.ToJsonProperty(IdPropertyJsonName)
+                    ?.Metadata;
 
             if (idProperty != null)
             {
@@ -96,7 +103,9 @@ public class StoreKeyConvention :
                     }
                     else
                     {
-                        idProperty.Builder.HasValueGeneratorFactory(typeof(IdValueGeneratorFactory));
+                        idProperty.Builder.HasValueGeneratorFactory(
+                            typeof(IdValueGeneratorFactory)
+                        );
                     }
                 }
 
@@ -104,8 +113,7 @@ public class StoreKeyConvention :
                 if (partitionKey != null)
                 {
                     var partitionKeyProperty = entityType.FindProperty(partitionKey);
-                    if (partitionKeyProperty == null
-                        || partitionKeyProperty == idProperty)
+                    if (partitionKeyProperty == null || partitionKeyProperty == idProperty)
                     {
                         newKey = entityTypeBuilder.HasKey(new[] { idProperty })?.Metadata;
                     }
@@ -113,7 +121,9 @@ public class StoreKeyConvention :
                     {
                         if (entityType.FindKey(new[] { partitionKeyProperty, idProperty }) == null)
                         {
-                            newKey = entityTypeBuilder.HasKey(new[] { idProperty, partitionKeyProperty })?.Metadata;
+                            newKey = entityTypeBuilder
+                                .HasKey(new[] { idProperty, partitionKeyProperty })
+                                ?.Metadata;
                         }
 
                         entityTypeBuilder.HasNoKey(new[] { idProperty });
@@ -130,8 +140,7 @@ public class StoreKeyConvention :
             idProperty = entityType.FindDeclaredProperty(DefaultIdPropertyName);
         }
 
-        if (idProperty != null
-            && idProperty.GetContainingKeys().Count() > (newKey == null ? 0 : 1))
+        if (idProperty != null && idProperty.GetContainingKeys().Count() > (newKey == null ? 0 : 1))
         {
             foreach (var key in idProperty.GetContainingKeys().ToList())
             {
@@ -146,8 +155,7 @@ public class StoreKeyConvention :
     private static void ProcessJObjectProperty(IConventionEntityTypeBuilder entityTypeBuilder)
     {
         var entityType = entityTypeBuilder.Metadata;
-        if (entityType.BaseType == null
-            && !entityType.IsKeyless)
+        if (entityType.BaseType == null && !entityType.IsKeyless)
         {
             var jObjectProperty = entityTypeBuilder.Property(typeof(JObject), JObjectPropertyName);
             jObjectProperty?.ToJsonProperty("");
@@ -166,7 +174,8 @@ public class StoreKeyConvention :
     /// <inheritdoc />
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         ProcessIdProperty(entityTypeBuilder);
         ProcessJObjectProperty(entityTypeBuilder);
@@ -175,17 +184,17 @@ public class StoreKeyConvention :
     /// <inheritdoc />
     public virtual void ProcessForeignKeyOwnershipChanged(
         IConventionForeignKeyBuilder relationshipBuilder,
-        IConventionContext<bool?> context)
-        => ProcessIdProperty(relationshipBuilder.Metadata.DeclaringEntityType.Builder);
+        IConventionContext<bool?> context
+    ) => ProcessIdProperty(relationshipBuilder.Metadata.DeclaringEntityType.Builder);
 
     /// <inheritdoc />
     public virtual void ProcessForeignKeyRemoved(
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionForeignKey foreignKey,
-        IConventionContext<IConventionForeignKey> context)
+        IConventionContext<IConventionForeignKey> context
+    )
     {
-        if (entityTypeBuilder.Metadata.IsInModel
-            && foreignKey.IsOwnership)
+        if (entityTypeBuilder.Metadata.IsInModel && foreignKey.IsOwnership)
         {
             ProcessIdProperty(foreignKey.DeclaringEntityType.Builder);
         }
@@ -194,7 +203,8 @@ public class StoreKeyConvention :
     /// <inheritdoc />
     public virtual void ProcessKeyAdded(
         IConventionKeyBuilder keyBuilder,
-        IConventionContext<IConventionKeyBuilder> context)
+        IConventionContext<IConventionKeyBuilder> context
+    )
     {
         var entityTypeBuilder = keyBuilder.Metadata.DeclaringEntityType.Builder;
         if (entityTypeBuilder.Metadata.GetKeys().Count() == 1)
@@ -208,7 +218,8 @@ public class StoreKeyConvention :
     public virtual void ProcessKeyRemoved(
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionKey key,
-        IConventionContext<IConventionKey> context)
+        IConventionContext<IConventionKey> context
+    )
     {
         if (!entityTypeBuilder.Metadata.IsInModel)
         {
@@ -227,10 +238,21 @@ public class StoreKeyConvention :
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionKey? newPrimaryKey,
         IConventionKey? previousPrimaryKey,
-        IConventionContext<IConventionKey> context)
+        IConventionContext<IConventionKey> context
+    )
     {
-        if ((newPrimaryKey != null && newPrimaryKey.Properties.Any(p => p.GetJsonPropertyName() == IdPropertyJsonName))
-            || (previousPrimaryKey != null && previousPrimaryKey.Properties.Any(p => p.GetJsonPropertyName() == IdPropertyJsonName)))
+        if (
+            (
+                newPrimaryKey != null
+                && newPrimaryKey.Properties.Any(p => p.GetJsonPropertyName() == IdPropertyJsonName)
+            )
+            || (
+                previousPrimaryKey != null
+                && previousPrimaryKey.Properties.Any(p =>
+                    p.GetJsonPropertyName() == IdPropertyJsonName
+                )
+            )
+        )
         {
             ProcessIdProperty(entityTypeBuilder);
         }
@@ -241,7 +263,8 @@ public class StoreKeyConvention :
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionEntityType? newBaseType,
         IConventionEntityType? oldBaseType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
         if (entityTypeBuilder.Metadata.BaseType == newBaseType)
         {
@@ -256,11 +279,13 @@ public class StoreKeyConvention :
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
-        if (name == CosmosAnnotationNames.ContainerName
-            && (annotation?.Value == null
-                || oldAnnotation?.Value == null))
+        if (
+            name == CosmosAnnotationNames.ContainerName
+            && (annotation?.Value == null || oldAnnotation?.Value == null)
+        )
         {
             ProcessIdProperty(entityTypeBuilder);
         }
@@ -289,11 +314,14 @@ public class StoreKeyConvention :
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
-        if (name == CosmosAnnotationNames.PropertyName
+        if (
+            name == CosmosAnnotationNames.PropertyName
             && (string?)annotation?.Value == IdPropertyJsonName
-            && propertyBuilder.Metadata.Name != DefaultIdPropertyName)
+            && propertyBuilder.Metadata.Name != DefaultIdPropertyName
+        )
         {
             var declaringType = propertyBuilder.Metadata.DeclaringType;
 

@@ -9,7 +9,8 @@ namespace System.ServiceModel.Channels
 
     public interface IChannelFactory : ICommunicationObject
     {
-        T GetProperty<T>() where T : class;
+        T GetProperty<T>()
+            where T : class;
     }
 
     public interface IChannelFactory<TChannel> : IChannelFactory

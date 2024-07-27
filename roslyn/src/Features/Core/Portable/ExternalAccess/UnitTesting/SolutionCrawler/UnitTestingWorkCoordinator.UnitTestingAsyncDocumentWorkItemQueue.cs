@@ -14,24 +14,36 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
     {
         internal partial class UnitTestingWorkCoordinator
         {
-            private class UnitTestingAsyncDocumentWorkItemQueue(UnitTestingSolutionCrawlerProgressReporter progressReporter) : UnitTestingAsyncWorkItemQueue<DocumentId>(progressReporter)
+            private class UnitTestingAsyncDocumentWorkItemQueue(
+                UnitTestingSolutionCrawlerProgressReporter progressReporter
+            ) : UnitTestingAsyncWorkItemQueue<DocumentId>(progressReporter)
             {
-                private readonly Dictionary<ProjectId, Dictionary<DocumentId, UnitTestingWorkItem>> _documentWorkQueue = new();
+                private readonly Dictionary<
+                    ProjectId,
+                    Dictionary<DocumentId, UnitTestingWorkItem>
+                > _documentWorkQueue = new();
 
                 protected override int WorkItemCount_NoLock => _documentWorkQueue.Count;
 
-                protected override bool TryTake_NoLock(DocumentId key, out UnitTestingWorkItem workInfo)
+                protected override bool TryTake_NoLock(
+                    DocumentId key,
+                    out UnitTestingWorkItem workInfo
+                )
                 {
                     workInfo = default;
-                    if (_documentWorkQueue.TryGetValue(key.ProjectId, out var documentMap) &&
-                        documentMap.TryGetValue(key, out workInfo))
+                    if (
+                        _documentWorkQueue.TryGetValue(key.ProjectId, out var documentMap)
+                        && documentMap.TryGetValue(key, out workInfo)
+                    )
                     {
                         documentMap.Remove(key);
 
                         if (documentMap.Count == 0)
                         {
                             _documentWorkQueue.Remove(key.ProjectId);
-                            SharedPools.BigDefault<Dictionary<DocumentId, UnitTestingWorkItem>>().ClearAndFree(documentMap);
+                            SharedPools
+                                .BigDefault<Dictionary<DocumentId, UnitTestingWorkItem>>()
+                                .ClearAndFree(documentMap);
                         }
 
                         return true;
@@ -46,7 +58,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     ProjectDependencyGraph dependencyGraph,
                     IDiagnosticAnalyzerService? service,
 #endif
-                    out UnitTestingWorkItem workItem)
+                    out UnitTestingWorkItem workItem
+                )
                 {
                     // there must be at least one item in the map when this is called unless host is shutting down.
                     if (_documentWorkQueue.Count == 0)
@@ -60,7 +73,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         , dependencyGraph
                         , service
 #endif
-                        );
+                    );
                     if (TryTake_NoLock(documentId, out workItem))
                     {
                         return true;
@@ -69,13 +82,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     throw ExceptionUtilities.Unreachable();
                 }
 
-                private DocumentId GetBestDocumentId_NoLock(
-                    ProjectId? preferableProjectId
+                private DocumentId GetBestDocumentId_NoLock(ProjectId? preferableProjectId
 #if false // Not used in unit testing crawling
                     , ProjectDependencyGraph dependencyGraph
                     , IDiagnosticAnalyzerService? analyzerService
 #endif
-                    )
+                )
                 {
                     var projectId = GetBestProjectId_NoLock(
                         _documentWorkQueue,
@@ -84,7 +96,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         , dependencyGraph
                         , analyzerService
 #endif
-                        );
+                    );
 
                     var documentMap = _documentWorkQueue[projectId];
 
@@ -118,21 +130,31 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     var key = item.DocumentId;
 
                     // now document work
-                    if (_documentWorkQueue.TryGetValue(key.ProjectId, out var documentMap) &&
-                        documentMap.TryGetValue(key, out var existingWorkItem))
+                    if (
+                        _documentWorkQueue.TryGetValue(key.ProjectId, out var documentMap)
+                        && documentMap.TryGetValue(key, out var existingWorkItem)
+                    )
                     {
                         // TODO: should I care about language when replace it?
                         Debug.Assert(existingWorkItem.Language == item.Language);
 
                         // replace it
-                        documentMap[key] = existingWorkItem.With(item.InvocationReasons, item.ActiveMember, item.SpecificAnalyzers, item.IsRetry, item.AsyncToken);
+                        documentMap[key] = existingWorkItem.With(
+                            item.InvocationReasons,
+                            item.ActiveMember,
+                            item.SpecificAnalyzers,
+                            item.IsRetry,
+                            item.AsyncToken
+                        );
                         return false;
                     }
 
                     // add document map if it is not already there
                     if (documentMap == null)
                     {
-                        documentMap = SharedPools.BigDefault<Dictionary<DocumentId, UnitTestingWorkItem>>().AllocateAndClear();
+                        documentMap = SharedPools
+                            .BigDefault<Dictionary<DocumentId, UnitTestingWorkItem>>()
+                            .AllocateAndClear();
                         _documentWorkQueue.Add(key.ProjectId, documentMap);
 
                         if (_documentWorkQueue.Count == 1)
@@ -157,7 +179,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             workItem.AsyncToken.Dispose();
                         }
 
-                        SharedPools.BigDefault<Dictionary<DocumentId, UnitTestingWorkItem>>().ClearAndFree(map);
+                        SharedPools
+                            .BigDefault<Dictionary<DocumentId, UnitTestingWorkItem>>()
+                            .ClearAndFree(map);
                     }
 
                     _documentWorkQueue.Clear();

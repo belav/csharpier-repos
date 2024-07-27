@@ -12,15 +12,15 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
-public class ServerInteropTestDefaultExceptionsBehavior : ServerTestBase<BasicTestAppServerSiteFixture<ServerStartup>>
+public class ServerInteropTestDefaultExceptionsBehavior
+    : ServerTestBase<BasicTestAppServerSiteFixture<ServerStartup>>
 {
     public ServerInteropTestDefaultExceptionsBehavior(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -59,7 +59,13 @@ public class ServerInteropTestDefaultExceptionsBehavior : ServerTestBase<BasicTe
         }
 
         string GetExpectedMessage(string method) =>
-            "\"There was an exception invoking '" + method + "' on assembly 'BasicTestApp'. For more details turn on " +
-            "detailed exceptions in '" + typeof(CircuitOptions).Name + "." + nameof(CircuitOptions.DetailedErrors) + "'\"";
+            "\"There was an exception invoking '"
+            + method
+            + "' on assembly 'BasicTestApp'. For more details turn on "
+            + "detailed exceptions in '"
+            + typeof(CircuitOptions).Name
+            + "."
+            + nameof(CircuitOptions.DetailedErrors)
+            + "'\"";
     }
 }

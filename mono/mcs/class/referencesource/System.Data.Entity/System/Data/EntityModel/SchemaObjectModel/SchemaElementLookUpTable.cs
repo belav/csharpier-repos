@@ -19,34 +19,29 @@ namespace System.Data.EntityModel.SchemaObjectModel
     /// Summary description for SchemaElementLookUpTable.
     /// </summary>
     internal sealed class SchemaElementLookUpTable<T> : IEnumerable<T>, ISchemaElementLookUpTable<T>
-    where T : SchemaElement
+        where T : SchemaElement
     {
         #region Instance Fields
-        private Dictionary<string,T> _keyToType = null;
+        private Dictionary<string, T> _keyToType = null;
         private List<string> _keysInDefOrder = new List<string>();
         #endregion
 
         #region Public Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        public SchemaElementLookUpTable()
-        {
-        }
+        public SchemaElementLookUpTable() { }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public int Count
         {
-            get
-            {
-                return KeyToType.Count;
-            }
+            get { return KeyToType.Count; }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -56,7 +51,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -72,46 +67,45 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             return null;
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public T this[string key]
         {
-            get
-            {
-                return KeyToType[KeyFromName(key)];
-            }
+            get { return KeyToType[KeyFromName(key)]; }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public T GetElementAt(int index)
         {
-                return KeyToType[_keysInDefOrder[index]];
+            return KeyToType[_keysInDefOrder[index]];
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return new SchemaElementLookUpTableEnumerator<T,T>(KeyToType,_keysInDefOrder);
+            return new SchemaElementLookUpTableEnumerator<T, T>(KeyToType, _keysInDefOrder);
         }
+
         IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return new SchemaElementLookUpTableEnumerator<T,T>(KeyToType,_keysInDefOrder);
+            return new SchemaElementLookUpTableEnumerator<T, T>(KeyToType, _keysInDefOrder);
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public IEnumerator<S> GetFilteredEnumerator<S>()
-        where S : T
+            where S : T
         {
-            return new SchemaElementLookUpTableEnumerator<S,T>(KeyToType,_keysInDefOrder);
+            return new SchemaElementLookUpTableEnumerator<S, T>(KeyToType, _keysInDefOrder);
         }
 
         /// <summary>
@@ -135,13 +129,17 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 return AddErrorKind.DuplicateNameError;
             }
 
-            KeyToType.Add(key,type);
+            KeyToType.Add(key, type);
             _keysInDefOrder.Add(key);
 
             return AddErrorKind.Succeeded;
         }
 
-        public void Add(T type, bool doNotAddErrorForEmptyName, Func<object, string> duplicateKeyErrorFormat)
+        public void Add(
+            T type,
+            bool doNotAddErrorForEmptyName,
+            Func<object, string> duplicateKeyErrorFormat
+        )
         {
             Debug.Assert(type != null, "type parameter is null");
             Debug.Assert(null != duplicateKeyErrorFormat, "duplicateKeyErrorFormat cannot be null");
@@ -152,15 +150,21 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 if (!doNotAddErrorForEmptyName)
                 {
-                    type.AddError(ErrorCode.InvalidName, EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.MissingName);
+                    type.AddError(
+                        ErrorCode.InvalidName,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.MissingName
+                    );
                 }
                 return;
             }
             else if (error == AddErrorKind.DuplicateNameError)
             {
-                type.AddError(ErrorCode.AlreadyDefined, EdmSchemaErrorSeverity.Error,
-                        duplicateKeyErrorFormat(type.FQName));
+                type.AddError(
+                    ErrorCode.AlreadyDefined,
+                    EdmSchemaErrorSeverity.Error,
+                    duplicateKeyErrorFormat(type.FQName)
+                );
             }
             else
             {
@@ -175,7 +179,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region Private Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
@@ -185,13 +189,16 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="unnormalizedKey"></param>
         /// <returns></returns>
         private static string KeyFromName(string unnormalizedKey)
         {
-            Debug.Assert(!String.IsNullOrEmpty(unnormalizedKey), "unnormalizedKey parameter is null or empty");
+            Debug.Assert(
+                !String.IsNullOrEmpty(unnormalizedKey),
+                "unnormalizedKey parameter is null or empty"
+            );
 
             return unnormalizedKey;
         }
@@ -199,15 +206,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region Private Properties
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        private Dictionary<string,T> KeyToType
+        private Dictionary<string, T> KeyToType
         {
             get
             {
-                if ( _keyToType == null )
+                if (_keyToType == null)
                 {
-                    _keyToType = new Dictionary<string,T>(StringComparer.Ordinal);
+                    _keyToType = new Dictionary<string, T>(StringComparer.Ordinal);
                 }
                 return _keyToType;
             }

@@ -9,7 +9,8 @@ namespace System.Security.Cryptography
     public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
     {
         [SupportedOSPlatform("windows")]
-        public ECDiffieHellmanCng() : this(521) { }
+        public ECDiffieHellmanCng()
+            : this(521) { }
 
         [SupportedOSPlatform("windows")]
         public ECDiffieHellmanCng(int keySize)
@@ -34,10 +35,7 @@ namespace System.Security.Cryptography
 
         public override int KeySize
         {
-            get
-            {
-                return base.KeySize;
-            }
+            get { return base.KeySize; }
             set
             {
                 if (KeySize == value)
@@ -73,19 +71,25 @@ namespace System.Security.Cryptography
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm,
             byte[]? secretPrepend,
-            byte[]? secretAppend)
+            byte[]? secretAppend
+        )
         {
             ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
 
-            using (SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(otherPartyPublicKey))
+            using (
+                SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(
+                    otherPartyPublicKey
+                )
+            )
             {
                 return Interop.NCrypt.DeriveKeyMaterialHash(
                     secretAgreement,
                     hashAlgorithm.Name,
                     secretPrepend,
                     secretAppend,
-                    Interop.NCrypt.SecretAgreementFlags.None);
+                    Interop.NCrypt.SecretAgreementFlags.None
+                );
             }
         }
 
@@ -94,16 +98,22 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             byte[]? hmacKey,
             byte[]? secretPrepend,
-            byte[]? secretAppend)
+            byte[]? secretAppend
+        )
         {
             ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
 
-            using (SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(otherPartyPublicKey))
+            using (
+                SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(
+                    otherPartyPublicKey
+                )
+            )
             {
-                Interop.NCrypt.SecretAgreementFlags flags = hmacKey == null ?
-                    Interop.NCrypt.SecretAgreementFlags.UseSecretAsHmacKey :
-                    Interop.NCrypt.SecretAgreementFlags.None;
+                Interop.NCrypt.SecretAgreementFlags flags =
+                    hmacKey == null
+                        ? Interop.NCrypt.SecretAgreementFlags.UseSecretAsHmacKey
+                        : Interop.NCrypt.SecretAgreementFlags.None;
 
                 return Interop.NCrypt.DeriveKeyMaterialHmac(
                     secretAgreement,
@@ -111,36 +121,53 @@ namespace System.Security.Cryptography
                     hmacKey,
                     secretPrepend,
                     secretAppend,
-                    flags);
+                    flags
+                );
             }
         }
 
-        public override byte[] DeriveKeyTls(ECDiffieHellmanPublicKey otherPartyPublicKey, byte[] prfLabel, byte[] prfSeed)
+        public override byte[] DeriveKeyTls(
+            ECDiffieHellmanPublicKey otherPartyPublicKey,
+            byte[] prfLabel,
+            byte[] prfSeed
+        )
         {
             ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
             ArgumentNullException.ThrowIfNull(prfLabel);
             ArgumentNullException.ThrowIfNull(prfSeed);
 
-            using (SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(otherPartyPublicKey))
+            using (
+                SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(
+                    otherPartyPublicKey
+                )
+            )
             {
                 return Interop.NCrypt.DeriveKeyMaterialTls(
                     secretAgreement,
                     prfLabel,
                     prfSeed,
-                    Interop.NCrypt.SecretAgreementFlags.None);
+                    Interop.NCrypt.SecretAgreementFlags.None
+                );
             }
         }
 
         /// <inheritdoc />
-        public override byte[] DeriveRawSecretAgreement(ECDiffieHellmanPublicKey otherPartyPublicKey)
+        public override byte[] DeriveRawSecretAgreement(
+            ECDiffieHellmanPublicKey otherPartyPublicKey
+        )
         {
             ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
 
-            using (SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(otherPartyPublicKey))
+            using (
+                SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(
+                    otherPartyPublicKey
+                )
+            )
             {
                 return Interop.NCrypt.DeriveKeyMaterialTruncate(
                     secretAgreement,
-                    Interop.NCrypt.SecretAgreementFlags.None);
+                    Interop.NCrypt.SecretAgreementFlags.None
+                );
             }
         }
     }

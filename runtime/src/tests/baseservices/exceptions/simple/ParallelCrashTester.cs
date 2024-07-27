@@ -32,13 +32,18 @@ public class ParallelCrashTester
         Console.WriteLine($"Running ParallelCrash test({arg})");
         Process testProcess = new Process();
 
-        testProcess.StartInfo.FileName = Path.Combine(Environment.GetEnvironmentVariable("CORE_ROOT"), "corerun");
+        testProcess.StartInfo.FileName = Path.Combine(
+            Environment.GetEnvironmentVariable("CORE_ROOT"),
+            "corerun"
+        );
         testProcess.StartInfo.Arguments = $"ParallelCrash.dll {arg}";
         testProcess.StartInfo.UseShellExecute = false;
         testProcess.Start();
         testProcess.WaitForExit();
 
-        int expectedExitCode = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? -2146232797 : 128 + 6);
+        int expectedExitCode = (
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? -2146232797 : 128 + 6
+        );
         if (testProcess.ExitCode != expectedExitCode)
         {
             throw new Exception($"Exit code = {testProcess.ExitCode}, expected {expectedExitCode}");

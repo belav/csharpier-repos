@@ -17,7 +17,7 @@ internal static class ManagedAlgorithmHelpers
         typeof(HMACSHA1),
         typeof(HMACSHA256),
         typeof(HMACSHA384),
-        typeof(HMACSHA512)
+        typeof(HMACSHA512),
     };
 
     // Any changes to this method should also be be reflected in FriendlyNameToType.
@@ -34,9 +34,19 @@ internal static class ManagedAlgorithmHelpers
     }
 
     // Any changes to this method should also be be reflected in TypeToFriendlyName.
-    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-    [UnconditionalSuppressMessage("Trimmer", "IL2075", Justification = "Unknown type is checked for whether it has a public parameterless constructor. Handle trimmed types by providing a useful error message.")]
-    [UnconditionalSuppressMessage("Trimmer", "IL2073", Justification = "Unknown type is checked for whether it has a public parameterless constructor. Handle trimmed types by providing a useful error message.")]
+    [return: DynamicallyAccessedMembers(
+        DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+    )]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2075",
+        Justification = "Unknown type is checked for whether it has a public parameterless constructor. Handle trimmed types by providing a useful error message."
+    )]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2073",
+        Justification = "Unknown type is checked for whether it has a public parameterless constructor. Handle trimmed types by providing a useful error message."
+    )]
     public static Type FriendlyNameToType(string typeName)
     {
         foreach (var knownType in KnownAlgorithmTypes)
@@ -58,7 +68,9 @@ internal static class ManagedAlgorithmHelpers
         // All other types are created using Activator.CreateInstance. Validate it has a valid constructor.
         if (type.GetConstructor(Type.EmptyTypes) == null)
         {
-            throw new InvalidOperationException($"Algorithm type {type} doesn't have a public parameterless constructor. If the app is published with trimming then the constructor may have been trimmed. Ensure the type's assembly is excluded from trimming.");
+            throw new InvalidOperationException(
+                $"Algorithm type {type} doesn't have a public parameterless constructor. If the app is published with trimming then the constructor may have been trimmed. Ensure the type's assembly is excluded from trimming."
+            );
         }
 
         return type;

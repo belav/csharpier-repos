@@ -20,14 +20,21 @@ namespace System.IO.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void SettingAttributes_Unix_ReadOnly()
         {
-            if (!CanBeReadOnly) return;
+            if (!CanBeReadOnly)
+                return;
             string path = CreateItem();
             AssertSettingAttributes(path, FileAttributes.ReadOnly);
         }
 
         [Theory]
         [InlineData(FileAttributes.Hidden)]
-        [PlatformSpecific(TestPlatforms.OSX | TestPlatforms.FreeBSD | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [PlatformSpecific(
+            TestPlatforms.OSX
+                | TestPlatforms.FreeBSD
+                | TestPlatforms.iOS
+                | TestPlatforms.tvOS
+                | TestPlatforms.MacCatalyst
+        )]
         public void SettingAttributes_OSXAndFreeBSD(FileAttributes attributes)
         {
             string path = CreateItem();
@@ -53,7 +60,8 @@ namespace System.IO.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void SettingAttributes_Windows_ReadOnly(FileAttributes attributes)
         {
-            if (!CanBeReadOnly) return;
+            if (!CanBeReadOnly)
+                return;
             string path = CreateItem();
             AssertSettingAttributes(path, attributes);
         }
@@ -78,9 +86,21 @@ namespace System.IO.Tests
             AssertSettingInvalidAttributes(path, attributes);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.FileCreateCaseSensitive))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.FileCreateCaseSensitive)
+        )]
         [InlineData(FileAttributes.Hidden)]
-        [PlatformSpecific(TestPlatforms.AnyUnix & ~(TestPlatforms.OSX | TestPlatforms.FreeBSD | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst))]
+        [PlatformSpecific(
+            TestPlatforms.AnyUnix
+                & ~(
+                    TestPlatforms.OSX
+                    | TestPlatforms.FreeBSD
+                    | TestPlatforms.iOS
+                    | TestPlatforms.tvOS
+                    | TestPlatforms.MacCatalyst
+                )
+        )]
         public void SettingInvalidAttributes_UnixExceptOSXAndFreeBSD(FileAttributes attributes)
         {
             string path = CreateItem();
@@ -106,9 +126,7 @@ namespace System.IO.Tests
             Assert.Equal(FileAttributes.Normal, GetAttributes(path));
         }
 
-        [Theory,
-            InlineData(":bar"),
-            InlineData(":bar:$DATA")]
+        [Theory, InlineData(":bar"), InlineData(":bar:$DATA")]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GettingAndSettingAttributes_AlternateDataStream_Windows(string streamName)
         {

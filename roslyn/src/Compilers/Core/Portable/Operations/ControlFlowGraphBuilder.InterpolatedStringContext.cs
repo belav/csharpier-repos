@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             public readonly int StartingStackDepth;
             public readonly bool HasReceiver;
 
-            public InterpolatedStringHandlerArgumentsContext(ImmutableArray<IInterpolatedStringHandlerCreationOperation> applicableCreationOperations, int startingStackDepth, bool hasReceiver)
+            public InterpolatedStringHandlerArgumentsContext(
+                ImmutableArray<IInterpolatedStringHandlerCreationOperation> applicableCreationOperations,
+                int startingStackDepth,
+                bool hasReceiver
+            )
             {
                 ApplicableCreationOperations = applicableCreationOperations;
                 HasReceiver = hasReceiver;
@@ -33,7 +37,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             public readonly int HandlerPlaceholder;
             public readonly int OutPlaceholder;
 
-            public InterpolatedStringHandlerCreationContext(IInterpolatedStringHandlerCreationOperation applicableCreationOperation, int maximumStackDepth, int handlerPlaceholder, int outParameterPlaceholder)
+            public InterpolatedStringHandlerCreationContext(
+                IInterpolatedStringHandlerCreationOperation applicableCreationOperation,
+                int maximumStackDepth,
+                int handlerPlaceholder,
+                int outParameterPlaceholder
+            )
             {
                 ApplicableCreationOperation = applicableCreationOperation;
                 MaximumStackDepth = maximumStackDepth;
@@ -44,10 +53,20 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
         [Conditional("DEBUG")]
         [MemberNotNull(nameof(_currentInterpolatedStringHandlerCreationContext))]
-        private void AssertContainingContextIsForThisCreation(IOperation placeholderOperation, bool assertArgumentContext)
+        private void AssertContainingContextIsForThisCreation(
+            IOperation placeholderOperation,
+            bool assertArgumentContext
+        )
         {
             Debug.Assert(_currentInterpolatedStringHandlerCreationContext != null);
-            Debug.Assert(placeholderOperation is IInstanceReferenceOperation { ReferenceKind: InstanceReferenceKind.InterpolatedStringHandler } or IInterpolatedStringHandlerArgumentPlaceholderOperation);
+            Debug.Assert(
+                placeholderOperation
+                    is IInstanceReferenceOperation
+                        {
+                            ReferenceKind: InstanceReferenceKind.InterpolatedStringHandler
+                        }
+                        or IInterpolatedStringHandlerArgumentPlaceholderOperation
+            );
 
             IOperation? operation = placeholderOperation.Parent;
             while (operation is not (null or IInterpolatedStringHandlerCreationOperation))
@@ -56,12 +75,19 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             }
 
             Debug.Assert(operation != null);
-            Debug.Assert(_currentInterpolatedStringHandlerCreationContext.ApplicableCreationOperation == operation);
+            Debug.Assert(
+                _currentInterpolatedStringHandlerCreationContext.ApplicableCreationOperation
+                    == operation
+            );
 
             if (assertArgumentContext)
             {
                 Debug.Assert(_currentInterpolatedStringHandlerArgumentContext != null);
-                Debug.Assert(_currentInterpolatedStringHandlerArgumentContext.ApplicableCreationOperations.Contains((IInterpolatedStringHandlerCreationOperation)operation));
+                Debug.Assert(
+                    _currentInterpolatedStringHandlerArgumentContext.ApplicableCreationOperations.Contains(
+                        (IInterpolatedStringHandlerCreationOperation)operation
+                    )
+                );
             }
         }
     }

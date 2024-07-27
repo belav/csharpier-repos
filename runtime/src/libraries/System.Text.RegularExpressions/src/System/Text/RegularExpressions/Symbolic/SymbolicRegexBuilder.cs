@@ -16,7 +16,8 @@ namespace System.Text.RegularExpressions.Symbolic
     /// TSet is the type of the set of elements.
     /// Used to convert .NET regexes to symbolic regexes.
     /// </summary>
-    internal sealed class SymbolicRegexBuilder<TSet> where TSet : IComparable<TSet>, IEquatable<TSet>
+    internal sealed class SymbolicRegexBuilder<TSet>
+        where TSet : IComparable<TSet>, IEquatable<TSet>
     {
         internal readonly CharSetSolver _charSetSolver;
         internal readonly ISolver<TSet> _solver;
@@ -27,31 +28,64 @@ namespace System.Text.RegularExpressions.Symbolic
         internal readonly SymbolicRegexNode<TSet> _anyStarLazy;
 
         private SymbolicRegexNode<TSet>? _epsilon;
-        internal SymbolicRegexNode<TSet> Epsilon => _epsilon ??= SymbolicRegexNode<TSet>.CreateEpsilon(this);
+        internal SymbolicRegexNode<TSet> Epsilon =>
+            _epsilon ??= SymbolicRegexNode<TSet>.CreateEpsilon(this);
 
         private SymbolicRegexNode<TSet>? _beginningAnchor;
-        internal SymbolicRegexNode<TSet> BeginningAnchor => _beginningAnchor ??= SymbolicRegexNode<TSet>.CreateAnchor(this, SymbolicRegexNodeKind.BeginningAnchor);
+        internal SymbolicRegexNode<TSet> BeginningAnchor =>
+            _beginningAnchor ??= SymbolicRegexNode<TSet>.CreateAnchor(
+                this,
+                SymbolicRegexNodeKind.BeginningAnchor
+            );
 
         private SymbolicRegexNode<TSet>? _endAnchor;
-        internal SymbolicRegexNode<TSet> EndAnchor => _endAnchor ??= SymbolicRegexNode<TSet>.CreateAnchor(this, SymbolicRegexNodeKind.EndAnchor);
+        internal SymbolicRegexNode<TSet> EndAnchor =>
+            _endAnchor ??= SymbolicRegexNode<TSet>.CreateAnchor(
+                this,
+                SymbolicRegexNodeKind.EndAnchor
+            );
 
         private SymbolicRegexNode<TSet>? _endAnchorZ;
-        internal SymbolicRegexNode<TSet> EndAnchorZ => _endAnchorZ ??= SymbolicRegexNode<TSet>.CreateAnchor(this, SymbolicRegexNodeKind.EndAnchorZ);
+        internal SymbolicRegexNode<TSet> EndAnchorZ =>
+            _endAnchorZ ??= SymbolicRegexNode<TSet>.CreateAnchor(
+                this,
+                SymbolicRegexNodeKind.EndAnchorZ
+            );
 
         private SymbolicRegexNode<TSet>? _endAnchorZReverse;
-        internal SymbolicRegexNode<TSet> EndAnchorZReverse => _endAnchorZReverse ??= SymbolicRegexNode<TSet>.CreateAnchor(this, SymbolicRegexNodeKind.EndAnchorZReverse);
+        internal SymbolicRegexNode<TSet> EndAnchorZReverse =>
+            _endAnchorZReverse ??= SymbolicRegexNode<TSet>.CreateAnchor(
+                this,
+                SymbolicRegexNodeKind.EndAnchorZReverse
+            );
 
         private SymbolicRegexNode<TSet>? _bolAnchor;
-        internal SymbolicRegexNode<TSet> BolAnchor => _bolAnchor ??= SymbolicRegexNode<TSet>.CreateAnchor(this, SymbolicRegexNodeKind.BOLAnchor);
+        internal SymbolicRegexNode<TSet> BolAnchor =>
+            _bolAnchor ??= SymbolicRegexNode<TSet>.CreateAnchor(
+                this,
+                SymbolicRegexNodeKind.BOLAnchor
+            );
 
         private SymbolicRegexNode<TSet>? _eolAnchor;
-        internal SymbolicRegexNode<TSet> EolAnchor => _eolAnchor ??= SymbolicRegexNode<TSet>.CreateAnchor(this, SymbolicRegexNodeKind.EOLAnchor);
+        internal SymbolicRegexNode<TSet> EolAnchor =>
+            _eolAnchor ??= SymbolicRegexNode<TSet>.CreateAnchor(
+                this,
+                SymbolicRegexNodeKind.EOLAnchor
+            );
 
         private SymbolicRegexNode<TSet>? _wbAnchor;
-        internal SymbolicRegexNode<TSet> BoundaryAnchor => _wbAnchor ??= SymbolicRegexNode<TSet>.CreateAnchor(this, SymbolicRegexNodeKind.BoundaryAnchor);
+        internal SymbolicRegexNode<TSet> BoundaryAnchor =>
+            _wbAnchor ??= SymbolicRegexNode<TSet>.CreateAnchor(
+                this,
+                SymbolicRegexNodeKind.BoundaryAnchor
+            );
 
         private SymbolicRegexNode<TSet>? _nwbAnchor;
-        internal SymbolicRegexNode<TSet> NonBoundaryAnchor => _nwbAnchor ??= SymbolicRegexNode<TSet>.CreateAnchor(this, SymbolicRegexNodeKind.NonBoundaryAnchor);
+        internal SymbolicRegexNode<TSet> NonBoundaryAnchor =>
+            _nwbAnchor ??= SymbolicRegexNode<TSet>.CreateAnchor(
+                this,
+                SymbolicRegexNodeKind.NonBoundaryAnchor
+            );
 
         internal TSet _wordLetterForBoundariesSet;
         internal TSet _newLineSet;
@@ -81,9 +115,14 @@ namespace System.Text.RegularExpressions.Symbolic
             public readonly SymbolicRegexInfo Info;
 
             public NodeCacheKey(
-                SymbolicRegexNodeKind kind, SymbolicRegexNode<TSet>? left, SymbolicRegexNode<TSet>? right,
-                int lower, int upper,
-                TSet set, SymbolicRegexInfo info)
+                SymbolicRegexNodeKind kind,
+                SymbolicRegexNode<TSet>? left,
+                SymbolicRegexNode<TSet>? right,
+                int lower,
+                int upper,
+                TSet set,
+                SymbolicRegexInfo info
+            )
             {
                 Kind = kind;
                 Left = left;
@@ -101,13 +140,13 @@ namespace System.Text.RegularExpressions.Symbolic
                 obj is NodeCacheKey other && Equals(other);
 
             public bool Equals(SymbolicRegexBuilder<TSet>.NodeCacheKey other) =>
-                Kind == other.Kind &&
-                Left == other.Left &&
-                Right == other.Right &&
-                Lower == other.Lower &&
-                Upper == other.Upper &&
-                EqualityComparer<TSet>.Default.Equals(Set, other.Set) &&
-                EqualityComparer<SymbolicRegexInfo>.Default.Equals(Info, other.Info);
+                Kind == other.Kind
+                && Left == other.Left
+                && Right == other.Right
+                && Lower == other.Lower
+                && Upper == other.Upper
+                && EqualityComparer<TSet>.Default.Equals(Set, other.Set)
+                && EqualityComparer<SymbolicRegexInfo>.Default.Equals(Info, other.Info);
         }
 
         // The following dictionaries are used as caches for operations that recurse over the structure of SymbolicRegexNode.
@@ -122,7 +161,10 @@ namespace System.Text.RegularExpressions.Symbolic
         ///  -The surrounding character context
         /// The value is the derivative.
         /// </summary>
-        internal readonly Dictionary<(SymbolicRegexNode<TSet>, TSet elem, uint context), SymbolicRegexNode<TSet>> _derivativeCache = new();
+        internal readonly Dictionary<
+            (SymbolicRegexNode<TSet>, TSet elem, uint context),
+            SymbolicRegexNode<TSet>
+        > _derivativeCache = new();
 
         /// <summary>
         /// Cache for <see cref="SymbolicRegexNode{TSet}.PruneLowerPriorityThanNullability(SymbolicRegexBuilder{TSet}, uint)"/> keyed by:
@@ -130,7 +172,10 @@ namespace System.Text.RegularExpressions.Symbolic
         ///  -The surrounding character context
         /// The value is the pruned node.
         /// </summary>
-        internal readonly Dictionary<(SymbolicRegexNode<TSet>, uint), SymbolicRegexNode<TSet>> _pruneLowerPriorityThanNullabilityCache = new();
+        internal readonly Dictionary<
+            (SymbolicRegexNode<TSet>, uint),
+            SymbolicRegexNode<TSet>
+        > _pruneLowerPriorityThanNullabilityCache = new();
 
         /// <summary>
         /// Cache for <see cref="SymbolicRegexNode{TSet}.Subsumes(SymbolicRegexBuilder{TSet}, SymbolicRegexNode{TSet}, int)"/> keyed by:
@@ -138,7 +183,10 @@ namespace System.Text.RegularExpressions.Symbolic
         ///  -The node S potentially being subsumed by R
         /// The value indicates if subsumption is known to hold.
         /// </summary>
-        internal readonly Dictionary<(SymbolicRegexNode<TSet>, SymbolicRegexNode<TSet>), bool> _subsumptionCache = new();
+        internal readonly Dictionary<
+            (SymbolicRegexNode<TSet>, SymbolicRegexNode<TSet>),
+            bool
+        > _subsumptionCache = new();
 
         /// <summary>Create a new symbolic regex builder.</summary>
         internal SymbolicRegexBuilder(ISolver<TSet> solver, CharSetSolver charSetSolver)
@@ -158,8 +206,20 @@ namespace System.Text.RegularExpressions.Symbolic
             _newLineSet = solver.Empty;
             _nothing = SymbolicRegexNode<TSet>.CreateFalse(this);
             _anyChar = SymbolicRegexNode<TSet>.CreateTrue(this);
-            _anyStar = SymbolicRegexNode<TSet>.CreateLoop(this, _anyChar, 0, int.MaxValue, isLazy: false);
-            _anyStarLazy = SymbolicRegexNode<TSet>.CreateLoop(this, _anyChar, 0, int.MaxValue, isLazy: true);
+            _anyStar = SymbolicRegexNode<TSet>.CreateLoop(
+                this,
+                _anyChar,
+                0,
+                int.MaxValue,
+                isLazy: false
+            );
+            _anyStarLazy = SymbolicRegexNode<TSet>.CreateLoop(
+                this,
+                _anyChar,
+                0,
+                int.MaxValue,
+                isLazy: true
+            );
 
             // --- initialize singletonCache ---
             _singletonCache[_solver.Empty] = _nothing;
@@ -191,7 +251,12 @@ namespace System.Text.RegularExpressions.Symbolic
             SymbolicRegexNode<TSet> or = _nothing;
             for (int i = nodes.Count - 1; i >= 0; --i)
             {
-                or = SymbolicRegexNode<TSet>.CreateAlternate(this, nodes[i], or, deduplicated: true);
+                or = SymbolicRegexNode<TSet>.CreateAlternate(
+                    this,
+                    nodes[i],
+                    or,
+                    deduplicated: true
+                );
             }
 
             return or;
@@ -202,7 +267,9 @@ namespace System.Text.RegularExpressions.Symbolic
         /// If any regex is nothing, then return nothing.
         /// Eliminate intermediate epsilons.
         /// </remarks>
-        internal SymbolicRegexNode<TSet> CreateConcatAlreadyReversed(IEnumerable<SymbolicRegexNode<TSet>> nodes)
+        internal SymbolicRegexNode<TSet> CreateConcatAlreadyReversed(
+            IEnumerable<SymbolicRegexNode<TSet>> nodes
+        )
         {
             SymbolicRegexNode<TSet> result = Epsilon;
 
@@ -222,12 +289,20 @@ namespace System.Text.RegularExpressions.Symbolic
             return result;
         }
 
-        internal SymbolicRegexNode<TSet> CreateConcat(SymbolicRegexNode<TSet> left, SymbolicRegexNode<TSet> right) => SymbolicRegexNode<TSet>.CreateConcat(this, left, right);
+        internal SymbolicRegexNode<TSet> CreateConcat(
+            SymbolicRegexNode<TSet> left,
+            SymbolicRegexNode<TSet> right
+        ) => SymbolicRegexNode<TSet>.CreateConcat(this, left, right);
 
         /// <summary>
         /// Make loop regex
         /// </summary>
-        internal SymbolicRegexNode<TSet> CreateLoop(SymbolicRegexNode<TSet> node, bool isLazy, int lower = 0, int upper = int.MaxValue)
+        internal SymbolicRegexNode<TSet> CreateLoop(
+            SymbolicRegexNode<TSet> node,
+            bool isLazy,
+            int lower = 0,
+            int upper = int.MaxValue
+        )
         {
             // If the lower and upper bound are both 1, then the node would be processed once and only once, so we can just return that node.
             if (lower == 1 && upper == 1)
@@ -242,7 +317,12 @@ namespace System.Text.RegularExpressions.Symbolic
             }
 
             // If this is equivalent to any*, return that.
-            if (!isLazy && lower == 0 && upper == int.MaxValue && node._kind == SymbolicRegexNodeKind.Singleton)
+            if (
+                !isLazy
+                && lower == 0
+                && upper == int.MaxValue
+                && node._kind == SymbolicRegexNodeKind.Singleton
+            )
             {
                 Debug.Assert(node._set is not null);
                 if (_solver.IsFull(node._set))
@@ -252,7 +332,13 @@ namespace System.Text.RegularExpressions.Symbolic
             }
 
             // Flip X? into X?? or X?? into X?
-            if (node.Kind == SymbolicRegexNodeKind.Loop && node._lower == 0 && node._upper == 1 && lower == 0 && upper == 1)
+            if (
+                node.Kind == SymbolicRegexNodeKind.Loop
+                && node._lower == 0
+                && node._upper == 1
+                && lower == 0
+                && upper == 1
+            )
             {
                 Debug.Assert(node._left is not null);
                 if (node.IsLazy != isLazy)
@@ -273,27 +359,52 @@ namespace System.Text.RegularExpressions.Symbolic
         {
             // We maintain a cache of singletons, under the assumption that it's likely the same one/notone/set appears
             // multiple times in the same pattern.  First consult the cache, and then create a new singleton if one didn't exist.
-            ref SymbolicRegexNode<TSet>? result = ref CollectionsMarshal.GetValueRefOrAddDefault(_singletonCache, set, out _);
+            ref SymbolicRegexNode<TSet>? result = ref CollectionsMarshal.GetValueRefOrAddDefault(
+                _singletonCache,
+                set,
+                out _
+            );
             return result ??= SymbolicRegexNode<TSet>.CreateSingleton(this, set);
         }
 
         /// <summary>Creates a fixed length marker for the end of a sequence.</summary>
-        internal SymbolicRegexNode<TSet> CreateFixedLengthMarker(int length) => SymbolicRegexNode<TSet>.CreateFixedLengthMarker(this, length);
+        internal SymbolicRegexNode<TSet> CreateFixedLengthMarker(int length) =>
+            SymbolicRegexNode<TSet>.CreateFixedLengthMarker(this, length);
 
-        internal SymbolicRegexNode<TSet> CreateEffect(SymbolicRegexNode<TSet> node, SymbolicRegexNode<TSet> effectNode) => SymbolicRegexNode<TSet>.CreateEffect(this, node, effectNode);
+        internal SymbolicRegexNode<TSet> CreateEffect(
+            SymbolicRegexNode<TSet> node,
+            SymbolicRegexNode<TSet> effectNode
+        ) => SymbolicRegexNode<TSet>.CreateEffect(this, node, effectNode);
 
-        internal SymbolicRegexNode<TSet> CreateCapture(SymbolicRegexNode<TSet> child, int captureNum) => CreateConcat(CreateCaptureStart(captureNum), CreateConcat(child, CreateCaptureEnd(captureNum)));
+        internal SymbolicRegexNode<TSet> CreateCapture(
+            SymbolicRegexNode<TSet> child,
+            int captureNum
+        ) =>
+            CreateConcat(
+                CreateCaptureStart(captureNum),
+                CreateConcat(child, CreateCaptureEnd(captureNum))
+            );
 
-        internal SymbolicRegexNode<TSet> CreateCaptureStart(int captureNum) => SymbolicRegexNode<TSet>.CreateCaptureStart(this, captureNum);
+        internal SymbolicRegexNode<TSet> CreateCaptureStart(int captureNum) =>
+            SymbolicRegexNode<TSet>.CreateCaptureStart(this, captureNum);
 
-        internal SymbolicRegexNode<TSet> CreateCaptureEnd(int captureNum) => SymbolicRegexNode<TSet>.CreateCaptureEnd(this, captureNum);
+        internal SymbolicRegexNode<TSet> CreateCaptureEnd(int captureNum) =>
+            SymbolicRegexNode<TSet>.CreateCaptureEnd(this, captureNum);
 
-        internal SymbolicRegexNode<TSet> CreateDisableBacktrackingSimulation(SymbolicRegexNode<TSet> child)
+        internal SymbolicRegexNode<TSet> CreateDisableBacktrackingSimulation(
+            SymbolicRegexNode<TSet> child
+        )
         {
-            return child == _nothing ? _nothing : SymbolicRegexNode<TSet>.CreateDisableBacktrackingSimulation(this, child);
+            return child == _nothing
+                ? _nothing
+                : SymbolicRegexNode<TSet>.CreateDisableBacktrackingSimulation(this, child);
         }
 
-        internal SymbolicRegexNode<TNewSet> Transform<TNewSet>(SymbolicRegexNode<TSet> node, SymbolicRegexBuilder<TNewSet> builder, Func<SymbolicRegexBuilder<TNewSet>, TSet, TNewSet> setTransformer)
+        internal SymbolicRegexNode<TNewSet> Transform<TNewSet>(
+            SymbolicRegexNode<TSet> node,
+            SymbolicRegexBuilder<TNewSet> builder,
+            Func<SymbolicRegexBuilder<TNewSet>, TSet, TNewSet> setTransformer
+        )
             where TNewSet : IComparable<TNewSet>, IEquatable<TNewSet>
         {
             if (!StackHelper.TryEnsureSufficientExecutionStack())
@@ -339,14 +450,21 @@ namespace System.Text.RegularExpressions.Symbolic
 
                 case SymbolicRegexNodeKind.Loop:
                     Debug.Assert(node._left is not null);
-                    return builder.CreateLoop(Transform(node._left, builder, setTransformer), node.IsLazy, node._lower, node._upper);
+                    return builder.CreateLoop(
+                        Transform(node._left, builder, setTransformer),
+                        node.IsLazy,
+                        node._lower,
+                        node._upper
+                    );
 
                 case SymbolicRegexNodeKind.Alternate:
                     Debug.Assert(node._left is not null && node._right is not null);
-                    return SymbolicRegexNode<TNewSet>.CreateAlternate(builder,
+                    return SymbolicRegexNode<TNewSet>.CreateAlternate(
+                        builder,
                         Transform(node._left, builder, setTransformer),
                         Transform(node._right, builder, setTransformer),
-                        deduplicated: true);
+                        deduplicated: true
+                    );
 
                 case SymbolicRegexNodeKind.CaptureStart:
                     return builder.CreateCaptureStart(node._lower);
@@ -355,19 +473,26 @@ namespace System.Text.RegularExpressions.Symbolic
                     return builder.CreateCaptureEnd(node._lower);
 
                 case SymbolicRegexNodeKind.Concat:
+                {
+                    List<SymbolicRegexNode<TSet>> concatElements = node.ToList();
+                    SymbolicRegexNode<TNewSet>[] reverseTransformed =
+                        new SymbolicRegexNode<TNewSet>[concatElements.Count];
+                    for (int i = 0; i < reverseTransformed.Length; i++)
                     {
-                        List<SymbolicRegexNode<TSet>> concatElements = node.ToList();
-                        SymbolicRegexNode<TNewSet>[] reverseTransformed = new SymbolicRegexNode<TNewSet>[concatElements.Count];
-                        for (int i = 0; i < reverseTransformed.Length; i++)
-                        {
-                            reverseTransformed[i] = Transform(concatElements[^(i + 1)], builder, setTransformer);
-                        }
-                        return builder.CreateConcatAlreadyReversed(reverseTransformed);
+                        reverseTransformed[i] = Transform(
+                            concatElements[^(i + 1)],
+                            builder,
+                            setTransformer
+                        );
                     }
+                    return builder.CreateConcatAlreadyReversed(reverseTransformed);
+                }
 
                 case SymbolicRegexNodeKind.DisableBacktrackingSimulation:
                     Debug.Assert(node._left is not null);
-                    return builder.CreateDisableBacktrackingSimulation(Transform(node._left, builder, setTransformer));
+                    return builder.CreateDisableBacktrackingSimulation(
+                        Transform(node._left, builder, setTransformer)
+                    );
 
                 default:
                     Debug.Fail($"{nameof(Transform)}:{node._kind}");

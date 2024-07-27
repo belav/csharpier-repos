@@ -3,7 +3,6 @@
 
 using System;
 using System.Reflection.Metadata;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem.Ecma
@@ -33,19 +32,31 @@ namespace Internal.TypeSystem.Ecma
             return elementType.MakeArrayType();
         }
 
-        public TypeDesc GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind)
+        public TypeDesc GetTypeFromDefinition(
+            MetadataReader reader,
+            TypeDefinitionHandle handle,
+            byte rawTypeKind
+        )
         {
             Debug.Assert(reader == _module.MetadataReader);
             return _module.GetType(handle);
         }
 
-        public TypeDesc GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
+        public TypeDesc GetTypeFromReference(
+            MetadataReader reader,
+            TypeReferenceHandle handle,
+            byte rawTypeKind
+        )
         {
             Debug.Assert(reader == _module.MetadataReader);
             return _module.GetType(handle);
         }
 
-        public TypeDesc GetTypeFromSpecification(MetadataReader reader, TypeSpecificationHandle handle, byte rawTypeKind)
+        public TypeDesc GetTypeFromSpecification(
+            MetadataReader reader,
+            TypeSpecificationHandle handle,
+            byte rawTypeKind
+        )
         {
             Debug.Assert(reader == _module.MetadataReader);
             return _module.GetType(handle);

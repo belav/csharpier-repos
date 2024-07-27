@@ -67,6 +67,7 @@ namespace System.Data
         internal DataColumn[] ColumnsReference => _columns;
         internal bool HasValue => null != _columns;
         internal DataTable Table => _columns[0].Table!;
+
         internal void CheckState()
         {
             DataTable? table = _columns[0].Table;
@@ -109,7 +110,8 @@ namespace System.Data
             }
             else
             {
-                int i, j;
+                int i,
+                    j;
                 for (i = 0; i < column1.Length; i++)
                 {
                     bool check = false;

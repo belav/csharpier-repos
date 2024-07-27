@@ -19,7 +19,8 @@ public sealed class CodeAnalysisProgress
     /// available.  This should be used sparingly.  Locations that currently do not show progress should ideally be
     /// migrated to ones that do so that long running operations are visible to the user in a coherent fashion.
     /// </summary>
-    internal static readonly IProgress<CodeAnalysisProgress> None = NullProgress<CodeAnalysisProgress>.Instance;
+    internal static readonly IProgress<CodeAnalysisProgress> None =
+        NullProgress<CodeAnalysisProgress>.Instance;
 
     internal bool ClearValue { get; init; }
     internal int? CompleteItemValue { get; init; }
@@ -33,8 +34,11 @@ public sealed class CodeAnalysisProgress
     /// <example>
     /// progress.Report(CodeAnalysisProgress.Description("Renaming files"));
     /// </example>
-    public static CodeAnalysisProgress Description(string description)
-        => new() { DescriptionValue = description ?? throw new ArgumentNullException(nameof(description)) };
+    public static CodeAnalysisProgress Description(string description) =>
+        new()
+        {
+            DescriptionValue = description ?? throw new ArgumentNullException(nameof(description)),
+        };
 
     /// <summary>
     /// When passed to an appropriate <see cref="IProgress{T}"/>, will add the requested number of incomplete items to
@@ -47,10 +51,11 @@ public sealed class CodeAnalysisProgress
     /// <example>
     /// progress.Report(CodeAnalysisProgress.AddIncompleteItems(20));
     /// </example>
-    public static CodeAnalysisProgress AddIncompleteItems(int count, string? description = null)
-        => new()
+    public static CodeAnalysisProgress AddIncompleteItems(int count, string? description = null) =>
+        new()
         {
-            IncompleteItemsValue = count >= 0 ? count : throw new ArgumentOutOfRangeException(nameof(count)),
+            IncompleteItemsValue =
+                count >= 0 ? count : throw new ArgumentOutOfRangeException(nameof(count)),
             DescriptionValue = description,
         };
 
@@ -65,10 +70,11 @@ public sealed class CodeAnalysisProgress
     /// <example>
     /// progress.Report(CodeAnalysisProgress.CompleteItem());
     /// </example>
-    public static CodeAnalysisProgress AddCompleteItems(int count, string? description = null)
-        => new()
+    public static CodeAnalysisProgress AddCompleteItems(int count, string? description = null) =>
+        new()
         {
-            CompleteItemValue = count >= 1 ? count : throw new ArgumentOutOfRangeException(nameof(count)),
+            CompleteItemValue =
+                count >= 1 ? count : throw new ArgumentOutOfRangeException(nameof(count)),
             DescriptionValue = description,
         };
 
@@ -82,6 +88,5 @@ public sealed class CodeAnalysisProgress
     /// compute the work, then reset the progress to apply all the changes).  Could be exposed later to 3rd party code
     /// if a demonstrable need is presented.
     /// </remarks>
-    internal static CodeAnalysisProgress Clear()
-        => new() { ClearValue = true };
+    internal static CodeAnalysisProgress Clear() => new() { ClearValue = true };
 }

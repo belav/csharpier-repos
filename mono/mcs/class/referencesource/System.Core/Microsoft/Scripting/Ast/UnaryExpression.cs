@@ -1,11 +1,11 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -18,15 +18,16 @@ using System.Diagnostics;
 using System.Dynamic.Utils;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
 #if SILVERLIGHT
 using System.Core;
 #endif
 
 #if CLR2
-namespace Microsoft.Scripting.Ast {
+namespace Microsoft.Scripting.Ast
+{
 #else
-namespace System.Linq.Expressions {
+namespace System.Linq.Expressions
+{
 #endif
 
     /// <summary>
@@ -35,13 +36,20 @@ namespace System.Linq.Expressions {
 #if !SILVERLIGHT
     [DebuggerTypeProxy(typeof(Expression.UnaryExpressionProxy))]
 #endif
-    public sealed class UnaryExpression : Expression {
+    public sealed class UnaryExpression : Expression
+    {
         private readonly Expression _operand;
         private readonly MethodInfo _method;
         private readonly ExpressionType _nodeType;
         private readonly Type _type;
 
-        internal UnaryExpression(ExpressionType nodeType, Expression expression, Type type, MethodInfo method) {
+        internal UnaryExpression(
+            ExpressionType nodeType,
+            Expression expression,
+            Type type,
+            MethodInfo method
+        )
+        {
             _operand = expression;
             _method = method;
             _nodeType = nodeType;
@@ -52,7 +60,8 @@ namespace System.Linq.Expressions {
         /// Gets the static type of the expression that this <see cref="Expression" /> represents. (Inherited from <see cref="Expression"/>.)
         /// </summary>
         /// <returns>The <see cref="Type"/> that represents the static type of the expression.</returns>
-        public sealed override Type Type {
+        public sealed override Type Type
+        {
             get { return _type; }
         }
 
@@ -60,7 +69,8 @@ namespace System.Linq.Expressions {
         /// Returns the node type of this <see cref="Expression" />. (Inherited from <see cref="Expression" />.)
         /// </summary>
         /// <returns>The <see cref="ExpressionType"/> that represents this expression.</returns>
-        public sealed override ExpressionType NodeType {
+        public sealed override ExpressionType NodeType
+        {
             get { return _nodeType; }
         }
 
@@ -68,7 +78,8 @@ namespace System.Linq.Expressions {
         /// Gets the operand of the unary operation.
         /// </summary>
         /// <returns> An <see cref="ExpressionType"/> that represents the operand of the unary operation.</returns>
-        public Expression Operand {
+        public Expression Operand
+        {
             get { return _operand; }
         }
 
@@ -76,7 +87,8 @@ namespace System.Linq.Expressions {
         /// Gets the implementing method for the unary operation.
         /// </summary>
         /// <returns>The <see cref="MethodInfo"/> that represents the implementing method.</returns>
-        public MethodInfo Method {
+        public MethodInfo Method
+        {
             get { return _method; }
         }
 
@@ -84,16 +96,33 @@ namespace System.Linq.Expressions {
         /// Gets a value that indicates whether the expression tree node represents a lifted call to an operator.
         /// </summary>
         /// <returns>true if the node represents a lifted call; otherwise, false.</returns>
-        public bool IsLifted {
-            get {
-                if (NodeType == ExpressionType.TypeAs || NodeType == ExpressionType.Quote || NodeType == ExpressionType.Throw) {
+        public bool IsLifted
+        {
+            get
+            {
+                if (
+                    NodeType == ExpressionType.TypeAs
+                    || NodeType == ExpressionType.Quote
+                    || NodeType == ExpressionType.Throw
+                )
+                {
                     return false;
                 }
                 bool operandIsNullable = TypeUtils.IsNullableType(_operand.Type);
                 bool resultIsNullable = TypeUtils.IsNullableType(this.Type);
-                if (_method != null) {
-                    return (operandIsNullable && !TypeUtils.AreEquivalent(_method.GetParametersCached()[0].ParameterType, _operand.Type)) ||
-                           (resultIsNullable && !TypeUtils.AreEquivalent(_method.ReturnType, this.Type));
+                if (_method != null)
+                {
+                    return (
+                            operandIsNullable
+                            && !TypeUtils.AreEquivalent(
+                                _method.GetParametersCached()[0].ParameterType,
+                                _operand.Type
+                            )
+                        )
+                        || (
+                            resultIsNullable
+                            && !TypeUtils.AreEquivalent(_method.ReturnType, this.Type)
+                        );
                 }
                 return operandIsNullable || resultIsNullable;
             }
@@ -103,25 +132,28 @@ namespace System.Linq.Expressions {
         /// Gets a value that indicates whether the expression tree node represents a lifted call to an operator whose return type is lifted to a nullable type.
         /// </summary>
         /// <returns>true if the operator's return type is lifted to a nullable type; otherwise, false.</returns>
-        public bool IsLiftedToNull {
-            get {
-                return IsLifted && TypeUtils.IsNullableType(this.Type);
-            }
+        public bool IsLiftedToNull
+        {
+            get { return IsLifted && TypeUtils.IsNullableType(this.Type); }
         }
 
         /// <summary>
         /// Dispatches to the specific visit method for this node type.
         /// </summary>
-        protected internal override Expression Accept(ExpressionVisitor visitor) {
+        protected internal override Expression Accept(ExpressionVisitor visitor)
+        {
             return visitor.VisitUnary(this);
         }
 
         /// <summary>
-        /// Gets a value that indicates whether the expression tree node can be reduced. 
-        /// </summary>        
-        public override bool CanReduce {
-            get {
-                switch (_nodeType) {
+        /// Gets a value that indicates whether the expression tree node can be reduced.
+        /// </summary>
+        public override bool CanReduce
+        {
+            get
+            {
+                switch (_nodeType)
+                {
                     case ExpressionType.PreIncrementAssign:
                     case ExpressionType.PreDecrementAssign:
                     case ExpressionType.PostIncrementAssign:
@@ -133,15 +165,18 @@ namespace System.Linq.Expressions {
         }
 
         /// <summary>
-        /// Reduces the expression node to a simpler expression. 
+        /// Reduces the expression node to a simpler expression.
         /// If CanReduce returns true, this should return a valid expression.
-        /// This method is allowed to return another node which itself 
+        /// This method is allowed to return another node which itself
         /// must be reduced.
         /// </summary>
         /// <returns>The reduced expression.</returns>
-        public override Expression Reduce() {
-            if (CanReduce) {
-                switch (_operand.NodeType) {
+        public override Expression Reduce()
+        {
+            if (CanReduce)
+            {
+                switch (_operand.NodeType)
+                {
                     case ExpressionType.Index:
                         return ReduceIndex();
                     case ExpressionType.MemberAccess:
@@ -153,22 +188,36 @@ namespace System.Linq.Expressions {
             return this;
         }
 
-        private bool IsPrefix {
-            get { return _nodeType == ExpressionType.PreIncrementAssign || _nodeType == ExpressionType.PreDecrementAssign; }
+        private bool IsPrefix
+        {
+            get
+            {
+                return _nodeType == ExpressionType.PreIncrementAssign
+                    || _nodeType == ExpressionType.PreDecrementAssign;
+            }
         }
 
-        private UnaryExpression FunctionalOp(Expression operand) {
+        private UnaryExpression FunctionalOp(Expression operand)
+        {
             ExpressionType functional;
-            if (_nodeType == ExpressionType.PreIncrementAssign || _nodeType == ExpressionType.PostIncrementAssign) {
+            if (
+                _nodeType == ExpressionType.PreIncrementAssign
+                || _nodeType == ExpressionType.PostIncrementAssign
+            )
+            {
                 functional = ExpressionType.Increment;
-            } else {
+            }
+            else
+            {
                 functional = ExpressionType.Decrement;
             }
             return new UnaryExpression(functional, operand, operand.Type, _method);
         }
 
-        private Expression ReduceVariable() {
-            if (IsPrefix) {
+        private Expression ReduceVariable()
+        {
+            if (IsPrefix)
+            {
                 // (op) var
                 // ... is reduced into ...
                 // var = op(var)
@@ -188,26 +237,27 @@ namespace System.Linq.Expressions {
             );
         }
 
-        private Expression ReduceMember() {
+        private Expression ReduceMember()
+        {
             var member = (MemberExpression)_operand;
-            if (member.Expression == null) {
+            if (member.Expression == null)
+            {
                 //static member, reduce the same as variable
                 return ReduceVariable();
-            } else {
+            }
+            else
+            {
                 var temp1 = Parameter(member.Expression.Type, null);
                 var initTemp1 = Assign(temp1, member.Expression);
                 member = MakeMemberAccess(temp1, member.Member);
 
-                if (IsPrefix) {
+                if (IsPrefix)
+                {
                     // (op) value.member
                     // ... is reduced into ...
                     // temp1 = value
                     // temp1.member = op(temp1.member)
-                    return Block(
-                        new[] { temp1 },
-                        initTemp1,
-                        Assign(member, FunctionalOp(member))
-                    );
+                    return Block(new[] { temp1 }, initTemp1, Assign(member, FunctionalOp(member)));
                 }
 
                 // value.member (op)
@@ -227,7 +277,8 @@ namespace System.Linq.Expressions {
             }
         }
 
-        private Expression ReduceIndex() {
+        private Expression ReduceIndex()
+        {
             // left[a0, a1, ... aN] (op)
             //
             // ... is reduced into ...
@@ -251,26 +302,37 @@ namespace System.Linq.Expressions {
             temps[i] = Parameter(index.Object.Type, null);
             block[i] = Assign(temps[i], index.Object);
             i++;
-            while (i <= count) {
+            while (i <= count)
+            {
                 var arg = index.Arguments[i - 1];
                 args[i - 1] = temps[i] = Parameter(arg.Type, null);
                 block[i] = Assign(temps[i], arg);
                 i++;
             }
-            index = MakeIndex(temps[0], index.Indexer, new TrueReadOnlyCollection<Expression>(args));
-            if (!prefix) {
+            index = MakeIndex(
+                temps[0],
+                index.Indexer,
+                new TrueReadOnlyCollection<Expression>(args)
+            );
+            if (!prefix)
+            {
                 var lastTemp = temps[i] = Parameter(index.Type, null);
                 block[i] = Assign(temps[i], index);
                 i++;
                 Debug.Assert(i == temps.Length);
                 block[i++] = Assign(index, FunctionalOp(lastTemp));
                 block[i++] = lastTemp;
-            } else {
+            }
+            else
+            {
                 Debug.Assert(i == temps.Length);
                 block[i++] = Assign(index, FunctionalOp(index));
             }
             Debug.Assert(i == block.Length);
-            return Block(new TrueReadOnlyCollection<ParameterExpression>(temps), new TrueReadOnlyCollection<Expression>(block));
+            return Block(
+                new TrueReadOnlyCollection<ParameterExpression>(temps),
+                new TrueReadOnlyCollection<Expression>(block)
+            );
         }
 
         /// <summary>
@@ -280,16 +342,18 @@ namespace System.Linq.Expressions {
         /// </summary>
         /// <param name="operand">The <see cref="Operand" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public UnaryExpression Update(Expression operand) {
-            if (operand == Operand) {
+        public UnaryExpression Update(Expression operand)
+        {
+            if (operand == Operand)
+            {
                 return this;
             }
             return Expression.MakeUnary(NodeType, operand, Type, Method);
         }
     }
 
-    public partial class Expression {
-
+    public partial class Expression
+    {
         /// <summary>
         /// Creates a <see cref="UnaryExpression"></see>, given an operand, by calling the appropriate factory method.
         /// </summary>
@@ -299,7 +363,12 @@ namespace System.Linq.Expressions {
         /// <returns>The <see cref="UnaryExpression"></see> that results from calling the appropriate factory method.</returns>
         /// <exception cref="ArgumentException">Thrown when <paramref name="unaryType"/> does not correspond to a unary expression.</exception>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="operand"/> is null.</exception>
-        public static UnaryExpression MakeUnary(ExpressionType unaryType, Expression operand, Type type) {
+        public static UnaryExpression MakeUnary(
+            ExpressionType unaryType,
+            Expression operand,
+            Type type
+        )
+        {
             return MakeUnary(unaryType, operand, type, null);
         }
 
@@ -311,11 +380,21 @@ namespace System.Linq.Expressions {
         /// <param name="type">The <see cref="Type"></see> that specifies the type to be converted to (pass null if not applicable).</param>
         /// <param name="method">The <see cref="MethodInfo"></see> that represents the implementing method.</param>
         /// <returns>The <see cref="UnaryExpression"></see> that results from calling the appropriate factory method.</returns>
-        /// <exception cref="ArgumentException">Thrown when <paramref name="unaryType"/> does not correspond to a unary expression.</exception> 
+        /// <exception cref="ArgumentException">Thrown when <paramref name="unaryType"/> does not correspond to a unary expression.</exception>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="operand"/> is null.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        public static UnaryExpression MakeUnary(ExpressionType unaryType, Expression operand, Type type, MethodInfo method) {
-            switch (unaryType) {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity"
+        )]
+        public static UnaryExpression MakeUnary(
+            ExpressionType unaryType,
+            Expression operand,
+            Type type,
+            MethodInfo method
+        )
+        {
+            switch (unaryType)
+            {
                 case ExpressionType.Negate:
                     return Negate(operand, method);
                 case ExpressionType.NegateChecked:
@@ -361,86 +440,169 @@ namespace System.Linq.Expressions {
             }
         }
 
-        private static UnaryExpression GetUserDefinedUnaryOperatorOrThrow(ExpressionType unaryType, string name, Expression operand) {
+        private static UnaryExpression GetUserDefinedUnaryOperatorOrThrow(
+            ExpressionType unaryType,
+            string name,
+            Expression operand
+        )
+        {
             UnaryExpression u = GetUserDefinedUnaryOperator(unaryType, name, operand);
-            if (u != null) {
-                ValidateParamswithOperandsOrThrow(u.Method.GetParametersCached()[0].ParameterType, operand.Type, unaryType, name);
+            if (u != null)
+            {
+                ValidateParamswithOperandsOrThrow(
+                    u.Method.GetParametersCached()[0].ParameterType,
+                    operand.Type,
+                    unaryType,
+                    name
+                );
                 return u;
             }
             throw Error.UnaryOperatorNotDefined(unaryType, operand.Type);
         }
 
-        private static UnaryExpression GetUserDefinedUnaryOperator(ExpressionType unaryType, string name, Expression operand) {
+        private static UnaryExpression GetUserDefinedUnaryOperator(
+            ExpressionType unaryType,
+            string name,
+            Expression operand
+        )
+        {
             Type operandType = operand.Type;
             Type[] types = new Type[] { operandType };
             Type nnOperandType = TypeUtils.GetNonNullableType(operandType);
             BindingFlags flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
             MethodInfo method = nnOperandType.GetMethodValidated(name, flags, null, types, null);
-            if (method != null) {
+            if (method != null)
+            {
                 return new UnaryExpression(unaryType, operand, method.ReturnType, method);
             }
             // try lifted call
-            if (TypeUtils.IsNullableType(operandType)) {
+            if (TypeUtils.IsNullableType(operandType))
+            {
                 types[0] = nnOperandType;
                 method = nnOperandType.GetMethodValidated(name, flags, null, types, null);
-                if (method != null && method.ReturnType.IsValueType && !TypeUtils.IsNullableType(method.ReturnType)) {
-                    return new UnaryExpression(unaryType, operand, TypeUtils.GetNullableType(method.ReturnType), method);
+                if (
+                    method != null
+                    && method.ReturnType.IsValueType
+                    && !TypeUtils.IsNullableType(method.ReturnType)
+                )
+                {
+                    return new UnaryExpression(
+                        unaryType,
+                        operand,
+                        TypeUtils.GetNullableType(method.ReturnType),
+                        method
+                    );
                 }
             }
             return null;
         }
 
-        private static UnaryExpression GetMethodBasedUnaryOperator(ExpressionType unaryType, Expression operand, MethodInfo method) {
+        private static UnaryExpression GetMethodBasedUnaryOperator(
+            ExpressionType unaryType,
+            Expression operand,
+            MethodInfo method
+        )
+        {
             System.Diagnostics.Debug.Assert(method != null);
             ValidateOperator(method);
             ParameterInfo[] pms = method.GetParametersCached();
             if (pms.Length != 1)
                 throw Error.IncorrectNumberOfMethodCallArguments(method);
-            if (ParameterIsAssignable(pms[0], operand.Type)) {
-                ValidateParamswithOperandsOrThrow(pms[0].ParameterType, operand.Type, unaryType, method.Name);
+            if (ParameterIsAssignable(pms[0], operand.Type))
+            {
+                ValidateParamswithOperandsOrThrow(
+                    pms[0].ParameterType,
+                    operand.Type,
+                    unaryType,
+                    method.Name
+                );
                 return new UnaryExpression(unaryType, operand, method.ReturnType, method);
             }
             // check for lifted call
-            if (TypeUtils.IsNullableType(operand.Type) &&
-                ParameterIsAssignable(pms[0], TypeUtils.GetNonNullableType(operand.Type)) &&
-                method.ReturnType.IsValueType && !TypeUtils.IsNullableType(method.ReturnType)) {
-                return new UnaryExpression(unaryType, operand, TypeUtils.GetNullableType(method.ReturnType), method);
+            if (
+                TypeUtils.IsNullableType(operand.Type)
+                && ParameterIsAssignable(pms[0], TypeUtils.GetNonNullableType(operand.Type))
+                && method.ReturnType.IsValueType
+                && !TypeUtils.IsNullableType(method.ReturnType)
+            )
+            {
+                return new UnaryExpression(
+                    unaryType,
+                    operand,
+                    TypeUtils.GetNullableType(method.ReturnType),
+                    method
+                );
             }
 
             throw Error.OperandTypesDoNotMatchParameters(unaryType, method.Name);
         }
 
-        private static UnaryExpression GetUserDefinedCoercionOrThrow(ExpressionType coercionType, Expression expression, Type convertToType) {
+        private static UnaryExpression GetUserDefinedCoercionOrThrow(
+            ExpressionType coercionType,
+            Expression expression,
+            Type convertToType
+        )
+        {
             UnaryExpression u = GetUserDefinedCoercion(coercionType, expression, convertToType);
-            if (u != null) {
+            if (u != null)
+            {
                 return u;
             }
             throw Error.CoercionOperatorNotDefined(expression.Type, convertToType);
         }
 
-        private static UnaryExpression GetUserDefinedCoercion(ExpressionType coercionType, Expression expression, Type convertToType) {
-            MethodInfo method = TypeUtils.GetUserDefinedCoercionMethod(expression.Type, convertToType, false);
-            if (method != null) {
+        private static UnaryExpression GetUserDefinedCoercion(
+            ExpressionType coercionType,
+            Expression expression,
+            Type convertToType
+        )
+        {
+            MethodInfo method = TypeUtils.GetUserDefinedCoercionMethod(
+                expression.Type,
+                convertToType,
+                false
+            );
+            if (method != null)
+            {
                 return new UnaryExpression(coercionType, expression, convertToType, method);
-            } else {
+            }
+            else
+            {
                 return null;
             }
         }
 
-        private static UnaryExpression GetMethodBasedCoercionOperator(ExpressionType unaryType, Expression operand, Type convertToType, MethodInfo method) {
+        private static UnaryExpression GetMethodBasedCoercionOperator(
+            ExpressionType unaryType,
+            Expression operand,
+            Type convertToType,
+            MethodInfo method
+        )
+        {
             System.Diagnostics.Debug.Assert(method != null);
             ValidateOperator(method);
             ParameterInfo[] pms = method.GetParametersCached();
-            if (pms.Length != 1) {
+            if (pms.Length != 1)
+            {
                 throw Error.IncorrectNumberOfMethodCallArguments(method);
             }
-            if (ParameterIsAssignable(pms[0], operand.Type) && TypeUtils.AreEquivalent(method.ReturnType, convertToType)) {
+            if (
+                ParameterIsAssignable(pms[0], operand.Type)
+                && TypeUtils.AreEquivalent(method.ReturnType, convertToType)
+            )
+            {
                 return new UnaryExpression(unaryType, operand, method.ReturnType, method);
             }
             // check for lifted call
-            if ((TypeUtils.IsNullableType(operand.Type) || TypeUtils.IsNullableType(convertToType)) &&
-                ParameterIsAssignable(pms[0], TypeUtils.GetNonNullableType(operand.Type)) &&
-                TypeUtils.AreEquivalent(method.ReturnType, TypeUtils.GetNonNullableType(convertToType))) {
+            if (
+                (TypeUtils.IsNullableType(operand.Type) || TypeUtils.IsNullableType(convertToType))
+                && ParameterIsAssignable(pms[0], TypeUtils.GetNonNullableType(operand.Type))
+                && TypeUtils.AreEquivalent(
+                    method.ReturnType,
+                    TypeUtils.GetNonNullableType(convertToType)
+                )
+            )
+            {
                 return new UnaryExpression(unaryType, operand, convertToType, method);
             }
             throw Error.OperandTypesDoNotMatchParameters(unaryType, method.Name);
@@ -453,7 +615,8 @@ namespace System.Linq.Expressions {
         /// <returns>A <see cref="UnaryExpression"></see> that has the <see cref="P:Expression.NodeType"></see> property equal to <see cref="P:ExpressionType.Negate"></see> and the <see cref="P:UnaryExpression.Operand"></see> properties set to the specified value.</returns>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="expression"/> is null.</exception>
         /// <exception cref="InvalidOperationException">Thrown when the unary minus operator is not defined for <see cref="P:Expression.Type"></see></exception>
-        public static UnaryExpression Negate(Expression expression) {
+        public static UnaryExpression Negate(Expression expression)
+        {
             return Negate(expression, null);
         }
 
@@ -466,13 +629,28 @@ namespace System.Linq.Expressions {
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="expression"/> is null.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="method"/> is not null and the method it represents returns void, is not static (Shared in Visual Basic), or does not take exactly one argument.</exception>
         /// <exception cref="InvalidOperationException">Thown when <paramref name="method"/> is null and the unary minus operator is not defined for expression.Type or expression.Type (or its corresponding non-nullable type if it is a nullable value type) is not assignable to the argument type of the method represented by method.</exception>
-        public static UnaryExpression Negate(Expression expression, MethodInfo method) {
+        public static UnaryExpression Negate(Expression expression, MethodInfo method)
+        {
             RequiresCanRead(expression, "expression");
-            if (method == null) {
-                if (TypeUtils.IsArithmetic(expression.Type) && !TypeUtils.IsUnsignedInt(expression.Type)) {
-                    return new UnaryExpression(ExpressionType.Negate, expression, expression.Type, null);
+            if (method == null)
+            {
+                if (
+                    TypeUtils.IsArithmetic(expression.Type)
+                    && !TypeUtils.IsUnsignedInt(expression.Type)
+                )
+                {
+                    return new UnaryExpression(
+                        ExpressionType.Negate,
+                        expression,
+                        expression.Type,
+                        null
+                    );
                 }
-                return GetUserDefinedUnaryOperatorOrThrow(ExpressionType.Negate, "op_UnaryNegation", expression);
+                return GetUserDefinedUnaryOperatorOrThrow(
+                    ExpressionType.Negate,
+                    "op_UnaryNegation",
+                    expression
+                );
             }
             return GetMethodBasedUnaryOperator(ExpressionType.Negate, expression, method);
         }
@@ -484,7 +662,8 @@ namespace System.Linq.Expressions {
         /// <returns>A <see cref="UnaryExpression"></see> that has the <see cref="Expression.NodeType"></see> property equal to <see cref="ExpressionType.UnaryPlus"></see> and the <see cref="UnaryExpression.Operand"></see> property set to the specified value.</returns>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="expression"/> is null.</exception>
         /// <exception cref="InvalidOperationException">Thown when the unary minus operator is not defined for expression.Type.</exception>
-        public static UnaryExpression UnaryPlus(Expression expression) {
+        public static UnaryExpression UnaryPlus(Expression expression)
+        {
             return UnaryPlus(expression, null);
         }
 
@@ -497,13 +676,25 @@ namespace System.Linq.Expressions {
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="expression"/> is null.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="method"/> is not null and the method it represents returns void, is not static (Shared in Visual Basic), or does not take exactly one argument.</exception>
         /// <exception cref="InvalidOperationException">Thown when <paramref name="method"/> is null and the unary minus operator is not defined for expression.Type or expression.Type (or its corresponding non-nullable type if it is a nullable value type) is not assignable to the argument type of the method represented by method.</exception>
-        public static UnaryExpression UnaryPlus(Expression expression, MethodInfo method) {
+        public static UnaryExpression UnaryPlus(Expression expression, MethodInfo method)
+        {
             RequiresCanRead(expression, "expression");
-            if (method == null) {
-                if (TypeUtils.IsArithmetic(expression.Type)) {
-                    return new UnaryExpression(ExpressionType.UnaryPlus, expression, expression.Type, null);
+            if (method == null)
+            {
+                if (TypeUtils.IsArithmetic(expression.Type))
+                {
+                    return new UnaryExpression(
+                        ExpressionType.UnaryPlus,
+                        expression,
+                        expression.Type,
+                        null
+                    );
                 }
-                return GetUserDefinedUnaryOperatorOrThrow(ExpressionType.UnaryPlus, "op_UnaryPlus", expression);
+                return GetUserDefinedUnaryOperatorOrThrow(
+                    ExpressionType.UnaryPlus,
+                    "op_UnaryPlus",
+                    expression
+                );
             }
             return GetMethodBasedUnaryOperator(ExpressionType.UnaryPlus, expression, method);
         }
@@ -513,8 +704,9 @@ namespace System.Linq.Expressions {
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression" /> to set the <see cref="P:System.Linq.Expressions.UnaryExpression.Operand" /> property equal to.</param>
         /// <exception cref="T:System.ArgumentNullException">
         ///   Thrown when <paramref name="expression" /> is null.</exception>
-        /// <exception cref="T:System.InvalidOperationException">Thrown when the unary minus operator is not defined for <paramref name="expression" />.Type.</exception> 
-        public static UnaryExpression NegateChecked(Expression expression) {
+        /// <exception cref="T:System.InvalidOperationException">Thrown when the unary minus operator is not defined for <paramref name="expression" />.Type.</exception>
+        public static UnaryExpression NegateChecked(Expression expression)
+        {
             return NegateChecked(expression, null);
         }
 
@@ -528,13 +720,28 @@ namespace System.Linq.Expressions {
         ///<paramref name="method" /> is not null and the method it represents returns void, is not static (Shared in Visual Basic), or does not take exactly one argument.</exception>
         ///<exception cref="T:System.InvalidOperationException">
         ///<paramref name="method" /> is null and the unary minus operator is not defined for <paramref name="expression" />.Type.-or-<paramref name="expression" />.Type (or its corresponding non-nullable type if it is a nullable value type) is not assignable to the argument type of the method represented by <paramref name="method" />.</exception>
-        public static UnaryExpression NegateChecked(Expression expression, MethodInfo method) {
+        public static UnaryExpression NegateChecked(Expression expression, MethodInfo method)
+        {
             RequiresCanRead(expression, "expression");
-            if (method == null) {
-                if (TypeUtils.IsArithmetic(expression.Type) && !TypeUtils.IsUnsignedInt(expression.Type)) {
-                    return new UnaryExpression(ExpressionType.NegateChecked, expression, expression.Type, null);
+            if (method == null)
+            {
+                if (
+                    TypeUtils.IsArithmetic(expression.Type)
+                    && !TypeUtils.IsUnsignedInt(expression.Type)
+                )
+                {
+                    return new UnaryExpression(
+                        ExpressionType.NegateChecked,
+                        expression,
+                        expression.Type,
+                        null
+                    );
                 }
-                return GetUserDefinedUnaryOperatorOrThrow(ExpressionType.NegateChecked, "op_UnaryNegation", expression);
+                return GetUserDefinedUnaryOperatorOrThrow(
+                    ExpressionType.NegateChecked,
+                    "op_UnaryNegation",
+                    expression
+                );
             }
             return GetMethodBasedUnaryOperator(ExpressionType.NegateChecked, expression, method);
         }
@@ -545,7 +752,8 @@ namespace System.Linq.Expressions {
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="expression" /> is null.</exception>
         ///<exception cref="T:System.InvalidOperationException">The unary not operator is not defined for <paramref name="expression" />.Type.</exception>
-        public static UnaryExpression Not(Expression expression) {
+        public static UnaryExpression Not(Expression expression)
+        {
             return Not(expression, null);
         }
 
@@ -559,17 +767,34 @@ namespace System.Linq.Expressions {
         ///<paramref name="method" /> is not null and the method it represents returns void, is not static (Shared in Visual Basic), or does not take exactly one argument.</exception>
         ///<exception cref="T:System.InvalidOperationException">
         ///<paramref name="method" /> is null and the unary not operator is not defined for <paramref name="expression" />.Type.-or-<paramref name="expression" />.Type (or its corresponding non-nullable type if it is a nullable value type) is not assignable to the argument type of the method represented by <paramref name="method" />.</exception>
-        public static UnaryExpression Not(Expression expression, MethodInfo method) {
+        public static UnaryExpression Not(Expression expression, MethodInfo method)
+        {
             RequiresCanRead(expression, "expression");
-            if (method == null) {
-                if (TypeUtils.IsIntegerOrBool(expression.Type)) {
-                    return new UnaryExpression(ExpressionType.Not, expression, expression.Type, null);
+            if (method == null)
+            {
+                if (TypeUtils.IsIntegerOrBool(expression.Type))
+                {
+                    return new UnaryExpression(
+                        ExpressionType.Not,
+                        expression,
+                        expression.Type,
+                        null
+                    );
                 }
-                UnaryExpression u = GetUserDefinedUnaryOperator(ExpressionType.Not, "op_LogicalNot", expression);
-                if (u != null) {
+                UnaryExpression u = GetUserDefinedUnaryOperator(
+                    ExpressionType.Not,
+                    "op_LogicalNot",
+                    expression
+                );
+                if (u != null)
+                {
                     return u;
                 }
-                return GetUserDefinedUnaryOperatorOrThrow(ExpressionType.Not, "op_OnesComplement", expression);
+                return GetUserDefinedUnaryOperatorOrThrow(
+                    ExpressionType.Not,
+                    "op_OnesComplement",
+                    expression
+                );
             }
             return GetMethodBasedUnaryOperator(ExpressionType.Not, expression, method);
         }
@@ -579,7 +804,8 @@ namespace System.Linq.Expressions {
         /// </summary>
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression" /> to evaluate.</param>
         /// <returns>An instance of <see cref="UnaryExpression"/>.</returns>
-        public static UnaryExpression IsFalse(Expression expression) {
+        public static UnaryExpression IsFalse(Expression expression)
+        {
             return IsFalse(expression, null);
         }
 
@@ -589,13 +815,25 @@ namespace System.Linq.Expressions {
         ///<param name="expression">An <see cref="T:System.Linq.Expressions.Expression" /> to evaluate.</param>
         ///<param name="method">A <see cref="T:System.Reflection.MethodInfo" /> that represents the implementing method.</param>
         /// <returns>An instance of <see cref="UnaryExpression"/>.</returns>
-        public static UnaryExpression IsFalse(Expression expression, MethodInfo method) {
+        public static UnaryExpression IsFalse(Expression expression, MethodInfo method)
+        {
             RequiresCanRead(expression, "expression");
-            if (method == null) {
-                if (TypeUtils.IsBool(expression.Type)) {
-                    return new UnaryExpression(ExpressionType.IsFalse, expression, expression.Type, null);
+            if (method == null)
+            {
+                if (TypeUtils.IsBool(expression.Type))
+                {
+                    return new UnaryExpression(
+                        ExpressionType.IsFalse,
+                        expression,
+                        expression.Type,
+                        null
+                    );
                 }
-                return GetUserDefinedUnaryOperatorOrThrow(ExpressionType.IsFalse, "op_False", expression);
+                return GetUserDefinedUnaryOperatorOrThrow(
+                    ExpressionType.IsFalse,
+                    "op_False",
+                    expression
+                );
             }
             return GetMethodBasedUnaryOperator(ExpressionType.IsFalse, expression, method);
         }
@@ -605,7 +843,8 @@ namespace System.Linq.Expressions {
         /// </summary>
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression" /> to evaluate.</param>
         /// <returns>An instance of <see cref="UnaryExpression"/>.</returns>
-        public static UnaryExpression IsTrue(Expression expression) {
+        public static UnaryExpression IsTrue(Expression expression)
+        {
             return IsTrue(expression, null);
         }
 
@@ -615,13 +854,25 @@ namespace System.Linq.Expressions {
         ///<param name="expression">An <see cref="T:System.Linq.Expressions.Expression" /> to evaluate.</param>
         ///<param name="method">A <see cref="T:System.Reflection.MethodInfo" /> that represents the implementing method.</param>
         /// <returns>An instance of <see cref="UnaryExpression"/>.</returns>
-        public static UnaryExpression IsTrue(Expression expression, MethodInfo method) {
+        public static UnaryExpression IsTrue(Expression expression, MethodInfo method)
+        {
             RequiresCanRead(expression, "expression");
-            if (method == null) {
-                if (TypeUtils.IsBool(expression.Type)) {
-                    return new UnaryExpression(ExpressionType.IsTrue, expression, expression.Type, null);
+            if (method == null)
+            {
+                if (TypeUtils.IsBool(expression.Type))
+                {
+                    return new UnaryExpression(
+                        ExpressionType.IsTrue,
+                        expression,
+                        expression.Type,
+                        null
+                    );
                 }
-                return GetUserDefinedUnaryOperatorOrThrow(ExpressionType.IsTrue, "op_True", expression);
+                return GetUserDefinedUnaryOperatorOrThrow(
+                    ExpressionType.IsTrue,
+                    "op_True",
+                    expression
+                );
             }
             return GetMethodBasedUnaryOperator(ExpressionType.IsTrue, expression, method);
         }
@@ -631,7 +882,8 @@ namespace System.Linq.Expressions {
         /// </summary>
         ///<param name="expression">An <see cref="T:System.Linq.Expressions.Expression" />.</param>
         /// <returns>An instance of <see cref="UnaryExpression"/>.</returns>
-        public static UnaryExpression OnesComplement(Expression expression) {
+        public static UnaryExpression OnesComplement(Expression expression)
+        {
             return OnesComplement(expression, null);
         }
 
@@ -641,13 +893,25 @@ namespace System.Linq.Expressions {
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression" />.</param>
         /// <param name="method">A <see cref="T:System.Reflection.MethodInfo" /> that represents the implementing method.</param>
         /// <returns>An instance of <see cref="UnaryExpression"/>.</returns>
-        public static UnaryExpression OnesComplement(Expression expression, MethodInfo method) {
+        public static UnaryExpression OnesComplement(Expression expression, MethodInfo method)
+        {
             RequiresCanRead(expression, "expression");
-            if (method == null) {
-                if (TypeUtils.IsInteger(expression.Type)) {
-                    return new UnaryExpression(ExpressionType.OnesComplement, expression, expression.Type, null);
+            if (method == null)
+            {
+                if (TypeUtils.IsInteger(expression.Type))
+                {
+                    return new UnaryExpression(
+                        ExpressionType.OnesComplement,
+                        expression,
+                        expression.Type,
+                        null
+                    );
                 }
-                return GetUserDefinedUnaryOperatorOrThrow(ExpressionType.OnesComplement, "op_OnesComplement", expression);
+                return GetUserDefinedUnaryOperatorOrThrow(
+                    ExpressionType.OnesComplement,
+                    "op_OnesComplement",
+                    expression
+                );
             }
             return GetMethodBasedUnaryOperator(ExpressionType.OnesComplement, expression, method);
         }
@@ -658,12 +922,14 @@ namespace System.Linq.Expressions {
         ///<param name="type">A <see cref="T:System.Type" /> to set the <see cref="P:System.Linq.Expressions.Expression.Type" /> property equal to.</param>
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="expression" /> or <paramref name="type" /> is null.</exception>
-        public static UnaryExpression TypeAs(Expression expression, Type type) {
+        public static UnaryExpression TypeAs(Expression expression, Type type)
+        {
             RequiresCanRead(expression, "expression");
             ContractUtils.RequiresNotNull(type, "type");
             TypeUtils.ValidateType(type);
 
-            if (type.IsValueType && !TypeUtils.IsNullableType(type)) {
+            if (type.IsValueType && !TypeUtils.IsNullableType(type))
+            {
                 throw Error.IncorrectTypeForTypeAs(type);
             }
             return new UnaryExpression(ExpressionType.TypeAs, expression, type, null);
@@ -671,17 +937,20 @@ namespace System.Linq.Expressions {
 
         /// <summary>
         /// <summary>Creates a <see cref="T:System.Linq.Expressions.UnaryExpression" /> that represents an explicit unboxing.</summary>
-        /// </summary>     
+        /// </summary>
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression" /> to unbox.</param>
         /// <param name="type">The new <see cref="T:System.Type" /> of the expression.</param>
         /// <returns>An instance of <see cref="UnaryExpression"/>.</returns>
-        public static UnaryExpression Unbox(Expression expression, Type type) {
+        public static UnaryExpression Unbox(Expression expression, Type type)
+        {
             RequiresCanRead(expression, "expression");
             ContractUtils.RequiresNotNull(type, "type");
-            if (!expression.Type.IsInterface && expression.Type != typeof(object)) {
+            if (!expression.Type.IsInterface && expression.Type != typeof(object))
+            {
                 throw Error.InvalidUnboxType();
             }
-            if (!type.IsValueType) throw Error.InvalidUnboxType();
+            if (!type.IsValueType)
+                throw Error.InvalidUnboxType();
             TypeUtils.ValidateType(type);
             return new UnaryExpression(ExpressionType.Unbox, expression, type, null);
         }
@@ -693,7 +962,8 @@ namespace System.Linq.Expressions {
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="expression" /> or <paramref name="type" /> is null.</exception>
         ///<exception cref="T:System.InvalidOperationException">No conversion operator is defined between <paramref name="expression" />.Type and <paramref name="type" />.</exception>
-        public static UnaryExpression Convert(Expression expression, Type type) {
+        public static UnaryExpression Convert(Expression expression, Type type)
+        {
             return Convert(expression, type, null);
         }
 
@@ -708,14 +978,19 @@ namespace System.Linq.Expressions {
         ///<paramref name="method" /> is not null and the method it represents returns void, is not static (Shared in Visual Basic), or does not take exactly one argument.</exception>
         ///<exception cref="T:System.Reflection.AmbiguousMatchException">More than one method that matches the <paramref name="method" /> description was found.</exception>
         ///<exception cref="T:System.InvalidOperationException">No conversion operator is defined between <paramref name="expression" />.Type and <paramref name="type" />.-or-<paramref name="expression" />.Type is not assignable to the argument type of the method represented by <paramref name="method" />.-or-The return type of the method represented by <paramref name="method" /> is not assignable to <paramref name="type" />.-or-<paramref name="expression" />.Type or <paramref name="type" /> is a nullable value type and the corresponding non-nullable value type does not equal the argument type or the return type, respectively, of the method represented by <paramref name="method" />.</exception>
-        public static UnaryExpression Convert(Expression expression, Type type, MethodInfo method) {
+        public static UnaryExpression Convert(Expression expression, Type type, MethodInfo method)
+        {
             RequiresCanRead(expression, "expression");
             ContractUtils.RequiresNotNull(type, "type");
             TypeUtils.ValidateType(type);
 
-            if (method == null) {
-                if (TypeUtils.HasIdentityPrimitiveOrNullableConversion(expression.Type, type) ||
-                    TypeUtils.HasReferenceConversion(expression.Type, type)) {
+            if (method == null)
+            {
+                if (
+                    TypeUtils.HasIdentityPrimitiveOrNullableConversion(expression.Type, type)
+                    || TypeUtils.HasReferenceConversion(expression.Type, type)
+                )
+                {
                     return new UnaryExpression(ExpressionType.Convert, expression, type, null);
                 }
                 return GetUserDefinedCoercionOrThrow(ExpressionType.Convert, expression, type);
@@ -730,7 +1005,8 @@ namespace System.Linq.Expressions {
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="expression" /> or <paramref name="type" /> is null.</exception>
         ///<exception cref="T:System.InvalidOperationException">No conversion operator is defined between <paramref name="expression" />.Type and <paramref name="type" />.</exception>
-        public static UnaryExpression ConvertChecked(Expression expression, Type type) {
+        public static UnaryExpression ConvertChecked(Expression expression, Type type)
+        {
             return ConvertChecked(expression, type, null);
         }
 
@@ -745,21 +1021,43 @@ namespace System.Linq.Expressions {
         ///<paramref name="method" /> is not null and the method it represents returns void, is not static (Shared in Visual Basic), or does not take exactly one argument.</exception>
         ///<exception cref="T:System.Reflection.AmbiguousMatchException">More than one method that matches the <paramref name="method" /> description was found.</exception>
         ///<exception cref="T:System.InvalidOperationException">No conversion operator is defined between <paramref name="expression" />.Type and <paramref name="type" />.-or-<paramref name="expression" />.Type is not assignable to the argument type of the method represented by <paramref name="method" />.-or-The return type of the method represented by <paramref name="method" /> is not assignable to <paramref name="type" />.-or-<paramref name="expression" />.Type or <paramref name="type" /> is a nullable value type and the corresponding non-nullable value type does not equal the argument type or the return type, respectively, of the method represented by <paramref name="method" />.</exception>
-        public static UnaryExpression ConvertChecked(Expression expression, Type type, MethodInfo method) {
+        public static UnaryExpression ConvertChecked(
+            Expression expression,
+            Type type,
+            MethodInfo method
+        )
+        {
             RequiresCanRead(expression, "expression");
             ContractUtils.RequiresNotNull(type, "type");
             TypeUtils.ValidateType(type);
 
-            if (method == null) {
-                if (TypeUtils.HasIdentityPrimitiveOrNullableConversion(expression.Type, type)) {
-                    return new UnaryExpression(ExpressionType.ConvertChecked, expression, type, null);
+            if (method == null)
+            {
+                if (TypeUtils.HasIdentityPrimitiveOrNullableConversion(expression.Type, type))
+                {
+                    return new UnaryExpression(
+                        ExpressionType.ConvertChecked,
+                        expression,
+                        type,
+                        null
+                    );
                 }
-                if (TypeUtils.HasReferenceConversion(expression.Type, type)) {
+                if (TypeUtils.HasReferenceConversion(expression.Type, type))
+                {
                     return new UnaryExpression(ExpressionType.Convert, expression, type, null);
                 }
-                return GetUserDefinedCoercionOrThrow(ExpressionType.ConvertChecked, expression, type);
+                return GetUserDefinedCoercionOrThrow(
+                    ExpressionType.ConvertChecked,
+                    expression,
+                    type
+                );
             }
-            return GetMethodBasedCoercionOperator(ExpressionType.ConvertChecked, expression, type, method);
+            return GetMethodBasedCoercionOperator(
+                ExpressionType.ConvertChecked,
+                expression,
+                type,
+                method
+            );
         }
 
         ///<summary>Creates a <see cref="T:System.Linq.Expressions.UnaryExpression" /> that represents getting the length of a one-dimensional array.</summary>
@@ -769,12 +1067,15 @@ namespace System.Linq.Expressions {
         ///<paramref name="array" /> is null.</exception>
         ///<exception cref="T:System.ArgumentException">
         ///<paramref name="array" />.Type does not represent an array type.</exception>
-        public static UnaryExpression ArrayLength(Expression array) {
+        public static UnaryExpression ArrayLength(Expression array)
+        {
             ContractUtils.RequiresNotNull(array, "array");
-            if (!array.Type.IsArray || !typeof(Array).IsAssignableFrom(array.Type)) {
+            if (!array.Type.IsArray || !typeof(Array).IsAssignableFrom(array.Type))
+            {
                 throw Error.ArgumentMustBeArray();
             }
-            if (array.Type.GetArrayRank() != 1) {
+            if (array.Type.GetArrayRank() != 1)
+            {
                 throw Error.ArgumentMustBeSingleDimensionalArrayType();
             }
             return new UnaryExpression(ExpressionType.ArrayLength, array, typeof(int), null);
@@ -785,21 +1086,29 @@ namespace System.Linq.Expressions {
         ///<param name="expression">An <see cref="T:System.Linq.Expressions.Expression" /> to set the <see cref="P:System.Linq.Expressions.UnaryExpression.Operand" /> property equal to.</param>
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="expression" /> is null.</exception>
-        public static UnaryExpression Quote(Expression expression) {
+        public static UnaryExpression Quote(Expression expression)
+        {
             RequiresCanRead(expression, "expression");
             bool validQuote = expression is LambdaExpression;
 #if SILVERLIGHT
             validQuote |= SilverlightQuirks;
 #endif
-            if (!validQuote) throw Error.QuotedExpressionMustBeLambda();
-            return new UnaryExpression(ExpressionType.Quote, expression, expression.GetType(), null);
+            if (!validQuote)
+                throw Error.QuotedExpressionMustBeLambda();
+            return new UnaryExpression(
+                ExpressionType.Quote,
+                expression,
+                expression.GetType(),
+                null
+            );
         }
 
         /// <summary>
         /// Creates a <see cref="T:System.Linq.Expressions.UnaryExpression" /> that represents a rethrowing of an exception.
         /// </summary>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents a rethrowing of an exception.</returns>
-        public static UnaryExpression Rethrow() {
+        public static UnaryExpression Rethrow()
+        {
             return Throw(null);
         }
 
@@ -808,7 +1117,8 @@ namespace System.Linq.Expressions {
         /// </summary>
         ///<param name="type">The new <see cref="T:System.Type" /> of the expression.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents a rethrowing of an exception.</returns>
-        public static UnaryExpression Rethrow(Type type) {
+        public static UnaryExpression Rethrow(Type type)
+        {
             return Throw(null, type);
         }
 
@@ -817,7 +1127,8 @@ namespace System.Linq.Expressions {
         /// </summary>
         /// <param name="value">An <see cref="T:System.Linq.Expressions.Expression" />.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the exception.</returns>
-        public static UnaryExpression Throw(Expression value) {
+        public static UnaryExpression Throw(Expression value)
+        {
             return Throw(value, typeof(void));
         }
 
@@ -827,13 +1138,16 @@ namespace System.Linq.Expressions {
         /// <param name="value">An <see cref="T:System.Linq.Expressions.Expression" />.</param>
         /// <param name="type">The new <see cref="T:System.Type" /> of the expression.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the exception.</returns>
-        public static UnaryExpression Throw(Expression value, Type type) {
+        public static UnaryExpression Throw(Expression value, Type type)
+        {
             ContractUtils.RequiresNotNull(type, "type");
             TypeUtils.ValidateType(type);
 
-            if (value != null) {
+            if (value != null)
+            {
                 RequiresCanRead(value, "value");
-                if (value.Type.IsValueType) throw Error.ArgumentMustNotHaveValueType();
+                if (value.Type.IsValueType)
+                    throw Error.ArgumentMustNotHaveValueType();
             }
             return new UnaryExpression(ExpressionType.Throw, value, type, null);
         }
@@ -843,7 +1157,8 @@ namespace System.Linq.Expressions {
         /// </summary>
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression"></see> to increment.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the incremented expression.</returns>
-        public static UnaryExpression Increment(Expression expression) {
+        public static UnaryExpression Increment(Expression expression)
+        {
             return Increment(expression, null);
         }
 
@@ -853,13 +1168,25 @@ namespace System.Linq.Expressions {
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression"></see> to increment.</param>
         ///<param name="method">A <see cref="T:System.Reflection.MethodInfo" /> that represents the implementing method.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the incremented expression.</returns>
-        public static UnaryExpression Increment(Expression expression, MethodInfo method) {
+        public static UnaryExpression Increment(Expression expression, MethodInfo method)
+        {
             RequiresCanRead(expression, "expression");
-            if (method == null) {
-                if (TypeUtils.IsArithmetic(expression.Type)) {
-                    return new UnaryExpression(ExpressionType.Increment, expression, expression.Type, null);
+            if (method == null)
+            {
+                if (TypeUtils.IsArithmetic(expression.Type))
+                {
+                    return new UnaryExpression(
+                        ExpressionType.Increment,
+                        expression,
+                        expression.Type,
+                        null
+                    );
                 }
-                return GetUserDefinedUnaryOperatorOrThrow(ExpressionType.Increment, "op_Increment", expression);
+                return GetUserDefinedUnaryOperatorOrThrow(
+                    ExpressionType.Increment,
+                    "op_Increment",
+                    expression
+                );
             }
             return GetMethodBasedUnaryOperator(ExpressionType.Increment, expression, method);
         }
@@ -869,7 +1196,8 @@ namespace System.Linq.Expressions {
         /// </summary>
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression"></see> to decrement.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the decremented expression.</returns>
-        public static UnaryExpression Decrement(Expression expression) {
+        public static UnaryExpression Decrement(Expression expression)
+        {
             return Decrement(expression, null);
         }
 
@@ -879,13 +1207,25 @@ namespace System.Linq.Expressions {
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression"></see> to decrement.</param>
         ///<param name="method">A <see cref="T:System.Reflection.MethodInfo" /> that represents the implementing method.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the decremented expression.</returns>
-        public static UnaryExpression Decrement(Expression expression, MethodInfo method) {
+        public static UnaryExpression Decrement(Expression expression, MethodInfo method)
+        {
             RequiresCanRead(expression, "expression");
-            if (method == null) {
-                if (TypeUtils.IsArithmetic(expression.Type)) {
-                    return new UnaryExpression(ExpressionType.Decrement, expression, expression.Type, null);
+            if (method == null)
+            {
+                if (TypeUtils.IsArithmetic(expression.Type))
+                {
+                    return new UnaryExpression(
+                        ExpressionType.Decrement,
+                        expression,
+                        expression.Type,
+                        null
+                    );
                 }
-                return GetUserDefinedUnaryOperatorOrThrow(ExpressionType.Decrement, "op_Decrement", expression);
+                return GetUserDefinedUnaryOperatorOrThrow(
+                    ExpressionType.Decrement,
+                    "op_Decrement",
+                    expression
+                );
             }
             return GetMethodBasedUnaryOperator(ExpressionType.Decrement, expression, method);
         }
@@ -896,9 +1236,9 @@ namespace System.Linq.Expressions {
         /// </summary>
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression"></see> to apply the operations on.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the resultant expression.</returns>
-        public static UnaryExpression PreIncrementAssign(Expression expression) {
+        public static UnaryExpression PreIncrementAssign(Expression expression)
+        {
             return MakeOpAssignUnary(ExpressionType.PreIncrementAssign, expression, null);
-
         }
 
         /// <summary>
@@ -908,7 +1248,8 @@ namespace System.Linq.Expressions {
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression"></see> to apply the operations on.</param>
         /// <param name="method">A <see cref="T:System.Reflection.MethodInfo" /> that represents the implementing method.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the resultant expression.</returns>
-        public static UnaryExpression PreIncrementAssign(Expression expression, MethodInfo method) {
+        public static UnaryExpression PreIncrementAssign(Expression expression, MethodInfo method)
+        {
             return MakeOpAssignUnary(ExpressionType.PreIncrementAssign, expression, method);
         }
 
@@ -918,7 +1259,8 @@ namespace System.Linq.Expressions {
         /// </summary>
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression"></see> to apply the operations on.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the resultant expression.</returns>
-        public static UnaryExpression PreDecrementAssign(Expression expression) {
+        public static UnaryExpression PreDecrementAssign(Expression expression)
+        {
             return MakeOpAssignUnary(ExpressionType.PreDecrementAssign, expression, null);
         }
 
@@ -929,73 +1271,94 @@ namespace System.Linq.Expressions {
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression"></see> to apply the operations on.</param>
         /// <param name="method">A <see cref="T:System.Reflection.MethodInfo" /> that represents the implementing method.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the resultant expression.</returns>
-        public static UnaryExpression PreDecrementAssign(Expression expression, MethodInfo method) {
+        public static UnaryExpression PreDecrementAssign(Expression expression, MethodInfo method)
+        {
             return MakeOpAssignUnary(ExpressionType.PreDecrementAssign, expression, method);
         }
 
         /// <summary>
-        /// Creates a <see cref="UnaryExpression"/> that represents the assignment of the expression 
+        /// Creates a <see cref="UnaryExpression"/> that represents the assignment of the expression
         /// followed by a subsequent increment by 1 of the original expression.
         /// </summary>
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression"></see> to apply the operations on.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the resultant expression.</returns>
-        public static UnaryExpression PostIncrementAssign(Expression expression) {
+        public static UnaryExpression PostIncrementAssign(Expression expression)
+        {
             return MakeOpAssignUnary(ExpressionType.PostIncrementAssign, expression, null);
         }
 
         /// <summary>
-        /// Creates a <see cref="UnaryExpression"/> that represents the assignment of the expression 
+        /// Creates a <see cref="UnaryExpression"/> that represents the assignment of the expression
         /// followed by a subsequent increment by 1 of the original expression.
         /// </summary>
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression"></see> to apply the operations on.</param>
         /// <param name="method">A <see cref="T:System.Reflection.MethodInfo" /> that represents the implementing method.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the resultant expression.</returns>
-        public static UnaryExpression PostIncrementAssign(Expression expression, MethodInfo method) {
+        public static UnaryExpression PostIncrementAssign(Expression expression, MethodInfo method)
+        {
             return MakeOpAssignUnary(ExpressionType.PostIncrementAssign, expression, method);
         }
 
         /// <summary>
-        /// Creates a <see cref="UnaryExpression"/> that represents the assignment of the expression 
+        /// Creates a <see cref="UnaryExpression"/> that represents the assignment of the expression
         /// followed by a subsequent decrement by 1 of the original expression.
         /// </summary>
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression"></see> to apply the operations on.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the resultant expression.</returns>
-        public static UnaryExpression PostDecrementAssign(Expression expression) {
+        public static UnaryExpression PostDecrementAssign(Expression expression)
+        {
             return MakeOpAssignUnary(ExpressionType.PostDecrementAssign, expression, null);
         }
 
         /// <summary>
-        /// Creates a <see cref="UnaryExpression"/> that represents the assignment of the expression 
+        /// Creates a <see cref="UnaryExpression"/> that represents the assignment of the expression
         /// followed by a subsequent decrement by 1 of the original expression.
         /// </summary>
         /// <param name="expression">An <see cref="T:System.Linq.Expressions.Expression"></see> to apply the operations on.</param>
         /// <param name="method">A <see cref="T:System.Reflection.MethodInfo" /> that represents the implementing method.</param>
         /// <returns>A <see cref="T:System.Linq.Expressions.UnaryExpression"/> that represents the resultant expression.</returns>
-        public static UnaryExpression PostDecrementAssign(Expression expression, MethodInfo method) {
+        public static UnaryExpression PostDecrementAssign(Expression expression, MethodInfo method)
+        {
             return MakeOpAssignUnary(ExpressionType.PostDecrementAssign, expression, method);
         }
 
-        private static UnaryExpression MakeOpAssignUnary(ExpressionType kind, Expression expression, MethodInfo method) {
+        private static UnaryExpression MakeOpAssignUnary(
+            ExpressionType kind,
+            Expression expression,
+            MethodInfo method
+        )
+        {
             RequiresCanRead(expression, "expression");
             RequiresCanWrite(expression, "expression");
 
             UnaryExpression result;
-            if (method == null) {
-                if (TypeUtils.IsArithmetic(expression.Type)) {
+            if (method == null)
+            {
+                if (TypeUtils.IsArithmetic(expression.Type))
+                {
                     return new UnaryExpression(kind, expression, expression.Type, null);
                 }
                 string name;
-                if (kind == ExpressionType.PreIncrementAssign || kind == ExpressionType.PostIncrementAssign) {
+                if (
+                    kind == ExpressionType.PreIncrementAssign
+                    || kind == ExpressionType.PostIncrementAssign
+                )
+                {
                     name = "op_Increment";
-                } else {
+                }
+                else
+                {
                     name = "op_Decrement";
                 }
                 result = GetUserDefinedUnaryOperatorOrThrow(kind, name, expression);
-            } else {
+            }
+            else
+            {
                 result = GetMethodBasedUnaryOperator(kind, expression, method);
             }
             // return type must be assignable back to the operand type
-            if (!TypeUtils.AreReferenceAssignable(expression.Type, result.Type)) {
+            if (!TypeUtils.AreReferenceAssignable(expression.Type, result.Type))
+            {
                 throw Error.UserDefinedOpMustHaveValidReturnType(kind, method.Name);
             }
             return result;

@@ -40,11 +40,17 @@ namespace System.CodeDom.Tests
 
             CodeTypeReference type1 = new CodeTypeReference(typeof(int));
             memberEvent.ImplementationTypes.Add(type1);
-            Assert.Equal(new CodeTypeReference[] { type1 }, memberEvent.ImplementationTypes.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1 },
+                memberEvent.ImplementationTypes.Cast<CodeTypeReference>()
+            );
 
             CodeTypeReference type2 = new CodeTypeReference(typeof(int));
             memberEvent.ImplementationTypes.Add(type2);
-            Assert.Equal(new CodeTypeReference[] { type1, type2 }, memberEvent.ImplementationTypes.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1, type2 },
+                memberEvent.ImplementationTypes.Cast<CodeTypeReference>()
+            );
         }
     }
 }

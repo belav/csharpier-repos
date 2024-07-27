@@ -7,5 +7,5 @@ internal enum HttpConnectionStatus
 {
     Inactive,
     Active,
-    Disposed
+    Disposed,
 }

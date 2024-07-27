@@ -7,7 +7,6 @@ using System.Diagnostics.Contracts;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Threading;
-
 using Internal.DeveloperExperience;
 
 namespace System
@@ -36,8 +35,7 @@ namespace System
         // to assign blame for crashes.  Don't mess with this, such as by making it call
         // another managed helper method, unless you consult with some CLR Watson experts.
         [DoesNotReturn]
-        public static void FailFast(string? message) =>
-            RuntimeExceptionHelpers.FailFast(message);
+        public static void FailFast(string? message) => RuntimeExceptionHelpers.FailFast(message);
 
         [DoesNotReturn]
         public static void FailFast(string? message, Exception? exception) =>
@@ -45,7 +43,12 @@ namespace System
 
         // Used by System.Diagnostics.Debug.Assert/Fail
         internal static void FailFast(string? message, Exception? exception, string errorSource) =>
-            RuntimeExceptionHelpers.FailFast(message, exception, errorSource: errorSource, reason: RhFailFastReason.AssertionFailure);
+            RuntimeExceptionHelpers.FailFast(
+                message,
+                exception,
+                errorSource: errorSource,
+                reason: RhFailFastReason.AssertionFailure
+            );
 
         private static int GetProcessorCount() => Runtime.RuntimeImports.RhGetProcessCpuCount();
 

@@ -32,9 +32,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class NoConstructorReadOnlyDictionary<TKey, TValue> : ReadOnlyDictionary<TKey, TValue>
     {
         public NoConstructorReadOnlyDictionary()
-            : base(new Dictionary<TKey, TValue>())
-        {
-        }
+            : base(new Dictionary<TKey, TValue>()) { }
     }
 #endif
 }

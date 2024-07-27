@@ -13,7 +13,10 @@ public class BulkUpdatesAsserter
     private readonly Func<Expression, Expression> _rewriteServerQueryExpression;
     private readonly IReadOnlyDictionary<Type, object> _entitySorters;
 
-    public BulkUpdatesAsserter(IBulkUpdatesFixtureBase queryFixture, Func<Expression, Expression> rewriteServerQueryExpression)
+    public BulkUpdatesAsserter(
+        IBulkUpdatesFixtureBase queryFixture,
+        Func<Expression, Expression> rewriteServerQueryExpression
+    )
     {
         _contextCreator = queryFixture.GetContextCreator();
         _useTransaction = queryFixture.GetUseTransaction();
@@ -25,12 +28,14 @@ public class BulkUpdatesAsserter
     public async Task AssertDelete<TResult>(
         bool async,
         Func<ISetSource, IQueryable<TResult>> query,
-        int rowsAffectedCount)
+        int rowsAffectedCount
+    )
     {
         if (async)
         {
             await TestHelpers.ExecuteWithStrategyInTransactionAsync(
-                _contextCreator, _useTransaction,
+                _contextCreator,
+                _useTransaction,
                 async context =>
                 {
                     var processedQuery = RewriteServerQuery(query(_setSourceCreator(context)));
@@ -38,12 +43,14 @@ public class BulkUpdatesAsserter
                     var result = await processedQuery.ExecuteDeleteAsync();
 
                     Assert.Equal(rowsAffectedCount, result);
-                });
+                }
+            );
         }
         else
         {
             TestHelpers.ExecuteWithStrategyInTransaction(
-                _contextCreator, _useTransaction,
+                _contextCreator,
+                _useTransaction,
                 context =>
                 {
                     var processedQuery = RewriteServerQuery(query(_setSourceCreator(context)));
@@ -51,7 +58,8 @@ public class BulkUpdatesAsserter
                     var result = processedQuery.ExecuteDelete();
 
                     Assert.Equal(rowsAffectedCount, result);
-                });
+                }
+            );
         }
     }
 
@@ -61,7 +69,8 @@ public class BulkUpdatesAsserter
         Expression<Func<TResult, TEntity>> entitySelector,
         Expression<Func<SetPropertyCalls<TResult>, SetPropertyCalls<TResult>>> setPropertyCalls,
         int rowsAffectedCount,
-        Action<IReadOnlyList<TEntity>, IReadOnlyList<TEntity>> asserter)
+        Action<IReadOnlyList<TEntity>, IReadOnlyList<TEntity>> asserter
+    )
         where TResult : class
     {
         _entitySorters.TryGetValue(typeof(TEntity), out var sorter);
@@ -69,43 +78,63 @@ public class BulkUpdatesAsserter
         if (async)
         {
             await TestHelpers.ExecuteWithStrategyInTransactionAsync(
-                _contextCreator, _useTransaction,
+                _contextCreator,
+                _useTransaction,
                 async context =>
                 {
                     var processedQuery = RewriteServerQuery(query(_setSourceCreator(context)));
 
-                    var before = processedQuery.AsNoTracking().Select(entitySelector).OrderBy(elementSorter).ToList();
+                    var before = processedQuery
+                        .AsNoTracking()
+                        .Select(entitySelector)
+                        .OrderBy(elementSorter)
+                        .ToList();
 
                     var result = await processedQuery.ExecuteUpdateAsync(setPropertyCalls);
 
                     Assert.Equal(rowsAffectedCount, result);
 
-                    var after = processedQuery.AsNoTracking().Select(entitySelector).OrderBy(elementSorter).ToList();
+                    var after = processedQuery
+                        .AsNoTracking()
+                        .Select(entitySelector)
+                        .OrderBy(elementSorter)
+                        .ToList();
 
                     asserter?.Invoke(before, after);
-                });
+                }
+            );
         }
         else
         {
             TestHelpers.ExecuteWithStrategyInTransaction(
-                _contextCreator, _useTransaction,
+                _contextCreator,
+                _useTransaction,
                 context =>
                 {
                     var processedQuery = RewriteServerQuery(query(_setSourceCreator(context)));
 
-                    var before = processedQuery.AsNoTracking().Select(entitySelector).OrderBy(elementSorter).ToList();
+                    var before = processedQuery
+                        .AsNoTracking()
+                        .Select(entitySelector)
+                        .OrderBy(elementSorter)
+                        .ToList();
 
                     var result = processedQuery.ExecuteUpdate(setPropertyCalls);
 
                     Assert.Equal(rowsAffectedCount, result);
 
-                    var after = processedQuery.AsNoTracking().Select(entitySelector).OrderBy(elementSorter).ToList();
+                    var after = processedQuery
+                        .AsNoTracking()
+                        .Select(entitySelector)
+                        .OrderBy(elementSorter)
+                        .ToList();
 
                     asserter?.Invoke(before, after);
-                });
+                }
+            );
         }
     }
 
-    private IQueryable<T> RewriteServerQuery<T>(IQueryable<T> query)
-        => query.Provider.CreateQuery<T>(_rewriteServerQueryExpression(query.Expression));
+    private IQueryable<T> RewriteServerQuery<T>(IQueryable<T> query) =>
+        query.Provider.CreateQuery<T>(_rewriteServerQueryExpression(query.Expression));
 }

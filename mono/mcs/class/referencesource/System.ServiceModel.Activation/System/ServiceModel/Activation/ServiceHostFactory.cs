@@ -11,7 +11,9 @@ namespace System.ServiceModel.Activation
     using System.Runtime;
     using System.Runtime.CompilerServices;
 
-    [TypeForwardedFrom("System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ServiceHostFactory : ServiceHostFactoryBase
     {
         Collection<string> referencedAssemblies;
@@ -26,19 +28,33 @@ namespace System.ServiceModel.Activation
             this.referencedAssemblies.Add(assemblyName);
         }
 
-        [SuppressMessage(FxCop.Category.ReliabilityBasic, 
+        [SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
             "Reliability104:CaughtAndHandledExceptionsRule",
-            Justification = "When using the Asp.Net 'WebSite-model' this exception can happen due to dynamic compilation. This isn't harmful for WCF as long as the ServiceType can be found in another assembly.")]
-        public override ServiceHostBase CreateServiceHost(string constructorString, Uri[] baseAddresses)
+            Justification = "When using the Asp.Net 'WebSite-model' this exception can happen due to dynamic compilation. This isn't harmful for WCF as long as the ServiceType can be found in another assembly."
+        )]
+        public override ServiceHostBase CreateServiceHost(
+            string constructorString,
+            Uri[] baseAddresses
+        )
         {
             if (!AspNetEnvironment.Enabled)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_ProcessNotExecutingUnderHostedContext("ServiceHostFactory.CreateServiceHost")));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.Hosting_ProcessNotExecutingUnderHostedContext(
+                            "ServiceHostFactory.CreateServiceHost"
+                        )
+                    )
+                );
             }
 
             if (string.IsNullOrEmpty(constructorString))
             {
-                throw FxTrace.Exception.Argument("constructorString", SR.Hosting_ServiceTypeNotProvided);
+                throw FxTrace.Exception.Argument(
+                    "constructorString",
+                    SR.Hosting_ServiceTypeNotProvided
+                );
             }
 
             Type type = Type.GetType(constructorString, false);
@@ -60,7 +76,7 @@ namespace System.ServiceModel.Activation
                     }
                     catch (FileNotFoundException fileNotFoundException)
                     {
-                        // When using the Asp.Net "WebSite-model" this exception can happen due to dynamic compilation 
+                        // When using the Asp.Net "WebSite-model" this exception can happen due to dynamic compilation
                         // This isn't harmful for WCF as long as the ServiceType can be found in another assembly...
                         if (FxTrace.ShouldTraceInformation)
                         {
@@ -94,7 +110,11 @@ namespace System.ServiceModel.Activation
 
             if (type == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_ServiceTypeNotResolved(constructorString)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.Hosting_ServiceTypeNotResolved(constructorString)
+                    )
+                );
             }
 
             return CreateServiceHost(type, baseAddresses);

@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-    
+namespace System.Web.UI.WebControls
+{
     // TODO, nikhilko: Change namespace to System.Web.UI
 
 
@@ -17,13 +17,11 @@ namespace System.Web.UI.WebControls {
     /// ****************************************************************************
     ///
     /// </devdoc>
-    public interface ICompositeControlDesignerAccessor {
-
-
+    public interface ICompositeControlDesignerAccessor
+    {
         /// <devdoc>
         /// Recreates the child controls.
         /// </devdoc>
         void RecreateChildControls();
     }
-
 }

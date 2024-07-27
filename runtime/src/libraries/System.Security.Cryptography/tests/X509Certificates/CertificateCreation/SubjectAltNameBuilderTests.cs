@@ -16,14 +16,35 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         {
             SubjectAlternativeNameBuilder builder = new SubjectAlternativeNameBuilder();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("dnsName", () => builder.AddDnsName(null));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("dnsName", () => builder.AddDnsName(string.Empty));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("emailAddress", () => builder.AddEmailAddress(null));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("emailAddress", () => builder.AddEmailAddress(string.Empty));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "dnsName",
+                () => builder.AddDnsName(null)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "dnsName",
+                () => builder.AddDnsName(string.Empty)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "emailAddress",
+                () => builder.AddEmailAddress(null)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "emailAddress",
+                () => builder.AddEmailAddress(string.Empty)
+            );
             AssertExtensions.Throws<ArgumentNullException>("uri", () => builder.AddUri(null));
-            AssertExtensions.Throws<ArgumentNullException>("ipAddress", () => builder.AddIpAddress(null));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("upn", () => builder.AddUserPrincipalName(null));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("upn", () => builder.AddUserPrincipalName(string.Empty));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "ipAddress",
+                () => builder.AddIpAddress(null)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "upn",
+                () => builder.AddUserPrincipalName(null)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "upn",
+                () => builder.AddUserPrincipalName(string.Empty)
+            );
         }
 
         [Fact]
@@ -35,7 +56,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             X509Extension extension = builder.Build();
             Assert.Equal(SubjectAltNameOid, extension.Oid.Value);
 
-            Assert.Equal("3011820F7777772E6578616D706C652E6F7267", extension.RawData.ByteArrayToHex());
+            Assert.Equal(
+                "3011820F7777772E6578616D706C652E6F7267",
+                extension.RawData.ByteArrayToHex()
+            );
         }
 
         [Fact]
@@ -51,7 +75,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             Assert.Equal(
                 "301C821A786E2D2D7767763731616F3039652E6578616D706C652E6F7267",
-                extension.RawData.ByteArrayToHex());
+                extension.RawData.ByteArrayToHex()
+            );
         }
 
         [Fact]
@@ -63,7 +88,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             X509Extension extension = builder.Build();
             Assert.Equal(SubjectAltNameOid, extension.Oid.Value);
 
-            Assert.Equal("3012811075736572406578616D706C652E6F7267", extension.RawData.ByteArrayToHex());
+            Assert.Equal(
+                "3012811075736572406578616D706C652E6F7267",
+                extension.RawData.ByteArrayToHex()
+            );
         }
 
         [Fact]
@@ -75,7 +103,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             // [nihongo]@[nihongo].example.org
             Assert.Throws<CryptographicException>(
-                () => builder.AddEmailAddress("\u65E5\u672C\u8A8E@\u65E5\u672C\u8A8E.example.org"));
+                () => builder.AddEmailAddress("\u65E5\u672C\u8A8E@\u65E5\u672C\u8A8E.example.org")
+            );
         }
 
         [Fact]
@@ -101,7 +130,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             X509Extension extension = builder.Build();
             Assert.Equal(SubjectAltNameOid, extension.Oid.Value);
 
-            Assert.Equal("3012871000000000000000000000000000000001", extension.RawData.ByteArrayToHex());
+            Assert.Equal(
+                "3012871000000000000000000000000000000001",
+                extension.RawData.ByteArrayToHex()
+            );
         }
 
         [Fact]
@@ -116,7 +148,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             Assert.Equal(
                 "30198617687474703A2F2F7777772E6578616D706C652E6F72672F",
-                extension.RawData.ByteArrayToHex());
+                extension.RawData.ByteArrayToHex()
+            );
         }
 
         [Fact]
@@ -125,7 +158,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             SubjectAlternativeNameBuilder builder = new SubjectAlternativeNameBuilder();
 
             Assert.Throws<CryptographicException>(
-                () => builder.AddUri(new Uri("http://\u65E5\u672C\u8A8E.example.org/")));
+                () => builder.AddUri(new Uri("http://\u65E5\u672C\u8A8E.example.org/"))
+            );
         }
 
         [Fact]
@@ -139,12 +173,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             Assert.Equal(SubjectAltNameOid, extension.Oid.Value);
 
             const string expectedHex =
-                "30348632687474703A2F2F7777772E6578616D706C652E6F72672F2545362539" +
-                "37254135254536253943254143254538254141253845";
+                "30348632687474703A2F2F7777772E6578616D706C652E6F72672F2545362539"
+                + "37254135254536253943254143254538254141253845";
 
-            Assert.Equal(
-                expectedHex,
-                extension.RawData.ByteArrayToHex());
+            Assert.Equal(expectedHex, extension.RawData.ByteArrayToHex());
         }
 
         [Fact]
@@ -159,7 +191,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             Assert.Equal(
                 "3022A020060A2B060104018237140203A0120C1075736572406578616D706C652E6F7267",
-                extension.RawData.ByteArrayToHex());
+                extension.RawData.ByteArrayToHex()
+            );
         }
 
         [Fact]
@@ -179,14 +212,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             //     URL=http://uri2.subject.example.org/
 
             const string expectedHex =
-                "3081F88218646E73312E7375626A6563742E6578616D706C652E6F7267821864" +
-                "6E73322E7375626A6563742E6578616D706C652E6F7267811573616E656D6169" +
-                "6C31406578616D706C652E6F7267811573616E656D61696C32406578616D706C" +
-                "652E6F7267A027060A2B060104018237140203A0190C177375626A6563747570" +
-                "6E31406578616D706C652E6F7267A027060A2B060104018237140203A0190C17" +
-                "7375626A65637475706E32406578616D706C652E6F72678620687474703A2F2F" +
-                "757269312E7375626A6563742E6578616D706C652E6F72672F8620687474703A" +
-                "2F2F757269322E7375626A6563742E6578616D706C652E6F72672F";
+                "3081F88218646E73312E7375626A6563742E6578616D706C652E6F7267821864"
+                + "6E73322E7375626A6563742E6578616D706C652E6F7267811573616E656D6169"
+                + "6C31406578616D706C652E6F7267811573616E656D61696C32406578616D706C"
+                + "652E6F7267A027060A2B060104018237140203A0190C177375626A6563747570"
+                + "6E31406578616D706C652E6F7267A027060A2B060104018237140203A0190C17"
+                + "7375626A65637475706E32406578616D706C652E6F72678620687474703A2F2F"
+                + "757269312E7375626A6563742E6578616D706C652E6F72672F8620687474703A"
+                + "2F2F757269322E7375626A6563742E6578616D706C652E6F72672F";
 
             SubjectAlternativeNameBuilder builder = new SubjectAlternativeNameBuilder();
             builder.AddDnsName("dns1.subject.example.org");
@@ -201,9 +234,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             X509Extension extension = builder.Build();
             Assert.Equal(SubjectAltNameOid, extension.Oid.Value);
 
-            Assert.Equal(
-                expectedHex,
-                extension.RawData.ByteArrayToHex());
+            Assert.Equal(expectedHex, extension.RawData.ByteArrayToHex());
         }
 
         [Fact]
@@ -243,7 +274,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             Assert.True(
                 secondExtension.RawData.Length > extension.RawData.Length,
-                $"secondExtension.RawData.Length > extension.RawData.Length");
+                $"secondExtension.RawData.Length > extension.RawData.Length"
+            );
         }
 
         [Fact]

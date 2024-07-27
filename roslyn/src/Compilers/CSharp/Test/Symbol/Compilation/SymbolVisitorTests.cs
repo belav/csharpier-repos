@@ -24,8 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             public override string ToString() => _output.ToString();
 
             void VisitChildren<T>(params T[] children)
-                where T : ISymbol
-                => VisitChildren((IEnumerable<T>)children);
+                where T : ISymbol => VisitChildren((IEnumerable<T>)children);
 
             void VisitChildren<T>(IEnumerable<T> children)
                 where T : ISymbol
@@ -38,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override void DefaultVisit(ISymbol symbol)
             {
-                _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                _output.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
             }
 
             public override void VisitAlias(IAliasSymbol symbol)
@@ -55,7 +56,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override void VisitAssembly(IAssemblySymbol symbol)
             {
-                _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                _output.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 _indent++;
                 VisitChildren(symbol.Modules);
                 _indent--;
@@ -73,14 +76,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override void VisitEvent(IEventSymbol symbol)
             {
-                _output.Append(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": ");
+                _output.Append(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": "
+                );
                 symbol.Type.Accept(this);
                 _output.AppendLine();
             }
 
             public override void VisitField(IFieldSymbol symbol)
             {
-                _output.Append(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": ");
+                _output.Append(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": "
+                );
                 symbol.Type.Accept(this);
                 _output.AppendLine();
             }
@@ -97,7 +104,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override void VisitMethod(IMethodSymbol symbol)
             {
-                _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                _output.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 _indent++;
                 VisitChildren(symbol.TypeArguments);
                 VisitChildren(symbol.Parameters);
@@ -106,7 +115,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override void VisitModule(IModuleSymbol symbol)
             {
-                _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                _output.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 _indent++;
                 VisitChildren(symbol.GlobalNamespace);
                 _indent--;
@@ -116,7 +127,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_indent < 4)
                 {
-                    _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                    _output.AppendLine(
+                        new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                    );
                     _indent++;
                     VisitChildren(symbol.TypeArguments);
                     VisitChildren(symbol.GetMembers());
@@ -135,7 +148,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override void VisitNamespace(INamespaceSymbol symbol)
             {
-                _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                _output.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 _indent++;
                 VisitChildren(symbol.GetMembers());
                 _indent--;
@@ -143,7 +158,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override void VisitParameter(IParameterSymbol symbol)
             {
-                _output.Append(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": ");
+                _output.Append(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": "
+                );
                 symbol.Type.Accept(this);
                 _output.AppendLine();
             }
@@ -161,7 +178,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override void VisitProperty(IPropertySymbol symbol)
             {
-                _output.Append(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                _output.Append(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 symbol.Type.Accept(this);
                 _output.AppendLine();
             }
@@ -175,7 +194,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_indent < 5)
                 {
-                    _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                    _output.AppendLine(
+                        new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                    );
                 }
                 else
                 {
@@ -192,8 +213,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             public override string ToString() => _output.ToString();
 
             void VisitChildren<T>(params T[] children)
-                where T : ISymbol
-                => VisitChildren((IEnumerable<T>)children);
+                where T : ISymbol => VisitChildren((IEnumerable<T>)children);
 
             void VisitChildren<T>(IEnumerable<T> children)
                 where T : ISymbol
@@ -206,7 +226,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override string DefaultVisit(ISymbol symbol)
             {
-                _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                _output.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 return null;
             }
 
@@ -226,7 +248,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override string VisitAssembly(IAssemblySymbol symbol)
             {
-                _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                _output.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 _indent++;
                 VisitChildren(symbol.Modules);
                 _indent--;
@@ -247,7 +271,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override string VisitEvent(IEventSymbol symbol)
             {
-                _output.Append(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": ");
+                _output.Append(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": "
+                );
                 symbol.Type.Accept(this);
                 _output.AppendLine();
                 return null;
@@ -255,7 +281,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override string VisitField(IFieldSymbol symbol)
             {
-                _output.Append(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": ");
+                _output.Append(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": "
+                );
                 symbol.Type.Accept(this);
                 _output.AppendLine();
                 return null;
@@ -275,7 +303,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override string VisitMethod(IMethodSymbol symbol)
             {
-                _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                _output.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 _indent++;
                 VisitChildren(symbol.TypeArguments);
                 VisitChildren(symbol.Parameters);
@@ -285,7 +315,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override string VisitModule(IModuleSymbol symbol)
             {
-                _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                _output.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 _indent++;
                 VisitChildren(symbol.GlobalNamespace);
                 _indent--;
@@ -296,7 +328,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_indent < 4)
                 {
-                    _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                    _output.AppendLine(
+                        new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                    );
                     _indent++;
                     VisitChildren(symbol.TypeArguments);
                     VisitChildren(symbol.GetMembers());
@@ -316,7 +350,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override string VisitNamespace(INamespaceSymbol symbol)
             {
-                _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                _output.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 _indent++;
                 VisitChildren(symbol.GetMembers());
                 _indent--;
@@ -325,7 +361,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override string VisitParameter(IParameterSymbol symbol)
             {
-                _output.Append(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": ");
+                _output.Append(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": "
+                );
                 symbol.Type.Accept(this);
                 _output.AppendLine();
                 return null;
@@ -346,7 +384,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override string VisitProperty(IPropertySymbol symbol)
             {
-                _output.Append(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                _output.Append(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 symbol.Type.Accept(this);
                 _output.AppendLine();
                 return null;
@@ -362,7 +402,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_indent < 5)
                 {
-                    _output.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                    _output.AppendLine(
+                        new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                    );
                 }
                 else
                 {
@@ -372,7 +414,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private class LoggingSymbolVisitorWithReturnValueAndContext : SymbolVisitor<StringBuilder, int>
+        private class LoggingSymbolVisitorWithReturnValueAndContext
+            : SymbolVisitor<StringBuilder, int>
         {
             private int _indent;
 
@@ -389,7 +432,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override int VisitAssembly(IAssemblySymbol symbol, StringBuilder argument)
             {
-                argument.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                argument.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 _indent++;
                 VisitChildren(symbol.Modules, argument);
                 _indent--;
@@ -398,7 +443,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override int VisitModule(IModuleSymbol symbol, StringBuilder argument)
             {
-                argument.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                argument.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 _indent++;
                 VisitChildren(new[] { symbol.GlobalNamespace }, argument);
                 _indent--;
@@ -407,7 +454,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override int VisitNamespace(INamespaceSymbol symbol, StringBuilder argument)
             {
-                argument.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                argument.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 _indent++;
                 VisitChildren(symbol.GetMembers(), argument);
                 _indent--;
@@ -418,7 +467,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_indent < 4)
                 {
-                    argument.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                    argument.AppendLine(
+                        new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                    );
                     _indent++;
                     VisitChildren(symbol.TypeArguments, argument);
                     VisitChildren(symbol.GetMembers(), argument);
@@ -438,7 +489,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override int VisitEvent(IEventSymbol symbol, StringBuilder argument)
             {
-                argument.Append(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": ");
+                argument.Append(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": "
+                );
                 symbol.Type.Accept(this, argument);
                 argument.AppendLine();
                 return _indent;
@@ -446,7 +499,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override int VisitField(IFieldSymbol symbol, StringBuilder argument)
             {
-                argument.Append(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": ");
+                argument.Append(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": "
+                );
                 symbol.Type.Accept(this, argument);
                 argument.AppendLine();
                 return _indent;
@@ -454,7 +509,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override int VisitMethod(IMethodSymbol symbol, StringBuilder argument)
             {
-                argument.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                argument.AppendLine(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 _indent++;
                 VisitChildren(symbol.TypeArguments, argument);
                 VisitChildren(symbol.Parameters, argument);
@@ -464,7 +521,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override int VisitParameter(IParameterSymbol symbol, StringBuilder argument)
             {
-                argument.Append(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": ");
+                argument.Append(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name + ": "
+                );
                 symbol.Type.Accept(this, argument);
                 argument.AppendLine();
                 return _indent;
@@ -490,29 +549,42 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return _indent;
             }
 
-            public override int VisitFunctionPointerType(IFunctionPointerTypeSymbol symbol, StringBuilder argument)
+            public override int VisitFunctionPointerType(
+                IFunctionPointerTypeSymbol symbol,
+                StringBuilder argument
+            )
             {
                 return base.VisitFunctionPointerType(symbol, argument);
             }
 
             public override int VisitProperty(IPropertySymbol symbol, StringBuilder argument)
             {
-                argument.Append(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                argument.Append(
+                    new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                );
                 symbol.Type.Accept(this, argument);
                 argument.AppendLine();
                 return _indent;
             }
 
-            public override int VisitRangeVariable(IRangeVariableSymbol symbol, StringBuilder argument)
+            public override int VisitRangeVariable(
+                IRangeVariableSymbol symbol,
+                StringBuilder argument
+            )
             {
                 return base.VisitRangeVariable(symbol, argument);
             }
 
-            public override int VisitTypeParameter(ITypeParameterSymbol symbol, StringBuilder argument)
+            public override int VisitTypeParameter(
+                ITypeParameterSymbol symbol,
+                StringBuilder argument
+            )
             {
                 if (_indent < 5)
                 {
-                    argument.AppendLine(new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name);
+                    argument.AppendLine(
+                        new string(' ', 2 * _indent) + symbol.GetType().Name + " " + symbol.Name
+                    );
                 }
                 else
                 {
@@ -526,18 +598,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         public void NamedType_LoggingSymbolVisitor()
         {
             var c = CreateCompilation(
-                "using System;" +
-                "class C { }" +
-                "struct S { int i; }" +
-                "class Generic<T> {}" +
-                "enum ABC { A, B, C }" +
-                "delegate TReturn Function<T, TReturn>(T arg);",
-                assemblyName: "SymbolVisitorTests");
+                "using System;"
+                    + "class C { }"
+                    + "struct S { int i; }"
+                    + "class Generic<T> {}"
+                    + "enum ABC { A, B, C }"
+                    + "delegate TReturn Function<T, TReturn>(T arg);",
+                assemblyName: "SymbolVisitorTests"
+            );
             IAssemblySymbol asm = new SourceAssemblySymbol(c.SourceAssembly);
             var visitor = new LoggingSymbolVisitor();
             asm.Accept(visitor);
 
-            string expectedOutput = @"SourceAssemblySymbol SymbolVisitorTests
+            string expectedOutput =
+                @"SourceAssemblySymbol SymbolVisitorTests
   ModuleSymbol SymbolVisitorTests.dll
     NamespaceSymbol 
       NonErrorNamedTypeSymbol C
@@ -577,18 +651,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         public void NamedType_LoggingSymbolVisitorWithReturnValue()
         {
             var c = CreateCompilation(
-                "using System;" +
-                "class C { }" +
-                "struct S { int i; }" +
-                "class Generic<T> {}" +
-                "enum ABC { A, B, C }" +
-                "delegate TReturn Function<T, TReturn>(T arg);",
-                assemblyName: "SymbolVisitorTests");
+                "using System;"
+                    + "class C { }"
+                    + "struct S { int i; }"
+                    + "class Generic<T> {}"
+                    + "enum ABC { A, B, C }"
+                    + "delegate TReturn Function<T, TReturn>(T arg);",
+                assemblyName: "SymbolVisitorTests"
+            );
             IAssemblySymbol asm = new SourceAssemblySymbol(c.SourceAssembly);
             var visitor = new LoggingSymbolVisitorWithReturnValue();
             asm.Accept(visitor);
 
-            string expectedOutput = @"SourceAssemblySymbol SymbolVisitorTests
+            string expectedOutput =
+                @"SourceAssemblySymbol SymbolVisitorTests
   ModuleSymbol SymbolVisitorTests.dll
     NamespaceSymbol 
       NonErrorNamedTypeSymbol C
@@ -628,19 +704,21 @@ namespace Microsoft.CodeAnalysis.CSharp
         public void NamedType_LoggingSymbolVisitorWithReturnValueAndContext()
         {
             var c = CreateCompilation(
-                "using System;" +
-                "class C { }" +
-                "struct S { int i; }" +
-                "class Generic<T> {}" +
-                "enum ABC { A, B, C }" +
-                "delegate TReturn Function<T, TReturn>(T arg);",
-                assemblyName: "SymbolVisitorTests");
+                "using System;"
+                    + "class C { }"
+                    + "struct S { int i; }"
+                    + "class Generic<T> {}"
+                    + "enum ABC { A, B, C }"
+                    + "delegate TReturn Function<T, TReturn>(T arg);",
+                assemblyName: "SymbolVisitorTests"
+            );
             IAssemblySymbol asm = new SourceAssemblySymbol(c.SourceAssembly);
             var visitor = new LoggingSymbolVisitorWithReturnValueAndContext();
             var sb = new StringBuilder();
             asm.Accept(visitor, sb);
 
-            string expectedOutput = @"SourceAssemblySymbol SymbolVisitorTests
+            string expectedOutput =
+                @"SourceAssemblySymbol SymbolVisitorTests
   ModuleSymbol SymbolVisitorTests.dll
     NamespaceSymbol 
       NonErrorNamedTypeSymbol C
@@ -680,23 +758,25 @@ namespace Microsoft.CodeAnalysis.CSharp
         public void TypeMembers_LoggingSymbolVisitor()
         {
             var c = CreateCompilation(
-                "using System;" +
-                "using System.Collections.Generic;" +
-                "unsafe class C { " +
-                "public C() {} " +
-                "int* field; " +
-                "string[] field2; " +
-                "List<string> generics; " +
-                "dynamic d; " +
-                "public int Value { get; set; } " +
-                "public event EventHandler Event; " +
-                "}",
-                assemblyName: "SymbolVisitorTests");
+                "using System;"
+                    + "using System.Collections.Generic;"
+                    + "unsafe class C { "
+                    + "public C() {} "
+                    + "int* field; "
+                    + "string[] field2; "
+                    + "List<string> generics; "
+                    + "dynamic d; "
+                    + "public int Value { get; set; } "
+                    + "public event EventHandler Event; "
+                    + "}",
+                assemblyName: "SymbolVisitorTests"
+            );
             IAssemblySymbol asm = new SourceAssemblySymbol(c.SourceAssembly);
             var visitor = new LoggingSymbolVisitor();
             asm.Accept(visitor);
 
-            string expectedOutput = @"SourceAssemblySymbol SymbolVisitorTests
+            string expectedOutput =
+                @"SourceAssemblySymbol SymbolVisitorTests
   ModuleSymbol SymbolVisitorTests.dll
     NamespaceSymbol 
       NonErrorNamedTypeSymbol C
@@ -720,27 +800,30 @@ namespace Microsoft.CodeAnalysis.CSharp
             string resultOutput = visitor.ToString();
             Assert.Equal(expectedOutput, resultOutput);
         }
+
         [Fact]
         public void TypeMembers_LoggingSymbolVisitorWithReturnValue()
         {
             var c = CreateCompilation(
-                "using System;" +
-                "using System.Collections.Generic;" +
-                "unsafe class C { " +
-                "public C() {} " +
-                "int* field; " +
-                "string[] field2; " +
-                "List<string> generics; " +
-                "dynamic d; " +
-                "public int Value { get; set; } " +
-                "public event EventHandler Event; " +
-                "}",
-                assemblyName: "SymbolVisitorTests");
+                "using System;"
+                    + "using System.Collections.Generic;"
+                    + "unsafe class C { "
+                    + "public C() {} "
+                    + "int* field; "
+                    + "string[] field2; "
+                    + "List<string> generics; "
+                    + "dynamic d; "
+                    + "public int Value { get; set; } "
+                    + "public event EventHandler Event; "
+                    + "}",
+                assemblyName: "SymbolVisitorTests"
+            );
             IAssemblySymbol asm = new SourceAssemblySymbol(c.SourceAssembly);
             var visitor = new LoggingSymbolVisitorWithReturnValue();
             asm.Accept(visitor);
 
-            string expectedOutput = @"SourceAssemblySymbol SymbolVisitorTests
+            string expectedOutput =
+                @"SourceAssemblySymbol SymbolVisitorTests
   ModuleSymbol SymbolVisitorTests.dll
     NamespaceSymbol 
       NonErrorNamedTypeSymbol C
@@ -764,28 +847,31 @@ namespace Microsoft.CodeAnalysis.CSharp
             string resultOutput = visitor.ToString();
             Assert.Equal(expectedOutput, resultOutput);
         }
+
         [Fact]
         public void TypeMembers_LoggingSymbolVisitorWithReturnValueAndContext()
         {
             var c = CreateCompilation(
-                "using System;" +
-                "using System.Collections.Generic;" +
-                "unsafe class C { " +
-                "public C() {} " +
-                "int* field; " +
-                "string[] field2; " +
-                "List<string> generics; " +
-                "dynamic d; " +
-                "public int Value { get; set; } " +
-                "public event EventHandler Event; " +
-                "}",
-                assemblyName: "SymbolVisitorTests");
+                "using System;"
+                    + "using System.Collections.Generic;"
+                    + "unsafe class C { "
+                    + "public C() {} "
+                    + "int* field; "
+                    + "string[] field2; "
+                    + "List<string> generics; "
+                    + "dynamic d; "
+                    + "public int Value { get; set; } "
+                    + "public event EventHandler Event; "
+                    + "}",
+                assemblyName: "SymbolVisitorTests"
+            );
             IAssemblySymbol asm = new SourceAssemblySymbol(c.SourceAssembly);
             var visitor = new LoggingSymbolVisitorWithReturnValueAndContext();
             var sb = new StringBuilder();
             asm.Accept(visitor, sb);
 
-            string expectedOutput = @"SourceAssemblySymbol SymbolVisitorTests
+            string expectedOutput =
+                @"SourceAssemblySymbol SymbolVisitorTests
   ModuleSymbol SymbolVisitorTests.dll
     NamespaceSymbol 
       NonErrorNamedTypeSymbol C

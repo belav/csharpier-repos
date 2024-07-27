@@ -45,7 +45,12 @@ public class TagHelperRunner
 
         return Task.CompletedTask;
 
-        static async Task Awaited(Task task, TagHelperExecutionContext executionContext, int i, int count)
+        static async Task Awaited(
+            Task task,
+            TagHelperExecutionContext executionContext,
+            int i,
+            int count
+        )
         {
             await task;
 
@@ -61,7 +66,6 @@ public class TagHelperRunner
 
     private readonly struct SortTagHelpers : IComparer<ITagHelper>
     {
-        public int Compare(ITagHelper left, ITagHelper right)
-            => left.Order.CompareTo(right.Order);
+        public int Compare(ITagHelper left, ITagHelper right) => left.Order.CompareTo(right.Order);
     }
 }

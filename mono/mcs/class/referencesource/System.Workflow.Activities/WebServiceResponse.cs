@@ -1,19 +1,19 @@
 using System;
-using System.Reflection;
-using System.Drawing;
-using System.Drawing.Design;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Workflow.ComponentModel;
-using System.Workflow.Runtime;
-using System.Workflow.ComponentModel.Design;
-using System.Workflow.ComponentModel.Compiler;
-using System.Runtime.Remoting.Messaging;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Design;
+using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Workflow.Activities.Common;
+using System.Workflow.ComponentModel;
+using System.Workflow.ComponentModel.Compiler;
+using System.Workflow.ComponentModel.Design;
+using System.Workflow.Runtime;
 
 namespace System.Workflow.Activities
 {
@@ -23,31 +23,67 @@ namespace System.Workflow.Activities
     [Designer(typeof(WebServiceResponseDesigner), typeof(IDesigner))]
     [ActivityValidator(typeof(WebServiceResponseValidator))]
     [DefaultEvent("SendingOutput")]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public sealed class WebServiceOutputActivity : Activity, IPropertyValueProvider, IDynamicPropertyTypeProvider
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class WebServiceOutputActivity
+        : Activity,
+            IPropertyValueProvider,
+            IDynamicPropertyTypeProvider
     {
         //metadata properties
-        public static readonly DependencyProperty InputActivityNameProperty = DependencyProperty.Register("InputActivityName", typeof(string), typeof(WebServiceOutputActivity), new PropertyMetadata("", DependencyPropertyOptions.Metadata));
+        public static readonly DependencyProperty InputActivityNameProperty =
+            DependencyProperty.Register(
+                "InputActivityName",
+                typeof(string),
+                typeof(WebServiceOutputActivity),
+                new PropertyMetadata("", DependencyPropertyOptions.Metadata)
+            );
 
         //instance properties
-        public static readonly DependencyProperty ParameterBindingsProperty = DependencyProperty.Register("ParameterBindings", typeof(WorkflowParameterBindingCollection), typeof(WebServiceOutputActivity), new PropertyMetadata(DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly, new Attribute[] { new BrowsableAttribute(false), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content) }));
+        public static readonly DependencyProperty ParameterBindingsProperty =
+            DependencyProperty.Register(
+                "ParameterBindings",
+                typeof(WorkflowParameterBindingCollection),
+                typeof(WebServiceOutputActivity),
+                new PropertyMetadata(
+                    DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly,
+                    new Attribute[]
+                    {
+                        new BrowsableAttribute(false),
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Content
+                        ),
+                    }
+                )
+            );
 
         //event
-        public static readonly DependencyProperty SendingOutputEvent = DependencyProperty.Register("SendingOutput", typeof(EventHandler), typeof(WebServiceOutputActivity));
+        public static readonly DependencyProperty SendingOutputEvent = DependencyProperty.Register(
+            "SendingOutput",
+            typeof(EventHandler),
+            typeof(WebServiceOutputActivity)
+        );
 
         #region Constructors
 
         public WebServiceOutputActivity()
         {
             //
-            base.SetReadOnlyPropertyValue(ParameterBindingsProperty, new WorkflowParameterBindingCollection(this));
+            base.SetReadOnlyPropertyValue(
+                ParameterBindingsProperty,
+                new WorkflowParameterBindingCollection(this)
+            );
         }
 
         public WebServiceOutputActivity(string name)
             : base(name)
         {
             //
-            base.SetReadOnlyPropertyValue(ParameterBindingsProperty, new WorkflowParameterBindingCollection(this));
+            base.SetReadOnlyPropertyValue(
+                ParameterBindingsProperty,
+                new WorkflowParameterBindingCollection(this)
+            );
         }
 
         #endregion
@@ -60,15 +96,8 @@ namespace System.Workflow.Activities
         [DefaultValue("")]
         public string InputActivityName
         {
-            get
-            {
-                return base.GetValue(InputActivityNameProperty) as string;
-            }
-
-            set
-            {
-                base.SetValue(InputActivityNameProperty, value);
-            }
+            get { return base.GetValue(InputActivityNameProperty) as string; }
+            set { base.SetValue(InputActivityNameProperty, value); }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
@@ -77,7 +106,8 @@ namespace System.Workflow.Activities
         {
             get
             {
-                return base.GetValue(ParameterBindingsProperty) as WorkflowParameterBindingCollection;
+                return base.GetValue(ParameterBindingsProperty)
+                    as WorkflowParameterBindingCollection;
             }
         }
 
@@ -86,23 +116,18 @@ namespace System.Workflow.Activities
         [MergableProperty(false)]
         public event EventHandler SendingOutput
         {
-            add
-            {
-                base.AddHandler(SendingOutputEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(SendingOutputEvent, value);
-            }
+            add { base.AddHandler(SendingOutputEvent, value); }
+            remove { base.RemoveHandler(SendingOutputEvent, value); }
         }
-
 
         ICollection IPropertyValueProvider.GetPropertyValues(ITypeDescriptorContext context)
         {
             StringCollection names = new StringCollection();
             if (context.PropertyDescriptor.Name == "InputActivityName")
             {
-                foreach (Activity activity in WebServiceActivityHelpers.GetPreceedingActivities(this))
+                foreach (
+                    Activity activity in WebServiceActivityHelpers.GetPreceedingActivities(this)
+                )
                 {
                     if (activity is WebServiceInputActivity)
                     {
@@ -112,6 +137,7 @@ namespace System.Workflow.Activities
             }
             return names;
         }
+
         protected override void Initialize(IServiceProvider provider)
         {
             if (this.Parent == null)
@@ -121,17 +147,21 @@ namespace System.Workflow.Activities
         }
 
         #region Execute
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
 
-            WorkflowQueuingService queueService = executionContext.GetService<WorkflowQueuingService>();
+            WorkflowQueuingService queueService =
+                executionContext.GetService<WorkflowQueuingService>();
 
             // fire event
             this.RaiseEvent(WebServiceOutputActivity.SendingOutputEvent, this, EventArgs.Empty);
 
-            WebServiceInputActivity webservicereceive = this.GetActivityByName(this.InputActivityName) as WebServiceInputActivity;
+            WebServiceInputActivity webservicereceive =
+                this.GetActivityByName(this.InputActivityName) as WebServiceInputActivity;
             if (webservicereceive == null)
             {
                 Activity parent = this.Parent;
@@ -139,18 +169,31 @@ namespace System.Workflow.Activities
                 {
                     //typically if defined inside a custom activity
                     string qualifiedName = parent.QualifiedName + "." + this.InputActivityName;
-                    webservicereceive = this.GetActivityByName(qualifiedName) as WebServiceInputActivity;
+                    webservicereceive =
+                        this.GetActivityByName(qualifiedName) as WebServiceInputActivity;
                     if (webservicereceive != null)
                         break;
                     parent = this.Parent;
                 }
             }
             if (webservicereceive == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_CannotResolveWebServiceInput, this.QualifiedName, this.InputActivityName));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_CannotResolveWebServiceInput,
+                        this.QualifiedName,
+                        this.InputActivityName
+                    )
+                );
 
-            IComparable queueId = new EventQueueName(webservicereceive.InterfaceType, webservicereceive.MethodName, webservicereceive.QualifiedName);
+            IComparable queueId = new EventQueueName(
+                webservicereceive.InterfaceType,
+                webservicereceive.MethodName,
+                webservicereceive.QualifiedName
+            );
 
-            MethodInfo mInfo = webservicereceive.InterfaceType.GetMethod(webservicereceive.MethodName);
+            MethodInfo mInfo = webservicereceive.InterfaceType.GetMethod(
+                webservicereceive.MethodName
+            );
             if (!queueService.Exists(queueId))
             {
                 // determine if no response is required,
@@ -163,7 +206,10 @@ namespace System.Workflow.Activities
                 bool isresponseRequired = false;
                 foreach (ParameterInfo formalParameter in mInfo.GetParameters())
                 {
-                    if (formalParameter.ParameterType.IsByRef || (formalParameter.IsIn && formalParameter.IsOut))
+                    if (
+                        formalParameter.ParameterType.IsByRef
+                        || (formalParameter.IsIn && formalParameter.IsOut)
+                    )
                     {
                         isresponseRequired = true;
                     }
@@ -176,7 +222,12 @@ namespace System.Workflow.Activities
             }
 
             if (!queueService.Exists(queueId))
-                throw new InvalidOperationException(SR.GetString(SR.Error_WebServiceInputNotProcessed, webservicereceive.QualifiedName));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_WebServiceInputNotProcessed,
+                        webservicereceive.QualifiedName
+                    )
+                );
 
             IMethodResponseMessage responseMessage = null;
             WorkflowQueue queue = queueService.GetWorkflowQueue(queueId);
@@ -201,7 +252,10 @@ namespace System.Workflow.Activities
             foreach (ParameterInfo formalParameter in mInfo.GetParameters())
             {
                 // update out and byref values
-                if (formalParameter.ParameterType.IsByRef || (formalParameter.IsIn && formalParameter.IsOut))
+                if (
+                    formalParameter.ParameterType.IsByRef
+                    || (formalParameter.IsIn && formalParameter.IsOut)
+                )
                 {
                     WorkflowParameterBinding binding = parameterBindings[formalParameter.Name];
                     outArgs.Add(binding.Value);
@@ -219,7 +273,10 @@ namespace System.Workflow.Activities
 
         #region IDynamicPropertyTypeProvider
 
-        Type IDynamicPropertyTypeProvider.GetPropertyType(IServiceProvider serviceProvider, string propertyName)
+        Type IDynamicPropertyTypeProvider.GetPropertyType(
+            IServiceProvider serviceProvider,
+            string propertyName
+        )
         {
             if (propertyName == null)
                 throw new ArgumentNullException("propertyName");
@@ -228,7 +285,8 @@ namespace System.Workflow.Activities
             this.GetParameterPropertyDescriptors(parameters);
             if (parameters.ContainsKey(propertyName))
             {
-                ParameterInfoBasedPropertyDescriptor descriptor = parameters[propertyName] as ParameterInfoBasedPropertyDescriptor;
+                ParameterInfoBasedPropertyDescriptor descriptor =
+                    parameters[propertyName] as ParameterInfoBasedPropertyDescriptor;
                 if (descriptor != null)
                     return descriptor.ParameterType;
             }
@@ -236,7 +294,10 @@ namespace System.Workflow.Activities
             return null;
         }
 
-        AccessTypes IDynamicPropertyTypeProvider.GetAccessType(IServiceProvider serviceProvider, string propertyName)
+        AccessTypes IDynamicPropertyTypeProvider.GetAccessType(
+            IServiceProvider serviceProvider,
+            string propertyName
+        )
         {
             if (propertyName == null)
                 throw new ArgumentNullException("propertyName");
@@ -249,35 +310,65 @@ namespace System.Workflow.Activities
             if (((IComponent)this).Site == null)
                 return;
 
-            ITypeProvider typeProvider = (ITypeProvider)((IComponent)this).Site.GetService(typeof(ITypeProvider));
+            ITypeProvider typeProvider = (ITypeProvider)
+                ((IComponent)this).Site.GetService(typeof(ITypeProvider));
             if (typeProvider == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName)
+                );
 
-            if (this.InputActivityName != null && !String.IsNullOrEmpty(this.InputActivityName.Trim()))
+            if (
+                this.InputActivityName != null
+                && !String.IsNullOrEmpty(this.InputActivityName.Trim())
+            )
             {
-                WebServiceInputActivity webServiceReceive = Helpers.ParseActivity(Helpers.GetRootActivity(this), this.InputActivityName) as WebServiceInputActivity;
+                WebServiceInputActivity webServiceReceive =
+                    Helpers.ParseActivity(Helpers.GetRootActivity(this), this.InputActivityName)
+                    as WebServiceInputActivity;
                 if (webServiceReceive != null)
                 {
                     Type type = null;
                     if (webServiceReceive.InterfaceType != null)
-                        type = typeProvider.GetType(webServiceReceive.InterfaceType.AssemblyQualifiedName);
+                        type = typeProvider.GetType(
+                            webServiceReceive.InterfaceType.AssemblyQualifiedName
+                        );
 
                     if (type != null)
                     {
-
-                        MethodInfo method = Helpers.GetInterfaceMethod(type, webServiceReceive.MethodName);
-                        if (method != null && WebServiceActivityHelpers.ValidateParameterTypes(method).Count == 0)
+                        MethodInfo method = Helpers.GetInterfaceMethod(
+                            type,
+                            webServiceReceive.MethodName
+                        );
+                        if (
+                            method != null
+                            && WebServiceActivityHelpers.ValidateParameterTypes(method).Count == 0
+                        )
                         {
-                            List<ParameterInfo> inputParameters, outParameters;
-                            WebServiceActivityHelpers.GetParameterInfo(method, out inputParameters, out outParameters);
+                            List<ParameterInfo> inputParameters,
+                                outParameters;
+                            WebServiceActivityHelpers.GetParameterInfo(
+                                method,
+                                out inputParameters,
+                                out outParameters
+                            );
 
                             foreach (ParameterInfo paramInfo in outParameters)
                             {
                                 PropertyDescriptor prop = null;
                                 if (paramInfo.Position == -1)
-                                    prop = new ParameterInfoBasedPropertyDescriptor(typeof(WebServiceOutputActivity), paramInfo, false, DesignOnlyAttribute.Yes);
+                                    prop = new ParameterInfoBasedPropertyDescriptor(
+                                        typeof(WebServiceOutputActivity),
+                                        paramInfo,
+                                        false,
+                                        DesignOnlyAttribute.Yes
+                                    );
                                 else
-                                    prop = new ParameterInfoBasedPropertyDescriptor(typeof(WebServiceOutputActivity), paramInfo, true, DesignOnlyAttribute.Yes);
+                                    prop = new ParameterInfoBasedPropertyDescriptor(
+                                        typeof(WebServiceOutputActivity),
+                                        paramInfo,
+                                        true,
+                                        DesignOnlyAttribute.Yes
+                                    );
 
                                 if (prop != null)
                                     properties[prop.Name] = prop;
@@ -288,7 +379,6 @@ namespace System.Workflow.Activities
             }
         }
         #endregion
-
     }
 
     internal sealed class WebServiceResponseValidator : ActivityValidator
@@ -299,7 +389,13 @@ namespace System.Workflow.Activities
 
             WebServiceOutputActivity webServiceResponse = obj as WebServiceOutputActivity;
             if (webServiceResponse == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(WebServiceOutputActivity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_UnexpectedArgumentType,
+                        typeof(WebServiceOutputActivity).FullName
+                    ),
+                    "obj"
+                );
 
             if (Helpers.IsActivityLocked(webServiceResponse))
             {
@@ -312,27 +408,78 @@ namespace System.Workflow.Activities
                 validationErrors.Add(ValidationError.GetNotSetValidationError("InputActivityName"));
             else
             {
-                ITypeProvider typeProvider = (ITypeProvider)manager.GetService(typeof(ITypeProvider));
+                ITypeProvider typeProvider = (ITypeProvider)
+                    manager.GetService(typeof(ITypeProvider));
                 if (typeProvider == null)
-                    throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName)
+                    );
 
                 bool foundMatchingReceive = false;
-                foreach (Activity activity in WebServiceActivityHelpers.GetPreceedingActivities(webServiceResponse))
+                foreach (
+                    Activity activity in WebServiceActivityHelpers.GetPreceedingActivities(
+                        webServiceResponse
+                    )
+                )
                 {
-                    if ((activity is WebServiceOutputActivity && String.Compare(((WebServiceOutputActivity)activity).InputActivityName, webServiceResponse.InputActivityName, StringComparison.Ordinal) == 0) ||
-                        (activity is WebServiceFaultActivity && String.Compare(((WebServiceFaultActivity)activity).InputActivityName, webServiceResponse.InputActivityName, StringComparison.Ordinal) == 0))
+                    if (
+                        (
+                            activity is WebServiceOutputActivity
+                            && String.Compare(
+                                ((WebServiceOutputActivity)activity).InputActivityName,
+                                webServiceResponse.InputActivityName,
+                                StringComparison.Ordinal
+                            ) == 0
+                        )
+                        || (
+                            activity is WebServiceFaultActivity
+                            && String.Compare(
+                                ((WebServiceFaultActivity)activity).InputActivityName,
+                                webServiceResponse.InputActivityName,
+                                StringComparison.Ordinal
+                            ) == 0
+                        )
+                    )
                     {
                         if (activity is WebServiceOutputActivity)
-                            validationErrors.Add(new ValidationError(SR.GetString(SR.Error_DuplicateWebServiceResponseFound, activity.QualifiedName, webServiceResponse.InputActivityName), ErrorNumbers.Error_DuplicateWebServiceResponseFound));
+                            validationErrors.Add(
+                                new ValidationError(
+                                    SR.GetString(
+                                        SR.Error_DuplicateWebServiceResponseFound,
+                                        activity.QualifiedName,
+                                        webServiceResponse.InputActivityName
+                                    ),
+                                    ErrorNumbers.Error_DuplicateWebServiceResponseFound
+                                )
+                            );
                         else
-                            validationErrors.Add(new ValidationError(SR.GetString(SR.Error_DuplicateWebServiceFaultFound, activity.QualifiedName, webServiceResponse.InputActivityName), ErrorNumbers.Error_DuplicateWebServiceFaultFound));
+                            validationErrors.Add(
+                                new ValidationError(
+                                    SR.GetString(
+                                        SR.Error_DuplicateWebServiceFaultFound,
+                                        activity.QualifiedName,
+                                        webServiceResponse.InputActivityName
+                                    ),
+                                    ErrorNumbers.Error_DuplicateWebServiceFaultFound
+                                )
+                            );
                         return validationErrors;
                     }
                 }
 
-                foreach (Activity activity in WebServiceActivityHelpers.GetPreceedingActivities(webServiceResponse))
+                foreach (
+                    Activity activity in WebServiceActivityHelpers.GetPreceedingActivities(
+                        webServiceResponse
+                    )
+                )
                 {
-                    if (String.Compare(activity.QualifiedName, webServiceResponse.InputActivityName, StringComparison.Ordinal) == 0)
+                    if (
+                        String.Compare(
+                            activity.QualifiedName,
+                            webServiceResponse.InputActivityName,
+                            StringComparison.Ordinal
+                        ) == 0
+                    )
                     {
                         if (activity is WebServiceInputActivity)
                         {
@@ -342,7 +489,15 @@ namespace System.Workflow.Activities
                         else
                         {
                             foundMatchingReceive = false;
-                            validationErrors.Add(new ValidationError(SR.GetString(SR.Error_WebServiceReceiveNotValid, webServiceResponse.InputActivityName), ErrorNumbers.Error_WebServiceReceiveNotValid));
+                            validationErrors.Add(
+                                new ValidationError(
+                                    SR.GetString(
+                                        SR.Error_WebServiceReceiveNotValid,
+                                        webServiceResponse.InputActivityName
+                                    ),
+                                    ErrorNumbers.Error_WebServiceReceiveNotValid
+                                )
+                            );
                             return validationErrors;
                         }
                         break;
@@ -351,38 +506,78 @@ namespace System.Workflow.Activities
 
                 if (!foundMatchingReceive)
                 {
-                    validationErrors.Add(new ValidationError(SR.GetString(SR.Error_WebServiceReceiveNotFound, webServiceResponse.InputActivityName), ErrorNumbers.Error_WebServiceReceiveNotFound));
+                    validationErrors.Add(
+                        new ValidationError(
+                            SR.GetString(
+                                SR.Error_WebServiceReceiveNotFound,
+                                webServiceResponse.InputActivityName
+                            ),
+                            ErrorNumbers.Error_WebServiceReceiveNotFound
+                        )
+                    );
                     return validationErrors;
                 }
                 else
                 {
                     Type interfaceType = null;
                     if (webServiceReceive.InterfaceType != null)
-                        interfaceType = typeProvider.GetType(webServiceReceive.InterfaceType.AssemblyQualifiedName);
+                        interfaceType = typeProvider.GetType(
+                            webServiceReceive.InterfaceType.AssemblyQualifiedName
+                        );
 
                     if (interfaceType == null)
                     {
-                        validationErrors.Add(new ValidationError(SR.GetString(SR.Error_WebServiceReceiveNotConfigured, webServiceReceive.Name), ErrorNumbers.Error_WebServiceReceiveNotConfigured));
+                        validationErrors.Add(
+                            new ValidationError(
+                                SR.GetString(
+                                    SR.Error_WebServiceReceiveNotConfigured,
+                                    webServiceReceive.Name
+                                ),
+                                ErrorNumbers.Error_WebServiceReceiveNotConfigured
+                            )
+                        );
                     }
                     else
                     {
                         // Validate method
                         if (String.IsNullOrEmpty(webServiceReceive.MethodName))
-                            validationErrors.Add(new ValidationError(SR.GetString(SR.Error_WebServiceReceiveNotConfigured, webServiceReceive.Name), ErrorNumbers.Error_WebServiceReceiveNotConfigured));
+                            validationErrors.Add(
+                                new ValidationError(
+                                    SR.GetString(
+                                        SR.Error_WebServiceReceiveNotConfigured,
+                                        webServiceReceive.Name
+                                    ),
+                                    ErrorNumbers.Error_WebServiceReceiveNotConfigured
+                                )
+                            );
                         else
                         {
-                            MethodInfo methodInfo = Helpers.GetInterfaceMethod(interfaceType, webServiceReceive.MethodName);
+                            MethodInfo methodInfo = Helpers.GetInterfaceMethod(
+                                interfaceType,
+                                webServiceReceive.MethodName
+                            );
 
                             if (methodInfo == null)
                             {
-                                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_WebServiceReceiveNotConfigured, webServiceReceive.Name), ErrorNumbers.Error_WebServiceReceiveNotConfigured));
+                                validationErrors.Add(
+                                    new ValidationError(
+                                        SR.GetString(
+                                            SR.Error_WebServiceReceiveNotConfigured,
+                                            webServiceReceive.Name
+                                        ),
+                                        ErrorNumbers.Error_WebServiceReceiveNotConfigured
+                                    )
+                                );
                             }
                             else
                             {
-                                ValidationErrorCollection parameterTypeErrors = WebServiceActivityHelpers.ValidateParameterTypes(methodInfo);
+                                ValidationErrorCollection parameterTypeErrors =
+                                    WebServiceActivityHelpers.ValidateParameterTypes(methodInfo);
                                 if (parameterTypeErrors.Count > 0)
                                 {
-                                    foreach (ValidationError parameterTypeError in parameterTypeErrors)
+                                    foreach (
+                                        ValidationError parameterTypeError in parameterTypeErrors
+                                    )
                                     {
                                         parameterTypeError.PropertyName = "InputActivityName";
                                     }
@@ -390,12 +585,22 @@ namespace System.Workflow.Activities
                                 }
                                 else
                                 {
-                                    List<ParameterInfo> inputParameters, outParameters;
-                                    WebServiceActivityHelpers.GetParameterInfo(methodInfo, out inputParameters, out outParameters);
+                                    List<ParameterInfo> inputParameters,
+                                        outParameters;
+                                    WebServiceActivityHelpers.GetParameterInfo(
+                                        methodInfo,
+                                        out inputParameters,
+                                        out outParameters
+                                    );
 
                                     if (outParameters.Count == 0)
                                     {
-                                        validationErrors.Add(new ValidationError(SR.GetString(SR.Error_WebServiceResponseNotNeeded), ErrorNumbers.Error_WebServiceResponseNotNeeded));
+                                        validationErrors.Add(
+                                            new ValidationError(
+                                                SR.GetString(SR.Error_WebServiceResponseNotNeeded),
+                                                ErrorNumbers.Error_WebServiceResponseNotNeeded
+                                            )
+                                        );
                                     }
                                     else
                                     {
@@ -403,51 +608,155 @@ namespace System.Workflow.Activities
                                         foreach (ParameterInfo paramInfo in outParameters)
                                         {
                                             string paramName = paramInfo.Name;
-                                            Type paramType = paramInfo.ParameterType.IsByRef ? paramInfo.ParameterType.GetElementType() : paramInfo.ParameterType;
+                                            Type paramType = paramInfo.ParameterType.IsByRef
+                                                ? paramInfo.ParameterType.GetElementType()
+                                                : paramInfo.ParameterType;
 
                                             if (paramInfo.Position == -1)
                                                 paramName = "(ReturnValue)";
 
                                             object paramValue = null;
-                                            if (webServiceResponse.ParameterBindings.Contains(paramName))
+                                            if (
+                                                webServiceResponse.ParameterBindings.Contains(
+                                                    paramName
+                                                )
+                                            )
                                             {
-                                                if (webServiceResponse.ParameterBindings[paramName].IsBindingSet(WorkflowParameterBinding.ValueProperty))
-                                                    paramValue = webServiceResponse.ParameterBindings[paramName].GetBinding(WorkflowParameterBinding.ValueProperty);
+                                                if (
+                                                    webServiceResponse
+                                                        .ParameterBindings[paramName]
+                                                        .IsBindingSet(
+                                                            WorkflowParameterBinding.ValueProperty
+                                                        )
+                                                )
+                                                    paramValue = webServiceResponse
+                                                        .ParameterBindings[paramName]
+                                                        .GetBinding(
+                                                            WorkflowParameterBinding.ValueProperty
+                                                        );
                                                 else
-                                                    paramValue = webServiceResponse.ParameterBindings[paramName].GetValue(WorkflowParameterBinding.ValueProperty);
+                                                    paramValue = webServiceResponse
+                                                        .ParameterBindings[paramName]
+                                                        .GetValue(
+                                                            WorkflowParameterBinding.ValueProperty
+                                                        );
                                             }
 
                                             if (!paramType.IsPublic || !paramType.IsSerializable)
                                             {
-                                                ValidationError validationError = new ValidationError(SR.GetString(SR.Error_TypeNotPublicSerializable, paramName, paramType.FullName), ErrorNumbers.Error_TypeNotPublicSerializable);
-                                                validationError.PropertyName = (String.Compare(paramName, "(ReturnValue)", StringComparison.Ordinal) == 0) ? paramName : ParameterInfoBasedPropertyDescriptor.GetParameterPropertyName(webServiceReceive.GetType(), paramName);
+                                                ValidationError validationError =
+                                                    new ValidationError(
+                                                        SR.GetString(
+                                                            SR.Error_TypeNotPublicSerializable,
+                                                            paramName,
+                                                            paramType.FullName
+                                                        ),
+                                                        ErrorNumbers.Error_TypeNotPublicSerializable
+                                                    );
+                                                validationError.PropertyName =
+                                                    (
+                                                        String.Compare(
+                                                            paramName,
+                                                            "(ReturnValue)",
+                                                            StringComparison.Ordinal
+                                                        ) == 0
+                                                    )
+                                                        ? paramName
+                                                        : ParameterInfoBasedPropertyDescriptor.GetParameterPropertyName(
+                                                            webServiceReceive.GetType(),
+                                                            paramName
+                                                        );
                                                 validationErrors.Add(validationError);
                                             }
-                                            else if (!webServiceResponse.ParameterBindings.Contains(paramName) || paramValue == null)
+                                            else if (
+                                                !webServiceResponse.ParameterBindings.Contains(
+                                                    paramName
+                                                )
+                                                || paramValue == null
+                                            )
                                             {
-                                                ValidationError validationError = ValidationError.GetNotSetValidationError(paramName);
-                                                validationError.PropertyName = (String.Compare(paramName, "(ReturnValue)", StringComparison.Ordinal) == 0) ? paramName : ParameterInfoBasedPropertyDescriptor.GetParameterPropertyName(webServiceReceive.GetType(), paramName);
+                                                ValidationError validationError =
+                                                    ValidationError.GetNotSetValidationError(
+                                                        paramName
+                                                    );
+                                                validationError.PropertyName =
+                                                    (
+                                                        String.Compare(
+                                                            paramName,
+                                                            "(ReturnValue)",
+                                                            StringComparison.Ordinal
+                                                        ) == 0
+                                                    )
+                                                        ? paramName
+                                                        : ParameterInfoBasedPropertyDescriptor.GetParameterPropertyName(
+                                                            webServiceReceive.GetType(),
+                                                            paramName
+                                                        );
                                                 validationErrors.Add(validationError);
                                             }
                                             else
                                             {
                                                 AccessTypes access = AccessTypes.Read;
-                                                if (paramInfo.IsOut || paramInfo.IsRetval || paramInfo.Position == -1)
+                                                if (
+                                                    paramInfo.IsOut
+                                                    || paramInfo.IsRetval
+                                                    || paramInfo.Position == -1
+                                                )
                                                     access = AccessTypes.Write;
 
-                                                ValidationErrorCollection variableErrors = ValidationHelpers.ValidateProperty(manager, webServiceResponse, paramValue,
-                                                                                                new PropertyValidationContext(webServiceResponse.ParameterBindings[paramName], null, paramName), new BindValidationContext(paramInfo.ParameterType.IsByRef ? paramInfo.ParameterType.GetElementType() : paramInfo.ParameterType, access));
-                                                foreach (ValidationError variableError in variableErrors)
+                                                ValidationErrorCollection variableErrors =
+                                                    ValidationHelpers.ValidateProperty(
+                                                        manager,
+                                                        webServiceResponse,
+                                                        paramValue,
+                                                        new PropertyValidationContext(
+                                                            webServiceResponse.ParameterBindings[
+                                                                paramName
+                                                            ],
+                                                            null,
+                                                            paramName
+                                                        ),
+                                                        new BindValidationContext(
+                                                            paramInfo.ParameterType.IsByRef
+                                                                ? paramInfo.ParameterType.GetElementType()
+                                                                : paramInfo.ParameterType,
+                                                            access
+                                                        )
+                                                    );
+                                                foreach (
+                                                    ValidationError variableError in variableErrors
+                                                )
                                                 {
-                                                    if (String.Compare(paramName, "(ReturnValue)", StringComparison.Ordinal) != 0)
-                                                        variableError.PropertyName = ParameterInfoBasedPropertyDescriptor.GetParameterPropertyName(webServiceReceive.GetType(), paramName);
+                                                    if (
+                                                        String.Compare(
+                                                            paramName,
+                                                            "(ReturnValue)",
+                                                            StringComparison.Ordinal
+                                                        ) != 0
+                                                    )
+                                                        variableError.PropertyName =
+                                                            ParameterInfoBasedPropertyDescriptor.GetParameterPropertyName(
+                                                                webServiceReceive.GetType(),
+                                                                paramName
+                                                            );
                                                 }
                                                 validationErrors.AddRange(variableErrors);
                                             }
                                         }
 
-                                        if (webServiceResponse.ParameterBindings.Count > outParameters.Count)
-                                            validationErrors.Add(new ValidationError(SR.GetString(SR.Warning_AdditionalBindingsFound), ErrorNumbers.Warning_AdditionalBindingsFound, true));
+                                        if (
+                                            webServiceResponse.ParameterBindings.Count
+                                            > outParameters.Count
+                                        )
+                                            validationErrors.Add(
+                                                new ValidationError(
+                                                    SR.GetString(
+                                                        SR.Warning_AdditionalBindingsFound
+                                                    ),
+                                                    ErrorNumbers.Warning_AdditionalBindingsFound,
+                                                    true
+                                                )
+                                            );
                                     }
                                 }
                             }
@@ -468,9 +777,16 @@ namespace System.Workflow.Activities
 
             foreach (Activity containedActivity in activity.Activities)
             {
-                if (containedActivity is CompositeActivity && !Helpers.IsCustomActivity((CompositeActivity)containedActivity))
+                if (
+                    containedActivity is CompositeActivity
+                    && !Helpers.IsCustomActivity((CompositeActivity)containedActivity)
+                )
                 {
-                    foreach (Activity nestedActivity in WebServiceActivityHelpers.GetContainedActivities((CompositeActivity)containedActivity))
+                    foreach (
+                        Activity nestedActivity in WebServiceActivityHelpers.GetContainedActivities(
+                            (CompositeActivity)containedActivity
+                        )
+                    )
                     {
                         if (nestedActivity.Enabled)
                             yield return nestedActivity;
@@ -490,7 +806,10 @@ namespace System.Workflow.Activities
             return GetPreceedingActivities(startActivity, false);
         }
 
-        internal static IEnumerable GetPreceedingActivities(Activity startActivity, bool crossOverLoop)
+        internal static IEnumerable GetPreceedingActivities(
+            Activity startActivity,
+            bool crossOverLoop
+        )
         {
             Activity currentActivity = null;
             Stack<Activity> activityStack = new Stack<Activity>();
@@ -498,34 +817,57 @@ namespace System.Workflow.Activities
 
             while ((currentActivity = activityStack.Pop()) != null)
             {
-                if (currentActivity is CompositeActivity && Helpers.IsCustomActivity((CompositeActivity)currentActivity))
+                if (
+                    currentActivity is CompositeActivity
+                    && Helpers.IsCustomActivity((CompositeActivity)currentActivity)
+                )
                     break;
 
                 if (currentActivity.Parent != null)
                 {
                     foreach (Activity siblingActivity in currentActivity.Parent.Activities)
                     {
-                        // 
-                        if (siblingActivity == currentActivity && ((currentActivity.Parent is ParallelActivity && !Helpers.IsFrameworkActivity(currentActivity)) || (currentActivity.Parent is StateActivity && !Helpers.IsFrameworkActivity(currentActivity))))
+                        //
+                        if (
+                            siblingActivity == currentActivity
+                            && (
+                                (
+                                    currentActivity.Parent is ParallelActivity
+                                    && !Helpers.IsFrameworkActivity(currentActivity)
+                                )
+                                || (
+                                    currentActivity.Parent is StateActivity
+                                    && !Helpers.IsFrameworkActivity(currentActivity)
+                                )
+                            )
+                        )
                             continue;
 
-                        // 
-                        if (currentActivity.Parent is IfElseActivity && !Helpers.IsFrameworkActivity(currentActivity))
+                        //
+                        if (
+                            currentActivity.Parent is IfElseActivity
+                            && !Helpers.IsFrameworkActivity(currentActivity)
+                        )
                             continue;
 
                         //For Listen Case.
-                        if (currentActivity.Parent is ListenActivity && !Helpers.IsFrameworkActivity(currentActivity))
+                        if (
+                            currentActivity.Parent is ListenActivity
+                            && !Helpers.IsFrameworkActivity(currentActivity)
+                        )
                             continue;
 
                         // State Machine logic:
                         // If startActivity was in the InitialState, then
-                        // there are no preceeding activities. 
+                        // there are no preceeding activities.
                         // Otherwise, we just return the parent state as
-                        // the preceeding activity. 
+                        // the preceeding activity.
                         StateActivity currentState = currentActivity.Parent as StateActivity;
                         if (currentState != null)
                         {
-                            StateActivity enclosingState = StateMachineHelpers.FindEnclosingState(startActivity);
+                            StateActivity enclosingState = StateMachineHelpers.FindEnclosingState(
+                                startActivity
+                            );
                             //If we are at Initial State there is no preceeding above us.
                             if (StateMachineHelpers.IsInitialState(enclosingState))
                                 yield break;
@@ -538,9 +880,17 @@ namespace System.Workflow.Activities
 
                         if (siblingActivity.Enabled)
                         {
-                            if (siblingActivity is CompositeActivity && !Helpers.IsCustomActivity((CompositeActivity)siblingActivity) && (crossOverLoop || !IsLoopActivity(siblingActivity)))
+                            if (
+                                siblingActivity is CompositeActivity
+                                && !Helpers.IsCustomActivity((CompositeActivity)siblingActivity)
+                                && (crossOverLoop || !IsLoopActivity(siblingActivity))
+                            )
                             {
-                                foreach (Activity containedActivity in WebServiceActivityHelpers.GetContainedActivities((CompositeActivity)siblingActivity))
+                                foreach (
+                                    Activity containedActivity in WebServiceActivityHelpers.GetContainedActivities(
+                                        (CompositeActivity)siblingActivity
+                                    )
+                                )
                                     yield return containedActivity;
                             }
                             else
@@ -555,7 +905,6 @@ namespace System.Workflow.Activities
                     break;
                 else
                     activityStack.Push(currentActivity.Parent);
-
             }
             yield break;
         }
@@ -563,7 +912,11 @@ namespace System.Workflow.Activities
         internal static bool IsLoopActivity(Activity activity)
         {
             //
-            if (activity is WhileActivity || activity is ReplicatorActivity || activity is ConditionedActivityGroup)
+            if (
+                activity is WhileActivity
+                || activity is ReplicatorActivity
+                || activity is ConditionedActivityGroup
+            )
                 return true;
 
             return false;
@@ -574,11 +927,17 @@ namespace System.Workflow.Activities
             IEnumerable<String> searchBoundaryPath = GetActivityPath(searchBoundary);
             IEnumerable<String> currentActivityPath = GetActivityPath(webServiceActivity);
 
-            String leastCommonParent = FindLeastCommonParent(searchBoundaryPath, currentActivityPath);
+            String leastCommonParent = FindLeastCommonParent(
+                searchBoundaryPath,
+                currentActivityPath
+            );
 
             Activity currentActivity = webServiceActivity;
 
-            while (currentActivity.Parent != null && currentActivity.Parent.QualifiedName != leastCommonParent)
+            while (
+                currentActivity.Parent != null
+                && currentActivity.Parent.QualifiedName != leastCommonParent
+            )
             {
                 if (IsLoopActivity(currentActivity))
                     return true;
@@ -626,7 +985,10 @@ namespace System.Workflow.Activities
 
             while ((currentActivity = activityStack.Pop()) != null)
             {
-                if (currentActivity is CompositeActivity && Helpers.IsCustomActivity((CompositeActivity)currentActivity))
+                if (
+                    currentActivity is CompositeActivity
+                    && Helpers.IsCustomActivity((CompositeActivity)currentActivity)
+                )
                     break;
 
                 if (currentActivity.Parent != null)
@@ -646,9 +1008,16 @@ namespace System.Workflow.Activities
 
                         if (siblingActivity.Enabled)
                         {
-                            if (siblingActivity is CompositeActivity && !Helpers.IsCustomActivity((CompositeActivity)siblingActivity))
+                            if (
+                                siblingActivity is CompositeActivity
+                                && !Helpers.IsCustomActivity((CompositeActivity)siblingActivity)
+                            )
                             {
-                                foreach (Activity containedActivity in WebServiceActivityHelpers.GetContainedActivities((CompositeActivity)siblingActivity))
+                                foreach (
+                                    Activity containedActivity in WebServiceActivityHelpers.GetContainedActivities(
+                                        (CompositeActivity)siblingActivity
+                                    )
+                                )
                                     yield return containedActivity;
                             }
                             else
@@ -663,9 +1032,14 @@ namespace System.Workflow.Activities
             yield break;
         }
 
-        internal static void GetParameterInfo(MethodInfo methodInfo, out List<ParameterInfo> inParameters, out List<ParameterInfo> outParameters)
+        internal static void GetParameterInfo(
+            MethodInfo methodInfo,
+            out List<ParameterInfo> inParameters,
+            out List<ParameterInfo> outParameters
+        )
         {
-            inParameters = new List<ParameterInfo>(); outParameters = new List<ParameterInfo>();
+            inParameters = new List<ParameterInfo>();
+            outParameters = new List<ParameterInfo>();
             foreach (ParameterInfo paramInfo in methodInfo.GetParameters())
             {
                 if (paramInfo.IsOut || paramInfo.IsRetval || paramInfo.ParameterType.IsByRef)
@@ -690,13 +1064,30 @@ namespace System.Workflow.Activities
             {
                 if (paramInfo.ParameterType == null)
                 {
-                    validationErrors.Add(new ValidationError(SR.GetString(SR.Error_ParameterTypeNotFound, methodInfo.Name, paramInfo.Name), ErrorNumbers.Error_ParameterTypeNotFound));
+                    validationErrors.Add(
+                        new ValidationError(
+                            SR.GetString(
+                                SR.Error_ParameterTypeNotFound,
+                                methodInfo.Name,
+                                paramInfo.Name
+                            ),
+                            ErrorNumbers.Error_ParameterTypeNotFound
+                        )
+                    );
                 }
             }
 
-            if (methodInfo.ReturnType != typeof(void) && methodInfo.ReturnParameter.ParameterType == null)
+            if (
+                methodInfo.ReturnType != typeof(void)
+                && methodInfo.ReturnParameter.ParameterType == null
+            )
             {
-                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_ReturnTypeNotFound, methodInfo.Name), ErrorNumbers.Error_ReturnTypeNotFound));
+                validationErrors.Add(
+                    new ValidationError(
+                        SR.GetString(SR.Error_ReturnTypeNotFound, methodInfo.Name),
+                        ErrorNumbers.Error_ReturnTypeNotFound
+                    )
+                );
             }
 
             return validationErrors;

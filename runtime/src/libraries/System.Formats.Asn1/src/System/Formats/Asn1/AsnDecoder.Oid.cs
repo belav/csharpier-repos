@@ -51,7 +51,8 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             // T-REC-X.690-201508 sec 8.19.1
             ReadOnlySpan<byte> contents = GetPrimitiveContentSpan(
@@ -59,7 +60,8 @@ namespace System.Formats.Asn1
                 ruleSet,
                 expectedTag ?? Asn1Tag.ObjectIdentifier,
                 UniversalTagNumber.ObjectIdentifier,
-                out int consumed);
+                out int consumed
+            );
 
 #if NETCOREAPP
             string? wellKnown = WellKnownOids.GetValue(contents);
@@ -80,7 +82,8 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             out int bytesRead,
             out long? smallValue,
-            out BigInteger? largeValue)
+            out BigInteger? largeValue
+        )
         {
             Debug.Assert(source.Length > 0);
 
@@ -212,7 +215,12 @@ namespace System.Formats.Asn1
             // 255 encoded bytes will just have to re-allocate.
             StringBuilder builder = new StringBuilder(((byte)contents.Length) * 4);
 
-            ReadSubIdentifier(contents, out int bytesRead, out long? smallValue, out BigInteger? largeValue);
+            ReadSubIdentifier(
+                contents,
+                out int bytesRead,
+                out long? smallValue,
+                out BigInteger? largeValue
+            );
 
             // T-REC-X.690-201508 sec 8.19.4
             // The first two subidentifiers (X.Y) are encoded as (X * 40) + Y, because Y is
@@ -317,8 +325,12 @@ namespace System.Formats.Asn1
         /// </exception>
         public string ReadObjectIdentifier(Asn1Tag? expectedTag = null)
         {
-            string oidValue =
-                AsnDecoder.ReadObjectIdentifier(_data.Span, RuleSet, out int consumed, expectedTag);
+            string oidValue = AsnDecoder.ReadObjectIdentifier(
+                _data.Span,
+                RuleSet,
+                out int consumed,
+                expectedTag
+            );
 
             _data = _data.Slice(consumed);
             return oidValue;

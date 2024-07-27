@@ -11,22 +11,27 @@ namespace System.IO.Tests
 {
     public partial class RandomAccess_FlushToDisk : RandomAccess_Base<long>
     {
-        public static IEnumerable<object[]> BufferByteCounts => new[]
-        {
-            // To ensure that flushing works correctly, we use a wide variety of buffer sizes.
-            new object[] { 1                              }, // Single-byte buffer.
-            new object[] { Environment.SystemPageSize - 1 }, // Buffer that's slightly smaller than a page.
-            new object[] { Environment.SystemPageSize + 1 }, // Buffer that's slightly larger than a page.
-            new object[] { Environment.SystemPageSize     }, // Buffer that's exactly one page.
-            new object[] { Environment.SystemPageSize * 2 }, // Buffer that's an even multiple of a page.
-            new object[] { Environment.SystemPageSize * 7 }, // Buffer that's an odd multiple of a page.
-        };
+        public static IEnumerable<object[]> BufferByteCounts =>
+            new[]
+            {
+                // To ensure that flushing works correctly, we use a wide variety of buffer sizes.
+                new object[] { 1 }, // Single-byte buffer.
+                new object[] { Environment.SystemPageSize - 1 }, // Buffer that's slightly smaller than a page.
+                new object[] { Environment.SystemPageSize + 1 }, // Buffer that's slightly larger than a page.
+                new object[] { Environment.SystemPageSize }, // Buffer that's exactly one page.
+                new object[] { Environment.SystemPageSize * 2 }, // Buffer that's an even multiple of a page.
+                new object[] { Environment.SystemPageSize * 7 }, // Buffer that's an odd multiple of a page.
+            };
 
         protected override bool UsesOffsets => false;
 
         protected override bool ThrowsForUnseekableFile => false;
 
-        protected override long MethodUnderTest(SafeFileHandle handle, byte[] bytes, long fileOffset)
+        protected override long MethodUnderTest(
+            SafeFileHandle handle,
+            byte[] bytes,
+            long fileOffset
+        )
         {
             RandomAccess.FlushToDisk(handle);
             return 0;
@@ -43,7 +48,13 @@ namespace System.IO.Tests
 
             byte[] randomBytes = RandomNumberGenerator.GetBytes(bufferByteCount);
 
-            using (SafeFileHandle handle = File.OpenHandle(testFilePath, FileMode.CreateNew, FileAccess.Write))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    testFilePath,
+                    FileMode.CreateNew,
+                    FileAccess.Write
+                )
+            )
             {
                 RandomAccess.Write(handle, randomBytes, fileOffset: 0);
 
@@ -71,7 +82,13 @@ namespace System.IO.Tests
         [Fact]
         public void CanFlushWithoutWriting()
         {
-            using (SafeFileHandle handle = File.OpenHandle(GetTestFilePath(), FileMode.CreateNew, FileAccess.Write))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    GetTestFilePath(),
+                    FileMode.CreateNew,
+                    FileAccess.Write
+                )
+            )
             {
                 // Flush the file to disk. NOTE: we have created a file but have not written anything to it yet
                 // so there is nothing to flush to disk. This should succeed without throwing an exception.
@@ -88,7 +105,12 @@ namespace System.IO.Tests
         public void CanFlushUnseekableFile()
         {
             using (var server = new AnonymousPipeServerStream(PipeDirection.Out))
-            using (SafeFileHandle handle = new SafeFileHandle(server.SafePipeHandle.DangerousGetHandle(), ownsHandle: false))
+            using (
+                SafeFileHandle handle = new SafeFileHandle(
+                    server.SafePipeHandle.DangerousGetHandle(),
+                    ownsHandle: false
+                )
+            )
             {
                 // Flushing a non-seekable handle (in this case, a pipe handle) should work without throwing an
                 // exception. On Windows, the FlushFileBuffers() function DOES work with non-seekable handles
@@ -107,7 +129,13 @@ namespace System.IO.Tests
             const int FileByteCount = 100;
             File.WriteAllBytes(testFilePath, RandomNumberGenerator.GetBytes(FileByteCount));
 
-            using (SafeFileHandle handle = File.OpenHandle(testFilePath, FileMode.Open, FileAccess.Read))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    testFilePath,
+                    FileMode.Open,
+                    FileAccess.Read
+                )
+            )
             {
                 // On non-Windows platforms (notably Unix), flushing a file opened for reading should succeed.
                 // On Windows, the FlushFileBuffers() function does not work with files opened for reading and

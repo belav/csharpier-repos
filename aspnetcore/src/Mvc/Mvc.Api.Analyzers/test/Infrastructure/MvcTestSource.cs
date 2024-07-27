@@ -12,10 +12,18 @@ public static class MvcTestSource
 
     public static TestSource Read(string testClassName, string testMethod)
     {
-        var filePath = Path.Combine(ProjectDirectory, "TestFiles", testClassName, testMethod + ".cs");
+        var filePath = Path.Combine(
+            ProjectDirectory,
+            "TestFiles",
+            testClassName,
+            testMethod + ".cs"
+        );
         if (!File.Exists(filePath))
         {
-            throw new FileNotFoundException($"TestFile {testMethod} could not be found at {filePath}.", filePath);
+            throw new FileNotFoundException(
+                $"TestFile {testMethod} could not be found at {filePath}.",
+                filePath
+            );
         }
 
         var fileContent = File.ReadAllText(filePath);

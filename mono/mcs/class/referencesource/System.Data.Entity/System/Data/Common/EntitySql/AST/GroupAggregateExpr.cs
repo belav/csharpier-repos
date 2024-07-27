@@ -10,10 +10,10 @@
 namespace System.Data.Common.EntitySql.AST
 {
     using System;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
 
     /// <summary>
     /// Base class for <see cref="MethodExpr"/> and <see cref="GroupPartitionExpr"/>.

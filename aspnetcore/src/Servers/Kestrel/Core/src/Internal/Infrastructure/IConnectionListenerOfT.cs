@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 /// <summary>
 /// Defines an interface that represents a listener bound to a specific <see cref="EndPoint"/>.
 /// </summary>
-internal interface IConnectionListener<T> : IConnectionListenerBase where T : BaseConnectionContext
+internal interface IConnectionListener<T> : IConnectionListenerBase
+    where T : BaseConnectionContext
 {
     /// <summary>
     /// Begins an asynchronous operation to accept an incoming connection.

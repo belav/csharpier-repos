@@ -22,8 +22,7 @@ public class SignInResultTest
         var principal = new ClaimsPrincipal();
         var httpContext = new Mock<HttpContext>();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignInAsync(httpContext.Object, "", principal, null))
+        auth.Setup(c => c.SignInAsync(httpContext.Object, "", principal, null))
             .Returns(Task.CompletedTask)
             .Verifiable();
         httpContext.Setup(c => c.RequestServices).Returns(CreateServices(auth.Object));
@@ -33,7 +32,8 @@ public class SignInResultTest
         var actionContext = new ActionContext(
             httpContext.Object,
             routeData,
-            new ActionDescriptor());
+            new ActionDescriptor()
+        );
 
         // Act
         await result.ExecuteResultAsync(actionContext);
@@ -49,8 +49,7 @@ public class SignInResultTest
         var principal = new ClaimsPrincipal();
         var httpContext = new Mock<HttpContext>();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignInAsync(httpContext.Object, null, principal, null))
+        auth.Setup(c => c.SignInAsync(httpContext.Object, null, principal, null))
             .Returns(Task.CompletedTask)
             .Verifiable();
         httpContext.Setup(c => c.RequestServices).Returns(CreateServices(auth.Object));
@@ -60,7 +59,8 @@ public class SignInResultTest
         var actionContext = new ActionContext(
             httpContext.Object,
             routeData,
-            new ActionDescriptor());
+            new ActionDescriptor()
+        );
 
         // Act
         await result.ExecuteResultAsync(actionContext);
@@ -77,8 +77,7 @@ public class SignInResultTest
         var authProperties = new AuthenticationProperties();
         var httpContext = new Mock<HttpContext>();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignInAsync(httpContext.Object, "Scheme1", principal, authProperties))
+        auth.Setup(c => c.SignInAsync(httpContext.Object, "Scheme1", principal, authProperties))
             .Returns(Task.CompletedTask)
             .Verifiable();
         httpContext.Setup(c => c.RequestServices).Returns(CreateServices(auth.Object));
@@ -88,7 +87,8 @@ public class SignInResultTest
         var actionContext = new ActionContext(
             httpContext.Object,
             routeData,
-            new ActionDescriptor());
+            new ActionDescriptor()
+        );
 
         // Act
         await result.ExecuteResultAsync(actionContext);

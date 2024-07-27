@@ -9,7 +9,8 @@ using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
 
 namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
 {
-    internal abstract partial class CommonFixAllState<TProvider, TFixAllProvider, TFixAllState> : IFixAllState
+    internal abstract partial class CommonFixAllState<TProvider, TFixAllProvider, TFixAllState>
+        : IFixAllState
         where TFixAllProvider : IFixAllProvider
         where TFixAllState : CommonFixAllState<TProvider, TFixAllProvider, TFixAllState>
     {
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             TProvider provider,
             CodeActionOptionsProvider optionsProvider,
             FixAllScope scope,
-            string? codeActionEquivalenceKey)
+            string? codeActionEquivalenceKey
+        )
         {
             Debug.Assert(document == null || document.Project == project);
 
@@ -44,21 +46,33 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             CodeActionEquivalenceKey = codeActionEquivalenceKey;
         }
 
-        protected abstract TFixAllState With(Document? document, Project project, FixAllScope scope, string? codeActionEquivalenceKey);
+        protected abstract TFixAllState With(
+            Document? document,
+            Project project,
+            FixAllScope scope,
+            string? codeActionEquivalenceKey
+        );
 
         public TFixAllState With(
             Optional<(Document? document, Project project)> documentAndProject = default,
             Optional<FixAllScope> scope = default,
-            Optional<string?> codeActionEquivalenceKey = default)
+            Optional<string?> codeActionEquivalenceKey = default
+        )
         {
-            var (newDocument, newProject) = documentAndProject.HasValue ? documentAndProject.Value : (Document, Project);
+            var (newDocument, newProject) = documentAndProject.HasValue
+                ? documentAndProject.Value
+                : (Document, Project);
             var newScope = scope.HasValue ? scope.Value : Scope;
-            var newCodeActionEquivalenceKey = codeActionEquivalenceKey.HasValue ? codeActionEquivalenceKey.Value : CodeActionEquivalenceKey;
+            var newCodeActionEquivalenceKey = codeActionEquivalenceKey.HasValue
+                ? codeActionEquivalenceKey.Value
+                : CodeActionEquivalenceKey;
 
-            if (newDocument == Document &&
-                newProject == Project &&
-                newScope == Scope &&
-                newCodeActionEquivalenceKey == CodeActionEquivalenceKey)
+            if (
+                newDocument == Document
+                && newProject == Project
+                && newScope == Scope
+                && newCodeActionEquivalenceKey == CodeActionEquivalenceKey
+            )
             {
                 return (TFixAllState)this;
             }
@@ -74,8 +88,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
         IFixAllState IFixAllState.With(
             Optional<(Document? document, Project project)> documentAndProject,
             Optional<FixAllScope> scope,
-            Optional<string?> codeActionEquivalenceKey)
-            => this.With(documentAndProject, scope, codeActionEquivalenceKey);
+            Optional<string?> codeActionEquivalenceKey
+        ) => this.With(documentAndProject, scope, codeActionEquivalenceKey);
         #endregion
     }
 }

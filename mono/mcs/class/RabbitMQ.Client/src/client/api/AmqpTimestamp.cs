@@ -90,10 +90,7 @@ namespace RabbitMQ.Client
         ///<summary>Retrieve the time_t from this structure.</summary>
         public long UnixTime
         {
-            get
-            {
-                return m_unixTime;
-            }
+            get { return m_unixTime; }
         }
 
         ///<summary>Provides a debugger-friendly display.</summary>

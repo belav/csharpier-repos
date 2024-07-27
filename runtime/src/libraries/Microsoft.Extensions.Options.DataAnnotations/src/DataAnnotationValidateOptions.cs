@@ -16,15 +16,23 @@ namespace Microsoft.Extensions.Options
     /// Implementation of <see cref="IValidateOptions{TOptions}"/> that uses DataAnnotation's <see cref="Validator"/> for validation.
     /// </summary>
     /// <typeparam name="TOptions">The instance being validated.</typeparam>
-    public class DataAnnotationValidateOptions<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] TOptions>
-        : IValidateOptions<TOptions> where TOptions : class
+    public class DataAnnotationValidateOptions<
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
+            TOptions
+    > : IValidateOptions<TOptions>
+        where TOptions : class
     {
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="name">The name of the option.</param>
-        [RequiresUnreferencedCode("The implementation of Validate method on this type will walk through all properties of the passed in options object, and its type cannot be " +
-            "statically analyzed so its members may be trimmed.")]
+        [RequiresUnreferencedCode(
+            "The implementation of Validate method on this type will walk through all properties of the passed in options object, and its type cannot be "
+                + "statically analyzed so its members may be trimmed."
+        )]
         public DataAnnotationValidateOptions(string? name)
         {
             Name = name;
@@ -41,8 +49,11 @@ namespace Microsoft.Extensions.Options
         /// <param name="name">The name of the options instance being validated.</param>
         /// <param name="options">The options instance.</param>
         /// <returns>The <see cref="ValidateOptionsResult"/> result.</returns>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Suppressing the warnings on this method since the constructor of the type is annotated as RequiresUnreferencedCode.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Suppressing the warnings on this method since the constructor of the type is annotated as RequiresUnreferencedCode."
+        )]
         public ValidateOptionsResult Validate(string? name, TOptions options)
         {
             // Null name is used to configure all named options.
@@ -59,7 +70,15 @@ namespace Microsoft.Extensions.Options
             HashSet<object>? visited = null;
             List<string>? errors = null;
 
-            if (TryValidateOptions(options, options.GetType().Name, validationResults, ref errors, ref visited))
+            if (
+                TryValidateOptions(
+                    options,
+                    options.GetType().Name,
+                    validationResults,
+                    ref errors,
+                    ref visited
+                )
+            )
             {
                 return ValidateOptionsResult.Success;
             }
@@ -69,9 +88,17 @@ namespace Microsoft.Extensions.Options
             return ValidateOptionsResult.Fail(errors);
         }
 
-        [RequiresUnreferencedCode("This method on this type will walk through all properties of the passed in options object, and its type cannot be " +
-            "statically analyzed so its members may be trimmed.")]
-        private static bool TryValidateOptions(object options, string qualifiedName, List<ValidationResult> results, ref List<string>? errors, ref HashSet<object>? visited)
+        [RequiresUnreferencedCode(
+            "This method on this type will walk through all properties of the passed in options object, and its type cannot be "
+                + "statically analyzed so its members may be trimmed."
+        )]
+        private static bool TryValidateOptions(
+            object options,
+            string qualifiedName,
+            List<ValidationResult> results,
+            ref List<string>? errors,
+            ref HashSet<object>? visited
+        )
         {
             Debug.Assert(options is not null);
 
@@ -82,21 +109,35 @@ namespace Microsoft.Extensions.Options
 
             results.Clear();
 
-            bool res = Validator.TryValidateObject(options, new ValidationContext(options), results, validateAllProperties: true);
+            bool res = Validator.TryValidateObject(
+                options,
+                new ValidationContext(options),
+                results,
+                validateAllProperties: true
+            );
             if (!res)
             {
                 errors ??= new List<string>();
 
                 foreach (ValidationResult result in results!)
                 {
-                    errors.Add($"DataAnnotation validation failed for '{qualifiedName}' members: '{string.Join(",", result.MemberNames)}' with the error: '{result.ErrorMessage}'.");
+                    errors.Add(
+                        $"DataAnnotation validation failed for '{qualifiedName}' members: '{string.Join(",", result.MemberNames)}' with the error: '{result.ErrorMessage}'."
+                    );
                 }
             }
 
-            foreach (PropertyInfo propertyInfo in options.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public))
+            foreach (
+                PropertyInfo propertyInfo in options
+                    .GetType()
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+            )
             {
                 // Indexers are properties which take parameters. Ignore them.
-                if (propertyInfo.GetMethod is null || propertyInfo.GetMethod.GetParameters().Length > 0)
+                if (
+                    propertyInfo.GetMethod is null
+                    || propertyInfo.GetMethod.GetParameters().Length > 0
+                )
                 {
                     continue;
                 }
@@ -114,10 +155,20 @@ namespace Microsoft.Extensions.Options
                     visited.Add(options);
 
                     results ??= new List<ValidationResult>();
-                    res = TryValidateOptions(value, $"{qualifiedName}.{propertyInfo.Name}", results, ref errors, ref visited) && res;
+                    res =
+                        TryValidateOptions(
+                            value,
+                            $"{qualifiedName}.{propertyInfo.Name}",
+                            results,
+                            ref errors,
+                            ref visited
+                        ) && res;
                 }
-                else if (value is IEnumerable enumerable &&
-                         propertyInfo.GetCustomAttribute<ValidateEnumeratedItemsAttribute>() is not null)
+                else if (
+                    value is IEnumerable enumerable
+                    && propertyInfo.GetCustomAttribute<ValidateEnumeratedItemsAttribute>()
+                        is not null
+                )
                 {
                     visited ??= new HashSet<object>(ReferenceEqualityComparer.Instance);
                     visited.Add(options);
@@ -126,7 +177,14 @@ namespace Microsoft.Extensions.Options
                     int index = 0;
                     foreach (object item in enumerable)
                     {
-                        res = TryValidateOptions(item, $"{qualifiedName}.{propertyInfo.Name}[{index++}]", results, ref errors, ref visited) && res;
+                        res =
+                            TryValidateOptions(
+                                item,
+                                $"{qualifiedName}.{propertyInfo.Name}[{index++}]",
+                                results,
+                                ref errors,
+                                ref visited
+                            ) && res;
                     }
                 }
             }

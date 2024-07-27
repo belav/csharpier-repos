@@ -12,7 +12,8 @@ namespace System.ServiceModel.Activities.Description
     [Fx.Tag.XamlVisible(false)]
     public class WorkflowUnhandledExceptionBehavior : IServiceBehavior
     {
-        internal const WorkflowUnhandledExceptionAction defaultAction = WorkflowUnhandledExceptionAction.AbandonAndSuspend;
+        internal const WorkflowUnhandledExceptionAction defaultAction =
+            WorkflowUnhandledExceptionAction.AbandonAndSuspend;
 
         WorkflowUnhandledExceptionAction action;
 
@@ -34,11 +35,17 @@ namespace System.ServiceModel.Activities.Description
             }
         }
 
-        public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
-        {
-        }
+        public void AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        public void ApplyDispatchBehavior(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        )
         {
             WorkflowServiceHost workflowServiceHost = serviceHostBase as WorkflowServiceHost;
             if (workflowServiceHost != null)

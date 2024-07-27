@@ -50,7 +50,8 @@ public class TempDataController : Controller
         int intValue,
         IList<string> listValues,
         DateTime datetimeValue,
-        Guid guidValue)
+        Guid guidValue
+    )
     {
         TempData["key1"] = value;
         TempData["key2"] = intValue;
@@ -107,7 +108,9 @@ public class TempDataController : Controller
     public IActionResult UnhandledExceptionAndSettingTempData()
     {
         TempData[nameof(UnhandledExceptionAndSettingTempData)] = "James";
-        throw new InvalidOperationException($"Exception from action {nameof(UnhandledExceptionAndSettingTempData)}");
+        throw new InvalidOperationException(
+            $"Exception from action {nameof(UnhandledExceptionAndSettingTempData)}"
+        );
     }
 
     [HttpGet]

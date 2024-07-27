@@ -20,7 +20,10 @@ public class ResponseCacheFilterApplicationModelProviderTest
     {
         // Arrange
         var options = Options.Create(new MvcOptions());
-        var provider = new ResponseCacheFilterApplicationModelProvider(options, Mock.Of<ILoggerFactory>());
+        var provider = new ResponseCacheFilterApplicationModelProvider(
+            options,
+            Mock.Of<ILoggerFactory>()
+        );
         var typeInfo = typeof(PageWithoutResponseCache).GetTypeInfo();
         var context = GetApplicationProviderContext(typeInfo);
 
@@ -31,7 +34,8 @@ public class ResponseCacheFilterApplicationModelProviderTest
         Assert.Collection(
             context.PageApplicationModel.Filters,
             f => Assert.IsType<PageHandlerPageFilter>(f),
-            f => Assert.IsType<HandleOptionsRequestsPageFilter>(f));
+            f => Assert.IsType<HandleOptionsRequestsPageFilter>(f)
+        );
     }
 
     private class PageWithoutResponseCache : Page
@@ -44,9 +48,7 @@ public class ResponseCacheFilterApplicationModelProviderTest
     [Authorize]
     public class ModelWithoutResponseCache : PageModel
     {
-        public void OnGet()
-        {
-        }
+        public void OnGet() { }
     }
 
     [Fact]
@@ -54,7 +56,10 @@ public class ResponseCacheFilterApplicationModelProviderTest
     {
         // Arrange
         var options = Options.Create(new MvcOptions());
-        var provider = new ResponseCacheFilterApplicationModelProvider(options, Mock.Of<ILoggerFactory>());
+        var provider = new ResponseCacheFilterApplicationModelProvider(
+            options,
+            Mock.Of<ILoggerFactory>()
+        );
         var typeInfo = typeof(PageWithResponseCache).GetTypeInfo();
         var context = GetApplicationProviderContext(typeInfo);
 
@@ -73,7 +78,8 @@ public class ResponseCacheFilterApplicationModelProviderTest
                 Assert.Equal("Abc", filter.VaryByHeader);
                 Assert.Equal(12, filter.Duration);
                 Assert.True(filter.NoStore);
-            });
+            }
+        );
     }
 
     private class PageWithResponseCache : Page
@@ -86,9 +92,7 @@ public class ResponseCacheFilterApplicationModelProviderTest
     [ResponseCache(Duration = 12, NoStore = true, VaryByHeader = "Abc")]
     private class ModelWithResponseCache : PageModel
     {
-        public virtual void OnGet()
-        {
-        }
+        public virtual void OnGet() { }
     }
 
     [Fact]
@@ -96,12 +100,14 @@ public class ResponseCacheFilterApplicationModelProviderTest
     {
         // Arrange
         var options = Options.Create(new MvcOptions());
-        options.Value.CacheProfiles.Add("TestCacheProfile", new CacheProfile
-        {
-            Duration = 14,
-            VaryByQueryKeys = new[] { "A" },
-        });
-        var provider = new ResponseCacheFilterApplicationModelProvider(options, Mock.Of<ILoggerFactory>());
+        options.Value.CacheProfiles.Add(
+            "TestCacheProfile",
+            new CacheProfile { Duration = 14, VaryByQueryKeys = new[] { "A" } }
+        );
+        var provider = new ResponseCacheFilterApplicationModelProvider(
+            options,
+            Mock.Of<ILoggerFactory>()
+        );
         var typeInfo = typeof(PageWithResponseCacheProfile).GetTypeInfo();
         var context = GetApplicationProviderContext(typeInfo);
 
@@ -119,7 +125,8 @@ public class ResponseCacheFilterApplicationModelProviderTest
                 var filter = Assert.IsType<PageResponseCacheFilter>(f);
                 Assert.Equal(new[] { "A" }, filter.VaryByQueryKeys);
                 Assert.Equal(14, filter.Duration);
-            });
+            }
+        );
     }
 
     private class PageWithResponseCacheProfile : Page
@@ -132,19 +139,20 @@ public class ResponseCacheFilterApplicationModelProviderTest
     [ResponseCache(CacheProfileName = "TestCacheProfile")]
     private class ModelWithResponseCacheProfile : PageModel
     {
-        public virtual void OnGet()
-        {
-        }
+        public virtual void OnGet() { }
     }
 
-    private static PageApplicationModelProviderContext GetApplicationProviderContext(TypeInfo typeInfo)
+    private static PageApplicationModelProviderContext GetApplicationProviderContext(
+        TypeInfo typeInfo
+    )
     {
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
 
         var defaultProvider = new DefaultPageApplicationModelProvider(
             modelMetadataProvider,
             Options.Create(new RazorPagesOptions()),
-            new DefaultPageApplicationModelPartsProvider(modelMetadataProvider));
+            new DefaultPageApplicationModelPartsProvider(modelMetadataProvider)
+        );
 
         var context = new PageApplicationModelProviderContext(new PageActionDescriptor(), typeInfo);
         defaultProvider.OnProvidersExecuting(context);

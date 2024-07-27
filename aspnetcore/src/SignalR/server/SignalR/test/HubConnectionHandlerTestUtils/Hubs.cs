@@ -49,7 +49,11 @@ public class MethodHub : TestHub
         return Clients.Group(groupName).SendAsync("Send", message);
     }
 
-    public Task GroupExceptSendMethod(string groupName, string message, IReadOnlyList<string> excludedConnectionIds)
+    public Task GroupExceptSendMethod(
+        string groupName,
+        string message,
+        IReadOnlyList<string> excludedConnectionIds
+    )
     {
         return Clients.GroupExcept(groupName, excludedConnectionIds).SendAsync("Send", message);
     }
@@ -71,7 +75,10 @@ public class MethodHub : TestHub
 
     public Task BroadcastItem()
     {
-        return Clients.All.SendAsync("Broadcast", new Result { Message = "test", paramName = "param" });
+        return Clients.All.SendAsync(
+            "Broadcast",
+            new Result { Message = "test", paramName = "param" }
+        );
     }
 
     public Task SendArray()
@@ -110,9 +117,7 @@ public class MethodHub : TestHub
         return data;
     }
 
-    public void VoidMethod()
-    {
-    }
+    public void VoidMethod() { }
 
     public string ConcatString(byte b, int i, char c, string s)
     {
@@ -144,19 +149,13 @@ public class MethodHub : TestHub
         return Task.FromException(new InvalidOperationException("BOOM!"));
     }
 
-    public static void StaticMethod()
-    {
-    }
+    public static void StaticMethod() { }
 
     [Authorize("test")]
-    public void AuthMethod()
-    {
-    }
+    public void AuthMethod() { }
 
     [Authorize("test")]
-    public void MultiParamAuthMethod(string s1, string s2)
-    {
-    }
+    public void MultiParamAuthMethod(string s1, string s2) { }
 
     public Task SendToAllExcept(string message, IReadOnlyList<string> excludedConnectionIds)
     {
@@ -183,9 +182,7 @@ public class MethodHub : TestHub
         return Clients.Caller.SendAsync("Send", new SelfRef());
     }
 
-    public void InvalidArgument(CancellationToken token)
-    {
-    }
+    public void InvalidArgument(CancellationToken token) { }
 
     public async Task<string> StreamingConcat(ChannelReader<string> source)
     {
@@ -204,9 +201,7 @@ public class MethodHub : TestHub
 
     public async Task StreamDontRead(ChannelReader<string> source)
     {
-        while (await source.WaitToReadAsync())
-        {
-        }
+        while (await source.WaitToReadAsync()) { }
     }
 
     public async Task<int> StreamingSum(ChannelReader<int> source)
@@ -311,9 +306,7 @@ public class MethodHub : TestHub
         {
             while (await source.WaitToReadAsync())
             {
-                while (source.TryRead(out var item))
-                {
-                }
+                while (source.TryRead(out var item)) { }
             }
         }
         catch (Exception ex)
@@ -435,7 +428,11 @@ public class DynamicTestHub : DynamicHub
         return Clients.Group(groupName).Send(message);
     }
 
-    public Task GroupExceptSendMethod(string groupName, string message, IReadOnlyList<string> excludedConnectionIds)
+    public Task GroupExceptSendMethod(
+        string groupName,
+        string message,
+        IReadOnlyList<string> excludedConnectionIds
+    )
     {
         return Clients.GroupExcept(groupName, excludedConnectionIds).Send(message);
     }
@@ -521,7 +518,11 @@ public class HubT : Hub<ITest>
         return Clients.Group(groupName).Send(message);
     }
 
-    public Task GroupExceptSendMethod(string groupName, string message, IReadOnlyList<string> excludedConnectionIds)
+    public Task GroupExceptSendMethod(
+        string groupName,
+        string message,
+        IReadOnlyList<string> excludedConnectionIds
+    )
     {
         return Clients.GroupExcept(groupName, excludedConnectionIds).Send(message);
     }
@@ -559,7 +560,8 @@ public class HubT : Hub<ITest>
     public async Task<ClientResults> GetClientResultTwoWays(int clientValue, int callerValue) =>
         new ClientResults(
             await Clients.Client(Context.ConnectionId).GetClientResult(clientValue),
-            await Clients.Caller.GetClientResult(callerValue));
+            await Clients.Caller.GetClientResult(callerValue)
+        );
 }
 
 public interface ITest
@@ -628,20 +630,14 @@ public class BaseHub : TestHub
 
 public class InvalidHub : TestHub
 {
-    public void OverloadedMethod(int num)
-    {
-    }
+    public void OverloadedMethod(int num) { }
 
-    public void OverloadedMethod(string message)
-    {
-    }
+    public void OverloadedMethod(string message) { }
 }
 
 public class GenericMethodHub : Hub
 {
-    public void GenericMethod<T>()
-    {
-    }
+    public void GenericMethod<T>() { }
 }
 
 public class DisposeTrackingHub : TestHub
@@ -671,10 +667,7 @@ public class HubWithAsyncDisposable : TestHub
         _disposable = disposable;
     }
 
-    public void Test()
-    {
-
-    }
+    public void Test() { }
 }
 
 public class AbortHub : Hub
@@ -744,7 +737,9 @@ public class StreamingHub : TestHub
         return new AsyncEnumerableImpl<string>(CounterAsyncEnumerable(count));
     }
 
-    public AsyncEnumerableImplChannelThrows<string> AsyncEnumerableIsPreferredOverChannelReader(int count)
+    public AsyncEnumerableImplChannelThrows<string> AsyncEnumerableIsPreferredOverChannelReader(
+        int count
+    )
     {
         return new AsyncEnumerableImplChannelThrows<string>(CounterChannel(count));
     }
@@ -764,14 +759,18 @@ public class StreamingHub : TestHub
     public ChannelReader<int> ChannelClosedExceptionStream()
     {
         var channel = Channel.CreateUnbounded<int>();
-        channel.Writer.TryComplete(new ChannelClosedException("ChannelClosedException from channel"));
+        channel.Writer.TryComplete(
+            new ChannelClosedException("ChannelClosedException from channel")
+        );
         return channel.Reader;
     }
 
     public ChannelReader<int> ChannelClosedExceptionInnerExceptionStream()
     {
         var channel = Channel.CreateUnbounded<int>();
-        channel.Writer.TryComplete(new ChannelClosedException(new Exception("ChannelClosedException from channel")));
+        channel.Writer.TryComplete(
+            new ChannelClosedException(new Exception("ChannelClosedException from channel"))
+        );
         return channel.Reader;
     }
 
@@ -810,25 +809,35 @@ public class StreamingHub : TestHub
         return output.Reader;
     }
 
-    public async IAsyncEnumerable<string> DerivedParameterInterfaceAsyncEnumerable(IDerivedParameterTestObject param)
+    public async IAsyncEnumerable<string> DerivedParameterInterfaceAsyncEnumerable(
+        IDerivedParameterTestObject param
+    )
     {
         await Task.Yield();
         yield return param.Value;
     }
 
-    public async IAsyncEnumerable<string> DerivedParameterBaseClassAsyncEnumerable(DerivedParameterTestObjectBase param)
+    public async IAsyncEnumerable<string> DerivedParameterBaseClassAsyncEnumerable(
+        DerivedParameterTestObjectBase param
+    )
     {
         await Task.Yield();
         yield return param.Value;
     }
 
-    public async IAsyncEnumerable<string> DerivedParameterInterfaceAsyncEnumerableWithCancellation(IDerivedParameterTestObject param, [EnumeratorCancellation] CancellationToken token)
+    public async IAsyncEnumerable<string> DerivedParameterInterfaceAsyncEnumerableWithCancellation(
+        IDerivedParameterTestObject param,
+        [EnumeratorCancellation] CancellationToken token
+    )
     {
         await Task.Yield();
         yield return param.Value;
     }
 
-    public async IAsyncEnumerable<string> DerivedParameterBaseClassAsyncEnumerableWithCancellation(DerivedParameterTestObjectBase param, [EnumeratorCancellation] CancellationToken token)
+    public async IAsyncEnumerable<string> DerivedParameterBaseClassAsyncEnumerableWithCancellation(
+        DerivedParameterTestObjectBase param,
+        [EnumeratorCancellation] CancellationToken token
+    )
     {
         await Task.Yield();
         yield return param.Value;
@@ -864,7 +873,9 @@ public class StreamingHub : TestHub
             throw new NotImplementedException();
         }
 
-        public override ValueTask<bool> WaitToReadAsync(CancellationToken cancellationToken = default)
+        public override ValueTask<bool> WaitToReadAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             // Not implemented to verify this is consumed as an IAsyncEnumerable<T> instead of a ChannelReader<T>.
             throw new NotImplementedException();
@@ -880,12 +891,17 @@ public class StreamingHub : TestHub
         {
             /// <summary>The channel being enumerated.</summary>
             private readonly ChannelReader<T> _channel;
+
             /// <summary>Cancellation token used to cancel the enumeration.</summary>
             private readonly CancellationToken _cancellationToken;
+
             /// <summary>The current element of the enumeration.</summary>
             private T _current;
 
-            public ChannelAsyncEnumerator(ChannelReader<T> channel, CancellationToken cancellationToken)
+            public ChannelAsyncEnumerator(
+                ChannelReader<T> channel,
+                CancellationToken cancellationToken
+            )
             {
                 _channel = channel;
                 _cancellationToken = cancellationToken;
@@ -942,11 +958,12 @@ public class StreamingHub : TestHub
     public class DerivedParameterKnownTypesBinder : ISerializationBinder
     {
         private static readonly IEnumerable<Type> _knownTypes = new List<Type>()
-            {
-                typeof(DerivedParameterTestObject)
-            };
+        {
+            typeof(DerivedParameterTestObject),
+        };
 
-        public static ISerializationBinder Instance { get; } = new DerivedParameterKnownTypesBinder();
+        public static ISerializationBinder Instance { get; } =
+            new DerivedParameterKnownTypesBinder();
 
         public void BindToName(Type serializedType, out string assemblyName, out string typeName)
         {
@@ -1026,7 +1043,11 @@ public class LongRunningHub : Hub
         return channel.Reader;
     }
 
-    public ChannelReader<int> CancelableStreamMultiParameter(int ignore, int ignore2, CancellationToken token)
+    public ChannelReader<int> CancelableStreamMultiParameter(
+        int ignore,
+        int ignore2,
+        CancellationToken token
+    )
     {
         var channel = Channel.CreateBounded<int>(10);
 
@@ -1041,7 +1062,11 @@ public class LongRunningHub : Hub
         return channel.Reader;
     }
 
-    public ChannelReader<int> CancelableStreamNullableParameter(int x, string y, CancellationToken token)
+    public ChannelReader<int> CancelableStreamNullableParameter(
+        int x,
+        string y,
+        CancellationToken token
+    )
     {
         var channel = Channel.CreateBounded<int>(10);
 
@@ -1071,7 +1096,11 @@ public class LongRunningHub : Hub
         return channel.Reader;
     }
 
-    public ChannelReader<int> CancelableStreamMiddleParameter(int ignore, CancellationToken token, int ignore2)
+    public ChannelReader<int> CancelableStreamMiddleParameter(
+        int ignore,
+        CancellationToken token,
+        int ignore2
+    )
     {
         var channel = Channel.CreateBounded<int>(10);
 
@@ -1086,7 +1115,9 @@ public class LongRunningHub : Hub
         return channel.Reader;
     }
 
-    public async IAsyncEnumerable<int> CancelableStreamGeneratedAsyncEnumerable([EnumeratorCancellation] CancellationToken token)
+    public async IAsyncEnumerable<int> CancelableStreamGeneratedAsyncEnumerable(
+        [EnumeratorCancellation] CancellationToken token
+    )
     {
         _tcsService.StartedMethod.SetResult(null);
         await token.WaitForCancellationAsync();
@@ -1094,7 +1125,10 @@ public class LongRunningHub : Hub
         yield break;
     }
 
-    public async IAsyncEnumerable<int> CountingCancelableStreamGeneratedAsyncEnumerable(int count, [EnumeratorCancellation] CancellationToken token)
+    public async IAsyncEnumerable<int> CountingCancelableStreamGeneratedAsyncEnumerable(
+        int count,
+        [EnumeratorCancellation] CancellationToken token
+    )
     {
         for (int i = 0; i < count; i++)
         {
@@ -1107,7 +1141,10 @@ public class LongRunningHub : Hub
         yield break;
     }
 
-    public ChannelReader<int> CountingCancelableStreamGeneratedChannel(int count, CancellationToken token)
+    public ChannelReader<int> CountingCancelableStreamGeneratedChannel(
+        int count,
+        CancellationToken token
+    )
     {
         var channel = Channel.CreateBounded<int>(10);
 
@@ -1153,7 +1190,9 @@ public class LongRunningHub : Hub
             _tcsService = tcsService;
         }
 
-        public IAsyncEnumerator<int> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+        public IAsyncEnumerator<int> GetAsyncEnumerator(
+            CancellationToken cancellationToken = default
+        )
         {
             return new CustomAsyncEnumerator(_tcsService, cancellationToken);
         }
@@ -1199,8 +1238,12 @@ public class TcsService
 
     public void Reset()
     {
-        StartedMethod = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
-        EndMethod = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+        StartedMethod = new TaskCompletionSource<object>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        EndMethod = new TaskCompletionSource<object>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
     }
 }
 
@@ -1332,14 +1375,13 @@ public class CallerService
 }
 
 [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
-public class FromService : Attribute, IFromServiceMetadata
-{ }
-public class Service1
-{ }
-public class Service2
-{ }
-public class Service3
-{ }
+public class FromService : Attribute, IFromServiceMetadata { }
+
+public class Service1 { }
+
+public class Service2 { }
+
+public class Service3 { }
 
 public class ServicesHub : TestHub
 {
@@ -1348,12 +1390,22 @@ public class ServicesHub : TestHub
         return true;
     }
 
-    public bool MultipleServices([FromService] Service1 service, [FromService] Service2 service2, [FromService] Service3 service3)
+    public bool MultipleServices(
+        [FromService] Service1 service,
+        [FromService] Service2 service2,
+        [FromService] Service3 service3
+    )
     {
         return true;
     }
 
-    public async Task<int> ServicesAndParams(int value, [FromService] Service1 service, ChannelReader<int> channelReader, [FromService] Service2 service2, bool value2)
+    public async Task<int> ServicesAndParams(
+        int value,
+        [FromService] Service1 service,
+        ChannelReader<int> channelReader,
+        [FromService] Service2 service2,
+        bool value2
+    )
     {
         int total = 0;
         while (await channelReader.WaitToReadAsync())
@@ -1389,7 +1441,10 @@ public class ServicesHub : TestHub
 
 public class KeyedServicesHub : TestHub
 {
-    public int MultipleSameKeyedServices([FromKeyedServices("service1")] Service1 service, [FromKeyedServices("service1")] Service1 service2)
+    public int MultipleSameKeyedServices(
+        [FromKeyedServices("service1")] Service1 service,
+        [FromKeyedServices("service1")] Service1 service2
+    )
     {
         Assert.Same(service, service2);
         return 445;
@@ -1405,12 +1460,18 @@ public class KeyedServicesHub : TestHub
         return 13 * input;
     }
 
-    public int KeyedServiceNonKeyedService(Service2 service2, [FromKeyedServices("service1")] Service1 service)
+    public int KeyedServiceNonKeyedService(
+        Service2 service2,
+        [FromKeyedServices("service1")] Service1 service
+    )
     {
         return 11;
     }
 
-    public int MultipleKeyedServices([FromKeyedServices("service1")] Service1 service, [FromKeyedServices("service2")] Service1 service2)
+    public int MultipleKeyedServices(
+        [FromKeyedServices("service1")] Service1 service,
+        [FromKeyedServices("service2")] Service1 service2
+    )
     {
         Assert.NotEqual(service, service2);
         return 45;
@@ -1419,20 +1480,78 @@ public class KeyedServicesHub : TestHub
 
 public class BadServicesHub : Hub
 {
-    public void BadMethod([FromKeyedServices("service1")] [FromService] Service1 service)
-    {
-    }
+    public void BadMethod([FromKeyedServices("service1")] [FromService] Service1 service) { }
 }
 
 public class TooManyParamsHub : Hub
 {
-    public void ManyParams(int a1, string a2, bool a3, float a4, string a5, int a6, int a7, int a8, int a9, int a10, int a11,
-        int a12, int a13, int a14, int a15, int a16, int a17, int a18, int a19, int a20, int a21, int a22, int a23, int a24,
-        int a25, int a26, int a27, int a28, int a29, int a30, int a31, int a32, int a33, int a34, int a35, int a36, int a37,
-        int a38, int a39, int a40, int a41, int a42, int a43, int a44, int a45, int a46, int a47, int a48, int a49, int a50,
-        int a51, int a52, int a53, int a54, int a55, int a56, int a57, int a58, int a59, int a60, int a61, int a62, int a63,
-        int a64, [FromService] Service1 service)
-    { }
+    public void ManyParams(
+        int a1,
+        string a2,
+        bool a3,
+        float a4,
+        string a5,
+        int a6,
+        int a7,
+        int a8,
+        int a9,
+        int a10,
+        int a11,
+        int a12,
+        int a13,
+        int a14,
+        int a15,
+        int a16,
+        int a17,
+        int a18,
+        int a19,
+        int a20,
+        int a21,
+        int a22,
+        int a23,
+        int a24,
+        int a25,
+        int a26,
+        int a27,
+        int a28,
+        int a29,
+        int a30,
+        int a31,
+        int a32,
+        int a33,
+        int a34,
+        int a35,
+        int a36,
+        int a37,
+        int a38,
+        int a39,
+        int a40,
+        int a41,
+        int a42,
+        int a43,
+        int a44,
+        int a45,
+        int a46,
+        int a47,
+        int a48,
+        int a49,
+        int a50,
+        int a51,
+        int a52,
+        int a53,
+        int a54,
+        int a55,
+        int a56,
+        int a57,
+        int a58,
+        int a59,
+        int a60,
+        int a61,
+        int a62,
+        int a63,
+        int a64,
+        [FromService] Service1 service
+    ) { }
 }
 
 public class OnConnectedSendToClientHub : Hub

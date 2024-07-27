@@ -10,7 +10,8 @@ namespace System.Net.Mime
         private readonly object _context;
         private int _outstanding;
 
-        internal MultiAsyncResult(object context, AsyncCallback? callback, object? state) : base(context, state, callback)
+        internal MultiAsyncResult(object context, AsyncCallback? callback, object? state)
+            : base(context, state, callback)
         {
             _context = context;
         }

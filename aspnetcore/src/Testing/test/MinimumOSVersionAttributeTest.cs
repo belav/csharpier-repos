@@ -11,19 +11,29 @@ public class MinimumOSVersionAttributeTest
     [Fact]
     public void Linux_ThrowsNotImplemeneted()
     {
-        Assert.Throws<NotImplementedException>(() => new MinimumOSVersionAttribute(OperatingSystems.Linux, "2.5"));
+        Assert.Throws<NotImplementedException>(
+            () => new MinimumOSVersionAttribute(OperatingSystems.Linux, "2.5")
+        );
     }
 
     [Fact]
     public void Mac_ThrowsNotImplemeneted()
     {
-        Assert.Throws<NotImplementedException>(() => new MinimumOSVersionAttribute(OperatingSystems.MacOSX, "2.5"));
+        Assert.Throws<NotImplementedException>(
+            () => new MinimumOSVersionAttribute(OperatingSystems.MacOSX, "2.5")
+        );
     }
 
     [Fact]
     public void WindowsOrLinux_ThrowsNotImplemeneted()
     {
-        Assert.Throws<NotImplementedException>(() => new MinimumOSVersionAttribute(OperatingSystems.Linux | OperatingSystems.Windows, "2.5"));
+        Assert.Throws<NotImplementedException>(
+            () =>
+                new MinimumOSVersionAttribute(
+                    OperatingSystems.Linux | OperatingSystems.Windows,
+                    "2.5"
+                )
+        );
     }
 
     [Fact]
@@ -33,7 +43,8 @@ public class MinimumOSVersionAttributeTest
             OperatingSystems.Windows,
             new Version("2.0"),
             OperatingSystems.Windows,
-            new Version("2.5"));
+            new Version("2.5")
+        );
 
         Assert.True(osSkipAttribute.IsMet);
     }
@@ -45,7 +56,8 @@ public class MinimumOSVersionAttributeTest
             OperatingSystems.Windows,
             new Version("2.5"),
             OperatingSystems.Windows,
-            new Version("2.5"));
+            new Version("2.5")
+        );
 
         Assert.True(osSkipAttribute.IsMet);
     }
@@ -57,7 +69,8 @@ public class MinimumOSVersionAttributeTest
             OperatingSystems.Windows,
             new Version("3.0"),
             OperatingSystems.Windows,
-            new Version("2.5"));
+            new Version("2.5")
+        );
 
         Assert.False(osSkipAttribute.IsMet);
     }
@@ -69,7 +82,8 @@ public class MinimumOSVersionAttributeTest
             OperatingSystems.Windows,
             new Version("2.5"),
             OperatingSystems.Linux,
-            new Version("2.5"));
+            new Version("2.5")
+        );
 
         Assert.True(osSkipAttribute.IsMet);
     }

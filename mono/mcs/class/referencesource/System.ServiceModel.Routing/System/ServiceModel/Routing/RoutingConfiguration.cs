@@ -21,12 +21,18 @@ namespace System.ServiceModel.Routing
         MessageFilterTable<IEnumerable<ServiceEndpoint>> filterTable;
 
         public RoutingConfiguration()
-            : this(new MessageFilterTable<IEnumerable<ServiceEndpoint>>(), DefaultRouteOnHeadersOnly)
+            : this(
+                new MessageFilterTable<IEnumerable<ServiceEndpoint>>(),
+                DefaultRouteOnHeadersOnly
+            )
         {
             this.configured = false;
         }
 
-        public RoutingConfiguration (MessageFilterTable<IEnumerable<ServiceEndpoint>> filterTable, bool routeOnHeadersOnly)
+        public RoutingConfiguration(
+            MessageFilterTable<IEnumerable<ServiceEndpoint>> filterTable,
+            bool routeOnHeadersOnly
+        )
         {
             if (filterTable == null)
             {
@@ -50,36 +56,27 @@ namespace System.ServiceModel.Routing
 
         internal MessageFilterTable<IEnumerable<ServiceEndpoint>> InternalFilterTable
         {
-            get
-            {
-                return this.filterTable;
-            }
-        }
-        
-        public bool RouteOnHeadersOnly
-        {
-            get;
-            set;
+            get { return this.filterTable; }
         }
 
-        public bool SoapProcessingEnabled
-        {
-            get;
-            set;
-        }
+        public bool RouteOnHeadersOnly { get; set; }
 
-        public bool EnsureOrderedDispatch
-        {
-            get;
-            set;
-        }
+        public bool SoapProcessingEnabled { get; set; }
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "This gets called in RoutingService..ctor")]
+        public bool EnsureOrderedDispatch { get; set; }
+
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "This gets called in RoutingService..ctor"
+        )]
         internal void VerifyConfigured()
         {
             if (!this.configured)
             {
-                throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR.RoutingTableNotConfigured));
+                throw FxTrace.Exception.AsError(
+                    new ConfigurationErrorsException(SR.RoutingTableNotConfigured)
+                );
             }
         }
     }

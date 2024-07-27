@@ -4,15 +4,15 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.ServiceModel.Channels;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using System.ServiceModel.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
 
     [DataContract]
     public class MessageFilterTable<TFilterData> : IMessageFilterTable<TFilterData>
@@ -25,9 +25,7 @@ namespace System.ServiceModel.Dispatcher
         static readonly TableEntryComparer staticComparerInstance = new TableEntryComparer();
 
         public MessageFilterTable()
-            : this(0)
-        {
-        }
+            : this(0) { }
 
         public MessageFilterTable(int defaultPriority)
         {
@@ -48,10 +46,7 @@ namespace System.ServiceModel.Dispatcher
 
         public TFilterData this[MessageFilter filter]
         {
-            get
-            {
-                return this.filters[filter];
-            }
+            get { return this.filters[filter]; }
             set
             {
                 if (this.ContainsKey(filter))
@@ -69,23 +64,14 @@ namespace System.ServiceModel.Dispatcher
 
         public int Count
         {
-            get
-            {
-                return this.filters.Count;
-            }
+            get { return this.filters.Count; }
         }
 
         [DataMember]
         public int DefaultPriority
         {
-            get
-            {
-                return this.defaultPriority;
-            }
-            set
-            {
-                this.defaultPriority = value;
-            }
+            get { return this.defaultPriority; }
+            set { this.defaultPriority = value; }
         }
 
         [DataMember]
@@ -113,26 +99,17 @@ namespace System.ServiceModel.Dispatcher
 
         public bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public ICollection<MessageFilter> Keys
         {
-            get
-            {
-                return this.filters.Keys;
-            }
+            get { return this.filters.Keys; }
         }
 
         public ICollection<TFilterData> Values
         {
-            get
-            {
-                return this.filters.Values;
-            }
+            get { return this.filters.Values; }
         }
 
         public void Add(MessageFilter filter, TFilterData data)
@@ -140,7 +117,12 @@ namespace System.ServiceModel.Dispatcher
             this.Add(filter, data, this.defaultPriority);
         }
 
-        [SuppressMessage(FxCop.Category.Usage, "CA2301:EmbeddableTypesInContainersRule", MessageId = "filterTypeMappings", Justification = "No need to support type equivalence here.")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            "CA2301:EmbeddableTypesInContainersRule",
+            MessageId = "filterTypeMappings",
+            Justification = "No need to support type equivalence here."
+        )]
         public void Add(MessageFilter filter, TFilterData data, int priority)
         {
             if (filter == null)
@@ -150,7 +132,10 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.filters.ContainsKey(filter))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("filter", SR.GetString(SR.FilterExists));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "filter",
+                    SR.GetString(SR.FilterExists)
+                );
             }
 
 #pragma warning suppress 56506 // Microsoft, PreSharp generates a false warning here
@@ -162,7 +147,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 for (int i = 0; i < this.tables.Count; ++i)
                 {
-                    if (this.tables[i].priority == priority && this.tables[i].table.GetType().Equals(tableType))
+                    if (
+                        this.tables[i].priority == priority
+                        && this.tables[i].table.GetType().Equals(tableType)
+                    )
                     {
                         table = this.tables[i].table;
                         break;
@@ -174,7 +162,9 @@ namespace System.ServiceModel.Dispatcher
                     ValidateTable(table);
                     if (!table.GetType().Equals(tableType))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FilterTableTypeMismatch)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FilterTableTypeMismatch))
+                        );
                     }
                     table.Add(filter, data);
                     this.tables.Add(new FilterTableEntry(priority, table));
@@ -220,7 +210,9 @@ namespace System.ServiceModel.Dispatcher
 
         public bool Contains(KeyValuePair<MessageFilter, TFilterData> item)
         {
-            return ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).Contains(item);
+            return ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).Contains(
+                item
+            );
         }
 
         public bool ContainsKey(MessageFilter filter)
@@ -230,14 +222,19 @@ namespace System.ServiceModel.Dispatcher
 
         public void CopyTo(KeyValuePair<MessageFilter, TFilterData>[] array, int arrayIndex)
         {
-            ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).CopyTo(array, arrayIndex);
+            ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).CopyTo(
+                array,
+                arrayIndex
+            );
         }
 
         void CreateEmptyTables()
         {
             this.filterTypeMappings = new Dictionary<Type, Type>();
             this.filters = new Dictionary<MessageFilter, TFilterData>();
-            this.tables = new SortedBuffer<FilterTableEntry, TableEntryComparer>(staticComparerInstance);
+            this.tables = new SortedBuffer<FilterTableEntry, TableEntryComparer>(
+                staticComparerInstance
+            );
         }
 
         protected virtual IMessageFilterTable<TFilterData> CreateFilterTable(MessageFilter filter)
@@ -257,7 +254,9 @@ namespace System.ServiceModel.Dispatcher
 
         public IEnumerator<KeyValuePair<MessageFilter, TFilterData>> GetEnumerator()
         {
-            return ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).GetEnumerator();
+            return (
+                (ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters
+            ).GetEnumerator();
         }
 
         public int GetPriority(MessageFilter filter)
@@ -271,8 +270,9 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new InvalidOperationException(SR.GetString(SR.FilterTableInvalidForLookup)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                new InvalidOperationException(SR.GetString(SR.FilterTableInvalidForLookup))
+            );
         }
 
         public bool GetMatchingValue(Message message, out TFilterData data)
@@ -296,7 +296,14 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (dataSet)
                     {
-                        throw TraceUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, null), message);
+                        throw TraceUtility.ThrowHelperError(
+                            new MultipleFilterMatchesException(
+                                SR.GetString(SR.FilterMultipleMatches),
+                                null,
+                                null
+                            ),
+                            message
+                        );
                     }
 
                     data = currentData;
@@ -307,7 +314,11 @@ namespace System.ServiceModel.Dispatcher
             return dataSet;
         }
 
-        internal bool GetMatchingValue(Message message, out TFilterData data, out bool addressMatched)
+        internal bool GetMatchingValue(
+            Message message,
+            out TFilterData data,
+            out bool addressMatched
+        )
         {
             bool dataSet = false;
             int pri = int.MinValue;
@@ -325,11 +336,16 @@ namespace System.ServiceModel.Dispatcher
                 bool matchResult;
                 TFilterData currentData;
                 IMessageFilterTable<TFilterData> table = this.tables[i].table;
-                AndMessageFilterTable<TFilterData> andTable = table as AndMessageFilterTable<TFilterData>;
+                AndMessageFilterTable<TFilterData> andTable =
+                    table as AndMessageFilterTable<TFilterData>;
                 if (andTable != null)
                 {
                     bool addressResult;
-                    matchResult = andTable.GetMatchingValue(message, out currentData, out addressResult);
+                    matchResult = andTable.GetMatchingValue(
+                        message,
+                        out currentData,
+                        out addressResult
+                    );
                     addressMatched |= addressResult;
                 }
                 else
@@ -341,7 +357,14 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (dataSet)
                     {
-                        throw TraceUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, null), message);
+                        throw TraceUtility.ThrowHelperError(
+                            new MultipleFilterMatchesException(
+                                SR.GetString(SR.FilterMultipleMatches),
+                                null,
+                                null
+                            ),
+                            message
+                        );
                     }
 
                     addressMatched = true;
@@ -359,7 +382,11 @@ namespace System.ServiceModel.Dispatcher
         }
 
         // this optimization is only for CorrelationActionMessageFilter and ActionMessageFilter if they override CreateFilterTable to return ActionMessageFilterTable
-        internal bool GetMatchingValue(MessageBuffer buffer, Message messageToReadHeaders, out TFilterData data)
+        internal bool GetMatchingValue(
+            MessageBuffer buffer,
+            Message messageToReadHeaders,
+            out TFilterData data
+        )
         {
             bool dataSet = false;
             int pri = int.MinValue;
@@ -375,10 +402,14 @@ namespace System.ServiceModel.Dispatcher
 
                 TFilterData currentData;
                 bool result = false;
-                if (messageToReadHeaders != null && this.tables[i].table is ActionMessageFilterTable<TFilterData>)
+                if (
+                    messageToReadHeaders != null
+                    && this.tables[i].table is ActionMessageFilterTable<TFilterData>
+                )
                 {
                     // this is an action message, in this case we can pass in the message itself since the filter will only read from the header
-                    result = this.tables[i].table.GetMatchingValue(messageToReadHeaders, out currentData);
+                    result = this.tables[i]
+                        .table.GetMatchingValue(messageToReadHeaders, out currentData);
                 }
                 else
                 {
@@ -389,7 +420,13 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (dataSet)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, null));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MultipleFilterMatchesException(
+                                SR.GetString(SR.FilterMultipleMatches),
+                                null,
+                                null
+                            )
+                        );
                     }
 
                     data = currentData;
@@ -469,7 +506,14 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> c = new Collection<MessageFilter>();
                         c.Add(filter);
                         c.Add(f);
-                        throw TraceUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, c), message);
+                        throw TraceUtility.ThrowHelperError(
+                            new MultipleFilterMatchesException(
+                                SR.GetString(SR.FilterMultipleMatches),
+                                null,
+                                c
+                            ),
+                            message
+                        );
                     }
                 }
             }
@@ -502,7 +546,13 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> c = new Collection<MessageFilter>();
                         c.Add(filter);
                         c.Add(f);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, c));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MultipleFilterMatchesException(
+                                SR.GetString(SR.FilterMultipleMatches),
+                                null,
+                                c
+                            )
+                        );
                     }
                 }
             }
@@ -572,7 +622,9 @@ namespace System.ServiceModel.Dispatcher
 
         public bool Remove(KeyValuePair<MessageFilter, TFilterData> item)
         {
-            if (((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).Contains(item))
+            if (
+                ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).Contains(item)
+            )
             {
                 return this.Remove(item.Key);
             }
@@ -589,7 +641,9 @@ namespace System.ServiceModel.Dispatcher
             Type t = this.GetType();
             if (t.IsInstanceOfType(table))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FilterBadTableType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.FilterBadTableType))
+                );
             }
         }
 

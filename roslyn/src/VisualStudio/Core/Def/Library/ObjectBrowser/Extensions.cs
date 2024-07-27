@@ -15,16 +15,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 {
     internal static class Extensions
     {
-        private static readonly SymbolDisplayFormat s_typeDisplayFormat = new(
-            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
-            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance);
+        private static readonly SymbolDisplayFormat s_typeDisplayFormat =
+            new(
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeVariance
+            );
 
-        private static readonly SymbolDisplayFormat s_memberDisplayFormat = new(
-            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance,
-            memberOptions: SymbolDisplayMemberOptions.IncludeExplicitInterface | SymbolDisplayMemberOptions.IncludeParameters,
-            parameterOptions: SymbolDisplayParameterOptions.IncludeType,
-            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+        private static readonly SymbolDisplayFormat s_memberDisplayFormat =
+            new(
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeVariance,
+                memberOptions: SymbolDisplayMemberOptions.IncludeExplicitInterface
+                    | SymbolDisplayMemberOptions.IncludeParameters,
+                parameterOptions: SymbolDisplayParameterOptions.IncludeType,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
         public static string GetMemberNavInfoNameOrEmpty(this ISymbol memberSymbol)
         {
@@ -65,11 +72,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             {
                 return project.Name;
             }
-            else if (project.Solution.Workspace is VisualStudioWorkspace workspace
+            else if (
+                project.Solution.Workspace is VisualStudioWorkspace workspace
                 && workspace.GetHierarchy(project.Id) is { } hierarchy
-                && (IVsSolution3)ServiceProvider.GlobalProvider.GetService(typeof(SVsSolution)) is { } solution)
+                && (IVsSolution3)ServiceProvider.GlobalProvider.GetService(typeof(SVsSolution))
+                    is { } solution
+            )
             {
-                if (ErrorHandler.Succeeded(solution.GetUniqueUINameOfProject(hierarchy, out var name)) && name != null)
+                if (
+                    ErrorHandler.Succeeded(
+                        solution.GetUniqueUINameOfProject(hierarchy, out var name)
+                    )
+                    && name != null
+                )
                 {
                     return name;
                 }
@@ -139,7 +154,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 return result;
             }
 
-            if (hierarchy.TryGetParentHierarchy(out var parentHierarchy) && !(parentHierarchy is IVsSolution))
+            if (
+                hierarchy.TryGetParentHierarchy(out var parentHierarchy)
+                && !(parentHierarchy is IVsSolution)
+            )
             {
                 var builder = new StringBuilder(result);
 

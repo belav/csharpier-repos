@@ -5,13 +5,13 @@ namespace MyApp.Namespace
 {
     [Route("api/[controller]")]
     [ApiController]
-    #if NameIsController
+#if NameIsController
     public class ValueController : Microsoft.AspNetCore.Mvc.ControllerBase
-    #else
+#else
     public class ValueController : ControllerBase
-    #endif
+#endif
     {
-        #if(actions)
+#if(actions)
         // GET: api/<ValueController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -28,21 +28,15 @@ namespace MyApp.Namespace
 
         // POST api/<ValueController>
         [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        public void Post([FromBody] string value) { }
 
         // PUT api/<ValueController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        public void Put(int id, [FromBody] string value) { }
 
         // DELETE api/<ValueController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-        #endif
+        public void Delete(int id) { }
+#endif
     }
 }

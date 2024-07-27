@@ -24,7 +24,10 @@ public class PostConfigureNegotiateOptions : IPostConfigureOptions<NegotiateOpti
     /// </summary>
     /// <param name="serverAuthServices"></param>
     /// <param name="logger"></param>
-    public PostConfigureNegotiateOptions(IEnumerable<IServerIntegratedAuth> serverAuthServices, ILogger<NegotiateHandler> logger)
+    public PostConfigureNegotiateOptions(
+        IEnumerable<IServerIntegratedAuth> serverAuthServices,
+        ILogger<NegotiateHandler> logger
+    )
     {
         _serverAuth = serverAuthServices.LastOrDefault();
         _logger = logger;
@@ -55,8 +58,10 @@ public class PostConfigureNegotiateOptions : IPostConfigureOptions<NegotiateOpti
             // Otherwise fail, you shouldn't be using this auth handler on a server that supports integrated auth.
             else
             {
-                throw new InvalidOperationException("The Negotiate Authentication handler cannot be used on a server that directly supports Windows Authentication."
-                    + " Enable Windows Authentication for the server and the Negotiate Authentication handler will defer to it.");
+                throw new InvalidOperationException(
+                    "The Negotiate Authentication handler cannot be used on a server that directly supports Windows Authentication."
+                        + " Enable Windows Authentication for the server and the Negotiate Authentication handler will defer to it."
+                );
             }
         }
 
@@ -68,7 +73,11 @@ public class PostConfigureNegotiateOptions : IPostConfigureOptions<NegotiateOpti
 
             if (ldapSettings.LdapConnection == null)
             {
-                var di = new LdapDirectoryIdentifier(server: ldapSettings.Domain, fullyQualifiedDnsHostName: true, connectionless: false);
+                var di = new LdapDirectoryIdentifier(
+                    server: ldapSettings.Domain,
+                    fullyQualifiedDnsHostName: true,
+                    connectionless: false
+                );
 
                 if (string.IsNullOrEmpty(ldapSettings.MachineAccountName))
                 {
@@ -78,8 +87,12 @@ public class PostConfigureNegotiateOptions : IPostConfigureOptions<NegotiateOpti
                 else
                 {
                     // Use specific specific machine account
-                    var machineAccount = ldapSettings.MachineAccountName + "@" + ldapSettings.Domain;
-                    var credentials = new NetworkCredential(machineAccount, ldapSettings.MachineAccountPassword);
+                    var machineAccount =
+                        ldapSettings.MachineAccountName + "@" + ldapSettings.Domain;
+                    var credentials = new NetworkCredential(
+                        machineAccount,
+                        ldapSettings.MachineAccountPassword
+                    );
                     ldapSettings.LdapConnection = new LdapConnection(di, credentials);
                 }
 

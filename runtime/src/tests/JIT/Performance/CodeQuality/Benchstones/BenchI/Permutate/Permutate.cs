@@ -8,95 +8,94 @@ using Xunit;
 
 namespace Benchstone.BenchI
 {
-public class Permutate
-{
+    public class Permutate
+    {
 #if DEBUG
-    public const int Iterations = 1;
+        public const int Iterations = 1;
 #else
-    public const int Iterations = 20000;
+        public const int Iterations = 20000;
 #endif
 
-    private int[] _permArray = new int[11];
-    private static int s_pctr;
+        private int[] _permArray = new int[11];
+        private static int s_pctr;
 
-    private static
-    void Swap(int[] arr, int i, int j)
-    {
-        int t = arr[i];
-        arr[i] = arr[j];
-        arr[j] = t;
-    }
-
-    private void Initialize()
-    {
-        for (int i = 1; i <= 7; i++)
+        private static void Swap(int[] arr, int i, int j)
         {
-            _permArray[i] = i - 1;
+            int t = arr[i];
+            arr[i] = arr[j];
+            arr[j] = t;
         }
-    }
 
-    private void PermuteArray(int n)
-    {
-        int k;
-        s_pctr = s_pctr + 1;
-        if (n != 1)
+        private void Initialize()
         {
-            PermuteArray(n - 1);
-            for (k = n - 1; k >= 1; k--)
+            for (int i = 1; i <= 7; i++)
             {
-                Swap(_permArray, n, k);
-                PermuteArray(n - 1);
-                Swap(_permArray, n, k);
+                _permArray[i] = i - 1;
             }
         }
-    }
 
-    private bool Validate()
-    {
-        int k = 0;
-
-        for (int i = 0; i <= 6; i++)
+        private void PermuteArray(int n)
         {
-            for (int j = 1; j <= 7; j++)
+            int k;
+            s_pctr = s_pctr + 1;
+            if (n != 1)
             {
-                if (_permArray[j] == i)
+                PermuteArray(n - 1);
+                for (k = n - 1; k >= 1; k--)
                 {
-                    k = k + 1;
+                    Swap(_permArray, n, k);
+                    PermuteArray(n - 1);
+                    Swap(_permArray, n, k);
                 }
             }
         }
 
-        return (k == 7);
-    }
-
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    private bool Bench()
-    {
-        Initialize();
-
-        for (int i = 0; i < Iterations; ++i)
+        private bool Validate()
         {
-            s_pctr = 0;
-            PermuteArray(7);
+            int k = 0;
+
+            for (int i = 0; i <= 6; i++)
+            {
+                for (int j = 1; j <= 7; j++)
+                {
+                    if (_permArray[j] == i)
+                    {
+                        k = k + 1;
+                    }
+                }
+            }
+
+            return (k == 7);
         }
 
-        bool result = Validate();
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private bool Bench()
+        {
+            Initialize();
 
-        return result;
-    }
+            for (int i = 0; i < Iterations; ++i)
+            {
+                s_pctr = 0;
+                PermuteArray(7);
+            }
 
-    private static bool TestBase()
-    {
-        Permutate P = new Permutate();
-        bool result = P.Bench();
-        return result;
-    }
+            bool result = Validate();
 
-    [Fact]
-    public static int TestEntryPoint()
-    {
-        bool result = TestBase();
-        return (result ? 100 : -1);
+            return result;
+        }
+
+        private static bool TestBase()
+        {
+            Permutate P = new Permutate();
+            bool result = P.Bench();
+            return result;
+        }
+
+        [Fact]
+        public static int TestEntryPoint()
+        {
+            bool result = TestBase();
+            return (result ? 100 : -1);
+        }
     }
-}
 }

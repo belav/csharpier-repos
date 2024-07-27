@@ -15,8 +15,10 @@ namespace System.Data
     /// objects for a <see cref='System.Data.DataTable'/>.
     /// </summary>
     [DefaultEvent(nameof(CollectionChanged))]
-    [Editor("Microsoft.VSDesigner.Data.Design.ColumnsCollectionEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Editor(
+        "Microsoft.VSDesigner.Data.Design.ColumnsCollectionEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+        "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public sealed class DataColumnCollection : InternalDataCollectionBase
     {
         private readonly DataTable _table;
@@ -24,7 +26,7 @@ namespace System.Data
         private int _defaultNameIndex = 1;
         private DataColumn?[]? _delayedAddRangeColumns;
 
-        private readonly Dictionary<string, DataColumn?> _columnFromName;     // Links names to columns
+        private readonly Dictionary<string, DataColumn?> _columnFromName; // Links names to columns
 
         private bool _fInClear;
 
@@ -46,11 +48,14 @@ namespace System.Data
         /// </summary>
         protected override ArrayList List => _list;
 
-        internal DataColumn[] ColumnsImplementingIChangeTracking => _columnsImplementingIChangeTracking;
+        internal DataColumn[] ColumnsImplementingIChangeTracking =>
+            _columnsImplementingIChangeTracking;
 
-        internal int ColumnsImplementingIChangeTrackingCount => _nColumnsImplementingIChangeTracking;
+        internal int ColumnsImplementingIChangeTrackingCount =>
+            _nColumnsImplementingIChangeTracking;
 
-        internal int ColumnsImplementingIRevertibleChangeTrackingCount => _nColumnsImplementingIRevertibleChangeTracking;
+        internal int ColumnsImplementingIRevertibleChangeTrackingCount =>
+            _nColumnsImplementingIRevertibleChangeTracking;
 
         /// <summary>
         /// Gets the <see cref='System.Data.DataColumn'/>
@@ -108,7 +113,11 @@ namespace System.Data
             get
             {
                 DataColumn? column;
-                if ((_columnFromName.TryGetValue(name, out column)) && (column != null) && (column.Namespace == ns))
+                if (
+                    (_columnFromName.TryGetValue(name, out column))
+                    && (column != null)
+                    && (column.Namespace == ns)
+                )
                 {
                     return column;
                 }
@@ -148,7 +157,9 @@ namespace System.Data
                     throw ExceptionBuilder.CannotAddColumn4(column.ColumnName);
                 }
 
-                OnCollectionChanging(new CollectionChangeEventArgs(CollectionChangeAction.Add, column));
+                OnCollectionChanging(
+                    new CollectionChangeEventArgs(CollectionChangeAction.Add, column)
+                );
                 BaseAdd(column);
                 if (index != -1)
                 {
@@ -163,7 +174,9 @@ namespace System.Data
             }
             else
             {
-                OnCollectionChanging(new CollectionChangeEventArgs(CollectionChangeAction.Add, column));
+                OnCollectionChanging(
+                    new CollectionChangeEventArgs(CollectionChangeAction.Add, column)
+                );
                 BaseAdd(column);
                 if (index != -1)
                 {
@@ -212,7 +225,15 @@ namespace System.Data
         /// with the specified name, type, and compute expression to the columns collection.
         /// </summary>
         [RequiresUnreferencedCode("Members might be trimmed for some data types or expressions.")]
-        public DataColumn Add(string? columnName, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)] Type type, string expression)
+        public DataColumn Add(
+            string? columnName,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type type,
+            string expression
+        )
         {
             var column = new DataColumn(columnName, type, expression);
             Add(column);
@@ -224,7 +245,14 @@ namespace System.Data
         /// with the
         /// specified name and type to the columns collection.
         /// </summary>
-        public DataColumn Add(string? columnName, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)] Type type)
+        public DataColumn Add(
+            string? columnName,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicFields
+            )]
+                Type type
+        )
         {
             var column = new DataColumn(columnName, type);
             Add(column);
@@ -251,7 +279,6 @@ namespace System.Data
             Add(column);
             return column;
         }
-
 
         /// <summary>
         /// Occurs when the columns collection changes, either by adding or removing a column.
@@ -370,7 +397,12 @@ namespace System.Data
         /// <summary>
         /// BaseGroupSwitch will intelligently remove and add tables from the collection.
         /// </summary>
-        private void BaseGroupSwitch(DataColumn[] oldArray, int oldLength, DataColumn[] newArray, int newLength)
+        private void BaseGroupSwitch(
+            DataColumn[] oldArray,
+            int oldLength,
+            DataColumn[] newArray,
+            int newLength
+        )
         {
             // We're doing a smart diff of oldArray and newArray to find out what
             // should be removed.  We'll pass through oldArray and see if it exists
@@ -493,7 +525,9 @@ namespace System.Data
                     if (!fThrowException)
                         return false;
                     else
-                        throw ExceptionBuilder.CannotRemoveChildKey(_table.ParentRelations[i].RelationName);
+                        throw ExceptionBuilder.CannotRemoveChildKey(
+                            _table.ParentRelations[i].RelationName
+                        );
                 }
             }
 
@@ -504,7 +538,9 @@ namespace System.Data
                     if (!fThrowException)
                         return false;
                     else
-                        throw ExceptionBuilder.CannotRemoveChildKey(_table.ChildRelations[i].RelationName);
+                        throw ExceptionBuilder.CannotRemoveChildKey(
+                            _table.ChildRelations[i].RelationName
+                        );
                 }
             }
 
@@ -514,19 +550,30 @@ namespace System.Data
                     if (!fThrowException)
                         return false;
                     else
-                        throw ExceptionBuilder.CannotRemoveConstraint(_table.Constraints[i].ConstraintName, _table.Constraints[i].Table!.TableName);
+                        throw ExceptionBuilder.CannotRemoveConstraint(
+                            _table.Constraints[i].ConstraintName,
+                            _table.Constraints[i].Table!.TableName
+                        );
             }
 
             if (_table.DataSet != null)
             {
-                for (ParentForeignKeyConstraintEnumerator en = new ParentForeignKeyConstraintEnumerator(_table.DataSet, _table); en.GetNext();)
+                for (
+                    ParentForeignKeyConstraintEnumerator en =
+                        new ParentForeignKeyConstraintEnumerator(_table.DataSet, _table);
+                    en.GetNext();
+
+                )
                 {
                     Constraint constraint = en.GetConstraint();
                     if (((ForeignKeyConstraint)constraint).ParentKey.ContainsColumn(column))
                         if (!fThrowException)
                             return false;
                         else
-                            throw ExceptionBuilder.CannotRemoveConstraint(constraint.ConstraintName, constraint.Table!.TableName);
+                            throw ExceptionBuilder.CannotRemoveConstraint(
+                                constraint.ConstraintName,
+                                constraint.Table!.TableName
+                            );
                 }
             }
 
@@ -545,14 +592,20 @@ namespace System.Data
                         continue;
                     }
 
-                    Debug.Assert(col.Computed, "invalid (non an expression) column in the expression dependent columns");
+                    Debug.Assert(
+                        col.Computed,
+                        "invalid (non an expression) column in the expression dependent columns"
+                    );
                     DataExpression? expr = col.DataExpression;
                     if ((expr != null) && (expr.DependsOn(column)))
                     {
                         if (!fThrowException)
                             return false;
                         else
-                            throw ExceptionBuilder.CannotRemoveExpression(col.ColumnName, col.Expression);
+                            throw ExceptionBuilder.CannotRemoveExpression(
+                                col.ColumnName,
+                                col.Expression
+                            );
                     }
                 }
             }
@@ -721,8 +774,10 @@ namespace System.Data
             for (int i = 0; i < Count; i++)
             {
                 DataColumn column = (DataColumn)_list[i]!;
-                if ((hashcode == 0 || column._hashCode == 0 || column._hashCode == hashcode) &&
-                   NamesEqual(column.ColumnName, name, false, _table.Locale) != 0)
+                if (
+                    (hashcode == 0 || column._hashCode == 0 || column._hashCode == hashcode)
+                    && NamesEqual(column.ColumnName, name, false, _table.Locale) != 0
+                )
                 {
                     if (cachedI == -1)
                     {
@@ -761,9 +816,10 @@ namespace System.Data
         /// <summary>
         /// Makes a default name with the given index.  e.g. Column1, Column2, ... Columni
         /// </summary>
-        private static string MakeName(int index) => index == 1 ?
-                "Column1" :
-                "Column" + index.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        private static string MakeName(int index) =>
+            index == 1
+                ? "Column1"
+                : "Column" + index.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         internal void MoveTo(DataColumn column, int newPosition)
         {
@@ -786,7 +842,9 @@ namespace System.Data
             }
 
             CheckIChangeTracking(column);
-            OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, column));
+            OnCollectionChanged(
+                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, column)
+            );
         }
 
         /// <summary>
@@ -847,7 +905,10 @@ namespace System.Data
             }
 
             // If we're adding a child table, then update defaultNameIndex to avoid colisions between the child table and auto-generated column names
-            if ((column == null) && NamesEqual(name, MakeName(_defaultNameIndex), true, _table.Locale) != 0)
+            if (
+                (column == null)
+                && NamesEqual(name, MakeName(_defaultNameIndex), true, _table.Locale) != 0
+            )
             {
                 do
                 {
@@ -868,10 +929,14 @@ namespace System.Data
         /// </summary>
         public void Remove(DataColumn column)
         {
-            OnCollectionChanging(new CollectionChangeEventArgs(CollectionChangeAction.Remove, column));
+            OnCollectionChanging(
+                new CollectionChangeEventArgs(CollectionChangeAction.Remove, column)
+            );
             BaseRemove(column);
             ArrayRemove(column);
-            OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Remove, column));
+            OnCollectionChanged(
+                new CollectionChangeEventArgs(CollectionChangeAction.Remove, column)
+            );
             // if the column is an element decrease the internal dataTable counter
             if (column.ColumnMapping == MappingType.Element)
             {

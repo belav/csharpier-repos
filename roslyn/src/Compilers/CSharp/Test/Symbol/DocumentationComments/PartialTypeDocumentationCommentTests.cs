@@ -32,7 +32,9 @@ partial class Goo
     partial void ImplementedMethodWithNoSummaryOnImpl();
 
     partial void ImplementedMethod();
-}", options: TestOptions.RegularWithDocumentationComments);
+}",
+                options: TestOptions.RegularWithDocumentationComments
+            );
 
             var tree2 = Parse(
                 @"
@@ -44,7 +46,9 @@ partial class Goo
 
     /// <summary>Implemented method.</summary>
     partial void ImplementedMethod() { }
-}", options: TestOptions.RegularWithDocumentationComments);
+}",
+                options: TestOptions.RegularWithDocumentationComments
+            );
 
             _compilation = CreateCompilation(new[] { tree1, tree2 });
 
@@ -55,11 +59,13 @@ partial class Goo
         public void TestSummaryOfType()
         {
             Assert.Equal(
-@"<member name=""T:Goo"">
+                @"<member name=""T:Goo"">
     <summary>Summary on first file's Goo.</summary>
     <summary>Summary on second file's Goo.</summary>
 </member>
-", _gooClass.GetDocumentationCommentXml());
+",
+                _gooClass.GetDocumentationCommentXml()
+            );
         }
 
         [Fact]
@@ -67,10 +73,12 @@ partial class Goo
         {
             var method = _gooClass.GetMembers("MethodWithNoImplementation").Single();
             Assert.Equal(
-@"<member name=""M:Goo.MethodWithNoImplementation"">
+                @"<member name=""M:Goo.MethodWithNoImplementation"">
     <summary>Summary on MethodWithNoImplementation.</summary>
 </member>
-", method.GetDocumentationCommentXml());
+",
+                method.GetDocumentationCommentXml()
+            );
         }
 
         [Fact]
@@ -81,10 +89,12 @@ partial class Goo
             // null!
             var method = _gooClass.GetMembers("ImplementedMethodWithNoSummaryOnImpl").Single();
             Assert.Equal(
-@"<member name=""M:Goo.ImplementedMethodWithNoSummaryOnImpl"">
+                @"<member name=""M:Goo.ImplementedMethodWithNoSummaryOnImpl"">
     <remarks>Goo.</remarks>
 </member>
-", method.GetDocumentationCommentXml());
+",
+                method.GetDocumentationCommentXml()
+            );
         }
 
         [Fact]
@@ -92,10 +102,12 @@ partial class Goo
         {
             var method = _gooClass.GetMembers("ImplementedMethod").Single();
             Assert.Equal(
-@"<member name=""M:Goo.ImplementedMethod"">
+                @"<member name=""M:Goo.ImplementedMethod"">
     <summary>Implemented method.</summary>
 </member>
-", method.GetDocumentationCommentXml());
+",
+                method.GetDocumentationCommentXml()
+            );
         }
     }
 }

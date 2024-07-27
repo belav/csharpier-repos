@@ -28,8 +28,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-        CountResults(new ThrowInFinallyTest().Run(),            ref nSuccesses, ref nFailures);
-        
+        CountResults(new ThrowInFinallyTest().Run(), ref nSuccesses, ref nFailures);
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -43,31 +43,30 @@ public class TestSet
     }
 }
 
-
 class ThrowInFinallyTest
 {
     Trace _trace;
-    
+
     void Dumb()
     {
         _trace.Write("2");
         try
         {
             _trace.Write("3");
-            try 
+            try
             {
                 _trace.Write("4");
-                try 
+                try
                 {
                     _trace.Write("5");
                     throw new Exception("A");
-                } 
+                }
                 finally
                 {
                     _trace.Write("6");
                     throw new Exception("B");
                 }
-            } 
+            }
             finally
             {
                 _trace.Write("7");
@@ -80,17 +79,17 @@ class ThrowInFinallyTest
         }
     }
 
-    public int Run() 
+    public int Run()
     {
         _trace = new Trace("ThrowInFinallyTest", "0123456789Ca");
-        
+
         _trace.Write("0");
         try
         {
             _trace.Write("1");
             Dumb();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("9");
@@ -98,5 +97,5 @@ class ThrowInFinallyTest
         }
         _trace.Write("a");
         return _trace.Match();
-   }
+    }
 }

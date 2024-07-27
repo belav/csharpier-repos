@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.ObjectPoolingAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,90 +32,91 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Class)]
-	[ComVisible(false)]
-	public sealed class ObjectPoolingAttribute : Attribute, IConfigurationAttribute {
+namespace System.EnterpriseServices
+{
+    [AttributeUsage(AttributeTargets.Class)]
+    [ComVisible(false)]
+    public sealed class ObjectPoolingAttribute : Attribute, IConfigurationAttribute
+    {
+        #region Fields
 
-		#region Fields
+        int creationTimeout;
+        bool enabled;
+        int minPoolSize;
+        int maxPoolSize;
 
-		int creationTimeout;
-		bool enabled;
-		int minPoolSize;
-		int maxPoolSize;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
+        public ObjectPoolingAttribute()
+            : this(true) { }
 
-		public ObjectPoolingAttribute () 
-			: this (true)
-		{
-		}
+        public ObjectPoolingAttribute(bool enable)
+        {
+            this.enabled = enable;
+        }
 
-		public ObjectPoolingAttribute (bool enable)
-		{
-			this.enabled = enable;
-		}
+        public ObjectPoolingAttribute(int minPoolSize, int maxPoolSize)
+            : this(true, minPoolSize, maxPoolSize) { }
 
-		public ObjectPoolingAttribute (int minPoolSize, int maxPoolSize)
-			: this (true, minPoolSize, maxPoolSize)
-		{
-		}
+        public ObjectPoolingAttribute(bool enable, int minPoolSize, int maxPoolSize)
+        {
+            this.enabled = enable;
+            this.minPoolSize = minPoolSize;
+            this.maxPoolSize = maxPoolSize;
+        }
 
-		public ObjectPoolingAttribute (bool enable, int minPoolSize, int maxPoolSize)
-		{
-			this.enabled = enable;
-			this.minPoolSize = minPoolSize;
-			this.maxPoolSize = maxPoolSize;
-		}
+        #endregion // Constructors
 
-		#endregion // Constructors
+        #region Properties
 
-		#region Properties
+        public int CreationTimeout
+        {
+            get { return creationTimeout; }
+            set { creationTimeout = value; }
+        }
 
-		public int CreationTimeout {
-			get { return creationTimeout; }
-			set { creationTimeout = value; }
-		}
+        public bool Enabled
+        {
+            get { return enabled; }
+            set { enabled = value; }
+        }
 
-		public bool Enabled {
-			get { return enabled; }
-			set { enabled = value; }
-		}
+        public int MaxPoolSize
+        {
+            get { return maxPoolSize; }
+            set { maxPoolSize = value; }
+        }
 
-		public int MaxPoolSize {
-			get { return maxPoolSize; }
-			set { maxPoolSize = value; }
-		}
+        public int MinPoolSize
+        {
+            get { return minPoolSize; }
+            set { minPoolSize = value; }
+        }
 
-		public int MinPoolSize {
-			get { return minPoolSize; }
-			set { minPoolSize = value; }
-		}
+        #endregion // Properties
 
-		#endregion // Properties
+        #region Methods
 
-		#region Methods 
+        [MonoTODO]
+        public bool AfterSaveChanges(Hashtable info)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public bool AfterSaveChanges (Hashtable info)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public bool Apply(Hashtable info)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public bool Apply (Hashtable info)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public bool IsValidTarget(string s)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public bool IsValidTarget (string s)
-		{
-			throw new NotImplementedException ();
-		}
-
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

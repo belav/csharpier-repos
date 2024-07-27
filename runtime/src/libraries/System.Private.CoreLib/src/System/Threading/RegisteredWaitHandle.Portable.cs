@@ -52,8 +52,12 @@ namespace System.Threading
         /// </summary>
         internal PortableThreadPool.WaitThread? WaitThread { get; set; }
 
-        internal RegisteredWaitHandle(WaitHandle waitHandle, _ThreadPoolWaitOrTimerCallback callbackHelper,
-            int millisecondsTimeout, bool repeating)
+        internal RegisteredWaitHandle(
+            WaitHandle waitHandle,
+            _ThreadPoolWaitOrTimerCallback callbackHelper,
+            int millisecondsTimeout,
+            bool repeating
+        )
         {
 #if WINDOWS
             Debug.Assert(!ThreadPool.UseWindowsThreadPool);
@@ -72,8 +76,7 @@ namespace System.Threading
         }
 
         private static AutoResetEvent RentEvent() =>
-            Interlocked.Exchange(ref s_cachedEvent, null) ??
-            new AutoResetEvent(false);
+            Interlocked.Exchange(ref s_cachedEvent, null) ?? new AutoResetEvent(false);
 
         private static void ReturnEvent(AutoResetEvent resetEvent)
         {
@@ -107,7 +110,8 @@ namespace System.Threading
                 UserUnregisterWaitHandle = waitObject?.SafeWaitHandle;
                 UserUnregisterWaitHandle?.DangerousAddRef(ref needToRollBackRefCountOnException);
 
-                UserUnregisterWaitHandleValue = UserUnregisterWaitHandle?.DangerousGetHandle() ?? IntPtr.Zero;
+                UserUnregisterWaitHandleValue =
+                    UserUnregisterWaitHandle?.DangerousGetHandle() ?? IntPtr.Zero;
 
                 if (_unregistered)
                 {

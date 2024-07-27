@@ -28,20 +28,20 @@
 // for things such as UpDown controls, and the ComboBox that will not have their
 // size altered by scaling
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
+    internal class FixedSizeTextBox : TextBox
+    {
+        public FixedSizeTextBox()
+        {
+            SetStyle(ControlStyles.FixedWidth, true);
+            SetStyle(ControlStyles.FixedHeight, true);
+        }
 
-	internal class FixedSizeTextBox : TextBox {
-
-		public FixedSizeTextBox ()
-		{
-			SetStyle (ControlStyles.FixedWidth, true);
-			SetStyle (ControlStyles.FixedHeight, true);
-		}
-
-		public FixedSizeTextBox (bool fixed_horz, bool fixed_vert) {
-			SetStyle (ControlStyles.FixedWidth, fixed_horz);
-			SetStyle (ControlStyles.FixedHeight, fixed_vert);
-		}
-	}
+        public FixedSizeTextBox(bool fixed_horz, bool fixed_vert)
+        {
+            SetStyle(ControlStyles.FixedWidth, fixed_horz);
+            SetStyle(ControlStyles.FixedHeight, fixed_vert);
+        }
+    }
 }
-

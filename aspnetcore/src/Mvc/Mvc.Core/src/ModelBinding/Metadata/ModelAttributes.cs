@@ -42,7 +42,8 @@ public class ModelAttributes
     internal ModelAttributes(
         IEnumerable<object> typeAttributes,
         IEnumerable<object>? propertyAttributes,
-        IEnumerable<object>? parameterAttributes)
+        IEnumerable<object>? parameterAttributes
+    )
     {
         if (propertyAttributes != null)
         {
@@ -126,7 +127,11 @@ public class ModelAttributes
     /// <returns>
     /// A <see cref="ModelAttributes"/> instance with the attributes of the property and its <see cref="Type"/>.
     /// </returns>
-    public static ModelAttributes GetAttributesForProperty(Type containerType, PropertyInfo property, Type modelType)
+    public static ModelAttributes GetAttributesForProperty(
+        Type containerType,
+        PropertyInfo property,
+        Type modelType
+    )
     {
         ArgumentNullException.ThrowIfNull(containerType);
         ArgumentNullException.ThrowIfNull(property);
@@ -140,7 +145,9 @@ public class ModelAttributes
             var metadataProperty = metadataType.GetRuntimeProperty(property.Name);
             if (metadataProperty != null)
             {
-                propertyAttributes = propertyAttributes.Concat(metadataProperty.GetCustomAttributes());
+                propertyAttributes = propertyAttributes.Concat(
+                    metadataProperty.GetCustomAttributes()
+                );
             }
         }
 
@@ -198,7 +205,10 @@ public class ModelAttributes
     /// <returns>
     /// A <see cref="ModelAttributes"/> instance with the attributes of the parameter and its <see cref="Type"/>.
     /// </returns>
-    public static ModelAttributes GetAttributesForParameter(ParameterInfo parameterInfo, Type modelType)
+    public static ModelAttributes GetAttributesForParameter(
+        ParameterInfo parameterInfo,
+        Type modelType
+    )
     {
         ArgumentNullException.ThrowIfNull(parameterInfo);
         ArgumentNullException.ThrowIfNull(modelType);
@@ -225,14 +235,19 @@ public class ModelAttributes
         // To avoid this, we call `GetCustomAttributes` directly
         // to avoid examining the inheritance hierarchy.
         // See https://source.dot.net/#System.Private.CoreLib/src/System/Attribute.CoreCLR.cs,677
-        var modelMetadataTypeAttributes = type.GetCustomAttributes<ModelMetadataTypeAttribute>(inherit: false);
+        var modelMetadataTypeAttributes = type.GetCustomAttributes<ModelMetadataTypeAttribute>(
+            inherit: false
+        );
         try
         {
             return modelMetadataTypeAttributes?.SingleOrDefault()?.MetadataType;
         }
         catch (InvalidOperationException e)
         {
-            throw new InvalidOperationException("Only one ModelMetadataType attribute is permitted per type.", e);
+            throw new InvalidOperationException(
+                "Only one ModelMetadataType attribute is permitted per type.",
+                e
+            );
         }
     }
 }

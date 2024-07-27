@@ -42,7 +42,9 @@ namespace Microsoft.Extensions.FileProviders.Composite
                 _directories = new List<IDirectoryContents>();
                 foreach (IFileProvider fileProvider in _fileProviders)
                 {
-                    IDirectoryContents directoryContents = fileProvider.GetDirectoryContents(_subPath);
+                    IDirectoryContents directoryContents = fileProvider.GetDirectoryContents(
+                        _subPath
+                    );
                     if (directoryContents != null && directoryContents.Exists)
                     {
                         _exists = true;

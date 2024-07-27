@@ -27,7 +27,9 @@ namespace System.ComponentModel
             private Type[]? _editorTypes;
             private int _editorCount;
 
-            internal ReflectedTypeData([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type)
+            internal ReflectedTypeData(
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
+            )
             {
                 _type = type;
             }
@@ -36,13 +38,17 @@ namespace System.ComponentModel
             /// This method returns true if the data cache in this reflection
             /// type descriptor has data in it.
             /// </summary>
-            internal bool IsPopulated => (_attributes != null) | (_events != null) | (_properties != null);
+            internal bool IsPopulated =>
+                (_attributes != null) | (_events != null) | (_properties != null);
 
             /// <summary>
             /// Retrieves custom attributes.
             /// </summary>
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2062:UnrecognizedReflectionPattern",
-                Justification = "_type is annotated as preserve All members, so any Types returned from GetInterfaces should be preserved as well once https://github.com/mono/linker/issues/1731 is fixed.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2062:UnrecognizedReflectionPattern",
+                Justification = "_type is annotated as preserve All members, so any Types returned from GetInterfaces should be preserved as well once https://github.com/mono/linker/issues/1731 is fixed."
+            )]
             internal AttributeCollection GetAttributes()
             {
                 // Worst case collision scenario:  we don't want the perf hit
@@ -100,7 +106,12 @@ namespace System.ComponentModel
                     {
                         // Only do this for public interfaces.
                         Type iface = interfaces[idx];
-                        if ((iface.Attributes & (TypeAttributes.Public | TypeAttributes.NestedPublic)) != 0)
+                        if (
+                            (
+                                iface.Attributes
+                                & (TypeAttributes.Public | TypeAttributes.NestedPublic)
+                            ) != 0
+                        )
                         {
                             // No need to pass an instance into GetTypeDescriptor here because, if someone provided a custom
                             // provider based on object, it already would have hit.
@@ -121,9 +132,16 @@ namespace System.ComponentModel
                             bool addAttr = true;
                             if (idx >= ifaceStartIdx)
                             {
-                                for (int ifaceSkipIdx = 0; ifaceSkipIdx < s_skipInterfaceAttributeList.Length; ifaceSkipIdx++)
+                                for (
+                                    int ifaceSkipIdx = 0;
+                                    ifaceSkipIdx < s_skipInterfaceAttributeList.Length;
+                                    ifaceSkipIdx++
+                                )
                                 {
-                                    if (s_skipInterfaceAttributeList[ifaceSkipIdx].IsInstanceOfType(attr))
+                                    if (
+                                        s_skipInterfaceAttributeList[ifaceSkipIdx]
+                                            .IsInstanceOfType(attr)
+                                    )
                                     {
                                         addAttr = false;
                                         break;
@@ -172,7 +190,9 @@ namespace System.ComponentModel
             /// it will be used to retrieve attributes. Otherwise, _type
             /// will be used.
             /// </summary>
-            [RequiresUnreferencedCode("NullableConverter's UnderlyingType cannot be statically discovered. The Type of instance cannot be statically discovered.")]
+            [RequiresUnreferencedCode(
+                "NullableConverter's UnderlyingType cannot be statically discovered. The Type of instance cannot be statically discovered."
+            )]
             internal TypeConverter GetConverter(object? instance)
             {
                 TypeConverterAttribute? typeAttr = null;
@@ -184,14 +204,23 @@ namespace System.ComponentModel
                 // to override these attributes, so we want to be smart here.
                 if (instance != null)
                 {
-                    typeAttr = (TypeConverterAttribute?)TypeDescriptor.GetAttributes(_type)[typeof(TypeConverterAttribute)];
-                    TypeConverterAttribute instanceAttr = (TypeConverterAttribute)TypeDescriptor.GetAttributes(instance)[typeof(TypeConverterAttribute)]!;
+                    typeAttr = (TypeConverterAttribute?)
+                        TypeDescriptor.GetAttributes(_type)[typeof(TypeConverterAttribute)];
+                    TypeConverterAttribute instanceAttr = (TypeConverterAttribute)
+                        TypeDescriptor.GetAttributes(instance)[typeof(TypeConverterAttribute)]!;
                     if (typeAttr != instanceAttr)
                     {
                         Type? converterType = GetTypeFromName(instanceAttr.ConverterTypeName);
-                        if (converterType != null && typeof(TypeConverter).IsAssignableFrom(converterType))
+                        if (
+                            converterType != null
+                            && typeof(TypeConverter).IsAssignableFrom(converterType)
+                        )
                         {
-                            return (TypeConverter)ReflectTypeDescriptionProvider.CreateInstance(converterType, _type)!;
+                            return (TypeConverter)
+                                ReflectTypeDescriptionProvider.CreateInstance(
+                                    converterType,
+                                    _type
+                                )!;
                         }
                     }
                 }
@@ -199,12 +228,16 @@ namespace System.ComponentModel
                 // If we got here, we return our type-based converter.
                 if (_converter == null)
                 {
-                    typeAttr ??= (TypeConverterAttribute?)TypeDescriptor.GetAttributes(_type)[typeof(TypeConverterAttribute)];
+                    typeAttr ??= (TypeConverterAttribute?)
+                        TypeDescriptor.GetAttributes(_type)[typeof(TypeConverterAttribute)];
 
                     if (typeAttr != null)
                     {
                         Type? converterType = GetTypeFromName(typeAttr.ConverterTypeName);
-                        if (converterType != null && typeof(TypeConverter).IsAssignableFrom(converterType))
+                        if (
+                            converterType != null
+                            && typeof(TypeConverter).IsAssignableFrom(converterType)
+                        )
                         {
                             _converter = (TypeConverter)CreateInstance(converterType, _type)!;
                         }
@@ -215,7 +248,10 @@ namespace System.ComponentModel
                         // We did not get a converter. Traverse up the base class chain until
                         // we find one in the stock hashtable.
                         _converter = GetIntrinsicTypeConverter(_type);
-                        Debug.Assert(_converter != null, "There is no intrinsic setup in the hashtable for the Object type");
+                        Debug.Assert(
+                            _converter != null,
+                            "There is no intrinsic setup in the hashtable for the Object type"
+                        );
                     }
                 }
 
@@ -240,7 +276,8 @@ namespace System.ComponentModel
                     attributes = TypeDescriptor.GetAttributes(_type);
                 }
 
-                DefaultEventAttribute? attr = (DefaultEventAttribute?)attributes[typeof(DefaultEventAttribute)];
+                DefaultEventAttribute? attr = (DefaultEventAttribute?)
+                    attributes[typeof(DefaultEventAttribute)];
                 if (attr != null && attr.Name != null)
                 {
                     if (instance != null)
@@ -259,7 +296,10 @@ namespace System.ComponentModel
             /// <summary>
             /// Return the default property.
             /// </summary>
-            [RequiresUnreferencedCode(PropertyDescriptor.PropertyDescriptorPropertyTypeMessage + " The Type of instance cannot be statically discovered.")]
+            [RequiresUnreferencedCode(
+                PropertyDescriptor.PropertyDescriptorPropertyTypeMessage
+                    + " The Type of instance cannot be statically discovered."
+            )]
             internal PropertyDescriptor? GetDefaultProperty(object? instance)
             {
                 AttributeCollection attributes;
@@ -273,7 +313,8 @@ namespace System.ComponentModel
                     attributes = TypeDescriptor.GetAttributes(_type);
                 }
 
-                DefaultPropertyAttribute? attr = (DefaultPropertyAttribute?)attributes[typeof(DefaultPropertyAttribute)];
+                DefaultPropertyAttribute? attr = (DefaultPropertyAttribute?)
+                    attributes[typeof(DefaultPropertyAttribute)];
                 if (attr != null && attr.Name != null)
                 {
                     if (instance != null)
@@ -292,7 +333,10 @@ namespace System.ComponentModel
             /// <summary>
             /// Retrieves the editor for the given base type.
             /// </summary>
-            [RequiresUnreferencedCode(TypeDescriptor.EditorRequiresUnreferencedCode + " The Type of instance cannot be statically discovered.")]
+            [RequiresUnreferencedCode(
+                TypeDescriptor.EditorRequiresUnreferencedCode
+                    + " The Type of instance cannot be statically discovered."
+            )]
             internal object? GetEditor(object? instance, Type editorBaseType)
             {
                 EditorAttribute? typeAttr;
@@ -304,8 +348,14 @@ namespace System.ComponentModel
                 // to override these attributes, so we want to be smart here.
                 if (instance != null)
                 {
-                    typeAttr = GetEditorAttribute(TypeDescriptor.GetAttributes(_type), editorBaseType);
-                    EditorAttribute? instanceAttr = GetEditorAttribute(TypeDescriptor.GetAttributes(instance), editorBaseType);
+                    typeAttr = GetEditorAttribute(
+                        TypeDescriptor.GetAttributes(_type),
+                        editorBaseType
+                    );
+                    EditorAttribute? instanceAttr = GetEditorAttribute(
+                        TypeDescriptor.GetAttributes(instance),
+                        editorBaseType
+                    );
                     if (typeAttr != instanceAttr)
                     {
                         Type? editorType = GetTypeFromName(instanceAttr!.EditorTypeName);
@@ -354,7 +404,9 @@ namespace System.ComponentModel
                     // the correct type.
                     if (editor != null && !editorBaseType.IsInstanceOfType(editor))
                     {
-                        Debug.Fail($"Editor {editor.GetType().FullName} is not an instance of {editorBaseType.FullName} but it is in that base types table.");
+                        Debug.Fail(
+                            $"Editor {editor.GetType().FullName} is not an instance of {editorBaseType.FullName} but it is in that base types table."
+                        );
                         editor = null;
                     }
                 }
@@ -391,7 +443,10 @@ namespace System.ComponentModel
             /// <summary>
             /// Helper method to return an editor attribute of the correct base type.
             /// </summary>
-            private static EditorAttribute? GetEditorAttribute(AttributeCollection attributes, Type editorBaseType)
+            private static EditorAttribute? GetEditorAttribute(
+                AttributeCollection attributes,
+                Type editorBaseType
+            )
             {
                 foreach (Attribute attr in attributes)
                 {
@@ -421,7 +476,10 @@ namespace System.ComponentModel
                 if (_events == null)
                 {
                     EventDescriptor[] eventArray;
-                    Dictionary<string, EventDescriptor> eventList = new Dictionary<string, EventDescriptor>(16);
+                    Dictionary<string, EventDescriptor> eventList = new Dictionary<
+                        string,
+                        EventDescriptor
+                    >(16);
                     Type? baseType = _type;
                     Type objType = typeof(object);
 
@@ -433,8 +491,7 @@ namespace System.ComponentModel
                             eventList.TryAdd(ed.Name, ed);
                         }
                         baseType = baseType.BaseType;
-                    }
-                    while (baseType != null && baseType != objType);
+                    } while (baseType != null && baseType != objType);
 
                     eventArray = new EventDescriptor[eventList.Count];
                     eventList.Values.CopyTo(eventArray, 0);
@@ -456,7 +513,10 @@ namespace System.ComponentModel
                 if (_properties == null)
                 {
                     PropertyDescriptor[] propertyArray;
-                    Dictionary<string, PropertyDescriptor> propertyList = new Dictionary<string, PropertyDescriptor>(10);
+                    Dictionary<string, PropertyDescriptor> propertyList = new Dictionary<
+                        string,
+                        PropertyDescriptor
+                    >(10);
                     Type? baseType = _type;
                     Type objType = typeof(object);
 
@@ -468,8 +528,7 @@ namespace System.ComponentModel
                             propertyList.TryAdd(p.Name, p);
                         }
                         baseType = baseType.BaseType;
-                    }
-                    while (baseType != null && baseType != objType);
+                    } while (baseType != null && baseType != objType);
 
                     propertyArray = new PropertyDescriptor[propertyList.Count];
                     propertyList.Values.CopyTo(propertyArray, 0);
@@ -484,14 +543,22 @@ namespace System.ComponentModel
             /// that this PropertyDescriptor came from is first checked,
             /// then a global Type.GetType is performed.
             /// </summary>
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "Calling _type.Assembly.GetType on a non-assembly qualified type will still work. See https://github.com/mono/linker/issues/1895")]
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2057:TypeGetType",
-                Justification = "Using the non-assembly qualified type name will still work.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "Calling _type.Assembly.GetType on a non-assembly qualified type will still work. See https://github.com/mono/linker/issues/1895"
+            )]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2057:TypeGetType",
+                Justification = "Using the non-assembly qualified type name will still work."
+            )]
             private Type? GetTypeFromName(
                 // this method doesn't create the type, but all callers are annotated with PublicConstructors,
                 // so use that value to ensure the Type will be preserved
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] string typeName)
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                    string typeName
+            )
             {
                 if (string.IsNullOrEmpty(typeName))
                 {

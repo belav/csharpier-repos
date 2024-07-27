@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [Fact]
         public void ExplicitConversionRuntimeGrabbag()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 enum E1 { e1, e2 }
 enum E2 { e3, e4 }
@@ -84,7 +85,8 @@ public class Program
         [Fact]
         public void InaccessibleConversion()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface J<T> { }
@@ -113,14 +115,18 @@ class Program
     }
 }
 ";
-            var compilationVerifier = CompileAndVerify(source, expectedOutput: @"Goo<T>(J<T> x)
-");
+            var compilationVerifier = CompileAndVerify(
+                source,
+                expectedOutput: @"Goo<T>(J<T> x)
+"
+            );
         }
 
         [Fact]
         public void BadCodeCast()
         {
-            var csSource = @"using System;
+            var csSource =
+                @"using System;
  
 class G<K>
 {
@@ -155,7 +161,7 @@ class Program
         public void WrongOrderConversion()
         {
             var text =
-@"using System;
+                @"using System;
 
 public class Test
 {
@@ -172,8 +178,9 @@ public class Test
     }
 }";
             var compilation = CompileAndVerify(text);
-            compilation.VerifyIL("Test.M",
-@"{
+            compilation.VerifyIL(
+                "Test.M",
+                @"{
   // Code size       13 (0xd)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -181,14 +188,16 @@ public class Test
   IL_0006:  conv.i8
   IL_0007:  newobj     ""long?..ctor(long)""
   IL_000c:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(602009, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/602009")]
         [Fact]
         public void DefaultParameterValue_DateTimeConstant()
         {
-            var source1 = @"
+            var source1 =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -237,7 +246,8 @@ public static class Test
 }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 class Program
 {
     public static void Main()
@@ -263,7 +273,8 @@ class Program
 }
 ";
 
-            var expectedOutput = @"
+            var expectedOutput =
+                @"
 02/01/2013 22:32:47
 02/01/2013 22:32:47
 02/01/2013 22:32:47
@@ -281,7 +292,11 @@ null
             var verifier1 = CompileAndVerify(source1 + source2, expectedOutput: expectedOutput);
 
             // When the method with the attribute is from metadata.
-            var comp2 = CreateCompilation(source2, new[] { MetadataReference.CreateFromImage(verifier1.EmittedAssemblyData) }, TestOptions.ReleaseExe);
+            var comp2 = CreateCompilation(
+                source2,
+                new[] { MetadataReference.CreateFromImage(verifier1.EmittedAssemblyData) },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(comp2, expectedOutput: expectedOutput);
         }
 
@@ -289,7 +304,8 @@ null
         [Fact]
         public void DefaultParameterValue_DecimalConstant()
         {
-            var source1 = @"
+            var source1 =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -338,7 +354,8 @@ public static class Test
 }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 class Program
 {
     public static void Main()
@@ -361,7 +378,8 @@ class Program
 }
 ";
 
-            var expectedOutput = @"
+            var expectedOutput =
+                @"
 50
 50
 50
@@ -379,7 +397,11 @@ null
             var verifier1 = CompileAndVerify(source1 + source2, expectedOutput: expectedOutput);
 
             // When the method with the attribute is from metadata.
-            var comp2 = CreateCompilation(source2, new[] { MetadataReference.CreateFromImage(verifier1.EmittedAssemblyData) }, TestOptions.ReleaseExe);
+            var comp2 = CreateCompilation(
+                source2,
+                new[] { MetadataReference.CreateFromImage(verifier1.EmittedAssemblyData) },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(comp2, expectedOutput: expectedOutput);
         }
 
@@ -388,7 +410,7 @@ null
         public void FloatConversion001()
         {
             var text =
-@"using System;
+                @"using System;
 
 public class Program
 {
@@ -402,8 +424,9 @@ public class Program
     }
 }";
             var compilation = CompileAndVerify(text);
-            compilation.VerifyIL("Program.Test(decimal)",
-@"
+            compilation.VerifyIL(
+                "Program.Test(decimal)",
+                @"
 {
   // Code size        8 (0x8)
   .maxstack  1
@@ -411,7 +434,8 @@ public class Program
   IL_0001:  call       ""float decimal.op_Explicit(decimal)""
   IL_0006:  conv.r4
   IL_0007:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(659424, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/659424")]
@@ -419,7 +443,7 @@ public class Program
         public void FloatConversion002()
         {
             var text =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -448,8 +472,9 @@ class Program
 }
 ";
             var compilation = CompileAndVerify(text);
-            compilation.VerifyIL("Program.Test2(float)",
-@"
+            compilation.VerifyIL(
+                "Program.Test2(float)",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -459,7 +484,8 @@ class Program
   IL_0007:  ldc.r4     2
   IL_000c:  div
   IL_000d:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(659424, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/659424")]
@@ -467,7 +493,7 @@ class Program
         public void FloatConversion003()
         {
             var text =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -496,8 +522,9 @@ class Program
 }
 ";
             var compilation = CompileAndVerify(text);
-            compilation.VerifyIL("Program.Test2(float)",
-@"
+            compilation.VerifyIL(
+                "Program.Test2(float)",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -507,7 +534,8 @@ class Program
   IL_0007:  ldc.r4     2
   IL_000c:  div
   IL_000d:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(448900, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/448900")]
@@ -515,7 +543,7 @@ class Program
         public void Regress448900()
         {
             var text =
-@"
+                @"
 
 using System;
 
@@ -540,8 +568,9 @@ class MyClass
 }
 ";
             var compilation = CompileAndVerify(text, expectedOutput: "Value is: 1");
-            compilation.VerifyIL("Class1.Main()",
-@"
+            compilation.VerifyIL(
+                "Class1.Main()",
+                @"
 {
   // Code size       60 (0x3c)
   .maxstack  2
@@ -568,7 +597,8 @@ class MyClass
   IL_0035:  callvirt   ""string object.ToString()""
   IL_003a:  pop
   IL_003b:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(448900, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/448900")]
@@ -576,7 +606,7 @@ class MyClass
         public void Regress448900_Optimized()
         {
             var text =
-@"
+                @"
 
 using System;
 
@@ -599,8 +629,9 @@ class MyClass
 }
 ";
             var compilation = CompileAndVerify(text, expectedOutput: "Value is: 1");
-            compilation.VerifyIL("Class1.Main()",
-@"
+            compilation.VerifyIL(
+                "Class1.Main()",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  1
@@ -617,7 +648,8 @@ class MyClass
   IL_001c:  call       ""MyClass MyClass.op_Implicit(decimal)""
   IL_0021:  pop
   IL_0022:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(448900, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/448900")]
@@ -625,7 +657,7 @@ class MyClass
         public void Regress448900_Folded()
         {
             var text =
-@"
+                @"
 
 using System;
 
@@ -647,8 +679,9 @@ class MyClass
 }
 ";
             var compilation = CompileAndVerify(text, expectedOutput: "Value is: 1");
-            compilation.VerifyIL("Class1.Main()",
-@"
+            compilation.VerifyIL(
+                "Class1.Main()",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  1
@@ -657,7 +690,8 @@ class MyClass
   IL_0006:  call       ""MyClass MyClass.op_Implicit(decimal)""
   IL_000b:  pop
   IL_000c:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(674803, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/674803")]
@@ -665,7 +699,7 @@ class MyClass
         public void CastFrom0ToExplicitConversionViaEnum01()
         {
             var text =
-@"enum E { a, b, c }
+                @"enum E { a, b, c }
 class C
 {
     public static explicit operator C(E x) { return null; }
@@ -685,7 +719,8 @@ class C
         [Fact]
         public void RuntimeTypeCheckForGenericEnum()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -709,8 +744,9 @@ class G<T>
 ";
 
             var compilation = CompileAndVerify(source, expectedOutput: "TrueTrue");
-            compilation.VerifyIL("Program.Goo<T>(G<T>.E, G<int>.E)",
-@"
+            compilation.VerifyIL(
+                "Program.Goo<T>(G<T>.E, G<int>.E)",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  2
@@ -727,7 +763,8 @@ class G<T>
   IL_001f:  cgt.un
   IL_0021:  call       ""void System.Console.Write(bool)""
   IL_0026:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(864605, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/864605")]
@@ -735,7 +772,8 @@ class G<T>
         [Fact]
         public void MethodGroupIsExpression()
         {
-            string source = @"
+            string source =
+                @"
 using System;
  
 class Program
@@ -747,10 +785,13 @@ class Program
 }
 ";
 
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (8,17): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
-                //         var x = ICloneable.Clone is object;
-                Diagnostic(ErrorCode.ERR_LambdaInIsAs, "ICloneable.Clone is object").WithLocation(8, 17));
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (8,17): error CS0837: The first operand of an 'is' or 'as' operator may not be a lambda expression, anonymous method, or method group.
+                    //         var x = ICloneable.Clone is object;
+                    Diagnostic(ErrorCode.ERR_LambdaInIsAs, "ICloneable.Clone is object")
+                        .WithLocation(8, 17)
+                );
         }
 
         [Fact]
@@ -758,7 +799,7 @@ class Program
         public void NullableConversionFromConst()
         {
             var source =
-@"
+                @"
 
 using System;
 
@@ -775,8 +816,9 @@ class C
 ";
 
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("C.Main()",
-@"
+            compilation.VerifyIL(
+                "C.Main()",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  1
@@ -787,14 +829,15 @@ class C
   IL_000c:  newobj     ""int?..ctor(int)""
   IL_0011:  call       ""void C.Use(int?)""
   IL_0016:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void LiftedFromIntPtrConversions()
         {
             var source =
-@"
+                @"
 using System;
 
 class C
@@ -812,16 +855,18 @@ class C
 }
 ";
 
-            CompileAndVerify(source, expectedOutput:
-@"
-42");
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
+42"
+            );
         }
 
         [Fact]
         public void LiftedToIntPtrConversions()
         {
             var source =
-@"
+                @"
 using System;
 
 class C
@@ -839,19 +884,21 @@ class C
 }
 ";
 
-            CompileAndVerify(source, expectedOutput:
-@"
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
 42
 
 300
-");
+"
+            );
         }
 
         [Fact]
         public void LiftedToIntPtrConversionsOptimized()
         {
             var source =
-@"
+                @"
 using System;
 
 class C
@@ -867,7 +914,9 @@ class C
 ";
 
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("C.Main()", @"
+            compilation.VerifyIL(
+                "C.Main()",
+                @"
 {
   // Code size       32 (0x20)
   .maxstack  1
@@ -881,14 +930,15 @@ class C
   IL_0015:  newobj     ""System.IntPtr?..ctor(System.IntPtr)""
   IL_001a:  call       ""void C.Use(System.IntPtr?)""
   IL_001f:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void NullableNumericToIntPtr()
         {
             var source =
-@"
+                @"
 using System;
 
 class C
@@ -902,7 +952,9 @@ class C
 }";
 
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("C.Test()", @"
+            compilation.VerifyIL(
+                "C.Test()",
+                @"
 {
   // Code size       31 (0x1f)
   .maxstack  2
@@ -916,14 +968,15 @@ class C
   IL_0014:  box        ""System.IntPtr""
   IL_0019:  call       ""void System.Console.WriteLine(object)""
   IL_001e:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void NullableNumericToIntPtr1()
         {
             var source =
-@"
+                @"
 using System;
 
 class C
@@ -937,7 +990,9 @@ class C
 }";
 
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("C.Test()", @"
+            compilation.VerifyIL(
+                "C.Test()",
+                @"
 {
   // Code size       32 (0x20)
   .maxstack  2
@@ -952,14 +1007,15 @@ class C
   IL_0015:  box        ""System.IntPtr""
   IL_001a:  call       ""void System.Console.WriteLine(object)""
   IL_001f:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void NumericToNullableIntPtr()
         {
             var source =
-@"
+                @"
 using System;
 
 class C
@@ -973,7 +1029,9 @@ class C
 }";
 
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("C.Test()", @"
+            compilation.VerifyIL(
+                "C.Test()",
+                @"
 {
   // Code size       24 (0x18)
   .maxstack  1
@@ -986,7 +1044,8 @@ class C
   IL_000d:  box        ""System.IntPtr?""
   IL_0012:  call       ""void System.Console.WriteLine(object)""
   IL_0017:  ret
-}");
+}"
+            );
         }
 
         [Fact]
@@ -994,7 +1053,7 @@ class C
         public void LiftedIntToIntPtr()
         {
             var source =
-@"
+                @"
 using System;
 
 class C
@@ -1010,8 +1069,9 @@ class C
 ";
 
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("C.Main()",
-@"
+            compilation.VerifyIL(
+                "C.Main()",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  1
@@ -1032,7 +1092,8 @@ class C
   IL_0026:  newobj     ""System.IntPtr?..ctor(System.IntPtr)""
   IL_002b:  call       ""void C.Use(System.IntPtr?)""
   IL_0030:  ret
-}");
+}"
+            );
         }
 
         [Fact]
@@ -1040,7 +1101,7 @@ class C
         public void ExprTreeCOM_IntPtr()
         {
             var source =
-@"
+                @"
 using System;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
@@ -1067,14 +1128,18 @@ public interface IAaa
 
 ";
 
-            var compilation = CreateCompilationWithMscorlib45AndCSharp(source, options: TestOptions.ReleaseExe.WithAllowUnsafe(true));
+            var compilation = CreateCompilationWithMscorlib45AndCSharp(
+                source,
+                options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
+            );
             CompileAndVerify(compilation);
         }
 
         [Fact, WorkItem(17756, "https://github.com/dotnet/roslyn/issues/17756")]
         public void TestIdentityConversionNotLvalue()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     struct S1
@@ -1101,7 +1166,8 @@ class Program
         [Fact, WorkItem(22533, "https://github.com/dotnet/roslyn/issues/22533")]
         public void TestDoubleConversionEmitted()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
 
@@ -1116,8 +1182,9 @@ class Program
 }
 ";
             var comp = CompileAndVerify(source);
-            comp.VerifyIL("Program.M",
-@"{
+            comp.VerifyIL(
+                "Program.M",
+                @"{
   // Code size       28 (0x1c)
   .maxstack  4
   .locals init (int V_0, //iValue
@@ -1136,13 +1203,15 @@ class Program
   IL_0018:  conv.r8
   IL_0019:  cgt
   IL_001b:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(22533, "https://github.com/dotnet/roslyn/issues/22533")]
         public void TestExplicitDoubleConversionEmitted()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
 
@@ -1157,8 +1226,9 @@ class Program
 }
 ";
             var comp = CompileAndVerify(source);
-            comp.VerifyIL("Program.M",
-@"{
+            comp.VerifyIL(
+                "Program.M",
+                @"{
   // Code size       43 (0x2b)
   .maxstack  4
   .locals init (int V_0, //iValue
@@ -1181,13 +1251,15 @@ class Program
   IL_0027:  conv.r8
   IL_0028:  cgt
   IL_002a:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(31587, "https://github.com/dotnet/roslyn/issues/31587")]
         public void NullableDecimalToEnumConversion()
         {
-            var source = @"
+            var source =
+                @"
 enum E { }
 class C
 {
@@ -1200,7 +1272,8 @@ class C
         [Fact, WorkItem(31587, "https://github.com/dotnet/roslyn/issues/31587")]
         public void NullableMethodGroupConversion()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class C
 {
@@ -1217,7 +1290,8 @@ class C
         [WorkItem(54113, "https://github.com/dotnet/roslyn/issues/54113")]
         public void DisallowedModreqOnConversion()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit C
     extends [mscorlib]System.Object
 {
@@ -1240,7 +1314,8 @@ class C
     }
 }
 ";
-            var comp = CreateCompilationWithIL(@"
+            var comp = CreateCompilationWithIL(
+                @"
 class Test
 {
     void M(C x)
@@ -1248,12 +1323,16 @@ class Test
         _ = (int)x;
     }
 }
-", il);
+",
+                il
+            );
 
             comp.VerifyDiagnostics(
-                    // (6,13): error CS0570: 'C.implicit operator int(C)' is not supported by the language
-                    //         _ = (int)x;
-                    Diagnostic(ErrorCode.ERR_BindToBogus, "(int)x").WithArguments("C.implicit operator int(C)").WithLocation(6, 13)
+                // (6,13): error CS0570: 'C.implicit operator int(C)' is not supported by the language
+                //         _ = (int)x;
+                Diagnostic(ErrorCode.ERR_BindToBogus, "(int)x")
+                    .WithArguments("C.implicit operator int(C)")
+                    .WithLocation(6, 13)
             );
         }
     }

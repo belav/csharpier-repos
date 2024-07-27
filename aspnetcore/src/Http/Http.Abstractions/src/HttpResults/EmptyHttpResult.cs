@@ -9,9 +9,7 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// </summary>
 public sealed class EmptyHttpResult : IResult
 {
-    private EmptyHttpResult()
-    {
-    }
+    private EmptyHttpResult() { }
 
     /// <summary>
     /// Gets an instance of <see cref="EmptyHttpResult"/>.

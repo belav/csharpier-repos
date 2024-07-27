@@ -11,7 +11,11 @@ namespace System.Globalization.Tests
         public static IEnumerable<object[]> ShortDatePattern_Get_TestData_HybridGlobalization()
         {
             // see the comments on the right to check the non-Hybrid result, if it differs
-            yield return new object[] { new CultureInfo("ar-SA").DateTimeFormat, "d\u200f/M\u200f/yyyy" }; // "d\u200f/M\u200f/yyyy g"
+            yield return new object[]
+            {
+                new CultureInfo("ar-SA").DateTimeFormat,
+                "d\u200f/M\u200f/yyyy",
+            }; // "d\u200f/M\u200f/yyyy g"
             yield return new object[] { new CultureInfo("am-ET").DateTimeFormat, "dd/MM/yyyy" };
             yield return new object[] { new CultureInfo("bg-BG").DateTimeFormat, "d.MM.yyyy г." }; // "d.MM.yyyy 'г'."
             yield return new object[] { new CultureInfo("bn-BD").DateTimeFormat, "d/M/yyyy" };
@@ -200,9 +204,15 @@ namespace System.Globalization.Tests
             yield return new object[] { new CultureInfo("zh-TW").DateTimeFormat, "yyyy/M/d" };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsHybridGlobalizationOnBrowser))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsHybridGlobalizationOnBrowser)
+        )]
         [MemberData(nameof(ShortDatePattern_Get_TestData_HybridGlobalization))]
-        public void ShortDatePattern_Get_ReturnsExpected_HybridGlobalization(DateTimeFormatInfo format, string expected)
+        public void ShortDatePattern_Get_ReturnsExpected_HybridGlobalization(
+            DateTimeFormatInfo format,
+            string expected
+        )
         {
             Assert.Equal(expected, format.ShortDatePattern);
         }
@@ -250,13 +260,18 @@ namespace System.Globalization.Tests
         public void ShortDatePattern_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.ShortDatePattern = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.ShortDatePattern = null
+            );
         }
 
         [Fact]
         public void ShortDatePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.ShortDatePattern = "MM/dd/yyyy");
+            Assert.Throws<InvalidOperationException>(
+                () => DateTimeFormatInfo.InvariantInfo.ShortDatePattern = "MM/dd/yyyy"
+            );
         }
     }
 }

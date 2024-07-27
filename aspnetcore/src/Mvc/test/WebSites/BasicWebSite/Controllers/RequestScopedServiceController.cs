@@ -18,9 +18,7 @@ public class RequestScopedServiceController : Controller
 
     [HttpGet]
     [TypeFilter<RequestScopedFilter>]
-    public void FromFilter()
-    {
-    }
+    public void FromFilter() { }
 
     [HttpGet]
     public IActionResult FromView()

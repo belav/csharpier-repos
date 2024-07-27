@@ -23,7 +23,10 @@ namespace System.Runtime.Tests
         [InlineData(0)]
         public void Ctor_Negative_ThrowsArgumentOutOfRangeException(int sizeInMegabytes)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sizeInMegabytes", () => new MemoryFailPoint(sizeInMegabytes));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sizeInMegabytes",
+                () => new MemoryFailPoint(sizeInMegabytes)
+            );
         }
 
         [ConditionalFact]
@@ -32,7 +35,9 @@ namespace System.Runtime.Tests
         {
             if (PlatformDetection.IsArmProcess)
             {
-                throw new SkipTestException("[ActiveIssue: https://github.com/dotnet/runtime/issues/35805]");
+                throw new SkipTestException(
+                    "[ActiveIssue: https://github.com/dotnet/runtime/issues/35805]"
+                );
             }
 
             Assert.Throws<InsufficientMemoryException>(() => new MemoryFailPoint(int.MaxValue));

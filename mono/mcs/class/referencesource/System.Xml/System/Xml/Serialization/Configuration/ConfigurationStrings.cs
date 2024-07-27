@@ -2,7 +2,7 @@
 // <copyright file="ConfigurationStrings.cs" company="Microsoft Corporation">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 namespace System.Xml.Serialization.Configuration
 {
@@ -14,22 +14,42 @@ namespace System.Xml.Serialization.Configuration
     {
         static string GetSectionPath(string sectionName)
         {
-            return string.Format(CultureInfo.InvariantCulture, @"{0}/{1}", ConfigurationStrings.SectionGroupName, sectionName);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                @"{0}/{1}",
+                ConfigurationStrings.SectionGroupName,
+                sectionName
+            );
         }
 
-        static internal string SchemaImporterExtensionsSectionPath
+        internal static string SchemaImporterExtensionsSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.SchemaImporterExtensionsSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.SchemaImporterExtensionsSectionName
+                );
+            }
         }
 
-        static internal string DateTimeSerializationSectionPath 
+        internal static string DateTimeSerializationSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.DateTimeSerializationSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.DateTimeSerializationSectionName
+                );
+            }
         }
 
-        static internal string XmlSerializerSectionPath 
+        internal static string XmlSerializerSectionPath
         {
-            get { return ConfigurationStrings.GetSectionPath(ConfigurationStrings.XmlSerializerSectionName); }
+            get
+            {
+                return ConfigurationStrings.GetSectionPath(
+                    ConfigurationStrings.XmlSerializerSectionName
+                );
+            }
         }
 
         internal const string Name = "name";
@@ -56,10 +76,12 @@ namespace System.Xml.Serialization.Configuration
         internal const string SqlTypesSchemaImporterFloat = "SqlTypesSchemaImporterFloat";
         internal const string SqlTypesSchemaImporterReal = "SqlTypesSchemaImporterReal";
         internal const string SqlTypesSchemaImporterDateTime = "SqlTypesSchemaImporterDateTime";
-        internal const string SqlTypesSchemaImporterSmallDateTime = "SqlTypesSchemaImporterSmallDateTime";
+        internal const string SqlTypesSchemaImporterSmallDateTime =
+            "SqlTypesSchemaImporterSmallDateTime";
         internal const string SqlTypesSchemaImporterMoney = "SqlTypesSchemaImporterMoney";
         internal const string SqlTypesSchemaImporterSmallMoney = "SqlTypesSchemaImporterSmallMoney";
-        internal const string SqlTypesSchemaImporterUniqueIdentifier = "SqlTypesSchemaImporterUniqueIdentifier";
+        internal const string SqlTypesSchemaImporterUniqueIdentifier =
+            "SqlTypesSchemaImporterUniqueIdentifier";
         internal const string Type = "type";
         internal const string Mode = "mode";
         internal const string CheckDeserializeAdvances = "checkDeserializeAdvances";

@@ -5,7 +5,5 @@ namespace Microsoft.AspNetCore.Hosting.Fakes;
 
 public class StartupBoom
 {
-    public StartupBoom()
-    {
-    }
+    public StartupBoom() { }
 }

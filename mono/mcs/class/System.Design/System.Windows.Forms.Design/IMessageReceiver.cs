@@ -32,8 +32,8 @@ using System.Windows.Forms;
 
 namespace System.Windows.Forms.Design
 {
-	internal interface IMessageReceiver
-	{
-		void WndProc (ref Message m);
-	}
+    internal interface IMessageReceiver
+    {
+        void WndProc(ref Message m);
+    }
 }

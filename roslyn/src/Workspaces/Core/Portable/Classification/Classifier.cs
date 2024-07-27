@@ -21,18 +21,29 @@ namespace Microsoft.CodeAnalysis.Classification
 {
     public static class Classifier
     {
-        internal static PooledObject<SegmentedList<ClassifiedSpan>> GetPooledList(out SegmentedList<ClassifiedSpan> classifiedSpans)
-            => SegmentedListPool.GetPooledList<ClassifiedSpan>(out classifiedSpans);
+        internal static PooledObject<SegmentedList<ClassifiedSpan>> GetPooledList(
+            out SegmentedList<ClassifiedSpan> classifiedSpans
+        ) => SegmentedListPool.GetPooledList<ClassifiedSpan>(out classifiedSpans);
 
         public static async Task<IEnumerable<ClassifiedSpan>> GetClassifiedSpansAsync(
             Document document,
             TextSpan textSpan,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // public options do not affect classification:
-            return GetClassifiedSpans(document.Project.Solution.Services, document.Project, semanticModel, textSpan, ClassificationOptions.Default, cancellationToken);
+            return GetClassifiedSpans(
+                document.Project.Solution.Services,
+                document.Project,
+                semanticModel,
+                textSpan,
+                ClassificationOptions.Default,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -48,10 +59,18 @@ namespace Microsoft.CodeAnalysis.Classification
             SemanticModel semanticModel,
             TextSpan textSpan,
             Workspace workspace,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             // public options do not affect classification:
-            return GetClassifiedSpans(workspace.Services.SolutionServices, project: null, semanticModel, textSpan, ClassificationOptions.Default, cancellationToken);
+            return GetClassifiedSpans(
+                workspace.Services.SolutionServices,
+                project: null,
+                semanticModel,
+                textSpan,
+                ClassificationOptions.Default,
+                cancellationToken
+            );
         }
 
         internal static IEnumerable<ClassifiedSpan> GetClassifiedSpans(
@@ -60,10 +79,18 @@ namespace Microsoft.CodeAnalysis.Classification
             SemanticModel semanticModel,
             TextSpan textSpan,
             ClassificationOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return GetClassifiedSpans(
-                services, project, semanticModel, textSpan, options, includedEmbeddedClassifications: true, cancellationToken);
+                services,
+                project,
+                semanticModel,
+                textSpan,
+                options,
+                includedEmbeddedClassifications: true,
+                cancellationToken
+            );
         }
 
         internal static IEnumerable<ClassifiedSpan> GetClassifiedSpans(
@@ -73,52 +100,105 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan textSpan,
             ClassificationOptions options,
             bool includedEmbeddedClassifications,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var projectServices = services.GetLanguageServices(semanticModel.Language);
-            var classificationService = projectServices.GetRequiredService<ISyntaxClassificationService>();
-            var embeddedLanguageService = projectServices.GetRequiredService<IEmbeddedLanguageClassificationService>();
+            var classificationService =
+                projectServices.GetRequiredService<ISyntaxClassificationService>();
+            var embeddedLanguageService =
+                projectServices.GetRequiredService<IEmbeddedLanguageClassificationService>();
 
             var syntaxClassifiers = classificationService.GetDefaultSyntaxClassifiers();
 
             var extensionManager = services.GetRequiredService<IExtensionManager>();
-            var getNodeClassifiers = extensionManager.CreateNodeExtensionGetter(syntaxClassifiers, c => c.SyntaxNodeTypes);
-            var getTokenClassifiers = extensionManager.CreateTokenExtensionGetter(syntaxClassifiers, c => c.SyntaxTokenKinds);
+            var getNodeClassifiers = extensionManager.CreateNodeExtensionGetter(
+                syntaxClassifiers,
+                c => c.SyntaxNodeTypes
+            );
+            var getTokenClassifiers = extensionManager.CreateTokenExtensionGetter(
+                syntaxClassifiers,
+                c => c.SyntaxTokenKinds
+            );
 
             using var _1 = GetPooledList(out var syntacticClassifications);
             using var _2 = GetPooledList(out var semanticClassifications);
 
             var root = semanticModel.SyntaxTree.GetRoot(cancellationToken);
 
-            classificationService.AddSyntacticClassifications(root, textSpan, syntacticClassifications, cancellationToken);
-            classificationService.AddSemanticClassifications(semanticModel, textSpan, getNodeClassifiers, getTokenClassifiers, semanticClassifications, options, cancellationToken);
+            classificationService.AddSyntacticClassifications(
+                root,
+                textSpan,
+                syntacticClassifications,
+                cancellationToken
+            );
+            classificationService.AddSemanticClassifications(
+                semanticModel,
+                textSpan,
+                getNodeClassifiers,
+                getTokenClassifiers,
+                semanticClassifications,
+                options,
+                cancellationToken
+            );
 
             // intentionally adding to the semanticClassifications array here.
             if (includedEmbeddedClassifications && project != null)
-                embeddedLanguageService.AddEmbeddedLanguageClassifications(services, project, semanticModel, textSpan, options, semanticClassifications, cancellationToken);
+                embeddedLanguageService.AddEmbeddedLanguageClassifications(
+                    services,
+                    project,
+                    semanticModel,
+                    textSpan,
+                    options,
+                    semanticClassifications,
+                    cancellationToken
+                );
 
-            var allClassifications = new List<ClassifiedSpan>(semanticClassifications.Where(s => s.TextSpan.OverlapsWith(textSpan)));
+            var allClassifications = new List<ClassifiedSpan>(
+                semanticClassifications.Where(s => s.TextSpan.OverlapsWith(textSpan))
+            );
             var semanticSet = semanticClassifications.Select(s => s.TextSpan).ToSet();
 
-            allClassifications.AddRange(syntacticClassifications.Where(
-                s => s.TextSpan.OverlapsWith(textSpan) && !semanticSet.Contains(s.TextSpan)));
+            allClassifications.AddRange(
+                syntacticClassifications.Where(s =>
+                    s.TextSpan.OverlapsWith(textSpan) && !semanticSet.Contains(s.TextSpan)
+                )
+            );
             allClassifications.Sort((s1, s2) => s1.TextSpan.Start - s2.TextSpan.Start);
 
             return allClassifications;
         }
 
-        internal static async Task<ImmutableArray<SymbolDisplayPart>> GetClassifiedSymbolDisplayPartsAsync(
-            LanguageServices languageServices, SemanticModel semanticModel, TextSpan textSpan, ClassificationOptions options,
-            CancellationToken cancellationToken = default)
+        internal static async Task<
+            ImmutableArray<SymbolDisplayPart>
+        > GetClassifiedSymbolDisplayPartsAsync(
+            LanguageServices languageServices,
+            SemanticModel semanticModel,
+            TextSpan textSpan,
+            ClassificationOptions options,
+            CancellationToken cancellationToken = default
+        )
         {
-            var classifiedSpans = GetClassifiedSpans(languageServices.SolutionServices, project: null, semanticModel, textSpan, options, cancellationToken);
-            var sourceText = await semanticModel.SyntaxTree.GetTextAsync(cancellationToken).ConfigureAwait(false);
+            var classifiedSpans = GetClassifiedSpans(
+                languageServices.SolutionServices,
+                project: null,
+                semanticModel,
+                textSpan,
+                options,
+                cancellationToken
+            );
+            var sourceText = await semanticModel
+                .SyntaxTree.GetTextAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             return ConvertClassificationsToParts(sourceText, textSpan.Start, classifiedSpans);
         }
 
         internal static ImmutableArray<SymbolDisplayPart> ConvertClassificationsToParts(
-            SourceText sourceText, int startPosition, IEnumerable<ClassifiedSpan> classifiedSpans)
+            SourceText sourceText,
+            int startPosition,
+            IEnumerable<ClassifiedSpan> classifiedSpans
+        )
         {
             var parts = ArrayBuilder<SymbolDisplayPart>.GetInstance();
 
@@ -133,7 +213,9 @@ namespace Microsoft.CodeAnalysis.Classification
                 var kind = GetClassificationKind(span.ClassificationType);
                 if (kind != null)
                 {
-                    parts.Add(new SymbolDisplayPart(kind.Value, null, sourceText.ToString(span.TextSpan)));
+                    parts.Add(
+                        new SymbolDisplayPart(kind.Value, null, sourceText.ToString(span.TextSpan))
+                    );
 
                     startPosition = span.TextSpan.End;
                 }
@@ -144,11 +226,15 @@ namespace Microsoft.CodeAnalysis.Classification
 
         private static IEnumerable<SymbolDisplayPart> Space(int count = 1)
         {
-            yield return new SymbolDisplayPart(SymbolDisplayPartKind.Space, null, new string(' ', count));
+            yield return new SymbolDisplayPart(
+                SymbolDisplayPartKind.Space,
+                null,
+                new string(' ', count)
+            );
         }
 
-        private static SymbolDisplayPartKind? GetClassificationKind(string type)
-            => type switch
+        private static SymbolDisplayPartKind? GetClassificationKind(string type) =>
+            type switch
             {
                 ClassificationTypeNames.Identifier => SymbolDisplayPartKind.Text,
                 ClassificationTypeNames.Keyword => SymbolDisplayPartKind.Keyword,
@@ -163,15 +249,18 @@ namespace Microsoft.CodeAnalysis.Classification
                 ClassificationTypeNames.InterfaceName => SymbolDisplayPartKind.InterfaceName,
                 ClassificationTypeNames.DelegateName => SymbolDisplayPartKind.DelegateName,
                 ClassificationTypeNames.EnumName => SymbolDisplayPartKind.EnumName,
-                ClassificationTypeNames.TypeParameterName => SymbolDisplayPartKind.TypeParameterName,
+                ClassificationTypeNames.TypeParameterName
+                    => SymbolDisplayPartKind.TypeParameterName,
                 ClassificationTypeNames.ModuleName => SymbolDisplayPartKind.ModuleName,
-                ClassificationTypeNames.VerbatimStringLiteral => SymbolDisplayPartKind.StringLiteral,
+                ClassificationTypeNames.VerbatimStringLiteral
+                    => SymbolDisplayPartKind.StringLiteral,
                 ClassificationTypeNames.FieldName => SymbolDisplayPartKind.FieldName,
                 ClassificationTypeNames.EnumMemberName => SymbolDisplayPartKind.EnumMemberName,
                 ClassificationTypeNames.ConstantName => SymbolDisplayPartKind.ConstantName,
                 ClassificationTypeNames.LocalName => SymbolDisplayPartKind.LocalName,
                 ClassificationTypeNames.ParameterName => SymbolDisplayPartKind.ParameterName,
-                ClassificationTypeNames.ExtensionMethodName => SymbolDisplayPartKind.ExtensionMethodName,
+                ClassificationTypeNames.ExtensionMethodName
+                    => SymbolDisplayPartKind.ExtensionMethodName,
                 ClassificationTypeNames.MethodName => SymbolDisplayPartKind.MethodName,
                 ClassificationTypeNames.PropertyName => SymbolDisplayPartKind.PropertyName,
                 ClassificationTypeNames.LabelName => SymbolDisplayPartKind.LabelName,

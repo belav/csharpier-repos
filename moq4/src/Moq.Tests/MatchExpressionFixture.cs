@@ -4,9 +4,7 @@
 using System;
 using System.Diagnostics;
 using System.Linq.Expressions;
-
 using Moq.Protected;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -16,25 +14,22 @@ namespace Moq.Tests
         [Fact]
         public void Prevents_compilation()
         {
-            var ex = Assert.Throws<ArgumentException>(() =>
-                GetExpression().CompileUsingExpressionCompiler());
+            var ex = Assert.Throws<ArgumentException>(
+                () => GetExpression().CompileUsingExpressionCompiler()
+            );
             Assert.Contains("ReduceAndCheck", ex.StackTrace);
         }
 
         [Fact]
         public void Can_be_rendered_using_ToString()
         {
-            Assert.Equal(
-                "x => x.M(Is(arg => (arg == 5)))",
-                GetExpression().ToString());
+            Assert.Equal("x => x.M(Is(arg => (arg == 5)))", GetExpression().ToString());
         }
 
         [Fact]
         public void Can_be_rendered_using_ToStringFixed()
         {
-            Assert.Equal(
-                "x => x.M(It.Is<int>(arg => arg == 5))",
-                GetExpression().ToStringFixed());
+            Assert.Equal("x => x.M(It.Is<int>(arg => arg == 5))", GetExpression().ToStringFixed());
         }
 
         [Fact]
@@ -126,8 +121,11 @@ namespace Moq.Tests
                     x,
                     typeof(IX).GetMethod(nameof(IX.M)),
                     new MatchExpression(
-                        new Match<int>(arg => arg == 5, () => It.Is<int>(arg => arg == 5)))),
-                x);
+                        new Match<int>(arg => arg == 5, () => It.Is<int>(arg => arg == 5))
+                    )
+                ),
+                x
+            );
 
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
@@ -141,11 +139,9 @@ namespace Moq.Tests
         {
             var x = Expression.Parameter(typeof(IX), "x");
             return Expression.Lambda<Action<IX>>(
-                Expression.Call(
-                    x,
-                    typeof(IX).GetMethod(nameof(IX.M)),
-                    ItExpr.IsAny<int>()),
-                x);
+                Expression.Call(x, typeof(IX).GetMethod(nameof(IX.M)), ItExpr.IsAny<int>()),
+                x
+            );
 
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
@@ -169,8 +165,10 @@ namespace Moq.Tests
                 Expression.Call(
                     x,
                     typeof(IX).GetMethod(nameof(IX.M)),
-                    new MatchExpression(itIsAnyMatch)),
-                x);
+                    new MatchExpression(itIsAnyMatch)
+                ),
+                x
+            );
 
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:

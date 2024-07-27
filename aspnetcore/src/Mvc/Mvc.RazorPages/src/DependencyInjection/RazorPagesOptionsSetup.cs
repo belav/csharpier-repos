@@ -13,7 +13,8 @@ internal sealed class RazorPagesOptionsSetup : IConfigureOptions<RazorPagesOptio
 
     public RazorPagesOptionsSetup(IServiceProvider serviceProvider)
     {
-        _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+        _serviceProvider =
+            serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
     }
 
     public void Configure(RazorPagesOptions options)

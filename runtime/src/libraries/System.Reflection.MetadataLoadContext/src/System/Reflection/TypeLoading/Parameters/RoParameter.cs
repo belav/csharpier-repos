@@ -29,11 +29,15 @@ namespace System.Reflection.TypeLoading
         public abstract override string? Name { get; }
         public abstract override Type ParameterType { get; }
         public abstract override ParameterAttributes Attributes { get; }
-        public sealed override IList<CustomAttributeData> GetCustomAttributesData() => CustomAttributes.ToReadOnlyCollection();
+
+        public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttributes.ToReadOnlyCollection();
+
         public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
 
         public abstract override bool HasDefaultValue { get; }
-        public sealed override object DefaultValue => throw new InvalidOperationException(SR.Arg_ReflectionOnlyParameterDefaultValue);
+        public sealed override object DefaultValue =>
+            throw new InvalidOperationException(SR.Arg_ReflectionOnlyParameterDefaultValue);
         public abstract override object? RawDefaultValue { get; }
 
         public abstract override Type[] GetOptionalCustomModifiers();
@@ -58,8 +62,13 @@ namespace System.Reflection.TypeLoading
         public sealed override int GetHashCode() => _member.GetHashCode() ^ _position.GetHashCode();
 
         // Operations that are illegal on ReflectionOnly objects.
-        public sealed override object[] GetCustomAttributes(bool inherit) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
-        public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
-        public sealed override bool IsDefined(Type attributeType, bool inherit) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+        public sealed override object[] GetCustomAttributes(bool inherit) =>
+            throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
+        public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+            throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
+        public sealed override bool IsDefined(Type attributeType, bool inherit) =>
+            throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
     }
 }

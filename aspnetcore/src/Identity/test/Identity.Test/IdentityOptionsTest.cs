@@ -25,19 +25,27 @@ public class IdentityOptionsTest
         Assert.Equal(6, options.Password.RequiredLength);
         Assert.Equal(1, options.Password.RequiredUniqueChars);
 
-        Assert.Equal("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+", options.User.AllowedUserNameCharacters);
+        Assert.Equal(
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+",
+            options.User.AllowedUserNameCharacters
+        );
         Assert.False(options.User.RequireUniqueEmail);
 
         Assert.Equal(ClaimTypes.Role, options.ClaimsIdentity.RoleClaimType);
         Assert.Equal(ClaimTypes.Name, options.ClaimsIdentity.UserNameClaimType);
         Assert.Equal(ClaimTypes.NameIdentifier, options.ClaimsIdentity.UserIdClaimType);
-        Assert.Equal("AspNet.Identity.SecurityStamp", options.ClaimsIdentity.SecurityStampClaimType);
+        Assert.Equal(
+            "AspNet.Identity.SecurityStamp",
+            options.ClaimsIdentity.SecurityStampClaimType
+        );
     }
 
     [Fact]
     public void CanCustomizeIdentityOptions()
     {
-        var services = new ServiceCollection().Configure<IdentityOptions>(options => options.Password.RequiredLength = -1);
+        var services = new ServiceCollection().Configure<IdentityOptions>(options =>
+            options.Password.RequiredLength = -1
+        );
         services.AddIdentity<PocoUser, PocoRole>();
         var serviceProvider = services.BuildServiceProvider();
 
@@ -72,16 +80,20 @@ public class IdentityOptionsTest
     public void CanConfigureCookieOptions()
     {
         var services = new ServiceCollection();
-        services.AddAuthentication().AddIdentityCookies(o =>
-        {
-            o.ApplicationCookie.Configure(a => a.Cookie.Name = "a");
-            o.ExternalCookie.Configure(a => a.Cookie.Name = "b");
-            o.TwoFactorRememberMeCookie.Configure(a => a.Cookie.Name = "c");
-            o.TwoFactorUserIdCookie.Configure(a => a.Cookie.Name = "d");
-        });
+        services
+            .AddAuthentication()
+            .AddIdentityCookies(o =>
+            {
+                o.ApplicationCookie.Configure(a => a.Cookie.Name = "a");
+                o.ExternalCookie.Configure(a => a.Cookie.Name = "b");
+                o.TwoFactorRememberMeCookie.Configure(a => a.Cookie.Name = "c");
+                o.TwoFactorUserIdCookie.Configure(a => a.Cookie.Name = "d");
+            });
         var serviceProvider = services.BuildServiceProvider();
 
-        var options = serviceProvider.GetRequiredService<IOptionsMonitor<CookieAuthenticationOptions>>();
+        var options = serviceProvider.GetRequiredService<
+            IOptionsMonitor<CookieAuthenticationOptions>
+        >();
         Assert.NotNull(options);
 
         Assert.Equal("a", options.Get(IdentityConstants.ApplicationScheme).Cookie.Name);
@@ -89,5 +101,4 @@ public class IdentityOptionsTest
         Assert.Equal("c", options.Get(IdentityConstants.TwoFactorRememberMeScheme).Cookie.Name);
         Assert.Equal("d", options.Get(IdentityConstants.TwoFactorUserIdScheme).Cookie.Name);
     }
-
 }

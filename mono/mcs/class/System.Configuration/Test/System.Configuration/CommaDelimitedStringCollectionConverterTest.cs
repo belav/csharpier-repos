@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,91 +32,98 @@ using System;
 using System.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class CommaDelimitedStringCollectionConverterTest
-	{
-		[Test]
-		public void CanConvertFrom ()
-		{
-			CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter ();
+namespace MonoTests.System.Configuration
+{
+    [TestFixture]
+    public class CommaDelimitedStringCollectionConverterTest
+    {
+        [Test]
+        public void CanConvertFrom()
+        {
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
 
-			Assert.IsTrue (cv.CanConvertFrom (null, typeof (string)), "A1");
-			Assert.IsFalse (cv.CanConvertFrom (null, typeof (TimeSpan)), "A2");
-			Assert.IsFalse (cv.CanConvertFrom (null, typeof (int)), "A3");
-			Assert.IsFalse (cv.CanConvertFrom (null, typeof (object)), "A4");
-		}
+            Assert.IsTrue(cv.CanConvertFrom(null, typeof(string)), "A1");
+            Assert.IsFalse(cv.CanConvertFrom(null, typeof(TimeSpan)), "A2");
+            Assert.IsFalse(cv.CanConvertFrom(null, typeof(int)), "A3");
+            Assert.IsFalse(cv.CanConvertFrom(null, typeof(object)), "A4");
+        }
 
-		[Test]
-		public void CanConvertTo ()
-		{
-			CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter ();
+        [Test]
+        public void CanConvertTo()
+        {
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
 
-			Assert.IsTrue (cv.CanConvertTo (null, typeof (string)), "A1");
-			Assert.IsFalse (cv.CanConvertTo (null, typeof (TimeSpan)), "A2");
-			Assert.IsFalse (cv.CanConvertTo (null, typeof (int)), "A3");
-			Assert.IsFalse (cv.CanConvertTo (null, typeof (object)), "A4");
-		}
+            Assert.IsTrue(cv.CanConvertTo(null, typeof(string)), "A1");
+            Assert.IsFalse(cv.CanConvertTo(null, typeof(TimeSpan)), "A2");
+            Assert.IsFalse(cv.CanConvertTo(null, typeof(int)), "A3");
+            Assert.IsFalse(cv.CanConvertTo(null, typeof(object)), "A4");
+        }
 
-		[Test]
-		public void ConvertFrom ()
-		{
-			CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter ();
-			object o;
-			CommaDelimitedStringCollection col;
+        [Test]
+        public void ConvertFrom()
+        {
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
+            object o;
+            CommaDelimitedStringCollection col;
 
-			o = cv.ConvertFrom (null, null, "hi,bye");
-			Assert.AreEqual (typeof (CommaDelimitedStringCollection), o.GetType(), "A1");
+            o = cv.ConvertFrom(null, null, "hi,bye");
+            Assert.AreEqual(typeof(CommaDelimitedStringCollection), o.GetType(), "A1");
 
-			col = (CommaDelimitedStringCollection)o;
-			Assert.AreEqual (2, col.Count, "A2");
-			Assert.AreEqual ("hi", col[0], "A3");
-			Assert.AreEqual ("bye", col[1], "A4");
+            col = (CommaDelimitedStringCollection)o;
+            Assert.AreEqual(2, col.Count, "A2");
+            Assert.AreEqual("hi", col[0], "A3");
+            Assert.AreEqual("bye", col[1], "A4");
 
-			col = (CommaDelimitedStringCollection)cv.ConvertFrom (null, null, "hi, bye");
-			Assert.AreEqual (2, col.Count, "A5");
-			Assert.AreEqual ("hi", col[0], "A6");
-			Assert.AreEqual ("bye", col[1], "A7");
-		}
+            col = (CommaDelimitedStringCollection)cv.ConvertFrom(null, null, "hi, bye");
+            Assert.AreEqual(2, col.Count, "A5");
+            Assert.AreEqual("hi", col[0], "A6");
+            Assert.AreEqual("bye", col[1], "A7");
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidCastException))]
-		public void ConvertFrom_TypeError ()
-		{
-			CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter ();
-			object o;
+        [Test]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void ConvertFrom_TypeError()
+        {
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
+            object o;
 
-			o = cv.ConvertFrom (null, null, 59);
-			Assert.IsNull (o, "A1");
-		}
+            o = cv.ConvertFrom(null, null, 59);
+            Assert.IsNull(o, "A1");
+        }
 
-		[Test]
-		public void ConvertTo ()
-		{
-			CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter ();
-			CommaDelimitedStringCollection col = new CommaDelimitedStringCollection();
-			col.Add ("hi");
-			col.Add ("bye");
+        [Test]
+        public void ConvertTo()
+        {
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
+            CommaDelimitedStringCollection col = new CommaDelimitedStringCollection();
+            col.Add("hi");
+            col.Add("bye");
 
-			Assert.AreEqual ("hi,bye", cv.ConvertTo (null, null, col, typeof (string)), "A1");
-		}
+            Assert.AreEqual("hi,bye", cv.ConvertTo(null, null, col, typeof(string)), "A1");
+        }
 
-		[Test]
-		public void ConvertTo_NullError ()
-		{
-			CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter ();
+        [Test]
+        public void ConvertTo_NullError()
+        {
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
 
-			Assert.AreEqual (null, cv.ConvertTo (null, null, null, typeof (string)), "A1");
-		}
+            Assert.AreEqual(null, cv.ConvertTo(null, null, null, typeof(string)), "A1");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void ConvertTo_TypeError ()
-		{
-			CommaDelimitedStringCollectionConverter cv = new CommaDelimitedStringCollectionConverter ();
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConvertTo_TypeError()
+        {
+            CommaDelimitedStringCollectionConverter cv =
+                new CommaDelimitedStringCollectionConverter();
 
-			Assert.AreEqual ("59", cv.ConvertTo (null, null, 59, typeof (string)), "A1");
-		}
-	}
+            Assert.AreEqual("59", cv.ConvertTo(null, null, 59, typeof(string)), "A1");
+        }
+    }
 }
-

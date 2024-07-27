@@ -24,6 +24,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         #region Helpers
 
         internal delegate int IndexOfDelegate(SegmentedList<T> list, T value);
+
         public enum IndexOfMethod
         {
             IndexOf_T,
@@ -39,17 +40,47 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             switch (methodType)
             {
                 case (IndexOfMethod.IndexOf_T):
-                    return ((SegmentedList<T> list, T value) => { return list.IndexOf(value); });
+                    return (
+                        (SegmentedList<T> list, T value) =>
+                        {
+                            return list.IndexOf(value);
+                        }
+                    );
                 case (IndexOfMethod.IndexOf_T_int):
-                    return ((SegmentedList<T> list, T value) => { return list.IndexOf(value, 0); });
+                    return (
+                        (SegmentedList<T> list, T value) =>
+                        {
+                            return list.IndexOf(value, 0);
+                        }
+                    );
                 case (IndexOfMethod.IndexOf_T_int_int):
-                    return ((SegmentedList<T> list, T value) => { return list.IndexOf(value, 0, list.Count); });
+                    return (
+                        (SegmentedList<T> list, T value) =>
+                        {
+                            return list.IndexOf(value, 0, list.Count);
+                        }
+                    );
                 case (IndexOfMethod.LastIndexOf_T):
-                    return ((SegmentedList<T> list, T value) => { return list.LastIndexOf(value); });
+                    return (
+                        (SegmentedList<T> list, T value) =>
+                        {
+                            return list.LastIndexOf(value);
+                        }
+                    );
                 case (IndexOfMethod.LastIndexOf_T_int):
-                    return ((SegmentedList<T> list, T value) => { return list.LastIndexOf(value, list.Count - 1); });
+                    return (
+                        (SegmentedList<T> list, T value) =>
+                        {
+                            return list.LastIndexOf(value, list.Count - 1);
+                        }
+                    );
                 case (IndexOfMethod.LastIndexOf_T_int_int):
-                    return ((SegmentedList<T> list, T value) => { return list.LastIndexOf(value, list.Count - 1, list.Count); });
+                    return (
+                        (SegmentedList<T> list, T value) =>
+                        {
+                            return list.LastIndexOf(value, list.Count - 1, list.Count);
+                        }
+                    );
                 default:
                     throw new Exception("Invalid IndexOfMethod");
             }
@@ -85,37 +116,61 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(IndexOfTestData))]
-        public void IndexOf_NoDuplicates(IndexOfMethod indexOfMethod, int count, bool frontToBackOrder)
+        public void IndexOf_NoDuplicates(
+            IndexOfMethod indexOfMethod,
+            int count,
+            bool frontToBackOrder
+        )
         {
             _ = frontToBackOrder;
             SegmentedList<T> list = GenericListFactory(count);
             SegmentedList<T> expectedList = list.ToSegmentedList();
             IndexOfDelegate IndexOf = IndexOfDelegateFromType(indexOfMethod);
 
-            Assert.All(Enumerable.Range(0, count), i =>
-            {
-                Assert.Equal(i, IndexOf(list, expectedList[i]));
-            });
+            Assert.All(
+                Enumerable.Range(0, count),
+                i =>
+                {
+                    Assert.Equal(i, IndexOf(list, expectedList[i]));
+                }
+            );
         }
 
         [Theory]
         [MemberData(nameof(IndexOfTestData))]
-        public void IndexOf_NonExistingValues(IndexOfMethod indexOfMethod, int count, bool frontToBackOrder)
+        public void IndexOf_NonExistingValues(
+            IndexOfMethod indexOfMethod,
+            int count,
+            bool frontToBackOrder
+        )
         {
             _ = frontToBackOrder;
             SegmentedList<T> list = GenericListFactory(count);
-            IEnumerable<T> nonexistentValues = CreateEnumerable(EnumerableType.List, list, count: count, numberOfMatchingElements: 0, numberOfDuplicateElements: 0);
+            IEnumerable<T> nonexistentValues = CreateEnumerable(
+                EnumerableType.List,
+                list,
+                count: count,
+                numberOfMatchingElements: 0,
+                numberOfDuplicateElements: 0
+            );
             IndexOfDelegate IndexOf = IndexOfDelegateFromType(indexOfMethod);
 
-            Assert.All(nonexistentValues, nonexistentValue =>
-            {
-                Assert.Equal(-1, IndexOf(list, nonexistentValue));
-            });
+            Assert.All(
+                nonexistentValues,
+                nonexistentValue =>
+                {
+                    Assert.Equal(-1, IndexOf(list, nonexistentValue));
+                }
+            );
         }
 
         [Theory]
         [MemberData(nameof(IndexOfTestData))]
-        public void IndexOf_DefaultValue(IndexOfMethod indexOfMethod, int count, bool frontToBackOrder)
+        public void IndexOf_DefaultValue(
+            IndexOfMethod indexOfMethod,
+            int count,
+            bool frontToBackOrder
+        )
         {
             _ = frontToBackOrder;
             T? defaultValue = default;
@@ -129,20 +184,27 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(IndexOfTestData))]
-        public void IndexOf_OrderIsCorrect(IndexOfMethod indexOfMethod, int count, bool frontToBackOrder)
+        public void IndexOf_OrderIsCorrect(
+            IndexOfMethod indexOfMethod,
+            int count,
+            bool frontToBackOrder
+        )
         {
             SegmentedList<T> list = GenericListFactory(count);
             SegmentedList<T> withoutDuplicates = list.ToSegmentedList();
             list.AddRange(list);
             IndexOfDelegate IndexOf = IndexOfDelegateFromType(indexOfMethod);
 
-            Assert.All(Enumerable.Range(0, count), i =>
-            {
-                if (frontToBackOrder)
-                    Assert.Equal(i, IndexOf(list, withoutDuplicates[i]));
-                else
-                    Assert.Equal(count + i, IndexOf(list, withoutDuplicates[i]));
-            });
+            Assert.All(
+                Enumerable.Range(0, count),
+                i =>
+                {
+                    if (frontToBackOrder)
+                        Assert.Equal(i, IndexOf(list, withoutDuplicates[i]));
+                    else
+                        Assert.Equal(count + i, IndexOf(list, withoutDuplicates[i]));
+                }
+            );
         }
 
         [Theory]
@@ -155,15 +217,27 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             list.AddRange(list);
             list.AddRange(list);
 
-            Assert.All(Enumerable.Range(0, count), i =>
-            {
-                Assert.All(Enumerable.Range(0, 4), j =>
+            Assert.All(
+                Enumerable.Range(0, count),
+                i =>
                 {
-                    int expectedIndex = (j * count) + i;
-                    Assert.Equal(expectedIndex, list.IndexOf(withoutDuplicates[i], (count * j)));
-                    Assert.Equal(expectedIndex, list.IndexOf(withoutDuplicates[i], (count * j), count));
-                });
-            });
+                    Assert.All(
+                        Enumerable.Range(0, 4),
+                        j =>
+                        {
+                            int expectedIndex = (j * count) + i;
+                            Assert.Equal(
+                                expectedIndex,
+                                list.IndexOf(withoutDuplicates[i], (count * j))
+                            );
+                            Assert.Equal(
+                                expectedIndex,
+                                list.IndexOf(withoutDuplicates[i], (count * j), count)
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -176,15 +250,27 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             list.AddRange(list);
             list.AddRange(list);
 
-            Assert.All(Enumerable.Range(0, count), i =>
-            {
-                Assert.All(Enumerable.Range(0, 4), j =>
+            Assert.All(
+                Enumerable.Range(0, count),
+                i =>
                 {
-                    int expectedIndex = (j * count) + i;
-                    Assert.Equal(expectedIndex, list.LastIndexOf(withoutDuplicates[i], (count * (j + 1)) - 1));
-                    Assert.Equal(expectedIndex, list.LastIndexOf(withoutDuplicates[i], (count * (j + 1)) - 1, count));
-                });
-            });
+                    Assert.All(
+                        Enumerable.Range(0, 4),
+                        j =>
+                        {
+                            int expectedIndex = (j * count) + i;
+                            Assert.Equal(
+                                expectedIndex,
+                                list.LastIndexOf(withoutDuplicates[i], (count * (j + 1)) - 1)
+                            );
+                            Assert.Equal(
+                                expectedIndex,
+                                list.LastIndexOf(withoutDuplicates[i], (count * (j + 1)) - 1, count)
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -208,7 +294,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, count, 1)); //"ArgumentOutOfRangeException expected on index larger than array."
             Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, count + 1, 1)); //"ArgumentOutOfRangeException expected  on index larger than array."
             Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, 0, count + 1)); //"ArgumentOutOfRangeException expected  on count larger than array."
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, count / 2, count / 2 + 2)); //"ArgumentOutOfRangeException expected.."
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => list.IndexOf(element, count / 2, count / 2 + 2)
+            ); //"ArgumentOutOfRangeException expected.."
             Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, 0, count + 1)); //"ArgumentOutOfRangeException expected  on count larger than array."
             Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, 0, -1)); //"ArgumentOutOfRangeException expected on negative count."
             Assert.Throws<ArgumentOutOfRangeException>(() => list.IndexOf(element, -1, 1)); //"ArgumentOutOfRangeException expected on negative index."
@@ -221,7 +309,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             SegmentedList<T> list = GenericListFactory(count);
             T element = CreateT(234);
             Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, count)); //"ArgumentOutOfRangeException expected."
-            if (count == 0)  // IndexOf with a 0 count List is special cased to return -1.
+            if (count == 0) // IndexOf with a 0 count List is special cased to return -1.
                 Assert.Equal(-1, list.LastIndexOf(element, -1));
             else
                 Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, -1));
@@ -236,13 +324,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             if (count > 0)
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, 0, count + 1)); //"Expected ArgumentOutOfRangeException."
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, count / 2, count / 2 + 2)); //"Expected ArgumentOutOfRangeException."
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, 0, count + 1)); //"Expected ArgumentOutOfRangeException."
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => list.LastIndexOf(element, 0, count + 1)
+                ); //"Expected ArgumentOutOfRangeException."
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => list.LastIndexOf(element, count / 2, count / 2 + 2)
+                ); //"Expected ArgumentOutOfRangeException."
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => list.LastIndexOf(element, 0, count + 1)
+                ); //"Expected ArgumentOutOfRangeException."
                 Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, 0, -1)); //"Expected ArgumentOutOfRangeException."
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, -1, count)); //"Expected ArgumentOutOfRangeException."
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => list.LastIndexOf(element, -1, count)
+                ); //"Expected ArgumentOutOfRangeException."
                 Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, -1, 1)); //"Expected ArgumentOutOfRangeException."                Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, count, 0)); //"Expected ArgumentOutOfRangeException."
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, count, 1)); //"Expected ArgumentOutOfRangeException."
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => list.LastIndexOf(element, count, 1)
+                ); //"Expected ArgumentOutOfRangeException."
             }
             else // IndexOf with a 0 count List is special cased to return -1.
             {

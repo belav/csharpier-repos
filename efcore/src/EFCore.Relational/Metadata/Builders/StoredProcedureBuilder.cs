@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <summary>
 ///     Provides a simple API for configuring a <see cref="IMutableStoredProcedure" /> that an entity type is mapped to.
 /// </summary>
-public class StoredProcedureBuilder : IInfrastructure<EntityTypeBuilder>, IInfrastructure<IConventionStoredProcedureBuilder>
+public class StoredProcedureBuilder
+    : IInfrastructure<EntityTypeBuilder>,
+        IInfrastructure<IConventionStoredProcedureBuilder>
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -17,7 +19,10 @@ public class StoredProcedureBuilder : IInfrastructure<EntityTypeBuilder>, IInfra
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public StoredProcedureBuilder(IMutableStoredProcedure sproc, EntityTypeBuilder entityTypeBuilder)
+    public StoredProcedureBuilder(
+        IMutableStoredProcedure sproc,
+        EntityTypeBuilder entityTypeBuilder
+    )
     {
         Builder = ((StoredProcedure)sproc).Builder;
         EntityTypeBuilder = entityTypeBuilder;
@@ -32,7 +37,11 @@ public class StoredProcedureBuilder : IInfrastructure<EntityTypeBuilder>, IInfra
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalStoredProcedureBuilder Builder { [DebuggerStepThrough] get; }
+    protected virtual InternalStoredProcedureBuilder Builder
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <inheritdoc />
     IConventionStoredProcedureBuilder IInfrastructure<IConventionStoredProcedureBuilder>.Instance
@@ -44,8 +53,7 @@ public class StoredProcedureBuilder : IInfrastructure<EntityTypeBuilder>, IInfra
     /// <summary>
     ///     The stored procedure being configured.
     /// </summary>
-    public virtual IMutableStoredProcedure Metadata
-        => Builder.Metadata;
+    public virtual IMutableStoredProcedure Metadata => Builder.Metadata;
 
     /// <summary>
     ///     Configures a new parameter if no parameter mapped to the given property exists.
@@ -66,10 +74,16 @@ public class StoredProcedureBuilder : IInfrastructure<EntityTypeBuilder>, IInfra
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual StoredProcedureBuilder HasParameter(
         string propertyName,
-        Action<StoredProcedureParameterBuilder> buildAction)
+        Action<StoredProcedureParameterBuilder> buildAction
+    )
     {
         var parameterBuilder = Builder.HasParameter(propertyName, ConfigurationSource.Explicit)!;
-        buildAction(new StoredProcedureParameterBuilder(parameterBuilder, CreatePropertyBuilder(propertyName)));
+        buildAction(
+            new StoredProcedureParameterBuilder(
+                parameterBuilder,
+                CreatePropertyBuilder(propertyName)
+            )
+        );
         return this;
     }
 
@@ -92,10 +106,19 @@ public class StoredProcedureBuilder : IInfrastructure<EntityTypeBuilder>, IInfra
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual StoredProcedureBuilder HasOriginalValueParameter(
         string propertyName,
-        Action<StoredProcedureParameterBuilder> buildAction)
+        Action<StoredProcedureParameterBuilder> buildAction
+    )
     {
-        var parameterBuilder = Builder.HasOriginalValueParameter(propertyName, ConfigurationSource.Explicit)!;
-        buildAction(new StoredProcedureParameterBuilder(parameterBuilder, CreatePropertyBuilder(propertyName)));
+        var parameterBuilder = Builder.HasOriginalValueParameter(
+            propertyName,
+            ConfigurationSource.Explicit
+        )!;
+        buildAction(
+            new StoredProcedureParameterBuilder(
+                parameterBuilder,
+                CreatePropertyBuilder(propertyName)
+            )
+        );
         return this;
     }
 
@@ -115,7 +138,8 @@ public class StoredProcedureBuilder : IInfrastructure<EntityTypeBuilder>, IInfra
     /// <param name="buildAction">An action that performs configuration of the parameter.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual StoredProcedureBuilder HasRowsAffectedParameter(
-        Action<StoredProcedureParameterBuilder> buildAction)
+        Action<StoredProcedureParameterBuilder> buildAction
+    )
     {
         var parameterBuilder = Builder.HasRowsAffectedParameter(ConfigurationSource.Explicit)!;
         buildAction(new StoredProcedureParameterBuilder(parameterBuilder, null));
@@ -141,10 +165,19 @@ public class StoredProcedureBuilder : IInfrastructure<EntityTypeBuilder>, IInfra
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual StoredProcedureBuilder HasResultColumn(
         string propertyName,
-        Action<StoredProcedureResultColumnBuilder> buildAction)
+        Action<StoredProcedureResultColumnBuilder> buildAction
+    )
     {
-        var resultColumnBuilder = Builder.HasResultColumn(propertyName, ConfigurationSource.Explicit)!;
-        buildAction(new StoredProcedureResultColumnBuilder(resultColumnBuilder, CreatePropertyBuilder(propertyName)));
+        var resultColumnBuilder = Builder.HasResultColumn(
+            propertyName,
+            ConfigurationSource.Explicit
+        )!;
+        buildAction(
+            new StoredProcedureResultColumnBuilder(
+                resultColumnBuilder,
+                CreatePropertyBuilder(propertyName)
+            )
+        );
         return this;
     }
 
@@ -165,9 +198,12 @@ public class StoredProcedureBuilder : IInfrastructure<EntityTypeBuilder>, IInfra
     /// </summary>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual StoredProcedureBuilder HasRowsAffectedResultColumn(
-        Action<StoredProcedureResultColumnBuilder> buildAction)
+        Action<StoredProcedureResultColumnBuilder> buildAction
+    )
     {
-        var resultColumnBuilder = Builder.HasRowsAffectedResultColumn(ConfigurationSource.Explicit)!;
+        var resultColumnBuilder = Builder.HasRowsAffectedResultColumn(
+            ConfigurationSource.Explicit
+        )!;
         buildAction(new StoredProcedureResultColumnBuilder(resultColumnBuilder, null));
         return this;
     }
@@ -179,7 +215,9 @@ public class StoredProcedureBuilder : IInfrastructure<EntityTypeBuilder>, IInfra
     ///     A value indicating whether this stored procedure returns the number of rows affected.
     /// </param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual StoredProcedureBuilder HasRowsAffectedReturnValue(bool rowsAffectedReturned = true)
+    public virtual StoredProcedureBuilder HasRowsAffectedReturnValue(
+        bool rowsAffectedReturned = true
+    )
     {
         Builder.HasRowsAffectedReturn(rowsAffectedReturned, ConfigurationSource.Explicit);
         return this;
@@ -214,13 +252,17 @@ public class StoredProcedureBuilder : IInfrastructure<EntityTypeBuilder>, IInfra
         var property = entityType.FindProperty(propertyName);
         if (property == null)
         {
-            property = entityType.GetDerivedTypes().SelectMany(et => et.GetDeclaredProperties())
+            property = entityType
+                .GetDerivedTypes()
+                .SelectMany(et => et.GetDeclaredProperties())
                 .FirstOrDefault(p => p.Name == propertyName);
         }
 
         if (property == null)
         {
-            throw new InvalidOperationException(CoreStrings.PropertyNotFound(propertyName, entityType.DisplayName()));
+            throw new InvalidOperationException(
+                CoreStrings.PropertyNotFound(propertyName, entityType.DisplayName())
+            );
         }
 
 #pragma warning disable EF1001 // Internal EF Core API usage.
@@ -238,20 +280,21 @@ public class StoredProcedureBuilder : IInfrastructure<EntityTypeBuilder>, IInfra
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual PropertyBuilder CreatePropertyBuilder<TDerivedEntity, TProperty>(
-        Expression<Func<TDerivedEntity, TProperty>> propertyExpression)
+        Expression<Func<TDerivedEntity, TProperty>> propertyExpression
+    )
         where TDerivedEntity : class
     {
         var memberInfo = propertyExpression.GetMemberAccess();
         var entityType = EntityTypeBuilder.Metadata;
-        var entityTypeBuilder = entityType.ClrType == typeof(TDerivedEntity)
-            ? EntityTypeBuilder
+        var entityTypeBuilder =
+            entityType.ClrType == typeof(TDerivedEntity)
+                ? EntityTypeBuilder
 #pragma warning disable EF1001 // Internal EF Core API usage.
-            : new ModelBuilder(entityType.Model).Entity(typeof(TDerivedEntity));
+                : new ModelBuilder(entityType.Model).Entity(typeof(TDerivedEntity));
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
         return entityTypeBuilder.Property(memberInfo.GetMemberType(), memberInfo.Name);
     }
 
-    EntityTypeBuilder IInfrastructure<EntityTypeBuilder>.Instance
-        => EntityTypeBuilder;
+    EntityTypeBuilder IInfrastructure<EntityTypeBuilder>.Instance => EntityTypeBuilder;
 }

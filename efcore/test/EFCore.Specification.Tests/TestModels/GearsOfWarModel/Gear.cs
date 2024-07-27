@@ -39,6 +39,5 @@ public class Gear
     public bool HasSoulPatch { get; set; }
 
     [NotMapped]
-    public bool IsMarcus
-        => Nickname == "Marcus";
+    public bool IsMarcus => Nickname == "Marcus";
 }

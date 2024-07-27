@@ -40,7 +40,11 @@ namespace System.Web.Mvc
             get { return ViewData.Model; }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is settable for unit testing purposes")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This is settable for unit testing purposes"
+        )]
         public new ViewDataDictionary<TModel> ViewData
         {
             get

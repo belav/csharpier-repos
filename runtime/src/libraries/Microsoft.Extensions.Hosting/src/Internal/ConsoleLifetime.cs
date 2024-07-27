@@ -31,8 +31,19 @@ namespace Microsoft.Extensions.Hosting.Internal
         /// <param name="applicationLifetime">An object that allows consumers to be notified of application lifetime events.</param>
         /// <param name="hostOptions">An object used to retrieve <see cref="HostOptions"/> instances.</param>
         /// <exception cref="ArgumentNullException"><paramref name="options"/> or <paramref name="environment"/> or <paramref name="applicationLifetime"/> or <paramref name="hostOptions"/> is <see langword="null"/>.</exception>
-        public ConsoleLifetime(IOptions<ConsoleLifetimeOptions> options, IHostEnvironment environment, IHostApplicationLifetime applicationLifetime, IOptions<HostOptions> hostOptions)
-            : this(options, environment, applicationLifetime, hostOptions, NullLoggerFactory.Instance) { }
+        public ConsoleLifetime(
+            IOptions<ConsoleLifetimeOptions> options,
+            IHostEnvironment environment,
+            IHostApplicationLifetime applicationLifetime,
+            IOptions<HostOptions> hostOptions
+        )
+            : this(
+                options,
+                environment,
+                applicationLifetime,
+                hostOptions,
+                NullLoggerFactory.Instance
+            ) { }
 
         /// <summary>
         /// Initializes a <see cref="ConsoleLifetime"/> instance using the specified console lifetime options, host environment, host options and logger factory.
@@ -43,7 +54,13 @@ namespace Microsoft.Extensions.Hosting.Internal
         /// <param name="hostOptions">An object used to retrieve <see cref="HostOptions"/> instances.</param>
         /// <param name="loggerFactory">An object to configure the logging system and create instances of <see cref="ILogger"/> from the registered <see cref="ILoggerProvider"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="options"/> or <paramref name="environment"/> or <paramref name="applicationLifetime"/> or <paramref name="hostOptions"/> or <paramref name="loggerFactory"/> is <see langword="null"/>.</exception>
-        public ConsoleLifetime(IOptions<ConsoleLifetimeOptions> options, IHostEnvironment environment, IHostApplicationLifetime applicationLifetime, IOptions<HostOptions> hostOptions, ILoggerFactory loggerFactory)
+        public ConsoleLifetime(
+            IOptions<ConsoleLifetimeOptions> options,
+            IHostEnvironment environment,
+            IHostApplicationLifetime applicationLifetime,
+            IOptions<HostOptions> hostOptions,
+            ILoggerFactory loggerFactory
+        )
         {
             ThrowHelper.ThrowIfNull(options?.Value, nameof(options));
             ThrowHelper.ThrowIfNull(applicationLifetime);
@@ -77,16 +94,20 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             if (!Options.SuppressStatusMessages)
             {
-                _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(state =>
-                {
-                    ((ConsoleLifetime)state!).OnApplicationStarted();
-                },
-                this);
-                _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(state =>
-                {
-                    ((ConsoleLifetime)state!).OnApplicationStopping();
-                },
-                this);
+                _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(
+                    state =>
+                    {
+                        ((ConsoleLifetime)state!).OnApplicationStarted();
+                    },
+                    this
+                );
+                _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(
+                    state =>
+                    {
+                        ((ConsoleLifetime)state!).OnApplicationStopping();
+                    },
+                    this
+                );
             }
 
             RegisterShutdownHandlers();

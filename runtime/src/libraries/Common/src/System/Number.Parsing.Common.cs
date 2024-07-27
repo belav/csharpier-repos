@@ -10,12 +10,20 @@ namespace System
 {
     internal static partial class Number
     {
-        private static unsafe bool TryParseNumber(scoped ref char* str, char* strEnd, NumberStyles styles, ref NumberBuffer number, NumberFormatInfo info)
+        private static unsafe bool TryParseNumber(
+            scoped ref char* str,
+            char* strEnd,
+            NumberStyles styles,
+            ref NumberBuffer number,
+            NumberFormatInfo info
+        )
         {
             Debug.Assert(str != null);
             Debug.Assert(strEnd != null);
             Debug.Assert(str <= strEnd);
-            Debug.Assert((styles & (NumberStyles.AllowHexSpecifier | NumberStyles.AllowBinarySpecifier)) == 0);
+            Debug.Assert(
+                (styles & (NumberStyles.AllowHexSpecifier | NumberStyles.AllowBinarySpecifier)) == 0
+            );
 
             const int StateSign = 0x0001;
             const int StateParens = 0x0002;
@@ -31,9 +39,9 @@ namespace System
 
             number.CheckConsistency();
 
-            string decSep;                  // decimal separator from NumberFormatInfo.
-            string groupSep;                // group separator from NumberFormatInfo.
-            string? currSymbol = null;       // currency symbol from NumberFormatInfo.
+            string decSep; // decimal separator from NumberFormatInfo.
+            string groupSep; // group separator from NumberFormatInfo.
+            string? currSymbol = null; // currency symbol from NumberFormatInfo.
 
             bool parsingCurrency = false;
             if ((styles & NumberStyles.AllowCurrencySymbol) != 0)
@@ -61,19 +69,45 @@ namespace System
             {
                 // Eat whitespace unless we've found a sign which isn't followed by a currency symbol.
                 // "-Kr 1231.47" is legal but "- 1231.47" is not.
-                if (!IsWhite(ch) || (styles & NumberStyles.AllowLeadingWhite) == 0 || ((state & StateSign) != 0 && ((state & StateCurrency) == 0 && info.NumberNegativePattern != 2)))
+                if (
+                    !IsWhite(ch)
+                    || (styles & NumberStyles.AllowLeadingWhite) == 0
+                    || (
+                        (state & StateSign) != 0
+                        && ((state & StateCurrency) == 0 && info.NumberNegativePattern != 2)
+                    )
+                )
                 {
-                    if ((((styles & NumberStyles.AllowLeadingSign) != 0) && (state & StateSign) == 0) && ((next = MatchChars(p, strEnd, info.PositiveSign)) != null || ((next = MatchNegativeSignChars(p, strEnd, info)) != null && (number.IsNegative = true))))
+                    if (
+                        (
+                            ((styles & NumberStyles.AllowLeadingSign) != 0)
+                            && (state & StateSign) == 0
+                        )
+                        && (
+                            (next = MatchChars(p, strEnd, info.PositiveSign)) != null
+                            || (
+                                (next = MatchNegativeSignChars(p, strEnd, info)) != null
+                                && (number.IsNegative = true)
+                            )
+                        )
+                    )
                     {
                         state |= StateSign;
                         p = next - 1;
                     }
-                    else if (ch == '(' && ((styles & NumberStyles.AllowParentheses) != 0) && ((state & StateSign) == 0))
+                    else if (
+                        ch == '('
+                        && ((styles & NumberStyles.AllowParentheses) != 0)
+                        && ((state & StateSign) == 0)
+                    )
                     {
                         state |= StateSign | StateParens;
                         number.IsNegative = true;
                     }
-                    else if (currSymbol != null && (next = MatchChars(p, strEnd, currSymbol)) != null)
+                    else if (
+                        currSymbol != null
+                        && (next = MatchChars(p, strEnd, currSymbol)) != null
+                    )
                     {
                         state |= StateCurrency;
                         currSymbol = null;
@@ -147,12 +181,29 @@ namespace System
                         number.Scale--;
                     }
                 }
-                else if (((styles & NumberStyles.AllowDecimalPoint) != 0) && ((state & StateDecimal) == 0) && ((next = MatchChars(p, strEnd, decSep)) != null || (parsingCurrency && (state & StateCurrency) == 0) && (next = MatchChars(p, strEnd, info.NumberDecimalSeparator)) != null))
+                else if (
+                    ((styles & NumberStyles.AllowDecimalPoint) != 0)
+                    && ((state & StateDecimal) == 0)
+                    && (
+                        (next = MatchChars(p, strEnd, decSep)) != null
+                        || (parsingCurrency && (state & StateCurrency) == 0)
+                            && (next = MatchChars(p, strEnd, info.NumberDecimalSeparator)) != null
+                    )
+                )
                 {
                     state |= StateDecimal;
                     p = next - 1;
                 }
-                else if (((styles & NumberStyles.AllowThousands) != 0) && ((state & StateDigits) != 0) && ((state & StateDecimal) == 0) && ((next = MatchChars(p, strEnd, groupSep)) != null || (parsingCurrency && (state & StateCurrency) == 0) && (next = MatchChars(p, strEnd, info.NumberGroupSeparator)) != null))
+                else if (
+                    ((styles & NumberStyles.AllowThousands) != 0)
+                    && ((state & StateDigits) != 0)
+                    && ((state & StateDecimal) == 0)
+                    && (
+                        (next = MatchChars(p, strEnd, groupSep)) != null
+                        || (parsingCurrency && (state & StateCurrency) == 0)
+                            && (next = MatchChars(p, strEnd, info.NumberGroupSeparator)) != null
+                    )
+                )
                 {
                     p = next - 1;
                 }
@@ -223,7 +274,10 @@ namespace System
                     int numberOfFractionalDigits = digEnd - number.Scale;
                     if (numberOfFractionalDigits > 0)
                     {
-                        numberOfTrailingZeros = Math.Min(numberOfTrailingZeros, numberOfFractionalDigits);
+                        numberOfTrailingZeros = Math.Min(
+                            numberOfTrailingZeros,
+                            numberOfFractionalDigits
+                        );
                         Debug.Assert(numberOfTrailingZeros >= 0);
                         number.DigitsCount = digEnd - numberOfTrailingZeros;
                         number.Digits[number.DigitsCount] = (byte)('\0');
@@ -234,7 +288,17 @@ namespace System
                 {
                     if (!IsWhite(ch) || (styles & NumberStyles.AllowTrailingWhite) == 0)
                     {
-                        if ((styles & NumberStyles.AllowTrailingSign) != 0 && ((state & StateSign) == 0) && ((next = MatchChars(p, strEnd, info.PositiveSign)) != null || (((next = MatchNegativeSignChars(p, strEnd, info)) != null) && (number.IsNegative = true))))
+                        if (
+                            (styles & NumberStyles.AllowTrailingSign) != 0
+                            && ((state & StateSign) == 0)
+                            && (
+                                (next = MatchChars(p, strEnd, info.PositiveSign)) != null
+                                || (
+                                    ((next = MatchNegativeSignChars(p, strEnd, info)) != null)
+                                    && (number.IsNegative = true)
+                                )
+                            )
+                        )
                         {
                             state |= StateSign;
                             p = next - 1;
@@ -243,7 +307,10 @@ namespace System
                         {
                             state &= ~StateParens;
                         }
-                        else if (currSymbol != null && (next = MatchChars(p, strEnd, currSymbol)) != null)
+                        else if (
+                            currSymbol != null
+                            && (next = MatchChars(p, strEnd, currSymbol)) != null
+                        )
                         {
                             currSymbol = null;
                             p = next - 1;
@@ -263,7 +330,10 @@ namespace System
                         {
                             number.Scale = 0;
                         }
-                        if ((number.Kind == NumberBufferKind.Integer) && (state & StateDecimal) == 0)
+                        if (
+                            (number.Kind == NumberBufferKind.Integer)
+                            && (state & StateDecimal) == 0
+                        )
                         {
                             number.IsNegative = false;
                         }
@@ -276,14 +346,24 @@ namespace System
             return false;
         }
 
-        internal static unsafe bool TryStringToNumber(ReadOnlySpan<char> value, NumberStyles styles, ref NumberBuffer number, NumberFormatInfo info)
+        internal static unsafe bool TryStringToNumber(
+            ReadOnlySpan<char> value,
+            NumberStyles styles,
+            ref NumberBuffer number,
+            NumberFormatInfo info
+        )
         {
             Debug.Assert(info != null);
             fixed (char* stringPointer = &MemoryMarshal.GetReference(value))
             {
                 char* p = stringPointer;
-                if (!TryParseNumber(ref p, p + value.Length, styles, ref number, info)
-                    || ((int)(p - stringPointer) < value.Length && !TrailingZeros(value, (int)(p - stringPointer))))
+                if (
+                    !TryParseNumber(ref p, p + value.Length, styles, ref number, info)
+                    || (
+                        (int)(p - stringPointer) < value.Length
+                        && !TrailingZeros(value, (int)(p - stringPointer))
+                    )
+                )
                 {
                     number.CheckConsistency();
                     return false;
@@ -307,13 +387,17 @@ namespace System
         {
             OK,
             Failed,
-            Overflow
+            Overflow,
         }
 
         private static bool IsSpaceReplacingChar(char c) => c == '\u00a0' || c == '\u202f';
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe char* MatchNegativeSignChars(char* p, char* pEnd, NumberFormatInfo info)
+        private static unsafe char* MatchNegativeSignChars(
+            char* p,
+            char* pEnd,
+            NumberFormatInfo info
+        )
         {
             char* ret = MatchChars(p, pEnd, info.NegativeSign);
             if (ret == null && GetAllowHyphenDuringParsing(info) && p < pEnd && *p == '-')
@@ -355,23 +439,31 @@ namespace System
 
         // Helper for internal property
 #if SYSTEM_PRIVATE_CORELIB
-        private static bool GetAllowHyphenDuringParsing(NumberFormatInfo info) => info.AllowHyphenDuringParsing;
+        private static bool GetAllowHyphenDuringParsing(NumberFormatInfo info) =>
+            info.AllowHyphenDuringParsing;
 #else
         private static bool GetAllowHyphenDuringParsing(NumberFormatInfo info)
         {
             string negativeSign = info.NegativeSign;
-            return negativeSign.Length == 1 &&
-                   negativeSign[0] switch
-                   {
-                       '\u2012' or         // Figure Dash
-                       '\u207B' or         // Superscript Minus
-                       '\u208B' or         // Subscript Minus
-                       '\u2212' or         // Minus Sign
-                       '\u2796' or         // Heavy Minus Sign
-                       '\uFE63' or         // Small Hyphen-Minus
-                       '\uFF0D' => true,   // Fullwidth Hyphen-Minus
-                       _ => false
-                   };
+            return negativeSign.Length == 1
+                && negativeSign[0] switch
+                {
+                    '\u2012'
+                    or // Figure Dash
+                    '\u207B'
+                    or // Superscript Minus
+                    '\u208B'
+                    or // Subscript Minus
+                    '\u2212'
+                    or // Minus Sign
+                    '\u2796'
+                    or // Heavy Minus Sign
+                    '\uFE63'
+                    or // Small Hyphen-Minus
+                    '\uFF0D'
+                        => true, // Fullwidth Hyphen-Minus
+                    _ => false,
+                };
         }
 #endif
     }

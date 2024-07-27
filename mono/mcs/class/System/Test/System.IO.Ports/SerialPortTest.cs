@@ -30,65 +30,67 @@
 using System;
 using System.IO;
 using System.IO.Ports;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.IO.Ports
 {
-	[TestFixture]
-	public class SerialPortTest
-	{
-		[Category ("NotWorking")]
-		[Test]
-		public void DiscardNull ()
-		{
-			SerialPort sp = new SerialPort ();
-			Assert.AreEqual (false, sp.IsOpen, "#A1");
-			Assert.AreEqual (false, sp.DiscardNull, "#A2");
+    [TestFixture]
+    public class SerialPortTest
+    {
+        [Category("NotWorking")]
+        [Test]
+        public void DiscardNull()
+        {
+            SerialPort sp = new SerialPort();
+            Assert.AreEqual(false, sp.IsOpen, "#A1");
+            Assert.AreEqual(false, sp.DiscardNull, "#A2");
 
-			sp.DiscardNull = true;
-			Assert.AreEqual (true, sp.DiscardNull, "#B1");
+            sp.DiscardNull = true;
+            Assert.AreEqual(true, sp.DiscardNull, "#B1");
 
-			sp.DiscardNull = false;
-			Assert.AreEqual (false, sp.DiscardNull, "#C1");
-		}
+            sp.DiscardNull = false;
+            Assert.AreEqual(false, sp.DiscardNull, "#C1");
+        }
 
-		[Category ("NotWorking")]
-		[Test]
-		public void NonstandardBaudRate ()
-		{
-			int platform = (int) Environment.OSVersion.Platform;
-			// we are testing on Unix only
-			if ((platform != 4) && (platform != 128)) Assert.Ignore ("Not running on Unix.");
-			SerialPort sp = new SerialPort ();
-			sp.BaudRate = 1234;
-			var exceptionCatched = false;
-			try {
-				sp.Open();
-			} catch(ArgumentOutOfRangeException) {
-				exceptionCatched = true;
-			}
-			Assert.IsTrue(exceptionCatched,
-				"Exception not thrown despite wrong baud rate");
-		}
+        [Category("NotWorking")]
+        [Test]
+        public void NonstandardBaudRate()
+        {
+            int platform = (int)Environment.OSVersion.Platform;
+            // we are testing on Unix only
+            if ((platform != 4) && (platform != 128))
+                Assert.Ignore("Not running on Unix.");
+            SerialPort sp = new SerialPort();
+            sp.BaudRate = 1234;
+            var exceptionCatched = false;
+            try
+            {
+                sp.Open();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                exceptionCatched = true;
+            }
+            Assert.IsTrue(exceptionCatched, "Exception not thrown despite wrong baud rate");
+        }
 
-		/// <summary>
-		/// This test is related to bug #635971
-		/// </summary>
-		[Test]
-		public void ZeroTimeout ()
-		{
-			var sp = new SerialPort ();
-			var exceptionThrown = false;
-			try {
-				sp.ReadTimeout = 0;
-			} catch(ArgumentOutOfRangeException) {
-				exceptionThrown = true;
-			}
-			Assert.IsFalse(exceptionThrown,
-				"Exception thrown despite proper timeout (0)");
-		}
-
-	}
+        /// <summary>
+        /// This test is related to bug #635971
+        /// </summary>
+        [Test]
+        public void ZeroTimeout()
+        {
+            var sp = new SerialPort();
+            var exceptionThrown = false;
+            try
+            {
+                sp.ReadTimeout = 0;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                exceptionThrown = true;
+            }
+            Assert.IsFalse(exceptionThrown, "Exception thrown despite proper timeout (0)");
+        }
+    }
 }
-

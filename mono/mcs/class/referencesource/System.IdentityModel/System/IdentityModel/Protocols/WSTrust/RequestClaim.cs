@@ -9,7 +9,7 @@ namespace System.IdentityModel.Protocols.WSTrust
 {
     /// <summary>
     /// This class is used to represent the Request Claims collection inside RequestSecurityToken.
-    /// Indicate whether the claim is optional or not. 
+    /// Indicate whether the claim is optional or not.
     /// </summary>
     public class RequestClaim
     {
@@ -18,27 +18,23 @@ namespace System.IdentityModel.Protocols.WSTrust
         string _value;
 
         /// <summary>
-        /// Instantiates a required RequestClaim instance with ClaimType Uri. 
+        /// Instantiates a required RequestClaim instance with ClaimType Uri.
         /// </summary>
         /// <param name="claimType">ClaimType Uri attribute.</param>
         public RequestClaim(string claimType)
-            : this(claimType, false)
-        {
-        }
+            : this(claimType, false) { }
 
         /// <summary>
-        /// Instantiates a RequestClaim instance with ClaimType Uri and inidicates whether it is 
+        /// Instantiates a RequestClaim instance with ClaimType Uri and inidicates whether it is
         /// optional.
         /// </summary>
         /// <param name="claimType">The ClaimType Uri attribute.</param>
         /// <param name="isOptional">The ClaimType Optional attribute.</param>
         public RequestClaim(string claimType, bool isOptional)
-            : this(claimType, isOptional, null)
-        {
-        }
+            : this(claimType, isOptional, null) { }
 
         /// <summary>
-        /// Instantiates a RequestClaim instance with ClaimType Uri, the flag to inidicate whether it is 
+        /// Instantiates a RequestClaim instance with ClaimType Uri, the flag to inidicate whether it is
         /// optional and the value of the request.
         /// </summary>
         /// <param name="claimType">The ClaimType Uri attribute.</param>
@@ -48,7 +44,9 @@ namespace System.IdentityModel.Protocols.WSTrust
         {
             if (string.IsNullOrEmpty(claimType))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.ID0006), "claimType"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.ID0006), "claimType")
+                );
             }
 
             _claimType = claimType;
@@ -61,10 +59,7 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public string ClaimType
         {
-            get
-            {
-                return _claimType;
-            }
+            get { return _claimType; }
         }
 
         /// <summary>
@@ -72,14 +67,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public bool IsOptional
         {
-            get
-            {
-                return _isOptional;
-            }
-            set
-            {
-                _isOptional = value;
-            }
+            get { return _isOptional; }
+            set { _isOptional = value; }
         }
 
         /// <summary>
@@ -87,14 +76,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public string Value
         {
-            get
-            {
-                return _value;
-            }
-            set
-            {
-                _value = value;
-            }
+            get { return _value; }
+            set { _value = value; }
         }
     }
 }

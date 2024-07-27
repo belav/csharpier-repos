@@ -38,7 +38,9 @@ internal class DeveloperExceptionPageMiddlewareImpl
     private readonly DiagnosticsMetrics _metrics;
     private readonly ExceptionDetailsProvider _exceptionDetailsProvider;
     private readonly Func<ErrorContext, Task> _exceptionHandler;
-    private static readonly MediaTypeHeaderValue _textHtmlMediaType = new MediaTypeHeaderValue("text/html");
+    private static readonly MediaTypeHeaderValue _textHtmlMediaType = new MediaTypeHeaderValue(
+        "text/html"
+    );
     private readonly ExtensionsExceptionJsonContext _serializationContext;
     private readonly IProblemDetailsService? _problemDetailsService;
 
@@ -51,7 +53,8 @@ internal class DeveloperExceptionPageMiddlewareImpl
         IEnumerable<IDeveloperPageExceptionFilter> filters,
         IMeterFactory meterFactory,
         IOptions<JsonOptions>? jsonOptions = null,
-        IProblemDetailsService? problemDetailsService = null)
+        IProblemDetailsService? problemDetailsService = null
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(options);
@@ -63,22 +66,31 @@ internal class DeveloperExceptionPageMiddlewareImpl
         _fileProvider = _options.FileProvider ?? hostingEnvironment.ContentRootFileProvider;
         _diagnosticSource = diagnosticSource;
         _metrics = new DiagnosticsMetrics(meterFactory);
-        _exceptionDetailsProvider = new ExceptionDetailsProvider(_fileProvider, _logger, _options.SourceCodeLineCount);
+        _exceptionDetailsProvider = new ExceptionDetailsProvider(
+            _fileProvider,
+            _logger,
+            _options.SourceCodeLineCount
+        );
         _exceptionHandler = DisplayException;
         _serializationContext = CreateSerializationContext(jsonOptions?.Value);
         _problemDetailsService = problemDetailsService;
         foreach (var filter in filters.Reverse())
         {
             var nextFilter = _exceptionHandler;
-            _exceptionHandler = errorContext => filter.HandleExceptionAsync(errorContext, nextFilter);
+            _exceptionHandler = errorContext =>
+                filter.HandleExceptionAsync(errorContext, nextFilter);
         }
     }
 
-    private static ExtensionsExceptionJsonContext CreateSerializationContext(JsonOptions? jsonOptions)
+    private static ExtensionsExceptionJsonContext CreateSerializationContext(
+        JsonOptions? jsonOptions
+    )
     {
         // Create context from configured options to get settings such as PropertyNamePolicy and DictionaryKeyPolicy.
         jsonOptions ??= new JsonOptions();
-        return new ExtensionsExceptionJsonContext(new JsonSerializerOptions(jsonOptions.SerializerOptions));
+        return new ExtensionsExceptionJsonContext(
+            new JsonSerializerOptions(jsonOptions.SerializerOptions)
+        );
     }
 
     private static void SetExceptionHandlerFeatures(ErrorContext errorContext)
@@ -90,7 +102,7 @@ internal class DeveloperExceptionPageMiddlewareImpl
             Error = errorContext.Exception,
             Path = httpContext.Request.Path.ToString(),
             Endpoint = httpContext.GetEndpoint(),
-            RouteValues = httpContext.Features.Get<IRouteValuesFeature>()?.RouteValues
+            RouteValues = httpContext.Features.Get<IRouteValuesFeature>()?.RouteValues,
         };
 
         httpContext.Features.Set<IExceptionHandlerFeature>(exceptionHandlerFeature);
@@ -112,7 +124,10 @@ internal class DeveloperExceptionPageMiddlewareImpl
         {
             var exceptionName = ex.GetType().FullName!;
 
-            if ((ex is OperationCanceledException || ex is IOException) && context.RequestAborted.IsCancellationRequested)
+            if (
+                (ex is OperationCanceledException || ex is IOException)
+                && context.RequestAborted.IsCancellationRequested
+            )
             {
                 _logger.RequestAbortedException();
                 _metrics.RequestException(exceptionName, ExceptionResult.Aborted, handler: null);
@@ -153,7 +168,11 @@ internal class DeveloperExceptionPageMiddlewareImpl
                 const string eventName = "Microsoft.AspNetCore.Diagnostics.UnhandledException";
                 if (_diagnosticSource.IsEnabled(eventName))
                 {
-                    WriteDiagnosticEvent(_diagnosticSource, eventName, new { httpContext = context, exception = ex });
+                    WriteDiagnosticEvent(
+                        _diagnosticSource,
+                        eventName,
+                        new { httpContext = context, exception = ex }
+                    );
                 }
 
                 _metrics.RequestException(exceptionName, ExceptionResult.Unhandled, handler: null);
@@ -169,10 +188,15 @@ internal class DeveloperExceptionPageMiddlewareImpl
             throw;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026",
-            Justification = "The values being passed into Write have the commonly used properties being preserved with DynamicDependency.")]
-        static void WriteDiagnosticEvent<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TValue>(DiagnosticSource diagnosticSource, string name, TValue value)
-            => diagnosticSource.Write(name, value);
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026",
+            Justification = "The values being passed into Write have the commonly used properties being preserved with DynamicDependency."
+        )]
+        static void WriteDiagnosticEvent<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TValue
+        >(DiagnosticSource diagnosticSource, string name, TValue value) =>
+            diagnosticSource.Write(name, value);
     }
 
     // Assumes the response headers have not been sent.  If they have, still attempt to write to the body.
@@ -205,12 +229,17 @@ internal class DeveloperExceptionPageMiddlewareImpl
             SetExceptionHandlerFeatures(errorContext);
         }
 
-        if (_problemDetailsService == null || !await _problemDetailsService.TryWriteAsync(new()
-            {
-                HttpContext = httpContext,
-                ProblemDetails = CreateProblemDetails(errorContext, httpContext), 
-                Exception = errorContext.Exception 
-            }))
+        if (
+            _problemDetailsService == null
+            || !await _problemDetailsService.TryWriteAsync(
+                new()
+                {
+                    HttpContext = httpContext,
+                    ProblemDetails = CreateProblemDetails(errorContext, httpContext),
+                    Exception = errorContext.Exception,
+                }
+            )
+        )
         {
             httpContext.Response.ContentType = "text/plain; charset=utf-8";
 
@@ -234,26 +263,29 @@ internal class DeveloperExceptionPageMiddlewareImpl
         {
             Title = TypeNameHelper.GetTypeDisplayName(errorContext.Exception.GetType()),
             Detail = errorContext.Exception.Message,
-            Status = httpContext.Response.StatusCode
+            Status = httpContext.Response.StatusCode,
         };
 
         // Problem details source gen serialization doesn't know about IHeaderDictionary or RouteValueDictionary.
         // Serialize payload to a JsonElement here. Problem details serialization can write JsonElement in extensions dictionary.
-        problemDetails.Extensions["exception"] = JsonSerializer.SerializeToElement(new ExceptionExtensionData
-        (
-            details: errorContext.Exception.ToString(),
-            headers: httpContext.Request.Headers,
-            path: httpContext.Request.Path.ToString(),
-            endpoint: httpContext.GetEndpoint()?.ToString(),
-            routeValues: httpContext.Features.Get<IRouteValuesFeature>()?.RouteValues
-        ), _serializationContext.ExceptionExtensionData);
+        problemDetails.Extensions["exception"] = JsonSerializer.SerializeToElement(
+            new ExceptionExtensionData(
+                details: errorContext.Exception.ToString(),
+                headers: httpContext.Request.Headers,
+                path: httpContext.Request.Path.ToString(),
+                endpoint: httpContext.GetEndpoint()?.ToString(),
+                routeValues: httpContext.Features.Get<IRouteValuesFeature>()?.RouteValues
+            ),
+            _serializationContext.ExceptionExtensionData
+        );
 
         return problemDetails;
     }
 
     private Task DisplayCompilationException(
         HttpContext context,
-        ICompilationException compilationException)
+        ICompilationException compilationException
+    )
     {
         var model = new CompilationErrorPageModel(_options);
 
@@ -272,7 +304,10 @@ internal class DeveloperExceptionPageMiddlewareImpl
             }
 
             var stackFrames = new List<StackFrameSourceCodeInfo>();
-            var exceptionDetails = new ExceptionDetails(compilationFailure.FailureSummary!, stackFrames);
+            var exceptionDetails = new ExceptionDetails(
+                compilationFailure.FailureSummary!,
+                stackFrames
+            );
             model.ErrorDetails.Add(exceptionDetails);
             model.CompiledContent.Add(compilationFailure.CompiledContent);
 
@@ -281,9 +316,10 @@ internal class DeveloperExceptionPageMiddlewareImpl
                 continue;
             }
 
-            var sourceLines = compilationFailure
-                    .SourceFileContent?
-                    .Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            var sourceLines = compilationFailure.SourceFileContent?.Split(
+                new[] { Environment.NewLine },
+                StringSplitOptions.None
+            );
 
             foreach (var item in compilationFailure.Messages)
             {
@@ -296,12 +332,17 @@ internal class DeveloperExceptionPageMiddlewareImpl
                 {
                     File = compilationFailure.SourceFilePath,
                     Line = item.StartLine,
-                    Function = string.Empty
+                    Function = string.Empty,
                 };
 
                 if (sourceLines != null)
                 {
-                    _exceptionDetailsProvider.ReadFrameContent(frame, sourceLines, item.StartLine, item.EndLine);
+                    _exceptionDetailsProvider.ReadFrameContent(
+                        frame,
+                        sourceLines,
+                        item.StartLine,
+                        item.EndLine
+                    );
                 }
 
                 frame.ErrorDetails = item.Message;
@@ -341,7 +382,9 @@ internal class DeveloperExceptionPageMiddlewareImpl
 
         if (ex is BadHttpRequestException badHttpRequestException)
         {
-            var badRequestReasonPhrase = WebUtilities.ReasonPhrases.GetReasonPhrase(badHttpRequestException.StatusCode);
+            var badRequestReasonPhrase = WebUtilities.ReasonPhrases.GetReasonPhrase(
+                badHttpRequestException.StatusCode
+            );
 
             if (!string.IsNullOrEmpty(badRequestReasonPhrase))
             {
@@ -368,7 +411,13 @@ internal class DeveloperExceptionPageMiddlewareImpl
 
 internal sealed class ExceptionExtensionData
 {
-    public ExceptionExtensionData(string details, IHeaderDictionary headers, string path, string? endpoint, RouteValueDictionary? routeValues)
+    public ExceptionExtensionData(
+        string details,
+        IHeaderDictionary headers,
+        string path,
+        string? endpoint,
+        RouteValueDictionary? routeValues
+    )
     {
         Details = details;
         Headers = headers;
@@ -385,6 +434,4 @@ internal sealed class ExceptionExtensionData
 }
 
 [JsonSerializable(typeof(ExceptionExtensionData))]
-internal sealed partial class ExtensionsExceptionJsonContext : JsonSerializerContext
-{
-}
+internal sealed partial class ExtensionsExceptionJsonContext : JsonSerializerContext { }

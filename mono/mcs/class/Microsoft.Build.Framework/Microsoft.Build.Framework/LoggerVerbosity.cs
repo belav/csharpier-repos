@@ -4,7 +4,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -31,26 +31,29 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Build.Framework
 {
-	[ComVisible (true)]
-	public enum LoggerVerbosity
-	{
-		// Quiet verbosity, which displays a build summary.
-		Quiet,
-		// Minimal verbosity, which displays errors, warnings,
-		// messages with MessageImportance values of High, and a build
-		// summary.
-		Minimal,
-		// Normal verbosity, which displays error, warning, messages
-		// with MessageImportance values of High, some status events,
-		// and a build summary.
-		Normal,
-		// Minimal verbosity, which displays error, warnings, messages
-		// with MessageImportance values of High or Normal, all status
-		// events, and a build summary.
-		Detailed,
-		// Diagnostic verbosity, which displays all errors, warnings,
-		// messages, status events, and a build summary.
-		Diagnostic
-	}
-}
+    [ComVisible(true)]
+    public enum LoggerVerbosity
+    {
+        // Quiet verbosity, which displays a build summary.
+        Quiet,
 
+        // Minimal verbosity, which displays errors, warnings,
+        // messages with MessageImportance values of High, and a build
+        // summary.
+        Minimal,
+
+        // Normal verbosity, which displays error, warning, messages
+        // with MessageImportance values of High, some status events,
+        // and a build summary.
+        Normal,
+
+        // Minimal verbosity, which displays error, warnings, messages
+        // with MessageImportance values of High or Normal, all status
+        // events, and a build summary.
+        Detailed,
+
+        // Diagnostic verbosity, which displays all errors, warnings,
+        // messages, status events, and a build summary.
+        Diagnostic,
+    }
+}

@@ -9,6 +9,6 @@ namespace System.ServiceModel.Web
         Bare,
         Wrapped,
         WrappedRequest,
-        WrappedResponse
+        WrappedResponse,
     }
 }

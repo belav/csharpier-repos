@@ -11,7 +11,11 @@ namespace System.IO.Ports.Tests
 {
     public class ctor_str_int_parity_int_stopbits : PortsTest
     {
-        private enum ThrowAt { Set, Open };
+        private enum ThrowAt
+        {
+            Set,
+            Open,
+        };
 
         [Fact]
         public void COM1_9600_Odd_5_1()
@@ -25,7 +29,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits);
         }
 
-
         [Fact]
         public void COM2_14400_None_5_1()
         {
@@ -37,7 +40,6 @@ namespace System.IO.Ports.Tests
 
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits);
         }
-
 
         [Fact]
         public void COM3_28800_None_5_15()
@@ -51,7 +53,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits);
         }
 
-
         [Fact]
         public void COM4_57600_Even_5_15()
         {
@@ -63,7 +64,6 @@ namespace System.IO.Ports.Tests
 
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits);
         }
-
 
         [Fact]
         public void COM256_115200_Mark_5_2()
@@ -77,7 +77,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits);
         }
 
-
         [Fact]
         public void COM1_9600_None_5_2()
         {
@@ -89,7 +88,6 @@ namespace System.IO.Ports.Tests
 
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits);
         }
-
 
         [Fact]
         public void COM2_14400_Even_6_1()
@@ -103,7 +101,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits);
         }
 
-
         [Fact]
         public void COM3_28800_Odd_7_2()
         {
@@ -115,7 +112,6 @@ namespace System.IO.Ports.Tests
 
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits);
         }
-
 
         [Fact]
         public void COM1_9600_Odd_8_1()
@@ -129,7 +125,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits);
         }
 
-
         [Fact]
         public void COM2_14400_None_8_1()
         {
@@ -141,7 +136,6 @@ namespace System.IO.Ports.Tests
 
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits);
         }
-
 
         [Fact]
         public void COM256_115200_Mark_8_2()
@@ -155,7 +149,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits);
         }
 
-
         [Fact]
         public void COM1_9600_None_8_2()
         {
@@ -168,7 +161,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits);
         }
 
-
         //[] Error checking for PortName
         [Fact]
         public void Empty_9600_None_5_15()
@@ -179,9 +171,16 @@ namespace System.IO.Ports.Tests
             int dataBits = 5;
             int stopBits = (int)StopBits.OnePointFive;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentException),
+                ThrowAt.Set
+            );
         }
-
 
         [Fact]
         public void Null_14400_Even_6_1()
@@ -192,7 +191,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 6;
             int stopBits = (int)StopBits.One;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentNullException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentNullException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -224,7 +231,15 @@ namespace System.IO.Ports.Tests
             testFile.Close();
             try
             {
-                VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentException), ThrowAt.Open);
+                VerifyCtor(
+                    portName,
+                    baudRate,
+                    parity,
+                    dataBits,
+                    stopBits,
+                    typeof(ArgumentException),
+                    ThrowAt.Open
+                );
             }
             catch (Exception)
             {
@@ -245,7 +260,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 5;
             int stopBits = (int)StopBits.OnePointFive;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentException), ThrowAt.Open);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentException),
+                ThrowAt.Open
+            );
         }
 
         //[] Error checking for BaudRate
@@ -258,7 +281,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 5;
             int stopBits = (int)StopBits.OnePointFive;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -270,7 +301,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 6;
             int stopBits = (int)StopBits.One;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -282,7 +321,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 7;
             int stopBits = (int)StopBits.Two;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -294,7 +341,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 8;
             int stopBits = (int)StopBits.Two;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Open);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Open
+            );
         }
 
         //[] Error checking for Parity
@@ -307,7 +362,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 5;
             int stopBits = (int)StopBits.OnePointFive;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -319,7 +382,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 6;
             int stopBits = (int)StopBits.One;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -331,7 +402,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 7;
             int stopBits = (int)StopBits.Two;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -343,7 +422,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 8;
             int stopBits = (int)StopBits.Two;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         //[] Error checking for DataBits
@@ -356,7 +443,15 @@ namespace System.IO.Ports.Tests
             int dataBits = int.MinValue;
             int stopBits = (int)StopBits.OnePointFive;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -368,7 +463,15 @@ namespace System.IO.Ports.Tests
             int dataBits = -1;
             int stopBits = (int)StopBits.One;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -380,7 +483,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 4;
             int stopBits = (int)StopBits.Two;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -392,7 +503,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 9;
             int stopBits = (int)StopBits.Two;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -404,7 +523,15 @@ namespace System.IO.Ports.Tests
             int dataBits = int.MaxValue;
             int stopBits = (int)StopBits.One;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         //[] Error checking for StopBits
@@ -417,7 +544,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 5;
             int stopBits = int.MinValue;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -429,7 +564,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 6;
             int stopBits = -1;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -441,7 +584,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 7;
             int stopBits = 0;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -453,7 +604,15 @@ namespace System.IO.Ports.Tests
             int dataBits = 8;
             int stopBits = 4;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -465,22 +624,59 @@ namespace System.IO.Ports.Tests
             int dataBits = 8;
             int stopBits = int.MaxValue;
 
-            VerifyCtor(portName, baudRate, parity, dataBits, stopBits, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
-        private void VerifyCtor(string portName, int baudRate, int parity, int dataBits, int stopBits)
+        private void VerifyCtor(
+            string portName,
+            int baudRate,
+            int parity,
+            int dataBits,
+            int stopBits
+        )
         {
             VerifyCtor(portName, baudRate, parity, dataBits, stopBits, null, ThrowAt.Set);
         }
 
-        private void VerifyCtor(string portName, int baudRate, int parity, int dataBits, int stopBits, Type expectedException, ThrowAt throwAt)
+        private void VerifyCtor(
+            string portName,
+            int baudRate,
+            int parity,
+            int dataBits,
+            int stopBits,
+            Type expectedException,
+            ThrowAt throwAt
+        )
         {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
-            Debug.WriteLine("Verifying properties where PortName={0},BaudRate={1},Parity={2},DatBits={3},StopBits={4}", portName, baudRate, parity, dataBits, stopBits);
+            Debug.WriteLine(
+                "Verifying properties where PortName={0},BaudRate={1},Parity={2},DatBits={3},StopBits={4}",
+                portName,
+                baudRate,
+                parity,
+                dataBits,
+                stopBits
+            );
             try
             {
-                using (SerialPort com = new SerialPort(portName, baudRate, (Parity)parity, dataBits, (StopBits)stopBits))
+                using (
+                    SerialPort com = new SerialPort(
+                        portName,
+                        baudRate,
+                        (Parity)parity,
+                        dataBits,
+                        (StopBits)stopBits
+                    )
+                )
                 {
                     if (null != expectedException && throwAt == ThrowAt.Set)
                     {
@@ -502,15 +698,26 @@ namespace System.IO.Ports.Tests
             {
                 if (null == expectedException)
                 {
-                    Fail("Err_07081hadnh Did not expect exception to be thrown and the following was thrown: \n{0}", e);
+                    Fail(
+                        "Err_07081hadnh Did not expect exception to be thrown and the following was thrown: \n{0}",
+                        e
+                    );
                 }
                 else if (throwAt == ThrowAt.Open)
                 {
-                    Fail("Err_88916adfa Expected {0} to be thrown at Open and the following was thrown at Set: \n{1}", expectedException, e);
+                    Fail(
+                        "Err_88916adfa Expected {0} to be thrown at Open and the following was thrown at Set: \n{1}",
+                        expectedException,
+                        e
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("Err_90282ahwhp Expected {0} to be thrown and the following was thrown: \n{1}", expectedException, e);
+                    Fail(
+                        "Err_90282ahwhp Expected {0} to be thrown and the following was thrown: \n{1}",
+                        expectedException,
+                        e
+                    );
                 }
             }
         }

@@ -9,39 +9,37 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.Query.InternalTrees;
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
-// to prevent from simple mistakes during development (e.g. method argument validation 
-// in cases where it was you who created the variables or the variables had already been validated or 
-// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default 
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are 
-// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in 
-// the shipped product. 
-// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions 
+// to prevent from simple mistakes during development (e.g. method argument validation
+// in cases where it was you who created the variables or the variables had already been validated or
+// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
+// the shipped product.
+// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
 // about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct 
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
 
 using System.Globalization;
-
-using System.Data.Common;
 using md = System.Data.Metadata.Edm;
-using System.Data.Query.InternalTrees;
 
 namespace System.Data.Query.PlanCompiler
 {
-
     /// <summary>
-    /// The PropertyPushdownHelper module is a submodule of the StructuredTypeEliminator 
-    /// module. It serves as a useful optimization sidekick for NominalTypeEliminator which 
+    /// The PropertyPushdownHelper module is a submodule of the StructuredTypeEliminator
+    /// module. It serves as a useful optimization sidekick for NominalTypeEliminator which
     /// is the real guts of eliminating structured types.
-    /// 
+    ///
     /// The goal of this module is to identify a list of desired properties for each node
     /// (and Var) in the tree that is of a structured type. This list of desired properties
-    /// is identified in a top-down push fashion. 
+    /// is identified in a top-down push fashion.
     ///
     /// While it is desirable to get as accurate information as possible, it is unnecessary
     /// for this module to be super-efficient (i.e.) it is ok for it to get a superset
@@ -52,18 +50,17 @@ namespace System.Data.Query.PlanCompiler
     /// This module is implemented as a visitor - it leverages information about
     /// types in the query - made possible by the TypeFlattener module - and walks
     /// down the tree pushing properties to each child of a node. It builds two maps:
-    /// 
-    ///     (*) a node-property map 
+    ///
+    ///     (*) a node-property map
     ///     (*) a var-property map
-    /// 
-    /// Each of these keeps trackof the properties needed from each node/var. 
-    /// 
-    /// These maps are returned to the caller and will be used by the NominalTypeEliminator 
+    ///
+    /// Each of these keeps trackof the properties needed from each node/var.
+    ///
+    /// These maps are returned to the caller and will be used by the NominalTypeEliminator
     /// module to eliminate all structured types.
     /// </summary>
     internal class PropertyPushdownHelper : BasicOpVisitor
     {
-
         #region private state
 
         private readonly Dictionary<Node, PropertyRefList> m_nodePropertyRefMap;
@@ -94,7 +91,12 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="structuredTypeInfo">Type info for structured types appearing in query.</param>
         /// <param name="varPropertyRefs">List of desired properties from each Var</param>
         /// <param name="nodePropertyRefs">List of desired properties from each node</param>
-        internal static void Process(Command itree, StructuredTypeInfo structuredTypeInfo, out Dictionary<Var, PropertyRefList> varPropertyRefs, out Dictionary<Node, PropertyRefList> nodePropertyRefs)
+        internal static void Process(
+            Command itree,
+            StructuredTypeInfo structuredTypeInfo,
+            out Dictionary<Var, PropertyRefList> varPropertyRefs,
+            out Dictionary<Node, PropertyRefList> nodePropertyRefs
+        )
         {
             PropertyPushdownHelper pph = new PropertyPushdownHelper(structuredTypeInfo);
             pph.Process(itree.Root);
@@ -121,7 +123,7 @@ namespace System.Data.Query.PlanCompiler
         #region state maintenance
 
         /// <summary>
-        /// Get the list of propertyrefs for a node. If none exists, create an 
+        /// Get the list of propertyrefs for a node. If none exists, create an
         /// empty structure and store it in the map
         /// </summary>
         /// <param name="node">Specific node</param>
@@ -214,14 +216,14 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Default visitor for an Op.
-        /// 
-        /// Simply walks through all children looking for Ops of structured 
+        ///
+        /// Simply walks through all children looking for Ops of structured
         /// types, and asks for all their properties.
         /// </summary>
         /// <remarks>
         /// Several of the ScalarOps take the default handling, to simply ask
         /// for all the children's properties:
-        /// 
+        ///
         ///     AggegateOp
         ///     ArithmeticOp
         ///     CastOp
@@ -237,11 +239,11 @@ namespace System.Data.Query.PlanCompiler
         ///     NewMultisetOp
         ///     NewRecordOp
         ///     RefOp
-        /// 
-        /// They do not exist here to eliminate noise.  
-        /// 
-        /// Note that the NewRecordOp and the NewInstanceOp could be optimized to only 
-        /// push down the appropriate references, but it isn't clear to Murali that the 
+        ///
+        /// They do not exist here to eliminate noise.
+        ///
+        /// Note that the NewRecordOp and the NewInstanceOp could be optimized to only
+        /// push down the appropriate references, but it isn't clear to Murali that the
         /// complexity is worth it.
         /// </remarks>
         /// <param name="n"></param>
@@ -263,7 +265,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// SoftCastOp:
-        /// If the input is 
+        /// If the input is
         ///    Ref - ask for all properties
         ///    Entity, ComplexType - ask for the same properties I've been asked for
         ///    Record - ask for all properties (Note: This should be more optimized in the future
@@ -286,8 +288,8 @@ namespace System.Data.Query.PlanCompiler
             }
             else if (md.TypeSemantics.IsRowType(op.Type))
             {
-                // 
-                // Note: We should do a better job here (by translating  
+                //
+                // Note: We should do a better job here (by translating
                 // our PropertyRefs to the equivalent property refs on the child
                 //
                 childProps = PropertyRefList.All;
@@ -302,7 +304,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// CaseOp handling
-        /// 
+        ///
         /// Pushes its desired properties to each of the WHEN/ELSE clauses
         /// </summary>
         /// <param name="op"></param>
@@ -312,7 +314,7 @@ namespace System.Data.Query.PlanCompiler
             // First find the properties that my parent expects from me
             PropertyRefList pdProps = GetPropertyRefList(n);
 
-            // push down the same properties to my then/else clauses. 
+            // push down the same properties to my then/else clauses.
             // the "when" clauses are irrelevant
             for (int i = 1; i < n.Children.Count - 1; i += 2)
             {
@@ -326,7 +328,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// CollectOp handling. 
+        /// CollectOp handling.
         /// </summary>
         /// <param name="op"></param>
         /// <param name="n"></param>
@@ -353,12 +355,20 @@ namespace System.Data.Query.PlanCompiler
             {
                 VisitChildren(n);
             }
-            else if (md.TypeSemantics.IsRowType(childOpType) || md.TypeSemantics.IsReferenceType(childOpType))
+            else if (
+                md.TypeSemantics.IsRowType(childOpType)
+                || md.TypeSemantics.IsReferenceType(childOpType)
+            )
                 VisitDefault(n);
             else
             {
-                PlanCompiler.Assert(md.TypeSemantics.IsEntityType(childOpType), "unexpected childOpType?");
-                PropertyRefList desiredProperties = GetIdentityProperties(TypeHelpers.GetEdmType<md.EntityType>(childOpType));
+                PlanCompiler.Assert(
+                    md.TypeSemantics.IsEntityType(childOpType),
+                    "unexpected childOpType?"
+                );
+                PropertyRefList desiredProperties = GetIdentityProperties(
+                    TypeHelpers.GetEdmType<md.EntityType>(childOpType)
+                );
 
                 // Now push these set of properties to each child
                 foreach (Node chi in n.Children)
@@ -381,8 +391,8 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// GetEntityRefOp handling 
-        /// 
+        /// GetEntityRefOp handling
+        ///
         /// Ask for the "identity" properties from the input entity, and push that
         /// down to my child
         /// </summary>
@@ -404,7 +414,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// IsOfOp handling
-        /// 
+        ///
         /// Simply requests the "typeid" property from
         /// the input. No other property is required
         /// </summary>
@@ -412,7 +422,6 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="n">Node to visit</param>
         public override void Visit(IsOfOp op, Node n)
         {
-
             // The only property I need from my child is the typeid property;
             PropertyRefList childProps = new PropertyRefList();
             childProps.Add(TypeIdPropertyRef.Instance);
@@ -422,7 +431,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Common handler for RelPropertyOp and PropertyOp. 
+        /// Common handler for RelPropertyOp and PropertyOp.
         /// Simply pushes down the desired set of properties to the child
         /// </summary>
         /// <param name="op">the *propertyOp</param>
@@ -437,18 +446,18 @@ namespace System.Data.Query.PlanCompiler
             }
             else
             {
-                // Get the list of properties my parent expects from me. 
+                // Get the list of properties my parent expects from me.
                 PropertyRefList pdProps = GetPropertyRefList(n);
 
-                // Ask my child (which is really my container type) for each of these 
+                // Ask my child (which is really my container type) for each of these
                 // properties
 
-                // If I've been asked for all my properties, then get the 
+                // If I've been asked for all my properties, then get the
                 // corresponding flat list of properties from my children.
                 // For now, however, simply ask for all properties in this case
                 // What we really need to do is to get the "flattened" list of
                 // properties from the input, and prepend each of these with
-                // our property name. We don't have that info available, so 
+                // our property name. We don't have that info available, so
                 // I'm taking the easier route.
                 if (pdProps.AllProperties)
                 {
@@ -482,8 +491,8 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// PropertyOp handling
-        /// 
-        /// Pushes down the requested properties along with the current 
+        ///
+        /// Pushes down the requested properties along with the current
         /// property to the child
         /// </summary>
         /// <param name="op"></param>
@@ -495,7 +504,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// TreatOp handling
-        /// 
+        ///
         /// Simply passes down "my" desired properties, and additionally
         /// asks for the TypeID property
         /// </summary>
@@ -516,7 +525,7 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// VarRefOp handling
-        /// 
+        ///
         /// Simply passes along the current "desired" properties
         /// to the corresponding Var
         /// </summary>
@@ -526,7 +535,7 @@ namespace System.Data.Query.PlanCompiler
         {
             if (TypeUtils.IsStructuredType(op.Var.Type))
             {
-                // Get the properties that my parent expects from me. 
+                // Get the properties that my parent expects from me.
                 PropertyRefList myProps = GetPropertyRefList(n);
                 // Add this onto the list of properties expected from the var itself
                 AddPropertyRefs(op.Var, myProps);
@@ -539,8 +548,8 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// VarDefOp handling
-        /// 
-        /// Pushes the "desired" properties to the 
+        ///
+        /// Pushes the "desired" properties to the
         /// defining expression
         /// </summary>
         /// <param name="op"></param>
@@ -575,9 +584,9 @@ namespace System.Data.Query.PlanCompiler
         /// ApplyOp handling
         /// CrossApplyOp handling
         /// OuterApplyOp handling
-        /// 
+        ///
         /// Handling for all ApplyOps: Process the right child, and then
-        /// the left child - since the right child may have references to the 
+        /// the left child - since the right child may have references to the
         /// left
         /// </summary>
         /// <param name="op">apply op</param>
@@ -588,10 +597,9 @@ namespace System.Data.Query.PlanCompiler
             VisitNode(n.Child0); // the left input
         }
 
-
         /// <summary>
         /// DistinctOp handling
-        /// 
+        ///
         /// Require all properties out of all structured vars
         /// </summary>
         /// <param name="op"></param>
@@ -608,8 +616,8 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// FilterOp handling
-        /// 
-        /// Process the predicate child, and then the input child - since the 
+        ///
+        /// Process the predicate child, and then the input child - since the
         /// predicate child will probably have references to the input.
         /// </summary>
         /// <param name="op"></param>
@@ -621,7 +629,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// GroupByOp handling        
+        /// GroupByOp handling
         /// </summary>
         /// <param name="op"></param>
         /// <param name="n"></param>
@@ -636,11 +644,10 @@ namespace System.Data.Query.PlanCompiler
                 }
             }
 
-            // Now visit the aggregate definitions, the key definitions, and 
+            // Now visit the aggregate definitions, the key definitions, and
             // the relop input in that order
             VisitChildrenReverse(n);
         }
-
 
         /// <summary>
         /// JoinOp handling
@@ -649,10 +656,10 @@ namespace System.Data.Query.PlanCompiler
         /// LeftOuterJoinOp handling
         /// FullOuterJoinOp handling
         ///
-        /// Handler for all JoinOps. For all joins except cross joins, process 
+        /// Handler for all JoinOps. For all joins except cross joins, process
         /// the predicate first, and then the inputs - the inputs can be processed
         /// in any order.
-        /// 
+        ///
         /// For cross joins, simply process all the (relop) inputs
         /// </summary>
         /// <param name="op">join op</param>
@@ -680,7 +687,6 @@ namespace System.Data.Query.PlanCompiler
             VisitNode(n.Child0); // then visit the relop input
         }
 
-
         /// <summary>
         /// ScanTableOp handler
         /// </summary>
@@ -692,8 +698,8 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// ScanViewOp 
-        /// 
+        /// ScanViewOp
+        ///
         /// ask for all properties from the view definition
         /// that have currently been requested from the view itself
         /// </summary>
@@ -706,7 +712,10 @@ namespace System.Data.Query.PlanCompiler
             PropertyRefList columnProps = GetPropertyRefList(columnVar);
 
             Var inputVar = NominalTypeEliminator.GetSingletonVar(n.Child0);
-            PlanCompiler.Assert(inputVar != null, "cannot determine single Var from ScanViewOp's input");
+            PlanCompiler.Assert(
+                inputVar != null,
+                "cannot determine single Var from ScanViewOp's input"
+            );
 
             AddPropertyRefs(inputVar, columnProps.Clone());
 
@@ -718,8 +727,8 @@ namespace System.Data.Query.PlanCompiler
         /// UnionAllOp handling
         /// IntersectOp handling
         /// ExceptOp handling
-        /// 
-        /// Visitor for a SetOp. Pushes desired properties to the corresponding 
+        ///
+        /// Visitor for a SetOp. Pushes desired properties to the corresponding
         /// Vars of the input
         /// </summary>
         /// <param name="op">the setop</param>
@@ -727,39 +736,39 @@ namespace System.Data.Query.PlanCompiler
         protected override void VisitSetOp(SetOp op, Node n)
         {
             foreach (VarMap varMap in op.VarMap)
-                foreach (KeyValuePair<Var, Var> kv in varMap)
+            foreach (KeyValuePair<Var, Var> kv in varMap)
+            {
+                if (TypeUtils.IsStructuredType(kv.Key.Type))
                 {
-                    if (TypeUtils.IsStructuredType(kv.Key.Type))
+                    // Get the set of expected properties for the unionVar, and
+                    // push it down to the inputvars
+                    // For Intersect and ExceptOps, we need all properties
+                    // from the input
+                    // We call GetPropertyRefList() always to initialize
+                    // the map, even though we may not use it
+                    //
+                    PropertyRefList myProps = GetPropertyRefList(kv.Key);
+                    if (op.OpType == OpType.Intersect || op.OpType == OpType.Except)
                     {
-                        // Get the set of expected properties for the unionVar, and 
-                        // push it down to the inputvars
-                        // For Intersect and ExceptOps, we need all properties 
-                        // from the input
-                        // We call GetPropertyRefList() always to initialize
-                        // the map, even though we may not use it
-                        // 
-                        PropertyRefList myProps = GetPropertyRefList(kv.Key);
-                        if (op.OpType == OpType.Intersect || op.OpType == OpType.Except)
-                        {
-                            myProps = PropertyRefList.All;
-                            // We "want" all properties even on the output of the setop
-                            AddPropertyRefs(kv.Key, myProps);
-                        }
-                        else
-                        {
-                            myProps = myProps.Clone();
-                        }
-                        AddPropertyRefs(kv.Value, myProps);
+                        myProps = PropertyRefList.All;
+                        // We "want" all properties even on the output of the setop
+                        AddPropertyRefs(kv.Key, myProps);
                     }
+                    else
+                    {
+                        myProps = myProps.Clone();
+                    }
+                    AddPropertyRefs(kv.Value, myProps);
                 }
+            }
             VisitChildren(n);
         }
 
         /// <summary>
-        /// SortOp handling 
-        /// 
-        /// First, "request" that for any sort key that is a structured type, we 
-        /// need all its properties. Then process any local definitions, and 
+        /// SortOp handling
+        ///
+        /// First, "request" that for any sort key that is a structured type, we
+        /// need all its properties. Then process any local definitions, and
         /// finally the relop input
         /// </summary>
         /// <param name="op"></param>

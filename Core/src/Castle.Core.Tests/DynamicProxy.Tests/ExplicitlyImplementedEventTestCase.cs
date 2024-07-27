@@ -14,27 +14,26 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
+    using System;
+    using NUnit.Framework;
 
-	using NUnit.Framework;
+    [TestFixture]
+    public class ExplicitlyImplementedEventTestCase : BasePEVerifyTestCase
+    {
+        [Test]
+        public void Can_proxy_type_having_two_identically_named_events_with_different_signatures()
+        {
+            _ = generator.CreateInterfaceProxyWithoutTarget<IDerived>();
+        }
 
-	[TestFixture]
-	public class ExplicitlyImplementedEventTestCase : BasePEVerifyTestCase
-	{
-		[Test]
-		public void Can_proxy_type_having_two_identically_named_events_with_different_signatures()
-		{
-			_ = generator.CreateInterfaceProxyWithoutTarget<IDerived>();
-		}
+        public interface IBase
+        {
+            event Action Event;
+        }
 
-		public interface IBase
-		{
-			event Action Event;
-		}
-
-		public interface IDerived : IBase
-		{
-			new event Action<bool> Event;
-		}
-	}
+        public interface IDerived : IBase
+        {
+            new event Action<bool> Event;
+        }
+    }
 }

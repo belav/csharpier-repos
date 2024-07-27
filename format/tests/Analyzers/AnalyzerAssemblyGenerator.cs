@@ -9,7 +9,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -38,16 +37,34 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
             };
 
             // Resolve the targeting pack and the target framework used to compile the test assembly.
-            var netCurrentTargetingPackVersion = (string)AppContext.GetData("ReferenceAssemblies.NetCurrent.TargetingPackVersion")!;
-            var netCurrentTargetFramework = (string)AppContext.GetData("ReferenceAssemblies.NetCurrent.TargetFramework")!;
-            var nugetConfigPath = (string)AppContext.GetData("ReferenceAssemblies.NetCurrent.NuGetConfigPath")!;
-            ReferenceAssemblies netCurrentReferenceAssemblies = new(netCurrentTargetFramework,
-                new PackageIdentity("Microsoft.NETCore.App.Ref", netCurrentTargetingPackVersion),
-                Path.Combine("ref", netCurrentTargetFramework));
-            netCurrentReferenceAssemblies = netCurrentReferenceAssemblies.WithNuGetConfigFilePath(nugetConfigPath);
+            var netCurrentTargetingPackVersion = (string)
+                AppContext.GetData("ReferenceAssemblies.NetCurrent.TargetingPackVersion")!;
+            var netCurrentTargetFramework = (string)
+                AppContext.GetData("ReferenceAssemblies.NetCurrent.TargetFramework")!;
+            var nugetConfigPath = (string)
+                AppContext.GetData("ReferenceAssemblies.NetCurrent.NuGetConfigPath")!;
+            ReferenceAssemblies netCurrentReferenceAssemblies =
+                new(
+                    netCurrentTargetFramework,
+                    new PackageIdentity(
+                        "Microsoft.NETCore.App.Ref",
+                        netCurrentTargetingPackVersion
+                    ),
+                    Path.Combine("ref", netCurrentTargetFramework)
+                );
+            netCurrentReferenceAssemblies = netCurrentReferenceAssemblies.WithNuGetConfigFilePath(
+                nugetConfigPath
+            );
 
-            var netcoreMetadataReferences = await netCurrentReferenceAssemblies.ResolveAsync(LanguageNames.CSharp, CancellationToken.None);
-            references.AddRange(netcoreMetadataReferences.Where(reference => Path.GetFileName(reference.Display) != "System.Collections.Immutable.dll"));
+            var netcoreMetadataReferences = await netCurrentReferenceAssemblies.ResolveAsync(
+                LanguageNames.CSharp,
+                CancellationToken.None
+            );
+            references.AddRange(
+                netcoreMetadataReferences.Where(reference =>
+                    Path.GetFileName(reference.Display) != "System.Collections.Immutable.dll"
+                )
+            );
 
             s_references = references;
             return references;
@@ -55,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
 
         public static SyntaxTree GenerateCodeFix(string typeName, string diagnosticId)
         {
-            var codefix = $@"
+            var codefix =
+                $@"
 using System;
 using System.Collections.Immutable;
 using System.Composition;
@@ -86,7 +104,8 @@ public class {typeName} : CodeFixProvider
 
         public static SyntaxTree GenerateAnalyzerCode(string typeName, string diagnosticId)
         {
-            var analyzer = $@"
+            var analyzer =
+                $@"
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -110,16 +129,22 @@ public class {typeName} : DiagnosticAnalyzer
         {
             var assemblyName = Guid.NewGuid().ToString();
             var references = await GetReferencesAsync();
-            var compilation = CSharpCompilation.Create(assemblyName, trees, references,
-                options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            var compilation = CSharpCompilation.Create(
+                assemblyName,
+                trees,
+                references,
+                options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+            );
 
             using var ms = new MemoryStream();
             var result = compilation.Emit(ms);
             if (!result.Success)
             {
-                var failures = result.Diagnostics.Where(diagnostic =>
-                    diagnostic.IsWarningAsError ||
-                    diagnostic.Severity == DiagnosticSeverity.Error)
+                var failures = result
+                    .Diagnostics.Where(diagnostic =>
+                        diagnostic.IsWarningAsError
+                        || diagnostic.Severity == DiagnosticSeverity.Error
+                    )
                     .Select(diagnostic => $"{diagnostic.Id}: {diagnostic.GetMessage()}");
 
                 throw new Exception(string.Join(Environment.NewLine, failures));

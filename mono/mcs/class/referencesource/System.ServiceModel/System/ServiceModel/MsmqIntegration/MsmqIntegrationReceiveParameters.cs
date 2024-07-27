@@ -6,8 +6,7 @@ namespace System.ServiceModel.MsmqIntegration
     using System.Collections.Generic;
     using System.ServiceModel.Channels;
 
-    sealed class MsmqIntegrationReceiveParameters
-        : MsmqReceiveParameters
+    sealed class MsmqIntegrationReceiveParameters : MsmqReceiveParameters
     {
         MsmqMessageSerializationFormat serializationFormat;
         Type[] targetSerializationTypes;
@@ -21,7 +20,7 @@ namespace System.ServiceModel.MsmqIntegration
             if (null != bindingElement.TargetSerializationTypes)
             {
                 foreach (Type type in bindingElement.TargetSerializationTypes)
-                    if (! knownTypes.Contains(type))
+                    if (!knownTypes.Contains(type))
                         knownTypes.Add(type);
             }
             this.targetSerializationTypes = knownTypes.ToArray();

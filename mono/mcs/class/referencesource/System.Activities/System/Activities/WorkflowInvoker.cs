@@ -68,8 +68,9 @@ namespace System.Activities
             {
                 if (this.raiseInvokeCompletedCallback == null)
                 {
-                    this.raiseInvokeCompletedCallback =
-                        Fx.ThunkCallback(new SendOrPostCallback(this.RaiseInvokeCompleted));
+                    this.raiseInvokeCompletedCallback = Fx.ThunkCallback(
+                        new SendOrPostCallback(this.RaiseInvokeCompleted)
+                    );
                 }
                 return this.raiseInvokeCompletedCallback;
             }
@@ -77,10 +78,7 @@ namespace System.Activities
 
         object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
 
         [Fx.Tag.Throws.Timeout("A timeout occurred when invoking the workflow")]
@@ -96,48 +94,82 @@ namespace System.Activities
         }
 
         [Fx.Tag.InheritThrows(From = "Invoke")]
-        public static IDictionary<string, object> Invoke(Activity workflow, IDictionary<string, object> inputs)
+        public static IDictionary<string, object> Invoke(
+            Activity workflow,
+            IDictionary<string, object> inputs
+        )
         {
             return Invoke(workflow, inputs, ActivityDefaults.InvokeTimeout, null);
         }
 
         [Fx.Tag.InheritThrows(From = "Invoke")]
-        public static IDictionary<string, object> Invoke(Activity workflow, IDictionary<string, object> inputs, TimeSpan timeout)
+        public static IDictionary<string, object> Invoke(
+            Activity workflow,
+            IDictionary<string, object> inputs,
+            TimeSpan timeout
+        )
         {
             return Invoke(workflow, inputs, timeout, null);
         }
 
         [Fx.Tag.InheritThrows(From = "Invoke")]
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Generic needed for type inference")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Generic needed for type inference"
+        )]
         public static TResult Invoke<TResult>(Activity<TResult> workflow)
         {
             return Invoke(workflow, null);
         }
 
         [Fx.Tag.InheritThrows(From = "Invoke")]
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Generic needed for type inference")]
-        public static TResult Invoke<TResult>(Activity<TResult> workflow, IDictionary<string, object> inputs)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Generic needed for type inference"
+        )]
+        public static TResult Invoke<TResult>(
+            Activity<TResult> workflow,
+            IDictionary<string, object> inputs
+        )
         {
             return Invoke(workflow, inputs, ActivityDefaults.InvokeTimeout);
         }
 
         [Fx.Tag.InheritThrows(From = "Invoke")]
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Generic needed for type inference")]
-        public static TResult Invoke<TResult>(Activity<TResult> workflow, IDictionary<string, object> inputs, TimeSpan timeout)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Generic needed for type inference"
+        )]
+        public static TResult Invoke<TResult>(
+            Activity<TResult> workflow,
+            IDictionary<string, object> inputs,
+            TimeSpan timeout
+        )
         {
             IDictionary<string, object> dummyOutputs;
             return Invoke(workflow, inputs, out dummyOutputs, timeout);
         }
 
         [Fx.Tag.InheritThrows(From = "Invoke")]
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Generic needed for type inference")]
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters,
-            Justification = "Arch approved design. Requires the out argument for extra information provided")]
-        public static TResult Invoke<TResult>(Activity<TResult> workflow, IDictionary<string, object> inputs, out IDictionary<string, object> additionalOutputs, TimeSpan timeout)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Generic needed for type inference"
+        )]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "Arch approved design. Requires the out argument for extra information provided"
+        )]
+        public static TResult Invoke<TResult>(
+            Activity<TResult> workflow,
+            IDictionary<string, object> inputs,
+            out IDictionary<string, object> additionalOutputs,
+            TimeSpan timeout
+        )
         {
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
             if (inputs != null)
@@ -156,14 +188,22 @@ namespace System.Activities
             }
             else
             {
-                throw Fx.AssertAndThrow("Activity<TResult> should always have a output named \"Result\"");
+                throw Fx.AssertAndThrow(
+                    "Activity<TResult> should always have a output named \"Result\""
+                );
             }
         }
 
         [Fx.Tag.InheritThrows(From = "Invoke")]
         public IAsyncResult BeginInvoke(AsyncCallback callback, object state)
         {
-            return BeginInvoke(this.workflow, ActivityDefaults.InvokeTimeout, this.extensions, callback, state);
+            return BeginInvoke(
+                this.workflow,
+                ActivityDefaults.InvokeTimeout,
+                this.extensions,
+                callback,
+                state
+            );
         }
 
         [Fx.Tag.InheritThrows(From = "Invoke")]
@@ -175,13 +215,29 @@ namespace System.Activities
         }
 
         [Fx.Tag.InheritThrows(From = "Invoke")]
-        public IAsyncResult BeginInvoke(IDictionary<string, object> inputs, AsyncCallback callback, object state)
+        public IAsyncResult BeginInvoke(
+            IDictionary<string, object> inputs,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return BeginInvoke(this.workflow, inputs, ActivityDefaults.InvokeTimeout, this.extensions, callback, state);
+            return BeginInvoke(
+                this.workflow,
+                inputs,
+                ActivityDefaults.InvokeTimeout,
+                this.extensions,
+                callback,
+                state
+            );
         }
 
         [Fx.Tag.InheritThrows(From = "Invoke")]
-        public IAsyncResult BeginInvoke(IDictionary<string, object> inputs, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginInvoke(
+            IDictionary<string, object> inputs,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
 
@@ -205,7 +261,11 @@ namespace System.Activities
                 }
                 // cancel only throws TimeoutException and shouldnt throw at all if timeout is infinite
                 // cancel does not need to raise InvokeCompleted since the InvokeAsync invocation would raise it
-                IAsyncResult result = context.WorkflowApplication.BeginCancel(TimeSpan.MaxValue, cancelCallback, context);
+                IAsyncResult result = context.WorkflowApplication.BeginCancel(
+                    TimeSpan.MaxValue,
+                    cancelCallback,
+                    context
+                );
                 if (result.CompletedSynchronously)
                 {
                     context.WorkflowApplication.EndCancel(result);
@@ -222,7 +282,11 @@ namespace System.Activities
         [Fx.Tag.Throws.Timeout("A timeout occurred when invoking the workflow")]
         public IDictionary<string, object> Invoke()
         {
-            return WorkflowInvoker.Invoke(this.workflow, ActivityDefaults.InvokeTimeout, this.extensions);
+            return WorkflowInvoker.Invoke(
+                this.workflow,
+                ActivityDefaults.InvokeTimeout,
+                this.extensions
+            );
         }
 
         [Fx.Tag.Throws.Timeout("A timeout occurred when invoking the workflow")]
@@ -236,11 +300,19 @@ namespace System.Activities
         [Fx.Tag.Throws.Timeout("A timeout occurred when invoking the workflow")]
         public IDictionary<string, object> Invoke(IDictionary<string, object> inputs)
         {
-            return WorkflowInvoker.Invoke(this.workflow, inputs, ActivityDefaults.InvokeTimeout, this.extensions);
+            return WorkflowInvoker.Invoke(
+                this.workflow,
+                inputs,
+                ActivityDefaults.InvokeTimeout,
+                this.extensions
+            );
         }
 
         [Fx.Tag.Throws.Timeout("A timeout occurred when invoking the workflow")]
-        public IDictionary<string, object> Invoke(IDictionary<string, object> inputs, TimeSpan timeout)
+        public IDictionary<string, object> Invoke(
+            IDictionary<string, object> inputs,
+            TimeSpan timeout
+        )
         {
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
 
@@ -284,7 +356,11 @@ namespace System.Activities
             InvokeAsync(inputs, ActivityDefaults.InvokeTimeout, userState);
         }
 
-        public void InvokeAsync(IDictionary<string, object> inputs, TimeSpan timeout, object userState)
+        public void InvokeAsync(
+            IDictionary<string, object> inputs,
+            TimeSpan timeout,
+            object userState
+        )
         {
             if (inputs == null)
             {
@@ -296,7 +372,11 @@ namespace System.Activities
         }
 
         [Fx.Tag.Throws.Timeout("A timeout occurred when invoking the workflow")]
-        static IDictionary<string, object> Invoke(Activity workflow, TimeSpan timeout, WorkflowInstanceExtensionManager extensions)
+        static IDictionary<string, object> Invoke(
+            Activity workflow,
+            TimeSpan timeout,
+            WorkflowInstanceExtensionManager extensions
+        )
         {
             if (workflow == null)
             {
@@ -305,7 +385,12 @@ namespace System.Activities
 
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
 
-            IDictionary<string, object> outputs = WorkflowApplication.Invoke(workflow, null, extensions, timeout);
+            IDictionary<string, object> outputs = WorkflowApplication.Invoke(
+                workflow,
+                null,
+                extensions,
+                timeout
+            );
 
             if (outputs == null)
             {
@@ -318,7 +403,12 @@ namespace System.Activities
         }
 
         [Fx.Tag.Throws.Timeout("A timeout occurred when invoking the workflow")]
-        static IDictionary<string, object> Invoke(Activity workflow, IDictionary<string, object> inputs, TimeSpan timeout, WorkflowInstanceExtensionManager extensions)
+        static IDictionary<string, object> Invoke(
+            Activity workflow,
+            IDictionary<string, object> inputs,
+            TimeSpan timeout,
+            WorkflowInstanceExtensionManager extensions
+        )
         {
             if (workflow == null)
             {
@@ -332,7 +422,12 @@ namespace System.Activities
 
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
 
-            IDictionary<string, object> outputs = WorkflowApplication.Invoke(workflow, inputs, extensions, timeout);
+            IDictionary<string, object> outputs = WorkflowApplication.Invoke(
+                workflow,
+                inputs,
+                extensions,
+                timeout
+            );
 
             if (outputs == null)
             {
@@ -350,14 +445,23 @@ namespace System.Activities
             {
                 if (this.PendingInvokes.ContainsKey(context.UserState))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.SameUserStateUsedForMultipleInvokes));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.SameUserStateUsedForMultipleInvokes)
+                    );
                 }
                 this.PendingInvokes.Add(context.UserState, context);
             }
         }
 
         [Fx.Tag.InheritThrows(From = "Invoke")]
-        IAsyncResult BeginInvoke(Activity workflow, IDictionary<string, object> inputs, TimeSpan timeout, WorkflowInstanceExtensionManager extensions, AsyncCallback callback, object state)
+        IAsyncResult BeginInvoke(
+            Activity workflow,
+            IDictionary<string, object> inputs,
+            TimeSpan timeout,
+            WorkflowInstanceExtensionManager extensions,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (inputs == null)
             {
@@ -366,15 +470,39 @@ namespace System.Activities
 
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
 
-            return WorkflowApplication.BeginInvoke(workflow, inputs, extensions, timeout, null, null, callback, state);
+            return WorkflowApplication.BeginInvoke(
+                workflow,
+                inputs,
+                extensions,
+                timeout,
+                null,
+                null,
+                callback,
+                state
+            );
         }
 
         [Fx.Tag.InheritThrows(From = "Invoke")]
-        IAsyncResult BeginInvoke(Activity workflow, TimeSpan timeout, WorkflowInstanceExtensionManager extensions, AsyncCallback callback, object state)
+        IAsyncResult BeginInvoke(
+            Activity workflow,
+            TimeSpan timeout,
+            WorkflowInstanceExtensionManager extensions,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
 
-            return WorkflowApplication.BeginInvoke(workflow, null, extensions, timeout, null, null, callback, state);
+            return WorkflowApplication.BeginInvoke(
+                workflow,
+                null,
+                extensions,
+                timeout,
+                null,
+                null,
+                callback,
+                state
+            );
         }
 
         void CancelCallback(IAsyncResult result)
@@ -388,7 +516,11 @@ namespace System.Activities
             context.WorkflowApplication.EndCancel(result);
         }
 
-        void InternalInvokeAsync(IDictionary<string, object> inputs, TimeSpan timeout, object userState)
+        void InternalInvokeAsync(
+            IDictionary<string, object> inputs,
+            TimeSpan timeout,
+            object userState
+        )
         {
             AsyncInvokeContext context = new AsyncInvokeContext(userState, this);
             if (userState != null)
@@ -404,7 +536,16 @@ namespace System.Activities
                     invokeCallback = Fx.ThunkCallback(new AsyncCallback(InvokeCallback));
                 }
                 context.Operation.OperationStarted();
-                IAsyncResult result = WorkflowApplication.BeginInvoke(this.workflow, inputs, this.extensions, timeout, SynchronizationContext.Current, context, invokeCallback, context);
+                IAsyncResult result = WorkflowApplication.BeginInvoke(
+                    this.workflow,
+                    inputs,
+                    this.extensions,
+                    timeout,
+                    SynchronizationContext.Current,
+                    context,
+                    invokeCallback,
+                    context
+                );
                 if (result.CompletedSynchronously)
                 {
                     context.Outputs = this.EndInvoke(result);

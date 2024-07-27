@@ -11,19 +11,18 @@ public class TestValueProvider : RouteValueProvider
         id: "Test",
         displayName: "Test",
         isGreedy: false,
-        isFromRequest: true);
+        isFromRequest: true
+    );
 
     public TestValueProvider(IDictionary<string, object> values)
 #pragma warning disable CA1304 // Specify CultureInfo
-            : base(TestBindingSource, new RouteValueDictionary(values))
+        : base(TestBindingSource, new RouteValueDictionary(values))
 #pragma warning restore CA1304 // Specify CultureInfo
-    {
-    }
+    { }
 
     public TestValueProvider(BindingSource bindingSource, IDictionary<string, object> values)
 #pragma warning disable CA1304 // Specify CultureInfo
-            : base(bindingSource, new RouteValueDictionary(values))
+        : base(bindingSource, new RouteValueDictionary(values))
 #pragma warning restore CA1304 // Specify CultureInfo
-    {
-    }
+    { }
 }

@@ -14,9 +14,7 @@ namespace System.Threading
         private readonly Action<AsyncLocalValueChangedArgs<T>>? _valueChangedHandler;
 
         /// <summary>Instantiates an <see cref="AsyncLocal{T}"/> instance that does not receive change notifications.</summary>
-        public AsyncLocal()
-        {
-        }
+        public AsyncLocal() { }
 
         /// <summary>Instantiates an <see cref="AsyncLocal{T}"/> instance that receives change notifications.</summary>
         /// <param name="valueChangedHandler">The delegate that is called whenever the current value changes on any thread.</param>
@@ -40,18 +38,21 @@ namespace System.Threading
 
                 return (T)value!;
             }
-            set
-            {
-                ExecutionContext.SetLocalValue(this, value, _valueChangedHandler is not null);
-            }
+            set { ExecutionContext.SetLocalValue(this, value, _valueChangedHandler is not null); }
         }
 
-        void IAsyncLocal.OnValueChanged(object? previousValueObj, object? currentValueObj, bool contextChanged)
+        void IAsyncLocal.OnValueChanged(
+            object? previousValueObj,
+            object? currentValueObj,
+            bool contextChanged
+        )
         {
             Debug.Assert(_valueChangedHandler is not null);
             T previousValue = previousValueObj is null ? default! : (T)previousValueObj;
             T currentValue = currentValueObj is null ? default! : (T)currentValueObj;
-            _valueChangedHandler(new AsyncLocalValueChangedArgs<T>(previousValue, currentValue, contextChanged));
+            _valueChangedHandler(
+                new AsyncLocalValueChangedArgs<T>(previousValue, currentValue, contextChanged)
+            );
         }
     }
 
@@ -102,30 +103,41 @@ namespace System.Threading
         public static bool IsEmpty(IAsyncLocalValueMap asyncLocalValueMap)
         {
             Debug.Assert(asyncLocalValueMap is not null);
-            Debug.Assert(asyncLocalValueMap == Empty || asyncLocalValueMap.GetType() != typeof(EmptyAsyncLocalValueMap));
+            Debug.Assert(
+                asyncLocalValueMap == Empty
+                    || asyncLocalValueMap.GetType() != typeof(EmptyAsyncLocalValueMap)
+            );
 
             return asyncLocalValueMap == Empty;
         }
 
-        public static IAsyncLocalValueMap Create(IAsyncLocal key, object? value, bool treatNullValueAsNonexistent)
+        public static IAsyncLocalValueMap Create(
+            IAsyncLocal key,
+            object? value,
+            bool treatNullValueAsNonexistent
+        )
         {
             // If the value isn't null or a null value may not be treated as nonexistent, then create a new one-element map
             // to store the key/value pair.  Otherwise, use the empty map.
-            return value is not null || !treatNullValueAsNonexistent ?
-                new OneElementAsyncLocalValueMap(KeyValuePair.Create(key, value)) :
-                Empty;
+            return value is not null || !treatNullValueAsNonexistent
+                ? new OneElementAsyncLocalValueMap(KeyValuePair.Create(key, value))
+                : Empty;
         }
 
         // Instance without any key/value pairs.  Used as a singleton/
         private sealed class EmptyAsyncLocalValueMap : IAsyncLocalValueMap
         {
-            public IAsyncLocalValueMap Set(IAsyncLocal key, object? value, bool treatNullValueAsNonexistent)
+            public IAsyncLocalValueMap Set(
+                IAsyncLocal key,
+                object? value,
+                bool treatNullValueAsNonexistent
+            )
             {
                 // If the value isn't null or a null value may not be treated as nonexistent, then create a new one-element map
                 // to store the key/value pair.  Otherwise, use the empty map.
-                return value is not null || !treatNullValueAsNonexistent ?
-                    new OneElementAsyncLocalValueMap(KeyValuePair.Create(key, value)) :
-                    this;
+                return value is not null || !treatNullValueAsNonexistent
+                    ? new OneElementAsyncLocalValueMap(KeyValuePair.Create(key, value))
+                    : this;
             }
 
             public bool TryGetValue(IAsyncLocal key, out object? value)
@@ -145,24 +157,26 @@ namespace System.Threading
                 _item0 = item0;
             }
 
-            public IAsyncLocalValueMap Set(IAsyncLocal key, object? value, bool treatNullValueAsNonexistent)
+            public IAsyncLocalValueMap Set(
+                IAsyncLocal key,
+                object? value,
+                bool treatNullValueAsNonexistent
+            )
             {
                 if (value is not null || !treatNullValueAsNonexistent)
                 {
                     // If the key matches one already contained in this map, then create a new one-element map with the updated
                     // value, otherwise create a two-element map with the additional key/value.
                     KeyValuePair<IAsyncLocal, object?> newItem = KeyValuePair.Create(key, value);
-                    return ReferenceEquals(key, _item0.Key) ?
-                        new OneElementAsyncLocalValueMap(newItem) :
-                        new TwoElementAsyncLocalValueMap(_item0, newItem);
+                    return ReferenceEquals(key, _item0.Key)
+                        ? new OneElementAsyncLocalValueMap(newItem)
+                        : new TwoElementAsyncLocalValueMap(_item0, newItem);
                 }
                 else
                 {
                     // If the key exists in this map, remove it by downgrading to an empty map.  Otherwise, there's nothing to
                     // add or remove, so just return this map.
-                    return ReferenceEquals(key, _item0.Key) ?
-                        Empty :
-                        this;
+                    return ReferenceEquals(key, _item0.Key) ? Empty : this;
                 }
             }
 
@@ -189,32 +203,39 @@ namespace System.Threading
 
             public TwoElementAsyncLocalValueMap(
                 KeyValuePair<IAsyncLocal, object?> item0,
-                KeyValuePair<IAsyncLocal, object?> item1)
+                KeyValuePair<IAsyncLocal, object?> item1
+            )
             {
                 _item0 = item0;
                 _item1 = item1;
             }
 
-            public IAsyncLocalValueMap Set(IAsyncLocal key, object? value, bool treatNullValueAsNonexistent)
+            public IAsyncLocalValueMap Set(
+                IAsyncLocal key,
+                object? value,
+                bool treatNullValueAsNonexistent
+            )
             {
                 if (value is not null || !treatNullValueAsNonexistent)
                 {
                     // If the key matches one already contained in this map, then create a new two-element map with the updated
                     // value, otherwise create a three-element map with the additional key/value.
                     KeyValuePair<IAsyncLocal, object?> newItem = KeyValuePair.Create(key, value);
-                    return
-                        ReferenceEquals(key, _item0.Key) ? new TwoElementAsyncLocalValueMap(newItem, _item1) :
-                        ReferenceEquals(key, _item1.Key) ? new TwoElementAsyncLocalValueMap(_item0, newItem) :
-                        new ThreeElementAsyncLocalValueMap(_item0, _item1, newItem);
+                    return ReferenceEquals(key, _item0.Key)
+                            ? new TwoElementAsyncLocalValueMap(newItem, _item1)
+                        : ReferenceEquals(key, _item1.Key)
+                            ? new TwoElementAsyncLocalValueMap(_item0, newItem)
+                        : new ThreeElementAsyncLocalValueMap(_item0, _item1, newItem);
                 }
                 else
                 {
                     // If the key exists in this map, remove it by downgrading to a one-element map without the key.  Otherwise,
                     // there's nothing to add or remove, so just return this map.
-                    return
-                        ReferenceEquals(key, _item0.Key) ? new OneElementAsyncLocalValueMap(_item1) :
-                        ReferenceEquals(key, _item1.Key) ? new OneElementAsyncLocalValueMap(_item0) :
-                        this;
+                    return ReferenceEquals(key, _item0.Key)
+                            ? new OneElementAsyncLocalValueMap(_item1)
+                        : ReferenceEquals(key, _item1.Key)
+                            ? new OneElementAsyncLocalValueMap(_item0)
+                        : this;
                 }
             }
 
@@ -248,35 +269,44 @@ namespace System.Threading
             public ThreeElementAsyncLocalValueMap(
                 KeyValuePair<IAsyncLocal, object?> item0,
                 KeyValuePair<IAsyncLocal, object?> item1,
-                KeyValuePair<IAsyncLocal, object?> item2)
+                KeyValuePair<IAsyncLocal, object?> item2
+            )
             {
                 _item0 = item0;
                 _item1 = item1;
                 _item2 = item2;
             }
 
-            public IAsyncLocalValueMap Set(IAsyncLocal key, object? value, bool treatNullValueAsNonexistent)
+            public IAsyncLocalValueMap Set(
+                IAsyncLocal key,
+                object? value,
+                bool treatNullValueAsNonexistent
+            )
             {
                 if (value is not null || !treatNullValueAsNonexistent)
                 {
                     // If the key matches one already contained in this map, then create a new three-element map with the updated
                     // value, otherwise create a three-element map with the additional key/value.
                     KeyValuePair<IAsyncLocal, object?> newItem = KeyValuePair.Create(key, value);
-                    return
-                        ReferenceEquals(key, _item0.Key) ? new ThreeElementAsyncLocalValueMap(newItem, _item1, _item2) :
-                        ReferenceEquals(key, _item1.Key) ? new ThreeElementAsyncLocalValueMap(_item0, newItem, _item2) :
-                        ReferenceEquals(key, _item2.Key) ? new ThreeElementAsyncLocalValueMap(_item0, _item1, newItem) :
-                        new FourElementAsyncLocalValueMap(_item0, _item1, _item2, newItem);
+                    return ReferenceEquals(key, _item0.Key)
+                            ? new ThreeElementAsyncLocalValueMap(newItem, _item1, _item2)
+                        : ReferenceEquals(key, _item1.Key)
+                            ? new ThreeElementAsyncLocalValueMap(_item0, newItem, _item2)
+                        : ReferenceEquals(key, _item2.Key)
+                            ? new ThreeElementAsyncLocalValueMap(_item0, _item1, newItem)
+                        : new FourElementAsyncLocalValueMap(_item0, _item1, _item2, newItem);
                 }
                 else
                 {
                     // If the key exists in this map, remove it by downgrading to a one-element map without the key.  Otherwise,
                     // there's nothing to add or remove, so just return this map.
-                    return
-                        ReferenceEquals(key, _item0.Key) ? new TwoElementAsyncLocalValueMap(_item1, _item2) :
-                        ReferenceEquals(key, _item1.Key) ? new TwoElementAsyncLocalValueMap(_item0, _item2) :
-                        ReferenceEquals(key, _item2.Key) ? new TwoElementAsyncLocalValueMap(_item0, _item1) :
-                        this;
+                    return ReferenceEquals(key, _item0.Key)
+                            ? new TwoElementAsyncLocalValueMap(_item1, _item2)
+                        : ReferenceEquals(key, _item1.Key)
+                            ? new TwoElementAsyncLocalValueMap(_item0, _item2)
+                        : ReferenceEquals(key, _item2.Key)
+                            ? new TwoElementAsyncLocalValueMap(_item0, _item1)
+                        : this;
                 }
             }
 
@@ -317,7 +347,8 @@ namespace System.Threading
                 KeyValuePair<IAsyncLocal, object?> item0,
                 KeyValuePair<IAsyncLocal, object?> item1,
                 KeyValuePair<IAsyncLocal, object?> item2,
-                KeyValuePair<IAsyncLocal, object?> item3)
+                KeyValuePair<IAsyncLocal, object?> item3
+            )
             {
                 _item0 = item0;
                 _item1 = item1;
@@ -325,29 +356,41 @@ namespace System.Threading
                 _item3 = item3;
             }
 
-            public IAsyncLocalValueMap Set(IAsyncLocal key, object? value, bool treatNullValueAsNonexistent)
+            public IAsyncLocalValueMap Set(
+                IAsyncLocal key,
+                object? value,
+                bool treatNullValueAsNonexistent
+            )
             {
                 if (value is not null || !treatNullValueAsNonexistent)
                 {
                     // If the key matches one already contained in this map, then create a new four-element map with the updated value.
                     KeyValuePair<IAsyncLocal, object?> newItem = KeyValuePair.Create(key, value);
-                    return
-                        ReferenceEquals(key, _item0.Key) ? new FourElementAsyncLocalValueMap(newItem, _item1, _item2, _item3) :
-                        ReferenceEquals(key, _item1.Key) ? new FourElementAsyncLocalValueMap(_item0, newItem, _item2, _item3) :
-                        ReferenceEquals(key, _item2.Key) ? new FourElementAsyncLocalValueMap(_item0, _item1, newItem, _item3) :
-                        ReferenceEquals(key, _item3.Key) ? new FourElementAsyncLocalValueMap(_item0, _item1, _item2, newItem) :
-                        new MultiElementAsyncLocalValueMap(new[] { _item0, _item1, _item2, _item3, newItem }); // upgrade to a multi
+                    return ReferenceEquals(key, _item0.Key)
+                            ? new FourElementAsyncLocalValueMap(newItem, _item1, _item2, _item3)
+                        : ReferenceEquals(key, _item1.Key)
+                            ? new FourElementAsyncLocalValueMap(_item0, newItem, _item2, _item3)
+                        : ReferenceEquals(key, _item2.Key)
+                            ? new FourElementAsyncLocalValueMap(_item0, _item1, newItem, _item3)
+                        : ReferenceEquals(key, _item3.Key)
+                            ? new FourElementAsyncLocalValueMap(_item0, _item1, _item2, newItem)
+                        : new MultiElementAsyncLocalValueMap(
+                            new[] { _item0, _item1, _item2, _item3, newItem }
+                        ); // upgrade to a multi
                 }
                 else
                 {
                     // If the key exists in this map, remove it by downgrading to a two-element map without the key.  Otherwise,
                     // there's nothing to add or remove, so just return this map.
-                    return
-                        ReferenceEquals(key, _item0.Key) ? new ThreeElementAsyncLocalValueMap(_item1, _item2, _item3) :
-                        ReferenceEquals(key, _item1.Key) ? new ThreeElementAsyncLocalValueMap(_item0, _item2, _item3) :
-                        ReferenceEquals(key, _item2.Key) ? new ThreeElementAsyncLocalValueMap(_item0, _item1, _item3) :
-                        ReferenceEquals(key, _item3.Key) ? new ThreeElementAsyncLocalValueMap(_item0, _item1, _item2) :
-                        this;
+                    return ReferenceEquals(key, _item0.Key)
+                            ? new ThreeElementAsyncLocalValueMap(_item1, _item2, _item3)
+                        : ReferenceEquals(key, _item1.Key)
+                            ? new ThreeElementAsyncLocalValueMap(_item0, _item2, _item3)
+                        : ReferenceEquals(key, _item2.Key)
+                            ? new ThreeElementAsyncLocalValueMap(_item0, _item1, _item3)
+                        : ReferenceEquals(key, _item3.Key)
+                            ? new ThreeElementAsyncLocalValueMap(_item0, _item1, _item2)
+                        : this;
                 }
             }
 
@@ -393,7 +436,11 @@ namespace System.Threading
                 _keyValues = keyValues;
             }
 
-            public IAsyncLocalValueMap Set(IAsyncLocal key, object? value, bool treatNullValueAsNonexistent)
+            public IAsyncLocalValueMap Set(
+                IAsyncLocal key,
+                object? value,
+                bool treatNullValueAsNonexistent
+            )
             {
                 // Find the key in this map.
                 for (int i = 0; i < _keyValues.Length; i++)
@@ -404,7 +451,9 @@ namespace System.Threading
                         if (value is not null || !treatNullValueAsNonexistent)
                         {
                             // Create a new map of the same size that has all of the same pairs, with this new key/value pair overwriting the old.
-                            KeyValuePair<IAsyncLocal, object?>[] newValues = _keyValues.AsSpan().ToArray();
+                            KeyValuePair<IAsyncLocal, object?>[] newValues = _keyValues
+                                .AsSpan()
+                                .ToArray();
                             newValues[i] = KeyValuePair.Create(key, value);
                             return new MultiElementAsyncLocalValueMap(newValues);
                         }
@@ -414,20 +463,60 @@ namespace System.Threading
                             // without the matching element.
                             return i switch
                             {
-                                0 => new FourElementAsyncLocalValueMap(_keyValues[1], _keyValues[2], _keyValues[3], _keyValues[4]),
-                                1 => new FourElementAsyncLocalValueMap(_keyValues[0], _keyValues[2], _keyValues[3], _keyValues[4]),
-                                2 => new FourElementAsyncLocalValueMap(_keyValues[0], _keyValues[1], _keyValues[3], _keyValues[4]),
-                                3 => new FourElementAsyncLocalValueMap(_keyValues[0], _keyValues[1], _keyValues[2], _keyValues[4]),
-                                _ => new FourElementAsyncLocalValueMap(_keyValues[0], _keyValues[1], _keyValues[2], _keyValues[3]),
+                                0
+                                    => new FourElementAsyncLocalValueMap(
+                                        _keyValues[1],
+                                        _keyValues[2],
+                                        _keyValues[3],
+                                        _keyValues[4]
+                                    ),
+                                1
+                                    => new FourElementAsyncLocalValueMap(
+                                        _keyValues[0],
+                                        _keyValues[2],
+                                        _keyValues[3],
+                                        _keyValues[4]
+                                    ),
+                                2
+                                    => new FourElementAsyncLocalValueMap(
+                                        _keyValues[0],
+                                        _keyValues[1],
+                                        _keyValues[3],
+                                        _keyValues[4]
+                                    ),
+                                3
+                                    => new FourElementAsyncLocalValueMap(
+                                        _keyValues[0],
+                                        _keyValues[1],
+                                        _keyValues[2],
+                                        _keyValues[4]
+                                    ),
+                                _
+                                    => new FourElementAsyncLocalValueMap(
+                                        _keyValues[0],
+                                        _keyValues[1],
+                                        _keyValues[2],
+                                        _keyValues[3]
+                                    ),
                             };
                         }
                         else
                         {
                             // We have enough elements remaining to warrant a multi map.  Create a new one and copy all of the
                             // elements from this one, except the one to be removed.
-                            var newValues = new KeyValuePair<IAsyncLocal, object?>[_keyValues.Length - 1];
-                            if (i != 0) Array.Copy(_keyValues, newValues, i);
-                            if (i != _keyValues.Length - 1) Array.Copy(_keyValues, i + 1, newValues, i, _keyValues.Length - i - 1);
+                            var newValues = new KeyValuePair<IAsyncLocal, object?>[
+                                _keyValues.Length - 1
+                            ];
+                            if (i != 0)
+                                Array.Copy(_keyValues, newValues, i);
+                            if (i != _keyValues.Length - 1)
+                                Array.Copy(
+                                    _keyValues,
+                                    i + 1,
+                                    newValues,
+                                    i,
+                                    _keyValues.Length - i - 1
+                                );
                             return new MultiElementAsyncLocalValueMap(newValues);
                         }
                     }
@@ -477,11 +566,18 @@ namespace System.Threading
         }
 
         /// <summary>Instance with any number of key/value pairs.</summary>
-        private sealed class ManyElementAsyncLocalValueMap : Dictionary<IAsyncLocal, object?>, IAsyncLocalValueMap
+        private sealed class ManyElementAsyncLocalValueMap
+            : Dictionary<IAsyncLocal, object?>,
+                IAsyncLocalValueMap
         {
-            public ManyElementAsyncLocalValueMap(int capacity) : base(capacity) { }
+            public ManyElementAsyncLocalValueMap(int capacity)
+                : base(capacity) { }
 
-            public IAsyncLocalValueMap Set(IAsyncLocal key, object? value, bool treatNullValueAsNonexistent)
+            public IAsyncLocalValueMap Set(
+                IAsyncLocal key,
+                object? value,
+                bool treatNullValueAsNonexistent
+            )
             {
                 int count = Count;
                 bool containsKey = ContainsKey(key);
@@ -510,7 +606,9 @@ namespace System.Threading
                     // Otherwise, just create a new many map that's missing this key.
                     if (count == MultiElementAsyncLocalValueMap.MaxMultiElements + 1)
                     {
-                        var newValues = new KeyValuePair<IAsyncLocal, object?>[MultiElementAsyncLocalValueMap.MaxMultiElements];
+                        var newValues = new KeyValuePair<IAsyncLocal, object?>[
+                            MultiElementAsyncLocalValueMap.MaxMultiElements
+                        ];
                         int index = 0;
                         foreach (KeyValuePair<IAsyncLocal, object?> pair in this)
                         {

@@ -8,12 +8,19 @@ using Log = Microsoft.AspNetCore.Server.HttpSys.RequestContextLog;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal sealed partial class RequestContext<TContext> : RequestContext where TContext : notnull
+internal sealed partial class RequestContext<TContext> : RequestContext
+    where TContext : notnull
 {
     private readonly IHttpApplication<TContext> _application;
     private readonly MessagePump _messagePump;
 
-    public RequestContext(IHttpApplication<TContext> application, MessagePump messagePump, HttpSysListener server, uint? bufferSize, ulong requestId)
+    public RequestContext(
+        IHttpApplication<TContext> application,
+        MessagePump messagePump,
+        HttpSysListener server,
+        uint? bufferSize,
+        ulong requestId
+    )
         : base(server, bufferSize, requestId)
     {
         _application = application;
@@ -56,7 +63,10 @@ internal sealed partial class RequestContext<TContext> : RequestContext where TC
             {
                 applicationException = ex;
 
-                if ((ex is OperationCanceledException || ex is IOException) && DisconnectToken.IsCancellationRequested)
+                if (
+                    (ex is OperationCanceledException || ex is IOException)
+                    && DisconnectToken.IsCancellationRequested
+                )
                 {
                     Log.RequestAborted(Logger);
                 }
@@ -91,7 +101,10 @@ internal sealed partial class RequestContext<TContext> : RequestContext where TC
                     {
                         SetFatalResponse(badHttpRequestException.StatusCode);
                     }
-                    else if ((ex is OperationCanceledException || ex is IOException) && DisconnectToken.IsCancellationRequested)
+                    else if (
+                        (ex is OperationCanceledException || ex is IOException)
+                        && DisconnectToken.IsCancellationRequested
+                    )
                     {
                         SetFatalResponse(StatusCodes.Status499ClientClosedRequest);
                     }

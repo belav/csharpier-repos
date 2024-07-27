@@ -21,7 +21,12 @@ namespace System.ServiceModel.Channels
             this.messageType = WebSocketDefaults.DefaultWebSocketMessageType;
         }
 
-        internal WebSocketMessageProperty(WebSocketContext context, string subProtocol, WebSocketMessageType incomingMessageType, ReadOnlyDictionary<string, object> properties)
+        internal WebSocketMessageProperty(
+            WebSocketContext context,
+            string subProtocol,
+            WebSocketMessageType incomingMessageType,
+            ReadOnlyDictionary<string, object> properties
+        )
         {
             this.context = context;
             this.subProtocol = subProtocol;
@@ -47,18 +52,23 @@ namespace System.ServiceModel.Channels
 
         public ReadOnlyDictionary<string, object> OpeningHandshakeProperties
         {
-            get 
+            get
             {
                 if (this.properties == null)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(
-                        SR.WebSocketOpeningHandshakePropertiesNotAvailable,
-                        "RequestMessage",
-                        typeof(HttpResponseMessage).Name,
-                        typeof(DelegatingHandler).Name)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.WebSocketOpeningHandshakePropertiesNotAvailable,
+                                "RequestMessage",
+                                typeof(HttpResponseMessage).Name,
+                                typeof(DelegatingHandler).Name
+                            )
+                        )
+                    );
                 }
 
-                return this.properties; 
+                return this.properties;
             }
         }
     }

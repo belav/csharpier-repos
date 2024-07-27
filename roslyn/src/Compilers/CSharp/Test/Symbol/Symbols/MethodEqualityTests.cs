@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void NoGenerics()
         {
-            var text = @"
+            var text =
+                @"
 class Class1
 {
     void Method1() { }
@@ -62,7 +63,8 @@ class Class2
         [Fact]
         public void GenericsTypes()
         {
-            var text = @"
+            var text =
+                @"
 class Base<T>
 {
     void Method(T t) { }
@@ -86,13 +88,17 @@ class Derived2 : Base<int>
 
             var derivedClass1 = global.GetTypeMembers("Derived1").Single();
             var substitutedBaseClass = derivedClass1.BaseType();
-            var substitutedBaseClassMethod1 = (MethodSymbol)substitutedBaseClass.GetMembers("Method").First();
-            var substitutedBaseClassMethod2 = (MethodSymbol)substitutedBaseClass.GetMembers("Method").Last();
+            var substitutedBaseClassMethod1 = (MethodSymbol)
+                substitutedBaseClass.GetMembers("Method").First();
+            var substitutedBaseClassMethod2 = (MethodSymbol)
+                substitutedBaseClass.GetMembers("Method").Last();
 
             var derivedClass2 = global.GetTypeMembers("Derived2").Single();
             var constructedBaseClass = derivedClass2.BaseType();
-            var constructedBaseClassMethod1 = (MethodSymbol)constructedBaseClass.GetMembers("Method").First();
-            var constructedBaseClassMethod2 = (MethodSymbol)constructedBaseClass.GetMembers("Method").Last();
+            var constructedBaseClassMethod1 = (MethodSymbol)
+                constructedBaseClass.GetMembers("Method").First();
+            var constructedBaseClassMethod2 = (MethodSymbol)
+                constructedBaseClass.GetMembers("Method").Last();
 
             //different type args
             Assert.NotEqual(baseClassMethod1, substitutedBaseClassMethod1);
@@ -122,7 +128,8 @@ class Derived2 : Base<int>
         [Fact]
         public void GenericsTypesAndMethods()
         {
-            var text = @"
+            var text =
+                @"
 class Base<T>
 {
     U Method<U>(T t) { }
@@ -146,13 +153,17 @@ class Derived2 : Base<int>
 
             var derivedClass1 = global.GetTypeMembers("Derived1").Single();
             var substitutedBaseClass = derivedClass1.BaseType();
-            var substitutedBaseClassMethod1 = (MethodSymbol)substitutedBaseClass.GetMembers("Method").First();
-            var substitutedBaseClassMethod2 = (MethodSymbol)substitutedBaseClass.GetMembers("Method").Last();
+            var substitutedBaseClassMethod1 = (MethodSymbol)
+                substitutedBaseClass.GetMembers("Method").First();
+            var substitutedBaseClassMethod2 = (MethodSymbol)
+                substitutedBaseClass.GetMembers("Method").Last();
 
             var derivedClass2 = global.GetTypeMembers("Derived2").Single();
             var constructedBaseClass = derivedClass2.BaseType();
-            var constructedBaseClassMethod1 = (MethodSymbol)constructedBaseClass.GetMembers("Method").First();
-            var constructedBaseClassMethod2 = (MethodSymbol)constructedBaseClass.GetMembers("Method").Last();
+            var constructedBaseClassMethod1 = (MethodSymbol)
+                constructedBaseClass.GetMembers("Method").First();
+            var constructedBaseClassMethod2 = (MethodSymbol)
+                constructedBaseClass.GetMembers("Method").Last();
 
             //different type args
             Assert.NotEqual(baseClassMethod1, substitutedBaseClassMethod1);
@@ -182,7 +193,8 @@ class Derived2 : Base<int>
         [Fact]
         public void SubstitutedGenericMethods()
         {
-            var text = @"
+            var text =
+                @"
 class Class
 {
     void Method<U, V>(U u, V v)
@@ -210,12 +222,14 @@ class Class
             var mDecl = (MethodDeclarationSyntax)cDecl.Members[0];
             var stmts = mDecl.Body.Statements;
 
-            var invokedMethods = stmts.Select(stmt =>
-            {
-                var exprStmt = (ExpressionStatementSyntax)stmt;
-                var semanticInfo = model.GetSymbolInfo(exprStmt.Expression);
-                return (IMethodSymbol)semanticInfo.Symbol;
-            }).ToArray();
+            var invokedMethods = stmts
+                .Select(stmt =>
+                {
+                    var exprStmt = (ExpressionStatementSyntax)stmt;
+                    var semanticInfo = model.GetSymbolInfo(exprStmt.Expression);
+                    return (IMethodSymbol)semanticInfo.Symbol;
+                })
+                .ToArray();
 
             Assert.Equal(6, invokedMethods.Length);
 

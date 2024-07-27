@@ -16,13 +16,20 @@ namespace System.Threading.RateLimiting.Tests
         public void ThrowsWhenNoLimitersProvided()
         {
             Assert.Throws<ArgumentException>(() => PartitionedRateLimiter.CreateChained<string>());
-            Assert.Throws<ArgumentException>(() => PartitionedRateLimiter.CreateChained<string>(new PartitionedRateLimiter<string>[0]));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    PartitionedRateLimiter.CreateChained<string>(
+                        new PartitionedRateLimiter<string>[0]
+                    )
+            );
         }
 
         [Fact]
         public void ThrowsWhenNullPassedIn()
         {
-            Assert.Throws<ArgumentNullException>(() => PartitionedRateLimiter.CreateChained<string>(null));
+            Assert.Throws<ArgumentNullException>(
+                () => PartitionedRateLimiter.CreateChained<string>(null)
+            );
         }
 
         [Fact]
@@ -30,23 +37,27 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ =>
-                    new ConcurrencyLimiterOptions
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 0
-                    });
+                        QueueLimit = 0,
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ =>
-                    new ConcurrencyLimiterOptions
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 0
-                    });
+                        QueueLimit = 0,
+                    }
+                );
             });
             var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
 
@@ -54,7 +65,9 @@ namespace System.Threading.RateLimiting.Tests
 
             Assert.Throws<ObjectDisposedException>(() => chainedLimiter.GetStatistics(""));
             Assert.Throws<ObjectDisposedException>(() => chainedLimiter.AttemptAcquire(""));
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await chainedLimiter.AcquireAsync(""));
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () => await chainedLimiter.AcquireAsync("")
+            );
         }
 
         [Fact]
@@ -62,23 +75,27 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ =>
-                    new ConcurrencyLimiterOptions
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 0
-                    });
+                        QueueLimit = 0,
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ =>
-                    new ConcurrencyLimiterOptions
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 0
-                    });
+                        QueueLimit = 0,
+                    }
+                );
             });
             var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
 
@@ -86,7 +103,9 @@ namespace System.Threading.RateLimiting.Tests
 
             Assert.Throws<ObjectDisposedException>(() => chainedLimiter.GetStatistics(""));
             Assert.Throws<ObjectDisposedException>(() => chainedLimiter.AttemptAcquire(""));
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await chainedLimiter.AcquireAsync(""));
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () => await chainedLimiter.AcquireAsync("")
+            );
         }
 
         [Fact]
@@ -94,36 +113,46 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ =>
-                    new ConcurrencyLimiterOptions
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
                     {
                         PermitLimit = 34,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 4
-                    });
+                        QueueLimit = 4,
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ =>
-                    new ConcurrencyLimiterOptions
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
                     {
                         PermitLimit = 22,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 2
-                    });
+                        QueueLimit = 2,
+                    }
+                );
             });
             using var limiter3 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ =>
-                    new ConcurrencyLimiterOptions
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
                     {
                         PermitLimit = 13,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 10
-                    });
+                        QueueLimit = 10,
+                    }
+                );
             });
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2, limiter3);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2,
+                limiter3
+            );
 
             var stats = chainedLimiter.GetStatistics("");
             Assert.Equal(13, stats.CurrentAvailablePermits);
@@ -137,13 +166,15 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ =>
-                    new ConcurrencyLimiterOptions
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
                     {
                         PermitLimit = 34,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 0
-                    });
+                        QueueLimit = 0,
+                    }
+                );
             });
 
             using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter);
@@ -160,33 +191,46 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ => new ConcurrencyLimiterOptions
-                {
-                    PermitLimit = 34,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 4
-                });
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = 34,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 4,
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ => new ConcurrencyLimiterOptions
-                {
-                    PermitLimit = 22,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 2
-                });
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = 22,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 2,
+                    }
+                );
             });
             using var limiter3 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ => new ConcurrencyLimiterOptions
-                {
-                    PermitLimit = 13,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 10
-                });
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = 13,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 10,
+                    }
+                );
             });
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2, limiter3);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2,
+                limiter3
+            );
 
             var stats = chainedLimiter.GetStatistics("");
             var stats2 = chainedLimiter.GetStatistics("");
@@ -198,33 +242,46 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ => new ConcurrencyLimiterOptions
-                {
-                    PermitLimit = 34,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 4
-                });
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = 34,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 4,
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ => new ConcurrencyLimiterOptions
-                {
-                    PermitLimit = 22,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 2
-                });
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = 22,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 2,
+                    }
+                );
             });
             using var limiter3 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, _ => new ConcurrencyLimiterOptions
-                {
-                    PermitLimit = 13,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 10
-                });
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = 13,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 10,
+                    }
+                );
             });
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2, limiter3);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2,
+                limiter3
+            );
 
             var lease = chainedLimiter.AttemptAcquire("", 10);
             var stats = chainedLimiter.GetStatistics("");
@@ -313,7 +370,10 @@ namespace System.Threading.RateLimiting.Tests
                 return RateLimitPartition.Get(2, key => limiterFactory.GetLimiter(key));
             });
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             using var lease = chainedLimiter.AttemptAcquire("");
 
             Assert.True(lease.IsAcquired);
@@ -337,7 +397,10 @@ namespace System.Threading.RateLimiting.Tests
                 return RateLimitPartition.Get(2, key => limiterFactory.GetLimiter(key));
             });
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             using var lease = await chainedLimiter.AcquireAsync("");
 
             Assert.True(lease.IsAcquired);
@@ -351,18 +414,22 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public void AcquireLeaseCorrectlyDisposesWithMultipleLimiters()
         {
-            var concurrencyLimiter1 = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
-            var concurrencyLimiter2 = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            var concurrencyLimiter1 = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
+            var concurrencyLimiter2 = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter1);
@@ -372,7 +439,10 @@ namespace System.Threading.RateLimiting.Tests
                 return RateLimitPartition.Get(2, key => concurrencyLimiter2);
             });
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             var lease = chainedLimiter.AttemptAcquire("");
 
             Assert.True(lease.IsAcquired);
@@ -387,18 +457,22 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public async Task AcquireAsyncLeaseCorrectlyDisposesWithMultipleLimiters()
         {
-            var concurrencyLimiter1 = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
-            var concurrencyLimiter2 = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            var concurrencyLimiter1 = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
+            var concurrencyLimiter2 = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter1);
@@ -408,7 +482,10 @@ namespace System.Threading.RateLimiting.Tests
                 return RateLimitPartition.Get(2, key => concurrencyLimiter2);
             });
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             var lease = await chainedLimiter.AcquireAsync("");
 
             Assert.True(lease.IsAcquired);
@@ -423,12 +500,14 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public void AcquireLeaseCorrectlyDisposesWithSingleLimiter()
         {
-            var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter);
@@ -447,12 +526,14 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public async Task AcquireAsyncLeaseCorrectlyDisposesWithSingleLimiter()
         {
-            var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter);
@@ -472,12 +553,14 @@ namespace System.Threading.RateLimiting.Tests
         public void AcquireFailsWhenOneLimiterDoesNotHaveEnoughResources()
         {
             var limiterFactory = new TrackingRateLimiterFactory<int>();
-            using var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => limiterFactory.GetLimiter(key));
@@ -490,7 +573,10 @@ namespace System.Threading.RateLimiting.Tests
             // Acquire the only permit on the ConcurrencyLimiter so the chained limiter fails when calling acquire
             var concurrencyLease = concurrencyLimiter.AttemptAcquire();
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             using var lease = chainedLimiter.AttemptAcquire("");
 
             Assert.False(lease.IsAcquired);
@@ -503,12 +589,14 @@ namespace System.Threading.RateLimiting.Tests
         public async Task AcquireAsyncFailsWhenOneLimiterDoesNotHaveEnoughResources()
         {
             var limiterFactory = new TrackingRateLimiterFactory<int>();
-            using var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => limiterFactory.GetLimiter(key));
@@ -521,7 +609,10 @@ namespace System.Threading.RateLimiting.Tests
             // Acquire the only permit on the ConcurrencyLimiter so the chained limiter fails when calling acquire
             var concurrencyLease = await concurrencyLimiter.AcquireAsync();
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             using var lease = chainedLimiter.AttemptAcquire("");
 
             Assert.False(lease.IsAcquired);
@@ -533,18 +624,22 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public void AcquireFailsAndReleasesAcquiredResources()
         {
-            using var concurrencyLimiter1 = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
-            using var concurrencyLimiter2 = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter1 = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
+            using var concurrencyLimiter2 = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter1);
@@ -557,7 +652,10 @@ namespace System.Threading.RateLimiting.Tests
             // Acquire the only permit on the ConcurrencyLimiter so the chained limiter fails when calling acquire
             var concurrencyLease = concurrencyLimiter2.AttemptAcquire();
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             using var lease = chainedLimiter.AttemptAcquire("");
 
             Assert.False(lease.IsAcquired);
@@ -567,18 +665,22 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public async Task AcquireAsyncFailsAndReleasesAcquiredResources()
         {
-            using var concurrencyLimiter1 = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
-            using var concurrencyLimiter2 = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter1 = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
+            using var concurrencyLimiter2 = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter1);
@@ -591,7 +693,10 @@ namespace System.Threading.RateLimiting.Tests
             // Acquire the only permit on the ConcurrencyLimiter so the chained limiter fails when calling acquire
             var concurrencyLease = await concurrencyLimiter2.AcquireAsync();
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             using var lease = chainedLimiter.AttemptAcquire("");
 
             Assert.False(lease.IsAcquired);
@@ -601,12 +706,14 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public void AcquireThrowsAndReleasesAcquiredResources()
         {
-            using var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter);
@@ -616,7 +723,10 @@ namespace System.Threading.RateLimiting.Tests
                 return RateLimitPartition.Get(2, key => new NotImplementedLimiter());
             });
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             Assert.Throws<NotImplementedException>(() => chainedLimiter.AttemptAcquire(""));
             Assert.Equal(1, concurrencyLimiter.GetStatistics().CurrentAvailablePermits);
         }
@@ -624,12 +734,14 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public async Task AcquireAsyncThrowsAndReleasesAcquiredResources()
         {
-            using var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter);
@@ -639,8 +751,13 @@ namespace System.Threading.RateLimiting.Tests
                 return RateLimitPartition.Get(2, key => new NotImplementedLimiter());
             });
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
-            await Assert.ThrowsAsync<NotImplementedException>(async () => await chainedLimiter.AcquireAsync(""));
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
+            await Assert.ThrowsAsync<NotImplementedException>(
+                async () => await chainedLimiter.AcquireAsync("")
+            );
             Assert.Equal(1, concurrencyLimiter.GetStatistics().CurrentAvailablePermits);
         }
 
@@ -665,16 +782,20 @@ namespace System.Threading.RateLimiting.Tests
             });
 
             using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1);
-            await Assert.ThrowsAsync<NotImplementedException>(async () => await chainedLimiter.AcquireAsync(""));
+            await Assert.ThrowsAsync<NotImplementedException>(
+                async () => await chainedLimiter.AcquireAsync("")
+            );
         }
 
         internal sealed class ThrowDisposeLease : RateLimitLease
         {
             public override bool IsAcquired => true;
 
-            public override IEnumerable<string> MetadataNames => throw new NotImplementedException();
+            public override IEnumerable<string> MetadataNames =>
+                throw new NotImplementedException();
 
-            public override bool TryGetMetadata(string metadataName, out object? metadata) => throw new NotImplementedException();
+            public override bool TryGetMetadata(string metadataName, out object? metadata) =>
+                throw new NotImplementedException();
 
             protected override void Dispose(bool disposing) => throw new NotImplementedException();
         }
@@ -682,15 +803,23 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public void AcquireFailsDisposeThrows()
         {
-            using var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, key => new CustomizableLimiter() { AttemptAcquireCoreImpl = _ => new ThrowDisposeLease() });
+                return RateLimitPartition.Get(
+                    1,
+                    key => new CustomizableLimiter()
+                    {
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -699,7 +828,10 @@ namespace System.Threading.RateLimiting.Tests
 
             var lease = concurrencyLimiter.AttemptAcquire();
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             var ex = Assert.Throws<AggregateException>(() => chainedLimiter.AttemptAcquire(""));
             Assert.Single(ex.InnerExceptions);
             Assert.IsType<NotImplementedException>(ex.InnerException);
@@ -708,15 +840,23 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public async Task AcquireAsyncFailsDisposeThrows()
         {
-            using var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, key => new CustomizableLimiter() { AttemptAcquireCoreImpl = _ => new ThrowDisposeLease() });
+                return RateLimitPartition.Get(
+                    1,
+                    key => new CustomizableLimiter()
+                    {
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -725,7 +865,10 @@ namespace System.Threading.RateLimiting.Tests
 
             var lease = await concurrencyLimiter.AcquireAsync();
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             var ex = Assert.Throws<AggregateException>(() => chainedLimiter.AttemptAcquire(""));
             Assert.Single(ex.InnerExceptions);
             Assert.IsType<NotImplementedException>(ex.InnerException);
@@ -734,19 +877,33 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public void AcquireFailsDisposeThrowsMultipleLimitersThrow()
         {
-            using var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, key => new CustomizableLimiter() { AttemptAcquireCoreImpl = _ => new ThrowDisposeLease() });
+                return RateLimitPartition.Get(
+                    1,
+                    key => new CustomizableLimiter()
+                    {
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, key => new CustomizableLimiter() { AttemptAcquireCoreImpl = _ => new ThrowDisposeLease() });
+                return RateLimitPartition.Get(
+                    1,
+                    key => new CustomizableLimiter()
+                    {
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                    }
+                );
             });
             using var limiter3 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -755,7 +912,11 @@ namespace System.Threading.RateLimiting.Tests
 
             var lease = concurrencyLimiter.AttemptAcquire();
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2, limiter3);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2,
+                limiter3
+            );
             var ex = Assert.Throws<AggregateException>(() => chainedLimiter.AttemptAcquire(""));
             Assert.Equal(2, ex.InnerExceptions.Count);
             Assert.IsType<NotImplementedException>(ex.InnerExceptions[0]);
@@ -765,19 +926,35 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public async Task AcquireAsyncFailsDisposeThrowsMultipleLimitersThrow()
         {
-            using var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, key => new CustomizableLimiter() { AcquireAsyncCoreImpl = (_, _) => new ValueTask<RateLimitLease>(new ThrowDisposeLease()) });
+                return RateLimitPartition.Get(
+                    1,
+                    key => new CustomizableLimiter()
+                    {
+                        AcquireAsyncCoreImpl = (_, _) =>
+                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, key => new CustomizableLimiter() { AcquireAsyncCoreImpl = (_, _) => new ValueTask<RateLimitLease>(new ThrowDisposeLease()) });
+                return RateLimitPartition.Get(
+                    1,
+                    key => new CustomizableLimiter()
+                    {
+                        AcquireAsyncCoreImpl = (_, _) =>
+                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
+                    }
+                );
             });
             using var limiter3 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -786,8 +963,14 @@ namespace System.Threading.RateLimiting.Tests
 
             var lease = concurrencyLimiter.AttemptAcquire();
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2, limiter3);
-            var ex = await Assert.ThrowsAsync<AggregateException>(async () => await chainedLimiter.AcquireAsync(""));
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2,
+                limiter3
+            );
+            var ex = await Assert.ThrowsAsync<AggregateException>(
+                async () => await chainedLimiter.AcquireAsync("")
+            );
             Assert.Equal(2, ex.InnerExceptions.Count);
             Assert.IsType<NotImplementedException>(ex.InnerExceptions[0]);
             Assert.IsType<NotImplementedException>(ex.InnerExceptions[1]);
@@ -796,19 +979,33 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public void AcquireThrowsDisposeThrowsMultipleLimitersThrow()
         {
-            using var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, key => new CustomizableLimiter() { AttemptAcquireCoreImpl = _ => new ThrowDisposeLease() });
+                return RateLimitPartition.Get(
+                    1,
+                    key => new CustomizableLimiter()
+                    {
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, key => new CustomizableLimiter() { AttemptAcquireCoreImpl = _ => new ThrowDisposeLease() });
+                return RateLimitPartition.Get(
+                    1,
+                    key => new CustomizableLimiter()
+                    {
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                    }
+                );
             });
             using var limiter3 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -817,7 +1014,11 @@ namespace System.Threading.RateLimiting.Tests
 
             var lease = concurrencyLimiter.AttemptAcquire();
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2, limiter3);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2,
+                limiter3
+            );
             var ex = Assert.Throws<AggregateException>(() => chainedLimiter.AttemptAcquire(""));
             Assert.Equal(3, ex.InnerExceptions.Count);
             Assert.IsType<NotImplementedException>(ex.InnerExceptions[0]);
@@ -828,19 +1029,35 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public async Task AcquireAsyncThrowsDisposeThrowsMultipleLimitersThrow()
         {
-            using var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, key => new CustomizableLimiter() { AcquireAsyncCoreImpl = (_, _) => new ValueTask<RateLimitLease>(new ThrowDisposeLease()) });
+                return RateLimitPartition.Get(
+                    1,
+                    key => new CustomizableLimiter()
+                    {
+                        AcquireAsyncCoreImpl = (_, _) =>
+                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, key => new CustomizableLimiter() { AcquireAsyncCoreImpl = (_, _) => new ValueTask<RateLimitLease>(new ThrowDisposeLease()) });
+                return RateLimitPartition.Get(
+                    1,
+                    key => new CustomizableLimiter()
+                    {
+                        AcquireAsyncCoreImpl = (_, _) =>
+                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
+                    }
+                );
             });
             using var limiter3 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -849,8 +1066,14 @@ namespace System.Threading.RateLimiting.Tests
 
             var lease = concurrencyLimiter.AttemptAcquire();
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2, limiter3);
-            var ex = await Assert.ThrowsAsync<AggregateException>(async () => await chainedLimiter.AcquireAsync(""));
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2,
+                limiter3
+            );
+            var ex = await Assert.ThrowsAsync<AggregateException>(
+                async () => await chainedLimiter.AcquireAsync("")
+            );
             Assert.Equal(3, ex.InnerExceptions.Count);
             Assert.IsType<NotImplementedException>(ex.InnerExceptions[0]);
             Assert.IsType<NotImplementedException>(ex.InnerExceptions[1]);
@@ -860,22 +1083,33 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public void AcquireSucceedsDisposeThrowsAndReleasesResources()
         {
-            using var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, key => new CustomizableLimiter() { AttemptAcquireCoreImpl = _ => new ThrowDisposeLease() });
+                return RateLimitPartition.Get(
+                    1,
+                    key => new CustomizableLimiter()
+                    {
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter);
             });
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             var lease = chainedLimiter.AttemptAcquire("");
             Assert.True(lease.IsAcquired);
             Assert.Equal(0, concurrencyLimiter.GetStatistics().CurrentAvailablePermits);
@@ -889,22 +1123,34 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public async Task AcquireAsyncSucceedsDisposeThrowsAndReleasesResources()
         {
-            using var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(1, key => new CustomizableLimiter() { AcquireAsyncCoreImpl = (_, _) => new ValueTask<RateLimitLease>(new ThrowDisposeLease()) });
+                return RateLimitPartition.Get(
+                    1,
+                    key => new CustomizableLimiter()
+                    {
+                        AcquireAsyncCoreImpl = (_, _) =>
+                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter);
             });
 
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
             var lease = await chainedLimiter.AcquireAsync("");
             Assert.True(lease.IsAcquired);
             Assert.Equal(0, concurrencyLimiter.GetStatistics().CurrentAvailablePermits);
@@ -918,18 +1164,22 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public void AcquireForwardsCorrectPermitCount()
         {
-            using var concurrencyLimiter1 = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 5,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
-            using var concurrencyLimiter2 = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 3,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter1 = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 5,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
+            using var concurrencyLimiter2 = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 3,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter1);
@@ -938,7 +1188,10 @@ namespace System.Threading.RateLimiting.Tests
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter2);
             });
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
 
             var lease = chainedLimiter.AttemptAcquire("", 3);
             Assert.True(lease.IsAcquired);
@@ -953,18 +1206,22 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public async Task AcquireAsyncForwardsCorrectPermitCount()
         {
-            using var concurrencyLimiter1 = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 5,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
-            using var concurrencyLimiter2 = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 3,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            using var concurrencyLimiter1 = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 5,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
+            using var concurrencyLimiter2 = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 3,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter1);
@@ -973,7 +1230,10 @@ namespace System.Threading.RateLimiting.Tests
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter2);
             });
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
 
             var lease = await chainedLimiter.AcquireAsync("", 3);
             Assert.True(lease.IsAcquired);
@@ -1005,7 +1265,10 @@ namespace System.Threading.RateLimiting.Tests
                 }
                 return RateLimitPartition.Get(4, key => limiterFactory.GetLimiter(key));
             });
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
 
             var lease = chainedLimiter.AttemptAcquire("1");
             Assert.True(lease.IsAcquired);
@@ -1034,7 +1297,10 @@ namespace System.Threading.RateLimiting.Tests
                 }
                 return RateLimitPartition.Get(4, key => limiterFactory.GetLimiter(key));
             });
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
 
             var lease = await chainedLimiter.AcquireAsync("1");
             Assert.True(lease.IsAcquired);
@@ -1048,12 +1314,15 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, key => new ConcurrencyLimiterOptions
-                {
-                    PermitLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 1
-                });
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    key => new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                        QueueLimit = 1,
+                    }
+                );
             });
             using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter);
 
@@ -1064,32 +1333,40 @@ namespace System.Threading.RateLimiting.Tests
             var task = chainedLimiter.AcquireAsync("", 1, cts.Token);
 
             cts.Cancel();
-             await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+            await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
         }
 
         [Fact]
         public async Task AcquireAsyncCanceledReleasesAcquiredResources()
         {
-            var concurrencyLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions
-            {
-                PermitLimit = 2,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0
-            });
+            var concurrencyLimiter = new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 2,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                }
+            );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 return RateLimitPartition.Get(1, key => concurrencyLimiter);
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, key => new ConcurrencyLimiterOptions
-                {
-                    PermitLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 1
-                });
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    key => new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                        QueueLimit = 1,
+                    }
+                );
             });
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
 
             var lease = chainedLimiter.AttemptAcquire("");
             Assert.True(lease.IsAcquired);
@@ -1109,25 +1386,34 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.GetConcurrencyLimiter(1, key => new ConcurrencyLimiterOptions
-                {
-                    PermitLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 1
-                });
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    key => new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                        QueueLimit = 1,
+                    }
+                );
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 // 0 queue limit to verify this isn't called while the previous limiter is waiting for resource(s)
                 // as it would return a failed lease when no queue is available
-                return RateLimitPartition.GetConcurrencyLimiter(1, key => new ConcurrencyLimiterOptions
-                {
-                    PermitLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
-                });
+                return RateLimitPartition.GetConcurrencyLimiter(
+                    1,
+                    key => new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                        QueueLimit = 0,
+                    }
+                );
             });
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
 
             var lease = chainedLimiter.AttemptAcquire("");
             Assert.True(lease.IsAcquired);
@@ -1153,7 +1439,10 @@ namespace System.Threading.RateLimiting.Tests
             {
                 return RateLimitPartition.Get(1, key => customizableLimiter2);
             });
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
 
             var customizableLease1 = new CustomizableLease();
             var disposeCalled = false;
@@ -1193,7 +1482,11 @@ namespace System.Threading.RateLimiting.Tests
             {
                 return RateLimitPartition.Get(1, key => new NotImplementedLimiter());
             });
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2, limiter3);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2,
+                limiter3
+            );
 
             var customizableLease1 = new CustomizableLease();
             var disposeCalled = false;
@@ -1230,7 +1523,11 @@ namespace System.Threading.RateLimiting.Tests
             {
                 return RateLimitPartition.Get(1, key => new NotImplementedLimiter());
             });
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2, limiter3);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2,
+                limiter3
+            );
 
             var customizableLease1 = new CustomizableLease();
             var disposeCalled = false;
@@ -1238,16 +1535,20 @@ namespace System.Threading.RateLimiting.Tests
             {
                 Assert.True(disposeCalled);
             };
-            customizableLimiter1.AcquireAsyncCoreImpl = (_, _) => new ValueTask<RateLimitLease>(customizableLease1);
+            customizableLimiter1.AcquireAsyncCoreImpl = (_, _) =>
+                new ValueTask<RateLimitLease>(customizableLease1);
 
             var customizableLease2 = new CustomizableLease();
             customizableLease2.DisposeImpl = _ =>
             {
                 disposeCalled = true;
             };
-            customizableLimiter2.AcquireAsyncCoreImpl = (_, _) => new ValueTask<RateLimitLease>(customizableLease2);
+            customizableLimiter2.AcquireAsyncCoreImpl = (_, _) =>
+                new ValueTask<RateLimitLease>(customizableLease2);
 
-            await Assert.ThrowsAsync<NotImplementedException>(async () => await chainedLimiter.AcquireAsync(""));
+            await Assert.ThrowsAsync<NotImplementedException>(
+                async () => await chainedLimiter.AcquireAsync("")
+            );
         }
 
         [Fact]
@@ -1274,7 +1575,7 @@ namespace System.Threading.RateLimiting.Tests
                     }
                     metadata = null;
                     return false;
-                }
+                },
             };
             var customizableLimiter2 = new CustomizableLimiter();
             customizableLimiter2.AttemptAcquireCoreImpl = _ => new CustomizableLease()
@@ -1297,7 +1598,7 @@ namespace System.Threading.RateLimiting.Tests
                     }
                     metadata = null;
                     return false;
-                }
+                },
             };
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -1307,7 +1608,10 @@ namespace System.Threading.RateLimiting.Tests
             {
                 return RateLimitPartition.Get(1, key => customizableLimiter2);
             });
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
 
             var lease = chainedLimiter.AttemptAcquire("");
 
@@ -1352,7 +1656,7 @@ namespace System.Threading.RateLimiting.Tests
                     }
                     metadata = null;
                     return false;
-                }
+                },
             };
             var customizableLimiter2 = new CustomizableLimiter();
             customizableLimiter2.AttemptAcquireCoreImpl = _ => new CustomizableLease()
@@ -1376,7 +1680,7 @@ namespace System.Threading.RateLimiting.Tests
                     }
                     metadata = null;
                     return false;
-                }
+                },
             };
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -1386,7 +1690,10 @@ namespace System.Threading.RateLimiting.Tests
             {
                 return RateLimitPartition.Get(1, key => customizableLimiter2);
             });
-            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(limiter1, limiter2);
+            using var chainedLimiter = PartitionedRateLimiter.CreateChained<string>(
+                limiter1,
+                limiter2
+            );
 
             var lease = chainedLimiter.AttemptAcquire("");
 

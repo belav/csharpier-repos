@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class Test_test
 {
     private int _counter = 0;
@@ -10,9 +11,7 @@ public class Test_test
     {
         int rc;
 
-        try
-        {
-        }
+        try { }
         finally
         {
             switch (type)
@@ -42,7 +41,6 @@ public class Test_test
     {
         return _counter++;
     }
-
 
     [Fact]
     public static int TestEntryPoint()

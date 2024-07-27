@@ -44,7 +44,11 @@ namespace System.Security.Cryptography.Xml.Tests
         public void KeySize_SetNegativeValue_ThrowsArgumentOutOfRangeException(int value)
         {
             EncryptionMethod method = new EncryptionMethod();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", null, () => method.KeySize = value);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                null,
+                () => method.KeySize = value
+            );
         }
 
         [Theory]
@@ -62,19 +66,19 @@ namespace System.Security.Cryptography.Xml.Tests
             yield return new object[]
             {
                 new EncryptionMethod(),
-                "<EncryptionMethod xmlns=\"http://www.w3.org/2001/04/xmlenc#\" />"
+                "<EncryptionMethod xmlns=\"http://www.w3.org/2001/04/xmlenc#\" />",
             };
 
             yield return new object[]
             {
                 new EncryptionMethod("algorithm"),
-                "<EncryptionMethod Algorithm=\"algorithm\" xmlns=\"http://www.w3.org/2001/04/xmlenc#\" />"
+                "<EncryptionMethod Algorithm=\"algorithm\" xmlns=\"http://www.w3.org/2001/04/xmlenc#\" />",
             };
 
             yield return new object[]
             {
                 new EncryptionMethod("algorithm") { KeySize = 1 },
-                "<EncryptionMethod Algorithm=\"algorithm\" xmlns=\"http://www.w3.org/2001/04/xmlenc#\"><KeySize>1</KeySize></EncryptionMethod>"
+                "<EncryptionMethod Algorithm=\"algorithm\" xmlns=\"http://www.w3.org/2001/04/xmlenc#\"><KeySize>1</KeySize></EncryptionMethod>",
             };
         }
 
@@ -109,21 +113,70 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             yield return new object[] { "<name />", null, 0 };
             yield return new object[] { "<name Algorithm=\"algorithm\"/>", "algorithm", 0 };
-            yield return new object[] { "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\"><enc:KeySize>1</enc:KeySize></name>", null, 1 };
-            yield return new object[] { "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\"><enc:KeySize>  1   </enc:KeySize></name>", null, 1 };
-            yield return new object[] { "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\" Algorithm=\"algorithm\" ><enc:KeySize>1</enc:KeySize></name>", "algorithm", 1 };
+            yield return new object[]
+            {
+                "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\"><enc:KeySize>1</enc:KeySize></name>",
+                null,
+                1,
+            };
+            yield return new object[]
+            {
+                "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\"><enc:KeySize>  1   </enc:KeySize></name>",
+                null,
+                1,
+            };
+            yield return new object[]
+            {
+                "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\" Algorithm=\"algorithm\" ><enc:KeySize>1</enc:KeySize></name>",
+                "algorithm",
+                1,
+            };
 
             // Custom namespace
-            yield return new object[] { "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\" enc:Algorithm=\"algorithm\"/>", "algorithm", 0 };
-            yield return new object[] { "<name xmlns:abc=\"http://www.w3.org/2001/04/xmlenc#\" abc:Algorithm=\"algorithm\"/>", "algorithm", 0 };
-            yield return new object[] { "<name xmlns:abc=\"http://www.w3.org/2001/04/xmlenc#\"><abc:KeySize>1</abc:KeySize></name>", null, 1 };
-            yield return new object[] { "<name Algorithm=\"originalAlgorithm\" xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\" enc:Algorithm=\"namespacedAlgorithm\"/>", "originalAlgorithm", 0 };
-            yield return new object[] { "<name xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:Algorithm=\"algorithm\"/>", null, 0 };
-
+            yield return new object[]
+            {
+                "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\" enc:Algorithm=\"algorithm\"/>",
+                "algorithm",
+                0,
+            };
+            yield return new object[]
+            {
+                "<name xmlns:abc=\"http://www.w3.org/2001/04/xmlenc#\" abc:Algorithm=\"algorithm\"/>",
+                "algorithm",
+                0,
+            };
+            yield return new object[]
+            {
+                "<name xmlns:abc=\"http://www.w3.org/2001/04/xmlenc#\"><abc:KeySize>1</abc:KeySize></name>",
+                null,
+                1,
+            };
+            yield return new object[]
+            {
+                "<name Algorithm=\"originalAlgorithm\" xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\" enc:Algorithm=\"namespacedAlgorithm\"/>",
+                "originalAlgorithm",
+                0,
+            };
+            yield return new object[]
+            {
+                "<name xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:Algorithm=\"algorithm\"/>",
+                null,
+                0,
+            };
 
             yield return new object[] { "<name algorithm=\"algorithm\"/>", null, 0 };
-            yield return new object[] { "<name Algorithm=\"algorithm\"><KeySize>1</KeySize></name>", "algorithm", 0 };
-            yield return new object[] { "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\"><KeySize>1</KeySize></name>", null, 0 };
+            yield return new object[]
+            {
+                "<name Algorithm=\"algorithm\"><KeySize>1</KeySize></name>",
+                "algorithm",
+                0,
+            };
+            yield return new object[]
+            {
+                "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\"><KeySize>1</KeySize></name>",
+                null,
+                0,
+            };
         }
 
         [Theory]
@@ -146,7 +199,10 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void LoadXml_NullValue_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new EncryptionMethod().LoadXml(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new EncryptionMethod().LoadXml(null)
+            );
         }
 
         [Theory]
@@ -157,7 +213,9 @@ namespace System.Security.Cryptography.Xml.Tests
         public void LoadXml_NegativeKeySize_Throws(string keySize, Type exceptionType)
         {
             XmlDocument document = new XmlDocument();
-            document.LoadXml($"<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\"><enc:KeySize>{keySize}</enc:KeySize></name>");
+            document.LoadXml(
+                $"<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\"><enc:KeySize>{keySize}</enc:KeySize></name>"
+            );
             XmlElement value = (XmlElement)document.FirstChild;
 
             EncryptionMethod method = new EncryptionMethod();

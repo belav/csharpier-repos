@@ -21,20 +21,25 @@ public class RouteParameterUnusedParameterFixer : CodeFixProvider
 {
     private static readonly TypeSyntax DefaultType = SyntaxFactory.ParseTypeName("string");
 
-    public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(
-        DiagnosticDescriptors.RoutePatternUnusedParameter.Id);
+    public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+        ImmutableArray.Create(DiagnosticDescriptors.RoutePatternUnusedParameter.Id);
 
-    public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
+    public sealed override FixAllProvider GetFixAllProvider() =>
+        WellKnownFixAllProviders.BatchFixer;
 
     public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
-        var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+        var root = await context
+            .Document.GetSyntaxRootAsync(context.CancellationToken)
+            .ConfigureAwait(false);
         if (root == null)
         {
             return;
         }
 
-        var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+        var semanticModel = await context
+            .Document.GetSemanticModelAsync(context.CancellationToken)
+            .ConfigureAwait(false);
         if (semanticModel == null)
         {
             return;
@@ -47,15 +52,31 @@ public class RouteParameterUnusedParameterFixer : CodeFixProvider
             if (diagnostic.Properties.TryGetValue("RouteParameterName", out var routeParameterName))
             {
                 context.RegisterCodeFix(
-                    CodeAction.Create($"Add parameter '{routeParameterName}'",
-                        cancellationToken => AddRouteParameterAsync(diagnostic, root, routeUsageCache, context.Document, cancellationToken),
-                        equivalenceKey: DiagnosticDescriptors.RoutePatternUnusedParameter.Id),
-                    diagnostic);
+                    CodeAction.Create(
+                        $"Add parameter '{routeParameterName}'",
+                        cancellationToken =>
+                            AddRouteParameterAsync(
+                                diagnostic,
+                                root,
+                                routeUsageCache,
+                                context.Document,
+                                cancellationToken
+                            ),
+                        equivalenceKey: DiagnosticDescriptors.RoutePatternUnusedParameter.Id
+                    ),
+                    diagnostic
+                );
             }
         }
     }
 
-    private static Task<Document> AddRouteParameterAsync(Diagnostic diagnostic, SyntaxNode root, RouteUsageCache routeUsageCache, Document document, CancellationToken cancellationToken)
+    private static Task<Document> AddRouteParameterAsync(
+        Diagnostic diagnostic,
+        SyntaxNode root,
+        RouteUsageCache routeUsageCache,
+        Document document,
+        CancellationToken cancellationToken
+    )
     {
         var param = root.FindNode(diagnostic.Location.SourceSpan);
 
@@ -68,15 +89,28 @@ public class RouteParameterUnusedParameterFixer : CodeFixProvider
             return Task.FromResult(document);
         }
 
-        return Task.FromResult(UpdateDocument(diagnostic, root, document, routeUsage.UsageContext.MethodSyntax));
+        return Task.FromResult(
+            UpdateDocument(diagnostic, root, document, routeUsage.UsageContext.MethodSyntax)
+        );
     }
 
-    private static Document UpdateDocument(Diagnostic diagnostic, SyntaxNode root, Document document, SyntaxNode methodSyntax)
+    private static Document UpdateDocument(
+        Diagnostic diagnostic,
+        SyntaxNode root,
+        Document document,
+        SyntaxNode methodSyntax
+    )
     {
         var routeParameterName = diagnostic.Properties["RouteParameterName"];
         var routeParameterPolicy = diagnostic.Properties["RouteParameterPolicy"];
-        var routeParameterIsOptional = Convert.ToBoolean(diagnostic.Properties["RouteParameterIsOptional"], CultureInfo.InvariantCulture);
-        var routeParameterInsertIndex = Convert.ToInt32(diagnostic.Properties["RouteParameterInsertIndex"], CultureInfo.InvariantCulture);
+        var routeParameterIsOptional = Convert.ToBoolean(
+            diagnostic.Properties["RouteParameterIsOptional"],
+            CultureInfo.InvariantCulture
+        );
+        var routeParameterInsertIndex = Convert.ToInt32(
+            diagnostic.Properties["RouteParameterInsertIndex"],
+            CultureInfo.InvariantCulture
+        );
 
         var resolvedType = CalculateTypeFromPolicy(routeParameterPolicy);
         if (routeParameterIsOptional)
@@ -85,13 +119,22 @@ public class RouteParameterUnusedParameterFixer : CodeFixProvider
         }
 
         // After fix, navigate to type with CodeAction_Navigation.
-        var type = resolvedType.WithAdditionalAnnotations(new SyntaxAnnotation("CodeAction_Navigation"));
-        var newParameter = SyntaxFactory.Parameter(SyntaxFactory.Identifier(routeParameterName!)).WithType(type);
+        var type = resolvedType.WithAdditionalAnnotations(
+            new SyntaxAnnotation("CodeAction_Navigation")
+        );
+        var newParameter = SyntaxFactory
+            .Parameter(SyntaxFactory.Identifier(routeParameterName!))
+            .WithType(type);
         var updatedMethod = methodSyntax switch
         {
-            BaseMethodDeclarationSyntax declaredMethodSyntax => AddParameter(declaredMethodSyntax, newParameter, routeParameterInsertIndex),
-            ParenthesizedLambdaExpressionSyntax lambdaExpressionSyntax => AddParameter(lambdaExpressionSyntax, newParameter, routeParameterInsertIndex),
-            _ => throw new InvalidOperationException($"Unexpected method syntax: {methodSyntax.GetType().FullName}")
+            BaseMethodDeclarationSyntax declaredMethodSyntax
+                => AddParameter(declaredMethodSyntax, newParameter, routeParameterInsertIndex),
+            ParenthesizedLambdaExpressionSyntax lambdaExpressionSyntax
+                => AddParameter(lambdaExpressionSyntax, newParameter, routeParameterInsertIndex),
+            _
+                => throw new InvalidOperationException(
+                    $"Unexpected method syntax: {methodSyntax.GetType().FullName}"
+                ),
         };
 
         // Update document.
@@ -99,7 +142,11 @@ public class RouteParameterUnusedParameterFixer : CodeFixProvider
         return document.WithSyntaxRoot(updatedSyntaxTree);
     }
 
-    private static SyntaxNode AddParameter(BaseMethodDeclarationSyntax syntax, ParameterSyntax parameterSyntax, int parameterIndex)
+    private static SyntaxNode AddParameter(
+        BaseMethodDeclarationSyntax syntax,
+        ParameterSyntax parameterSyntax,
+        int parameterIndex
+    )
     {
         if (parameterIndex == -1)
         {
@@ -110,7 +157,11 @@ public class RouteParameterUnusedParameterFixer : CodeFixProvider
         return syntax.WithParameterList(syntax.ParameterList.WithParameters(newParameters));
     }
 
-    private static SyntaxNode AddParameter(ParenthesizedLambdaExpressionSyntax syntax, ParameterSyntax parameterSyntax, int parameterIndex)
+    private static SyntaxNode AddParameter(
+        ParenthesizedLambdaExpressionSyntax syntax,
+        ParameterSyntax parameterSyntax,
+        int parameterIndex
+    )
     {
         if (parameterIndex == -1)
         {
@@ -129,7 +180,12 @@ public class RouteParameterUnusedParameterFixer : CodeFixProvider
         }
 
         string? resolvedName = null;
-        foreach (var policy in routeParameterPolicy.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries))
+        foreach (
+            var policy in routeParameterPolicy.Split(
+                new[] { ':' },
+                StringSplitOptions.RemoveEmptyEntries
+            )
+        )
         {
             // Match policy to a type.
             var typeName = policy switch
@@ -142,7 +198,7 @@ public class RouteParameterUnusedParameterFixer : CodeFixProvider
                 "double" => "double",
                 "float" => "float",
                 "guid" => "System.Guid",
-                _ => null
+                _ => null,
             };
 
             if (typeName != null)

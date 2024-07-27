@@ -11,12 +11,18 @@ namespace System.Text.Encodings.Web.Tests
 {
     public class UrlEncoderTests
     {
-        private static UTF8Encoding _utf8EncodingThrowOnInvalidBytes = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+        private static UTF8Encoding _utf8EncodingThrowOnInvalidBytes = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: true
+        );
 
         [Fact]
         public void TestSurrogate()
         {
-            Assert.Equal("%F0%9F%92%A9", System.Text.Encodings.Web.UrlEncoder.Default.Encode("\U0001f4a9"));
+            Assert.Equal(
+                "%F0%9F%92%A9",
+                System.Text.Encodings.Web.UrlEncoder.Default.Encode("\U0001f4a9")
+            );
             using (var writer = new StringWriter())
             {
                 System.Text.Encodings.Web.UrlEncoder.Default.Encode(writer, "\U0001f4a9");
@@ -47,12 +53,25 @@ namespace System.Text.Encodings.Web.Tests
         public void Ctor_WithUnicodeRanges()
         {
             // Arrange
-            UrlEncoder encoder = UrlEncoder.Create(UnicodeRanges.Latin1Supplement, UnicodeRanges.MiscellaneousSymbols);
+            UrlEncoder encoder = UrlEncoder.Create(
+                UnicodeRanges.Latin1Supplement,
+                UnicodeRanges.MiscellaneousSymbols
+            );
 
             // Act & assert
             Assert.Equal("%61", encoder.Encode("a"));
-            Assert.Equal("\u00E9", encoder.Encode("\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */));
-            Assert.Equal("\u2601", encoder.Encode("\u2601" /* CLOUD */));
+            Assert.Equal(
+                "\u00E9",
+                encoder.Encode(
+                    "\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */
+                )
+            );
+            Assert.Equal(
+                "\u2601",
+                encoder.Encode(
+                    "\u2601" /* CLOUD */
+                )
+            );
         }
 
         [Fact]
@@ -63,8 +82,18 @@ namespace System.Text.Encodings.Web.Tests
 
             // Act & assert
             Assert.Equal("a", encoder.Encode("a"));
-            Assert.Equal("%C3%A9", encoder.Encode("\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */));
-            Assert.Equal("%E2%98%81", encoder.Encode("\u2601" /* CLOUD */));
+            Assert.Equal(
+                "%C3%A9",
+                encoder.Encode(
+                    "\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */
+                )
+            );
+            Assert.Equal(
+                "%E2%98%81",
+                encoder.Encode(
+                    "\u2601" /* CLOUD */
+                )
+            );
         }
 
         [Fact]
@@ -110,7 +139,11 @@ namespace System.Text.Encodings.Web.Tests
                     {
                         mustEncode = false; // ALPHA / DIGIT
                     }
-                    else if ((0x00A0 <= i && i <= 0xD7FF) | (0xF900 <= i && i <= 0xFDCF) | (0xFDF0 <= i && i <= 0xFFEF))
+                    else if (
+                        (0x00A0 <= i && i <= 0xD7FF)
+                        | (0xF900 <= i && i <= 0xFDCF)
+                        | (0xFDF0 <= i && i <= 0xFFEF)
+                    )
                     {
                         mustEncode = !UnicodeTestHelpers.IsCharacterDefined((char)i); // 'ucschar'
                     }
@@ -172,7 +205,8 @@ namespace System.Text.Encodings.Web.Tests
 
             // "a<unpaired leading>b<unpaired trailing>c<trailing before leading>d<unpaired trailing><valid>e<high at end of string>"
             const string input = "a\uD800b\uDFFFc\uDFFF\uD800d\uDFFF\uD800\uDFFFe\uD800";
-            const string expected = "a%EF%BF%BDb%EF%BF%BDc%EF%BF%BD%EF%BF%BDd%EF%BF%BD%F0%90%8F%BFe%EF%BF%BD"; // 'D800' 'DFFF' was preserved since it's valid
+            const string expected =
+                "a%EF%BF%BDb%EF%BF%BDc%EF%BF%BD%EF%BF%BDd%EF%BF%BD%F0%90%8F%BFe%EF%BF%BD"; // 'D800' 'DFFF' was preserved since it's valid
 
             // Act
             string retVal = encoder.Encode(input);
@@ -208,7 +242,10 @@ namespace System.Text.Encodings.Web.Tests
             // Arrange
             UrlEncoder encoder = UrlEncoder.Default;
 
-            Assert.Throws<ArgumentNullException>(() => { encoder.Encode(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                encoder.Encode(null);
+            });
         }
 
         [Fact]
@@ -290,7 +327,11 @@ namespace System.Text.Encodings.Web.Tests
         private static string GetKnownGoodPercentEncodedValue(int codePoint)
         {
             // Convert the code point to UTF16, then call Encoding.UTF8.GetBytes, then hex-encode everything
-            return string.Concat(_utf8EncodingThrowOnInvalidBytes.GetBytes(char.ConvertFromUtf32(codePoint)).Select(b => string.Format(CultureInfo.InvariantCulture, "%{0:X2}", b)));
+            return string.Concat(
+                _utf8EncodingThrowOnInvalidBytes
+                    .GetBytes(char.ConvertFromUtf32(codePoint))
+                    .Select(b => string.Format(CultureInfo.InvariantCulture, "%{0:X2}", b))
+            );
         }
 
         private static bool IsSurrogateCodePoint(int codePoint)

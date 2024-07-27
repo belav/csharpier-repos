@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
@@ -24,7 +24,11 @@ public class CertificatePathWatcherTests : LoggedTest
 
         var logger = LoggerFactory.CreateLogger<CertificatePathWatcher>();
 
-        using var watcher = new CertificatePathWatcher(dir, logger, _ => NoChangeFileProvider.Instance);
+        using var watcher = new CertificatePathWatcher(
+            dir,
+            logger,
+            _ => NoChangeFileProvider.Instance
+        );
 
         var changeToken = watcher.GetChangeToken();
 
@@ -79,7 +83,11 @@ public class CertificatePathWatcherTests : LoggedTest
             dirs[i] = Path.Combine(rootDir, $"dir{i}");
         }
 
-        using var watcher = new CertificatePathWatcher(rootDir, logger, _ => NoChangeFileProvider.Instance);
+        using var watcher = new CertificatePathWatcher(
+            rootDir,
+            logger,
+            _ => NoChangeFileProvider.Instance
+        );
 
         var certificateConfigs = new CertificateConfig[fileCount];
         var filesInDir = new int[dirCount];
@@ -97,7 +105,10 @@ public class CertificatePathWatcherTests : LoggedTest
             watcher.AddWatchUnsynchronized(certificateConfig);
         }
 
-        Assert.Equal(Math.Min(dirCount, fileCount), watcher.TestGetDirectoryWatchCountUnsynchronized());
+        Assert.Equal(
+            Math.Min(dirCount, fileCount),
+            watcher.TestGetDirectoryWatchCountUnsynchronized()
+        );
 
         for (int i = 0; i < dirCount; i++)
         {
@@ -130,7 +141,9 @@ public class CertificatePathWatcherTests : LoggedTest
 
         using var watcher = new CertificatePathWatcher(dir, logger, _ => fileProvider);
 
-        var signalTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var signalTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         var oldChangeToken = watcher.GetChangeToken();
         oldChangeToken.RegisterChangeCallback(_ => signalTcs.SetResult(), state: null);
@@ -138,10 +151,7 @@ public class CertificatePathWatcherTests : LoggedTest
         var certificateConfigs = new CertificateConfig[observerCount];
         for (int i = 0; i < observerCount; i++)
         {
-            certificateConfigs[i] = new CertificateConfig
-            {
-                Path = filePath,
-            };
+            certificateConfigs[i] = new CertificateConfig { Path = filePath };
 
             watcher.AddWatchUnsynchronized(certificateConfigs[i]);
         }
@@ -180,14 +190,13 @@ public class CertificatePathWatcherTests : LoggedTest
 
         using var watcher = new CertificatePathWatcher(dir, logger, _ => fileProvider);
 
-        var certificateConfig = new CertificateConfig
-        {
-            Path = filePath,
-        };
+        var certificateConfig = new CertificateConfig { Path = filePath };
 
         watcher.AddWatchUnsynchronized(certificateConfig);
 
-        var signalTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var signalTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         var oldChangeToken = watcher.GetChangeToken();
         oldChangeToken.RegisterChangeCallback(_ => signalTcs.SetResult(), state: null);
@@ -217,10 +226,7 @@ public class CertificatePathWatcherTests : LoggedTest
         // Returning null indicates that the directory does not exist
         using var watcher = new CertificatePathWatcher(dir, logger, _ => null);
 
-        var certificateConfig = new CertificateConfig
-        {
-            Path = Path.Combine(dir, "test.pfx"),
-        };
+        var certificateConfig = new CertificateConfig { Path = Path.Combine(dir, "test.pfx") };
 
         watcher.AddWatchUnsynchronized(certificateConfig);
 
@@ -241,12 +247,13 @@ public class CertificatePathWatcherTests : LoggedTest
 
         var logger = LoggerFactory.CreateLogger<CertificatePathWatcher>();
 
-        using var watcher = new CertificatePathWatcher(dir, logger, _ => NoChangeFileProvider.Instance);
+        using var watcher = new CertificatePathWatcher(
+            dir,
+            logger,
+            _ => NoChangeFileProvider.Instance
+        );
 
-        var certificateConfig = new CertificateConfig
-        {
-            Path = filePath,
-        };
+        var certificateConfig = new CertificateConfig { Path = filePath };
 
         if (previouslyAdded)
         {
@@ -275,17 +282,15 @@ public class CertificatePathWatcherTests : LoggedTest
 
         var logger = LoggerFactory.CreateLogger<CertificatePathWatcher>();
 
-        using var watcher = new CertificatePathWatcher(dir, logger, _ => NoChangeFileProvider.Instance);
+        using var watcher = new CertificatePathWatcher(
+            dir,
+            logger,
+            _ => NoChangeFileProvider.Instance
+        );
 
-        var certificateConfig1 = new CertificateConfig
-        {
-            Path = filePath,
-        };
+        var certificateConfig1 = new CertificateConfig { Path = filePath };
 
-        var certificateConfig2 = new CertificateConfig
-        {
-            Path = filePath,
-        };
+        var certificateConfig2 = new CertificateConfig { Path = filePath };
 
         watcher.AddWatchUnsynchronized(certificateConfig1);
 
@@ -315,12 +320,13 @@ public class CertificatePathWatcherTests : LoggedTest
 
         var logger = LoggerFactory.CreateLogger<CertificatePathWatcher>();
 
-        using var watcher = new CertificatePathWatcher(dir, logger, _ => NoChangeFileProvider.Instance);
+        using var watcher = new CertificatePathWatcher(
+            dir,
+            logger,
+            _ => NoChangeFileProvider.Instance
+        );
 
-        var certificateConfig = new CertificateConfig
-        {
-            Path = filePath,
-        };
+        var certificateConfig = new CertificateConfig { Path = filePath };
 
         watcher.AddWatchUnsynchronized(certificateConfig);
 
@@ -352,10 +358,7 @@ public class CertificatePathWatcherTests : LoggedTest
 
         using var watcher = new CertificatePathWatcher(dir, logger, _ => fileProvider);
 
-        var certificateConfig = new CertificateConfig
-        {
-            Path = filePath,
-        };
+        var certificateConfig = new CertificateConfig { Path = filePath };
 
         watcher.AddWatchUnsynchronized(certificateConfig);
 
@@ -363,11 +366,15 @@ public class CertificatePathWatcherTests : LoggedTest
         Assert.Equal(1, watcher.TestGetFileWatchCountUnsynchronized(dir));
         Assert.Equal(1, watcher.TestGetObserverCountUnsynchronized(filePath));
 
-        var changeTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var changeTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         watcher.GetChangeToken().RegisterChangeCallback(_ => changeTcs.SetResult(), state: null);
 
-        var logNoLastModifiedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var logNoLastModifiedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         TestSink.MessageLogged += writeContext =>
         {
@@ -391,7 +398,12 @@ public class CertificatePathWatcherTests : LoggedTest
         Assert.False(changeTcs.Task.IsCompleted);
 
         // Restore the file
-        fileProvider.SetLastModifiedTime(fileName, restoredWithNewerLastModifiedTime ? fileLastModifiedTime.AddSeconds(1) : fileLastModifiedTime);
+        fileProvider.SetLastModifiedTime(
+            fileName,
+            restoredWithNewerLastModifiedTime
+                ? fileLastModifiedTime.AddSeconds(1)
+                : fileLastModifiedTime
+        );
         fileProvider.FireChangeToken(fileName);
 
         await changeTcs.Task.DefaultTimeout();
@@ -406,41 +418,45 @@ public class CertificatePathWatcherTests : LoggedTest
 
         var logger = LoggerFactory.CreateLogger<CertificatePathWatcher>();
 
-        using var watcher = new CertificatePathWatcher(dir, logger, _ => NoChangeFileProvider.Instance);
+        using var watcher = new CertificatePathWatcher(
+            dir,
+            logger,
+            _ => NoChangeFileProvider.Instance
+        );
 
         var changeToken = watcher.GetChangeToken();
 
-        var certificateConfig1 = new CertificateConfig
-        {
-            Path = filePath,
-        };
+        var certificateConfig1 = new CertificateConfig { Path = filePath };
 
-        var certificateConfig2 = new CertificateConfig
-        {
-            Path = filePath,
-        };
+        var certificateConfig2 = new CertificateConfig { Path = filePath };
 
-        var certificateConfig3 = new CertificateConfig
-        {
-            Path = filePath,
-        };
+        var certificateConfig3 = new CertificateConfig { Path = filePath };
 
         // Add certificateConfig1
-        watcher.UpdateWatches(new List<CertificateConfig> { }, new List<CertificateConfig> { certificateConfig1 });
+        watcher.UpdateWatches(
+            new List<CertificateConfig> { },
+            new List<CertificateConfig> { certificateConfig1 }
+        );
 
         Assert.Equal(1, watcher.TestGetDirectoryWatchCountUnsynchronized());
         Assert.Equal(1, watcher.TestGetFileWatchCountUnsynchronized(dir));
         Assert.Equal(1, watcher.TestGetObserverCountUnsynchronized(filePath));
 
         // Remove certificateConfig1
-        watcher.UpdateWatches(new List<CertificateConfig> { certificateConfig1 }, new List<CertificateConfig> { });
+        watcher.UpdateWatches(
+            new List<CertificateConfig> { certificateConfig1 },
+            new List<CertificateConfig> { }
+        );
 
         Assert.Equal(0, watcher.TestGetDirectoryWatchCountUnsynchronized());
         Assert.Equal(0, watcher.TestGetFileWatchCountUnsynchronized(dir));
         Assert.Equal(0, watcher.TestGetObserverCountUnsynchronized(filePath));
 
         // Re-add certificateConfig1
-        watcher.UpdateWatches(new List<CertificateConfig> { }, new List<CertificateConfig> { certificateConfig1 });
+        watcher.UpdateWatches(
+            new List<CertificateConfig> { },
+            new List<CertificateConfig> { certificateConfig1 }
+        );
 
         Assert.Equal(1, watcher.TestGetDirectoryWatchCountUnsynchronized());
         Assert.Equal(1, watcher.TestGetFileWatchCountUnsynchronized(dir));
@@ -462,14 +478,18 @@ public class CertificatePathWatcherTests : LoggedTest
                 certificateConfig2, // Add it again
                 certificateConfig3, // Add something new
                 certificateConfig3, // Add it again
-            });
+            }
+        );
 
         Assert.Equal(1, watcher.TestGetDirectoryWatchCountUnsynchronized());
         Assert.Equal(1, watcher.TestGetFileWatchCountUnsynchronized(dir));
         Assert.Equal(3, watcher.TestGetObserverCountUnsynchronized(filePath));
     }
 
-    private static IDictionary<string, object> GetLogMessageProperties(ITestSink testSink, string eventName)
+    private static IDictionary<string, object> GetLogMessageProperties(
+        ITestSink testSink,
+        string eventName
+    )
     {
         var writeContext = Assert.Single(testSink.Writes.Where(wc => wc.EventId.Name == eventName));
         var pairs = (IReadOnlyList<KeyValuePair<string, object>>)writeContext.State;
@@ -481,25 +501,28 @@ public class CertificatePathWatcherTests : LoggedTest
     {
         public static readonly IFileProvider Instance = new NoChangeFileProvider();
 
-        private NoChangeFileProvider()
-        {
-        }
+        private NoChangeFileProvider() { }
 
-        IDirectoryContents IFileProvider.GetDirectoryContents(string subpath) => throw new NotSupportedException();
+        IDirectoryContents IFileProvider.GetDirectoryContents(string subpath) =>
+            throw new NotSupportedException();
+
         IFileInfo IFileProvider.GetFileInfo(string subpath) => throw new NotSupportedException();
+
         IChangeToken IFileProvider.Watch(string filter) => NoChangeChangeToken.Instance;
 
         private sealed class NoChangeChangeToken : IChangeToken
         {
             public static readonly IChangeToken Instance = new NoChangeChangeToken();
 
-            private NoChangeChangeToken()
-            {
-            }
+            private NoChangeChangeToken() { }
 
             bool IChangeToken.HasChanged => false;
             bool IChangeToken.ActiveChangeCallbacks => true;
-            IDisposable IChangeToken.RegisterChangeCallback(Action<object> callback, object state) => DummyDisposable.Instance;
+
+            IDisposable IChangeToken.RegisterChangeCallback(
+                Action<object> callback,
+                object state
+            ) => DummyDisposable.Instance;
         }
     }
 
@@ -507,13 +530,9 @@ public class CertificatePathWatcherTests : LoggedTest
     {
         public static readonly IDisposable Instance = new DummyDisposable();
 
-        private DummyDisposable()
-        {
-        }
+        private DummyDisposable() { }
 
-        void IDisposable.Dispose()
-        {
-        }
+        void IDisposable.Dispose() { }
     }
 
     private sealed class MockFileProvider : IFileProvider
@@ -569,6 +588,7 @@ public class CertificatePathWatcherTests : LoggedTest
             string IFileInfo.PhysicalPath => throw new NotSupportedException();
             string IFileInfo.Name => throw new NotSupportedException();
             bool IFileInfo.IsDirectory => throw new NotSupportedException();
+
             Stream IFileInfo.CreateReadStream() => throw new NotSupportedException();
         }
     }

@@ -5,9 +5,13 @@ using Microsoft.Data.Sqlite;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class FromSqlQuerySqliteTest : FromSqlQueryTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
+public class FromSqlQuerySqliteTest
+    : FromSqlQueryTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
 {
-    public FromSqlQuerySqliteTest(NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture, ITestOutputHelper testOutputHelper)
+    public FromSqlQuerySqliteTest(
+        NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -24,7 +28,8 @@ FROM (
     SELECT * FROM "Customers"
 ) AS "m"
 WHERE "m"."ContactName" IS NOT NULL AND instr("m"."ContactName", 'z') > 0
-""");
+"""
+        );
     }
 
     public override async Task<string> FromSqlRaw_queryable_with_parameters_and_closure(bool async)
@@ -39,26 +44,33 @@ SELECT ""m"".""CustomerID"", ""m"".""Address"", ""m"".""City"", ""m"".""CompanyN
 FROM (
     SELECT * FROM ""Customers"" WHERE ""City"" = @p0
 ) AS ""m""
-WHERE ""m"".""ContactTitle"" = @__contactTitle_1", queryString, ignoreLineEndingDifferences: true);
+WHERE ""m"".""ContactTitle"" = @__contactTitle_1",
+            queryString,
+            ignoreLineEndingDifferences: true
+        );
 
         return queryString;
     }
 
     public override Task Bad_data_error_handling_invalid_cast_key(bool async)
         // Not supported on SQLite
-        => Task.CompletedTask;
+        =>
+        Task.CompletedTask;
 
     public override Task Bad_data_error_handling_invalid_cast(bool async)
         // Not supported on SQLite
-        => Task.CompletedTask;
+        =>
+        Task.CompletedTask;
 
     public override Task Bad_data_error_handling_invalid_cast_projection(bool async)
         // Not supported on SQLite
-        => Task.CompletedTask;
+        =>
+        Task.CompletedTask;
 
     public override Task Bad_data_error_handling_invalid_cast_no_tracking(bool async)
         // Not supported on SQLite
-        => Task.CompletedTask;
+        =>
+        Task.CompletedTask;
 
     public override async Task FromSqlRaw_composed_with_common_table_expression(bool async)
     {
@@ -74,12 +86,13 @@ FROM (
     SELECT * FROM "Customers2"
 ) AS "m"
 WHERE "m"."ContactName" IS NOT NULL AND instr("m"."ContactName", 'z') > 0
-""");
+"""
+        );
     }
 
-    protected override DbParameter CreateDbParameter(string name, object value)
-        => new SqliteParameter { ParameterName = name, Value = value };
+    protected override DbParameter CreateDbParameter(string name, object value) =>
+        new SqliteParameter { ParameterName = name, Value = value };
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

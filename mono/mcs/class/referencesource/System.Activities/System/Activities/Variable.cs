@@ -16,7 +16,7 @@ namespace System.Activities
     using System.Runtime;
     using System.Runtime.Serialization;
 
-    [DebuggerDisplay("Name = {Name}, Type = {Type}")] 
+    [DebuggerDisplay("Name = {Name}, Type = {Type}")]
     public abstract class Variable : LocationReference
     {
         VariableModifiers modifiers;
@@ -29,32 +29,19 @@ namespace System.Activities
             this.Id = -1;
         }
 
-        internal bool IsHandle
-        {
-            get;
-            set;
-        }
+        internal bool IsHandle { get; set; }
 
         [DefaultValue(null)]
         public new string Name
         {
-            get
-            {
-                return this.name;
-            }
-            set
-            {
-                this.name = value;
-            }
+            get { return this.name; }
+            set { this.name = value; }
         }
 
         [DefaultValue(VariableModifiers.None)]
         public VariableModifiers Modifiers
         {
-            get
-            {
-                return this.modifiers;
-            }
+            get { return this.modifiers; }
             set
             {
                 VariableModifiersHelper.Validate(value, "value");
@@ -66,62 +53,31 @@ namespace System.Activities
         [DefaultValue(null)]
         public ActivityWithResult Default
         {
-            get
-            {
-                return this.DefaultCore;
-            }
-            set
-            {
-                this.DefaultCore = value;
-            }
+            get { return this.DefaultCore; }
+            set { this.DefaultCore = value; }
         }
 
         protected override string NameCore
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         internal int CacheId
         {
-            get
-            {
-                return this.cacheId;
-            }
+            get { return this.cacheId; }
         }
 
-        internal abstract ActivityWithResult DefaultCore
-        {
-            get;
-            set;
-        }
+        internal abstract ActivityWithResult DefaultCore { get; set; }
 
-        internal bool IsPublic
-        {
-            get;
-            set;
-        }
+        internal bool IsPublic { get; set; }
 
-        internal object Origin
-        {
-            get;
-            set;
-        }
+        internal object Origin { get; set; }
 
-        internal Activity Owner
-        {
-            get;
-            private set;
-        }
+        internal Activity Owner { get; private set; }
 
         internal bool IsInTree
         {
-            get
-            {
-                return this.Owner != null;
-            }
+            get { return this.Owner != null; }
         }
 
         public static Variable Create(string name, Type type, VariableModifiers modifiers)
@@ -129,13 +85,26 @@ namespace System.Activities
             return ActivityUtilities.CreateVariable(name, type, modifiers);
         }
 
-        internal bool InitializeRelationship(Activity parent, bool isPublic, ref IList<ValidationError> validationErrors)
+        internal bool InitializeRelationship(
+            Activity parent,
+            bool isPublic,
+            ref IList<ValidationError> validationErrors
+        )
         {
             if (this.cacheId == parent.CacheId)
             {
                 if (this.Owner != null)
                 {
-                    ValidationError validationError = new ValidationError(SR.VariableAlreadyInUseOnActivity(this.Name, parent.DisplayName, this.Owner.DisplayName), false, this.Name, parent);
+                    ValidationError validationError = new ValidationError(
+                        SR.VariableAlreadyInUseOnActivity(
+                            this.Name,
+                            parent.DisplayName,
+                            this.Owner.DisplayName
+                        ),
+                        false,
+                        this.Name,
+                        parent
+                    );
                     ActivityUtilities.Add(ref validationErrors, validationError);
 
                     // Get out early since we've already initialized this variable.
@@ -160,7 +129,17 @@ namespace System.Activities
                 {
                     ActivityUtilities.Add(
                         ref validationErrors,
-                        new ValidationError(SR.VariableExpressionTypeMismatch(this.Name, this.Type, expression.ResultType), false, this.Name, parent));
+                        new ValidationError(
+                            SR.VariableExpressionTypeMismatch(
+                                this.Name,
+                                this.Type,
+                                expression.ResultType
+                            ),
+                            false,
+                            this.Name,
+                            parent
+                        )
+                    );
                 }
 
                 return this.Default.InitializeRelationship(this, isPublic, ref validationErrors);
@@ -173,7 +152,9 @@ namespace System.Activities
         {
             if (!this.IsInTree)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.VariableNotOpen(this.Name, this.Type)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.VariableNotOpen(this.Name, this.Type))
+                );
             }
         }
 
@@ -181,7 +162,9 @@ namespace System.Activities
         {
             if (this.IsHandle)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CannotPerformOperationOnHandle));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CannotPerformOperationOnHandle)
+                );
             }
         }
 
@@ -202,12 +185,21 @@ namespace System.Activities
             {
                 if (this.IsPublic || !object.ReferenceEquals(this.Owner, context.Activity))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.VariableOnlyAccessibleAtScopeOfDeclaration(context.Activity, this.Owner)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.VariableOnlyAccessibleAtScopeOfDeclaration(
+                                context.Activity,
+                                this.Owner
+                            )
+                        )
+                    );
                 }
 
                 if (!context.Environment.TryGetLocation(this.Id, out location))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.VariableDoesNotExist(this.Name)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.VariableDoesNotExist(this.Name))
+                    );
                 }
             }
             else
@@ -216,7 +208,9 @@ namespace System.Activities
 
                 if (!context.Environment.TryGetLocation(this.Id, this.Owner, out location))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.VariableDoesNotExist(this.Name)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.VariableDoesNotExist(this.Name))
+                    );
                 }
             }
 
@@ -246,7 +240,10 @@ namespace System.Activities
             context.SetValue((LocationReference)this, value);
         }
 
-        internal abstract Location DeclareLocation(ActivityExecutor executor, ActivityInstance instance);
+        internal abstract Location DeclareLocation(
+            ActivityExecutor executor,
+            ActivityInstance instance
+        );
 
         // This method exists for debugger use
         internal Location InternalGetLocation(LocationEnvironment environment)
@@ -256,13 +253,19 @@ namespace System.Activities
             Location location;
             if (!environment.TryGetLocation(this.Id, this.Owner, out location))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.VariableDoesNotExist(this.Name)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.VariableDoesNotExist(this.Name))
+                );
             }
             return location;
         }
 
         // optional "fast-path" for initial value expressions that can be resolved synchronously
-        internal abstract void PopulateDefault(ActivityExecutor executor, ActivityInstance parentInstance, Location location);
+        internal abstract void PopulateDefault(
+            ActivityExecutor executor,
+            ActivityInstance parentInstance,
+            Location location
+        );
 
         internal abstract void SetIsWaitingOnDefaultValue(Location location);
 
@@ -314,19 +317,13 @@ namespace System.Activities
 
         protected override Type TypeCore
         {
-            get
-            {
-                return typeof(T);
-            }
+            get { return typeof(T); }
         }
 
         [DefaultValue(null)]
         public new Activity<T> Default
         {
-            get
-            {
-                return this.defaultExpression;
-            }
+            get { return this.defaultExpression; }
             set
             {
                 ThrowIfHandle();
@@ -337,10 +334,7 @@ namespace System.Activities
 
         internal override ActivityWithResult DefaultCore
         {
-            get
-            {
-                return this.Default;
-            }
+            get { return this.Default; }
             set
             {
                 ThrowIfHandle();
@@ -398,7 +392,10 @@ namespace System.Activities
             context.SetValue((LocationReference)this, value);
         }
 
-        internal override Location DeclareLocation(ActivityExecutor executor, ActivityInstance instance)
+        internal override Location DeclareLocation(
+            ActivityExecutor executor,
+            ActivityInstance instance
+        )
         {
             VariableLocation variableLocation = new VariableLocation(Modifiers, this.IsHandle);
 
@@ -407,10 +404,15 @@ namespace System.Activities
                 Fx.Assert(this.Default == null, "Default should be null");
                 instance.Environment.DeclareHandle(this, variableLocation, instance);
 
-                HandleInitializationContext context = new HandleInitializationContext(executor, instance);
+                HandleInitializationContext context = new HandleInitializationContext(
+                    executor,
+                    instance
+                );
                 try
                 {
-                    variableLocation.SetInitialValue((T)context.CreateAndInitializeHandle(typeof(T)));
+                    variableLocation.SetInitialValue(
+                        (T)context.CreateAndInitializeHandle(typeof(T))
+                    );
                 }
                 finally
                 {
@@ -425,7 +427,11 @@ namespace System.Activities
             return variableLocation;
         }
 
-        internal override void PopulateDefault(ActivityExecutor executor, ActivityInstance parentInstance, Location location)
+        internal override void PopulateDefault(
+            ActivityExecutor executor,
+            ActivityInstance parentInstance,
+            Location location
+        )
         {
             Fx.Assert(this.Default.UseOldFastPath, "Should only be called for OldFastPath");
             VariableLocation variableLocation = (VariableLocation)location;
@@ -469,12 +475,14 @@ namespace System.Activities
                 add
                 {
                     this.propertyChanged += value;
-                    INotifyPropertyChanged notifyPropertyChanged = this.Value as INotifyPropertyChanged;
+                    INotifyPropertyChanged notifyPropertyChanged =
+                        this.Value as INotifyPropertyChanged;
                     if (notifyPropertyChanged != null)
                     {
                         notifyPropertyChanged.PropertyChanged += ValuePropertyChangedHandler;
                     }
-                    INotifyCollectionChanged notifyCollectionChanged = this.Value as INotifyCollectionChanged;
+                    INotifyCollectionChanged notifyCollectionChanged =
+                        this.Value as INotifyCollectionChanged;
                     if (notifyCollectionChanged != null)
                     {
                         notifyCollectionChanged.CollectionChanged += ValueCollectionChangedHandler;
@@ -483,12 +491,14 @@ namespace System.Activities
                 remove
                 {
                     this.propertyChanged -= value;
-                    INotifyPropertyChanged notifyPropertyChanged = this.Value as INotifyPropertyChanged;
+                    INotifyPropertyChanged notifyPropertyChanged =
+                        this.Value as INotifyPropertyChanged;
                     if (notifyPropertyChanged != null)
                     {
                         notifyPropertyChanged.PropertyChanged -= ValuePropertyChangedHandler;
                     }
-                    INotifyCollectionChanged notifyCollectionChanged = this.Value as INotifyCollectionChanged;
+                    INotifyCollectionChanged notifyCollectionChanged =
+                        this.Value as INotifyCollectionChanged;
                     if (notifyCollectionChanged != null)
                     {
                         notifyCollectionChanged.CollectionChanged -= ValueCollectionChangedHandler;
@@ -519,18 +529,12 @@ namespace System.Activities
 
             internal override bool CanBeMapped
             {
-                get
-                {
-                    return VariableModifiersHelper.IsMappable(this.modifiers);
-                }
+                get { return VariableModifiersHelper.IsMappable(this.modifiers); }
             }
 
             public override T Value
             {
-                get
-                {
-                    return base.Value;
-                }
+                get { return base.Value; }
                 set
                 {
                     if (this.isHandle)
@@ -540,13 +544,17 @@ namespace System.Activities
                         // We only allow sets on null or uninitialized handles
                         if (currentValue != null && currentValue.IsInitialized)
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CannotPerformOperationOnHandle));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(SR.CannotPerformOperationOnHandle)
+                            );
                         }
 
                         // We only allow setting it to null
                         if (value != null)
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CannotPerformOperationOnHandle));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(SR.CannotPerformOperationOnHandle)
+                            );
                         }
                     }
 
@@ -559,7 +567,8 @@ namespace System.Activities
                         else
                         {
                             throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(SR.ConstVariableCannotBeSet));
+                                new InvalidOperationException(SR.ConstVariableCannotBeSet)
+                            );
                         }
                     }
 
@@ -574,7 +583,9 @@ namespace System.Activities
                 {
                     if (this.valueCollectionChanged == null)
                     {
-                        this.valueCollectionChanged = new NotifyCollectionChangedEventHandler(this.NotifyValueCollectionChanged);
+                        this.valueCollectionChanged = new NotifyCollectionChangedEventHandler(
+                            this.NotifyValueCollectionChanged
+                        );
                     }
                     return this.valueCollectionChanged;
                 }
@@ -586,7 +597,9 @@ namespace System.Activities
                 {
                     if (this.valuePropertyChanged == null)
                     {
-                        this.valuePropertyChanged = new PropertyChangedEventHandler(this.NotifyValuePropertyChanged);
+                        this.valuePropertyChanged = new PropertyChangedEventHandler(
+                            this.NotifyValuePropertyChanged
+                        );
                     }
                     return this.valuePropertyChanged;
                 }

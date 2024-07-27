@@ -41,7 +41,11 @@ namespace AutobahnTestAppHttpListener
             return 0;
         }
 
-        private static async Task Run(HttpListener listener, string wsUrl, CancellationToken stopToken)
+        private static async Task Run(
+            HttpListener listener,
+            string wsUrl,
+            CancellationToken stopToken
+        )
         {
             while (!stopToken.IsCancellationRequested)
             {
@@ -58,7 +62,9 @@ namespace AutobahnTestAppHttpListener
                     {
                         using (var writer = new StreamWriter(context.Response.OutputStream))
                         {
-                            await writer.WriteLineAsync($"Ready to accept WebSocket request at: {wsUrl}");
+                            await writer.WriteLineAsync(
+                                $"Ready to accept WebSocket request at: {wsUrl}"
+                            );
                         }
                     }
                 }
@@ -72,13 +78,28 @@ namespace AutobahnTestAppHttpListener
         private static async Task Echo(WebSocket webSocket)
         {
             var buffer = new byte[1024 * 4];
-            var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+            var result = await webSocket.ReceiveAsync(
+                new ArraySegment<byte>(buffer),
+                CancellationToken.None
+            );
             while (!result.CloseStatus.HasValue)
             {
-                await webSocket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType, result.EndOfMessage, CancellationToken.None);
-                result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                await webSocket.SendAsync(
+                    new ArraySegment<byte>(buffer, 0, result.Count),
+                    result.MessageType,
+                    result.EndOfMessage,
+                    CancellationToken.None
+                );
+                result = await webSocket.ReceiveAsync(
+                    new ArraySegment<byte>(buffer),
+                    CancellationToken.None
+                );
             }
-            await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
+            await webSocket.CloseAsync(
+                result.CloseStatus.Value,
+                result.CloseStatusDescription,
+                CancellationToken.None
+            );
         }
 
         static HttpListener StartListener()

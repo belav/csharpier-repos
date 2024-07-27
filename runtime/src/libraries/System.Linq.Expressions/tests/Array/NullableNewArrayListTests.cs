@@ -13,11 +13,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableBoolArrayListTest(bool useInterpreter)
         {
             bool?[][] array = new bool?[][]
-                {
-                    new bool?[] {  },
-                    new bool?[] { true },
-                    new bool?[] { true, false }
-                };
+            {
+                new bool?[] { },
+                new bool?[] { true },
+                new bool?[] { true, false },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -39,11 +39,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableByteArrayListTest(bool useInterpreter)
         {
             byte?[][] array = new byte?[][]
-                {
-                    new byte?[] {  },
-                    new byte?[] { 0 },
-                    new byte?[] { 0, 1, byte.MaxValue }
-                };
+            {
+                new byte?[] { },
+                new byte?[] { 0 },
+                new byte?[] { 0, 1, byte.MaxValue },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -65,11 +65,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableCharArrayListTest(bool useInterpreter)
         {
             char?[][] array = new char?[][]
-                {
-                    new char?[] {  },
-                    new char?[] { '\0' },
-                    new char?[] { '\0', '\b', 'A', '\uffff' }
-                };
+            {
+                new char?[] { },
+                new char?[] { '\0' },
+                new char?[] { '\0', '\b', 'A', '\uffff' },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -91,11 +91,18 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableDecimalArrayListTest(bool useInterpreter)
         {
             decimal?[][] array = new decimal?[][]
+            {
+                new decimal?[] { },
+                new decimal?[] { decimal.Zero },
+                new decimal?[]
                 {
-                    new decimal?[] {  },
-                    new decimal?[] { decimal.Zero },
-                    new decimal?[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue }
-                };
+                    decimal.Zero,
+                    decimal.One,
+                    decimal.MinusOne,
+                    decimal.MinValue,
+                    decimal.MaxValue,
+                },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -117,11 +124,22 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableDoubleArrayListTest(bool useInterpreter)
         {
             double?[][] array = new double?[][]
+            {
+                new double?[] { },
+                new double?[] { 0 },
+                new double?[]
                 {
-                    new double?[] {  },
-                    new double?[] { 0 },
-                    new double?[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN }
-                };
+                    0,
+                    1,
+                    -1,
+                    double.MinValue,
+                    double.MaxValue,
+                    double.Epsilon,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -143,11 +161,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableEnumArrayListTest(bool useInterpreter)
         {
             E?[][] array = new E?[][]
-                {
-                    new E?[] {  },
-                    new E?[] { (E) 0 },
-                    new E?[] { (E) 0, E.A, E.B, (E) int.MaxValue, (E) int.MinValue }
-                };
+            {
+                new E?[] { },
+                new E?[] { (E)0 },
+                new E?[] { (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -169,11 +187,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableLongEnumArrayListTest(bool useInterpreter)
         {
             El?[][] array = new El?[][]
-                {
-                    new El?[] {  },
-                    new El?[] { (El) 0 },
-                    new El?[] { (El) 0, El.A, El.B, (El) long.MaxValue, (El) long.MinValue }
-                };
+            {
+                new El?[] { },
+                new El?[] { (El)0 },
+                new El?[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -195,11 +213,22 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableFloatArrayListTest(bool useInterpreter)
         {
             float?[][] array = new float?[][]
+            {
+                new float?[] { },
+                new float?[] { 0 },
+                new float?[]
                 {
-                    new float?[] {  },
-                    new float?[] { 0 },
-                    new float?[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN }
-                };
+                    0,
+                    1,
+                    -1,
+                    float.MinValue,
+                    float.MaxValue,
+                    float.Epsilon,
+                    float.NegativeInfinity,
+                    float.PositiveInfinity,
+                    float.NaN,
+                },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -221,11 +250,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableIntArrayListTest(bool useInterpreter)
         {
             int?[][] array = new int?[][]
-                {
-                    new int?[] {  },
-                    new int?[] { 0 },
-                    new int?[] { 0, 1, -1, int.MinValue, int.MaxValue }
-                };
+            {
+                new int?[] { },
+                new int?[] { 0 },
+                new int?[] { 0, 1, -1, int.MinValue, int.MaxValue },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -247,11 +276,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableLongArrayListTest(bool useInterpreter)
         {
             long?[][] array = new long?[][]
-                {
-                    new long?[] {  },
-                    new long?[] { 0 },
-                    new long?[] { 0, 1, -1, long.MinValue, long.MaxValue }
-                };
+            {
+                new long?[] { },
+                new long?[] { 0 },
+                new long?[] { 0, 1, -1, long.MinValue, long.MaxValue },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -273,11 +302,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableStructArrayListTest(bool useInterpreter)
         {
             S?[][] array = new S?[][]
-                {
-                    new S?[] {  },
-                    new S?[] { default(S) },
-                    new S?[] { default(S), new S() }
-                };
+            {
+                new S?[] { },
+                new S?[] { default(S) },
+                new S?[] { default(S), new S() },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -299,11 +328,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableSByteArrayListTest(bool useInterpreter)
         {
             sbyte?[][] array = new sbyte?[][]
-                {
-                    new sbyte?[] {  },
-                    new sbyte?[] { 0 },
-                    new sbyte?[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
-                };
+            {
+                new sbyte?[] { },
+                new sbyte?[] { 0 },
+                new sbyte?[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -325,11 +354,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableStructWithStringArrayListTest(bool useInterpreter)
         {
             Sc?[][] array = new Sc?[][]
-                {
-                    new Sc?[] {  },
-                    new Sc?[] { default(Sc) },
-                    new Sc?[] { default(Sc), new Sc(), new Sc(null) }
-                };
+            {
+                new Sc?[] { },
+                new Sc?[] { default(Sc) },
+                new Sc?[] { default(Sc), new Sc(), new Sc(null) },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -351,11 +380,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableStructWithStringAndValueArrayListTest(bool useInterpreter)
         {
             Scs?[][] array = new Scs?[][]
-                {
-                    new Scs?[] {  },
-                    new Scs?[] { default(Scs) },
-                    new Scs?[] { default(Scs), new Scs(), new Scs(null,new S()) }
-                };
+            {
+                new Scs?[] { },
+                new Scs?[] { default(Scs) },
+                new Scs?[] { default(Scs), new Scs(), new Scs(null, new S()) },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -377,11 +406,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableShortArrayListTest(bool useInterpreter)
         {
             short?[][] array = new short?[][]
-                {
-                    new short?[] {  },
-                    new short?[] { 0 },
-                    new short?[] { 0, 1, -1, short.MinValue, short.MaxValue }
-                };
+            {
+                new short?[] { },
+                new short?[] { 0 },
+                new short?[] { 0, 1, -1, short.MinValue, short.MaxValue },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -403,11 +432,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableStructWithTwoValuesArrayListTest(bool useInterpreter)
         {
             Sp?[][] array = new Sp?[][]
-                {
-                    new Sp?[] {  },
-                    new Sp?[] { default(Sp) },
-                    new Sp?[] { default(Sp), new Sp(), new Sp(5,5.0) }
-                };
+            {
+                new Sp?[] { },
+                new Sp?[] { default(Sp) },
+                new Sp?[] { default(Sp), new Sp(), new Sp(5, 5.0) },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -429,11 +458,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableStructWithValueArrayListTest(bool useInterpreter)
         {
             Ss?[][] array = new Ss?[][]
-                {
-                    new Ss?[] {  },
-                    new Ss?[] { default(Ss) },
-                    new Ss?[] { default(Ss), new Ss(), new Ss(new S()) }
-                };
+            {
+                new Ss?[] { },
+                new Ss?[] { default(Ss) },
+                new Ss?[] { default(Ss), new Ss(), new Ss(new S()) },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -455,11 +484,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableUIntArrayListTest(bool useInterpreter)
         {
             uint?[][] array = new uint?[][]
-                {
-                    new uint?[] {  },
-                    new uint?[] { 0 },
-                    new uint?[] { 0, 1, uint.MaxValue }
-                };
+            {
+                new uint?[] { },
+                new uint?[] { 0 },
+                new uint?[] { 0, 1, uint.MaxValue },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -481,11 +510,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableULongArrayListTest(bool useInterpreter)
         {
             ulong?[][] array = new ulong?[][]
-                {
-                    new ulong?[] {  },
-                    new ulong?[] { 0 },
-                    new ulong?[] { 0, 1, ulong.MaxValue }
-                };
+            {
+                new ulong?[] { },
+                new ulong?[] { 0 },
+                new ulong?[] { 0, 1, ulong.MaxValue },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -507,11 +536,11 @@ namespace System.Linq.Expressions.Tests
         public static void CheckNullableUShortArrayListTest(bool useInterpreter)
         {
             ushort?[][] array = new ushort?[][]
-                {
-                    new ushort?[] {  },
-                    new ushort?[] { 0 },
-                    new ushort?[] { 0, 1, ushort.MaxValue }
-                };
+            {
+                new ushort?[] { },
+                new ushort?[] { 0 },
+                new ushort?[] { 0, 1, ushort.MaxValue },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -542,7 +571,9 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericNullableStructWithStringAndValueArrayListTest(bool useInterpreter)
+        public static void CheckGenericNullableStructWithStringAndValueArrayListTest(
+            bool useInterpreter
+        )
         {
             CheckNullableGenericWithStructRestrictionArrayList<Scs>(useInterpreter);
         }
@@ -551,14 +582,17 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckNullableGenericWithStructRestrictionArrayList<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckNullableGenericWithStructRestrictionArrayList<Ts>(
+            bool useInterpreter
+        )
+            where Ts : struct
         {
             Ts?[][] array = new Ts?[][]
-                {
-                    new Ts?[] {  },
-                    new Ts?[] { default(Ts) },
-                    new Ts?[] { default(Ts), new Ts() }
-                };
+            {
+                new Ts?[] { },
+                new Ts?[] { default(Ts) },
+                new Ts?[] { default(Ts), new Ts() },
+            };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
             {
@@ -572,7 +606,11 @@ namespace System.Linq.Expressions.Tests
 
             for (int i = 0; i < array.Length; i++)
             {
-                VerifyNullableGenericWithStructRestrictionArrayList<Ts>(array[i], exprs[i], useInterpreter);
+                VerifyNullableGenericWithStructRestrictionArrayList<Ts>(
+                    array[i],
+                    exprs[i],
+                    useInterpreter
+                );
             }
         }
 
@@ -580,12 +618,16 @@ namespace System.Linq.Expressions.Tests
 
         #region  verifiers
 
-        private static void VerifyNullableBoolArrayList(bool?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableBoolArrayList(
+            bool?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<bool?[]>> e =
-                Expression.Lambda<Func<bool?[]>>(
-                    Expression.NewArrayInit(typeof(bool?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?[]>> e = Expression.Lambda<Func<bool?[]>>(
+                Expression.NewArrayInit(typeof(bool?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?[]> f = e.Compile(useInterpreter);
             bool?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -595,12 +637,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableByteArrayList(byte?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableByteArrayList(
+            byte?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<byte?[]>> e =
-                Expression.Lambda<Func<byte?[]>>(
-                    Expression.NewArrayInit(typeof(byte?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte?[]>> e = Expression.Lambda<Func<byte?[]>>(
+                Expression.NewArrayInit(typeof(byte?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte?[]> f = e.Compile(useInterpreter);
             byte?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -610,12 +656,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableCharArrayList(char?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableCharArrayList(
+            char?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<char?[]>> e =
-                Expression.Lambda<Func<char?[]>>(
-                    Expression.NewArrayInit(typeof(char?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<char?[]>> e = Expression.Lambda<Func<char?[]>>(
+                Expression.NewArrayInit(typeof(char?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<char?[]> f = e.Compile(useInterpreter);
             char?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -625,12 +675,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableDecimalArrayList(decimal?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableDecimalArrayList(
+            decimal?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<decimal?[]>> e =
-                Expression.Lambda<Func<decimal?[]>>(
-                    Expression.NewArrayInit(typeof(decimal?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?[]>> e = Expression.Lambda<Func<decimal?[]>>(
+                Expression.NewArrayInit(typeof(decimal?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?[]> f = e.Compile(useInterpreter);
             decimal?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -640,12 +694,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableDoubleArrayList(double?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableDoubleArrayList(
+            double?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<double?[]>> e =
-                Expression.Lambda<Func<double?[]>>(
-                    Expression.NewArrayInit(typeof(double?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?[]>> e = Expression.Lambda<Func<double?[]>>(
+                Expression.NewArrayInit(typeof(double?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?[]> f = e.Compile(useInterpreter);
             double?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -655,12 +713,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableEnumArrayList(E?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableEnumArrayList(
+            E?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<E?[]>> e =
-                Expression.Lambda<Func<E?[]>>(
-                    Expression.NewArrayInit(typeof(E?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?[]>> e = Expression.Lambda<Func<E?[]>>(
+                Expression.NewArrayInit(typeof(E?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?[]> f = e.Compile(useInterpreter);
             E?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -670,12 +732,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableLongEnumArrayList(El?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableLongEnumArrayList(
+            El?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<El?[]>> e =
-                Expression.Lambda<Func<El?[]>>(
-                    Expression.NewArrayInit(typeof(El?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<El?[]>> e = Expression.Lambda<Func<El?[]>>(
+                Expression.NewArrayInit(typeof(El?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<El?[]> f = e.Compile(useInterpreter);
             El?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -685,12 +751,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableFloatArrayList(float?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableFloatArrayList(
+            float?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<float?[]>> e =
-                Expression.Lambda<Func<float?[]>>(
-                    Expression.NewArrayInit(typeof(float?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?[]>> e = Expression.Lambda<Func<float?[]>>(
+                Expression.NewArrayInit(typeof(float?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?[]> f = e.Compile(useInterpreter);
             float?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -700,12 +770,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableIntArrayList(int?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableIntArrayList(
+            int?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<int?[]>> e =
-                Expression.Lambda<Func<int?[]>>(
-                    Expression.NewArrayInit(typeof(int?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?[]>> e = Expression.Lambda<Func<int?[]>>(
+                Expression.NewArrayInit(typeof(int?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?[]> f = e.Compile(useInterpreter);
             int?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -715,12 +789,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableLongArrayList(long?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableLongArrayList(
+            long?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<long?[]>> e =
-                Expression.Lambda<Func<long?[]>>(
-                    Expression.NewArrayInit(typeof(long?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?[]>> e = Expression.Lambda<Func<long?[]>>(
+                Expression.NewArrayInit(typeof(long?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?[]> f = e.Compile(useInterpreter);
             long?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -730,12 +808,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableStructArrayList(S?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableStructArrayList(
+            S?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<S?[]>> e =
-                Expression.Lambda<Func<S?[]>>(
-                    Expression.NewArrayInit(typeof(S?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<S?[]>> e = Expression.Lambda<Func<S?[]>>(
+                Expression.NewArrayInit(typeof(S?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<S?[]> f = e.Compile(useInterpreter);
             S?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -745,12 +827,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableSByteArrayList(sbyte?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableSByteArrayList(
+            sbyte?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<sbyte?[]>> e =
-                Expression.Lambda<Func<sbyte?[]>>(
-                    Expression.NewArrayInit(typeof(sbyte?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte?[]>> e = Expression.Lambda<Func<sbyte?[]>>(
+                Expression.NewArrayInit(typeof(sbyte?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte?[]> f = e.Compile(useInterpreter);
             sbyte?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -760,12 +846,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableStructWithStringArrayList(Sc?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableStructWithStringArrayList(
+            Sc?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<Sc?[]>> e =
-                Expression.Lambda<Func<Sc?[]>>(
-                    Expression.NewArrayInit(typeof(Sc?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Sc?[]>> e = Expression.Lambda<Func<Sc?[]>>(
+                Expression.NewArrayInit(typeof(Sc?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Sc?[]> f = e.Compile(useInterpreter);
             Sc?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -775,12 +865,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableStructWithStringAndValueArrayList(Scs?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableStructWithStringAndValueArrayList(
+            Scs?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<Scs?[]>> e =
-                Expression.Lambda<Func<Scs?[]>>(
-                    Expression.NewArrayInit(typeof(Scs?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Scs?[]>> e = Expression.Lambda<Func<Scs?[]>>(
+                Expression.NewArrayInit(typeof(Scs?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Scs?[]> f = e.Compile(useInterpreter);
             Scs?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -790,12 +884,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableShortArrayList(short?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableShortArrayList(
+            short?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<short?[]>> e =
-                Expression.Lambda<Func<short?[]>>(
-                    Expression.NewArrayInit(typeof(short?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?[]>> e = Expression.Lambda<Func<short?[]>>(
+                Expression.NewArrayInit(typeof(short?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?[]> f = e.Compile(useInterpreter);
             short?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -805,12 +903,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableStructWithTwoValuesArrayList(Sp?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableStructWithTwoValuesArrayList(
+            Sp?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<Sp?[]>> e =
-                Expression.Lambda<Func<Sp?[]>>(
-                    Expression.NewArrayInit(typeof(Sp?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Sp?[]>> e = Expression.Lambda<Func<Sp?[]>>(
+                Expression.NewArrayInit(typeof(Sp?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Sp?[]> f = e.Compile(useInterpreter);
             Sp?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -820,12 +922,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableStructWithValueArrayList(Ss?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableStructWithValueArrayList(
+            Ss?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<Ss?[]>> e =
-                Expression.Lambda<Func<Ss?[]>>(
-                    Expression.NewArrayInit(typeof(Ss?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Ss?[]>> e = Expression.Lambda<Func<Ss?[]>>(
+                Expression.NewArrayInit(typeof(Ss?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Ss?[]> f = e.Compile(useInterpreter);
             Ss?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -835,12 +941,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableUIntArrayList(uint?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableUIntArrayList(
+            uint?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<uint?[]>> e =
-                Expression.Lambda<Func<uint?[]>>(
-                    Expression.NewArrayInit(typeof(uint?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?[]>> e = Expression.Lambda<Func<uint?[]>>(
+                Expression.NewArrayInit(typeof(uint?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?[]> f = e.Compile(useInterpreter);
             uint?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -850,12 +960,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableULongArrayList(ulong?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableULongArrayList(
+            ulong?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<ulong?[]>> e =
-                Expression.Lambda<Func<ulong?[]>>(
-                    Expression.NewArrayInit(typeof(ulong?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?[]>> e = Expression.Lambda<Func<ulong?[]>>(
+                Expression.NewArrayInit(typeof(ulong?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?[]> f = e.Compile(useInterpreter);
             ulong?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -865,12 +979,16 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableUShortArrayList(ushort?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableUShortArrayList(
+            ushort?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
         {
-            Expression<Func<ushort?[]>> e =
-                Expression.Lambda<Func<ushort?[]>>(
-                    Expression.NewArrayInit(typeof(ushort?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?[]>> e = Expression.Lambda<Func<ushort?[]>>(
+                Expression.NewArrayInit(typeof(ushort?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?[]> f = e.Compile(useInterpreter);
             ushort?[] result = f();
             Assert.Equal(val.Length, result.Length);
@@ -880,12 +998,17 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableGenericWithStructRestrictionArrayList<Ts>(Ts?[] val, Expression[] exprs, bool useInterpreter) where Ts : struct
+        private static void VerifyNullableGenericWithStructRestrictionArrayList<Ts>(
+            Ts?[] val,
+            Expression[] exprs,
+            bool useInterpreter
+        )
+            where Ts : struct
         {
-            Expression<Func<Ts?[]>> e =
-                Expression.Lambda<Func<Ts?[]>>(
-                    Expression.NewArrayInit(typeof(Ts?), exprs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Ts?[]>> e = Expression.Lambda<Func<Ts?[]>>(
+                Expression.NewArrayInit(typeof(Ts?), exprs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Ts?[]> f = e.Compile(useInterpreter);
             Ts?[] result = f();
             Assert.Equal(val.Length, result.Length);

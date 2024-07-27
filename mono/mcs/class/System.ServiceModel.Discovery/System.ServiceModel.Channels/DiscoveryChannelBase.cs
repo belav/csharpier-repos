@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,27 +34,39 @@ using System.ServiceModel.Discovery;
 
 namespace System.ServiceModel.Channels
 {
-	internal abstract class DiscoveryChannelBase : ChannelBase
-	{
-		public DiscoveryChannelBase (ChannelManagerBase owner)
-			: base (owner)
-		{
-		}
+    internal abstract class DiscoveryChannelBase : ChannelBase
+    {
+        public DiscoveryChannelBase(ChannelManagerBase owner)
+            : base(owner) { }
 
-		public TChannel CreateDiscoveryInnerChannel<TChannel> (DiscoveryChannelFactory<TChannel> factory)
-		{
-			// FIXME: use timeout
-			var client = new DiscoveryClient (factory.Source.DiscoveryEndpointProvider.GetDiscoveryEndpoint ());
-			var res = client.Find (factory.Source.FindCriteria);
+        public TChannel CreateDiscoveryInnerChannel<TChannel>(
+            DiscoveryChannelFactory<TChannel> factory
+        )
+        {
+            // FIXME: use timeout
+            var client = new DiscoveryClient(
+                factory.Source.DiscoveryEndpointProvider.GetDiscoveryEndpoint()
+            );
+            var res = client.Find(factory.Source.FindCriteria);
 
-			foreach (var edm in res.Endpoints) {
-				try {
-					// FIXME: find scheme-matching ListenUri
-					return factory.InnerFactory.CreateChannel (edm.Address, edm.ListenUris.FirstOrDefault (u => true) ?? edm.Address.Uri);
-				} catch (Exception) {
-				}
-			}
-			throw new EndpointNotFoundException (String.Format ("Could not find usable endpoint in {0} endpoints returned by the discovery service.", res.Endpoints.Count));
-		}
-	}
+            foreach (var edm in res.Endpoints)
+            {
+                try
+                {
+                    // FIXME: find scheme-matching ListenUri
+                    return factory.InnerFactory.CreateChannel(
+                        edm.Address,
+                        edm.ListenUris.FirstOrDefault(u => true) ?? edm.Address.Uri
+                    );
+                }
+                catch (Exception) { }
+            }
+            throw new EndpointNotFoundException(
+                String.Format(
+                    "Could not find usable endpoint in {0} endpoints returned by the discovery service.",
+                    res.Endpoints.Count
+                )
+            );
+        }
+    }
 }

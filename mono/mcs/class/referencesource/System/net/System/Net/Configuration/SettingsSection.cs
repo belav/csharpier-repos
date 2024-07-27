@@ -7,18 +7,19 @@
 namespace System.Net.Configuration
 {
     using System.Configuration;
-    using System.Threading; 
     using System.Net.Security;
     using System.Net.Sockets;
+    using System.Threading;
 
     public sealed class SettingsSection : ConfigurationSection
     {
-
         // This gets called by the configuration system when the app.config file is located at an
         // http:// Uri.  It forces the System.Net config to be loaded based on only the machine.config
         // because the configuration system uses System.Net to download the app.config file.
-        static internal void EnsureConfigLoaded() {
-            try {
+        static internal void EnsureConfigLoaded()
+        {
+            try
+            {
                 //AuthenticationModules section
                 System.Net.AuthenticationManager.EnsureConfigLoaded();
                 //Requestcachingsection section
@@ -32,12 +33,10 @@ namespace System.Net.Configuration
                 //DefaultProxy section
                 o = System.Net.WebRequest.InternalDefaultWebProxy;
             }
-            catch {
-            }
+            catch { }
         }
 
-
-        public SettingsSection() 
+        public SettingsSection()
         {
             this.properties.Add(this.httpWebRequest);
             this.properties.Add(this.ipv6);
@@ -48,7 +47,6 @@ namespace System.Net.Configuration
             this.properties.Add(this.httpListener);
             this.properties.Add(this.webUtility);
         }
-
 
         [ConfigurationProperty(ConfigurationStrings.HttpWebRequest)]
         public HttpWebRequestElement HttpWebRequest
@@ -77,14 +75,13 @@ namespace System.Net.Configuration
         [ConfigurationProperty(ConfigurationStrings.WebProxyScript)]
         public WebProxyScriptElement WebProxyScript
         {
-            get { return (WebProxyScriptElement) this[this.webProxyScript]; }
+            get { return (WebProxyScriptElement)this[this.webProxyScript]; }
         }
-
 
         [ConfigurationProperty(ConfigurationStrings.PerformanceCounters)]
         public PerformanceCountersElement PerformanceCounters
         {
-            get { return (PerformanceCountersElement) this[this.performanceCounters]; }
+            get { return (PerformanceCountersElement)this[this.performanceCounters]; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.HttpListener)]
@@ -106,42 +103,67 @@ namespace System.Net.Configuration
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty httpWebRequest =
-            new ConfigurationProperty(ConfigurationStrings.HttpWebRequest, typeof(HttpWebRequestElement), null,
-                    ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty httpWebRequest = new ConfigurationProperty(
+            ConfigurationStrings.HttpWebRequest,
+            typeof(HttpWebRequestElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty ipv6 =
-            new ConfigurationProperty(ConfigurationStrings.Ipv6, typeof(Ipv6Element), null,
-                ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty ipv6 = new ConfigurationProperty(
+            ConfigurationStrings.Ipv6,
+            typeof(Ipv6Element),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty servicePointManager =
-            new ConfigurationProperty(ConfigurationStrings.ServicePointManager, typeof(ServicePointManagerElement), null,
-                ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty servicePointManager = new ConfigurationProperty(
+            ConfigurationStrings.ServicePointManager,
+            typeof(ServicePointManagerElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty socket =
-            new ConfigurationProperty(ConfigurationStrings.Socket, typeof(SocketElement), null,
-                ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty socket = new ConfigurationProperty(
+            ConfigurationStrings.Socket,
+            typeof(SocketElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty webProxyScript =
-            new ConfigurationProperty(ConfigurationStrings.WebProxyScript, typeof(WebProxyScriptElement), null,
-                ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty webProxyScript = new ConfigurationProperty(
+            ConfigurationStrings.WebProxyScript,
+            typeof(WebProxyScriptElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty performanceCounters =
-            new ConfigurationProperty(ConfigurationStrings.PerformanceCounters, typeof(PerformanceCountersElement), null,
-                ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty performanceCounters = new ConfigurationProperty(
+            ConfigurationStrings.PerformanceCounters,
+            typeof(PerformanceCountersElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty httpListener =
-            new ConfigurationProperty(ConfigurationStrings.HttpListener, typeof(HttpListenerElement), null,
-                ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty httpListener = new ConfigurationProperty(
+            ConfigurationStrings.HttpListener,
+            typeof(HttpListenerElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty webUtility =
-            new ConfigurationProperty(ConfigurationStrings.WebUtility, typeof(WebUtilityElement), null,
-                ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty webUtility = new ConfigurationProperty(
+            ConfigurationStrings.WebUtility,
+            typeof(WebUtilityElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
     }
 
     internal sealed class SettingsSectionInternal
     {
         private static object s_InternalSyncObject = null;
+
         internal SettingsSectionInternal(SettingsSection section)
         {
             TimeSpan ts;
@@ -149,43 +171,62 @@ namespace System.Net.Configuration
             if (section == null)
                 section = new SettingsSection();
 
-            this.alwaysUseCompletionPortsForConnect = section.Socket.AlwaysUseCompletionPortsForConnect;
-            this.alwaysUseCompletionPortsForAccept = section.Socket.AlwaysUseCompletionPortsForAccept;
+            this.alwaysUseCompletionPortsForConnect = section
+                .Socket
+                .AlwaysUseCompletionPortsForConnect;
+            this.alwaysUseCompletionPortsForAccept = section
+                .Socket
+                .AlwaysUseCompletionPortsForAccept;
             this.checkCertificateName = section.ServicePointManager.CheckCertificateName;
-            this.checkCertificateRevocationList = section.ServicePointManager.CheckCertificateRevocationList;
+            this.checkCertificateRevocationList = section
+                .ServicePointManager
+                .CheckCertificateRevocationList;
             this.dnsRefreshTimeout = section.ServicePointManager.DnsRefreshTimeout;
             this.ipProtectionLevel = section.Socket.IPProtectionLevel;
             this.ipv6Enabled = section.Ipv6.Enabled;
             this.enableDnsRoundRobin = section.ServicePointManager.EnableDnsRoundRobin;
             this.encryptionPolicy = section.ServicePointManager.EncryptionPolicy;
             this.expect100Continue = section.ServicePointManager.Expect100Continue;
-            this.maximumUnauthorizedUploadLength = section.HttpWebRequest.MaximumUnauthorizedUploadLength;
+            this.maximumUnauthorizedUploadLength = section
+                .HttpWebRequest
+                .MaximumUnauthorizedUploadLength;
             this.maximumResponseHeadersLength = section.HttpWebRequest.MaximumResponseHeadersLength;
             this.maximumErrorResponseLength = section.HttpWebRequest.MaximumErrorResponseLength;
             this.useUnsafeHeaderParsing = section.HttpWebRequest.UseUnsafeHeaderParsing;
             this.useNagleAlgorithm = section.ServicePointManager.UseNagleAlgorithm;
             ts = section.WebProxyScript.DownloadTimeout;
-            this.downloadTimeout = (ts == TimeSpan.MaxValue || ts == TimeSpan.Zero) ? Timeout.Infinite : (int) ts.TotalMilliseconds;
+            this.downloadTimeout =
+                (ts == TimeSpan.MaxValue || ts == TimeSpan.Zero)
+                    ? Timeout.Infinite
+                    : (int)ts.TotalMilliseconds;
             this.performanceCountersEnabled = section.PerformanceCounters.Enabled;
             this.httpListenerUnescapeRequestUrl = section.HttpListener.UnescapeRequestUrl;
             this.httpListenerTimeouts = section.HttpListener.Timeouts.GetTimeouts();
 
             // <webUtility> element
             WebUtilityElement webUtilityElement = section.WebUtility;
-            this.WebUtilityUnicodeDecodingConformance = webUtilityElement.UnicodeDecodingConformance;
-            this.WebUtilityUnicodeEncodingConformance = webUtilityElement.UnicodeEncodingConformance;
+            this.WebUtilityUnicodeDecodingConformance =
+                webUtilityElement.UnicodeDecodingConformance;
+            this.WebUtilityUnicodeEncodingConformance =
+                webUtilityElement.UnicodeEncodingConformance;
         }
-
 
         internal static SettingsSectionInternal Section
         {
             get
             {
-
-                if (s_settings == null) {
-                    lock(InternalSyncObject) {
-                        if (s_settings == null) {
-                            s_settings = new SettingsSectionInternal((SettingsSection) PrivilegedConfigurationManager.GetSection(ConfigurationStrings.SettingsSectionPath));
+                if (s_settings == null)
+                {
+                    lock (InternalSyncObject)
+                    {
+                        if (s_settings == null)
+                        {
+                            s_settings = new SettingsSectionInternal(
+                                (SettingsSection)
+                                    PrivilegedConfigurationManager.GetSection(
+                                        ConfigurationStrings.SettingsSectionPath
+                                    )
+                            );
                         }
                     }
                 }
@@ -193,10 +234,12 @@ namespace System.Net.Configuration
             }
         }
 
-
-        private static object InternalSyncObject {
-            get {
-                if (s_InternalSyncObject == null) {
+        private static object InternalSyncObject
+        {
+            get
+            {
+                if (s_InternalSyncObject == null)
+                {
                     object o = new object();
                     Interlocked.CompareExchange(ref s_InternalSyncObject, o, null);
                 }
@@ -204,14 +247,17 @@ namespace System.Net.Configuration
             }
         }
 
-
         // This method is required - it gets called through reflection, matching all the other XxxSectionInternal classes.
         // This one gets it fresh for each call.  Generally it shouldn't be used.
         internal static SettingsSectionInternal GetSection()
         {
-            return new SettingsSectionInternal((SettingsSection) PrivilegedConfigurationManager.GetSection(ConfigurationStrings.SettingsSectionPath));
+            return new SettingsSectionInternal(
+                (SettingsSection)
+                    PrivilegedConfigurationManager.GetSection(
+                        ConfigurationStrings.SettingsSectionPath
+                    )
+            );
         }
-
 
         internal bool AlwaysUseCompletionPortsForAccept
         {
@@ -282,13 +328,13 @@ namespace System.Net.Configuration
         {
             get { return this.maximumUnauthorizedUploadLength; }
         }
-        
+
         internal int MaximumErrorResponseLength
         {
             get { return this.maximumErrorResponseLength; }
             set { this.maximumErrorResponseLength = value; }
         }
-        
+
         internal bool UseUnsafeHeaderParsing
         {
             get { return this.useUnsafeHeaderParsing; }

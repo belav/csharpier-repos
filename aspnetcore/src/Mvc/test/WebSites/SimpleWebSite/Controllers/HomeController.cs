@@ -7,9 +7,6 @@ public class HomeController
 {
     public IDictionary<string, string> Index()
     {
-        return new Dictionary<string, string> {
-                {"first", "wall" },
-                {"second", "floor" }
-            };
+        return new Dictionary<string, string> { { "first", "wall" }, { "second", "floor" } };
     }
 }

@@ -28,21 +28,33 @@ namespace System.CodeDom
             Name = name;
         }
 
-        public CodeVariableDeclarationStatement(CodeTypeReference type, string name, CodeExpression initExpression)
+        public CodeVariableDeclarationStatement(
+            CodeTypeReference type,
+            string name,
+            CodeExpression initExpression
+        )
         {
             Type = type;
             Name = name;
             InitExpression = initExpression;
         }
 
-        public CodeVariableDeclarationStatement(string type, string name, CodeExpression initExpression)
+        public CodeVariableDeclarationStatement(
+            string type,
+            string name,
+            CodeExpression initExpression
+        )
         {
             Type = new CodeTypeReference(type);
             Name = name;
             InitExpression = initExpression;
         }
 
-        public CodeVariableDeclarationStatement(Type type, string name, CodeExpression initExpression)
+        public CodeVariableDeclarationStatement(
+            Type type,
+            string name,
+            CodeExpression initExpression
+        )
         {
             Type = new CodeTypeReference(type);
             Name = name;

@@ -16,6 +16,7 @@ namespace System.Data.Entity.Util
     {
         private static volatile bool _settingsInitialized = false;
         private static object _appSettingsLock = new object();
+
         private static void EnsureSettingsLoaded()
         {
             if (!_settingsInitialized)
@@ -31,17 +32,36 @@ namespace System.Data.Entity.Util
                         }
                         finally
                         {
-                            if (settings == null || !Boolean.TryParse(settings["EntityFramework_SimplifyLimitOperations"], out _SimplifyLimitOperations))
+                            if (
+                                settings == null
+                                || !Boolean.TryParse(
+                                    settings["EntityFramework_SimplifyLimitOperations"],
+                                    out _SimplifyLimitOperations
+                                )
+                            )
                             {
                                 _SimplifyLimitOperations = false;
                             }
 
-                            if (settings == null || !Boolean.TryParse(settings["EntityFramework_SimplifyUserSpecifiedViews"], out _SimplifyUserSpecifiedViews))
+                            if (
+                                settings == null
+                                || !Boolean.TryParse(
+                                    settings["EntityFramework_SimplifyUserSpecifiedViews"],
+                                    out _SimplifyUserSpecifiedViews
+                                )
+                            )
                             {
                                 _SimplifyUserSpecifiedViews = true;
                             }
 
-                            if (settings == null || !int.TryParse(settings["EntityFramework_QueryCacheSize"], out _QueryCacheSize) || _QueryCacheSize < 1)
+                            if (
+                                settings == null
+                                || !int.TryParse(
+                                    settings["EntityFramework_QueryCacheSize"],
+                                    out _QueryCacheSize
+                                )
+                                || _QueryCacheSize < 1
+                            )
                             {
                                 _QueryCacheSize = DefaultQueryCacheSize;
                             }

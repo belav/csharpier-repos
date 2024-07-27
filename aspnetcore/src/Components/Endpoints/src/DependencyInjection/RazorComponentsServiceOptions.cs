@@ -52,10 +52,7 @@ public sealed class RazorComponentsServiceOptions
     public int MaxFormMappingErrorCount
     {
         get => _formMappingOptions.MaxErrorCount;
-        set
-        {
-            _formMappingOptions.MaxErrorCount = value;
-        }
+        set { _formMappingOptions.MaxErrorCount = value; }
     }
 
     /// <summary>

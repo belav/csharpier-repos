@@ -4,7 +4,11 @@
 
 namespace System.Runtime.Serialization
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum,
+        Inherited = false,
+        AllowMultiple = false
+    )]
     public sealed class DataContractAttribute : Attribute
     {
         string name;
@@ -14,9 +18,7 @@ namespace System.Runtime.Serialization
         bool isReference;
         bool isReferenceSetExplicitly;
 
-        public DataContractAttribute()
-        {
-        }
+        public DataContractAttribute() { }
 
         public bool IsReference
         {
@@ -62,6 +64,5 @@ namespace System.Runtime.Serialization
         {
             get { return isNameSetExplicitly; }
         }
-
     }
 }

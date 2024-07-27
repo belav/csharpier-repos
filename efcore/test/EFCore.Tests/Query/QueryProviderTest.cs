@@ -28,8 +28,8 @@ public class QueryProviderTest
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<TestEntity> TestEntities { get; set; }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
     }

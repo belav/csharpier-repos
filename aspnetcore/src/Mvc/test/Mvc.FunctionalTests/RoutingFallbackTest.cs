@@ -14,11 +14,14 @@ public class RoutingFallbackTest : IClassFixture<MvcTestFixture<RoutingWebSite.S
 {
     public RoutingFallbackTest(MvcTestFixture<RoutingWebSite.StartupForFallback> fixture)
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 
-    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) => builder.UseStartup<RoutingWebSite.StartupForFallback>();
+    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
+        builder.UseStartup<RoutingWebSite.StartupForFallback>();
 
     public HttpClient Client { get; }
 
@@ -66,7 +69,10 @@ public class RoutingFallbackTest : IClassFixture<MvcTestFixture<RoutingWebSite.S
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal("Hello from fallback controller: /link_generation/Admin/Fallback/Index", content);
+        Assert.Equal(
+            "Hello from fallback controller: /link_generation/Admin/Fallback/Index",
+            content
+        );
     }
 
     [Fact]
@@ -82,7 +88,10 @@ public class RoutingFallbackTest : IClassFixture<MvcTestFixture<RoutingWebSite.S
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal("Hello from fallback controller POST: /link_generation/Admin/Fallback/Index", content);
+        Assert.Equal(
+            "Hello from fallback controller POST: /link_generation/Admin/Fallback/Index",
+            content
+        );
     }
 
     [Fact]
@@ -98,7 +107,10 @@ public class RoutingFallbackTest : IClassFixture<MvcTestFixture<RoutingWebSite.S
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal("Hello from fallback controller POST: /link_generation/Admin/Fallback/Index", content);
+        Assert.Equal(
+            "Hello from fallback controller POST: /link_generation/Admin/Fallback/Index",
+            content
+        );
     }
 
     [Fact]

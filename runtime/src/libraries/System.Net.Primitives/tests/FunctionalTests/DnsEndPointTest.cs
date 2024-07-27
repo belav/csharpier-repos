@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net.Sockets;
-
 using Xunit;
 
 namespace System.Net.Primitives.Functional.Tests
@@ -30,14 +29,26 @@ namespace System.Net.Primitives.Functional.Tests
         [Fact]
         public static void Ctor_HostPortAddressFamily_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("host", () => new DnsEndPoint(null, 500, AddressFamily.InterNetwork)); //Null host
-            AssertExtensions.Throws<ArgumentException>("host", () => new DnsEndPoint("", 500, AddressFamily.InterNetwork)); //Empty host
+            AssertExtensions.Throws<ArgumentNullException>(
+                "host",
+                () => new DnsEndPoint(null, 500, AddressFamily.InterNetwork)
+            ); //Null host
+            AssertExtensions.Throws<ArgumentException>(
+                "host",
+                () => new DnsEndPoint("", 500, AddressFamily.InterNetwork)
+            ); //Empty host
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new DnsEndPoint("host", IPEndPoint.MinPort - 1, AddressFamily.InterNetwork)); //Port < min port (0)
-            Assert.Throws<ArgumentOutOfRangeException>(() => new DnsEndPoint("host", IPEndPoint.MaxPort + 1, AddressFamily.InterNetwork)); //Port > max port (65535)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new DnsEndPoint("host", IPEndPoint.MinPort - 1, AddressFamily.InterNetwork)
+            ); //Port < min port (0)
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new DnsEndPoint("host", IPEndPoint.MaxPort + 1, AddressFamily.InterNetwork)
+            ); //Port > max port (65535)
 
-            AssertExtensions.Throws<ArgumentException>("addressFamily", () => new DnsEndPoint("host", 500, AddressFamily.AppleTalk
-                )); //Invalid address family
+            AssertExtensions.Throws<ArgumentException>(
+                "addressFamily",
+                () => new DnsEndPoint("host", 500, AddressFamily.AppleTalk)
+            ); //Invalid address family
         }
 
         [Fact]

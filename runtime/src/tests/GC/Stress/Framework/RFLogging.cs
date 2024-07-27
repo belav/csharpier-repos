@@ -6,11 +6,11 @@
 
 #define USE_INSTRUMENTATION
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Threading;
-using System.Collections.Generic;
 
 /// <summary>
 /// Classed used for all logging infrastructure
@@ -49,7 +49,7 @@ internal class RFLogging
         while (true)
         {
             bool cachedCloseLogFile = _closeLogFile; // The CloseLog method will set closeLogFile to true indicating we should close the log file
-                                                     // This value is cached here so we can write all of the remaining messages to log before closing it
+            // This value is cached here so we can write all of the remaining messages to log before closing it
             int messageQueueCount = _messageQueue.Count;
             int instrumentationQueueCount = _instrumentationMessageQueue.Count;
 
@@ -67,7 +67,10 @@ internal class RFLogging
                                 text = _messageQueue.Dequeue();
                             }
                         }
-                        catch (InvalidOperationException) { text = null; }
+                        catch (InvalidOperationException)
+                        {
+                            text = null;
+                        }
 
                         if (!String.IsNullOrEmpty(text))
                         {
@@ -79,11 +82,12 @@ internal class RFLogging
                 }
                 catch (IOException e)
                 {
-                    ReliabilityFramework.MyDebugBreak(String.Format("LogWorker IOException:{0}", e.ToString()));
+                    ReliabilityFramework.MyDebugBreak(
+                        String.Format("LogWorker IOException:{0}", e.ToString())
+                    );
                     //Disk may be full so simply stop logging
                 }
             }
-
 
             if (cachedCloseLogFile)
             {
@@ -108,7 +112,10 @@ internal class RFLogging
                                 text = _instrumentationMessageQueue.Dequeue();
                             }
                         }
-                        catch (InvalidOperationException) { text = null; }
+                        catch (InvalidOperationException)
+                        {
+                            text = null;
+                        }
 
                         if (!String.IsNullOrEmpty(text))
                         {
@@ -120,7 +127,9 @@ internal class RFLogging
                 }
                 catch (IOException e)
                 {
-                    ReliabilityFramework.MyDebugBreak(String.Format("LogWorker IOException:{0}", e.ToString()));
+                    ReliabilityFramework.MyDebugBreak(
+                        String.Format("LogWorker IOException:{0}", e.ToString())
+                    );
                 }
             }
         }
@@ -135,13 +144,22 @@ internal class RFLogging
                 string logFilename = Path.Combine(logDirectory, "instrmentation.log");
                 while (File.Exists(logFilename))
                 {
-                    logFilename = Path.Combine(logDirectory, "instrmentation.log-" + DateTime.Now.ToString().Replace('/', '-').Replace(':', '.'));
+                    logFilename = Path.Combine(
+                        logDirectory,
+                        "instrmentation.log-"
+                            + DateTime.Now.ToString().Replace('/', '-').Replace(':', '.')
+                    );
                 }
 
                 string logDirname = Path.GetDirectoryName(logFilename);
                 if (!Directory.Exists(logDirname))
                     Directory.CreateDirectory(logDirname);
-                _instrumentationLogFile = File.Open(logFilename, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.ReadWrite);
+                _instrumentationLogFile = File.Open(
+                    logFilename,
+                    FileMode.CreateNew,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite
+                );
             }
             catch
             {
@@ -174,52 +192,87 @@ internal class RFLogging
             {
                 fRetry = false;
 
-                string safeName = Path.Combine(logDirectory, name.Replace('\\', ' ').Replace('*', ' ').Replace('?', ' ').Replace('>', ' ').Replace('<', ' ').Replace('|', ' ').Replace(':', ' ').Replace('/', ' ').Replace('"', ' '));
+                string safeName = Path.Combine(
+                    logDirectory,
+                    name.Replace('\\', ' ')
+                        .Replace('*', ' ')
+                        .Replace('?', ' ')
+                        .Replace('>', ' ')
+                        .Replace('<', ' ')
+                        .Replace('|', ' ')
+                        .Replace(':', ' ')
+                        .Replace('/', ' ')
+                        .Replace('"', ' ')
+                );
                 filename = safeName + ".log";
                 if (File.Exists(filename))
                 {
-                    filename = String.Format("{0} - {1}.log", safeName, DateTime.Now.ToString().Replace('/', '-').Replace(':', '.'));
+                    filename = String.Format(
+                        "{0} - {1}.log",
+                        safeName,
+                        DateTime.Now.ToString().Replace('/', '-').Replace(':', '.')
+                    );
                 }
                 try
                 {
                     string dirname = Path.GetDirectoryName(filename);
                     if (!Directory.Exists(dirname))
                         Directory.CreateDirectory(dirname);
-                    _logFile = File.Open(filename, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.ReadWrite);
+                    _logFile = File.Open(
+                        filename,
+                        FileMode.CreateNew,
+                        FileAccess.ReadWrite,
+                        FileShare.ReadWrite
+                    );
                 }
                 catch (IOException e)
                 {
                     Console.WriteLine("Failed to open file: {0} {1}", filename, e);
                     fRetry = true;
                 }
-            }
-            while (fRetry);
+            } while (fRetry);
             WriteToLog("<TestRun>\r\n");
         }
         catch (ArgumentException)
         {
-            Console.WriteLine("RFLogging - Blank or Empty FriendlyName, logging is disabled: {0}", name);
+            Console.WriteLine(
+                "RFLogging - Blank or Empty FriendlyName, logging is disabled: {0}",
+                name
+            );
             _logFile = null;
         }
         catch (PathTooLongException)
         {
-            Console.WriteLine("RFLogging - FriendlyName is too long, logging is disabled: {0}", name);
+            Console.WriteLine(
+                "RFLogging - FriendlyName is too long, logging is disabled: {0}",
+                name
+            );
             _logFile = null;
         }
         catch (DirectoryNotFoundException ex)
         {
             Console.WriteLine(ex.ToString());
-            Console.WriteLine("RFLogging - Friendly name contains drive or directory specifiers, logging is disabled: {0} {1}", name, filename);
+            Console.WriteLine(
+                "RFLogging - Friendly name contains drive or directory specifiers, logging is disabled: {0} {1}",
+                name,
+                filename
+            );
             _logFile = null;
         }
         catch (UnauthorizedAccessException)
         {
-            Console.WriteLine("RFLogging - Unauthorized access to log file, please change the test name or fix the current directory: {0}.log", name);
+            Console.WriteLine(
+                "RFLogging - Unauthorized access to log file, please change the test name or fix the current directory: {0}.log",
+                name
+            );
             _logFile = null;
         }
         catch (NotSupportedException)
         {
-            Console.WriteLine("RFLogging - The friendly test name contains a : in the string, try again: {0}", name);
+            Console.WriteLine(
+                "RFLogging - The friendly test name contains a : in the string, try again: {0}",
+                name
+            );
             _logFile = null;
         }
     }
@@ -253,22 +306,35 @@ internal class RFLogging
     /// <param name="value"></param>
     public void WriteStartupInfo(int randSeed)
     {
-        WriteToLog("    <StartupInfo>\r\n        <RandomSeed>" + randSeed.ToString() + "</RandomSeed>\r\n    </StartupInfo>\r\n");
+        WriteToLog(
+            "    <StartupInfo>\r\n        <RandomSeed>"
+                + randSeed.ToString()
+                + "</RandomSeed>\r\n    </StartupInfo>\r\n"
+        );
     }
 
     /// <summary>
     /// Writes the performance stats into the stress log
     /// </summary>
-    public void WritePerfStats(float pagesVal, float pageFaultsVal, float ourPageFaultsVal, float cpuVal, float memVal, bool testStartPrevented)
+    public void WritePerfStats(
+        float pagesVal,
+        float pageFaultsVal,
+        float ourPageFaultsVal,
+        float cpuVal,
+        float memVal,
+        bool testStartPrevented
+    )
     {
         WriteToLog(
-            String.Format("    <PerfStats CPU=\"{0}\" Pages=\"{1}\" PageFaults=\"{2}\" OurPageFaults=\"{3}\" TestStartPrevented=\"{4}\" />\r\n",
-            cpuVal,
-            pagesVal,
-            pageFaultsVal,
-            ourPageFaultsVal,
-            testStartPrevented
-            ));
+            String.Format(
+                "    <PerfStats CPU=\"{0}\" Pages=\"{1}\" PageFaults=\"{2}\" OurPageFaults=\"{3}\" TestStartPrevented=\"{4}\" />\r\n",
+                cpuVal,
+                pagesVal,
+                pageFaultsVal,
+                ourPageFaultsVal,
+                testStartPrevented
+            )
+        );
     }
 
     /// <summary>
@@ -276,7 +342,13 @@ internal class RFLogging
     /// </summary>
     public void WriteTestStart(ReliabilityTest test)
     {
-        WriteToLog(String.Format("    <TestStart DateTime=\"{0}\" TestId=\"{1}\" /> \r\n", DateTime.Now, test.RefOrID));
+        WriteToLog(
+            String.Format(
+                "    <TestStart DateTime=\"{0}\" TestId=\"{1}\" /> \r\n",
+                DateTime.Now,
+                test.RefOrID
+            )
+        );
     }
 
     /// <summary>
@@ -284,7 +356,13 @@ internal class RFLogging
     /// </summary>
     public void WriteTestRace(ReliabilityTest test)
     {
-        WriteToLog(String.Format("<TestRace DateTime=\"{0}\" TestId=\"\"/>\r\n", DateTime.Now, test.RefOrID));
+        WriteToLog(
+            String.Format(
+                "<TestRace DateTime=\"{0}\" TestId=\"\"/>\r\n",
+                DateTime.Now,
+                test.RefOrID
+            )
+        );
     }
 
     /// <summary>
@@ -292,10 +370,14 @@ internal class RFLogging
     /// </summary>
     public void WritePreCommandFailure(ReliabilityTest test, string command, string commandType)
     {
-        WriteToLog(String.Format("    <PreCommandFailure Command=\"\" CommandType=\"{1}\" TestId=\"{2}\"",
-            command,
-            commandType,
-            test.RefOrID));
+        WriteToLog(
+            String.Format(
+                "    <PreCommandFailure Command=\"\" CommandType=\"{1}\" TestId=\"{2}\"",
+                command,
+                commandType,
+                test.RefOrID
+            )
+        );
     }
 
     /// <summary>
@@ -304,10 +386,14 @@ internal class RFLogging
     public void WriteTestFail(ReliabilityTest test, string message)
     {
         string testName = (test == null) ? "Harness" : test.RefOrID;
-        WriteToLog(String.Format("    <TestFail DateTime=\"{0}\" TestId=\"{1}\" Description=\"{2}\" />\r\n",
-            DateTime.Now,
-            testName,
-            message));
+        WriteToLog(
+            String.Format(
+                "    <TestFail DateTime=\"{0}\" TestId=\"{1}\" Description=\"{2}\" />\r\n",
+                DateTime.Now,
+                testName,
+                message
+            )
+        );
     }
 
     /// <summary>
@@ -316,10 +402,14 @@ internal class RFLogging
     public void WriteTestPass(ReliabilityTest test, string message)
     {
         string testName = (test == null) ? "Harness" : test.RefOrID;
-        WriteToLog(String.Format("    <TestPass DateTime=\"{0}\" TestId=\"{1}\" Description=\"{2}\" />\r\n",
-            DateTime.Now,
-            testName,
-            message));
+        WriteToLog(
+            String.Format(
+                "    <TestPass DateTime=\"{0}\" TestId=\"{1}\" Description=\"{2}\" />\r\n",
+                DateTime.Now,
+                testName,
+                message
+            )
+        );
     }
 
     // Updates the stress information with the latest time stamp
@@ -327,7 +417,12 @@ internal class RFLogging
     {
         if (File.Exists(Environment.ExpandEnvironmentVariables("%SCRIPTSDIR%\\record.js")))
         {
-            ProcessStartInfo psi = new ProcessStartInfo("cscript.exe", Environment.ExpandEnvironmentVariables("//b //nologo %SCRIPTSDIR%\\record.js -i %STRESSID% -a UPDATE_RECORD -s RUNNING"));
+            ProcessStartInfo psi = new ProcessStartInfo(
+                "cscript.exe",
+                Environment.ExpandEnvironmentVariables(
+                    "//b //nologo %SCRIPTSDIR%\\record.js -i %STRESSID% -a UPDATE_RECORD -s RUNNING"
+                )
+            );
             psi.UseShellExecute = false;
             psi.RedirectStandardOutput = true;
 
@@ -337,8 +432,6 @@ internal class RFLogging
             p.Dispose();
         }
     }
-
-
 
     /// <summary>
     /// This writes a line of text to the log file.  If the log file is not opened no action is taken.
@@ -357,8 +450,12 @@ internal class RFLogging
                     _messageQueue.Enqueue(text);
                 }
             }
-            catch (IOException) { /*Eat exceptions for IO */ }
-            catch (InvalidOperationException) { /*Eat exceptions if we can't queue */}
+            catch (IOException)
+            { /*Eat exceptions for IO */
+            }
+            catch (InvalidOperationException)
+            { /*Eat exceptions if we can't queue */
+            }
         }
     }
 
@@ -370,7 +467,12 @@ internal class RFLogging
             {
                 if (File.Exists(Environment.ExpandEnvironmentVariables("%SCRIPTSDIR%\\record.js")))
                 {
-                    ProcessStartInfo psi = new ProcessStartInfo("cscript.exe", Environment.ExpandEnvironmentVariables("//b //nologo %SCRIPTSDIR%\\record.js -i %STRESSID% -a UPDATE_RECORD -s RUNNING"));
+                    ProcessStartInfo psi = new ProcessStartInfo(
+                        "cscript.exe",
+                        Environment.ExpandEnvironmentVariables(
+                            "//b //nologo %SCRIPTSDIR%\\record.js -i %STRESSID% -a UPDATE_RECORD -s RUNNING"
+                        )
+                    );
                     psi.UseShellExecute = false;
                     psi.RedirectStandardOutput = true;
 
@@ -379,7 +481,13 @@ internal class RFLogging
                     p.WaitForExit();
                     if (p.ExitCode != 0)
                     {
-                        string msg = String.Format("cscript.exe " + Environment.ExpandEnvironmentVariables("//b //nologo %SCRIPTSDIR%\\record.js -i %STRESSID% -a UPDATE_RECORD -s RUNNING\r\nWARNING: Status update did not return success!"), p.ExitCode);
+                        string msg = String.Format(
+                            "cscript.exe "
+                                + Environment.ExpandEnvironmentVariables(
+                                    "//b //nologo %SCRIPTSDIR%\\record.js -i %STRESSID% -a UPDATE_RECORD -s RUNNING\r\nWARNING: Status update did not return success!"
+                                ),
+                            p.ExitCode
+                        );
                         WriteToInstrumentationLog(null, LoggingLevels.UrtFrameworks, msg);
                     }
                     p.Dispose();
@@ -392,7 +500,10 @@ internal class RFLogging
             }
             catch (Exception e)
             {
-                string msg = String.Format("WARNING: Status update did not return success (exception thrown {0})!", e);
+                string msg = String.Format(
+                    "WARNING: Status update did not return success (exception thrown {0})!",
+                    e
+                );
                 WriteToInstrumentationLog(null, LoggingLevels.UrtFrameworks, msg);
                 Console.WriteLine(msg);
             }
@@ -401,14 +512,8 @@ internal class RFLogging
 
     public bool ReportResults
     {
-        get
-        {
-            return (_reportResults);
-        }
-        set
-        {
-            _reportResults = value;
-        }
+        get { return (_reportResults); }
+        set { _reportResults = value; }
     }
 
     public void LogNoResultReporter(bool fReportResults)
@@ -429,11 +534,20 @@ internal class RFLogging
     /// </summary>
     /// <param name="level"></param>
     /// <param name="str"></param>
-    public void WriteToInstrumentationLog(ReliabilityTestSet curTestSet, LoggingLevels level, string str)
+    public void WriteToInstrumentationLog(
+        ReliabilityTestSet curTestSet,
+        LoggingLevels level,
+        string str
+    )
     {
         if (curTestSet == null || (curTestSet.LoggingLevel & level) != 0)
         {
-            str = String.Format("[{0} {2}] {1}\r\n", DateTime.Now.ToString(), str, Thread.CurrentThread.ManagedThreadId);
+            str = String.Format(
+                "[{0} {2}] {1}\r\n",
+                DateTime.Now.ToString(),
+                str,
+                Thread.CurrentThread.ManagedThreadId
+            );
             try
             {
                 lock (_instrumentationMessageQueue)
@@ -441,9 +555,12 @@ internal class RFLogging
                     _instrumentationMessageQueue.Enqueue(str);
                 }
             }
-            catch (IOException) { /*Eat exceptions for IO */ }
-            catch (InvalidOperationException) { /*Eat exceptions if we can't queue */}
+            catch (IOException)
+            { /*Eat exceptions for IO */
+            }
+            catch (InvalidOperationException)
+            { /*Eat exceptions if we can't queue */
+            }
         }
     }
 }
-

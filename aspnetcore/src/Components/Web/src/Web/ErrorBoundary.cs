@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Components.Web;
 /// </summary>
 public class ErrorBoundary : ErrorBoundaryBase
 {
-    [Inject] private IErrorBoundaryLogger? ErrorBoundaryLogger { get; set; }
+    [Inject]
+    private IErrorBoundaryLogger? ErrorBoundaryLogger { get; set; }
 
     /// <summary>
     /// Invoked by the base class when an error is being handled. The default implementation

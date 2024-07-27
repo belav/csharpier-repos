@@ -16,14 +16,12 @@ public class TestMatrix : IEnumerable<object[]>
     // ANCM specific...
     public IList<HostingModel> HostingModels { get; set; } = new List<HostingModel>();
 
-    private IList<Tuple<Func<TestVariant, bool>, string>> Skips { get; } = new List<Tuple<Func<TestVariant, bool>, string>>();
+    private IList<Tuple<Func<TestVariant, bool>, string>> Skips { get; } =
+        new List<Tuple<Func<TestVariant, bool>, string>>();
 
     public static TestMatrix ForServers(params ServerType[] types)
     {
-        return new TestMatrix()
-        {
-            Servers = types
-        };
+        return new TestMatrix() { Servers = types };
     }
 
     public TestMatrix WithTfms(params string[] tfms)
@@ -44,6 +42,7 @@ public class TestMatrix : IEnumerable<object[]>
         ApplicationTypes.Add(ApplicationType.Standalone);
         return this;
     }
+
     public TestMatrix WithArchitectures(params RuntimeArchitecture[] archs)
     {
         Architectures = archs;
@@ -195,7 +194,12 @@ public class TestMatrix : IEnumerable<object[]>
         return null;
     }
 
-    private void VaryByApplicationType(List<TestVariant> variants, ServerType server, string tfm, string skip)
+    private void VaryByApplicationType(
+        List<TestVariant> variants,
+        ServerType server,
+        string tfm,
+        string skip
+    )
     {
         foreach (var t in ApplicationTypes)
         {
@@ -217,7 +221,13 @@ public class TestMatrix : IEnumerable<object[]>
         }
     }
 
-    private void VaryByArchitecture(List<TestVariant> variants, ServerType server, string tfm, string skip, ApplicationType type)
+    private void VaryByArchitecture(
+        List<TestVariant> variants,
+        ServerType server,
+        string tfm,
+        string skip,
+        ApplicationType type
+    )
     {
         foreach (var arch in Architectures)
         {
@@ -233,14 +243,16 @@ public class TestMatrix : IEnumerable<object[]>
             }
             else
             {
-                variants.Add(new TestVariant()
-                {
-                    Server = server,
-                    Tfm = tfm,
-                    ApplicationType = type,
-                    Architecture = arch,
-                    Skip = archSkip,
-                });
+                variants.Add(
+                    new TestVariant()
+                    {
+                        Server = server,
+                        Tfm = tfm,
+                        ApplicationType = type,
+                        Architecture = arch,
+                        Skip = archSkip,
+                    }
+                );
             }
         }
     }
@@ -250,8 +262,12 @@ public class TestMatrix : IEnumerable<object[]>
         if (arch == RuntimeArchitecture.x64)
         {
             // Can't run x64 on a x86 OS.
-            return (RuntimeInformation.OSArchitecture == Architecture.Arm || RuntimeInformation.OSArchitecture == Architecture.X86)
-                ? $"Cannot run {arch} on your current system." : null;
+            return (
+                RuntimeInformation.OSArchitecture == Architecture.Arm
+                || RuntimeInformation.OSArchitecture == Architecture.X86
+            )
+                ? $"Cannot run {arch} on your current system."
+                : null;
         }
 
         // No x86 runtimes available on MacOS or Linux.
@@ -264,7 +280,14 @@ public class TestMatrix : IEnumerable<object[]>
         return !(arch == RuntimeArchitecture.x86 && ServerType.Nginx == server);
     }
 
-    private void VaryByAncmHostingModel(IList<TestVariant> variants, ServerType server, string tfm, ApplicationType type, RuntimeArchitecture arch, string skip)
+    private void VaryByAncmHostingModel(
+        IList<TestVariant> variants,
+        ServerType server,
+        string tfm,
+        ApplicationType type,
+        RuntimeArchitecture arch,
+        string skip
+    )
     {
         foreach (var hostingModel in HostingModels)
         {
@@ -283,15 +306,17 @@ public class TestMatrix : IEnumerable<object[]>
                 }
             }
 
-            variants.Add(new TestVariant()
-            {
-                Server = server,
-                Tfm = tfm,
-                ApplicationType = type,
-                Architecture = arch,
-                HostingModel = hostingModel,
-                Skip = skipAncm,
-            });
+            variants.Add(
+                new TestVariant()
+                {
+                    Server = server,
+                    Tfm = tfm,
+                    ApplicationType = type,
+                    Architecture = arch,
+                    HostingModel = hostingModel,
+                    Skip = skipAncm,
+                }
+            );
         }
     }
 

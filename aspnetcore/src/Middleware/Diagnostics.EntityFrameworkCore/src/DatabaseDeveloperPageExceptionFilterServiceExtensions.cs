@@ -23,11 +23,19 @@ public static class DatabaseDeveloperPageExceptionFilterServiceExtensions
     /// This should only be enabled in the Development environment.
     /// </remarks>
     [RequiresDynamicCode("DbContext migrations operations are not supported with NativeAOT")]
-    public static IServiceCollection AddDatabaseDeveloperPageExceptionFilter(this IServiceCollection services)
+    public static IServiceCollection AddDatabaseDeveloperPageExceptionFilter(
+        this IServiceCollection services
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
 
-        services.TryAddEnumerable(new ServiceDescriptor(typeof(IDeveloperPageExceptionFilter), typeof(DatabaseDeveloperPageExceptionFilter), ServiceLifetime.Singleton));
+        services.TryAddEnumerable(
+            new ServiceDescriptor(
+                typeof(IDeveloperPageExceptionFilter),
+                typeof(DatabaseDeveloperPageExceptionFilter),
+                ServiceLifetime.Singleton
+            )
+        );
 
         return services;
     }

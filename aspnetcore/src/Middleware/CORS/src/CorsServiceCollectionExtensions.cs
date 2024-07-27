@@ -23,7 +23,9 @@ public static class CorsServiceCollectionExtensions
         services.AddOptions();
 
         services.TryAdd(ServiceDescriptor.Transient<ICorsService, CorsService>());
-        services.TryAdd(ServiceDescriptor.Transient<ICorsPolicyProvider, DefaultCorsPolicyProvider>());
+        services.TryAdd(
+            ServiceDescriptor.Transient<ICorsPolicyProvider, DefaultCorsPolicyProvider>()
+        );
 
         return services;
     }
@@ -34,7 +36,10 @@ public static class CorsServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <param name="setupAction">An <see cref="Action{CorsOptions}"/> to configure the provided <see cref="CorsOptions"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-    public static IServiceCollection AddCors(this IServiceCollection services, Action<CorsOptions> setupAction)
+    public static IServiceCollection AddCors(
+        this IServiceCollection services,
+        Action<CorsOptions> setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(setupAction);

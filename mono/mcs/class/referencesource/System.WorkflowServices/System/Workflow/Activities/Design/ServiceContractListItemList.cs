@@ -19,10 +19,7 @@ namespace System.Workflow.Activities.Design
 
         protected override string GeneratedNameFormatResource
         {
-            get
-            {
-                return SR2.GeneratedContractNameFormat;
-            }
+            get { return SR2.GeneratedContractNameFormat; }
         }
 
         protected override ServiceContractListItem CreateObject(string name)

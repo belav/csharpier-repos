@@ -7,8 +7,8 @@
 namespace System.Net.Configuration
 {
     using System;
-    using System.Configuration;
     using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.Net;
     using System.Net.Mail;
@@ -27,27 +27,24 @@ namespace System.Net.Configuration
             this.properties.Add(this.specifiedPickupDirectory);
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DeliveryMethod, DefaultValue = (SmtpDeliveryMethod) SmtpDeliveryMethod.Network)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DeliveryMethod,
+            DefaultValue = (SmtpDeliveryMethod)SmtpDeliveryMethod.Network
+        )]
         public SmtpDeliveryMethod DeliveryMethod
         {
-            get { 
-                return (SmtpDeliveryMethod)this[this.deliveryMethod]; 
-            }
-            set { 
-                this[this.deliveryMethod] = value; 
-            }
+            get { return (SmtpDeliveryMethod)this[this.deliveryMethod]; }
+            set { this[this.deliveryMethod] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DeliveryFormat, 
-            DefaultValue = (SmtpDeliveryFormat)SmtpDeliveryFormat.SevenBit)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DeliveryFormat,
+            DefaultValue = (SmtpDeliveryFormat)SmtpDeliveryFormat.SevenBit
+        )]
         public SmtpDeliveryFormat DeliveryFormat
         {
-            get { 
-                return (SmtpDeliveryFormat)this[this.deliveryFormat]; 
-            }
-            set { 
-                this[this.deliveryFormat] = value; 
-            }
+            get { return (SmtpDeliveryFormat)this[this.deliveryFormat]; }
+            set { this[this.deliveryFormat] = value; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.From)]
@@ -57,72 +54,91 @@ namespace System.Net.Configuration
             set { this[this.from] = value; }
         }
 
-
         [ConfigurationProperty(ConfigurationStrings.Network)]
         public SmtpNetworkElement Network
         {
-            get { 
-                return (SmtpNetworkElement)this[this.network]; 
-            }
+            get { return (SmtpNetworkElement)this[this.network]; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.SpecifiedPickupDirectory)]
         public SmtpSpecifiedPickupDirectoryElement SpecifiedPickupDirectory
         {
-            get { 
-                return (SmtpSpecifiedPickupDirectoryElement)this[this.specifiedPickupDirectory]; 
-            }
+            get { return (SmtpSpecifiedPickupDirectoryElement)this[this.specifiedPickupDirectory]; }
         }
 
-        protected override ConfigurationPropertyCollection Properties 
+        protected override ConfigurationPropertyCollection Properties
         {
-            get 
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
-	        
-        // 
+        //
 
 
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty from =
-            new ConfigurationProperty(ConfigurationStrings.From, typeof(string), null,
-                    ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty from = new ConfigurationProperty(
+            ConfigurationStrings.From,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty network =
-            new ConfigurationProperty(ConfigurationStrings.Network, typeof(SmtpNetworkElement), null,
-                    ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty network = new ConfigurationProperty(
+            ConfigurationStrings.Network,
+            typeof(SmtpNetworkElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty specifiedPickupDirectory =
-            new ConfigurationProperty(ConfigurationStrings.SpecifiedPickupDirectory, typeof(SmtpSpecifiedPickupDirectoryElement), null,
-                    ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty specifiedPickupDirectory = new ConfigurationProperty(
+            ConfigurationStrings.SpecifiedPickupDirectory,
+            typeof(SmtpSpecifiedPickupDirectoryElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty deliveryMethod =
-            new ConfigurationProperty(ConfigurationStrings.DeliveryMethod, typeof(SmtpDeliveryMethod), SmtpDeliveryMethod.Network, new SmtpDeliveryMethodTypeConverter(), null,
-                    ConfigurationPropertyOptions.None);
-        
-        private readonly ConfigurationProperty deliveryFormat 
-            = new ConfigurationProperty(ConfigurationStrings.DeliveryFormat, typeof(SmtpDeliveryFormat), 
-                SmtpDeliveryFormat.SevenBit, new SmtpDeliveryFormatTypeConverter(), null, 
-                ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty deliveryMethod = new ConfigurationProperty(
+            ConfigurationStrings.DeliveryMethod,
+            typeof(SmtpDeliveryMethod),
+            SmtpDeliveryMethod.Network,
+            new SmtpDeliveryMethodTypeConverter(),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        class SmtpDeliveryMethodTypeConverter : TypeConverter {
-            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) {
-                if (sourceType == typeof(string)) {
+        private readonly ConfigurationProperty deliveryFormat = new ConfigurationProperty(
+            ConfigurationStrings.DeliveryFormat,
+            typeof(SmtpDeliveryFormat),
+            SmtpDeliveryFormat.SevenBit,
+            new SmtpDeliveryFormatTypeConverter(),
+            null,
+            ConfigurationPropertyOptions.None
+        );
+
+        class SmtpDeliveryMethodTypeConverter : TypeConverter
+        {
+            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+            {
+                if (sourceType == typeof(string))
+                {
                     return true;
                 }
                 return base.CanConvertFrom(context, sourceType);
             }
-    
-            public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) {
+
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
+            {
                 string s = value as string;
-                if (s != null) {
+                if (s != null)
+                {
                     s = s.ToLower(CultureInfo.InvariantCulture);
-                    switch (s) {
+                    switch (s)
+                    {
                         case "network":
                             return SmtpDeliveryMethod.Network;
                         case "specifiedpickupdirectory":
@@ -133,24 +149,34 @@ namespace System.Net.Configuration
 #endif
                     }
                 }
-    
+
                 return base.ConvertFrom(context, culture, value);
             }
         }
 
-        class SmtpDeliveryFormatTypeConverter : TypeConverter {
-            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) {
-                if (sourceType == typeof(string)) {
+        class SmtpDeliveryFormatTypeConverter : TypeConverter
+        {
+            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+            {
+                if (sourceType == typeof(string))
+                {
                     return true;
                 }
                 return base.CanConvertFrom(context, sourceType);
             }
 
-            public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) {
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
+            {
                 string s = value as string;
-                if (s != null) {
+                if (s != null)
+                {
                     s = s.ToLower(CultureInfo.InvariantCulture);
-                    switch (s) {
+                    switch (s)
+                    {
                         case "sevenbit":
                             return SmtpDeliveryFormat.SevenBit;
                         case "international":
@@ -172,7 +198,9 @@ namespace System.Net.Configuration
             this.from = section.From;
 
             this.network = new SmtpNetworkElementInternal(section.Network);
-            this.specifiedPickupDirectory = new SmtpSpecifiedPickupDirectoryElementInternal(section.SpecifiedPickupDirectory);
+            this.specifiedPickupDirectory = new SmtpSpecifiedPickupDirectoryElementInternal(
+                section.SpecifiedPickupDirectory
+            );
         }
 
         internal SmtpDeliveryMethod DeliveryMethod
@@ -200,10 +228,10 @@ namespace System.Net.Configuration
             get { return this.specifiedPickupDirectory; }
         }
 
-        SmtpDeliveryMethod                          deliveryMethod;
-        SmtpDeliveryFormat                          deliveryFormat;
-        string                                      from = null;
-        SmtpNetworkElementInternal                  network = null;
+        SmtpDeliveryMethod deliveryMethod;
+        SmtpDeliveryFormat deliveryFormat;
+        string from = null;
+        SmtpNetworkElementInternal network = null;
         SmtpSpecifiedPickupDirectoryElementInternal specifiedPickupDirectory = null;
 
         internal static object ClassSyncObject
@@ -222,7 +250,9 @@ namespace System.Net.Configuration
         {
             lock (ClassSyncObject)
             {
-                SmtpSection section = PrivilegedConfigurationManager.GetSection(ConfigurationStrings.SmtpSectionPath) as SmtpSection;
+                SmtpSection section =
+                    PrivilegedConfigurationManager.GetSection(ConfigurationStrings.SmtpSectionPath)
+                    as SmtpSection;
                 if (section == null)
                     return null;
 
@@ -233,5 +263,3 @@ namespace System.Net.Configuration
         private static object classSyncObject;
     }
 }
-
-

@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-#if !NETCOREAPP
-using System.Diagnostics;
-#endif
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
+#if !NETCOREAPP
+using System.Diagnostics;
+#endif
 
 namespace System.Net.Http.Functional.Tests
 {
@@ -31,10 +31,12 @@ namespace System.Net.Http.Functional.Tests
             _output = output;
         }
 
-        protected virtual HttpClient CreateHttpClient() => CreateHttpClient(CreateHttpClientHandler());
+        protected virtual HttpClient CreateHttpClient() =>
+            CreateHttpClient(CreateHttpClientHandler());
 
         protected HttpClient CreateHttpClient(HttpMessageHandler handler) =>
-            new HttpClient(handler) {
+            new HttpClient(handler)
+            {
 #if !NETFRAMEWORK
                 DefaultRequestVersion = UseVersion
 #endif
@@ -43,8 +45,12 @@ namespace System.Net.Http.Functional.Tests
         protected static HttpClient CreateHttpClient(string useVersionString) =>
             CreateHttpClient(CreateHttpClientHandler(useVersionString), useVersionString);
 
-        protected static HttpClient CreateHttpClient(HttpMessageHandler handler, string useVersionString) =>
-            new HttpClient(handler) {
+        protected static HttpClient CreateHttpClient(
+            HttpMessageHandler handler,
+            string useVersionString
+        ) =>
+            new HttpClient(handler)
+            {
 #if !NETFRAMEWORK
                 DefaultRequestVersion = Version.Parse(useVersionString)
 #endif
@@ -55,14 +61,21 @@ namespace System.Net.Http.Functional.Tests
         public static readonly bool[] BoolValues = new[] { true, false };
 
         // For use by remote server tests
-        public static readonly IEnumerable<object[]> RemoteServersMemberData = Configuration.Http.RemoteServersMemberData;
+        public static readonly IEnumerable<object[]> RemoteServersMemberData = Configuration
+            .Http
+            .RemoteServersMemberData;
 
-        protected HttpClient CreateHttpClientForRemoteServer(Configuration.Http.RemoteServer remoteServer)
+        protected HttpClient CreateHttpClientForRemoteServer(
+            Configuration.Http.RemoteServer remoteServer
+        )
         {
             return CreateHttpClientForRemoteServer(remoteServer, CreateHttpClientHandler());
         }
 
-        protected HttpClient CreateHttpClientForRemoteServer(Configuration.Http.RemoteServer remoteServer, HttpMessageHandler httpClientHandler)
+        protected HttpClient CreateHttpClientForRemoteServer(
+            Configuration.Http.RemoteServer remoteServer,
+            HttpMessageHandler httpClientHandler
+        )
         {
             HttpMessageHandler wrappedHandler = httpClientHandler;
 
@@ -70,10 +83,14 @@ namespace System.Net.Http.Functional.Tests
             // So, skip this verification if we're not using SocketsHttpHandler.
             if (PlatformDetection.SupportsAlpn && !IsWinHttpHandler)
             {
-                wrappedHandler = new VersionCheckerHttpHandler(httpClientHandler, remoteServer.HttpVersion);
+                wrappedHandler = new VersionCheckerHttpHandler(
+                    httpClientHandler,
+                    remoteServer.HttpVersion
+                );
             }
 
-            return new HttpClient(wrappedHandler) {
+            return new HttpClient(wrappedHandler)
+            {
 #if !NETFRAMEWORK
                 DefaultRequestVersion = remoteServer.HttpVersion
 #endif
@@ -84,43 +101,60 @@ namespace System.Net.Http.Functional.Tests
         {
             private readonly Version _expectedVersion;
 
-            public VersionCheckerHttpHandler(HttpMessageHandler innerHandler, Version expectedVersion)
+            public VersionCheckerHttpHandler(
+                HttpMessageHandler innerHandler,
+                Version expectedVersion
+            )
                 : base(innerHandler)
             {
                 _expectedVersion = expectedVersion;
             }
 
 #if NETCOREAPP
-            protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override HttpResponseMessage Send(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 if (request.Version != _expectedVersion)
                 {
-                    throw new Exception($"Unexpected request version: expected {_expectedVersion}, saw {request.Version}");
+                    throw new Exception(
+                        $"Unexpected request version: expected {_expectedVersion}, saw {request.Version}"
+                    );
                 }
 
                 HttpResponseMessage response = base.Send(request, cancellationToken);
 
                 if (response.Version != _expectedVersion)
                 {
-                    throw new Exception($"Unexpected response version: expected {_expectedVersion}, saw {response.Version}");
+                    throw new Exception(
+                        $"Unexpected response version: expected {_expectedVersion}, saw {response.Version}"
+                    );
                 }
 
                 return response;
             }
 #endif
 
-            protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override async Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 if (request.Version != _expectedVersion)
                 {
-                    throw new Exception($"Unexpected request version: expected {_expectedVersion}, saw {request.Version}");
+                    throw new Exception(
+                        $"Unexpected request version: expected {_expectedVersion}, saw {request.Version}"
+                    );
                 }
 
                 HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
                 if (response.Version != _expectedVersion)
                 {
-                    throw new Exception($"Unexpected response version: expected {_expectedVersion}, saw {response.Version}");
+                    throw new Exception(
+                        $"Unexpected response version: expected {_expectedVersion}, saw {response.Version}"
+                    );
                 }
 
                 return response;
@@ -130,7 +164,13 @@ namespace System.Net.Http.Functional.Tests
 
     public static class HttpClientExtensions
     {
-        public static Task<HttpResponseMessage> SendAsync(this HttpClient client, bool async, HttpRequestMessage request, HttpCompletionOption completionOption = default, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> SendAsync(
+            this HttpClient client,
+            bool async,
+            HttpRequestMessage request,
+            HttpCompletionOption completionOption = default,
+            CancellationToken cancellationToken = default
+        )
         {
             if (async)
             {
@@ -145,13 +185,20 @@ namespace System.Net.Http.Functional.Tests
 #else
                 // Framework won't ever have the sync API.
                 // This shouldn't be called due to AsyncBoolValues returning only true on Framework.
-                Debug.Fail("Framework doesn't have Sync API and it shouldn't be attempted to be tested.");
+                Debug.Fail(
+                    "Framework doesn't have Sync API and it shouldn't be attempted to be tested."
+                );
                 throw new Exception("Shouldn't be reachable");
 #endif
             }
         }
 
-        public static Task<HttpResponseMessage> SendAsync(this HttpMessageInvoker invoker, bool async, HttpRequestMessage request, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> SendAsync(
+            this HttpMessageInvoker invoker,
+            bool async,
+            HttpRequestMessage request,
+            CancellationToken cancellationToken = default
+        )
         {
             if (async)
             {
@@ -166,13 +213,19 @@ namespace System.Net.Http.Functional.Tests
 #else
                 // Framework won't ever have the sync API.
                 // This shouldn't be called due to AsyncBoolValues returning only true on Framework.
-                Debug.Fail("Framework doesn't have Sync API and it shouldn't be attempted to be tested.");
+                Debug.Fail(
+                    "Framework doesn't have Sync API and it shouldn't be attempted to be tested."
+                );
                 throw new Exception("Shouldn't be reachable");
 #endif
             }
         }
 
-        public static Task<Stream> ReadAsStreamAsync(this HttpContent content, bool async, CancellationToken cancellationToken = default)
+        public static Task<Stream> ReadAsStreamAsync(
+            this HttpContent content,
+            bool async,
+            CancellationToken cancellationToken = default
+        )
         {
             if (async)
             {
@@ -182,7 +235,6 @@ namespace System.Net.Http.Functional.Tests
 #else
                 return content.ReadAsStreamAsync();
 #endif
-
             }
             else
             {
@@ -191,20 +243,31 @@ namespace System.Net.Http.Functional.Tests
 #else
                 // Framework won't ever have the sync API.
                 // This shouldn't be called due to AsyncBoolValues returning only true on Framework.
-                Debug.Fail("Framework doesn't have Sync API and it shouldn't be attempted to be tested.");
+                Debug.Fail(
+                    "Framework doesn't have Sync API and it shouldn't be attempted to be tested."
+                );
                 throw new Exception("Shouldn't be reachable");
 #endif
             }
         }
 
-        public static Task<byte[]> GetByteArrayAsync(this HttpClient client, bool async, bool useCopyTo, Uri uri)
+        public static Task<byte[]> GetByteArrayAsync(
+            this HttpClient client,
+            bool async,
+            bool useCopyTo,
+            Uri uri
+        )
         {
 #if NETCOREAPP
             return Task.Run(async () =>
             {
                 var m = new HttpRequestMessage(HttpMethod.Get, uri);
-                using HttpResponseMessage r = async ? await client.SendAsync(m, HttpCompletionOption.ResponseHeadersRead) : client.Send(m, HttpCompletionOption.ResponseHeadersRead);
-                using Stream s = async ? await r.Content.ReadAsStreamAsync() : r.Content.ReadAsStream();
+                using HttpResponseMessage r = async
+                    ? await client.SendAsync(m, HttpCompletionOption.ResponseHeadersRead)
+                    : client.Send(m, HttpCompletionOption.ResponseHeadersRead);
+                using Stream s = async
+                    ? await r.Content.ReadAsStreamAsync()
+                    : r.Content.ReadAsStream();
 
                 var result = new MemoryStream();
                 if (useCopyTo)
@@ -239,9 +302,21 @@ namespace System.Net.Http.Functional.Tests
 #endif
         }
 
-        public static Task<HttpResponseMessage> GetAsync(this HttpClient client, bool async, Uri uri, HttpCompletionOption completionOption = default, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> GetAsync(
+            this HttpClient client,
+            bool async,
+            Uri uri,
+            HttpCompletionOption completionOption = default,
+            CancellationToken cancellationToken = default
+        )
         {
-            return SendAsync(client, async, new HttpRequestMessage(HttpMethod.Get, uri), completionOption, cancellationToken);
+            return SendAsync(
+                client,
+                async,
+                new HttpRequestMessage(HttpMethod.Get, uri),
+                completionOption,
+                cancellationToken
+            );
         }
     }
 }

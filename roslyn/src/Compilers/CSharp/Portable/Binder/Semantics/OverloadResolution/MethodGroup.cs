@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression receiverOpt,
             MethodSymbol method,
             LookupResultKind resultKind = LookupResultKind.Viable,
-            DiagnosticInfo error = null)
+            DiagnosticInfo error = null
+        )
         {
             this.PopulateHelper(receiverOpt, resultKind, error);
             this.Methods.Add(method);
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<Symbol> members,
             ImmutableArray<TypeWithAnnotations> typeArguments,
             LookupResultKind resultKind = LookupResultKind.Viable,
-            DiagnosticInfo error = null)
+            DiagnosticInfo error = null
+        )
         {
             this.PopulateHelper(receiverOpt, resultKind, error);
             this.IsExtensionMethodGroup = true;
@@ -62,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<MethodSymbol> methods,
             ImmutableArray<TypeWithAnnotations> typeArguments,
             LookupResultKind resultKind = LookupResultKind.Viable,
-            DiagnosticInfo error = null)
+            DiagnosticInfo error = null
+        )
         {
             this.PopulateHelper(receiverOpt, resultKind, error);
             this.Methods.AddRange(methods);
@@ -72,7 +75,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private void PopulateHelper(BoundExpression receiverOpt, LookupResultKind resultKind, DiagnosticInfo error)
+        private void PopulateHelper(
+            BoundExpression receiverOpt,
+            LookupResultKind resultKind,
+            DiagnosticInfo error
+        )
         {
             VerifyClear();
             this.Receiver = receiverOpt;
@@ -94,10 +101,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public string Name
         {
-            get
-            {
-                return this.Methods.Count > 0 ? this.Methods[0].Name : null;
-            }
+            get { return this.Methods.Count > 0 ? this.Methods[0].Name : null; }
         }
 
         public BoundExpression InstanceOpt

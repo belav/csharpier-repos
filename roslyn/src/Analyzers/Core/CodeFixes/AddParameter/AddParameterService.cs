@@ -78,21 +78,30 @@ namespace Microsoft.CodeAnalysis.AddParameter
             string parameterName,
             int? newParameterIndex,
             bool fixAllReferences,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var solution = invocationDocument.Project.Solution;
 
             var referencedSymbols = fixAllReferences
-                ? await FindMethodDeclarationReferencesAsync(invocationDocument, method, cancellationToken).ConfigureAwait(false)
+                ? await FindMethodDeclarationReferencesAsync(
+                        invocationDocument,
+                        method,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
                 : method.GetAllMethodSymbolsOfPartialParts();
 
-            var anySymbolReferencesNotInSource = referencedSymbols.Any(static symbol => !symbol.IsFromSource());
+            var anySymbolReferencesNotInSource = referencedSymbols.Any(static symbol =>
+                !symbol.IsFromSource()
+            );
             var locationsInSource = referencedSymbols.Where(symbol => symbol.IsFromSource());
 
             // Indexing Locations[0] is valid because IMethodSymbols have one location at most
             // and IsFromSource() tests if there is at least one location.
-            var locationsByDocument = locationsInSource.ToLookup(declarationLocation
-                => solution.GetRequiredDocument(declarationLocation.Locations[0].SourceTree!));
+            var locationsByDocument = locationsInSource.ToLookup(declarationLocation =>
+                solution.GetRequiredDocument(declarationLocation.Locations[0].SourceTree!)
+            );
 
             foreach (var documentLookup in locationsByDocument)
             {
@@ -103,38 +112,66 @@ namespace Microsoft.CodeAnalysis.AddParameter
                 if (syntaxFacts is null)
                     continue;
 
-                var syntaxRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var syntaxRoot = await document
+                    .GetRequiredSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var editor = new SyntaxEditor(syntaxRoot, solution.Services);
                 var generator = editor.Generator;
                 foreach (var methodDeclaration in documentLookup)
                 {
-                    var methodNode = syntaxRoot.FindNode(methodDeclaration.Locations[0].SourceSpan, getInnermostNodeForTie: true);
+                    var methodNode = syntaxRoot.FindNode(
+                        methodDeclaration.Locations[0].SourceSpan,
+                        getInnermostNodeForTie: true
+                    );
                     var existingParameters = generator.GetParameters(methodNode);
                     var insertionIndex = newParameterIndex ?? existingParameters.Count;
 
-                    // if the preceding parameter is optional, the new parameter must also be optional 
+                    // if the preceding parameter is optional, the new parameter must also be optional
                     // see also BC30202 and CS1737
-                    var parameterMustBeOptional = insertionIndex > 0 &&
-                        syntaxFacts.GetDefaultOfParameter(existingParameters[insertionIndex - 1]) != null;
+                    var parameterMustBeOptional =
+                        insertionIndex > 0
+                        && syntaxFacts.GetDefaultOfParameter(existingParameters[insertionIndex - 1])
+                            != null;
 
                     var parameterSymbol = CreateParameterSymbol(
-                        methodDeclaration, newParameterType, refKind, parameterMustBeOptional, parameterName);
+                        methodDeclaration,
+                        newParameterType,
+                        refKind,
+                        parameterMustBeOptional,
+                        parameterName
+                    );
 
-                    var argumentInitializer = parameterMustBeOptional ? generator.DefaultExpression(newParameterType) : null;
-                    var parameterDeclaration = generator.ParameterDeclaration(parameterSymbol, argumentInitializer)
-                                                        .WithAdditionalAnnotations(Formatter.Annotation);
+                    var argumentInitializer = parameterMustBeOptional
+                        ? generator.DefaultExpression(newParameterType)
+                        : null;
+                    var parameterDeclaration = generator
+                        .ParameterDeclaration(parameterSymbol, argumentInitializer)
+                        .WithAdditionalAnnotations(Formatter.Annotation);
                     if (anySymbolReferencesNotInSource && methodDeclaration == method)
                     {
                         parameterDeclaration = parameterDeclaration.WithAdditionalAnnotations(
-                            ConflictAnnotation.Create(CodeFixesResources.Related_method_signatures_found_in_metadata_will_not_be_updated));
+                            ConflictAnnotation.Create(
+                                CodeFixesResources.Related_method_signatures_found_in_metadata_will_not_be_updated
+                            )
+                        );
                     }
 
-                    if (method.MethodKind == MethodKind.ReducedExtension && insertionIndex < existingParameters.Count)
+                    if (
+                        method.MethodKind == MethodKind.ReducedExtension
+                        && insertionIndex < existingParameters.Count
+                    )
                     {
                         insertionIndex++;
                     }
 
-                    AddParameterEditor.AddParameter(syntaxFacts, editor, methodNode, insertionIndex, parameterDeclaration, cancellationToken);
+                    AddParameterEditor.AddParameter(
+                        syntaxFacts,
+                        editor,
+                        methodNode,
+                        insertionIndex,
+                        parameterDeclaration,
+                        cancellationToken
+                    );
                 }
 
                 var newRoot = editor.GetChangedRoot();
@@ -144,16 +181,23 @@ namespace Microsoft.CodeAnalysis.AddParameter
             return solution;
         }
 
-        private static async Task<ImmutableArray<IMethodSymbol>> FindMethodDeclarationReferencesAsync(
-            Document invocationDocument, IMethodSymbol method, CancellationToken cancellationToken)
+        private static async Task<
+            ImmutableArray<IMethodSymbol>
+        > FindMethodDeclarationReferencesAsync(
+            Document invocationDocument,
+            IMethodSymbol method,
+            CancellationToken cancellationToken
+        )
         {
-            var referencedSymbols = await SymbolFinder.FindReferencesAsync(
-                method, invocationDocument.Project.Solution, cancellationToken).ConfigureAwait(false);
+            var referencedSymbols = await SymbolFinder
+                .FindReferencesAsync(method, invocationDocument.Project.Solution, cancellationToken)
+                .ConfigureAwait(false);
 
-            return referencedSymbols.Select(referencedSymbol => referencedSymbol.Definition)
-                                    .OfType<IMethodSymbol>()
-                                    .Distinct()
-                                    .ToImmutableArray();
+            return referencedSymbols
+                .Select(referencedSymbol => referencedSymbol.Definition)
+                .OfType<IMethodSymbol>()
+                .Distinct()
+                .ToImmutableArray();
         }
 
         private static IParameterSymbol CreateParameterSymbol(
@@ -161,11 +205,21 @@ namespace Microsoft.CodeAnalysis.AddParameter
             ITypeSymbol parameterType,
             RefKind refKind,
             bool isOptional,
-            string argumentNameSuggestion)
+            string argumentNameSuggestion
+        )
         {
-            var uniqueName = NameGenerator.EnsureUniqueness(argumentNameSuggestion, method.Parameters.Select(p => p.Name));
+            var uniqueName = NameGenerator.EnsureUniqueness(
+                argumentNameSuggestion,
+                method.Parameters.Select(p => p.Name)
+            );
             var newParameterSymbol = CodeGenerationSymbolFactory.CreateParameterSymbol(
-                    attributes: default, refKind: refKind, isOptional: isOptional, isParams: false, type: parameterType, name: uniqueName);
+                attributes: default,
+                refKind: refKind,
+                isOptional: isOptional,
+                isParams: false,
+                type: parameterType,
+                name: uniqueName
+            );
             return newParameterSymbol;
         }
     }

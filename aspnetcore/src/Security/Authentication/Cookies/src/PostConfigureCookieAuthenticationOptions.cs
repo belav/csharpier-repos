@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies;
 /// <summary>
 /// Used to setup defaults for all <see cref="CookieAuthenticationOptions"/>.
 /// </summary>
-public class PostConfigureCookieAuthenticationOptions : IPostConfigureOptions<CookieAuthenticationOptions>
+public class PostConfigureCookieAuthenticationOptions
+    : IPostConfigureOptions<CookieAuthenticationOptions>
 {
     private readonly IDataProtectionProvider _dp;
 
@@ -35,12 +36,17 @@ public class PostConfigureCookieAuthenticationOptions : IPostConfigureOptions<Co
 
         if (string.IsNullOrEmpty(options.Cookie.Name))
         {
-            options.Cookie.Name = CookieAuthenticationDefaults.CookiePrefix + Uri.EscapeDataString(name);
+            options.Cookie.Name =
+                CookieAuthenticationDefaults.CookiePrefix + Uri.EscapeDataString(name);
         }
         if (options.TicketDataFormat == null)
         {
             // Note: the purpose for the data protector must remain fixed for interop to work.
-            var dataProtector = options.DataProtectionProvider.CreateProtector("Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationMiddleware", name, "v2");
+            var dataProtector = options.DataProtectionProvider.CreateProtector(
+                "Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationMiddleware",
+                name,
+                "v2"
+            );
             options.TicketDataFormat = new TicketDataFormat(dataProtector);
         }
         if (options.CookieManager == null)

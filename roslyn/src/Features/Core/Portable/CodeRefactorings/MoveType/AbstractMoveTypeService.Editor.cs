@@ -13,7 +13,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 {
-    internal abstract partial class AbstractMoveTypeService<TService, TTypeDeclarationSyntax, TNamespaceDeclarationSyntax, TMemberDeclarationSyntax, TCompilationUnitSyntax>
+    internal abstract partial class AbstractMoveTypeService<
+        TService,
+        TTypeDeclarationSyntax,
+        TNamespaceDeclarationSyntax,
+        TMemberDeclarationSyntax,
+        TCompilationUnitSyntax
+    >
     {
         /// <summary>
         /// An abstract class for different edits performed by the Move Type Code Action.
@@ -22,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             TService service,
             State state,
             string fileName,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             protected State State { get; } = state;
             protected TService Service { get; } = service;
@@ -42,7 +49,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                     return ImmutableArray<CodeActionOperation>.Empty;
                 }
 
-                return ImmutableArray.Create<CodeActionOperation>(new ApplyChangesOperation(solution));
+                return ImmutableArray.Create<CodeActionOperation>(
+                    new ApplyChangesOperation(solution)
+                );
             }
 
             /// <summary>
@@ -50,13 +59,28 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             /// </summary>
             public abstract Task<Solution> GetModifiedSolutionAsync();
 
-            public static Editor GetEditor(MoveTypeOperationKind operationKind, TService service, State state, string fileName, CancellationToken cancellationToken)
-                => operationKind switch
+            public static Editor GetEditor(
+                MoveTypeOperationKind operationKind,
+                TService service,
+                State state,
+                string fileName,
+                CancellationToken cancellationToken
+            ) =>
+                operationKind switch
                 {
-                    MoveTypeOperationKind.MoveType => new MoveTypeEditor(service, state, fileName, cancellationToken),
-                    MoveTypeOperationKind.RenameType => new RenameTypeEditor(service, state, fileName, cancellationToken),
-                    MoveTypeOperationKind.RenameFile => new RenameFileEditor(service, state, fileName, cancellationToken),
-                    MoveTypeOperationKind.MoveTypeNamespaceScope => new MoveTypeNamespaceScopeEditor(service, state, fileName, cancellationToken),
+                    MoveTypeOperationKind.MoveType
+                        => new MoveTypeEditor(service, state, fileName, cancellationToken),
+                    MoveTypeOperationKind.RenameType
+                        => new RenameTypeEditor(service, state, fileName, cancellationToken),
+                    MoveTypeOperationKind.RenameFile
+                        => new RenameFileEditor(service, state, fileName, cancellationToken),
+                    MoveTypeOperationKind.MoveTypeNamespaceScope
+                        => new MoveTypeNamespaceScopeEditor(
+                            service,
+                            state,
+                            fileName,
+                            cancellationToken
+                        ),
                     _ => throw ExceptionUtilities.UnexpectedValue(operationKind),
                 };
         }

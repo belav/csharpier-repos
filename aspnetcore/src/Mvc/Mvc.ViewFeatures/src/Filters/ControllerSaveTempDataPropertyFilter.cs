@@ -5,16 +5,14 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-internal sealed class ControllerSaveTempDataPropertyFilter : SaveTempDataPropertyFilterBase, IActionFilter
+internal sealed class ControllerSaveTempDataPropertyFilter
+    : SaveTempDataPropertyFilterBase,
+        IActionFilter
 {
     public ControllerSaveTempDataPropertyFilter(ITempDataDictionaryFactory factory)
-        : base(factory)
-    {
-    }
+        : base(factory) { }
 
-    public void OnActionExecuted(ActionExecutedContext context)
-    {
-    }
+    public void OnActionExecuted(ActionExecutedContext context) { }
 
     /// <inheritdoc />
     public void OnActionExecuting(ActionExecutingContext context)

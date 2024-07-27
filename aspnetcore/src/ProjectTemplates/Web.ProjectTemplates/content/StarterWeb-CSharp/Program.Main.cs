@@ -40,72 +40,79 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        #if (IndividualLocalAuth)
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+#if (IndividualLocalAuth)
+        var connectionString =
+            builder.Configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException(
+                "Connection string 'DefaultConnection' not found."
+            );
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        #if (UseLocalDB)
-            options.UseSqlServer(connectionString));
-        #else
-            options.UseSqlite(connectionString));
-        #endif
+#if (UseLocalDB)
+            options.UseSqlServer(connectionString)
+        );
+#else
+            options.UseSqlite(connectionString)
+        );
+#endif
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        builder
+            .Services.AddDefaultIdentity<IdentityUser>(options =>
+                options.SignIn.RequireConfirmedAccount = true
+            )
             .AddEntityFrameworkStores<ApplicationDbContext>();
-        #elif (OrganizationalAuth)
-        #if (GenerateApiOrGraph)
+#elif (OrganizationalAuth)
+#if (GenerateApiOrGraph)
         var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
 
-        #endif
-        builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-        #if (GenerateApiOrGraph)
+#endif
+        builder
+            .Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+#if (GenerateApiOrGraph)
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
-                .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
-        #if (GenerateApi)
+            .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+#if (GenerateApi)
                     .AddDownstreamApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
-        #endif
-        #if (GenerateGraph)
+#endif
+#if (GenerateGraph)
                     .AddMicrosoftGraph(builder.Configuration.GetSection("DownstreamApi"))
-        #endif
-                    .AddInMemoryTokenCaches();
-        #else
+#endif
+            .AddInMemoryTokenCaches();
+#else
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
-        #endif
-        #elif (IndividualB2CAuth)
-        #if (GenerateApi)
+#endif
+#elif (IndividualB2CAuth)
+#if (GenerateApi)
         var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
 
-        #endif
-        builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-        #if (GenerateApi)
+#endif
+        builder
+            .Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+#if (GenerateApi)
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAdB2C"))
-                .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
-                    .AddDownstreamApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
-                    .AddInMemoryTokenCaches();
-        #else
+            .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+            .AddDownstreamApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
+            .AddInMemoryTokenCaches();
+#else
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAdB2C"));
-        #endif
-        #endif
-        #if (OrganizationalAuth)
+#endif
+#endif
+#if (OrganizationalAuth)
 
         builder.Services.AddControllersWithViews(options =>
         {
-            var policy = new AuthorizationPolicyBuilder()
-                .RequireAuthenticatedUser()
-                .Build();
+            var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
             options.Filters.Add(new AuthorizeFilter(policy));
         });
-        #else
+#else
         builder.Services.AddControllersWithViews();
-        #endif
-        #if (OrganizationalAuth || IndividualB2CAuth)
-        builder.Services.AddRazorPages()
-            .AddMicrosoftIdentityUI();
-        #endif
-        #if (WindowsAuth)
+#endif
+#if (OrganizationalAuth || IndividualB2CAuth)
+        builder.Services.AddRazorPages().AddMicrosoftIdentityUI();
+#endif
+#if (WindowsAuth)
 
-        builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-        .AddNegotiate();
+        builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
         builder.Services.AddAuthorization(options =>
         {
@@ -113,43 +120,41 @@ public class Program
             options.FallbackPolicy = options.DefaultPolicy;
         });
         builder.Services.AddRazorPages();
-        #endif
+#endif
 
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
-        #if (IndividualLocalAuth)
+#if (IndividualLocalAuth)
         if (app.Environment.IsDevelopment())
         {
             app.UseMigrationsEndPoint();
         }
         else
-        #else
+#else
         if (!app.Environment.IsDevelopment())
-        #endif
+#endif
         {
             app.UseExceptionHandler("/Home/Error");
-        #if (HasHttpsProfile)
+#if (HasHttpsProfile)
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
 
         app.UseHttpsRedirection();
-        #else
+#else
         }
-        #endif
+#endif
         app.UseStaticFiles();
 
         app.UseRouting();
 
         app.UseAuthorization();
 
-        app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
-        #if (OrganizationalAuth || IndividualAuth)
+        app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+#if (OrganizationalAuth || IndividualAuth)
         app.MapRazorPages();
-        #endif
+#endif
 
         app.Run();
     }

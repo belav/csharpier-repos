@@ -10,11 +10,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class EndRegionKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public EndRegionKeywordRecommender()
-            : base(SyntaxKind.EndRegionKeyword, isValidInPreprocessorContext: true, shouldFormatOnCommit: true)
-        {
-        }
+            : base(
+                SyntaxKind.EndRegionKeyword,
+                isValidInPreprocessorContext: true,
+                shouldFormatOnCommit: true
+            ) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => context.IsPreProcessorKeywordContext;
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) => context.IsPreProcessorKeywordContext;
     }
 }

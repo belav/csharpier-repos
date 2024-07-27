@@ -36,7 +36,6 @@ public class ViewComponentDescriptor
 
             return _displayName;
         }
-
         set
         {
             ArgumentNullException.ThrowIfNull(value);

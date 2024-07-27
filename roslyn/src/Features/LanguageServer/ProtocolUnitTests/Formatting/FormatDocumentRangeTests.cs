@@ -16,15 +16,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
 {
     public class FormatDocumentRangeTests : AbstractLanguageServerProtocolTests
     {
-        public FormatDocumentRangeTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        public FormatDocumentRangeTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) { }
 
         [Theory, CombinatorialData]
         public async Task TestFormatDocumentRangeAsync(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
 {|format:void|} M()
 {
@@ -32,16 +31,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     void M()
 {
             int i = 1;
     }
 }";
-            await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+            await using var testLspServer = await CreateTestLspServerAsync(
+                markup,
+                mutatingLspWorkspace
+            );
             var rangeToFormat = testLspServer.GetLocations("format").Single();
-            var documentText = await testLspServer.GetCurrentSolution().GetDocuments(rangeToFormat.Uri).Single().GetTextAsync();
+            var documentText = await testLspServer
+                .GetCurrentSolution()
+                .GetDocuments(rangeToFormat.Uri)
+                .Single()
+                .GetTextAsync();
 
             var results = await RunFormatDocumentRangeAsync(testLspServer, rangeToFormat);
             var actualText = ApplyTextEdits(results, documentText);
@@ -52,7 +58,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
         public async Task TestFormatDocumentRange_UseTabsAsync(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
 {|format:void|} M()
 {
@@ -60,18 +66,30 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
 	}
 }";
             var expected =
-@"class A
+                @"class A
 {
 	void M()
 {
 			int i = 1;
 	}
 }";
-            await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+            await using var testLspServer = await CreateTestLspServerAsync(
+                markup,
+                mutatingLspWorkspace
+            );
             var rangeToFormat = testLspServer.GetLocations("format").Single();
-            var documentText = await testLspServer.GetCurrentSolution().GetDocuments(rangeToFormat.Uri).Single().GetTextAsync();
+            var documentText = await testLspServer
+                .GetCurrentSolution()
+                .GetDocuments(rangeToFormat.Uri)
+                .Single()
+                .GetTextAsync();
 
-            var results = await RunFormatDocumentRangeAsync(testLspServer, rangeToFormat, insertSpaces: false, tabSize: 4);
+            var results = await RunFormatDocumentRangeAsync(
+                testLspServer,
+                rangeToFormat,
+                insertSpaces: false,
+                tabSize: 4
+            );
             var actualText = ApplyTextEdits(results, documentText);
             Assert.Equal(expected, actualText);
         }
@@ -80,27 +98,33 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
             TestLspServer testLspServer,
             LSP.Location location,
             bool insertSpaces = true,
-            int tabSize = 4)
+            int tabSize = 4
+        )
         {
-            return await testLspServer.ExecuteRequestAsync<LSP.DocumentRangeFormattingParams, LSP.TextEdit[]>(
+            return await testLspServer.ExecuteRequestAsync<
+                LSP.DocumentRangeFormattingParams,
+                LSP.TextEdit[]
+            >(
                 LSP.Methods.TextDocumentRangeFormattingName,
                 CreateDocumentRangeFormattingParams(location, insertSpaces, tabSize),
-                CancellationToken.None);
+                CancellationToken.None
+            );
         }
 
         private static LSP.DocumentRangeFormattingParams CreateDocumentRangeFormattingParams(
             LSP.Location location,
             bool insertSpaces,
-            int tabSize)
-            => new LSP.DocumentRangeFormattingParams()
+            int tabSize
+        ) =>
+            new LSP.DocumentRangeFormattingParams()
             {
                 Range = location.Range,
                 TextDocument = CreateTextDocumentIdentifier(location.Uri),
                 Options = new LSP.FormattingOptions()
                 {
                     InsertSpaces = insertSpaces,
-                    TabSize = tabSize
-                }
+                    TabSize = tabSize,
+                },
             };
     }
 }

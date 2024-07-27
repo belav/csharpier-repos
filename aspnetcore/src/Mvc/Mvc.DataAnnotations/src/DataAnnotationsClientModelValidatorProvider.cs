@@ -31,7 +31,8 @@ internal sealed class DataAnnotationsClientModelValidatorProvider : IClientModel
     public DataAnnotationsClientModelValidatorProvider(
         IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
         IOptions<MvcDataAnnotationsLocalizationOptions> options,
-        IStringLocalizerFactory? stringLocalizerFactory)
+        IStringLocalizerFactory? stringLocalizerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(validationAttributeAdapterProvider);
         ArgumentNullException.ThrowIfNull(options);
@@ -46,13 +47,17 @@ internal sealed class DataAnnotationsClientModelValidatorProvider : IClientModel
     {
         ArgumentNullException.ThrowIfNull(context);
         IStringLocalizer? stringLocalizer = null;
-        if (_options.Value.DataAnnotationLocalizerProvider != null && _stringLocalizerFactory != null)
+        if (
+            _options.Value.DataAnnotationLocalizerProvider != null
+            && _stringLocalizerFactory != null
+        )
         {
             // This will pass first non-null type (either containerType or modelType) to delegate.
             // Pass the root model type(container type) if it is non null, else pass the model type.
             stringLocalizer = _options.Value.DataAnnotationLocalizerProvider(
                 context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
-                _stringLocalizerFactory);
+                _stringLocalizerFactory
+            );
         }
 
         var hasRequiredAttribute = false;
@@ -78,7 +83,10 @@ internal sealed class DataAnnotationsClientModelValidatorProvider : IClientModel
 
             hasRequiredAttribute |= attribute is RequiredAttribute;
 
-            var adapter = _validationAttributeAdapterProvider.GetAttributeAdapter(attribute, stringLocalizer);
+            var adapter = _validationAttributeAdapterProvider.GetAttributeAdapter(
+                attribute,
+                stringLocalizer
+            );
             if (adapter != null)
             {
                 validatorItem.Validator = adapter;
@@ -89,13 +97,16 @@ internal sealed class DataAnnotationsClientModelValidatorProvider : IClientModel
         if (!hasRequiredAttribute && context.ModelMetadata.IsRequired)
         {
             // Add a default '[Required]' validator for generating HTML if necessary.
-            context.Results.Add(new ClientValidatorItem
-            {
-                Validator = _validationAttributeAdapterProvider.GetAttributeAdapter(
-                    new RequiredAttribute(),
-                    stringLocalizer),
-                IsReusable = true
-            });
+            context.Results.Add(
+                new ClientValidatorItem
+                {
+                    Validator = _validationAttributeAdapterProvider.GetAttributeAdapter(
+                        new RequiredAttribute(),
+                        stringLocalizer
+                    ),
+                    IsReusable = true,
+                }
+            );
         }
     }
 }

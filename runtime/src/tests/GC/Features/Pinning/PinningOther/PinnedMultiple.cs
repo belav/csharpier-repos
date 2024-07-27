@@ -13,8 +13,8 @@ public class Test_PinnedMultiple
     {
         int[] arr = new int[1000];
         GCHandle[] arrhandle = new GCHandle[10000]; // array of handles to the same object
-        IntPtr[] oldaddress = new IntPtr[10000];        // store old addresses
-        IntPtr[] newaddress = new IntPtr[10000];        // store new addresses
+        IntPtr[] oldaddress = new IntPtr[10000]; // store old addresses
+        IntPtr[] newaddress = new IntPtr[10000]; // store new addresses
 
         for (int i = 0; i < 10000; i++)
         {

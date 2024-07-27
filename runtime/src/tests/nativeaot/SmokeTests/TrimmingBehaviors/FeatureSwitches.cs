@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;
 using System.Diagnostics.CodeAnalysis;
-
+using System.Reflection;
 using BindingFlags = System.Reflection.BindingFlags;
 
 class FeatureSwitches
@@ -12,7 +11,9 @@ class FeatureSwitches
     // These are substituted using the XML file
     // We're testing that the basic blocks that are known to be unreachable don't get compiled.
     static bool IsEnabled() => true;
+
     static int GetIntConstant() => 0;
+
     static bool s_isEnabled = IsEnabled();
 
     // These are substituted by embedded XML file and re-substituted by XML passed on command line
@@ -28,7 +29,7 @@ class FeatureSwitches
         TestIntConstant.Run();
         TestResubstitution.Run();
         TestResourceStripping.Run();
-        
+
         return 100;
     }
 
@@ -109,10 +110,7 @@ class FeatureSwitches
 
         public static void Run()
         {
-            try
-            {
-
-            }
+            try { }
             finally
             {
                 if (IsEnabled())
@@ -177,9 +175,13 @@ class FeatureSwitches
         }
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    private static bool IsTypePresent(Type testType, string typeName) => testType.GetNestedType(typeName, BindingFlags.NonPublic | BindingFlags.Public) != null;
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    private static bool IsTypePresent(Type testType, string typeName) =>
+        testType.GetNestedType(typeName, BindingFlags.NonPublic | BindingFlags.Public) != null;
 
     private static void ThrowIfPresent(Type testType, string typeName)
     {
@@ -189,7 +191,9 @@ class FeatureSwitches
         }
     }
 
-    private static void EnsurePresent([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type)
+    private static void EnsurePresent(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
+    )
     {
         if (type.GetConstructors().Length != 1)
             throw new Exception();

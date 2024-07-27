@@ -16,9 +16,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RazorTestWorkspaceRegistrationService()
-        {
-        }
+        public RazorTestWorkspaceRegistrationService() { }
 
         // Method purposely doesn't override the base so any changes to the method
         // signature in the base class won't automatically break Razor.

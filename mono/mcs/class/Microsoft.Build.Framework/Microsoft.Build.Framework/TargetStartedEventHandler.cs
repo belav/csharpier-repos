@@ -27,8 +27,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-namespace Microsoft.Build.Framework {
-	public delegate void TargetStartedEventHandler (object sender,
-							TargetStartedEventArgs e);
+namespace Microsoft.Build.Framework
+{
+    public delegate void TargetStartedEventHandler(object sender, TargetStartedEventArgs e);
 }
-

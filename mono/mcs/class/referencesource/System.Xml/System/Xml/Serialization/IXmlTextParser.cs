@@ -5,7 +5,8 @@
 // <owner current="true" primary="true">ElenaK</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
+namespace System.Xml.Serialization
+{
     using System.Xml;
 
     /// <include file='doc\IXmlTextParser.uex' path='docs/doc[@for="IXmlTextParser"]/*' />
@@ -13,7 +14,8 @@ namespace System.Xml.Serialization {
     /// <devdoc>
     /// <para>This class is <see langword='interface'/> .</para>
     /// </devdoc>
-    public interface IXmlTextParser {
+    public interface IXmlTextParser
+    {
         /// <include file='doc\IXmlTextParser.uex' path='docs/doc[@for="IXmlTextParser.Normalized"]/*' />
         /// <internalonly/>
         bool Normalized { get; set; }

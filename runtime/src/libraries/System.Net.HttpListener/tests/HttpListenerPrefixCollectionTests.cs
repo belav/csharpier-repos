@@ -12,7 +12,8 @@ namespace System.Net.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))] // httpsys component missing in Nano.
     public class HttpListenerPrefixCollectionTests
     {
-        public static bool IsNonZeroLowerBoundArraySupported => PlatformDetection.IsNonZeroLowerBoundArraySupported;
+        public static bool IsNonZeroLowerBoundArraySupported =>
+            PlatformDetection.IsNonZeroLowerBoundArraySupported;
 
         [Fact]
         public void Prefixes_Get_ReturnsEmpty()
@@ -96,7 +97,10 @@ namespace System.Net.Tests
 
             // Exception thrown when not empty.
             listener.Prefixes.Add("http://localhost:9200/");
-            AssertExtensions.Throws<ArgumentException>(null, () => listener.Prefixes.CopyTo(new object[1, 1], 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => listener.Prefixes.CopyTo(new object[1, 1], 0)
+            );
         }
 
         [ConditionalFact(nameof(IsNonZeroLowerBoundArraySupported))]
@@ -131,8 +135,14 @@ namespace System.Net.Tests
         {
             var listener = new HttpListener();
             listener.Prefixes.Add("http://localhost:9200/");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("array", () => listener.Prefixes.CopyTo((Array)new string[0], 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("array", () => listener.Prefixes.CopyTo(new string[0], 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "array",
+                () => listener.Prefixes.CopyTo((Array)new string[0], 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "array",
+                () => listener.Prefixes.CopyTo(new string[0], 0)
+            );
         }
 
         [Theory]
@@ -142,8 +152,14 @@ namespace System.Net.Tests
         {
             var listener = new HttpListener();
             listener.Prefixes.Add("http://localhost:9200/");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => listener.Prefixes.CopyTo((Array)new string[1], offset));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => listener.Prefixes.CopyTo(new string[1], offset));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "offset",
+                () => listener.Prefixes.CopyTo((Array)new string[1], offset)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "offset",
+                () => listener.Prefixes.CopyTo(new string[1], offset)
+            );
         }
 
         [Fact]
@@ -177,7 +193,10 @@ namespace System.Net.Tests
             Assert.Equal(1, listener.Prefixes.Count);
             Assert.True(listener.Prefixes.Contains(uriPrefix));
 
-            Assert.All(listener.DefaultServiceNames.Cast<string>(), serviceNames => Assert.StartsWith("HTTP/", serviceNames));
+            Assert.All(
+                listener.DefaultServiceNames.Cast<string>(),
+                serviceNames => Assert.StartsWith("HTTP/", serviceNames)
+            );
         }
 
         [Fact]
@@ -210,7 +229,9 @@ namespace System.Net.Tests
 
         [Theory]
         [MemberData(nameof(Hosts_TestData))]
-        public void Add_PrefixAlreadyRegisteredAndNotStarted_ThrowsHttpListenerException(string hostname)
+        public void Add_PrefixAlreadyRegisteredAndNotStarted_ThrowsHttpListenerException(
+            string hostname
+        )
         {
             using (var factory = new HttpListenerFactory(hostname))
             {
@@ -242,7 +263,9 @@ namespace System.Net.Tests
 
         [Theory]
         [MemberData(nameof(Hosts_TestData))]
-        public void Add_PrefixAlreadyRegisteredAndStarted_ThrowsHttpListenerException(string hostname)
+        public void Add_PrefixAlreadyRegisteredAndStarted_ThrowsHttpListenerException(
+            string hostname
+        )
         {
             using (var factory = new HttpListenerFactory(hostname))
             {
@@ -250,7 +273,9 @@ namespace System.Net.Tests
                 string uriPrefix = Assert.Single(listener.Prefixes);
 
                 Assert.Throws<HttpListenerException>(() => listener.Prefixes.Add(uriPrefix));
-                Assert.Throws<HttpListenerException>(() => listener.Prefixes.Add(uriPrefix + "/sub_path/"));
+                Assert.Throws<HttpListenerException>(
+                    () => listener.Prefixes.Add(uriPrefix + "/sub_path/")
+                );
             }
         }
 
@@ -304,11 +329,15 @@ namespace System.Net.Tests
 
                 // Conflicts with existing registration: listener2 has registered to listen to http://127.0.0.1:{freePort1}/...
                 Assert.Throws<HttpListenerException>(() => listener1.Prefixes.Add(prefix1));
-                Assert.Throws<HttpListenerException>(() => listener1.Prefixes.Add($"{prefix1}hola/"));
+                Assert.Throws<HttpListenerException>(
+                    () => listener1.Prefixes.Add($"{prefix1}hola/")
+                );
 
                 // Conflicts with existing registration: listener1 has registered to listen to http://127.0.0.1:{freePort2}/...
                 Assert.Throws<HttpListenerException>(() => listener2.Prefixes.Add(prefix2));
-                Assert.Throws<HttpListenerException>(() => listener2.Prefixes.Add($"{prefix2}hola/"));
+                Assert.Throws<HttpListenerException>(
+                    () => listener2.Prefixes.Add($"{prefix2}hola/")
+                );
             }
         }
 
@@ -331,12 +360,20 @@ namespace System.Net.Tests
                 Assert.Equal(2, listener2.Prefixes.Count);
 
                 // Conflict: listenerX is already listening to $"http://127.0.0.1:{freePortX}/hola/".
-                Assert.Throws<HttpListenerException>(() => listener1.Prefixes.Add($"{prefix1}hola/"));
-                Assert.Throws<HttpListenerException>(() => listener2.Prefixes.Add($"{prefix2}hola/"));
+                Assert.Throws<HttpListenerException>(
+                    () => listener1.Prefixes.Add($"{prefix1}hola/")
+                );
+                Assert.Throws<HttpListenerException>(
+                    () => listener2.Prefixes.Add($"{prefix2}hola/")
+                );
 
                 // Conflict: listenerX is already listening to $"http://127.0.0.1:{freePortY}/hola/".
-                Assert.Throws<HttpListenerException>(() => listener1.Prefixes.Add($"{prefix2}hola/"));
-                Assert.Throws<HttpListenerException>(() => listener2.Prefixes.Add($"{prefix2}hola/"));
+                Assert.Throws<HttpListenerException>(
+                    () => listener1.Prefixes.Add($"{prefix2}hola/")
+                );
+                Assert.Throws<HttpListenerException>(
+                    () => listener2.Prefixes.Add($"{prefix2}hola/")
+                );
             }
         }
 
@@ -359,7 +396,10 @@ namespace System.Net.Tests
 
         [Theory]
         [MemberData(nameof(InvalidPrefix_TestData))]
-        [SkipOnPlatform(TestPlatforms.FreeBSD, "FreeBSD accepts some inputs as valid and test hangs")]
+        [SkipOnPlatform(
+            TestPlatforms.FreeBSD,
+            "FreeBSD accepts some inputs as valid and test hangs"
+        )]
         public void Add_InvalidPrefixNotStarted_ThrowsHttpListenerExceptionOnStart(string uriPrefix)
         {
             var listener = new HttpListener();
@@ -372,8 +412,13 @@ namespace System.Net.Tests
 
         [Theory]
         [MemberData(nameof(InvalidPrefix_TestData))]
-        [SkipOnPlatform(TestPlatforms.FreeBSD, "FreeBSD accepts some inputs as valid and test hangs")]
-        public void Add_InvalidPrefixAlreadyStarted_ThrowsHttpListenerExceptionOnAdd(string uriPrefix)
+        [SkipOnPlatform(
+            TestPlatforms.FreeBSD,
+            "FreeBSD accepts some inputs as valid and test hangs"
+        )]
+        public void Add_InvalidPrefixAlreadyStarted_ThrowsHttpListenerExceptionOnAdd(
+            string uriPrefix
+        )
         {
             using (var factory = new HttpListenerFactory())
             {
@@ -399,7 +444,10 @@ namespace System.Net.Tests
         public void Add_InvalidPrefix_ThrowsArgumentException(string uriPrefix)
         {
             var listener = new HttpListener();
-            AssertExtensions.Throws<ArgumentException>("uriPrefix", () => listener.Prefixes.Add(uriPrefix));
+            AssertExtensions.Throws<ArgumentException>(
+                "uriPrefix",
+                () => listener.Prefixes.Add(uriPrefix)
+            );
 
             // If the prefix was invalid, it shouldn't be added to the list.
             Assert.Empty(listener.Prefixes);
@@ -410,7 +458,10 @@ namespace System.Net.Tests
         public void Add_NullPrefix_ThrowsArgumentNullException()
         {
             var listener = new HttpListener();
-            AssertExtensions.Throws<ArgumentNullException>("uriPrefix", () => listener.Prefixes.Add(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "uriPrefix",
+                () => listener.Prefixes.Add(null)
+            );
         }
 
         [Fact]
@@ -418,7 +469,10 @@ namespace System.Net.Tests
         {
             var listener = new HttpListener();
             string longPrefix = "http://" + new string('a', 256) + "/";
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("hostName", () => listener.Prefixes.Add(longPrefix));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "hostName",
+                () => listener.Prefixes.Add(longPrefix)
+            );
 
             // Ouch: even though adding the prefix threw an exception, the prefix was still added.
             Assert.Equal(1, listener.Prefixes.Count);
@@ -456,7 +510,10 @@ namespace System.Net.Tests
         public void Contains_NullPrefix_ThrowsArgumentNullException()
         {
             var listener = new HttpListener();
-            AssertExtensions.Throws<ArgumentNullException>("key", () => listener.Prefixes.Contains(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "key",
+                () => listener.Prefixes.Contains(null)
+            );
         }
 
         [Fact]
@@ -514,7 +571,10 @@ namespace System.Net.Tests
         public void Remove_NullPrefix_ThrowsArgumentNullException()
         {
             var listener = new HttpListener();
-            AssertExtensions.Throws<ArgumentNullException>("uriPrefix", () => listener.Prefixes.Remove(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "uriPrefix",
+                () => listener.Prefixes.Remove(null)
+            );
         }
 
         [Fact]

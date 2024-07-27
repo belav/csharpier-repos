@@ -22,8 +22,15 @@ namespace Microsoft.Extensions.Logging
         /// <param name="listener">The <see cref="TraceListener"/> to use.</param>
         /// <returns>The <see cref="ILoggerFactory"/> so that additional calls can be chained.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddTraceSource(this ILoggingBuilder builder).", error: true)]
-        public static ILoggerFactory AddTraceSource(this ILoggerFactory factory, System.Diagnostics.SourceSwitch sourceSwitch, System.Diagnostics.TraceListener listener)
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddTraceSource(this ILoggingBuilder builder).",
+            error: true
+        )]
+        public static ILoggerFactory AddTraceSource(
+            this ILoggerFactory factory,
+            System.Diagnostics.SourceSwitch sourceSwitch,
+            System.Diagnostics.TraceListener listener
+        )
         {
             ThrowHelper.ThrowIfNull(factory);
             ThrowHelper.ThrowIfNull(sourceSwitch);
@@ -41,8 +48,14 @@ namespace Microsoft.Extensions.Logging
         /// <param name="sourceSwitch">The <see cref="SourceSwitch"/> to use.</param>
         /// <returns>The <see cref="ILoggerFactory"/> so that additional calls can be chained.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddTraceSource(this ILoggingBuilder builder).", error: true)]
-        public static ILoggerFactory AddTraceSource(this ILoggerFactory factory, System.Diagnostics.SourceSwitch sourceSwitch)
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddTraceSource(this ILoggingBuilder builder).",
+            error: true
+        )]
+        public static ILoggerFactory AddTraceSource(
+            this ILoggerFactory factory,
+            System.Diagnostics.SourceSwitch sourceSwitch
+        )
         {
             ThrowHelper.ThrowIfNull(factory);
             ThrowHelper.ThrowIfNull(sourceSwitch);
@@ -60,14 +73,23 @@ namespace Microsoft.Extensions.Logging
         /// <param name="listener">The <see cref="TraceListener"/> to use.</param>
         /// <returns>The <see cref="ILoggerFactory"/> so that additional calls can be chained.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddTraceSource(this ILoggingBuilder builder).", error: true)]
-        public static ILoggerFactory AddTraceSource(this ILoggerFactory factory, string switchName, System.Diagnostics.TraceListener listener)
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddTraceSource(this ILoggingBuilder builder).",
+            error: true
+        )]
+        public static ILoggerFactory AddTraceSource(
+            this ILoggerFactory factory,
+            string switchName,
+            System.Diagnostics.TraceListener listener
+        )
         {
             ThrowHelper.ThrowIfNull(factory);
             ThrowHelper.ThrowIfNull(switchName);
             ThrowHelper.ThrowIfNull(listener);
 
-            factory.AddProvider(new TraceSourceLoggerProvider(new SourceSwitch(switchName), listener));
+            factory.AddProvider(
+                new TraceSourceLoggerProvider(new SourceSwitch(switchName), listener)
+            );
 
             return factory;
         }
@@ -79,7 +101,10 @@ namespace Microsoft.Extensions.Logging
         /// <param name="switchName">The name of the <see cref="SourceSwitch"/> to use.</param>
         /// <returns>The <see cref="ILoggerFactory"/> so that additional calls can be chained.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddTraceSource(this ILoggingBuilder builder).", error: true)]
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddTraceSource(this ILoggingBuilder builder).",
+            error: true
+        )]
         public static ILoggerFactory AddTraceSource(this ILoggerFactory factory, string switchName)
         {
             ThrowHelper.ThrowIfNull(factory);
@@ -98,7 +123,8 @@ namespace Microsoft.Extensions.Logging
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder AddTraceSource(
             this ILoggingBuilder builder,
-            string switchName)
+            string switchName
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(switchName);
@@ -116,7 +142,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddTraceSource(
             this ILoggingBuilder builder,
             string switchName,
-            TraceListener listener)
+            TraceListener listener
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(switchName);
@@ -133,12 +160,15 @@ namespace Microsoft.Extensions.Logging
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder AddTraceSource(
             this ILoggingBuilder builder,
-            SourceSwitch sourceSwitch)
+            SourceSwitch sourceSwitch
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(sourceSwitch);
 
-            builder.Services.AddSingleton<ILoggerProvider>(_ => new TraceSourceLoggerProvider(sourceSwitch));
+            builder.Services.AddSingleton<ILoggerProvider>(_ => new TraceSourceLoggerProvider(
+                sourceSwitch
+            ));
 
             return builder;
         }
@@ -153,13 +183,17 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddTraceSource(
             this ILoggingBuilder builder,
             SourceSwitch sourceSwitch,
-            TraceListener listener)
+            TraceListener listener
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(sourceSwitch);
             ThrowHelper.ThrowIfNull(listener);
 
-            builder.Services.AddSingleton<ILoggerProvider>(_ => new TraceSourceLoggerProvider(sourceSwitch, listener));
+            builder.Services.AddSingleton<ILoggerProvider>(_ => new TraceSourceLoggerProvider(
+                sourceSwitch,
+                listener
+            ));
 
             return builder;
         }

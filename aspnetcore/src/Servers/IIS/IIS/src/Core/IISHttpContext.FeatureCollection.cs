@@ -20,24 +20,25 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-internal partial class IISHttpContext : IFeatureCollection,
-                                        IHttpRequestFeature,
-                                        IHttpRequestBodyDetectionFeature,
-                                        IHttpResponseFeature,
-                                        IHttpResponseBodyFeature,
-                                        IHttpUpgradeFeature,
-                                        IHttpRequestLifetimeFeature,
-                                        IHttpAuthenticationFeature,
-                                        IServerVariablesFeature,
-                                        ITlsConnectionFeature,
-                                        ITlsHandshakeFeature,
-                                        IHttpBodyControlFeature,
-                                        IHttpMaxRequestBodySizeFeature,
-                                        IHttpResponseTrailersFeature,
-                                        IHttpResetFeature,
-                                        IConnectionLifetimeNotificationFeature,
-                                        IHttpSysRequestInfoFeature,
-                                        IHttpSysRequestTimingFeature
+internal partial class IISHttpContext
+    : IFeatureCollection,
+        IHttpRequestFeature,
+        IHttpRequestBodyDetectionFeature,
+        IHttpResponseFeature,
+        IHttpResponseBodyFeature,
+        IHttpUpgradeFeature,
+        IHttpRequestLifetimeFeature,
+        IHttpAuthenticationFeature,
+        IServerVariablesFeature,
+        ITlsConnectionFeature,
+        ITlsHandshakeFeature,
+        IHttpBodyControlFeature,
+        IHttpMaxRequestBodySizeFeature,
+        IHttpResponseTrailersFeature,
+        IHttpResetFeature,
+        IConnectionLifetimeNotificationFeature,
+        IHttpSysRequestInfoFeature,
+        IHttpSysRequestTimingFeature
 {
     private int _featureRevision;
     private string? _httpProtocolVersion;
@@ -194,7 +195,10 @@ internal partial class IISHttpContext : IFeatureCollection,
         {
             if (ResponsePipeWrapper == null)
             {
-                ResponsePipeWrapper = PipeWriter.Create(ResponseBody, new StreamPipeWriterOptions(leaveOpen: true));
+                ResponsePipeWrapper = PipeWriter.Create(
+                    ResponseBody,
+                    new StreamPipeWriterOptions(leaveOpen: true)
+                );
             }
 
             return ResponsePipeWrapper;
@@ -211,8 +215,12 @@ internal partial class IISHttpContext : IFeatureCollection,
         return Task.CompletedTask;
     }
 
-    Task IHttpResponseBodyFeature.SendFileAsync(string path, long offset, long? count, CancellationToken cancellation)
-        => SendFileFallback.SendFileAsync(ResponseBody, path, offset, count, cancellation);
+    Task IHttpResponseBodyFeature.SendFileAsync(
+        string path,
+        long offset,
+        long? count,
+        CancellationToken cancellation
+    ) => SendFileFallback.SendFileAsync(ResponseBody, path, offset, count, cancellation);
 
     // TODO: In the future this could complete the body all the way down to the server. For now it just ensures
     // any unflushed data gets flushed.
@@ -269,7 +277,8 @@ internal partial class IISHttpContext : IFeatureCollection,
     // Http/2 does not support the upgrade mechanic.
     // Http/1.1 upgrade requests may have a request body, but that's not allowed in our main scenario (WebSockets) and much
     // more complicated to support. See https://tools.ietf.org/html/rfc7230#section-6.7, https://tools.ietf.org/html/rfc7540#section-3.2
-    bool IHttpUpgradeFeature.IsUpgradableRequest => !RequestCanHaveBody && HttpVersion == System.Net.HttpVersion.Version11;
+    bool IHttpUpgradeFeature.IsUpgradableRequest =>
+        !RequestCanHaveBody && HttpVersion == System.Net.HttpVersion.Version11;
 
     bool IFeatureCollection.IsReadOnly => false;
 
@@ -293,7 +302,13 @@ internal partial class IISHttpContext : IFeatureCollection,
             // Synchronize access to native methods that might run in parallel with IO loops
             lock (_contextLock)
             {
-                return NativeMethods.HttpTryGetServerVariable(_requestNativeHandle, variableName, out var value) ? value : null;
+                return NativeMethods.HttpTryGetServerVariable(
+                    _requestNativeHandle,
+                    variableName,
+                    out var value
+                )
+                    ? value
+                    : null;
             }
         }
         set
@@ -319,12 +334,14 @@ internal partial class IISHttpContext : IFeatureCollection,
         set => FastFeatureSet(key, value);
     }
 
-    TFeature? IFeatureCollection.Get<TFeature>() where TFeature : default
+    TFeature? IFeatureCollection.Get<TFeature>()
+        where TFeature : default
     {
         return (TFeature?)FastFeatureGet(typeof(TFeature));
     }
 
-    void IFeatureCollection.Set<TFeature>(TFeature? instance) where TFeature : default
+    void IFeatureCollection.Set<TFeature>(TFeature? instance)
+        where TFeature : default
     {
         FastFeatureSet(typeof(TFeature), instance);
     }
@@ -380,7 +397,9 @@ internal partial class IISHttpContext : IFeatureCollection,
         return _streams.Upgrade();
     }
 
-    Task<X509Certificate2?> ITlsConnectionFeature.GetClientCertificateAsync(CancellationToken cancellationToken)
+    Task<X509Certificate2?> ITlsConnectionFeature.GetClientCertificateAsync(
+        CancellationToken cancellationToken
+    )
     {
         return Task.FromResult(((ITlsConnectionFeature)this).ClientCertificate);
     }
@@ -389,24 +408,30 @@ internal partial class IISHttpContext : IFeatureCollection,
     {
         get
         {
-            if (_certificate == null &&
-                NativeRequest->pSslInfo != null &&
-                NativeRequest->pSslInfo->pClientCertInfo != null &&
-                NativeRequest->pSslInfo->pClientCertInfo->pCertEncoded != null &&
-                NativeRequest->pSslInfo->pClientCertInfo->CertEncodedSize != 0)
+            if (
+                _certificate == null
+                && NativeRequest->pSslInfo != null
+                && NativeRequest->pSslInfo->pClientCertInfo != null
+                && NativeRequest->pSslInfo->pClientCertInfo->pCertEncoded != null
+                && NativeRequest->pSslInfo->pClientCertInfo->CertEncodedSize != 0
+            )
             {
                 // Based off of from https://referencesource.microsoft.com/#system/net/System/Net/HttpListenerRequest.cs,1037c8ec82879ba0,references
-                var rawCertificateCopy = new byte[NativeRequest->pSslInfo->pClientCertInfo->CertEncodedSize];
-                Marshal.Copy((IntPtr)NativeRequest->pSslInfo->pClientCertInfo->pCertEncoded, rawCertificateCopy, 0, rawCertificateCopy.Length);
+                var rawCertificateCopy = new byte[
+                    NativeRequest->pSslInfo->pClientCertInfo->CertEncodedSize
+                ];
+                Marshal.Copy(
+                    (IntPtr)NativeRequest->pSslInfo->pClientCertInfo->pCertEncoded,
+                    rawCertificateCopy,
+                    0,
+                    rawCertificateCopy.Length
+                );
                 _certificate = new X509Certificate2(rawCertificateCopy);
             }
 
             return _certificate;
         }
-        set
-        {
-            _certificate = value;
-        }
+        set { _certificate = value; }
     }
 
     SslProtocols ITlsHandshakeFeature.Protocol => Protocol;
@@ -427,13 +452,16 @@ internal partial class IISHttpContext : IFeatureCollection,
 
     int ITlsHandshakeFeature.KeyExchangeStrength => KeyExchangeStrength;
 
-    IEnumerator<KeyValuePair<Type, object>> IEnumerable<KeyValuePair<Type, object>>.GetEnumerator() => FastEnumerable().GetEnumerator();
+    IEnumerator<KeyValuePair<Type, object>> IEnumerable<
+        KeyValuePair<Type, object>
+    >.GetEnumerator() => FastEnumerable().GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => FastEnumerable().GetEnumerator();
 
     bool IHttpBodyControlFeature.AllowSynchronousIO { get; set; }
 
-    bool IHttpMaxRequestBodySizeFeature.IsReadOnly => HasStartedConsumingRequestBody || _wasUpgraded;
+    bool IHttpMaxRequestBodySizeFeature.IsReadOnly =>
+        HasStartedConsumingRequestBody || _wasUpgraded;
 
     long? IHttpMaxRequestBodySizeFeature.MaxRequestBodySize
     {
@@ -442,15 +470,22 @@ internal partial class IISHttpContext : IFeatureCollection,
         {
             if (HasStartedConsumingRequestBody)
             {
-                throw new InvalidOperationException(CoreStrings.MaxRequestBodySizeCannotBeModifiedAfterRead);
+                throw new InvalidOperationException(
+                    CoreStrings.MaxRequestBodySizeCannotBeModifiedAfterRead
+                );
             }
             if (_wasUpgraded)
             {
-                throw new InvalidOperationException(CoreStrings.MaxRequestBodySizeCannotBeModifiedForUpgradedRequests);
+                throw new InvalidOperationException(
+                    CoreStrings.MaxRequestBodySizeCannotBeModifiedForUpgradedRequests
+                );
             }
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.NonNegativeNumberOrNullRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    CoreStrings.NonNegativeNumberOrNullRequired
+                );
             }
 
             if (value > _options.IisMaxRequestSizeLimit)
@@ -489,7 +524,10 @@ internal partial class IISHttpContext : IFeatureCollection,
     {
         if (errorCode < 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(errorCode), "'errorCode' cannot be negative");
+            throw new ArgumentOutOfRangeException(
+                nameof(errorCode),
+                "'errorCode' cannot be negative"
+            );
         }
 
         SetResetCode(errorCode);

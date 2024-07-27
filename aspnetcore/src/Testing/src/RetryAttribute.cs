@@ -11,7 +11,10 @@ namespace Microsoft.AspNetCore.InternalTesting;
 /// This can be used on an assembly, class, or method name. Requires using the AspNetCore test framework.
 /// </summary>
 [EditorBrowsable(EditorBrowsableState.Never)]
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = false)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly,
+    AllowMultiple = false
+)]
 public sealed class RetryAttribute : Attribute
 {
     public RetryAttribute(int maxRetries = 3)

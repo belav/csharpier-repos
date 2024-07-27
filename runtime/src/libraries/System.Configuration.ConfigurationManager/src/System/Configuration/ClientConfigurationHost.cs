@@ -19,7 +19,8 @@ namespace System.Configuration
         internal const string MachineConfigPath = MachineConfigName;
         internal const string ExeConfigPath = MachineConfigPath + "/" + ExeConfigName;
         internal const string RoamingUserConfigPath = ExeConfigPath + "/" + RoamingUserConfigName;
-        internal const string LocalUserConfigPath = RoamingUserConfigPath + "/" + LocalUserConfigName;
+        internal const string LocalUserConfigPath =
+            RoamingUserConfigPath + "/" + LocalUserConfigName;
 
         private const string MachineConfigFilename = "machine.config";
         private const string MachineConfigSubdirectory = "Config";
@@ -37,7 +38,8 @@ namespace System.Configuration
             Host = new InternalConfigHost();
         }
 
-        internal ClientConfigPaths ConfigPaths => _configPaths ??= ClientConfigPaths.GetPaths(_exePath, _initComplete);
+        internal ClientConfigPaths ConfigPaths =>
+            _configPaths ??= ClientConfigPaths.GetPaths(_exePath, _initComplete);
 
         internal static string MachineConfigFilePath
         {
@@ -46,8 +48,10 @@ namespace System.Configuration
                 if (s_machineConfigFilePath == null)
                 {
                     string directory = AppDomain.CurrentDomain.BaseDirectory;
-                    s_machineConfigFilePath = Path.Combine(Path.Combine(directory, MachineConfigSubdirectory),
-                        MachineConfigFilename);
+                    s_machineConfigFilePath = Path.Combine(
+                        Path.Combine(directory, MachineConfigSubdirectory),
+                        MachineConfigFilename
+                    );
                 }
 
                 return s_machineConfigFilePath;
@@ -58,8 +62,10 @@ namespace System.Configuration
         {
             get
             {
-                if (_fileMap != null) return !string.IsNullOrEmpty(_fileMap.RoamingUserConfigFilename);
-                else return ConfigPaths.HasRoamingConfig;
+                if (_fileMap != null)
+                    return !string.IsNullOrEmpty(_fileMap.RoamingUserConfigFilename);
+                else
+                    return ConfigPaths.HasRoamingConfig;
             }
         }
 
@@ -67,8 +73,10 @@ namespace System.Configuration
         {
             get
             {
-                if (_fileMap != null) return !string.IsNullOrEmpty(_fileMap.LocalUserConfigFilename);
-                else return ConfigPaths.HasLocalConfig;
+                if (_fileMap != null)
+                    return !string.IsNullOrEmpty(_fileMap.LocalUserConfigFilename);
+                else
+                    return ConfigPaths.HasLocalConfig;
             }
         }
 
@@ -124,8 +132,8 @@ namespace System.Configuration
         // Return true if the config path is for a user.config file, false otherwise.
         private static bool IsUserConfig(string configPath)
         {
-            return StringUtil.EqualsIgnoreCase(configPath, RoamingUserConfigPath) ||
-                StringUtil.EqualsIgnoreCase(configPath, LocalUserConfigPath);
+            return StringUtil.EqualsIgnoreCase(configPath, RoamingUserConfigPath)
+                || StringUtil.EqualsIgnoreCase(configPath, LocalUserConfigPath);
         }
 
         public override void Init(IInternalConfigRoot configRoot, params object[] hostInitParams)
@@ -144,26 +152,35 @@ namespace System.Configuration
                 if ((fileMap != null) && !string.IsNullOrEmpty(_exePath))
                     throw ExceptionUtil.UnexpectedError("ClientConfigurationHost::Init");
 
-                if (string.IsNullOrEmpty(_exePath)) _exePath = null;
+                if (string.IsNullOrEmpty(_exePath))
+                    _exePath = null;
 
                 // Initialize the fileMap, if provided.
                 if (fileMap != null)
                 {
                     _fileMap = new ExeConfigurationFileMap();
                     if (!string.IsNullOrEmpty(fileMap.MachineConfigFilename))
-                        _fileMap.MachineConfigFilename = Path.GetFullPath(fileMap.MachineConfigFilename);
+                        _fileMap.MachineConfigFilename = Path.GetFullPath(
+                            fileMap.MachineConfigFilename
+                        );
 
                     ExeConfigurationFileMap exeFileMap = fileMap as ExeConfigurationFileMap;
                     if (exeFileMap != null)
                     {
                         if (!string.IsNullOrEmpty(exeFileMap.ExeConfigFilename))
-                            _fileMap.ExeConfigFilename = Path.GetFullPath(exeFileMap.ExeConfigFilename);
+                            _fileMap.ExeConfigFilename = Path.GetFullPath(
+                                exeFileMap.ExeConfigFilename
+                            );
 
                         if (!string.IsNullOrEmpty(exeFileMap.RoamingUserConfigFilename))
-                            _fileMap.RoamingUserConfigFilename = Path.GetFullPath(exeFileMap.RoamingUserConfigFilename);
+                            _fileMap.RoamingUserConfigFilename = Path.GetFullPath(
+                                exeFileMap.RoamingUserConfigFilename
+                            );
 
                         if (!string.IsNullOrEmpty(exeFileMap.LocalUserConfigFilename))
-                            _fileMap.LocalUserConfigFilename = Path.GetFullPath(exeFileMap.LocalUserConfigFilename);
+                            _fileMap.LocalUserConfigFilename = Path.GetFullPath(
+                                exeFileMap.LocalUserConfigFilename
+                            );
                     }
                 }
             }
@@ -173,9 +190,13 @@ namespace System.Configuration
             }
         }
 
-        public override void InitForConfiguration(ref string locationSubPath, out string configPath,
+        public override void InitForConfiguration(
+            ref string locationSubPath,
+            out string configPath,
             out string locationConfigPath,
-            IInternalConfigRoot configRoot, params object[] hostInitConfigurationParams)
+            IInternalConfigRoot configRoot,
+            params object[] hostInitConfigurationParams
+        )
         {
             locationSubPath = null;
             configPath = (string)hostInitConfigurationParams[2];
@@ -278,9 +299,11 @@ namespace System.Configuration
         public override Stream OpenStreamForRead(string streamName)
         {
             // the streamName can either be a file name, or a URI
-            if (IsFile(streamName)) return Host.OpenStreamForRead(streamName);
+            if (IsFile(streamName))
+                return Host.OpenStreamForRead(streamName);
 
-            if (streamName == null) return null;
+            if (streamName == null)
+                return null;
 
 #pragma warning disable SYSLIB0014 // WebClient is obsolete.
             // scheme is http
@@ -301,16 +324,24 @@ namespace System.Configuration
             catch { }
 #pragma warning restore SYSLIB0014
 
-            if (fileData == null) return null;
+            if (fileData == null)
+                return null;
 
             MemoryStream stream = new MemoryStream(fileData);
             return stream;
         }
 
-        public override Stream OpenStreamForWrite(string streamName, string templateStreamName, ref object writeContext)
+        public override Stream OpenStreamForWrite(
+            string streamName,
+            string templateStreamName,
+            ref object writeContext
+        )
         {
             // only support files, not URIs
-            if (!IsFile(streamName)) throw ExceptionUtil.UnexpectedError($"ClientConfigurationHost::OpenStreamForWrite '{streamName}' '{templateStreamName}'");
+            if (!IsFile(streamName))
+                throw ExceptionUtil.UnexpectedError(
+                    $"ClientConfigurationHost::OpenStreamForWrite '{streamName}' '{templateStreamName}'"
+                );
 
             return Host.OpenStreamForWrite(streamName, templateStreamName, ref writeContext);
         }
@@ -318,13 +349,17 @@ namespace System.Configuration
         public override void DeleteStream(string streamName)
         {
             // only support files, not URIs
-            if (!IsFile(streamName)) throw ExceptionUtil.UnexpectedError("ClientConfigurationHost::Delete");
+            if (!IsFile(streamName))
+                throw ExceptionUtil.UnexpectedError("ClientConfigurationHost::Delete");
 
             Host.DeleteStream(streamName);
         }
 
-        public override bool IsDefinitionAllowed(string configPath, ConfigurationAllowDefinition allowDefinition,
-            ConfigurationAllowExeDefinition allowExeDefinition)
+        public override bool IsDefinitionAllowed(
+            string configPath,
+            ConfigurationAllowDefinition allowDefinition,
+            ConfigurationAllowExeDefinition allowExeDefinition
+        )
         {
             string allowedConfigPath;
 
@@ -345,29 +380,47 @@ namespace System.Configuration
                 default:
                     // If we have extended ConfigurationAllowExeDefinition
                     // make sure to update this switch accordingly
-                    throw ExceptionUtil.UnexpectedError("ClientConfigurationHost::IsDefinitionAllowed");
+                    throw ExceptionUtil.UnexpectedError(
+                        "ClientConfigurationHost::IsDefinitionAllowed"
+                    );
             }
 
             return configPath.Length <= allowedConfigPath.Length;
         }
 
-        public override void VerifyDefinitionAllowed(string configPath, ConfigurationAllowDefinition allowDefinition,
-            ConfigurationAllowExeDefinition allowExeDefinition, IConfigErrorInfo errorInfo)
+        public override void VerifyDefinitionAllowed(
+            string configPath,
+            ConfigurationAllowDefinition allowDefinition,
+            ConfigurationAllowExeDefinition allowExeDefinition,
+            IConfigErrorInfo errorInfo
+        )
         {
             if (!IsDefinitionAllowed(configPath, allowDefinition, allowExeDefinition))
             {
                 throw allowExeDefinition switch
                 {
-                    ConfigurationAllowExeDefinition.MachineOnly => new ConfigurationErrorsException(
-                           SR.Config_allow_exedefinition_error_machine, errorInfo),
-                    ConfigurationAllowExeDefinition.MachineToApplication => new ConfigurationErrorsException(
-                            SR.Config_allow_exedefinition_error_application, errorInfo),
-                    ConfigurationAllowExeDefinition.MachineToRoamingUser => new ConfigurationErrorsException(
-                            SR.Config_allow_exedefinition_error_roaminguser, errorInfo),
+                    ConfigurationAllowExeDefinition.MachineOnly
+                        => new ConfigurationErrorsException(
+                            SR.Config_allow_exedefinition_error_machine,
+                            errorInfo
+                        ),
+                    ConfigurationAllowExeDefinition.MachineToApplication
+                        => new ConfigurationErrorsException(
+                            SR.Config_allow_exedefinition_error_application,
+                            errorInfo
+                        ),
+                    ConfigurationAllowExeDefinition.MachineToRoamingUser
+                        => new ConfigurationErrorsException(
+                            SR.Config_allow_exedefinition_error_roaminguser,
+                            errorInfo
+                        ),
 
                     // If we have extended ConfigurationAllowExeDefinition
                     // make sure to update this switch accordingly
-                    _ => ExceptionUtil.UnexpectedError("ClientConfigurationHost::VerifyDefinitionAllowed"),
+                    _
+                        => ExceptionUtil.UnexpectedError(
+                            "ClientConfigurationHost::VerifyDefinitionAllowed"
+                        ),
                 };
             }
         }
@@ -389,9 +442,7 @@ namespace System.Configuration
             return null;
         }
 
-        public override object
-            CreateConfigurationContext(string configPath,
-            string locationSubPath)
+        public override object CreateConfigurationContext(string configPath, string locationSubPath)
         {
             return new ExeContext(GetUserLevel(configPath), ConfigPaths.ApplicationUri);
         }
@@ -423,8 +474,12 @@ namespace System.Configuration
             return level;
         }
 
-        internal static Configuration OpenExeConfiguration(ConfigurationFileMap fileMap, bool isMachine,
-            ConfigurationUserLevel userLevel, string exePath)
+        internal static Configuration OpenExeConfiguration(
+            ConfigurationFileMap fileMap,
+            bool isMachine,
+            ConfigurationUserLevel userLevel,
+            string exePath
+        )
         {
             // validate userLevel argument
             switch (userLevel)
@@ -441,7 +496,9 @@ namespace System.Configuration
             if (fileMap != null)
             {
                 if (string.IsNullOrEmpty(fileMap.MachineConfigFilename))
-                    throw ExceptionUtil.ParameterNullOrEmpty(nameof(fileMap) + "." + nameof(fileMap.MachineConfigFilename));
+                    throw ExceptionUtil.ParameterNullOrEmpty(
+                        nameof(fileMap) + "." + nameof(fileMap.MachineConfigFilename)
+                    );
 
                 ExeConfigurationFileMap exeFileMap = fileMap as ExeConfigurationFileMap;
                 if (exeFileMap != null)
@@ -450,22 +507,33 @@ namespace System.Configuration
                     {
                         case ConfigurationUserLevel.None:
                             if (string.IsNullOrEmpty(exeFileMap.ExeConfigFilename))
-                                throw ExceptionUtil.ParameterNullOrEmpty(nameof(fileMap) + "." + nameof(exeFileMap.ExeConfigFilename));
+                                throw ExceptionUtil.ParameterNullOrEmpty(
+                                    nameof(fileMap) + "." + nameof(exeFileMap.ExeConfigFilename)
+                                );
                             break;
                         case ConfigurationUserLevel.PerUserRoaming:
                             if (string.IsNullOrEmpty(exeFileMap.RoamingUserConfigFilename))
-                                throw ExceptionUtil.ParameterNullOrEmpty(nameof(fileMap) + "." + nameof(exeFileMap.RoamingUserConfigFilename));
+                                throw ExceptionUtil.ParameterNullOrEmpty(
+                                    nameof(fileMap)
+                                        + "."
+                                        + nameof(exeFileMap.RoamingUserConfigFilename)
+                                );
                             goto case ConfigurationUserLevel.None;
                         case ConfigurationUserLevel.PerUserRoamingAndLocal:
                             if (string.IsNullOrEmpty(exeFileMap.LocalUserConfigFilename))
-                                throw ExceptionUtil.ParameterNullOrEmpty(nameof(fileMap) + "." + nameof(exeFileMap.LocalUserConfigFilename));
+                                throw ExceptionUtil.ParameterNullOrEmpty(
+                                    nameof(fileMap)
+                                        + "."
+                                        + nameof(exeFileMap.LocalUserConfigFilename)
+                                );
                             goto case ConfigurationUserLevel.PerUserRoaming;
                     }
                 }
             }
 
             string configPath = null;
-            if (isMachine) configPath = MachineConfigPath;
+            if (isMachine)
+                configPath = MachineConfigPath;
             else
             {
                 switch (userLevel)
@@ -482,7 +550,13 @@ namespace System.Configuration
                 }
             }
 
-            Configuration configuration = new Configuration(null, typeof(ClientConfigurationHost), fileMap, exePath, configPath);
+            Configuration configuration = new Configuration(
+                null,
+                typeof(ClientConfigurationHost),
+                fileMap,
+                exePath,
+                configPath
+            );
 
             return configuration;
         }

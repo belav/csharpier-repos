@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,91 +31,111 @@ using System.Runtime.Remoting;
 using System.Security;
 using System.Security.Policy;
 
-namespace System.Runtime.Hosting {
-
+namespace System.Runtime.Hosting
+{
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
-	[ComVisible (true)]
-	[MonoTODO ("missing manifest support")]
-	public class ApplicationActivator {
+    [ComVisible(true)]
+    [MonoTODO("missing manifest support")]
+    public class ApplicationActivator
+    {
+        public ApplicationActivator() { }
 
-		public ApplicationActivator ()
-		{
-		}
+        public virtual ObjectHandle CreateInstance(ActivationContext activationContext)
+        {
+            return CreateInstance(activationContext, null);
+        }
 
-		public virtual ObjectHandle CreateInstance (ActivationContext activationContext)
-		{
-			return CreateInstance (activationContext, null);
-		}
+        public virtual ObjectHandle CreateInstance(
+            ActivationContext activationContext,
+            string[] activationCustomData
+        )
+        {
+            if (activationContext == null)
+                throw new ArgumentNullException("activationContext");
 
-		public virtual ObjectHandle CreateInstance (ActivationContext activationContext, string[] activationCustomData)
-		{
-			if (activationContext == null)
-				throw new ArgumentNullException ("activationContext");
+            // TODO : compare activationContext with the one from this domain
+            // and use it if it match
 
-			// TODO : compare activationContext with the one from this domain
-			// and use it if it match
+            // TODO : we must pass the activationCustomData in the AppDomainSetup
+            // even if the activationCustomData don't match ???
 
-			// TODO : we must pass the activationCustomData in the AppDomainSetup
-			// even if the activationCustomData don't match ???
+            AppDomainSetup setup = new AppDomainSetup(activationContext);
+            return CreateInstanceHelper(setup);
+        }
 
-			AppDomainSetup setup = new AppDomainSetup (activationContext);
-			return CreateInstanceHelper (setup);
-		}
+        protected static ObjectHandle CreateInstanceHelper(AppDomainSetup adSetup)
+        {
+            if (adSetup == null)
+                throw new ArgumentNullException("adSetup");
 
-		protected static ObjectHandle CreateInstanceHelper (AppDomainSetup adSetup)
-		{
-			if (adSetup == null)
-				throw new ArgumentNullException ("adSetup");
+            if (adSetup.ActivationArguments == null)
+            {
+                string msg = Locale.GetText("{0} is missing it's {1} property");
+                throw new ArgumentException(
+                    String.Format(msg, "AppDomainSetup", "ActivationArguments"),
+                    "adSetup"
+                );
+            }
 
-			if (adSetup.ActivationArguments == null) {
-				string msg = Locale.GetText ("{0} is missing it's {1} property");
-				throw new ArgumentException (String.Format (msg, "AppDomainSetup", "ActivationArguments"), "adSetup");
-			}
+            HostSecurityManager hsm = null;
+            if (AppDomain.CurrentDomain.DomainManager != null)
+                hsm = AppDomain.CurrentDomain.DomainManager.HostSecurityManager;
+            else
+                hsm = new HostSecurityManager(); // default
 
-			HostSecurityManager hsm = null;
-			if (AppDomain.CurrentDomain.DomainManager != null)
-				hsm = AppDomain.CurrentDomain.DomainManager.HostSecurityManager;
-			else
-				hsm = new HostSecurityManager (); // default
+            Evidence applicationEvidence = new Evidence();
+            applicationEvidence.AddHost(adSetup.ActivationArguments);
+            TrustManagerContext context = new TrustManagerContext();
+            ApplicationTrust trust = hsm.DetermineApplicationTrust(
+                applicationEvidence,
+                null,
+                context
+            );
+            if (!trust.IsApplicationTrustedToRun)
+            {
+                string msg = Locale.GetText("Current policy doesn't allow execution of addin.");
+                throw new PolicyException(msg);
+            }
 
-			Evidence applicationEvidence = new Evidence ();
-			applicationEvidence.AddHost (adSetup.ActivationArguments);
-			TrustManagerContext context = new TrustManagerContext ();
-			ApplicationTrust trust = hsm.DetermineApplicationTrust (applicationEvidence, null, context);
-			if (!trust.IsApplicationTrustedToRun) {
-				string msg = Locale.GetText ("Current policy doesn't allow execution of addin.");
-				throw new PolicyException (msg);
-			}
-
-			// FIXME: we're missing the information from the manifest
-			AppDomain ad = AppDomain.CreateDomain ("friendlyName", null, adSetup);
-			return ad.CreateInstance ("assemblyName", "typeName", null);
-		}
-	}
+            // FIXME: we're missing the information from the manifest
+            AppDomain ad = AppDomain.CreateDomain("friendlyName", null, adSetup);
+            return ad.CreateInstance("assemblyName", "typeName", null);
+        }
+    }
 #else
-	[Obsolete ("ApplicationActivator is not supported on this platform.", true)]
-	public class ApplicationActivator {
+    [Obsolete("ApplicationActivator is not supported on this platform.", true)]
+    public class ApplicationActivator
+    {
+        public ApplicationActivator()
+        {
+            throw new PlatformNotSupportedException(
+                "ApplicationActivator is not supported on this platform."
+            );
+        }
 
-		public ApplicationActivator ()
-		{
-			throw new PlatformNotSupportedException ("ApplicationActivator is not supported on this platform.");
-		}
+        public virtual ObjectHandle CreateInstance(ActivationContext activationContext)
+        {
+            throw new PlatformNotSupportedException(
+                "ApplicationActivator is not supported on this platform."
+            );
+        }
 
-		public virtual ObjectHandle CreateInstance (ActivationContext activationContext)
-		{
-			throw new PlatformNotSupportedException ("ApplicationActivator is not supported on this platform.");
-		}
+        public virtual ObjectHandle CreateInstance(
+            ActivationContext activationContext,
+            string[] activationCustomData
+        )
+        {
+            throw new PlatformNotSupportedException(
+                "ApplicationActivator is not supported on this platform."
+            );
+        }
 
-		public virtual ObjectHandle CreateInstance (ActivationContext activationContext, string[] activationCustomData)
-		{
-			throw new PlatformNotSupportedException ("ApplicationActivator is not supported on this platform.");
-		}
-
-		protected static ObjectHandle CreateInstanceHelper (AppDomainSetup adSetup)
-		{
-			throw new PlatformNotSupportedException ("ApplicationActivator is not supported on this platform.");
-		}
-	}
+        protected static ObjectHandle CreateInstanceHelper(AppDomainSetup adSetup)
+        {
+            throw new PlatformNotSupportedException(
+                "ApplicationActivator is not supported on this platform."
+            );
+        }
+    }
 #endif // MONO_FEATURE_MULTIPLE_APPDOMAINS
 }
-

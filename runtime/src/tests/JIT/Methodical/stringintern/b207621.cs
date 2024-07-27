@@ -14,7 +14,7 @@ public class Test_b207621
     }
 
     [Fact]
-    static public int TestEntryPoint()
+    public static int TestEntryPoint()
     {
         string a = null;
         string b = null;
@@ -28,9 +28,7 @@ public class Test_b207621
                 b = FooBar();
                 throw new Exception();
             }
-            catch (System.Exception)
-            {
-            }
+            catch (System.Exception) { }
 
             Console.Write("Dynamic interning of non fixed up string...");
             if ((object)a != (object)b)
@@ -49,9 +47,7 @@ public class Test_b207621
                 b = FooBar();
                 throw new Exception();
             }
-            catch (System.Exception)
-            {
-            }
+            catch (System.Exception) { }
 
             Console.Write("Dynamic interning of fixed up string...");
             if ((object)a != (object)b)
@@ -64,16 +60,13 @@ public class Test_b207621
                 Console.WriteLine("PASSED");
             }
 
-
             try
             {
                 a = "Hello World non fixed up";
                 b = "Hello World non fixed up";
                 throw new Exception();
             }
-            catch (System.Exception)
-            {
-            }
+            catch (System.Exception) { }
 
             Console.Write("Dynamic interning of string that is not in fixup list...");
             if ((object)a != (object)b)

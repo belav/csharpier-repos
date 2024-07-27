@@ -28,17 +28,25 @@ namespace Microsoft.CodeAnalysis.Classification;
 [TagType(typeof(IClassificationTag))]
 [Microsoft.VisualStudio.Utilities.ContentType(ContentTypeNames.RoslynContentType)]
 [method: ImportingConstructor]
-[method: SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+[method: SuppressMessage(
+    "RoslynDiagnosticsReliability",
+    "RS0033:Importing constructor should be [Obsolete]",
+    Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+)]
 internal sealed class TotalClassificationTaggerProvider(
     IThreadingContext threadingContext,
     ClassificationTypeMap typeMap,
     IGlobalOptionService globalOptions,
     [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-    IAsynchronousOperationListenerProvider listenerProvider) : IViewTaggerProvider
+    IAsynchronousOperationListenerProvider listenerProvider
+) : IViewTaggerProvider
 {
-    private readonly SyntacticClassificationTaggerProvider _syntacticTaggerProvider = new(threadingContext, typeMap, globalOptions, listenerProvider);
-    private readonly SemanticClassificationViewTaggerProvider _semanticTaggerProvider = new(threadingContext, typeMap, globalOptions, visibilityTracker, listenerProvider);
-    private readonly EmbeddedLanguageClassificationViewTaggerProvider _embeddedTaggerProvider = new(threadingContext, typeMap, globalOptions, visibilityTracker, listenerProvider);
+    private readonly SyntacticClassificationTaggerProvider _syntacticTaggerProvider =
+        new(threadingContext, typeMap, globalOptions, listenerProvider);
+    private readonly SemanticClassificationViewTaggerProvider _semanticTaggerProvider =
+        new(threadingContext, typeMap, globalOptions, visibilityTracker, listenerProvider);
+    private readonly EmbeddedLanguageClassificationViewTaggerProvider _embeddedTaggerProvider =
+        new(threadingContext, typeMap, globalOptions, visibilityTracker, listenerProvider);
 
     ITagger<T>? IViewTaggerProvider.CreateTagger<T>(ITextView textView, ITextBuffer buffer)
     {
@@ -66,27 +74,46 @@ internal sealed class TotalClassificationTaggerProvider(
             return null;
         }
 
-        return new TotalClassificationAggregateTagger(syntacticTagger, semanticTagger, embeddedTagger);
+        return new TotalClassificationAggregateTagger(
+            syntacticTagger,
+            semanticTagger,
+            embeddedTagger
+        );
     }
 
     internal sealed class TotalClassificationAggregateTagger(
         EfficientTagger<IClassificationTag> syntacticTagger,
         EfficientTagger<IClassificationTag> semanticTagger,
-        EfficientTagger<IClassificationTag> embeddedTagger)
-        : AbstractAggregateTagger<IClassificationTag>(ImmutableArray.Create(syntacticTagger, semanticTagger, embeddedTagger))
+        EfficientTagger<IClassificationTag> embeddedTagger
+    )
+        : AbstractAggregateTagger<IClassificationTag>(
+            ImmutableArray.Create(syntacticTagger, semanticTagger, embeddedTagger)
+        )
     {
-        private static readonly Comparison<ITagSpan<IClassificationTag>> s_spanComparison = static (s1, s2) => s1.Span.Start - s2.Span.Start;
+        private static readonly Comparison<ITagSpan<IClassificationTag>> s_spanComparison = static (
+            s1,
+            s2
+        ) => s1.Span.Start - s2.Span.Start;
 
-        public override void AddTags(NormalizedSnapshotSpanCollection spans, SegmentedList<ITagSpan<IClassificationTag>> totalTags)
+        public override void AddTags(
+            NormalizedSnapshotSpanCollection spans,
+            SegmentedList<ITagSpan<IClassificationTag>> totalTags
+        )
         {
             // First, get all the syntactic tags.  While they are generally overridden by semantic tags (since semantics
             // allows us to understand better what things like identifiers mean), they do take precedence for certain
             // tags like 'Comments' and 'Excluded Code'.  In those cases we want the classification to 'snap' instantly to
             // the syntactic state, and we do not want things like semantic classifications showing up over that.
 
-            using var _1 = SegmentedListPool.GetPooledList<ITagSpan<IClassificationTag>>(out var stringLiterals);
-            using var _2 = SegmentedListPool.GetPooledList<ITagSpan<IClassificationTag>>(out var syntacticSpans);
-            using var _3 = SegmentedListPool.GetPooledList<ITagSpan<IClassificationTag>>(out var semanticSpans);
+            using var _1 = SegmentedListPool.GetPooledList<ITagSpan<IClassificationTag>>(
+                out var stringLiterals
+            );
+            using var _2 = SegmentedListPool.GetPooledList<ITagSpan<IClassificationTag>>(
+                out var syntacticSpans
+            );
+            using var _3 = SegmentedListPool.GetPooledList<ITagSpan<IClassificationTag>>(
+                out var semanticSpans
+            );
 
             syntacticTagger.AddTags(spans, syntacticSpans);
             semanticTagger.AddTags(spans, semanticSpans);
@@ -158,7 +185,11 @@ internal sealed class TotalClassificationTaggerProvider(
 
             bool TryProcessSyntacticStringLiteral()
             {
-                if (currentSyntactic.Tag.ClassificationType.Classification is not ClassificationTypeNames.StringLiteral and not ClassificationTypeNames.VerbatimStringLiteral)
+                if (
+                    currentSyntactic.Tag.ClassificationType.Classification
+                    is not ClassificationTypeNames.StringLiteral
+                        and not ClassificationTypeNames.VerbatimStringLiteral
+                )
                     return false;
 
                 stringLiterals.Add(currentSyntactic);
@@ -168,11 +199,18 @@ internal sealed class TotalClassificationTaggerProvider(
 
             bool TryProcessCommentOrExcludedCode()
             {
-                if (currentSyntactic.Tag.ClassificationType.Classification is not ClassificationTypeNames.Comment and not ClassificationTypeNames.ExcludedCode)
+                if (
+                    currentSyntactic.Tag.ClassificationType.Classification
+                    is not ClassificationTypeNames.Comment
+                        and not ClassificationTypeNames.ExcludedCode
+                )
                     return false;
 
                 // Keep skipping semantic tags that overlaps with this syntactic tag.
-                while (currentSemantic != null && currentSemantic.Span.OverlapsWith(currentSyntactic.Span.Span))
+                while (
+                    currentSemantic != null
+                    && currentSemantic.Span.OverlapsWith(currentSyntactic.Span.Span)
+                )
                     currentSemantic = GetNextSemanticSpan();
 
                 // now add that syntactic span.
@@ -188,9 +226,13 @@ internal sealed class TotalClassificationTaggerProvider(
                     return;
 
                 // Only need to ask for the spans that overlapped the string literals.
-                using var _1 = SegmentedListPool.GetPooledList<ITagSpan<IClassificationTag>>(out var embeddedClassifications);
+                using var _1 = SegmentedListPool.GetPooledList<ITagSpan<IClassificationTag>>(
+                    out var embeddedClassifications
+                );
 
-                var stringLiteralSpans = new NormalizedSnapshotSpanCollection(stringLiterals.Select(s => s.Span));
+                var stringLiteralSpans = new NormalizedSnapshotSpanCollection(
+                    stringLiterals.Select(s => s.Span)
+                );
                 embeddedTagger.AddTags(stringLiteralSpans, embeddedClassifications);
 
                 // Nothing complex to do if we got no embedded classifications back.  Just add in all the string
@@ -209,28 +251,35 @@ internal sealed class TotalClassificationTaggerProvider(
                 // The helper will add all the embedded classifications first, then add string literal classifications
                 // in the the space between the embedded classifications that were originally classified as a string
                 // literal.
-                ClassifierHelper.MergeParts<ITagSpan<IClassificationTag>, ClassificationTagSpanIntervalIntrospector>(
+                ClassifierHelper.MergeParts<
+                    ITagSpan<IClassificationTag>,
+                    ClassificationTagSpanIntervalIntrospector
+                >(
                     stringLiterals,
                     embeddedClassifications,
                     totalTags,
                     static tag => tag.Span.Span.ToTextSpan(),
-                    static (original, final) => new TagSpan<IClassificationTag>(new SnapshotSpan(original.Span.Snapshot, final.ToSpan()), original.Tag));
+                    static (original, final) =>
+                        new TagSpan<IClassificationTag>(
+                            new SnapshotSpan(original.Span.Snapshot, final.ToSpan()),
+                            original.Tag
+                        )
+                );
             }
 
-            ITagSpan<IClassificationTag>? GetNextSyntacticSpan()
-                => syntacticEnumerator.MoveNext() ? syntacticEnumerator.Current : null;
+            ITagSpan<IClassificationTag>? GetNextSyntacticSpan() =>
+                syntacticEnumerator.MoveNext() ? syntacticEnumerator.Current : null;
 
-            ITagSpan<IClassificationTag>? GetNextSemanticSpan()
-                => semanticEnumerator.MoveNext() ? semanticEnumerator.Current : null;
+            ITagSpan<IClassificationTag>? GetNextSemanticSpan() =>
+                semanticEnumerator.MoveNext() ? semanticEnumerator.Current : null;
         }
     }
 
-    private readonly struct ClassificationTagSpanIntervalIntrospector : IIntervalIntrospector<ITagSpan<IClassificationTag>>
+    private readonly struct ClassificationTagSpanIntervalIntrospector
+        : IIntervalIntrospector<ITagSpan<IClassificationTag>>
     {
-        public int GetStart(ITagSpan<IClassificationTag> value)
-            => value.Span.Start;
+        public int GetStart(ITagSpan<IClassificationTag> value) => value.Span.Start;
 
-        public int GetLength(ITagSpan<IClassificationTag> value)
-            => value.Span.Length;
+        public int GetLength(ITagSpan<IClassificationTag> value) => value.Span.Length;
     }
 }

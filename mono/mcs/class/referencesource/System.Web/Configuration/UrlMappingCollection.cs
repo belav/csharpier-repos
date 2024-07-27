@@ -4,77 +4,81 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
-    using System.ComponentModel;
     using System.Web.Util;
-    using System.Diagnostics;
-    using System.Security.Permissions;    
+    using System.Xml;
 
     [ConfigurationCollection(typeof(UrlMapping))]
-    public sealed class UrlMappingCollection : ConfigurationElementCollection {
+    public sealed class UrlMappingCollection : ConfigurationElementCollection
+    {
         private static readonly ConfigurationPropertyCollection _properties;
 
-        static UrlMappingCollection() {
+        static UrlMappingCollection()
+        {
             _properties = new ConfigurationPropertyCollection();
         }
 
         public UrlMappingCollection()
-            :
-            base(StringComparer.OrdinalIgnoreCase) {
+            : base(StringComparer.OrdinalIgnoreCase) { }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        public String[] AllKeys
+        {
+            get { return StringUtil.ObjectArrayToStringArray(BaseGetAllKeys()); }
         }
 
-        public String[] AllKeys {
-            get {
-                return StringUtil.ObjectArrayToStringArray(BaseGetAllKeys());
-            }
-        }
-
-        public String GetKey(int index) {
+        public String GetKey(int index)
+        {
             return (String)BaseGetKey(index);
         }
 
-        public void Add(UrlMapping urlMapping) {
+        public void Add(UrlMapping urlMapping)
+        {
             BaseAdd(urlMapping);
         }
 
-        public void Remove(string name) {
+        public void Remove(string name)
+        {
             BaseRemove(name);
         }
 
-        public void Remove(UrlMapping urlMapping) {
+        public void Remove(UrlMapping urlMapping)
+        {
             BaseRemove(GetElementKey(urlMapping));
         }
 
-        public void RemoveAt(int index) {
+        public void RemoveAt(int index)
+        {
             BaseRemoveAt(index);
         }
 
-        public new UrlMapping this[string name] {
-            get {
-                return (UrlMapping)BaseGet(name);
-            }
+        public new UrlMapping this[string name]
+        {
+            get { return (UrlMapping)BaseGet(name); }
         }
 
-        public UrlMapping this[int index] {
-            get {
-                return (UrlMapping)BaseGet(index);
-            }
-            set {
-                if (BaseGet(index) != null) {
+        public UrlMapping this[int index]
+        {
+            get { return (UrlMapping)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                {
                     BaseRemoveAt(index);
                 }
 
@@ -82,15 +86,18 @@ namespace System.Web.Configuration {
             }
         }
 
-        public void Clear() {
+        public void Clear()
+        {
             BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement() {
+        protected override ConfigurationElement CreateNewElement()
+        {
             return new UrlMapping();
         }
 
-        protected override Object GetElementKey(ConfigurationElement element) {
+        protected override Object GetElementKey(ConfigurationElement element)
+        {
             return ((UrlMapping)element).Url;
         }
     }

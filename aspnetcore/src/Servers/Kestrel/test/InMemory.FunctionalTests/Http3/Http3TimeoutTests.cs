@@ -4,10 +4,10 @@
 using System.Net.Http;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -27,7 +27,11 @@ public class Http3TimeoutTests : Http3TestBase
 
         Http3Api.AdvanceTime(limits.KeepAliveTimeout + TimeSpan.FromTicks(1));
 
-        await Http3Api.WaitForConnectionStopAsync(0, false, expectedErrorCode: Http3ErrorCode.NoError);
+        await Http3Api.WaitForConnectionStopAsync(
+            0,
+            false,
+            expectedErrorCode: Http3ErrorCode.NoError
+        );
     }
 
     [Fact]
@@ -43,7 +47,11 @@ public class Http3TimeoutTests : Http3TestBase
 
         Http3Api.AdvanceTime(limits.KeepAliveTimeout + TimeSpan.FromTicks(1));
 
-        await Http3Api.WaitForConnectionStopAsync(0, false, expectedErrorCode: Http3ErrorCode.NoError);
+        await Http3Api.WaitForConnectionStopAsync(
+            0,
+            false,
+            expectedErrorCode: Http3ErrorCode.NoError
+        );
     }
 
     [Fact]
@@ -71,7 +79,11 @@ public class Http3TimeoutTests : Http3TestBase
 
         Http3Api.AdvanceTime(limits.KeepAliveTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1));
 
-        await Http3Api.WaitForConnectionStopAsync(4, false, expectedErrorCode: Http3ErrorCode.NoError);
+        await Http3Api.WaitForConnectionStopAsync(
+            4,
+            false,
+            expectedErrorCode: Http3ErrorCode.NoError
+        );
     }
 
     [Fact]
@@ -88,11 +100,13 @@ public class Http3TimeoutTests : Http3TestBase
         var requestReceivedTcs = new TaskCompletionSource();
         var requestFinishedTcs = new TaskCompletionSource();
 
-        await Http3Api.InitializeConnectionAsync(_ =>
-        {
-            requestReceivedTcs.SetResult();
-            return requestFinishedTcs.Task;
-        }).DefaultTimeout();
+        await Http3Api
+            .InitializeConnectionAsync(_ =>
+            {
+                requestReceivedTcs.SetResult();
+                return requestFinishedTcs.Task;
+            })
+            .DefaultTimeout();
 
         await Http3Api.CreateControlStream();
         var controlStream = await Http3Api.GetInboundControlStream().DefaultTimeout();
@@ -116,7 +130,11 @@ public class Http3TimeoutTests : Http3TestBase
 
         Http3Api.AdvanceTime(limits.KeepAliveTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1));
 
-        await Http3Api.WaitForConnectionStopAsync(4, false, expectedErrorCode: Http3ErrorCode.NoError);
+        await Http3Api.WaitForConnectionStopAsync(
+            4,
+            false,
+            expectedErrorCode: Http3ErrorCode.NoError
+        );
     }
 
     [Fact]
@@ -126,7 +144,9 @@ public class Http3TimeoutTests : Http3TestBase
         var timestamp = timeProvider.GetTimestamp();
         var limits = _serviceContext.ServerOptions.Limits;
 
-        var requestStream = await Http3Api.InitializeConnectionAndStreamsAsync(_noopApplication, null).DefaultTimeout();
+        var requestStream = await Http3Api
+            .InitializeConnectionAndStreamsAsync(_noopApplication, null)
+            .DefaultTimeout();
 
         var controlStream = await Http3Api.GetInboundControlStream().DefaultTimeout();
         await controlStream.ExpectSettingsAsync().DefaultTimeout();
@@ -140,22 +160,29 @@ public class Http3TimeoutTests : Http3TestBase
         Http3Api.TriggerTick();
         Http3Api.TriggerTick(limits.RequestHeadersTimeout);
 
-        Assert.Equal(timeProvider.GetTimestamp(timestamp, limits.RequestHeadersTimeout), serverRequestStream.StreamTimeoutTimestamp);
+        Assert.Equal(
+            timeProvider.GetTimestamp(timestamp, limits.RequestHeadersTimeout),
+            serverRequestStream.StreamTimeoutTimestamp
+        );
 
         Http3Api.TriggerTick(TimeSpan.FromTicks(1));
 
         await requestStream.WaitForStreamErrorAsync(
             Http3ErrorCode.RequestRejected,
             AssertExpectedErrorMessages,
-            CoreStrings.BadRequest_RequestHeadersTimeout);
+            CoreStrings.BadRequest_RequestHeadersTimeout
+        );
     }
 
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task HEADERS_HeaderFrameReceivedWithinRequestHeadersTimeout_Success(bool pendingStreamsEnabled)
+    public async Task HEADERS_HeaderFrameReceivedWithinRequestHeadersTimeout_Success(
+        bool pendingStreamsEnabled
+    )
     {
-        Http3Api._serviceContext.ServerOptions.EnableWebTransportAndH3Datagrams = pendingStreamsEnabled;
+        Http3Api._serviceContext.ServerOptions.EnableWebTransportAndH3Datagrams =
+            pendingStreamsEnabled;
 
         var timestamp = _serviceContext.FakeTimeProvider.GetTimestamp();
         var limits = _serviceContext.ServerOptions.Limits;
@@ -167,7 +194,9 @@ public class Http3TimeoutTests : Http3TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
         };
 
-        var requestStream = await Http3Api.InitializeConnectionAndStreamsAsync(_noopApplication, null).DefaultTimeout();
+        var requestStream = await Http3Api
+            .InitializeConnectionAndStreamsAsync(_noopApplication, null)
+            .DefaultTimeout();
 
         var controlStream = await Http3Api.GetInboundControlStream().DefaultTimeout();
         await controlStream.ExpectSettingsAsync().DefaultTimeout();
@@ -190,7 +219,10 @@ public class Http3TimeoutTests : Http3TestBase
         Http3Api.TriggerTick();
         Http3Api.AdvanceTime(limits.RequestHeadersTimeout);
 
-        Assert.Equal(_serviceContext.TimeProvider.GetTimestamp(timestamp, limits.RequestHeadersTimeout), serverRequestStream.StreamTimeoutTimestamp);
+        Assert.Equal(
+            _serviceContext.TimeProvider.GetTimestamp(timestamp, limits.RequestHeadersTimeout),
+            serverRequestStream.StreamTimeoutTimestamp
+        );
 
         await requestStream.SendHeadersAsync(headers).DefaultTimeout();
 
@@ -222,12 +254,17 @@ public class Http3TimeoutTests : Http3TestBase
         var outboundControlStream = await Http3Api.CreateControlStream(id: null);
 
         await outboundControlStream.OnUnidentifiedStreamCreatedTask.DefaultTimeout();
-        var serverInboundControlStream = Http3Api.Connection._unidentifiedStreams[outboundControlStream.StreamId];
+        var serverInboundControlStream = Http3Api.Connection._unidentifiedStreams[
+            outboundControlStream.StreamId
+        ];
 
         Http3Api.TriggerTick();
         Http3Api.AdvanceTime(limits.RequestHeadersTimeout);
 
-        Assert.Equal(timeProvider.GetTimestamp(timestamp, limits.RequestHeadersTimeout), serverInboundControlStream.StreamTimeoutTimestamp);
+        Assert.Equal(
+            timeProvider.GetTimestamp(timestamp, limits.RequestHeadersTimeout),
+            serverInboundControlStream.StreamTimeoutTimestamp
+        );
 
         Http3Api.AdvanceTime(TimeSpan.FromTicks(1));
     }
@@ -258,19 +295,25 @@ public class Http3TimeoutTests : Http3TestBase
 
         await outboundControlStream.OnStreamCreatedTask.DefaultTimeout();
 
-        var serverInboundControlStream = Http3Api.Connection._streams[outboundControlStream.StreamId];
+        var serverInboundControlStream = Http3Api.Connection._streams[
+            outboundControlStream.StreamId
+        ];
 
         Http3Api.TriggerTick();
         Http3Api.TriggerTick(limits.RequestHeadersTimeout);
 
-        Assert.Equal(timeProvider.GetTimestamp(timestamp, limits.RequestHeadersTimeout), serverInboundControlStream.StreamTimeoutTimestamp);
+        Assert.Equal(
+            timeProvider.GetTimestamp(timestamp, limits.RequestHeadersTimeout),
+            serverInboundControlStream.StreamTimeoutTimestamp
+        );
 
         Http3Api.TriggerTick(TimeSpan.FromTicks(1));
 
         await outboundControlStream.WaitForStreamErrorAsync(
             Http3ErrorCode.StreamCreationError,
             AssertExpectedErrorMessages,
-            CoreStrings.Http3ControlStreamHeaderTimeout);
+            CoreStrings.Http3ControlStreamHeaderTimeout
+        );
     }
 
     [Fact]
@@ -296,9 +339,12 @@ public class Http3TimeoutTests : Http3TestBase
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task ControlStream_RequestHeadersTimeoutMaxValue_ExpirationIsMaxValue(bool pendingStreamEnabled)
+    public async Task ControlStream_RequestHeadersTimeoutMaxValue_ExpirationIsMaxValue(
+        bool pendingStreamEnabled
+    )
     {
-        Http3Api._serviceContext.ServerOptions.EnableWebTransportAndH3Datagrams = pendingStreamEnabled;
+        Http3Api._serviceContext.ServerOptions.EnableWebTransportAndH3Datagrams =
+            pendingStreamEnabled;
 
         var timeProvider = _serviceContext.FakeTimeProvider;
         var limits = _serviceContext.ServerOptions.Limits;
@@ -315,17 +361,24 @@ public class Http3TimeoutTests : Http3TestBase
         if (pendingStreamEnabled)
         {
             await outboundControlStream.OnUnidentifiedStreamCreatedTask.DefaultTimeout();
-            serverInboundControlStream = Http3Api.Connection._unidentifiedStreams[outboundControlStream.StreamId];
+            serverInboundControlStream = Http3Api.Connection._unidentifiedStreams[
+                outboundControlStream.StreamId
+            ];
         }
         else
         {
             await outboundControlStream.OnStreamCreatedTask.DefaultTimeout();
-            serverInboundControlStream = Http3Api.Connection._streams[outboundControlStream.StreamId];
+            serverInboundControlStream = Http3Api.Connection._streams[
+                outboundControlStream.StreamId
+            ];
         }
 
         Http3Api.TriggerTick();
 
-        Assert.Equal(TimeSpan.MaxValue.ToTicks(timeProvider), serverInboundControlStream.StreamTimeoutTimestamp);
+        Assert.Equal(
+            TimeSpan.MaxValue.ToTicks(timeProvider),
+            serverInboundControlStream.StreamTimeoutTimestamp
+        );
     }
 
     [Fact]
@@ -344,7 +397,10 @@ public class Http3TimeoutTests : Http3TestBase
         await inboundControlStream.ExpectSettingsAsync();
 
         // _helloWorldBytes is 12 bytes, and 12 bytes / 240 bytes/sec = .05 secs which is far below the grace period.
-        var requestStream = await Http3Api.CreateRequestStream(ReadRateRequestHeaders(_helloWorldBytes.Length), endStream: false);
+        var requestStream = await Http3Api.CreateRequestStream(
+            ReadRateRequestHeaders(_helloWorldBytes.Length),
+            endStream: false
+        );
         await requestStream.SendDataAsync(_helloWorldBytes, endStream: false);
 
         await requestStream.ExpectHeadersAsync();
@@ -364,7 +420,8 @@ public class Http3TimeoutTests : Http3TestBase
             ignoreNonGoAwayFrames: false,
             expectedLastStreamId: 4,
             Http3ErrorCode.InternalError,
-            null);
+            null
+        );
 
         _mockTimeoutHandler.VerifyNoOtherCalls();
     }
@@ -382,13 +439,18 @@ public class Http3TimeoutTests : Http3TestBase
         var inboundControlStream = await Http3Api.GetInboundControlStream();
         await inboundControlStream.ExpectSettingsAsync();
 
-        var requestStream = await Http3Api.CreateRequestStream(new[]
-        {
-            new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
-        }, null, true, new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously));
+        var requestStream = await Http3Api.CreateRequestStream(
+            new[]
+            {
+                new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
+                new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
+                new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
+                new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
+            },
+            null,
+            true,
+            new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously)
+        );
 
         await requestStream.OnDisposingTask.DefaultTimeout();
 
@@ -407,14 +469,20 @@ public class Http3TimeoutTests : Http3TestBase
             expectedLastStreamId: 4,
             Http3ErrorCode.InternalError,
             matchExpectedErrorMessage: AssertExpectedErrorMessages,
-            expectedErrorMessage: CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied);
+            expectedErrorMessage: CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
+        );
 
-        Assert.Contains(TestSink.Writes, w => w.EventId.Name == "ResponseMinimumDataRateNotSatisfied");
+        Assert.Contains(
+            TestSink.Writes,
+            w => w.EventId.Name == "ResponseMinimumDataRateNotSatisfied"
+        );
     }
 
     private class EchoAppWithNotification
     {
-        private readonly TaskCompletionSource _writeStartedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _writeStartedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         public Task WriteStartedTask => _writeStartedTcs.Task;
 
@@ -450,7 +518,11 @@ public class Http3TimeoutTests : Http3TestBase
         Http3Api._timeoutControl.Initialize();
 
         var app = new EchoAppWithNotification();
-        var requestStream = await Http3Api.InitializeConnectionAndStreamsAsync(app.RunApp, _browserRequestHeaders, endStream: false);
+        var requestStream = await Http3Api.InitializeConnectionAndStreamsAsync(
+            app.RunApp,
+            _browserRequestHeaders,
+            endStream: false
+        );
         await requestStream.SendDataAsync(_helloWorldBytes, endStream: true);
 
         await requestStream.ExpectHeadersAsync();
@@ -461,8 +533,15 @@ public class Http3TimeoutTests : Http3TestBase
         Http3Api._timeoutControl.Tick(fakeTimeProvider.GetTimestamp());
 
         // Don't read data frame to induce "socket" backpressure.
-        Http3Api.AdvanceTime(TimeSpan.FromSeconds((requestStream.BytesReceived + _helloWorldBytes.Length) / limits.MinResponseDataRate.BytesPerSecond) +
-            limits.MinResponseDataRate.GracePeriod + Heartbeat.Interval - TimeSpan.FromSeconds(.5));
+        Http3Api.AdvanceTime(
+            TimeSpan.FromSeconds(
+                (requestStream.BytesReceived + _helloWorldBytes.Length)
+                    / limits.MinResponseDataRate.BytesPerSecond
+            )
+                + limits.MinResponseDataRate.GracePeriod
+                + Heartbeat.Interval
+                - TimeSpan.FromSeconds(.5)
+        );
 
         _mockTimeoutHandler.Verify(h => h.OnTimeout(It.IsAny<TimeoutReason>()), Times.Never);
 
@@ -492,7 +571,11 @@ public class Http3TimeoutTests : Http3TestBase
         Http3Api._timeoutControl.Initialize();
 
         var app = new EchoAppWithNotification();
-        var requestStream = await Http3Api.InitializeConnectionAndStreamsAsync(app.RunApp, _browserRequestHeaders, endStream: false);
+        var requestStream = await Http3Api.InitializeConnectionAndStreamsAsync(
+            app.RunApp,
+            _browserRequestHeaders,
+            endStream: false
+        );
         await requestStream.SendDataAsync(_maxData, endStream: true);
 
         await requestStream.ExpectHeadersAsync();
@@ -502,8 +585,14 @@ public class Http3TimeoutTests : Http3TestBase
         // Complete timing of the request body so we don't induce any unexpected request body rate timeouts.
         Http3Api._timeoutControl.Tick(fakeTimeProvider.GetTimestamp());
 
-        var timeToWriteMaxData = TimeSpan.FromSeconds((requestStream.BytesReceived + _maxData.Length) / limits.MinResponseDataRate.BytesPerSecond) +
-            limits.MinResponseDataRate.GracePeriod + Heartbeat.Interval - TimeSpan.FromSeconds(.5);
+        var timeToWriteMaxData =
+            TimeSpan.FromSeconds(
+                (requestStream.BytesReceived + _maxData.Length)
+                    / limits.MinResponseDataRate.BytesPerSecond
+            )
+            + limits.MinResponseDataRate.GracePeriod
+            + Heartbeat.Interval
+            - TimeSpan.FromSeconds(.5);
 
         // Don't read data frame to induce "socket" backpressure.
         Http3Api.AdvanceTime(timeToWriteMaxData);
@@ -536,7 +625,10 @@ public class Http3TimeoutTests : Http3TestBase
         await inboundControlStream.ExpectSettingsAsync();
 
         // _maxData is 16 KiB, and 16 KiB / 240 bytes/sec ~= 68 secs which is far above the grace period.
-        var requestStream = await Http3Api.CreateRequestStream(ReadRateRequestHeaders(_maxData.Length), endStream: false);
+        var requestStream = await Http3Api.CreateRequestStream(
+            ReadRateRequestHeaders(_maxData.Length),
+            endStream: false
+        );
         await requestStream.SendDataAsync(_maxData, endStream: false);
 
         await requestStream.ExpectHeadersAsync();
@@ -545,7 +637,9 @@ public class Http3TimeoutTests : Http3TestBase
 
         // Due to the imprecision of floating point math and the fact that TimeoutControl derives rate from elapsed
         // time for reads instead of vice versa like for writes, use a half-second instead of single-tick cushion.
-        var timeToReadMaxData = TimeSpan.FromSeconds(_maxData.Length / limits.MinRequestBodyDataRate.BytesPerSecond) - TimeSpan.FromSeconds(.5);
+        var timeToReadMaxData =
+            TimeSpan.FromSeconds(_maxData.Length / limits.MinRequestBodyDataRate.BytesPerSecond)
+            - TimeSpan.FromSeconds(.5);
 
         // Don't send any more data and advance just to and then past the rate timeout.
         Http3Api.AdvanceTime(timeToReadMaxData);
@@ -560,7 +654,8 @@ public class Http3TimeoutTests : Http3TestBase
             ignoreNonGoAwayFrames: false,
             expectedLastStreamId: null,
             Http3ErrorCode.InternalError,
-            null);
+            null
+        );
 
         _mockTimeoutHandler.VerifyNoOtherCalls();
     }
@@ -581,19 +676,27 @@ public class Http3TimeoutTests : Http3TestBase
         await inboundControlStream.ExpectSettingsAsync();
 
         // _maxData is 16 KiB, and 16 KiB / 240 bytes/sec ~= 68 secs which is far above the grace period.
-        var requestStream1 = await Http3Api.CreateRequestStream(ReadRateRequestHeaders(_maxData.Length), endStream: false);
+        var requestStream1 = await Http3Api.CreateRequestStream(
+            ReadRateRequestHeaders(_maxData.Length),
+            endStream: false
+        );
         await requestStream1.SendDataAsync(_maxData, endStream: false);
 
         await requestStream1.ExpectHeadersAsync();
         await requestStream1.ExpectDataAsync();
 
-        var requestStream2 = await Http3Api.CreateRequestStream(ReadRateRequestHeaders(_maxData.Length), endStream: false);
+        var requestStream2 = await Http3Api.CreateRequestStream(
+            ReadRateRequestHeaders(_maxData.Length),
+            endStream: false
+        );
         await requestStream2.SendDataAsync(_maxData, endStream: false);
 
         await requestStream2.ExpectHeadersAsync();
         await requestStream2.ExpectDataAsync();
 
-        var timeToReadMaxData = TimeSpan.FromSeconds(_maxData.Length / limits.MinRequestBodyDataRate.BytesPerSecond);
+        var timeToReadMaxData = TimeSpan.FromSeconds(
+            _maxData.Length / limits.MinRequestBodyDataRate.BytesPerSecond
+        );
         // Double the timeout for the second stream.
         timeToReadMaxData += timeToReadMaxData;
 
@@ -614,7 +717,8 @@ public class Http3TimeoutTests : Http3TestBase
             ignoreNonGoAwayFrames: false,
             expectedLastStreamId: null,
             Http3ErrorCode.InternalError,
-            null);
+            null
+        );
 
         _mockTimeoutHandler.VerifyNoOtherCalls();
     }
@@ -637,7 +741,10 @@ public class Http3TimeoutTests : Http3TestBase
         Logger.LogInformation("Sending first request");
 
         // _maxData is 16 KiB, and 16 KiB / 240 bytes/sec ~= 68 secs which is far above the grace period.
-        var requestStream1 = await Http3Api.CreateRequestStream(ReadRateRequestHeaders(_maxData.Length), endStream: false);
+        var requestStream1 = await Http3Api.CreateRequestStream(
+            ReadRateRequestHeaders(_maxData.Length),
+            endStream: false
+        );
         await requestStream1.SendDataAsync(_maxData, endStream: true);
 
         await requestStream1.ExpectHeadersAsync();
@@ -646,7 +753,10 @@ public class Http3TimeoutTests : Http3TestBase
         await requestStream1.ExpectReceiveEndOfStream();
 
         Logger.LogInformation("Sending second request");
-        var requestStream2 = await Http3Api.CreateRequestStream(ReadRateRequestHeaders(_maxData.Length), endStream: false);
+        var requestStream2 = await Http3Api.CreateRequestStream(
+            ReadRateRequestHeaders(_maxData.Length),
+            endStream: false
+        );
         await requestStream2.SendDataAsync(_maxData, endStream: false);
 
         await requestStream2.ExpectHeadersAsync();
@@ -654,7 +764,9 @@ public class Http3TimeoutTests : Http3TestBase
 
         // Due to the imprecision of floating point math and the fact that TimeoutControl derives rate from elapsed
         // time for reads instead of vice versa like for writes, use a half-second instead of single-tick cushion.
-        var timeToReadMaxData = TimeSpan.FromSeconds(_maxData.Length / limits.MinRequestBodyDataRate.BytesPerSecond) - TimeSpan.FromSeconds(.5);
+        var timeToReadMaxData =
+            TimeSpan.FromSeconds(_maxData.Length / limits.MinRequestBodyDataRate.BytesPerSecond)
+            - TimeSpan.FromSeconds(.5);
 
         // Don't send any more data and advance just to and then past the rate timeout.
         Http3Api.AdvanceTime(timeToReadMaxData);
@@ -669,7 +781,8 @@ public class Http3TimeoutTests : Http3TestBase
             ignoreNonGoAwayFrames: false,
             expectedLastStreamId: null,
             Http3ErrorCode.InternalError,
-            null);
+            null
+        );
 
         _mockTimeoutHandler.VerifyNoOtherCalls();
     }
@@ -697,7 +810,10 @@ public class Http3TimeoutTests : Http3TestBase
         Http3Api.OutboundControlStream = await Http3Api.CreateControlStream();
 
         // _helloWorldBytes is 12 bytes, and 12 bytes / 240 bytes/sec = .05 secs which is far below the grace period.
-        var requestStream = await Http3Api.CreateRequestStream(ReadRateRequestHeaders(_helloWorldBytes.Length), endStream: false);
+        var requestStream = await Http3Api.CreateRequestStream(
+            ReadRateRequestHeaders(_helloWorldBytes.Length),
+            endStream: false
+        );
         await requestStream.SendDataAsync(_helloWorldBytes, endStream: false);
 
         await requestStream.ExpectHeadersAsync();

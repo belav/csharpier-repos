@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2006 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -30,47 +30,49 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-	public class RemoveDuplicates : TaskExtension {
+namespace Microsoft.Build.Tasks
+{
+    public class RemoveDuplicates : TaskExtension
+    {
+        ITaskItem[] filtered;
+        ITaskItem[] inputs;
 
-		ITaskItem [] filtered;
-		ITaskItem [] inputs;
-	
-		public RemoveDuplicates ()
-		{
-		}
+        public RemoveDuplicates() { }
 
-		[MonoTODO]
-		public override bool Execute ()
-		{
-			if (inputs == null || inputs.Length == 0)
-				return true;
+        [MonoTODO]
+        public override bool Execute()
+        {
+            if (inputs == null || inputs.Length == 0)
+                return true;
 
-			Dictionary <string, ITaskItem> items = new Dictionary <string, ITaskItem> ();
-			List <ITaskItem> list = new List <ITaskItem> ();
+            Dictionary<string, ITaskItem> items = new Dictionary<string, ITaskItem>();
+            List<ITaskItem> list = new List<ITaskItem>();
 
-			foreach (ITaskItem item in inputs) {
-				if (!items.ContainsKey (item.ItemSpec)) {
-					items.Add (item.ItemSpec, item);
-					list.Add (item);
-				}
-			}
+            foreach (ITaskItem item in inputs)
+            {
+                if (!items.ContainsKey(item.ItemSpec))
+                {
+                    items.Add(item.ItemSpec, item);
+                    list.Add(item);
+                }
+            }
 
-			filtered = list.ToArray ();
+            filtered = list.ToArray();
 
-			return true;
-		}
-		
-		[Output]
-		public ITaskItem [] Filtered {
-			get { return filtered; }
-			set { filtered = value; }
-		}
+            return true;
+        }
 
-		public ITaskItem [] Inputs {
-			get { return inputs; }
-			set { inputs = value; }
-		}
-	}
+        [Output]
+        public ITaskItem[] Filtered
+        {
+            get { return filtered; }
+            set { filtered = value; }
+        }
+
+        public ITaskItem[] Inputs
+        {
+            get { return inputs; }
+            set { inputs = value; }
+        }
+    }
 }
-

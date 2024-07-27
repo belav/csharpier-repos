@@ -52,12 +52,12 @@ public class GetLibraryExportTests : IDisposable
         EXPECT(TryGetLibraryExport(handle, "NonNativeSum"), TestResult.ReturnFailure);
     }
 
-
     public void Dispose() => NativeLibrary.Free(handle);
-    
+
     static TestResult GetLibraryExport(IntPtr handle, string name)
     {
-        return Run(() => {
+        return Run(() =>
+        {
             IntPtr address = NativeLibrary.GetExport(handle, name);
             if (address == IntPtr.Zero)
                 return TestResult.ReturnNull;
@@ -69,7 +69,8 @@ public class GetLibraryExportTests : IDisposable
 
     static TestResult TryGetLibraryExport(IntPtr handle, string name)
     {
-        return Run(() => {
+        return Run(() =>
+        {
             IntPtr address = IntPtr.Zero;
             bool success = NativeLibrary.TryGetExport(handle, name, out address);
             if (!success)
@@ -87,7 +88,8 @@ public class GetLibraryExportTests : IDisposable
         // We use a delegate here instead of a function pointer to avoid hitting issues
         // where Mono AOT doesn't generate the managed->native wrapper and then fails
         // when in AOT-only mode.
-        NativeFunctionWrapper wrapper = Marshal.GetDelegateForFunctionPointer<NativeFunctionWrapper>(address);
+        NativeFunctionWrapper wrapper =
+            Marshal.GetDelegateForFunctionPointer<NativeFunctionWrapper>(address);
         return wrapper(arg1, arg2);
     }
 

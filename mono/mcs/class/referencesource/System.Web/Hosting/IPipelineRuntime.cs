@@ -10,56 +10,66 @@
  * Copyright (c) 2004 Microsoft Corporation
  */
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
     using System.Collections;
     using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.Text;
     using System.Threading;
-    using System.Web.Util;
     using System.Web;
     using System.Web.Management;
-    using System.IO;
-
+    using System.Web.Util;
     using IIS = UnsafeIISMethods;
 
     delegate void AsyncCompletionDelegate(
-        IntPtr rootedObjectsPointer, 
-        int bytesRead, 
+        IntPtr rootedObjectsPointer,
+        int bytesRead,
         int hresult,
-        IntPtr pAsyncCompletionContext);
+        IntPtr pAsyncCompletionContext
+    );
 
-    delegate void AsyncDisconnectNotificationDelegate(
-        IntPtr pManagedRootedObjects);
+    delegate void AsyncDisconnectNotificationDelegate(IntPtr pManagedRootedObjects);
 
     // this delegate is called from native code
     // each time a native-managed
     // transition is made to process a request state
     delegate int ExecuteFunctionDelegate(
-            IntPtr rootedObjectsPointer,
-            IntPtr nativeRequestContext,
-            IntPtr moduleData,
-            int flags);
+        IntPtr rootedObjectsPointer,
+        IntPtr nativeRequestContext,
+        IntPtr moduleData,
+        int flags
+    );
 
     delegate IntPtr PrincipalFunctionDelegate(
-            IntPtr rootedObjectsPointer,
-            int requestingAppDomainId);
+        IntPtr rootedObjectsPointer,
+        int requestingAppDomainId
+    );
 
     delegate int RoleFunctionDelegate(
-            IntPtr pRootedObjects,
-            IntPtr pszRole,
-            int cchRole,
-            out bool isInRole);
+        IntPtr pRootedObjects,
+        IntPtr pszRole,
+        int cchRole,
+        out bool isInRole
+    );
 
     // this delegate is called from native code when the request is complete
     // to free any managed resources associated with the request
-    delegate void DisposeFunctionDelegate( [In] IntPtr rootedObjectsPointer );
+    delegate void DisposeFunctionDelegate([In] IntPtr rootedObjectsPointer);
 
-    [ComImport, Guid("c96cb854-aec2-4208-9ada-a86a96860cb6"), System.Runtime.InteropServices.InterfaceTypeAttribute(System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown)]
-    internal interface IPipelineRuntime {
+    [
+        ComImport,
+        Guid("c96cb854-aec2-4208-9ada-a86a96860cb6"),
+        System.Runtime.InteropServices.InterfaceTypeAttribute(
+            System.Runtime.InteropServices.ComInterfaceType.InterfaceIsIUnknown
+        )
+    ]
+    internal interface IPipelineRuntime
+    {
         void StartProcessing();
         void StopProcessing();
         void InitializeApplication([In] IntPtr appContext);
@@ -76,8 +86,8 @@ namespace System.Web.Hosting {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     /// <internalonly/>
-    internal sealed class PipelineRuntime : MarshalByRefObject, IPipelineRuntime, IRegisteredObject {
-
+    internal sealed class PipelineRuntime : MarshalByRefObject, IPipelineRuntime, IRegisteredObject
+    {
         // initialization error handling
         internal const string InitExceptionModuleName = "AspNetInitializationExceptionModule";
         private const string s_InitExceptionModulePrecondition = "";
@@ -100,7 +110,8 @@ namespace System.Web.Hosting {
         private static AsyncCompletionDelegate _asyncCompletionDelegate = null;
 
         private static IntPtr _asyncDisconnectNotificationDelegatePointer = IntPtr.Zero;
-        private static AsyncDisconnectNotificationDelegate _asyncDisconnectNotificationDelegate = null;
+        private static AsyncDisconnectNotificationDelegate _asyncDisconnectNotificationDelegate =
+            null;
 
         private static IntPtr _executeDelegatePointer = IntPtr.Zero;
         private static ExecuteFunctionDelegate _executeDelegate = null;
@@ -114,14 +125,22 @@ namespace System.Web.Hosting {
         private static IntPtr _principalDelegatePointer = IntPtr.Zero;
         private static PrincipalFunctionDelegate _principalDelegate = null;
 
-        public IntPtr GetAsyncCompletionDelegate() {
-            if (IntPtr.Zero == _asyncCompletionDelegatePointer) {
-                lock (_delegatelock) {
-                    if (IntPtr.Zero == _asyncCompletionDelegatePointer) {
-                        AsyncCompletionDelegate d = new AsyncCompletionDelegate(AsyncCompletionHandler);
-                        if (null != d) {
+        public IntPtr GetAsyncCompletionDelegate()
+        {
+            if (IntPtr.Zero == _asyncCompletionDelegatePointer)
+            {
+                lock (_delegatelock)
+                {
+                    if (IntPtr.Zero == _asyncCompletionDelegatePointer)
+                    {
+                        AsyncCompletionDelegate d = new AsyncCompletionDelegate(
+                            AsyncCompletionHandler
+                        );
+                        if (null != d)
+                        {
                             IntPtr p = Marshal.GetFunctionPointerForDelegate(d);
-                            if (IntPtr.Zero != p) {
+                            if (IntPtr.Zero != p)
+                            {
                                 _asyncCompletionDelegate = d;
                                 _asyncCompletionDelegatePointer = p;
                             }
@@ -132,14 +151,23 @@ namespace System.Web.Hosting {
             return _asyncCompletionDelegatePointer;
         }
 
-        public IntPtr GetAsyncDisconnectNotificationDelegate() {
-            if (IntPtr.Zero == _asyncDisconnectNotificationDelegatePointer) {
-                lock (_delegatelock) {
-                    if (IntPtr.Zero == _asyncDisconnectNotificationDelegatePointer) {
-                        AsyncDisconnectNotificationDelegate d = new AsyncDisconnectNotificationDelegate(AsyncDisconnectNotificationHandler);
-                        if (null != d) {
+        public IntPtr GetAsyncDisconnectNotificationDelegate()
+        {
+            if (IntPtr.Zero == _asyncDisconnectNotificationDelegatePointer)
+            {
+                lock (_delegatelock)
+                {
+                    if (IntPtr.Zero == _asyncDisconnectNotificationDelegatePointer)
+                    {
+                        AsyncDisconnectNotificationDelegate d =
+                            new AsyncDisconnectNotificationDelegate(
+                                AsyncDisconnectNotificationHandler
+                            );
+                        if (null != d)
+                        {
                             IntPtr p = Marshal.GetFunctionPointerForDelegate(d);
-                            if (IntPtr.Zero != p) {
+                            if (IntPtr.Zero != p)
+                            {
                                 _asyncDisconnectNotificationDelegate = d;
                                 _asyncDisconnectNotificationDelegatePointer = p;
                             }
@@ -150,14 +178,22 @@ namespace System.Web.Hosting {
             return _asyncDisconnectNotificationDelegatePointer;
         }
 
-        public IntPtr GetExecuteDelegate() {
-            if (IntPtr.Zero == _executeDelegatePointer) {
-                lock (_delegatelock) {
-                    if (IntPtr.Zero == _executeDelegatePointer) {
-                        ExecuteFunctionDelegate d = new ExecuteFunctionDelegate(ProcessRequestNotification);
-                        if (null != d) {
+        public IntPtr GetExecuteDelegate()
+        {
+            if (IntPtr.Zero == _executeDelegatePointer)
+            {
+                lock (_delegatelock)
+                {
+                    if (IntPtr.Zero == _executeDelegatePointer)
+                    {
+                        ExecuteFunctionDelegate d = new ExecuteFunctionDelegate(
+                            ProcessRequestNotification
+                        );
+                        if (null != d)
+                        {
                             IntPtr p = Marshal.GetFunctionPointerForDelegate(d);
-                            if (IntPtr.Zero != p) {
+                            if (IntPtr.Zero != p)
+                            {
                                 Thread.MemoryBarrier();
                                 _executeDelegate = d;
                                 _executeDelegatePointer = p;
@@ -170,14 +206,20 @@ namespace System.Web.Hosting {
             return _executeDelegatePointer;
         }
 
-        public IntPtr GetDisposeDelegate() {
-            if (IntPtr.Zero == _disposeDelegatePointer) {
-                lock (_delegatelock) {
-                    if (IntPtr.Zero == _disposeDelegatePointer) {
+        public IntPtr GetDisposeDelegate()
+        {
+            if (IntPtr.Zero == _disposeDelegatePointer)
+            {
+                lock (_delegatelock)
+                {
+                    if (IntPtr.Zero == _disposeDelegatePointer)
+                    {
                         DisposeFunctionDelegate d = new DisposeFunctionDelegate(DisposeHandler);
-                        if (null != d) {
+                        if (null != d)
+                        {
                             IntPtr p = Marshal.GetFunctionPointerForDelegate(d);
-                            if (IntPtr.Zero != p) {
+                            if (IntPtr.Zero != p)
+                            {
                                 Thread.MemoryBarrier();
                                 _disposeDelegate = d;
                                 _disposeDelegatePointer = p;
@@ -190,14 +232,20 @@ namespace System.Web.Hosting {
             return _disposeDelegatePointer;
         }
 
-        public IntPtr GetRoleDelegate() {
-            if (IntPtr.Zero == _roleDelegatePointer) {
-                lock (_delegatelock) {
-                    if (IntPtr.Zero == _roleDelegatePointer) {
+        public IntPtr GetRoleDelegate()
+        {
+            if (IntPtr.Zero == _roleDelegatePointer)
+            {
+                lock (_delegatelock)
+                {
+                    if (IntPtr.Zero == _roleDelegatePointer)
+                    {
                         RoleFunctionDelegate d = new RoleFunctionDelegate(RoleHandler);
-                        if (null != d) {
+                        if (null != d)
+                        {
                             IntPtr p = Marshal.GetFunctionPointerForDelegate(d);
-                            if (IntPtr.Zero != p) {
+                            if (IntPtr.Zero != p)
+                            {
                                 Thread.MemoryBarrier();
                                 _roleDelegate = d;
                                 _roleDelegatePointer = p;
@@ -210,14 +258,22 @@ namespace System.Web.Hosting {
             return _roleDelegatePointer;
         }
 
-        public IntPtr GetPrincipalDelegate() {
-            if (IntPtr.Zero == _principalDelegatePointer) {
-                lock (_delegatelock) {
-                    if (IntPtr.Zero == _principalDelegatePointer) {
-                        PrincipalFunctionDelegate d = new PrincipalFunctionDelegate(GetManagedPrincipalHandler);
-                        if (null != d) {
+        public IntPtr GetPrincipalDelegate()
+        {
+            if (IntPtr.Zero == _principalDelegatePointer)
+            {
+                lock (_delegatelock)
+                {
+                    if (IntPtr.Zero == _principalDelegatePointer)
+                    {
+                        PrincipalFunctionDelegate d = new PrincipalFunctionDelegate(
+                            GetManagedPrincipalHandler
+                        );
+                        if (null != d)
+                        {
                             IntPtr p = Marshal.GetFunctionPointerForDelegate(d);
-                            if (IntPtr.Zero != p) {
+                            if (IntPtr.Zero != p)
+                            {
                                 Thread.MemoryBarrier();
                                 _principalDelegate = d;
                                 _principalDelegatePointer = p;
@@ -230,32 +286,46 @@ namespace System.Web.Hosting {
             return _principalDelegatePointer;
         }
 
-
-
-        [SecurityPermission(SecurityAction.Demand, UnmanagedCode=true)]
-        public PipelineRuntime() {
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public PipelineRuntime()
+        {
             HostingEnvironment.RegisterObject(this);
             Debug.Trace("PipelineDomain", "RegisterObject(this) called");
         }
 
-        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.Infrastructure)]
-        public override Object InitializeLifetimeService() {
+        [SecurityPermissionAttribute(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.Infrastructure
+        )]
+        public override Object InitializeLifetimeService()
+        {
             return null; // never expire lease
         }
 
-        public void StartProcessing() {
+        public void StartProcessing()
+        {
             Debug.Trace("PipelineDomain", "StartProcessing AppId = " + s_thisAppDomainsIsapiAppId);
             HostingEnvironment.SetupStopListeningHandler();
         }
 
         [EnvironmentPermission(SecurityAction.Assert, Unrestricted = true)]
-        public void StopProcessing() {
-            Debug.Trace("PipelineDomain", "StopProcessing with stack = " + Environment.StackTrace
-                        + " for AppId= " +  s_thisAppDomainsIsapiAppId);
+        public void StopProcessing()
+        {
+            Debug.Trace(
+                "PipelineDomain",
+                "StopProcessing with stack = "
+                    + Environment.StackTrace
+                    + " for AppId= "
+                    + s_thisAppDomainsIsapiAppId
+            );
 
-            if (!HostingEnvironment.StopListeningWasCalled && !HostingEnvironment.ShutdownInitiated) {
+            if (!HostingEnvironment.StopListeningWasCalled && !HostingEnvironment.ShutdownInitiated)
+            {
                 // If GL_STOP_LISTENING wasn't triggered, the reset is likely due to a configuration change.
-                HttpRuntime.SetShutdownReason(ApplicationShutdownReason.ConfigurationChange, "IIS configuration change");
+                HttpRuntime.SetShutdownReason(
+                    ApplicationShutdownReason.ConfigurationChange,
+                    "IIS configuration change"
+                );
             }
 
             s_StopProcessingCalled = true;
@@ -264,27 +334,34 @@ namespace System.Web.Hosting {
             HostingEnvironment.InitiateShutdownWithoutDemand();
         }
 
-        internal static void WaitForRequestsToDrain() {
-            if (s_ApplicationContext == IntPtr.Zero) {
+        internal static void WaitForRequestsToDrain()
+        {
+            if (s_ApplicationContext == IntPtr.Zero)
+            {
                 // If InitializeApplication was never called, then no requests ever came in and StopProcessing will never be called.
                 // We can just short-circuit this method.
                 return;
             }
 
-            while (!s_StopProcessingCalled || _inIndicateCompletionCount > 0) {
+            while (!s_StopProcessingCalled || _inIndicateCompletionCount > 0)
+            {
                 Thread.Sleep(250);
             }
         }
 
-        private StringBuilder FormatExceptionMessage(Exception e, string[] strings) {
+        private StringBuilder FormatExceptionMessage(Exception e, string[] strings)
+        {
             StringBuilder sb = new StringBuilder(4096);
 
-            if (null != strings) {
-                for (int i = 0; i < strings.Length; i++) {
+            if (null != strings)
+            {
+                for (int i = 0; i < strings.Length; i++)
+                {
                     sb.Append(strings[i]);
                 }
             }
-            for (Exception current = e; current != null; current = current.InnerException) {
+            for (Exception current = e; current != null; current = current.InnerException)
+            {
                 if (current == e)
                     sb.Append("\r\n\r\nException: ");
                 else
@@ -314,34 +391,45 @@ namespace System.Web.Hosting {
 
             HttpApplication app = null;
 
-            try {
+            try
+            {
                 // if HttpRuntime.HostingInit failed, do not attempt to create the application (WOS #1653963)
-                if (!HttpRuntime.HostingInitFailed) {
+                if (!HttpRuntime.HostingInitFailed)
+                {
                     //
                     //  On IIS7, application initialization does not provide an http context.  Theoretically,
                     //  no one should be using the context during application initialization, but people do.
                     //  Create a dummy context that is used during application initialization
                     //  to prevent breakage (ISAPI mode always provides a context)
                     //
-                    HttpWorkerRequest initWorkerRequest = new SimpleWorkerRequest("" /*page*/,
-                                                                                  "" /*query*/,
-                                                                                  new StringWriter(CultureInfo.InvariantCulture));
+                    HttpWorkerRequest initWorkerRequest = new SimpleWorkerRequest(
+                        "" /*page*/
+                        ,
+                        "" /*query*/
+                        ,
+                        new StringWriter(CultureInfo.InvariantCulture)
+                    );
                     MimeMapping.SetIntegratedApplicationContext(appContext);
                     HttpContext initHttpContext = new HttpContext(initWorkerRequest);
-                    app = HttpApplicationFactory.GetPipelineApplicationInstance(appContext, initHttpContext);
+                    app = HttpApplicationFactory.GetPipelineApplicationInstance(
+                        appContext,
+                        initHttpContext
+                    );
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                if (HttpRuntime.InitializationException == null) {
+                if (HttpRuntime.InitializationException == null)
+                {
                     HttpRuntime.InitializationException = e;
                 }
             }
-            finally {
+            finally
+            {
                 s_InitializationCompleted = true;
 
-                if (HttpRuntime.InitializationException != null) {
-
+                if (HttpRuntime.InitializationException != null)
+                {
                     // at least one module must be registered so that we
                     // call ProcessRequestNotification later and send the formatted
                     // InitializationException to the client.
@@ -349,73 +437,100 @@ namespace System.Web.Hosting {
                         appContext,
                         InitExceptionModuleName,
                         RequestNotification.BeginRequest,
-                        0 /*postRequestNotifications*/,
+                        0 /*postRequestNotifications*/
+                        ,
                         InitExceptionModuleName,
                         s_InitExceptionModulePrecondition,
                         new IntPtr(-1),
-                        false /*useHighPriority*/);
+                        false /*useHighPriority*/
+                    );
 
-                    if (hresult < 0) {
-                        throw new COMException( SR.GetString(SR.Failed_Pipeline_Subscription, InitExceptionModuleName),
-                                                hresult );
+                    if (hresult < 0)
+                    {
+                        throw new COMException(
+                            SR.GetString(SR.Failed_Pipeline_Subscription, InitExceptionModuleName),
+                            hresult
+                        );
                     }
 
                     // Always register a managed handler:
-                    // WOS 1990290: VS F5 Debugging: "AspNetInitializationExceptionModule" is registered for RQ_BEGIN_REQUEST, 
-                    // but the DEBUG verb skips notifications until post RQ_AUTHENTICATE_REQUEST.  
+                    // WOS 1990290: VS F5 Debugging: "AspNetInitializationExceptionModule" is registered for RQ_BEGIN_REQUEST,
+                    // but the DEBUG verb skips notifications until post RQ_AUTHENTICATE_REQUEST.
                     hresult = UnsafeIISMethods.MgdRegisterEventSubscription(
                         appContext,
                         HttpApplication.IMPLICIT_HANDLER,
-                        RequestNotification.ExecuteRequestHandler /*requestNotifications*/,
-                        0 /*postRequestNotifications*/,
-                        String.Empty /*type*/, 
-                        HttpApplication.MANAGED_PRECONDITION /*precondition*/,
+                        RequestNotification.ExecuteRequestHandler /*requestNotifications*/
+                        ,
+                        0 /*postRequestNotifications*/
+                        ,
+                        String.Empty /*type*/
+                        ,
+                        HttpApplication.MANAGED_PRECONDITION /*precondition*/
+                        ,
                         new IntPtr(-1),
-                        false /*useHighPriority*/);
+                        false /*useHighPriority*/
+                    );
 
-                    if (hresult < 0) {
-                        throw new COMException( SR.GetString(SR.Failed_Pipeline_Subscription, HttpApplication.IMPLICIT_HANDLER),
-                                                hresult );
+                    if (hresult < 0)
+                    {
+                        throw new COMException(
+                            SR.GetString(
+                                SR.Failed_Pipeline_Subscription,
+                                HttpApplication.IMPLICIT_HANDLER
+                            ),
+                            hresult
+                        );
                     }
                 }
 
-                if (app != null) {
+                if (app != null)
+                {
                     HttpApplicationFactory.RecyclePipelineApplicationInstance(app);
                 }
             }
         }
 
-        private static HttpContext UnwrapContext(IntPtr rootedObjectsPointer) {
+        private static HttpContext UnwrapContext(IntPtr rootedObjectsPointer)
+        {
             RootedObjects objects = RootedObjects.FromPointer(rootedObjectsPointer);
             return objects.HttpContext;
         }
 
-        internal bool HostingShutdownInitiated {
-            get {
-                return HostingEnvironment.ShutdownInitiated;
-            }
+        internal bool HostingShutdownInitiated
+        {
+            get { return HostingEnvironment.ShutdownInitiated; }
         }
 
         // called from native code when the IHttpContext is disposed
-        internal static void AsyncCompletionHandler(IntPtr rootedObjectsPointer, int bytesCompleted, int hresult, IntPtr pAsyncCompletionContext) {
+        internal static void AsyncCompletionHandler(
+            IntPtr rootedObjectsPointer,
+            int bytesCompleted,
+            int hresult,
+            IntPtr pAsyncCompletionContext
+        )
+        {
             HttpContext context = UnwrapContext(rootedObjectsPointer);
             IIS7WorkerRequest wr = context.WorkerRequest as IIS7WorkerRequest;
             wr.OnAsyncCompletion(bytesCompleted, hresult, pAsyncCompletionContext);
         }
 
         // called from native code when the IHttpConnection is disconnected
-        internal static void AsyncDisconnectNotificationHandler(IntPtr pManagedRootedObjects) {
+        internal static void AsyncDisconnectNotificationHandler(IntPtr pManagedRootedObjects)
+        {
             // Every object we're about to call into should be live / non-disposed,
             // but since we're paranoid we should put guard clauses everywhere.
 
             Debug.Assert(pManagedRootedObjects != IntPtr.Zero);
-            if (pManagedRootedObjects != IntPtr.Zero) {
+            if (pManagedRootedObjects != IntPtr.Zero)
+            {
                 RootedObjects rootObj = RootedObjects.FromPointer(pManagedRootedObjects);
                 Debug.Assert(rootObj != null);
-                if (rootObj != null) {
+                if (rootObj != null)
+                {
                     IIS7WorkerRequest workerRequest = rootObj.WorkerRequest;
                     Debug.Assert(workerRequest != null);
-                    if (workerRequest != null) {
+                    if (workerRequest != null)
+                    {
                         workerRequest.NotifyOfAsyncDisconnect();
                     }
                 }
@@ -423,14 +538,23 @@ namespace System.Web.Hosting {
         }
 
         // Called from native code to see if a principal is in a given role
-        internal static int RoleHandler(IntPtr pRootedObjects, IntPtr pszRole, int cchRole, out bool isInRole) {
+        internal static int RoleHandler(
+            IntPtr pRootedObjects,
+            IntPtr pszRole,
+            int cchRole,
+            out bool isInRole
+        )
+        {
             isInRole = false;
             IPrincipal principal = RootedObjects.FromPointer(pRootedObjects).Principal;
-            if (principal != null) {
-                try {
+            if (principal != null)
+            {
+                try
+                {
                     isInRole = principal.IsInRole(StringUtil.StringFromWCharPtr(pszRole, cchRole));
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     return Marshal.GetHRForException(e);
                 }
             }
@@ -439,12 +563,17 @@ namespace System.Web.Hosting {
 
         // Called from native code to get the managed principal for a given request
         // If the return value is non-zero, the caller must free the returned GCHandle
-        internal static IntPtr GetManagedPrincipalHandler(IntPtr pRootedObjects, int requestingAppDomainId) {
+        internal static IntPtr GetManagedPrincipalHandler(
+            IntPtr pRootedObjects,
+            int requestingAppDomainId
+        )
+        {
             // DevDiv 375079: Server.TransferRequest can be used to transfer requests to different applications,
             // which means that we might be trying to pass a GCHandle to the IPrincipal object to a different
             // AppDomain, which is disallowed. If this happens, we just tell our caller that we can't give him
             // a managed IPrincipal object.
-            if (requestingAppDomainId != AppDomain.CurrentDomain.Id) {
+            if (requestingAppDomainId != AppDomain.CurrentDomain.Id)
+            {
                 return IntPtr.Zero;
             }
 
@@ -453,14 +582,21 @@ namespace System.Web.Hosting {
         }
 
         // called from native code when the IHttpContext is disposed
-        internal static void DisposeHandler(IntPtr rootedObjectsPointer) {
+        internal static void DisposeHandler(IntPtr rootedObjectsPointer)
+        {
             RootedObjects root = RootedObjects.FromPointer(rootedObjectsPointer);
             root.Destroy();
         }
-        
+
         // called from managed code as a perf optimization to avoid calling back later
-        internal static void DisposeHandler(HttpContext context, IntPtr nativeRequestContext, RequestNotificationStatus status) {
-            if (IIS.MgdCanDisposeManagedContext(nativeRequestContext, status)) {
+        internal static void DisposeHandler(
+            HttpContext context,
+            IntPtr nativeRequestContext,
+            RequestNotificationStatus status
+        )
+        {
+            if (IIS.MgdCanDisposeManagedContext(nativeRequestContext, status))
+            {
                 context.RootedObjects.Destroy();
             }
         }
@@ -477,25 +613,34 @@ namespace System.Web.Hosting {
         // Code that might throw belongs in HttpRuntime::ProcessRequestNotificationPrivate.
         //
         internal static int ProcessRequestNotification(
-                IntPtr rootedObjectsPointer,
-                IntPtr nativeRequestContext,
-                IntPtr moduleData,
-                int flags)
+            IntPtr rootedObjectsPointer,
+            IntPtr nativeRequestContext,
+            IntPtr moduleData,
+            int flags
+        )
         {
-            try {
-                return ProcessRequestNotificationHelper(rootedObjectsPointer, nativeRequestContext, moduleData, flags);
+            try
+            {
+                return ProcessRequestNotificationHelper(
+                    rootedObjectsPointer,
+                    nativeRequestContext,
+                    moduleData,
+                    flags
+                );
             }
-            catch(Exception e) {
+            catch (Exception e)
+            {
                 ApplicationManager.RecordFatalException(e);
                 throw;
             }
         }
 
         internal static int ProcessRequestNotificationHelper(
-                IntPtr rootedObjectsPointer,
-                IntPtr nativeRequestContext,
-                IntPtr moduleData,
-                int flags)
+            IntPtr rootedObjectsPointer,
+            IntPtr nativeRequestContext,
+            IntPtr moduleData,
+            int flags
+        )
         {
             IIS7WorkerRequest wr = null;
             HttpContext context = null;
@@ -503,10 +648,12 @@ namespace System.Web.Hosting {
             RootedObjects root;
             bool workerRequestWasJustCreated = false;
 
-            if (rootedObjectsPointer == IntPtr.Zero) {
+            if (rootedObjectsPointer == IntPtr.Zero)
+            {
                 InitializeRequestContext(nativeRequestContext, flags, out wr, out context);
                 workerRequestWasJustCreated = true;
-                if (context == null) {
+                if (context == null)
+                {
                     return (int)RequestNotificationStatus.FinishRequest;
                 }
 
@@ -518,7 +665,8 @@ namespace System.Web.Hosting {
 
                 IIS.MgdSetManagedHttpContext(nativeRequestContext, root.Pointer);
             }
-            else {
+            else
+            {
                 root = RootedObjects.FromPointer(rootedObjectsPointer);
                 context = root.HttpContext;
                 wr = root.WorkerRequest as IIS7WorkerRequest;
@@ -527,85 +675,121 @@ namespace System.Web.Hosting {
             Debug.Assert(root != null, "We should have a RootedObjects instance by this point.");
             Debug.Assert(wr != null, "We should have an IIS7WorkerRequest instance by this point.");
 
-            using (root.WithinTraceBlock()) {
-                if (workerRequestWasJustCreated) {
+            using (root.WithinTraceBlock())
+            {
+                if (workerRequestWasJustCreated)
+                {
                     AspNetEventSource.Instance.RequestStarted(wr);
                 }
 
                 int currentModuleIndex;
                 bool isPostNotification;
                 int currentNotification;
-                IIS.MgdGetCurrentNotificationInfo(nativeRequestContext, out currentModuleIndex, out isPostNotification, out currentNotification);
+                IIS.MgdGetCurrentNotificationInfo(
+                    nativeRequestContext,
+                    out currentModuleIndex,
+                    out isPostNotification,
+                    out currentNotification
+                );
 
                 // If the HttpContext is null at this point, then we've already transitioned this request to a WebSockets request.
                 // The WebSockets module should already be running, and asynchronous module-level events (like SendResponse) are
                 // ineligible to be hooked by managed code.
-                if (context == null || context.HasWebSocketRequestTransitionStarted) {
+                if (context == null || context.HasWebSocketRequestTransitionStarted)
+                {
                     return (int)RequestNotificationStatus.Continue;
                 }
 
                 // It is possible for a notification to complete asynchronously while we're in
-                // a call to IndicateCompletion, in which case a new IIS thread might enter before 
+                // a call to IndicateCompletion, in which case a new IIS thread might enter before
                 // the call to IndicateCompletion returns.  If this happens, block the thread until
                 // IndicateCompletion returns.  But never block a SendResponse notification, because
                 // that can cause the request to hang (DevDiv Bugs 187441).
-                if (context.InIndicateCompletion
-                    && context.ThreadInsideIndicateCompletion != Thread.CurrentThread 
-                    && RequestNotification.SendResponse != (RequestNotification)currentNotification) {
-                    while (context.InIndicateCompletion) {
+                if (
+                    context.InIndicateCompletion
+                    && context.ThreadInsideIndicateCompletion != Thread.CurrentThread
+                    && RequestNotification.SendResponse != (RequestNotification)currentNotification
+                )
+                {
+                    while (context.InIndicateCompletion)
+                    {
                         Thread.Sleep(10);
                     }
                 }
-            
+
                 // RQ_SEND_RESPONSE fires out of band and completes synchronously only.
-                // The pipeline must be reentrant to support this, so the notification 
+                // The pipeline must be reentrant to support this, so the notification
                 // context for the previous notification must be saved and restored.
                 NotificationContext savedNotificationContext = context.NotificationContext;
                 bool cancellable = context.IsInCancellablePeriod;
                 bool locked = false;
-                try {
-                    if (cancellable) {
+                try
+                {
+                    if (cancellable)
+                    {
                         context.EndCancellablePeriod();
                     }
                     bool isReEntry = (savedNotificationContext != null);
-                    if (isReEntry) {
+                    if (isReEntry)
+                    {
                         context.ApplicationInstance.AcquireNotifcationContextLock(ref locked);
                     }
-                    context.NotificationContext = new NotificationContext(flags /*CurrentNotificationFlags*/, 
-                                                                          isReEntry);
+                    context.NotificationContext = new NotificationContext(
+                        flags /*CurrentNotificationFlags*/
+                        ,
+                        isReEntry
+                    );
 
                     Action<RequestNotificationStatus> verifierCheck = null;
-                    if (AppVerifier.IsAppVerifierEnabled) {
-                        verifierCheck = AppVerifier.GetRequestNotificationStatusCheckDelegate(context, (RequestNotification)currentNotification, isPostNotification);
+                    if (AppVerifier.IsAppVerifierEnabled)
+                    {
+                        verifierCheck = AppVerifier.GetRequestNotificationStatusCheckDelegate(
+                            context,
+                            (RequestNotification)currentNotification,
+                            isPostNotification
+                        );
                     }
 
                     status = HttpRuntime.ProcessRequestNotification(wr, context);
 
-                    if (verifierCheck != null) {
+                    if (verifierCheck != null)
+                    {
                         AppVerifier.InvokeVerifierCheck(verifierCheck, status);
                     }
                 }
-                finally {
-                    if (status != RequestNotificationStatus.Pending) {
+                finally
+                {
+                    if (status != RequestNotificationStatus.Pending)
+                    {
                         // if we completed the notification, pop the notification context stack
                         // if this is an asynchronous unwind, then the completion will clear the context
                         context.NotificationContext = savedNotificationContext;
 
                         // DevDiv 112755 restore cancellable state if its changed
-                        if (cancellable && !context.IsInCancellablePeriod) {
+                        if (cancellable && !context.IsInCancellablePeriod)
+                        {
                             context.BeginCancellablePeriod();
-                        } else if (!cancellable && context.IsInCancellablePeriod) {
+                        }
+                        else if (!cancellable && context.IsInCancellablePeriod)
+                        {
                             context.EndCancellablePeriod();
                         }
                     }
-                    if (locked) {
+                    if (locked)
+                    {
                         context.ApplicationInstance.ReleaseNotifcationContextLock();
                     }
                 }
 
-                if (status != RequestNotificationStatus.Pending) {
+                if (status != RequestNotificationStatus.Pending)
+                {
                     // The current notification may have changed due to the HttpApplication progressing the IIS state machine, so retrieve the info again.
-                    IIS.MgdGetCurrentNotificationInfo(nativeRequestContext, out currentModuleIndex, out isPostNotification, out currentNotification);
+                    IIS.MgdGetCurrentNotificationInfo(
+                        nativeRequestContext,
+                        out currentModuleIndex,
+                        out isPostNotification,
+                        out currentNotification
+                    );
 
                     // WOS 1785741: (Perf) In profiles, 8% of HelloWorld is transitioning from native to managed.
                     // The fix is to keep managed code on the stack so that the AppDomain context remains on the
@@ -614,26 +798,36 @@ namespace System.Web.Hosting {
                     // and return PENDING as the status.
                     ThreadContext threadContext = context.IndicateCompletionContext;
                     // DevDiv 482614:
-                    // Don't use local copy to detect if we can call MgdIndicateCompletion because another thread 
+                    // Don't use local copy to detect if we can call MgdIndicateCompletion because another thread
                     // unwinding from MgdIndicateCompletion may be changing context.IndicateCompletionContext at the same time.
-                    if (!context.InIndicateCompletion && context.IndicateCompletionContext != null) {
-                        if (status == RequestNotificationStatus.Continue) {
-                            try {
+                    if (!context.InIndicateCompletion && context.IndicateCompletionContext != null)
+                    {
+                        if (status == RequestNotificationStatus.Continue)
+                        {
+                            try
+                            {
                                 context.InIndicateCompletion = true;
                                 Interlocked.Increment(ref _inIndicateCompletionCount);
                                 context.ThreadInsideIndicateCompletion = Thread.CurrentThread;
                                 IIS.MgdIndicateCompletion(nativeRequestContext, ref status);
                             }
-                            finally {
+                            finally
+                            {
                                 context.ThreadInsideIndicateCompletion = null;
                                 Interlocked.Decrement(ref _inIndicateCompletionCount);
 
                                 // Leave will have been called already if the last notification is returning pending
                                 // DTS267762: Make sure InIndicateCompletion is released, not based on the thread context state
                                 // Otherwise the next request notification may deadlock
-                                if (!threadContext.HasBeenDisassociatedFromThread || context.InIndicateCompletion) {
-                                    lock (threadContext) {
-                                        if (!threadContext.HasBeenDisassociatedFromThread) {
+                                if (
+                                    !threadContext.HasBeenDisassociatedFromThread
+                                    || context.InIndicateCompletion
+                                )
+                                {
+                                    lock (threadContext)
+                                    {
+                                        if (!threadContext.HasBeenDisassociatedFromThread)
+                                        {
                                             threadContext.DisassociateFromCurrentThread();
                                         }
 
@@ -643,10 +837,17 @@ namespace System.Web.Hosting {
                                 }
                             }
                         }
-                        else {
-                            if (!threadContext.HasBeenDisassociatedFromThread || context.InIndicateCompletion) {
-                                lock (threadContext) {
-                                    if (!threadContext.HasBeenDisassociatedFromThread) {
+                        else
+                        {
+                            if (
+                                !threadContext.HasBeenDisassociatedFromThread
+                                || context.InIndicateCompletion
+                            )
+                            {
+                                lock (threadContext)
+                                {
+                                    if (!threadContext.HasBeenDisassociatedFromThread)
+                                    {
                                         threadContext.DisassociateFromCurrentThread();
                                     }
 
@@ -658,7 +859,11 @@ namespace System.Web.Hosting {
                     }
                 }
 
-                if (context.HasWebSocketRequestTransitionStarted && status == RequestNotificationStatus.Pending) {
+                if (
+                    context.HasWebSocketRequestTransitionStarted
+                    && status == RequestNotificationStatus.Pending
+                )
+                {
                     // At this point, the WebSocket module event (PostEndRequest) has executed and set up the appropriate contexts for us.
                     // However, there is a race condition that we need to avoid. It is possible that one thread has kicked off some async
                     // work, e.g. via an IHttpAsyncHandler, and that thread is unwinding and has reached this line of execution.
@@ -671,7 +876,8 @@ namespace System.Web.Hosting {
                     // the above scenario the original thread (which invoked the IHttpAsyncHandler) no-ops at this point and just returns
                     // Pending to its caller.
 
-                    if (context.DidCurrentThreadStartWebSocketTransition) {
+                    if (context.DidCurrentThreadStartWebSocketTransition)
+                    {
                         // We'll mark the HttpContext as complete, call the continuation to kick off the socket send / receive loop, and return
                         // Pending to IIS so that it doesn't advance the state machine until the WebSocket loop completes.
                         root.ReleaseHttpContext();
@@ -683,11 +889,21 @@ namespace System.Web.Hosting {
             }
         }
 
-        private static void InitializeRequestContext(IntPtr nativeRequestContext, int flags, out IIS7WorkerRequest wr, out HttpContext context) {
+        private static void InitializeRequestContext(
+            IntPtr nativeRequestContext,
+            int flags,
+            out IIS7WorkerRequest wr,
+            out HttpContext context
+        )
+        {
             wr = null;
             context = null;
-            try {
-                bool etwEnabled = ((flags & HttpContext.FLAG_ETW_PROVIDER_ENABLED) == HttpContext.FLAG_ETW_PROVIDER_ENABLED);
+            try
+            {
+                bool etwEnabled = (
+                    (flags & HttpContext.FLAG_ETW_PROVIDER_ENABLED)
+                    == HttpContext.FLAG_ETW_PROVIDER_ENABLED
+                );
 
                 // this may throw, e.g. if the request Content-Length header has a value greater than Int32.MaxValue
                 wr = IIS7WorkerRequest.CreateWorkerRequest(nativeRequestContext, etwEnabled);
@@ -695,7 +911,8 @@ namespace System.Web.Hosting {
                 // this may throw, e.g. see WOS 1724573: ASP.Net v2.0: wrong error code returned when ? is used in the URL
                 context = new HttpContext(wr, false);
             }
-            catch {
+            catch
+            {
                 // treat as "400 Bad Request" since that's the only reason the HttpContext.ctor should throw
                 IIS.MgdSetBadRequestStatus(nativeRequestContext);
             }
@@ -703,11 +920,15 @@ namespace System.Web.Hosting {
 
         /// <include file='doc\ISAPIRuntime.uex' path='docs/doc[@for="ISAPIRuntime.IRegisteredObject.Stop"]/*' />
         /// <internalonly/>
-        void IRegisteredObject.Stop(bool immediate) {
-            Debug.Trace("PipelineDomain", "IRegisteredObject.Stop appId = " +
-                        s_thisAppDomainsIsapiAppId);
+        void IRegisteredObject.Stop(bool immediate)
+        {
+            Debug.Trace(
+                "PipelineDomain",
+                "IRegisteredObject.Stop appId = " + s_thisAppDomainsIsapiAppId
+            );
 
-            while (!s_InitializationCompleted && !s_StopProcessingCalled) {
+            while (!s_InitializationCompleted && !s_StopProcessingCalled)
+            {
                 // the native W3_MGD_APP_CONTEXT is not ready for us to unload
                 Thread.Sleep(250);
             }
@@ -716,13 +937,16 @@ namespace System.Web.Hosting {
             HostingEnvironment.UnregisterObject(this);
         }
 
-        internal void SetThisAppDomainsIsapiAppId(String appId) {
+        internal void SetThisAppDomainsIsapiAppId(String appId)
+        {
             Debug.Trace("PipelineDomain", "SetThisAppDomainsPipelineAppId appId=" + appId);
             s_thisAppDomainsIsapiAppId = appId;
         }
 
-        internal static void RemoveThisAppDomainFromUnmanagedTable() {
-            if (Interlocked.Exchange(ref s_isThisAppDomainRemovedFromUnmanagedTable, 1) != 0) {
+        internal static void RemoveThisAppDomainFromUnmanagedTable()
+        {
+            if (Interlocked.Exchange(ref s_isThisAppDomainRemovedFromUnmanagedTable, 1) != 0)
+            {
                 return;
             }
 
@@ -732,30 +956,40 @@ namespace System.Web.Hosting {
             // We can also have PipelineRuntime in app domains with only
             // other protocols
             //
-            try {
-                if (s_thisAppDomainsIsapiAppId != null  && s_ApplicationContext != IntPtr.Zero) {
-                    Debug.Trace("PipelineDomain", "Calling MgdAppDomainShutdown appId=" +
-                        s_thisAppDomainsIsapiAppId + " (AppDomainAppId=" + HttpRuntime.AppDomainAppId + ")");
+            try
+            {
+                if (s_thisAppDomainsIsapiAppId != null && s_ApplicationContext != IntPtr.Zero)
+                {
+                    Debug.Trace(
+                        "PipelineDomain",
+                        "Calling MgdAppDomainShutdown appId="
+                            + s_thisAppDomainsIsapiAppId
+                            + " (AppDomainAppId="
+                            + HttpRuntime.AppDomainAppId
+                            + ")"
+                    );
 
                     UnsafeIISMethods.MgdAppDomainShutdown(s_ApplicationContext);
                 }
 
                 HttpRuntime.AddAppDomainTraceMessage(SR.GetString(SR.App_Domain_Restart));
             }
-            catch(Exception e) {
-                if (ShouldRethrowException(e)) {
+            catch (Exception e)
+            {
+                if (ShouldRethrowException(e))
+                {
                     throw;
                 }
             }
         }
 
-        internal static bool ShouldRethrowException(Exception ex) {
-            return     ex is NullReferenceException
-                    || ex is AccessViolationException
-                    || ex is StackOverflowException
-                    || ex is OutOfMemoryException
-                    || ex is System.Threading.ThreadAbortException;
+        internal static bool ShouldRethrowException(Exception ex)
+        {
+            return ex is NullReferenceException
+                || ex is AccessViolationException
+                || ex is StackOverflowException
+                || ex is OutOfMemoryException
+                || ex is System.Threading.ThreadAbortException;
         }
-
     }
 }

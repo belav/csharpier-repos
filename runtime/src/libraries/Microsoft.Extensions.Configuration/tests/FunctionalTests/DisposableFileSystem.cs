@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.IO;
+using System.Threading;
 
 namespace Microsoft.Extensions.Configuration.Test
 {
@@ -17,7 +17,9 @@ namespace Microsoft.Extensions.Configuration.Test
 #if NETCOREAPP
             DirectoryInfo = Directory.CreateTempSubdirectory();
 #else
-            DirectoryInfo = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()));
+            DirectoryInfo = new DirectoryInfo(
+                Path.Combine(Path.GetTempPath(), Path.GetRandomFileName())
+            );
             DirectoryInfo.Create();
 #endif
             RootPath = DirectoryInfo.FullName;
@@ -29,44 +31,45 @@ namespace Microsoft.Extensions.Configuration.Test
 
         public DisposableFileSystem CreateFolder(string path, bool absolute = false)
         {
-            var fullPath = absolute
-                ? path
-                : Path.Combine(RootPath, path);
+            var fullPath = absolute ? path : Path.Combine(RootPath, path);
 
             Directory.CreateDirectory(fullPath);
 
             WaitForFileSystem(
                 () => Directory.Exists(fullPath),
-                $"Directory.CreateDirectory(\"{fullPath}\") failed");
+                $"Directory.CreateDirectory(\"{fullPath}\") failed"
+            );
 
             return this;
         }
 
-        public DisposableFileSystem WriteFile(string path, string text = "temp", bool absolute = false)
+        public DisposableFileSystem WriteFile(
+            string path,
+            string text = "temp",
+            bool absolute = false
+        )
         {
-            var fullPath = absolute
-                ? path
-                : Path.Combine(RootPath, path);
+            var fullPath = absolute ? path : Path.Combine(RootPath, path);
 
             File.WriteAllText(fullPath, text);
 
             WaitForFileSystem(
                 () => File.ReadAllText(fullPath).Length == text.Length,
-                $"File.WriteAllText(\"{fullPath}\", \"{text}\") failed");
+                $"File.WriteAllText(\"{fullPath}\", \"{text}\") failed"
+            );
 
             return this;
         }
 
         public DisposableFileSystem DeleteFile(string path, bool absolute = false)
         {
-            var fullPath = absolute
-                ? path
-                : Path.Combine(RootPath, path);
+            var fullPath = absolute ? path : Path.Combine(RootPath, path);
 
             WaitForFileSystem(
                 () => !File.Exists(fullPath),
                 $"File.Delete(\"{fullPath}\") failed",
-                () => File.Delete(fullPath));
+                () => File.Delete(fullPath)
+            );
 
             return this;
         }
@@ -81,11 +84,16 @@ namespace Microsoft.Extensions.Configuration.Test
 
                 WaitForFileSystem(
                     () => Directory.Exists(dirName),
-                    $"Directory.CreateDirectory(\"{dirName}\") failed");
+                    $"Directory.CreateDirectory(\"{dirName}\") failed"
+                );
 
                 WriteFile(
                     fullPath,
-                    string.Format("Automatically generated for testing on {0:yyyy}/{0:MM}/{0:dd} {0:hh}:{0:mm}:{0:ss}", DateTime.UtcNow));
+                    string.Format(
+                        "Automatically generated for testing on {0:yyyy}/{0:MM}/{0:dd} {0:hh}:{0:mm}:{0:ss}",
+                        DateTime.UtcNow
+                    )
+                );
             }
 
             return this;
@@ -103,10 +111,7 @@ namespace Microsoft.Extensions.Configuration.Test
             }
         }
 
-        private void WaitForFileSystem(
-            Func<bool> test,
-            string failureMessage,
-            Action retry = null)
+        private void WaitForFileSystem(Func<bool> test, string failureMessage, Action retry = null)
         {
             Exception failure = null;
 

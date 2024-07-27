@@ -12,38 +12,72 @@ using WellKnownType = WellKnownTypeData.WellKnownType;
 
 internal static class RoutePatternParametersDetector
 {
-    public static ImmutableArray<ParameterSymbol> ResolvedParameters(ISymbol symbol, WellKnownTypes wellKnownTypes)
+    public static ImmutableArray<ParameterSymbol> ResolvedParameters(
+        ISymbol symbol,
+        WellKnownTypes wellKnownTypes
+    )
     {
         return ResolvedParametersCore(symbol, topLevelSymbol: null, wellKnownTypes);
 
-        static ImmutableArray<ParameterSymbol> ResolvedParametersCore(ISymbol symbol, ISymbol? topLevelSymbol, WellKnownTypes wellKnownTypes)
+        static ImmutableArray<ParameterSymbol> ResolvedParametersCore(
+            ISymbol symbol,
+            ISymbol? topLevelSymbol,
+            WellKnownTypes wellKnownTypes
+        )
         {
             var resolvedParameterSymbols = ImmutableArray.CreateBuilder<ParameterSymbol>();
             var childSymbols = GetParameterSymbols(symbol);
 
             foreach (var child in childSymbols)
             {
-                if (HasSpecialType(child, wellKnownTypes, RouteWellKnownTypes.ParameterSpecialTypes) || HasExplicitNonRouteAttribute(child, wellKnownTypes, RouteWellKnownTypes.NonRouteMetadataTypes))
+                if (
+                    HasSpecialType(child, wellKnownTypes, RouteWellKnownTypes.ParameterSpecialTypes)
+                    || HasExplicitNonRouteAttribute(
+                        child,
+                        wellKnownTypes,
+                        RouteWellKnownTypes.NonRouteMetadataTypes
+                    )
+                )
                 {
                     continue;
                 }
-                else if (child.HasAttribute(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_AsParametersAttribute)))
+                else if (
+                    child.HasAttribute(
+                        wellKnownTypes.Get(
+                            WellKnownType.Microsoft_AspNetCore_Http_AsParametersAttribute
+                        )
+                    )
+                )
                 {
-                    resolvedParameterSymbols.AddRange(ResolvedParametersCore(child.GetParameterType(), child, wellKnownTypes));
+                    resolvedParameterSymbols.AddRange(
+                        ResolvedParametersCore(child.GetParameterType(), child, wellKnownTypes)
+                    );
                 }
                 else
                 {
                     var routeParameterName = ResolveRouteParameterName(child, wellKnownTypes);
-                    resolvedParameterSymbols.Add(new ParameterSymbol(routeParameterName, child, topLevelSymbol));
+                    resolvedParameterSymbols.Add(
+                        new ParameterSymbol(routeParameterName, child, topLevelSymbol)
+                    );
                 }
             }
             return resolvedParameterSymbols.ToImmutable();
         }
 
-        static string ResolveRouteParameterName(ISymbol parameterSymbol, WellKnownTypes wellKnownTypes)
+        static string ResolveRouteParameterName(
+            ISymbol parameterSymbol,
+            WellKnownTypes wellKnownTypes
+        )
         {
-            var fromRouteMetadata = wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_Metadata_IFromRouteMetadata);
-            if (!parameterSymbol.TryGetAttributeImplementingInterface(fromRouteMetadata, out var attributeData))
+            var fromRouteMetadata = wellKnownTypes.Get(
+                WellKnownType.Microsoft_AspNetCore_Http_Metadata_IFromRouteMetadata
+            );
+            if (
+                !parameterSymbol.TryGetAttributeImplementingInterface(
+                    fromRouteMetadata,
+                    out var attributeData
+                )
+            )
             {
                 return parameterSymbol.Name; // No route metadata attribute!
             }
@@ -66,13 +100,22 @@ internal static class RoutePatternParametersDetector
     {
         return symbol switch
         {
-            ITypeSymbol typeSymbol => typeSymbol.GetMembers().OfType<IPropertySymbol>().ToImmutableArray().As<ISymbol>(),
+            ITypeSymbol typeSymbol
+                => typeSymbol
+                    .GetMembers()
+                    .OfType<IPropertySymbol>()
+                    .ToImmutableArray()
+                    .As<ISymbol>(),
             IMethodSymbol methodSymbol => methodSymbol.Parameters.As<ISymbol>(),
-            _ => throw new InvalidOperationException("Unexpected symbol type: " + symbol)
+            _ => throw new InvalidOperationException("Unexpected symbol type: " + symbol),
         };
     }
 
-    private static bool HasSpecialType(ISymbol child, WellKnownTypes wellKnownTypes, WellKnownType[] specialTypes)
+    private static bool HasSpecialType(
+        ISymbol child,
+        WellKnownTypes wellKnownTypes,
+        WellKnownType[] specialTypes
+    )
     {
         if (child.GetParameterType() is not INamedTypeSymbol type)
         {
@@ -82,13 +125,20 @@ internal static class RoutePatternParametersDetector
         return wellKnownTypes.IsType(type, specialTypes);
     }
 
-    private static bool HasExplicitNonRouteAttribute(ISymbol child, WellKnownTypes wellKnownTypes, WellKnownType[] allNoneRouteMetadataTypes)
+    private static bool HasExplicitNonRouteAttribute(
+        ISymbol child,
+        WellKnownTypes wellKnownTypes,
+        WellKnownType[] allNoneRouteMetadataTypes
+    )
     {
         foreach (var attributeData in child.GetAttributes())
         {
             var attributeClass = attributeData.AttributeClass;
 
-            if (attributeClass != null && wellKnownTypes.Implements(attributeClass, allNoneRouteMetadataTypes))
+            if (
+                attributeClass != null
+                && wellKnownTypes.Implements(attributeClass, allNoneRouteMetadataTypes)
+            )
             {
                 return true;
             }

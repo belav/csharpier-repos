@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,148 +31,155 @@
 
 
 using System;
-using System.Xml;
-using System.IO;
 using System.Configuration;
+using System.IO;
+using System.Xml;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class IntegerValidatorTest
-	{
-		[Test]
-		public void CanValidate ()
-		{
-			IntegerValidator v = new IntegerValidator (1, 1);
+namespace MonoTests.System.Configuration
+{
+    [TestFixture]
+    public class IntegerValidatorTest
+    {
+        [Test]
+        public void CanValidate()
+        {
+            IntegerValidator v = new IntegerValidator(1, 1);
 
-			Assert.IsFalse (v.CanValidate (typeof (TimeSpan)), "A1");
-			Assert.IsTrue (v.CanValidate (typeof (int)), "A2");
-			Assert.IsFalse (v.CanValidate (typeof (long)), "A3");
-		}
+            Assert.IsFalse(v.CanValidate(typeof(TimeSpan)), "A1");
+            Assert.IsTrue(v.CanValidate(typeof(int)), "A2");
+            Assert.IsFalse(v.CanValidate(typeof(long)), "A3");
+        }
 
-		[Test]
-		public void Validate_inRange ()
-		{
-			IntegerValidator v = new IntegerValidator (5000, 10000);
-			v.Validate (7000);
-		}
+        [Test]
+        public void Validate_inRange()
+        {
+            IntegerValidator v = new IntegerValidator(5000, 10000);
+            v.Validate(7000);
+        }
 
-		[Test]
-		public void Validate_Inclusive ()
-		{
-			IntegerValidator v = new IntegerValidator (5000, 10000, false);
-			v.Validate (5000);
-			v.Validate (10000);
-		}
+        [Test]
+        public void Validate_Inclusive()
+        {
+            IntegerValidator v = new IntegerValidator(5000, 10000, false);
+            v.Validate(5000);
+            v.Validate(10000);
+        }
 
-		[Test]
-		public void Validate_Exclusive ()
-		{
-			IntegerValidator v = new IntegerValidator (5000, 10000, true);
-			v.Validate (1000);
-			v.Validate (15000);
-		}
+        [Test]
+        public void Validate_Exclusive()
+        {
+            IntegerValidator v = new IntegerValidator(5000, 10000, true);
+            v.Validate(1000);
+            v.Validate(15000);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Validate_Exclusive_fail1 ()
-		{
-			IntegerValidator v = new IntegerValidator (5000, 10000, true);
-			v.Validate (5000);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Validate_Exclusive_fail1()
+        {
+            IntegerValidator v = new IntegerValidator(5000, 10000, true);
+            v.Validate(5000);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Validate_Exclusive_fail2 ()
-		{
-			IntegerValidator v = new IntegerValidator (5000, 10000, true);
-			v.Validate (10000);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Validate_Exclusive_fail2()
+        {
+            IntegerValidator v = new IntegerValidator(5000, 10000, true);
+            v.Validate(10000);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Validate_Exclusive_fail3 ()
-		{
-			IntegerValidator v = new IntegerValidator (5000, 10000, true);
-			v.Validate (7000);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Validate_Exclusive_fail3()
+        {
+            IntegerValidator v = new IntegerValidator(5000, 10000, true);
+            v.Validate(7000);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Validate_Resolution ()
-		{
-			IntegerValidator v = new IntegerValidator (20000,
-								   50000,
-								   false,
-								   3000);
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Validate_Resolution()
+        {
+            IntegerValidator v = new IntegerValidator(20000, 50000, false, 3000);
 
-			v.Validate (40000);
-		}
+            v.Validate(40000);
+        }
 
-		#region BNC654721 https://bugzilla.novell.com/show_bug.cgi?id=654721
-		public sealed class TestSection : ConfigurationSection
-		{
-			public void Load (string xml)
-			{
-				Init ();
-				using (var sr = new StringReader (xml))
-				using (var reader = new XmlTextReader (sr))
-				{
-					DeserializeSection (reader);
-				}
-			}
+        #region BNC654721 https://bugzilla.novell.com/show_bug.cgi?id=654721
+        public sealed class TestSection : ConfigurationSection
+        {
+            public void Load(string xml)
+            {
+                Init();
+                using (var sr = new StringReader(xml))
+                using (var reader = new XmlTextReader(sr))
+                {
+                    DeserializeSection(reader);
+                }
+            }
 
-			[ConfigurationProperty ("integerValidatorMinValue")]
-			public IntegerValidatorMinValueChildElement IntegerValidatorMinValue
-			{
-				get { return (IntegerValidatorMinValueChildElement)base["integerValidatorMinValue"]; }
-				set { base["integerValidatorMinValue"] = value; }
-			}
+            [ConfigurationProperty("integerValidatorMinValue")]
+            public IntegerValidatorMinValueChildElement IntegerValidatorMinValue
+            {
+                get
+                {
+                    return (IntegerValidatorMinValueChildElement)base["integerValidatorMinValue"];
+                }
+                set { base["integerValidatorMinValue"] = value; }
+            }
 
-			[ConfigurationProperty ("integerValidatorMaxValue")]
-			public IntegerValidatorMaxValueChildElement IntegerValidatorMaxValue
-			{
-				get { return (IntegerValidatorMaxValueChildElement)base["integerValidatorMaxValue"]; }
-				set { base["integerValidatorMaxValue"] = value; }
-			}
-		}
+            [ConfigurationProperty("integerValidatorMaxValue")]
+            public IntegerValidatorMaxValueChildElement IntegerValidatorMaxValue
+            {
+                get
+                {
+                    return (IntegerValidatorMaxValueChildElement)base["integerValidatorMaxValue"];
+                }
+                set { base["integerValidatorMaxValue"] = value; }
+            }
+        }
 
-		public sealed class IntegerValidatorMaxValueChildElement : ConfigurationElement
-		{
-			[ConfigurationProperty ("theProperty"), IntegerValidator (MaxValue = 100)]
-			public int TheProperty
-			{
-				get { return (int)base["theProperty"]; }
-				set { base ["theProperty"] = value; }
-			}
-		}
+        public sealed class IntegerValidatorMaxValueChildElement : ConfigurationElement
+        {
+            [ConfigurationProperty("theProperty"), IntegerValidator(MaxValue = 100)]
+            public int TheProperty
+            {
+                get { return (int)base["theProperty"]; }
+                set { base["theProperty"] = value; }
+            }
+        }
 
-		public sealed class IntegerValidatorMinValueChildElement : ConfigurationElement
-		{
-			[ConfigurationProperty ("theProperty"), IntegerValidator (MinValue = 0)]
-			public int TheProperty
-			{
-				get { return (int)base["theProperty"]; }
-				set { base ["theProperty"] = value; }
-			}
-		}
+        public sealed class IntegerValidatorMinValueChildElement : ConfigurationElement
+        {
+            [ConfigurationProperty("theProperty"), IntegerValidator(MinValue = 0)]
+            public int TheProperty
+            {
+                get { return (int)base["theProperty"]; }
+                set { base["theProperty"] = value; }
+            }
+        }
 
-		[Test]
-		public void IntegerValidatorMinValueTest ()
-		{
-			var section = new TestSection ();
-			section.Load (@"<someSection><integerValidatorMinValue theProperty=""15"" /></someSection>");
-			Assert.AreEqual (15, section.IntegerValidatorMinValue.TheProperty);
-		}
+        [Test]
+        public void IntegerValidatorMinValueTest()
+        {
+            var section = new TestSection();
+            section.Load(
+                @"<someSection><integerValidatorMinValue theProperty=""15"" /></someSection>"
+            );
+            Assert.AreEqual(15, section.IntegerValidatorMinValue.TheProperty);
+        }
 
-		[Test]
-		public void IntegerValidatorMaxValueTest ()
-		{
-			var section = new TestSection ();
-			section.Load (@"<someSection><integerValidatorMaxValue theProperty=""25"" /></someSection>");
-			Assert.AreEqual (25, section.IntegerValidatorMaxValue.TheProperty);
-		}
-		#endregion
-	}
+        [Test]
+        public void IntegerValidatorMaxValueTest()
+        {
+            var section = new TestSection();
+            section.Load(
+                @"<someSection><integerValidatorMaxValue theProperty=""25"" /></someSection>"
+            );
+            Assert.AreEqual(25, section.IntegerValidatorMaxValue.TheProperty);
+        }
+        #endregion
+    }
 }
-

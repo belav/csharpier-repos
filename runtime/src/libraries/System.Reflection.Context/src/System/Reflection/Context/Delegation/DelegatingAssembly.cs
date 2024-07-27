@@ -23,7 +23,10 @@ namespace System.Reflection.Context.Delegation
         }
 
 #pragma warning disable IL3003 // netstandard2.1 didn't have RequiresAssemblyFiles attributes applied on Assembly
-        [RequiresAssemblyFiles("Calling 'System.Reflection.Assembly.Location' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'", Url = "https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/il3000")]
+        [RequiresAssemblyFiles(
+            "Calling 'System.Reflection.Assembly.Location' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'",
+            Url = "https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/il3000"
+        )]
         public override string Location
         {
             get { return UnderlyingAssembly.Location; }
@@ -81,9 +84,25 @@ namespace System.Reflection.Context.Delegation
             get { return UnderlyingAssembly.CodeBase; }
         }
 
-        public override object? CreateInstance(string typeName, bool ignoreCase, BindingFlags bindingAttr, Binder? binder, object[]? args, CultureInfo? culture, object[]? activationAttributes)
+        public override object? CreateInstance(
+            string typeName,
+            bool ignoreCase,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            object[]? args,
+            CultureInfo? culture,
+            object[]? activationAttributes
+        )
         {
-            return UnderlyingAssembly.CreateInstance(typeName, ignoreCase, bindingAttr, binder, args, culture, activationAttributes);
+            return UnderlyingAssembly.CreateInstance(
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes
+            );
         }
 
         public override MethodInfo? EntryPoint
@@ -111,19 +130,28 @@ namespace System.Reflection.Context.Delegation
         }
 
 #pragma warning disable IL3003 // netstandard2.1 didn't have RequiresAssemblyFiles attributes applied on Assembly
-        [RequiresAssemblyFiles("Calling 'System.Reflection.Assembly.GetFile(string)' will throw for assemblies embedded in a single-file app", Url = "https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/il3001")]
+        [RequiresAssemblyFiles(
+            "Calling 'System.Reflection.Assembly.GetFile(string)' will throw for assemblies embedded in a single-file app",
+            Url = "https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/il3001"
+        )]
         public override FileStream? GetFile(string name)
         {
             return UnderlyingAssembly.GetFile(name);
         }
 
-        [RequiresAssemblyFiles("Calling 'System.Reflection.Assembly.GetFiles()' will throw for assemblies embedded in a single-file app", Url = "https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/il3001")]
+        [RequiresAssemblyFiles(
+            "Calling 'System.Reflection.Assembly.GetFiles()' will throw for assemblies embedded in a single-file app",
+            Url = "https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/il3001"
+        )]
         public override FileStream[] GetFiles()
         {
             return UnderlyingAssembly.GetFiles();
         }
 
-        [RequiresAssemblyFiles("Calling 'System.Reflection.Assembly.GetFiles(bool)' will throw for assemblies embedded in a single-file app", Url = "https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/il3001")]
+        [RequiresAssemblyFiles(
+            "Calling 'System.Reflection.Assembly.GetFiles(bool)' will throw for assemblies embedded in a single-file app",
+            Url = "https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/il3001"
+        )]
         public override FileStream[] GetFiles(bool getResourceModules)
         {
             return UnderlyingAssembly.GetFiles(getResourceModules);
@@ -223,7 +251,11 @@ namespace System.Reflection.Context.Delegation
             get { return UnderlyingAssembly.IsDynamic; }
         }
 
-        public override Module LoadModule(string moduleName, byte[]? rawModule, byte[]? rawSymbolStore)
+        public override Module LoadModule(
+            string moduleName,
+            byte[]? rawModule,
+            byte[]? rawSymbolStore
+        )
         {
             return UnderlyingAssembly.LoadModule(moduleName, rawModule, rawSymbolStore);
         }

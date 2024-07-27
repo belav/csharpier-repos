@@ -15,6 +15,6 @@ namespace System.Xml
     {
         Prohibit,
         Ignore,
-        Parse
+        Parse,
     }
 }

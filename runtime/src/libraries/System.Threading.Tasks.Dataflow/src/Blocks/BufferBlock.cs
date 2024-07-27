@@ -22,23 +22,32 @@ namespace System.Threading.Tasks.Dataflow
     /// <typeparam name="T">Specifies the type of the data buffered by this dataflow block.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
     [DebuggerTypeProxy(typeof(BufferBlock<>.DebugView))]
-    public sealed class BufferBlock<T> : IPropagatorBlock<T, T>, IReceivableSourceBlock<T>, IDebuggerDisplay
+    public sealed class BufferBlock<T>
+        : IPropagatorBlock<T, T>,
+            IReceivableSourceBlock<T>,
+            IDebuggerDisplay
     {
         /// <summary>The core logic for the buffer block.</summary>
         private readonly SourceCore<T> _source;
+
         /// <summary>The bounding state for when in bounding mode; null if not bounding.</summary>
         private readonly BoundingStateWithPostponedAndTask<T>? _boundingState;
+
         /// <summary>Whether all future messages should be declined on the target.</summary>
         private bool _targetDecliningPermanently;
+
         /// <summary>A task has reserved the right to run the target's completion routine.</summary>
         private bool _targetCompletionReserved;
+
         /// <summary>Gets the lock object used to synchronize incoming requests.</summary>
-        private object IncomingLock { get { return _source; } }
+        private object IncomingLock
+        {
+            get { return _source; }
+        }
 
         /// <summary>Initializes the <see cref="BufferBlock{T}"/>.</summary>
-        public BufferBlock() :
-            this(DataflowBlockOptions.Default)
-        { }
+        public BufferBlock()
+            : this(DataflowBlockOptions.Default) { }
 
         /// <summary>Initializes the <see cref="BufferBlock{T}"/> with the specified <see cref="DataflowBlockOptions"/>.</summary>
         /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="BufferBlock{T}"/>.</param>
@@ -57,29 +66,48 @@ namespace System.Threading.Tasks.Dataflow
             Action<ISourceBlock<T>, int>? onItemsRemoved = null;
             if (dataflowBlockOptions.BoundedCapacity > 0)
             {
-                onItemsRemoved = static (owningSource, count) => ((BufferBlock<T>)owningSource).OnItemsRemoved(count);
-                _boundingState = new BoundingStateWithPostponedAndTask<T>(dataflowBlockOptions.BoundedCapacity);
+                onItemsRemoved = static (owningSource, count) =>
+                    ((BufferBlock<T>)owningSource).OnItemsRemoved(count);
+                _boundingState = new BoundingStateWithPostponedAndTask<T>(
+                    dataflowBlockOptions.BoundedCapacity
+                );
             }
 
             // Initialize the source state
-            _source = new SourceCore<T>(this, dataflowBlockOptions,
+            _source = new SourceCore<T>(
+                this,
+                dataflowBlockOptions,
                 static owningSource => ((BufferBlock<T>)owningSource).Complete(),
-                onItemsRemoved);
+                onItemsRemoved
+            );
 
             // It is possible that the source half may fault on its own, e.g. due to a task scheduler exception.
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source.Completion.ContinueWith(static (completed, state) =>
-            {
-                var thisBlock = ((BufferBlock<T>)state!) as IDataflowBlock;
-                Debug.Assert(completed.IsFaulted, "The source must be faulted in order to trigger a target completion.");
-                thisBlock.Fault(completed.Exception!);
-            }, this, CancellationToken.None, Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted, TaskScheduler.Default);
+            _source.Completion.ContinueWith(
+                static (completed, state) =>
+                {
+                    var thisBlock = ((BufferBlock<T>)state!) as IDataflowBlock;
+                    Debug.Assert(
+                        completed.IsFaulted,
+                        "The source must be faulted in order to trigger a target completion."
+                    );
+                    thisBlock.Fault(completed.Exception!);
+                },
+                this,
+                CancellationToken.None,
+                Common.GetContinuationOptions() | TaskContinuationOptions.OnlyOnFaulted,
+                TaskScheduler.Default
+            );
 
             // Handle async cancellation requests by declining on the target
             Common.WireCancellationToComplete(
-                dataflowBlockOptions.CancellationToken, _source.Completion, static (owningSource, _) => ((BufferBlock<T>)owningSource!).Complete(), this);
+                dataflowBlockOptions.CancellationToken,
+                _source.Completion,
+                static (owningSource, _) => ((BufferBlock<T>)owningSource!).Complete(),
+                this
+            );
             DataflowEtwProvider etwLog = DataflowEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
@@ -88,11 +116,24 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
-        DataflowMessageStatus ITargetBlock<T>.OfferMessage(DataflowMessageHeader messageHeader, T messageValue, ISourceBlock<T>? source, bool consumeToAccept)
+        DataflowMessageStatus ITargetBlock<T>.OfferMessage(
+            DataflowMessageHeader messageHeader,
+            T messageValue,
+            ISourceBlock<T>? source,
+            bool consumeToAccept
+        )
         {
             // Validate arguments
-            if (!messageHeader.IsValid) throw new ArgumentException(SR.Argument_InvalidMessageHeader, nameof(messageHeader));
-            if (source == null && consumeToAccept) throw new ArgumentException(SR.Argument_CantConsumeFromANullSource, nameof(consumeToAccept));
+            if (!messageHeader.IsValid)
+                throw new ArgumentException(
+                    SR.Argument_InvalidMessageHeader,
+                    nameof(messageHeader)
+                );
+            if (source == null && consumeToAccept)
+                throw new ArgumentException(
+                    SR.Argument_CantConsumeFromANullSource,
+                    nameof(consumeToAccept)
+                );
 
             lock (IncomingLock)
             {
@@ -109,31 +150,43 @@ namespace System.Threading.Tasks.Dataflow
                 // (If there were any postponed messages, we would need to postpone so that ordering would be maintained.)
                 // (We should also postpone if we are currently processing, because there may be a race between consuming postponed messages and
                 // accepting new ones directly into the queue.)
-                if (_boundingState == null
-                        ||
-                    (_boundingState.CountIsLessThanBound && _boundingState.PostponedMessages.Count == 0 && _boundingState.TaskForInputProcessing == null))
+                if (
+                    _boundingState == null
+                    || (
+                        _boundingState.CountIsLessThanBound
+                        && _boundingState.PostponedMessages.Count == 0
+                        && _boundingState.TaskForInputProcessing == null
+                    )
+                )
                 {
                     // Consume the message from the source if necessary
                     if (consumeToAccept)
                     {
-                        Debug.Assert(source != null, "We must have thrown if source == null && consumeToAccept == true.");
+                        Debug.Assert(
+                            source != null,
+                            "We must have thrown if source == null && consumeToAccept == true."
+                        );
 
                         bool consumed;
                         messageValue = source.ConsumeMessage(messageHeader, this, out consumed)!;
-                        if (!consumed) return DataflowMessageStatus.NotAvailable;
+                        if (!consumed)
+                            return DataflowMessageStatus.NotAvailable;
                     }
 
                     // Once consumed, pass it to the source
                     _source.AddMessage(messageValue!);
-                    if (_boundingState != null) _boundingState.CurrentCount++;
+                    if (_boundingState != null)
+                        _boundingState.CurrentCount++;
 
                     return DataflowMessageStatus.Accepted;
                 }
                 // Otherwise, we try to postpone if a source was provided
                 else if (source != null)
                 {
-                    Debug.Assert(_boundingState != null && _boundingState.PostponedMessages != null,
-                        "PostponedMessages must have been initialized during construction in bounding mode.");
+                    Debug.Assert(
+                        _boundingState != null && _boundingState.PostponedMessages != null,
+                        "PostponedMessages must have been initialized during construction in bounding mode."
+                    );
 
                     _boundingState.PostponedMessages.Push(source, messageHeader);
                     return DataflowMessageStatus.Postponed;
@@ -144,7 +197,10 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
-        public void Complete() { CompleteCore(exception: null, storeExceptionEvenIfAlreadyCompleting: false); }
+        public void Complete()
+        {
+            CompleteCore(exception: null, storeExceptionEvenIfAlreadyCompleting: false);
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
         void IDataflowBlock.Fault(Exception exception)
@@ -157,16 +213,25 @@ namespace System.Threading.Tasks.Dataflow
             CompleteCore(exception, storeExceptionEvenIfAlreadyCompleting: false);
         }
 
-        private void CompleteCore(Exception? exception, bool storeExceptionEvenIfAlreadyCompleting, bool revertProcessingState = false)
+        private void CompleteCore(
+            Exception? exception,
+            bool storeExceptionEvenIfAlreadyCompleting,
+            bool revertProcessingState = false
+        )
         {
-            Debug.Assert(storeExceptionEvenIfAlreadyCompleting || !revertProcessingState,
-                            "Indicating dirty processing state may only come with storeExceptionEvenIfAlreadyCompleting==true.");
+            Debug.Assert(
+                storeExceptionEvenIfAlreadyCompleting || !revertProcessingState,
+                "Indicating dirty processing state may only come with storeExceptionEvenIfAlreadyCompleting==true."
+            );
 
             lock (IncomingLock)
             {
                 // Faulting from outside is allowed until we start declining permanently.
                 // Faulting from inside is allowed at any time.
-                if (exception != null && (!_targetDecliningPermanently || storeExceptionEvenIfAlreadyCompleting))
+                if (
+                    exception != null
+                    && (!_targetDecliningPermanently || storeExceptionEvenIfAlreadyCompleting)
+                )
                 {
                     _source.AddException(exception);
                 }
@@ -174,8 +239,10 @@ namespace System.Threading.Tasks.Dataflow
                 // Revert the dirty processing state if requested
                 if (revertProcessingState)
                 {
-                    Debug.Assert(_boundingState != null && _boundingState.TaskForInputProcessing != null,
-                                    "The processing state must be dirty when revertProcessingState==true.");
+                    Debug.Assert(
+                        _boundingState != null && _boundingState.TaskForInputProcessing != null,
+                        "The processing state must be dirty when revertProcessingState==true."
+                    );
                     _boundingState.TaskForInputProcessing = null;
                 }
 
@@ -186,34 +253,59 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="LinkTo"]/*' />
-        public IDisposable LinkTo(ITargetBlock<T> target, DataflowLinkOptions linkOptions) { return _source.LinkTo(target, linkOptions); }
+        public IDisposable LinkTo(ITargetBlock<T> target, DataflowLinkOptions linkOptions)
+        {
+            return _source.LinkTo(target, linkOptions);
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceive"]/*' />
-        public bool TryReceive(Predicate<T>? filter, [MaybeNullWhen(false)] out T item) { return _source.TryReceive(filter, out item); }
+        public bool TryReceive(Predicate<T>? filter, [MaybeNullWhen(false)] out T item)
+        {
+            return _source.TryReceive(filter, out item);
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceiveAll"]/*' />
-        public bool TryReceiveAll([NotNullWhen(true)] out IList<T>? items) { return _source.TryReceiveAll(out items); }
+        public bool TryReceiveAll([NotNullWhen(true)] out IList<T>? items)
+        {
+            return _source.TryReceiveAll(out items);
+        }
 
         /// <summary>Gets the number of items currently stored in the buffer.</summary>
-        public int Count { get { return _source.OutputCount; } }
+        public int Count
+        {
+            get { return _source.OutputCount; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
-        public Task Completion { get { return _source.Completion; } }
+        public Task Completion
+        {
+            get { return _source.Completion; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
-        T? ISourceBlock<T>.ConsumeMessage(DataflowMessageHeader messageHeader, ITargetBlock<T> target, out bool messageConsumed)
+        T? ISourceBlock<T>.ConsumeMessage(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<T> target,
+            out bool messageConsumed
+        )
         {
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
-        bool ISourceBlock<T>.ReserveMessage(DataflowMessageHeader messageHeader, ITargetBlock<T> target)
+        bool ISourceBlock<T>.ReserveMessage(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<T> target
+        )
         {
             return _source.ReserveMessage(messageHeader, target);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
-        void ISourceBlock<T>.ReleaseReservation(DataflowMessageHeader messageHeader, ITargetBlock<T> target)
+        void ISourceBlock<T>.ReleaseReservation(
+            DataflowMessageHeader messageHeader,
+            ITargetBlock<T> target
+        )
         {
             _source.ReleaseReservation(messageHeader, target);
         }
@@ -233,8 +325,10 @@ namespace System.Threading.Tasks.Dataflow
                 lock (IncomingLock)
                 {
                     // Decrement the count, which mirrors the count in the source half
-                    Debug.Assert(_boundingState.CurrentCount - numItemsRemoved >= 0,
-                        "It should be impossible to have a negative number of items.");
+                    Debug.Assert(
+                        _boundingState.CurrentCount - numItemsRemoved >= 0,
+                        "It should be impossible to have a negative number of items."
+                    );
                     _boundingState.CurrentCount -= numItemsRemoved;
 
                     ConsumeAsyncIfNecessary();
@@ -250,52 +344,77 @@ namespace System.Threading.Tasks.Dataflow
             Common.ContractAssertMonitorStatus(IncomingLock, held: true);
             Debug.Assert(_boundingState != null, "Must be in bounded mode.");
 
-            if (!_targetDecliningPermanently &&
-                _boundingState.TaskForInputProcessing == null &&
-                _boundingState.PostponedMessages.Count > 0 &&
-                _boundingState.CountIsLessThanBound)
+            if (
+                !_targetDecliningPermanently
+                && _boundingState.TaskForInputProcessing == null
+                && _boundingState.PostponedMessages.Count > 0
+                && _boundingState.CountIsLessThanBound
+            )
             {
                 // Create task and store into _taskForInputProcessing prior to scheduling the task
                 // so that _taskForInputProcessing will be visibly set in the task loop.
-                _boundingState.TaskForInputProcessing =
-                    new Task(static state => ((BufferBlock<T>)state!).ConsumeMessagesLoopCore(), this,
-                        Common.GetCreationOptionsForTask(isReplacementReplica));
+                _boundingState.TaskForInputProcessing = new Task(
+                    static state => ((BufferBlock<T>)state!).ConsumeMessagesLoopCore(),
+                    this,
+                    Common.GetCreationOptionsForTask(isReplacementReplica)
+                );
 
                 DataflowEtwProvider etwLog = DataflowEtwProvider.Log;
                 if (etwLog.IsEnabled())
                 {
                     etwLog.TaskLaunchedForMessageHandling(
-                        this, _boundingState.TaskForInputProcessing, DataflowEtwProvider.TaskLaunchedReason.ProcessingInputMessages,
-                        _boundingState.PostponedMessages.Count);
+                        this,
+                        _boundingState.TaskForInputProcessing,
+                        DataflowEtwProvider.TaskLaunchedReason.ProcessingInputMessages,
+                        _boundingState.PostponedMessages.Count
+                    );
                 }
 
                 // Start the task handling scheduling exceptions
-                Exception? exception = Common.StartTaskSafe(_boundingState.TaskForInputProcessing, _source.DataflowBlockOptions.TaskScheduler);
+                Exception? exception = Common.StartTaskSafe(
+                    _boundingState.TaskForInputProcessing,
+                    _source.DataflowBlockOptions.TaskScheduler
+                );
                 if (exception != null)
                 {
                     // Get out from under currently held locks. CompleteCore re-acquires the locks it needs.
-                    Task.Factory.StartNew(exc => CompleteCore(exception: (Exception)exc!, storeExceptionEvenIfAlreadyCompleting: true, revertProcessingState: true),
-                                        exception, CancellationToken.None, Common.GetCreationOptionsForTask(), TaskScheduler.Default);
+                    Task.Factory.StartNew(
+                        exc =>
+                            CompleteCore(
+                                exception: (Exception)exc!,
+                                storeExceptionEvenIfAlreadyCompleting: true,
+                                revertProcessingState: true
+                            ),
+                        exception,
+                        CancellationToken.None,
+                        Common.GetCreationOptionsForTask(),
+                        TaskScheduler.Default
+                    );
                 }
             }
         }
 
-
         /// <summary>Task body used to consume postponed messages.</summary>
         private void ConsumeMessagesLoopCore()
         {
-            Debug.Assert(_boundingState != null && _boundingState.TaskForInputProcessing != null,
-                "May only be called in bounded mode and when a task is in flight.");
-            Debug.Assert(_boundingState.TaskForInputProcessing.Id == Task.CurrentId,
-                "This must only be called from the in-flight processing task.");
+            Debug.Assert(
+                _boundingState != null && _boundingState.TaskForInputProcessing != null,
+                "May only be called in bounded mode and when a task is in flight."
+            );
+            Debug.Assert(
+                _boundingState.TaskForInputProcessing.Id == Task.CurrentId,
+                "This must only be called from the in-flight processing task."
+            );
             Common.ContractAssertMonitorStatus(IncomingLock, held: false);
 
             try
             {
                 int maxMessagesPerTask = _source.DataflowBlockOptions.ActualMaxMessagesPerTask;
-                for (int i = 0;
+                for (
+                    int i = 0;
                     i < maxMessagesPerTask && ConsumeAndStoreOneMessageIfAvailable();
-                    i++)
+                    i++
+                )
                     ;
             }
             catch (Exception exc)
@@ -330,10 +449,14 @@ namespace System.Threading.Tasks.Dataflow
         /// <remarks>This must only be called from the asynchronous processing loop.</remarks>
         private bool ConsumeAndStoreOneMessageIfAvailable()
         {
-            Debug.Assert(_boundingState != null && _boundingState.TaskForInputProcessing != null,
-                "May only be called in bounded mode and when a task is in flight.");
-            Debug.Assert(_boundingState.TaskForInputProcessing.Id == Task.CurrentId,
-                "This must only be called from the in-flight processing task.");
+            Debug.Assert(
+                _boundingState != null && _boundingState.TaskForInputProcessing != null,
+                "May only be called in bounded mode and when a task is in flight."
+            );
+            Debug.Assert(
+                _boundingState.TaskForInputProcessing.Id == Task.CurrentId,
+                "This must only be called from the in-flight processing task."
+            );
             Common.ContractAssertMonitorStatus(IncomingLock, held: false);
 
             // Loop through the postponed messages until we get one.
@@ -343,9 +466,12 @@ namespace System.Threading.Tasks.Dataflow
                 KeyValuePair<ISourceBlock<T>, DataflowMessageHeader> sourceAndMessage;
                 lock (IncomingLock)
                 {
-                    if (_targetDecliningPermanently) return false;
-                    if (!_boundingState.CountIsLessThanBound) return false;
-                    if (!_boundingState.PostponedMessages.TryPop(out sourceAndMessage)) return false;
+                    if (_targetDecliningPermanently)
+                        return false;
+                    if (!_boundingState.CountIsLessThanBound)
+                        return false;
+                    if (!_boundingState.PostponedMessages.TryPop(out sourceAndMessage))
+                        return false;
 
                     // Optimistically assume we're going to get the item. This avoids taking the lock
                     // again if we're right.  If we're wrong, we decrement it later under lock.
@@ -356,7 +482,11 @@ namespace System.Threading.Tasks.Dataflow
                 bool consumed = false;
                 try
                 {
-                    T? consumedValue = sourceAndMessage.Key.ConsumeMessage(sourceAndMessage.Value, this, out consumed);
+                    T? consumedValue = sourceAndMessage.Key.ConsumeMessage(
+                        sourceAndMessage.Value,
+                        this,
+                        out consumed
+                    );
                     if (consumed)
                     {
                         _source.AddMessage(consumedValue!);
@@ -368,7 +498,8 @@ namespace System.Threading.Tasks.Dataflow
                     // We didn't get the item, so decrement the count to counteract our optimistic assumption.
                     if (!consumed)
                     {
-                        lock (IncomingLock) _boundingState.CurrentCount--;
+                        lock (IncomingLock)
+                            _boundingState.CurrentCount--;
                     }
                 }
             }
@@ -378,9 +509,11 @@ namespace System.Threading.Tasks.Dataflow
         private void CompleteTargetIfPossible()
         {
             Common.ContractAssertMonitorStatus(IncomingLock, held: true);
-            if (_targetDecliningPermanently &&
-                !_targetCompletionReserved &&
-                (_boundingState == null || _boundingState.TaskForInputProcessing == null))
+            if (
+                _targetDecliningPermanently
+                && !_targetCompletionReserved
+                && (_boundingState == null || _boundingState.TaskForInputProcessing == null)
+            )
             {
                 _targetCompletionReserved = true;
 
@@ -388,29 +521,37 @@ namespace System.Threading.Tasks.Dataflow
                 // which means calling back to the source, which means we need to escape the incoming lock.
                 if (_boundingState != null && _boundingState.PostponedMessages.Count > 0)
                 {
-                    Task.Factory.StartNew(static state =>
-                    {
-                        var thisBufferBlock = (BufferBlock<T>)state!;
-
-                        // Release any postponed messages
-                        List<Exception>? exceptions = null;
-                        if (thisBufferBlock._boundingState != null)
+                    Task.Factory.StartNew(
+                        static state =>
                         {
-                            // Note: No locks should be held at this point
-                            Common.ReleaseAllPostponedMessages(thisBufferBlock,
-                                                               thisBufferBlock._boundingState.PostponedMessages,
-                                                               ref exceptions);
-                        }
+                            var thisBufferBlock = (BufferBlock<T>)state!;
 
-                        if (exceptions != null)
-                        {
-                            // It is important to migrate these exceptions to the source part of the owning batch,
-                            // because that is the completion task that is publicly exposed.
-                            thisBufferBlock._source.AddExceptions(exceptions);
-                        }
+                            // Release any postponed messages
+                            List<Exception>? exceptions = null;
+                            if (thisBufferBlock._boundingState != null)
+                            {
+                                // Note: No locks should be held at this point
+                                Common.ReleaseAllPostponedMessages(
+                                    thisBufferBlock,
+                                    thisBufferBlock._boundingState.PostponedMessages,
+                                    ref exceptions
+                                );
+                            }
 
-                        thisBufferBlock._source.Complete();
-                    }, this, CancellationToken.None, Common.GetCreationOptionsForTask(), TaskScheduler.Default);
+                            if (exceptions != null)
+                            {
+                                // It is important to migrate these exceptions to the source part of the owning batch,
+                                // because that is the completion task that is publicly exposed.
+                                thisBufferBlock._source.AddExceptions(exceptions);
+                            }
+
+                            thisBufferBlock._source.Complete();
+                        },
+                        this,
+                        CancellationToken.None,
+                        Common.GetCreationOptionsForTask(),
+                        TaskScheduler.Default
+                    );
                 }
                 // Otherwise, we can just decline the source directly.
                 else
@@ -421,23 +562,33 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <summary>Gets the number of messages in the buffer.  This must only be used from the debugger as it avoids taking necessary locks.</summary>
-        private int CountForDebugger { get { return _source.GetDebuggingInformation().OutputCount; } }
+        private int CountForDebugger
+        {
+            get { return _source.GetDebuggingInformation().OutputCount; }
+        }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="ToString"]/*' />
-        public override string ToString() { return Common.GetNameForDebugger(this, _source.DataflowBlockOptions); }
+        public override string ToString()
+        {
+            return Common.GetNameForDebugger(this, _source.DataflowBlockOptions);
+        }
 
         /// <summary>The data to display in the debugger display attribute.</summary>
         private object DebuggerDisplayContent =>
             $"{Common.GetNameForDebugger(this, _source.DataflowBlockOptions)}, Count = {CountForDebugger}";
 
         /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
-        object IDebuggerDisplay.Content { get { return DebuggerDisplayContent; } }
+        object IDebuggerDisplay.Content
+        {
+            get { return DebuggerDisplayContent; }
+        }
 
         /// <summary>Provides a debugger type proxy for the BufferBlock.</summary>
         private sealed class DebugView
         {
             /// <summary>The buffer block.</summary>
             private readonly BufferBlock<T> _bufferBlock;
+
             /// <summary>The buffer's source half.</summary>
             private readonly SourceCore<T>.DebuggingInformation _sourceDebuggingInformation;
 
@@ -445,7 +596,10 @@ namespace System.Threading.Tasks.Dataflow
             /// <param name="bufferBlock">The BufferBlock being viewed.</param>
             public DebugView(BufferBlock<T> bufferBlock)
             {
-                Debug.Assert(bufferBlock != null, "Need a block with which to construct the debug view.");
+                Debug.Assert(
+                    bufferBlock != null,
+                    "Need a block with which to construct the debug view."
+                );
                 _bufferBlock = bufferBlock;
                 _sourceDebuggingInformation = bufferBlock._source.GetDebuggingInformation();
             }
@@ -455,28 +609,60 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _bufferBlock._boundingState?.PostponedMessages; }
             }
+
             /// <summary>Gets the messages in the buffer.</summary>
-            public IEnumerable<T> Queue { get { return _sourceDebuggingInformation.OutputQueue; } }
+            public IEnumerable<T> Queue
+            {
+                get { return _sourceDebuggingInformation.OutputQueue; }
+            }
 
             /// <summary>The task used to process messages.</summary>
-            public Task? TaskForInputProcessing { get { return _bufferBlock._boundingState?.TaskForInputProcessing; } }
+            public Task? TaskForInputProcessing
+            {
+                get { return _bufferBlock._boundingState?.TaskForInputProcessing; }
+            }
+
             /// <summary>Gets the task being used for output processing.</summary>
-            public Task? TaskForOutputProcessing { get { return _sourceDebuggingInformation.TaskForOutputProcessing; } }
+            public Task? TaskForOutputProcessing
+            {
+                get { return _sourceDebuggingInformation.TaskForOutputProcessing; }
+            }
 
             /// <summary>Gets the DataflowBlockOptions used to configure this block.</summary>
-            public DataflowBlockOptions DataflowBlockOptions { get { return _sourceDebuggingInformation.DataflowBlockOptions; } }
+            public DataflowBlockOptions DataflowBlockOptions
+            {
+                get { return _sourceDebuggingInformation.DataflowBlockOptions; }
+            }
 
             /// <summary>Gets whether the block is declining further messages.</summary>
-            public bool IsDecliningPermanently { get { return _bufferBlock._targetDecliningPermanently; } }
+            public bool IsDecliningPermanently
+            {
+                get { return _bufferBlock._targetDecliningPermanently; }
+            }
+
             /// <summary>Gets whether the block is completed.</summary>
-            public bool IsCompleted { get { return _sourceDebuggingInformation.IsCompleted; } }
+            public bool IsCompleted
+            {
+                get { return _sourceDebuggingInformation.IsCompleted; }
+            }
+
             /// <summary>Gets the block's Id.</summary>
-            public int Id { get { return Common.GetBlockId(_bufferBlock); } }
+            public int Id
+            {
+                get { return Common.GetBlockId(_bufferBlock); }
+            }
 
             /// <summary>Gets the set of all targets linked from this block.</summary>
-            public TargetRegistry<T> LinkedTargets { get { return _sourceDebuggingInformation.LinkedTargets; } }
+            public TargetRegistry<T> LinkedTargets
+            {
+                get { return _sourceDebuggingInformation.LinkedTargets; }
+            }
+
             /// <summary>Gets the set of all targets linked from this block.</summary>
-            public ITargetBlock<T>? NextMessageReservedFor { get { return _sourceDebuggingInformation.NextMessageReservedFor; } }
+            public ITargetBlock<T>? NextMessageReservedFor
+            {
+                get { return _sourceDebuggingInformation.NextMessageReservedFor; }
+            }
         }
     }
 }

@@ -12,7 +12,8 @@ public class PocoRoleClaim : PocoRoleClaim<string> { }
 ///     EntityType that represents one specific role claim
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public class PocoRoleClaim<TKey> where TKey : IEquatable<TKey>
+public class PocoRoleClaim<TKey>
+    where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     Primary key

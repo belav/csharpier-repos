@@ -4,18 +4,20 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-
-namespace System.Collections.Generic {
-
+namespace System.Collections.Generic
+{
     /// <summary>
     /// Debug view for SortedSet
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal class SortedSetDebugView<T> {
+    internal class SortedSetDebugView<T>
+    {
         private SortedSet<T> set;
 
-        public SortedSetDebugView(SortedSet<T> set) {
-            if (set == null) {
+        public SortedSetDebugView(SortedSet<T> set)
+        {
+            if (set == null)
+            {
                 throw new ArgumentNullException("set");
             }
 
@@ -23,11 +25,9 @@ namespace System.Collections.Generic {
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-        public T[] Items {
-            get {
-                return set.ToArray();
-            }
+        public T[] Items
+        {
+            get { return set.ToArray(); }
         }
     }
-
 }

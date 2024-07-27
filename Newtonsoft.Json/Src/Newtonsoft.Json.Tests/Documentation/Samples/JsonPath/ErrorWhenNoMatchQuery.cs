@@ -23,6 +23,9 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.Text;
 using Newtonsoft.Json.Linq;
 #if DNXCORE50
 using Xunit;
@@ -31,14 +34,12 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System;
-using System.Collections.Generic;
+
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
 {
@@ -49,16 +50,18 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
         public void Example()
         {
             #region Usage
-            JArray items = JArray.Parse(@"[
+            JArray items = JArray.Parse(
+                @"[
               {
                 'Name': 'John Doe',
               },
               {
                 'Name': 'Jane Doe',
               }
-            ]");
+            ]"
+            );
 
-            // A true value for errorWhenNoMatch will result in an error if the queried value is missing 
+            // A true value for errorWhenNoMatch will result in an error if the queried value is missing
             string result;
             try
             {

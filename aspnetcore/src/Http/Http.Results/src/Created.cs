@@ -40,7 +40,10 @@ public sealed class Created : IResult, IEndpointMetadataProvider, IStatusCodeHtt
             }
             else
             {
-                Location = locationUri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+                Location = locationUri.GetComponents(
+                    UriComponents.SerializationInfoString,
+                    UriFormat.UriEscaped
+                );
             }
         }
     }
@@ -76,11 +79,16 @@ public sealed class Created : IResult, IEndpointMetadataProvider, IStatusCodeHtt
     }
 
     /// <inheritdoc/>
-    static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+    static void IEndpointMetadataProvider.PopulateMetadata(
+        MethodInfo method,
+        EndpointBuilder builder
+    )
     {
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder.Metadata.Add(new ProducesResponseTypeMetadata(StatusCodes.Status201Created, typeof(void)));
+        builder.Metadata.Add(
+            new ProducesResponseTypeMetadata(StatusCodes.Status201Created, typeof(void))
+        );
     }
 }

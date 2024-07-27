@@ -19,7 +19,7 @@ internal static partial class Interop
             /// <summary>
             /// Stat doesn't include the name.
             /// </summary>
-            STATFLAG_NONAME = 1
+            STATFLAG_NONAME = 1,
         }
     }
 }

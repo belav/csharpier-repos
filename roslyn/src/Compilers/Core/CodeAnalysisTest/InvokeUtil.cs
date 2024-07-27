@@ -15,12 +15,12 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Test.Utilities;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Roslyn.Test.Utilities;
 using Roslyn.Utilities;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
-using Microsoft.CodeAnalysis.VisualBasic;
 #if NETCOREAPP
 using Roslyn.Test.Utilities.CoreClr;
 using System.Runtime.Loader;
@@ -30,15 +30,21 @@ using Roslyn.Test.Utilities.Desktop;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {
-
 #if NETCOREAPP
 
     public sealed class InvokeUtil
     {
-        public void Exec(ITestOutputHelper testOutputHelper, AssemblyLoadContext compilerContext, AssemblyLoadTestFixture fixture, AnalyzerTestKind kind, string typeName, string methodName)
+        public void Exec(
+            ITestOutputHelper testOutputHelper,
+            AssemblyLoadContext compilerContext,
+            AssemblyLoadTestFixture fixture,
+            AnalyzerTestKind kind,
+            string typeName,
+            string methodName
+        )
         {
-            // Ensure that the test did not load any of the test fixture assemblies into 
-            // the default load context. That should never happen. Assemblies should either 
+            // Ensure that the test did not load any of the test fixture assemblies into
+            // the default load context. That should never happen. Assemblies should either
             // load into the compiler or directory load context.
             //
             // Not only is this bad behavior it also pollutes future test results.
@@ -48,10 +54,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var tempRoot = new TempRoot();
             AnalyzerAssemblyLoader loader = kind switch
             {
-                AnalyzerTestKind.LoadDirect => new DefaultAnalyzerAssemblyLoader(compilerContext, AnalyzerLoadOption.LoadFromDisk),
-                AnalyzerTestKind.LoadStream => new DefaultAnalyzerAssemblyLoader(compilerContext, AnalyzerLoadOption.LoadFromStream),
-                AnalyzerTestKind.ShadowLoad => new ShadowCopyAnalyzerAssemblyLoader(compilerContext, tempRoot.CreateDirectory().Path),
-                _ => throw ExceptionUtilities.Unreachable()
+                AnalyzerTestKind.LoadDirect
+                    => new DefaultAnalyzerAssemblyLoader(
+                        compilerContext,
+                        AnalyzerLoadOption.LoadFromDisk
+                    ),
+                AnalyzerTestKind.LoadStream
+                    => new DefaultAnalyzerAssemblyLoader(
+                        compilerContext,
+                        AnalyzerLoadOption.LoadFromStream
+                    ),
+                AnalyzerTestKind.ShadowLoad
+                    => new ShadowCopyAnalyzerAssemblyLoader(
+                        compilerContext,
+                        tempRoot.CreateDirectory().Path
+                    ),
+                _ => throw ExceptionUtilities.Unreachable(),
             };
 
             try
@@ -80,7 +98,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 testOutputHelper.WriteLine($"Loader path maps");
                 foreach (var pair in loader.GetPathMapSnapshot())
                 {
-                    testOutputHelper.WriteLine($"\t{pair.OriginalAssemblyPath} -> {pair.RealAssemblyPath}");
+                    testOutputHelper.WriteLine(
+                        $"\t{pair.OriginalAssemblyPath} -> {pair.RealAssemblyPath}"
+                    );
                 }
 
                 Assert.Equal(defaultContextCount, AssemblyLoadContext.Default.Assemblies.Count());
@@ -93,14 +113,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
     public sealed class InvokeUtil : MarshalByRefObject
     {
-        public void Exec(ITestOutputHelper testOutputHelper, AssemblyLoadTestFixture fixture, AnalyzerTestKind kind, string typeName, string methodName)
+        public void Exec(
+            ITestOutputHelper testOutputHelper,
+            AssemblyLoadTestFixture fixture,
+            AnalyzerTestKind kind,
+            string typeName,
+            string methodName
+        )
         {
             using var tempRoot = new TempRoot();
             AnalyzerAssemblyLoader loader = kind switch
             {
                 AnalyzerTestKind.LoadDirect => new DefaultAnalyzerAssemblyLoader(),
-                AnalyzerTestKind.ShadowLoad => new ShadowCopyAnalyzerAssemblyLoader(tempRoot.CreateDirectory().Path),
-                _ => throw ExceptionUtilities.Unreachable()
+                AnalyzerTestKind.ShadowLoad
+                    => new ShadowCopyAnalyzerAssemblyLoader(tempRoot.CreateDirectory().Path),
+                _ => throw ExceptionUtilities.Unreachable(),
             };
 
             try
@@ -117,7 +144,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 testOutputHelper.WriteLine($"Test fixture root: {fixture.TempDirectory}");
 
                 testOutputHelper.WriteLine($"Loaded Assemblies");
-                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().OrderByDescending(x => x.FullName))
+                foreach (
+                    var assembly in AppDomain
+                        .CurrentDomain.GetAssemblies()
+                        .OrderByDescending(x => x.FullName)
+                )
                 {
                     testOutputHelper.WriteLine($"\t{assembly.FullName} -> {assembly.Location}");
                 }
@@ -130,12 +161,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 testOutputHelper.WriteLine($"Loader path maps");
                 foreach (var pair in loader.GetPathMapSnapshot())
                 {
-                    testOutputHelper.WriteLine($"\t{pair.OriginalAssemblyPath} -> {pair.RealAssemblyPath}");
+                    testOutputHelper.WriteLine(
+                        $"\t{pair.OriginalAssemblyPath} -> {pair.RealAssemblyPath}"
+                    );
                 }
             }
         }
     }
 
 #endif
-
 }

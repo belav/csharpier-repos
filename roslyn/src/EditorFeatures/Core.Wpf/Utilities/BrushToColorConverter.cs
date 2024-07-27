@@ -15,12 +15,13 @@ namespace Microsoft.CodeAnalysis.Utilities
 {
     internal class BrushToColorConverter : ValueConverter<Brush, Color>
     {
-        protected override Color Convert(Brush brush, object parameter, CultureInfo culture)
-            => brush switch
+        protected override Color Convert(Brush brush, object parameter, CultureInfo culture) =>
+            brush switch
             {
                 SolidColorBrush solidColorBrush => solidColorBrush.Color,
-                GradientBrush gradientBrush => gradientBrush.GradientStops.FirstOrDefault()?.Color ?? Colors.Transparent,
-                _ => Colors.Transparent
+                GradientBrush gradientBrush
+                    => gradientBrush.GradientStops.FirstOrDefault()?.Color ?? Colors.Transparent,
+                _ => Colors.Transparent,
             };
     }
 }

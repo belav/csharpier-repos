@@ -13,7 +13,10 @@ internal static partial class Interop
             return RentDynamicBuffer(GetAsn1StringBytes, asn1);
         }
 
-        private static ArraySegment<byte> RentDynamicBuffer<THandle>(NegativeSizeReadMethod<THandle> method, THandle handle)
+        private static ArraySegment<byte> RentDynamicBuffer<THandle>(
+            NegativeSizeReadMethod<THandle> method,
+            THandle handle
+        )
         {
             int negativeSize = method(handle, null, 0);
 

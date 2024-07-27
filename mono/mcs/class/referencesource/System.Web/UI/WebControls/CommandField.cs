@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -17,520 +17,641 @@ namespace System.Web.UI.WebControls {
     /// <see langword='Update'/>, and <see langword='Cancel'/> commands to edit items
     ///    within the selected row.</para>
     /// </devdoc>
-    public class CommandField : ButtonFieldBase {
-
-
+    public class CommandField : ButtonFieldBase
+    {
         /// <devdoc>
         /// <para>Initializes a new instance of an <see cref='System.Web.UI.WebControls.CommandField'/> class.</para>
         /// </devdoc>
-        public CommandField() {
-        }
-
+        public CommandField() { }
 
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        WebSysDescription(SR.CommandField_CancelImageUrl),
-        UrlProperty()
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            Editor(
+                "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            WebSysDescription(SR.CommandField_CancelImageUrl),
+            UrlProperty()
         ]
-        public virtual string CancelImageUrl {
-            get {
+        public virtual string CancelImageUrl
+        {
+            get
+            {
                 object o = ViewState["CancelImageUrl"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return String.Empty;
             }
-            set {
-                if (!String.Equals(value, ViewState["CancelImageUrl"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["CancelImageUrl"]))
+                {
                     ViewState["CancelImageUrl"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         /// <devdoc>
         /// <para>Indicates the text to display for the <see langword='Cancel'/> command button
         ///    in the field.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        Localizable(true),
-        WebSysDefaultValue(SR.CommandField_DefaultCancelCaption),
-        WebSysDescription(SR.CommandField_CancelText)
+            WebCategory("Appearance"),
+            Localizable(true),
+            WebSysDefaultValue(SR.CommandField_DefaultCancelCaption),
+            WebSysDescription(SR.CommandField_CancelText)
         ]
-        public virtual string CancelText {
-            get {
+        public virtual string CancelText
+        {
+            get
+            {
                 object text = ViewState["CancelText"];
-                return text == null ? SR.GetString(SR.CommandField_DefaultCancelCaption) : (string)text;
+                return text == null
+                    ? SR.GetString(SR.CommandField_DefaultCancelCaption)
+                    : (string)text;
             }
-            set {
-                if (!String.Equals(value, ViewState["CancelText"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["CancelText"]))
+                {
                     ViewState["CancelText"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         [
-        WebCategory("Behavior"),
-        DefaultValue(true),
-        WebSysDescription(SR.ButtonFieldBase_CausesValidation)
+            WebCategory("Behavior"),
+            DefaultValue(true),
+            WebSysDescription(SR.ButtonFieldBase_CausesValidation)
         ]
-        public override bool CausesValidation {
-            get {
+        public override bool CausesValidation
+        {
+            get
+            {
                 object o = ViewState["CausesValidation"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (bool)o;
                 }
                 return true;
             }
-            set {
-                base.CausesValidation = value;
-            }
+            set { base.CausesValidation = value; }
         }
 
-
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        WebSysDescription(SR.CommandField_DeleteImageUrl),
-        UrlProperty()
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            Editor(
+                "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            WebSysDescription(SR.CommandField_DeleteImageUrl),
+            UrlProperty()
         ]
-        public virtual string DeleteImageUrl {
-            get {
+        public virtual string DeleteImageUrl
+        {
+            get
+            {
                 object o = ViewState["DeleteImageUrl"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return String.Empty;
             }
-            set {
-                if (!String.Equals(value, ViewState["DeleteImageUrl"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["DeleteImageUrl"]))
+                {
                     ViewState["DeleteImageUrl"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         /// <devdoc>
         /// <para>Indicates the text to display for the <see langword='Delete'/> command button in
         ///    the field.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        Localizable(true),
-        WebSysDefaultValue(SR.CommandField_DefaultDeleteCaption),
-        WebSysDescription(SR.CommandField_DeleteText)
+            WebCategory("Appearance"),
+            Localizable(true),
+            WebSysDefaultValue(SR.CommandField_DefaultDeleteCaption),
+            WebSysDescription(SR.CommandField_DeleteText)
         ]
-        public virtual string DeleteText {
-            get {
+        public virtual string DeleteText
+        {
+            get
+            {
                 object text = ViewState["DeleteText"];
-                return text == null ? SR.GetString(SR.CommandField_DefaultDeleteCaption) : (string)text;
+                return text == null
+                    ? SR.GetString(SR.CommandField_DefaultDeleteCaption)
+                    : (string)text;
             }
-            set {
-                if (!String.Equals(value, ViewState["DeleteText"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["DeleteText"]))
+                {
                     ViewState["DeleteText"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        WebSysDescription(SR.CommandField_EditImageUrl),
-        UrlProperty()
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            Editor(
+                "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            WebSysDescription(SR.CommandField_EditImageUrl),
+            UrlProperty()
         ]
-        public virtual string EditImageUrl {
-            get {
+        public virtual string EditImageUrl
+        {
+            get
+            {
                 object o = ViewState["EditImageUrl"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return String.Empty;
             }
-            set {
-                if (!String.Equals(value, ViewState["EditImageUrl"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["EditImageUrl"]))
+                {
                     ViewState["EditImageUrl"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         /// <devdoc>
         /// <para>Indicates the text to display for the <see langword='Edit'/> command button in
         ///    the field.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        Localizable(true),
-        WebSysDefaultValue(SR.CommandField_DefaultEditCaption),
-        WebSysDescription(SR.CommandField_EditText)
+            WebCategory("Appearance"),
+            Localizable(true),
+            WebSysDefaultValue(SR.CommandField_DefaultEditCaption),
+            WebSysDescription(SR.CommandField_EditText)
         ]
-        public virtual string EditText {
-            get {
+        public virtual string EditText
+        {
+            get
+            {
                 object text = ViewState["EditText"];
-                return text == null ? SR.GetString(SR.CommandField_DefaultEditCaption) : (string)text;
+                return text == null
+                    ? SR.GetString(SR.CommandField_DefaultEditCaption)
+                    : (string)text;
             }
-            set {
-                if (!String.Equals(value, ViewState["EditText"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["EditText"]))
+                {
                     ViewState["EditText"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        WebSysDescription(SR.CommandField_InsertImageUrl),
-        UrlProperty()
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            Editor(
+                "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            WebSysDescription(SR.CommandField_InsertImageUrl),
+            UrlProperty()
         ]
-        public virtual string InsertImageUrl {
-            get {
+        public virtual string InsertImageUrl
+        {
+            get
+            {
                 object o = ViewState["InsertImageUrl"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return String.Empty;
             }
-            set {
-                if (!String.Equals(value, ViewState["InsertImageUrl"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["InsertImageUrl"]))
+                {
                     ViewState["InsertImageUrl"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         /// <devdoc>
         /// <para>Indicates the text to display for the <see langword='Insert'/> command button
         ///    in the field.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        Localizable(true),
-        WebSysDefaultValue(SR.CommandField_DefaultInsertCaption),
-        WebSysDescription(SR.CommandField_InsertText)
+            WebCategory("Appearance"),
+            Localizable(true),
+            WebSysDefaultValue(SR.CommandField_DefaultInsertCaption),
+            WebSysDescription(SR.CommandField_InsertText)
         ]
-        public virtual string InsertText {
-            get {
+        public virtual string InsertText
+        {
+            get
+            {
                 object text = ViewState["InsertText"];
-                return text == null ? SR.GetString(SR.CommandField_DefaultInsertCaption) : (string)text;
+                return text == null
+                    ? SR.GetString(SR.CommandField_DefaultInsertCaption)
+                    : (string)text;
             }
-            set {
-                if (!String.Equals(value, ViewState["InsertText"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["InsertText"]))
+                {
                     ViewState["InsertText"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        WebSysDescription(SR.CommandField_NewImageUrl),
-        UrlProperty()
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            Editor(
+                "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            WebSysDescription(SR.CommandField_NewImageUrl),
+            UrlProperty()
         ]
-        public virtual string NewImageUrl {
-            get {
+        public virtual string NewImageUrl
+        {
+            get
+            {
                 object o = ViewState["NewImageUrl"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return String.Empty;
             }
-            set {
-                if (!String.Equals(value, ViewState["NewImageUrl"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["NewImageUrl"]))
+                {
                     ViewState["NewImageUrl"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         /// <devdoc>
         /// <para>Indicates the text to display for the <see langword='New'/> command button
         ///    in the field.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        Localizable(true),
-        WebSysDefaultValue(SR.CommandField_DefaultNewCaption),
-        WebSysDescription(SR.CommandField_NewText)
+            WebCategory("Appearance"),
+            Localizable(true),
+            WebSysDefaultValue(SR.CommandField_DefaultNewCaption),
+            WebSysDescription(SR.CommandField_NewText)
         ]
-        public virtual string NewText {
-            get {
+        public virtual string NewText
+        {
+            get
+            {
                 object text = ViewState["NewText"];
-                return text == null ? SR.GetString(SR.CommandField_DefaultNewCaption) : (string)text;
+                return text == null
+                    ? SR.GetString(SR.CommandField_DefaultNewCaption)
+                    : (string)text;
             }
-            set {
-                if (!String.Equals(value, ViewState["NewText"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["NewText"]))
+                {
                     ViewState["NewText"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        WebSysDescription(SR.CommandField_SelectImageUrl),
-        UrlProperty()
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            Editor(
+                "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            WebSysDescription(SR.CommandField_SelectImageUrl),
+            UrlProperty()
         ]
-        public virtual string SelectImageUrl {
-            get {
+        public virtual string SelectImageUrl
+        {
+            get
+            {
                 object o = ViewState["SelectImageUrl"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return String.Empty;
             }
-            set {
-                if (!String.Equals(value, ViewState["SelectImageUrl"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["SelectImageUrl"]))
+                {
                     ViewState["SelectImageUrl"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         /// <devdoc>
         /// <para>Indicates the text to display for the <see langword='Select'/> command button
         ///    in the field.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        Localizable(true),
-        WebSysDefaultValue(SR.CommandField_DefaultSelectCaption),
-        WebSysDescription(SR.CommandField_SelectText)
+            WebCategory("Appearance"),
+            Localizable(true),
+            WebSysDefaultValue(SR.CommandField_DefaultSelectCaption),
+            WebSysDescription(SR.CommandField_SelectText)
         ]
-        public virtual string SelectText {
-            get {
+        public virtual string SelectText
+        {
+            get
+            {
                 object text = ViewState["SelectText"];
-                return text == null ? SR.GetString(SR.CommandField_DefaultSelectCaption) : (string)text;
+                return text == null
+                    ? SR.GetString(SR.CommandField_DefaultSelectCaption)
+                    : (string)text;
             }
-            set {
-                if (!String.Equals(value, ViewState["SelectText"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["SelectText"]))
+                {
                     ViewState["SelectText"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         [
-        WebCategory("Behavior"),
-        DefaultValue(true),
-        WebSysDescription(SR.CommandField_ShowCancelButton)
+            WebCategory("Behavior"),
+            DefaultValue(true),
+            WebSysDescription(SR.CommandField_ShowCancelButton)
         ]
-        public virtual bool ShowCancelButton {
-            get {
+        public virtual bool ShowCancelButton
+        {
+            get
+            {
                 object o = ViewState["ShowCancelButton"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (bool)o;
                 }
                 return true;
             }
-            set {
+            set
+            {
                 object oldValue = ViewState["ShowCancelButton"];
-                if (oldValue == null || (bool)oldValue != value) {
+                if (oldValue == null || (bool)oldValue != value)
+                {
                     ViewState["ShowCancelButton"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         [
-        WebCategory("Behavior"),
-        DefaultValue(false),
-        WebSysDescription(SR.CommandField_ShowDeleteButton)
+            WebCategory("Behavior"),
+            DefaultValue(false),
+            WebSysDescription(SR.CommandField_ShowDeleteButton)
         ]
-        public virtual bool ShowDeleteButton {
-            get {
+        public virtual bool ShowDeleteButton
+        {
+            get
+            {
                 object o = ViewState["ShowDeleteButton"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (bool)o;
                 }
                 return false;
             }
-            set {
+            set
+            {
                 object oldValue = ViewState["ShowDeleteButton"];
-                if (oldValue == null || (bool)oldValue != value) {
+                if (oldValue == null || (bool)oldValue != value)
+                {
                     ViewState["ShowDeleteButton"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         [
-        WebCategory("Behavior"),
-        DefaultValue(false),
-        WebSysDescription(SR.CommandField_ShowEditButton)
+            WebCategory("Behavior"),
+            DefaultValue(false),
+            WebSysDescription(SR.CommandField_ShowEditButton)
         ]
-        public virtual bool ShowEditButton {
-            get {
+        public virtual bool ShowEditButton
+        {
+            get
+            {
                 object o = ViewState["ShowEditButton"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (bool)o;
                 }
                 return false;
             }
-            set {
+            set
+            {
                 object oldValue = ViewState["ShowEditButton"];
-                if (oldValue == null || (bool)oldValue != value) {
+                if (oldValue == null || (bool)oldValue != value)
+                {
                     ViewState["ShowEditButton"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         [
-        WebCategory("Behavior"),
-        DefaultValue(false),
-        WebSysDescription(SR.CommandField_ShowSelectButton)
+            WebCategory("Behavior"),
+            DefaultValue(false),
+            WebSysDescription(SR.CommandField_ShowSelectButton)
         ]
-        public virtual bool ShowSelectButton {
-            get {
+        public virtual bool ShowSelectButton
+        {
+            get
+            {
                 object o = ViewState["ShowSelectButton"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (bool)o;
                 }
                 return false;
             }
-            set {
+            set
+            {
                 object oldValue = ViewState["ShowSelectButton"];
-                if (oldValue == null || (bool)oldValue != value) {
+                if (oldValue == null || (bool)oldValue != value)
+                {
                     ViewState["ShowSelectButton"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         [
-        WebCategory("Behavior"),
-        DefaultValue(false),
-        WebSysDescription(SR.CommandField_ShowInsertButton)
+            WebCategory("Behavior"),
+            DefaultValue(false),
+            WebSysDescription(SR.CommandField_ShowInsertButton)
         ]
-        public virtual bool ShowInsertButton {
-            get {
+        public virtual bool ShowInsertButton
+        {
+            get
+            {
                 object o = ViewState["ShowInsertButton"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (bool)o;
                 }
                 return false;
             }
-            set {
+            set
+            {
                 object oldValue = ViewState["ShowInsertButton"];
-                if (oldValue == null || (bool)oldValue != value) {
+                if (oldValue == null || (bool)oldValue != value)
+                {
                     ViewState["ShowInsertButton"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        WebSysDescription(SR.CommandField_UpdateImageUrl),
-        UrlProperty()
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            Editor(
+                "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            WebSysDescription(SR.CommandField_UpdateImageUrl),
+            UrlProperty()
         ]
-        public virtual string UpdateImageUrl {
-            get {
+        public virtual string UpdateImageUrl
+        {
+            get
+            {
                 object o = ViewState["UpdateImageUrl"];
-                if (o != null) {
+                if (o != null)
+                {
                     return (string)o;
                 }
                 return String.Empty;
             }
-            set {
-                if (!String.Equals(value, ViewState["UpdateImageUrl"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["UpdateImageUrl"]))
+                {
                     ViewState["UpdateImageUrl"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-
         /// <devdoc>
         /// <para>Indicates the text to display for the <see langword='Update'/> command button
         ///    in the field.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        Localizable(true),
-        WebSysDefaultValue(SR.CommandField_DefaultUpdateCaption),
-        WebSysDescription(SR.CommandField_UpdateText)
+            WebCategory("Appearance"),
+            Localizable(true),
+            WebSysDefaultValue(SR.CommandField_DefaultUpdateCaption),
+            WebSysDescription(SR.CommandField_UpdateText)
         ]
-        public virtual string UpdateText {
-            get {
+        public virtual string UpdateText
+        {
+            get
+            {
                 object text = ViewState["UpdateText"];
-                return text == null ? SR.GetString(SR.CommandField_DefaultUpdateCaption) : (string)text;
+                return text == null
+                    ? SR.GetString(SR.CommandField_DefaultUpdateCaption)
+                    : (string)text;
             }
-            set {
-                if (!String.Equals(value, ViewState["UpdateText"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["UpdateText"]))
+                {
                     ViewState["UpdateText"] = value;
                     OnFieldChanged();
                 }
             }
         }
 
-        private void AddButtonToCell(DataControlFieldCell cell,  string commandName, string buttonText, bool causesValidation, string validationGroup, int rowIndex, string imageUrl) {
+        private void AddButtonToCell(
+            DataControlFieldCell cell,
+            string commandName,
+            string buttonText,
+            bool causesValidation,
+            string validationGroup,
+            int rowIndex,
+            string imageUrl
+        )
+        {
             IButtonControl button;
             IPostBackContainer container = Control as IPostBackContainer;
-            bool setCausesValidation = true;    // the setter on the DataControlButtons throw if there's a container for security
+            bool setCausesValidation = true; // the setter on the DataControlButtons throw if there's a container for security
 
-            switch (ButtonType) {
-                case ButtonType.Link: {
-                    if (container != null && !causesValidation) {
+            switch (ButtonType)
+            {
+                case ButtonType.Link:
+                {
+                    if (container != null && !causesValidation)
+                    {
                         button = new DataControlLinkButton(container);
                         setCausesValidation = false;
                     }
-                    else {
+                    else
+                    {
                         button = new DataControlLinkButton(null);
                     }
 
                     break;
                 }
-                case ButtonType.Button: {
-                    if (container != null && !causesValidation) {
+                case ButtonType.Button:
+                {
+                    if (container != null && !causesValidation)
+                    {
                         button = new DataControlButton(container);
                         setCausesValidation = false;
                     }
-                    else {
+                    else
+                    {
                         button = new Button();
                     }
 
                     break;
                 }
                 case ButtonType.Image:
-                default: {
-                    if (container != null && !causesValidation) {
+                default:
+                {
+                    if (container != null && !causesValidation)
+                    {
                         button = new DataControlImageButton(container);
                         setCausesValidation = false;
                     }
-                    else {
+                    else
+                    {
                         button = new ImageButton();
                     }
 
@@ -538,20 +659,21 @@ namespace System.Web.UI.WebControls {
                     break;
                 }
             }
-            
+
             button.Text = buttonText;
             button.CommandName = commandName;
             button.CommandArgument = rowIndex.ToString(CultureInfo.InvariantCulture);
-            if (setCausesValidation) {
+            if (setCausesValidation)
+            {
                 button.CausesValidation = causesValidation;
             }
             button.ValidationGroup = validationGroup;
 
             cell.Controls.Add((WebControl)button);
-
         }
 
-        protected override void CopyProperties(DataControlField newField) {
+        protected override void CopyProperties(DataControlField newField)
+        {
             ((CommandField)newField).CancelImageUrl = CancelImageUrl;
             ((CommandField)newField).CancelText = CancelText;
             ((CommandField)newField).DeleteImageUrl = DeleteImageUrl;
@@ -574,15 +696,21 @@ namespace System.Web.UI.WebControls {
             base.CopyProperties(newField);
         }
 
-        protected override DataControlField CreateField() {
+        protected override DataControlField CreateField()
+        {
             return new CommandField();
         }
-
 
         /// <devdoc>
         ///    <para>Initializes a cell within the field.</para>
         /// </devdoc>
-        public override void InitializeCell(DataControlFieldCell cell, DataControlCellType cellType, DataControlRowState rowState, int rowIndex) {
+        public override void InitializeCell(
+            DataControlFieldCell cell,
+            DataControlCellType cellType,
+            DataControlRowState rowState,
+            int rowIndex
+        )
+        {
             base.InitializeCell(cell, cellType, rowState, rowIndex);
             bool showEditButton = ShowEditButton;
             bool showDeleteButton = ShowDeleteButton;
@@ -594,53 +722,130 @@ namespace System.Web.UI.WebControls {
             string validationGroup = ValidationGroup;
             LiteralControl spaceControl;
 
-            if (cellType == DataControlCellType.DataCell) {
-                if ((rowState & (DataControlRowState.Edit | DataControlRowState.Insert)) != 0) {
-                    if ((rowState & DataControlRowState.Edit) != 0 && showEditButton) {
-                        AddButtonToCell(cell,  DataControlCommands.UpdateCommandName, UpdateText, causesValidation, validationGroup, rowIndex, UpdateImageUrl);
-                        if (showCancelButton) {
+            if (cellType == DataControlCellType.DataCell)
+            {
+                if ((rowState & (DataControlRowState.Edit | DataControlRowState.Insert)) != 0)
+                {
+                    if ((rowState & DataControlRowState.Edit) != 0 && showEditButton)
+                    {
+                        AddButtonToCell(
+                            cell,
+                            DataControlCommands.UpdateCommandName,
+                            UpdateText,
+                            causesValidation,
+                            validationGroup,
+                            rowIndex,
+                            UpdateImageUrl
+                        );
+                        if (showCancelButton)
+                        {
                             spaceControl = new LiteralControl("&nbsp;");
                             cell.Controls.Add(spaceControl);
-                            AddButtonToCell(cell,  DataControlCommands.CancelCommandName, CancelText, false, String.Empty, rowIndex, CancelImageUrl);
+                            AddButtonToCell(
+                                cell,
+                                DataControlCommands.CancelCommandName,
+                                CancelText,
+                                false,
+                                String.Empty,
+                                rowIndex,
+                                CancelImageUrl
+                            );
                         }
-
                     }
-                    if ((rowState & DataControlRowState.Insert) != 0 && showInsertButton) {
-                        AddButtonToCell(cell,  DataControlCommands.InsertCommandName, InsertText, causesValidation, validationGroup, rowIndex, InsertImageUrl);
-                        if (showCancelButton) {
+                    if ((rowState & DataControlRowState.Insert) != 0 && showInsertButton)
+                    {
+                        AddButtonToCell(
+                            cell,
+                            DataControlCommands.InsertCommandName,
+                            InsertText,
+                            causesValidation,
+                            validationGroup,
+                            rowIndex,
+                            InsertImageUrl
+                        );
+                        if (showCancelButton)
+                        {
                             spaceControl = new LiteralControl("&nbsp;");
                             cell.Controls.Add(spaceControl);
-                            AddButtonToCell(cell,  DataControlCommands.CancelCommandName, CancelText, false, String.Empty, rowIndex, CancelImageUrl);
+                            AddButtonToCell(
+                                cell,
+                                DataControlCommands.CancelCommandName,
+                                CancelText,
+                                false,
+                                String.Empty,
+                                rowIndex,
+                                CancelImageUrl
+                            );
                         }
                     }
                 }
-                else {
-                    if (showEditButton) {
-                        AddButtonToCell(cell,  DataControlCommands.EditCommandName, EditText, false, String.Empty, rowIndex, EditImageUrl);
+                else
+                {
+                    if (showEditButton)
+                    {
+                        AddButtonToCell(
+                            cell,
+                            DataControlCommands.EditCommandName,
+                            EditText,
+                            false,
+                            String.Empty,
+                            rowIndex,
+                            EditImageUrl
+                        );
                         isFirstButton = false;
                     }
-                    if (showDeleteButton) {
-                        if (isFirstButton == false) {
+                    if (showDeleteButton)
+                    {
+                        if (isFirstButton == false)
+                        {
                             spaceControl = new LiteralControl("&nbsp;");
                             cell.Controls.Add(spaceControl);
                         }
-                        AddButtonToCell(cell,  DataControlCommands.DeleteCommandName, DeleteText, false, String.Empty, rowIndex, DeleteImageUrl);
+                        AddButtonToCell(
+                            cell,
+                            DataControlCommands.DeleteCommandName,
+                            DeleteText,
+                            false,
+                            String.Empty,
+                            rowIndex,
+                            DeleteImageUrl
+                        );
                         isFirstButton = false;
                     }
-                    if (showInsertButton) {
-                        if (isFirstButton == false) {
+                    if (showInsertButton)
+                    {
+                        if (isFirstButton == false)
+                        {
                             spaceControl = new LiteralControl("&nbsp;");
                             cell.Controls.Add(spaceControl);
                         }
-                        AddButtonToCell(cell,  DataControlCommands.NewCommandName, NewText, false, String.Empty, rowIndex, NewImageUrl);
+                        AddButtonToCell(
+                            cell,
+                            DataControlCommands.NewCommandName,
+                            NewText,
+                            false,
+                            String.Empty,
+                            rowIndex,
+                            NewImageUrl
+                        );
                         isFirstButton = false;
                     }
-                    if (showSelectButton) {
-                        if (isFirstButton == false) {
+                    if (showSelectButton)
+                    {
+                        if (isFirstButton == false)
+                        {
                             spaceControl = new LiteralControl("&nbsp;");
                             cell.Controls.Add(spaceControl);
                         }
-                        AddButtonToCell(cell,  DataControlCommands.SelectCommandName, SelectText, false, String.Empty, rowIndex, SelectImageUrl);
+                        AddButtonToCell(
+                            cell,
+                            DataControlCommands.SelectCommandName,
+                            SelectText,
+                            false,
+                            String.Empty,
+                            rowIndex,
+                            SelectImageUrl
+                        );
                         isFirstButton = false;
                     }
                 }
@@ -651,11 +856,14 @@ namespace System.Web.UI.WebControls {
         /// <para>Override with an empty body if the field's controls all support callback.
         ///  Otherwise, override and throw a useful error message about why the field can't support callbacks.</para>
         /// </devdoc>
-        public override void ValidateSupportsCallback() {
-            if (ShowSelectButton) {
-                throw new NotSupportedException(SR.GetString(SR.CommandField_CallbacksNotSupported, Control.ID));
+        public override void ValidateSupportsCallback()
+        {
+            if (ShowSelectButton)
+            {
+                throw new NotSupportedException(
+                    SR.GetString(SR.CommandField_CallbacksNotSupported, Control.ID)
+                );
             }
         }
     }
 }
-

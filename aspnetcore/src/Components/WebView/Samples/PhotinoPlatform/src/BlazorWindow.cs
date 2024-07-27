@@ -28,7 +28,8 @@ public class BlazorWindow
         string hostPage,
         IServiceProvider services,
         Action<PhotinoWindow>? configureWindow = null,
-        string? pathBase = null)
+        string? pathBase = null
+    )
     {
         PhotinoWindow = new PhotinoWindow
         {
@@ -38,7 +39,10 @@ public class BlazorWindow
             Left = 300,
             Top = 300,
         };
-        PhotinoWindow.RegisterCustomSchemeHandler(PhotinoWebViewManager.BlazorAppScheme, HandleWebRequest);
+        PhotinoWindow.RegisterCustomSchemeHandler(
+            PhotinoWebViewManager.BlazorAppScheme,
+            HandleWebRequest
+        );
 
         configureWindow?.Invoke(PhotinoWindow);
 
@@ -58,7 +62,15 @@ public class BlazorWindow
         }
         var appBaseUri = new Uri(new Uri(PhotinoWebViewManager.AppBaseOrigin), _pathBase);
 
-        _manager = new PhotinoWebViewManager(PhotinoWindow, services, dispatcher, appBaseUri, fileProvider, jsComponents, hostPageRelativePath);
+        _manager = new PhotinoWebViewManager(
+            PhotinoWindow,
+            services,
+            dispatcher,
+            appBaseUri,
+            fileProvider,
+            jsComponents,
+            hostPageRelativePath
+        );
         RootComponents = new BlazorWindowRootComponents(_manager, jsComponents);
     }
 
@@ -84,6 +96,10 @@ public class BlazorWindow
         PhotinoWindow.WaitForClose();
     }
 
-    private Stream HandleWebRequest(object sender, string scheme, string url, out string contentType)
-        => _manager.HandleWebRequest(url, out contentType!)!;
+    private Stream HandleWebRequest(
+        object sender,
+        string scheme,
+        string url,
+        out string contentType
+    ) => _manager.HandleWebRequest(url, out contentType!)!;
 }

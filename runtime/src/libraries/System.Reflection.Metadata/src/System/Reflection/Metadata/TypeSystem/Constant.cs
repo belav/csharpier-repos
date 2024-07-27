@@ -23,10 +23,7 @@ namespace System.Reflection.Metadata
 
         private ConstantHandle Handle
         {
-            get
-            {
-                return ConstantHandle.FromRowId(_rowId);
-            }
+            get { return ConstantHandle.FromRowId(_rowId); }
         }
 
         /// <summary>
@@ -37,10 +34,7 @@ namespace System.Reflection.Metadata
         /// </remarks>
         public ConstantTypeCode TypeCode
         {
-            get
-            {
-                return _reader.ConstantTable.GetType(Handle);
-            }
+            get { return _reader.ConstantTable.GetType(Handle); }
         }
 
         /// <summary>
@@ -51,10 +45,7 @@ namespace System.Reflection.Metadata
         /// </remarks>
         public BlobHandle Value
         {
-            get
-            {
-                return _reader.ConstantTable.GetValue(Handle);
-            }
+            get { return _reader.ConstantTable.GetValue(Handle); }
         }
 
         /// <summary>
@@ -65,10 +56,7 @@ namespace System.Reflection.Metadata
         /// </remarks>
         public EntityHandle Parent
         {
-            get
-            {
-                return _reader.ConstantTable.GetParent(Handle);
-            }
+            get { return _reader.ConstantTable.GetParent(Handle); }
         }
     }
 }

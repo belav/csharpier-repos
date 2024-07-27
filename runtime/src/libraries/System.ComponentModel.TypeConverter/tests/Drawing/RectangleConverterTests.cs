@@ -18,23 +18,32 @@ namespace System.ComponentModel.TypeConverterTests
         protected override bool CreateInstanceSupported { get; } = true;
         protected override bool IsGetPropertiesSupported { get; } = true;
 
-        protected override IEnumerable<Tuple<Rectangle, Dictionary<string, object>>> CreateInstancePairs {
+        protected override IEnumerable<
+            Tuple<Rectangle, Dictionary<string, object>>
+        > CreateInstancePairs
+        {
             get
             {
-                yield return Tuple.Create(new Rectangle(10, 10, 20, 30), new Dictionary<string, object>
-                {
-                    ["X"] = 10,
-                    ["Y"] = 10,
-                    ["Width"] = 20,
-                    ["Height"] = 30,
-                });
-                yield return Tuple.Create(new Rectangle(-10, -10, 20, 30), new Dictionary<string, object>
-                {
-                    ["X"] = -10,
-                    ["Y"] = -10,
-                    ["Width"] = 20,
-                    ["Height"] = 30,
-                });
+                yield return Tuple.Create(
+                    new Rectangle(10, 10, 20, 30),
+                    new Dictionary<string, object>
+                    {
+                        ["X"] = 10,
+                        ["Y"] = 10,
+                        ["Width"] = 20,
+                        ["Height"] = 30,
+                    }
+                );
+                yield return Tuple.Create(
+                    new Rectangle(-10, -10, 20, 30),
+                    new Dictionary<string, object>
+                    {
+                        ["X"] = -10,
+                        ["Y"] = -10,
+                        ["Width"] = 20,
+                        ["Height"] = 30,
+                    }
+                );
             }
         }
 
@@ -85,22 +94,25 @@ namespace System.ComponentModel.TypeConverterTests
         public static IEnumerable<object[]> RectangleData =>
             new[]
             {
-                new object[] {0, 0, 0, 0},
-                new object[] {1, 1, 1, 1},
-                new object[] {-1, 1, 1, 1},
-                new object[] {1, -1, 1, 1},
-                new object[] {-1, -1, 1, 1},
-                new object[] {int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue},
-                new object[] {int.MinValue, int.MaxValue, int.MaxValue, int.MaxValue},
-                new object[] {int.MaxValue, int.MinValue, int.MaxValue, int.MaxValue},
-                new object[] {int.MinValue, int.MinValue, int.MaxValue, int.MaxValue},
+                new object[] { 0, 0, 0, 0 },
+                new object[] { 1, 1, 1, 1 },
+                new object[] { -1, 1, 1, 1 },
+                new object[] { 1, -1, 1, 1 },
+                new object[] { -1, -1, 1, 1 },
+                new object[] { int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue },
+                new object[] { int.MinValue, int.MaxValue, int.MaxValue, int.MaxValue },
+                new object[] { int.MaxValue, int.MinValue, int.MaxValue, int.MaxValue },
+                new object[] { int.MinValue, int.MinValue, int.MaxValue, int.MaxValue },
             };
 
         [Theory]
         [MemberData(nameof(RectangleData))]
         public void ConvertFrom(int x, int y, int width, int height)
         {
-            TestConvertFromString(new Rectangle(x, y, width, height), $"{x}, {y}, {width}, {height}");
+            TestConvertFromString(
+                new Rectangle(x, y, width, height),
+                $"{x}, {y}, {width}, {height}"
+            );
         }
 
         [Theory]
@@ -120,12 +132,12 @@ namespace System.ComponentModel.TypeConverterTests
         public static IEnumerable<object[]> ConvertFrom_NotSupportedData =>
             new[]
             {
-                new object[] {new Point(10, 10)},
-                new object[] {new PointF(10, 10)},
-                new object[] {new Size(10, 10)},
-                new object[] {new SizeF(10, 10)},
-                new object[] {new object()},
-                new object[] {1001},
+                new object[] { new Point(10, 10) },
+                new object[] { new PointF(10, 10) },
+                new object[] { new Size(10, 10) },
+                new object[] { new SizeF(10, 10) },
+                new object[] { new object() },
+                new object[] { 1001 },
             };
 
         [Theory]
@@ -157,16 +169,22 @@ namespace System.ComponentModel.TypeConverterTests
         [Fact]
         public void CreateInstance_CaseSensitive()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                Converter.CreateInstance(null, new Dictionary<string, object>
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
                 {
-                    ["x"] = -10,
-                    ["Y"] = -10,
-                    ["Width"] = 20,
-                    ["Height"] = 30,
-                });
-            });
+                    Converter.CreateInstance(
+                        null,
+                        new Dictionary<string, object>
+                        {
+                            ["x"] = -10,
+                            ["Y"] = -10,
+                            ["Width"] = 20,
+                            ["Height"] = 30,
+                        }
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -206,7 +224,11 @@ namespace System.ComponentModel.TypeConverterTests
             Assert.Equal(rect.IsEmpty, propsColl["IsEmpty"].GetValue(rect));
 
             // Pick an attribute that cannot be applied to properties to make sure everything gets filtered
-            propsColl = Converter.GetProperties(null, new Rectangle(10, 10, 20, 30), new Attribute[] { new System.Reflection.AssemblyCopyrightAttribute("")});
+            propsColl = Converter.GetProperties(
+                null,
+                new Rectangle(10, 10, 20, 30),
+                new Attribute[] { new System.Reflection.AssemblyCopyrightAttribute("") }
+            );
             Assert.Equal(0, propsColl.Count);
         }
 
@@ -214,7 +236,8 @@ namespace System.ComponentModel.TypeConverterTests
         [MemberData(nameof(RectangleData))]
         public void ConvertFromInvariantString(int x, int y, int width, int height)
         {
-            var rect = (Rectangle)Converter.ConvertFromInvariantString($"{x}, {y}, {width}, {height}");
+            var rect = (Rectangle)
+                Converter.ConvertFromInvariantString($"{x}, {y}, {width}, {height}");
             Assert.Equal(x, rect.X);
             Assert.Equal(y, rect.Y);
             Assert.Equal(width, rect.Width);
@@ -237,9 +260,17 @@ namespace System.ComponentModel.TypeConverterTests
         [MemberData(nameof(RectangleData))]
         public void ConvertFromString(int x, int y, int width, int height)
         {
-            var rect =
-                (Rectangle)Converter.ConvertFromString(string.Format("{0}{4} {1}{4} {2}{4} {3}", x, y, width, height,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator));
+            var rect = (Rectangle)
+                Converter.ConvertFromString(
+                    string.Format(
+                        "{0}{4} {1}{4} {2}{4} {3}",
+                        x,
+                        y,
+                        width,
+                        height,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    )
+                );
             Assert.Equal(x, rect.X);
             Assert.Equal(y, rect.Y);
             Assert.Equal(width, rect.Width);
@@ -249,8 +280,12 @@ namespace System.ComponentModel.TypeConverterTests
         [Fact]
         public void ConvertFromString_ArgumentException()
         {
-            ConvertFromStringThrowsArgumentException(string.Format("1{0} 1{0} 1{0} 1{0} 1",
-                CultureInfo.CurrentCulture.TextInfo.ListSeparator));
+            ConvertFromStringThrowsArgumentException(
+                string.Format(
+                    "1{0} 1{0} 1{0} 1{0} 1",
+                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                )
+            );
         }
 
         [Fact]
@@ -273,8 +308,16 @@ namespace System.ComponentModel.TypeConverterTests
         {
             var str = Converter.ConvertToString(new Rectangle(x, y, width, height));
             Assert.Equal(
-                string.Format("{0}{4} {1}{4} {2}{4} {3}", x, y, width, height,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator), str);
+                string.Format(
+                    "{0}{4} {1}{4} {2}{4} {3}",
+                    x,
+                    y,
+                    width,
+                    height,
+                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                ),
+                str
+            );
         }
     }
 }

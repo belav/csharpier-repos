@@ -14,19 +14,13 @@ namespace System.Activities.Core.Presentation
         private bool isExpanded = false;
         private bool isPinned = false;
 
-        public ExpandableItemWrapper()
-        {
-        }
+        public ExpandableItemWrapper() { }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsExpanded
         {
-            get
-            {
-                return this.isExpanded;
-            }
-
+            get { return this.isExpanded; }
             set
             {
                 this.isExpanded = value;
@@ -36,11 +30,7 @@ namespace System.Activities.Core.Presentation
 
         public bool IsPinned
         {
-            get
-            {
-                return this.isPinned;
-            }
-
+            get { return this.isPinned; }
             set
             {
                 this.isPinned = value;
@@ -48,11 +38,7 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        public ModelItem Item
-        {
-            get;
-            set;
-        }
+        public ModelItem Item { get; set; }
 
         internal void SetPinState(bool isPinned)
         {

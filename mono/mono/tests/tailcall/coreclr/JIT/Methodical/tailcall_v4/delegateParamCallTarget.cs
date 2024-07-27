@@ -13,7 +13,7 @@
  *
  * Actual output:
  * Accomplice
- * Failed 
+ * Failed
  */
 
 using System;

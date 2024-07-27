@@ -11,12 +11,22 @@ namespace System.Collections.Frozen
     {
         /// <summary>The maximum number of items allowed per bucket.  The larger the value, the longer it can take to search a bucket, which is sequentially examined.</summary>
         internal const int MaxPerLength = 5;
+
         /// <summary>Allowed ratio between buckets with values and total buckets.  Under this ratio, this implementation won't be used due to too much wasted space.</summary>
         private const double EmptyLengthsRatio = 0.2;
 
-        internal static int[]? CreateLengthBucketsArrayIfAppropriate(string[] keys, IEqualityComparer<string> comparer, int minLength, int maxLength)
+        internal static int[]? CreateLengthBucketsArrayIfAppropriate(
+            string[] keys,
+            IEqualityComparer<string> comparer,
+            int minLength,
+            int maxLength
+        )
         {
-            Debug.Assert(comparer == EqualityComparer<string>.Default || comparer == StringComparer.Ordinal || comparer == StringComparer.OrdinalIgnoreCase);
+            Debug.Assert(
+                comparer == EqualityComparer<string>.Default
+                    || comparer == StringComparer.Ordinal
+                    || comparer == StringComparer.OrdinalIgnoreCase
+            );
             Debug.Assert(minLength >= 0 && maxLength >= minLength);
 
             // If without even looking at the keys we know that some bucket will exceed the max per-bucket

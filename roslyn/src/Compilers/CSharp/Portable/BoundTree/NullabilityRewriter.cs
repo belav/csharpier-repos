@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return VisitBinaryOperatorBase(node);
         }
 
-        public override BoundNode? VisitUserDefinedConditionalLogicalOperator(BoundUserDefinedConditionalLogicalOperator node)
+        public override BoundNode? VisitUserDefinedConditionalLogicalOperator(
+            BoundUserDefinedConditionalLogicalOperator node
+        )
         {
             return VisitBinaryOperatorBase(node);
         }
@@ -38,8 +40,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 stack.Push(currentBinary);
                 currentBinary = currentBinary.Left as BoundBinaryOperatorBase;
-            }
-            while (currentBinary is not null);
+            } while (currentBinary is not null);
 
             Debug.Assert(stack.Count > 0);
             var leftChild = (BoundExpression)Visit(stack.Peek().Left);
@@ -48,21 +49,38 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 currentBinary = stack.Pop();
 
-                bool foundInfo = _updatedNullabilities.TryGetValue(currentBinary, out (NullabilityInfo Info, TypeSymbol? Type) infoAndType);
+                bool foundInfo = _updatedNullabilities.TryGetValue(
+                    currentBinary,
+                    out (NullabilityInfo Info, TypeSymbol? Type) infoAndType
+                );
                 var right = (BoundExpression)Visit(currentBinary.Right);
                 var type = foundInfo ? infoAndType.Type : currentBinary.Type;
 
                 currentBinary = currentBinary switch
                 {
-                    BoundBinaryOperator binary => binary.Update(
-                        binary.OperatorKind,
-                        binary.Data?.WithUpdatedMethod(GetUpdatedSymbol(binary, binary.Method)),
-                        binary.ResultKind,
-                        leftChild,
-                        right,
-                        type!),
+                    BoundBinaryOperator binary
+                        => binary.Update(
+                            binary.OperatorKind,
+                            binary.Data?.WithUpdatedMethod(GetUpdatedSymbol(binary, binary.Method)),
+                            binary.ResultKind,
+                            leftChild,
+                            right,
+                            type!
+                        ),
                     // https://github.com/dotnet/roslyn/issues/35031: We'll need to update logical.LogicalOperator
-                    BoundUserDefinedConditionalLogicalOperator logical => logical.Update(logical.OperatorKind, logical.LogicalOperator, logical.TrueOperator, logical.FalseOperator, logical.ConstrainedToTypeOpt, logical.ResultKind, logical.OriginalUserDefinedOperatorsOpt, leftChild, right, type!),
+                    BoundUserDefinedConditionalLogicalOperator logical
+                        => logical.Update(
+                            logical.OperatorKind,
+                            logical.LogicalOperator,
+                            logical.TrueOperator,
+                            logical.FalseOperator,
+                            logical.ConstrainedToTypeOpt,
+                            logical.ResultKind,
+                            logical.OriginalUserDefinedOperatorsOpt,
+                            leftChild,
+                            right,
+                            type!
+                        ),
                     _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Kind),
                 };
 
@@ -72,16 +90,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 leftChild = currentBinary;
-            }
-            while (stack.Count > 0);
+            } while (stack.Count > 0);
 
             Debug.Assert(currentBinary != null);
             return currentBinary!;
         }
 
-        private T GetUpdatedSymbol<T>(BoundNode expr, T sym) where T : Symbol?
+        private T GetUpdatedSymbol<T>(BoundNode expr, T sym)
+            where T : Symbol?
         {
-            if (sym is null) return sym;
+            if (sym is null)
+                return sym;
 
             Symbol? updatedSymbol = null;
             if (_snapshotManager?.TryGetUpdatedSymbol(expr, sym, out updatedSymbol) != true)
@@ -112,7 +131,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var updatedDelegateType = _snapshotManager?.GetUpdatedDelegateTypeForLambda(lambda);
 
-                if (!_remappedSymbols.TryGetValue(lambda.ContainingSymbol, out Symbol? updatedContaining) && updatedDelegateType is null)
+                if (
+                    !_remappedSymbols.TryGetValue(
+                        lambda.ContainingSymbol,
+                        out Symbol? updatedContaining
+                    ) && updatedDelegateType is null
+                )
                 {
                     return lambda;
                 }
@@ -121,12 +145,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (updatedDelegateType is null)
                 {
                     Debug.Assert(updatedContaining is object);
-                    updatedLambda = boundLambda.CreateLambdaSymbol(updatedContaining, lambda.ReturnTypeWithAnnotations, lambda.ParameterTypesWithAnnotations, lambda.ParameterRefKinds, lambda.RefKind);
+                    updatedLambda = boundLambda.CreateLambdaSymbol(
+                        updatedContaining,
+                        lambda.ReturnTypeWithAnnotations,
+                        lambda.ParameterTypesWithAnnotations,
+                        lambda.ParameterRefKinds,
+                        lambda.RefKind
+                    );
                 }
                 else
                 {
                     Debug.Assert(updatedDelegateType is object);
-                    updatedLambda = boundLambda.CreateLambdaSymbol(updatedDelegateType, updatedContaining ?? lambda.ContainingSymbol);
+                    updatedLambda = boundLambda.CreateLambdaSymbol(
+                        updatedDelegateType,
+                        updatedContaining ?? lambda.ContainingSymbol
+                    );
                 }
 
                 _remappedSymbols.Add(lambda, updatedLambda);
@@ -149,14 +182,23 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var updatedType = _snapshotManager?.GetUpdatedTypeForLocalSymbol(local);
 
-                if (!_remappedSymbols.TryGetValue(local.ContainingSymbol, out Symbol? updatedContaining) && !updatedType.HasValue)
+                if (
+                    !_remappedSymbols.TryGetValue(
+                        local.ContainingSymbol,
+                        out Symbol? updatedContaining
+                    ) && !updatedType.HasValue
+                )
                 {
                     // Map the local to itself so we don't have to search again in the future
                     _remappedSymbols.Add(local, local);
                     return local;
                 }
 
-                updatedLocal = new UpdatedContainingSymbolAndNullableAnnotationLocal(local, updatedContaining ?? local.ContainingSymbol, updatedType ?? local.TypeWithAnnotations);
+                updatedLocal = new UpdatedContainingSymbolAndNullableAnnotationLocal(
+                    local,
+                    updatedContaining ?? local.ContainingSymbol,
+                    updatedType ?? local.TypeWithAnnotations
+                );
                 _remappedSymbols.Add(local, updatedLocal);
                 return updatedLocal;
             }
@@ -170,19 +212,41 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression indexerAccess = (BoundExpression)this.Visit(node.IndexerOrSliceAccess);
             BoundImplicitIndexerAccess updatedNode;
 
-            if (_updatedNullabilities.TryGetValue(node, out (NullabilityInfo Info, TypeSymbol? Type) infoAndType))
+            if (
+                _updatedNullabilities.TryGetValue(
+                    node,
+                    out (NullabilityInfo Info, TypeSymbol? Type) infoAndType
+                )
+            )
             {
-                updatedNode = node.Update(receiver, argument, lengthOrCountAccess, node.ReceiverPlaceholder, indexerAccess, node.ArgumentPlaceholders, infoAndType.Type!);
+                updatedNode = node.Update(
+                    receiver,
+                    argument,
+                    lengthOrCountAccess,
+                    node.ReceiverPlaceholder,
+                    indexerAccess,
+                    node.ArgumentPlaceholders,
+                    infoAndType.Type!
+                );
                 updatedNode.TopLevelNullability = infoAndType.Info;
             }
             else
             {
-                updatedNode = node.Update(receiver, argument, lengthOrCountAccess, node.ReceiverPlaceholder, indexerAccess, node.ArgumentPlaceholders, node.Type);
+                updatedNode = node.Update(
+                    receiver,
+                    argument,
+                    lengthOrCountAccess,
+                    node.ReceiverPlaceholder,
+                    indexerAccess,
+                    node.ArgumentPlaceholders,
+                    node.Type
+                );
             }
             return updatedNode;
         }
 
-        private ImmutableArray<T> GetUpdatedArray<T>(BoundNode expr, ImmutableArray<T> symbols) where T : Symbol?
+        private ImmutableArray<T> GetUpdatedArray<T>(BoundNode expr, ImmutableArray<T> symbols)
+            where T : Symbol?
         {
             if (symbols.IsDefaultOrEmpty)
             {

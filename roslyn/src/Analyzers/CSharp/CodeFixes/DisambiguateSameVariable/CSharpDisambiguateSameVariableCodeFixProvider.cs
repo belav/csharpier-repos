@@ -25,7 +25,13 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
 {
     using static SyntaxFactory;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.DisambiguateSameVariable), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.DisambiguateSameVariable
+        ),
+        Shared
+    ]
     internal class CSharpDisambiguateSameVariableCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         private const string CS1717 = nameof(CS1717); // Assignment made to same variable; did you mean to assign something else?
@@ -33,12 +39,10 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpDisambiguateSameVariableCodeFixProvider()
-        {
-        }
+        public CSharpDisambiguateSameVariableCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds { get; }
-            = ImmutableArray.Create(CS1717, CS1718);
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+            ImmutableArray.Create(CS1717, CS1718);
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -46,29 +50,43 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
             var diagnostic = context.Diagnostics.First();
             var cancellationToken = context.CancellationToken;
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (CanFix(semanticModel, diagnostic, cancellationToken, out _, out _, out var title))
             {
-                RegisterCodeFix(context, title, nameof(CSharpDisambiguateSameVariableCodeFixProvider));
+                RegisterCodeFix(
+                    context,
+                    title,
+                    nameof(CSharpDisambiguateSameVariableCodeFixProvider)
+                );
             }
         }
 
         private static bool CanFix(
-            SemanticModel semanticModel, Diagnostic diagnostic, CancellationToken cancellationToken,
+            SemanticModel semanticModel,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken,
             [NotNullWhen(true)] out SimpleNameSyntax? leftName,
             [NotNullWhen(true)] out ISymbol? matchingMember,
-            [NotNullWhen(true)] out string? title)
+            [NotNullWhen(true)] out string? title
+        )
         {
             leftName = null;
             matchingMember = null;
             title = null;
 
             var span = diagnostic.Location.SourceSpan;
-            var node = diagnostic.Location.FindNode(getInnermostNodeForTie: true, cancellationToken);
+            var node = diagnostic.Location.FindNode(
+                getInnermostNodeForTie: true,
+                cancellationToken
+            );
             var (left, right, titleFormat) = node switch
             {
-                BinaryExpressionSyntax binary => (binary.Left, binary.Right, CSharpCodeFixesResources.Compare_to_0),
-                AssignmentExpressionSyntax assignment => (assignment.Left, assignment.Right, CSharpCodeFixesResources.Assign_to_0),
+                BinaryExpressionSyntax binary
+                    => (binary.Left, binary.Right, CSharpCodeFixesResources.Compare_to_0),
+                AssignmentExpressionSyntax assignment
+                    => (assignment.Left, assignment.Right, CSharpCodeFixesResources.Assign_to_0),
                 _ => default,
             };
 
@@ -87,10 +105,13 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
             // Since this is a self assignment/compare, these symbols should be the same.
             Debug.Assert(leftSymbol.Equals(rightSymbol));
 
-            if (leftSymbol.Kind is not SymbolKind.Local and
-                not SymbolKind.Parameter and
-                not SymbolKind.Field and
-                not SymbolKind.Property)
+            if (
+                leftSymbol.Kind
+                is not SymbolKind.Local
+                    and not SymbolKind.Parameter
+                    and not SymbolKind.Field
+                    and not SymbolKind.Property
+            )
             {
                 return false;
             }
@@ -109,23 +130,28 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
             var pascalName = localOrParamName.ToPascalCase();
             var camelName = localOrParamName.ToCamelCase();
             var underscoreName = "_" + localOrParamName;
-            var members = from t in enclosingType.GetBaseTypesAndThis()
-                          from m in t.GetMembers()
-                          where !m.IsStatic
-                          where m is IFieldSymbol or IPropertySymbol
-                          where !m.Equals(leftSymbol)
-                          where m.Name == localOrParamName ||
-                                m.Name == pascalName ||
-                                m.Name == camelName ||
-                                m.Name == underscoreName
-                          where m.IsAccessibleWithin(enclosingType)
-                          select m;
+            var members =
+                from t in enclosingType.GetBaseTypesAndThis()
+                from m in t.GetMembers()
+                where !m.IsStatic
+                where m is IFieldSymbol or IPropertySymbol
+                where !m.Equals(leftSymbol)
+                where
+                    m.Name == localOrParamName
+                    || m.Name == pascalName
+                    || m.Name == camelName
+                    || m.Name == underscoreName
+                where m.IsAccessibleWithin(enclosingType)
+                select m;
 
             matchingMember = members.FirstOrDefault();
             if (matchingMember == null)
                 return false;
 
-            var memberContainer = matchingMember.ContainingType.ToMinimalDisplayString(semanticModel, span.Start);
+            var memberContainer = matchingMember.ContainingType.ToMinimalDisplayString(
+                semanticModel,
+                span.Start
+            );
             title = string.Format(titleFormat, $"{memberContainer}.{matchingMember.Name}");
 
             leftName = left is MemberAccessExpressionSyntax memberAccess
@@ -136,27 +162,47 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = CSharpSyntaxFacts.Instance;
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var diagnostic in diagnostics)
             {
-                if (!CanFix(semanticModel, diagnostic, cancellationToken,
-                        out var nameNode, out var matchingMember, out _))
+                if (
+                    !CanFix(
+                        semanticModel,
+                        diagnostic,
+                        cancellationToken,
+                        out var nameNode,
+                        out var matchingMember,
+                        out _
+                    )
+                )
                 {
                     continue;
                 }
 
                 var newNameNode = matchingMember.Name.ToIdentifierName();
                 var newExpr = (ExpressionSyntax)newNameNode;
-                if (!syntaxFacts.IsNameOfSimpleMemberAccessExpression(nameNode) &&
-                    !syntaxFacts.IsNameOfMemberBindingExpression(nameNode))
+                if (
+                    !syntaxFacts.IsNameOfSimpleMemberAccessExpression(nameNode)
+                    && !syntaxFacts.IsNameOfMemberBindingExpression(nameNode)
+                )
                 {
                     newExpr = MemberAccessExpression(
-                        SyntaxKind.SimpleMemberAccessExpression, ThisExpression(), newNameNode).WithAdditionalAnnotations(Simplifier.Annotation);
+                            SyntaxKind.SimpleMemberAccessExpression,
+                            ThisExpression(),
+                            newNameNode
+                        )
+                        .WithAdditionalAnnotations(Simplifier.Annotation);
                 }
 
                 newExpr = newExpr.WithTriviaFrom(nameNode);

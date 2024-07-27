@@ -12,8 +12,11 @@ namespace Microsoft.Internal
     internal sealed class Lock : IDisposable
     {
 #if (FEATURE_SLIMLOCK)
-        private ReaderWriterLockSlim _thisLock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
+        private ReaderWriterLockSlim _thisLock = new ReaderWriterLockSlim(
+            LockRecursionPolicy.NoRecursion
+        );
         private int _isDisposed = 0;
+
         public void EnterReadLock()
         {
             this._thisLock.EnterReadLock();
@@ -47,9 +50,7 @@ namespace Microsoft.Internal
         // Satisfies our requirements until it is implemented
         object _thisLock = new object();
 
-        public Lock()
-        {
-        }
+        public Lock() { }
 
         public void EnterReadLock()
         {
@@ -71,9 +72,7 @@ namespace Microsoft.Internal
             Monitor.Exit(this._thisLock);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 #endif
     }
 }

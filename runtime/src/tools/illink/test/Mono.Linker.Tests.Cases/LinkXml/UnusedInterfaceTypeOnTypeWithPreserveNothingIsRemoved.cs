@@ -3,21 +3,15 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-	[SetupLinkerDescriptorFile ("UnusedInterfaceTypeOnTypeWithPreserveNothingIsRemoved.xml")]
-	public class UnusedInterfaceTypeOnTypeWithPreserveNothingIsRemoved
-	{
-		public static void Main ()
-		{
-		}
+    [SetupLinkerDescriptorFile("UnusedInterfaceTypeOnTypeWithPreserveNothingIsRemoved.xml")]
+    public class UnusedInterfaceTypeOnTypeWithPreserveNothingIsRemoved
+    {
+        public static void Main() { }
 
-		[Kept (By = Tool.NativeAot)]
-		interface IFoo
-		{
-		}
+        [Kept(By = Tool.NativeAot)]
+        interface IFoo { }
 
-		[Kept]
-		class Bar : IFoo
-		{
-		}
-	}
+        [Kept]
+        class Bar : IFoo { }
+    }
 }

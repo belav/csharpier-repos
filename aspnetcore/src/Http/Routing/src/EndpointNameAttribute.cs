@@ -12,7 +12,11 @@ namespace Microsoft.AspNetCore.Routing;
 /// Endpoint names must be unique within an application, and can be used to unambiguously
 /// identify a desired endpoint for URI generation using <see cref="Microsoft.AspNetCore.Routing.LinkGenerator"/>
 /// </remarks>
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Delegate, Inherited = false, AllowMultiple = false)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Delegate,
+    Inherited = false,
+    AllowMultiple = false
+)]
 public sealed class EndpointNameAttribute : Attribute, IEndpointNameMetadata
 {
     /// <summary>

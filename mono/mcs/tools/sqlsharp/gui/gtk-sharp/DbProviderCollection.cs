@@ -9,139 +9,130 @@
 // To be included with Mono as a SQL query tool licensed under the GPL license.
 //
 
-namespace Mono.Data.SqlSharp.Gui.GtkSharp 
+namespace Mono.Data.SqlSharp.Gui.GtkSharp
 {
-	using System;
-	using System.Data;
-	using System.Collections;
+    using System;
+    using System.Collections;
+    using System.Data;
 
-	public class DbProviderCollection : MarshalByRefObject, IList, ICollection, IEnumerable 
-	{	
-		#region Fields
+    public class DbProviderCollection : MarshalByRefObject, IList, ICollection, IEnumerable
+    {
+        #region Fields
 
-		ArrayList list = new ArrayList ();
+        ArrayList list = new ArrayList();
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public DbProviderCollection () 
-		{
-		}
+        public DbProviderCollection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public DbProvider this[int index] {
-			get { 
-				return (DbProvider) list[index]; 
-			}
-		}
+        public DbProvider this[int index]
+        {
+            get { return (DbProvider)list[index]; }
+        }
 
-		public DbProvider this[string key] {
-			get {
-				DbProvider p = null;
-				foreach(object o in list) {
-					p = (DbProvider) o;
-					if(p.Key.ToUpper().Equals(key.ToUpper())) {
-						return p;
-					}
-				}
-				throw new Exception("DbProvider not found");
-			}
-		}
+        public DbProvider this[string key]
+        {
+            get
+            {
+                DbProvider p = null;
+                foreach (object o in list)
+                {
+                    p = (DbProvider)o;
+                    if (p.Key.ToUpper().Equals(key.ToUpper()))
+                    {
+                        return p;
+                    }
+                }
+                throw new Exception("DbProvider not found");
+            }
+        }
 
-		object IList.this[int index] {
-			get { 
-				return list[index]; 
-			}			
+        object IList.this[int index]
+        {
+            get { return list[index]; }
+            set { list[index] = value; }
+        }
 
-			set {
-				list[index] = value;
-			}
-		}
+        public int Count
+        {
+            get { return list.Count; }
+        }
 
-		public int Count {
-			get { 
-				return list.Count; 
-			}
-		}
+        public bool IsFixedSize
+        {
+            get { return false; }
+        }
 
-		public bool IsFixedSize {
-			get { 
-				return false; 
-			}
-		}
+        public bool IsReadOnly
+        {
+            get { return true; }
+        }
 
-		public bool IsReadOnly {
-			get { 
-				return true; 
-			}
-		}
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
 
-		public bool IsSynchronized {
-			get { 
-				return false; 
-			}
-		}
+        public object SyncRoot
+        {
+            get { throw new InvalidOperationException(); }
+        }
 
-		public object SyncRoot {
-			get { 
-				throw new InvalidOperationException (); 
-			}
-		}
+        #endregion // Properties
 
-		#endregion // Properties
+        #region Methods
 
-		#region Methods
+        public int Add(object o)
+        {
+            return list.Add((DbProvider)o);
+        }
 
-		public int Add (object o) 
-		{
-			return list.Add ((DbProvider) o);
-		}
+        public void Clear()
+        {
+            list.Clear();
+        }
 
-		public void Clear () 
-		{
-			list.Clear ();
-		}
+        public bool Contains(object o)
+        {
+            return list.Contains((DbProvider)o);
+        }
 
-		public bool Contains (object o) 
-		{
-			return list.Contains ((DbProvider) o);
-		}
+        public void CopyTo(Array array, int index)
+        {
+            list.CopyTo(array, index);
+        }
 
-		public void CopyTo (Array array, int index) 
-		{
-			list.CopyTo (array, index);
-		}
+        public IEnumerator GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
 
-		public IEnumerator GetEnumerator () 
-		{
-			return list.GetEnumerator ();
-		}
+        public int IndexOf(object o)
+        {
+            return list.IndexOf((DbProvider)o);
+        }
 
-		public int IndexOf (object o) 
-		{
-			return list.IndexOf ((DbProvider) o);
-		}
+        public void Insert(int index, object o)
+        {
+            list.Insert(index, (DbProvider)o);
+        }
 
-		public void Insert (int index, object o) 
-		{
-			list.Insert (index, (DbProvider) o);
-		}
+        public void Remove(object o)
+        {
+            list.Remove((DbProvider)o);
+        }
 
-		public void Remove (object o) 
-		{
-			list.Remove ((DbProvider) o);
-		}
+        public void RemoveAt(int index)
+        {
+            list.RemoveAt(index);
+        }
 
-		public void RemoveAt (int index) 
-		{
-			list.RemoveAt (index);
-		}
-
-		#endregion // Methods
-		
-	}
+        #endregion // Methods
+    }
 }

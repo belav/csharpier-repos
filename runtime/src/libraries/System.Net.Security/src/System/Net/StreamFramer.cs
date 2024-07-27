@@ -21,7 +21,10 @@ namespace System.Net
         public FrameHeader ReadHeader => _curReadHeader;
         public FrameHeader WriteHeader => _writeHeader;
 
-        public async ValueTask<byte[]?> ReadMessageAsync<TAdapter>(Stream stream, CancellationToken cancellationToken)
+        public async ValueTask<byte[]?> ReadMessageAsync<TAdapter>(
+            Stream stream,
+            CancellationToken cancellationToken
+        )
             where TAdapter : IReadWriteAdapter
         {
             if (_eof)
@@ -31,8 +34,15 @@ namespace System.Net
 
             byte[] buffer = _readHeaderBuffer;
 
-            int bytesRead = await TAdapter.ReadAtLeastAsync(
-                stream, buffer, buffer.Length, throwOnEndOfStream: false, cancellationToken).ConfigureAwait(false);
+            int bytesRead = await TAdapter
+                .ReadAtLeastAsync(
+                    stream,
+                    buffer,
+                    buffer.Length,
+                    throwOnEndOfStream: false,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (bytesRead < buffer.Length)
             {
                 if (bytesRead == 0)
@@ -47,32 +57,51 @@ namespace System.Net
             _curReadHeader.CopyFrom(buffer, 0);
             if (_curReadHeader.PayloadSize > FrameHeader.MaxMessageSize)
             {
-                throw new InvalidOperationException(SR.Format(SR.net_frame_size,
-                                                               FrameHeader.MaxMessageSize,
-                                                               _curReadHeader.PayloadSize.ToString(NumberFormatInfo.InvariantInfo)));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.net_frame_size,
+                        FrameHeader.MaxMessageSize,
+                        _curReadHeader.PayloadSize.ToString(NumberFormatInfo.InvariantInfo)
+                    )
+                );
             }
 
             buffer = new byte[_curReadHeader.PayloadSize];
 
             if (buffer.Length > 0)
             {
-                bytesRead = await TAdapter.ReadAtLeastAsync(
-                    stream, buffer, buffer.Length, throwOnEndOfStream: false, cancellationToken).ConfigureAwait(false);
+                bytesRead = await TAdapter
+                    .ReadAtLeastAsync(
+                        stream,
+                        buffer,
+                        buffer.Length,
+                        throwOnEndOfStream: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (bytesRead < buffer.Length)
                 {
-                    throw new IOException(SR.Format(SR.net_io_readfailure, SR.net_io_connectionclosed));
+                    throw new IOException(
+                        SR.Format(SR.net_io_readfailure, SR.net_io_connectionclosed)
+                    );
                 }
             }
             return buffer;
         }
 
-        public async Task WriteMessageAsync<TAdapter>(Stream stream, byte[] message, CancellationToken cancellationToken)
+        public async Task WriteMessageAsync<TAdapter>(
+            Stream stream,
+            byte[] message,
+            CancellationToken cancellationToken
+        )
             where TAdapter : IReadWriteAdapter
         {
             _writeHeader.PayloadSize = message.Length;
             _writeHeader.CopyTo(_writeHeaderBuffer, 0);
 
-            await TAdapter.WriteAsync(stream, _writeHeaderBuffer, cancellationToken).ConfigureAwait(false);
+            await TAdapter
+                .WriteAsync(stream, _writeHeaderBuffer, cancellationToken)
+                .ConfigureAwait(false);
             if (message.Length != 0)
             {
                 await TAdapter.WriteAsync(stream, message, cancellationToken).ConfigureAwait(false);
@@ -105,7 +134,10 @@ namespace System.Net
             {
                 if (value > MaxMessageSize)
                 {
-                    throw new ArgumentException(SR.Format(SR.net_frame_max_size, MaxMessageSize, value), nameof(PayloadSize));
+                    throw new ArgumentException(
+                        SR.Format(SR.net_frame_max_size, MaxMessageSize, value),
+                        nameof(PayloadSize)
+                    );
                 }
 
                 _payloadSize = value;

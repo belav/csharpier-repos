@@ -18,7 +18,7 @@ public class Runtime_43391
         }
         return r;
     }
- 
+
     public static unsafe byte Test(int i)
     {
         byte* p = stackalloc byte[8];

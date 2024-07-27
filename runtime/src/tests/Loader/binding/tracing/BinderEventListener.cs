@@ -5,9 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
-using System.Threading;
 using System.Reflection;
-
+using System.Threading;
 using Xunit;
 
 namespace BinderTracingTests
@@ -54,8 +53,12 @@ namespace BinderTracingTests
         {
             var sb = new System.Text.StringBuilder();
             sb.Append(AssemblyName);
-            sb.Append($" - Request: Path={AssemblyPath}, ALC={AssemblyLoadContext}, RequestingAssembly={RequestingAssembly}, RequestingALC={RequestingAssemblyLoadContext}");
-            sb.Append($" - Result: Success={Success}, Name={ResultAssemblyName}, Path={ResultAssemblyPath}, Cached={Cached}");
+            sb.Append(
+                $" - Request: Path={AssemblyPath}, ALC={AssemblyLoadContext}, RequestingAssembly={RequestingAssembly}, RequestingALC={RequestingAssemblyLoadContext}"
+            );
+            sb.Append(
+                $" - Result: Success={Success}, Name={ResultAssemblyName}, Path={ResultAssemblyPath}, Cached={Cached}"
+            );
             return sb.ToString();
         }
     }
@@ -143,7 +146,7 @@ namespace BinderTracingTests
             Unused,
             AppPaths,
             PlatformResourceRoots,
-            SatelliteSubdirectory
+            SatelliteSubdirectory,
         }
 
         public string FilePath { get; internal set; }
@@ -161,7 +164,8 @@ namespace BinderTracingTests
         private const EventKeywords AssemblyLoaderKeyword = (EventKeywords)0x4;
 
         private readonly object eventsLock = new object();
-        private readonly Dictionary<Guid, BindOperation> bindOperations = new Dictionary<Guid, BindOperation>();
+        private readonly Dictionary<Guid, BindOperation> bindOperations =
+            new Dictionary<Guid, BindOperation>();
         private readonly string[] loadsToTrack;
 
         public BinderEventListener(string[] loadsToTrack, bool log = false)
@@ -171,19 +175,27 @@ namespace BinderTracingTests
 
         public BindOperation[] WaitAndGetEventsForAssembly(AssemblyName assemblyName)
         {
-            Assert.True(IsLoadToTrack(assemblyName.Name), $"Waiting for load for untracked name: {assemblyName.Name}. Tracking loads for: {string.Join(", ", loadsToTrack)}");
+            Assert.True(
+                IsLoadToTrack(assemblyName.Name),
+                $"Waiting for load for untracked name: {assemblyName.Name}. Tracking loads for: {string.Join(", ", loadsToTrack)}"
+            );
 
             const int waitIntervalInMs = 50;
-            int waitTimeoutInMs = Environment.GetEnvironmentVariable("DOTNET_GCStress") == null
-                ? 30 * 1000
-                : int.MaxValue;
+            int waitTimeoutInMs =
+                Environment.GetEnvironmentVariable("DOTNET_GCStress") == null
+                    ? 30 * 1000
+                    : int.MaxValue;
 
             int timeWaitedInMs = 0;
             while (true)
             {
                 lock (eventsLock)
                 {
-                    var events = bindOperations.Values.Where(e => e.Completed && Helpers.AssemblyNamesMatch(e.AssemblyName, assemblyName) && !e.Nested);
+                    var events = bindOperations.Values.Where(e =>
+                        e.Completed
+                        && Helpers.AssemblyNamesMatch(e.AssemblyName, assemblyName)
+                        && !e.Nested
+                    );
                     if (events.Any())
                     {
                         return events.ToArray();
@@ -195,7 +207,9 @@ namespace BinderTracingTests
 
                 if (timeWaitedInMs > waitTimeoutInMs)
                 {
-                    var msg = new System.Text.StringBuilder($"Timed out waiting for bind events for {assemblyName}");
+                    var msg = new System.Text.StringBuilder(
+                        $"Timed out waiting for bind events for {assemblyName}"
+                    );
                     msg.AppendLine(GetReceivedEventsAsString());
                     throw new TimeoutException(msg.ToString());
                 }
@@ -219,7 +233,8 @@ namespace BinderTracingTests
             {
                 int index = data.PayloadNames.IndexOf(name);
                 return index >= 0 ? data.Payload[index] : null;
-            };
+            }
+            ;
             string GetDataString(string name) => GetData(name) as string;
 
             switch (data.EventName)
@@ -232,7 +247,10 @@ namespace BinderTracingTests
 
                     lock (eventsLock)
                     {
-                        Assert.True(!bindOperations.ContainsKey(data.ActivityId), "AssemblyLoadStart should not exist for same activity ID ");
+                        Assert.True(
+                            !bindOperations.ContainsKey(data.ActivityId),
+                            "AssemblyLoadStart should not exist for same activity ID "
+                        );
                         bindOperation.Nested = bindOperations.ContainsKey(data.RelatedActivityId);
                         bindOperations.Add(data.ActivityId, bindOperation);
                         if (bindOperation.Nested)
@@ -253,7 +271,12 @@ namespace BinderTracingTests
                     lock (eventsLock)
                     {
                         if (!bindOperations.ContainsKey(data.ActivityId))
-                            Assert.Fail(GetMissingAssemblyBindStartMessage(data, $"Success={success}, Name={resultName}"));
+                            Assert.Fail(
+                                GetMissingAssemblyBindStartMessage(
+                                    data,
+                                    $"Success={success}, Name={resultName}"
+                                )
+                            );
 
                         BindOperation bind = bindOperations[data.ActivityId];
                         bind.Success = success;
@@ -269,14 +292,19 @@ namespace BinderTracingTests
                 }
                 case "ResolutionAttempted":
                 {
-                    ResolutionAttempt attempt = ParseResolutionAttemptedEvent(GetData, GetDataString);
+                    ResolutionAttempt attempt = ParseResolutionAttemptedEvent(
+                        GetData,
+                        GetDataString
+                    );
                     if (!IsLoadToTrack(attempt.AssemblyName.Name))
                         return;
 
                     lock (eventsLock)
                     {
                         if (!bindOperations.ContainsKey(data.ActivityId))
-                            Assert.Fail(GetMissingAssemblyBindStartMessage(data, attempt.ToString()));
+                            Assert.Fail(
+                                GetMissingAssemblyBindStartMessage(data, attempt.ToString())
+                            );
 
                         BindOperation bind = bindOperations[data.ActivityId];
                         bind.ResolutionAttempts.Add(attempt);
@@ -292,7 +320,12 @@ namespace BinderTracingTests
                     lock (eventsLock)
                     {
                         if (!bindOperations.ContainsKey(data.ActivityId))
-                            Assert.Fail(GetMissingAssemblyBindStartMessage(data, handlerInvocation.ToString()));
+                            Assert.Fail(
+                                GetMissingAssemblyBindStartMessage(
+                                    data,
+                                    handlerInvocation.ToString()
+                                )
+                            );
 
                         BindOperation bind = bindOperations[data.ActivityId];
                         bind.AssemblyLoadContextResolvingHandlers.Add(handlerInvocation);
@@ -308,7 +341,12 @@ namespace BinderTracingTests
                     lock (eventsLock)
                     {
                         if (!bindOperations.ContainsKey(data.ActivityId))
-                            Assert.Fail(GetMissingAssemblyBindStartMessage(data, handlerInvocation.ToString()));
+                            Assert.Fail(
+                                GetMissingAssemblyBindStartMessage(
+                                    data,
+                                    handlerInvocation.ToString()
+                                )
+                            );
 
                         BindOperation bind = bindOperations[data.ActivityId];
                         bind.AppDomainAssemblyResolveHandlers.Add(handlerInvocation);
@@ -317,14 +355,19 @@ namespace BinderTracingTests
                 }
                 case "AssemblyLoadFromResolveHandlerInvoked":
                 {
-                    LoadFromHandlerInvocation loadFrom = ParseLoadFromHandlerInvokedEvent(GetData, GetDataString);
+                    LoadFromHandlerInvocation loadFrom = ParseLoadFromHandlerInvokedEvent(
+                        GetData,
+                        GetDataString
+                    );
                     if (!IsLoadToTrack(loadFrom.AssemblyName.Name))
                         return;
 
                     lock (eventsLock)
                     {
                         if (!bindOperations.ContainsKey(data.ActivityId))
-                            Assert.Fail(GetMissingAssemblyBindStartMessage(data, loadFrom.ToString()));
+                            Assert.Fail(
+                                GetMissingAssemblyBindStartMessage(data, loadFrom.ToString())
+                            );
 
                         BindOperation bind = bindOperations[data.ActivityId];
                         bind.AssemblyLoadFromHandler = loadFrom;
@@ -341,7 +384,9 @@ namespace BinderTracingTests
                     lock (eventsLock)
                     {
                         if (!bindOperations.ContainsKey(data.ActivityId))
-                            Assert.Fail(GetMissingAssemblyBindStartMessage(data, probedPath.ToString()));
+                            Assert.Fail(
+                                GetMissingAssemblyBindStartMessage(data, probedPath.ToString())
+                            );
 
                         BindOperation bind = bindOperations[data.ActivityId];
                         bind.ProbedPaths.Add(probedPath);
@@ -353,13 +398,20 @@ namespace BinderTracingTests
 
         private bool IsLoadToTrack(string name)
         {
-            return this.loadsToTrack.Any(n => n.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+            return this.loadsToTrack.Any(n =>
+                n.Equals(name, StringComparison.InvariantCultureIgnoreCase)
+            );
         }
 
-        private string GetMissingAssemblyBindStartMessage(EventWrittenEventArgs data, string parsedEventAsString)
+        private string GetMissingAssemblyBindStartMessage(
+            EventWrittenEventArgs data,
+            string parsedEventAsString
+        )
         {
             var msg = new System.Text.StringBuilder();
-            msg.AppendLine($"{data.EventName} (ActivityId: {data.ActivityId}) should have a matching AssemblyBindStart");
+            msg.AppendLine(
+                $"{data.EventName} (ActivityId: {data.ActivityId}) should have a matching AssemblyBindStart"
+            );
             msg.AppendLine($"Parsed event: {parsedEventAsString}");
             msg.AppendLine(GetReceivedEventsAsString());
             return msg.ToString();
@@ -383,7 +435,10 @@ namespace BinderTracingTests
             return msg.ToString();
         }
 
-        private BindOperation ParseAssemblyLoadStartEvent(EventWrittenEventArgs data, Func<string, string> getDataString)
+        private BindOperation ParseAssemblyLoadStartEvent(
+            EventWrittenEventArgs data,
+            Func<string, string> getDataString
+        )
         {
             var bindOperation = new BindOperation()
             {
@@ -403,7 +458,10 @@ namespace BinderTracingTests
             return bindOperation;
         }
 
-        private ResolutionAttempt ParseResolutionAttemptedEvent(Func<string, object> getData, Func<string, string> getDataString)
+        private ResolutionAttempt ParseResolutionAttemptedEvent(
+            Func<string, object> getData,
+            Func<string, string> getDataString
+        )
         {
             var attempt = new ResolutionAttempt()
             {
@@ -412,7 +470,7 @@ namespace BinderTracingTests
                 AssemblyLoadContext = getDataString("AssemblyLoadContext"),
                 Result = (ResolutionAttempt.ResolutionResult)getData("Result"),
                 ResultAssemblyPath = getDataString("ResultAssemblyPath"),
-                ErrorMessage = getDataString("ErrorMessage")
+                ErrorMessage = getDataString("ErrorMessage"),
             };
             string resultName = getDataString("ResultAssemblyName");
             if (!string.IsNullOrEmpty(resultName) && resultName != "NULL")
@@ -430,7 +488,7 @@ namespace BinderTracingTests
                 AssemblyName = new AssemblyName(getDataString("AssemblyName")),
                 HandlerName = getDataString("HandlerName"),
                 AssemblyLoadContext = getDataString("AssemblyLoadContext"),
-                ResultAssemblyPath = getDataString("ResultAssemblyPath")
+                ResultAssemblyPath = getDataString("ResultAssemblyPath"),
             };
             string resultName = getDataString("ResultAssemblyName");
             if (!string.IsNullOrEmpty(resultName) && resultName != "NULL")
@@ -441,7 +499,10 @@ namespace BinderTracingTests
             return handlerInvocation;
         }
 
-        private LoadFromHandlerInvocation ParseLoadFromHandlerInvokedEvent(Func<string, object> getData, Func<string, string> getDataString)
+        private LoadFromHandlerInvocation ParseLoadFromHandlerInvokedEvent(
+            Func<string, object> getData,
+            Func<string, string> getDataString
+        )
         {
             var loadFrom = new LoadFromHandlerInvocation()
             {
@@ -453,7 +514,10 @@ namespace BinderTracingTests
             return loadFrom;
         }
 
-        private ProbedPath ParseKnownPathProbedEvent(Func<string, object> getData, Func<string, string> getDataString)
+        private ProbedPath ParseKnownPathProbedEvent(
+            Func<string, object> getData,
+            Func<string, string> getDataString
+        )
         {
             var probedPath = new ProbedPath()
             {

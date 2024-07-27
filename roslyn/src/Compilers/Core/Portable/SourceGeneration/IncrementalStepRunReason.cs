@@ -32,6 +32,6 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// The input to this step was removed or modified from a previous run, and the output it used to generate is no longer present.
         /// </summary>
-        Removed
+        Removed,
     }
 }

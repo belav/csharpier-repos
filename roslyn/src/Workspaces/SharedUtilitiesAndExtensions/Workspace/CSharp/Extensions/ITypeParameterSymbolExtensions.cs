@@ -13,13 +13,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     internal static class ITypeParameterSymbolExtensions
     {
         public static SyntaxList<TypeParameterConstraintClauseSyntax> GenerateConstraintClauses(
-            this ImmutableArray<ITypeParameterSymbol> typeParameters)
+            this ImmutableArray<ITypeParameterSymbol> typeParameters
+        )
         {
             return typeParameters.AsEnumerable().GenerateConstraintClauses();
         }
 
         public static SyntaxList<TypeParameterConstraintClauseSyntax> GenerateConstraintClauses(
-            this IEnumerable<ITypeParameterSymbol> typeParameters)
+            this IEnumerable<ITypeParameterSymbol> typeParameters
+        )
         {
             var clauses = new List<TypeParameterConstraintClauseSyntax>();
 
@@ -33,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         private static void AddConstraintClauses(
             List<TypeParameterConstraintClauseSyntax> clauses,
-            ITypeParameterSymbol typeParameter)
+            ITypeParameterSymbol typeParameter
+        )
         {
             var constraints = new List<TypeParameterConstraintSyntax>();
 
@@ -43,7 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
             else if (typeParameter.HasUnmanagedTypeConstraint)
             {
-                constraints.Add(SyntaxFactory.TypeConstraint(SyntaxFactory.IdentifierName("unmanaged")));
+                constraints.Add(
+                    SyntaxFactory.TypeConstraint(SyntaxFactory.IdentifierName("unmanaged"))
+                );
             }
             else if (typeParameter.HasValueTypeConstraint)
             {
@@ -51,13 +56,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
             else if (typeParameter.HasNotNullConstraint)
             {
-                constraints.Add(SyntaxFactory.TypeConstraint(SyntaxFactory.IdentifierName("notnull")));
+                constraints.Add(
+                    SyntaxFactory.TypeConstraint(SyntaxFactory.IdentifierName("notnull"))
+                );
             }
 
-            var constraintTypes =
-                typeParameter.ConstraintTypes.Where(t => t.TypeKind == TypeKind.Class).Concat(
-                typeParameter.ConstraintTypes.Where(t => t.TypeKind == TypeKind.Interface).Concat(
-                typeParameter.ConstraintTypes.Where(t => t.TypeKind is not TypeKind.Class and not TypeKind.Interface)));
+            var constraintTypes = typeParameter
+                .ConstraintTypes.Where(t => t.TypeKind == TypeKind.Class)
+                .Concat(
+                    typeParameter
+                        .ConstraintTypes.Where(t => t.TypeKind == TypeKind.Interface)
+                        .Concat(
+                            typeParameter.ConstraintTypes.Where(t =>
+                                t.TypeKind is not TypeKind.Class and not TypeKind.Interface
+                            )
+                        )
+                );
 
             foreach (var type in constraintTypes)
             {
@@ -77,9 +91,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 return;
             }
 
-            clauses.Add(SyntaxFactory.TypeParameterConstraintClause(
-                typeParameter.Name.ToIdentifierName(),
-                SyntaxFactory.SeparatedList(constraints)));
+            clauses.Add(
+                SyntaxFactory.TypeParameterConstraintClause(
+                    typeParameter.Name.ToIdentifierName(),
+                    SyntaxFactory.SeparatedList(constraints)
+                )
+            );
         }
     }
 }

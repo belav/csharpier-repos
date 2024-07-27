@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,41 +14,48 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
-	using System.Reflection;
-	using System.Runtime.InteropServices;
+    using System;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using ComInteropTypes.ADODB;
+    using NUnit.Framework;
 
-	using ComInteropTypes.ADODB;
+    [TestFixture]
+    public class ComInterfacesTests : BasePEVerifyTestCase
+    {
+        [Test]
+        [Platform(
+            Include = "Win,Mono",
+            Reason = "`Marshal.Release` triggers a `PlatformNotSupportedException` with .NET Core on Linux."
+        )]
+        public void Marshal_Release_throws_when_called_with_IntPtr_Zero()
+        {
+            Assert.Catch<ArgumentException>(() => Marshal.Release(IntPtr.Zero));
+            //           ^^^^^^^^^^^^^^^^^
+            // We're not going to be more precise because Mono and the CLR don't throw the same exception type.
+            // See https://github.com/mono/mono/issues/15853.
+        }
 
-	using NUnit.Framework;
+        [Test]
+        public void Can_proxy_ADO_RecorsSet()
+        {
+            generator.CreateInterfaceProxyWithoutTarget<Recordset>();
+        }
 
-	[TestFixture]
-	public class ComInterfacesTests:BasePEVerifyTestCase
-	{
-		[Test]
-		[Platform(Include = "Win,Mono", Reason = "`Marshal.Release` triggers a `PlatformNotSupportedException` with .NET Core on Linux.")]
-		public void Marshal_Release_throws_when_called_with_IntPtr_Zero()
-		{
-			Assert.Catch<ArgumentException>(() => Marshal.Release(IntPtr.Zero));
-			//           ^^^^^^^^^^^^^^^^^
-			// We're not going to be more precise because Mono and the CLR don't throw the same exception type.
-			// See https://github.com/mono/mono/issues/15853.
-		}
-
-		[Test]
-		public void Can_proxy_ADO_RecorsSet()
-		{
-			generator.CreateInterfaceProxyWithoutTarget<Recordset>();
-		}
-
-		[Test]
-		[Platform(Include = "Win", Reason = "Depends on OLE32.dll due to co-class instantiation, which is likely only available on Windows.")]
-		[Platform(Exclude = "NetCore", Reason = "Co-class instantiation is not supported by all versions of .NET Core, and can crash the test host.")]
-		public void Can_proxy_existing_com_object()
-		{
-			var command = new Command();
-			var parameter = command.CreateParameter("foo");
-			generator.CreateInterfaceProxyWithTargetInterface(parameter);
-		}
-	}
+        [Test]
+        [Platform(
+            Include = "Win",
+            Reason = "Depends on OLE32.dll due to co-class instantiation, which is likely only available on Windows."
+        )]
+        [Platform(
+            Exclude = "NetCore",
+            Reason = "Co-class instantiation is not supported by all versions of .NET Core, and can crash the test host."
+        )]
+        public void Can_proxy_existing_com_object()
+        {
+            var command = new Command();
+            var parameter = command.CreateParameter("foo");
+            generator.CreateInterfaceProxyWithTargetInterface(parameter);
+        }
+    }
 }

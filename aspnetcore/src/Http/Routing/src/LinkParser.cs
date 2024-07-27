@@ -32,5 +32,8 @@ public abstract class LinkParser
     /// of the route patterns match the provided URI path.
     /// </para>
     /// </remarks>
-    public abstract RouteValueDictionary? ParsePathByAddress<TAddress>(TAddress address, PathString path);
+    public abstract RouteValueDictionary? ParsePathByAddress<TAddress>(
+        TAddress address,
+        PathString path
+    );
 }

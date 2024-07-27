@@ -27,10 +27,18 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 {
-    internal sealed class ProjectExternalErrorReporter : IVsReportExternalErrors, IVsLanguageServiceBuildErrorReporter2
+    internal sealed class ProjectExternalErrorReporter
+        : IVsReportExternalErrors,
+            IVsLanguageServiceBuildErrorReporter2
     {
-        internal static readonly ImmutableArray<string> CustomTags = ImmutableArray.Create(WellKnownDiagnosticTags.Telemetry);
-        internal static readonly ImmutableArray<string> CompilerDiagnosticCustomTags = ImmutableArray.Create(WellKnownDiagnosticTags.Compiler, WellKnownDiagnosticTags.Telemetry);
+        internal static readonly ImmutableArray<string> CustomTags = ImmutableArray.Create(
+            WellKnownDiagnosticTags.Telemetry
+        );
+        internal static readonly ImmutableArray<string> CompilerDiagnosticCustomTags =
+            ImmutableArray.Create(
+                WellKnownDiagnosticTags.Compiler,
+                WellKnownDiagnosticTags.Telemetry
+            );
 
         private readonly ProjectId _projectId;
         private readonly string _errorCodePrefix;
@@ -39,14 +47,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
         private readonly VisualStudioWorkspaceImpl _workspace;
 
         [Obsolete("This is a compatibility shim for F#; please do not use it.")]
-        public ProjectExternalErrorReporter(ProjectId projectId, string errorCodePrefix, IServiceProvider serviceProvider)
-            : this(projectId, errorCodePrefix, LanguageNames.FSharp, (VisualStudioWorkspaceImpl)serviceProvider.GetMefService<VisualStudioWorkspace>())
-        {
-        }
+        public ProjectExternalErrorReporter(
+            ProjectId projectId,
+            string errorCodePrefix,
+            IServiceProvider serviceProvider
+        )
+            : this(
+                projectId,
+                errorCodePrefix,
+                LanguageNames.FSharp,
+                (VisualStudioWorkspaceImpl)serviceProvider.GetMefService<VisualStudioWorkspace>()
+            ) { }
 
-        private DiagnosticAnalyzerInfoCache AnalyzerInfoCache => _workspace.ExternalErrorDiagnosticUpdateSource.AnalyzerInfoCache;
+        private DiagnosticAnalyzerInfoCache AnalyzerInfoCache =>
+            _workspace.ExternalErrorDiagnosticUpdateSource.AnalyzerInfoCache;
 
-        public ProjectExternalErrorReporter(ProjectId projectId, string errorCodePrefix, string language, VisualStudioWorkspaceImpl workspace)
+        public ProjectExternalErrorReporter(
+            ProjectId projectId,
+            string errorCodePrefix,
+            string language,
+            VisualStudioWorkspaceImpl workspace
+        )
         {
             Debug.Assert(projectId != null);
             Debug.Assert(errorCodePrefix != null);
@@ -58,7 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             _workspace = workspace;
         }
 
-        private ExternalErrorDiagnosticUpdateSource DiagnosticProvider => _workspace.ExternalErrorDiagnosticUpdateSource;
+        private ExternalErrorDiagnosticUpdateSource DiagnosticProvider =>
+            _workspace.ExternalErrorDiagnosticUpdateSource;
 
         private bool CanHandle(string errorId)
         {
@@ -95,22 +117,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                     var diagnostic = TryCreateDocumentDiagnosticItem(error);
                     if (diagnostic != null)
                     {
-                        var diagnostics = documentErrorsMap.GetOrAdd(diagnostic.DocumentId, _ => new HashSet<DiagnosticData>());
+                        var diagnostics = documentErrorsMap.GetOrAdd(
+                            diagnostic.DocumentId,
+                            _ => new HashSet<DiagnosticData>()
+                        );
                         diagnostics.Add(diagnostic);
                         continue;
                     }
                 }
 
-                projectErrors.Add(GetDiagnosticData(
-                    documentId: null,
-                    _projectId,
-                    _workspace,
-                    GetErrorId(error),
-                    error.bstrText,
-                    GetDiagnosticSeverity(error),
-                    _language,
-                    new FileLinePositionSpan(project.FilePath ?? "", span: default),
-                    AnalyzerInfoCache));
+                projectErrors.Add(
+                    GetDiagnosticData(
+                        documentId: null,
+                        _projectId,
+                        _workspace,
+                        GetErrorId(error),
+                        error.bstrText,
+                        GetDiagnosticSeverity(error),
+                        _language,
+                        new FileLinePositionSpan(project.FilePath ?? "", span: default),
+                        AnalyzerInfoCache
+                    )
+                );
             }
 
             DiagnosticProvider.AddNewErrors(_projectId, projectErrors, documentErrorsMap);
@@ -132,9 +160,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
         private DocumentId TryGetDocumentId(string filePath)
         {
-            return _workspace.CurrentSolution.GetDocumentIdsWithFilePath(filePath)
-                             .Where(f => f.ProjectId == _projectId)
-                             .FirstOrDefault();
+            return _workspace
+                .CurrentSolution.GetDocumentIdsWithFilePath(filePath)
+                .Where(f => f.ProjectId == _projectId)
+                .FirstOrDefault();
         }
 
         private DiagnosticData TryCreateDocumentDiagnosticItem(ExternalError error)
@@ -167,9 +196,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 };
 
                 var spans = new TextManager.Interop.TextSpan[1];
-                Marshal.ThrowExceptionForHR(containedDocument.BufferCoordinator.MapPrimaryToSecondarySpan(
-                    span,
-                    spans));
+                Marshal.ThrowExceptionForHR(
+                    containedDocument.BufferCoordinator.MapPrimaryToSecondarySpan(span, spans)
+                );
 
                 line = spans[0].iStartLine;
                 column = spans[0].iStartIndex;
@@ -185,20 +214,48 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 error.bstrText,
                 GetDiagnosticSeverity(error),
                 _language,
-                new FileLinePositionSpan(error.bstrFileName,
+                new FileLinePositionSpan(
+                    error.bstrFileName,
                     new LinePosition(line, column),
-                    new LinePosition(line, column)),
-                    AnalyzerInfoCache);
+                    new LinePosition(line, column)
+                ),
+                AnalyzerInfoCache
+            );
         }
 
-        public int ReportError(string bstrErrorMessage, string bstrErrorId, [ComAliasName("VsShell.VSTASKPRIORITY")] VSTASKPRIORITY nPriority, int iLine, int iColumn, string bstrFileName)
+        public int ReportError(
+            string bstrErrorMessage,
+            string bstrErrorId,
+            [ComAliasName("VsShell.VSTASKPRIORITY")] VSTASKPRIORITY nPriority,
+            int iLine,
+            int iColumn,
+            string bstrFileName
+        )
         {
-            ReportError2(bstrErrorMessage, bstrErrorId, nPriority, iLine, iColumn, iLine, iColumn, bstrFileName);
+            ReportError2(
+                bstrErrorMessage,
+                bstrErrorId,
+                nPriority,
+                iLine,
+                iColumn,
+                iLine,
+                iColumn,
+                bstrFileName
+            );
             return VSConstants.S_OK;
         }
 
         // TODO: Use PreserveSig instead of throwing these exceptions for common cases.
-        public void ReportError2(string bstrErrorMessage, string bstrErrorId, [ComAliasName("VsShell.VSTASKPRIORITY")] VSTASKPRIORITY nPriority, int iStartLine, int iStartColumn, int iEndLine, int iEndColumn, string bstrFileName)
+        public void ReportError2(
+            string bstrErrorMessage,
+            string bstrErrorId,
+            [ComAliasName("VsShell.VSTASKPRIORITY")] VSTASKPRIORITY nPriority,
+            int iStartLine,
+            int iStartColumn,
+            int iEndLine,
+            int iEndColumn,
+            string bstrFileName
+        )
         {
             // first we check whether given error is something we can take care.
             if (!CanHandle(bstrErrorId))
@@ -207,11 +264,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 throw new NotImplementedException();
             }
 
-            if ((iEndLine >= 0 && iEndColumn >= 0) &&
-               ((iEndLine < iStartLine) ||
-                (iEndLine == iStartLine && iEndColumn < iStartColumn)))
+            if (
+                (iEndLine >= 0 && iEndColumn >= 0)
+                && (
+                    (iEndLine < iStartLine) || (iEndLine == iStartLine && iEndColumn < iStartColumn)
+                )
+            )
             {
-                throw new ArgumentException(ServicesVSResources.End_position_must_be_start_position);
+                throw new ArgumentException(
+                    ServicesVSResources.End_position_must_be_start_position
+                );
             }
 
             var severity = nPriority switch
@@ -219,7 +281,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 VSTASKPRIORITY.TP_HIGH => DiagnosticSeverity.Error,
                 VSTASKPRIORITY.TP_NORMAL => DiagnosticSeverity.Warning,
                 VSTASKPRIORITY.TP_LOW => DiagnosticSeverity.Info,
-                _ => throw new ArgumentException(ServicesVSResources.Not_a_valid_value, nameof(nPriority))
+                _
+                    => throw new ArgumentException(
+                        ServicesVSResources.Not_a_valid_value,
+                        nameof(nPriority)
+                    ),
             };
 
             DocumentId documentId;
@@ -249,8 +315,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 new FileLinePositionSpan(
                     bstrFileName,
                     new LinePosition(iStartLine, iStartColumn),
-                    new LinePosition(iEndLine, iEndColumn)),
-                    AnalyzerInfoCache);
+                    new LinePosition(iEndLine, iEndColumn)
+                ),
+                AnalyzerInfoCache
+            );
 
             if (documentId == null)
             {
@@ -277,14 +345,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             DiagnosticSeverity severity,
             string language,
             FileLinePositionSpan unmappedSpan,
-            DiagnosticAnalyzerInfoCache analyzerInfoCache)
+            DiagnosticAnalyzerInfoCache analyzerInfoCache
+        )
         {
-            string title, description, category, helpLink;
+            string title,
+                description,
+                category,
+                helpLink;
             DiagnosticSeverity defaultSeverity;
             bool isEnabledByDefault;
             ImmutableArray<string> customTags;
 
-            if (analyzerInfoCache != null && analyzerInfoCache.TryGetDescriptorForDiagnosticId(errorId, out var descriptor))
+            if (
+                analyzerInfoCache != null
+                && analyzerInfoCache.TryGetDescriptorForDiagnosticId(errorId, out var descriptor)
+            )
             {
                 title = descriptor.Title.ToString(CultureInfo.CurrentUICulture);
                 description = descriptor.Description.ToString(CultureInfo.CurrentUICulture);
@@ -301,7 +376,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 category = WellKnownDiagnosticTags.Build;
                 defaultSeverity = severity;
                 isEnabledByDefault = true;
-                customTags = IsCompilerDiagnostic(errorId) ? CompilerDiagnosticCustomTags : CustomTags;
+                customTags = IsCompilerDiagnostic(errorId)
+                    ? CompilerDiagnosticCustomTags
+                    : CustomTags;
                 helpLink = null;
             }
 
@@ -318,14 +395,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 customTags: customTags,
                 properties: DiagnosticData.PropertiesForBuildDiagnostic,
                 projectId: projectId,
-                location: new DiagnosticDataLocation(
-                    unmappedSpan,
-                    documentId),
+                location: new DiagnosticDataLocation(unmappedSpan, documentId),
                 language: language,
-                helpLink: helpLink);
+                helpLink: helpLink
+            );
 
-            if (workspace.CurrentSolution.GetDocument(documentId) is Document document &&
-                document.SupportsSyntaxTree)
+            if (
+                workspace.CurrentSolution.GetDocument(documentId) is Document document
+                && document.SupportsSyntaxTree
+            )
             {
                 var tree = document.GetSyntaxTreeSynchronously(CancellationToken.None);
                 var text = tree.GetText();
@@ -342,7 +420,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             if (!string.IsNullOrEmpty(errorId) && errorId.Length > 2)
             {
                 var prefix = errorId[..2];
-                if (prefix.Equals("CS", StringComparison.OrdinalIgnoreCase) || prefix.Equals("BC", StringComparison.OrdinalIgnoreCase))
+                if (
+                    prefix.Equals("CS", StringComparison.OrdinalIgnoreCase)
+                    || prefix.Equals("BC", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     var suffix = errorId[2..];
                     return int.TryParse(suffix, out _);
@@ -352,10 +433,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             return false;
         }
 
-        private string GetErrorId(ExternalError error)
-            => string.Format("{0}{1:0000}", _errorCodePrefix, error.iErrorID);
+        private string GetErrorId(ExternalError error) =>
+            string.Format("{0}{1:0000}", _errorCodePrefix, error.iErrorID);
 
-        private static DiagnosticSeverity GetDiagnosticSeverity(ExternalError error)
-            => error.fError != 0 ? DiagnosticSeverity.Error : DiagnosticSeverity.Warning;
+        private static DiagnosticSeverity GetDiagnosticSeverity(ExternalError error) =>
+            error.fError != 0 ? DiagnosticSeverity.Error : DiagnosticSeverity.Warning;
     }
 }

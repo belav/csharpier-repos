@@ -133,18 +133,24 @@ namespace System.Net
             }
             else
             {
-                OutputStream.BeginWrite(responseEntity, 0, responseEntity.Length, iar =>
-                {
-                    var thisRef = (HttpListenerResponse)iar.AsyncState!;
-                    try
+                OutputStream.BeginWrite(
+                    responseEntity,
+                    0,
+                    responseEntity.Length,
+                    iar =>
                     {
-                        thisRef.OutputStream.EndWrite(iar);
-                    }
-                    finally
-                    {
-                        thisRef.Close(false);
-                    }
-                }, this);
+                        var thisRef = (HttpListenerResponse)iar.AsyncState!;
+                        try
+                        {
+                            thisRef.OutputStream.EndWrite(iar);
+                        }
+                        finally
+                        {
+                            thisRef.Close(false);
+                        }
+                    },
+                    this
+                );
             }
         }
 
@@ -165,12 +171,18 @@ namespace System.Net
             {
                 if (_webHeaders[HttpKnownHeaderNames.Server] == null)
                 {
-                    _webHeaders.Set(HttpKnownHeaderNames.Server, HttpHeaderStrings.NetCoreServerName);
+                    _webHeaders.Set(
+                        HttpKnownHeaderNames.Server,
+                        HttpHeaderStrings.NetCoreServerName
+                    );
                 }
 
                 if (_webHeaders[HttpKnownHeaderNames.Date] == null)
                 {
-                    _webHeaders.Set(HttpKnownHeaderNames.Date, DateTime.UtcNow.ToString("r", CultureInfo.InvariantCulture));
+                    _webHeaders.Set(
+                        HttpKnownHeaderNames.Date,
+                        DateTime.UtcNow.ToString("r", CultureInfo.InvariantCulture)
+                    );
                 }
 
                 if (_boundaryType == BoundaryType.None)
@@ -199,12 +211,17 @@ namespace System.Net
                 {
                     if (_boundaryType != BoundaryType.ContentLength && closing)
                     {
-                        _contentLength = CanSendResponseBody(_httpContext!.Response.StatusCode) ? -1 : 0;
+                        _contentLength = CanSendResponseBody(_httpContext!.Response.StatusCode)
+                            ? -1
+                            : 0;
                     }
 
                     if (_boundaryType == BoundaryType.ContentLength)
                     {
-                        _webHeaders.Set(HttpKnownHeaderNames.ContentLength, _contentLength.ToString("D", CultureInfo.InvariantCulture));
+                        _webHeaders.Set(
+                            HttpKnownHeaderNames.ContentLength,
+                            _contentLength.ToString("D", CultureInfo.InvariantCulture)
+                        );
                     }
                 }
 
@@ -217,10 +234,15 @@ namespace System.Net
                  *    HttpStatusCode.InternalServerError      500
                  *    HttpStatusCode.ServiceUnavailable         503
                  */
-                bool conn_close = (_statusCode == (int)HttpStatusCode.BadRequest || _statusCode == (int)HttpStatusCode.RequestTimeout
-                        || _statusCode == (int)HttpStatusCode.LengthRequired || _statusCode == (int)HttpStatusCode.RequestEntityTooLarge
-                        || _statusCode == (int)HttpStatusCode.RequestUriTooLong || _statusCode == (int)HttpStatusCode.InternalServerError
-                        || _statusCode == (int)HttpStatusCode.ServiceUnavailable);
+                bool conn_close = (
+                    _statusCode == (int)HttpStatusCode.BadRequest
+                    || _statusCode == (int)HttpStatusCode.RequestTimeout
+                    || _statusCode == (int)HttpStatusCode.LengthRequired
+                    || _statusCode == (int)HttpStatusCode.RequestEntityTooLarge
+                    || _statusCode == (int)HttpStatusCode.RequestUriTooLong
+                    || _statusCode == (int)HttpStatusCode.InternalServerError
+                    || _statusCode == (int)HttpStatusCode.ServiceUnavailable
+                );
 
                 if (!conn_close)
                 {
@@ -236,7 +258,10 @@ namespace System.Net
 
                 if (SendChunked)
                 {
-                    _webHeaders.Set(HttpKnownHeaderNames.TransferEncoding, HttpHeaderStrings.Chunked);
+                    _webHeaders.Set(
+                        HttpKnownHeaderNames.TransferEncoding,
+                        HttpHeaderStrings.Chunked
+                    );
                 }
 
                 int reuses = _httpContext!.Connection.Reuses;
@@ -259,7 +284,10 @@ namespace System.Net
 
                     if (!conn_close)
                     {
-                        _webHeaders.Set(HttpKnownHeaderNames.Connection, HttpHeaderStrings.KeepAlive);
+                        _webHeaders.Set(
+                            HttpKnownHeaderNames.Connection,
+                            HttpHeaderStrings.KeepAlive
+                        );
                     }
                 }
 
@@ -307,8 +335,16 @@ namespace System.Net
                     {
                         if (anyValues)
                         {
-                            if (key.Equals(HttpKnownHeaderNames.SetCookie, StringComparison.OrdinalIgnoreCase) ||
-                                key.Equals(HttpKnownHeaderNames.SetCookie2, StringComparison.OrdinalIgnoreCase))
+                            if (
+                                key.Equals(
+                                    HttpKnownHeaderNames.SetCookie,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                                || key.Equals(
+                                    HttpKnownHeaderNames.SetCookie2,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
                             {
                                 sb.Append("\r\n").Append(key).Append(": ");
                             }

@@ -37,10 +37,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
             bool hasVsLspCapability,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var actionSets = await GetActionSetsAsync(
-                document, fallbackOptions, codeFixService, codeRefactoringService, request.Range, cancellationToken).ConfigureAwait(false);
+                    document,
+                    fallbackOptions,
+                    codeFixService,
+                    codeRefactoringService,
+                    request.Range,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (actionSets.IsDefaultOrEmpty)
                 return Array.Empty<LSP.CodeAction>();
 
@@ -48,7 +56,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             // VS-LSP support nested code action, but standard LSP doesn't.
             if (hasVsLspCapability)
             {
-                var documentText = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+                var documentText = await document
+                    .GetValueTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 // Each suggested action set should have a unique set number, which is used for grouping code actions together.
                 var currentHighestSetNumber = 0;
@@ -60,14 +70,25 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                     {
                         if (!IsCodeActionNotSupportedByLSP(suggestedAction))
                         {
-                            codeActions.Add(GenerateVSCodeAction(
-                                request, documentText,
-                                suggestedAction: suggestedAction,
-                                codeActionKind: GetCodeActionKindFromSuggestedActionCategoryName(set.CategoryName!),
-                                setPriority: set.Priority,
-                                applicableRange: set.ApplicableToSpan.HasValue ? ProtocolConversions.TextSpanToRange(set.ApplicableToSpan.Value, documentText) : null,
-                                currentSetNumber: currentSetNumber,
-                                currentHighestSetNumber: ref currentHighestSetNumber));
+                            codeActions.Add(
+                                GenerateVSCodeAction(
+                                    request,
+                                    documentText,
+                                    suggestedAction: suggestedAction,
+                                    codeActionKind: GetCodeActionKindFromSuggestedActionCategoryName(
+                                        set.CategoryName!
+                                    ),
+                                    setPriority: set.Priority,
+                                    applicableRange: set.ApplicableToSpan.HasValue
+                                        ? ProtocolConversions.TextSpanToRange(
+                                            set.ApplicableToSpan.Value,
+                                            documentText
+                                        )
+                                        : null,
+                                    currentSetNumber: currentSetNumber,
+                                    currentHighestSetNumber: ref currentHighestSetNumber
+                                )
+                            );
                         }
                     }
                 }
@@ -80,10 +101,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                     {
                         if (!IsCodeActionNotSupportedByLSP(suggestedAction))
                         {
-                            codeActions.AddRange(GenerateCodeActions(
-                                request,
-                                suggestedAction,
-                                GetCodeActionKindFromSuggestedActionCategoryName(set.CategoryName!)));
+                            codeActions.AddRange(
+                                GenerateCodeActions(
+                                    request,
+                                    suggestedAction,
+                                    GetCodeActionKindFromSuggestedActionCategoryName(
+                                        set.CategoryName!
+                                    )
+                                )
+                            );
                         }
                     }
                 }
@@ -94,10 +120,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
 
         private static bool IsCodeActionNotSupportedByLSP(IUnifiedSuggestedAction suggestedAction)
             // Filter out code actions with options since they'll show dialogs and we can't remote the UI and the options.
-            => suggestedAction.OriginalCodeAction is CodeActionWithOptions
+            =>
+            suggestedAction.OriginalCodeAction is CodeActionWithOptions
             // Skip code actions that requires non-document changes.  We can't apply them in LSP currently.
             // https://github.com/dotnet/roslyn/issues/48698
-            || suggestedAction.OriginalCodeAction.Tags.Contains(CodeAction.RequiresNonDocumentChange);
+            || suggestedAction.OriginalCodeAction.Tags.Contains(
+                CodeAction.RequiresNonDocumentChange
+            );
 
         /// <summary>
         /// Generate the matching code actions for <paramref name="suggestedAction"/>. If it contains nested code actions, flatten them into an array.
@@ -105,14 +134,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
         private static LSP.CodeAction[] GenerateCodeActions(
             CodeActionParams request,
             IUnifiedSuggestedAction suggestedAction,
-            LSP.CodeActionKind codeActionKind)
+            LSP.CodeActionKind codeActionKind
+        )
         {
             var codeAction = suggestedAction.OriginalCodeAction;
             var diagnosticsForFix = GetApplicableDiagnostics(request.Context, suggestedAction);
 
             using var _ = ArrayBuilder<LSP.CodeAction>.GetInstance(out var builder);
             using var _1 = ArrayBuilder<string>.GetInstance(out var codeActionPath);
-            var nestedCodeActions = CollectNestedActions(request, codeActionKind, diagnosticsForFix, suggestedAction, codeActionPath, isTopLevelCodeAction: true);
+            var nestedCodeActions = CollectNestedActions(
+                request,
+                codeActionKind,
+                diagnosticsForFix,
+                suggestedAction,
+                codeActionPath,
+                isTopLevelCodeAction: true
+            );
 
             Command? nestedCodeActionCommand = null;
             var title = codeAction.Title;
@@ -124,12 +161,32 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 {
                     CommandIdentifier = CodeActionsHandler.RunNestedCodeActionCommandName,
                     Title = title,
-                    Arguments = [new CodeActionResolveData(title, codeAction.CustomTags, request.Range, request.TextDocument, null, nestedCodeActions: nestedCodeActions, codeActionPathList)]
+                    Arguments =
+                    [
+                        new CodeActionResolveData(
+                            title,
+                            codeAction.CustomTags,
+                            request.Range,
+                            request.TextDocument,
+                            null,
+                            nestedCodeActions: nestedCodeActions,
+                            codeActionPathList
+                        ),
+                    ],
                 };
             }
 
-            AddLSPCodeActions(builder, codeAction, request, codeActionKind, diagnosticsForFix, nestedCodeActionCommand,
-                nestedCodeActions, codeActionPathList, suggestedAction);
+            AddLSPCodeActions(
+                builder,
+                codeAction,
+                request,
+                codeActionKind,
+                diagnosticsForFix,
+                nestedCodeActionCommand,
+                nestedCodeActions,
+                codeActionPathList,
+                suggestedAction
+            );
 
             return builder.ToArray();
         }
@@ -140,7 +197,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             LSP.Diagnostic[]? diagnosticsForFix,
             IUnifiedSuggestedAction suggestedAction,
             ArrayBuilder<string> codeActionPath,
-            bool isTopLevelCodeAction = false)
+            bool isTopLevelCodeAction = false
+        )
         {
             var codeAction = suggestedAction.OriginalCodeAction;
             using var _1 = ArrayBuilder<LSP.CodeAction>.GetInstance(out var nestedCodeActions);
@@ -152,7 +210,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 {
                     foreach (var action in actionSet.Actions)
                     {
-                        nestedCodeActions.AddRange(CollectNestedActions(request, codeActionKind, diagnosticsForFix, action, codeActionPath));
+                        nestedCodeActions.AddRange(
+                            CollectNestedActions(
+                                request,
+                                codeActionKind,
+                                diagnosticsForFix,
+                                action,
+                                codeActionPath
+                            )
+                        );
                     }
                 }
             }
@@ -161,8 +227,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 if (!isTopLevelCodeAction)
                 {
                     var codeActionPathList = codeActionPath.ToArray();
-                    AddLSPCodeActions(nestedCodeActions, codeAction, request, codeActionKind, diagnosticsForFix,
-                        nestedCodeActionCommand: null, nestedCodeActions: null, codeActionPathList, suggestedAction);
+                    AddLSPCodeActions(
+                        nestedCodeActions,
+                        codeAction,
+                        request,
+                        codeActionKind,
+                        diagnosticsForFix,
+                        nestedCodeActionCommand: null,
+                        nestedCodeActions: null,
+                        codeActionPathList,
+                        suggestedAction
+                    );
                 }
             }
 
@@ -178,42 +253,80 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             Command? nestedCodeActionCommand,
             ImmutableArray<LSP.CodeAction>? nestedCodeActions,
             string[] codeActionPathList,
-            IUnifiedSuggestedAction suggestedAction)
+            IUnifiedSuggestedAction suggestedAction
+        )
         {
             var title = codeAction.Title;
             // We add an overarching action to the lightbulb that may contain nested actions.
             // Selecting one of these actions from the list invokes a command on the client side to open
             // a quick pick to select a nested action.
-            builder.Add(new LSP.CodeAction
-            {
-                Title = title,
-                Kind = codeActionKind,
-                Diagnostics = diagnosticsForFix,
-                Command = nestedCodeActionCommand,
-                Data = new CodeActionResolveData(title, codeAction.CustomTags, request.Range, request.TextDocument, fixAllFlavors: null, nestedCodeActions, codeActionPathList)
-            });
+            builder.Add(
+                new LSP.CodeAction
+                {
+                    Title = title,
+                    Kind = codeActionKind,
+                    Diagnostics = diagnosticsForFix,
+                    Command = nestedCodeActionCommand,
+                    Data = new CodeActionResolveData(
+                        title,
+                        codeAction.CustomTags,
+                        request.Range,
+                        request.TextDocument,
+                        fixAllFlavors: null,
+                        nestedCodeActions,
+                        codeActionPathList
+                    ),
+                }
+            );
 
-            if (suggestedAction is UnifiedCodeFixSuggestedAction unifiedCodeFixSuggestedAction && unifiedCodeFixSuggestedAction.FixAllFlavors is not null)
+            if (
+                suggestedAction is UnifiedCodeFixSuggestedAction unifiedCodeFixSuggestedAction
+                && unifiedCodeFixSuggestedAction.FixAllFlavors is not null
+            )
             {
-                var fixAllFlavors = unifiedCodeFixSuggestedAction.FixAllFlavors.Actions.OfType<UnifiedFixAllCodeFixSuggestedAction>().Select(action => action.FixAllState.Scope.ToString());
+                var fixAllFlavors = unifiedCodeFixSuggestedAction
+                    .FixAllFlavors.Actions.OfType<UnifiedFixAllCodeFixSuggestedAction>()
+                    .Select(action => action.FixAllState.Scope.ToString());
                 var fixAllTitle = string.Format(FeaturesResources.Fix_All_0, title);
                 var command = new LSP.Command
                 {
                     CommandIdentifier = CodeActionsHandler.RunFixAllCodeActionCommandName,
                     Title = fixAllTitle,
-                    Arguments = [new CodeActionResolveData(fixAllTitle, codeAction.CustomTags, request.Range, request.TextDocument, fixAllFlavors.ToArray(), nestedCodeActions: null, codeActionPathList)]
+                    Arguments =
+                    [
+                        new CodeActionResolveData(
+                            fixAllTitle,
+                            codeAction.CustomTags,
+                            request.Range,
+                            request.TextDocument,
+                            fixAllFlavors.ToArray(),
+                            nestedCodeActions: null,
+                            codeActionPathList
+                        ),
+                    ],
                 };
 
-                builder.Add(new LSP.CodeAction
-                {
-                    Title = fixAllTitle,
-                    Command = command,
-                    Kind = codeActionKind,
-                    Diagnostics = diagnosticsForFix,
-                    Data = new CodeActionResolveData(fixAllTitle, codeAction.CustomTags, request.Range, request.TextDocument, fixAllFlavors.ToArray(), nestedCodeActions: null, codeActionPathList)
-                });
+                builder.Add(
+                    new LSP.CodeAction
+                    {
+                        Title = fixAllTitle,
+                        Command = command,
+                        Kind = codeActionKind,
+                        Diagnostics = diagnosticsForFix,
+                        Data = new CodeActionResolveData(
+                            fixAllTitle,
+                            codeAction.CustomTags,
+                            request.Range,
+                            request.TextDocument,
+                            fixAllFlavors.ToArray(),
+                            nestedCodeActions: null,
+                            codeActionPathList
+                        ),
+                    }
+                );
             }
         }
+
         private static VSInternalCodeAction GenerateVSCodeAction(
             CodeActionParams request,
             SourceText documentText,
@@ -223,7 +336,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             LSP.Range? applicableRange,
             int currentSetNumber,
             ref int currentHighestSetNumber,
-            string currentTitle = "")
+            string currentTitle = ""
+        )
         {
             if (!string.IsNullOrEmpty(currentTitle))
             {
@@ -237,7 +351,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             var diagnosticsForFix = GetApplicableDiagnostics(request.Context, suggestedAction);
 
             // Nested code actions' unique identifiers consist of: parent code action unique identifier + '|' + title of code action
-            var nestedActions = GenerateNestedVSCodeActions(request, documentText, suggestedAction, codeActionKind, ref currentHighestSetNumber, currentTitle);
+            var nestedActions = GenerateNestedVSCodeActions(
+                request,
+                documentText,
+                suggestedAction,
+                codeActionKind,
+                ref currentHighestSetNumber,
+                currentTitle
+            );
 
             return new VSInternalCodeAction
             {
@@ -248,7 +369,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 Priority = UnifiedSuggestedActionSetPriorityToPriorityLevel(setPriority),
                 Group = $"Roslyn{currentSetNumber}",
                 ApplicableRange = applicableRange,
-                Data = new CodeActionResolveData(currentTitle, codeAction.CustomTags, request.Range, request.TextDocument, fixAllFlavors: null, nestedCodeActions: null, codeActionPath: null)
+                Data = new CodeActionResolveData(
+                    currentTitle,
+                    codeAction.CustomTags,
+                    request.Range,
+                    request.TextDocument,
+                    fixAllFlavors: null,
+                    nestedCodeActions: null,
+                    codeActionPath: null
+                ),
             };
 
             static VSInternalCodeAction[] GenerateNestedVSCodeActions(
@@ -257,9 +386,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 IUnifiedSuggestedAction suggestedAction,
                 CodeActionKind codeActionKind,
                 ref int currentHighestSetNumber,
-                string currentTitle)
+                string currentTitle
+            )
             {
-                if (suggestedAction is not UnifiedSuggestedActionWithNestedActions suggestedActionWithNestedActions)
+                if (
+                    suggestedAction
+                    is not UnifiedSuggestedActionWithNestedActions suggestedActionWithNestedActions
+                )
                 {
                     return Array.Empty<VSInternalCodeAction>();
                 }
@@ -271,11 +404,24 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                     var nestedSetNumber = ++currentHighestSetNumber;
                     foreach (var nestedSuggestedAction in nestedActionSet.Actions)
                     {
-                        nestedActions.Add(GenerateVSCodeAction(
-                            request, documentText, nestedSuggestedAction, codeActionKind, nestedActionSet.Priority,
-                            applicableRange: nestedActionSet.ApplicableToSpan.HasValue
-                                ? ProtocolConversions.TextSpanToRange(nestedActionSet.ApplicableToSpan.Value, documentText) : null,
-                            nestedSetNumber, ref currentHighestSetNumber, currentTitle));
+                        nestedActions.Add(
+                            GenerateVSCodeAction(
+                                request,
+                                documentText,
+                                nestedSuggestedAction,
+                                codeActionKind,
+                                nestedActionSet.Priority,
+                                applicableRange: nestedActionSet.ApplicableToSpan.HasValue
+                                    ? ProtocolConversions.TextSpanToRange(
+                                        nestedActionSet.ApplicableToSpan.Value,
+                                        documentText
+                                    )
+                                    : null,
+                                nestedSetNumber,
+                                ref currentHighestSetNumber,
+                                currentTitle
+                            )
+                        );
                     }
                 }
 
@@ -283,13 +429,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             }
         }
 
-        private static LSP.Diagnostic[]? GetApplicableDiagnostics(CodeActionContext context, IUnifiedSuggestedAction action)
+        private static LSP.Diagnostic[]? GetApplicableDiagnostics(
+            CodeActionContext context,
+            IUnifiedSuggestedAction action
+        )
         {
-            if (action is UnifiedCodeFixSuggestedAction codeFixAction && context.Diagnostics != null)
+            if (
+                action is UnifiedCodeFixSuggestedAction codeFixAction
+                && context.Diagnostics != null
+            )
             {
                 // Associate the diagnostics from the request that match the diagnostic fixed by the code action by ID.
                 // The request diagnostics are already restricted to the code fix location by the request.
-                var diagnosticCodesFixedByAction = codeFixAction.CodeFix.Diagnostics.Select(d => d.Id);
+                var diagnosticCodesFixedByAction = codeFixAction.CodeFix.Diagnostics.Select(d =>
+                    d.Id
+                );
                 using var _ = ArrayBuilder<LSP.Diagnostic>.GetInstance(out var diagnosticsBuilder);
                 foreach (var requestDiagnostic in context.Diagnostics)
                 {
@@ -319,10 +473,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
             string? fixAllScope,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var actionSets = await GetActionSetsAsync(
-                document, fallbackOptions, codeFixService, codeRefactoringService, selection, cancellationToken).ConfigureAwait(false);
+                    document,
+                    fallbackOptions,
+                    codeFixService,
+                    codeRefactoringService,
+                    selection,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (actionSets.IsDefaultOrEmpty)
                 return ImmutableArray<CodeAction>.Empty;
 
@@ -352,10 +514,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
         /// <summary>
         /// Generates a code action with its nested actions properly set.
         /// </summary>
-        private static CodeAction GetNestedActionsFromActionSet(IUnifiedSuggestedAction suggestedAction, string? fixAllScope)
+        private static CodeAction GetNestedActionsFromActionSet(
+            IUnifiedSuggestedAction suggestedAction,
+            string? fixAllScope
+        )
         {
             var codeAction = suggestedAction.OriginalCodeAction;
-            if (suggestedAction is not UnifiedSuggestedActionWithNestedActions suggestedActionWithNestedActions)
+            if (
+                suggestedAction
+                is not UnifiedSuggestedActionWithNestedActions suggestedActionWithNestedActions
+            )
             {
                 return codeAction;
             }
@@ -374,69 +542,126 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             }
 
             return CodeAction.Create(
-                codeAction.Title, nestedActions.ToImmutable(), codeAction.IsInlinable, codeAction.Priority);
+                codeAction.Title,
+                nestedActions.ToImmutable(),
+                codeAction.IsInlinable,
+                codeAction.Priority
+            );
         }
 
-        private static void GetFixAllActionsFromActionSet(IUnifiedSuggestedAction suggestedAction, ArrayBuilder<CodeAction> codeActions, string? fixAllScope)
+        private static void GetFixAllActionsFromActionSet(
+            IUnifiedSuggestedAction suggestedAction,
+            ArrayBuilder<CodeAction> codeActions,
+            string? fixAllScope
+        )
         {
             var codeAction = suggestedAction.OriginalCodeAction;
-            if (suggestedAction is not UnifiedCodeFixSuggestedAction { FixAllFlavors: not null } unifiedCodeFixSuggestedAction)
+            if (
+                suggestedAction
+                is not UnifiedCodeFixSuggestedAction
+                {
+                    FixAllFlavors: not null
+                } unifiedCodeFixSuggestedAction
+            )
             {
                 return;
             }
 
-            // Retrieves the fix all code action based on the scope that was selected. 
+            // Retrieves the fix all code action based on the scope that was selected.
             // Creates a FixAllCodeAction type so that we can get the correct operations for the selected scope.
-            var fixAllFlavor = unifiedCodeFixSuggestedAction.FixAllFlavors.Actions.OfType<UnifiedFixAllCodeFixSuggestedAction>().Where(action => action.FixAllState.Scope.ToString() == fixAllScope).First();
-            codeActions.Add(new FixAllCodeAction(codeAction.Title, fixAllFlavor.FixAllState, showPreviewChangesDialog: false));
+            var fixAllFlavor = unifiedCodeFixSuggestedAction
+                .FixAllFlavors.Actions.OfType<UnifiedFixAllCodeFixSuggestedAction>()
+                .Where(action => action.FixAllState.Scope.ToString() == fixAllScope)
+                .First();
+            codeActions.Add(
+                new FixAllCodeAction(
+                    codeAction.Title,
+                    fixAllFlavor.FixAllState,
+                    showPreviewChangesDialog: false
+                )
+            );
         }
 
-        private static async ValueTask<ImmutableArray<UnifiedSuggestedActionSet>> GetActionSetsAsync(
+        private static async ValueTask<
+            ImmutableArray<UnifiedSuggestedActionSet>
+        > GetActionSetsAsync(
             Document document,
             CodeActionOptionsProvider fallbackOptions,
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
             LSP.Range selection,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
             var textSpan = ProtocolConversions.RangeToTextSpan(selection, text);
 
-            var codeFixes = await UnifiedSuggestedActionsSource.GetFilterAndOrderCodeFixesAsync(
-                document.Project.Solution.Workspace, codeFixService, document, textSpan,
-                new DefaultCodeActionRequestPriorityProvider(),
-                fallbackOptions, addOperationScope: _ => null, cancellationToken).ConfigureAwait(false);
+            var codeFixes = await UnifiedSuggestedActionsSource
+                .GetFilterAndOrderCodeFixesAsync(
+                    document.Project.Solution.Workspace,
+                    codeFixService,
+                    document,
+                    textSpan,
+                    new DefaultCodeActionRequestPriorityProvider(),
+                    fallbackOptions,
+                    addOperationScope: _ => null,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var codeRefactorings = await UnifiedSuggestedActionsSource.GetFilterAndOrderCodeRefactoringsAsync(
-                document.Project.Solution.Workspace, codeRefactoringService, document, textSpan, priority: null, fallbackOptions,
-                addOperationScope: _ => null, filterOutsideSelection: false, cancellationToken).ConfigureAwait(false);
+            var codeRefactorings = await UnifiedSuggestedActionsSource
+                .GetFilterAndOrderCodeRefactoringsAsync(
+                    document.Project.Solution.Workspace,
+                    codeRefactoringService,
+                    document,
+                    textSpan,
+                    priority: null,
+                    fallbackOptions,
+                    addOperationScope: _ => null,
+                    filterOutsideSelection: false,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var actionSets = UnifiedSuggestedActionsSource.FilterAndOrderActionSets(
-                codeFixes, codeRefactorings, textSpan, currentActionCount: 0);
+                codeFixes,
+                codeRefactorings,
+                textSpan,
+                currentActionCount: 0
+            );
             return actionSets;
         }
 
-        private static CodeActionKind GetCodeActionKindFromSuggestedActionCategoryName(string categoryName)
-            => categoryName switch
+        private static CodeActionKind GetCodeActionKindFromSuggestedActionCategoryName(
+            string categoryName
+        ) =>
+            categoryName switch
             {
                 UnifiedPredefinedSuggestedActionCategoryNames.CodeFix => CodeActionKind.QuickFix,
-                UnifiedPredefinedSuggestedActionCategoryNames.Refactoring => CodeActionKind.Refactor,
+                UnifiedPredefinedSuggestedActionCategoryNames.Refactoring
+                    => CodeActionKind.Refactor,
                 UnifiedPredefinedSuggestedActionCategoryNames.StyleFix => CodeActionKind.QuickFix,
                 UnifiedPredefinedSuggestedActionCategoryNames.ErrorFix => CodeActionKind.QuickFix,
-                _ => throw ExceptionUtilities.UnexpectedValue(categoryName)
+                _ => throw ExceptionUtilities.UnexpectedValue(categoryName),
             };
 
-        private static LSP.VSInternalPriorityLevel? UnifiedSuggestedActionSetPriorityToPriorityLevel(CodeActionPriority priority)
-            => priority switch
+        private static LSP.VSInternalPriorityLevel? UnifiedSuggestedActionSetPriorityToPriorityLevel(
+            CodeActionPriority priority
+        ) =>
+            priority switch
             {
                 CodeActionPriority.Lowest => LSP.VSInternalPriorityLevel.Lowest,
                 CodeActionPriority.Low => LSP.VSInternalPriorityLevel.Low,
                 CodeActionPriority.Default => LSP.VSInternalPriorityLevel.Normal,
                 CodeActionPriority.High => LSP.VSInternalPriorityLevel.High,
-                _ => throw ExceptionUtilities.UnexpectedValue(priority)
+                _ => throw ExceptionUtilities.UnexpectedValue(priority),
             };
 
-        public static CodeAction GetCodeActionToResolve(string[] codeActionPath, ImmutableArray<CodeAction> codeActions, bool isFixAllAction)
+        public static CodeAction GetCodeActionToResolve(
+            string[] codeActionPath,
+            ImmutableArray<CodeAction> codeActions,
+            bool isFixAllAction
+        )
         {
             CodeAction? matchingAction = null;
             var currentActions = codeActions;
@@ -455,7 +680,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                     // Otherwise, we are likely at the end of the path and need to retrieve
                     // the FixAllCodeAction if we are in that state or just the regular CodeAction
                     // since they have the same title path.
-                    matchingAction = matchingActions.Single(action => isFixAllAction ? action is FixAllCodeAction : action is CodeAction);
+                    matchingAction = matchingActions.Single(action =>
+                        isFixAllAction ? action is FixAllCodeAction : action is CodeAction
+                    );
                 }
 
                 Contract.ThrowIfNull(matchingAction);

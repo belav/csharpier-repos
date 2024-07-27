@@ -15,7 +15,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 {
-
     /// <summary>
     /// Looks for code of the forms:
     /// <code>
@@ -28,19 +27,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
     /// </code>
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal partial class CSharpAsAndNullCheckDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal partial class CSharpAsAndNullCheckDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpAsAndNullCheckDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.InlineAsTypeCheckId,
-                   EnforceOnBuildValues.InlineAsType,
-                   CSharpCodeStyleOptions.PreferPatternMatchingOverAsWithNullCheck,
-                   new LocalizableResourceString(
-                        nameof(CSharpAnalyzersResources.Use_pattern_matching), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.InlineAsTypeCheckId,
+                EnforceOnBuildValues.InlineAsType,
+                CSharpCodeStyleOptions.PreferPatternMatchingOverAsWithNullCheck,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_pattern_matching),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
             // We wrap the SyntaxNodeAction within a CodeBlockStartAction, which allows us to
@@ -48,12 +51,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             // and eventually report a diagnostic on the local declaration statement node.
             // Without the containing CodeBlockStartAction, our reported diagnostic would be classified
             // as a non-local diagnostic and would not participate in lightbulb for computing code fixes.
-            => context.RegisterCodeBlockStartAction<SyntaxKind>(blockStartContext =>
-            blockStartContext.RegisterSyntaxNodeAction(SyntaxNodeAction,
-                SyntaxKind.EqualsExpression,
-                SyntaxKind.NotEqualsExpression,
-                SyntaxKind.IsExpression,
-                SyntaxKind.IsPatternExpression));
+            =>
+            context.RegisterCodeBlockStartAction<SyntaxKind>(blockStartContext =>
+                blockStartContext.RegisterSyntaxNodeAction(
+                    SyntaxNodeAction,
+                    SyntaxKind.EqualsExpression,
+                    SyntaxKind.NotEqualsExpression,
+                    SyntaxKind.IsExpression,
+                    SyntaxKind.IsPatternExpression
+                )
+            );
 
         private void SyntaxNodeAction(SyntaxNodeAnalysisContext syntaxContext)
         {
@@ -65,7 +72,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             if (syntaxTree.Options.LanguageVersion() < LanguageVersion.CSharp7)
                 return;
 
-            var styleOption = syntaxContext.GetCSharpAnalyzerOptions().PreferPatternMatchingOverAsWithNullCheck;
+            var styleOption = syntaxContext
+                .GetCSharpAnalyzerOptions()
+                .PreferPatternMatchingOverAsWithNullCheck;
             if (!styleOption.Value || ShouldSkipAnalysis(syntaxContext, styleOption.Notification))
             {
                 // Bail immediately if the user has disabled this feature.
@@ -75,12 +84,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var comparison = (ExpressionSyntax)node;
             var (comparisonLeft, comparisonRight) = comparison switch
             {
-                BinaryExpressionSyntax binaryExpression => (binaryExpression.Left, (SyntaxNode)binaryExpression.Right),
+                BinaryExpressionSyntax binaryExpression
+                    => (binaryExpression.Left, (SyntaxNode)binaryExpression.Right),
                 IsPatternExpressionSyntax isPattern => (isPattern.Expression, isPattern.Pattern),
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 
-            var operand = GetNullCheckOperand(comparisonLeft, comparison.Kind(), comparisonRight)?.WalkDownParentheses();
+            var operand = GetNullCheckOperand(comparisonLeft, comparison.Kind(), comparisonRight)
+                ?.WalkDownParentheses();
             if (operand == null)
                 return;
 
@@ -94,21 +105,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             }
 
             var cancellationToken = syntaxContext.CancellationToken;
-            if (semanticModel.GetSymbolInfo(comparison, cancellationToken).GetAnySymbol().IsUserDefinedOperator())
+            if (
+                semanticModel
+                    .GetSymbolInfo(comparison, cancellationToken)
+                    .GetAnySymbol()
+                    .IsUserDefinedOperator()
+            )
                 return;
 
-            if (!TryGetTypeCheckParts(semanticModel, operand,
+            if (
+                !TryGetTypeCheckParts(
+                    semanticModel,
+                    operand,
                     out var declarator,
                     out var asExpression,
-                    out var localSymbol))
+                    out var localSymbol
+                )
+            )
             {
                 return;
             }
 
             var localStatement = declarator.Parent?.Parent;
             var enclosingBlock = localStatement?.Parent;
-            if (localStatement == null ||
-                enclosingBlock == null)
+            if (localStatement == null || enclosingBlock == null)
             {
                 return;
             }
@@ -124,7 +144,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
             // Don't convert if the as is part of a local declaration with a using keyword
             // eg using var x = y as MyObject;
-            if (localStatement is LocalDeclarationStatementSyntax localDecl && localDecl.UsingKeyword != default)
+            if (
+                localStatement is LocalDeclarationStatementSyntax localDecl
+                && localDecl.UsingKeyword != default
+            )
                 return;
 
             var typeNode = asExpression.Right;
@@ -166,13 +189,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             //      if (s != null) { ... }
             //
             // It's no longer safe to use pattern-matching because 'field is string s' would never be true.
-            // 
+            //
             // Additionally, also bail out if the assigned local is referenced (i.e. read/write/nameof) up to the point of null check.
             //      var s = field as string;
             //      MethodCall(flag: s == null);
             //      if (s != null) { ... }
             //
-            var asOperand = semanticModel.GetSymbolInfo(asExpression.Left, cancellationToken).Symbol;
+            var asOperand = semanticModel
+                .GetSymbolInfo(asExpression.Left, cancellationToken)
+                .Symbol;
             var localStatementStart = localStatement.SpanStart;
             var comparisonSpanStart = comparison.SpanStart;
 
@@ -188,9 +213,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 if (descendentNode is IdentifierNameSyntax identifierName)
                 {
                     // Check if this is a 'write' to the asOperand.
-                    if (identifierName.Identifier.ValueText == asOperand?.Name &&
-                        asOperand.Equals(semanticModel.GetSymbolInfo(identifierName, cancellationToken).Symbol) &&
-                        identifierName.IsWrittenTo(semanticModel, cancellationToken))
+                    if (
+                        identifierName.Identifier.ValueText == asOperand?.Name
+                        && asOperand.Equals(
+                            semanticModel.GetSymbolInfo(identifierName, cancellationToken).Symbol
+                        )
+                        && identifierName.IsWrittenTo(semanticModel, cancellationToken)
+                    )
                     {
                         return;
                     }
@@ -201,14 +230,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 }
             }
 
-            if (!Analyzer.CanSafelyConvertToPatternMatching(
-                    semanticModel, localSymbol, comparison, operand,
-                    localStatement, enclosingBlock, cancellationToken))
+            if (
+                !Analyzer.CanSafelyConvertToPatternMatching(
+                    semanticModel,
+                    localSymbol,
+                    comparison,
+                    operand,
+                    localStatement,
+                    enclosingBlock,
+                    cancellationToken
+                )
+            )
             {
                 return;
             }
 
-            var comparisonEnclosingBlock = comparison.AncestorsAndSelf().FirstOrDefault(n => n is BlockSyntax);
+            var comparisonEnclosingBlock = comparison
+                .AncestorsAndSelf()
+                .FirstOrDefault(n => n is BlockSyntax);
             if (comparisonEnclosingBlock is null)
                 return;
 
@@ -223,10 +262,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     if (descendentNodeSpanStart <= localStatementStart)
                         continue;
 
-                    if (descendentNode is IdentifierNameSyntax identifierName && !
-                        descendentNode.Span.IntersectsWith(comparisonEnclosingBlock.Span) &&
-                        identifierName.Identifier.ValueText == localSymbol.Name &&
-                        localSymbol.Equals(semanticModel.GetSymbolInfo(identifierName, cancellationToken).Symbol))
+                    if (
+                        descendentNode is IdentifierNameSyntax identifierName
+                        && !descendentNode.Span.IntersectsWith(comparisonEnclosingBlock.Span)
+                        && identifierName.Identifier.ValueText == localSymbol.Name
+                        && localSymbol.Equals(
+                            semanticModel.GetSymbolInfo(identifierName, cancellationToken).Symbol
+                        )
+                    )
                     {
                         return;
                     }
@@ -244,15 +287,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     if (descendentNodeSpanStart <= localStatementStart)
                         continue;
 
-                    if (descendentNode is IdentifierNameSyntax identifierName &&
-                        identifierName.Identifier.ValueText == localSymbol.Name &&
-                        localSymbol.Equals(semanticModel.GetSymbolInfo(identifierName, cancellationToken).Symbol))
+                    if (
+                        descendentNode is IdentifierNameSyntax identifierName
+                        && identifierName.Identifier.ValueText == localSymbol.Name
+                        && localSymbol.Equals(
+                            semanticModel.GetSymbolInfo(identifierName, cancellationToken).Symbol
+                        )
+                    )
                     {
-                        if (identifierName.Parent is AssignmentExpressionSyntax assignmentExpression &&
-                            assignmentExpression.Left == identifierName)
+                        if (
+                            identifierName.Parent is AssignmentExpressionSyntax assignmentExpression
+                            && assignmentExpression.Left == identifierName
+                        )
                         {
                             var rightType = semanticModel.GetTypeInfo(assignmentExpression.Right);
-                            if (rightType.Type is null or { NullableAnnotation: NullableAnnotation.Annotated })
+                            if (
+                                rightType.Type
+                                is null
+                                    or { NullableAnnotation: NullableAnnotation.Annotated }
+                            )
                                 return;
                         }
                     }
@@ -263,15 +316,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var additionalLocations = ImmutableArray.Create(
                 declarator.GetLocation(),
                 comparison.GetLocation(),
-                asExpression.GetLocation());
+                asExpression.GetLocation()
+            );
 
             // Put a diagnostic with the appropriate severity on the declaration-statement itself.
-            syntaxContext.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                localStatement.GetLocation(),
-                styleOption.Notification,
-                additionalLocations,
-                properties: null));
+            syntaxContext.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    localStatement.GetLocation(),
+                    styleOption.Notification,
+                    additionalLocations,
+                    properties: null
+                )
+            );
         }
 
         private static bool TryGetTypeCheckParts(
@@ -279,41 +336,58 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             SyntaxNode operand,
             [NotNullWhen(true)] out VariableDeclaratorSyntax? declarator,
             [NotNullWhen(true)] out BinaryExpressionSyntax? asExpression,
-            [NotNullWhen(true)] out ILocalSymbol? localSymbol)
+            [NotNullWhen(true)] out ILocalSymbol? localSymbol
+        )
         {
             switch (operand.Kind())
             {
                 case SyntaxKind.IdentifierName:
-                    {
-                        // var x = e as T;
-                        // if (x != null) F(x);
-                        var identifier = (IdentifierNameSyntax)operand;
-                        if (!TryFindVariableDeclarator(semanticModel, identifier, out localSymbol, out declarator))
-                            break;
+                {
+                    // var x = e as T;
+                    // if (x != null) F(x);
+                    var identifier = (IdentifierNameSyntax)operand;
+                    if (
+                        !TryFindVariableDeclarator(
+                            semanticModel,
+                            identifier,
+                            out localSymbol,
+                            out declarator
+                        )
+                    )
+                        break;
 
-                        var initializerValue = declarator.Initializer?.Value;
-                        if (!initializerValue.IsKind(SyntaxKind.AsExpression, out asExpression))
-                            break;
+                    var initializerValue = declarator.Initializer?.Value;
+                    if (!initializerValue.IsKind(SyntaxKind.AsExpression, out asExpression))
+                        break;
 
-                        return true;
-                    }
+                    return true;
+                }
 
                 case SyntaxKind.SimpleAssignmentExpression:
+                {
+                    // T x;
+                    // if ((x = e as T) != null) F(x);
+                    var assignment = (AssignmentExpressionSyntax)operand;
+                    if (
+                        !assignment.Right.IsKind(SyntaxKind.AsExpression, out asExpression)
+                        || assignment.Left is not IdentifierNameSyntax identifier
+                    )
                     {
-                        // T x;
-                        // if ((x = e as T) != null) F(x);
-                        var assignment = (AssignmentExpressionSyntax)operand;
-                        if (!assignment.Right.IsKind(SyntaxKind.AsExpression, out asExpression) ||
-                            assignment.Left is not IdentifierNameSyntax identifier)
-                        {
-                            break;
-                        }
-
-                        if (!TryFindVariableDeclarator(semanticModel, identifier, out localSymbol, out declarator))
-                            break;
-
-                        return true;
+                        break;
                     }
+
+                    if (
+                        !TryFindVariableDeclarator(
+                            semanticModel,
+                            identifier,
+                            out localSymbol,
+                            out declarator
+                        )
+                    )
+                        break;
+
+                    return true;
+                }
             }
 
             declarator = null;
@@ -326,14 +400,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             SemanticModel semanticModel,
             IdentifierNameSyntax identifier,
             [NotNullWhen(true)] out ILocalSymbol? localSymbol,
-            [NotNullWhen(true)] out VariableDeclaratorSyntax? declarator)
+            [NotNullWhen(true)] out VariableDeclaratorSyntax? declarator
+        )
         {
             localSymbol = semanticModel.GetSymbolInfo(identifier).Symbol as ILocalSymbol;
-            declarator = localSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as VariableDeclaratorSyntax;
+            declarator =
+                localSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
+                as VariableDeclaratorSyntax;
             return localSymbol != null && declarator != null;
         }
 
-        private static ExpressionSyntax? GetNullCheckOperand(ExpressionSyntax left, SyntaxKind comparisonKind, SyntaxNode right)
+        private static ExpressionSyntax? GetNullCheckOperand(
+            ExpressionSyntax left,
+            SyntaxKind comparisonKind,
+            SyntaxNode right
+        )
         {
             if (left.IsKind(SyntaxKind.NullLiteralExpression))
             {
@@ -349,17 +430,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 return left;
             }
 
-            if (right is PredefinedTypeSyntax predefinedType
+            if (
+                right is PredefinedTypeSyntax predefinedType
                 && predefinedType.Keyword.IsKind(SyntaxKind.ObjectKeyword)
-                && comparisonKind == SyntaxKind.IsExpression)
+                && comparisonKind == SyntaxKind.IsExpression
+            )
             {
                 // x is object
                 return left;
             }
 
-            if (right is ConstantPatternSyntax constantPattern
+            if (
+                right is ConstantPatternSyntax constantPattern
                 && constantPattern.Expression.IsKind(SyntaxKind.NullLiteralExpression)
-                && comparisonKind == SyntaxKind.IsPatternExpression)
+                && comparisonKind == SyntaxKind.IsPatternExpression
+            )
             {
                 // x is null
                 return left;

@@ -182,8 +182,9 @@ namespace System.Security.Cryptography.X509Certificates
 
         public void Decrypt(SafePasswordHandle password, bool ephemeralSpecified)
         {
-            ReadOnlyMemory<byte> authSafeContents =
-                Helpers.DecodeOctetStringAsMemory(_pfxAsn.AuthSafe.Content);
+            ReadOnlyMemory<byte> authSafeContents = Helpers.DecodeOctetStringAsMemory(
+                _pfxAsn.AuthSafe.Content
+            );
 
             _allowDoubleBind = !ephemeralSpecified;
 
@@ -231,7 +232,7 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 throw new CryptographicException(SR.Cryptography_Pfx_BadPassword, e)
                 {
-                    HResult = ErrorInvalidPasswordHResult
+                    HResult = ErrorInvalidPasswordHResult,
                 };
             }
             finally
@@ -240,7 +241,10 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        private void VerifyAndDecrypt(ReadOnlySpan<char> password, ReadOnlyMemory<byte> authSafeContents)
+        private void VerifyAndDecrypt(
+            ReadOnlySpan<char> password,
+            ReadOnlyMemory<byte> authSafeContents
+        )
         {
             Debug.Assert(_pfxAsn.MacData.HasValue);
             ReadOnlySpan<byte> authSafeSpan = authSafeContents.Span;
@@ -269,7 +273,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             throw new CryptographicException(SR.Cryptography_Pfx_BadPassword)
             {
-                HResult = ErrorInvalidPasswordHResult
+                HResult = ErrorInvalidPasswordHResult,
             };
         }
 
@@ -299,7 +303,8 @@ namespace System.Security.Cryptography.X509Certificates
                     ref certBagAttrs,
                     ref certBagIdx,
                     ref keyBags,
-                    ref keyBagIdx);
+                    ref keyBagIdx
+                );
 
                 certs = ArrayPool<CertAndKey>.Shared.Rent(certBagIdx);
                 certs.AsSpan().Clear();
@@ -321,7 +326,8 @@ namespace System.Security.Cryptography.X509Certificates
                     keyBags,
                     publicKeyInfos,
                     keys,
-                    keyBagIdx);
+                    keyBagIdx
+                );
 
                 _certCount = certBagIdx;
                 _certs = certs;
@@ -358,7 +364,10 @@ namespace System.Security.Cryptography.X509Certificates
                         publicKeyInfos[i].Dispose();
                     }
 
-                    ArrayPool<RentedSubjectPublicKeyInfo>.Shared.Return(publicKeyInfos, clearArray: true);
+                    ArrayPool<RentedSubjectPublicKeyInfo>.Shared.Return(
+                        publicKeyInfos,
+                        clearArray: true
+                    );
                 }
 
                 ArrayPool<CertBagAsn>.Shared.Return(certBags, clearArray: true);
@@ -375,7 +384,10 @@ namespace System.Security.Cryptography.X509Certificates
 
             try
             {
-                AsnValueReader outer = new AsnValueReader(authSafeContents.Span, AsnEncodingRules.BER);
+                AsnValueReader outer = new AsnValueReader(
+                    authSafeContents.Span,
+                    AsnEncodingRules.BER
+                );
                 AsnValueReader reader = outer.ReadSequence();
                 outer.ThrowIfNotEmpty();
                 int i = 0;
@@ -402,7 +414,8 @@ namespace System.Security.Cryptography.X509Certificates
             ref AttributeAsn[]?[] certBagAttrs,
             ref int certBagIdx,
             ref SafeBagAsn[] keyBags,
-            ref int keyBagIdx)
+            ref int keyBagIdx
+        )
         {
             for (int i = 0; i < _safeContentsValues!.Length; i++)
             {
@@ -433,7 +446,8 @@ namespace System.Security.Cryptography.X509Certificates
                         ref certBagAttrs,
                         ref certBagIdx,
                         ref keyBags,
-                        ref keyBagIdx);
+                        ref keyBagIdx
+                    );
                 }
             }
         }
@@ -443,7 +457,8 @@ namespace System.Security.Cryptography.X509Certificates
             SafeBagAsn[] keyBags,
             int keyBagIdx,
             AsymmetricAlgorithm[] keys,
-            RentedSubjectPublicKeyInfo[] publicKeyInfos)
+            RentedSubjectPublicKeyInfo[] publicKeyInfos
+        )
         {
             byte[]? spkiBuf = null;
 
@@ -472,7 +487,8 @@ namespace System.Security.Cryptography.X509Certificates
 
                     cur.Value = SubjectPublicKeyInfoAsn.Decode(
                         spkiBuf.AsMemory(0, pubLength),
-                        AsnEncodingRules.DER);
+                        AsnEncodingRules.DER
+                    );
 
                     keys[i] = key;
                     cur.TrackArray(spkiBuf, clearSize: 0);
@@ -505,28 +521,33 @@ namespace System.Security.Cryptography.X509Certificates
             SafeBagAsn[] keyBags,
             RentedSubjectPublicKeyInfo[] publicKeyInfos,
             AsymmetricAlgorithm?[] keys,
-            int keyBagIdx)
+            int keyBagIdx
+        )
         {
             for (certBagIdx--; certBagIdx >= 0; certBagIdx--)
             {
                 int matchingKeyIdx = -1;
 
-                foreach (AttributeAsn attr in certBagAttrs[certBagIdx] ?? Array.Empty<AttributeAsn>())
+                foreach (
+                    AttributeAsn attr in certBagAttrs[certBagIdx] ?? Array.Empty<AttributeAsn>()
+                )
                 {
                     if (attr.AttrType == Oids.LocalKeyId && attr.AttrValues.Length > 0)
                     {
                         matchingKeyIdx = FindMatchingKey(
                             keyBags,
                             keyBagIdx,
-                            Helpers.DecodeOctetStringAsMemory(attr.AttrValues[0]).Span);
+                            Helpers.DecodeOctetStringAsMemory(attr.AttrValues[0]).Span
+                        );
 
                         // Only try the first one.
                         break;
                     }
                 }
 
-                ReadOnlyMemory<byte> x509Data =
-                    Helpers.DecodeOctetStringAsMemory(certBags[certBagIdx].CertValue);
+                ReadOnlyMemory<byte> x509Data = Helpers.DecodeOctetStringAsMemory(
+                    certBags[certBagIdx].CertValue
+                );
 
                 certs[certBagIdx].Cert = ReadX509Der(x509Data);
 
@@ -541,7 +562,14 @@ namespace System.Security.Cryptography.X509Certificates
 
                     for (int i = 0; i < keyBagIdx; i++)
                     {
-                        if (PublicKeyMatches(algorithm, keyParams, keyValue, ref publicKeyInfos[i].Value))
+                        if (
+                            PublicKeyMatches(
+                                algorithm,
+                                keyParams,
+                                keyValue,
+                                ref publicKeyInfos[i].Value
+                            )
+                        )
                         {
                             matchingKeyIdx = i;
                             break;
@@ -579,7 +607,8 @@ namespace System.Security.Cryptography.X509Certificates
             string algorithm,
             byte[] keyParams,
             byte[] keyValue,
-            ref SubjectPublicKeyInfoAsn publicKeyInfo)
+            ref SubjectPublicKeyInfoAsn publicKeyInfo
+        )
         {
             if (!publicKeyInfo.SubjectPublicKey.Span.SequenceEqual(keyValue))
             {
@@ -599,9 +628,8 @@ namespace System.Security.Cryptography.X509Certificates
                             return false;
                     }
 
-                    return
-                        publicKeyInfo.Algorithm.HasNullEquivalentParameters() &&
-                        AlgorithmIdentifierAsn.RepresentsNull(keyParams);
+                    return publicKeyInfo.Algorithm.HasNullEquivalentParameters()
+                        && AlgorithmIdentifierAsn.RepresentsNull(keyParams);
                 case Oids.EcPublicKey:
                 case Oids.EcDiffieHellman:
                     switch (publicKeyInfo.Algorithm.Algorithm)
@@ -613,9 +641,8 @@ namespace System.Security.Cryptography.X509Certificates
                             return false;
                     }
 
-                    return
-                        publicKeyInfo.Algorithm.Parameters.HasValue &&
-                        publicKeyInfo.Algorithm.Parameters.Value.Span.SequenceEqual(keyParams);
+                    return publicKeyInfo.Algorithm.Parameters.HasValue
+                        && publicKeyInfo.Algorithm.Parameters.Value.Span.SequenceEqual(keyParams);
             }
 
             if (algorithm != publicKeyInfo.Algorithm.Algorithm)
@@ -634,16 +661,20 @@ namespace System.Security.Cryptography.X509Certificates
         private static int FindMatchingKey(
             SafeBagAsn[] keyBags,
             int keyBagCount,
-            ReadOnlySpan<byte> localKeyId)
+            ReadOnlySpan<byte> localKeyId
+        )
         {
             for (int i = 0; i < keyBagCount; i++)
             {
-                foreach (AttributeAsn attr in keyBags[i].BagAttributes ?? Array.Empty<AttributeAsn>())
+                foreach (
+                    AttributeAsn attr in keyBags[i].BagAttributes ?? Array.Empty<AttributeAsn>()
+                )
                 {
                     if (attr.AttrType == Oids.LocalKeyId && attr.AttrValues.Length > 0)
                     {
-                        ReadOnlyMemory<byte> curKeyId =
-                            Helpers.DecodeOctetStringAsMemory(attr.AttrValues[0]);
+                        ReadOnlyMemory<byte> curKeyId = Helpers.DecodeOctetStringAsMemory(
+                            attr.AttrValues[0]
+                        );
 
                         if (curKeyId.Span.SequenceEqual(localKeyId))
                         {
@@ -660,10 +691,13 @@ namespace System.Security.Cryptography.X509Certificates
 
         private static void DecryptSafeContents(
             ReadOnlySpan<char> password,
-            ref ContentInfoAsn safeContentsAsn)
+            ref ContentInfoAsn safeContentsAsn
+        )
         {
-            EncryptedDataAsn encryptedData =
-                EncryptedDataAsn.Decode(safeContentsAsn.Content, AsnEncodingRules.BER);
+            EncryptedDataAsn encryptedData = EncryptedDataAsn.Decode(
+                safeContentsAsn.Content,
+                AsnEncodingRules.BER
+            );
 
             // https://tools.ietf.org/html/rfc5652#section-8
             if (encryptedData.Version != 0 && encryptedData.Version != 2)
@@ -684,7 +718,11 @@ namespace System.Security.Cryptography.X509Certificates
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
             }
 
-            int encryptedValueLength = encryptedData.EncryptedContentInfo.EncryptedContent.Value.Length;
+            int encryptedValueLength = encryptedData
+                .EncryptedContentInfo
+                .EncryptedContent
+                .Value
+                .Length;
             byte[] destination = CryptoPool.Rent(encryptedValueLength);
             int written;
 
@@ -695,7 +733,8 @@ namespace System.Security.Cryptography.X509Certificates
                     password,
                     default,
                     encryptedData.EncryptedContentInfo.EncryptedContent.Value.Span,
-                    destination);
+                    destination
+                );
             }
             catch
             {
@@ -716,7 +755,8 @@ namespace System.Security.Cryptography.X509Certificates
             ref AttributeAsn[]?[] certBagAttrs,
             ref int certBagIdx,
             ref SafeBagAsn[] keyBags,
-            ref int keyBagIdx)
+            ref int keyBagIdx
+        )
         {
             ReadOnlyMemory<byte> contentData = safeContentsAsn.Content;
 
@@ -748,7 +788,10 @@ namespace System.Security.Cryptography.X509Certificates
                             certBagIdx++;
                         }
                     }
-                    else if (bag.BagId == Oids.Pkcs12KeyBag || bag.BagId == Oids.Pkcs12ShroudedKeyBag)
+                    else if (
+                        bag.BagId == Oids.Pkcs12KeyBag
+                        || bag.BagId == Oids.Pkcs12ShroudedKeyBag
+                    )
                     {
                         GrowIfNeeded(ref keyBags, keyBagIdx);
                         keyBags[keyBagIdx] = bag;
@@ -769,7 +812,8 @@ namespace System.Security.Cryptography.X509Certificates
                 ArraySegment<byte> decrypted = KeyFormatHelper.DecryptPkcs8(
                     password,
                     safeBag.BagValue,
-                    out int localRead);
+                    out int localRead
+                );
 
                 try
                 {

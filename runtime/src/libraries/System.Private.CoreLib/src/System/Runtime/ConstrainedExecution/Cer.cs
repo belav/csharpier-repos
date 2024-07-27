@@ -3,11 +3,15 @@
 
 namespace System.Runtime.ConstrainedExecution
 {
-    [Obsolete(Obsoletions.ConstrainedExecutionRegionMessage, DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.ConstrainedExecutionRegionMessage,
+        DiagnosticId = Obsoletions.ConstrainedExecutionRegionDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public enum Cer : int
     {
         None = 0,
-        MayFail = 1,  // Might fail, but the method will say it failed
+        MayFail = 1, // Might fail, but the method will say it failed
         Success = 2,
     }
 }

@@ -22,7 +22,8 @@ public static class RelationalElementTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static ElementTypeBuilder HasStoreType(
         this ElementTypeBuilder elementTypeBuilder,
-        string? typeName)
+        string? typeName
+    )
     {
         Check.NullButNotEmpty(typeName, nameof(typeName));
 
@@ -44,7 +45,8 @@ public static class RelationalElementTypeBuilderExtensions
     public static IConventionElementTypeBuilder? HasStoreType(
         this IConventionElementTypeBuilder elementTypeBuilder,
         string? typeName,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!elementTypeBuilder.CanSetStoreType(typeName, fromDataAnnotation))
         {
@@ -68,8 +70,13 @@ public static class RelationalElementTypeBuilderExtensions
     public static bool CanSetStoreType(
         this IConventionElementTypeBuilder elementTypeBuilder,
         string? typeName,
-        bool fromDataAnnotation = false)
-        => elementTypeBuilder.CanSetAnnotation(RelationalAnnotationNames.StoreType, typeName, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        elementTypeBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.StoreType,
+            typeName,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the elements as capable of storing only fixed-length data, such as strings.
@@ -82,7 +89,8 @@ public static class RelationalElementTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public static ElementTypeBuilder IsFixedLength(
         this ElementTypeBuilder elementTypeBuilder,
-        bool fixedLength = true)
+        bool fixedLength = true
+    )
     {
         elementTypeBuilder.Metadata.SetIsFixedLength(fixedLength);
 
@@ -102,7 +110,8 @@ public static class RelationalElementTypeBuilderExtensions
     public static IConventionElementTypeBuilder? IsFixedLength(
         this IConventionElementTypeBuilder elementTypeBuilder,
         bool? fixedLength,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!elementTypeBuilder.CanSetFixedLength(fixedLength, fromDataAnnotation))
         {
@@ -126,6 +135,11 @@ public static class RelationalElementTypeBuilderExtensions
     public static bool CanSetFixedLength(
         this IConventionElementTypeBuilder elementTypeBuilder,
         bool? fixedLength,
-        bool fromDataAnnotation = false)
-        => elementTypeBuilder.CanSetAnnotation(RelationalAnnotationNames.IsFixedLength, fixedLength, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        elementTypeBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.IsFixedLength,
+            fixedLength,
+            fromDataAnnotation
+        );
 }

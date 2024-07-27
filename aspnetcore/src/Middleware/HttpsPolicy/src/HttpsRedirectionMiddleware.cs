@@ -33,7 +33,12 @@ public class HttpsRedirectionMiddleware
     /// <param name="options"></param>
     /// <param name="config"></param>
     /// <param name="loggerFactory"></param>
-    public HttpsRedirectionMiddleware(RequestDelegate next, IOptions<HttpsRedirectionOptions> options, IConfiguration config, ILoggerFactory loggerFactory)
+    public HttpsRedirectionMiddleware(
+        RequestDelegate next,
+        IOptions<HttpsRedirectionOptions> options,
+        IConfiguration config,
+        ILoggerFactory loggerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(options);
@@ -63,11 +68,18 @@ public class HttpsRedirectionMiddleware
     /// <param name="config"></param>
     /// <param name="loggerFactory"></param>
     /// <param name="serverAddressesFeature"></param>
-    public HttpsRedirectionMiddleware(RequestDelegate next, IOptions<HttpsRedirectionOptions> options, IConfiguration config, ILoggerFactory loggerFactory,
-        IServerAddressesFeature serverAddressesFeature)
+    public HttpsRedirectionMiddleware(
+        RequestDelegate next,
+        IOptions<HttpsRedirectionOptions> options,
+        IConfiguration config,
+        ILoggerFactory loggerFactory,
+        IServerAddressesFeature serverAddressesFeature
+    )
         : this(next, options, config, loggerFactory)
     {
-        _serverAddressesFeature = serverAddressesFeature ?? throw new ArgumentNullException(nameof(serverAddressesFeature));
+        _serverAddressesFeature =
+            serverAddressesFeature
+            ?? throw new ArgumentNullException(nameof(serverAddressesFeature));
     }
 
     /// <summary>
@@ -104,7 +116,8 @@ public class HttpsRedirectionMiddleware
             host,
             request.PathBase,
             request.Path,
-            request.QueryString);
+            request.QueryString
+        );
 
         context.Response.StatusCode = _statusCode;
         context.Response.Headers.Location = redirectUrl;
@@ -147,8 +160,9 @@ public class HttpsRedirectionMiddleware
                 if (nullablePort.HasValue && nullablePort != bindingAddress.Port)
                 {
                     throw new InvalidOperationException(
-                        "Cannot determine the https port from IServerAddressesFeature, multiple values were found. " +
-                        "Set the desired port explicitly on HttpsRedirectionOptions.HttpsPort.");
+                        "Cannot determine the https port from IServerAddressesFeature, multiple values were found. "
+                            + "Set the desired port explicitly on HttpsRedirectionOptions.HttpsPort."
+                    );
                 }
                 else
                 {
@@ -168,6 +182,13 @@ public class HttpsRedirectionMiddleware
         return PortNotFound;
 
         int? GetIntConfigValue(string name) =>
-            int.TryParse(_config[name], NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out var value) ? value : null;
+            int.TryParse(
+                _config[name],
+                NumberStyles.AllowLeadingSign,
+                CultureInfo.InvariantCulture,
+                out var value
+            )
+                ? value
+                : null;
     }
 }

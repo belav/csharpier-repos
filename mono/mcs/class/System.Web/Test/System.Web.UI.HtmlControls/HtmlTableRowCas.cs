@@ -1,5 +1,5 @@
 //
-// HtmlTableRowCas.cs 
+// HtmlTableRowCas.cs
 //	- CAS unit tests for System.Web.UI.HtmlControls.HtmlTableRow
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,35 +27,34 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Security.Permissions;
 using System.Web.UI.HtmlControls;
-
 using MonoTests.System.Web.UI.HtmlControls;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI.HtmlControls {
+namespace MonoCasTests.System.Web.UI.HtmlControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class HtmlTableRowCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            HtmlTableRowTest unit = new HtmlTableRowTest();
+            unit.DefaultProperties();
+            unit.NullProperties();
+            unit.CleanProperties();
+            unit.Render();
+            unit.HtmlTableCellControlCollectionAdd();
+            unit.HtmlTableCellControlCollectionAddAt();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlTableRowCas : AspNetHostingMinimal {
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HtmlTableRowTest unit = new HtmlTableRowTest ();
-			unit.DefaultProperties ();
-			unit.NullProperties ();
-			unit.CleanProperties ();
-			unit.Render ();
-			unit.HtmlTableCellControlCollectionAdd ();
-			unit.HtmlTableCellControlCollectionAddAt ();
-		}
-
-		public override Type Type {
-			get { return typeof (HtmlTableRow); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(HtmlTableRow); }
+        }
+    }
 }

@@ -13,7 +13,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Debug.Assert(kind.IsUnaryOperator() || kind > ExpressionKind.TypeLimit);
         }
 
-        protected ExprOperator(ExpressionKind kind, CType type, Expr call, MethPropWithInst userDefinedMethod)
+        protected ExprOperator(
+            ExpressionKind kind,
+            CType type,
+            Expr call,
+            MethPropWithInst userDefinedMethod
+        )
             : this(kind, type)
         {
             OptionalUserDefinedCall = call;

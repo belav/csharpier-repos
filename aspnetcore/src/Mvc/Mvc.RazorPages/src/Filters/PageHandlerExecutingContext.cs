@@ -26,7 +26,8 @@ public class PageHandlerExecutingContext : FilterContext
         IList<IFilterMetadata> filters,
         HandlerMethodDescriptor? handlerMethod,
         IDictionary<string, object?> handlerArguments,
-        object handlerInstance)
+        object handlerInstance
+    )
         : base(pageContext, filters)
     {
         ArgumentNullException.ThrowIfNull(handlerArguments);

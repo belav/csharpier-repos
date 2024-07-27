@@ -30,18 +30,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         private PackageInstallerService _packageInstallerService;
         private VisualStudioSymbolSearchService _symbolSearchService;
 
-        protected AbstractPackage()
-        {
-        }
+        protected AbstractPackage() { }
 
-        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+        protected override async Task InitializeAsync(
+            CancellationToken cancellationToken,
+            IProgress<ServiceProgressData> progress
+        )
         {
             await base.InitializeAsync(cancellationToken, progress).ConfigureAwait(true);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var shell = (IVsShell7)await GetServiceAsync(typeof(SVsShell)).ConfigureAwait(true);
-            var solution = (IVsSolution)await GetServiceAsync(typeof(SVsSolution)).ConfigureAwait(true);
+            var solution = (IVsSolution)
+                await GetServiceAsync(typeof(SVsSolution)).ConfigureAwait(true);
             cancellationToken.ThrowIfCancellationRequested();
             Assumes.Present(shell);
             Assumes.Present(solution);
@@ -51,27 +53,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 RegisterEditorFactory(editorFactory);
             }
 
-            RegisterLanguageService(typeof(TLanguageService), async ct =>
-            {
-                await JoinableTaskFactory.SwitchToMainThreadAsync(ct);
+            RegisterLanguageService(
+                typeof(TLanguageService),
+                async ct =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(ct);
 
-                // Create the language service, tell it to set itself up, then store it in a field
-                // so we can notify it that it's time to clean up.
-                _languageService = CreateLanguageService();
-                _languageService.Setup();
-                return _languageService.ComAggregate;
-            });
+                    // Create the language service, tell it to set itself up, then store it in a field
+                    // so we can notify it that it's time to clean up.
+                    _languageService = CreateLanguageService();
+                    _languageService.Setup();
+                    return _languageService.ComAggregate;
+                }
+            );
 
             await shell.LoadPackageAsync(Guids.RoslynPackageId);
 
-            var miscellaneousFilesWorkspace = this.ComponentModel.GetService<MiscellaneousFilesWorkspace>();
+            var miscellaneousFilesWorkspace =
+                this.ComponentModel.GetService<MiscellaneousFilesWorkspace>();
             RegisterMiscellaneousFilesWorkspaceInformation(miscellaneousFilesWorkspace);
 
             if (!IVsShellExtensions.IsInCommandLineMode(JoinableTaskFactory))
             {
                 // not every derived package support object browser and for those languages
                 // this is a no op
-                await RegisterObjectBrowserLibraryManagerAsync(cancellationToken).ConfigureAwait(true);
+                await RegisterObjectBrowserLibraryManagerAsync(cancellationToken)
+                    .ConfigureAwait(true);
             }
 
             LoadComponentsInUIContextOnceSolutionFullyLoadedAsync(cancellationToken).Forget();
@@ -92,24 +99,43 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             // This code will have to be moved elsewhere once any of that load path is changed such that the package
             // no longer loads if a file is opened.
             var workspace = ComponentModel.GetService<VisualStudioWorkspace>();
-            _packageInstallerService = workspace.Services.GetService<IPackageInstallerService>() as PackageInstallerService;
-            _symbolSearchService = workspace.Services.GetService<ISymbolSearchService>() as VisualStudioSymbolSearchService;
+            _packageInstallerService =
+                workspace.Services.GetService<IPackageInstallerService>()
+                as PackageInstallerService;
+            _symbolSearchService =
+                workspace.Services.GetService<ISymbolSearchService>()
+                as VisualStudioSymbolSearchService;
 
             _packageInstallerService?.RegisterLanguage(this.RoslynLanguageName);
             _symbolSearchService?.RegisterLanguage(this.RoslynLanguageName);
         }
 
-        protected abstract void RegisterMiscellaneousFilesWorkspaceInformation(MiscellaneousFilesWorkspace miscellaneousFilesWorkspace);
+        protected abstract void RegisterMiscellaneousFilesWorkspaceInformation(
+            MiscellaneousFilesWorkspace miscellaneousFilesWorkspace
+        );
 
         protected abstract IEnumerable<IVsEditorFactory> CreateEditorFactories();
         protected abstract TLanguageService CreateLanguageService();
 
-        protected void RegisterService<T>(Func<CancellationToken, Task<T>> serviceCreator)
-            => AddService(typeof(T), async (container, cancellationToken, type) => await serviceCreator(cancellationToken).ConfigureAwait(true), promote: true);
+        protected void RegisterService<T>(Func<CancellationToken, Task<T>> serviceCreator) =>
+            AddService(
+                typeof(T),
+                async (container, cancellationToken, type) =>
+                    await serviceCreator(cancellationToken).ConfigureAwait(true),
+                promote: true
+            );
 
         // When registering a language service, we need to take its ComAggregate wrapper.
-        protected void RegisterLanguageService(Type t, Func<CancellationToken, Task<object>> serviceCreator)
-            => AddService(t, async (container, cancellationToken, type) => await serviceCreator(cancellationToken).ConfigureAwait(true), promote: true);
+        protected void RegisterLanguageService(
+            Type t,
+            Func<CancellationToken, Task<object>> serviceCreator
+        ) =>
+            AddService(
+                t,
+                async (container, cancellationToken, type) =>
+                    await serviceCreator(cancellationToken).ConfigureAwait(true),
+                promote: true
+            );
 
         protected override void Dispose(bool disposing)
         {
@@ -117,7 +143,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             {
                 if (!IVsShellExtensions.IsInCommandLineMode(JoinableTaskFactory))
                 {
-                    JoinableTaskFactory.Run(async () => await UnregisterObjectBrowserLibraryManagerAsync(CancellationToken.None).ConfigureAwait(true));
+                    JoinableTaskFactory.Run(
+                        async () =>
+                            await UnregisterObjectBrowserLibraryManagerAsync(CancellationToken.None)
+                                .ConfigureAwait(true)
+                    );
                 }
 
                 // If we've created the language service then tell it it's time to clean itself up now.
@@ -133,14 +163,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
         protected abstract string RoslynLanguageName { get; }
 
-        protected virtual Task RegisterObjectBrowserLibraryManagerAsync(CancellationToken cancellationToken)
+        protected virtual Task RegisterObjectBrowserLibraryManagerAsync(
+            CancellationToken cancellationToken
+        )
         {
             // it is virtual rather than abstract to not break other languages which derived from our
             // base package implementations
             return Task.CompletedTask;
         }
 
-        protected virtual Task UnregisterObjectBrowserLibraryManagerAsync(CancellationToken cancellationToken)
+        protected virtual Task UnregisterObjectBrowserLibraryManagerAsync(
+            CancellationToken cancellationToken
+        )
         {
             // it is virtual rather than abstract to not break other languages which derived from our
             // base package implementations

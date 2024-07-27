@@ -31,7 +31,7 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Provide access to a static field.
         /// </summary>
-        StaticField
+        StaticField,
     };
 
     /// <summary>
@@ -88,8 +88,7 @@ namespace System.Runtime.CompilerServices
         /// Instantiates an <see cref="UnsafeAccessorAttribute"/> providing access to a member of kind <see cref="UnsafeAccessorKind"/>.
         /// </summary>
         /// <param name="kind">The kind of the target to which access is provided.</param>
-        public UnsafeAccessorAttribute(UnsafeAccessorKind kind)
-            => Kind = kind;
+        public UnsafeAccessorAttribute(UnsafeAccessorKind kind) => Kind = kind;
 
         /// <summary>
         /// Gets the kind of member to which access is provided.

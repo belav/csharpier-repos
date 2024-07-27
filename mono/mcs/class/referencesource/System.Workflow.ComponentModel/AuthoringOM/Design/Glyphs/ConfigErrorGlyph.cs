@@ -11,7 +11,9 @@ namespace System.Workflow.ComponentModel.Design
     //Class is internal but not sealed as we dont expect the ActivityDesigner writers to supply their own
     //Glyph instead based on designer actions the smart tag will be shown
     //Exception: StripItemConfigErrorGlyph
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ConfigErrorGlyph : DesignerGlyph
     {
         private static ConfigErrorGlyph defaultConfigErrorGlyph = null;
@@ -28,18 +30,12 @@ namespace System.Workflow.ComponentModel.Design
 
         public override bool CanBeActivated
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override int Priority
         {
-            get
-            {
-                return DesignerGlyph.ConfigErrorPriority;
-            }
+            get { return DesignerGlyph.ConfigErrorPriority; }
         }
 
         public override Rectangle GetBounds(ActivityDesigner designer, bool activated)
@@ -49,7 +45,10 @@ namespace System.Workflow.ComponentModel.Design
 
             Size configErrorSize = WorkflowTheme.CurrentTheme.AmbientTheme.GlyphSize;
             Size margin = WorkflowTheme.CurrentTheme.AmbientTheme.Margin;
-            Point configErrorLocation = new Point(designer.Bounds.Right - configErrorSize.Width - margin.Width / 2, designer.Bounds.Top - configErrorSize.Height + margin.Height);
+            Point configErrorLocation = new Point(
+                designer.Bounds.Right - configErrorSize.Width - margin.Width / 2,
+                designer.Bounds.Top - configErrorSize.Height + margin.Height
+            );
             Rectangle bounds = new Rectangle(configErrorLocation, configErrorSize);
 
             if (activated)
@@ -58,11 +57,16 @@ namespace System.Workflow.ComponentModel.Design
                 AmbientTheme ambientTheme = WorkflowTheme.CurrentTheme.AmbientTheme;
                 bounds.Inflate(ambientTheme.Margin.Width / 2, ambientTheme.Margin.Height / 2);
             }
-            
+
             return bounds;
         }
 
-        protected override void OnPaint(Graphics graphics, bool activated, AmbientTheme ambientTheme, ActivityDesigner designer)
+        protected override void OnPaint(
+            Graphics graphics,
+            bool activated,
+            AmbientTheme ambientTheme,
+            ActivityDesigner designer
+        )
         {
             Rectangle bounds = GetBounds(designer, false);
             Rectangle activatedBounds = GetBounds(designer, activated);
@@ -81,19 +85,36 @@ namespace System.Workflow.ComponentModel.Design
                 if (activated)
                 {
                     graphics.FillRectangle(SystemBrushes.ButtonFace, activatedBounds);
-                    graphics.DrawRectangle(SystemPens.ControlDarkDark, activatedBounds.Left, activatedBounds.Top, activatedBounds.Width - 1, activatedBounds.Height - 1);
+                    graphics.DrawRectangle(
+                        SystemPens.ControlDarkDark,
+                        activatedBounds.Left,
+                        activatedBounds.Top,
+                        activatedBounds.Width - 1,
+                        activatedBounds.Height - 1
+                    );
 
                     activatedBounds.X += bounds.Width + ambientTheme.Margin.Width;
                     activatedBounds.Width -= (bounds.Width + 2 * ambientTheme.Margin.Width);
 
-                    using (GraphicsPath dropDownIndicator = ActivityDesignerPaint.GetScrollIndicatorPath(activatedBounds, ScrollButton.Down))
+                    using (
+                        GraphicsPath dropDownIndicator =
+                            ActivityDesignerPaint.GetScrollIndicatorPath(
+                                activatedBounds,
+                                ScrollButton.Down
+                            )
+                    )
                     {
                         graphics.FillPath(SystemBrushes.ControlText, dropDownIndicator);
                         graphics.DrawPath(SystemPens.ControlText, dropDownIndicator);
                     }
                 }
 
-                ActivityDesignerPaint.DrawImage(graphics, AmbientTheme.ConfigErrorImage, bounds, DesignerContentAlignment.Fill);
+                ActivityDesignerPaint.DrawImage(
+                    graphics,
+                    AmbientTheme.ConfigErrorImage,
+                    bounds,
+                    DesignerContentAlignment.Fill
+                );
             }
             finally
             {
@@ -112,8 +133,14 @@ namespace System.Workflow.ComponentModel.Design
                 if (designer.DesignerActions.Count > 0)
                 {
                     Rectangle bounds = GetBounds(designer, false);
-                    Point location = designer.ParentView.LogicalPointToScreen(new Point(bounds.Left, bounds.Bottom));
-                    DesignerHelpers.ShowDesignerVerbs(designer, location, DesignerHelpers.GetDesignerActionVerbs(designer, designer.DesignerActions));
+                    Point location = designer.ParentView.LogicalPointToScreen(
+                        new Point(bounds.Left, bounds.Bottom)
+                    );
+                    DesignerHelpers.ShowDesignerVerbs(
+                        designer,
+                        location,
+                        DesignerHelpers.GetDesignerActionVerbs(designer, designer.DesignerActions)
+                    );
                 }
             }
         }
@@ -122,4 +149,3 @@ namespace System.Workflow.ComponentModel.Design
 
     #endregion
 }
-

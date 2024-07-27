@@ -6,19 +6,16 @@ using System.Threading;
 
 namespace Microsoft.Extensions.ObjectPool;
 
-internal sealed class DisposableObjectPool<T> : DefaultObjectPool<T>, IDisposable where T : class
+internal sealed class DisposableObjectPool<T> : DefaultObjectPool<T>, IDisposable
+    where T : class
 {
     private volatile bool _isDisposed;
 
     public DisposableObjectPool(IPooledObjectPolicy<T> policy)
-        : base(policy)
-    {
-    }
+        : base(policy) { }
 
     public DisposableObjectPool(IPooledObjectPolicy<T> policy, int maximumRetained)
-        : base(policy, maximumRetained)
-    {
-    }
+        : base(policy, maximumRetained) { }
 
     public override T Get()
     {

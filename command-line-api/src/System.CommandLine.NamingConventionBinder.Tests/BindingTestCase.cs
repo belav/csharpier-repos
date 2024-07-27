@@ -11,19 +11,16 @@ public class BindingTestCase
         string commandLineToken,
         Type parameterType,
         Action<object> assertBoundValue,
-        string variationName) : this(
-        new[] { commandLineToken },
-        parameterType,
-        assertBoundValue,
-        variationName)
-    {
-    }
+        string variationName
+    )
+        : this(new[] { commandLineToken }, parameterType, assertBoundValue, variationName) { }
 
     private BindingTestCase(
         string[] commandLineTokens,
         Type parameterType,
         Action<object> assertBoundValue,
-        string variationName)
+        string variationName
+    )
     {
         _assertBoundValue = assertBoundValue;
         VariationName = variationName;
@@ -45,18 +42,12 @@ public class BindingTestCase
     public static BindingTestCase Create<T>(
         string commandLineToken,
         Action<T> assertBoundValue,
-        string variationName = null) =>
-        new(commandLineToken,
-            typeof(T),
-            o => assertBoundValue((T) o),
-            variationName);
+        string variationName = null
+    ) => new(commandLineToken, typeof(T), o => assertBoundValue((T)o), variationName);
 
     public static BindingTestCase Create<T>(
         string[] commandLineTokens,
         Action<T> assertBoundValue,
-        string variationName = null) =>
-        new(commandLineTokens,
-            typeof(T),
-            o => assertBoundValue((T) o),
-            variationName);
+        string variationName = null
+    ) => new(commandLineTokens, typeof(T), o => assertBoundValue((T)o), variationName);
 }

@@ -15,15 +15,23 @@ namespace Microsoft.AspNetCore.WebSockets;
 internal static class HandshakeHelpers
 {
     // This uses C# compiler's ability to refer to static data directly. For more information see https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
-    private static ReadOnlySpan<byte> EncodedWebSocketKey => "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"u8;
+    private static ReadOnlySpan<byte> EncodedWebSocketKey =>
+        "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"u8;
 
-    public static void GenerateResponseHeaders(bool isHttp1, IHeaderDictionary requestHeaders, string? subProtocol, IHeaderDictionary responseHeaders)
+    public static void GenerateResponseHeaders(
+        bool isHttp1,
+        IHeaderDictionary requestHeaders,
+        string? subProtocol,
+        IHeaderDictionary responseHeaders
+    )
     {
         if (isHttp1)
         {
             responseHeaders.Connection = HeaderNames.Upgrade;
             responseHeaders.Upgrade = Constants.Headers.UpgradeWebSocket;
-            responseHeaders.SecWebSocketAccept = CreateResponseKey(requestHeaders.SecWebSocketKey.ToString());
+            responseHeaders.SecWebSocketAccept = CreateResponseKey(
+                requestHeaders.SecWebSocketKey.ToString()
+            );
         }
         if (!string.IsNullOrWhiteSpace(subProtocol))
         {
@@ -65,15 +73,22 @@ internal static class HandshakeHelpers
         var written = SHA1.HashData(mergedBytes, hashedBytes);
         if (written != 20)
         {
-            throw new InvalidOperationException("Could not compute the hash for the 'Sec-WebSocket-Accept' header.");
+            throw new InvalidOperationException(
+                "Could not compute the hash for the 'Sec-WebSocket-Accept' header."
+            );
         }
 
         return Convert.ToBase64String(hashedBytes);
     }
 
     // https://datatracker.ietf.org/doc/html/rfc7692#section-7.1
-    public static bool ParseDeflateOptions(ReadOnlySpan<char> extension, bool serverContextTakeover,
-        int serverMaxWindowBits, out WebSocketDeflateOptions parsedOptions, [NotNullWhen(true)] out string? response)
+    public static bool ParseDeflateOptions(
+        ReadOnlySpan<char> extension,
+        bool serverContextTakeover,
+        int serverMaxWindowBits,
+        out WebSocketDeflateOptions parsedOptions,
+        [NotNullWhen(true)] out string? response
+    )
     {
         bool hasServerMaxWindowBits = false;
         bool hasClientMaxWindowBits = false;
@@ -83,7 +98,7 @@ internal static class HandshakeHelpers
         parsedOptions = new WebSocketDeflateOptions()
         {
             ServerContextTakeover = serverContextTakeover,
-            ServerMaxWindowBits = serverMaxWindowBits
+            ServerMaxWindowBits = serverMaxWindowBits,
         };
 
         using var builder = new ValueStringBuilder(WebSocketDeflateConstants.MaxExtensionLength);
@@ -171,7 +186,11 @@ internal static class HandshakeHelpers
                 builder.Append('=');
                 var len = (parsedOptions.ClientMaxWindowBits > 9) ? 2 : 1;
                 var span = builder.AppendSpan(len);
-                var ret = parsedOptions.ClientMaxWindowBits.TryFormat(span, out var written, provider: CultureInfo.InvariantCulture);
+                var ret = parsedOptions.ClientMaxWindowBits.TryFormat(
+                    span,
+                    out var written,
+                    provider: CultureInfo.InvariantCulture
+                );
                 Debug.Assert(ret);
                 Debug.Assert(written == len);
             }
@@ -203,7 +222,10 @@ internal static class HandshakeHelpers
                 // by including the "server_max_window_bits" extension parameter in the
                 // extension negotiation response to send back to the client with the
                 // same or smaller value as the offer.
-                parsedOptions.ServerMaxWindowBits = Math.Min(parsedServerMaxWindowBits ?? 15, serverMaxWindowBits);
+                parsedOptions.ServerMaxWindowBits = Math.Min(
+                    parsedServerMaxWindowBits ?? 15,
+                    serverMaxWindowBits
+                );
             }
 
             static bool ParseWindowBits(ReadOnlySpan<char> value, out int? parsedValue)
@@ -232,9 +254,16 @@ internal static class HandshakeHelpers
                     value = value[1..^1];
                 }
 
-                if (!int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int windowBits) ||
-                    windowBits < 8 ||
-                    windowBits > 15)
+                if (
+                    !int.TryParse(
+                        value,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out int windowBits
+                    )
+                    || windowBits < 8
+                    || windowBits > 15
+                )
                 {
                     parsedValue = null;
                     return false;
@@ -266,7 +295,11 @@ internal static class HandshakeHelpers
             builder.Append('=');
             var len = (parsedOptions.ServerMaxWindowBits > 9) ? 2 : 1;
             var span = builder.AppendSpan(len);
-            var ret = parsedOptions.ServerMaxWindowBits.TryFormat(span, out var written, provider: CultureInfo.InvariantCulture);
+            var ret = parsedOptions.ServerMaxWindowBits.TryFormat(
+                span,
+                out var written,
+                provider: CultureInfo.InvariantCulture
+            );
             Debug.Assert(ret);
             Debug.Assert(written == len);
         }

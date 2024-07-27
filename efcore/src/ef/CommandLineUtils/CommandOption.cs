@@ -14,7 +14,9 @@ internal class CommandOption
         OptionType = optionType;
         Values = new List<string?>();
 
-        foreach (var part in Template.Split(new[] { ' ', '|' }, StringSplitOptions.RemoveEmptyEntries))
+        foreach (
+            var part in Template.Split(new[] { ' ', '|' }, StringSplitOptions.RemoveEmptyEntries)
+        )
         {
             if (part.StartsWith("--", StringComparison.Ordinal))
             {
@@ -25,8 +27,7 @@ internal class CommandOption
                 var optName = part.Substring(1);
 
                 // If there is only one char and it is not an English letter, it is a symbol option (e.g. "-?")
-                if (optName.Length == 1
-                    && !IsEnglishLetter(optName[0]))
+                if (optName.Length == 1 && !IsEnglishLetter(optName[0]))
                 {
                     SymbolName = optName;
                 }
@@ -35,26 +36,35 @@ internal class CommandOption
                     ShortName = optName;
                 }
             }
-            else if (part.StartsWith("<", StringComparison.Ordinal)
-                     && part.EndsWith(">", StringComparison.Ordinal))
+            else if (
+                part.StartsWith("<", StringComparison.Ordinal)
+                && part.EndsWith(">", StringComparison.Ordinal)
+            )
             {
                 ValueName = part.Substring(1, part.Length - 2);
             }
-            else if (optionType == CommandOptionType.MultipleValue
-                     && part.StartsWith("<", StringComparison.Ordinal)
-                     && part.EndsWith(">...", StringComparison.Ordinal))
+            else if (
+                optionType == CommandOptionType.MultipleValue
+                && part.StartsWith("<", StringComparison.Ordinal)
+                && part.EndsWith(">...", StringComparison.Ordinal)
+            )
             {
                 ValueName = part.Substring(1, part.Length - 5);
             }
             else
             {
-                throw new ArgumentException($"Invalid template pattern '{template}'", nameof(template));
+                throw new ArgumentException(
+                    $"Invalid template pattern '{template}'",
+                    nameof(template)
+                );
             }
         }
 
-        if (string.IsNullOrEmpty(LongName)
+        if (
+            string.IsNullOrEmpty(LongName)
             && string.IsNullOrEmpty(ShortName)
-            && string.IsNullOrEmpty(SymbolName))
+            && string.IsNullOrEmpty(SymbolName)
+        )
         {
             throw new ArgumentException($"Invalid template pattern '{template}'", nameof(template));
         }
@@ -123,12 +133,9 @@ internal class CommandOption
         return true;
     }
 
-    public bool HasValue()
-        => Values.Count > 0;
+    public bool HasValue() => Values.Count > 0;
 
-    public string? Value()
-        => HasValue() ? Values[0] : null;
+    public string? Value() => HasValue() ? Values[0] : null;
 
-    private static bool IsEnglishLetter(char c)
-        => c is >= 'a' and <= 'z' or >= 'A' and <= 'Z';
+    private static bool IsEnglishLetter(char c) => c is >= 'a' and <= 'z' or >= 'A' and <= 'Z';
 }

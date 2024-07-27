@@ -47,21 +47,20 @@ namespace Microsoft.CodeAnalysis.Remote
         /// <summary>
         /// Time we will wait after the last activity before doing explicit GC cleanup.
         /// We monitor all resource access and service call to track last activity time.
-        /// 
+        ///
         /// We do this since 64bit process can hold onto quite big unused memory when
         /// OOP is running as AnyCpu
         /// </summary>
         private readonly TimeSpan _gcAfterTimeSpan;
 
-        private readonly ConcurrentDictionary<Checksum, Entry> _assets = new(concurrencyLevel: 4, capacity: 10);
+        private readonly ConcurrentDictionary<Checksum, Entry> _assets =
+            new(concurrencyLevel: 4, capacity: 10);
 
         private DateTime _lastGCRun;
         private DateTime _lastActivityTime;
 
         // constructor for testing
-        public SolutionAssetCache()
-        {
-        }
+        public SolutionAssetCache() { }
 
         /// <summary>
         /// Create central data cache
@@ -69,7 +68,12 @@ namespace Microsoft.CodeAnalysis.Remote
         /// <param name="cleanupInterval">time interval to clean up</param>
         /// <param name="purgeAfter">time unused data can sit in the cache</param>
         /// <param name="gcAfter">time we wait before it call GC since last activity</param>
-        public SolutionAssetCache(RemoteWorkspace? remoteWorkspace, TimeSpan cleanupInterval, TimeSpan purgeAfter, TimeSpan gcAfter)
+        public SolutionAssetCache(
+            RemoteWorkspace? remoteWorkspace,
+            TimeSpan cleanupInterval,
+            TimeSpan purgeAfter,
+            TimeSpan gcAfter
+        )
         {
             _remoteWorkspace = remoteWorkspace;
             _cleanupIntervalTimeSpan = cleanupInterval;
@@ -95,7 +99,14 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             UpdateLastActivityTime();
 
-            using (Logger.LogBlock(FunctionId.AssetStorage_TryGetAsset, Checksum.GetChecksumLogInfo, checksum, CancellationToken.None))
+            using (
+                Logger.LogBlock(
+                    FunctionId.AssetStorage_TryGetAsset,
+                    Checksum.GetChecksumLogInfo,
+                    checksum,
+                    CancellationToken.None
+                )
+            )
             {
                 if (!_assets.TryGetValue(checksum, out var entry))
                 {
@@ -111,8 +122,7 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        public void UpdateLastActivityTime()
-            => _lastActivityTime = DateTime.UtcNow;
+        public void UpdateLastActivityTime() => _lastActivityTime = DateTime.UtcNow;
 
         private static void Update(Entry entry)
         {
@@ -159,7 +169,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
             using (Logger.LogBlock(FunctionId.AssetStorage_ForceGC, CancellationToken.None))
             {
-                // we didn't have activity for 5 min. spend some time to drop 
+                // we didn't have activity for 5 min. spend some time to drop
                 // unused memory
                 for (var i = 0; i < 3; i++)
                 {
@@ -196,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Remote
                         if (pinnedChecksums == null)
                         {
                             pinnedChecksums = PooledHashSet<Checksum>.GetInstance();
-                            await AddPinnedChecksumsAsync(pinnedChecksums, cancellationToken).ConfigureAwait(false);
+                            await AddPinnedChecksumsAsync(pinnedChecksums, cancellationToken)
+                                .ConfigureAwait(false);
                         }
 
                         if (pinnedChecksums.Contains(checksum))
@@ -212,12 +223,17 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        private async ValueTask AddPinnedChecksumsAsync(HashSet<Checksum> pinnedChecksums, CancellationToken cancellationToken)
+        private async ValueTask AddPinnedChecksumsAsync(
+            HashSet<Checksum> pinnedChecksums,
+            CancellationToken cancellationToken
+        )
         {
             if (_remoteWorkspace is null)
                 return;
 
-            var checksums = await _remoteWorkspace.CurrentSolution.State.GetStateChecksumsAsync(cancellationToken).ConfigureAwait(false);
+            var checksums = await _remoteWorkspace
+                .CurrentSolution.State.GetStateChecksumsAsync(cancellationToken)
+                .ConfigureAwait(false);
             checksums.AddAllTo(pinnedChecksums);
         }
 
@@ -235,4 +251,3 @@ namespace Microsoft.CodeAnalysis.Remote
         }
     }
 }
-

@@ -14,9 +14,11 @@ namespace System.Runtime.InteropServices.Marshalling
     {
         // See definition in wtypes.h in the Windows SDK.
         private const VarEnum VT_VERSIONED_STREAM = (VarEnum)73;
+
         // VARIANT_BOOL constants.
         internal const short VARIANT_TRUE = -1;
         internal const short VARIANT_FALSE = 0;
+
 #if DEBUG
         static unsafe ComVariant()
         {
@@ -37,12 +39,14 @@ namespace System.Runtime.InteropServices.Marshalling
 #endif
 
         // Most of the data types in the Variant are carried in _typeUnion
-        [FieldOffset(0)] private TypeUnion _typeUnion;
+        [FieldOffset(0)]
+        private TypeUnion _typeUnion;
 
         // Decimal is the largest data type and it needs to use the space that is normally unused in TypeUnion._wReserved1, etc.
         // Hence, it is declared to completely overlap with TypeUnion. A Decimal does not use the first two bytes, and so
         // TypeUnion._vt can still be used to encode the type.
-        [FieldOffset(0)] private decimal _decimal;
+        [FieldOffset(0)]
+        private decimal _decimal;
 
         [StructLayout(LayoutKind.Sequential)]
         private struct TypeUnion
@@ -76,7 +80,8 @@ namespace System.Runtime.InteropServices.Marshalling
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        private unsafe struct Vector<T> where T : unmanaged
+        private unsafe struct Vector<T>
+            where T : unmanaged
         {
             public int _numElements;
             public T* _data;
@@ -102,31 +107,80 @@ namespace System.Runtime.InteropServices.Marshalling
         [StructLayout(LayoutKind.Explicit)]
         private unsafe struct UnionTypes
         {
-            [FieldOffset(0)] public sbyte _i1;
-            [FieldOffset(0)] public short _i2;
-            [FieldOffset(0)] public int _i4;
-            [FieldOffset(0)] public long _i8;
-            [FieldOffset(0)] public byte _ui1;
-            [FieldOffset(0)] public ushort _ui2;
-            [FieldOffset(0)] public uint _ui4;
-            [FieldOffset(0)] public ulong _ui8;
-            [FieldOffset(0)] public int _int;
-            [FieldOffset(0)] public uint _uint;
-            [FieldOffset(0)] public short _bool;
-            [FieldOffset(0)] public int _error;
-            [FieldOffset(0)] public float _r4;
-            [FieldOffset(0)] public double _r8;
-            [FieldOffset(0)] public long _cy;
-            [FieldOffset(0)] public double _date;
-            [FieldOffset(0)] public IntPtr _bstr;
-            [FieldOffset(0)] public IntPtr _unknown;
-            [FieldOffset(0)] public IntPtr _dispatch;
-            [FieldOffset(0)] public IntPtr _pvarVal;
-            [FieldOffset(0)] public IntPtr _byref;
-            [FieldOffset(0)] public Record _record;
-            [FieldOffset(0)] public Blob _blob;
-            [FieldOffset(0)] public VersionedStream* _versionedStream;
-            [FieldOffset(0)] public ClipboardData* clipboardData;
+            [FieldOffset(0)]
+            public sbyte _i1;
+
+            [FieldOffset(0)]
+            public short _i2;
+
+            [FieldOffset(0)]
+            public int _i4;
+
+            [FieldOffset(0)]
+            public long _i8;
+
+            [FieldOffset(0)]
+            public byte _ui1;
+
+            [FieldOffset(0)]
+            public ushort _ui2;
+
+            [FieldOffset(0)]
+            public uint _ui4;
+
+            [FieldOffset(0)]
+            public ulong _ui8;
+
+            [FieldOffset(0)]
+            public int _int;
+
+            [FieldOffset(0)]
+            public uint _uint;
+
+            [FieldOffset(0)]
+            public short _bool;
+
+            [FieldOffset(0)]
+            public int _error;
+
+            [FieldOffset(0)]
+            public float _r4;
+
+            [FieldOffset(0)]
+            public double _r8;
+
+            [FieldOffset(0)]
+            public long _cy;
+
+            [FieldOffset(0)]
+            public double _date;
+
+            [FieldOffset(0)]
+            public IntPtr _bstr;
+
+            [FieldOffset(0)]
+            public IntPtr _unknown;
+
+            [FieldOffset(0)]
+            public IntPtr _dispatch;
+
+            [FieldOffset(0)]
+            public IntPtr _pvarVal;
+
+            [FieldOffset(0)]
+            public IntPtr _byref;
+
+            [FieldOffset(0)]
+            public Record _record;
+
+            [FieldOffset(0)]
+            public Blob _blob;
+
+            [FieldOffset(0)]
+            public VersionedStream* _versionedStream;
+
+            [FieldOffset(0)]
+            public ClipboardData* clipboardData;
         }
 
         /// <summary>
@@ -151,7 +205,9 @@ namespace System.Runtime.InteropServices.Marshalling
             }
             else if (VarType.HasFlag(VarEnum.VT_ARRAY))
             {
-                throw new PlatformNotSupportedException(SR.ComVariant_SafeArray_PlatformNotSupported);
+                throw new PlatformNotSupportedException(
+                    SR.ComVariant_SafeArray_PlatformNotSupported
+                );
             }
             else if (VarType == VarEnum.VT_UNKNOWN || VarType == VarEnum.VT_DISPATCH)
             {
@@ -167,12 +223,27 @@ namespace System.Runtime.InteropServices.Marshalling
                     // Invoke RecordClear on the record info with the data.
                     if (_typeUnion._unionTypes._record._record != IntPtr.Zero)
                     {
-                        Marshal.ThrowExceptionForHR(((delegate* unmanaged<IntPtr, IntPtr, int>)(*(*(void***)_typeUnion._unionTypes._record._recordInfo + 4 /* IRecordInfo.RecordClear slot */)))(_typeUnion._unionTypes._record._recordInfo, _typeUnion._unionTypes._record._record));
+                        Marshal.ThrowExceptionForHR(
+                            (
+                                (delegate* unmanaged<IntPtr, IntPtr, int>)(
+                                    *(
+                                        *(void***)_typeUnion._unionTypes._record._recordInfo + 4 /* IRecordInfo.RecordClear slot */
+                                    )
+                                )
+                            )(
+                                _typeUnion._unionTypes._record._recordInfo,
+                                _typeUnion._unionTypes._record._record
+                            )
+                        );
                     }
                     Marshal.Release(_typeUnion._unionTypes._record._recordInfo);
                 }
             }
-            else if (VarType == VarEnum.VT_LPSTR || VarType == VarEnum.VT_LPWSTR || VarType == VarEnum.VT_CLSID)
+            else if (
+                VarType == VarEnum.VT_LPSTR
+                || VarType == VarEnum.VT_LPWSTR
+                || VarType == VarEnum.VT_CLSID
+            )
             {
                 Marshal.FreeCoTaskMem(_typeUnion._unionTypes._byref);
             }
@@ -180,7 +251,12 @@ namespace System.Runtime.InteropServices.Marshalling
             {
                 Marshal.FreeCoTaskMem(_typeUnion._unionTypes._blob._data);
             }
-            else if (VarType == VarEnum.VT_STREAM || VarType == VarEnum.VT_STREAMED_OBJECT || VarType == VarEnum.VT_STORAGE || VarType == VarEnum.VT_STORED_OBJECT)
+            else if (
+                VarType == VarEnum.VT_STREAM
+                || VarType == VarEnum.VT_STREAMED_OBJECT
+                || VarType == VarEnum.VT_STORAGE
+                || VarType == VarEnum.VT_STORED_OBJECT
+            )
             {
                 if (_typeUnion._unionTypes._unknown != IntPtr.Zero)
                 {
@@ -217,7 +293,7 @@ namespace System.Runtime.InteropServices.Marshalling
                         break;
                     case VarEnum.VT_LPSTR:
                     case VarEnum.VT_LPWSTR:
-                    foreach (var str in GetRawDataRef<Vector<IntPtr>>().AsSpan())
+                        foreach (var str in GetRawDataRef<Vector<IntPtr>>().AsSpan())
                         {
                             Marshal.FreeCoTaskMem(str);
                         }
@@ -283,7 +359,9 @@ namespace System.Runtime.InteropServices.Marshalling
             else if (typeof(T) == typeof(CurrencyWrapper))
             {
                 variant.VarType = VarEnum.VT_CY;
-                variant._typeUnion._unionTypes._cy = decimal.ToOACurrency(((CurrencyWrapper)(object)value).WrappedObject);
+                variant._typeUnion._unionTypes._cy = decimal.ToOACurrency(
+                    ((CurrencyWrapper)(object)value).WrappedObject
+                );
             }
             else if (typeof(T) == typeof(DateTime))
             {
@@ -293,7 +371,9 @@ namespace System.Runtime.InteropServices.Marshalling
             else if (typeof(T) == typeof(BStrWrapper))
             {
                 variant.VarType = VarEnum.VT_BSTR;
-                variant._typeUnion._unionTypes._bstr = Marshal.StringToBSTR(((BStrWrapper)(object)value).WrappedObject);
+                variant._typeUnion._unionTypes._bstr = Marshal.StringToBSTR(
+                    ((BStrWrapper)(object)value).WrappedObject
+                );
             }
             else if (typeof(T) == typeof(string))
             {
@@ -314,7 +394,8 @@ namespace System.Runtime.InteropServices.Marshalling
             {
                 // bool values in OLE VARIANTs are VARIANT_BOOL values.
                 variant.VarType = VarEnum.VT_BOOL;
-                variant._typeUnion._unionTypes._bool = ((bool)(object)value) ? VARIANT_TRUE : VARIANT_FALSE;
+                variant._typeUnion._unionTypes._bool =
+                    ((bool)(object)value) ? VARIANT_TRUE : VARIANT_FALSE;
             }
             else if (typeof(T) == typeof(decimal))
             {
@@ -376,10 +457,17 @@ namespace System.Runtime.InteropServices.Marshalling
         public static unsafe ComVariant CreateRaw<T>(VarEnum vt, T rawValue)
             where T : unmanaged
         {
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(Unsafe.SizeOf<T>(), sizeof(UnionTypes), nameof(T));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                Unsafe.SizeOf<T>(),
+                sizeof(UnionTypes),
+                nameof(T)
+            );
             if (vt == VarEnum.VT_DECIMAL)
             {
-                throw new ArgumentException(SR.ComVariant_VT_DECIMAL_NotSupported_CreateRaw, nameof(vt));
+                throw new ArgumentException(
+                    SR.ComVariant_VT_DECIMAL_NotSupported_CreateRaw,
+                    nameof(vt)
+                );
             }
             if (vt == VarEnum.VT_VARIANT)
             {
@@ -387,7 +475,9 @@ namespace System.Runtime.InteropServices.Marshalling
             }
             if (vt.HasFlag(VarEnum.VT_ARRAY) && !OperatingSystem.IsWindows())
             {
-                throw new PlatformNotSupportedException(SR.ComVariant_SafeArray_PlatformNotSupported);
+                throw new PlatformNotSupportedException(
+                    SR.ComVariant_SafeArray_PlatformNotSupported
+                );
             }
 
             Unsafe.SkipInit(out ComVariant value);
@@ -396,17 +486,48 @@ namespace System.Runtime.InteropServices.Marshalling
             {
                 (VarEnum.VT_I1 or VarEnum.VT_UI1, 1) => rawValue,
                 (VarEnum.VT_I2 or VarEnum.VT_UI2 or VarEnum.VT_BOOL, 2) => rawValue,
-                (VarEnum.VT_ERROR or VarEnum.VT_HRESULT or VarEnum.VT_I4 or VarEnum.VT_UI4 or VarEnum.VT_R4 or VarEnum.VT_INT or VarEnum.VT_UINT, 4) => rawValue,
-                (VarEnum.VT_I8 or VarEnum.VT_UI8 or VarEnum.VT_R8 or VarEnum.VT_DATE, 8) => rawValue,
-                (VarEnum.VT_UNKNOWN or VarEnum.VT_DISPATCH or VarEnum.VT_LPSTR or VarEnum.VT_BSTR or VarEnum.VT_LPWSTR or VarEnum.VT_SAFEARRAY
-                    or VarEnum.VT_CLSID or VarEnum.VT_STREAM or VarEnum.VT_STREAMED_OBJECT or VarEnum.VT_STORAGE or VarEnum.VT_STORED_OBJECT or VarEnum.VT_CF or VT_VERSIONED_STREAM, _) when sizeof(T) == nint.Size => rawValue,
+                (
+                    VarEnum.VT_ERROR
+                        or VarEnum.VT_HRESULT
+                        or VarEnum.VT_I4
+                        or VarEnum.VT_UI4
+                        or VarEnum.VT_R4
+                        or VarEnum.VT_INT
+                        or VarEnum.VT_UINT,
+                    4
+                )
+                    => rawValue,
+                (VarEnum.VT_I8 or VarEnum.VT_UI8 or VarEnum.VT_R8 or VarEnum.VT_DATE, 8)
+                    => rawValue,
+                (
+                    VarEnum.VT_UNKNOWN
+                        or VarEnum.VT_DISPATCH
+                        or VarEnum.VT_LPSTR
+                        or VarEnum.VT_BSTR
+                        or VarEnum.VT_LPWSTR
+                        or VarEnum.VT_SAFEARRAY
+                        or VarEnum.VT_CLSID
+                        or VarEnum.VT_STREAM
+                        or VarEnum.VT_STREAMED_OBJECT
+                        or VarEnum.VT_STORAGE
+                        or VarEnum.VT_STORED_OBJECT
+                        or VarEnum.VT_CF
+                        or VT_VERSIONED_STREAM,
+                    _
+                ) when sizeof(T) == nint.Size
+                    => rawValue,
                 (VarEnum.VT_CY or VarEnum.VT_FILETIME, 8) => rawValue,
                 (VarEnum.VT_RECORD, _) when sizeof(T) == sizeof(Record) => rawValue,
                 _ when vt.HasFlag(VarEnum.VT_BYREF) && sizeof(T) == nint.Size => rawValue,
-                _ when vt.HasFlag(VarEnum.VT_VECTOR) && sizeof(T) == sizeof(Vector<byte>) => rawValue,
+                _ when vt.HasFlag(VarEnum.VT_VECTOR) && sizeof(T) == sizeof(Vector<byte>)
+                    => rawValue,
                 _ when vt.HasFlag(VarEnum.VT_ARRAY) && sizeof(T) == nint.Size => rawValue,
-                (VarEnum.VT_BLOB or VarEnum.VT_BLOB_OBJECT, _) when sizeof(T) == sizeof(Blob) => rawValue,
-                _ => throw new ArgumentException(SR.Format(SR.ComVariant_SizeMustMatchVariantSize, nameof(T), nameof(vt)))
+                (VarEnum.VT_BLOB or VarEnum.VT_BLOB_OBJECT, _) when sizeof(T) == sizeof(Blob)
+                    => rawValue,
+                _
+                    => throw new ArgumentException(
+                        SR.Format(SR.ComVariant_SizeMustMatchVariantSize, nameof(T), nameof(vt))
+                    ),
             };
 
             return value;
@@ -421,7 +542,13 @@ namespace System.Runtime.InteropServices.Marshalling
         {
             if (Array.IndexOf(requiredType, VarType) == -1)
             {
-                throw new InvalidOperationException(SR.Format(SR.ComVariant_TypeIsNotSupportedType, VarType, string.Join(", ", requiredType)));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.ComVariant_TypeIsNotSupportedType,
+                        VarType,
+                        string.Join(", ", requiredType)
+                    )
+                );
             }
         }
 
@@ -466,7 +593,8 @@ namespace System.Runtime.InteropServices.Marshalling
             else if (typeof(T) == typeof(CurrencyWrapper))
             {
                 ThrowIfNotVarType(VarEnum.VT_CY);
-                return (T)(object)new CurrencyWrapper(decimal.FromOACurrency(_typeUnion._unionTypes._cy));
+                return (T)
+                    (object)new CurrencyWrapper(decimal.FromOACurrency(_typeUnion._unionTypes._cy));
             }
             else if (typeof(T) == typeof(DateTime))
             {
@@ -476,7 +604,8 @@ namespace System.Runtime.InteropServices.Marshalling
             else if (typeof(T) == typeof(BStrWrapper))
             {
                 ThrowIfNotVarType(VarEnum.VT_BSTR);
-                return (T)(object)new BStrWrapper(Marshal.PtrToStringBSTR(_typeUnion._unionTypes._bstr));
+                return (T)
+                    (object)new BStrWrapper(Marshal.PtrToStringBSTR(_typeUnion._unionTypes._bstr));
             }
             else if (typeof(T) == typeof(string))
             {
@@ -564,10 +693,17 @@ namespace System.Runtime.InteropServices.Marshalling
         public unsafe ref T GetRawDataRef<T>()
             where T : unmanaged
         {
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(Unsafe.SizeOf<T>(), sizeof(UnionTypes), nameof(T));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                Unsafe.SizeOf<T>(),
+                sizeof(UnionTypes),
+                nameof(T)
+            );
             if (typeof(T) == typeof(decimal))
             {
-                throw new ArgumentException(SR.ComVariant_VT_DECIMAL_NotSupported_RawDataRef, nameof(T));
+                throw new ArgumentException(
+                    SR.ComVariant_VT_DECIMAL_NotSupported_RawDataRef,
+                    nameof(T)
+                );
             }
             return ref Unsafe.As<UnionTypes, T>(ref _typeUnion._unionTypes);
         }

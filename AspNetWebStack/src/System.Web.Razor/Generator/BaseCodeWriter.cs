@@ -15,7 +15,10 @@ namespace System.Web.Razor.Generator
             EmitStartMethodInvoke(methodName, new string[0]);
         }
 
-        protected internal override void EmitStartMethodInvoke(string methodName, params string[] genericArguments)
+        protected internal override void EmitStartMethodInvoke(
+            string methodName,
+            params string[] genericArguments
+        )
         {
             InnerWriter.Write(methodName);
             if (genericArguments != null && genericArguments.Length > 0)
@@ -45,9 +48,7 @@ namespace System.Web.Razor.Generator
             InnerWriter.Write(")");
         }
 
-        protected internal override void EmitEndLambdaExpression()
-        {
-        }
+        protected internal override void EmitEndLambdaExpression() { }
 
         public override void WriteParameterSeparator()
         {
@@ -66,12 +67,8 @@ namespace System.Web.Razor.Generator
             }
         }
 
-        protected internal virtual void WriteStartGenerics()
-        {
-        }
+        protected internal virtual void WriteStartGenerics() { }
 
-        protected internal virtual void WriteEndGenerics()
-        {
-        }
+        protected internal virtual void WriteEndGenerics() { }
     }
 }

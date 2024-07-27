@@ -2,30 +2,34 @@
 // <copyright file="XmlSerializationGeneratedCode.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
+namespace System.Xml.Serialization
+{
     using System;
-    using System.IO;
     using System.Collections;
     using System.ComponentModel;
-    using System.Threading;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Security;
-    using System.Globalization;
-   
+    using System.Threading;
+
     /// <include file='doc\XmlSerializationGeneratedCode.uex' path='docs/doc[@for="XmlSerializationGeneratedCode"]/*' />
     ///<internalonly/>
-    public abstract class XmlSerializationGeneratedCode {
+    public abstract class XmlSerializationGeneratedCode
+    {
         TempAssembly tempAssembly;
         int threadCode;
         ResolveEventHandler assemblyResolver;
 
-        internal void Init(TempAssembly tempAssembly) {
+        internal void Init(TempAssembly tempAssembly)
+        {
             this.tempAssembly = tempAssembly;
             // only hook the assembly resolver if we have something to help us do the resolution
-            if (tempAssembly != null && tempAssembly.NeedAssembyResolve) {
+            if (tempAssembly != null && tempAssembly.NeedAssembyResolve)
+            {
                 // we save the threadcode to make sure we don't handle any resolve events for any other threads
                 threadCode = Thread.CurrentThread.GetHashCode();
                 assemblyResolver = new ResolveEventHandler(OnAssemblyResolve);
@@ -34,20 +38,23 @@ namespace System.Xml.Serialization {
         }
 
         // this method must be called at the end of serialization
-        internal void Dispose() {
+        internal void Dispose()
+        {
             if (assemblyResolver != null)
                 AppDomain.CurrentDomain.AssemblyResolve -= assemblyResolver;
             assemblyResolver = null;
         }
 
-        internal Assembly OnAssemblyResolve(object sender, ResolveEventArgs args) {
+        internal Assembly OnAssemblyResolve(object sender, ResolveEventArgs args)
+        {
             if (tempAssembly != null && Thread.CurrentThread.GetHashCode() == threadCode)
                 return tempAssembly.GetReferencedAssembly(args.Name);
             return null;
         }
     }
 
-    internal class XmlSerializationCodeGen {
+    internal class XmlSerializationCodeGen
+    {
         IndentedWriter writer;
         int nextMethodNumber = 0;
         Hashtable methodNames = new Hashtable();
@@ -61,10 +68,17 @@ namespace System.Xml.Serialization {
         int references = 0;
         Hashtable generatedMethods = new Hashtable();
 
-        internal XmlSerializationCodeGen(IndentedWriter writer, TypeScope[] scopes, string access, string className) {
+        internal XmlSerializationCodeGen(
+            IndentedWriter writer,
+            TypeScope[] scopes,
+            string access,
+            string className
+        )
+        {
             this.writer = writer;
             this.scopes = scopes;
-            if (scopes.Length > 0) {
+            if (scopes.Length > 0)
+            {
                 stringTypeDesc = scopes[0].GetTypeDesc(typeof(string));
                 qnameTypeDesc = scopes[0].GetTypeDesc(typeof(XmlQualifiedName));
             }
@@ -73,29 +87,65 @@ namespace System.Xml.Serialization {
             this.access = access;
         }
 
-        internal IndentedWriter Writer { get { return writer; } }
-        internal int NextMethodNumber { get { return nextMethodNumber; } set { nextMethodNumber = value; } }
-        internal ReflectionAwareCodeGen RaCodeGen { get { return raCodeGen; } }
-        internal TypeDesc StringTypeDesc { get { return stringTypeDesc; } }
-        internal TypeDesc QnameTypeDesc { get { return qnameTypeDesc; } }
-        internal string ClassName { get { return className; } }
-        internal string Access { get { return access; } }
-        internal TypeScope[] Scopes { get { return scopes; } }
-        internal Hashtable MethodNames { get { return methodNames; } }
-        internal Hashtable GeneratedMethods { get { return generatedMethods; } }
+        internal IndentedWriter Writer
+        {
+            get { return writer; }
+        }
+        internal int NextMethodNumber
+        {
+            get { return nextMethodNumber; }
+            set { nextMethodNumber = value; }
+        }
+        internal ReflectionAwareCodeGen RaCodeGen
+        {
+            get { return raCodeGen; }
+        }
+        internal TypeDesc StringTypeDesc
+        {
+            get { return stringTypeDesc; }
+        }
+        internal TypeDesc QnameTypeDesc
+        {
+            get { return qnameTypeDesc; }
+        }
+        internal string ClassName
+        {
+            get { return className; }
+        }
+        internal string Access
+        {
+            get { return access; }
+        }
+        internal TypeScope[] Scopes
+        {
+            get { return scopes; }
+        }
+        internal Hashtable MethodNames
+        {
+            get { return methodNames; }
+        }
+        internal Hashtable GeneratedMethods
+        {
+            get { return generatedMethods; }
+        }
 
-        internal virtual void GenerateMethod(TypeMapping mapping){}
+        internal virtual void GenerateMethod(TypeMapping mapping) { }
 
-        internal void GenerateReferencedMethods() {
-            while(references > 0) {
+        internal void GenerateReferencedMethods()
+        {
+            while (references > 0)
+            {
                 TypeMapping mapping = referencedMethods[--references];
                 GenerateMethod(mapping);
             }
         }
 
-        internal string ReferenceMapping(TypeMapping mapping) {
-            if (!mapping.IsSoap) {
-                if (generatedMethods[mapping] == null) {
+        internal string ReferenceMapping(TypeMapping mapping)
+        {
+            if (!mapping.IsSoap)
+            {
+                if (generatedMethods[mapping] == null)
+                {
                     referencedMethods = EnsureArrayIndex(referencedMethods, references);
                     referencedMethods[references++] = mapping;
                 }
@@ -103,19 +153,24 @@ namespace System.Xml.Serialization {
             return (string)methodNames[mapping];
         }
 
-        TypeMapping[] EnsureArrayIndex(TypeMapping[] a, int index) {
-            if (a == null) return new TypeMapping[32];
-            if (index < a.Length) return a;
+        TypeMapping[] EnsureArrayIndex(TypeMapping[] a, int index)
+        {
+            if (a == null)
+                return new TypeMapping[32];
+            if (index < a.Length)
+                return a;
             TypeMapping[] b = new TypeMapping[a.Length + 32];
             Array.Copy(a, b, index);
             return b;
         }
 
-        internal void WriteQuotedCSharpString(string value) {
+        internal void WriteQuotedCSharpString(string value)
+        {
             raCodeGen.WriteQuotedCSharpString(value);
         }
 
-        internal void GenerateHashtableGetBegin(string privateName, string publicName) {
+        internal void GenerateHashtableGetBegin(string privateName, string publicName)
+        {
             writer.Write(typeof(Hashtable).FullName);
             writer.Write(" ");
             writer.Write(privateName);
@@ -140,10 +195,10 @@ namespace System.Xml.Serialization {
             writer.Write(" _tmp = new ");
             writer.Write(typeof(Hashtable).FullName);
             writer.WriteLine("();");
-
         }
 
-        internal void GenerateHashtableGetEnd(string privateName) {
+        internal void GenerateHashtableGetEnd(string privateName)
+        {
             writer.Write("if (");
             writer.Write(privateName);
             writer.Write(" == null) ");
@@ -161,10 +216,24 @@ namespace System.Xml.Serialization {
             writer.Indent--;
             writer.WriteLine("}");
         }
-        internal void GeneratePublicMethods(string privateName, string publicName, string[] methods, XmlMapping[] xmlMappings) {
+
+        internal void GeneratePublicMethods(
+            string privateName,
+            string publicName,
+            string[] methods,
+            XmlMapping[] xmlMappings
+        )
+        {
             GenerateHashtableGetBegin(privateName, publicName);
-            if (methods != null && methods.Length != 0 && xmlMappings != null && xmlMappings.Length == methods.Length) {
-                for (int i = 0; i < methods.Length; i++) {
+            if (
+                methods != null
+                && methods.Length != 0
+                && xmlMappings != null
+                && xmlMappings.Length == methods.Length
+            )
+            {
+                for (int i = 0; i < methods.Length; i++)
+                {
                     if (methods[i] == null)
                         continue;
                     writer.Write("_tmp[");
@@ -177,7 +246,8 @@ namespace System.Xml.Serialization {
             GenerateHashtableGetEnd(privateName);
         }
 
-        internal void GenerateSupportedTypes(Type[] types) {
+        internal void GenerateSupportedTypes(Type[] types)
+        {
             writer.Write("public override ");
             writer.Write(typeof(bool).FullName);
             writer.Write(" CanSerialize(");
@@ -185,7 +255,8 @@ namespace System.Xml.Serialization {
             writer.WriteLine(" type) {");
             writer.Indent++;
             Hashtable uniqueTypes = new Hashtable();
-            for (int i = 0; i < types.Length; i++) {
+            for (int i = 0; i < types.Length; i++)
+            {
                 Type type = types[i];
 
                 if (type == null)
@@ -196,7 +267,11 @@ namespace System.Xml.Serialization {
                     continue;
                 if (DynamicAssemblies.IsTypeDynamic(type))
                     continue;
-                if (type.IsGenericType || type.ContainsGenericParameters && DynamicAssemblies.IsTypeDynamic(type.GetGenericArguments()))
+                if (
+                    type.IsGenericType
+                    || type.ContainsGenericParameters
+                        && DynamicAssemblies.IsTypeDynamic(type.GetGenericArguments())
+                )
                     continue;
                 uniqueTypes[type] = type;
                 writer.Write("if (type == typeof(");
@@ -208,7 +283,13 @@ namespace System.Xml.Serialization {
             writer.WriteLine("}");
         }
 
-        internal string GenerateBaseSerializer(string baseSerializer, string readerClass, string writerClass, CodeIdentifiers classes) {
+        internal string GenerateBaseSerializer(
+            string baseSerializer,
+            string readerClass,
+            string writerClass,
+            CodeIdentifiers classes
+        )
+        {
             baseSerializer = CodeIdentifier.MakeValid(baseSerializer);
             baseSerializer = classes.AddUnique(baseSerializer, baseSerializer);
 
@@ -246,8 +327,19 @@ namespace System.Xml.Serialization {
             return baseSerializer;
         }
 
-        internal string GenerateTypedSerializer(string readMethod, string writeMethod, XmlMapping mapping, CodeIdentifiers classes, string baseSerializer, string readerClass, string writerClass) {
-            string serializerName = CodeIdentifier.MakeValid(Accessor.UnescapeName(mapping.Accessor.Mapping.TypeDesc.Name));
+        internal string GenerateTypedSerializer(
+            string readMethod,
+            string writeMethod,
+            XmlMapping mapping,
+            CodeIdentifiers classes,
+            string baseSerializer,
+            string readerClass,
+            string writerClass
+        )
+        {
+            string serializerName = CodeIdentifier.MakeValid(
+                Accessor.UnescapeName(mapping.Accessor.Mapping.TypeDesc.Name)
+            );
             serializerName = classes.AddUnique(serializerName + "Serializer", mapping);
 
             writer.WriteLine();
@@ -266,10 +358,12 @@ namespace System.Xml.Serialization {
             writer.WriteLine(" xmlReader) {");
             writer.Indent++;
 
-            if (mapping.Accessor.Any) {
+            if (mapping.Accessor.Any)
+            {
                 writer.WriteLine("return true;");
             }
-            else {
+            else
+            {
                 writer.Write("return xmlReader.IsStartElement(");
                 WriteQuotedCSharpString(mapping.Accessor.Name);
                 writer.Write(", ");
@@ -279,7 +373,8 @@ namespace System.Xml.Serialization {
             writer.Indent--;
             writer.WriteLine("}");
 
-            if (writeMethod != null) {
+            if (writeMethod != null)
+            {
                 writer.WriteLine();
                 writer.Write("protected override void Serialize(object objectToSerialize, ");
                 writer.Write(typeof(XmlSerializationWriter).FullName);
@@ -290,14 +385,16 @@ namespace System.Xml.Serialization {
                 writer.Write(")writer).");
                 writer.Write(writeMethod);
                 writer.Write("(");
-                if (mapping is XmlMembersMapping) {
+                if (mapping is XmlMembersMapping)
+                {
                     writer.Write("(object[])");
                 }
                 writer.WriteLine("objectToSerialize);");
                 writer.Indent--;
                 writer.WriteLine("}");
             }
-            if (readMethod != null) {
+            if (readMethod != null)
+            {
                 writer.WriteLine();
                 writer.Write("protected override object Deserialize(");
                 writer.Write(typeof(XmlSerializationReader).FullName);
@@ -317,11 +414,13 @@ namespace System.Xml.Serialization {
             return serializerName;
         }
 
-        void GenerateTypedSerializers(Hashtable serializers) {
+        void GenerateTypedSerializers(Hashtable serializers)
+        {
             string privateName = "typedSerializers";
             GenerateHashtableGetBegin(privateName, "TypedSerializers");
 
-            foreach (string key in serializers.Keys) {
+            foreach (string key in serializers.Keys)
+            {
                 writer.Write("_tmp.Add(");
                 WriteQuotedCSharpString(key);
                 writer.Write(", new ");
@@ -332,7 +431,8 @@ namespace System.Xml.Serialization {
         }
 
         //GenerateGetSerializer(serializers, xmlMappings);
-        void GenerateGetSerializer(Hashtable serializers, XmlMapping[] xmlMappings) {
+        void GenerateGetSerializer(Hashtable serializers, XmlMapping[] xmlMappings)
+        {
             writer.Write("public override ");
             writer.Write(typeof(XmlSerializer).FullName);
             writer.Write(" GetSerializer(");
@@ -340,8 +440,10 @@ namespace System.Xml.Serialization {
             writer.WriteLine(" type) {");
             writer.Indent++;
 
-            for (int i = 0; i < xmlMappings.Length; i++) {
-                if (xmlMappings[i] is XmlTypeMapping) {
+            for (int i = 0; i < xmlMappings.Length; i++)
+            {
+                if (xmlMappings[i] is XmlTypeMapping)
+                {
                     Type type = xmlMappings[i].Accessor.Mapping.TypeDesc.Type;
                     if (type == null)
                         continue;
@@ -349,7 +451,11 @@ namespace System.Xml.Serialization {
                         continue;
                     if (DynamicAssemblies.IsTypeDynamic(type))
                         continue;
-                    if (type.IsGenericType || type.ContainsGenericParameters && DynamicAssemblies.IsTypeDynamic(type.GetGenericArguments()))
+                    if (
+                        type.IsGenericType
+                        || type.ContainsGenericParameters
+                            && DynamicAssemblies.IsTypeDynamic(type.GetGenericArguments())
+                    )
                         continue;
                     writer.Write("if (type == typeof(");
                     writer.Write(CodeIdentifier.GetCSharpName(type));
@@ -363,7 +469,17 @@ namespace System.Xml.Serialization {
             writer.WriteLine("}");
         }
 
-        internal void GenerateSerializerContract(string className, XmlMapping[] xmlMappings, Type[] types, string readerType, string[] readMethods, string writerType, string[] writerMethods, Hashtable serializers) {
+        internal void GenerateSerializerContract(
+            string className,
+            XmlMapping[] xmlMappings,
+            Type[] types,
+            string readerType,
+            string[] readMethods,
+            string writerType,
+            string[] writerMethods,
+            Hashtable serializers
+        )
+        {
             writer.WriteLine();
             writer.Write("public class XmlSerializerContract : global::");
             writer.Write(typeof(XmlSerializerImplementation).FullName);
@@ -390,10 +506,10 @@ namespace System.Xml.Serialization {
 
             writer.Indent--;
             writer.WriteLine("}");
-
         }
 
-        internal static bool IsWildcard(SpecialMapping mapping) {
+        internal static bool IsWildcard(SpecialMapping mapping)
+        {
             if (mapping is SerializableMapping)
                 return ((SerializableMapping)mapping).IsAny;
             return mapping.TypeDesc.CanBeElementValue;

@@ -1,4 +1,3 @@
-
 namespace System.Net.NetworkInformation
 {
     /// Specifies types of network interfaces.

@@ -6,9 +6,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Core.Filters;
 
-internal sealed partial class AntiforgeryMiddlewareAuthorizationFilter(ILogger<AntiforgeryMiddlewareAuthorizationFilter> logger) : IAsyncAuthorizationFilter
+internal sealed partial class AntiforgeryMiddlewareAuthorizationFilter(
+    ILogger<AntiforgeryMiddlewareAuthorizationFilter> logger
+) : IAsyncAuthorizationFilter
 {
-    internal const string AntiforgeryMiddlewareWithEndpointInvokedKey = "__AntiforgeryMiddlewareWithEndpointInvoked";
+    internal const string AntiforgeryMiddlewareWithEndpointInvokedKey =
+        "__AntiforgeryMiddlewareWithEndpointInvoked";
 
     private readonly ILogger _logger = logger;
 
@@ -18,10 +21,15 @@ internal sealed partial class AntiforgeryMiddlewareAuthorizationFilter(ILogger<A
 
         if (context.HttpContext.Items.ContainsKey(AntiforgeryMiddlewareWithEndpointInvokedKey))
         {
-            var antiforgeryValidationFeature = context.HttpContext.Features.Get<IAntiforgeryValidationFeature>();
+            var antiforgeryValidationFeature =
+                context.HttpContext.Features.Get<IAntiforgeryValidationFeature>();
             if (antiforgeryValidationFeature is { IsValid: false })
             {
-                Log.AntiforgeryTokenInvalid(_logger, antiforgeryValidationFeature.Error!.Message, antiforgeryValidationFeature.Error!);
+                Log.AntiforgeryTokenInvalid(
+                    _logger,
+                    antiforgeryValidationFeature.Error!.Message,
+                    antiforgeryValidationFeature.Error!
+                );
                 context.Result = new AntiforgeryValidationFailedResult();
             }
         }
@@ -31,7 +39,16 @@ internal sealed partial class AntiforgeryMiddlewareAuthorizationFilter(ILogger<A
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Antiforgery token validation failed. {Message}", EventName = "AntiforgeryTokenInvalid")]
-        public static partial void AntiforgeryTokenInvalid(ILogger logger, string message, Exception exception);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Antiforgery token validation failed. {Message}",
+            EventName = "AntiforgeryTokenInvalid"
+        )]
+        public static partial void AntiforgeryTokenInvalid(
+            ILogger logger,
+            string message,
+            Exception exception
+        );
     }
 }

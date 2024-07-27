@@ -15,7 +15,11 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <param name="managedType">The managed type to marshal.</param>
         /// <param name="marshalMode">The marshalling mode this attribute applies to.</param>
         /// <param name="marshallerType">The type used for marshalling.</param>
-        public CustomMarshallerAttribute(Type managedType, MarshalMode marshalMode, Type marshallerType)
+        public CustomMarshallerAttribute(
+            Type managedType,
+            MarshalMode marshalMode,
+            Type marshallerType
+        )
         {
             ManagedType = managedType;
             MarshalMode = marshalMode;
@@ -40,8 +44,6 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <summary>
         /// Placeholder type for a generic parameter.
         /// </summary>
-        public struct GenericPlaceholder
-        {
-        }
+        public struct GenericPlaceholder { }
     }
 }

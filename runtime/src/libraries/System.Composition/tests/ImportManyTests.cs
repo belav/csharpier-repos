@@ -31,15 +31,16 @@ namespace System.Composition.UnitTests
                 Items = items;
             }
         }
+
         [Export]
         public class ImportManyPropsOfA
         {
             [ImportMany]
             public IEnumerable<IA> AllA { get; set; }
-            public ImportManyPropsOfA()
-            {
-            }
+
+            public ImportManyPropsOfA() { }
         }
+
         [Fact]
         public void ImportsMany()
         {

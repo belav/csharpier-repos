@@ -20,13 +20,15 @@ namespace Internal.Cryptography.Pal.AnyOS
             ContentInfo contentInfo,
             AlgorithmIdentifier contentEncryptionAlgorithm,
             X509Certificate2Collection originatorCerts,
-            CryptographicAttributeObjectCollection unprotectedAttributes)
+            CryptographicAttributeObjectCollection unprotectedAttributes
+        )
         {
             byte[] encryptedContent = EncryptContent(
                 contentInfo,
                 contentEncryptionAlgorithm,
                 out byte[] cek,
-                out byte[] parameterBytes);
+                out byte[] parameterBytes
+            );
 
             // Pin the CEK to prevent it from getting copied during heap compaction.
             fixed (byte* pinnedCek = cek)
@@ -41,7 +43,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                         unprotectedAttributes,
                         encryptedContent,
                         cek,
-                        parameterBytes);
+                        parameterBytes
+                    );
                 }
                 finally
                 {
@@ -58,7 +61,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             CryptographicAttributeObjectCollection unprotectedAttributes,
             byte[] encryptedContent,
             byte[] cek,
-            byte[] parameterBytes)
+            byte[] parameterBytes
+        )
         {
             EnvelopedDataAsn envelopedData = new EnvelopedDataAsn
             {
@@ -80,7 +84,9 @@ namespace Internal.Cryptography.Pal.AnyOS
             {
                 List<AttributeAsn> attrList = CmsSigner.BuildAttributes(unprotectedAttributes);
 
-                envelopedData.UnprotectedAttributes = PkcsHelpers.NormalizeAttributeSet(attrList.ToArray());
+                envelopedData.UnprotectedAttributes = PkcsHelpers.NormalizeAttributeSet(
+                    attrList.ToArray()
+                );
             }
 
             if (originatorCerts != null && originatorCerts.Count > 0)
@@ -92,10 +98,7 @@ namespace Internal.Cryptography.Pal.AnyOS
                     certs[i].Certificate = originatorCerts[i].RawData;
                 }
 
-                envelopedData.OriginatorInfo = new OriginatorInfoAsn
-                {
-                    CertificateSet = certs,
-                };
+                envelopedData.OriginatorInfo = new OriginatorInfoAsn { CertificateSet = certs };
             }
 
             envelopedData.RecipientInfos = new RecipientInfoAsn[recipients.Count];
@@ -107,13 +110,16 @@ namespace Internal.Cryptography.Pal.AnyOS
                 CmsRecipient recipient = recipients[i];
                 bool v0Recipient;
 
-                envelopedData.RecipientInfos[i].Ktri = recipient.Certificate.GetKeyAlgorithm() switch
-                {
-                    Oids.Rsa => MakeKtri(cek, recipient, out v0Recipient),
-                    _ => throw new CryptographicException(
-                            SR.Cryptography_Cms_UnknownAlgorithm,
-                            recipient.Certificate.GetKeyAlgorithm()),
-                };
+                envelopedData.RecipientInfos[i].Ktri =
+                    recipient.Certificate.GetKeyAlgorithm() switch
+                    {
+                        Oids.Rsa => MakeKtri(cek, recipient, out v0Recipient),
+                        _
+                            => throw new CryptographicException(
+                                SR.Cryptography_Cms_UnknownAlgorithm,
+                                recipient.Certificate.GetKeyAlgorithm()
+                            ),
+                    };
                 allRecipientsVersion0 = allRecipientsVersion0 && v0Recipient;
             }
 
@@ -134,9 +140,11 @@ namespace Internal.Cryptography.Pal.AnyOS
             // v0 (RFC 2315):
             //   * Anything not already matched
 
-            if (envelopedData.OriginatorInfo != null ||
-                !allRecipientsVersion0 ||
-                envelopedData.UnprotectedAttributes != null)
+            if (
+                envelopedData.OriginatorInfo != null
+                || !allRecipientsVersion0
+                || envelopedData.UnprotectedAttributes != null
+            )
             {
                 envelopedData.Version = 2;
             }
@@ -150,7 +158,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             ContentInfo contentInfo,
             AlgorithmIdentifier contentEncryptionAlgorithm,
             out byte[] cek,
-            out byte[] parameterBytes)
+            out byte[] parameterBytes
+        )
         {
             using (SymmetricAlgorithm alg = OpenAlgorithm(contentEncryptionAlgorithm))
             {
@@ -171,7 +180,10 @@ namespace Internal.Cryptography.Pal.AnyOS
 
                 byte[] toEncrypt = contentInfo.Content;
 
-                if (contentInfo.ContentType.Value == Oids.Pkcs7Data || contentInfo.Content.Length == 0)
+                if (
+                    contentInfo.ContentType.Value == Oids.Pkcs7Data
+                    || contentInfo.Content.Length == 0
+                )
                 {
                     return EncryptOneShot(alg, contentInfo.Content);
                 }
@@ -184,9 +196,13 @@ namespace Internal.Cryptography.Pal.AnyOS
                             AsnEncodingRules.BER,
                             out int contentOffset,
                             out int contentLength,
-                            out _);
+                            out _
+                        );
 
-                        ReadOnlySpan<byte> content = contentInfo.Content.AsSpan(contentOffset, contentLength);
+                        ReadOnlySpan<byte> content = contentInfo.Content.AsSpan(
+                            contentOffset,
+                            contentLength
+                        );
                         return EncryptOneShot(alg, content);
                     }
                     catch (AsnContentException e)

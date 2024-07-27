@@ -29,7 +29,8 @@ namespace Grpc.Shared.Server;
 /// <typeparam name="TService">Service type for this method.</typeparam>
 /// <typeparam name="TRequest">Request message type for this method.</typeparam>
 /// <typeparam name="TResponse">Response message type for this method.</typeparam>
-internal sealed class ServerStreamingServerMethodInvoker<TService, TRequest, TResponse> : ServerMethodInvokerBase<TService, TRequest, TResponse>
+internal sealed class ServerStreamingServerMethodInvoker<TService, TRequest, TResponse>
+    : ServerMethodInvokerBase<TService, TRequest, TResponse>
     where TRequest : class
     where TResponse : class
     where TService : class
@@ -48,29 +49,36 @@ internal sealed class ServerStreamingServerMethodInvoker<TService, TRequest, TRe
         ServerStreamingServerMethod<TService, TRequest, TResponse> invoker,
         Method<TRequest, TResponse> method,
         MethodOptions options,
-        IGrpcServiceActivator<TService> serviceActivator)
+        IGrpcServiceActivator<TService> serviceActivator
+    )
         : base(method, options, serviceActivator)
     {
         _invoker = invoker;
 
         if (Options.HasInterceptors)
         {
-            var interceptorPipeline = new InterceptorPipelineBuilder<TRequest, TResponse>(Options.Interceptors);
-            _pipelineInvoker = interceptorPipeline.ServerStreamingPipeline(ResolvedInterceptorInvoker);
+            var interceptorPipeline = new InterceptorPipelineBuilder<TRequest, TResponse>(
+                Options.Interceptors
+            );
+            _pipelineInvoker = interceptorPipeline.ServerStreamingPipeline(
+                ResolvedInterceptorInvoker
+            );
         }
     }
 
-    private async Task ResolvedInterceptorInvoker(TRequest request, IServerStreamWriter<TResponse> responseStream, ServerCallContext resolvedContext)
+    private async Task ResolvedInterceptorInvoker(
+        TRequest request,
+        IServerStreamWriter<TResponse> responseStream,
+        ServerCallContext resolvedContext
+    )
     {
         GrpcActivatorHandle<TService> serviceHandle = default;
         try
         {
-            serviceHandle = ServiceActivator.Create(resolvedContext.GetHttpContext().RequestServices);
-            await _invoker(
-                serviceHandle.Instance,
-                request,
-                responseStream,
-                resolvedContext);
+            serviceHandle = ServiceActivator.Create(
+                resolvedContext.GetHttpContext().RequestServices
+            );
+            await _invoker(serviceHandle.Instance, request, responseStream, resolvedContext);
         }
         finally
         {
@@ -89,7 +97,12 @@ internal sealed class ServerStreamingServerMethodInvoker<TService, TRequest, TRe
     /// <param name="request">The <typeparamref name="TRequest"/> message.</param>
     /// <param name="streamWriter">The <typeparamref name="TResponse"/> stream writer.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous method.</returns>
-    public async Task Invoke(HttpContext httpContext, ServerCallContext serverCallContext, TRequest request, IServerStreamWriter<TResponse> streamWriter)
+    public async Task Invoke(
+        HttpContext httpContext,
+        ServerCallContext serverCallContext,
+        TRequest request,
+        IServerStreamWriter<TResponse> streamWriter
+    )
     {
         if (_pipelineInvoker == null)
         {
@@ -97,11 +110,7 @@ internal sealed class ServerStreamingServerMethodInvoker<TService, TRequest, TRe
             try
             {
                 serviceHandle = ServiceActivator.Create(httpContext.RequestServices);
-                await _invoker(
-                    serviceHandle.Instance,
-                    request,
-                    streamWriter,
-                    serverCallContext);
+                await _invoker(serviceHandle.Instance, request, streamWriter, serverCallContext);
             }
             finally
             {
@@ -113,10 +122,7 @@ internal sealed class ServerStreamingServerMethodInvoker<TService, TRequest, TRe
         }
         else
         {
-            await _pipelineInvoker(
-                request,
-                streamWriter,
-                serverCallContext);
+            await _pipelineInvoker(request, streamWriter, serverCallContext);
         }
     }
 }

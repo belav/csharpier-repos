@@ -22,14 +22,20 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
     /// <remarks>
     /// Operates on runtime metadata artifacts.
     /// </remarks>
-    internal sealed class RuntimeMetadataReferenceResolver : MetadataReferenceResolver, IEquatable<RuntimeMetadataReferenceResolver>
+    internal sealed class RuntimeMetadataReferenceResolver
+        : MetadataReferenceResolver,
+            IEquatable<RuntimeMetadataReferenceResolver>
     {
         // Ideally we'd use properties with no aliases, but currently that's not possible since empty aliases mean {global}.
         private static readonly MetadataReferenceProperties s_resolvedMissingAssemblyReferenceProperties =
             MetadataReferenceProperties.Assembly.WithAliases(ImmutableArray.Create("<implicit>"));
 
-        internal static string? GetDesktopFrameworkDirectory() => GacFileResolver.IsAvailable ?
-            PathUtilities.GetDirectoryName(typeof(object).GetTypeInfo().Assembly.ManifestModule.FullyQualifiedName) : null;
+        internal static string? GetDesktopFrameworkDirectory() =>
+            GacFileResolver.IsAvailable
+                ? PathUtilities.GetDirectoryName(
+                    typeof(object).GetTypeInfo().Assembly.ManifestModule.FullyQualifiedName
+                )
+                : null;
 
         // file name to path:
         internal ImmutableDictionary<string, string> TrustedPlatformAssemblies;
@@ -37,13 +43,24 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         internal readonly RelativePathResolver PathResolver;
         internal readonly NuGetPackageResolver? PackageResolver;
         internal readonly GacFileResolver? GacFileResolver;
-        private readonly Func<string, MetadataReferenceProperties, PortableExecutableReference> _fileReferenceProvider;
+        private readonly Func<
+            string,
+            MetadataReferenceProperties,
+            PortableExecutableReference
+        > _fileReferenceProvider;
 
         // TODO: Look for .winmd, but only if the identity has content WindowsRuntime (https://github.com/dotnet/roslyn/issues/6483)
         // The extensions are in order in which the CLR loader looks for assembly files.
-        internal static ImmutableArray<string> AssemblyExtensions = ImmutableArray.Create(".dll", ".exe");
+        internal static ImmutableArray<string> AssemblyExtensions = ImmutableArray.Create(
+            ".dll",
+            ".exe"
+        );
 
-        private static readonly char[] s_directorySeparators = [PathUtilities.DirectorySeparatorChar, PathUtilities.AltDirectorySeparatorChar];
+        private static readonly char[] s_directorySeparators =
+        [
+            PathUtilities.DirectorySeparatorChar,
+            PathUtilities.AltDirectorySeparatorChar,
+        ];
 
         /// <summary>
         /// Creates a resolver that uses the current platform settings (GAC, platform assembly list).
@@ -51,15 +68,23 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         internal static RuntimeMetadataReferenceResolver CreateCurrentPlatformResolver(
             ImmutableArray<string> searchPaths = default,
             string? baseDirectory = null,
-            Func<string, MetadataReferenceProperties, PortableExecutableReference>? fileReferenceProvider = null)
+            Func<
+                string,
+                MetadataReferenceProperties,
+                PortableExecutableReference
+            >? fileReferenceProvider = null
+        )
         {
             return new RuntimeMetadataReferenceResolver(
                 searchPaths,
                 baseDirectory,
                 packageResolver: null,
-                gacFileResolver: GacFileResolver.IsAvailable ? new GacFileResolver(preferredCulture: CultureInfo.CurrentCulture) : null,
+                gacFileResolver: GacFileResolver.IsAvailable
+                    ? new GacFileResolver(preferredCulture: CultureInfo.CurrentCulture)
+                    : null,
                 GetTrustedPlatformAssemblyPaths(),
-                fileReferenceProvider);
+                fileReferenceProvider
+            );
         }
 
         internal RuntimeMetadataReferenceResolver(
@@ -68,35 +93,51 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             NuGetPackageResolver? packageResolver = null,
             GacFileResolver? gacFileResolver = null,
             ImmutableArray<string> platformAssemblyPaths = default,
-            Func<string, MetadataReferenceProperties, PortableExecutableReference>? fileReferenceProvider = null)
-            : this(new RelativePathResolver(searchPaths.NullToEmpty(), baseDirectory),
-                   packageResolver,
-                   gacFileResolver,
-                   GetTrustedPlatformAssemblies(platformAssemblyPaths.NullToEmpty()),
-                   fileReferenceProvider)
-        {
-        }
+            Func<
+                string,
+                MetadataReferenceProperties,
+                PortableExecutableReference
+            >? fileReferenceProvider = null
+        )
+            : this(
+                new RelativePathResolver(searchPaths.NullToEmpty(), baseDirectory),
+                packageResolver,
+                gacFileResolver,
+                GetTrustedPlatformAssemblies(platformAssemblyPaths.NullToEmpty()),
+                fileReferenceProvider
+            ) { }
 
         internal RuntimeMetadataReferenceResolver(
             RelativePathResolver pathResolver,
             NuGetPackageResolver? packageResolver,
             GacFileResolver? gacFileResolver,
             ImmutableDictionary<string, string> trustedPlatformAssemblies,
-            Func<string, MetadataReferenceProperties, PortableExecutableReference>? fileReferenceProvider = null)
+            Func<
+                string,
+                MetadataReferenceProperties,
+                PortableExecutableReference
+            >? fileReferenceProvider = null
+        )
         {
             PathResolver = pathResolver;
             PackageResolver = packageResolver;
             GacFileResolver = gacFileResolver;
 
-            _fileReferenceProvider = fileReferenceProvider ??
-                new Func<string, MetadataReferenceProperties, PortableExecutableReference>((path, properties) => MetadataReference.CreateFromFile(path, properties));
+            _fileReferenceProvider =
+                fileReferenceProvider
+                ?? new Func<string, MetadataReferenceProperties, PortableExecutableReference>(
+                    (path, properties) => MetadataReference.CreateFromFile(path, properties)
+                );
 
             TrustedPlatformAssemblies = trustedPlatformAssemblies;
         }
 
         public override bool ResolveMissingAssemblies => true;
 
-        public override PortableExecutableReference? ResolveMissingAssembly(MetadataReference definition, AssemblyIdentity referenceIdentity)
+        public override PortableExecutableReference? ResolveMissingAssembly(
+            MetadataReference definition,
+            AssemblyIdentity referenceIdentity
+        )
         {
             // look in the GAC:
             if (GacFileResolver != null && referenceIdentity.IsStrongName)
@@ -111,7 +152,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             // check platform assemblies:
             if (!TrustedPlatformAssemblies.IsEmpty)
             {
-                var result = ResolveTrustedPlatformAssembly(referenceIdentity.Name, s_resolvedMissingAssemblyReferenceProperties);
+                var result = ResolveTrustedPlatformAssembly(
+                    referenceIdentity.Name,
+                    s_resolvedMissingAssemblyReferenceProperties
+                );
                 if (result != null)
                 {
                     return result;
@@ -119,10 +163,15 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             }
 
             // look in the directory of the requesting definition:
-            var definitionDirectory = PathUtilities.GetDirectoryName((definition as PortableExecutableReference)?.FilePath);
+            var definitionDirectory = PathUtilities.GetDirectoryName(
+                (definition as PortableExecutableReference)?.FilePath
+            );
             if (definitionDirectory != null)
             {
-                string pathWithoutExtension = PathUtilities.CombinePathsUnchecked(definitionDirectory, referenceIdentity.Name);
+                string pathWithoutExtension = PathUtilities.CombinePathsUnchecked(
+                    definitionDirectory,
+                    referenceIdentity.Name
+                );
                 foreach (string extension in AssemblyExtensions)
                 {
                     string fullPath = pathWithoutExtension + extension;
@@ -141,9 +190,19 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             return _fileReferenceProvider(fullPath, s_resolvedMissingAssemblyReferenceProperties);
         }
 
-        public override ImmutableArray<PortableExecutableReference> ResolveReference(string reference, string? baseFilePath, MetadataReferenceProperties properties)
+        public override ImmutableArray<PortableExecutableReference> ResolveReference(
+            string reference,
+            string? baseFilePath,
+            MetadataReferenceProperties properties
+        )
         {
-            if (NuGetPackageResolver.TryParsePackageReference(reference, out string packageName, out string packageVersion))
+            if (
+                NuGetPackageResolver.TryParsePackageReference(
+                    reference,
+                    out string packageName,
+                    out string packageVersion
+                )
+            )
             {
                 if (PackageResolver != null)
                 {
@@ -154,9 +213,15 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             }
             else if (PathUtilities.IsFilePath(reference))
             {
-                if (!TrustedPlatformAssemblies.IsEmpty && reference.IndexOfAny(s_directorySeparators) < 0)
+                if (
+                    !TrustedPlatformAssemblies.IsEmpty
+                    && reference.IndexOfAny(s_directorySeparators) < 0
+                )
                 {
-                    var result = ResolveTrustedPlatformAssembly(PathUtilities.GetFileName(reference, includeExtension: false), properties);
+                    var result = ResolveTrustedPlatformAssembly(
+                        PathUtilities.GetFileName(reference, includeExtension: false),
+                        properties
+                    );
                     if (result != null)
                     {
                         return ImmutableArray.Create(result);
@@ -168,7 +233,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     string? resolvedPath = PathResolver.ResolvePath(reference, baseFilePath);
                     if (resolvedPath != null)
                     {
-                        return ImmutableArray.Create(_fileReferenceProvider(resolvedPath, properties));
+                        return ImmutableArray.Create(
+                            _fileReferenceProvider(resolvedPath, properties)
+                        );
                     }
                 }
             }
@@ -183,7 +250,14 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     }
                 }
 
-                if (!TrustedPlatformAssemblies.IsEmpty && AssemblyIdentity.TryParseDisplayName(reference, out var identity, out var identityParts))
+                if (
+                    !TrustedPlatformAssemblies.IsEmpty
+                    && AssemblyIdentity.TryParseDisplayName(
+                        reference,
+                        out var identity,
+                        out var identityParts
+                    )
+                )
                 {
                     var result = ResolveTrustedPlatformAssembly(identity.Name, properties);
                     if (result != null)
@@ -196,20 +270,33 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             return ImmutableArray<PortableExecutableReference>.Empty;
         }
 
-        private PortableExecutableReference? ResolveTrustedPlatformAssembly(string name, MetadataReferenceProperties properties)
-            => TrustedPlatformAssemblies.TryGetValue(name, out var path) && File.Exists(path) ? _fileReferenceProvider(path, properties) : null;
+        private PortableExecutableReference? ResolveTrustedPlatformAssembly(
+            string name,
+            MetadataReferenceProperties properties
+        ) =>
+            TrustedPlatformAssemblies.TryGetValue(name, out var path) && File.Exists(path)
+                ? _fileReferenceProvider(path, properties)
+                : null;
 
-        internal static ImmutableArray<string> GetTrustedPlatformAssemblyPaths()
-            => ((AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") as string)?.Split(Path.PathSeparator)).ToImmutableArrayOrEmpty();
+        internal static ImmutableArray<string> GetTrustedPlatformAssemblyPaths() =>
+            (
+                (AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") as string)?.Split(
+                    Path.PathSeparator
+                )
+            ).ToImmutableArrayOrEmpty();
 
-        internal static ImmutableDictionary<string, string> GetTrustedPlatformAssemblies(ImmutableArray<string> paths)
+        internal static ImmutableDictionary<string, string> GetTrustedPlatformAssemblies(
+            ImmutableArray<string> paths
+        )
         {
             if (paths.IsEmpty)
             {
                 return ImmutableDictionary<string, string>.Empty;
             }
 
-            var set = ImmutableDictionary.CreateBuilder<string, string>(StringComparer.OrdinalIgnoreCase);
+            var set = ImmutableDictionary.CreateBuilder<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             foreach (var path in paths)
             {
@@ -231,28 +318,44 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
         public override int GetHashCode()
         {
-            return Hash.Combine(PathResolver,
-                   Hash.Combine(PackageResolver,
-                   Hash.Combine(GacFileResolver,
-                   RuntimeHelpers.GetHashCode(TrustedPlatformAssemblies))));
+            return Hash.Combine(
+                PathResolver,
+                Hash.Combine(
+                    PackageResolver,
+                    Hash.Combine(
+                        GacFileResolver,
+                        RuntimeHelpers.GetHashCode(TrustedPlatformAssemblies)
+                    )
+                )
+            );
         }
 
         public bool Equals(RuntimeMetadataReferenceResolver? other)
         {
-            return ReferenceEquals(this, other) ||
-                other != null &&
-                Equals(PathResolver, other.PathResolver) &&
-                Equals(PackageResolver, other.PackageResolver) &&
-                Equals(GacFileResolver, other.GacFileResolver) &&
-                ReferenceEquals(TrustedPlatformAssemblies, other.TrustedPlatformAssemblies);
+            return ReferenceEquals(this, other)
+                || other != null
+                    && Equals(PathResolver, other.PathResolver)
+                    && Equals(PackageResolver, other.PackageResolver)
+                    && Equals(GacFileResolver, other.GacFileResolver)
+                    && ReferenceEquals(TrustedPlatformAssemblies, other.TrustedPlatformAssemblies);
         }
 
-        public override bool Equals(object? other) => Equals(other as RuntimeMetadataReferenceResolver);
+        public override bool Equals(object? other) =>
+            Equals(other as RuntimeMetadataReferenceResolver);
 
-        internal RuntimeMetadataReferenceResolver WithRelativePathResolver(RelativePathResolver resolver)
+        internal RuntimeMetadataReferenceResolver WithRelativePathResolver(
+            RelativePathResolver resolver
+        )
         {
-            return Equals(resolver, PathResolver) ? this :
-                new RuntimeMetadataReferenceResolver(resolver, PackageResolver, GacFileResolver, TrustedPlatformAssemblies, _fileReferenceProvider);
+            return Equals(resolver, PathResolver)
+                ? this
+                : new RuntimeMetadataReferenceResolver(
+                    resolver,
+                    PackageResolver,
+                    GacFileResolver,
+                    TrustedPlatformAssemblies,
+                    _fileReferenceProvider
+                );
         }
     }
 }

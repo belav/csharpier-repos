@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,69 +28,65 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
 
-namespace Mono.CodeContracts.Rewrite {
-	public struct AssemblyRef {
+namespace Mono.CodeContracts.Rewrite
+{
+    public struct AssemblyRef
+    {
+        public struct TwoStreams
+        {
+            public TwoStreams(Stream assembly, Stream symbols)
+                : this()
+            {
+                this.Assembly = assembly;
+                this.Symbols = symbols;
+            }
 
-		public struct TwoStreams {
+            public Stream Assembly { get; private set; }
+            public Stream Symbols { get; private set; }
+        }
 
-			public TwoStreams (Stream assembly, Stream symbols)
-				: this ()
-			{
-				this.Assembly = assembly;
-				this.Symbols = symbols;
-			}
+        public AssemblyRef(string filename)
+            : this()
+        {
+            this.Filename = filename;
+        }
 
-			public Stream Assembly { get; private set; }
-			public Stream Symbols { get; private set; }
+        public AssemblyRef(TwoStreams streams)
+            : this()
+        {
+            this.Streams = streams;
+        }
 
-		}
+        public string Filename { get; private set; }
+        public TwoStreams Streams { get; private set; }
 
-		public AssemblyRef (string filename)
-			: this ()
-		{
-			this.Filename = filename;
-		}
+        public bool IsFilename
+        {
+            get { return this.Filename != null; }
+        }
 
-		public AssemblyRef (TwoStreams streams)
-			: this ()
-		{
-			this.Streams = streams;
-		}
+        public bool IsStream
+        {
+            get { return this.Streams.Assembly != null; }
+        }
 
-		public string Filename { get; private set; }
-		public TwoStreams Streams { get; private set; }
+        public bool IsSet
+        {
+            get { return this.Filename != null || this.Streams.Assembly != null; }
+        }
 
-		public bool IsFilename {
-			get {
-				return this.Filename != null;
-			}
-		}
+        public static implicit operator AssemblyRef(string filename)
+        {
+            return new AssemblyRef(filename);
+        }
 
-		public bool IsStream {
-			get {
-				return this.Streams.Assembly != null;
-			}
-		}
-
-		public bool IsSet {
-			get {
-				return this.Filename != null || this.Streams.Assembly != null;
-			}
-		}
-
-		public static implicit operator AssemblyRef (string filename)
-		{
-			return new AssemblyRef (filename);
-		}
-
-		public static implicit operator AssemblyRef (Stream stream)
-		{
-			return new AssemblyRef (new TwoStreams (stream, null));
-		}
-
-	}
+        public static implicit operator AssemblyRef(Stream stream)
+        {
+            return new AssemblyRef(new TwoStreams(stream, null));
+        }
+    }
 }

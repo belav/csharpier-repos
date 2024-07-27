@@ -51,7 +51,11 @@ namespace Roslyn.Utilities
 
         public static bool ElementEquals(string name1, string name2, bool fromVb = false)
         {
-            return string.Equals(name1, name2, fromVb ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+            return string.Equals(
+                name1,
+                name2,
+                fromVb ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase
+            );
         }
 
         public static bool AttributeEquals(string name1, string name2)

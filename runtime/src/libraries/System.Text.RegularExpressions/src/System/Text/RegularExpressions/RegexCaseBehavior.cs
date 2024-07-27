@@ -38,6 +38,6 @@ namespace System.Text.RegularExpressions
         /// These are all the same mappings used by non-Turkish behavior, with the exception of: \u0049 => \u0069 which mapping doesn't exist
         /// on this behavior and with the additional mapping of: \u0069 => \u0131. This mode will be used when CurrentCulture is any of the tr/az cultures.
         /// </summary>
-        Turkish
+        Turkish,
     }
 }

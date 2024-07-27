@@ -14,17 +14,15 @@ internal sealed class DefaultApiProblemDetailsWriter : IProblemDetailsWriter
     private readonly ProblemDetailsFactory _problemDetailsFactory;
     private readonly ApiBehaviorOptions _apiBehaviorOptions;
 
-    private static readonly MediaTypeCollection _problemContentTypes = new()
-    {
-        "application/problem+json",
-        "application/problem+xml"
-    };
+    private static readonly MediaTypeCollection _problemContentTypes =
+        new() { "application/problem+json", "application/problem+xml" };
 
     public DefaultApiProblemDetailsWriter(
         OutputFormatterSelector formatterSelector,
         IHttpResponseStreamWriterFactory writerFactory,
         ProblemDetailsFactory problemDetailsFactory,
-        IOptions<ApiBehaviorOptions> apiBehaviorOptions)
+        IOptions<ApiBehaviorOptions> apiBehaviorOptions
+    )
     {
         _formatterSelector = formatterSelector;
         _writerFactory = writerFactory;
@@ -34,16 +32,18 @@ internal sealed class DefaultApiProblemDetailsWriter : IProblemDetailsWriter
 
     public bool CanWrite(ProblemDetailsContext context)
     {
-        var controllerAttribute = context.AdditionalMetadata?.GetMetadata<ControllerAttribute>() ??
-            context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<ControllerAttribute>();
+        var controllerAttribute =
+            context.AdditionalMetadata?.GetMetadata<ControllerAttribute>()
+            ?? context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<ControllerAttribute>();
 
         return controllerAttribute != null;
     }
 
     public ValueTask WriteAsync(ProblemDetailsContext context)
     {
-        var apiControllerAttribute = context.AdditionalMetadata?.GetMetadata<IApiBehaviorMetadata>() ??
-            context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<IApiBehaviorMetadata>();
+        var apiControllerAttribute =
+            context.AdditionalMetadata?.GetMetadata<IApiBehaviorMetadata>()
+            ?? context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<IApiBehaviorMetadata>();
 
         if (apiControllerAttribute is null || _apiBehaviorOptions.SuppressMapClientErrors)
         {
@@ -59,7 +59,8 @@ internal sealed class DefaultApiProblemDetailsWriter : IProblemDetailsWriter
             context.ProblemDetails.Title,
             context.ProblemDetails.Type,
             context.ProblemDetails.Detail,
-            context.ProblemDetails.Instance);
+            context.ProblemDetails.Instance
+        );
 
         if (context.ProblemDetails?.Extensions is not null)
         {
@@ -73,12 +74,14 @@ internal sealed class DefaultApiProblemDetailsWriter : IProblemDetailsWriter
             context.HttpContext,
             _writerFactory.CreateWriter,
             typeof(ProblemDetails),
-            problemDetails);
+            problemDetails
+        );
 
         var selectedFormatter = _formatterSelector.SelectFormatter(
             formatterContext,
             Array.Empty<IOutputFormatter>(),
-            _problemContentTypes);
+            _problemContentTypes
+        );
 
         if (selectedFormatter == null)
         {

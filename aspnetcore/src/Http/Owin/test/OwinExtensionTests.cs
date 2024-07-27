@@ -7,19 +7,21 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Owin;
 
-using AddMiddleware = Action<Func<
-      Func<IDictionary<string, object>, Task>,
-      Func<IDictionary<string, object>, Task>
-    >>;
+using AddMiddleware = Action<
+    Func<Func<IDictionary<string, object>, Task>, Func<IDictionary<string, object>, Task>>
+>;
 using AppFunc = Func<IDictionary<string, object>, Task>;
 using CreateMiddleware = Func<
-      Func<IDictionary<string, object>, Task>,
-      Func<IDictionary<string, object>, Task>
-    >;
+    Func<IDictionary<string, object>, Task>,
+    Func<IDictionary<string, object>, Task>
+>;
 
 public class OwinExtensionTests
 {
-    static readonly AppFunc notFound = env => new Task(() => { env["owin.ResponseStatusCode"] = 404; });
+    static readonly AppFunc notFound = env => new Task(() =>
+    {
+        env["owin.ResponseStatusCode"] = 404;
+    });
 
     [Fact]
     public async Task OwinConfigureServiceProviderAddsServices()
@@ -29,20 +31,21 @@ public class OwinExtensionTests
         IServiceProvider serviceProvider = null;
         FakeService fakeService = null;
 
-        var builder = build.UseBuilder(applicationBuilder =>
-        {
-            serviceProvider = applicationBuilder.ApplicationServices;
-            applicationBuilder.Run(context =>
+        var builder = build.UseBuilder(
+            applicationBuilder =>
             {
-                fakeService = context.RequestServices.GetService<FakeService>();
-                return Task.FromResult(0);
-            });
-        },
-        new ServiceCollection().AddSingleton(new FakeService()).BuildServiceProvider());
+                serviceProvider = applicationBuilder.ApplicationServices;
+                applicationBuilder.Run(context =>
+                {
+                    fakeService = context.RequestServices.GetService<FakeService>();
+                    return Task.FromResult(0);
+                });
+            },
+            new ServiceCollection().AddSingleton(new FakeService()).BuildServiceProvider()
+        );
 
         list.Reverse();
-        await list
-            .Aggregate(notFound, (next, middleware) => middleware(next))
+        await list.Aggregate(notFound, (next, middleware) => middleware(next))
             .Invoke(new Dictionary<string, object>());
 
         Assert.NotNull(serviceProvider);
@@ -61,22 +64,23 @@ public class OwinExtensionTests
         bool builderExecuted = false;
         bool applicationExecuted = false;
 
-        var builder = build.UseBuilder(applicationBuilder =>
-        {
-            builderExecuted = true;
-            serviceProvider = applicationBuilder.ApplicationServices;
-            applicationBuilder.Run(context =>
+        var builder = build.UseBuilder(
+            applicationBuilder =>
             {
-                applicationExecuted = true;
-                fakeService = context.RequestServices.GetService<FakeService>();
-                return Task.FromResult(0);
-            });
-        },
-        expectedServiceProvider);
+                builderExecuted = true;
+                serviceProvider = applicationBuilder.ApplicationServices;
+                applicationBuilder.Run(context =>
+                {
+                    applicationExecuted = true;
+                    fakeService = context.RequestServices.GetService<FakeService>();
+                    return Task.FromResult(0);
+                });
+            },
+            expectedServiceProvider
+        );
 
         list.Reverse();
-        await list
-            .Aggregate(notFound, (next, middleware) => middleware(next))
+        await list.Aggregate(notFound, (next, middleware) => middleware(next))
             .Invoke(new Dictionary<string, object>());
 
         Assert.True(builderExecuted);
@@ -108,8 +112,7 @@ public class OwinExtensionTests
         });
 
         list.Reverse();
-        await list
-            .Aggregate(notFound, (next, middleware) => middleware(next))
+        await list.Aggregate(notFound, (next, middleware) => middleware(next))
             .Invoke(new Dictionary<string, object>());
 
         Assert.True(builderExecuted);
@@ -142,16 +145,17 @@ public class OwinExtensionTests
 
         // Dictionary contains context but does not contain "websocket.Accept" or "websocket.AcceptAlt" keys.
         Assert.NotNull(environment);
-        var value = Assert.Single(
+        var value = Assert
+            .Single(
                 environment,
-                kvp => string.Equals(typeof(HttpContext).FullName, kvp.Key, StringComparison.Ordinal))
+                kvp =>
+                    string.Equals(typeof(HttpContext).FullName, kvp.Key, StringComparison.Ordinal)
+            )
             .Value;
         Assert.Equal(context, value);
         Assert.False(environment.ContainsKey("websocket.Accept"));
         Assert.False(environment.ContainsKey("websocket.AcceptAlt"));
     }
 
-    private class FakeService
-    {
-    }
+    private class FakeService { }
 }

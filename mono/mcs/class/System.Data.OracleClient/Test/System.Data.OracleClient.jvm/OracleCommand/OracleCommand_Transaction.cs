@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,61 +23,79 @@
 
 using System;
 using System.Data;
-using System.Data.OracleClient ;
-
+using System.Data.OracleClient;
 using MonoTests.System.Data.Utils;
-
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
-[TestFixture]
-public class TestId13266 : GHTBase
-{
-	public static void Main()
-	{
-		TestId13266 tc = new TestId13266();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("OracleCommand_Transaction");
-			tc.run();
-		}
-		catch(Exception ex){exp = ex;}
-		finally	{tc.EndTest(exp);}
-	}
+    [TestFixture]
+    public class TestId13266 : GHTBase
+    {
+        public static void Main()
+        {
+            TestId13266 tc = new TestId13266();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("OracleCommand_Transaction");
+                tc.run();
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
-	[Test]
-	public void run()
-	{
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
+            OracleConnection con = new OracleConnection(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
+            con.Open();
+            OracleTransaction txn = con.BeginTransaction();
+            OracleCommand cmd = new OracleCommand("Select * From Employees", con);
 
-		Exception exp = null;
-		OracleConnection con = new OracleConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-		con.Open();
-		OracleTransaction txn = con.BeginTransaction();
-		OracleCommand cmd = new OracleCommand("Select * From Employees", con);
+            try
+            {
+                BeginCase("check Transaction property - default");
+                Compare(cmd.Transaction == null, true);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
-		try
-		{
-			BeginCase("check Transaction property - default");
-			Compare(cmd.Transaction==null , true);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+            cmd.Transaction = txn;
 
-		cmd.Transaction = txn;
+            try
+            {
+                BeginCase("check Transaction property");
+                Compare(cmd.Transaction, txn);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
-		try
-		{
-			BeginCase("check Transaction property");
-			Compare(cmd.Transaction , txn);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
-		
-		if (con.State == ConnectionState.Open) con.Close();
-
-	}
-}
+            if (con.State == ConnectionState.Open)
+                con.Close();
+        }
+    }
 }

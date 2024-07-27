@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="ICertificatePolicy.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
+namespace System.Net
+{
     using System.Security.Cryptography.X509Certificates;
 
     // CertificatePolicy
@@ -14,14 +15,18 @@ namespace System.Net {
     ///       a server certificate.
     ///    </para>
     /// </devdoc>
-    public interface ICertificatePolicy {
+    public interface ICertificatePolicy
+    {
         /// <devdoc>
         ///    <para>
         ///       Validates a server certificate.
         ///    </para>
         /// </devdoc>
-        bool CheckValidationResult(ServicePoint srvPoint, X509Certificate certificate, WebRequest request, int certificateProblem);
-
+        bool CheckValidationResult(
+            ServicePoint srvPoint,
+            X509Certificate certificate,
+            WebRequest request,
+            int certificateProblem
+        );
     } // interface ICertificatePolicy
-
 } // namespace System.Net

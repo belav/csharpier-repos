@@ -47,10 +47,7 @@ namespace Microsoft.CodeAnalysis.Collections
 
         public override long Position
         {
-            get
-            {
-                return _position;
-            }
+            get { return _position; }
             set
             {
                 if (value < 0 || value >= _array.Length)
@@ -62,9 +59,7 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override int Read(byte[] buffer, int offset, int count)
         {

@@ -17,13 +17,19 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void FinalReleaseComObject_NullObject_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("o", () => Marshal.FinalReleaseComObject(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "o",
+                () => Marshal.FinalReleaseComObject(null)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void FinalReleaseComObject_NonComObject_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("o", () => Marshal.FinalReleaseComObject(10));
+            AssertExtensions.Throws<ArgumentException>(
+                "o",
+                () => Marshal.FinalReleaseComObject(10)
+            );
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-// XmlSchemaExceptionCas.cs 
+// XmlSchemaExceptionCas.cs
 //	- CAS unit tests for System.Xml.Schema.XmlSchemaException
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,59 +27,58 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
 using System.Xml.Schema;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Xml.Schema {
+namespace MonoCasTests.System.Xml.Schema
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class XmlSchemaExceptionCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class XmlSchemaExceptionCas {
+        [Test]
+        [ExpectedException(typeof(SecurityException))]
+        [SecurityPermission(SecurityAction.Deny, SerializationFormatter = true)]
+        public void DenySerializationFormatter_GetObjectData()
+        {
+            StreamingContext sc = new StreamingContext(StreamingContextStates.All);
+            XmlSchemaException xe = new XmlSchemaException(String.Empty, null);
+            xe.GetObjectData(null, sc);
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [SecurityPermission(SecurityAction.PermitOnly, SerializationFormatter = true)]
+        public void PermitOnlySerializationFormatter_GetObjectData()
+        {
+            StreamingContext sc = new StreamingContext(StreamingContextStates.All);
+            XmlSchemaException xe = new XmlSchemaException(String.Empty, null);
+            xe.GetObjectData(null, sc);
+        }
 
-		[Test]
-		[ExpectedException (typeof (SecurityException))]
-		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-		public void DenySerializationFormatter_GetObjectData ()
-		{
-			StreamingContext sc = new StreamingContext (StreamingContextStates.All);
-			XmlSchemaException xe = new XmlSchemaException (String.Empty, null);
-			xe.GetObjectData (null, sc);
-		}
-
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		[SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
-		public void PermitOnlySerializationFormatter_GetObjectData ()
-		{
-			StreamingContext sc = new StreamingContext (StreamingContextStates.All);
-			XmlSchemaException xe = new XmlSchemaException (String.Empty, null);
-			xe.GetObjectData (null, sc);
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void DenyUnrestricted ()
-		{
-			// can we call everything without a SecurityException ?
-			XmlSchemaException xe = new XmlSchemaException (String.Empty, null);
-			Assert.AreEqual (0, xe.LineNumber, "LineNumber");
-			Assert.AreEqual (0, xe.LinePosition, "LinePosition");
-			Assert.IsNotNull (xe.Message, "Message");
-			Assert.IsNull (xe.SourceSchemaObject, "SourceSchemaObject");
-			Assert.IsNull (xe.SourceUri, "SourceUri");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void DenyUnrestricted()
+        {
+            // can we call everything without a SecurityException ?
+            XmlSchemaException xe = new XmlSchemaException(String.Empty, null);
+            Assert.AreEqual(0, xe.LineNumber, "LineNumber");
+            Assert.AreEqual(0, xe.LinePosition, "LinePosition");
+            Assert.IsNotNull(xe.Message, "Message");
+            Assert.IsNull(xe.SourceSchemaObject, "SourceSchemaObject");
+            Assert.IsNull(xe.SourceUri, "SourceUri");
+        }
+    }
 }

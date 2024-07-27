@@ -45,11 +45,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return (char)(value + 1);
             }
 
-            char INumericTC<char>.FromConstantValue(ConstantValue constantValue) => constantValue.IsBad ? (char)0 : constantValue.CharValue;
+            char INumericTC<char>.FromConstantValue(ConstantValue constantValue) =>
+                constantValue.IsBad ? (char)0 : constantValue.CharValue;
 
             string INumericTC<char>.ToString(char c)
             {
-                return ObjectDisplay.FormatPrimitive(c, ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes);
+                return ObjectDisplay.FormatPrimitive(
+                    c,
+                    ObjectDisplayOptions.EscapeNonPrintableCharacters
+                        | ObjectDisplayOptions.UseQuotes
+                );
             }
 
             char INumericTC<char>.Prev(char value)
@@ -63,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return (char)random.Next((int)char.MinValue, 1 + (int)char.MaxValue);
             }
 
-            ConstantValue INumericTC<char>.ToConstantValue(char value) => ConstantValue.Create(value);
+            ConstantValue INumericTC<char>.ToConstantValue(char value) =>
+                ConstantValue.Create(value);
         }
     }
 }

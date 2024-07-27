@@ -9,11 +9,15 @@ namespace System.Net
     // Kerberos are used in the context of a Negotiate handshake
     internal static partial class NegotiationInfoClass
     {
-        internal static string? GetAuthenticationPackageName(SafeHandle safeHandle, int negotiationState)
+        internal static string? GetAuthenticationPackageName(
+            SafeHandle safeHandle,
+            int negotiationState
+        )
         {
             if (safeHandle.IsInvalid)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"Invalid handle:{safeHandle}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(null, $"Invalid handle:{safeHandle}");
                 return null;
             }
 
@@ -22,10 +26,16 @@ namespace System.Net
             {
                 safeHandle.DangerousAddRef(ref gotRef);
                 IntPtr packageInfo = safeHandle.DangerousGetHandle();
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"packageInfo:{packageInfo} negotiationState:{negotiationState:x}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        null,
+                        $"packageInfo:{packageInfo} negotiationState:{negotiationState:x}"
+                    );
 
-                if (negotiationState == Interop.SspiCli.SECPKG_NEGOTIATION_COMPLETE ||
-                    negotiationState == Interop.SspiCli.SECPKG_NEGOTIATION_OPTIMISTIC)
+                if (
+                    negotiationState == Interop.SspiCli.SECPKG_NEGOTIATION_COMPLETE
+                    || negotiationState == Interop.SspiCli.SECPKG_NEGOTIATION_OPTIMISTIC
+                )
                 {
                     string? name;
                     unsafe
@@ -33,13 +43,17 @@ namespace System.Net
                         name = Marshal.PtrToStringUni(((SecurityPackageInfo*)packageInfo)->Name);
                     }
 
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"packageInfo:{packageInfo} negotiationState:{negotiationState:x} name:{name}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(
+                            null,
+                            $"packageInfo:{packageInfo} negotiationState:{negotiationState:x} name:{name}"
+                        );
 
                     // An optimization for future string comparisons.
-                    return
-                        string.Equals(name, Kerberos, StringComparison.OrdinalIgnoreCase) ? Kerberos :
-                        string.Equals(name, NTLM, StringComparison.OrdinalIgnoreCase) ? NTLM :
-                        name;
+                    return string.Equals(name, Kerberos, StringComparison.OrdinalIgnoreCase)
+                            ? Kerberos
+                        : string.Equals(name, NTLM, StringComparison.OrdinalIgnoreCase) ? NTLM
+                        : name;
                 }
             }
             finally
