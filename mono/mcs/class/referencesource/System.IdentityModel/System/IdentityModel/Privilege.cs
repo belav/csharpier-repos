@@ -123,9 +123,9 @@ namespace System.IdentityModel
                 Utility.CloseInvalidOutSafeHandle(threadToken);
                 if (error != ERROR_NO_TOKEN)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(error)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new Win32Exception(error));
                 }
                 else
                 {
@@ -140,9 +140,9 @@ namespace System.IdentityModel
                     {
                         error = Marshal.GetLastWin32Error();
                         Utility.CloseInvalidOutSafeHandle(processToken);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new Win32Exception(error)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new Win32Exception(error));
                     }
 
                     try
@@ -162,9 +162,9 @@ namespace System.IdentityModel
                         {
                             error = Marshal.GetLastWin32Error();
                             Utility.CloseInvalidOutSafeHandle(threadToken);
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new Win32Exception(error)
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(new Win32Exception(error));
                         }
 
                         SetThreadToken(threadToken);
@@ -217,15 +217,15 @@ namespace System.IdentityModel
 
             if (error == ERROR_NOT_ALL_ASSIGNED)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new PrivilegeNotHeldException(this.privilege)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new PrivilegeNotHeldException(this.privilege));
             }
             else if (!success)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(error)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(error));
             }
         }
 
@@ -249,9 +249,9 @@ namespace System.IdentityModel
             }
             if (!this.isImpersonating)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(error)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(error));
             }
         }
 
@@ -269,9 +269,9 @@ namespace System.IdentityModel
             if (!NativeMethods.LookupPrivilegeValueW(null, privilege, out luid))
             {
                 int error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(error)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(error));
             }
 
             lock (luids)

@@ -225,10 +225,9 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
 
         bool TrimAndTakeStartLine(ref SequenceReader<byte> reader)
         {
-            var trimmedBuffer = reader.Sequence.Slice(
-                reader.Position,
-                ServerOptions.Limits.MaxRequestLineSize
-            );
+            var trimmedBuffer = reader
+                .Sequence
+                .Slice(reader.Position, ServerOptions.Limits.MaxRequestLineSize);
             var trimmedReader = new SequenceReader<byte>(trimmedBuffer);
 
             if (!_parser.ParseRequestLine(new Http1ParsingHandler(this), ref trimmedReader))
@@ -270,10 +269,9 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
 
         bool TrimAndTakeMessageHeaders(ref SequenceReader<byte> reader, bool trailers)
         {
-            var trimmedBuffer = reader.Sequence.Slice(
-                reader.Position,
-                _remainingRequestHeadersBytesAllowed
-            );
+            var trimmedBuffer = reader
+                .Sequence
+                .Slice(reader.Position, _remainingRequestHeadersBytesAllowed);
             var trimmedReader = new SequenceReader<byte>(trimmedBuffer);
             try
             {
@@ -855,10 +853,10 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
                 && requestData.Length >= PrefaceLineLength
             )
             {
-                var clientPrefaceRequestLine = Http2.Http2Connection.ClientPreface.Slice(
-                    0,
-                    PrefaceLineLength
-                );
+                var clientPrefaceRequestLine = Http2
+                    .Http2Connection
+                    .ClientPreface
+                    .Slice(0, PrefaceLineLength);
                 var currentRequestLine = requestData.Slice(0, PrefaceLineLength).ToSpan();
                 if (currentRequestLine.SequenceEqual(clientPrefaceRequestLine))
                 {

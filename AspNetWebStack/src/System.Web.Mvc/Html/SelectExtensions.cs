@@ -449,8 +449,11 @@ namespace System.Web.Mvc.Html
             // Run through same processing as SelectInternal() to determine selected value and ensure it is included
             // in the select list.
             string expressionName = ExpressionHelper.GetExpressionText(expression);
-            string expressionFullName =
-                htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(expressionName);
+            string expressionFullName = htmlHelper
+                .ViewContext
+                .ViewData
+                .TemplateInfo
+                .GetFullHtmlFieldName(expressionName);
             Enum currentValue = null;
             if (!String.IsNullOrEmpty(expressionFullName))
             {
@@ -787,9 +790,11 @@ namespace System.Web.Mvc.Html
             IDictionary<string, object> htmlAttributes
         )
         {
-            string fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
-                name
-            );
+            string fullName = htmlHelper
+                .ViewContext
+                .ViewData
+                .TemplateInfo
+                .GetFullHtmlFieldName(name);
             if (String.IsNullOrEmpty(fullName))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "name");

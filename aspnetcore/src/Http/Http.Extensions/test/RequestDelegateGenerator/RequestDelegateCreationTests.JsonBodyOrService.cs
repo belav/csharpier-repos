@@ -333,9 +333,9 @@ app.MapPost("/", TestAction);
         var httpContext = CreateHttpContext(serviceProvider);
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "0";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(false)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(false));
 
         var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
             () => endpoint.RequestDelegate(httpContext)

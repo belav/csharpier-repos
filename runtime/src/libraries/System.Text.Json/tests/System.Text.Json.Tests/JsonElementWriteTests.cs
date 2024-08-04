@@ -313,12 +313,9 @@ namespace System.Text.Json.Tests
                         // If it doesn't hit a 100% overlap then we're not testing what we thought we were.
                         Assert.Equal(
                             utf8Data.Length,
-                            Encoding.UTF8.GetBytes(
-                                inputPtr,
-                                overwriteJson.Length,
-                                dataPtr,
-                                utf8Data.Length
-                            )
+                            Encoding
+                                .UTF8
+                                .GetBytes(inputPtr, overwriteJson.Length, dataPtr, utf8Data.Length)
                         );
                     }
                 }

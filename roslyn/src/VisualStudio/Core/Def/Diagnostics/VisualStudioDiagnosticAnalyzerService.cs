@@ -68,8 +68,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             _vsHierarchyItemManager = vsHierarchyItemManager;
             _listener = listenerProvider.GetListener(FeatureAttribute.DiagnosticService);
             _globalOptions = globalOptions;
-            _codeAnalysisService =
-                workspace.Services.GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>();
+            _codeAnalysisService = workspace
+                .Services
+                .GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>();
         }
 
         public async Task InitializeAsync(
@@ -88,9 +89,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 .ConfigureAwait(false);
             if (menuCommandService != null)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
                 VisualStudioCommandHandlerHelpers.AddCommand(
                     menuCommandService,
                     RunCodeAnalysisForSelectedProjectCommandId,
@@ -160,9 +161,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             // Analyzers are only supported for C# and VB currently.
             var projectsWithHierarchy = currentSolution
-                .Projects.Where(p =>
-                    p.Language is LanguageNames.CSharp or LanguageNames.VisualBasic
-                )
+                .Projects
+                .Where(p => p.Language is LanguageNames.CSharp or LanguageNames.VisualBasic)
                 .Where(p => _workspace.GetHierarchy(p.Id) == hierarchy);
 
             if (projectsWithHierarchy.Count() <= 1)
@@ -266,16 +266,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             // The command is checked if RoslynPackage is loaded and the analysis scope for this command matches the
             // value saved for the solution.
-            var roslynPackage = _threadingContext.JoinableTaskFactory.Run(() =>
-            {
-                return RoslynPackage
-                    .GetOrLoadAsync(
-                        _threadingContext,
-                        (IAsyncServiceProvider)_serviceProvider,
-                        _threadingContext.DisposalToken
-                    )
-                    .AsTask();
-            });
+            var roslynPackage = _threadingContext
+                .JoinableTaskFactory
+                .Run(() =>
+                {
+                    return RoslynPackage
+                        .GetOrLoadAsync(
+                            _threadingContext,
+                            (IAsyncServiceProvider)_serviceProvider,
+                            _threadingContext.DisposalToken
+                        )
+                        .AsTask();
+                });
 
             if (roslynPackage is not null)
             {
@@ -318,12 +320,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     LanguageNames.VisualBasic
                 );
 
-                var containsCSharpProject = solution.Projects.Any(static project =>
-                    project.Language == LanguageNames.CSharp
-                );
-                var containsVisualBasicProject = solution.Projects.Any(static project =>
-                    project.Language == LanguageNames.VisualBasic
-                );
+                var containsCSharpProject = solution
+                    .Projects
+                    .Any(static project => project.Language == LanguageNames.CSharp);
+                var containsVisualBasicProject = solution
+                    .Projects
+                    .Any(static project => project.Language == LanguageNames.VisualBasic);
                 if (containsCSharpProject && containsVisualBasicProject)
                 {
                     if (csharpAnalysisScope == visualBasicAnalysisScope)
@@ -372,16 +374,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 return;
             }
 
-            var roslynPackage = _threadingContext.JoinableTaskFactory.Run(() =>
-            {
-                return RoslynPackage
-                    .GetOrLoadAsync(
-                        _threadingContext,
-                        (IAsyncServiceProvider)_serviceProvider,
-                        _threadingContext.DisposalToken
-                    )
-                    .AsTask();
-            });
+            var roslynPackage = _threadingContext
+                .JoinableTaskFactory
+                .Run(() =>
+                {
+                    return RoslynPackage
+                        .GetOrLoadAsync(
+                            _threadingContext,
+                            (IAsyncServiceProvider)_serviceProvider,
+                            _threadingContext.DisposalToken
+                        )
+                        .AsTask();
+                });
 
             Assumes.Present(roslynPackage);
 
@@ -456,7 +460,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             if (project != null)
             {
                 otherProjectsForMultiTfmProject = solution
-                    .Projects.Where(p =>
+                    .Projects
+                    .Where(p =>
                         p != project
                         && p.FilePath == project.FilePath
                         && p.State.NameAndFlavor.name == project.State.NameAndFlavor.name
@@ -471,61 +476,64 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             }
 
             // Force complete analyzer execution in background.
-            _threadingContext.JoinableTaskFactory.RunAsync(async () =>
-            {
-                using var asyncToken = _listener.BeginAsyncOperation(
-                    $"{nameof(VisualStudioDiagnosticAnalyzerService)}_{nameof(RunAnalyzers)}"
-                );
+            _threadingContext
+                .JoinableTaskFactory
+                .RunAsync(async () =>
+                {
+                    using var asyncToken = _listener.BeginAsyncOperation(
+                        $"{nameof(VisualStudioDiagnosticAnalyzerService)}_{nameof(RunAnalyzers)}"
+                    );
 
-                // Add a message to VS status bar that we are running code analysis.
-                var statusBar = await _statusbar.GetValueOrNullAsync().ConfigureAwait(true);
-                var totalProjectCount =
-                    project != null
-                        ? (1 + otherProjectsForMultiTfmProject.Length)
-                        : solution.ProjectIds.Count;
-                using var statusBarUpdater =
-                    statusBar != null
-                        ? new StatusBarUpdater(
-                            statusBar,
-                            _threadingContext,
-                            projectOrSolutionName,
-                            (uint)totalProjectCount
-                        )
-                        : null;
+                    // Add a message to VS status bar that we are running code analysis.
+                    var statusBar = await _statusbar.GetValueOrNullAsync().ConfigureAwait(true);
+                    var totalProjectCount =
+                        project != null
+                            ? (1 + otherProjectsForMultiTfmProject.Length)
+                            : solution.ProjectIds.Count;
+                    using var statusBarUpdater =
+                        statusBar != null
+                            ? new StatusBarUpdater(
+                                statusBar,
+                                _threadingContext,
+                                projectOrSolutionName,
+                                (uint)totalProjectCount
+                            )
+                            : null;
 
-                await TaskScheduler.Default;
+                    await TaskScheduler.Default;
 
-                var onAfterProjectAnalyzed =
-                    statusBarUpdater != null
-                        ? statusBarUpdater.OnAfterProjectAnalyzed
-                        : (Action<Project>)((Project _) => { });
-                await _codeAnalysisService
-                    .RunAnalysisAsync(
-                        solution,
-                        project?.Id,
-                        onAfterProjectAnalyzed,
-                        CancellationToken.None
-                    )
-                    .ConfigureAwait(false);
-
-                foreach (var otherProject in otherProjectsForMultiTfmProject)
+                    var onAfterProjectAnalyzed =
+                        statusBarUpdater != null
+                            ? statusBarUpdater.OnAfterProjectAnalyzed
+                            : (Action<Project>)((Project _) => { });
                     await _codeAnalysisService
                         .RunAnalysisAsync(
                             solution,
-                            otherProject.Id,
+                            project?.Id,
                             onAfterProjectAnalyzed,
                             CancellationToken.None
                         )
                         .ConfigureAwait(false);
-            });
+
+                    foreach (var otherProject in otherProjectsForMultiTfmProject)
+                        await _codeAnalysisService
+                            .RunAnalysisAsync(
+                                solution,
+                                otherProject.Id,
+                                onAfterProjectAnalyzed,
+                                CancellationToken.None
+                            )
+                            .ConfigureAwait(false);
+                });
         }
 
         private Project? GetProject(IVsHierarchy? hierarchy)
         {
             if (hierarchy != null)
             {
-                var projectMap =
-                    _workspace.Services.GetRequiredService<IHierarchyItemToProjectIdMap>();
+                var projectMap = _workspace
+                    .Services
+                    .GetRequiredService<IHierarchyItemToProjectIdMap>();
                 var projectHierarchyItem = _vsHierarchyItemManager.GetHierarchyItem(
                     hierarchy,
                     VSConstants.VSITEMID_ROOT
@@ -630,39 +638,41 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             private void UpdateStatusCore()
             {
-                _threadingContext.JoinableTaskFactory.RunAsync(async () =>
-                {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                _threadingContext
+                    .JoinableTaskFactory
+                    .RunAsync(async () =>
+                    {
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                    string message;
-                    int fInProgress;
-                    var analyzedProjectCount = (uint)_analyzedProjectCount;
-                    if (analyzedProjectCount == _totalProjectCount)
-                    {
-                        message = _statusMesageOnCompleted;
-                        fInProgress = 0;
-                    }
-                    else if (_disposed)
-                    {
-                        message = _statusMesageOnTerminated;
-                        fInProgress = 0;
-                    }
-                    else
-                    {
-                        message = _statusMessageWhileRunning;
-                        fInProgress = 1;
-                    }
+                        string message;
+                        int fInProgress;
+                        var analyzedProjectCount = (uint)_analyzedProjectCount;
+                        if (analyzedProjectCount == _totalProjectCount)
+                        {
+                            message = _statusMesageOnCompleted;
+                            fInProgress = 0;
+                        }
+                        else if (_disposed)
+                        {
+                            message = _statusMesageOnTerminated;
+                            fInProgress = 0;
+                        }
+                        else
+                        {
+                            message = _statusMessageWhileRunning;
+                            fInProgress = 1;
+                        }
 
-                    // Update the status bar progress and text.
-                    _statusBar.Progress(
-                        ref _statusBarCookie,
-                        fInProgress,
-                        message,
-                        analyzedProjectCount,
-                        _totalProjectCount
-                    );
-                    _statusBar.SetText(message);
-                });
+                        // Update the status bar progress and text.
+                        _statusBar.Progress(
+                            ref _statusBarCookie,
+                            fInProgress,
+                            message,
+                            analyzedProjectCount,
+                            _totalProjectCount
+                        );
+                        _statusBar.SetText(message);
+                    });
             }
         }
     }

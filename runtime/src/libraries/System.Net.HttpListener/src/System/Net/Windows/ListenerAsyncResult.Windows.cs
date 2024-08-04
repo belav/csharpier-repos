@@ -64,11 +64,13 @@ namespace System.Net
                                 )
                             )
                             {
-                                result = listenerSession.Listener.HandleAuthentication(
-                                    listenerSession,
-                                    asyncResult._requestContext!,
-                                    out stoleBlob
-                                );
+                                result = listenerSession
+                                    .Listener
+                                    .HandleAuthentication(
+                                        listenerSession,
+                                        asyncResult._requestContext!,
+                                        out stoleBlob
+                                    );
                             }
                         }
                         finally
@@ -86,21 +88,21 @@ namespace System.Net
                             }
                             else
                             {
-                                asyncResult._requestContext!.Reset(
-                                    listenerSession.RequestQueueBoundHandle,
-                                    0,
-                                    0
-                                );
+                                asyncResult
+                                    ._requestContext!
+                                    .Reset(listenerSession.RequestQueueBoundHandle, 0, 0);
                             }
                         }
                     }
                     else
                     {
-                        asyncResult._requestContext!.Reset(
-                            listenerSession.RequestQueueBoundHandle,
-                            asyncResult._requestContext.RequestBlob->RequestId,
-                            numBytes
-                        );
+                        asyncResult
+                            ._requestContext!
+                            .Reset(
+                                listenerSession.RequestQueueBoundHandle,
+                                asyncResult._requestContext.RequestBlob->RequestId,
+                                numBytes
+                            );
                     }
 
                     // We need to issue a new request, either because auth failed, or because our buffer was too small the first time.
@@ -161,15 +163,17 @@ namespace System.Net
                 uint bytesTransferred = 0;
                 Debug.Assert(AsyncObject != null);
                 HttpListenerSession listenerSession = (HttpListenerSession)AsyncObject!;
-                statusCode = Interop.HttpApi.HttpReceiveHttpRequest(
-                    listenerSession.RequestQueueHandle,
-                    _requestContext.RequestBlob->RequestId,
-                    (uint)Interop.HttpApi.HTTP_FLAGS.HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY,
-                    _requestContext.RequestBlob,
-                    _requestContext.Size,
-                    &bytesTransferred,
-                    _requestContext.NativeOverlapped
-                );
+                statusCode = Interop
+                    .HttpApi
+                    .HttpReceiveHttpRequest(
+                        listenerSession.RequestQueueHandle,
+                        _requestContext.RequestBlob->RequestId,
+                        (uint)Interop.HttpApi.HTTP_FLAGS.HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY,
+                        _requestContext.RequestBlob,
+                        _requestContext.Size,
+                        &bytesTransferred,
+                        _requestContext.NativeOverlapped
+                    );
 
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(

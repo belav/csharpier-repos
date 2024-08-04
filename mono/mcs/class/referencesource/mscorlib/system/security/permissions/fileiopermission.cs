@@ -1526,8 +1526,8 @@ namespace System.Security.Permissions
                 }
             }
 
-            String[] regularIntersection = this
-                .m_set.Intersect(operand.m_set)
+            String[] regularIntersection = this.m_set
+                .Intersect(operand.m_set)
                 .UnsafeToStringArray();
 
             if (regularIntersection != null)

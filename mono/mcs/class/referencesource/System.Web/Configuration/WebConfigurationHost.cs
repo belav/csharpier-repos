@@ -532,9 +532,9 @@ namespace System.Web.Configuration
                 return RootWebConfigPath;
             }
 
-            string virtualPath = vpath.VirtualPathStringNoTrailingSlash.ToLower(
-                CultureInfo.InvariantCulture
-            );
+            string virtualPath = vpath
+                .VirtualPathStringNoTrailingSlash
+                .ToLower(CultureInfo.InvariantCulture);
             string configPath =
                 (siteID == DefaultSiteID)
                     ? RootWebConfigPathAndDefaultSiteID
@@ -733,10 +733,9 @@ namespace System.Web.Configuration
                 list.Add(wrapper);
             }
 
-            HttpRuntime.FileChangesMonitor.StartMonitoringFile(
-                streamName,
-                new FileChangeEventHandler(wrapper.OnFileChanged)
-            );
+            HttpRuntime
+                .FileChangesMonitor
+                .StartMonitoringFile(streamName, new FileChangeEventHandler(wrapper.OnFileChanged));
 
             return wrapper;
         }

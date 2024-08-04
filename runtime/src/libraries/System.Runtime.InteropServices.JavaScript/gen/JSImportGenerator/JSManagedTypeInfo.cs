@@ -198,9 +198,8 @@ namespace Microsoft.Interop.JavaScript
                 case INamedTypeSymbol actionType
                     when fullTypeName.StartsWith(Constants.ActionGlobal, StringComparison.Ordinal):
                     var argumentTypes = actionType
-                        .TypeArguments.Select(arg =>
-                            CreateJSTypeInfoForTypeSymbol(arg) as JSSimpleTypeInfo
-                        )
+                        .TypeArguments
+                        .Select(arg => CreateJSTypeInfoForTypeSymbol(arg) as JSSimpleTypeInfo)
                         .ToArray();
                     if (argumentTypes.Any(x => x is null))
                     {
@@ -212,7 +211,8 @@ namespace Microsoft.Interop.JavaScript
                 case INamedTypeSymbol funcType
                     when fullTypeName.StartsWith(Constants.FuncGlobal, StringComparison.Ordinal):
                     var signatureTypes = funcType
-                        .TypeArguments.Select(argName =>
+                        .TypeArguments
+                        .Select(argName =>
                             CreateJSTypeInfoForTypeSymbol(argName) as JSSimpleTypeInfo
                         )
                         .ToArray();

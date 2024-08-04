@@ -688,9 +688,11 @@ namespace Mono.CSharp
             if (kind == InputKind.EOF)
             {
                 if (mode == ParseMode.ReportErrors)
-                    Console.Error.WriteLine(
-                        "Internal error: EOF condition should have been detected in a previous call with silent=true"
-                    );
+                    Console
+                        .Error
+                        .WriteLine(
+                            "Internal error: EOF condition should have been detected in a previous call with silent=true"
+                        );
                 partial_input = true;
                 return null;
             }
@@ -813,22 +815,24 @@ namespace Mono.CSharp
                     );
 
                     method.Block = new ToplevelBlock(method.Compiler, p, Location.Null);
-                    method.Block.AddStatement(
-                        new StatementExpression(
-                            new SimpleAssign(
-                                new SimpleName(p[0].Name, Location.Null),
-                                new Invocation(
-                                    new SimpleName(
-                                        expression_method.MemberName.Name,
-                                        Location.Null
+                    method
+                        .Block
+                        .AddStatement(
+                            new StatementExpression(
+                                new SimpleAssign(
+                                    new SimpleName(p[0].Name, Location.Null),
+                                    new Invocation(
+                                        new SimpleName(
+                                            expression_method.MemberName.Name,
+                                            Location.Null
+                                        ),
+                                        new Arguments(0)
                                     ),
-                                    new Arguments(0)
+                                    Location.Null
                                 ),
                                 Location.Null
-                            ),
-                            Location.Null
-                        )
-                    );
+                            )
+                        );
 
                     if (WaitOnTask)
                     {
@@ -838,15 +842,17 @@ namespace Mono.CSharp
                             Location.Null
                         );
 
-                        method.Block.AddStatement(
-                            new StatementExpression(
-                                new Invocation(
-                                    new MemberAccess(task, "Wait", Location.Null),
-                                    new Arguments(0)
-                                ),
-                                Location.Null
-                            )
-                        );
+                        method
+                            .Block
+                            .AddStatement(
+                                new StatementExpression(
+                                    new Invocation(
+                                        new MemberAccess(task, "Wait", Location.Null),
+                                        new Arguments(0)
+                                    ),
+                                    Location.Null
+                                )
+                            );
                     }
 
                     host.AddMember(method);
@@ -1444,9 +1450,9 @@ namespace Mono.CSharp
 
             if (current_container.Containers != null)
             {
-                var existing = current_container.Containers.FirstOrDefault(l =>
-                    l.MemberName.Basename == tc.MemberName.Basename
-                );
+                var existing = current_container
+                    .Containers
+                    .FirstOrDefault(l => l.MemberName.Basename == tc.MemberName.Basename);
                 if (existing != null)
                 {
                     current_container.RemoveContainer(existing);

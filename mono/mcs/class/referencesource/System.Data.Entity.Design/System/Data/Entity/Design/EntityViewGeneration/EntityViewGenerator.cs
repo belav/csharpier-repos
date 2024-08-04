@@ -679,24 +679,30 @@ namespace System.Data.Entity.Design
                 "index"
             );
             getViewAtMethod.Parameters.Add(parameter);
-            getViewAtMethod.Comments.Add(
-                new CodeCommentStatement(
-                    EntityViewGenerationConstants.SummaryStartElement,
-                    true /*docComment*/
-                )
-            );
-            getViewAtMethod.Comments.Add(
-                new CodeCommentStatement(
-                    Strings.GetViewAtMethodComments,
-                    true /*docComment*/
-                )
-            );
-            getViewAtMethod.Comments.Add(
-                new CodeCommentStatement(
-                    EntityViewGenerationConstants.SummaryEndElement,
-                    true /*docComment*/
-                )
-            );
+            getViewAtMethod
+                .Comments
+                .Add(
+                    new CodeCommentStatement(
+                        EntityViewGenerationConstants.SummaryStartElement,
+                        true /*docComment*/
+                    )
+                );
+            getViewAtMethod
+                .Comments
+                .Add(
+                    new CodeCommentStatement(
+                        Strings.GetViewAtMethodComments,
+                        true /*docComment*/
+                    )
+                );
+            getViewAtMethod
+                .Comments
+                .Add(
+                    new CodeCommentStatement(
+                        EntityViewGenerationConstants.SummaryEndElement,
+                        true /*docComment*/
+                    )
+                );
 
             getViewAtMethod.Attributes = MemberAttributes.Family | MemberAttributes.Override;
 
@@ -748,13 +754,15 @@ namespace System.Data.Entity.Design
             }
 
             // if an invalid index is asked for throw
-            getViewAtMethod.Statements.Add(
-                new CodeThrowExceptionStatement(
-                    new CodeObjectCreateExpression(
-                        new CodeTypeReference(typeof(IndexOutOfRangeException))
+            getViewAtMethod
+                .Statements
+                .Add(
+                    new CodeThrowExceptionStatement(
+                        new CodeObjectCreateExpression(
+                            new CodeTypeReference(typeof(IndexOutOfRangeException))
+                        )
                     )
-                )
-            );
+                );
         }
 
         private static CodeMemberMethod CreateViewReturnMethod(
@@ -773,24 +781,30 @@ namespace System.Data.Entity.Design
                     new Type[] { typeof(string), typeof(string) }
                 )
             );
-            viewMethod.Comments.Add(
-                new CodeCommentStatement(
-                    EntityViewGenerationConstants.SummaryStartElement,
-                    true /*docComment*/
-                )
-            );
-            viewMethod.Comments.Add(
-                new CodeCommentStatement(
-                    Strings.IndividualViewComments(extentFullName),
-                    true /*docComment*/
-                )
-            );
-            viewMethod.Comments.Add(
-                new CodeCommentStatement(
-                    EntityViewGenerationConstants.SummaryEndElement,
-                    true /*docComment*/
-                )
-            );
+            viewMethod
+                .Comments
+                .Add(
+                    new CodeCommentStatement(
+                        EntityViewGenerationConstants.SummaryStartElement,
+                        true /*docComment*/
+                    )
+                );
+            viewMethod
+                .Comments
+                .Add(
+                    new CodeCommentStatement(
+                        Strings.IndividualViewComments(extentFullName),
+                        true /*docComment*/
+                    )
+                );
+            viewMethod
+                .Comments
+                .Add(
+                    new CodeCommentStatement(
+                        EntityViewGenerationConstants.SummaryEndElement,
+                        true /*docComment*/
+                    )
+                );
 
             CodeExpression viewTextExpression;
             // only use the StringBuilder if we have to.
@@ -927,24 +941,30 @@ namespace System.Data.Entity.Design
             //Mark it as public
             constructor.Attributes = MemberAttributes.Public;
             //Add constructor comments
-            constructor.Comments.Add(
-                new CodeCommentStatement(
-                    EntityViewGenerationConstants.SummaryStartElement,
-                    true /*docComment*/
-                )
-            );
-            constructor.Comments.Add(
-                new CodeCommentStatement(
-                    Strings.ConstructorComments,
-                    true /*docComment*/
-                )
-            );
-            constructor.Comments.Add(
-                new CodeCommentStatement(
-                    EntityViewGenerationConstants.SummaryEndElement,
-                    true /*docComment*/
-                )
-            );
+            constructor
+                .Comments
+                .Add(
+                    new CodeCommentStatement(
+                        EntityViewGenerationConstants.SummaryStartElement,
+                        true /*docComment*/
+                    )
+                );
+            constructor
+                .Comments
+                .Add(
+                    new CodeCommentStatement(
+                        Strings.ConstructorComments,
+                        true /*docComment*/
+                    )
+                );
+            constructor
+                .Comments
+                .Add(
+                    new CodeCommentStatement(
+                        EntityViewGenerationConstants.SummaryEndElement,
+                        true /*docComment*/
+                    )
+                );
             return constructor;
         }
 
@@ -960,24 +980,30 @@ namespace System.Data.Entity.Design
             //of generated code
             typeDecl.BaseTypes.Add(EntityViewGenerationConstants.BaseTypeName);
             //Add type comments
-            typeDecl.Comments.Add(
-                new CodeCommentStatement(
-                    EntityViewGenerationConstants.SummaryStartElement,
-                    true /*docComment*/
-                )
-            );
-            typeDecl.Comments.Add(
-                new CodeCommentStatement(
-                    Strings.TypeComments,
-                    true /*docComment*/
-                )
-            );
-            typeDecl.Comments.Add(
-                new CodeCommentStatement(
-                    EntityViewGenerationConstants.SummaryEndElement,
-                    true /*docComment*/
-                )
-            );
+            typeDecl
+                .Comments
+                .Add(
+                    new CodeCommentStatement(
+                        EntityViewGenerationConstants.SummaryStartElement,
+                        true /*docComment*/
+                    )
+                );
+            typeDecl
+                .Comments
+                .Add(
+                    new CodeCommentStatement(
+                        Strings.TypeComments,
+                        true /*docComment*/
+                    )
+                );
+            typeDecl
+                .Comments
+                .Add(
+                    new CodeCommentStatement(
+                        EntityViewGenerationConstants.SummaryEndElement,
+                        true /*docComment*/
+                    )
+                );
             return typeDecl;
         }
         #endregion

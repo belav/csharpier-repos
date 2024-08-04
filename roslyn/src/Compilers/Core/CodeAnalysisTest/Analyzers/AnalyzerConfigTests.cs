@@ -196,7 +196,8 @@ my_PROP = my_VAL"
             );
             AssertEx.SetEqual(
                 AnalyzerConfig
-                    .ReservedKeys.Select(k => KeyValuePair.Create("my_" + k, "MY_VAL"))
+                    .ReservedKeys
+                    .Select(k => KeyValuePair.Create("my_" + k, "MY_VAL"))
                     .ToList(),
                 config.GlobalSection.Properties
             );
@@ -369,15 +370,16 @@ RoOt = TruE"
             var config = ParseConfigFile(
                 string.Join(
                     Environment.NewLine,
-                    AnalyzerConfig.ReservedValues.Select(v =>
-                        "MY_KEY" + (index++) + " = " + v.ToUpperInvariant()
-                    )
+                    AnalyzerConfig
+                        .ReservedValues
+                        .Select(v => "MY_KEY" + (index++) + " = " + v.ToUpperInvariant())
                 )
             );
             index = 0;
             AssertEx.SetEqual(
                 AnalyzerConfig
-                    .ReservedValues.Select(v => KeyValuePair.Create("my_key" + (index++), v))
+                    .ReservedValues
+                    .Select(v => KeyValuePair.Create("my_key" + (index++), v))
                     .ToList(),
                 config.GlobalSection.Properties
             );
@@ -2401,14 +2403,17 @@ dotnet_diagnostic.cs001.severity = bar
                 .ToArray();
             configs.Free();
 
-            set.GlobalConfigOptions.Diagnostics.Verify(
-                Diagnostic("InvalidSeverityInAnalyzerConfig")
-                    .WithArguments("cs000", "foo", "<Global Config>")
-                    .WithLocation(1, 1)
-            );
+            set.GlobalConfigOptions
+                .Diagnostics
+                .Verify(
+                    Diagnostic("InvalidSeverityInAnalyzerConfig")
+                        .WithArguments("cs000", "foo", "<Global Config>")
+                        .WithLocation(1, 1)
+                );
 
             options[1]
-                .Diagnostics.Verify(
+                .Diagnostics
+                .Verify(
                     Diagnostic("InvalidSeverityInAnalyzerConfig")
                         .WithArguments("cs001", "bar", "<Global Config>")
                         .WithLocation(1, 1)

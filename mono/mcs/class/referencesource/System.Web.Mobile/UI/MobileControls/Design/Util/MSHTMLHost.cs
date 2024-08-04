@@ -229,9 +229,11 @@ namespace System.Web.UI.Design.MobileControls.Util
             NativeMethods.GetClientRect(parentControl.Handle, lprcPosRect);
             NativeMethods.GetClientRect(parentControl.Handle, lprcClipRect);
 
-            lpFrameInfo.cb = System.Runtime.InteropServices.Marshal.SizeOf(
-                typeof(NativeMethods.tagOIFI)
-            );
+            lpFrameInfo.cb = System
+                .Runtime
+                .InteropServices
+                .Marshal
+                .SizeOf(typeof(NativeMethods.tagOIFI));
             lpFrameInfo.fMDIApp = 0;
             lpFrameInfo.hwndFrame = parentControl.Handle;
             lpFrameInfo.hAccel = IntPtr.Zero;

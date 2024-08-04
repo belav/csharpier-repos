@@ -10,8 +10,8 @@ class Program
         var mre = new ManualResetEvent(false);
 
         Func<string, Task<string>> f = async l =>
-            await Task
-                .Factory.StartNew(() =>
+            await Task.Factory
+                .StartNew(() =>
                 {
                     if (!mre_l.WaitOne(3000))
                         throw new ApplicationException("3");
@@ -31,8 +31,8 @@ class Program
         mre_l.Reset();
 
         Func<Task> ff = async () =>
-            await Task
-                .Factory.StartNew(() =>
+            await Task.Factory
+                .StartNew(() =>
                 {
                     if (!mre_l.WaitOne(3000))
                         throw new ApplicationException("3");
@@ -53,8 +53,8 @@ class Program
         mre.Reset();
         mre_l.Reset();
         Action a = async () =>
-            await Task
-                .Factory.StartNew(
+            await Task.Factory
+                .StartNew(
                     () =>
                     {
                         if (!mre_l.WaitOne(3000))

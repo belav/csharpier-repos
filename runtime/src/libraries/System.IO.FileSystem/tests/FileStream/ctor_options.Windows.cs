@@ -16,12 +16,14 @@ namespace System.IO.Tests
             Interop.Kernel32.FILE_STANDARD_INFO info;
 
             Assert.True(
-                Interop.Kernel32.GetFileInformationByHandleEx(
-                    fileStream.SafeFileHandle,
-                    Interop.Kernel32.FileStandardInfo,
-                    &info,
-                    (uint)sizeof(Interop.Kernel32.FILE_STANDARD_INFO)
-                )
+                Interop
+                    .Kernel32
+                    .GetFileInformationByHandleEx(
+                        fileStream.SafeFileHandle,
+                        Interop.Kernel32.FileStandardInfo,
+                        &info,
+                        (uint)sizeof(Interop.Kernel32.FILE_STANDARD_INFO)
+                    )
             );
 
             return info.AllocationSize;

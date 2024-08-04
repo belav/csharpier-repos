@@ -70,7 +70,9 @@ class C
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single()
-                .ParameterList.Parameters.Single()
+                .ParameterList
+                .Parameters
+                .Single()
                 .Type;
 
             FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
@@ -917,7 +919,9 @@ class C
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single()
-                .ParameterList.Parameters.Single()
+                .ParameterList
+                .Parameters
+                .Single()
                 .Type;
 
             FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
@@ -1457,10 +1461,12 @@ class C
                     }
 
                     Assert.True(
-                        param1.Type.Equals(
-                            param2.Type,
-                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                        )
+                        param1
+                            .Type
+                            .Equals(
+                                param2.Type,
+                                TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                            )
                     );
                 }
             }
@@ -1572,8 +1578,10 @@ class C
             var misplacedDeclaration = (
                 (ArrayTypeSyntax)functionPointerTypeSyntax.ParameterList.Parameters.Single().Type!
             )
-                .RankSpecifiers.Single()
-                .Sizes.Single();
+                .RankSpecifiers
+                .Single()
+                .Sizes
+                .Single();
 
             var a = (ILocalSymbol)model.GetSymbolInfo(misplacedDeclaration).Symbol!;
             Assert.NotNull(a);
@@ -2296,9 +2304,13 @@ unsafe class C
             );
             Assert.Equal(
                 "System.Runtime.InteropServices.OutAttribute[missing]",
-                ptr.Signature.Parameters.Single()
-                    .RefCustomModifiers.Single()
-                    .Modifier.ToTestDisplayString()
+                ptr.Signature
+                    .Parameters
+                    .Single()
+                    .RefCustomModifiers
+                    .Single()
+                    .Modifier
+                    .ToTestDisplayString()
             );
         }
 
@@ -3032,12 +3044,16 @@ namespace System
                 {
                     Assert.Equal(
                         expectedConventionEquality,
-                        ptr1.NoRef.Signature.GetCallingConventionModifiers()
+                        ptr1.NoRef
+                            .Signature
+                            .GetCallingConventionModifiers()
                             .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
                     );
                     Assert.Equal(
                         expectedConventionEquality,
-                        ptr1.ByRef.Signature.GetCallingConventionModifiers()
+                        ptr1.ByRef
+                            .Signature
+                            .GetCallingConventionModifiers()
                             .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
                     );
                 }
@@ -3161,12 +3177,16 @@ namespace System
 
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.NoRef.Signature.GetCallingConventionModifiers()
+                    ptr1.NoRef
+                        .Signature
+                        .GetCallingConventionModifiers()
                         .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
                 );
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.ByRef.Signature.GetCallingConventionModifiers()
+                    ptr1.ByRef
+                        .Signature
+                        .GetCallingConventionModifiers()
                         .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
                 );
                 Assert.Equal(
@@ -3295,12 +3315,16 @@ namespace System
 
                 Assert.Equal(
                     expectedTypeConventionEquality,
-                    ptr1.NoRef.Signature.GetCallingConventionModifiers()
+                    ptr1.NoRef
+                        .Signature
+                        .GetCallingConventionModifiers()
                         .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
                 );
                 Assert.Equal(
                     expectedRefConventionEquality,
-                    ptr1.ByRef.Signature.GetCallingConventionModifiers()
+                    ptr1.ByRef
+                        .Signature
+                        .GetCallingConventionModifiers()
                         .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
                 );
 

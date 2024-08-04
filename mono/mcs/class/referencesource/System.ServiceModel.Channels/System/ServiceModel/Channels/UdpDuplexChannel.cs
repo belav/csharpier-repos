@@ -115,9 +115,11 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                    );
             }
 
             this.ThrowPending();
@@ -133,9 +135,11 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                    );
             }
 
             this.ThrowPending();
@@ -151,9 +155,11 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                    );
             }
 
             this.ThrowPending();
@@ -164,9 +170,11 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                    );
             }
 
             this.ThrowPending();
@@ -182,9 +190,11 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                    );
             }
 
             this.ThrowPending();
@@ -199,9 +209,11 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
+                    );
             }
 
             this.ThrowPending();

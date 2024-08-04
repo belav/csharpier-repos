@@ -218,9 +218,9 @@ namespace System.Text.Json
                 )
                     ?
                     // Use a pooled alloc.
-                    tempArray = ArrayPool<byte>.Shared.Rent(
-                        json.Length * JsonConstants.MaxExpansionFactorWhileTranscoding
-                    )
+                    tempArray = ArrayPool<byte>
+                        .Shared
+                        .Rent(json.Length * JsonConstants.MaxExpansionFactorWhileTranscoding)
                     :
                     // Use a normal alloc since the pool would create a normal alloc anyway based on the threshold (per current implementation)
                     // and by using a normal alloc we can avoid the Clear().

@@ -115,7 +115,8 @@ public class MigrationsAssembly : IMigrationsAssembly
     /// </summary>
     public virtual string? FindMigrationId(string nameOrId) =>
         Migrations
-            .Keys.Where(
+            .Keys
+            .Where(
                 _idGenerator.IsValidId(nameOrId)
                     // ReSharper disable once ImplicitlyCapturedClosure
                     ? id => string.Equals(id, nameOrId, StringComparison.OrdinalIgnoreCase)

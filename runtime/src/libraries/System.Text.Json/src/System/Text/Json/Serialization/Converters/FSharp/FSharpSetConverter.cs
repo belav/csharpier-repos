@@ -18,10 +18,9 @@ namespace System.Text.Json.Serialization.Converters
         [RequiresDynamicCode(FSharpCoreReflectionProxy.FSharpCoreUnreferencedCodeMessage)]
         public FSharpSetConverter()
         {
-            _setConstructor = FSharpCoreReflectionProxy.Instance.CreateFSharpSetConstructor<
-                TSet,
-                TElement
-            >();
+            _setConstructor = FSharpCoreReflectionProxy
+                .Instance
+                .CreateFSharpSetConstructor<TSet, TElement>();
         }
 
         protected override void Add(in TElement value, ref ReadStack state)

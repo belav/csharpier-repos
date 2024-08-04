@@ -305,9 +305,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             );
 
             // left hand side of each assignment
-            var assignedUnderlyingFields = assignmentValues.Keys.SelectAsArray(
-                UnwrapPropertyToField
-            );
+            var assignedUnderlyingFields = assignmentValues
+                .Keys
+                .SelectAsArray(UnwrapPropertyToField);
 
             // Each right hand assignment should assign the same property.
             // All assigned properties should be equal (in potentially a different order)
@@ -378,7 +378,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         // Note: We can use AssociatedSymbol once this is implemented:
                         // https://github.com/dotnet/roslyn/issues/54286
                         var positionalParam = param
-                            .ContainingSymbol.ContainingType.GetMembers()
+                            .ContainingSymbol
+                            .ContainingType
+                            .GetMembers()
                             .FirstOrDefault(member =>
                                 member.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
                                 == param.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
@@ -450,10 +452,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 }
             )
             {
-                var dictionaryBuilder = ImmutableDictionary<
-                    ISymbol,
-                    ExpressionSyntax
-                >.Empty.ToBuilder();
+                var dictionaryBuilder = ImmutableDictionary<ISymbol, ExpressionSyntax>
+                    .Empty
+                    .ToBuilder();
 
                 foreach (var assignment in initializer.Initializers)
                 {

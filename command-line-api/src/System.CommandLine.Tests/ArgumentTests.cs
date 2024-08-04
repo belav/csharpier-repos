@@ -36,7 +36,9 @@ public class ArgumentTests
             .Invoking(a => a.GetDefaultValue())
             .Should()
             .Throw<InvalidOperationException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be("Argument \"the-arg\" does not have a default value");
     }
 
@@ -51,7 +53,8 @@ public class ArgumentTests
         var result = command.Parse("set-color Fuschia");
 
         result
-            .Errors.Select(e => e.Message)
+            .Errors
+            .Select(e => e.Message)
             .Should()
             .BeEquivalentTo(
                 new[] { $"Argument 'Fuschia' not recognized. Must be one of:\n\t'Red'\n\t'Green'" }

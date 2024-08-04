@@ -48,9 +48,9 @@ namespace System.Data.Tests
             }
             childTable.Rows.Add(11, 1, DBNull.Value);
 
-            parentTable.Columns.Add(
-                new DataColumn("Aggregate", expectedResult.GetType(), expression)
-            );
+            parentTable
+                .Columns
+                .Add(new DataColumn("Aggregate", expectedResult.GetType(), expression));
             Assert.Equal(expectedResult, parentTable.Rows[0][2]);
         }
 

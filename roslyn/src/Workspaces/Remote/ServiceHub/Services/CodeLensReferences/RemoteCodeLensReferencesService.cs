@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             }
 
                             return await CodeLensReferencesServiceFactory
-                                .Instance.GetReferenceCountAsync(
+                                .Instance
+                                .GetReferenceCountAsync(
                                     solution,
                                     documentId,
                                     syntaxNode,
@@ -130,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             }
 
                             return await CodeLensReferencesServiceFactory
-                                .Instance.FindReferenceLocationsAsync(
+                                .Instance
+                                .FindReferenceLocationsAsync(
                                     solution,
                                     documentId,
                                     syntaxNode,
@@ -176,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             }
 
                             return await CodeLensReferencesServiceFactory
-                                .Instance.FindReferenceMethodsAsync(
+                                .Instance
+                                .FindReferenceMethodsAsync(
                                     solution,
                                     documentId,
                                     syntaxNode,
@@ -225,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Remote
                                     }
 
                                     return await CodeLensReferencesServiceFactory
-                                        .Instance.GetFullyQualifiedNameAsync(
+                                        .Instance
+                                        .GetFullyQualifiedNameAsync(
                                             solution,
                                             documentId,
                                             syntaxNode,

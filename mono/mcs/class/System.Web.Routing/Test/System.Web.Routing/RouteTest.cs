@@ -1562,21 +1562,25 @@ namespace MonoTests.System.Web.Routing
             var rc = new RequestContext(context, new RouteData());
 
             Assert.IsNotNull(RouteTable.Routes, "#A1");
-            RouteTable.Routes.MapPageRoute(
-                "TestRoute",
-                "{language}/testroute",
-                "~/TestRoute.aspx",
-                true,
-                null,
-                new RouteValueDictionary { { "language", "(ru|en)" } }
-            );
+            RouteTable
+                .Routes
+                .MapPageRoute(
+                    "TestRoute",
+                    "{language}/testroute",
+                    "~/TestRoute.aspx",
+                    true,
+                    null,
+                    new RouteValueDictionary { { "language", "(ru|en)" } }
+                );
 
             Assert.IsNotNull(
-                RouteTable.Routes.GetVirtualPath(
-                    rc,
-                    "TestRoute",
-                    new RouteValueDictionary { { "language", "en" } }
-                ),
+                RouteTable
+                    .Routes
+                    .GetVirtualPath(
+                        rc,
+                        "TestRoute",
+                        new RouteValueDictionary { { "language", "en" } }
+                    ),
                 "#A2"
             );
 
@@ -1634,29 +1638,33 @@ namespace MonoTests.System.Web.Routing
             );
             var rc = new RequestContext(context, new RouteData());
 
-            RouteTable.Routes.Add(
-                "FirstPage",
-                new Route("Hello/FirstPage", new MyRouteHandler())
-                {
-                    Defaults = new RouteValueDictionary(
-                        new
-                        {
-                            controller = "Home",
-                            action = "Hello",
-                            page = 1,
-                        }
-                    ),
-                }
-            );
-            RouteTable.Routes.Add(
-                "OtherPages",
-                new Route("Hello/Page-{page}", new MyRouteHandler())
-                {
-                    Defaults = new RouteValueDictionary(
-                        new { controller = "Home", action = "Hello" }
-                    ),
-                }
-            );
+            RouteTable
+                .Routes
+                .Add(
+                    "FirstPage",
+                    new Route("Hello/FirstPage", new MyRouteHandler())
+                    {
+                        Defaults = new RouteValueDictionary(
+                            new
+                            {
+                                controller = "Home",
+                                action = "Hello",
+                                page = 1,
+                            }
+                        ),
+                    }
+                );
+            RouteTable
+                .Routes
+                .Add(
+                    "OtherPages",
+                    new Route("Hello/Page-{page}", new MyRouteHandler())
+                    {
+                        Defaults = new RouteValueDictionary(
+                            new { controller = "Home", action = "Hello" }
+                        ),
+                    }
+                );
 
             var firstPageRouteValues = new RouteValueDictionary
             {
@@ -1689,34 +1697,38 @@ namespace MonoTests.System.Web.Routing
             );
             var rc = new RequestContext(context, new RouteData());
 
-            RouteTable.Routes.Add(
-                "Published",
-                new Route("Posts/Published", new MyRouteHandler())
-                {
-                    Defaults = new RouteValueDictionary(
-                        new
-                        {
-                            controller = "Home",
-                            action = "Posts",
-                            published = true,
-                        }
-                    ),
-                }
-            );
-            RouteTable.Routes.Add(
-                "Unpublished",
-                new Route("Posts/Unpublished", new MyRouteHandler())
-                {
-                    Defaults = new RouteValueDictionary(
-                        new
-                        {
-                            controller = "Home",
-                            action = "Posts",
-                            published = false,
-                        }
-                    ),
-                }
-            );
+            RouteTable
+                .Routes
+                .Add(
+                    "Published",
+                    new Route("Posts/Published", new MyRouteHandler())
+                    {
+                        Defaults = new RouteValueDictionary(
+                            new
+                            {
+                                controller = "Home",
+                                action = "Posts",
+                                published = true,
+                            }
+                        ),
+                    }
+                );
+            RouteTable
+                .Routes
+                .Add(
+                    "Unpublished",
+                    new Route("Posts/Unpublished", new MyRouteHandler())
+                    {
+                        Defaults = new RouteValueDictionary(
+                            new
+                            {
+                                controller = "Home",
+                                action = "Posts",
+                                published = false,
+                            }
+                        ),
+                    }
+                );
 
             var publishedRouteValues = new RouteValueDictionary
             {

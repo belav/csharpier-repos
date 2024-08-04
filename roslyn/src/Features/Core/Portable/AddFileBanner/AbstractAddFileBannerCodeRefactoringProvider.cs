@@ -75,7 +75,9 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
             // ones that we can get a root from (without having to parse).  Then
             // look at the ones we'd need to parse.
             var siblingDocumentsAndRoots = document
-                .Project.Documents.Where(d => d != document)
+                .Project
+                .Documents
+                .Where(d => d != document)
                 .Select(d =>
                 {
                     d.TryGetSyntaxRoot(out var siblingRoot);

@@ -169,8 +169,8 @@ public partial class HelpBuilder
         public static Func<HelpContext, bool> CommandArgumentsSection() =>
             ctx =>
             {
-                TwoColumnHelpRow[] commandArguments = ctx
-                    .HelpBuilder.GetCommandArgumentRows(ctx.Command, ctx)
+                TwoColumnHelpRow[] commandArguments = ctx.HelpBuilder
+                    .GetCommandArgumentRows(ctx.Command, ctx)
                     .ToArray();
 
                 if (commandArguments.Length > 0)

@@ -1098,9 +1098,9 @@ namespace System.Workflow.ComponentModel.Design
                     );
                     if (this.editedConnector.ParentDesigner != null)
                     {
-                        this.editedConnector.ParentDesigner.OnConnectorChanged(
-                            new ConnectorEventArgs(this.editedConnector)
-                        );
+                        this.editedConnector
+                            .ParentDesigner
+                            .OnConnectorChanged(new ConnectorEventArgs(this.editedConnector));
 
                         WorkflowDesignerLoader loader =
                             GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
@@ -1550,7 +1550,8 @@ namespace System.Workflow.ComponentModel.Design
                 if (
                     this.editPoints.Count < 2
                     || !this.editPoints[this.editPoints.Count - 1]
-                        .EditedConnectionPoint.Equals(Target)
+                        .EditedConnectionPoint
+                        .Equals(Target)
                 )
                     editPoints.Add(new EditPoint(this, Target));
             }

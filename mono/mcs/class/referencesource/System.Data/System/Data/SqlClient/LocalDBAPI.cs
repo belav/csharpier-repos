@@ -358,9 +358,9 @@ namespace System.Data
             {
                 if (!_partialTrustFlagChecked)
                 {
-                    object partialTrustFlagValue = AppDomain.CurrentDomain.GetData(
-                        const_partialTrustFlagKey
-                    );
+                    object partialTrustFlagValue = AppDomain
+                        .CurrentDomain
+                        .GetData(const_partialTrustFlagKey);
                     if (partialTrustFlagValue != null && partialTrustFlagValue is bool)
                     {
                         _partialTrustAllowed = (bool)partialTrustFlagValue;

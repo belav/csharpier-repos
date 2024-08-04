@@ -42,8 +42,12 @@ namespace System.Data.Metadata.Edm
         // no reference to any metadata in OSpace. Also we assume that ObjectMaterializer loads the assembly
         // before it tries to do object materialization, since we might not have loaded an assembly in another workspace
         // where this store item collection is getting reused
-        private readonly System.Data.Common.QueryCache.QueryCacheManager _queryCacheManager =
-            System.Data.Common.QueryCache.QueryCacheManager.Create();
+        private readonly System.Data.Common.QueryCache.QueryCacheManager _queryCacheManager = System
+            .Data
+            .Common
+            .QueryCache
+            .QueryCacheManager
+            .Create();
         #endregion
 
         #region Constructors

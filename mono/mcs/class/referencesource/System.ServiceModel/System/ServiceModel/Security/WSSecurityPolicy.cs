@@ -699,9 +699,11 @@ namespace System.ServiceModel.Security
                     {
                         if (
                             false
-                            == importer.State.ContainsKey(
-                                SecurityBindingElementImporter.InSecureConversationBootstrapBindingImportMode
-                            )
+                            == importer
+                                .State
+                                .ContainsKey(
+                                    SecurityBindingElementImporter.InSecureConversationBootstrapBindingImportMode
+                                )
                         )
                         {
                             // The transportTokenAssertion should be consumed by the transport binding importer
@@ -1350,11 +1352,13 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
             }
 
             if (
@@ -1369,11 +1373,13 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
             }
 
             if (
@@ -1388,11 +1394,13 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
             }
 
             return true;
@@ -1423,9 +1431,9 @@ namespace System.ServiceModel.Security
             }
             if (optionalSignedEncrypted == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "optionalSignedEncrypted"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("optionalSignedEncrypted");
             }
 
             bool result = true;
@@ -1517,9 +1525,9 @@ namespace System.ServiceModel.Security
             }
             if (optionalEndorsing == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "optionalEndorsing"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("optionalEndorsing");
             }
 
             bool result = true;
@@ -1543,14 +1551,16 @@ namespace System.ServiceModel.Security
                         && assertion != null
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.UnsupportedSecurityPolicyAssertion,
-                                    assertion.OuterXml
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.UnsupportedSecurityPolicyAssertion,
+                                        assertion.OuterXml
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     Collection<SecurityTokenParameters> supportingTokens =
@@ -1617,9 +1627,9 @@ namespace System.ServiceModel.Security
             }
             if (optionalSignedEndorsing == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "optionalSignedEndorsing"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("optionalSignedEndorsing");
             }
 
             bool result = true;
@@ -1646,14 +1656,16 @@ namespace System.ServiceModel.Security
                         && assertion != null
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.UnsupportedSecurityPolicyAssertion,
-                                    assertion.OuterXml
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.UnsupportedSecurityPolicyAssertion,
+                                        assertion.OuterXml
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     Collection<SecurityTokenParameters> supportingTokens =
@@ -1782,7 +1794,8 @@ namespace System.ServiceModel.Security
                 ChannelProtectionRequirements.CreateFromContract(
                     policyContext.Contract,
                     policyContext
-                        .BindingElements.Find<SecurityBindingElement>()
+                        .BindingElements
+                        .Find<SecurityBindingElement>()
                         .GetIndividualProperty<ISecurityCapabilities>(),
                     false
                 )
@@ -1834,10 +1847,9 @@ namespace System.ServiceModel.Security
 
                     // confidentiality
                     if (
-                        protectionRequirements.OutgoingEncryptionParts.TryGetParts(
-                            fault.Action,
-                            out parts
-                        )
+                        protectionRequirements
+                            .OutgoingEncryptionParts
+                            .TryGetParts(fault.Action, out parts)
                     )
                     {
                         if (!parts.IsEmpty())
@@ -1990,9 +2002,9 @@ namespace System.ServiceModel.Security
             switch (layout)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("layout")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("layout"));
                 case SecurityHeaderLayout.Lax:
                     return CreateWsspAssertion(LaxName);
                 case SecurityHeaderLayout.LaxTimestampFirst:
@@ -2127,9 +2139,9 @@ namespace System.ServiceModel.Security
                 result = CreateWsspAssertion(TripleDesSha256Rsa15Name);
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("suite")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("suite"));
             }
 
             return result;
@@ -2351,9 +2363,9 @@ namespace System.ServiceModel.Security
         {
             if (transportTokenAssertion == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "transportTokenAssertion"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("transportTokenAssertion");
             }
 
             XmlElement result = CreateWsspAssertion(TransportTokenName);
@@ -2469,9 +2481,9 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("parameters")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("parameters"));
             }
 
             if (result != null && isOptional)
@@ -2548,16 +2560,18 @@ namespace System.ServiceModel.Security
                         if (e is NullReferenceException)
                             throw;
 
-                        importer.Errors.Add(
-                            new MetadataConversionError(
-                                SR.GetString(
-                                    SR.UnsupportedBooleanAttribute,
-                                    OptionalName,
-                                    e.Message
-                                ),
-                                false
-                            )
-                        );
+                        importer
+                            .Errors
+                            .Add(
+                                new MetadataConversionError(
+                                    SR.GetString(
+                                        SR.UnsupportedBooleanAttribute,
+                                        OptionalName,
+                                        e.Message
+                                    ),
+                                    false
+                                )
+                            );
                         return false;
                     }
 
@@ -2576,9 +2590,9 @@ namespace System.ServiceModel.Security
             switch (inclusionMode)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("inclusionMode")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("inclusionMode"));
                 case SecurityTokenInclusionMode.AlwaysToInitiator:
                     tokenAssertion.SetAttribute(
                         IncludeTokenName,
@@ -2738,9 +2752,9 @@ namespace System.ServiceModel.Security
             switch (referenceStyle)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("referenceStyle")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("referenceStyle"));
                 case X509KeyIdentifierClauseType.IssuerSerial:
                     _mustSupportRefIssuerSerialName = true;
                     return CreateWsspAssertion(RequireIssuerSerialReferenceName);
@@ -2938,9 +2952,9 @@ namespace System.ServiceModel.Security
             switch (referenceStyle)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("referenceStyle")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("referenceStyle"));
                 case SecurityTokenReferenceStyle.External:
                     return CreateWsspAssertion(RequireExternalReferenceName);
                 case SecurityTokenReferenceStyle.Internal:
@@ -2987,16 +3001,18 @@ namespace System.ServiceModel.Security
                 if (issuerMetadataAddress != null)
                 {
                     MetadataSet metadataSet = new MetadataSet();
-                    metadataSet.MetadataSections.Add(
-                        new MetadataSection(
-                            null,
-                            null,
-                            new MetadataReference(
-                                issuerMetadataAddress,
-                                AddressingVersion.WSAddressing10
+                    metadataSet
+                        .MetadataSections
+                        .Add(
+                            new MetadataSection(
+                                null,
+                                null,
+                                new MetadataReference(
+                                    issuerMetadataAddress,
+                                    AddressingVersion.WSAddressing10
+                                )
                             )
-                        )
-                    );
+                        );
 
                     stream = new MemoryStream();
                     writer = new XmlTextWriter(stream, System.Text.Encoding.UTF8);
@@ -3448,9 +3464,9 @@ namespace System.ServiceModel.Security
         )
         {
             if (bootstrapSecurity == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "bootstrapBinding"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("bootstrapBinding");
 
             WSSecurityPolicy sp = WSSecurityPolicy.GetSecurityPolicyDriver(
                 bootstrapSecurity.MessageSecurityVersion
@@ -3460,9 +3476,11 @@ namespace System.ServiceModel.Security
 
             CustomBinding bootstrapBinding = new CustomBinding(bootstrapSecurity);
             if (
-                exporter.State.ContainsKey(
-                    SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey
-                )
+                exporter
+                    .State
+                    .ContainsKey(
+                        SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey
+                    )
             )
             {
                 BindingElementCollection bindingElementsBelowSecurity =
@@ -3488,12 +3506,12 @@ namespace System.ServiceModel.Security
 
             // hard-coded requirements in V1: sign and encrypt RST and RSTR body
             ChannelProtectionRequirements bootstrapProtection = new ChannelProtectionRequirements();
-            bootstrapProtection.IncomingEncryptionParts.AddParts(
-                new MessagePartSpecification(true)
-            );
-            bootstrapProtection.OutgoingEncryptionParts.AddParts(
-                new MessagePartSpecification(true)
-            );
+            bootstrapProtection
+                .IncomingEncryptionParts
+                .AddParts(new MessagePartSpecification(true));
+            bootstrapProtection
+                .OutgoingEncryptionParts
+                .AddParts(new MessagePartSpecification(true));
             bootstrapProtection.IncomingSignatureParts.AddParts(new MessagePartSpecification(true));
             bootstrapProtection.OutgoingSignatureParts.AddParts(new MessagePartSpecification(true));
 
@@ -3573,9 +3591,11 @@ namespace System.ServiceModel.Security
                 {
                     bindingElements = importer.ImportPolicy(NullServiceEndpoint, alternatives);
                     if (
-                        importer.State.ContainsKey(
-                            SecurityBindingElementImporter.SecureConversationBootstrapEncryptionRequirements
-                        )
+                        importer
+                            .State
+                            .ContainsKey(
+                                SecurityBindingElementImporter.SecureConversationBootstrapEncryptionRequirements
+                            )
                     )
                     {
                         MessagePartSpecification encryption = (MessagePartSpecification)
@@ -3584,21 +3604,25 @@ namespace System.ServiceModel.Security
                             ];
                         if (encryption.IsBodyIncluded != true)
                         {
-                            importer.Errors.Add(
-                                new MetadataConversionError(
-                                    SR.GetString(
-                                        SR.UnsupportedSecureConversationBootstrapProtectionRequirements
-                                    ),
-                                    false
-                                )
-                            );
+                            importer
+                                .Errors
+                                .Add(
+                                    new MetadataConversionError(
+                                        SR.GetString(
+                                            SR.UnsupportedSecureConversationBootstrapProtectionRequirements
+                                        ),
+                                        false
+                                    )
+                                );
                             bindingElements = null;
                         }
                     }
                     if (
-                        importer.State.ContainsKey(
-                            SecurityBindingElementImporter.SecureConversationBootstrapSignatureRequirements
-                        )
+                        importer
+                            .State
+                            .ContainsKey(
+                                SecurityBindingElementImporter.SecureConversationBootstrapSignatureRequirements
+                            )
                     )
                     {
                         MessagePartSpecification signature = (MessagePartSpecification)
@@ -3607,39 +3631,51 @@ namespace System.ServiceModel.Security
                             ];
                         if (signature.IsBodyIncluded != true)
                         {
-                            importer.Errors.Add(
-                                new MetadataConversionError(
-                                    SR.GetString(
-                                        SR.UnsupportedSecureConversationBootstrapProtectionRequirements
-                                    ),
-                                    false
-                                )
-                            );
+                            importer
+                                .Errors
+                                .Add(
+                                    new MetadataConversionError(
+                                        SR.GetString(
+                                            SR.UnsupportedSecureConversationBootstrapProtectionRequirements
+                                        ),
+                                        false
+                                    )
+                                );
                             bindingElements = null;
                         }
                     }
                 }
                 finally
                 {
-                    importer.State.Remove(
-                        SecurityBindingElementImporter.InSecureConversationBootstrapBindingImportMode
-                    );
-                    if (
-                        importer.State.ContainsKey(
-                            SecurityBindingElementImporter.SecureConversationBootstrapEncryptionRequirements
-                        )
-                    )
-                        importer.State.Remove(
-                            SecurityBindingElementImporter.SecureConversationBootstrapEncryptionRequirements
+                    importer
+                        .State
+                        .Remove(
+                            SecurityBindingElementImporter.InSecureConversationBootstrapBindingImportMode
                         );
                     if (
-                        importer.State.ContainsKey(
-                            SecurityBindingElementImporter.SecureConversationBootstrapSignatureRequirements
-                        )
+                        importer
+                            .State
+                            .ContainsKey(
+                                SecurityBindingElementImporter.SecureConversationBootstrapEncryptionRequirements
+                            )
                     )
-                        importer.State.Remove(
-                            SecurityBindingElementImporter.SecureConversationBootstrapSignatureRequirements
-                        );
+                        importer
+                            .State
+                            .Remove(
+                                SecurityBindingElementImporter.SecureConversationBootstrapEncryptionRequirements
+                            );
+                    if (
+                        importer
+                            .State
+                            .ContainsKey(
+                                SecurityBindingElementImporter.SecureConversationBootstrapSignatureRequirements
+                            )
+                    )
+                        importer
+                            .State
+                            .Remove(
+                                SecurityBindingElementImporter.SecureConversationBootstrapSignatureRequirements
+                            );
                 }
                 if (bindingElements != null)
                 {
@@ -3753,9 +3789,9 @@ namespace System.ServiceModel.Security
             {
                 if (policyContext == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "policyContext"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("policyContext");
                 }
                 if (parameters == null)
                 {
@@ -3779,11 +3815,13 @@ namespace System.ServiceModel.Security
 
                 if (maximumRedirections <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.MaximumPolicyRedirectionsExceeded)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MaximumPolicyRedirectionsExceeded)
+                            )
+                        );
                 }
                 --maximumRedirections;
 
@@ -3854,16 +3892,18 @@ namespace System.ServiceModel.Security
                     // we could not retrieve the metadata from the issuer for some reason
                     //
                     if (mexException != null)
-                        importer.Errors.Add(
-                            new MetadataConversionError(
-                                SR.GetString(
-                                    SR.UnableToObtainIssuerMetadata,
-                                    mexAddress,
-                                    mexException
-                                ),
-                                false
-                            )
-                        );
+                        importer
+                            .Errors
+                            .Add(
+                                new MetadataConversionError(
+                                    SR.GetString(
+                                        SR.UnableToObtainIssuerMetadata,
+                                        mexAddress,
+                                        mexException
+                                    ),
+                                    false
+                                )
+                            );
 
                     return;
                 }
@@ -3899,16 +3939,20 @@ namespace System.ServiceModel.Security
                     )
                 )
                 {
-                    wsdlImporter.State.Add(
-                        MetadataExchangeClient.MetadataExchangeClientKey,
-                        importer.State[MetadataExchangeClient.MetadataExchangeClientKey]
-                    );
+                    wsdlImporter
+                        .State
+                        .Add(
+                            MetadataExchangeClient.MetadataExchangeClientKey,
+                            importer.State[MetadataExchangeClient.MetadataExchangeClientKey]
+                        );
                 }
 
-                wsdlImporter.State.Add(
-                    SecurityBindingElementImporter.MaxPolicyRedirectionsKey,
-                    maximumRedirections
-                );
+                wsdlImporter
+                    .State
+                    .Add(
+                        SecurityBindingElementImporter.MaxPolicyRedirectionsKey,
+                        maximumRedirections
+                    );
 
                 federationEndpoints = wsdlImporter.ImportAllEndpoints();
 
@@ -3916,16 +3960,18 @@ namespace System.ServiceModel.Security
                 for (int i = 0; i < wsdlImporter.Errors.Count; ++i)
                 {
                     MetadataConversionError error = wsdlImporter.Errors[i];
-                    importer.Errors.Add(
-                        new MetadataConversionError(
-                            SR.GetString(
-                                SR.ErrorImportingIssuerMetadata,
-                                mexAddress,
-                                InsertEllipsisIfTooLong(error.Message)
-                            ),
-                            error.IsWarning
-                        )
-                    );
+                    importer
+                        .Errors
+                        .Add(
+                            new MetadataConversionError(
+                                SR.GetString(
+                                    SR.ErrorImportingIssuerMetadata,
+                                    mexAddress,
+                                    InsertEllipsisIfTooLong(error.Message)
+                                ),
+                                error.IsWarning
+                            )
+                        );
                 }
 
                 if (federationEndpoints != null)
@@ -3936,11 +3982,13 @@ namespace System.ServiceModel.Security
                         && parameters.AlternativeIssuerEndpoints.Count > 0
                     )
                     {
-                        importer.Errors.Add(
-                            new MetadataConversionError(
-                                SR.GetString(SR.MultipleIssuerEndpointsFound, mexAddress)
-                            )
-                        );
+                        importer
+                            .Errors
+                            .Add(
+                                new MetadataConversionError(
+                                    SR.GetString(SR.MultipleIssuerEndpointsFound, mexAddress)
+                                )
+                            );
                     }
                 }
             }
@@ -4067,7 +4115,8 @@ namespace System.ServiceModel.Security
             bool TryGetTrustDriver(ServiceEndpoint endpoint, out TrustDriver trustDriver)
             {
                 SecurityBindingElement sbe = endpoint
-                    .Binding.CreateBindingElements()
+                    .Binding
+                    .CreateBindingElements()
                     .Find<SecurityBindingElement>();
                 trustDriver = null;
                 if (sbe != null)
@@ -4156,9 +4205,9 @@ namespace System.ServiceModel.Security
                     }
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException());
             }
         }
     }

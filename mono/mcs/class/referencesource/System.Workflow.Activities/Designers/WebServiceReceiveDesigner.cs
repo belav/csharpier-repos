@@ -67,7 +67,9 @@ namespace System.Workflow.Activities
                 else if (e.Member.Name == "MethodName")
                 {
                     // If method name changed, clear out parameters.
-                    (e.Activity as WebServiceInputActivity).ParameterBindings.Clear();
+                    (e.Activity as WebServiceInputActivity)
+                        .ParameterBindings
+                        .Clear();
                 }
 
                 // Refresh all other properties as well

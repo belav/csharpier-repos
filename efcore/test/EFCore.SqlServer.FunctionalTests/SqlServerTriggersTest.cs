@@ -145,8 +145,10 @@ public class SqlServerTriggersTest : IClassFixture<SqlServerTriggersTest.SqlServ
         {
             context.Database.EnsureCreatedResiliently();
 
-            context.Database.ExecuteSqlRaw(
-                @"
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"
 CREATE TRIGGER TRG_InsertProduct
 ON Products
 AFTER INSERT AS
@@ -158,10 +160,12 @@ BEGIN
     INSERT INTO ProductBackups
     SELECT * FROM INSERTED;
 END"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"
 CREATE TRIGGER TRG_UpdateProduct
 ON Products
 AFTER UPDATE AS
@@ -177,10 +181,12 @@ BEGIN
         ON b.Id = p.Id
     WHERE p.Id IN(SELECT INSERTED.Id FROM INSERTED);
 END"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"
 CREATE TRIGGER TRG_DeleteProduct
 ON Products
 AFTER DELETE AS
@@ -192,7 +198,7 @@ BEGIN
     DELETE FROM ProductBackups
     WHERE Id IN(SELECT DELETED.Id FROM DELETED);
 END"
-            );
+                );
         }
     }
 }

@@ -79,11 +79,13 @@ namespace System.ServiceModel.Configuration
 
             if (providerType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.PersistenceProviderTypeNotFound)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.PersistenceProviderTypeNotFound)
+                        )
+                    );
             }
 
             ConstructorInfo cInfo = providerType.GetConstructor(

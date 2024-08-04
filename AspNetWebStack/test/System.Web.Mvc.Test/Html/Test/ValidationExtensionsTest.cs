@@ -2611,9 +2611,9 @@ namespace System.Web.Mvc.Html.Test
             ModelState modelStateBar = new ModelState();
             ModelState modelStateBaz = new ModelState();
 
-            modelStateFoo.Errors.Add(
-                new ModelError(new InvalidOperationException("foo error from exception"))
-            );
+            modelStateFoo
+                .Errors
+                .Add(new ModelError(new InvalidOperationException("foo error from exception")));
             modelStateFoo.Errors.Add(new ModelError("foo error <1>"));
             modelStateFoo.Errors.Add(new ModelError("foo error 2"));
             modelStateBar.Errors.Add(new ModelError("bar error <1>"));
@@ -2623,14 +2623,12 @@ namespace System.Web.Mvc.Html.Test
             viewData.ModelState["bar"] = modelStateBar;
             viewData.ModelState["baz"] = modelStateBaz;
 
-            viewData.ModelState.SetModelValue(
-                "quux",
-                new ValueProviderResult(null, "quuxValue", null)
-            );
-            viewData.ModelState.AddModelError(
-                "quux",
-                new InvalidOperationException("Some error text.")
-            );
+            viewData
+                .ModelState
+                .SetModelValue("quux", new ValueProviderResult(null, "quuxValue", null));
+            viewData
+                .ModelState
+                .AddModelError("quux", new InvalidOperationException("Some error text."));
             return viewData;
         }
 
@@ -2648,14 +2646,12 @@ namespace System.Web.Mvc.Html.Test
             viewData.ModelState["foo"] = modelStateFoo;
             viewData.ModelState["bar"] = modelStateBar;
             viewData.ModelState["baz"] = modelStateBaz;
-            viewData.ModelState.SetModelValue(
-                "quux",
-                new ValueProviderResult(null, "quuxValue", null)
-            );
-            viewData.ModelState.AddModelError(
-                "quux",
-                new InvalidOperationException("Some error text.")
-            );
+            viewData
+                .ModelState
+                .SetModelValue("quux", new ValueProviderResult(null, "quuxValue", null));
+            viewData
+                .ModelState
+                .AddModelError("quux", new InvalidOperationException("Some error text."));
             viewData.ModelState.AddModelError(String.Empty, "Something is wrong.");
             viewData.ModelState.AddModelError(String.Empty, "Something else is also wrong.");
             return viewData;
@@ -2676,14 +2672,12 @@ namespace System.Web.Mvc.Html.Test
             viewData.ModelState[prefix + ".foo"] = modelStateFoo;
             viewData.ModelState[prefix + ".bar"] = modelStateBar;
             viewData.ModelState[prefix + ".baz"] = modelStateBaz;
-            viewData.ModelState.SetModelValue(
-                prefix + ".quux",
-                new ValueProviderResult(null, "quuxValue", null)
-            );
-            viewData.ModelState.AddModelError(
-                prefix + ".quux",
-                new InvalidOperationException("Some error text.")
-            );
+            viewData
+                .ModelState
+                .SetModelValue(prefix + ".quux", new ValueProviderResult(null, "quuxValue", null));
+            viewData
+                .ModelState
+                .AddModelError(prefix + ".quux", new InvalidOperationException("Some error text."));
             return viewData;
         }
 

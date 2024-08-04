@@ -23,7 +23,8 @@ namespace System.Reflection.Tests
         public void DeclaredConstructors(Type type, int expectedCount)
         {
             ConstructorInfo[] constructors = type.GetTypeInfo()
-                .DeclaredConstructors.Where(ctorInfo => !ctorInfo.IsStatic)
+                .DeclaredConstructors
+                .Where(ctorInfo => !ctorInfo.IsStatic)
                 .ToArray();
             Assert.Equal(expectedCount, constructors.Length);
             foreach (ConstructorInfo constructorInfo in constructors)
@@ -175,7 +176,8 @@ namespace System.Reflection.Tests
         )
         {
             IEnumerable<string> fields = type.GetTypeInfo()
-                .DeclaredFields.Select(fieldInfo => fieldInfo.Name);
+                .DeclaredFields
+                .Select(fieldInfo => fieldInfo.Name);
             FieldInfo declaredFieldInfo = type.GetTypeInfo().GetDeclaredField(name);
             if (exists)
             {
@@ -255,7 +257,8 @@ namespace System.Reflection.Tests
         public void DeclaredMethods(Type type, string name, bool exists)
         {
             IEnumerable<string> methods = type.GetTypeInfo()
-                .DeclaredMethods.Select(methodInfo => methodInfo.Name);
+                .DeclaredMethods
+                .Select(methodInfo => methodInfo.Name);
             MethodInfo declaredMethodInfo = type.GetTypeInfo().GetDeclaredMethod(name);
             if (exists)
             {
@@ -295,7 +298,8 @@ namespace System.Reflection.Tests
         public void DeclaredNestedTypes(Type type, string name, bool exists)
         {
             IEnumerable<string> nestedTypes = type.GetTypeInfo()
-                .DeclaredNestedTypes.Select(nestedType => nestedType.Name);
+                .DeclaredNestedTypes
+                .Select(nestedType => nestedType.Name);
 
             TypeInfo typeInfo = type.GetTypeInfo().GetDeclaredNestedType(name);
             if (exists)
@@ -321,9 +325,9 @@ namespace System.Reflection.Tests
         public void DeclaredProperties(Type type, string name)
         {
             TypeInfo typeInfo = type.GetTypeInfo();
-            IEnumerable<string> properties = typeInfo.DeclaredProperties.Select(property =>
-                property.Name
-            );
+            IEnumerable<string> properties = typeInfo
+                .DeclaredProperties
+                .Select(property => property.Name);
             Assert.Contains(name, properties);
             Assert.Equal(name, typeInfo.GetDeclaredProperty(name).Name);
         }

@@ -47,9 +47,9 @@ namespace Internal.Reflection.Execution.MethodInvokers
 
             if (methodHandle.IsNativeFormatMetadataBased)
             {
-                Method method = methodHandle.NativeFormatHandle.GetMethod(
-                    methodHandle.NativeFormatReader
-                );
+                Method method = methodHandle
+                    .NativeFormatHandle
+                    .GetMethod(methodHandle.NativeFormatReader);
                 MethodAttributes methodAttributes = method.Flags;
                 if (0 != (methodAttributes & MethodAttributes.Static))
                     isStatic = true;

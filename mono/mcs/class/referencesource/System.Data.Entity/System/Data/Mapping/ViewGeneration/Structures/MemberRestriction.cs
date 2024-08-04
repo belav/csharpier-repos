@@ -172,10 +172,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             }
             if (
                 false
-                == MemberProjectedSlot.EqualityComparer.Equals(
-                    m_restrictedMemberSlot,
-                    rightRestriction.m_restrictedMemberSlot
-                )
+                == MemberProjectedSlot
+                    .EqualityComparer
+                    .Equals(m_restrictedMemberSlot, rightRestriction.m_restrictedMemberSlot)
             )
             {
                 return false;
@@ -208,10 +207,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             {
                 return true;
             }
-            return MemberProjectedSlot.EqualityComparer.Equals(
-                m_restrictedMemberSlot,
-                rightOneOfConst.m_restrictedMemberSlot
-            );
+            return MemberProjectedSlot
+                .EqualityComparer
+                .Equals(m_restrictedMemberSlot, rightOneOfConst.m_restrictedMemberSlot);
         }
 
         /// <summary>

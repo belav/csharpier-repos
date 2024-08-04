@@ -34,9 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     Net40.mscorlib,
                     TestReferences.SymbolsTests.Methods.ByRefReturn,
                 },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var module1 = assemblies[0].Modules[0];
@@ -187,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal("void C2<T4>.M1<T5>(T5 x, T4 y)", basicC2_M1.ToTestDisplayString());
 
             var console = module5
-                .GlobalNamespace.GetMembers("System")
+                .GlobalNamespace
+                .GetMembers("System")
                 .OfType<NamespaceSymbol>()
                 .Single()
                 .GetTypeMembers("Console")
@@ -399,7 +400,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.False(csharpModifiers3_M4.IsOverride);
 
             var byrefReturnMethod = byrefReturn
-                .GlobalNamespace.GetTypeMembers("ByRefReturn")
+                .GlobalNamespace
+                .GetTypeMembers("ByRefReturn")
                 .Single()
                 .GetMembers("M")
                 .OfType<MethodSymbol>()
@@ -822,8 +824,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(@interface, innerClass.Interfaces().Single().ConstructedFrom);
 
             var innerClassMethod = (MethodSymbol)innerClass.GetMembers(methodName).Single();
-            var innerClassImplementingMethod =
-                innerClassMethod.ExplicitInterfaceImplementations.Single();
+            var innerClassImplementingMethod = innerClassMethod
+                .ExplicitInterfaceImplementations
+                .Single();
             Assert.Equal(interfaceMethod, innerClassImplementingMethod.OriginalDefinition);
             Assert.Equal(@interface, innerClassImplementingMethod.ContainingType.ConstructedFrom);
         }
@@ -1209,9 +1212,9 @@ class Override : MetadataModifiers
                 string.Format(ilTemplate, modifiers, explicitOverride, body),
                 compilation =>
                 {
-                    var derivedClass = compilation.GlobalNamespace.GetMember<PENamedTypeSymbol>(
-                        "Derived"
-                    );
+                    var derivedClass = compilation
+                        .GlobalNamespace
+                        .GetMember<PENamedTypeSymbol>("Derived");
                     var method = derivedClass.GetMember<MethodSymbol>("M");
 
                     switch (expectedVirtualness)

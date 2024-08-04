@@ -150,13 +150,15 @@ namespace System.Web.Razor.Test
             string src = "Baz";
 
             // Act
-            mockEngine.Object.GenerateCode(
-                reader,
-                className: className,
-                rootNamespace: ns,
-                sourceFileName: src,
-                cancelToken: source.Token
-            );
+            mockEngine
+                .Object
+                .GenerateCode(
+                    reader,
+                    className: className,
+                    rootNamespace: ns,
+                    sourceFileName: src,
+                    cancelToken: source.Token
+                );
 
             // Assert
             mockEngine.Verify(e =>

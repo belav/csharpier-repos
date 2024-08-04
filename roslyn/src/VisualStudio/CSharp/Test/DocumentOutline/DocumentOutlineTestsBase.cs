@@ -75,7 +75,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
         }
 
         private static readonly TestComposition s_composition = EditorTestCompositions
-            .LanguageServerProtocolEditorFeatures.AddParts(typeof(TestDocumentTrackingService))
+            .LanguageServerProtocolEditorFeatures
+            .AddParts(typeof(TestDocumentTrackingService))
             .AddParts(typeof(TestWorkspaceRegistrationService))
             .RemoveParts(typeof(MockWorkspaceEventListenerProvider));
 
@@ -191,8 +192,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             // Important: We must wait for workspace creation operations to finish.
             // Otherwise we could have a race where workspace change events triggered by creation are changing the state
             // created by the initial test steps. This can interfere with the expected test state.
-            var operations =
-                workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var operations = workspace
+                .ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             var workspaceWaiter = operations.GetWaiter(FeatureAttribute.Workspace);
             await workspaceWaiter.ExpeditedWaitAsync();
 

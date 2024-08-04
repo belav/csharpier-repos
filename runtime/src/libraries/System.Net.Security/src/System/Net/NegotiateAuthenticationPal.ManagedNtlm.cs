@@ -57,9 +57,9 @@ namespace System.Net
             private static ReadOnlySpan<byte> ServerSealingKeyMagic =>
                 "session key to server-to-client sealing key magic constant\0"u8;
 
-            private static readonly byte[] s_workstation = Encoding.Unicode.GetBytes(
-                Environment.MachineName
-            );
+            private static readonly byte[] s_workstation = Encoding
+                .Unicode
+                .GetBytes(Environment.MachineName);
 
             private const Flags s_requiredFlags =
                 Flags.NegotiateNtlm2
@@ -428,9 +428,9 @@ namespace System.Net
                     Encoding.Unicode.GetBytes(password, pwBytes);
                     MD4.HashData(pwBytes, pwHash);
                     // strangely, user is upper case, domain is not.
-                    byte[] blob = Encoding.Unicode.GetBytes(
-                        string.Concat(userName.ToUpperInvariant(), domain)
-                    );
+                    byte[] blob = Encoding
+                        .Unicode
+                        .GetBytes(string.Concat(userName.ToUpperInvariant(), domain));
                     int written = HMACMD5.HashData(pwHash, blob, hash);
                     Debug.Assert(written == HMACMD5.HashSizeInBytes);
                 }
@@ -594,10 +594,9 @@ namespace System.Net
                 );
                 if (_spn != null)
                 {
-                    int bytesWritten = Encoding.Unicode.GetBytes(
-                        _spn,
-                        targetInfoBuffer.AsSpan(4 + targetInfoOffset)
-                    );
+                    int bytesWritten = Encoding
+                        .Unicode
+                        .GetBytes(_spn, targetInfoBuffer.AsSpan(4 + targetInfoOffset));
                     Debug.Assert(bytesWritten == spnSize);
                 }
                 targetInfoOffset += spnSize + 4;

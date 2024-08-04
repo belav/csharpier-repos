@@ -61,12 +61,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             var expectedTextAfterCaret = expectedText[expectedCaretMarkupEndIndex..];
 
             var lineText = await TestServices.Editor.GetCurrentLineTextAsync(cancellationToken);
-            var lineTextBeforeCaret = await TestServices.Editor.GetLineTextBeforeCaretAsync(
-                cancellationToken
-            );
-            var lineTextAfterCaret = await TestServices.Editor.GetLineTextAfterCaretAsync(
-                cancellationToken
-            );
+            var lineTextBeforeCaret = await TestServices
+                .Editor
+                .GetLineTextBeforeCaretAsync(cancellationToken);
+            var lineTextAfterCaret = await TestServices
+                .Editor
+                .GetLineTextAfterCaretAsync(cancellationToken);
 
             Assert.Equal(expectedTextBeforeCaret, lineTextBeforeCaret);
             Assert.Equal(expectedTextAfterCaret, lineTextAfterCaret);
@@ -161,15 +161,17 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                [
-                    FeatureAttribute.Workspace,
-                    FeatureAttribute.SolutionCrawlerLegacy,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles,
-                ],
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    [
+                        FeatureAttribute.Workspace,
+                        FeatureAttribute.SolutionCrawlerLegacy,
+                        FeatureAttribute.DiagnosticService,
+                        FeatureAttribute.ErrorSquiggles,
+                    ],
+                    cancellationToken
+                );
 
             var actualTags = await TestServices.Editor.GetErrorTagsAsync(cancellationToken);
             Assert.Equal(expectedTags.Length, actualTags.Length);

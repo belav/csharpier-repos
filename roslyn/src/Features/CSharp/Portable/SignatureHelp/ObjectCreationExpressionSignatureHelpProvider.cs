@@ -135,8 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                     .ConfigureAwait(false);
 
             // get the candidate methods
-            var methods = type
-                .InstanceConstructors.WhereAsArray(c => c.IsAccessibleWithin(within))
+            var methods = type.InstanceConstructors
+                .WhereAsArray(c => c.IsAccessibleWithin(within))
                 .WhereAsArray(s =>
                     s.IsEditorBrowsable(options.HideAdvancedMembers, semanticModel.Compilation)
                 )
@@ -164,8 +164,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             );
 
             // present items and select
-            var structuralTypeDisplayService =
-                document.Project.Services.GetRequiredService<IStructuralTypeDisplayService>();
+            var structuralTypeDisplayService = document
+                .Project
+                .Services
+                .GetRequiredService<IStructuralTypeDisplayService>();
             var documentationCommentFormattingService =
                 document.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
 
@@ -231,8 +233,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             );
 
             // present item and select
-            var structuralTypeDisplayService =
-                document.Project.Services.GetRequiredService<IStructuralTypeDisplayService>();
+            var structuralTypeDisplayService = document
+                .Project
+                .Services
+                .GetRequiredService<IStructuralTypeDisplayService>();
             var items = ConvertDelegateTypeConstructor(
                 objectCreationExpression,
                 invokeMethod,

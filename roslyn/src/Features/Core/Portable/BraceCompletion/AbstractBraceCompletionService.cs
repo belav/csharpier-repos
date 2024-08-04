@@ -85,9 +85,11 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             );
 
             // The caret location should be in between the braces.
-            var originalOpeningLinePosition = context.Document.Text.Lines.GetLinePosition(
-                context.OpeningPoint
-            );
+            var originalOpeningLinePosition = context
+                .Document
+                .Text
+                .Lines
+                .GetLinePosition(context.OpeningPoint);
             var caretLocation = new LinePosition(
                 originalOpeningLinePosition.Line,
                 originalOpeningLinePosition.Character + 1
@@ -120,8 +122,9 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             }
 
             // check that the user is not typing in a string literal or comment
-            var syntaxFactsService =
-                document.LanguageServices.GetRequiredService<ISyntaxFactsService>();
+            var syntaxFactsService = document
+                .LanguageServices
+                .GetRequiredService<ISyntaxFactsService>();
 
             return !syntaxFactsService.IsInNonUserCode(
                 document.SyntaxTree,
@@ -189,8 +192,10 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         )
         {
             var tree = context.Document.SyntaxTree;
-            var syntaxFactsService =
-                context.Document.LanguageServices.GetRequiredService<ISyntaxFactsService>();
+            var syntaxFactsService = context
+                .Document
+                .LanguageServices
+                .GetRequiredService<ISyntaxFactsService>();
 
             return !syntaxFactsService.IsInNonUserCode(
                     tree,
@@ -219,11 +224,9 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         /// </summary>
         private bool CheckClosingTokenKind(ParsedDocument document, int closingPosition)
         {
-            var closingToken = document.Root.FindTokenFromEnd(
-                closingPosition,
-                includeZeroWidth: false,
-                findInsideTrivia: true
-            );
+            var closingToken = document
+                .Root
+                .FindTokenFromEnd(closingPosition, includeZeroWidth: false, findInsideTrivia: true);
             return IsValidClosingBraceToken(closingToken);
         }
 

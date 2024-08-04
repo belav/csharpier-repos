@@ -116,9 +116,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var compilation = CreateEmptyCompilation(
                 text,
                 new[] { MscorlibRef },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var mscorlib = compilation.ExternalReferences[0];
@@ -226,9 +226,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var compilation = CreateEmptyCompilation(
                 text,
                 new[] { MscorlibRef },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var mscorlib = compilation.ExternalReferences[0];
@@ -307,9 +307,9 @@ namespace System.Diagnostics.Eventing
                     TestMetadata.Net40.SystemCore,
                     compilation1.EmitToImageReference(),
                 },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             var compilation1Lib = compilation2.ExternalReferences[2];
@@ -561,8 +561,8 @@ class Test : StaticModClass
 
             var comp = CreateCompilationWithILAndMscorlib40("", ilSource);
 
-            var stateMachineClass = comp
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var stateMachineClass = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMembers()
                 .OfType<NamedTypeSymbol>()
                 .Single();

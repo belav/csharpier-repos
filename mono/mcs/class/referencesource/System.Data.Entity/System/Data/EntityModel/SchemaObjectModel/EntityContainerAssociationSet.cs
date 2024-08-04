@@ -144,10 +144,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         end.AddError(
                             ErrorCode.InvalidName,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.InferRelationshipEndGivesAlreadyDefinedEnd(
-                                end.EntitySet.FQName,
-                                Name
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .InferRelationshipEndGivesAlreadyDefinedEnd(
+                                    end.EntitySet.FQName,
+                                    Name
+                                )
                         );
                     }
                     else

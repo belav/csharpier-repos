@@ -524,8 +524,9 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     var rightHandSideValue = _syntaxFacts.GetRightHandSideOfAssignment(
                         inlineMethodContext.InlineExpression
                     );
-                    var (parameterSymbol, name) =
-                        methodParametersInfo.ParametersWithVariableDeclarationArgument.Single();
+                    var (parameterSymbol, name) = methodParametersInfo
+                        .ParametersWithVariableDeclarationArgument
+                        .Single();
                     var declarationNode = (TStatementSyntax)
                         syntaxGenerator.LocalDeclarationStatement(
                             parameterSymbol.Type,

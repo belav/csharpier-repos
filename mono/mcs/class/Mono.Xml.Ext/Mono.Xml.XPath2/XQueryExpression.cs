@@ -474,9 +474,9 @@ namespace Mono.Xml.XQuery
         public override void Serialize(XPathSequence iter)
         {
             if (Content != null)
-                iter.Context.Writer.WriteString(
-                    Atomize(new ExprSequenceIterator(iter, Content)).Value
-                );
+                iter.Context
+                    .Writer
+                    .WriteString(Atomize(new ExprSequenceIterator(iter, Content)).Value);
             else
                 iter.Context.Writer.WriteString(LiteralText);
         }
@@ -524,9 +524,9 @@ namespace Mono.Xml.XQuery
 
         public override void Serialize(XPathSequence iter)
         {
-            iter.Context.Writer.WriteComment(
-                Atomize(new ExprSequenceIterator(iter, Content)).Value
-            );
+            iter.Context
+                .Writer
+                .WriteComment(Atomize(new ExprSequenceIterator(iter, Content)).Value);
         }
 
         public override XPathSequence Evaluate(XPathSequence iter)
@@ -600,10 +600,12 @@ namespace Mono.Xml.XQuery
 
         public override void Serialize(XPathSequence iter)
         {
-            iter.Context.Writer.WriteProcessingInstruction(
-                GetName(iter),
-                Atomize(new ExprSequenceIterator(iter, Content)).Value
-            );
+            iter.Context
+                .Writer
+                .WriteProcessingInstruction(
+                    GetName(iter),
+                    Atomize(new ExprSequenceIterator(iter, Content)).Value
+                );
         }
 
         public override XPathSequence Evaluate(XPathSequence iter)

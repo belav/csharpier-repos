@@ -284,10 +284,9 @@ namespace Microsoft.CodeAnalysis.Emit
 
             // Check if method has changed previously. If so, we already have a map.
             if (
-                Baseline.AddedOrChangedMethods.TryGetValue(
-                    methodIndex,
-                    out var addedOrChangedMethod
-                )
+                Baseline
+                    .AddedOrChangedMethods
+                    .TryGetValue(methodIndex, out var addedOrChangedMethod)
             )
             {
                 methodId = addedOrChangedMethod.MethodId;
@@ -732,20 +731,18 @@ namespace Microsoft.CodeAnalysis.Emit
             var methodRowId = MetadataTokens.GetRowNumber(methodHandle);
 
             if (
-                Baseline.AddedOrChangedMethods.TryGetValue(
-                    methodRowId,
-                    out var addedOrChangedMethod
-                )
+                Baseline
+                    .AddedOrChangedMethods
+                    .TryGetValue(methodRowId, out var addedOrChangedMethod)
             )
             {
                 // If a method has been added or updated then all synthesized members it produced are stored on the baseline.
                 // This includes all lambdas regardless of whether they were mapped to previous generation or not.
                 if (
                     !addedOrChangedMethod.LambdaDebugInfo.IsDefaultOrEmpty
-                    && Baseline.SynthesizedMembers.TryGetValue(
-                        oldMethod.ContainingType,
-                        out var synthesizedSiblingSymbols
-                    )
+                    && Baseline
+                        .SynthesizedMembers
+                        .TryGetValue(oldMethod.ContainingType, out var synthesizedSiblingSymbols)
                 )
                 {
                     return getDeletedSynthesizedClosureMethods(

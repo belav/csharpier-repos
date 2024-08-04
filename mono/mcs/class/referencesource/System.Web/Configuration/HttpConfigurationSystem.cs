@@ -322,8 +322,11 @@ namespace System.Web.Configuration
             {
                 if (s_MsCorLibDirectory == null)
                 {
-                    s_MsCorLibDirectory =
-                        System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory();
+                    s_MsCorLibDirectory = System
+                        .Runtime
+                        .InteropServices
+                        .RuntimeEnvironment
+                        .GetRuntimeDirectory();
                 }
 
                 return s_MsCorLibDirectory;

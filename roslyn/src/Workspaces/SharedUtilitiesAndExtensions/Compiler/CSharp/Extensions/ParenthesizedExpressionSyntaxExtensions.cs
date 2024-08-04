@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     if (
                         semanticModel
                             .GetTypeInfo(varDecl.Type, cancellationToken)
-                            .Type.IsSpanOrReadOnlySpan()
+                            .Type
+                            .IsSpanOrReadOnlySpan()
                     )
                         return !varDecl.Type.IsVar;
                 }
@@ -539,11 +540,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         )
                     )
                     {
-                        return !CSharpSemanticFacts.Instance.IsSafeToChangeAssociativity(
-                            nodeBinary,
-                            parentBinaryExpression,
-                            semanticModel
-                        );
+                        return !CSharpSemanticFacts
+                            .Instance
+                            .IsSafeToChangeAssociativity(
+                                nodeBinary,
+                                parentBinaryExpression,
+                                semanticModel
+                            );
                     }
 
                     // Null-coalescing is right associative; removing parens from the LHS changes the association.

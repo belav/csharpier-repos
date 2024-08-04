@@ -779,7 +779,8 @@ namespace System.Text.Unicode.Tests
                 ToStringState.ToStringMode = ToStringMode.ISpanFormattableTryFormat;
 
                 ReadOnlySpan<byte> src = Encoding
-                    .UTF8.GetBytes(_value.ToString(format.ToString(), provider))
+                    .UTF8
+                    .GetBytes(_value.ToString(format.ToString(), provider))
                     .AsSpan();
                 if (src.TryCopyTo(utf8Destination))
                 {

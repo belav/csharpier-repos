@@ -27,8 +27,9 @@ internal static class CSharpStructureHelpers
         // Check *this* token to see if it has any trailing comments and use the last one; otherwise, we use the end
         // of this token.
 
-        var lastTrailingCommentOrWhitespaceTrivia =
-            firstToken.TrailingTrivia.GetLastCommentOrWhitespace();
+        var lastTrailingCommentOrWhitespaceTrivia = firstToken
+            .TrailingTrivia
+            .GetLastCommentOrWhitespace();
         return lastTrailingCommentOrWhitespaceTrivia?.Span.End ?? firstToken.Span.End;
     }
 
@@ -268,11 +269,13 @@ internal static class CSharpStructureHelpers
                 return false;
             }
 
-            var firstComment = startToken.LeadingTrivia.FirstOrNull(t =>
-                t.Kind()
-                    is SyntaxKind.SingleLineCommentTrivia
-                        or SyntaxKind.SingleLineDocumentationCommentTrivia
-            );
+            var firstComment = startToken
+                .LeadingTrivia
+                .FirstOrNull(t =>
+                    t.Kind()
+                        is SyntaxKind.SingleLineCommentTrivia
+                            or SyntaxKind.SingleLineDocumentationCommentTrivia
+                );
 
             var startPosition = firstComment.HasValue
                 ? firstComment.Value.FullSpan.Start

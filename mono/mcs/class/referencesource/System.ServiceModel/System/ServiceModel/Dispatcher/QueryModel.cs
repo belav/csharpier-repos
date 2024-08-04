@@ -722,11 +722,13 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.QueryCantGetStringForMovedIterator)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.QueryCantGetStringForMovedIterator)
+                        )
+                    );
             }
         }
 
@@ -804,9 +806,11 @@ namespace System.ServiceModel.Dispatcher
             switch (op)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                        new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperCritical(
+                            new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                        );
 
                 case RelationOperator.Eq:
                     return (x == y);
@@ -966,9 +970,9 @@ namespace System.ServiceModel.Dispatcher
                     return QueryValueModel.Compare((double)x, (string)y, op);
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new QueryCompileException(QueryCompileError.InvalidComparison)
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new QueryCompileException(QueryCompileError.InvalidComparison));
         }
 
         internal static bool Equals(bool x, string y)

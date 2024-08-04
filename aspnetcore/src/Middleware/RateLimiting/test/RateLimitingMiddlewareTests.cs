@@ -220,23 +220,25 @@ public class RateLimitingMiddlewareTests
         var onRejectedInvoked = false;
         var options = CreateOptionsAccessor();
         var name = "myEndpoint";
-        options.Value.AddPolicy<string>(
-            name,
-            (
-                context =>
-                {
-                    return RateLimitPartition.Get<string>(
-                        "myLimiter",
-                        (
-                            key =>
-                            {
-                                return new TestRateLimiter(false);
-                            }
-                        )
-                    );
-                }
-            )
-        );
+        options
+            .Value
+            .AddPolicy<string>(
+                name,
+                (
+                    context =>
+                    {
+                        return RateLimitPartition.Get<string>(
+                            "myLimiter",
+                            (
+                                key =>
+                                {
+                                    return new TestRateLimiter(false);
+                                }
+                            )
+                        );
+                    }
+                )
+            );
         options.Value.OnRejected = (context, token) =>
         {
             onRejectedInvoked = true;
@@ -265,17 +267,19 @@ public class RateLimitingMiddlewareTests
         var onRejectedInvoked = false;
         var options = CreateOptionsAccessor();
         var name = "myEndpoint";
-        options.Value.AddFixedWindowLimiter(
-            name,
-            options =>
-            {
-                options.PermitLimit = 1;
-                options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-                options.QueueLimit = 0;
-                options.Window = TimeSpan.FromSeconds(10);
-                options.AutoReplenishment = false;
-            }
-        );
+        options
+            .Value
+            .AddFixedWindowLimiter(
+                name,
+                options =>
+                {
+                    options.PermitLimit = 1;
+                    options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+                    options.QueueLimit = 0;
+                    options.Window = TimeSpan.FromSeconds(10);
+                    options.AutoReplenishment = false;
+                }
+            );
         options.Value.OnRejected = (context, token) =>
         {
             onRejectedInvoked = true;
@@ -480,14 +484,12 @@ public class RateLimitingMiddlewareTests
         var endpointName2 = "myEndpoint2";
         var duplicateKey = "myKey";
         // Two policies with the same partition key should not collide, because DefaultKeyType has reference equality
-        options.Value.AddPolicy<string>(
-            endpointName1,
-            new TestRateLimiterPolicy(duplicateKey, 404, false)
-        );
-        options.Value.AddPolicy<string>(
-            endpointName2,
-            new TestRateLimiterPolicy(duplicateKey, 400, false)
-        );
+        options
+            .Value
+            .AddPolicy<string>(endpointName1, new TestRateLimiterPolicy(duplicateKey, 404, false));
+        options
+            .Value
+            .AddPolicy<string>(endpointName2, new TestRateLimiterPolicy(duplicateKey, 400, false));
         // This OnRejected should be ignored in favor of the ones on the policy
         options.Value.OnRejected = (context, token) =>
         {
@@ -527,32 +529,36 @@ public class RateLimitingMiddlewareTests
         var endpointName2 = "myEndpoint2";
         var duplicateKey = "myKey";
         // Two policies with the same partition key should not collide, because DefaultKeyType has reference equality
-        options.Value.AddPolicy<string>(
-            endpointName1,
-            key =>
-            {
-                return new RateLimitPartition<string>(
-                    duplicateKey,
-                    partitionKey =>
-                    {
-                        return new TestRateLimiter(false);
-                    }
-                );
-            }
-        );
-        options.Value.AddPolicy<string>(
-            endpointName2,
-            key =>
-            {
-                return new RateLimitPartition<string>(
-                    duplicateKey,
-                    partitionKey =>
-                    {
-                        return new TestRateLimiter(true);
-                    }
-                );
-            }
-        );
+        options
+            .Value
+            .AddPolicy<string>(
+                endpointName1,
+                key =>
+                {
+                    return new RateLimitPartition<string>(
+                        duplicateKey,
+                        partitionKey =>
+                        {
+                            return new TestRateLimiter(false);
+                        }
+                    );
+                }
+            );
+        options
+            .Value
+            .AddPolicy<string>(
+                endpointName2,
+                key =>
+                {
+                    return new RateLimitPartition<string>(
+                        duplicateKey,
+                        partitionKey =>
+                        {
+                            return new TestRateLimiter(true);
+                        }
+                    );
+                }
+            );
         options.Value.OnRejected = (context, token) =>
         {
             globalOnRejectedInvoked = true;

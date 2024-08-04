@@ -351,10 +351,10 @@ namespace System.Workflow.Runtime.Hosting
                 this.channelFactory = channelFactory;
                 this.contractType = contractType;
 
-                ISecurityCapabilities securityCapabilities =
-                    channelFactory.Endpoint.Binding.GetProperty<ISecurityCapabilities>(
-                        new BindingParameterCollection()
-                    );
+                ISecurityCapabilities securityCapabilities = channelFactory
+                    .Endpoint
+                    .Binding
+                    .GetProperty<ISecurityCapabilities>(new BindingParameterCollection());
                 if (securityCapabilities != null)
                 {
                     this.supportsClientAuthentication =

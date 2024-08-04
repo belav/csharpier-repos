@@ -98,11 +98,9 @@ namespace System.Runtime.Remoting.Channels
         )
         {
             IMessage replyMessage = (IMessage)
-                _binaryCore.Deserializer.DeserializeMethodResponse(
-                    stream,
-                    null,
-                    (IMethodCallMessage)state
-                );
+                _binaryCore
+                    .Deserializer
+                    .DeserializeMethodResponse(stream, null, (IMethodCallMessage)state);
             sinkStack.DispatchReplyMessage(replyMessage);
         }
 
@@ -180,11 +178,9 @@ namespace System.Runtime.Remoting.Channels
                 // Deserialize response_stream
 
                 return (IMessage)
-                    _binaryCore.Deserializer.DeserializeMethodResponse(
-                        response_stream,
-                        null,
-                        (IMethodCallMessage)msg
-                    );
+                    _binaryCore
+                        .Deserializer
+                        .DeserializeMethodResponse(response_stream, null, (IMethodCallMessage)msg);
             }
             catch (Exception e)
             {

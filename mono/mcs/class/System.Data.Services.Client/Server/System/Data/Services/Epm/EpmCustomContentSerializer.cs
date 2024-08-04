@@ -73,23 +73,27 @@ namespace System.Data.Services.Common
             Debug.Assert(targetSegment.HasContent, "Must have content for attributes");
 
             EpmCustomContentWriterNodeData currentContent = this.visitorContent[targetSegment];
-            currentContent.XmlContentWriter.WriteAttributeString(
-                targetSegment.SegmentNamespacePrefix,
-                targetSegment.SegmentName.Substring(1),
-                targetSegment.SegmentNamespaceUri,
-                currentContent.Data
-            );
+            currentContent
+                .XmlContentWriter
+                .WriteAttributeString(
+                    targetSegment.SegmentNamespacePrefix,
+                    targetSegment.SegmentName.Substring(1),
+                    targetSegment.SegmentNamespaceUri,
+                    currentContent.Data
+                );
         }
 
         private void WriteElement(EpmTargetPathSegment targetSegment)
         {
             EpmCustomContentWriterNodeData currentContent = this.visitorContent[targetSegment];
 
-            currentContent.XmlContentWriter.WriteStartElement(
-                targetSegment.SegmentNamespacePrefix,
-                targetSegment.SegmentName,
-                targetSegment.SegmentNamespaceUri
-            );
+            currentContent
+                .XmlContentWriter
+                .WriteStartElement(
+                    targetSegment.SegmentNamespacePrefix,
+                    targetSegment.SegmentName,
+                    targetSegment.SegmentNamespaceUri
+                );
 
             base.Serialize(targetSegment, EpmSerializationKind.Attributes);
 

@@ -50,9 +50,11 @@ namespace System.ServiceModel.Administration
             catch (SecurityException)
             {
                 // WMI is not supported in PT, rethrow a meaningful exception (will fail the service activation)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.PartialTrustWMINotEnabled))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.PartialTrustWMINotEnabled))
+                    );
             }
         }
 
@@ -71,13 +73,15 @@ namespace System.ServiceModel.Administration
             );
             if ((int)WbemNative.WbemStatus.WBEM_S_NO_ERROR != hr)
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiRegistrationFailed,
-                    TraceUtility.CreateSourceString(this),
-                    hr.ToString("x", CultureInfo.InvariantCulture)
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiRegistrationFailed,
+                        TraceUtility.CreateSourceString(this),
+                        hr.ToString("x", CultureInfo.InvariantCulture)
+                    );
 
                 this.wbemRegistrar = null;
             }
@@ -90,13 +94,16 @@ namespace System.ServiceModel.Administration
                 int hr = this.wbemRegistrar.UnRegister();
                 if ((int)WbemNative.WbemStatus.WBEM_S_NO_ERROR != hr)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(
-                        TraceEventType.Error,
-                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiUnregistrationFailed,
-                        TraceUtility.CreateSourceString(this),
-                        hr.ToString("x", CultureInfo.InvariantCulture)
-                    );
+                    DiagnosticUtility
+                        .EventLog
+                        .LogEvent(
+                            TraceEventType.Error,
+                            (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                            (uint)
+                                System.Runtime.Diagnostics.EventLogEventId.WmiUnregistrationFailed,
+                            TraceUtility.CreateSourceString(this),
+                            hr.ToString("x", CultureInfo.InvariantCulture)
+                        );
                 }
                 this.wbemRegistrar = null;
             }
@@ -273,13 +280,15 @@ namespace System.ServiceModel.Administration
                 }
                 catch (WbemException e)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(
-                        TraceEventType.Error,
-                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiGetObjectFailed,
-                        TraceUtility.CreateSourceString(this),
-                        e.ToString()
-                    );
+                    DiagnosticUtility
+                        .EventLog
+                        .LogEvent(
+                            TraceEventType.Error,
+                            (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                            (uint)System.Runtime.Diagnostics.EventLogEventId.WmiGetObjectFailed,
+                            TraceUtility.CreateSourceString(this),
+                            e.ToString()
+                        );
                     wbemSink.SetStatus(
                         (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
                         e.ErrorCode,
@@ -291,13 +300,15 @@ namespace System.ServiceModel.Administration
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(
-                        TraceEventType.Error,
-                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiGetObjectFailed,
-                        TraceUtility.CreateSourceString(this),
-                        e.ToString()
-                    );
+                    DiagnosticUtility
+                        .EventLog
+                        .LogEvent(
+                            TraceEventType.Error,
+                            (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                            (uint)System.Runtime.Diagnostics.EventLogEventId.WmiGetObjectFailed,
+                            TraceUtility.CreateSourceString(this),
+                            e.ToString()
+                        );
                     wbemSink.SetStatus(
                         (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
                         (int)WbemNative.WbemStatus.WBEM_E_FAILED,
@@ -448,13 +459,15 @@ namespace System.ServiceModel.Administration
                 }
                 catch (WbemException e)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(
-                        TraceEventType.Error,
-                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiPutInstanceFailed,
-                        TraceUtility.CreateSourceString(this),
-                        e.ToString()
-                    );
+                    DiagnosticUtility
+                        .EventLog
+                        .LogEvent(
+                            TraceEventType.Error,
+                            (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                            (uint)System.Runtime.Diagnostics.EventLogEventId.WmiPutInstanceFailed,
+                            TraceUtility.CreateSourceString(this),
+                            e.ToString()
+                        );
                     wbemSink.SetStatus(
                         (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
                         e.ErrorCode,
@@ -466,13 +479,15 @@ namespace System.ServiceModel.Administration
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(
-                        TraceEventType.Error,
-                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiPutInstanceFailed,
-                        TraceUtility.CreateSourceString(this),
-                        e.ToString()
-                    );
+                    DiagnosticUtility
+                        .EventLog
+                        .LogEvent(
+                            TraceEventType.Error,
+                            (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                            (uint)System.Runtime.Diagnostics.EventLogEventId.WmiPutInstanceFailed,
+                            TraceUtility.CreateSourceString(this),
+                            e.ToString()
+                        );
                     wbemSink.SetStatus(
                         (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
                         (int)WbemNative.WbemStatus.WBEM_E_FAILED,
@@ -536,12 +551,14 @@ namespace System.ServiceModel.Administration
             }
             catch (WbemException e)
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiDeleteInstanceFailed,
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiDeleteInstanceFailed,
+                        e.ToString()
+                    );
                 wbemSink.SetStatus(
                     (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
                     e.ErrorCode,
@@ -553,12 +570,14 @@ namespace System.ServiceModel.Administration
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiDeleteInstanceFailed,
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiDeleteInstanceFailed,
+                        e.ToString()
+                    );
                 wbemSink.SetStatus(
                     (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
                     (int)WbemNative.WbemStatus.WBEM_E_FAILED,
@@ -623,25 +642,29 @@ namespace System.ServiceModel.Administration
                     null,
                     null
                 );
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiCreateInstanceFailed,
-                    className,
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiCreateInstanceFailed,
+                        className,
+                        e.ToString()
+                    );
                 return e.ErrorCode;
             }
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiCreateInstanceFailed,
-                    className,
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiCreateInstanceFailed,
+                        className,
+                        e.ToString()
+                    );
                 wbemSink.SetStatus(
                     (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
                     (int)WbemNative.WbemStatus.WBEM_E_FAILED,
@@ -704,12 +727,14 @@ namespace System.ServiceModel.Administration
             }
             catch (WbemException e)
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecQueryFailed,
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecQueryFailed,
+                        e.ToString()
+                    );
                 wbemSink.SetStatus(
                     (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
                     e.ErrorCode,
@@ -721,12 +746,14 @@ namespace System.ServiceModel.Administration
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecQueryFailed,
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecQueryFailed,
+                        e.ToString()
+                    );
                 wbemSink.SetStatus(
                     (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
                     (int)WbemNative.WbemStatus.WBEM_E_FAILED,
@@ -831,12 +858,14 @@ namespace System.ServiceModel.Administration
             }
             catch (WbemException e)
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecMethodFailed,
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecMethodFailed,
+                        e.ToString()
+                    );
                 result = e.ErrorCode;
                 wbemSink.SetStatus(
                     (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
@@ -848,12 +877,14 @@ namespace System.ServiceModel.Administration
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecMethodFailed,
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WmiExecMethodFailed,
+                        e.ToString()
+                    );
                 result = (int)WbemNative.WbemStatus.WBEM_E_FAILED;
                 wbemSink.SetStatus(
                     (int)WbemNative.tag_WBEM_STATUS_TYPE.WBEM_STATUS_COMPLETE,
@@ -886,10 +917,12 @@ namespace System.ServiceModel.Administration
             void IWmiInstances.AddInstance(IWmiInstance inst)
             {
                 WbemException.ThrowIfFail(
-                    this.parms.WbemSink.Indicate(
-                        1,
-                        new WbemNative.IWbemClassObject[] { ((InstanceContext)inst).WbemObject }
-                    )
+                    this.parms
+                        .WbemSink
+                        .Indicate(
+                            1,
+                            new WbemNative.IWbemClassObject[] { ((InstanceContext)inst).WbemObject }
+                        )
                 );
             }
         }
@@ -946,13 +979,15 @@ namespace System.ServiceModel.Administration
 
                 WbemNative.IWbemClassObject wbemObject = null;
                 WbemException.ThrowIfFail(
-                    parms.WbemServices.GetObject(
-                        parms.ClassName,
-                        0,
-                        parms.WbemContext,
-                        ref wbemObject,
-                        IntPtr.Zero
-                    )
+                    parms
+                        .WbemServices
+                        .GetObject(
+                            parms.ClassName,
+                            0,
+                            parms.WbemContext,
+                            ref wbemObject,
+                            IntPtr.Zero
+                        )
                 );
 
                 WbemNative.IWbemClassObject wbemMethod = null;
@@ -979,10 +1014,9 @@ namespace System.ServiceModel.Administration
                     object val = value;
                     WbemException.ThrowIfFail(this.wbemOutParms.Put("ReturnValue", 0, ref val, 0));
                     WbemException.ThrowIfFail(
-                        this.parms.WbemSink.Indicate(
-                            1,
-                            new WbemNative.IWbemClassObject[] { this.wbemOutParms }
-                        )
+                        this.parms
+                            .WbemSink
+                            .Indicate(1, new WbemNative.IWbemClassObject[] { this.wbemOutParms })
                     );
                 }
             }
@@ -1149,13 +1183,9 @@ namespace System.ServiceModel.Administration
                 this.className = className;
                 WbemNative.IWbemClassObject tempObj = null;
                 WbemException.ThrowIfFail(
-                    parms.WbemServices.GetObject(
-                        className,
-                        0,
-                        parms.WbemContext,
-                        ref tempObj,
-                        IntPtr.Zero
-                    )
+                    parms
+                        .WbemServices
+                        .GetObject(className, 0, parms.WbemContext, ref tempObj, IntPtr.Zero)
                 );
 
                 if (null != tempObj)
@@ -1257,14 +1287,16 @@ namespace System.ServiceModel.Administration
                         {
                             eventId = System.Runtime.Diagnostics.EventLogEventId.WmiPropertyMissing;
                         }
-                        DiagnosticUtility.EventLog.LogEvent(
-                            TraceEventType.Error,
-                            (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                            (uint)eventId,
-                            this.className,
-                            name,
-                            val.GetType().ToString()
-                        );
+                        DiagnosticUtility
+                            .EventLog
+                            .LogEvent(
+                                TraceEventType.Error,
+                                (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                                (uint)eventId,
+                                this.className,
+                                name,
+                                val.GetType().ToString()
+                            );
                     }
                     else
                     {
@@ -1287,10 +1319,9 @@ namespace System.ServiceModel.Administration
             internal void Indicate()
             {
                 WbemException.ThrowIfFail(
-                    this.parms.WbemSink.Indicate(
-                        1,
-                        new WbemNative.IWbemClassObject[] { this.wbemObject }
-                    )
+                    this.parms
+                        .WbemSink
+                        .Indicate(1, new WbemNative.IWbemClassObject[] { this.wbemObject })
                 );
             }
         }
@@ -1354,12 +1385,14 @@ namespace System.ServiceModel.Administration
                     Exception exception = job.Wait();
                     if (null != exception)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ApplicationException(
-                                SR.GetString(SR.AdminMTAWorkerThreadException),
-                                exception
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ApplicationException(
+                                    SR.GetString(SR.AdminMTAWorkerThreadException),
+                                    exception
+                                )
+                            );
                     }
                 }
             }

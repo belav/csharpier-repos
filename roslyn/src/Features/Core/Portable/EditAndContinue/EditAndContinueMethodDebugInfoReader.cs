@@ -223,11 +223,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     var document = _pdbReader.GetDocument(documentHandle);
 
                     if (
-                        _pdbReader.StringComparer.Equals(
-                            document.Name,
-                            documentPath,
-                            IgnoreCaseWhenComparingDocumentNames
-                        )
+                        _pdbReader
+                            .StringComparer
+                            .Equals(
+                                document.Name,
+                                documentPath,
+                                IgnoreCaseWhenComparingDocumentNames
+                            )
                     )
                     {
                         checksum = _pdbReader.GetBlobContent(document.Hash);

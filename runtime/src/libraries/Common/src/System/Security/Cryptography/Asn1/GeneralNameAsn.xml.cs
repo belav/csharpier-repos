@@ -245,12 +245,17 @@ namespace System.Security.Cryptography.Asn1
             if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
             {
                 System.Security.Cryptography.Asn1.OtherNameAsn tmpOtherName;
-                System.Security.Cryptography.Asn1.OtherNameAsn.Decode(
-                    ref reader,
-                    new Asn1Tag(TagClass.ContextSpecific, 0),
-                    rebind,
-                    out tmpOtherName
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Asn1
+                    .OtherNameAsn
+                    .Decode(
+                        ref reader,
+                        new Asn1Tag(TagClass.ContextSpecific, 0),
+                        rebind,
+                        out tmpOtherName
+                    );
                 decoded.OtherName = tmpOtherName;
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
@@ -286,12 +291,17 @@ namespace System.Security.Cryptography.Asn1
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 5)))
             {
                 System.Security.Cryptography.Asn1.EdiPartyNameAsn tmpEdiPartyName;
-                System.Security.Cryptography.Asn1.EdiPartyNameAsn.Decode(
-                    ref reader,
-                    new Asn1Tag(TagClass.ContextSpecific, 5),
-                    rebind,
-                    out tmpEdiPartyName
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Asn1
+                    .EdiPartyNameAsn
+                    .Decode(
+                        ref reader,
+                        new Asn1Tag(TagClass.ContextSpecific, 5),
+                        rebind,
+                        out tmpEdiPartyName
+                    );
                 decoded.EdiPartyName = tmpEdiPartyName;
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 6)))

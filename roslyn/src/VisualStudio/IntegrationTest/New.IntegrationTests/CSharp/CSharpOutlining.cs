@@ -46,9 +46,9 @@ namespace ConsoleApplication1[|
 }|]";
             MarkupTestFile.GetSpans(input, out var text, out var spans);
             await TestServices.Editor.SetTextAsync(text, HangMitigatingCancellationToken);
-            var actualSpansWithState = await TestServices.Editor.GetOutliningSpansAsync(
-                HangMitigatingCancellationToken
-            );
+            var actualSpansWithState = await TestServices
+                .Editor
+                .GetOutliningSpansAsync(HangMitigatingCancellationToken);
             var actualSpans = actualSpansWithState.Select(span => span.Span);
             Assert.Equal(spans.OrderBy(s => s.Start), actualSpans);
         }
@@ -102,16 +102,18 @@ namespace ClassLibrary1[|
             CancellationToken cancellationToken
         )
         {
-            await TestServices.Shell.ExecuteCommandAsync(
-                VSConstants.VSStd97CmdID.SolutionCfg,
-                configuration,
-                cancellationToken
-            );
+            await TestServices
+                .Shell
+                .ExecuteCommandAsync(
+                    VSConstants.VSStd97CmdID.SolutionCfg,
+                    configuration,
+                    cancellationToken
+                );
 
             var expectedSpans = spans[""].Concat(spans[configuration]).OrderBy(s => s.Start);
-            var actualSpansWithState = await TestServices.Editor.GetOutliningSpansAsync(
-                cancellationToken
-            );
+            var actualSpansWithState = await TestServices
+                .Editor
+                .GetOutliningSpansAsync(cancellationToken);
             var actualSpans = actualSpansWithState.Select(span => span.Span);
             Assert.Equal(expectedSpans, actualSpans);
         }

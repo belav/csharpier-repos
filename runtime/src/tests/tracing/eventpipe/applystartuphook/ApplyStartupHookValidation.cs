@@ -44,9 +44,9 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                         Logger.logger.Log($"IpcAdvertise: {advertise}");
 
                         string startupHookPath = Hook.Basic.AssemblyPath;
-                        Logger.logger.Log(
-                            $"Send ApplyStartupHook Diagnostic IPC: {startupHookPath}"
-                        );
+                        Logger
+                            .logger
+                            .Log($"Send ApplyStartupHook Diagnostic IPC: {startupHookPath}");
                         IpcMessage message = CreateApplyStartupHookMessage(startupHookPath);
                         Logger.logger.Log($"Sent: {message.ToString()}");
                         IpcMessage response = IpcClient.SendMessage(stream, message);
@@ -116,9 +116,11 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                             config,
                             out ulong sessionId
                         );
-                        Logger.logger.Log(
-                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId:X}"
-                        );
+                        Logger
+                            .logger
+                            .Log(
+                                $"Started EventPipeSession over standard connection with session id: 0x{sessionId:X}"
+                            );
 
                         using EventPipeEventSource source = new(eventStream);
                         TaskCompletionSource completionSource =
@@ -143,9 +145,11 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                         Logger.logger.Log($"received: {response.ToString()}");
                         fSuccess &= CheckResponse(response);
 
-                        Logger.logger.Log(
-                            "Start waiting for any event that indicates managed code is running."
-                        );
+                        Logger
+                            .logger
+                            .Log(
+                                "Start waiting for any event that indicates managed code is running."
+                            );
                         await completionSource.Task.ConfigureAwait(false);
 
                         Logger.logger.Log("Stopping trace.");
@@ -161,9 +165,9 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                         Logger.logger.Log($"IpcAdvertise: {advertise}");
 
                         string startupHookPath = Hook.Basic.AssemblyPath;
-                        Logger.logger.Log(
-                            $"Send ApplyStartupHook Diagnostic IPC: {startupHookPath}"
-                        );
+                        Logger
+                            .logger
+                            .Log($"Send ApplyStartupHook Diagnostic IPC: {startupHookPath}");
                         IpcMessage message = CreateApplyStartupHookMessage(startupHookPath);
                         Logger.logger.Log($"Sent: {message.ToString()}");
                         IpcMessage response = IpcClient.SendMessage(stream, message);

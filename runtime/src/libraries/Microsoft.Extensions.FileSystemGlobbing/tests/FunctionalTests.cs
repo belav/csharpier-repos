@@ -978,9 +978,11 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 new DirectoryInfoWrapper(new DirectoryInfo(directoryPath))
             );
 
-            var actual = results.Files.Select(match =>
-                Path.GetFullPath(Path.Combine(_context.RootPath, directoryPath, match.Path))
-            );
+            var actual = results
+                .Files
+                .Select(match =>
+                    Path.GetFullPath(Path.Combine(_context.RootPath, directoryPath, match.Path))
+                );
             var expected = expectFiles.Select(relativePath =>
                 Path.GetFullPath(Path.Combine(_context.RootPath, relativePath))
             );

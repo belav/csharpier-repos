@@ -135,9 +135,9 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
                 var reference = _solutionServices
                     .GetRequiredService<IMetadataService>()
                     .GetReference(fullFilePath, properties);
-                var fileWatchingToken = _fileReferenceChangeContext.Value.EnqueueWatchingFile(
-                    fullFilePath
-                );
+                var fileWatchingToken = _fileReferenceChangeContext
+                    .Value
+                    .EnqueueWatchingFile(fullFilePath);
 
                 _metadataReferenceFileWatchingTokens.Add(reference, fileWatchingToken);
 

@@ -565,19 +565,23 @@ namespace System.Reflection.Emit
                     Debug.Assert(masmi != null);
 
                     methDef = masmi.GetGenericMethodDefinition()!;
-                    methDef = methDef.Module.ResolveMethod(
-                        methodBase.MetadataToken,
-                        methDef.DeclaringType?.GetGenericArguments(),
-                        methDef.GetGenericArguments()
-                    )!;
+                    methDef = methDef
+                        .Module
+                        .ResolveMethod(
+                            methodBase.MetadataToken,
+                            methDef.DeclaringType?.GetGenericArguments(),
+                            methDef.GetGenericArguments()
+                        )!;
                 }
                 else
                 {
-                    methDef = methodBase.Module.ResolveMethod(
-                        methodBase.MetadataToken,
-                        methodBase.DeclaringType?.GetGenericArguments(),
-                        null
-                    )!;
+                    methDef = methodBase
+                        .Module
+                        .ResolveMethod(
+                            methodBase.MetadataToken,
+                            methodBase.DeclaringType?.GetGenericArguments(),
+                            null
+                        )!;
                 }
             }
 

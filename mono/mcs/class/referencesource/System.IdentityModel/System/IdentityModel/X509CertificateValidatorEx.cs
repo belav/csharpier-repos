@@ -72,9 +72,9 @@ namespace System.IdentityModel
 
                 case X509CertificateValidationMode.Custom:
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ID4256))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4256)));
             }
         }
 

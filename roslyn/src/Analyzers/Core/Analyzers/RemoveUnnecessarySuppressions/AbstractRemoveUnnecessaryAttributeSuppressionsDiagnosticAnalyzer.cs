@@ -98,8 +98,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
         {
             context.RegisterCompilationStartAction(context =>
             {
-                var suppressMessageAttributeType =
-                    context.Compilation.SuppressMessageAttributeType();
+                var suppressMessageAttributeType = context
+                    .Compilation
+                    .SuppressMessageAttributeType();
                 if (suppressMessageAttributeType == null)
                 {
                     return;

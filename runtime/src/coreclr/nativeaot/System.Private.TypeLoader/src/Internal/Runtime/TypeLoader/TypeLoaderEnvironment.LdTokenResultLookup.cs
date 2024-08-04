@@ -502,7 +502,9 @@ namespace Internal.Runtime.TypeLoader
                 ModuleInfo moduleInfo = methodData->MethodSignature.GetModuleInfo();
                 var metadataReader = ((NativeFormatModuleInfo)moduleInfo).MetadataReader;
                 var methodHandle = methodData
-                    ->MethodSignature.Token.AsHandle()
+                    ->MethodSignature
+                    .Token
+                    .AsHandle()
                     .ToMethodHandle(metadataReader);
                 var method = methodHandle.GetMethod(metadataReader);
                 var name = metadataReader.GetConstantStringValue(method.Name).Value;

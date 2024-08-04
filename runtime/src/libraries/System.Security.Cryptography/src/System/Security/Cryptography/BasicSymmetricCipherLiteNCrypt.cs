@@ -110,26 +110,30 @@ namespace System.Security.Cryptography
                     unsafe
                     {
                         ErrorCode errorCode = _encrypting
-                            ? Interop.NCrypt.NCryptEncrypt(
-                                keyHandle,
-                                input,
-                                input.Length,
-                                null,
-                                output,
-                                output.Length,
-                                out bytesWritten,
-                                AsymmetricPaddingMode.None
-                            )
-                            : Interop.NCrypt.NCryptDecrypt(
-                                keyHandle,
-                                input,
-                                input.Length,
-                                null,
-                                output,
-                                output.Length,
-                                out bytesWritten,
-                                AsymmetricPaddingMode.None
-                            );
+                            ? Interop
+                                .NCrypt
+                                .NCryptEncrypt(
+                                    keyHandle,
+                                    input,
+                                    input.Length,
+                                    null,
+                                    output,
+                                    output.Length,
+                                    out bytesWritten,
+                                    AsymmetricPaddingMode.None
+                                )
+                            : Interop
+                                .NCrypt
+                                .NCryptDecrypt(
+                                    keyHandle,
+                                    input,
+                                    input.Length,
+                                    null,
+                                    output,
+                                    output.Length,
+                                    out bytesWritten,
+                                    AsymmetricPaddingMode.None
+                                );
 
                         if (errorCode != ErrorCode.ERROR_SUCCESS)
                         {
@@ -151,13 +155,15 @@ namespace System.Security.Cryptography
                     // The Handle property duplicates the handle.
                     using (SafeNCryptKeyHandle keyHandle = _key.Handle)
                     {
-                        ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
-                            keyHandle,
-                            KeyPropertyName.InitializationVector,
-                            pIv,
-                            iv.Length,
-                            CngPropertyOptions.None
-                        );
+                        ErrorCode errorCode = Interop
+                            .NCrypt
+                            .NCryptSetProperty(
+                                keyHandle,
+                                KeyPropertyName.InitializationVector,
+                                pIv,
+                                iv.Length,
+                                CngPropertyOptions.None
+                            );
 
                         if (errorCode != ErrorCode.ERROR_SUCCESS)
                         {

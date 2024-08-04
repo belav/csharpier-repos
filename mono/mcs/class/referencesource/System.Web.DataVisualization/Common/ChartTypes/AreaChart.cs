@@ -577,14 +577,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Hot Regions mode used for image maps, tool tips and
                 // hit test function
                 //************************************************************
-                common.HotRegionsList.AddHotRegion(
-                    mapAreaPath,
-                    false,
-                    coord,
-                    point,
-                    series.Name,
-                    pointIndex
-                );
+                common
+                    .HotRegionsList
+                    .AddHotRegion(mapAreaPath, false, coord, point, series.Name, pointIndex);
 
                 //**************************************************************
                 //** Add area for the top line (with thickness)
@@ -635,14 +630,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     // Hot Regions mode used for image maps, tool tips and
                     // hit test function
                     //************************************************************
-                    common.HotRegionsList.AddHotRegion(
-                        mapAreaPath,
-                        false,
-                        coord,
-                        point,
-                        series.Name,
-                        pointIndex
-                    );
+                    common
+                        .HotRegionsList
+                        .AddHotRegion(mapAreaPath, false, coord, point, series.Name, pointIndex);
                 }
                 mapAreaPath.Dispose();
             }

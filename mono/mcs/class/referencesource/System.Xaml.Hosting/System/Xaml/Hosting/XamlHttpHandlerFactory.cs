@@ -104,9 +104,11 @@ namespace System.Xaml.Hosting
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(
-                            new HttpException((int)HttpStatusCode.NotFound, SR.ResourceNotFound)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new HttpException((int)HttpStatusCode.NotFound, SR.ResourceNotFound)
+                            );
                     }
                 }
             }
@@ -374,9 +376,9 @@ namespace System.Xaml.Hosting
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        (ConfigurationErrorsException)this.cachedResult
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError((ConfigurationErrorsException)this.cachedResult);
                 }
             }
         }

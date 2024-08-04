@@ -93,9 +93,9 @@ class Program
         {
             using (var workspace = TestWorkspace.CreateCSharp(code, parseOptions))
             {
-                var document = workspace.CurrentSolution.GetDocument(
-                    workspace.Documents.First().Id
-                );
+                var document = workspace
+                    .CurrentSolution
+                    .GetDocument(workspace.Documents.First().Id);
                 return GetSemanticClassificationsAsync(document, span);
             }
         }
@@ -109,8 +109,11 @@ class Program
 
             var service = document.GetLanguageService<ISyntaxClassificationService>();
             var classifiers = service.GetDefaultSyntaxClassifiers();
-            var extensionManager =
-                document.Project.Solution.Services.GetService<IExtensionManager>();
+            var extensionManager = document
+                .Project
+                .Solution
+                .Services
+                .GetService<IExtensionManager>();
 
             using var _ = Classifier.GetPooledList(out var results);
 

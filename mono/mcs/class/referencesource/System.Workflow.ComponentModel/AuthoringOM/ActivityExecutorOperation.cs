@@ -110,13 +110,18 @@ namespace System.Workflow.ComponentModel
                                 }
                                 catch (Exception e)
                                 {
-                                    System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                                        TraceEventType.Error,
-                                        1,
-                                        "Execute of Activity {0} threw {1}",
-                                        activity.QualifiedName,
-                                        e.ToString()
-                                    );
+                                    System
+                                        .Workflow
+                                        .Runtime
+                                        .WorkflowTrace
+                                        .Runtime
+                                        .TraceEvent(
+                                            TraceEventType.Error,
+                                            1,
+                                            "Execute of Activity {0} threw {1}",
+                                            activity.QualifiedName,
+                                            e.ToString()
+                                        );
                                     throw;
                                 }
                             }
@@ -144,13 +149,18 @@ namespace System.Workflow.ComponentModel
                                 }
                                 catch (Exception e)
                                 {
-                                    System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                                        TraceEventType.Error,
-                                        1,
-                                        "Cancel of Activity {0} threw {1}",
-                                        activity.QualifiedName,
-                                        e.ToString()
-                                    );
+                                    System
+                                        .Workflow
+                                        .Runtime
+                                        .WorkflowTrace
+                                        .Runtime
+                                        .TraceEvent(
+                                            TraceEventType.Error,
+                                            1,
+                                            "Cancel of Activity {0} threw {1}",
+                                            activity.QualifiedName,
+                                            e.ToString()
+                                        );
                                     throw;
                                 }
                             }
@@ -178,13 +188,18 @@ namespace System.Workflow.ComponentModel
                                 }
                                 catch (Exception e)
                                 {
-                                    System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                                        TraceEventType.Error,
-                                        1,
-                                        "Compensate of Activity {0} threw {1}",
-                                        activity.QualifiedName,
-                                        e.ToString()
-                                    );
+                                    System
+                                        .Workflow
+                                        .Runtime
+                                        .WorkflowTrace
+                                        .Runtime
+                                        .TraceEvent(
+                                            TraceEventType.Error,
+                                            1,
+                                            "Compensate of Activity {0} threw {1}",
+                                            activity.QualifiedName,
+                                            e.ToString()
+                                        );
                                     throw;
                                 }
                             }
@@ -214,13 +229,18 @@ namespace System.Workflow.ComponentModel
                                 }
                                 catch (Exception e)
                                 {
-                                    System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                                        TraceEventType.Error,
-                                        1,
-                                        "Compensate of Activity {0} threw {1}",
-                                        activity.QualifiedName,
-                                        e.ToString()
-                                    );
+                                    System
+                                        .Workflow
+                                        .Runtime
+                                        .WorkflowTrace
+                                        .Runtime
+                                        .TraceEvent(
+                                            TraceEventType.Error,
+                                            1,
+                                            "Compensate of Activity {0} threw {1}",
+                                            activity.QualifiedName,
+                                            e.ToString()
+                                        );
                                     throw;
                                 }
                             }

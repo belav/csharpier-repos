@@ -748,9 +748,9 @@ namespace System.ServiceModel.Syndication
         {
             if (value == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(errorMsg))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(errorMsg)));
             }
             return value;
         }

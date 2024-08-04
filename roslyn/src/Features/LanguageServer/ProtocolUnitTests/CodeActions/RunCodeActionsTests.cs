@@ -62,10 +62,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
             var results = await ExecuteRunCodeActionCommandAsync(testLspServer, commandArgument);
 
             var documentForB = testLspServer
-                .TestWorkspace.CurrentSolution.Projects.Single()
-                .Documents.Single(doc =>
-                    doc.Name.Equals("B.cs", StringComparison.OrdinalIgnoreCase)
-                );
+                .TestWorkspace
+                .CurrentSolution
+                .Projects
+                .Single()
+                .Documents
+                .Single(doc => doc.Name.Equals("B.cs", StringComparison.OrdinalIgnoreCase));
             var textForB = await documentForB.GetTextAsync();
             Assert.Equal(expectedTextForB, textForB.ToString());
         }

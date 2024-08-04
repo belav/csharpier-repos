@@ -190,8 +190,11 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             var newStatement = expressionStatement.WithExpression(
                 SyntaxFactory.ConditionalAccessExpression(
                     localDeclarationStatement
-                        .Declaration.Variables[0]
-                        .Initializer!.Value.Parenthesize(),
+                        .Declaration
+                        .Variables[0]
+                        .Initializer!
+                        .Value
+                        .Parenthesize(),
                     SyntaxFactory.InvocationExpression(
                         SyntaxFactory.MemberBindingExpression(invokeName),
                         invocationExpression.ArgumentList

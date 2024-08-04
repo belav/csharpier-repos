@@ -107,11 +107,13 @@ namespace System.ServiceModel.Security
         {
             if (this.BootstrapSecurityBindingElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.BootstrapSecurityBindingElementNotSet, this.GetType())
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.BootstrapSecurityBindingElementNotSet, this.GetType())
+                        )
+                    );
             }
             base.OnOpen(timeout);
         }
@@ -123,11 +125,16 @@ namespace System.ServiceModel.Security
             {
                 if (this.BootstrapSecurityBindingElement == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.BootstrapSecurityBindingElementNotSet, this.GetType())
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.BootstrapSecurityBindingElementNotSet,
+                                    this.GetType()
+                                )
+                            )
+                        );
                 }
                 this.credentialsHandle = SecurityUtils.GetCredentialsHandle(
                     this.BootstrapSecurityBindingElement,
@@ -170,8 +177,9 @@ namespace System.ServiceModel.Security
                 this.bootstrapSecurityBindingElement.GetProperty<ISecurityCapabilities>(
                     this.IssuerBindingContext
                 );
-            SecurityCredentialsManager securityCredentials =
-                this.IssuerBindingContext.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager securityCredentials = this.IssuerBindingContext
+                .BindingParameters
+                .Find<SecurityCredentialsManager>();
             if (securityCredentials == null)
             {
                 securityCredentials = ClientCredentials.CreateDefaultCredentials();
@@ -181,15 +189,18 @@ namespace System.ServiceModel.Security
                 this.IssuerBindingContext.GetInnerProperty<XmlDictionaryReaderQuotas>();
             if (this.bootstrapSecurityBindingElement.ReaderQuotas == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)
+                        )
+                    );
             }
 
-            TransportBindingElement transportBindingElement =
-                this.IssuerBindingContext.RemainingBindingElements.Find<TransportBindingElement>();
+            TransportBindingElement transportBindingElement = this.IssuerBindingContext
+                .RemainingBindingElements
+                .Find<TransportBindingElement>();
             if (transportBindingElement != null)
                 this.bootstrapSecurityBindingElement.MaxReceivedMessageSize =
                     transportBindingElement.MaxReceivedMessageSize;
@@ -213,22 +224,22 @@ namespace System.ServiceModel.Security
                         true;
 
                 MessagePartSpecification bodyPart = new MessagePartSpecification(true);
-                soapBindingFactory.ProtectionRequirements.IncomingSignatureParts.AddParts(
-                    bodyPart,
-                    RequestSecurityTokenAction
-                );
-                soapBindingFactory.ProtectionRequirements.IncomingEncryptionParts.AddParts(
-                    bodyPart,
-                    RequestSecurityTokenAction
-                );
-                soapBindingFactory.ProtectionRequirements.OutgoingSignatureParts.AddParts(
-                    bodyPart,
-                    RequestSecurityTokenResponseAction
-                );
-                soapBindingFactory.ProtectionRequirements.OutgoingEncryptionParts.AddParts(
-                    bodyPart,
-                    RequestSecurityTokenResponseAction
-                );
+                soapBindingFactory
+                    .ProtectionRequirements
+                    .IncomingSignatureParts
+                    .AddParts(bodyPart, RequestSecurityTokenAction);
+                soapBindingFactory
+                    .ProtectionRequirements
+                    .IncomingEncryptionParts
+                    .AddParts(bodyPart, RequestSecurityTokenAction);
+                soapBindingFactory
+                    .ProtectionRequirements
+                    .OutgoingSignatureParts
+                    .AddParts(bodyPart, RequestSecurityTokenResponseAction);
+                soapBindingFactory
+                    .ProtectionRequirements
+                    .OutgoingEncryptionParts
+                    .AddParts(bodyPart, RequestSecurityTokenResponseAction);
             }
             securityProtocolFactory.PrivacyNoticeUri = this.PrivacyNoticeUri;
             securityProtocolFactory.PrivacyNoticeVersion = this.PrivacyNoticeVersion;
@@ -384,30 +395,31 @@ namespace System.ServiceModel.Security
                     == TrustVersion.WSTrust13
                 )
                 {
-                    RequestSecurityTokenResponseCollection rstrc =
-                        this.StandardsManager.TrustDriver.CreateRequestSecurityTokenResponseCollection(
-                            bodyReader
-                        );
+                    RequestSecurityTokenResponseCollection rstrc = this.StandardsManager
+                        .TrustDriver
+                        .CreateRequestSecurityTokenResponseCollection(bodyReader);
 
                     foreach (RequestSecurityTokenResponse rstrItem in rstrc.RstrCollection)
                     {
                         if (rstr != null)
                         {
                             // More than one RSTR is found. So throw an exception.
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new MessageSecurityException(
-                                    SR.GetString(SR.MoreThanOneRSTRInRSTRC)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new MessageSecurityException(
+                                        SR.GetString(SR.MoreThanOneRSTRInRSTRC)
+                                    )
+                                );
                         }
                         rstr = rstrItem;
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new NotSupportedException());
                 }
 
                 incomingMessage.ReadFromBodyContentsToEnd(bodyReader);

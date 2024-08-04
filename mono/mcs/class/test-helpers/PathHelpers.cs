@@ -58,10 +58,10 @@ namespace MonoTests.Helpers
             if (calling_method != null)
                 name = calling_method.DeclaringType.FullName + "_" + calling_method.Name + "_";
 
-            var rv = global::System.IO.Path.Combine(
-                global::System.IO.Path.GetTempPath(),
-                name + Guid.NewGuid().ToString()
-            );
+            var rv = global::System
+                .IO
+                .Path
+                .Combine(global::System.IO.Path.GetTempPath(), name + Guid.NewGuid().ToString());
             Directory.CreateDirectory(rv);
             return rv;
         }

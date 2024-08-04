@@ -77,14 +77,16 @@ namespace System.Net.PeerToPeer
         /// <param name="scopeId">id ofthe scope</param>
         internal Cloud(string name, PnrpScope pnrpScope, int scopeId)
         {
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Creating cloud with Name: {0}, PnrpScope: {1}, ScopeID: {2}",
-                name,
-                pnrpScope,
-                scopeId
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Creating cloud with Name: {0}, PnrpScope: {1}, ScopeID: {2}",
+                    name,
+                    pnrpScope,
+                    scopeId
+                );
             m_CloudName = name;
             m_PnrpScope = pnrpScope;
             m_ScopeId = scopeId;
@@ -245,12 +247,14 @@ namespace System.Net.PeerToPeer
                 }
                 if (numClouds != 0)
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "Number of clouds returned {0}",
-                        numClouds
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "Number of clouds returned {0}",
+                            numClouds
+                        );
                     IntPtr pPEER_PNRP_CLOUD_INFO = ArrayOfCloudInfoStructures.DangerousGetHandle();
                     for (ulong i = 0; i < numClouds; i++)
                     {
@@ -291,11 +295,13 @@ namespace System.Net.PeerToPeer
                 }
                 else
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Warning,
-                        0,
-                        "No Clouds returned from the native call"
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Warning,
+                            0,
+                            "No Clouds returned from the native call"
+                        );
                 }
             }
             finally
@@ -307,12 +313,14 @@ namespace System.Net.PeerToPeer
             }
             if (cloudName != null && cloud == null)
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "The specific cloud name {0} asked for is not found",
-                    cloudName
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "The specific cloud name {0} asked for is not found",
+                        cloudName
+                    );
             }
             Logging.Leave(Logging.P2PTraceSource, "Cloud::GetCloudOrClouds()");
         }

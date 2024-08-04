@@ -85,7 +85,9 @@ namespace System.Collections.Frozen
                 if (index == endIndex)
                 {
                     // If we've already hit the max per-bucket limit, bail.
-                    ArrayPool<int>.Shared.Return(buckets);
+                    ArrayPool<int>
+                        .Shared
+                        .Return(buckets);
                     return null;
                 }
             }

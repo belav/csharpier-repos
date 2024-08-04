@@ -169,11 +169,13 @@ namespace Microsoft.Win32.RegistryTests
             const string name = "FooBar";
             TestRegistryKey.SetValue(name, 42);
             using (
-                var rk = Registry.CurrentUser.CreateSubKey(
-                    TestRegistryKeyName,
-                    writable: false,
-                    options: RegistryOptions.None
-                )
+                var rk = Registry
+                    .CurrentUser
+                    .CreateSubKey(
+                        TestRegistryKeyName,
+                        writable: false,
+                        options: RegistryOptions.None
+                    )
             )
             {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
@@ -184,11 +186,13 @@ namespace Microsoft.Win32.RegistryTests
             }
 
             using (
-                var rk = Registry.CurrentUser.CreateSubKey(
-                    TestRegistryKeyName,
-                    RegistryKeyPermissionCheck.ReadSubTree,
-                    RegistryOptions.None
-                )
+                var rk = Registry
+                    .CurrentUser
+                    .CreateSubKey(
+                        TestRegistryKeyName,
+                        RegistryKeyPermissionCheck.ReadSubTree,
+                        RegistryOptions.None
+                    )
             )
             {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));

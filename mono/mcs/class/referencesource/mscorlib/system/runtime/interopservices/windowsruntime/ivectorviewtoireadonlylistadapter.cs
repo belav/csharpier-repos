@@ -67,11 +67,14 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             where T : class
         {
             bool fUseString;
-            Delegate target = System.StubHelpers.StubHelpers.GetTargetForAmbiguousVariantCall(
-                this,
-                typeof(IReadOnlyList<T>).TypeHandle.Value,
-                out fUseString
-            );
+            Delegate target = System
+                .StubHelpers
+                .StubHelpers
+                .GetTargetForAmbiguousVariantCall(
+                    this,
+                    typeof(IReadOnlyList<T>).TypeHandle.Value,
+                    out fUseString
+                );
 
             if (target != null)
             {

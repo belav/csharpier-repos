@@ -21,10 +21,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                 if (
                     !targetMethod.IsGenericMethod
-                    || !SymbolEqualityComparer.Default.Equals(
-                        _typeSymbols.IServiceCollection,
-                        @params[0].Type
-                    )
+                    || !SymbolEqualityComparer
+                        .Default
+                        .Equals(_typeSymbols.IServiceCollection, @params[0].Type)
                 )
                 {
                     return;
@@ -39,10 +38,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                 if (
                     paramCount is 2
-                    && SymbolEqualityComparer.Default.Equals(
-                        _typeSymbols.IConfiguration,
-                        @params[1].Type
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(_typeSymbols.IConfiguration, @params[1].Type)
                 )
                 {
                     overload = MethodsToGen.ServiceCollectionExt_Configure_T;
@@ -54,23 +52,20 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                     if (
                         secondParamType.SpecialType is SpecialType.System_String
-                        && SymbolEqualityComparer.Default.Equals(
-                            _typeSymbols.IConfiguration,
-                            thirdParamType
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(_typeSymbols.IConfiguration, thirdParamType)
                     )
                     {
                         overload = MethodsToGen.ServiceCollectionExt_Configure_T_name;
                     }
                     else if (
-                        SymbolEqualityComparer.Default.Equals(
-                            _typeSymbols.IConfiguration,
-                            secondParamType
-                        )
-                        && SymbolEqualityComparer.Default.Equals(
-                            _typeSymbols.ActionOfBinderOptions,
-                            thirdParamType
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(_typeSymbols.IConfiguration, secondParamType)
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(_typeSymbols.ActionOfBinderOptions, thirdParamType)
                     )
                     {
                         overload = MethodsToGen.ServiceCollectionExt_Configure_T_BinderOptions;
@@ -83,14 +78,12 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 else if (
                     paramCount is 4
                     && @params[1].Type.SpecialType is SpecialType.System_String
-                    && SymbolEqualityComparer.Default.Equals(
-                        _typeSymbols.IConfiguration,
-                        @params[2].Type
-                    )
-                    && SymbolEqualityComparer.Default.Equals(
-                        _typeSymbols.ActionOfBinderOptions,
-                        @params[3].Type
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(_typeSymbols.IConfiguration, @params[2].Type)
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(_typeSymbols.ActionOfBinderOptions, @params[3].Type)
                 )
                 {
                     overload = MethodsToGen.ServiceCollectionExt_Configure_T_name_BinderOptions;

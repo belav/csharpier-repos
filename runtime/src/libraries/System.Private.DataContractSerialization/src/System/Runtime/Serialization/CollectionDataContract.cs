@@ -1116,9 +1116,9 @@ namespace System.Runtime.Serialization.DataContracts
                 if (Kind == CollectionKind.GenericDictionary)
                 {
                     Type[] keyValueTypes = ItemType.GetGenericArguments();
-                    enumeratorType = Globals.TypeOfGenericDictionaryEnumerator.MakeGenericType(
-                        keyValueTypes
-                    );
+                    enumeratorType = Globals
+                        .TypeOfGenericDictionaryEnumerator
+                        .MakeGenericType(keyValueTypes);
                 }
                 else if (Kind == CollectionKind.Dictionary)
                 {
@@ -1440,7 +1440,8 @@ namespace System.Runtime.Serialization.DataContracts
                                 itemType = Globals.TypeOfKeyValue.MakeGenericType(genericArgs);
                                 addMethod = type.GetMethod(Globals.AddMethodName);
                                 getEnumeratorMethod = Globals
-                                    .TypeOfIEnumerableGeneric.MakeGenericType(
+                                    .TypeOfIEnumerableGeneric
+                                    .MakeGenericType(
                                         Globals.TypeOfKeyValuePair.MakeGenericType(genericArgs)
                                     )
                                     .GetMethod(Globals.GetEnumeratorMethodName)!;
@@ -1454,11 +1455,13 @@ namespace System.Runtime.Serialization.DataContracts
                                 )
                                 {
                                     addMethod = Globals
-                                        .TypeOfICollectionGeneric.MakeGenericType(itemType)
+                                        .TypeOfICollectionGeneric
+                                        .MakeGenericType(itemType)
                                         .GetMethod(Globals.AddMethodName);
                                 }
                                 getEnumeratorMethod = Globals
-                                    .TypeOfIEnumerableGeneric.MakeGenericType(itemType)
+                                    .TypeOfIEnumerableGeneric
+                                    .MakeGenericType(itemType)
                                     .GetMethod(Globals.GetEnumeratorMethodName)!;
                             }
                         }

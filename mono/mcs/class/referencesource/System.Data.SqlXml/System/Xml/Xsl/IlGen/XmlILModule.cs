@@ -93,10 +93,9 @@ namespace System.Xml.Xsl.IlGen
             // 2. No temp files need be created
             // 3. Never allow assembly to Assert permissions
             asmName = CreateAssemblyName();
-            asmBldr = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                asmName,
-                AssemblyBuilderAccess.Run
-            );
+            asmBldr = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
 
             try
             {
@@ -176,10 +175,14 @@ namespace System.Xml.Xsl.IlGen
                 }
 #endif
 
-                asmBldr = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    asmName,
-                    this.persistAsm ? AssemblyBuilderAccess.RunAndSave : AssemblyBuilderAccess.Run
-                );
+                asmBldr = AppDomain
+                    .CurrentDomain
+                    .DefineDynamicAssembly(
+                        asmName,
+                        this.persistAsm
+                            ? AssemblyBuilderAccess.RunAndSave
+                            : AssemblyBuilderAccess.Run
+                    );
 
                 // Add custom attribute to assembly marking it as security transparent so that Assert will not be allowed
                 // and link demands will be converted to full demands.

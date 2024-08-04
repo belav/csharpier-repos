@@ -47,9 +47,11 @@ public partial class DbContextTest
     [ConditionalFact]
     public void Local_calls_DetectChanges()
     {
-        var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-            new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-        );
+        var provider = InMemoryTestHelpers
+            .Instance
+            .CreateServiceProvider(
+                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+            );
 
         using var context = new ButTheHedgehogContext(provider);
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -84,9 +86,11 @@ public partial class DbContextTest
     [ConditionalFact]
     public void Local_does_not_call_DetectChanges_when_disabled()
     {
-        var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-            new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-        );
+        var provider = InMemoryTestHelpers
+            .Instance
+            .CreateServiceProvider(
+                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+            );
 
         using var context = new ButTheHedgehogContext(provider);
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -177,23 +181,30 @@ public partial class DbContextTest
     {
         var loggerFactory = new ListLoggerFactory();
 
-        var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-            new ServiceCollection().AddSingleton<ILoggerFactory>(loggerFactory)
-        );
+        var provider = InMemoryTestHelpers
+            .Instance
+            .CreateServiceProvider(
+                new ServiceCollection().AddSingleton<ILoggerFactory>(loggerFactory)
+            );
 
         using var context = new ButTheHedgehogContext(provider);
-        context.Products.Add(
-            new Product
-            {
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        context
+            .Products
+            .Add(
+                new Product
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" },
-                },
-            }
-        );
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
+                }
+            );
 
         await Assert.ThrowsAnyAsync<OperationCanceledException>(
             () => context.SaveChangesAsync(new CancellationToken(canceled: true))
@@ -844,9 +855,11 @@ public partial class DbContextTest
     [ConditionalFact]
     public async Task Add_Attach_Remove_Update_do_not_call_DetectChanges()
     {
-        var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
-            new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
-        );
+        var provider = InMemoryTestHelpers
+            .Instance
+            .CreateServiceProvider(
+                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+            );
         using var context = new ButTheHedgehogContext(provider);
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 

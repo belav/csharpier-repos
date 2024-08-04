@@ -62,9 +62,9 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     certHandles = new[]
                     {
-                        (
-                            (AppleCertificatePal)_singleCertPal
-                        ).CertificateHandle.DangerousGetHandle(),
+                        ((AppleCertificatePal)_singleCertPal)
+                            .CertificateHandle
+                            .DangerousGetHandle(),
                     };
                 }
                 else if (_certs!.Count > 0)

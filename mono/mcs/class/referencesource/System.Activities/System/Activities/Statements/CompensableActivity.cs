@@ -353,9 +353,9 @@ namespace System.Activities.Statements
                         .IsTokenValidInSecondaryRoot
                 )
                 {
-                    throw SA.FxTrace.Exception.AsError(
-                        new InvalidOperationException(SA.SR.NoCAInSecondaryRoot)
-                    );
+                    throw SA.FxTrace
+                        .Exception
+                        .AsError(new InvalidOperationException(SA.SR.NoCAInSecondaryRoot));
                 }
 
                 parentCompensationId = parentToken.CompensationId;

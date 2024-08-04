@@ -355,9 +355,9 @@ namespace Microsoft.CodeAnalysis
                     // to changes to the project. We'll update everything here.
                     var generatorDriver = oldGeneratorDriver
                         .ReplaceAdditionalTexts(
-                            newProjectState.AdditionalDocumentStates.SelectAsArray(
-                                static documentState => documentState.AdditionalText
-                            )
+                            newProjectState
+                                .AdditionalDocumentStates
+                                .SelectAsArray(static documentState => documentState.AdditionalText)
                         )
                         .WithUpdatedParseOptions(newProjectState.ParseOptions!)
                         .WithUpdatedAnalyzerConfigOptions(

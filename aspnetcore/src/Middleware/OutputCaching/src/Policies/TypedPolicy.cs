@@ -33,9 +33,10 @@ internal sealed class TypedPolicy : IOutputCachePolicy
 
     private IOutputCachePolicy? CreatePolicy(OutputCacheContext context)
     {
-        var options = context.HttpContext.RequestServices.GetRequiredService<
-            IOptions<OutputCacheOptions>
-        >();
+        var options = context
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<IOptions<OutputCacheOptions>>();
         return _instance ??=
             ActivatorUtilities.CreateInstance(options.Value.ApplicationServices, _policyType)
             as IOutputCachePolicy;

@@ -211,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             )
             {
                 var loadDiagnostic = await document
-                    .State.GetLoadDiagnosticAsync(cancellationToken)
+                    .State
+                    .GetLoadDiagnosticAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (loadDiagnostic != null)
                     return ImmutableArray.Create(DiagnosticData.Create(loadDiagnostic, document));
@@ -275,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // document that doesn't support compiler diagnostics such as FSharp or TypeScript
                 return hostAnalyzers
                     .CreateDiagnosticAnalyzersPerReference(project)
-                    .Values.SelectManyAsArray(v => v);
+                    .Values
+                    .SelectManyAsArray(v => v);
             }
 
             public Task RemoveDocumentAsync(

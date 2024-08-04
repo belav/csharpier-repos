@@ -105,11 +105,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #endif
 
                     // event and worker queues
-                    _documentTracker =
-                        _registration.Services.GetRequiredService<IUnitTestingDocumentTrackingService>();
+                    _documentTracker = _registration
+                        .Services
+                        .GetRequiredService<IUnitTestingDocumentTrackingService>();
 
                     var globalNotificationService = _registration
-                        .Services.ExportProvider.GetExports<IGlobalOperationNotificationService>()
+                        .Services
+                        .ExportProvider
+                        .GetExports<IGlobalOperationNotificationService>()
                         .FirstOrDefault()
                         ?.Value;
 
@@ -562,24 +565,28 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     )
                     {
                         _incrementalAnalyzerProcessor
-                            ._normalPriorityProcessor.GetTestAccessor()
+                            ._normalPriorityProcessor
+                            .GetTestAccessor()
                             .WaitUntilCompletion(analyzers, items);
 
                         var projectItems = items.Select(i =>
                             i.ToProjectWorkItem(EmptyAsyncToken.Instance)
                         );
                         _incrementalAnalyzerProcessor
-                            ._lowPriorityProcessor.GetTestAccessor()
+                            ._lowPriorityProcessor
+                            .GetTestAccessor()
                             .WaitUntilCompletion(analyzers, items);
                     }
 
                     internal void WaitUntilCompletion()
                     {
                         _incrementalAnalyzerProcessor
-                            ._normalPriorityProcessor.GetTestAccessor()
+                            ._normalPriorityProcessor
+                            .GetTestAccessor()
                             .WaitUntilCompletion();
                         _incrementalAnalyzerProcessor
-                            ._lowPriorityProcessor.GetTestAccessor()
+                            ._lowPriorityProcessor
+                            .GetTestAccessor()
                             .WaitUntilCompletion();
                     }
                 }

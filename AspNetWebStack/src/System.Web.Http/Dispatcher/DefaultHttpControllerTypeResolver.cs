@@ -133,10 +133,9 @@ namespace System.Web.Http.Dispatcher
             Contract.Assert(controllerType != null);
             string controllerSuffix = DefaultHttpControllerSelector.ControllerSuffix;
             return controllerType.Name.Length > controllerSuffix.Length
-                && controllerType.Name.EndsWith(
-                    controllerSuffix,
-                    StringComparison.OrdinalIgnoreCase
-                );
+                && controllerType
+                    .Name
+                    .EndsWith(controllerSuffix, StringComparison.OrdinalIgnoreCase);
         }
 
         internal void SetGetTypesFunc(Func<Assembly, Type[]> getTypesFunc)

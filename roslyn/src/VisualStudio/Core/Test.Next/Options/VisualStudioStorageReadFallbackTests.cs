@@ -17,8 +17,10 @@ public class VisualStudioStorageReadFallbackTests
     [Fact]
     public void SpaceBetweenParentheses()
     {
-        var exportProvider =
-            VisualStudioTestCompositions.LanguageServices.ExportProviderFactory.CreateExportProvider();
+        var exportProvider = VisualStudioTestCompositions
+            .LanguageServices
+            .ExportProviderFactory
+            .CreateExportProvider();
         var fallback = exportProvider
             .GetExports<IVisualStudioStorageReadFallback, OptionNameMetadata>()
             .Single(export => export.Metadata.ConfigName == "csharp_space_between_parentheses")
@@ -71,8 +73,10 @@ public class VisualStudioStorageReadFallbackTests
     [Fact]
     public void NewLinesForBraces()
     {
-        var exportProvider =
-            VisualStudioTestCompositions.LanguageServices.ExportProviderFactory.CreateExportProvider();
+        var exportProvider = VisualStudioTestCompositions
+            .LanguageServices
+            .ExportProviderFactory
+            .CreateExportProvider();
         var fallback = exportProvider
             .GetExports<IVisualStudioStorageReadFallback, OptionNameMetadata>()
             .Single(export => export.Metadata.ConfigName == "csharp_new_line_before_open_brace")

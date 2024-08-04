@@ -63,9 +63,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // ID in GetDocumentIdsWithFilePath, but there's really nothing we can do since we don't have contexts for
             // close documents anyways.
             var openDocument = documents.First();
-            var currentContextDocumentId = context.Workspace.GetDocumentIdInCurrentContext(
-                openDocument.Id
-            );
+            var currentContextDocumentId = context
+                .Workspace
+                .GetDocumentIdInCurrentContext(openDocument.Id);
 
             return Task.FromResult<VSProjectContextList?>(
                 new VSProjectContextList

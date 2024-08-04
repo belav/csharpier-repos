@@ -23,9 +23,9 @@ namespace System.ServiceModel.Channels
         {
             if (!ContextExchangeMechanismHelper.IsDefined(contextExchangeMechanism))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("contextExchangeMechanism")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("contextExchangeMechanism"));
             }
             this.contextExchangeMechanism = contextExchangeMechanism;
         }
@@ -112,9 +112,9 @@ namespace System.ServiceModel.Channels
             {
                 if (httpCookieHeader == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "httpCookieHeader"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("httpCookieHeader");
                 }
 
                 context = null;

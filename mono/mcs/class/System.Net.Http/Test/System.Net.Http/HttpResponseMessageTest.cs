@@ -173,91 +173,107 @@ namespace MonoTests.System.Net.Http
             Assert.AreEqual(new Uri("http://xamarin.com"), headers.Location);
 
             Assert.IsTrue(
-                headers.Pragma.SequenceEqual(
-                    new[]
-                    {
-                        new NameValueHeaderValue("name", "value"),
-                        new NameValueHeaderValue("p"),
-                    }
-                )
+                headers
+                    .Pragma
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new NameValueHeaderValue("name", "value"),
+                            new NameValueHeaderValue("p"),
+                        }
+                    )
             );
 
             Assert.IsTrue(
-                headers.ProxyAuthenticate.SequenceEqual(
-                    new[]
-                    {
-                        new AuthenticationHeaderValue("proxy", "par"),
-                        new AuthenticationHeaderValue("ttt"),
-                    }
-                )
+                headers
+                    .ProxyAuthenticate
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new AuthenticationHeaderValue("proxy", "par"),
+                            new AuthenticationHeaderValue("ttt"),
+                        }
+                    )
             );
 
             Assert.AreEqual(new RetryConditionHeaderValue(TimeSpan.MinValue), headers.RetryAfter);
 
             Assert.IsTrue(
-                headers.Server.SequenceEqual(
-                    new[]
-                    {
-                        new ProductInfoHeaderValue("(comment)"),
-                        new ProductInfoHeaderValue(new ProductHeaderValue("server")),
-                    }
-                )
+                headers
+                    .Server
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new ProductInfoHeaderValue("(comment)"),
+                            new ProductInfoHeaderValue(new ProductHeaderValue("server")),
+                        }
+                    )
             );
 
             Assert.IsTrue(headers.Trailer.SequenceEqual(new[] { "trailer-vvv", "tt-r" }));
 
             Assert.IsTrue(
-                headers.TransferEncoding.SequenceEqual(
-                    new[]
-                    {
-                        new TransferCodingHeaderValue("tchv"),
-                        new TransferCodingHeaderValue("chunked"),
-                        new TransferCodingHeaderValue("ttt"),
-                    }
-                )
+                headers
+                    .TransferEncoding
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new TransferCodingHeaderValue("tchv"),
+                            new TransferCodingHeaderValue("chunked"),
+                            new TransferCodingHeaderValue("ttt"),
+                        }
+                    )
             );
 
             Assert.IsTrue(
-                headers.Upgrade.SequenceEqual(
-                    new[]
-                    {
-                        new ProductHeaderValue("prod", "ver"),
-                        new ProductHeaderValue("uuu"),
-                        new ProductHeaderValue("vvvvaa"),
-                    }
-                )
+                headers
+                    .Upgrade
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new ProductHeaderValue("prod", "ver"),
+                            new ProductHeaderValue("uuu"),
+                            new ProductHeaderValue("vvvvaa"),
+                        }
+                    )
             );
 
             Assert.IsTrue(headers.Vary.SequenceEqual(new[] { "vary", "vvaar" }));
 
             Assert.IsTrue(
-                headers.Via.SequenceEqual(
-                    new[]
-                    {
-                        new ViaHeaderValue("protocol", "rec-by"),
-                        new ViaHeaderValue("prot", "v"),
-                    }
-                )
+                headers
+                    .Via
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new ViaHeaderValue("protocol", "rec-by"),
+                            new ViaHeaderValue("prot", "v"),
+                        }
+                    )
             );
 
             Assert.IsTrue(
-                headers.Warning.SequenceEqual(
-                    new[]
-                    {
-                        new WarningHeaderValue(5, "agent", "\"txt\""),
-                        new WarningHeaderValue(4, "ww", "\"t\""),
-                    }
-                )
+                headers
+                    .Warning
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new WarningHeaderValue(5, "agent", "\"txt\""),
+                            new WarningHeaderValue(4, "ww", "\"t\""),
+                        }
+                    )
             );
 
             Assert.IsTrue(
-                headers.WwwAuthenticate.SequenceEqual(
-                    new[]
-                    {
-                        new AuthenticationHeaderValue("www", "par"),
-                        new AuthenticationHeaderValue("ww"),
-                    }
-                )
+                headers
+                    .WwwAuthenticate
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new AuthenticationHeaderValue("www", "par"),
+                            new AuthenticationHeaderValue("ww"),
+                        }
+                    )
             );
         }
 
@@ -342,53 +358,61 @@ namespace MonoTests.System.Net.Http
 
             Assert.AreEqual(4, headers.ProxyAuthenticate.Count, "#1a");
             Assert.IsTrue(
-                headers.ProxyAuthenticate.SequenceEqual(
-                    new[]
-                    {
-                        new AuthenticationHeaderValue("x"),
-                        new AuthenticationHeaderValue("y"),
-                        new AuthenticationHeaderValue("z"),
-                        new AuthenticationHeaderValue("i"),
-                    }
-                ),
+                headers
+                    .ProxyAuthenticate
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new AuthenticationHeaderValue("x"),
+                            new AuthenticationHeaderValue("y"),
+                            new AuthenticationHeaderValue("z"),
+                            new AuthenticationHeaderValue("i"),
+                        }
+                    ),
                 "#1b"
             );
 
             Assert.AreEqual(4, headers.Upgrade.Count, "#2a");
             Assert.IsTrue(
-                headers.Upgrade.SequenceEqual(
-                    new[]
-                    {
-                        new ProductHeaderValue("HTTP", "2.0"),
-                        new ProductHeaderValue("SHTTP", "1.3"),
-                        new ProductHeaderValue("IRC"),
-                        new ProductHeaderValue("RTA", "x11"),
-                    }
-                ),
+                headers
+                    .Upgrade
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new ProductHeaderValue("HTTP", "2.0"),
+                            new ProductHeaderValue("SHTTP", "1.3"),
+                            new ProductHeaderValue("IRC"),
+                            new ProductHeaderValue("RTA", "x11"),
+                        }
+                    ),
                 "#2b"
             );
 
             Assert.AreEqual(2, headers.Via.Count, "#3a");
             Assert.IsTrue(
-                headers.Via.SequenceEqual(
-                    new[]
-                    {
-                        new ViaHeaderValue("1.0", "fred"),
-                        new ViaHeaderValue("1.1", "nowhere.com", null, "(Apache/1.1)"),
-                    }
-                ),
+                headers
+                    .Via
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new ViaHeaderValue("1.0", "fred"),
+                            new ViaHeaderValue("1.1", "nowhere.com", null, "(Apache/1.1)"),
+                        }
+                    ),
                 "#2b"
             );
 
             Assert.AreEqual(2, headers.Warning.Count, "#4a");
             Assert.IsTrue(
-                headers.Warning.SequenceEqual(
-                    new[]
-                    {
-                        new WarningHeaderValue(199, "Miscellaneous", "\"w\""),
-                        new WarningHeaderValue(200, "a", "\"b\""),
-                    }
-                ),
+                headers
+                    .Warning
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new WarningHeaderValue(199, "Miscellaneous", "\"w\""),
+                            new WarningHeaderValue(200, "a", "\"b\""),
+                        }
+                    ),
                 "#4b"
             );
         }

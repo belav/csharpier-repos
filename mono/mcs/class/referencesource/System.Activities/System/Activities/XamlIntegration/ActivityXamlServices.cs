@@ -172,12 +172,14 @@ namespace System.Activities.XamlIntegration
             Activity result = xamlObject as Activity;
             if (result == null)
             {
-                throw FxTrace.Exception.Argument(
-                    "reader",
-                    SR.ActivityXamlServicesRequiresActivity(
-                        xamlObject != null ? xamlObject.GetType().FullName : string.Empty
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument(
+                        "reader",
+                        SR.ActivityXamlServicesRequiresActivity(
+                            xamlObject != null ? xamlObject.GetType().FullName : string.Empty
+                        )
+                    );
             }
 
             IDynamicActivity dynamicActivity = result as IDynamicActivity;
@@ -388,14 +390,16 @@ namespace System.Activities.XamlIntegration
                     {
                         throw;
                     }
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.CompiledExpressionsCacheMetadataException(
-                                dynamicActivity.Name,
-                                e.ToString()
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.CompiledExpressionsCacheMetadataException(
+                                    dynamicActivity.Name,
+                                    e.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -408,13 +412,15 @@ namespace System.Activities.XamlIntegration
             }
             if (vistor.HasLanguageConflict)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.DynamicActivityMultipleExpressionLanguages(
-                            vistor.GetConflictingLanguages().AsCommaSeparatedValues()
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.DynamicActivityMultipleExpressionLanguages(
+                                vistor.GetConflictingLanguages().AsCommaSeparatedValues()
+                            )
                         )
-                    )
-                );
+                    );
             }
             language = vistor.Language;
             return true;
@@ -499,11 +505,13 @@ namespace System.Activities.XamlIntegration
             string beforeInitializeResource = FindResource(resources, beforeInitializeResourceName);
             if (beforeInitializeResource == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.BeforeInitializeComponentXBTExtensionResourceNotFound
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.BeforeInitializeComponentXBTExtensionResourceNotFound
+                        )
+                    );
             }
 
             // Get the name of the XAML resource from the BeforeInitializeComponentHelper resource.
@@ -520,11 +528,13 @@ namespace System.Activities.XamlIntegration
             string fullXamlResourceName = FindResource(resources, xamlResourceName);
             if (fullXamlResourceName == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.XamlBuildTaskResourceNotFound(xamlResourceName)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.XamlBuildTaskResourceNotFound(xamlResourceName)
+                        )
+                    );
             }
 
             // Get the schema context for the type.
@@ -606,26 +616,30 @@ namespace System.Activities.XamlIntegration
                 Type schemaContextType = assembly.GetType(helperClassName);
                 if (schemaContextType == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.SchemaContextFromBeforeInitializeComponentXBTExtensionNotFound(
-                                helperClassName
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.SchemaContextFromBeforeInitializeComponentXBTExtensionNotFound(
+                                    helperClassName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 // The "official" BeforeInitializeComponent XBT Extension will not create a generic type for this helper class.
                 // This check is here so that the assembly manifest can't lure us into creating a type with a generic argument from a different assembly.
                 if (schemaContextType.IsGenericType || schemaContextType.IsGenericTypeDefinition)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.SchemaContextFromBeforeInitializeComponentXBTExtensionCannotBeGeneric(
-                                helperClassName
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.SchemaContextFromBeforeInitializeComponentXBTExtensionCannotBeGeneric(
+                                    helperClassName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 PropertyInfo schemaContextPropertyInfo = schemaContextType.GetProperty(

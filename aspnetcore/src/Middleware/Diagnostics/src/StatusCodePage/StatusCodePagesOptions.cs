@@ -23,8 +23,10 @@ public class StatusCodePagesOptions
         HandleAsync = async context =>
         {
             var statusCode = context.HttpContext.Response.StatusCode;
-            var problemDetailsService =
-                context.HttpContext.RequestServices.GetService<IProblemDetailsService>();
+            var problemDetailsService = context
+                .HttpContext
+                .RequestServices
+                .GetService<IProblemDetailsService>();
 
             if (
                 problemDetailsService == null

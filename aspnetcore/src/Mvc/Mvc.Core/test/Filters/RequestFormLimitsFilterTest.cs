@@ -120,9 +120,10 @@ public class RequestFormLimitsFilterTest
             new IFilterMetadata[] { requestFormLimitsFilter }
         );
         // Set to null explicitly as we want to make sure the filter adds one
-        authorizationFilterContext.HttpContext.Features.Set<IFormFeature>(
-            new FormFeature(authorizationFilterContext.HttpContext.Request)
-        );
+        authorizationFilterContext
+            .HttpContext
+            .Features
+            .Set<IFormFeature>(new FormFeature(authorizationFilterContext.HttpContext.Request));
 
         // Act
         requestFormLimitsFilter.OnAuthorization(authorizationFilterContext);

@@ -31,20 +31,24 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
 End Module",
                 HangMitigatingCancellationToken
             );
-            await TestServices.EditorVerifier.CodeActionAsync(
-                "Generate local 'xyz'",
-                applyFix: true,
-                cancellationToken: HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"Module Program
+            await TestServices
+                .EditorVerifier
+                .CodeActionAsync(
+                    "Generate local 'xyz'",
+                    applyFix: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    @"Module Program
     Sub Main(args As String())
         Dim xyz As String = Nothing
         Dim x As String = xyz
     End Sub
 End Module",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
@@ -58,23 +62,25 @@ End Module",
 End Module",
                 HangMitigatingCancellationToken
             );
-            await TestServices.EditorVerifier.CodeActionAsync(
-                "Generate class 'ClassInNewFile' in new file",
-                applyFix: true,
-                cancellationToken: HangMitigatingCancellationToken
-            );
-            await TestServices.SolutionExplorer.OpenFileAsync(
-                ProjectName,
-                "ClassInNewFile.vb",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"Friend Class ClassInNewFile
+            await TestServices
+                .EditorVerifier
+                .CodeActionAsync(
+                    "Generate class 'ClassInNewFile' in new file",
+                    applyFix: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
+            await TestServices
+                .SolutionExplorer
+                .OpenFileAsync(ProjectName, "ClassInNewFile.vb", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    @"Friend Class ClassInNewFile
     Public Sub New()
     End Sub
 End Class",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
     }
 }

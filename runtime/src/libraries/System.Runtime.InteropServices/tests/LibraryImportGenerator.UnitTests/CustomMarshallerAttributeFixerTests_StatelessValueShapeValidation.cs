@@ -631,9 +631,9 @@ namespace LibraryImportGenerator.UnitTests
                 "cs"
             );
             otherProjectOriginalState.Sources.Add(otherMarshallerTypeOriginalSource);
-            otherProjectOriginalState.AdditionalReferences.AddRange(
-                test.TestState.AdditionalReferences
-            );
+            otherProjectOriginalState
+                .AdditionalReferences
+                .AddRange(test.TestState.AdditionalReferences);
 
             ProjectState otherProjectFixedState = new ProjectState(
                 otherProjectName,
@@ -642,9 +642,9 @@ namespace LibraryImportGenerator.UnitTests
                 "cs"
             );
             otherProjectFixedState.Sources.Add(otherMarshallerTypeFixedSource);
-            otherProjectFixedState.AdditionalReferences.AddRange(
-                test.TestState.AdditionalReferences
-            );
+            otherProjectFixedState
+                .AdditionalReferences
+                .AddRange(test.TestState.AdditionalReferences);
 
             test.TestState.Sources.Add(entryPointTypeSource);
             test.TestState.AdditionalProjects.Add(otherProjectName, otherProjectOriginalState);

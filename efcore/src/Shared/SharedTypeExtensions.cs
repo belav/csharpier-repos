@@ -330,7 +330,8 @@ internal static class SharedTypeExtensions
         types ??= Array.Empty<Type>();
 
         return type.GetTypeInfo()
-            .DeclaredConstructors.SingleOrDefault(c =>
+            .DeclaredConstructors
+            .SingleOrDefault(c =>
                 !c.IsStatic && c.GetParameters().Select(p => p.ParameterType).SequenceEqual(types)
             )!;
     }

@@ -505,12 +505,9 @@ namespace System.Xml.Xsl.XsltOld
             for (int i = 0; i < elements.Length; i++)
             {
                 double defaultPriority = NameTest(elements[i]);
-                compiler.CompiledStylesheet!.AddSpace(
-                    compiler,
-                    elements[i],
-                    defaultPriority,
-                    preserve
-                );
+                compiler
+                    .CompiledStylesheet!
+                    .AddSpace(compiler, elements[i], defaultPriority, preserve);
             }
             CheckEmpty(compiler);
         }

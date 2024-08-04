@@ -720,7 +720,8 @@ namespace System.Runtime.Remoting.Contexts
                 Message.PropagateCallContextFromThreadToMessage(msgCall);
                 //DBG Console.WriteLine("CallBackGeneric starting!");
                 IMessage retMsg = Thread
-                    .CurrentContext.GetClientContextChain()
+                    .CurrentContext
+                    .GetClientContextChain()
                     .SyncProcessMessage(msgCall);
                 Message.PropagateCallContextFromMessageToThread(retMsg);
 

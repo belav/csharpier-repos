@@ -225,9 +225,10 @@ public class DefaultModelBindingContext : ModelBindingContext
         };
 
         // mvcOptions may be null when this method is called in test scenarios.
-        var mvcOptions = actionContext.HttpContext.RequestServices?.GetService<
-            IOptions<MvcOptions>
-        >();
+        var mvcOptions = actionContext
+            .HttpContext
+            .RequestServices
+            ?.GetService<IOptions<MvcOptions>>();
         if (mvcOptions != null)
         {
             bindingContext.MaxModelBindingRecursionDepth = mvcOptions

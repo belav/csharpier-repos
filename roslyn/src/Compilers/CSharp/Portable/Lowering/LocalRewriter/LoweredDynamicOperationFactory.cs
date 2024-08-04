@@ -877,10 +877,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // CS1969: One or more types required to compile a dynamic expression cannot be found.
                 // Dev11 reports it with source location for each dynamic operation, which results in many error messages.
                 // The diagnostic that names the specific missing type or member has already been reported.
-                _factory.Diagnostics.Add(
-                    ErrorCode.ERR_DynamicRequiredTypesMissing,
-                    NoLocation.Singleton
-                );
+                _factory
+                    .Diagnostics
+                    .Add(ErrorCode.ERR_DynamicRequiredTypesMissing, NoLocation.Singleton);
 
                 return LoweredDynamicOperation.Bad(
                     loweredReceiver,
@@ -1004,10 +1003,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (!synthesizedContainer.TypeParameters.IsEmpty)
             {
                 return synthesizedContainer.Construct(
-                    synthesizedContainer.ConstructedFromTypeParameters.Cast<
-                        TypeParameterSymbol,
-                        TypeSymbol
-                    >()
+                    synthesizedContainer
+                        .ConstructedFromTypeParameters
+                        .Cast<TypeParameterSymbol, TypeSymbol>()
                 );
             }
 
@@ -1025,9 +1023,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 methodToContainerTypeParametersMap.SubstituteNamedType(
                     delegateTypeOverMethodTypeParameters
                 );
-            var callSiteType = _factory.Compilation.GetWellKnownType(
-                WellKnownType.System_Runtime_CompilerServices_CallSite_T
-            );
+            var callSiteType = _factory
+                .Compilation
+                .GetWellKnownType(WellKnownType.System_Runtime_CompilerServices_CallSite_T);
             _factory.Diagnostics.ReportUseSite(callSiteType, _factory.Syntax);
             callSiteType = callSiteType.Construct(
                 new[] { delegateTypeOverContainerTypeParameters }
@@ -1134,12 +1132,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             int parameterCount = delegateSignature.Length - (returnsVoid ? 0 : 1);
             Debug.Assert(_factory.CompilationState.ModuleBuilderOpt is { });
             int generation = _factory.CompilationState.ModuleBuilderOpt.CurrentGenerationOrdinal;
-            var synthesizedType = _factory.Compilation.AnonymousTypeManager.SynthesizeDelegate(
-                parameterCount,
-                byRefs,
-                returnsVoid,
-                generation
-            );
+            var synthesizedType = _factory
+                .Compilation
+                .AnonymousTypeManager
+                .SynthesizeDelegate(parameterCount, byRefs, returnsVoid, generation);
             return synthesizedType.Construct(delegateSignature);
 
             // The distinction between by-ref kinds is ignored for dynamic call-sites.

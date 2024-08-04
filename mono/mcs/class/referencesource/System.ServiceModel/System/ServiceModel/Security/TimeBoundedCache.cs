@@ -422,9 +422,9 @@ namespace System.ServiceModel.Security
         {
             string message = SR.GetString(SR.CacheQuotaReached, this.maxCacheItems);
             Exception inner = new QuotaExceededException(message);
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new CommunicationException(message, inner)
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new CommunicationException(message, inner));
         }
 
         static void PurgeCallbackStatic(object state)

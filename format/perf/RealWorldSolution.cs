@@ -94,13 +94,14 @@ namespace Microsoft.CodeAnalysis.Tools.Perf.Real
         {
             public RealWorldConfig()
             {
-                var job = Job
-                    .Dry.WithWarmupCount(1)
+                var job = Job.Dry
+                    .WithWarmupCount(1)
                     .WithIterationCount(12)
                     .WithOutlierMode(Perfolizer.Mathematics.OutlierDetection.OutlierMode.RemoveAll);
                 Add(
                     DefaultConfig
-                        .Instance.AddJob(job.AsDefault())
+                        .Instance
+                        .AddJob(job.AsDefault())
                         .AddDiagnoser(MemoryDiagnoser.Default)
                 );
             }

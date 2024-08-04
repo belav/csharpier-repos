@@ -30,10 +30,9 @@ public class HeaderDictionaryIndexerFixer : CodeFixProvider
         {
             if (
                 diagnostic.Properties.TryGetValue("HeaderName", out var headerName)
-                && diagnostic.Properties.TryGetValue(
-                    "ResolvedPropertyName",
-                    out var resolvedPropertyName
-                )
+                && diagnostic
+                    .Properties
+                    .TryGetValue("ResolvedPropertyName", out var resolvedPropertyName)
             )
             {
                 var title = $"Access header '{headerName}' with {resolvedPropertyName} property";

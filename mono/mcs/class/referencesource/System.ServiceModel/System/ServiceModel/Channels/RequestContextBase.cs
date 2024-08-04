@@ -50,9 +50,9 @@ namespace System.ServiceModel.Channels
                 if (this.requestMessageException != null)
                 {
 #pragma warning suppress 56503 // Microsoft, see outcome of DCR 50092
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        this.requestMessageException
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(this.requestMessageException);
                 }
 
                 return requestMessage;
@@ -143,13 +143,15 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        timeout,
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             }
 
             bool sendAck = false;
@@ -220,21 +222,25 @@ namespace System.ServiceModel.Channels
             if (state == CommunicationState.Closed || state == CommunicationState.Closing)
             {
                 if (aborted)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationObjectAbortedException(
-                            SR.GetString(SR.RequestContextAborted)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationObjectAbortedException(
+                                SR.GetString(SR.RequestContextAborted)
+                            )
+                        );
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ObjectDisposedException(this.GetType().FullName)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
 
             if (this.replyInitiated)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ReplyAlreadySent))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ReplyAlreadySent))
+                    );
         }
 
         /// <summary>

@@ -125,13 +125,16 @@ namespace ILCompiler.Dataflow
             )?.Module;
 
             List<ModuleDesc> referencedModules = new();
-            TypeDesc foundType = System.Reflection.TypeNameParser.ResolveType(
-                typeName,
-                callingModule,
-                diagnosticContext.Origin.MemberDefinition!.Context,
-                referencedModules,
-                out bool typeWasNotFoundInAssemblyNorBaseLibrary
-            );
+            TypeDesc foundType = System
+                .Reflection
+                .TypeNameParser
+                .ResolveType(
+                    typeName,
+                    callingModule,
+                    diagnosticContext.Origin.MemberDefinition!.Context,
+                    referencedModules,
+                    out bool typeWasNotFoundInAssemblyNorBaseLibrary
+                );
             if (foundType == null)
             {
                 if (needsAssemblyName && typeWasNotFoundInAssemblyNorBaseLibrary)
@@ -150,9 +153,9 @@ namespace ILCompiler.Dataflow
                 {
                     // Also add module metadata in case this reference was through a type forward
                     if (
-                        Factory.MetadataManager.CanGenerateMetadata(
-                            referencedModule.GetGlobalModuleType()
-                        )
+                        Factory
+                            .MetadataManager
+                            .CanGenerateMetadata(referencedModule.GetGlobalModuleType())
                     )
                         _dependencies.Add(Factory.ModuleMetadata(referencedModule), reason);
                 }

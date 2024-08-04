@@ -146,7 +146,8 @@ namespace System.Data.Metadata.Edm
                                     primitiveType.FacetDescriptions,
                                     EdmProviderManifest.MaxLengthFacetName
                                 )
-                                .MaxValue.Value;
+                                .MaxValue
+                                .Value;
                         }
                         else
                         {
@@ -155,7 +156,8 @@ namespace System.Data.Metadata.Edm
                                     primitiveType.FacetDescriptions,
                                     EdmProviderManifest.MaxLengthFacetName
                                 )
-                                .MaxValue.Value;
+                                .MaxValue
+                                .Value;
                             if (newMaxLength > maxLength)
                             {
                                 type = primitiveType;

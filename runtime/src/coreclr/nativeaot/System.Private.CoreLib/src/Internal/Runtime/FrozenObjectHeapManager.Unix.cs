@@ -11,25 +11,29 @@ namespace Internal.Runtime
         {
             // The shim will return null for failure
             return (void*)
-                Interop.Sys.MMap(
-                    0,
-                    size,
-                    Interop.Sys.MemoryMappedProtections.PROT_NONE,
-                    Interop.Sys.MemoryMappedFlags.MAP_PRIVATE
-                        | Interop.Sys.MemoryMappedFlags.MAP_ANONYMOUS,
-                    -1,
-                    0
-                );
+                Interop
+                    .Sys
+                    .MMap(
+                        0,
+                        size,
+                        Interop.Sys.MemoryMappedProtections.PROT_NONE,
+                        Interop.Sys.MemoryMappedFlags.MAP_PRIVATE
+                            | Interop.Sys.MemoryMappedFlags.MAP_ANONYMOUS,
+                        -1,
+                        0
+                    );
         }
 
         static void* ClrVirtualCommit(void* pBase, nuint size)
         {
-            int result = Interop.Sys.MProtect(
-                (nint)pBase,
-                size,
-                Interop.Sys.MemoryMappedProtections.PROT_READ
-                    | Interop.Sys.MemoryMappedProtections.PROT_WRITE
-            );
+            int result = Interop
+                .Sys
+                .MProtect(
+                    (nint)pBase,
+                    size,
+                    Interop.Sys.MemoryMappedProtections.PROT_READ
+                        | Interop.Sys.MemoryMappedProtections.PROT_WRITE
+                );
 
             return result == 0 ? pBase : null;
         }

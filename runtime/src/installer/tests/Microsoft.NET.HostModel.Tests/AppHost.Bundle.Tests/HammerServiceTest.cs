@@ -68,7 +68,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hi Bellevue!");
+                .And
+                .HaveStdOutContaining("Hi Bellevue!");
 
             // Verify that the test DLL is loaded from the servicing location when being serviced
             Command
@@ -79,7 +80,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hi Bengaluru!");
+                .And
+                .HaveStdOutContaining("Hi Bengaluru!");
         }
 
         public class SharedTestState : SharedTestStateBase, IDisposable

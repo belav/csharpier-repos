@@ -120,20 +120,24 @@ namespace Microsoft.CodeAnalysis.Remote
                     }
                     catch (Exception e)
                     {
-                        hubClient.Logger.TraceEvent(
-                            TraceEventType.Error,
-                            1,
-                            $"Unable to find Roslyn ServiceHub process: {e.Message}"
-                        );
+                        hubClient
+                            .Logger
+                            .TraceEvent(
+                                TraceEventType.Error,
+                                1,
+                                $"Unable to find Roslyn ServiceHub process: {e.Message}"
+                            );
                     }
                 }
                 else
                 {
-                    hubClient.Logger.TraceEvent(
-                        TraceEventType.Error,
-                        1,
-                        "Roslyn ServiceHub process initialization failed."
-                    );
+                    hubClient
+                        .Logger
+                        .TraceEvent(
+                            TraceEventType.Error,
+                            1,
+                            "Roslyn ServiceHub process initialization failed."
+                        );
                 }
 
                 if (configuration.HasFlag(RemoteProcessConfiguration.EnableSolutionCrawler))

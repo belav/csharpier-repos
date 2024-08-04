@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Remote
     internal class RemoteWorkspaceManager
     {
         internal static readonly ImmutableArray<Assembly> RemoteHostAssemblies = MefHostServices
-            .DefaultAssemblies.Add(typeof(AspNetCoreEmbeddedLanguageClassifier).Assembly)
+            .DefaultAssemblies
+            .Add(typeof(AspNetCoreEmbeddedLanguageClassifier).Assembly)
             .Add(typeof(BrokeredServiceBase).Assembly)
             .Add(typeof(RemoteWorkspacesResources).Assembly);
 

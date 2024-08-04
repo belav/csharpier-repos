@@ -262,10 +262,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 type.IsParentKind(SyntaxKind.ObjectCreationExpression)
                 && type.Parent.IsParentKind(SyntaxKind.EqualsValueClause)
                 && type.Parent.Parent.IsParentKind(SyntaxKind.VariableDeclarator)
-                && type.Parent.Parent.Parent.IsParentKind(
-                    SyntaxKind.VariableDeclaration,
-                    out variableDeclaration
-                )
+                && type.Parent
+                    .Parent
+                    .Parent
+                    .IsParentKind(SyntaxKind.VariableDeclaration, out variableDeclaration)
                 && variableDeclaration.IsParentKind(SyntaxKind.FieldDeclaration)
             )
             {

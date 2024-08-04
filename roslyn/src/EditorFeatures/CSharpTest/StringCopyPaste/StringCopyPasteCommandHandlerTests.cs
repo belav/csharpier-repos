@@ -31,14 +31,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
     {
         internal sealed class StringCopyPasteTestState : AbstractCommandHandlerTestState
         {
-            private static readonly TestComposition s_composition =
-                EditorTestCompositions.EditorFeaturesWpf.AddParts(
-                    typeof(StringCopyPasteCommandHandler)
-                );
+            private static readonly TestComposition s_composition = EditorTestCompositions
+                .EditorFeaturesWpf
+                .AddParts(typeof(StringCopyPasteCommandHandler));
 
             private static readonly TestComposition s_compositionWithMockCopyPasteService =
                 EditorTestCompositions
-                    .EditorFeaturesWpf.RemoveExcludedPartTypes(typeof(WpfStringCopyPasteService))
+                    .EditorFeaturesWpf
+                    .RemoveExcludedPartTypes(typeof(WpfStringCopyPasteService))
                     .AddParts(typeof(TestStringCopyPasteService))
                     .AddParts(typeof(StringCopyPasteCommandHandler));
 
@@ -120,9 +120,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                     as TestStringCopyPasteService;
                 service?.TrySetClipboardData(StringCopyPasteCommandHandler.KeyAndVersion, "");
 
-                var copyDocument = this.Workspace.Documents.FirstOrDefault(d =>
-                    d.AnnotatedSpans.ContainsKey("Copy")
-                );
+                var copyDocument = this.Workspace
+                    .Documents
+                    .FirstOrDefault(d => d.AnnotatedSpans.ContainsKey("Copy"));
                 if (copyDocument != null)
                 {
                     Assert.Null(pasteText);

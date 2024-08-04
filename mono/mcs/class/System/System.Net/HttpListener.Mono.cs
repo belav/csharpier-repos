@@ -118,8 +118,9 @@ namespace System.Net
                 if (tlsProvider == null)
                     tlsProvider = MonoTlsProviderFactory.GetProvider();
                 var settings = (tlsSettings ?? MonoTlsSettings.DefaultSettings).Clone();
-                settings.RemoteCertificateValidationCallback =
-                    MNS.Private.CallbackHelpers.PublicToMono(callback);
+                settings.RemoteCertificateValidationCallback = MNS.Private
+                    .CallbackHelpers
+                    .PublicToMono(callback);
                 return new SslStream(innerStream, ownsStream, tlsProvider, settings);
             }
 #else

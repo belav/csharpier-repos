@@ -636,9 +636,9 @@ namespace System.ServiceModel.Security
 
             Fx.Assert(openCharIndex > 0, "");
 
-            byte[] splicedBuffer = DiagnosticUtility.Utility.AllocateByteArray(
-                checked(middle.Length + wrapperLength - 1)
-            );
+            byte[] splicedBuffer = DiagnosticUtility
+                .Utility
+                .AllocateByteArray(checked(middle.Length + wrapperLength - 1));
             int offset = 0;
             int count = openCharIndex - 1;
             Buffer.BlockCopy(wrapper, 0, splicedBuffer, offset, count);

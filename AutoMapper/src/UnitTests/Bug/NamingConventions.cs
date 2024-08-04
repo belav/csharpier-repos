@@ -28,8 +28,10 @@ public class RemoveNameSplitMapper : NonValidatingSpecBase
     public void Should_not_validate() =>
         Should
             .Throw<AutoMapperConfigurationException>(AssertConfigurationIsValid)
-            .Errors.Single()
-            .UnmappedPropertyNames.Single()
+            .Errors
+            .Single()
+            .UnmappedPropertyNames
+            .Single()
             .ShouldBe(nameof(Destination.InnerSourceValue));
 }
 
@@ -58,7 +60,8 @@ public class DisableNamingConvention : NonValidatingSpecBase
         new Action(Mapper.ConfigurationProvider.AssertConfigurationIsValid)
             .ShouldThrow<AutoMapperConfigurationException>()
             .Errors[0]
-            .UnmappedPropertyNames.ShouldContain("COMPANY_Name");
+            .UnmappedPropertyNames
+            .ShouldContain("COMPANY_Name");
 }
 
 public class Neda

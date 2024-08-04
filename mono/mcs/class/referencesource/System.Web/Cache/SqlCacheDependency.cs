@@ -72,9 +72,10 @@ namespace System.Web.Caching
                 "Depend on key="
                     + GetDependKey(databaseEntryName, tableName)
                     + "; value="
-                    + HttpRuntime.Cache.InternalCache.Get(
-                        GetDependKey(databaseEntryName, tableName)
-                    )
+                    + HttpRuntime
+                        .Cache
+                        .InternalCache
+                        .Get(GetDependKey(databaseEntryName, tableName))
             );
 
             // Permission checking is done in GetDependKey()
@@ -83,9 +84,10 @@ namespace System.Web.Caching
             _sql7DepInfo._database = databaseEntryName;
             _sql7DepInfo._table = tableName;
 
-            object o = HttpRuntime.Cache.InternalCache.Get(
-                GetDependKey(databaseEntryName, tableName)
-            );
+            object o = HttpRuntime
+                .Cache
+                .InternalCache
+                .Get(GetDependKey(databaseEntryName, tableName));
             if (o == null)
             {
                 // If the cache entry can't be found, this cache dependency will be set to CHANGED already.
@@ -1850,9 +1852,9 @@ namespace System.Web.Caching
                         ? SQL_REGISTER_TABLE_SP_DBO
                         : SQL_UNREGISTER_TABLE_SP_DBO;
                     sqlCmd.CommandType = CommandType.StoredProcedure;
-                    sqlCmd.Parameters.Add(
-                        new SqlParameter("@tableName", SqlDbType.NVarChar, table.Length)
-                    );
+                    sqlCmd
+                        .Parameters
+                        .Add(new SqlParameter("@tableName", SqlDbType.NVarChar, table.Length));
                     sqlCmd.Parameters[0].Value = table;
                 }
                 else

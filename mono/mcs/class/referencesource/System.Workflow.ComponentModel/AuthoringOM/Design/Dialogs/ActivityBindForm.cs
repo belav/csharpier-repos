@@ -1339,10 +1339,13 @@ namespace System.Workflow.ComponentModel.Design
                 for (int i = 0; i < memberTypes.Images.Count; i++)
                 {
                     Image image = memberTypes.Images[i];
-                    this.TreeView.ImageList.Images.Add(
-                        string.Format(CultureInfo.InvariantCulture, MemberTypeFormat, i),
-                        image
-                    ); //member type key is non-localizable
+                    this.TreeView
+                        .ImageList
+                        .Images
+                        .Add(
+                            string.Format(CultureInfo.InvariantCulture, MemberTypeFormat, i),
+                            image
+                        ); //member type key is non-localizable
                 }
             }
 
@@ -1382,8 +1385,10 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     node.RefreshNode();
                     int imageNumber = (int)memberNode.MemberKind + (int)memberNode.MemberAccessKind;
-                    node.ImageIndex = node.SelectedImageIndex =
-                        this.TreeView.ImageList.Images.IndexOfKey(
+                    node.ImageIndex = node.SelectedImageIndex = this.TreeView
+                        .ImageList
+                        .Images
+                        .IndexOfKey(
                             string.Format(
                                 CultureInfo.InvariantCulture,
                                 MemberTypeFormat,
@@ -1440,10 +1445,9 @@ namespace System.Workflow.ComponentModel.Design
                             int indexOfOpenBracket = currentPathInfo.Path.IndexOf('[');
                             if (indexOfOpenBracket != -1)
                             {
-                                string indexPropertyName = currentPathInfo.Path.Substring(
-                                    0,
-                                    indexOfOpenBracket
-                                );
+                                string indexPropertyName = currentPathInfo
+                                    .Path
+                                    .Substring(0, indexOfOpenBracket);
                                 if (node.Text.Equals(indexPropertyName, StringComparison.Ordinal))
                                 {
                                     //need to get back to the parent and select a different child with an index
@@ -1451,10 +1455,8 @@ namespace System.Workflow.ComponentModel.Design
                                     if (
                                         i > 0
                                         && pathInfoList[i - 1]
-                                            .Path.Equals(
-                                                indexPropertyName,
-                                                StringComparison.Ordinal
-                                            )
+                                            .Path
+                                            .Equals(indexPropertyName, StringComparison.Ordinal)
                                     )
                                         node = node.Parent as WorkflowOutlineNode;
                                 }

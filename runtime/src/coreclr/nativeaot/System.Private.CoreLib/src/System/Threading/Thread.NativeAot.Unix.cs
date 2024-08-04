@@ -94,11 +94,13 @@ namespace System.Threading
             _stopped = new ManualResetEvent(false);
 
             if (
-                !Interop.Sys.CreateThread(
-                    (IntPtr)_startHelper!._maxStackSize,
-                    &ThreadEntryPoint,
-                    (IntPtr)thisThreadHandle
-                )
+                !Interop
+                    .Sys
+                    .CreateThread(
+                        (IntPtr)_startHelper!._maxStackSize,
+                        &ThreadEntryPoint,
+                        (IntPtr)thisThreadHandle
+                    )
             )
             {
                 return false;

@@ -34,29 +34,33 @@ namespace System.Security.Cryptography
             CheckDisposed();
 
             using (
-                SafeEvpCipherCtxHandle ctx = Interop.Crypto.EvpCipherCreatePartial(
-                    GetCipher(_key.Length * 8)
-                )
+                SafeEvpCipherCtxHandle ctx = Interop
+                    .Crypto
+                    .EvpCipherCreatePartial(GetCipher(_key.Length * 8))
             )
             {
                 Interop.Crypto.CheckValidOpenSslHandle(ctx);
 
                 // We need to set mode to encryption before setting the tag and nonce length
                 // otherwise older versions of OpenSSL (i.e. 1.0.1f which can be found on Ubuntu 14.04) will fail
-                Interop.Crypto.EvpCipherSetKeyAndIV(
-                    ctx,
-                    Span<byte>.Empty,
-                    Span<byte>.Empty,
-                    Interop.Crypto.EvpCipherDirection.Encrypt
-                );
+                Interop
+                    .Crypto
+                    .EvpCipherSetKeyAndIV(
+                        ctx,
+                        Span<byte>.Empty,
+                        Span<byte>.Empty,
+                        Interop.Crypto.EvpCipherDirection.Encrypt
+                    );
                 Interop.Crypto.EvpCipherSetCcmTagLength(ctx, tag.Length);
                 Interop.Crypto.EvpCipherSetCcmNonceLength(ctx, nonce.Length);
-                Interop.Crypto.EvpCipherSetKeyAndIV(
-                    ctx,
-                    _key,
-                    nonce,
-                    Interop.Crypto.EvpCipherDirection.NoChange
-                );
+                Interop
+                    .Crypto
+                    .EvpCipherSetKeyAndIV(
+                        ctx,
+                        _key,
+                        nonce,
+                        Interop.Crypto.EvpCipherDirection.NoChange
+                    );
 
                 if (associatedData.Length != 0)
                 {
@@ -64,12 +68,9 @@ namespace System.Security.Cryptography
                     Interop.Crypto.EvpCipherSetInputLength(ctx, plaintext.Length);
 
                     if (
-                        !Interop.Crypto.EvpCipherUpdate(
-                            ctx,
-                            Span<byte>.Empty,
-                            out _,
-                            associatedData
-                        )
+                        !Interop
+                            .Crypto
+                            .EvpCipherUpdate(ctx, Span<byte>.Empty, out _, associatedData)
                     )
                     {
                         throw Interop.Crypto.CreateOpenSslCryptographicException();
@@ -77,23 +78,22 @@ namespace System.Security.Cryptography
                 }
 
                 if (
-                    !Interop.Crypto.EvpCipherUpdate(
-                        ctx,
-                        ciphertext,
-                        out int ciphertextBytesWritten,
-                        plaintext
-                    )
+                    !Interop
+                        .Crypto
+                        .EvpCipherUpdate(ctx, ciphertext, out int ciphertextBytesWritten, plaintext)
                 )
                 {
                     throw Interop.Crypto.CreateOpenSslCryptographicException();
                 }
 
                 if (
-                    !Interop.Crypto.EvpCipherFinalEx(
-                        ctx,
-                        ciphertext.Slice(ciphertextBytesWritten),
-                        out int bytesWritten
-                    )
+                    !Interop
+                        .Crypto
+                        .EvpCipherFinalEx(
+                            ctx,
+                            ciphertext.Slice(ciphertextBytesWritten),
+                            out int bytesWritten
+                        )
                 )
                 {
                     throw Interop.Crypto.CreateOpenSslCryptographicException();
@@ -124,21 +124,23 @@ namespace System.Security.Cryptography
             CheckDisposed();
 
             using (
-                SafeEvpCipherCtxHandle ctx = Interop.Crypto.EvpCipherCreatePartial(
-                    GetCipher(_key.Length * 8)
-                )
+                SafeEvpCipherCtxHandle ctx = Interop
+                    .Crypto
+                    .EvpCipherCreatePartial(GetCipher(_key.Length * 8))
             )
             {
                 Interop.Crypto.CheckValidOpenSslHandle(ctx);
                 Interop.Crypto.EvpCipherSetCcmNonceLength(ctx, nonce.Length);
                 Interop.Crypto.EvpCipherSetCcmTag(ctx, tag);
 
-                Interop.Crypto.EvpCipherSetKeyAndIV(
-                    ctx,
-                    _key,
-                    nonce,
-                    Interop.Crypto.EvpCipherDirection.Decrypt
-                );
+                Interop
+                    .Crypto
+                    .EvpCipherSetKeyAndIV(
+                        ctx,
+                        _key,
+                        nonce,
+                        Interop.Crypto.EvpCipherDirection.Decrypt
+                    );
 
                 if (associatedData.Length != 0)
                 {
@@ -146,12 +148,9 @@ namespace System.Security.Cryptography
                     Interop.Crypto.EvpCipherSetInputLength(ctx, ciphertext.Length);
 
                     if (
-                        !Interop.Crypto.EvpCipherUpdate(
-                            ctx,
-                            Span<byte>.Empty,
-                            out _,
-                            associatedData
-                        )
+                        !Interop
+                            .Crypto
+                            .EvpCipherUpdate(ctx, Span<byte>.Empty, out _, associatedData)
                     )
                     {
                         throw Interop.Crypto.CreateOpenSslCryptographicException();
@@ -159,12 +158,9 @@ namespace System.Security.Cryptography
                 }
 
                 if (
-                    !Interop.Crypto.EvpCipherUpdate(
-                        ctx,
-                        plaintext,
-                        out int plaintextBytesWritten,
-                        ciphertext
-                    )
+                    !Interop
+                        .Crypto
+                        .EvpCipherUpdate(ctx, plaintext, out int plaintextBytesWritten, ciphertext)
                 )
                 {
                     plaintext.Clear();

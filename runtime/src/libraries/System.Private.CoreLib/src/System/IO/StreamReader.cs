@@ -1092,9 +1092,9 @@ namespace System.IO
                 }
                 else if ((arrayPoolBuffer.Length - arrayPoolBufferPos) < (charLen - charPos))
                 {
-                    char[] newBuffer = ArrayPool<char>.Shared.Rent(
-                        checked(arrayPoolBufferPos + charLen - charPos)
-                    );
+                    char[] newBuffer = ArrayPool<char>
+                        .Shared
+                        .Rent(checked(arrayPoolBufferPos + charLen - charPos));
                     arrayPoolBuffer.AsSpan(0, arrayPoolBufferPos).CopyTo(newBuffer);
                     ArrayPool<char>.Shared.Return(arrayPoolBuffer);
                     arrayPoolBuffer = newBuffer;

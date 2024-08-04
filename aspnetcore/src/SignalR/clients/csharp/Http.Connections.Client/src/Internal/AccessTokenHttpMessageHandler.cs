@@ -31,10 +31,9 @@ internal sealed class AccessTokenHttpMessageHandler : DelegatingHandler
             ||
             // Negotiate redirects likely will have a new access token so let's always grab a (potentially) new access token on negotiate
 #if NET5_0_OR_GREATER
-            request.Options.TryGetValue(
-                new HttpRequestOptionsKey<bool>("IsNegotiate"),
-                out var value
-            )
+            request
+                .Options
+                .TryGetValue(new HttpRequestOptionsKey<bool>("IsNegotiate"), out var value)
                 && value == true
 #else
             request.Properties.TryGetValue("IsNegotiate", out var value) && value is true

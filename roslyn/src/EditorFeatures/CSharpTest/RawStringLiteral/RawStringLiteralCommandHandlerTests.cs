@@ -18,10 +18,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
     {
         internal sealed class RawStringLiteralTestState : AbstractCommandHandlerTestState
         {
-            private static readonly TestComposition s_composition =
-                EditorTestCompositions.EditorFeaturesWpf.AddParts(
-                    typeof(RawStringLiteralCommandHandler)
-                );
+            private static readonly TestComposition s_composition = EditorTestCompositions
+                .EditorFeaturesWpf
+                .AddParts(typeof(RawStringLiteralCommandHandler));
 
             private readonly RawStringLiteralCommandHandler _commandHandler;
 

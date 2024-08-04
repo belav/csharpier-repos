@@ -155,9 +155,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
                     return false;
             }
 
-            endOfLineTrivia = secondBrace.LeadingTrivia.Last(t =>
-                t.IsKind(SyntaxKind.EndOfLineTrivia)
-            );
+            endOfLineTrivia = secondBrace
+                .LeadingTrivia
+                .Last(t => t.IsKind(SyntaxKind.EndOfLineTrivia));
             return endOfLineTrivia != default;
         }
 

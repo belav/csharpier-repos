@@ -49,13 +49,15 @@ public class ResponseDrainingTests : TestApplicationErrorLoggerLoggedTest
                 );
 
 #pragma warning disable 0618 // TODO: Repalce OnWriterCompleted
-                transportConnection.Output.OnWriterCompleted(
-                    (ex, state) =>
-                    {
-                        ((TaskCompletionSource)state).SetResult();
-                    },
-                    outputBufferedTcs
-                );
+                transportConnection
+                    .Output
+                    .OnWriterCompleted(
+                        (ex, state) =>
+                        {
+                            ((TaskCompletionSource)state).SetResult();
+                        },
+                        outputBufferedTcs
+                    );
 #pragma warning restore
 
                 await connection.Send("GET / HTTP/1.1", "Host:", "Connection: close", "", "");

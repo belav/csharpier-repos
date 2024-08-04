@@ -29,9 +29,9 @@ namespace System.Workflow.Runtime.Hosting
             if (null == Transaction.Current)
                 tx = new CommittableTransaction();
             else
-                tx = Transaction.Current.DependentClone(
-                    DependentCloneOption.BlockCommitUntilComplete
-                );
+                tx = Transaction
+                    .Current
+                    .DependentClone(DependentCloneOption.BlockCommitUntilComplete);
 
             try
             {

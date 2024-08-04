@@ -1554,7 +1554,8 @@ namespace System.Web.UI.WebControls
             {
                 object fitem = null;
                 PropertyInfo prop_item = source
-                    .DataSource.GetType()
+                    .DataSource
+                    .GetType()
                     .GetProperty(
                         "Item",
                         BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public,

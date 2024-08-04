@@ -176,10 +176,12 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(name))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "name",
-                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "name",
+                        SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                    );
             }
             if (contractType == null)
             {
@@ -191,11 +193,13 @@ namespace System.Workflow.Activities
 
             if (contextActivity == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                        )
+                    );
             }
 
             if (string.IsNullOrEmpty(ownerActivityName))
@@ -227,11 +231,13 @@ namespace System.Workflow.Activities
 
             if (owner == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                        )
+                    );
             }
 
             LogicalChannel logicalChannel = null;
@@ -290,11 +296,13 @@ namespace System.Workflow.Activities
             LogicalChannel logicalChannel = GetLogicalChannel(activity, endpoint, contractType);
             if (logicalChannel == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.Error_FailedToRegisterChannel, endpoint.Name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.Error_FailedToRegisterChannel, endpoint.Name)
+                        )
+                    );
             }
 
             return logicalChannel;

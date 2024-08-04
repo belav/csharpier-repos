@@ -153,9 +153,9 @@ public class Http3RequestTests : LoggedTest
             {
                 connectionIdFromFeature = context.Features.Get<IConnectionIdFeature>().ConnectionId;
 
-                var logger = context.RequestServices.GetRequiredService<
-                    ILogger<Http3RequestTests>
-                >();
+                var logger = context
+                    .RequestServices
+                    .GetRequiredService<ILogger<Http3RequestTests>>();
                 logger.LogInformation(expectedLogMessage);
 
                 await context.Response.WriteAsync("hello, world");
@@ -245,14 +245,16 @@ public class Http3RequestTests : LoggedTest
                     return;
                 }
 
-                _loggerProvider._scopeProvider?.ForEachScope(
-                    (scopeObject, loggerPovider) =>
-                    {
-                        loggerPovider.LogScope ??=
-                            scopeObject as IReadOnlyList<KeyValuePair<string, object>>;
-                    },
-                    _loggerProvider
-                );
+                _loggerProvider
+                    ._scopeProvider
+                    ?.ForEachScope(
+                        (scopeObject, loggerPovider) =>
+                        {
+                            loggerPovider.LogScope ??=
+                                scopeObject as IReadOnlyList<KeyValuePair<string, object>>;
+                        },
+                        _loggerProvider
+                    );
             }
         }
     }
@@ -533,11 +535,13 @@ public class Http3RequestTests : LoggedTest
         var builder = CreateHostBuilder(
             async context =>
             {
-                context.RequestAborted.Register(() =>
-                {
-                    Logger.LogInformation("Server received cancellation");
-                    cancelledTcs.SetResult();
-                });
+                context
+                    .RequestAborted
+                    .Register(() =>
+                    {
+                        Logger.LogInformation("Server received cancellation");
+                        cancelledTcs.SetResult();
+                    });
 
                 var body = context.Request.Body;
 
@@ -1025,11 +1029,14 @@ public class Http3RequestTests : LoggedTest
                     context =>
                     {
                         requestHeaders.Add(
-                            context.Request.Headers.ToDictionary(
-                                k => k.Key,
-                                k => k.Value,
-                                StringComparer.OrdinalIgnoreCase
-                            )
+                            context
+                                .Request
+                                .Headers
+                                .ToDictionary(
+                                    k => k.Key,
+                                    k => k.Value,
+                                    StringComparer.OrdinalIgnoreCase
+                                )
                         );
                         return Task.CompletedTask;
                     },
@@ -1138,11 +1145,13 @@ public class Http3RequestTests : LoggedTest
         var builder = CreateHostBuilder(
             async context =>
             {
-                context.RequestAborted.Register(() =>
-                {
-                    Logger.LogInformation("Server received request aborted.");
-                    cancelledTcs.SetResult();
-                });
+                context
+                    .RequestAborted
+                    .Register(() =>
+                    {
+                        Logger.LogInformation("Server received request aborted.");
+                        cancelledTcs.SetResult();
+                    });
 
                 var requestBody = context.Request.Body;
                 var responseBody = context.Response.Body;
@@ -1354,11 +1363,13 @@ public class Http3RequestTests : LoggedTest
         var builder = CreateHostBuilder(
             async context =>
             {
-                context.RequestAborted.Register(() =>
-                {
-                    Logger.LogInformation("Server received request aborted.");
-                    cancelledTcs.SetResult();
-                });
+                context
+                    .RequestAborted
+                    .Register(() =>
+                    {
+                        Logger.LogInformation("Server received request aborted.");
+                        cancelledTcs.SetResult();
+                    });
 
                 var responseBody = context.Response.Body;
                 await responseBody.WriteAsync(TestData);
@@ -1705,18 +1716,22 @@ public class Http3RequestTests : LoggedTest
             response1.EnsureSuccessStatusCode();
 
             // Assert
-            var hasWriteLog = TestSink.Writes.Any(w =>
-                w.LoggerName
-                    == "Microsoft.AspNetCore.Server.Kestrel.Core.Internal.LoggingConnectionMiddleware"
-                && w.Message.StartsWith("WriteAsync", StringComparison.Ordinal)
-            );
+            var hasWriteLog = TestSink
+                .Writes
+                .Any(w =>
+                    w.LoggerName
+                        == "Microsoft.AspNetCore.Server.Kestrel.Core.Internal.LoggingConnectionMiddleware"
+                    && w.Message.StartsWith("WriteAsync", StringComparison.Ordinal)
+                );
             Assert.True(hasWriteLog);
 
-            var hasReadLog = TestSink.Writes.Any(w =>
-                w.LoggerName
-                    == "Microsoft.AspNetCore.Server.Kestrel.Core.Internal.LoggingConnectionMiddleware"
-                && w.Message.StartsWith("ReadAsync", StringComparison.Ordinal)
-            );
+            var hasReadLog = TestSink
+                .Writes
+                .Any(w =>
+                    w.LoggerName
+                        == "Microsoft.AspNetCore.Server.Kestrel.Core.Internal.LoggingConnectionMiddleware"
+                    && w.Message.StartsWith("ReadAsync", StringComparison.Ordinal)
+                );
             Assert.True(hasReadLog);
 
             await host.StopAsync();
@@ -1815,9 +1830,9 @@ public class Http3RequestTests : LoggedTest
                             return context =>
                             {
                                 connectionStartedTcs.SetResult();
-                                context.ConnectionClosed.Register(
-                                    () => connectionClosedTcs.SetResult()
-                                );
+                                context
+                                    .ConnectionClosed
+                                    .Register(() => connectionClosedTcs.SetResult());
                                 return next(context);
                             };
                         });
@@ -2062,10 +2077,12 @@ public class Http3RequestTests : LoggedTest
             // Assert
             const int applicationAbortedConnectionId = 6;
             Assert.Single(
-                TestSink.Writes.Where(w =>
-                    w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Quic"
-                    && w.EventId == applicationAbortedConnectionId
-                )
+                TestSink
+                    .Writes
+                    .Where(w =>
+                        w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Quic"
+                        && w.EventId == applicationAbortedConnectionId
+                    )
             );
 
             syncPoint.Continue();

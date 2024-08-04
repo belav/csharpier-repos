@@ -67,52 +67,70 @@ namespace MonoTests.System.Data.Utils
             oleDBda.InsertCommand.Connection = Conn;
             oleDBda.UpdateCommand.Connection = Conn;
 
-            oleDBda.DeleteCommand.Parameters.Add(
-                new Sys.Data.OracleClient.OracleParameter(
-                    "EmployeeID",
-                    Sys.Data.OracleClient.OracleType.Int32
-                )
-            );
+            oleDBda
+                .DeleteCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.OracleClient.OracleParameter(
+                        "EmployeeID",
+                        Sys.Data.OracleClient.OracleType.Int32
+                    )
+                );
             oleDBda.DeleteCommand.Parameters["EmployeeID"].SourceVersion = DataRowVersion.Original;
             oleDBda.DeleteCommand.Parameters["EmployeeID"].SourceColumn = "EmployeeID";
 
-            oleDBda.InsertCommand.Parameters.Add(
-                new Sys.Data.OracleClient.OracleParameter(
-                    "LastName",
-                    Sys.Data.OracleClient.OracleType.VarChar,
-                    20
-                )
-            );
-            oleDBda.InsertCommand.Parameters.Add(
-                new Sys.Data.OracleClient.OracleParameter(
-                    "FirstName",
-                    Sys.Data.OracleClient.OracleType.VarChar,
-                    10
-                )
-            );
-            oleDBda.InsertCommand.Parameters.Add(
-                new Sys.Data.OracleClient.OracleParameter(
-                    "EmployeeID",
-                    Sys.Data.OracleClient.OracleType.Int32
-                )
-            );
+            oleDBda
+                .InsertCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.OracleClient.OracleParameter(
+                        "LastName",
+                        Sys.Data.OracleClient.OracleType.VarChar,
+                        20
+                    )
+                );
+            oleDBda
+                .InsertCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.OracleClient.OracleParameter(
+                        "FirstName",
+                        Sys.Data.OracleClient.OracleType.VarChar,
+                        10
+                    )
+                );
+            oleDBda
+                .InsertCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.OracleClient.OracleParameter(
+                        "EmployeeID",
+                        Sys.Data.OracleClient.OracleType.Int32
+                    )
+                );
             oleDBda.InsertCommand.Parameters["EmployeeID"].SourceColumn = "EmployeeID";
             oleDBda.InsertCommand.Parameters["LastName"].SourceColumn = "LastName";
             oleDBda.InsertCommand.Parameters["FirstName"].SourceColumn = "FirstName";
 
-            oleDBda.UpdateCommand.Parameters.Add(
-                new Sys.Data.OracleClient.OracleParameter(
-                    "Title",
-                    Sys.Data.OracleClient.OracleType.VarChar,
-                    30
-                )
-            );
-            oleDBda.UpdateCommand.Parameters.Add(
-                new Sys.Data.OracleClient.OracleParameter(
-                    "EmployeeID",
-                    Sys.Data.OracleClient.OracleType.Int32
-                )
-            );
+            oleDBda
+                .UpdateCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.OracleClient.OracleParameter(
+                        "Title",
+                        Sys.Data.OracleClient.OracleType.VarChar,
+                        30
+                    )
+                );
+            oleDBda
+                .UpdateCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.OracleClient.OracleParameter(
+                        "EmployeeID",
+                        Sys.Data.OracleClient.OracleType.Int32
+                    )
+                );
             oleDBda.UpdateCommand.Parameters["EmployeeID"].SourceColumn = "EmployeeID";
             oleDBda.UpdateCommand.Parameters["Title"].SourceColumn = "Title";
 
@@ -520,7 +538,8 @@ namespace MonoTests.System.Data.Utils
                 {
                     dsExpected
                         .Tables[dsExpected.Tables.Count - 1]
-                        .Columns.Add(new DataColumn(Idr.GetName(i), Idr.GetFieldType(i)));
+                        .Columns
+                        .Add(new DataColumn(Idr.GetName(i), Idr.GetFieldType(i)));
                     if (ReadSchemaOnly)
                     { // add schema info
                         dsExpected.Tables[dsExpected.Tables.Count - 1].Columns[i].AllowDBNull =
@@ -829,7 +848,8 @@ namespace MonoTests.System.Data.Utils
                 BeginCase("DBConcurrencyException - Insert");
                 dsResultException
                     .Tables[0]
-                    .Rows.Add(new object[] { 9996, "Ofer", "Borshtein", "Insert" });
+                    .Rows
+                    .Add(new object[] { 9996, "Ofer", "Borshtein", "Insert" });
                 //no row with row version Insert exists - records affected = 0
                 NumberOfAffectedRows = -1;
                 try
@@ -1063,7 +1083,8 @@ namespace MonoTests.System.Data.Utils
                 BeginCase("DBConcurrencyException - Insert");
                 dsResultException
                     .Tables[0]
-                    .Rows.Add(new object[] { 9996, "Ofer", "Borshtein", "Insert" });
+                    .Rows
+                    .Add(new object[] { 9996, "Ofer", "Borshtein", "Insert" });
                 //no row with row version Insert exists - records affected = 0
                 NumberOfAffectedRows = -1;
                 try
@@ -1306,7 +1327,8 @@ namespace MonoTests.System.Data.Utils
                 BeginCase("DBConcurrencyException - Insert");
                 dsResultException
                     .Tables[0]
-                    .Rows.Add(new object[] { 9996, "Ofer", "Borshtein", "Insert" });
+                    .Rows
+                    .Add(new object[] { 9996, "Ofer", "Borshtein", "Insert" });
                 dsResultException.Tables[0].Rows.CopyTo(drArr, 0);
                 //no row with row version Insert exists - records affected = 0
                 NumberOfAffectedRows = -1;
@@ -1547,7 +1569,8 @@ namespace MonoTests.System.Data.Utils
                 BeginCase("DBConcurrencyException - Insert");
                 dsResultException
                     .Tables[0]
-                    .Rows.Add(new object[] { 9996, "Ofer", "Borshtein", "Insert" });
+                    .Rows
+                    .Add(new object[] { 9996, "Ofer", "Borshtein", "Insert" });
                 //no row with row version Insert exists - records affected = 0
                 NumberOfAffectedRows = -1;
                 try

@@ -139,14 +139,16 @@ namespace System
             CultureInfo? culture,
             object?[]? activationAttributes
         ) =>
-            ReflectionAugments.ReflectionCoreCallbacks.ActivatorCreateInstance(
-                type,
-                bindingAttr,
-                binder,
-                args,
-                culture,
-                activationAttributes
-            );
+            ReflectionAugments
+                .ReflectionCoreCallbacks
+                .ActivatorCreateInstance(
+                    type,
+                    bindingAttr,
+                    binder,
+                    args,
+                    culture,
+                    activationAttributes
+                );
 
         [RequiresUnreferencedCode("Type and its constructor could be removed")]
         public static ObjectHandle CreateInstance(string assemblyName, string typeName)

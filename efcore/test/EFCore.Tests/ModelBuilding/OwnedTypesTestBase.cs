@@ -230,7 +230,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(Customer));
             var ownee = owner
                 .FindNavigation(nameof(Customer.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Equal(
                 nameof(CustomerDetails.CustomerId),
                 ownee.FindPrimaryKey().Properties.Single().Name
@@ -270,7 +271,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(Customer));
             var owned = owner
                 .FindNavigation(nameof(Customer.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Null(owner.FindProperty("foo"));
             Assert.Contains("foo", owned.GetProperties().Select(p => p.Name));
             Assert.Equal(PropertyAccessMode.FieldDuringConstruction, owned.GetPropertyAccessMode());
@@ -293,7 +295,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(Customer));
             var owned = owner
                 .FindNavigation(nameof(Customer.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Equal(
                 nameof(CustomerDetails.Id),
                 owned.FindPrimaryKey().Properties.Single().Name
@@ -1223,17 +1226,21 @@ public abstract partial class ModelBuilderTest
             Assert.Equal(
                 typeof(int),
                 bookOwnership1
-                    .DeclaringEntityType.GetForeignKeys()
+                    .DeclaringEntityType
+                    .GetForeignKeys()
                     .Single()
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ClrType
             );
             Assert.Equal(
                 typeof(int),
                 bookOwnership1
-                    .DeclaringEntityType.GetForeignKeys()
+                    .DeclaringEntityType
+                    .GetForeignKeys()
                     .Single()
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ClrType
             );
             Assert.Equal("Bar", bookOwnership1["Foo"]);
@@ -1263,7 +1270,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(Customer));
             var owned = owner
                 .FindNavigation(nameof(Customer.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Null(owned.BaseType);
             Assert.Null(owned.GetDiscriminatorPropertyName());
             Assert.NotNull(model.FindEntityType(typeof(CustomerDetails)));
@@ -1295,7 +1303,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(Customer));
             var owned = owner
                 .FindNavigation(nameof(Customer.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Null(owned.BaseType);
             Assert.Null(owned.GetDiscriminatorPropertyName());
             Assert.NotNull(model.FindEntityType(typeof(CustomerDetails)));
@@ -1324,7 +1333,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(OrderCombination));
             var owned = owner
                 .FindNavigation(nameof(OrderCombination.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Empty(owned.GetDirectlyDerivedTypes());
             Assert.Null(owned.GetDiscriminatorPropertyName());
             var navToCustomerDetails = model
@@ -1367,7 +1377,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(OrderCombination));
             var owned = owner
                 .FindNavigation(nameof(OrderCombination.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Empty(owned.GetDirectlyDerivedTypes());
             Assert.Null(owned.GetDiscriminatorPropertyName());
             var navToCustomerDetails = model
@@ -1746,16 +1757,20 @@ public abstract partial class ModelBuilderTest
             Assert.Null(bookOwnership2.DependentToPrincipal);
 
             var bookLabel1Ownership1 = bookOwnership1
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
             var bookLabel1Ownership2 = bookOwnership1
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
             var bookLabel2Ownership1 = bookOwnership2
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
             var bookLabel2Ownership2 = bookOwnership2
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
 
             Assert.Null(bookLabel1Ownership1.DependentToPrincipal);
@@ -1770,16 +1785,20 @@ public abstract partial class ModelBuilderTest
             );
 
             var bookLabel1Ownership1Subownership = bookLabel1Ownership1
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
             var bookLabel1Ownership2Subownership = bookLabel1Ownership2
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
             var bookLabel2Ownership1Subownership = bookLabel2Ownership1
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
             var bookLabel2Ownership2Subownership = bookLabel2Ownership2
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
 
             Assert.NotSame(
@@ -1861,10 +1880,12 @@ public abstract partial class ModelBuilderTest
             Assert.Equal(nameof(BookLabel.Book), bookOwnership.DependentToPrincipal.Name);
 
             var bookLabelOwnership1 = bookOwnership
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
             var bookLabelOwnership2 = bookOwnership
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
 
             Assert.Null(bookLabelOwnership1.DependentToPrincipal);
@@ -1874,10 +1895,12 @@ public abstract partial class ModelBuilderTest
             );
 
             var bookLabel2Ownership1Subownership = bookLabelOwnership1
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.SpecialBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
             var bookLabel2Ownership2Subownership = bookLabelOwnership2
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
 
             Assert.NotNull(
@@ -1887,14 +1910,14 @@ public abstract partial class ModelBuilderTest
                 bookLabelOwnership2.DeclaringEntityType.FindNavigation(nameof(BookLabel.Book))
             );
             Assert.NotNull(
-                bookLabel2Ownership1Subownership.DeclaringEntityType.FindNavigation(
-                    nameof(BookLabel.Book)
-                )
+                bookLabel2Ownership1Subownership
+                    .DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.Book))
             );
             Assert.NotNull(
-                bookLabel2Ownership2Subownership.DeclaringEntityType.FindNavigation(
-                    nameof(BookLabel.Book)
-                )
+                bookLabel2Ownership2Subownership
+                    .DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.Book))
             );
             Assert.Equal(
                 nameof(SpecialBookLabel.AnotherBookLabel),
@@ -1934,7 +1957,8 @@ public abstract partial class ModelBuilderTest
                 .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
             var selfOwnership = bookLabelOwnership
-                .DeclaringEntityType.FindNavigation(nameof(BookLabel.AnotherBookLabel))
+                .DeclaringEntityType
+                .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
             Assert.NotSame(selfOwnership.PrincipalEntityType, selfOwnership.DeclaringEntityType);
             Assert.Equal(

@@ -84,16 +84,20 @@ namespace System.ServiceModel.ComIntegration
                     interfaceKey = Registry.ClassesRoot.OpenSubKey(keyName, false);
                 }
                 if (interfaceKey == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.InterfaceNotRegistered))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.InterfaceNotRegistered))
+                        );
                 string typeLibID = interfaceKey.GetValue("").ToString();
                 if (string.IsNullOrEmpty(typeLibID))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.NoTypeLibraryFoundForInterface)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.NoTypeLibraryFoundForInterface)
+                            )
+                        );
                 version = interfaceKey.GetValue("Version").ToString();
                 if (string.IsNullOrEmpty(version))
                     version = "1.0";
@@ -101,9 +105,11 @@ namespace System.ServiceModel.ComIntegration
                 Guid typeLibraryID;
                 if (!DiagnosticUtility.Utility.TryCreateGuid(typeLibID, out typeLibraryID))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.BadInterfaceRegistration))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.BadInterfaceRegistration))
+                        );
                 }
                 return typeLibraryID;
             }
@@ -153,15 +159,19 @@ namespace System.ServiceModel.ComIntegration
             }
             catch (FormatException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.BadInterfaceVersion))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.BadInterfaceVersion))
+                    );
             }
             catch (OverflowException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.BadInterfaceVersion))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.BadInterfaceVersion))
+                    );
             }
         }
 
@@ -180,9 +190,11 @@ namespace System.ServiceModel.ComIntegration
                 out otlb
             );
             if (hr != 0 || null == otlb)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new COMException(SR.GetString(SR.FailedToLoadTypeLibrary), hr)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new COMException(SR.GetString(SR.FailedToLoadTypeLibrary), hr)
+                    );
             return otlb as ITypeLib2;
         }
 
@@ -236,11 +248,13 @@ namespace System.ServiceModel.ComIntegration
                         if (String.IsNullOrEmpty(assembly))
                             generateNativeAssembly = true; // No custom data for this IID this is not a CLR typeLibrary
                         if (noAssemblyGeneration && generateNativeAssembly)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(SR.NativeTypeLibraryNotAllowed, typeLibraryID)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.NativeTypeLibraryNotAllowed, typeLibraryID)
+                                    )
+                                );
                         else if (!generateNativeAssembly)
                         {
                             ComPlusTLBImportTrace.Trace(
@@ -275,14 +289,16 @@ namespace System.ServiceModel.ComIntegration
             }
             catch (Exception e)
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.ComPlusTLBImportError,
-                    iid.ToString(),
-                    typeLibraryID.ToString(),
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.ComPlusTLBImportError,
+                        iid.ToString(),
+                        typeLibraryID.ToString(),
+                        e.ToString()
+                    );
                 throw;
             }
             finally
@@ -308,11 +324,11 @@ namespace System.ServiceModel.ComIntegration
 
         private bool NoCoClassAttributeOnType(ICustomAttributeProvider attrProvider)
         {
-            object[] attrs = System.ServiceModel.Description.ServiceReflector.GetCustomAttributes(
-                attrProvider,
-                typeof(CoClassAttribute),
-                false
-            );
+            object[] attrs = System
+                .ServiceModel
+                .Description
+                .ServiceReflector
+                .GetCustomAttributes(attrProvider, typeof(CoClassAttribute), false);
             if (attrs.Length == 0)
                 return true;
             else
@@ -363,11 +379,13 @@ namespace System.ServiceModel.ComIntegration
                         }
                     }
                     if (userDefinedType == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.UdtNotFoundInAssembly, typeDefId)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.UdtNotFoundInAssembly, typeDefId)
+                                )
+                            );
 
                     typeTable[typeDefId] = userDefinedType;
                 }
@@ -406,11 +424,13 @@ namespace System.ServiceModel.ComIntegration
                     if ((interfaceType == null) && (coClassInterface != null))
                         interfaceType = coClassInterface;
                     else if (interfaceType == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.InterfaceNotFoundInAssembly)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.InterfaceNotFoundInAssembly)
+                                )
+                            );
 
                     typeTable[iid] = interfaceType;
                 }
@@ -443,9 +463,13 @@ namespace System.ServiceModel.ComIntegration
                     }
                 }
                 if (interfaceType == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.InterfaceNotFoundInAssembly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.InterfaceNotFoundInAssembly)
+                            )
+                        );
             }
         }
 

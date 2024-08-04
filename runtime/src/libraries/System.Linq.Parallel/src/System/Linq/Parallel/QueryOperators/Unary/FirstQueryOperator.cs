@@ -38,9 +38,9 @@ namespace System.Linq.Parallel
         {
             Debug.Assert(child != null, "child data source cannot be null");
             _predicate = predicate;
-            _prematureMergeNeeded = Child.OrdinalIndexState.IsWorseThan(
-                OrdinalIndexState.Increasing
-            );
+            _prematureMergeNeeded = Child
+                .OrdinalIndexState
+                .IsWorseThan(OrdinalIndexState.Increasing);
         }
 
         //---------------------------------------------------------------------------------------

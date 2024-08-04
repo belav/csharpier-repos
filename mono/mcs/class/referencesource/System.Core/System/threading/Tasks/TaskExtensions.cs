@@ -81,7 +81,8 @@ namespace System.Threading.Tasks
                                 // When task.Result completes, take some action to set the completion state of tcs.Task.
                                 else
                                 {
-                                    task.Result.ContinueWith(
+                                    task.Result
+                                        .ContinueWith(
                                             _ =>
                                             {
                                                 // Copy completion/cancellation/exception info from task.Result to tcs.Task.
@@ -180,7 +181,8 @@ namespace System.Threading.Tasks
                                 // When task.Result completes, take some action to set the completion state of tcs.Task.
                                 else
                                 {
-                                    task.Result.ContinueWith(
+                                    task.Result
+                                        .ContinueWith(
                                             _ =>
                                             {
                                                 // Copy completion/cancellation/exception info from task.Result to tcs.Task.

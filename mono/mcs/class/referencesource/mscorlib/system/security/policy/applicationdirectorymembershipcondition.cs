@@ -103,18 +103,21 @@ namespace System.Security.Policy
         public SecurityElement ToXml(PolicyLevel level)
         {
             SecurityElement root = new SecurityElement("IMembershipCondition");
-            System.Security.Util.XMLUtil.AddClassAttribute(
-                root,
-                this.GetType(),
-                "System.Security.Policy.ApplicationDirectoryMembershipCondition"
-            );
+            System
+                .Security
+                .Util
+                .XMLUtil
+                .AddClassAttribute(
+                    root,
+                    this.GetType(),
+                    "System.Security.Policy.ApplicationDirectoryMembershipCondition"
+                );
             // If you hit this assert then most likely you are trying to change the name of this class.
             // This is ok as long as you change the hard coded string above and change the assert below.
             BCLDebug.Assert(
                 this.GetType()
-                    .FullName.Equals(
-                        "System.Security.Policy.ApplicationDirectoryMembershipCondition"
-                    ),
+                    .FullName
+                    .Equals("System.Security.Policy.ApplicationDirectoryMembershipCondition"),
                 "Class name changed!"
             );
 

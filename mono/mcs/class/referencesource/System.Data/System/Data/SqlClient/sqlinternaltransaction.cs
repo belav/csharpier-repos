@@ -47,9 +47,10 @@ namespace System.Data.SqlClient
         private WeakReference _parent; // weak ref to the outer transaction object; needs to be weak to allow GC to occur.
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        internal readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         internal bool RestoreBrokenConnection { get; set; }
         internal bool ConnectionHasBeenRestored { get; set; }

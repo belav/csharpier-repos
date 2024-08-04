@@ -336,10 +336,12 @@ abstract class C
             var matcher = CreateMatcher(compilation1, peAssemblySymbol);
 
             var f0 = peAssemblySymbol
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember("F");
             var g0 = peAssemblySymbol
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember("G");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
             var g1 = compilation1.GetMember<MethodSymbol>("C.G");

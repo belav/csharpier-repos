@@ -2223,7 +2223,8 @@ public class C
                 module =>
                 {
                     var methods = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                        .GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
                         .Where(m => m.MethodKind == MethodKind.Ordinary)
@@ -2342,7 +2343,8 @@ public struct S
                 module =>
                 {
                     var methods = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                        .GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
                         .Where(m => m.MethodKind == MethodKind.Ordinary)
@@ -2408,7 +2410,8 @@ public class C
                 module =>
                 {
                     var methods = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                        .GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
                         .Where(m => m.MethodKind == MethodKind.Ordinary)
@@ -2519,7 +2522,8 @@ public class C
                 module =>
                 {
                     var methods = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                        .GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
                         .Where(m => m.MethodKind == MethodKind.Ordinary)
@@ -2638,7 +2642,8 @@ public class C
                 module =>
                 {
                     var methods = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                        .GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
                         .Where(m => m.MethodKind == MethodKind.Ordinary)

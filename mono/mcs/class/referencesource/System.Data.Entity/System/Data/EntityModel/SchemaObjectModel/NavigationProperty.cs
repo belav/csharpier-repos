@@ -122,9 +122,13 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.BadNavigationProperty,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.BadNavigationPropertyRelationshipNotRelationship(
-                        _unresolvedRelationshipName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .BadNavigationPropertyRelationshipNotRelationship(
+                            _unresolvedRelationshipName
+                        )
                 );
                 return;
             }
@@ -135,10 +139,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.BadNavigationProperty,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.BadNavigationPropertyUndefinedRole(
-                        _unresolvedFromEndRole,
-                        _relationship.FQName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .BadNavigationPropertyUndefinedRole(
+                            _unresolvedFromEndRole,
+                            _relationship.FQName
+                        )
                 );
                 foundBothEnds = false;
             }
@@ -148,10 +156,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.BadNavigationProperty,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.BadNavigationPropertyUndefinedRole(
-                        _unresolvedToEndRole,
-                        _relationship.FQName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .BadNavigationPropertyUndefinedRole(
+                            _unresolvedToEndRole,
+                            _relationship.FQName
+                        )
                 );
 
                 foundBothEnds = false;
@@ -174,23 +186,30 @@ namespace System.Data.EntityModel.SchemaObjectModel
         {
             base.Validate();
 
-            System.Diagnostics.Debug.Assert(
-                _fromEnd != null && _toEnd != null,
-                "FromEnd and ToEnd must not be null in Validate. ResolveNames must have resolved it or added error"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    _fromEnd != null && _toEnd != null,
+                    "FromEnd and ToEnd must not be null in Validate. ResolveNames must have resolved it or added error"
+                );
 
             if (_fromEnd.Type != ParentElement)
             {
                 AddError(
                     ErrorCode.BadNavigationProperty,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.BadNavigationPropertyBadFromRoleType(
-                        this.Name,
-                        _fromEnd.Type.FQName,
-                        _fromEnd.Name,
-                        _relationship.FQName,
-                        ParentElement.FQName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .BadNavigationPropertyBadFromRoleType(
+                            this.Name,
+                            _fromEnd.Type.FQName,
+                            _fromEnd.Name,
+                            _relationship.FQName,
+                            ParentElement.FQName
+                        )
                 );
             }
 

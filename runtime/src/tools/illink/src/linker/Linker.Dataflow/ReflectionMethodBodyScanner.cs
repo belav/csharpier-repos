@@ -249,12 +249,14 @@ namespace Mono.Linker.Dataflow
             var callingMethodDefinition = origin.Provider as MethodDefinition;
             Debug.Assert(callingMethodDefinition != null);
 
-            bool requiresDataFlowAnalysis =
-                context.Annotations.FlowAnnotations.RequiresDataFlowAnalysis(
-                    calledMethodDefinition
-                );
-            var annotatedMethodReturnValue =
-                context.Annotations.FlowAnnotations.GetMethodReturnValue(calledMethodDefinition);
+            bool requiresDataFlowAnalysis = context
+                .Annotations
+                .FlowAnnotations
+                .RequiresDataFlowAnalysis(calledMethodDefinition);
+            var annotatedMethodReturnValue = context
+                .Annotations
+                .FlowAnnotations
+                .GetMethodReturnValue(calledMethodDefinition);
             Debug.Assert(
                 requiresDataFlowAnalysis
                     || annotatedMethodReturnValue.DynamicallyAccessedMemberTypes
@@ -344,10 +346,12 @@ namespace Mono.Linker.Dataflow
                         );
                     }
                     if (
-                        context.Annotations.DoesMethodRequireUnreferencedCode(
-                            calledMethodDefinition,
-                            out RequiresUnreferencedCodeAttribute? requiresUnreferencedCode
-                        )
+                        context
+                            .Annotations
+                            .DoesMethodRequireUnreferencedCode(
+                                calledMethodDefinition,
+                                out RequiresUnreferencedCodeAttribute? requiresUnreferencedCode
+                            )
                     )
                         MarkStep.ReportRequiresUnreferencedCode(
                             calledMethodDefinition.GetDisplayName(),
@@ -428,9 +432,10 @@ namespace Mono.Linker.Dataflow
                             {
                                 // We don't know anything about the type GetType was called on. Track this as a usual result of a method call without any annotations
                                 AddReturnValue(
-                                    context.Annotations.FlowAnnotations.GetMethodReturnValue(
-                                        calledMethodDefinition
-                                    )
+                                    context
+                                        .Annotations
+                                        .FlowAnnotations
+                                        .GetMethodReturnValue(calledMethodDefinition)
                                 );
                             }
                             else if (
@@ -462,19 +467,18 @@ namespace Mono.Linker.Dataflow
                                 // This should already be true for most cases (method params, fields, ...), but just in case
                                 reflectionMarker.MarkType(origin, staticType);
 
-                                var annotation =
-                                    markStep.DynamicallyAccessedMembersTypeHierarchy.ApplyDynamicallyAccessedMembersToTypeHierarchy(
-                                        staticType
-                                    );
+                                var annotation = markStep
+                                    .DynamicallyAccessedMembersTypeHierarchy
+                                    .ApplyDynamicallyAccessedMembersToTypeHierarchy(staticType);
 
                                 // Return a value which is "unknown type" with annotation. For now we'll use the return value node
                                 // for the method, which means we're loosing the information about which staticType this
                                 // started with. For now we don't need it, but we can add it later on.
                                 AddReturnValue(
-                                    context.Annotations.FlowAnnotations.GetMethodReturnValue(
-                                        calledMethodDefinition,
-                                        annotation
-                                    )
+                                    context
+                                        .Annotations
+                                        .FlowAnnotations
+                                        .GetMethodReturnValue(calledMethodDefinition, annotation)
                                 );
                             }
                         }
@@ -512,9 +516,9 @@ namespace Mono.Linker.Dataflow
                     )
                     {
                         if (
-                            !methodReturnValueWithMemberTypes.DynamicallyAccessedMemberTypes.HasFlag(
-                                annotatedMethodReturnValue.DynamicallyAccessedMemberTypes
-                            )
+                            !methodReturnValueWithMemberTypes
+                                .DynamicallyAccessedMemberTypes
+                                .HasFlag(annotatedMethodReturnValue.DynamicallyAccessedMemberTypes)
                         )
                             throw new InvalidOperationException(
                                 $"Internal trimming error: processing of call from {callingMethodDefinition.GetDisplayName()} to {calledMethod.GetDisplayName()} returned value which is not correctly annotated with the expected dynamic member access kinds."

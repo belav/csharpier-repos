@@ -30,20 +30,20 @@ namespace Microsoft.Interop.Analyzers
             context.EnableConcurrentExecution();
             context.RegisterCompilationStartAction(context =>
             {
-                INamedTypeSymbol? marshalType = context.Compilation.GetBestTypeByMetadataName(
-                    TypeNames.System_Runtime_InteropServices_Marshal
-                );
-                INamedTypeSymbol? generatedComClassAttribute =
-                    context.Compilation.GetBestTypeByMetadataName(
-                        TypeNames.GeneratedComClassAttribute
+                INamedTypeSymbol? marshalType = context
+                    .Compilation
+                    .GetBestTypeByMetadataName(TypeNames.System_Runtime_InteropServices_Marshal);
+                INamedTypeSymbol? generatedComClassAttribute = context
+                    .Compilation
+                    .GetBestTypeByMetadataName(TypeNames.GeneratedComClassAttribute);
+                INamedTypeSymbol? generatedComInterfaceAttribute = context
+                    .Compilation
+                    .GetBestTypeByMetadataName(TypeNames.GeneratedComInterfaceAttribute);
+                INamedTypeSymbol? comObjectType = context
+                    .Compilation
+                    .GetBestTypeByMetadataName(
+                        TypeNames.System_Runtime_InteropServices_Marshalling_ComObject
                     );
-                INamedTypeSymbol? generatedComInterfaceAttribute =
-                    context.Compilation.GetBestTypeByMetadataName(
-                        TypeNames.GeneratedComInterfaceAttribute
-                    );
-                INamedTypeSymbol? comObjectType = context.Compilation.GetBestTypeByMetadataName(
-                    TypeNames.System_Runtime_InteropServices_Marshalling_ComObject
-                );
 
                 List<Func<ITypeSymbol, bool>> sourceGeneratedComRecognizers = new();
                 if (generatedComClassAttribute is not null)
@@ -234,10 +234,12 @@ namespace Microsoft.Interop.Analyzers
                                                 Diagnostic.Create(
                                                     RuntimeComApisDoNotSupportSourceGeneratedCom,
                                                     diagnosticLocation,
-                                                    operation.TargetMethod.ToMinimalDisplayString(
-                                                        operation.SemanticModel,
-                                                        operation.Syntax.SpanStart
-                                                    ),
+                                                    operation
+                                                        .TargetMethod
+                                                        .ToMinimalDisplayString(
+                                                            operation.SemanticModel,
+                                                            operation.Syntax.SpanStart
+                                                        ),
                                                     targetType.ToMinimalDisplayString(
                                                         operation.SemanticModel,
                                                         operation.Syntax.SpanStart
@@ -255,10 +257,14 @@ namespace Microsoft.Interop.Analyzers
                 );
 
                 bool enableGeneratedComInterfaceComImportInterop =
-                    context.Options.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue(
-                        "build_property.EnableGeneratedComInterfaceComImportInterop",
-                        out string enableSourceGeneratedBuiltInInteropOption
-                    )
+                    context
+                        .Options
+                        .AnalyzerConfigOptionsProvider
+                        .GlobalOptions
+                        .TryGetValue(
+                            "build_property.EnableGeneratedComInterfaceComImportInterop",
+                            out string enableSourceGeneratedBuiltInInteropOption
+                        )
                     && bool.TryParse(
                         enableSourceGeneratedBuiltInInteropOption,
                         out bool enableSourceGeneratedBuiltInInterop
@@ -337,10 +343,12 @@ namespace Microsoft.Interop.Analyzers
                                 }
                                 else if (
                                     operand is IInvocationOperation invocation
-                                    && invocation.TargetMethod.Equals(
-                                        getObjectForIUnknown,
-                                        SymbolEqualityComparer.Default
-                                    )
+                                    && invocation
+                                        .TargetMethod
+                                        .Equals(
+                                            getObjectForIUnknown,
+                                            SymbolEqualityComparer.Default
+                                        )
                                 )
                                 {
                                     // The returned value from Marshal.GetObjectForIUnknown will always be a built-in COM object, which can't be cast to a source-generated COM type,
@@ -395,7 +403,8 @@ namespace Microsoft.Interop.Analyzers
                         if (expression.IsKind(SyntaxKind.GenericName))
                         {
                             location = ((GenericNameSyntax)expression)
-                                .TypeArgumentList.Arguments[ordinal]
+                                .TypeArgumentList
+                                .Arguments[ordinal]
                                 .GetLocation();
                         }
 

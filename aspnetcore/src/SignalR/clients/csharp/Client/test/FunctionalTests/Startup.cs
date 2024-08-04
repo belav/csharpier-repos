@@ -152,15 +152,17 @@ public class Startup
                 "/redirect/{*anything}",
                 context =>
                 {
-                    return context.Response.WriteAsync(
-                        JsonConvert.SerializeObject(
-                            new
-                            {
-                                url = $"{context.Request.Scheme}://{context.Request.Host}/authorizedHub",
-                                accessToken = GenerateJwtToken(),
-                            }
-                        )
-                    );
+                    return context
+                        .Response
+                        .WriteAsync(
+                            JsonConvert.SerializeObject(
+                                new
+                                {
+                                    url = $"{context.Request.Scheme}://{context.Request.Host}/authorizedHub",
+                                    accessToken = GenerateJwtToken(),
+                                }
+                            )
+                        );
                 }
             );
         });

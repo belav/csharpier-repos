@@ -222,23 +222,33 @@ namespace System.Runtime.Serialization
                 : base(type)
             {
                 if (type.IsDefined(Globals.TypeOfDataContractAttribute, false))
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.IXmlSerializableCannotHaveDataContract,
-                                DataContract.GetClrTypeFullName(type)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.IXmlSerializableCannotHaveDataContract,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
                             )
-                        )
-                    );
+                        );
                 if (type.IsDefined(Globals.TypeOfCollectionDataContractAttribute, false))
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.IXmlSerializableCannotHaveCollectionDataContract,
-                                DataContract.GetClrTypeFullName(type)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.IXmlSerializableCannotHaveCollectionDataContract,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
                             )
-                        )
-                    );
+                        );
                 XmlSchemaType xsdType;
                 bool hasRoot;
                 XmlQualifiedName stableName;
@@ -284,14 +294,16 @@ namespace System.Runtime.Serialization
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidDataContractException(
-                                SR.GetString(
-                                    SR.IsAnyCannotHaveXmlRoot,
-                                    DataContract.GetClrTypeFullName(UnderlyingType)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidDataContractException(
+                                    SR.GetString(
+                                        SR.IsAnyCannotHaveXmlRoot,
+                                        DataContract.GetClrTypeFullName(UnderlyingType)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -381,14 +393,19 @@ namespace System.Runtime.Serialization
                 null
             );
             if (ctor == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        SR.GetString(
-                            SR.IXmlSerializableMustHaveDefaultConstructor,
-                            DataContract.GetClrTypeFullName(type)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.GetString(
+                                SR.IXmlSerializableMustHaveDefaultConstructor,
+                                DataContract.GetClrTypeFullName(type)
+                            )
                         )
-                    )
-                );
+                    );
 
             return ctor;
         }
@@ -470,15 +487,17 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(
-                            SR.GetString(
-                                SR.PartialTrustIXmlSerializableTypeNotPublic,
-                                DataContract.GetClrTypeFullName(UnderlyingType)
-                            ),
-                            securityException
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(
+                                    SR.PartialTrustIXmlSerializableTypeNotPublic,
+                                    DataContract.GetClrTypeFullName(UnderlyingType)
+                                ),
+                                securityException
+                            )
+                        );
                 }
                 return true;
             }
@@ -487,15 +506,17 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(
-                            SR.GetString(
-                                SR.PartialTrustIXmlSerialzableNoPublicConstructor,
-                                DataContract.GetClrTypeFullName(UnderlyingType)
-                            ),
-                            securityException
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(
+                                    SR.PartialTrustIXmlSerialzableNoPublicConstructor,
+                                    DataContract.GetClrTypeFullName(UnderlyingType)
+                                ),
+                                securityException
+                            )
+                        );
                 }
                 return true;
             }

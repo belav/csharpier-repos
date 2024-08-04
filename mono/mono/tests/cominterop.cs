@@ -840,10 +840,12 @@ public class Tests
                     return 207;
                 if (mt.Status != 0)
                 {
-                    Console.Error.WriteLine(
-                        "after mono_test_cominterop_ccw_itest_foreign_thread Status = {0}",
-                        mt.Status
-                    );
+                    Console
+                        .Error
+                        .WriteLine(
+                            "after mono_test_cominterop_ccw_itest_foreign_thread Status = {0}",
+                            mt.Status
+                        );
                     return 208;
                 }
             }
@@ -2251,10 +2253,12 @@ public class Tests
             o = null;
             if (c != 0)
             {
-                Console.Error.WriteLine(
-                    "Expected IUnknown refcount on a CCW to be 0 after Release, was {0}",
-                    c
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "Expected IUnknown refcount on a CCW to be 0 after Release, was {0}",
+                        c
+                    );
                 ok = false;
             }
             return weakHandle;
@@ -2270,10 +2274,12 @@ public class Tests
             var o = h.Target;
             if (o != null)
             {
-                Console.Error.WriteLine(
-                    "Expected weak handle to be null after GC, but the object (of type {0}) was retained",
-                    o.GetType()
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "Expected weak handle to be null after GC, but the object (of type {0}) was retained",
+                        o.GetType()
+                    );
                 ok = false;
             }
             return "done"; // doesn't matter

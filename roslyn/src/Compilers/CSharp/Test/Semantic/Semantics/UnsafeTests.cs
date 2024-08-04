@@ -6440,13 +6440,15 @@ struct S
             Assert.Null(methodGroupSummary.ConvertedType);
             Assert.Equal(ConversionKind.Identity, methodGroupSummary.ImplicitConversion.Kind);
             Assert.True(
-                methodGroupSummary.MethodGroup.SetEquals(
-                    ImmutableArray.Create<IMethodSymbol>(
-                        structMethod1.GetPublicSymbol(),
-                        structMethod2.GetPublicSymbol()
-                    ),
-                    EqualityComparer<IMethodSymbol>.Default
-                )
+                methodGroupSummary
+                    .MethodGroup
+                    .SetEquals(
+                        ImmutableArray.Create<IMethodSymbol>(
+                            structMethod1.GetPublicSymbol(),
+                            structMethod2.GetPublicSymbol()
+                        ),
+                        EqualityComparer<IMethodSymbol>.Default
+                    )
             );
 
             var callSummary = model.GetSemanticInfoSummary(callSyntax);
@@ -6523,10 +6525,12 @@ struct S
             Assert.Null(methodGroupSummary.ConvertedType);
             Assert.Equal(ConversionKind.Identity, methodGroupSummary.ImplicitConversion.Kind);
             Assert.True(
-                methodGroupSummary.MethodGroup.SetEquals(
-                    structMethods.GetPublicSymbols(),
-                    EqualityComparer<IMethodSymbol>.Default
-                )
+                methodGroupSummary
+                    .MethodGroup
+                    .SetEquals(
+                        structMethods.GetPublicSymbols(),
+                        EqualityComparer<IMethodSymbol>.Default
+                    )
             );
 
             var callSummary = model.GetSemanticInfoSummary(callSyntax);
@@ -7562,7 +7566,8 @@ unsafe class C
             compilation.VerifyDiagnostics();
 
             var methodSymbol = compilation
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             var pointerType = methodSymbol.Parameters[0].Type;
             Assert.Equal(TypeKind.Pointer, pointerType.TypeKind);
@@ -9193,7 +9198,8 @@ unsafe class C
 
             var summary1 = initializerSummaries[1];
             var arraySymbol = compilation
-                .GlobalNamespace.GetMember<TypeSymbol>("C")
+                .GlobalNamespace
+                .GetMember<TypeSymbol>("C")
                 .GetMember<FieldSymbol>("a");
             Assert.Equal(arraySymbol, summary1.Symbol.GetSymbol());
             Assert.Equal(arraySymbol.Type, summary1.Type.GetSymbol());
@@ -9277,7 +9283,8 @@ unsafe class C
 
             var summary1 = initializerSummaries[1];
             var arraySymbol = compilation
-                .GlobalNamespace.GetMember<TypeSymbol>("C")
+                .GlobalNamespace
+                .GetMember<TypeSymbol>("C")
                 .GetMember<FieldSymbol>("a");
             Assert.Equal(arraySymbol, summary1.Symbol.GetSymbol());
             Assert.Equal(arraySymbol.Type, summary1.Type.GetSymbol());

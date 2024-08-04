@@ -88,9 +88,13 @@ namespace System.Web.DataAccess
             bool appLevel
         )
         {
-            System.Web.Util.Debug.Assert(
-                (specifiedConnectionString != null) && (specifiedConnectionString.Length != 0)
-            );
+            System
+                .Web
+                .Util
+                .Debug
+                .Assert(
+                    (specifiedConnectionString != null) && (specifiedConnectionString.Length != 0)
+                );
             if (specifiedConnectionString == null || specifiedConnectionString.Length < 1)
                 return null;
 
@@ -144,11 +148,13 @@ namespace System.Web.DataAccess
                     appPath = Environment.CurrentDirectory;
 
                 dataDir = Path.Combine(appPath, HttpRuntime.DataDirectoryName);
-                AppDomain.CurrentDomain.SetData(
-                    s_strDataDir,
-                    dataDir,
-                    new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dataDir)
-                );
+                AppDomain
+                    .CurrentDomain
+                    .SetData(
+                        s_strDataDir,
+                        dataDir,
+                        new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dataDir)
+                    );
             }
 
             return dataDir;

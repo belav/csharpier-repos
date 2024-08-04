@@ -24,10 +24,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             {
                 AssertIsForeground();
                 if (
-                    !session.Properties.TryGetProperty<SignatureHelpPresenterSession>(
-                        s_augmentSessionKey,
-                        out var presenterSession
-                    )
+                    !session
+                        .Properties
+                        .TryGetProperty<SignatureHelpPresenterSession>(
+                            s_augmentSessionKey,
+                            out var presenterSession
+                        )
                 )
                 {
                     return;

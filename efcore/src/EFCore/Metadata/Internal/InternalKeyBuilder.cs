@@ -51,8 +51,9 @@ public class InternalKeyBuilder
 
         if (primaryKeyConfigurationSource.HasValue && newKeyBuilder != null)
         {
-            var currentPrimaryKeyConfigurationSource =
-                entityTypeBuilder.Metadata.GetPrimaryKeyConfigurationSource();
+            var currentPrimaryKeyConfigurationSource = entityTypeBuilder
+                .Metadata
+                .GetPrimaryKeyConfigurationSource();
             if (
                 currentPrimaryKeyConfigurationSource?.Overrides(primaryKeyConfigurationSource.Value)
                 != true

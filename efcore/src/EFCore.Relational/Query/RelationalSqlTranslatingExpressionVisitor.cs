@@ -498,9 +498,9 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                     )
                     {
                         var anySubquery = Expression.Call(
-                            QueryableMethods.AnyWithoutPredicate.MakeGenericMethod(
-                                translatedSubquery.Type.GetSequenceType()
-                            ),
+                            QueryableMethods
+                                .AnyWithoutPredicate
+                                .MakeGenericMethod(translatedSubquery.Type.GetSequenceType()),
                             translatedSubquery
                         );
 
@@ -937,12 +937,14 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                     out var sqlInnerExpression
                 )
                     ? QueryCompilationContext.NotTranslatedExpression
-                    : Dependencies.MemberTranslatorProvider.Translate(
-                        sqlInnerExpression,
-                        memberExpression.Member,
-                        memberExpression.Type,
-                        _queryCompilationContext.Logger
-                    )
+                    : Dependencies
+                        .MemberTranslatorProvider
+                        .Translate(
+                            sqlInnerExpression,
+                            memberExpression.Member,
+                            memberExpression.Type,
+                            _queryCompilationContext.Logger
+                        )
             ) ?? QueryCompilationContext.NotTranslatedExpression;
     }
 
@@ -1287,13 +1289,15 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
         var translation =
             enumerableExpression != null
                 ? TranslateAggregateMethod(enumerableExpression, method, scalarArguments)
-                : Dependencies.MethodCallTranslatorProvider.Translate(
-                    _model,
-                    sqlObject,
-                    method,
-                    scalarArguments,
-                    _queryCompilationContext.Logger
-                );
+                : Dependencies
+                    .MethodCallTranslatorProvider
+                    .Translate(
+                        _model,
+                        sqlObject,
+                        method,
+                        scalarArguments,
+                        _queryCompilationContext.Logger
+                    );
 
         if (translation != null)
         {
@@ -1354,10 +1358,10 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
 
     /// <inheritdoc />
     protected override Expression VisitParameter(ParameterExpression parameterExpression) =>
-        parameterExpression.Name?.StartsWith(
-            QueryCompilationContext.QueryParameterPrefix,
-            StringComparison.Ordinal
-        ) == true
+        parameterExpression
+            .Name
+            ?.StartsWith(QueryCompilationContext.QueryParameterPrefix, StringComparison.Ordinal)
+        == true
             ? new SqlParameterExpression(parameterExpression.Name, parameterExpression.Type, null)
             : throw new InvalidOperationException(
                 CoreStrings.TranslationFailed(parameterExpression.Print())
@@ -1457,7 +1461,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 )
                 {
                     var matchingCaseWhenClauses = caseExpression
-                        .WhenClauses.Where(wc =>
+                        .WhenClauses
+                        .Where(wc =>
                             discriminatorValues.Contains(
                                 (string)((SqlConstantExpression)wc.Result).Value!
                             )
@@ -1567,10 +1572,9 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 // Introduce explicit cast only if the target type is mapped else we need to client eval
                 if (
                     unaryExpression.Type == typeof(object)
-                    || Dependencies.TypeMappingSource.FindMapping(
-                        unaryExpression.Type,
-                        Dependencies.Model
-                    ) != null
+                    || Dependencies
+                        .TypeMappingSource
+                        .FindMapping(unaryExpression.Type, Dependencies.Model) != null
                 )
                 {
                     sqlOperand = _sqlExpressionFactory.ApplyDefaultTypeMapping(sqlOperand);
@@ -2033,13 +2037,15 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             enumerableExpression = enumerableExpression.ApplySelector(selector);
         }
 
-        return Dependencies.AggregateMethodCallTranslatorProvider.Translate(
-            _model,
-            method,
-            enumerableExpression,
-            scalarArguments,
-            _queryCompilationContext.Logger
-        );
+        return Dependencies
+            .AggregateMethodCallTranslatorProvider
+            .Translate(
+                _model,
+                method,
+                enumerableExpression,
+                scalarArguments,
+                _queryCompilationContext.Logger
+            );
     }
 
     private static Expression RemapLambda(
@@ -2229,10 +2235,12 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 break;
 
             case SqlParameterExpression sqlParameterExpression
-                when sqlParameterExpression.Name.StartsWith(
-                    QueryCompilationContext.QueryParameterPrefix,
-                    StringComparison.Ordinal
-                ):
+                when sqlParameterExpression
+                    .Name
+                    .StartsWith(
+                        QueryCompilationContext.QueryParameterPrefix,
+                        StringComparison.Ordinal
+                    ):
                 var lambda = Expression.Lambda(
                     Expression.Call(
                         ParameterListValueExtractorMethod.MakeGenericMethod(
@@ -2367,11 +2375,16 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                         {
                             condition = requiredNonPkProperties
                                 .Select(p =>
-                                    Infrastructure.ExpressionExtensions.CreateEqualsExpression(
-                                        CreatePropertyAccessExpression(nonNullEntityReference, p),
-                                        Expression.Constant(null, p.ClrType.MakeNullable()),
-                                        nodeType != ExpressionType.Equal
-                                    )
+                                    Infrastructure
+                                        .ExpressionExtensions
+                                        .CreateEqualsExpression(
+                                            CreatePropertyAccessExpression(
+                                                nonNullEntityReference,
+                                                p
+                                            ),
+                                            Expression.Constant(null, p.ClrType.MakeNullable()),
+                                            nodeType != ExpressionType.Equal
+                                        )
                                 )
                                 .Aggregate(
                                     (l, r) =>
@@ -2395,11 +2408,16 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                             // - if the entity is to be not null, at least one property must be not null
                             var optionalPropertiesCondition = allNonPrincipalSharedNonPkProperties
                                 .Select(p =>
-                                    Infrastructure.ExpressionExtensions.CreateEqualsExpression(
-                                        CreatePropertyAccessExpression(nonNullEntityReference, p),
-                                        Expression.Constant(null, p.ClrType.MakeNullable()),
-                                        nodeType != ExpressionType.Equal
-                                    )
+                                    Infrastructure
+                                        .ExpressionExtensions
+                                        .CreateEqualsExpression(
+                                            CreatePropertyAccessExpression(
+                                                nonNullEntityReference,
+                                                p
+                                            ),
+                                            Expression.Constant(null, p.ClrType.MakeNullable()),
+                                            nodeType != ExpressionType.Equal
+                                        )
                                 )
                                 .Aggregate(
                                     (l, r) =>
@@ -2429,11 +2447,13 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 result = Visit(
                     nullComparedEntityTypePrimaryKeyProperties
                         .Select(p =>
-                            Infrastructure.ExpressionExtensions.CreateEqualsExpression(
-                                CreatePropertyAccessExpression(nonNullEntityReference, p),
-                                Expression.Constant(null, p.ClrType.MakeNullable()),
-                                nodeType != ExpressionType.Equal
-                            )
+                            Infrastructure
+                                .ExpressionExtensions
+                                .CreateEqualsExpression(
+                                    CreatePropertyAccessExpression(nonNullEntityReference, p),
+                                    Expression.Constant(null, p.ClrType.MakeNullable()),
+                                    nodeType != ExpressionType.Equal
+                                )
                         )
                         .Aggregate(
                             (l, r) =>
@@ -2504,11 +2524,13 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             result = Visit(
                 primaryKeyProperties
                     .Select(p =>
-                        Infrastructure.ExpressionExtensions.CreateEqualsExpression(
-                            CreatePropertyAccessExpression(left, p),
-                            CreatePropertyAccessExpression(right, p),
-                            nodeType != ExpressionType.Equal
-                        )
+                        Infrastructure
+                            .ExpressionExtensions
+                            .CreateEqualsExpression(
+                                CreatePropertyAccessExpression(left, p),
+                                CreatePropertyAccessExpression(right, p),
+                                nodeType != ExpressionType.Equal
+                            )
                     )
                     .Aggregate(
                         (l, r) =>
@@ -2572,11 +2594,13 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             {
                 foreach (var property in type.GetProperties())
                 {
-                    var comparison = Infrastructure.ExpressionExtensions.CreateEqualsExpression(
-                        CreatePropertyAccessExpression(left, property),
-                        CreatePropertyAccessExpression(right, property),
-                        nodeType != ExpressionType.Equal
-                    );
+                    var comparison = Infrastructure
+                        .ExpressionExtensions
+                        .CreateEqualsExpression(
+                            CreatePropertyAccessExpression(left, property),
+                            CreatePropertyAccessExpression(right, property),
+                            nodeType != ExpressionType.Equal
+                        );
 
                     comparisons =
                         comparisons is null ? comparison
@@ -2636,10 +2660,12 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 );
 
             case SqlParameterExpression sqlParameterExpression
-                when sqlParameterExpression.Name.StartsWith(
-                    QueryCompilationContext.QueryParameterPrefix,
-                    StringComparison.Ordinal
-                ):
+                when sqlParameterExpression
+                    .Name
+                    .StartsWith(
+                        QueryCompilationContext.QueryParameterPrefix,
+                        StringComparison.Ordinal
+                    ):
             {
                 var lambda = Expression.Lambda(
                     Expression.Call(
@@ -2690,9 +2716,9 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             }
 
             case MemberInitExpression memberInitExpression
-                when memberInitExpression.Bindings.SingleOrDefault(mb =>
-                    mb.Member.Name == property.Name
-                )
+                when memberInitExpression
+                    .Bindings
+                    .SingleOrDefault(mb => mb.Member.Name == property.Name)
                     is MemberAssignment memberAssignment:
                 return memberAssignment.Expression;
 
@@ -2716,19 +2742,21 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 ),
 
             SqlParameterExpression sqlParameterExpression
-                when sqlParameterExpression.Name.StartsWith(
-                    QueryCompilationContext.QueryParameterPrefix,
-                    StringComparison.Ordinal
-                )
+                when sqlParameterExpression
+                    .Name
+                    .StartsWith(
+                        QueryCompilationContext.QueryParameterPrefix,
+                        StringComparison.Ordinal
+                    )
                 => new ParameterBasedComplexPropertyChainExpression(
                     sqlParameterExpression,
                     complexProperty
                 ),
 
             MemberInitExpression memberInitExpression
-                when memberInitExpression.Bindings.SingleOrDefault(mb =>
-                    mb.Member.Name == complexProperty.Name
-                )
+                when memberInitExpression
+                    .Bindings
+                    .SingleOrDefault(mb => mb.Member.Name == complexProperty.Name)
                     is MemberAssignment memberAssignment
                 => memberAssignment.Expression,
 

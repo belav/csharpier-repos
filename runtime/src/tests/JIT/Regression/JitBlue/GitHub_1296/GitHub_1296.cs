@@ -96,14 +96,16 @@ public class Program
         // If all conditions are met, Callee enters with an incorrect value for regParam1
         // This should print "9 0 1 2 3".  If the tail call is made incorrectly,
         // the result is (typically) "418858424 0 1 2 3".
-        System.Console.WriteLine(
-            "Printing Outputs: {0} {1} {2} {3} {4}",
-            regParam1.C,
-            regParam2,
-            regParam3,
-            regParam4,
-            stackParam1
-        );
+        System
+            .Console
+            .WriteLine(
+                "Printing Outputs: {0} {1} {2} {3} {4}",
+                regParam1.C,
+                regParam2,
+                regParam3,
+                regParam4,
+                stackParam1
+            );
 
         return regParam1.C;
     }

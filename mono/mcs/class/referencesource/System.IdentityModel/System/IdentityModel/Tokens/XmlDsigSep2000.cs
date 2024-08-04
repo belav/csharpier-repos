@@ -76,9 +76,11 @@ namespace System.IdentityModel.Tokens
                 }
                 if (keyIdentifier.Count == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.ErrorDeserializingKeyIdentifierClause))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(SR.GetString(SR.ErrorDeserializingKeyIdentifierClause))
+                        );
                 }
                 reader.ReadEndElement();
                 return keyIdentifier;
@@ -102,20 +104,21 @@ namespace System.IdentityModel.Tokens
                 bool clauseWritten = false;
                 foreach (SecurityKeyIdentifierClause clause in keyIdentifier)
                 {
-                    this.securityTokenSerializer.InnerSecurityTokenSerializer.WriteKeyIdentifierClause(
-                        writer,
-                        clause
-                    );
+                    this.securityTokenSerializer
+                        .InnerSecurityTokenSerializer
+                        .WriteKeyIdentifierClause(writer, clause);
                     clauseWritten = true;
                 }
                 writer.WriteEndElement(); // KeyInfo
                 if (!clauseWritten)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityMessageSerializationException(
-                            SR.GetString(SR.NoKeyInfoClausesToWrite)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityMessageSerializationException(
+                                SR.GetString(SR.NoKeyInfoClausesToWrite)
+                            )
+                        );
                 }
             }
         }
@@ -294,11 +297,13 @@ namespace System.IdentityModel.Tokens
                             )
                         )
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new SecurityMessageSerializationException(
-                                    SR.GetString(SR.InvalidX509RawData)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new SecurityMessageSerializationException(
+                                        SR.GetString(SR.InvalidX509RawData)
+                                    )
+                                );
                         }
                         ski = new X509RawDataKeyIdentifierClause(certificate);
                     }

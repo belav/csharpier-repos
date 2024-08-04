@@ -22,19 +22,23 @@ namespace CodeStyleConfigFileGenerator
         private const int ExpectedArguments = 4;
 
         private static readonly string s_neverTag = EnforceOnBuild.Never.ToCustomTag();
-        private static readonly string s_whenExplicitlyEnabledTag =
-            EnforceOnBuild.WhenExplicitlyEnabled.ToCustomTag();
+        private static readonly string s_whenExplicitlyEnabledTag = EnforceOnBuild
+            .WhenExplicitlyEnabled
+            .ToCustomTag();
         private static readonly string s_recommendedTag = EnforceOnBuild.Recommended.ToCustomTag();
-        private static readonly string s_highlyRecommendedTag =
-            EnforceOnBuild.HighlyRecommended.ToCustomTag();
+        private static readonly string s_highlyRecommendedTag = EnforceOnBuild
+            .HighlyRecommended
+            .ToCustomTag();
 
         public static int Main(string[] args)
         {
             if (args.Length != ExpectedArguments)
             {
-                Console.Error.WriteLine(
-                    $"Excepted {ExpectedArguments} arguments, found {args.Length}: {string.Join(';', args)}"
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        $"Excepted {ExpectedArguments} arguments, found {args.Length}: {string.Join(';', args)}"
+                    );
                 return 1;
             }
 

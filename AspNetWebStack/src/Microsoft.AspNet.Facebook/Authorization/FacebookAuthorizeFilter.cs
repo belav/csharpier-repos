@@ -59,15 +59,13 @@ namespace Microsoft.AspNet.Facebook.Authorization
             }
 
             IEnumerable<FacebookAuthorizeAttribute> authorizeAttributes = filterContext
-                .ActionDescriptor.GetCustomAttributes(
-                    typeof(FacebookAuthorizeAttribute),
-                    inherit: true
-                )
+                .ActionDescriptor
+                .GetCustomAttributes(typeof(FacebookAuthorizeAttribute), inherit: true)
                 .Union(
-                    filterContext.ActionDescriptor.ControllerDescriptor.GetCustomAttributes(
-                        typeof(FacebookAuthorizeAttribute),
-                        inherit: true
-                    )
+                    filterContext
+                        .ActionDescriptor
+                        .ControllerDescriptor
+                        .GetCustomAttributes(typeof(FacebookAuthorizeAttribute), inherit: true)
                 )
                 .OfType<FacebookAuthorizeAttribute>();
             if (!authorizeAttributes.Any())
@@ -149,8 +147,9 @@ namespace Microsoft.AspNet.Facebook.Authorization
             }
             else if (requiredPermissions.Any())
             {
-                PermissionsStatus currentPermissionsStatus =
-                    _config.PermissionService.GetUserPermissionsStatus(userId, accessToken);
+                PermissionsStatus currentPermissionsStatus = _config
+                    .PermissionService
+                    .GetUserPermissionsStatus(userId, accessToken);
                 // Instead of performing another request to gather "granted" permissions just parse the status
                 IEnumerable<string> currentPermissions = PermissionHelper.GetGrantedPermissions(
                     currentPermissionsStatus

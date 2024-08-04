@@ -173,11 +173,10 @@ namespace System.Threading.Tasks
 
             try
             {
-                int hresult = Microsoft.Win32.UnsafeNativeMethods.RoGetActivationFactory(
-                    ClassId,
-                    ref guid,
-                    out factory
-                );
+                int hresult = Microsoft
+                    .Win32
+                    .UnsafeNativeMethods
+                    .RoGetActivationFactory(ClassId, ref guid, out factory);
 
                 if (hresult < 0 || factory == null)
                     return; //This prevents having an exception thrown in case IAsyncCausalityTracerStatics isn't registered.
@@ -231,11 +230,9 @@ namespace System.Threading.Tasks
             try
             {
                 if ((f_LoggingOn & Loggers.ETW) != 0)
-                    TplEtwProvider.Log.TraceOperationBegin(
-                        taskId,
-                        operationName,
-                        (long)relatedContext
-                    );
+                    TplEtwProvider
+                        .Log
+                        .TraceOperationBegin(taskId, operationName, (long)relatedContext);
                 if ((f_LoggingOn & Loggers.CausalityTracer) != 0)
                     s_TracerFactory.TraceOperationCreation(
                         (WFD.CausalityTraceLevel)traceLevel,

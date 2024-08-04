@@ -174,22 +174,26 @@ namespace System.Net.PeerToPeer
             m_MaxRecords = MaxRecords;
             m_PeerNameResolverWeakReference = new WeakReference(parent);
             m_TraceEventId = NewTraceEventId;
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "New PeerNameResolverHelper created with TraceEventID {0}",
-                m_TraceEventId
-            );
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "\tPeerName: {0}, Cloud: {1}, MaxRecords: {2}, userState {3}, ParentReference {4}",
-                m_PeerName,
-                m_Cloud,
-                m_MaxRecords,
-                userState.GetHashCode(),
-                m_PeerNameResolverWeakReference.Target.GetHashCode()
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    m_TraceEventId,
+                    "New PeerNameResolverHelper created with TraceEventID {0}",
+                    m_TraceEventId
+                );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    m_TraceEventId,
+                    "\tPeerName: {0}, Cloud: {1}, MaxRecords: {2}, userState {3}, ParentReference {4}",
+                    m_PeerName,
+                    m_Cloud,
+                    m_MaxRecords,
+                    userState.GetHashCode(),
+                    m_PeerNameResolverWeakReference.Target.GetHashCode()
+                );
         }
 
         // <SecurityKernel Critical="True" Ring="0">
@@ -246,11 +250,13 @@ namespace System.Net.PeerToPeer
                     SR.GetString(SR.Pnrp_CouldNotStartNameResolution),
                     result
                 );
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Error,
-                    m_TraceEventId,
-                    "Exception occurred while starting async resolve"
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        m_TraceEventId,
+                        "Exception occurred while starting async resolve"
+                    );
                 throw ex;
             }
 
@@ -260,12 +266,14 @@ namespace System.Net.PeerToPeer
             //------------------------------------------
             m_AsyncOp = AsyncOperationManager.CreateOperation(m_userState);
 
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "Successfully started the async resolve. The native handle is {0}",
-                m_SafePeerNameEndResolve.DangerousGetHandle()
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    m_TraceEventId,
+                    "Successfully started the async resolve. The native handle is {0}",
+                    m_SafePeerNameEndResolve.DangerousGetHandle()
+                );
         }
 
         // <SecurityKernel Critical="True" Ring="0">
@@ -289,33 +297,39 @@ namespace System.Net.PeerToPeer
             //This callback is called whenever there is an endpoint info
             //available or the resultion is completed
             //------------------------------------------
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "EndPointInfoAvailableCallback called"
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    m_TraceEventId,
+                    "EndPointInfoAvailableCallback called"
+                );
             PeerNameRecord record = null;
             SafePeerData shEndPointInfo;
             Int32 result = 0;
             PeerNameResolver parent = null;
             if (m_Cancelled)
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    m_TraceEventId,
-                    "Detected that the async operation is already canceled  - before entering the lock"
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        m_TraceEventId,
+                        "Detected that the async operation is already canceled  - before entering the lock"
+                    );
                 return;
             }
             lock (m_Lock)
             {
                 if (m_Cancelled)
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Information,
-                        m_TraceEventId,
-                        "Detected that the async operation is already canceled - after entering the lock"
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            m_TraceEventId,
+                            "Detected that the async operation is already canceled - after entering the lock"
+                        );
                     return;
                 }
                 result = UnsafeP2PNativeMethods.PeerPnrpGetEndpoint(
@@ -326,22 +340,26 @@ namespace System.Net.PeerToPeer
                 {
                     if (result == PEER_E_NO_MORE)
                     {
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Information,
-                            m_TraceEventId,
-                            "Native API returned that there are no more records - resolve completed successfully"
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(
+                                TraceEventType.Information,
+                                m_TraceEventId,
+                                "Native API returned that there are no more records - resolve completed successfully"
+                            );
                     }
                     m_CompletedOrException = true;
                     m_SafePeerNameEndResolve.Dispose();
                 }
                 else
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Information,
-                        m_TraceEventId,
-                        "Proceeding to retrieve the endpoint information from incremental resolve"
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            m_TraceEventId,
+                            "Proceeding to retrieve the endpoint information from incremental resolve"
+                        );
                     try
                     {
                         unsafe
@@ -409,11 +427,13 @@ namespace System.Net.PeerToPeer
                     ResolveProgressChangedEventArgs resolveProgressChangedEventArgs =
                         new ResolveProgressChangedEventArgs(record, m_AsyncOp.UserSuppliedState);
 
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Information,
-                        m_TraceEventId,
-                        "Proceeding to call progress changed event callback"
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            m_TraceEventId,
+                            "Proceeding to call progress changed event callback"
+                        );
                     parent = m_PeerNameResolverWeakReference.Target as PeerNameResolver;
                     if (parent != null)
                     {
@@ -442,11 +462,13 @@ namespace System.Net.PeerToPeer
                     SR.GetString(SR.Pnrp_ExceptionWhileResolvingAPeerName),
                     result
                 );
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    m_TraceEventId,
-                    "Exception occurred when the native API is called to harvest an incremental resolve notification"
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        m_TraceEventId,
+                        "Exception occurred when the native API is called to harvest an incremental resolve notification"
+                    );
                 resolveCompletedEventArgs = new ResolveCompletedEventArgs(
                     null,
                     ex,
@@ -457,11 +479,13 @@ namespace System.Net.PeerToPeer
             parent = m_PeerNameResolverWeakReference.Target as PeerNameResolver;
             if (parent != null)
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    m_TraceEventId,
-                    "Proceeding to call the ResolveCompleted callback"
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        m_TraceEventId,
+                        "Proceeding to call the ResolveCompleted callback"
+                    );
                 parent.PrepareToRaiseCompletedEvent(m_AsyncOp, resolveCompletedEventArgs);
             }
             return;
@@ -474,49 +498,59 @@ namespace System.Net.PeerToPeer
         [System.Security.SecurityCritical]
         public void ContineCancelCallback(object state)
         {
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "ContineCancelCallback called"
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    m_TraceEventId,
+                    "ContineCancelCallback called"
+                );
             try
             {
                 if (m_CompletedOrException)
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Information,
-                        m_TraceEventId,
-                        "ContinueCancelCallback detected (before acquiring lock) that another thread has already called completed event - so returning without calling cancel"
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            m_TraceEventId,
+                            "ContinueCancelCallback detected (before acquiring lock) that another thread has already called completed event - so returning without calling cancel"
+                        );
                     return;
                 }
                 lock (m_Lock)
                 {
                     if (m_Cancelled)
                     {
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Information,
-                            m_TraceEventId,
-                            "ContinueCancelCallback detected (after acquiring lock) that cancel has already been called"
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(
+                                TraceEventType.Information,
+                                m_TraceEventId,
+                                "ContinueCancelCallback detected (after acquiring lock) that cancel has already been called"
+                            );
                         return;
                     }
                     if (m_CompletedOrException)
                     {
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Information,
-                            m_TraceEventId,
-                            "ContinueCancelCallback detected (after acquiring lock) that another thread has already called completed event - so returning without calling cancel"
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(
+                                TraceEventType.Information,
+                                m_TraceEventId,
+                                "ContinueCancelCallback detected (after acquiring lock) that another thread has already called completed event - so returning without calling cancel"
+                            );
                         return;
                     }
                     else
                     {
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Information,
-                            m_TraceEventId,
-                            "ContinueCancelCallback is proceeding to close the handle and call the Completed callback with Cancelled = true"
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(
+                                TraceEventType.Information,
+                                m_TraceEventId,
+                                "ContinueCancelCallback is proceeding to close the handle and call the Completed callback with Cancelled = true"
+                            );
                     }
                     m_Cancelled = true;
                     m_SafePeerNameEndResolve.Dispose();
@@ -536,11 +570,13 @@ namespace System.Net.PeerToPeer
             }
             catch
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Critical,
-                    m_TraceEventId,
-                    "Exception while cancelling the call "
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Critical,
+                        m_TraceEventId,
+                        "Exception while cancelling the call "
+                    );
                 throw;
             }
         }
@@ -756,14 +792,16 @@ namespace System.Net.PeerToPeer
             //---------------------------------------------------------------
             //Trace log
             //---------------------------------------------------------------
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Sync Resolve called with PeerName: {0}, Cloud: {1}, MaxRecords {2}",
-                peerName,
-                cloud,
-                maxRecords
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Sync Resolve called with PeerName: {0}, Cloud: {1}, MaxRecords {2}",
+                    peerName,
+                    cloud,
+                    maxRecords
+                );
 
             SafePeerData shEndPointInfoArray;
             string NativeCloudName = cloud.InternalName;
@@ -865,12 +903,14 @@ namespace System.Net.PeerToPeer
                     shEndPointInfoArray.Dispose();
                 }
             }
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Sync Resolve returnig with PeerNameRecord count :{0}",
-                PeerNameRecords.Count
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Sync Resolve returnig with PeerNameRecord count :{0}",
+                    PeerNameRecords.Count
+                );
             return PeerNameRecords;
         }
 
@@ -958,12 +998,14 @@ namespace System.Net.PeerToPeer
                 {
                     throw new ArgumentException(SR.GetString(SR.DuplicateUserToken));
                 }
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    newTraceEventId,
-                    "PeerNameResolverHelper is being created with TraceEventId {0}",
-                    newTraceEventId
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        newTraceEventId,
+                        "PeerNameResolverHelper is being created with TraceEventId {0}",
+                        newTraceEventId
+                    );
                 peerNameResolverHelper = new PeerNameResolverHelper(
                     peerName,
                     cloud,
@@ -991,12 +1033,14 @@ namespace System.Net.PeerToPeer
                 lock (m_PeerNameResolverHelperListLock)
                 {
                     m_PeerNameResolverHelperList.Remove(userState);
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Error,
-                        newTraceEventId,
-                        "Removing userState token from pending list {0}",
-                        userState.GetHashCode()
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Error,
+                            newTraceEventId,
+                            "Removing userState token from pending list {0}",
+                            userState.GetHashCode()
+                        );
                 }
                 throw;
             }
@@ -1047,20 +1091,24 @@ namespace System.Net.PeerToPeer
                 PeerNameResolverHelper helper = m_PeerNameResolverHelperList[args.UserState];
                 if (helper == null)
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Critical,
-                        0,
-                        "userState for which we are about to call Completed event does not exist in the pending async list"
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Critical,
+                            0,
+                            "userState for which we are about to call Completed event does not exist in the pending async list"
+                        );
                 }
                 else
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Information,
-                        helper.TraceEventId,
-                        "userState {0} is being removed from the pending async list",
-                        args.UserState.GetHashCode()
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            helper.TraceEventId,
+                            "userState {0} is being removed from the pending async list",
+                            args.UserState.GetHashCode()
+                        );
                     m_PeerNameResolverHelperList.Remove(args.UserState);
                 }
             }
@@ -1082,19 +1130,23 @@ namespace System.Net.PeerToPeer
             {
                 if (!m_PeerNameResolverHelperList.TryGetValue(userState, out helper))
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Warning,
-                        0,
-                        "ResolveAsyncCancel called with a userState token that is not in the pending async list - returning"
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Warning,
+                            0,
+                            "ResolveAsyncCancel called with a userState token that is not in the pending async list - returning"
+                        );
                     return;
                 }
             }
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                helper.TraceEventId,
-                "Proceeding to cancel the pending async"
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    helper.TraceEventId,
+                    "Proceeding to cancel the pending async"
+                );
             helper.CancelAsync();
         }
 

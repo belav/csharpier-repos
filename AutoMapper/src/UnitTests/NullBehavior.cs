@@ -9,10 +9,12 @@ public class NullDestinationType : AutoMapperSpecBase
     {
         new Action(() => Mapper.Map("", null, null))
             .ShouldThrow<ArgumentNullException>()
-            .ParamName.ShouldBe("destinationType");
+            .ParamName
+            .ShouldBe("destinationType");
         new Action(() => Mapper.Map("", null, null, _ => { }))
             .ShouldThrow<ArgumentNullException>()
-            .ParamName.ShouldBe("destinationType");
+            .ParamName
+            .ShouldBe("destinationType");
         Mapper.Map("", "", null, null).ShouldBe("");
         Mapper.Map("", null, null, typeof(string)).ShouldBe("");
         Mapper.Map("", "", null, null, _ => { }).ShouldBe("");
@@ -752,9 +754,9 @@ public class When_overriding_null_behavior_in_sub_profile : AutoMapperSpecBase
                             d => d.SubExpressionName,
                             opt =>
                                 opt.MapFrom(src =>
-                                    src.Subs.FirstOrDefault(spt =>
-                                        spt.Sub.Something == src.Id
-                                    ).Something
+                                    src.Subs
+                                        .FirstOrDefault(spt => spt.Sub.Something == src.Id)
+                                        .Something
                                 )
                         )
                         .ForMember(

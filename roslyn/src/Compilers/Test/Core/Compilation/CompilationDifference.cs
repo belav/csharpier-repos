@@ -184,9 +184,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             params string[] expectedSynthesizedTypesAndMemberCounts
         )
         {
-            var actual = EmitResult.Baseline.SynthesizedMembers.Select(e =>
-                e.Key.ToString() + ": {" + string.Join(", ", e.Value.Select(v => v.Name)) + "}"
-            );
+            var actual = EmitResult
+                .Baseline
+                .SynthesizedMembers
+                .Select(e =>
+                    e.Key.ToString() + ": {" + string.Join(", ", e.Value.Select(v => v.Name)) + "}"
+                );
             AssertEx.SetEqual(
                 expectedSynthesizedTypesAndMemberCounts,
                 actual,
@@ -201,8 +204,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         )
         {
             var actual = EmitResult
-                .Baseline.SynthesizedMembers.Single(e => e.Key.ToString() == typeName)
-                .Value.Where(s => s.Kind == SymbolKind.Field)
+                .Baseline
+                .SynthesizedMembers
+                .Single(e => e.Key.ToString() == typeName)
+                .Value
+                .Where(s => s.Kind == SymbolKind.Field)
                 .Select(s => (IFieldSymbol)s.GetISymbol())
                 .Select(f => f.Name + ": " + f.Type);
             AssertEx.SetEqual(
@@ -216,9 +222,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             AssertEx.Equal(
                 expectedMethodTokens,
-                EmitResult.UpdatedMethods.Select(methodHandle =>
-                    $"0x{MetadataTokens.GetToken(methodHandle):X8}"
-                )
+                EmitResult
+                    .UpdatedMethods
+                    .Select(methodHandle => $"0x{MetadataTokens.GetToken(methodHandle):X8}")
             );
         }
     }

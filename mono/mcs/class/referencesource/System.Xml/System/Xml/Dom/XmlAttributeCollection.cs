@@ -320,12 +320,14 @@ namespace System.Xml
             Debug.Assert(retNode is XmlAttribute);
             RemoveParentFromElementIdAttrMap((XmlAttribute)retNode);
             // after remove the attribute, we need to check if a default attribute node should be created and inserted into the tree
-            XmlAttribute defattr = parent.OwnerDocument.GetDefaultAttribute(
-                (XmlElement)parent,
-                retNode.Prefix,
-                retNode.LocalName,
-                retNode.NamespaceURI
-            );
+            XmlAttribute defattr = parent
+                .OwnerDocument
+                .GetDefaultAttribute(
+                    (XmlElement)parent,
+                    retNode.Prefix,
+                    retNode.LocalName,
+                    retNode.NamespaceURI
+                );
             if (defattr != null)
                 InsertNodeAt(i, defattr);
             return retNode;

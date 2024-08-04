@@ -21,12 +21,14 @@ namespace System.Security.Cryptography
                 return Interop.BCrypt.ECC_CURVE_ALG_ID_ENUM.BCRYPT_NO_CURVE_GENERATION_ALG_ID;
             }
 
-            CRYPT_OID_INFO oid = Interop.Crypt32.FindOidInfo(
-                CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
-                name.Value.Name,
-                OidGroup.HashAlgorithm,
-                false
-            );
+            CRYPT_OID_INFO oid = Interop
+                .Crypt32
+                .FindOidInfo(
+                    CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
+                    name.Value.Name,
+                    OidGroup.HashAlgorithm,
+                    false
+                );
 
             if (oid.AlgId == -1)
             {

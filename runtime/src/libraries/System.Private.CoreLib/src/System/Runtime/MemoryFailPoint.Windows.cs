@@ -97,19 +97,23 @@ namespace System.Runtime
         {
             unsafe
             {
-                void* pMemory = Interop.Kernel32.VirtualAlloc(
-                    null,
-                    numBytes,
-                    Interop.Kernel32.MemOptions.MEM_COMMIT,
-                    Interop.Kernel32.PageOptions.PAGE_READWRITE
-                );
+                void* pMemory = Interop
+                    .Kernel32
+                    .VirtualAlloc(
+                        null,
+                        numBytes,
+                        Interop.Kernel32.MemOptions.MEM_COMMIT,
+                        Interop.Kernel32.PageOptions.PAGE_READWRITE
+                    );
                 if (pMemory != null)
                 {
-                    bool r = Interop.Kernel32.VirtualFree(
-                        pMemory,
-                        UIntPtr.Zero,
-                        Interop.Kernel32.MemOptions.MEM_RELEASE
-                    );
+                    bool r = Interop
+                        .Kernel32
+                        .VirtualFree(
+                            pMemory,
+                            UIntPtr.Zero,
+                            Interop.Kernel32.MemOptions.MEM_RELEASE
+                        );
                     if (!r)
                         throw Win32Marshal.GetExceptionForLastWin32Error();
                 }

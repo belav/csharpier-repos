@@ -209,17 +209,19 @@ namespace System.Xml.Serialization
                 XmlTypeMapMemberAnyElement mapMem = new XmlTypeMapMemberAnyElement();
                 mapMem.Name = typeName.Name;
                 mapMem.TypeData = TypeTranslator.GetTypeData(typeof(XmlNode));
-                mapMem.ElementInfo.Add(
-                    CreateElementInfo(
-                        typeName.Namespace,
-                        mapMem,
-                        typeName.Name,
-                        mapMem.TypeData,
-                        true,
-                        XmlSchemaForm.None,
-                        -1
-                    )
-                );
+                mapMem
+                    .ElementInfo
+                    .Add(
+                        CreateElementInfo(
+                            typeName.Namespace,
+                            mapMem,
+                            typeName.Name,
+                            mapMem.TypeData,
+                            true,
+                            XmlSchemaForm.None,
+                            -1
+                        )
+                    );
 
                 XmlMemberMapping[] mm = new XmlMemberMapping[1];
                 mm[0] = new XmlMemberMapping(
@@ -568,18 +570,20 @@ namespace System.Xml.Serialization
 
             mapMem.Name = name;
             mapMem.TypeData = type;
-            mapMem.ElementInfo.Add(
-                CreateElementInfo(
-                    ns,
-                    mapMem,
-                    name,
-                    type,
-                    isNullable,
-                    XmlSchemaForm.None,
-                    emap,
-                    order
-                )
-            );
+            mapMem
+                .ElementInfo
+                .Add(
+                    CreateElementInfo(
+                        ns,
+                        mapMem,
+                        name,
+                        type,
+                        isNullable,
+                        XmlSchemaForm.None,
+                        emap,
+                        order
+                    )
+                );
             return new XmlMemberMapping(name, ns, mapMem, encodedFormat);
         }
 
@@ -1226,13 +1230,15 @@ namespace System.Xml.Serialization
                 XmlTypeMapMemberFlatList member = new XmlTypeMapMemberFlatList();
                 member.Name = classIds.AddUnique("Text", member);
                 member.TypeData = TypeTranslator.GetTypeData(typeof(string[]));
-                member.ElementInfo.Add(
-                    CreateTextElementInfo(
-                        typeQName.Namespace,
-                        member,
-                        member.TypeData.ListItemTypeData
-                    )
-                );
+                member
+                    .ElementInfo
+                    .Add(
+                        CreateTextElementInfo(
+                            typeQName.Namespace,
+                            member,
+                            member.TypeData.ListItemTypeData
+                        )
+                    );
                 member.IsXmlTextCollector = true;
                 member.ListMap = new ListMap();
                 member.ListMap.ItemInfo = member.ElementInfo;
@@ -1353,18 +1359,20 @@ namespace System.Xml.Serialization
                         );
                         member.Documentation = GetDocumentation(elem);
                         member.TypeData = typeData;
-                        member.ElementInfo.Add(
-                            CreateElementInfo(
-                                ns,
-                                member,
-                                refElem.Name,
-                                typeData,
-                                refElem.IsNillable,
-                                refElem.Form,
-                                emap,
-                                items.IndexOf(item)
-                            )
-                        );
+                        member
+                            .ElementInfo
+                            .Add(
+                                CreateElementInfo(
+                                    ns,
+                                    member,
+                                    refElem.Name,
+                                    typeData,
+                                    refElem.IsNillable,
+                                    refElem.Form,
+                                    emap,
+                                    items.IndexOf(item)
+                                )
+                            );
                         cmap.AddMember(member);
                     }
                     else
@@ -1377,18 +1385,20 @@ namespace System.Xml.Serialization
                         );
                         member.Documentation = GetDocumentation(elem);
                         member.TypeData = typeData.ListTypeData;
-                        member.ElementInfo.Add(
-                            CreateElementInfo(
-                                ns,
-                                member,
-                                refElem.Name,
-                                typeData,
-                                refElem.IsNillable,
-                                refElem.Form,
-                                emap,
-                                items.IndexOf(item)
-                            )
-                        );
+                        member
+                            .ElementInfo
+                            .Add(
+                                CreateElementInfo(
+                                    ns,
+                                    member,
+                                    refElem.Name,
+                                    typeData,
+                                    refElem.IsNillable,
+                                    refElem.Form,
+                                    emap,
+                                    items.IndexOf(item)
+                                )
+                            );
                         member.ListMap.ItemInfo = member.ElementInfo;
                         cmap.AddMember(member);
                     }
@@ -1582,17 +1592,19 @@ namespace System.Xml.Serialization
                 choiceMember.TypeData = multiValue
                     ? enumMap.TypeData.ListTypeData
                     : enumMap.TypeData;
-                choiceMember.ElementInfo.Add(
-                    CreateElementInfo(
-                        typeQName.Namespace,
-                        choiceMember,
-                        choiceMember.Name,
-                        choiceMember.TypeData,
-                        false,
-                        XmlSchemaForm.None,
-                        -1
-                    )
-                );
+                choiceMember
+                    .ElementInfo
+                    .Add(
+                        CreateElementInfo(
+                            typeQName.Namespace,
+                            choiceMember,
+                            choiceMember.Name,
+                            choiceMember.TypeData,
+                            false,
+                            XmlSchemaForm.None,
+                            -1
+                        )
+                    );
                 cmap.AddMember(choiceMember);
             }
 
@@ -1713,9 +1725,9 @@ namespace System.Xml.Serialization
                 XmlTypeMapMemberElement member = new XmlTypeMapMemberElement();
                 member.Name = classIds.AddUnique("Value", member);
                 member.TypeData = simpleType;
-                member.ElementInfo.Add(
-                    CreateTextElementInfo(typeQName.Namespace, member, member.TypeData)
-                );
+                member
+                    .ElementInfo
+                    .Add(CreateTextElementInfo(typeQName.Namespace, member, member.TypeData));
                 member.IsXmlTextCollector = true;
                 cmap.AddMember(member);
             }
@@ -1922,17 +1934,19 @@ namespace System.Xml.Serialization
                 ListMap listMap = new ListMap();
 
                 listMap.ItemInfo = new XmlTypeMapElementInfoList();
-                listMap.ItemInfo.Add(
-                    CreateElementInfo(
-                        typeQName.Namespace,
-                        null,
-                        "Item",
-                        arrayTypeData.ListItemTypeData,
-                        false,
-                        XmlSchemaForm.None,
-                        -1
-                    )
-                );
+                listMap
+                    .ItemInfo
+                    .Add(
+                        CreateElementInfo(
+                            typeQName.Namespace,
+                            null,
+                            "Item",
+                            arrayTypeData.ListItemTypeData,
+                            false,
+                            XmlSchemaForm.None,
+                            -1
+                        )
+                    );
 
                 XmlTypeMapping map = CreateArrayTypeMapping(typeQName, arrayTypeData);
                 map.ObjectMap = listMap;
@@ -2506,17 +2520,19 @@ namespace System.Xml.Serialization
 
                 ListMap listMap = new ListMap();
                 listMap.ItemInfo = new XmlTypeMapElementInfoList();
-                listMap.ItemInfo.Add(
-                    CreateElementInfo(
-                        itemMap.Namespace,
-                        null,
-                        typeData.ListItemTypeData.XmlType,
-                        typeData.ListItemTypeData,
-                        false,
-                        XmlSchemaForm.None,
-                        -1
-                    )
-                );
+                listMap
+                    .ItemInfo
+                    .Add(
+                        CreateElementInfo(
+                            itemMap.Namespace,
+                            null,
+                            typeData.ListItemTypeData.XmlType,
+                            typeData.ListItemTypeData,
+                            false,
+                            XmlSchemaForm.None,
+                            -1
+                        )
+                    );
                 map.ObjectMap = listMap;
 
                 RegisterTypeMapping(

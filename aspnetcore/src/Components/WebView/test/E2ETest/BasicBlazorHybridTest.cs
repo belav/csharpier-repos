@@ -90,24 +90,28 @@ public class BasicBlazorHybridTest
         var isWebViewReady = false;
 
         Console.WriteLine($"RegisterWebMessageReceivedHandler...");
-        mainWindow.PhotinoWindow.RegisterWebMessageReceivedHandler(
-            (s, msg) =>
-            {
-                if (!msg.StartsWith("__bwv:", StringComparison.Ordinal))
+        mainWindow
+            .PhotinoWindow
+            .RegisterWebMessageReceivedHandler(
+                (s, msg) =>
                 {
-                    if (msg == "wvt:Started")
+                    if (!msg.StartsWith("__bwv:", StringComparison.Ordinal))
                     {
-                        isWebViewReady = true;
-                    }
-                    else if (msg.StartsWith(NewControlDivValueMessage, StringComparison.Ordinal))
-                    {
-                        _latestControlDivValue = msg.Substring(
-                            NewControlDivValueMessage.Length + 1
-                        );
+                        if (msg == "wvt:Started")
+                        {
+                            isWebViewReady = true;
+                        }
+                        else if (
+                            msg.StartsWith(NewControlDivValueMessage, StringComparison.Ordinal)
+                        )
+                        {
+                            _latestControlDivValue = msg.Substring(
+                                NewControlDivValueMessage.Length + 1
+                            );
+                        }
                     }
                 }
-            }
-        );
+            );
         var testPassed = false;
 
         mainWindow.PhotinoWindow.WindowCreated += (s, e) =>

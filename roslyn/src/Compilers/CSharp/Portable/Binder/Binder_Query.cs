@@ -26,10 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureQueryExpression.CheckFeatureAvailability(
-                diagnostics,
-                node.FromClause.FromKeyword
-            );
+            MessageID
+                .IDS_FeatureQueryExpression
+                .CheckFeatureAvailability(diagnostics, node.FromClause.FromKeyword);
 
             var fromClause = node.FromClause;
             var boundFromExpression = BindLeftOfPotentialColorColorMemberAccess(

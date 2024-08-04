@@ -237,10 +237,9 @@ namespace System.Runtime.Serialization
                 element.SchemaTypeName = dataContract.XmlName;
 
                 if (element.SchemaTypeName.Namespace.Equals(Globals.SerializationNamespace))
-                    schema.Namespaces.Add(
-                        Globals.SerPrefixForSchema,
-                        Globals.SerializationNamespace
-                    );
+                    schema
+                        .Namespaces
+                        .Add(Globals.SerPrefixForSchema, Globals.SerializationNamespace);
 
                 SchemaHelper.AddSchemaImport(dataContract.XmlName.Namespace, schema);
             }
@@ -403,9 +402,9 @@ namespace System.Runtime.Serialization
                     XmlAttribute typeNestedLevelsAttribute = XmlDoc.CreateAttribute(
                         Globals.GenericParameterNestedLevelAttribute
                     );
-                    typeNestedLevelsAttribute.Value = genericArgumentCounts.Count.ToString(
-                        CultureInfo.InvariantCulture
-                    );
+                    typeNestedLevelsAttribute.Value = genericArgumentCounts
+                        .Count
+                        .ToString(CultureInfo.InvariantCulture);
                     typeElement.Attributes.Append(typeNestedLevelsAttribute);
                 }
             }

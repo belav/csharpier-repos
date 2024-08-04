@@ -215,7 +215,8 @@ public class EntitySplittingData : ISetSource
             for (var j = 0; j < i; j++)
             {
                 _entityOnes[i]
-                    .OwnedCollection.Add(
+                    .OwnedCollection
+                    .Add(
                         new OwnedCollection
                         {
                             Id = i * 100 + j,
@@ -260,7 +261,8 @@ public class EntitySplittingData : ISetSource
             for (var j = 0; j < i; j++)
             {
                 _baseEntities[i]
-                    .OwnedCollection.Add(
+                    .OwnedCollection
+                    .Add(
                         new OwnedCollection
                         {
                             Id = i * 100 + j,

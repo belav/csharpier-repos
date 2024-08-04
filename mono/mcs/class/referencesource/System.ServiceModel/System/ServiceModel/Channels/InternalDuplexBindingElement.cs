@@ -57,10 +57,12 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
 
             IChannelFactory<IOutputChannel> innerChannelFactory = context
@@ -76,8 +78,9 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56506 // Microsoft, context.RemainingBindingElements will never be null
                 context.RemainingBindingElements.Clear();
             }
-            LocalAddressProvider localAddressProvider =
-                context.BindingParameters.Remove<LocalAddressProvider>();
+            LocalAddressProvider localAddressProvider = context
+                .BindingParameters
+                .Remove<LocalAddressProvider>();
             return (IChannelFactory<TChannel>)
                 (object)
                     new InternalDuplexChannelFactory(
@@ -100,10 +103,12 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) != typeof(IDuplexChannel))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
 
             return (IChannelListener<TChannel>)
@@ -289,10 +294,12 @@ namespace System.ServiceModel.Channels
             this.filter = filter;
 
             if (
-                localAddress.Headers.FindHeader(
-                    XD.UtilityDictionary.UniqueEndpointHeaderName.Value,
-                    XD.UtilityDictionary.UniqueEndpointHeaderNamespace.Value
-                ) == null
+                localAddress
+                    .Headers
+                    .FindHeader(
+                        XD.UtilityDictionary.UniqueEndpointHeaderName.Value,
+                        XD.UtilityDictionary.UniqueEndpointHeaderNamespace.Value
+                    ) == null
             )
             {
                 this.priority = Int32.MaxValue - 1;

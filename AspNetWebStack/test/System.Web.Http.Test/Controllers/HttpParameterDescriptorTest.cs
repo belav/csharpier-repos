@@ -37,13 +37,15 @@ namespace System.Web.Http
                 CallBase = true,
             }.Object;
 
-            Assert.Reflection.Property<HttpParameterDescriptor, HttpConfiguration>(
-                instance: parameterDescriptor,
-                propertyGetter: pd => pd.Configuration,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: config
-            );
+            Assert
+                .Reflection
+                .Property<HttpParameterDescriptor, HttpConfiguration>(
+                    instance: parameterDescriptor,
+                    propertyGetter: pd => pd.Configuration,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: config
+                );
         }
 
         [Fact]
@@ -55,13 +57,15 @@ namespace System.Web.Http
             }.Object;
             HttpActionDescriptor actionDescriptor = new Mock<HttpActionDescriptor>().Object;
 
-            Assert.Reflection.Property<HttpParameterDescriptor, HttpActionDescriptor>(
-                instance: parameterDescriptor,
-                propertyGetter: pd => pd.ActionDescriptor,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: actionDescriptor
-            );
+            Assert
+                .Reflection
+                .Property<HttpParameterDescriptor, HttpActionDescriptor>(
+                    instance: parameterDescriptor,
+                    propertyGetter: pd => pd.ActionDescriptor,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: actionDescriptor
+                );
         }
 
         [Fact]

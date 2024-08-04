@@ -174,9 +174,11 @@ namespace System.Activities
 
             if (!this.isHandleInitialized)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle)
+                    );
             }
 
             if (this.SuppressTransaction)
@@ -250,39 +252,47 @@ namespace System.Activities
 
             if (context.HasRuntimeTransaction)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.RuntimeTransactionAlreadyExists)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.RuntimeTransactionAlreadyExists));
             }
 
             if (context.IsInNoPersistScope)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.CannotSetRuntimeTransactionInNoPersist)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.CannotSetRuntimeTransactionInNoPersist)
+                    );
             }
 
             if (!this.isHandleInitialized)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle)
+                    );
             }
 
             if (this.SuppressTransaction)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.RuntimeTransactionIsSuppressed)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.RuntimeTransactionIsSuppressed));
             }
 
             if (isRequires)
             {
                 if (context.RequiresTransactionContextWaiterExists)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.OnlyOneRequireTransactionContextAllowed)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.OnlyOneRequireTransactionContextAllowed
+                            )
+                        );
                 }
 
                 this.ThrowIfNotRegistered(
@@ -324,30 +334,34 @@ namespace System.Activities
 
             if (this.rootTransaction != null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.CannotCompleteRuntimeOwnedTransaction)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.CannotCompleteRuntimeOwnedTransaction)
+                    );
             }
 
             if (!context.HasRuntimeTransaction)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.NoRuntimeTransactionExists)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.NoRuntimeTransactionExists));
             }
 
             if (!this.isHandleInitialized)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle)
+                    );
             }
 
             if (this.SuppressTransaction)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.RuntimeTransactionIsSuppressed)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.RuntimeTransactionIsSuppressed));
             }
 
             context.CompleteTransaction(this, callback);
@@ -382,9 +396,11 @@ namespace System.Activities
         {
             if (!this.isHandleInitialized)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle)
+                    );
             }
 
             RuntimeTransactionHandle handle = (RuntimeTransactionHandle)

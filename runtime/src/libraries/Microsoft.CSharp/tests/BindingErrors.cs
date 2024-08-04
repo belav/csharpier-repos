@@ -393,18 +393,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             CallSite<Func<CallSite, object, object, object, object>> site = CallSite<
                 Func<CallSite, object, object, object, object>
             >.Create(
-                Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(
-                    CSharpBinderFlags.None,
-                    "Equals",
-                    null,
-                    GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
-                    }
-                )
+                Microsoft
+                    .CSharp
+                    .RuntimeBinder
+                    .Binder
+                    .InvokeMember(
+                        CSharpBinderFlags.None,
+                        "Equals",
+                        null,
+                        GetType(),
+                        new[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
+                        }
+                    )
             );
             Func<CallSite, object, object, object, object> target = site.Target;
             Assert.Throws<RuntimeBinderException>(

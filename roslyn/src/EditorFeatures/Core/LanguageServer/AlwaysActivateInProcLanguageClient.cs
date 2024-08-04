@@ -146,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                     {
                         TokenTypes = SemanticTokensSchema
                             .GetSchema(clientCapabilities.HasVisualStudioLspCapability())
-                            .AllTokenTypes.ToArray(),
+                            .AllTokenTypes
+                            .ToArray(),
                         TokenModifiers = SemanticTokensSchema.TokenModifiers,
                     },
                 };

@@ -201,10 +201,9 @@ namespace System.Workflow.ComponentModel.Serialization
                 // To Support types whose assembly is not available, we need to still resolve the clr namespace
                 List<WorkflowMarkupSerializerMapping> xmlnsMappings = null;
                 if (
-                    manager.XmlNamespaceBasedMappings.TryGetValue(
-                        reader.LookupNamespace(prefix),
-                        out xmlnsMappings
-                    )
+                    manager
+                        .XmlNamespaceBasedMappings
+                        .TryGetValue(reader.LookupNamespace(prefix), out xmlnsMappings)
                     && xmlnsMappings != null
                     && xmlnsMappings.Count > 0
                 )

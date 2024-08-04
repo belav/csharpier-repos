@@ -166,8 +166,8 @@ class C
     {
         var c = new C();
         c.prop_value = 7;
-        c.Prop += await Task
-            .Factory.StartNew(() =>
+        c.Prop += await Task.Factory
+            .StartNew(() =>
             {
                 if (c.get_called != 1)
                     return -44;

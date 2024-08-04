@@ -4729,8 +4729,8 @@ public class Test
             var comp = (CSharpCompilation)verifier.Compilation;
             comp.VerifyDiagnostics();
 
-            var baseType = comp
-                .GlobalNamespace.GetMember<NamespaceSymbol>("Metadata")
+            var baseType = comp.GlobalNamespace
+                .GetMember<NamespaceSymbol>("Metadata")
                 .GetMember<NamedTypeSymbol>("LeastModoptsWin");
             var derivedType = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Derived");
 

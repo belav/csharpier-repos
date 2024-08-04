@@ -260,11 +260,13 @@ namespace System.ServiceModel.Activities
             {
                 if (this.InstanceKey != null && this.InstanceKey.Value != instanceKey.Value)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.CorrelationHandleInUse(this.InstanceKey.Value, instanceKey.Value)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.CorrelationHandleInUse(this.InstanceKey.Value, instanceKey.Value)
+                            )
+                        );
                 }
                 this.InstanceKey = instanceKey;
             }
@@ -281,11 +283,13 @@ namespace System.ServiceModel.Activities
                     {
                         if (this.Scope.Id != instanceKey.Value)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR.CorrelationHandleInUse(this.Scope.Id, instanceKey.Value)
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.CorrelationHandleInUse(this.Scope.Id, instanceKey.Value)
+                                    )
+                                );
                         }
                     }
                     else

@@ -70,13 +70,15 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             )
         )
         {
-            var result = await server.HttpClientSlim.PostAsync(
-                $"https://localhost:{server.Port}/",
-                new FormUrlEncodedContent(
-                    new[] { new KeyValuePair<string, string>("content", "Hello World?") }
-                ),
-                validateCertificate: false
-            );
+            var result = await server
+                .HttpClientSlim
+                .PostAsync(
+                    $"https://localhost:{server.Port}/",
+                    new FormUrlEncodedContent(
+                        new[] { new KeyValuePair<string, string>("content", "Hello World?") }
+                    ),
+                    validateCertificate: false
+                );
 
             Assert.Equal("content=Hello+World%3F", result);
         }
@@ -131,13 +133,15 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             )
         )
         {
-            var result = await server.HttpClientSlim.PostAsync(
-                $"https://localhost:{server.Port}/",
-                new FormUrlEncodedContent(
-                    new[] { new KeyValuePair<string, string>("content", "Hello World?") }
-                ),
-                validateCertificate: false
-            );
+            var result = await server
+                .HttpClientSlim
+                .PostAsync(
+                    $"https://localhost:{server.Port}/",
+                    new FormUrlEncodedContent(
+                        new[] { new KeyValuePair<string, string>("content", "Hello World?") }
+                    ),
+                    validateCertificate: false
+                );
 
             Assert.Equal("content=Hello+World%3F", result);
         }
@@ -169,10 +173,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             )
         )
         {
-            var result = await server.HttpClientSlim.GetStringAsync(
-                $"https://localhost:{server.Port}/",
-                validateCertificate: false
-            );
+            var result = await server
+                .HttpClientSlim
+                .GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
             Assert.Equal("hello world", result);
         }
     }
@@ -228,10 +231,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             )
         )
         {
-            var result = await server.HttpClientSlim.GetStringAsync(
-                $"https://localhost:{server.Port}/",
-                validateCertificate: false
-            );
+            var result = await server
+                .HttpClientSlim
+                .GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
             Assert.Equal("hello world", result);
         }
     }
@@ -282,10 +284,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             )
         )
         {
-            var result = await server.HttpClientSlim.GetStringAsync(
-                $"https://localhost:{server.Port}/",
-                validateCertificate: false
-            );
+            var result = await server
+                .HttpClientSlim
+                .GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
             Assert.Equal("hello world", result);
         }
     }
@@ -344,10 +345,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             )
         )
         {
-            var result = await server.HttpClientSlim.GetStringAsync(
-                $"https://localhost:{server.Port}/",
-                validateCertificate: false
-            );
+            var result = await server
+                .HttpClientSlim
+                .GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
             Assert.Equal("hello world", result);
         }
     }
@@ -391,10 +391,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             )
         )
         {
-            var result = await server.HttpClientSlim.GetStringAsync(
-                $"https://localhost:{server.Port}/",
-                validateCertificate: false
-            );
+            var result = await server
+                .HttpClientSlim
+                .GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
             Assert.Equal("hello world", result);
         }
     }
@@ -869,8 +868,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                     () => context.Connection.GetClientCertificateAsync()
                 );
 
-                var lifetimeNotificationFeature =
-                    context.Features.Get<IConnectionLifetimeNotificationFeature>();
+                var lifetimeNotificationFeature = context
+                    .Features
+                    .Get<IConnectionLifetimeNotificationFeature>();
                 Assert.False(
                     lifetimeNotificationFeature.ConnectionClosedRequested.IsCancellationRequested,
                     "GetClientCertificateAsync shouldn't cause the connection to be closed."
@@ -1451,9 +1451,11 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var stream = OpenSslStreamWithCert(connection.Stream);
         await stream.AuthenticateAsClientAsync(Guid.NewGuid().ToString());
 
-        var request = Encoding.UTF8.GetBytes(
-            $"POST / HTTP/1.1\r\nHost: localhost\r\nContent-Length: {expectedBody.Length}\r\n\r\n{expectedBody}"
-        );
+        var request = Encoding
+            .UTF8
+            .GetBytes(
+                $"POST / HTTP/1.1\r\nHost: localhost\r\nContent-Length: {expectedBody.Length}\r\n\r\n{expectedBody}"
+            );
         await stream.WriteAsync(request, 0, request.Length).DefaultTimeout();
         var reader = new StreamReader(stream);
         Assert.Equal("HTTP/1.1 200 OK", await reader.ReadLineAsync().DefaultTimeout());
@@ -1483,10 +1485,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             )
         )
         {
-            var result = await server.HttpClientSlim.GetStringAsync(
-                $"https://localhost:{server.Port}/",
-                validateCertificate: false
-            );
+            var result = await server
+                .HttpClientSlim
+                .GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
             Assert.Equal("https", result);
         }
     }
@@ -1997,9 +1998,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var request =
             body == null
                 ? Encoding.UTF8.GetBytes("GET / HTTP/1.0\r\n\r\n")
-                : Encoding.UTF8.GetBytes(
-                    $"POST / HTTP/1.0\r\nContent-Length: {body.Length}\r\n\r\n{body}"
-                );
+                : Encoding
+                    .UTF8
+                    .GetBytes($"POST / HTTP/1.0\r\nContent-Length: {body.Length}\r\n\r\n{body}");
         await stream.WriteAsync(request, 0, request.Length);
         var reader = new StreamReader(stream);
         string line = null;

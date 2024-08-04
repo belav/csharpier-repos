@@ -1308,11 +1308,9 @@ namespace System.Reflection.PortableExecutable.Tests
                 File.WriteAllBytes(tempFile.Path, Misc.Members);
 
                 using (
-                    SafeLibraryHandle libHandle = global::Interop.Kernel32.LoadLibraryExW(
-                        tempFile.Path,
-                        IntPtr.Zero,
-                        0
-                    )
+                    SafeLibraryHandle libHandle = global::Interop
+                        .Kernel32
+                        .LoadLibraryExW(tempFile.Path, IntPtr.Zero, 0)
                 )
                 {
                     byte* peImagePtr = (byte*)

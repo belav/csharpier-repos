@@ -138,16 +138,18 @@ namespace System.Activities
         {
             if (oldState == State.Loaded)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.WorkflowApplicationInstanceLoaded)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.WorkflowApplicationInstanceLoaded));
             }
 
             if (oldState == State.Aborted)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.WorkflowApplicationInstanceAbandoned)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.WorkflowApplicationInstanceAbandoned)
+                    );
             }
         }
     }

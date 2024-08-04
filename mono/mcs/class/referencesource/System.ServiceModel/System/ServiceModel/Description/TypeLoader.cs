@@ -105,9 +105,9 @@ namespace System.ServiceModel.Description
                             && serviceImplementation is IContractBehavior
                         )
                         {
-                            contractDescription.Behaviors.Add(
-                                (IContractBehavior)serviceImplementation
-                            );
+                            contractDescription
+                                .Behaviors
+                                .Add((IContractBehavior)serviceImplementation);
                         }
                         if (serviceType != null)
                         {
@@ -154,15 +154,17 @@ namespace System.ServiceModel.Description
                         != null
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxContractInheritanceRequiresInterfaces,
-                                    actualContractType,
-                                    service
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxContractInheritanceRequiresInterfaces,
+                                        actualContractType,
+                                        service
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -194,28 +196,32 @@ namespace System.ServiceModel.Description
                     {
                         if (operationContractProviderType == OperationContractAttributeType)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.SFxOperationContractOnNonServiceContract,
-                                        methodInfo.Name,
-                                        aParentType.Name
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.SFxOperationContractOnNonServiceContract,
+                                            methodInfo.Name,
+                                            aParentType.Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         else
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.SFxOperationContractProviderOnNonServiceContract,
-                                        operationContractProviderType.Name,
-                                        methodInfo.Name,
-                                        aParentType.Name
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.SFxOperationContractProviderOnNonServiceContract,
+                                            operationContractProviderType.Name,
+                                            methodInfo.Name,
+                                            aParentType.Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                 }
@@ -403,8 +409,9 @@ namespace System.ServiceModel.Description
             for (int i = 0; i < contractDesc.Operations.Count; i++)
             {
                 OperationDescription opDesc = contractDesc.Operations[i];
-                OperationBehaviorAttribute operationBehavior =
-                    opDesc.Behaviors.Find<OperationBehaviorAttribute>();
+                OperationBehaviorAttribute operationBehavior = opDesc
+                    .Behaviors
+                    .Find<OperationBehaviorAttribute>();
                 if (operationBehavior == null)
                 {
                     operationBehavior = new OperationBehaviorAttribute();
@@ -440,16 +447,18 @@ namespace System.ServiceModel.Description
                 {
                     if (!isInherited)
                     {
-                        operationDescription.Behaviors.Add(
-                            new DataContractSerializerOperationBehavior(
-                                operationDescription,
-                                dataContractFormatAttribute,
-                                true
-                            )
-                        );
-                        operationDescription.Behaviors.Add(
-                            new DataContractSerializerOperationGenerator()
-                        );
+                        operationDescription
+                            .Behaviors
+                            .Add(
+                                new DataContractSerializerOperationBehavior(
+                                    operationDescription,
+                                    dataContractFormatAttribute,
+                                    true
+                                )
+                            );
+                        operationDescription
+                            .Behaviors
+                            .Add(new DataContractSerializerOperationGenerator());
                     }
                 }
                 else if (
@@ -584,28 +593,32 @@ namespace System.ServiceModel.Description
                         null
                     );
                     if (method == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxKnownTypeAttributeUnknownMethod3,
-                                    provider,
-                                    knownTypeAttribute.MethodName,
-                                    type.FullName
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxKnownTypeAttributeUnknownMethod3,
+                                        provider,
+                                        knownTypeAttribute.MethodName,
+                                        type.FullName
+                                    )
                                 )
-                            )
-                        );
+                            );
 
                     if (!typeof(IEnumerable<Type>).IsAssignableFrom(method.ReturnType))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxKnownTypeAttributeReturnType3,
-                                    provider,
-                                    knownTypeAttribute.MethodName,
-                                    type.FullName
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxKnownTypeAttributeReturnType3,
+                                        provider,
+                                        knownTypeAttribute.MethodName,
+                                        type.FullName
+                                    )
                                 )
-                            )
-                        );
+                            );
 
                     return (IEnumerable<Type>)method.Invoke(null, new object[] { provider });
                 }
@@ -617,11 +630,13 @@ namespace System.ServiceModel.Description
                 ServiceKnownTypeAttribute knownTypeAttribute = (ServiceKnownTypeAttribute)
                     knownTypeAttributes[i];
                 if (knownTypeAttribute.Type == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxKnownTypeAttributeInvalid1, provider.ToString())
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxKnownTypeAttributeInvalid1, provider.ToString())
+                            )
+                        );
                 knownTypes.Add(knownTypeAttribute.Type);
             }
             return knownTypes;
@@ -718,50 +733,56 @@ namespace System.ServiceModel.Description
                 {
                     if (opDesc.SyncMethod != null && opDesc.BeginMethod != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SyncAsyncMatchConsistency_Attributes6,
-                                    opDesc.SyncMethod.Name,
-                                    opDesc.SyncMethod.DeclaringType,
-                                    opDesc.BeginMethod.Name,
-                                    opDesc.EndMethod.Name,
-                                    opDesc.Name,
-                                    opBehaviorAttr.GetType().FullName
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SyncAsyncMatchConsistency_Attributes6,
+                                        opDesc.SyncMethod.Name,
+                                        opDesc.SyncMethod.DeclaringType,
+                                        opDesc.BeginMethod.Name,
+                                        opDesc.EndMethod.Name,
+                                        opDesc.Name,
+                                        opBehaviorAttr.GetType().FullName
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else if (opDesc.SyncMethod != null && opDesc.TaskMethod != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SyncTaskMatchConsistency_Attributes6,
-                                    opDesc.SyncMethod.Name,
-                                    opDesc.SyncMethod.DeclaringType,
-                                    opDesc.TaskMethod.Name,
-                                    opDesc.Name,
-                                    opBehaviorAttr.GetType().FullName
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SyncTaskMatchConsistency_Attributes6,
+                                        opDesc.SyncMethod.Name,
+                                        opDesc.SyncMethod.DeclaringType,
+                                        opDesc.TaskMethod.Name,
+                                        opDesc.Name,
+                                        opBehaviorAttr.GetType().FullName
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else if (opDesc.TaskMethod != null && opDesc.BeginMethod != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.TaskAsyncMatchConsistency_Attributes6,
-                                    opDesc.TaskMethod.Name,
-                                    opDesc.TaskMethod.DeclaringType,
-                                    opDesc.BeginMethod.Name,
-                                    opDesc.EndMethod.Name,
-                                    opDesc.Name,
-                                    opBehaviorAttr.GetType().FullName
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.TaskAsyncMatchConsistency_Attributes6,
+                                        opDesc.TaskMethod.Name,
+                                        opDesc.TaskMethod.DeclaringType,
+                                        opDesc.BeginMethod.Name,
+                                        opDesc.EndMethod.Name,
+                                        opDesc.Name,
+                                        opBehaviorAttr.GetType().FullName
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     Fx.Assert("Invalid state. No exception for canHaveBehaviors = false");
                 }
@@ -772,8 +793,9 @@ namespace System.ServiceModel.Description
         {
             if (serviceEndpoint.Contract.IsDuplex())
             {
-                CallbackBehaviorAttribute attr =
-                    serviceEndpoint.Behaviors.Find<CallbackBehaviorAttribute>();
+                CallbackBehaviorAttribute attr = serviceEndpoint
+                    .Behaviors
+                    .Find<CallbackBehaviorAttribute>();
                 if (attr == null)
                 {
                     serviceEndpoint.Behaviors.Insert(0, new CallbackBehaviorAttribute());
@@ -907,16 +929,18 @@ namespace System.ServiceModel.Description
             )
             {
                 Fx.Assert("bad contract inheritance");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        String.Format(
-                            CultureInfo.InvariantCulture,
-                            "Bad contract inheritence. Contract {0} does not implement {1}",
-                            declaringContract.ContractType.Name,
-                            contractDescription.ContractType.Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "Bad contract inheritence. Contract {0} does not implement {1}",
+                                declaringContract.ContractType.Name,
+                                contractDescription.ContractType.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             foreach (
@@ -932,15 +956,17 @@ namespace System.ServiceModel.Description
                     );
                     if (attrs.Length != 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxOperationBehaviorAttributeOnlyOnServiceClass,
-                                    methodInfo.Name,
-                                    contractToGetMethodsFrom.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxOperationBehaviorAttributeOnlyOnServiceClass,
+                                        methodInfo.Name,
+                                        contractToGetMethodsFrom.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 ServiceReflector.ValidateParameterMetadata(methodInfo);
@@ -965,11 +991,13 @@ namespace System.ServiceModel.Description
         {
             if (callbackType != null && !callbackType.IsInterface && !callbackType.IsMarshalByRef)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.SFxInvalidCallbackContractType, callbackType.Name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.SFxInvalidCallbackContractType, callbackType.Name)
+                        )
+                    );
             }
         }
 
@@ -994,28 +1022,32 @@ namespace System.ServiceModel.Description
                 {
                     if (callbackType == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.InAContractInheritanceHierarchyIfParentHasCallbackChildMustToo,
-                                    inheritedContractType.Name,
-                                    inheritedContractAttr.CallbackContract.Name,
-                                    contractType.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.InAContractInheritanceHierarchyIfParentHasCallbackChildMustToo,
+                                        inheritedContractType.Name,
+                                        inheritedContractAttr.CallbackContract.Name,
+                                        contractType.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     if (!inheritedContractAttr.CallbackContract.IsAssignableFrom(callbackType))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.InAContractInheritanceHierarchyTheServiceContract3_2,
-                                    inheritedContractType.Name,
-                                    contractType.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.InAContractInheritanceHierarchyTheServiceContract3_2,
+                                        inheritedContractType.Name,
+                                        contractType.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -1081,22 +1113,25 @@ namespace System.ServiceModel.Description
                     if (!contractDescription.Operations.Contains(op)) // in a diamond hierarchy, ensure we don't add same op twice from two different parents
                     {
                         // ensure two different parents don't try to add conflicting operations
-                        Collection<OperationDescription> existingOps =
-                            contractDescription.Operations.FindAll(op.Name);
+                        Collection<OperationDescription> existingOps = contractDescription
+                            .Operations
+                            .FindAll(op.Name);
                         foreach (OperationDescription existingOp in existingOps)
                         {
                             if (existingOp.Messages[0].Direction == op.Messages[0].Direction)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new InvalidOperationException(
-                                        SR.GetString(
-                                            SR.CannotInheritTwoOperationsWithTheSameName3,
-                                            op.Name,
-                                            inheritedContractDescription.Name,
-                                            existingOp.DeclaringContract.Name
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new InvalidOperationException(
+                                            SR.GetString(
+                                                SR.CannotInheritTwoOperationsWithTheSameName3,
+                                                op.Name,
+                                                inheritedContractDescription.Name,
+                                                existingOp.DeclaringContract.Name
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                         }
                         contractDescription.Operations.Add(op);
@@ -1198,15 +1233,17 @@ namespace System.ServiceModel.Description
 
             if (ServiceReflector.HasEndMethodShape(methodInfo))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.EndMethodsCannotBeDecoratedWithOperationContractAttribute,
-                            methodInfo.Name,
-                            reflectionInfo.iface
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.EndMethodsCannotBeDecoratedWithOperationContractAttribute,
+                                methodInfo.Name,
+                                reflectionInfo.iface
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             Type taskTResult;
@@ -1220,9 +1257,9 @@ namespace System.ServiceModel.Description
 
             opAttr.EnsureInvariants(methodInfo, operationName.EncodedName);
 
-            Collection<OperationDescription> operations = contractDescription.Operations.FindAll(
-                operationName.EncodedName
-            );
+            Collection<OperationDescription> operations = contractDescription
+                .Operations
+                .FindAll(operationName.EncodedName);
             for (int i = 0; i < operations.Count; i++)
             {
                 OperationDescription existingOp = operations[i];
@@ -1233,46 +1270,52 @@ namespace System.ServiceModel.Description
                     {
                         string method1Name = existingOp.OperationMethod.Name;
                         string method2Name = methodInfo.Name;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.CannotHaveTwoOperationsWithTheSameName3,
-                                    method1Name,
-                                    method2Name,
-                                    reflectionInfo.iface
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.CannotHaveTwoOperationsWithTheSameName3,
+                                        method1Name,
+                                        method2Name,
+                                        reflectionInfo.iface
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     if (isAsync && (existingOp.BeginMethod != null))
                     {
                         string method1Name = existingOp.BeginMethod.Name;
                         string method2Name = methodInfo.Name;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.CannotHaveTwoOperationsWithTheSameName3,
-                                    method1Name,
-                                    method2Name,
-                                    reflectionInfo.iface
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.CannotHaveTwoOperationsWithTheSameName3,
+                                        method1Name,
+                                        method2Name,
+                                        reflectionInfo.iface
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     if (!isAsync && !isTask && (existingOp.SyncMethod != null))
                     {
                         string method1Name = existingOp.SyncMethod.Name;
                         string method2Name = methodInfo.Name;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.CannotHaveTwoOperationsWithTheSameName3,
-                                    method1Name,
-                                    method2Name,
-                                    reflectionInfo.iface
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.CannotHaveTwoOperationsWithTheSameName3,
+                                        method1Name,
+                                        method2Name,
+                                        reflectionInfo.iface
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     contractDescription.Operations.Remove(existingOp);
@@ -1383,15 +1426,17 @@ namespace System.ServiceModel.Description
 
             if (opAttr.IsOneWay && methodAttributes.Length > 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.OneWayAndFaultsIncompatible2,
-                            methodInfo.DeclaringType.FullName,
-                            operationName.EncodedName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.OneWayAndFaultsIncompatible2,
+                                methodInfo.DeclaringType.FullName,
+                                operationName.EncodedName
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             for (int i = 0; i < methodAttributes.Length; i++)
@@ -1496,23 +1541,27 @@ namespace System.ServiceModel.Description
                     || ServiceReflector.HasOutputParameters(outputMethod, isAsync)
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ServiceOperationsMarkedWithIsOneWayTrueMust0)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ServiceOperationsMarkedWithIsOneWayTrueMust0)
+                            )
+                        );
                 }
 
                 if (opAttr.ReplyAction != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.OneWayOperationShouldNotSpecifyAReplyAction1,
-                                operationName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.OneWayOperationShouldNotSpecifyAReplyAction1,
+                                    operationName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -1552,31 +1601,35 @@ namespace System.ServiceModel.Description
                     && XmlName.IsNullOrEmpty(fault.ElementName)
                     && existingFault.DetailType == fault.DetailType
                 )
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxFaultContractDuplicateDetailType,
-                                operationName,
-                                fault.DetailType
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxFaultContractDuplicateDetailType,
+                                    operationName,
+                                    fault.DetailType
+                                )
                             )
-                        )
-                    );
+                        );
                 if (
                     !XmlName.IsNullOrEmpty(existingFault.ElementName)
                     && !XmlName.IsNullOrEmpty(fault.ElementName)
                     && existingFault.ElementName == fault.ElementName
                     && existingFault.Namespace == fault.Namespace
                 )
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxFaultContractDuplicateElement,
-                                operationName,
-                                fault.ElementName,
-                                fault.Namespace
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxFaultContractDuplicateElement,
+                                    operationName,
+                                    fault.ElementName,
+                                    fault.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
             }
         }
 
@@ -1635,7 +1688,8 @@ namespace System.ServiceModel.Description
                 if (
                     parameters.Length == 1
                     && parameters[0]
-                        .ParameterType.IsDefined(typeof(MessageContractAttribute), false)
+                        .ParameterType
+                        .IsDefined(typeof(MessageContractAttribute), false)
                 )
                 {
                     messageDescription = CreateTypedMessageDescription(
@@ -1709,15 +1763,17 @@ namespace System.ServiceModel.Description
                 {
                     if (hasUnknownHeaders)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxMultipleUnknownHeaders,
-                                    methodInfo,
-                                    methodInfo.DeclaringType
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxMultipleUnknownHeaders,
+                                        methodInfo,
+                                        methodInfo.DeclaringType
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else
                     {
@@ -1751,11 +1807,13 @@ namespace System.ServiceModel.Description
                         )
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxInvalidMessageContractSignature, methodName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxInvalidMessageContractSignature, methodName)
+                            )
+                        );
                 }
             }
             if (
@@ -1766,11 +1824,13 @@ namespace System.ServiceModel.Description
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxInvalidMessageContractSignature, methodName)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxInvalidMessageContractSignature, methodName)
+                        )
+                    );
             }
 
             MessageDescription messageDescription = new MessageDescription(action, direction);
@@ -1791,15 +1851,17 @@ namespace System.ServiceModel.Description
                         new XmlQualifiedName(partDescription.Name, partDescription.Namespace)
                     )
                 )
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidMessageContractException(
-                            SR.GetString(
-                                SR.SFxDuplicateMessageParts,
-                                partDescription.Name,
-                                partDescription.Namespace
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidMessageContractException(
+                                SR.GetString(
+                                    SR.SFxDuplicateMessageParts,
+                                    partDescription.Name,
+                                    partDescription.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
                 messageDescription.Body.Parts.Add(partDescription);
             }
 
@@ -1903,15 +1965,17 @@ namespace System.ServiceModel.Description
                     )
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxMessageContractBaseTypeNotValid,
-                                baseType,
-                                typedMessageType
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxMessageContractBaseTypeNotValid,
+                                    baseType,
+                                    typedMessageType
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 if (!messageDescription.HasProtectionLevel)
                 {
@@ -2009,13 +2073,15 @@ namespace System.ServiceModel.Description
                 }
                 else if (memberInfo.IsDefined(typeof(MessagePropertyAttribute), false))
                 {
-                    messageDescription.Properties.Add(
-                        CreateMessagePropertyDescription(
-                            memberInfo,
-                            new XmlName(memberInfo.Name),
-                            i
-                        )
-                    );
+                    messageDescription
+                        .Properties
+                        .Add(
+                            CreateMessagePropertyDescription(
+                                memberInfo,
+                                new XmlName(memberInfo.Name),
+                                i
+                            )
+                        );
                 }
                 else
                 {
@@ -2133,11 +2199,13 @@ namespace System.ServiceModel.Description
             {
                 if (!headerParameterType.IsArray || headerParameterType.GetArrayRank() != 1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxInvalidMessageHeaderArrayType, defaultName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxInvalidMessageHeaderArrayType, defaultName)
+                            )
+                        );
                 }
                 headerDescription.Multiple = true;
                 headerParameterType = headerParameterType.GetElementType();
@@ -2152,11 +2220,16 @@ namespace System.ServiceModel.Description
                     || headerAttr.Actor != null
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxStaticMessageHeaderPropertiesNotAllowed, defaultName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxStaticMessageHeaderPropertiesNotAllowed,
+                                    defaultName
+                                )
+                            )
+                        );
                 }
             }
             else
@@ -2256,15 +2329,17 @@ namespace System.ServiceModel.Description
                     )
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidMessageContractException(
-                            SR.GetString(
-                                SR.SFxDuplicateMessageParts,
-                                partDescription.Name,
-                                partDescription.Namespace
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidMessageContractException(
+                                SR.GetString(
+                                    SR.SFxDuplicateMessageParts,
+                                    partDescription.Name,
+                                    partDescription.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 partDescriptionCollection.Add(partDescription);
             }
@@ -2330,28 +2405,9 @@ namespace System.ServiceModel.Description
                     || this.syncOutputs.Length != this.asyncOutputs.Length
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SyncAsyncMatchConsistency_Parameters5,
-                                this.syncOperation.SyncMethod.Name,
-                                this.syncOperation.SyncMethod.DeclaringType,
-                                this.asyncOperation.BeginMethod.Name,
-                                this.asyncOperation.EndMethod.Name,
-                                this.syncOperation.Name
-                            )
-                        )
-                    );
-                }
-            }
-
-            public override void VerifyParameterType()
-            {
-                for (int i = 0; i < this.syncInputs.Length; i++)
-                {
-                    if (this.syncInputs[i].ParameterType != this.asyncInputs[i].ParameterType)
-                    {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
                                     SR.SyncAsyncMatchConsistency_Parameters5,
@@ -2363,6 +2419,29 @@ namespace System.ServiceModel.Description
                                 )
                             )
                         );
+                }
+            }
+
+            public override void VerifyParameterType()
+            {
+                for (int i = 0; i < this.syncInputs.Length; i++)
+                {
+                    if (this.syncInputs[i].ParameterType != this.asyncInputs[i].ParameterType)
+                    {
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SyncAsyncMatchConsistency_Parameters5,
+                                        this.syncOperation.SyncMethod.Name,
+                                        this.syncOperation.SyncMethod.DeclaringType,
+                                        this.asyncOperation.BeginMethod.Name,
+                                        this.asyncOperation.EndMethod.Name,
+                                        this.syncOperation.Name
+                                    )
+                                )
+                            );
                     }
                 }
             }
@@ -2373,18 +2452,20 @@ namespace System.ServiceModel.Description
                 {
                     if (this.syncOutputs[i].ParameterType != this.asyncOutputs[i].ParameterType)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SyncAsyncMatchConsistency_Parameters5,
-                                    this.syncOperation.SyncMethod.Name,
-                                    this.syncOperation.SyncMethod.DeclaringType,
-                                    this.asyncOperation.BeginMethod.Name,
-                                    this.asyncOperation.EndMethod.Name,
-                                    this.syncOperation.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SyncAsyncMatchConsistency_Parameters5,
+                                        this.syncOperation.SyncMethod.Name,
+                                        this.syncOperation.SyncMethod.DeclaringType,
+                                        this.asyncOperation.BeginMethod.Name,
+                                        this.asyncOperation.EndMethod.Name,
+                                        this.syncOperation.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -2396,18 +2477,20 @@ namespace System.ServiceModel.Description
                     != this.syncOperation.EndMethod.ReturnType
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SyncAsyncMatchConsistency_ReturnType5,
-                                this.syncOperation.SyncMethod.Name,
-                                this.syncOperation.SyncMethod.DeclaringType,
-                                this.asyncOperation.BeginMethod.Name,
-                                this.asyncOperation.EndMethod.Name,
-                                this.syncOperation.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SyncAsyncMatchConsistency_ReturnType5,
+                                    this.syncOperation.SyncMethod.Name,
+                                    this.syncOperation.SyncMethod.DeclaringType,
+                                    this.asyncOperation.BeginMethod.Name,
+                                    this.asyncOperation.EndMethod.Name,
+                                    this.syncOperation.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2415,19 +2498,21 @@ namespace System.ServiceModel.Description
             {
                 if (this.asyncOperation.Faults.Count != 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SyncAsyncMatchConsistency_Attributes6,
-                                this.syncOperation.SyncMethod.Name,
-                                this.syncOperation.SyncMethod.DeclaringType,
-                                this.asyncOperation.BeginMethod.Name,
-                                this.asyncOperation.EndMethod.Name,
-                                this.syncOperation.Name,
-                                typeof(FaultContractAttribute).Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SyncAsyncMatchConsistency_Attributes6,
+                                    this.syncOperation.SyncMethod.Name,
+                                    this.syncOperation.SyncMethod.DeclaringType,
+                                    this.asyncOperation.BeginMethod.Name,
+                                    this.asyncOperation.EndMethod.Name,
+                                    this.syncOperation.Name,
+                                    typeof(FaultContractAttribute).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2435,19 +2520,21 @@ namespace System.ServiceModel.Description
             {
                 if (this.asyncOperation.KnownTypes.Count != 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SyncAsyncMatchConsistency_Attributes6,
-                                this.syncOperation.SyncMethod.Name,
-                                this.syncOperation.SyncMethod.DeclaringType,
-                                this.asyncOperation.BeginMethod.Name,
-                                this.asyncOperation.EndMethod.Name,
-                                this.syncOperation.Name,
-                                typeof(ServiceKnownTypeAttribute).Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SyncAsyncMatchConsistency_Attributes6,
+                                    this.syncOperation.SyncMethod.Name,
+                                    this.syncOperation.SyncMethod.DeclaringType,
+                                    this.asyncOperation.BeginMethod.Name,
+                                    this.asyncOperation.EndMethod.Name,
+                                    this.syncOperation.Name,
+                                    typeof(ServiceKnownTypeAttribute).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2455,19 +2542,21 @@ namespace System.ServiceModel.Description
             {
                 if (this.syncOperation.Messages.Count != this.asyncOperation.Messages.Count)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SyncAsyncMatchConsistency_Property6,
-                                this.syncOperation.SyncMethod.Name,
-                                this.syncOperation.SyncMethod.DeclaringType,
-                                this.asyncOperation.BeginMethod.Name,
-                                this.asyncOperation.EndMethod.Name,
-                                this.syncOperation.Name,
-                                "IsOneWay"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SyncAsyncMatchConsistency_Property6,
+                                    this.syncOperation.SyncMethod.Name,
+                                    this.syncOperation.SyncMethod.DeclaringType,
+                                    this.asyncOperation.BeginMethod.Name,
+                                    this.asyncOperation.EndMethod.Name,
+                                    this.syncOperation.Name,
+                                    "IsOneWay"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2480,19 +2569,21 @@ namespace System.ServiceModel.Description
                         != this.asyncOperation.Messages[index].Action
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SyncAsyncMatchConsistency_Property6,
-                                    this.syncOperation.SyncMethod.Name,
-                                    this.syncOperation.SyncMethod.DeclaringType,
-                                    this.asyncOperation.BeginMethod.Name,
-                                    this.asyncOperation.EndMethod.Name,
-                                    this.syncOperation.Name,
-                                    index == 0 ? "Action" : "ReplyAction"
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SyncAsyncMatchConsistency_Property6,
+                                        this.syncOperation.SyncMethod.Name,
+                                        this.syncOperation.SyncMethod.DeclaringType,
+                                        this.asyncOperation.BeginMethod.Name,
+                                        this.asyncOperation.EndMethod.Name,
+                                        this.syncOperation.Name,
+                                        index == 0 ? "Action" : "ReplyAction"
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -2526,27 +2617,9 @@ namespace System.ServiceModel.Description
             {
                 if (this.syncInputs.Length != this.taskInputs.Length)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SyncTaskMatchConsistency_Parameters5,
-                                this.syncOperation.SyncMethod.Name,
-                                this.syncOperation.SyncMethod.DeclaringType,
-                                this.taskOperation.TaskMethod.Name,
-                                this.syncOperation.Name
-                            )
-                        )
-                    );
-                }
-            }
-
-            public override void VerifyParameterType()
-            {
-                for (int i = 0; i < this.syncInputs.Length; i++)
-                {
-                    if (this.syncInputs[i].ParameterType != this.taskInputs[i].ParameterType)
-                    {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
                                     SR.SyncTaskMatchConsistency_Parameters5,
@@ -2557,6 +2630,28 @@ namespace System.ServiceModel.Description
                                 )
                             )
                         );
+                }
+            }
+
+            public override void VerifyParameterType()
+            {
+                for (int i = 0; i < this.syncInputs.Length; i++)
+                {
+                    if (this.syncInputs[i].ParameterType != this.taskInputs[i].ParameterType)
+                    {
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SyncTaskMatchConsistency_Parameters5,
+                                        this.syncOperation.SyncMethod.Name,
+                                        this.syncOperation.SyncMethod.DeclaringType,
+                                        this.taskOperation.TaskMethod.Name,
+                                        this.syncOperation.Name
+                                    )
+                                )
+                            );
                     }
                 }
             }
@@ -2565,17 +2660,19 @@ namespace System.ServiceModel.Description
             {
                 if (this.syncOperation.SyncMethod.ReturnType != this.syncOperation.TaskTResult)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SyncTaskMatchConsistency_ReturnType5,
-                                this.syncOperation.SyncMethod.Name,
-                                this.syncOperation.SyncMethod.DeclaringType,
-                                this.taskOperation.TaskMethod.Name,
-                                this.syncOperation.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SyncTaskMatchConsistency_ReturnType5,
+                                    this.syncOperation.SyncMethod.Name,
+                                    this.syncOperation.SyncMethod.DeclaringType,
+                                    this.taskOperation.TaskMethod.Name,
+                                    this.syncOperation.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2583,18 +2680,20 @@ namespace System.ServiceModel.Description
             {
                 if (this.taskOperation.Faults.Count != 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SyncTaskMatchConsistency_Attributes6,
-                                this.syncOperation.SyncMethod.Name,
-                                this.syncOperation.SyncMethod.DeclaringType,
-                                this.taskOperation.TaskMethod.Name,
-                                this.syncOperation.Name,
-                                typeof(FaultContractAttribute).Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SyncTaskMatchConsistency_Attributes6,
+                                    this.syncOperation.SyncMethod.Name,
+                                    this.syncOperation.SyncMethod.DeclaringType,
+                                    this.taskOperation.TaskMethod.Name,
+                                    this.syncOperation.Name,
+                                    typeof(FaultContractAttribute).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2602,18 +2701,20 @@ namespace System.ServiceModel.Description
             {
                 if (this.taskOperation.KnownTypes.Count != 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SyncTaskMatchConsistency_Attributes6,
-                                this.syncOperation.SyncMethod.Name,
-                                this.syncOperation.SyncMethod.DeclaringType,
-                                this.taskOperation.TaskMethod.Name,
-                                this.syncOperation.Name,
-                                typeof(ServiceKnownTypeAttribute).Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SyncTaskMatchConsistency_Attributes6,
+                                    this.syncOperation.SyncMethod.Name,
+                                    this.syncOperation.SyncMethod.DeclaringType,
+                                    this.taskOperation.TaskMethod.Name,
+                                    this.syncOperation.Name,
+                                    typeof(ServiceKnownTypeAttribute).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2621,18 +2722,20 @@ namespace System.ServiceModel.Description
             {
                 if (this.syncOperation.Messages.Count != this.taskOperation.Messages.Count)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SyncTaskMatchConsistency_Property6,
-                                this.syncOperation.SyncMethod.Name,
-                                this.syncOperation.SyncMethod.DeclaringType,
-                                this.taskOperation.TaskMethod.Name,
-                                this.syncOperation.Name,
-                                "IsOneWay"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SyncTaskMatchConsistency_Property6,
+                                    this.syncOperation.SyncMethod.Name,
+                                    this.syncOperation.SyncMethod.DeclaringType,
+                                    this.taskOperation.TaskMethod.Name,
+                                    this.syncOperation.Name,
+                                    "IsOneWay"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2645,18 +2748,20 @@ namespace System.ServiceModel.Description
                         != this.taskOperation.Messages[index].Action
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SyncTaskMatchConsistency_Property6,
-                                    this.syncOperation.SyncMethod.Name,
-                                    this.syncOperation.SyncMethod.DeclaringType,
-                                    this.taskOperation.TaskMethod.Name,
-                                    this.syncOperation.Name,
-                                    index == 0 ? "Action" : "ReplyAction"
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SyncTaskMatchConsistency_Property6,
+                                        this.syncOperation.SyncMethod.Name,
+                                        this.syncOperation.SyncMethod.DeclaringType,
+                                        this.taskOperation.TaskMethod.Name,
+                                        this.syncOperation.Name,
+                                        index == 0 ? "Action" : "ReplyAction"
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -2690,28 +2795,9 @@ namespace System.ServiceModel.Description
             {
                 if (this.taskInputs.Length != this.asyncInputs.Length)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.TaskAsyncMatchConsistency_Parameters5,
-                                this.taskOperation.TaskMethod.Name,
-                                this.taskOperation.TaskMethod.DeclaringType,
-                                this.asyncOperation.BeginMethod.Name,
-                                this.asyncOperation.EndMethod.Name,
-                                this.taskOperation.Name
-                            )
-                        )
-                    );
-                }
-            }
-
-            public override void VerifyParameterType()
-            {
-                for (int i = 0; i < this.taskInputs.Length; i++)
-                {
-                    if (this.taskInputs[i].ParameterType != this.asyncInputs[i].ParameterType)
-                    {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
                                     SR.TaskAsyncMatchConsistency_Parameters5,
@@ -2723,6 +2809,29 @@ namespace System.ServiceModel.Description
                                 )
                             )
                         );
+                }
+            }
+
+            public override void VerifyParameterType()
+            {
+                for (int i = 0; i < this.taskInputs.Length; i++)
+                {
+                    if (this.taskInputs[i].ParameterType != this.asyncInputs[i].ParameterType)
+                    {
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.TaskAsyncMatchConsistency_Parameters5,
+                                        this.taskOperation.TaskMethod.Name,
+                                        this.taskOperation.TaskMethod.DeclaringType,
+                                        this.asyncOperation.BeginMethod.Name,
+                                        this.asyncOperation.EndMethod.Name,
+                                        this.taskOperation.Name
+                                    )
+                                )
+                            );
                     }
                 }
             }
@@ -2731,18 +2840,20 @@ namespace System.ServiceModel.Description
             {
                 if (this.taskOperation.TaskTResult != this.asyncOperation.EndMethod.ReturnType)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.TaskAsyncMatchConsistency_ReturnType5,
-                                this.taskOperation.TaskMethod.Name,
-                                this.taskOperation.TaskMethod.DeclaringType,
-                                this.asyncOperation.BeginMethod.Name,
-                                this.asyncOperation.EndMethod.Name,
-                                this.taskOperation.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.TaskAsyncMatchConsistency_ReturnType5,
+                                    this.taskOperation.TaskMethod.Name,
+                                    this.taskOperation.TaskMethod.DeclaringType,
+                                    this.asyncOperation.BeginMethod.Name,
+                                    this.asyncOperation.EndMethod.Name,
+                                    this.taskOperation.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2750,19 +2861,21 @@ namespace System.ServiceModel.Description
             {
                 if (this.asyncOperation.Faults.Count != 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.TaskAsyncMatchConsistency_Attributes6,
-                                this.taskOperation.TaskMethod.Name,
-                                this.taskOperation.TaskMethod.DeclaringType,
-                                this.asyncOperation.BeginMethod.Name,
-                                this.asyncOperation.EndMethod.Name,
-                                this.taskOperation.Name,
-                                typeof(FaultContractAttribute).Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.TaskAsyncMatchConsistency_Attributes6,
+                                    this.taskOperation.TaskMethod.Name,
+                                    this.taskOperation.TaskMethod.DeclaringType,
+                                    this.asyncOperation.BeginMethod.Name,
+                                    this.asyncOperation.EndMethod.Name,
+                                    this.taskOperation.Name,
+                                    typeof(FaultContractAttribute).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2770,19 +2883,21 @@ namespace System.ServiceModel.Description
             {
                 if (this.asyncOperation.KnownTypes.Count != 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.TaskAsyncMatchConsistency_Attributes6,
-                                this.taskOperation.TaskMethod.Name,
-                                this.taskOperation.TaskMethod.DeclaringType,
-                                this.asyncOperation.BeginMethod.Name,
-                                this.asyncOperation.EndMethod.Name,
-                                this.taskOperation.Name,
-                                typeof(ServiceKnownTypeAttribute).Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.TaskAsyncMatchConsistency_Attributes6,
+                                    this.taskOperation.TaskMethod.Name,
+                                    this.taskOperation.TaskMethod.DeclaringType,
+                                    this.asyncOperation.BeginMethod.Name,
+                                    this.asyncOperation.EndMethod.Name,
+                                    this.taskOperation.Name,
+                                    typeof(ServiceKnownTypeAttribute).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2790,19 +2905,21 @@ namespace System.ServiceModel.Description
             {
                 if (this.taskOperation.Messages.Count != this.asyncOperation.Messages.Count)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.TaskAsyncMatchConsistency_Property6,
-                                this.taskOperation.TaskMethod.Name,
-                                this.taskOperation.TaskMethod.DeclaringType,
-                                this.asyncOperation.BeginMethod.Name,
-                                this.asyncOperation.EndMethod.Name,
-                                this.taskOperation.Name,
-                                "IsOneWay"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.TaskAsyncMatchConsistency_Property6,
+                                    this.taskOperation.TaskMethod.Name,
+                                    this.taskOperation.TaskMethod.DeclaringType,
+                                    this.asyncOperation.BeginMethod.Name,
+                                    this.asyncOperation.EndMethod.Name,
+                                    this.taskOperation.Name,
+                                    "IsOneWay"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2815,19 +2932,21 @@ namespace System.ServiceModel.Description
                         != this.asyncOperation.Messages[index].Action
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.TaskAsyncMatchConsistency_Property6,
-                                    this.taskOperation.TaskMethod.Name,
-                                    this.taskOperation.TaskMethod.DeclaringType,
-                                    this.asyncOperation.BeginMethod.Name,
-                                    this.asyncOperation.EndMethod.Name,
-                                    this.taskOperation.Name,
-                                    index == 0 ? "Action" : "ReplyAction"
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.TaskAsyncMatchConsistency_Property6,
+                                        this.taskOperation.TaskMethod.Name,
+                                        this.taskOperation.TaskMethod.DeclaringType,
+                                        this.asyncOperation.BeginMethod.Name,
+                                        this.asyncOperation.EndMethod.Name,
+                                        this.taskOperation.Name,
+                                        index == 0 ? "Action" : "ReplyAction"
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }

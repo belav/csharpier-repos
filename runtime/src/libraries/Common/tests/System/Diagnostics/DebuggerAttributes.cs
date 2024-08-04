@@ -156,7 +156,8 @@ namespace System.Diagnostics
             for (Type t = type; t != null; t = t.BaseType)
             {
                 CustomAttributeData[] attributes = t.GetTypeInfo()
-                    .CustomAttributes.Where(a => a.AttributeType == attributeType)
+                    .CustomAttributes
+                    .Where(a => a.AttributeType == attributeType)
                     .ToArray();
                 if (attributes.Length != 0)
                 {
@@ -197,10 +198,9 @@ namespace System.Diagnostics
             object obj
         )
         {
-            CustomAttributeNamedArgument namedAttribute =
-                debuggerDisplayAttributeData.NamedArguments.FirstOrDefault(na =>
-                    na.MemberName == argumentName
-                );
+            CustomAttributeNamedArgument namedAttribute = debuggerDisplayAttributeData
+                .NamedArguments
+                .FirstOrDefault(na => na.MemberName == argumentName);
             if (namedAttribute != default)
             {
                 string? value = (string?)namedAttribute.TypedValue.Value;

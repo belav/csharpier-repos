@@ -32,15 +32,15 @@ namespace System.Web.UI.MobileControls
         {
             ControlsConfig config = new ControlsConfig(null);
 
-            config["sessionStateHistorySize"] = controlSection.SessionStateHistorySize.ToString(
-                CultureInfo.InvariantCulture
-            );
+            config["sessionStateHistorySize"] = controlSection
+                .SessionStateHistorySize
+                .ToString(CultureInfo.InvariantCulture);
             config["cookielessDataDictionaryType"] = controlSection
                 .CookielessDataDictionaryType
                 .AssemblyQualifiedName;
-            config["allowCustomAttributes"] = controlSection.AllowCustomAttributes.ToString(
-                CultureInfo.InvariantCulture
-            );
+            config["allowCustomAttributes"] = controlSection
+                .AllowCustomAttributes
+                .ToString(CultureInfo.InvariantCulture);
 
             foreach (DeviceElement device in controlSection.Devices)
             {

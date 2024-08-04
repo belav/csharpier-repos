@@ -118,12 +118,16 @@ public class SqlServerValueGenerationStrategyConvention
                             )
                             .Metadata;
 
-                        property.Builder.HasDefaultValueSql(
-                            RelationalDependencies.UpdateSqlGenerator.GenerateObtainNextSequenceValueOperation(
-                                sequence.Name,
-                                sequence.Schema
-                            )
-                        );
+                        property
+                            .Builder
+                            .HasDefaultValueSql(
+                                RelationalDependencies
+                                    .UpdateSqlGenerator
+                                    .GenerateObtainNextSequenceValueOperation(
+                                        sequence.Name,
+                                        sequence.Schema
+                                    )
+                            );
                     }
                 }
             }
@@ -146,7 +150,9 @@ public class SqlServerValueGenerationStrategyConvention
                         property.FindRelationalTypeMapping(storeObject)
                         ?? Dependencies.TypeMappingSource.FindMapping((IProperty)property)
                     )?.Converter
-                )?.ProviderClrType.UnwrapNullableType();
+                )
+                    ?.ProviderClrType
+                    .UnwrapNullableType();
 
                 return providerClrType != null
                     && (providerClrType.IsInteger() || providerClrType == typeof(decimal));

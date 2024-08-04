@@ -793,10 +793,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ViewDataDictionary viewData = new ViewDataDictionary();
-            viewData.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                null,
-                typeof(DummyContactModel)
-            );
+            viewData.ModelMetadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(null, typeof(DummyContactModel));
 
             // Act
             ModelMetadata result = ModelMetadata.FromStringExpression("NullableIntValue", viewData);

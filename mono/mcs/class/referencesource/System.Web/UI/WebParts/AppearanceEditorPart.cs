@@ -250,60 +250,76 @@ namespace System.Web.UI.WebControls.WebParts
 
             TypeConverter chromeTypeConverter = TypeDescriptor.GetConverter(typeof(PartChromeType));
             _chromeType = new DropDownList();
-            _chromeType.Items.Add(
-                new ListItem(
-                    SR.GetString(SR.PartChromeType_Default),
-                    chromeTypeConverter.ConvertToString(PartChromeType.Default)
-                )
-            );
-            _chromeType.Items.Add(
-                new ListItem(
-                    SR.GetString(SR.PartChromeType_TitleAndBorder),
-                    chromeTypeConverter.ConvertToString(PartChromeType.TitleAndBorder)
-                )
-            );
-            _chromeType.Items.Add(
-                new ListItem(
-                    SR.GetString(SR.PartChromeType_TitleOnly),
-                    chromeTypeConverter.ConvertToString(PartChromeType.TitleOnly)
-                )
-            );
-            _chromeType.Items.Add(
-                new ListItem(
-                    SR.GetString(SR.PartChromeType_BorderOnly),
-                    chromeTypeConverter.ConvertToString(PartChromeType.BorderOnly)
-                )
-            );
-            _chromeType.Items.Add(
-                new ListItem(
-                    SR.GetString(SR.PartChromeType_None),
-                    chromeTypeConverter.ConvertToString(PartChromeType.None)
-                )
-            );
+            _chromeType
+                .Items
+                .Add(
+                    new ListItem(
+                        SR.GetString(SR.PartChromeType_Default),
+                        chromeTypeConverter.ConvertToString(PartChromeType.Default)
+                    )
+                );
+            _chromeType
+                .Items
+                .Add(
+                    new ListItem(
+                        SR.GetString(SR.PartChromeType_TitleAndBorder),
+                        chromeTypeConverter.ConvertToString(PartChromeType.TitleAndBorder)
+                    )
+                );
+            _chromeType
+                .Items
+                .Add(
+                    new ListItem(
+                        SR.GetString(SR.PartChromeType_TitleOnly),
+                        chromeTypeConverter.ConvertToString(PartChromeType.TitleOnly)
+                    )
+                );
+            _chromeType
+                .Items
+                .Add(
+                    new ListItem(
+                        SR.GetString(SR.PartChromeType_BorderOnly),
+                        chromeTypeConverter.ConvertToString(PartChromeType.BorderOnly)
+                    )
+                );
+            _chromeType
+                .Items
+                .Add(
+                    new ListItem(
+                        SR.GetString(SR.PartChromeType_None),
+                        chromeTypeConverter.ConvertToString(PartChromeType.None)
+                    )
+                );
             controls.Add(_chromeType);
 
             TypeConverter directionConverter = TypeDescriptor.GetConverter(
                 typeof(ContentDirection)
             );
             _direction = new DropDownList();
-            _direction.Items.Add(
-                new ListItem(
-                    SR.GetString(SR.ContentDirection_NotSet),
-                    directionConverter.ConvertToString(ContentDirection.NotSet)
-                )
-            );
-            _direction.Items.Add(
-                new ListItem(
-                    SR.GetString(SR.ContentDirection_LeftToRight),
-                    directionConverter.ConvertToString(ContentDirection.LeftToRight)
-                )
-            );
-            _direction.Items.Add(
-                new ListItem(
-                    SR.GetString(SR.ContentDirection_RightToLeft),
-                    directionConverter.ConvertToString(ContentDirection.RightToLeft)
-                )
-            );
+            _direction
+                .Items
+                .Add(
+                    new ListItem(
+                        SR.GetString(SR.ContentDirection_NotSet),
+                        directionConverter.ConvertToString(ContentDirection.NotSet)
+                    )
+                );
+            _direction
+                .Items
+                .Add(
+                    new ListItem(
+                        SR.GetString(SR.ContentDirection_LeftToRight),
+                        directionConverter.ConvertToString(ContentDirection.LeftToRight)
+                    )
+                );
+            _direction
+                .Items
+                .Add(
+                    new ListItem(
+                        SR.GetString(SR.ContentDirection_RightToLeft),
+                        directionConverter.ConvertToString(ContentDirection.RightToLeft)
+                    )
+                );
             controls.Add(_direction);
 
             _height = new UnitInput();
@@ -468,60 +484,78 @@ namespace System.Web.UI.WebControls.WebParts
                 Controls.Add(_value);
 
                 _type = new DropDownList();
-                _type.Items.Add(
-                    new ListItem(
-                        SR.GetString(SR.AppearanceEditorPart_Pixels),
-                        ((int)UnitType.Pixel).ToString(CultureInfo.InvariantCulture)
-                    )
-                );
-                _type.Items.Add(
-                    new ListItem(
-                        SR.GetString(SR.AppearanceEditorPart_Points),
-                        ((int)UnitType.Point).ToString(CultureInfo.InvariantCulture)
-                    )
-                );
-                _type.Items.Add(
-                    new ListItem(
-                        SR.GetString(SR.AppearanceEditorPart_Picas),
-                        ((int)UnitType.Pica).ToString(CultureInfo.InvariantCulture)
-                    )
-                );
-                _type.Items.Add(
-                    new ListItem(
-                        SR.GetString(SR.AppearanceEditorPart_Inches),
-                        ((int)UnitType.Inch).ToString(CultureInfo.InvariantCulture)
-                    )
-                );
-                _type.Items.Add(
-                    new ListItem(
-                        SR.GetString(SR.AppearanceEditorPart_Millimeters),
-                        ((int)UnitType.Mm).ToString(CultureInfo.InvariantCulture)
-                    )
-                );
-                _type.Items.Add(
-                    new ListItem(
-                        SR.GetString(SR.AppearanceEditorPart_Centimeters),
-                        ((int)UnitType.Cm).ToString(CultureInfo.InvariantCulture)
-                    )
-                );
-                _type.Items.Add(
-                    new ListItem(
-                        SR.GetString(SR.AppearanceEditorPart_Percent),
-                        ((int)UnitType.Percentage).ToString(CultureInfo.InvariantCulture)
-                    )
-                );
-                _type.Items.Add(
-                    new ListItem(
-                        SR.GetString(SR.AppearanceEditorPart_Em),
-                        ((int)UnitType.Em).ToString(CultureInfo.InvariantCulture)
-                    )
-                );
-                _type.Items.Add(
-                    new ListItem(
-                        SR.GetString(SR.AppearanceEditorPart_Ex),
-                        ((int)UnitType.Ex).ToString(CultureInfo.InvariantCulture)
-                    )
-                );
+                _type
+                    .Items
+                    .Add(
+                        new ListItem(
+                            SR.GetString(SR.AppearanceEditorPart_Pixels),
+                            ((int)UnitType.Pixel).ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
+                _type
+                    .Items
+                    .Add(
+                        new ListItem(
+                            SR.GetString(SR.AppearanceEditorPart_Points),
+                            ((int)UnitType.Point).ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
+                _type
+                    .Items
+                    .Add(
+                        new ListItem(
+                            SR.GetString(SR.AppearanceEditorPart_Picas),
+                            ((int)UnitType.Pica).ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
+                _type
+                    .Items
+                    .Add(
+                        new ListItem(
+                            SR.GetString(SR.AppearanceEditorPart_Inches),
+                            ((int)UnitType.Inch).ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
+                _type
+                    .Items
+                    .Add(
+                        new ListItem(
+                            SR.GetString(SR.AppearanceEditorPart_Millimeters),
+                            ((int)UnitType.Mm).ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
+                _type
+                    .Items
+                    .Add(
+                        new ListItem(
+                            SR.GetString(SR.AppearanceEditorPart_Centimeters),
+                            ((int)UnitType.Cm).ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
+                _type
+                    .Items
+                    .Add(
+                        new ListItem(
+                            SR.GetString(SR.AppearanceEditorPart_Percent),
+                            ((int)UnitType.Percentage).ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
+                _type
+                    .Items
+                    .Add(
+                        new ListItem(
+                            SR.GetString(SR.AppearanceEditorPart_Em),
+                            ((int)UnitType.Em).ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
+                _type
+                    .Items
+                    .Add(
+                        new ListItem(
+                            SR.GetString(SR.AppearanceEditorPart_Ex),
+                            ((int)UnitType.Ex).ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
                 Controls.Add(_type);
             }
 

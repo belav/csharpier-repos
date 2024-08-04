@@ -46,13 +46,15 @@ namespace System.Linq.Parallel
             );
             if (traceOutput != null && !String.IsNullOrEmpty(traceOutput.Trim()))
             {
-                s_traceSource.Listeners.Add(
-                    new TextWriterTraceListener(
-                        new StreamWriter(
-                            File.Open(traceOutput, FileMode.OpenOrCreate, FileAccess.ReadWrite)
+                s_traceSource
+                    .Listeners
+                    .Add(
+                        new TextWriterTraceListener(
+                            new StreamWriter(
+                                File.Open(traceOutput, FileMode.OpenOrCreate, FileAccess.ReadWrite)
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             string traceEnable = Environment.GetEnvironmentVariable(

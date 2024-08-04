@@ -149,10 +149,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                         : helper.GetDiagnosticLocation(declaration);
 
                 var additionalLocations = ImmutableArray.Create(declaration.GetLocation());
-                var properties = ImmutableDictionary<string, string?>.Empty.Add(
-                    nameof(UseExpressionBody),
-                    ""
-                );
+                var properties = ImmutableDictionary<string, string?>
+                    .Empty
+                    .Add(nameof(UseExpressionBody), "");
                 return DiagnosticHelper.Create(
                     CreateDescriptorWithId(
                         helper.DiagnosticId,

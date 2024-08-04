@@ -224,9 +224,9 @@ namespace System.Activities.Statements
                 //Create matched pair of RuntimeArguments for every property: Property (InArgument) & PropertyOut (Argument)
                 PropertyInfo[] bodyProperties = this.ActivityType.GetProperties();
                 // recheck for name collisions
-                this.hasNameCollision = InteropEnvironment.ParameterHelper.HasPropertyNameCollision(
-                    bodyProperties
-                );
+                this.hasNameCollision = InteropEnvironment
+                    .ParameterHelper
+                    .HasPropertyNameCollision(bodyProperties);
                 foreach (PropertyInfo propertyInfo in bodyProperties)
                 {
                     if (InteropEnvironment.ParameterHelper.IsBindable(propertyInfo))
@@ -450,10 +450,9 @@ namespace System.Activities.Statements
             RuntimeTransactionHandle runtimeTransactionHandle = this.runtimeTransactionHandle.Get(
                 context
             );
-            context.Properties.Add(
-                runtimeTransactionHandle.ExecutionPropertyName,
-                runtimeTransactionHandle
-            );
+            context
+                .Properties
+                .Add(runtimeTransactionHandle.ExecutionPropertyName, runtimeTransactionHandle);
 
             try
             {
@@ -739,17 +738,17 @@ namespace System.Activities.Statements
                     //Create matched pair of RuntimeArguments for every property: Property (InArgument) & PropertyOut (Argument)
                     PropertyInfo[] bodyProperties = this.ActivityType.GetProperties();
                     // recheck for name collisions
-                    this.hasNameCollision =
-                        InteropEnvironment.ParameterHelper.HasPropertyNameCollision(bodyProperties);
+                    this.hasNameCollision = InteropEnvironment
+                        .ParameterHelper
+                        .HasPropertyNameCollision(bodyProperties);
                     for (int i = 0; i < bodyProperties.Length; i++)
                     {
                         PropertyInfo property = bodyProperties[i];
                         bool isMetaProperty;
                         if (
-                            InteropEnvironment.ParameterHelper.IsBindableOrMetaProperty(
-                                property,
-                                out isMetaProperty
-                            )
+                            InteropEnvironment
+                                .ParameterHelper
+                                .IsBindableOrMetaProperty(property, out isMetaProperty)
                         )
                         {
                             // Propagate the attributes to the PropertyDescriptor, appending a DesignerSerializationVisibility attribute
@@ -1036,10 +1035,9 @@ namespace System.Activities.Statements
                 if (enlistment == null || !enlistment.IsValid)
                 {
                     enlistment = new InteropEnlistment(Transaction.Current, resourceManager);
-                    Transaction.Current.EnlistVolatile(
-                        enlistment,
-                        EnlistmentOptions.EnlistDuringPrepareRequired
-                    );
+                    Transaction
+                        .Current
+                        .EnlistVolatile(enlistment, EnlistmentOptions.EnlistDuringPrepareRequired);
                     this.interopEnlistment.Set(context, enlistment);
                 }
             }

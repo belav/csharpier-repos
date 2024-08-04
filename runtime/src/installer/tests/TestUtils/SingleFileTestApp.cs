@@ -214,7 +214,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
                                         .FileVersion;
                                     var asmVersion = AssemblyName
                                         .GetAssemblyName(file)
-                                        .Version!.ToString();
+                                        .Version!
+                                        .ToString();
                                     g.WithAsset(
                                         Path.GetFileName(file),
                                         f => f.WithVersion(asmVersion, fileVersion!).NotOnDisk()

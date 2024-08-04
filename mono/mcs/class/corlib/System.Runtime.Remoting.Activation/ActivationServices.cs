@@ -64,7 +64,8 @@ namespace System.Runtime.Remoting.Activation
 
             if (Thread.CurrentContext.HasExitSinks && !ctorCall.IsContextOk)
                 response = Thread
-                    .CurrentContext.GetClientContextSinkChain()
+                    .CurrentContext
+                    .GetClientContextSinkChain()
                     .SyncProcessMessage(ctorCall);
             else
                 response = RemoteActivate(ctorCall);

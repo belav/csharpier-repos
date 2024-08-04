@@ -330,9 +330,9 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                             : (TNameSyntax)
                                 g.GenericName(
                                     classNameToken,
-                                    classSymbol.TypeParameters.Select(tp =>
-                                        g.IdentifierName(tp.Name)
-                                    )
+                                    classSymbol
+                                        .TypeParameters
+                                        .Select(tp => g.IdentifierName(tp.Name))
                                 );
 
                     return CreateObjectCreationExpression(classNameNode, currentAnonymousObject)

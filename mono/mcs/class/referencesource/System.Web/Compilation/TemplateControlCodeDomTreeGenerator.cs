@@ -186,19 +186,19 @@ namespace System.Web.Compilation
 
             CodeMemberMethod bindMethod = new CodeMemberMethod();
             bindMethod.Name = "Bind";
-            bindMethod.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(string), "expression")
-            );
+            bindMethod
+                .Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(string), "expression"));
             if (addFormatParameter)
             {
-                bindMethod.Parameters.Add(
-                    new CodeParameterDeclarationExpression(typeof(string), "format")
-                );
+                bindMethod
+                    .Parameters
+                    .Add(new CodeParameterDeclarationExpression(typeof(string), "format"));
             }
             bindMethod.ReturnType = new CodeTypeReference(typeof(string));
-            bindMethod.Statements.Add(
-                new CodeMethodReturnStatement(new CodePrimitiveExpression(String.Empty))
-            );
+            bindMethod
+                .Statements
+                .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(String.Empty)));
             _sourceDataClass.Members.Add(bindMethod);
         }
 
@@ -253,9 +253,11 @@ namespace System.Web.Compilation
                     new CodeThisReferenceExpression(),
                     "SetStringResourcePointer"
                 );
-                methCallExpression.Parameters.Add(
-                    new CodeFieldReferenceExpression(_classTypeExpr, stringResourcePointerName)
-                );
+                methCallExpression
+                    .Parameters
+                    .Add(
+                        new CodeFieldReferenceExpression(_classTypeExpr, stringResourcePointerName)
+                    );
                 // Pass 0 for the maxResourceOffset, since it's being ignored
                 methCallExpression.Parameters.Add(new CodePrimitiveExpression(0));
                 method.Statements.Add(new CodeExpressionStatement(methCallExpression));

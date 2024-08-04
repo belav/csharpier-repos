@@ -26,9 +26,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
     {
         private static readonly TestComposition s_compositionWithMockDiagnosticUpdateSourceRegistrationService =
             EditorTestCompositions
-                .EditorFeatures.AddExcludedPartTypes(
-                    typeof(IDiagnosticUpdateSourceRegistrationService)
-                )
+                .EditorFeatures
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
         private static readonly Lazy<MetadataReference> _unconditionalSuppressMessageRef =
@@ -84,14 +83,17 @@ namespace System.Diagnostics.CodeAnalysis
 
             workspace.TryApplyChanges(
                 workspace
-                    .CurrentSolution.WithAnalyzerReferences(
+                    .CurrentSolution
+                    .WithAnalyzerReferences(
                         new[] { new AnalyzerImageReference(analyzers.ToImmutableArray()) }
                     )
                     .WithProjectMetadataReferences(
                         workspace.Projects.Single().Id,
                         workspace
-                            .Projects.Single()
-                            .MetadataReferences.Append(_unconditionalSuppressMessageRef.Value)
+                            .Projects
+                            .Single()
+                            .MetadataReferences
+                            .Append(_unconditionalSuppressMessageRef.Value)
                     )
             );
 

@@ -193,13 +193,15 @@ namespace System.Tests.Types
             Assert.Equal(
                 0,
                 volatileIntPointerElementType
-                    .UnderlyingSystemType.GetRequiredCustomModifiers()
+                    .UnderlyingSystemType
+                    .GetRequiredCustomModifiers()
                     .Length
             );
             Assert.Equal(
                 0,
                 volatileIntPointerElementType
-                    .UnderlyingSystemType.GetOptionalCustomModifiers()
+                    .UnderlyingSystemType
+                    .GetOptionalCustomModifiers()
                     .Length
             );
 
@@ -494,7 +496,8 @@ namespace System.Tests.Types
             Assert.Equal(
                 0,
                 returnParameter
-                    .ParameterType.GetFunctionPointerParameterTypes()[0]
+                    .ParameterType
+                    .GetFunctionPointerParameterTypes()[0]
                     .GetRequiredCustomModifiers()
                     .Length
             );

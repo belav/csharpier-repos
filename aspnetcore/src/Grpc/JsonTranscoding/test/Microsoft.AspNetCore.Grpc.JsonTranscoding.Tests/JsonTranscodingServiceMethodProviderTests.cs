@@ -85,8 +85,10 @@ public class JsonTranscodingServiceMethodProviderTests
         Assert.Equal(
             "/v1/additional_bindings/{name}",
             additionalMethodModel
-                .Metadata.GetMetadata<GrpcJsonTranscodingMetadata>()
-                ?.HttpRule.Delete
+                .Metadata
+                .GetMetadata<GrpcJsonTranscodingMetadata>()
+                ?.HttpRule
+                .Delete
         );
         Assert.Equal("/v1/additional_bindings/{name}", additionalMethodModel.RoutePattern.RawText);
     }
@@ -154,20 +156,22 @@ public class JsonTranscodingServiceMethodProviderTests
         });
 
         // Assert
-        var write = testSink.Writes.Single(w =>
-        {
-            if (w.EventId.Name != "HttpRuleFound")
+        var write = testSink
+            .Writes
+            .Single(w =>
             {
-                return false;
-            }
-            var values = (IReadOnlyList<KeyValuePair<string, object?>>)w.State;
-            if ((string)values.Single(v => v.Key == "MethodName").Value! != "SayHello")
-            {
-                return false;
-            }
+                if (w.EventId.Name != "HttpRuleFound")
+                {
+                    return false;
+                }
+                var values = (IReadOnlyList<KeyValuePair<string, object?>>)w.State;
+                if ((string)values.Single(v => v.Key == "MethodName").Value! != "SayHello")
+                {
+                    return false;
+                }
 
-            return true;
-        });
+                return true;
+            });
 
         Assert.Equal(
             @"Found HttpRule mapping. Method SayHello on transcoding.JsonTranscodingGreeter. HttpRule payload: { ""get"": ""/v1/greeter/{name}"" }",

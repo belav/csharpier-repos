@@ -372,17 +372,19 @@ namespace System.ServiceModel.Configuration
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR2.GetString(
-                            SR2.WebEndpointRequiredBinding,
-                            typeof(WebHttpEndpoint).Name,
-                            WebHttpBinding
-                                .WebHttpBindingConfigurationStrings
-                                .WebHttpBindingCollectionElementName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR2.GetString(
+                                SR2.WebEndpointRequiredBinding,
+                                typeof(WebHttpEndpoint).Name,
+                                WebHttpBinding
+                                    .WebHttpBindingConfigurationStrings
+                                    .WebHttpBindingCollectionElementName
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -406,17 +408,19 @@ namespace System.ServiceModel.Configuration
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR2.GetString(
-                            SR2.WebEndpointRequiredBinding,
-                            typeof(WebHttpEndpoint).Name,
-                            WebHttpBinding
-                                .WebHttpBindingConfigurationStrings
-                                .WebHttpBindingCollectionElementName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR2.GetString(
+                                SR2.WebEndpointRequiredBinding,
+                                typeof(WebHttpEndpoint).Name,
+                                WebHttpBinding
+                                    .WebHttpBindingConfigurationStrings
+                                    .WebHttpBindingCollectionElementName
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 

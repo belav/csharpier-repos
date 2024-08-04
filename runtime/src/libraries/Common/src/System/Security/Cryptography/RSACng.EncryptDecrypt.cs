@@ -421,26 +421,30 @@ namespace System.Security.Cryptography
         )
         {
             ErrorCode errorCode = encrypt
-                ? Interop.NCrypt.NCryptEncrypt(
-                    key,
-                    input,
-                    input.Length,
-                    paddingInfo,
-                    output,
-                    output.Length,
-                    out bytesNeeded,
-                    paddingMode
-                )
-                : Interop.NCrypt.NCryptDecrypt(
-                    key,
-                    input,
-                    input.Length,
-                    paddingInfo,
-                    output,
-                    output.Length,
-                    out bytesNeeded,
-                    paddingMode
-                );
+                ? Interop
+                    .NCrypt
+                    .NCryptEncrypt(
+                        key,
+                        input,
+                        input.Length,
+                        paddingInfo,
+                        output,
+                        output.Length,
+                        out bytesNeeded,
+                        paddingMode
+                    )
+                : Interop
+                    .NCrypt
+                    .NCryptDecrypt(
+                        key,
+                        input,
+                        input.Length,
+                        paddingInfo,
+                        output,
+                        output.Length,
+                        out bytesNeeded,
+                        paddingMode
+                    );
 
             // Windows 10.1903 can return success when it meant NTE_BUFFER_TOO_SMALL.
             if (errorCode == ErrorCode.ERROR_SUCCESS && bytesNeeded > output.Length)

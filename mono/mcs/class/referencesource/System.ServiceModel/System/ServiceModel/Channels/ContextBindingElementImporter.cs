@@ -44,15 +44,15 @@ namespace System.ServiceModel.Channels
             }
             if (context.Endpoint == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "context.Endpoint"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("context.Endpoint");
             }
             if (context.Endpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "context.Endpoint.Binding"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("context.Endpoint.Binding");
             }
 
             // Try to post-process the unrecognized RequireHttpCookie assertion to augment the AllowCookies value
@@ -140,11 +140,13 @@ namespace System.ServiceModel.Channels
             }
             if (context.BindingElements == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.PolicyImportContextBindingElementCollectionIsNull)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.PolicyImportContextBindingElementCollectionIsNull)
+                        )
+                    );
             }
 
             ContextBindingElement contextBindingElement;

@@ -19,7 +19,8 @@ namespace System.Threading.Tasks.Tests
             using (suppressFlow ? ExecutionContext.SuppressFlow() : default)
             {
                 var asyncLocal = new AsyncLocal<int>();
-                Task.Factory.StartNew(
+                Task.Factory
+                    .StartNew(
                         () => asyncLocal.Value = 42,
                         CancellationToken.None,
                         TaskCreationOptions.None,

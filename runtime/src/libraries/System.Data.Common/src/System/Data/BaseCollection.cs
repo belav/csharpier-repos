@@ -49,13 +49,15 @@ namespace System.Data
 
             // Case, kana and width -Insensitive compare
             if (
-                locale.CompareInfo.Compare(
-                    s1,
-                    s2,
-                    CompareOptions.IgnoreCase
-                        | CompareOptions.IgnoreKanaType
-                        | CompareOptions.IgnoreWidth
-                ) == 0
+                locale
+                    .CompareInfo
+                    .Compare(
+                        s1,
+                        s2,
+                        CompareOptions.IgnoreCase
+                            | CompareOptions.IgnoreKanaType
+                            | CompareOptions.IgnoreWidth
+                    ) == 0
             )
             {
                 return string.Compare(s1, s2, false, locale) == 0 ? 1 : -1;

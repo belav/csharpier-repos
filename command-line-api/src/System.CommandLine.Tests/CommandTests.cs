@@ -34,9 +34,14 @@ namespace System.CommandLine.Tests
             var result = _outerCommand.Parse("outer inner --option argument1");
 
             result
-                .CommandResult.Parent.Should()
+                .CommandResult
+                .Parent
+                .Should()
                 .BeOfType<CommandResult>()
-                .Which.Command.Name.Should()
+                .Which
+                .Command
+                .Name
+                .Should()
                 .Be("outer");
         }
 
@@ -46,9 +51,13 @@ namespace System.CommandLine.Tests
             var result = _outerCommand.Parse("outer inner --option argument1");
 
             result
-                .CommandResult.Should()
+                .CommandResult
+                .Should()
                 .BeOfType<CommandResult>()
-                .Which.Command.Name.Should()
+                .Which
+                .Command
+                .Name
+                .Should()
                 .Be("inner");
         }
 
@@ -58,10 +67,15 @@ namespace System.CommandLine.Tests
             var result = _outerCommand.Parse("outer inner --option argument1");
 
             result
-                .CommandResult.Children.ElementAt(0)
+                .CommandResult
+                .Children
+                .ElementAt(0)
                 .Should()
                 .BeOfType<OptionResult>()
-                .Which.Option.Name.Should()
+                .Which
+                .Option
+                .Name
+                .Should()
                 .Be("--option");
         }
 
@@ -71,8 +85,11 @@ namespace System.CommandLine.Tests
             var result = _outerCommand.Parse("outer inner --option argument1");
 
             result
-                .CommandResult.Children.ElementAt(0)
-                .Tokens.Select(t => t.Value)
+                .CommandResult
+                .Children
+                .ElementAt(0)
+                .Tokens
+                .Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("argument1");
         }
@@ -81,16 +98,18 @@ namespace System.CommandLine.Tests
         public void Commands_at_multiple_levels_can_have_their_own_arguments()
         {
             var outer = new CliCommand("outer") { new CliArgument<string>("outer_arg") };
-            outer.Subcommands.Add(
-                new CliCommand("inner") { new CliArgument<string[]>("inner_arg") }
-            );
+            outer
+                .Subcommands
+                .Add(new CliCommand("inner") { new CliArgument<string[]>("inner_arg") });
 
             var result = outer.Parse("outer arg1 inner arg2 arg3");
 
             result.CommandResult.Parent.Tokens.Select(t => t.Value).Should().BeEquivalentTo("arg1");
 
             result
-                .CommandResult.Tokens.Select(t => t.Value)
+                .CommandResult
+                .Tokens
+                .Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("arg2", "arg3");
         }
@@ -118,7 +137,9 @@ namespace System.CommandLine.Tests
             create
                 .Should()
                 .Throw<ArgumentException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Contain($"Names and aliases cannot contain whitespace: \"{alias}\"");
         }
 
@@ -137,7 +158,9 @@ namespace System.CommandLine.Tests
             addAlias
                 .Should()
                 .Throw<ArgumentException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Contain($"Names and aliases cannot contain whitespace: \"{alias}\"");
         }
 

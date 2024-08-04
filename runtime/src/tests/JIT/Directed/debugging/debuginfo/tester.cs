@@ -114,8 +114,9 @@ public unsafe class DebugInfoTest
                 // to never tier and in release, we expect the release mappings to be the "least common denominator",
                 // i.e. tier0 and tier1 mappings should both be a superset.
                 // Note that tier0 and MinOptJitted differs in mappings generated exactly due to DebuggableAttribute.
-                DebuggableAttribute debuggableAttrib =
-                    meth.DeclaringType.Assembly.GetCustomAttribute<DebuggableAttribute>();
+                DebuggableAttribute debuggableAttrib = meth.DeclaringType
+                    .Assembly
+                    .GetCustomAttribute<DebuggableAttribute>();
                 bool debuggableMappings =
                     debuggableAttrib != null && debuggableAttrib.IsJITOptimizerDisabled;
 
@@ -170,9 +171,9 @@ public unsafe class DebugInfoTest
 
     static DebugInfoTest()
     {
-        Type runtimeMethodHandleInternalType = typeof(RuntimeMethodHandle).Assembly.GetType(
-            "System.RuntimeMethodHandleInternal"
-        );
+        Type runtimeMethodHandleInternalType = typeof(RuntimeMethodHandle)
+            .Assembly
+            .GetType("System.RuntimeMethodHandleInternal");
         Type runtimeTypeType = typeof(RuntimeMethodHandle).Assembly.GetType("System.RuntimeType");
         MethodInfo getMethodBaseMethod = runtimeTypeType.GetMethod(
             "GetMethodBase",

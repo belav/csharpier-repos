@@ -21,17 +21,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [PlatformSpecific(TestPlatforms.Windows)] // Manifests are only supported on Windows OSes.
         public void MuxerRunsPortableAppWithoutWindowsOsShims()
         {
-            TestProjectFixture portableAppFixture =
-                sharedTestState.TestWindowsOsShimsAppFixture.Copy();
+            TestProjectFixture portableAppFixture = sharedTestState
+                .TestWindowsOsShimsAppFixture
+                .Copy();
 
             portableAppFixture
-                .BuiltDotnet.Exec(portableAppFixture.TestProject.AppDll)
+                .BuiltDotnet
+                .Exec(portableAppFixture.TestProject.AppDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     "Reported OS version is newer or equal to the true OS version - no shims."
                 );
         }
@@ -42,9 +45,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             // Long paths must also be enabled via a machine-wide setting. Only run the test if it is enabled.
             using (
-                RegistryKey key = Registry.LocalMachine.OpenSubKey(
-                    @"SYSTEM\CurrentControlSet\Control\FileSystem"
-                )
+                RegistryKey key = Registry
+                    .LocalMachine
+                    .OpenSubKey(@"SYSTEM\CurrentControlSet\Control\FileSystem")
             )
             {
                 if (key == null)
@@ -75,8 +78,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining("CreateDirectoryW with long path succeeded");
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdOutContaining("CreateDirectoryW with long path succeeded");
         }
 
         // Testing the standalone version (apphost) would require to make a copy of the entire SDK

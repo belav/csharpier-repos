@@ -154,9 +154,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     isLocalDiagnostic(diagnostic)
                     && (
                         !FilterSpanForLocalDiagnostics.HasValue
-                        || FilterSpanForLocalDiagnostics.Value.IntersectsWith(
-                            diagnostic.Location.SourceSpan
-                        )
+                        || FilterSpanForLocalDiagnostics
+                            .Value
+                            .IntersectsWith(diagnostic.Location.SourceSpan)
                     )
                 )
                 {
@@ -187,10 +187,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         && diagnostic.Location is ExternalFileLocation externalFileLocation
                     )
                     {
-                        return PathUtilities.Comparer.Equals(
-                            _contextFile.Value.AdditionalFile.Path,
-                            externalFileLocation.GetLineSpan().Path
-                        );
+                        return PathUtilities
+                            .Comparer
+                            .Equals(
+                                _contextFile.Value.AdditionalFile.Path,
+                                externalFileLocation.GetLineSpan().Path
+                            );
                     }
 
                     return false;

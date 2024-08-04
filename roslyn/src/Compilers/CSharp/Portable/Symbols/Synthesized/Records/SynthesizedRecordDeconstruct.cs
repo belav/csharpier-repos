@@ -58,23 +58,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         diagnostics
                     )
                 ),
-                Parameters: _ctor.Parameters.SelectAsArray<
-                    ParameterSymbol,
-                    ImmutableArray<Location>,
-                    ParameterSymbol
-                >(
-                    (param, locations) =>
-                        new SourceSimpleParameterSymbol(
-                            owner: this,
-                            param.TypeWithAnnotations,
-                            param.Ordinal,
-                            RefKind.Out,
-                            ScopedKind.None,
-                            param.Name,
-                            locations
-                        ),
-                    arg: Locations
-                )
+                Parameters: _ctor
+                    .Parameters
+                    .SelectAsArray<ParameterSymbol, ImmutableArray<Location>, ParameterSymbol>(
+                        (param, locations) =>
+                            new SourceSimpleParameterSymbol(
+                                owner: this,
+                                param.TypeWithAnnotations,
+                                param.Ordinal,
+                                RefKind.Out,
+                                ScopedKind.None,
+                                param.Name,
+                                locations
+                            ),
+                        arg: Locations
+                    )
             );
         }
 

@@ -287,9 +287,12 @@ namespace R2RDump
                             method.ComponentReader.MetadataReader,
                             method.MethodHandle
                         ),
-                    AssemblyName = method.ComponentReader.MetadataReader.GetString(
-                        method.ComponentReader.MetadataReader.GetAssemblyDefinition().Name
-                    ),
+                    AssemblyName = method
+                        .ComponentReader
+                        .MetadataReader
+                        .GetString(
+                            method.ComponentReader.MetadataReader.GetAssemblyDefinition().Name
+                        ),
                     ColdRVA = 0,
                     ColdLength = 0,
                 };

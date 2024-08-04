@@ -177,9 +177,9 @@ namespace System.Windows.Forms
             imageListTopToolbar.Images.Add(ResourceImageLoader.Get("go-previous.png"));
             imageListTopToolbar.Images.Add(ResourceImageLoader.Get("go-top.png"));
             imageListTopToolbar.Images.Add(ResourceImageLoader.Get("folder-new.png"));
-            imageListTopToolbar.Images.Add(
-                ResourceImageLoader.Get("preferences-system-windows.png")
-            );
+            imageListTopToolbar
+                .Images
+                .Add(ResourceImageLoader.Get("preferences-system-windows.png"));
             imageListTopToolbar.TransparentColor = Color.Transparent;
 
             // searchLabel
@@ -201,15 +201,17 @@ namespace System.Windows.Forms
             smallButtonToolBar.Anchor = ((AnchorStyles)((AnchorStyles.Top | AnchorStyles.Right)));
             smallButtonToolBar.Appearance = ToolBarAppearance.Flat;
             smallButtonToolBar.AutoSize = false;
-            smallButtonToolBar.Buttons.AddRange(
-                new ToolBarButton[]
-                {
-                    backToolBarButton,
-                    upToolBarButton,
-                    newdirToolBarButton,
-                    menueToolBarButton,
-                }
-            );
+            smallButtonToolBar
+                .Buttons
+                .AddRange(
+                    new ToolBarButton[]
+                    {
+                        backToolBarButton,
+                        upToolBarButton,
+                        newdirToolBarButton,
+                        menueToolBarButton,
+                    }
+                );
             smallButtonToolBar.ButtonSize = new Size(24, 24); // 21, 16
             smallButtonToolBar.Divider = false;
             smallButtonToolBar.Dock = DockStyle.None;

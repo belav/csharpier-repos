@@ -22,10 +22,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 provider,
                 isRootScope: true
             );
-            serviceProviderEngineScope.ResolvedServices.Add(
-                new ServiceCacheKey(ServiceIdentifier.FromServiceType(typeof(IFakeService)), 0),
-                null
-            );
+            serviceProviderEngineScope
+                .ResolvedServices
+                .Add(
+                    new ServiceCacheKey(ServiceIdentifier.FromServiceType(typeof(IFakeService)), 0),
+                    null
+                );
             serviceProviderEngineScope.Dispose();
             serviceProviderEngineScope.Dispose();
         }

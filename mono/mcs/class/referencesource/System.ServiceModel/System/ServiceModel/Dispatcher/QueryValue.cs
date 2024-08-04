@@ -150,17 +150,21 @@ namespace System.ServiceModel.Dispatcher
             switch (this.type)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                        new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperCritical(
+                            new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                        );
 
                 case ValueDataType.Boolean:
                     switch (val.type)
                     {
                         default:
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                                new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperCritical(
+                                    new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                                );
                         case ValueDataType.Boolean:
                             return QueryValueModel.Compare(this.boolVal, val.boolVal, op);
                         case ValueDataType.Double:
@@ -175,9 +179,11 @@ namespace System.ServiceModel.Dispatcher
                     switch (val.type)
                     {
                         default:
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                                new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperCritical(
+                                    new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                                );
                         case ValueDataType.Boolean:
                             return QueryValueModel.Compare(this.dblVal, val.boolVal, op);
                         case ValueDataType.Double:
@@ -192,9 +198,11 @@ namespace System.ServiceModel.Dispatcher
                     switch (val.type)
                     {
                         default:
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                                new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperCritical(
+                                    new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                                );
                         case ValueDataType.Boolean:
                             return QueryValueModel.Compare(this.sequence, val.boolVal, op);
                         case ValueDataType.Double:
@@ -209,9 +217,11 @@ namespace System.ServiceModel.Dispatcher
                     switch (val.type)
                     {
                         default:
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                                new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperCritical(
+                                    new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                                );
                         case ValueDataType.Boolean:
                             return QueryValueModel.Compare(this.strVal, val.boolVal, op);
                         case ValueDataType.Double:
@@ -229,9 +239,11 @@ namespace System.ServiceModel.Dispatcher
             switch (this.type)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                        new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperCritical(
+                            new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                        );
 
                 case ValueDataType.Boolean:
                     return QueryValueModel.Compare(this.boolVal, val, op);
@@ -331,10 +343,12 @@ namespace System.ServiceModel.Dispatcher
             switch (this.type)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new QueryProcessingException(QueryProcessingError.TypeMismatch),
-                        TraceEventType.Critical
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new QueryProcessingException(QueryProcessingError.TypeMismatch),
+                            TraceEventType.Critical
+                        );
 
                 case ValueDataType.Boolean:
                     return QueryValueModel.Equals(this.boolVal, val);
@@ -355,9 +369,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (ValueDataType.Boolean != this.type)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                    );
             }
 
             return this.boolVal;
@@ -367,9 +383,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (ValueDataType.Double != this.type)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                    );
             }
 
             return this.dblVal;
@@ -379,9 +397,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (ValueDataType.Sequence != this.type)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                    );
             }
 
             return this.sequence;
@@ -391,9 +411,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (ValueDataType.String != this.type)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                    );
             }
 
             return this.strVal;
@@ -453,9 +475,11 @@ namespace System.ServiceModel.Dispatcher
             switch (this.type)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                        new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperCritical(
+                            new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                        );
 
                 case ValueDataType.Boolean:
                     return this.boolVal;
@@ -476,9 +500,11 @@ namespace System.ServiceModel.Dispatcher
             switch (this.type)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                        new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperCritical(
+                            new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                        );
 
                 case ValueDataType.Boolean:
                     return QueryValueModel.Double(this.boolVal);
@@ -499,9 +525,11 @@ namespace System.ServiceModel.Dispatcher
             switch (this.type)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                        new QueryProcessingException(QueryProcessingError.TypeMismatch)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperCritical(
+                            new QueryProcessingException(QueryProcessingError.TypeMismatch)
+                        );
 
                 case ValueDataType.Boolean:
                     return QueryValueModel.String(this.boolVal);

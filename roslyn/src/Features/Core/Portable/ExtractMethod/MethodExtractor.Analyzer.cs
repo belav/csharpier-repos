@@ -188,17 +188,20 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
                 var thisParameterBeingRead = (IParameterSymbol?)
                     dataFlowAnalysisData.ReadInside.FirstOrDefault(IsThisParameter);
-                var isThisParameterWritten = dataFlowAnalysisData.WrittenInside.Any(static s =>
-                    IsThisParameter(s)
-                );
+                var isThisParameterWritten = dataFlowAnalysisData
+                    .WrittenInside
+                    .Any(static s => IsThisParameter(s));
 
-                var localFunctionCallsNotWithinSpan = symbolMap.Keys.Where(s =>
-                    s.IsLocalFunction()
-                    && !s.Locations.Any(
-                        static (l, self) => self.SelectionResult.FinalSpan.Contains(l.SourceSpan),
-                        this
-                    )
-                );
+                var localFunctionCallsNotWithinSpan = symbolMap
+                    .Keys
+                    .Where(s =>
+                        s.IsLocalFunction()
+                        && !s.Locations.Any(
+                            static (l, self) =>
+                                self.SelectionResult.FinalSpan.Contains(l.SourceSpan),
+                            this
+                        )
+                    );
 
                 // Checks to see if selection includes a local function call + if the given local function declaration is not included in the selection.
                 var containsAnyLocalFunctionCallNotWithinSpan =
@@ -536,8 +539,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             private Dictionary<ISymbol, List<SyntaxToken>> GetSymbolMap(SemanticModel model)
             {
-                var syntaxFactsService =
-                    _semanticDocument.Document.Project.Services.GetService<ISyntaxFactsService>();
+                var syntaxFactsService = _semanticDocument
+                    .Document
+                    .Project
+                    .Services
+                    .GetService<ISyntaxFactsService>();
                 var context = SelectionResult.GetContainingScope();
                 var symbolMap = SymbolMapBuilder.Build(
                     syntaxFactsService,
@@ -856,8 +862,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 // we probably need to move the API to syntaxFact service not semanticFact.
                 //
                 // if one wants to get result that also considers semantic, he should use data control flow analysis API.
-                var semanticFacts =
-                    _semanticDocument.Document.Project.Services.GetRequiredService<ISemanticFactsService>();
+                var semanticFacts = _semanticDocument
+                    .Document
+                    .Project
+                    .Services
+                    .GetRequiredService<ISemanticFactsService>();
                 return tokens.Any(t =>
                     semanticFacts.IsWrittenTo(model, t.Parent, CancellationToken.None)
                 );
@@ -1234,8 +1243,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     return OperationStatus.SucceededStatus;
 
                 using var _ = ArrayBuilder<string>.GetInstance(out var names);
-                var semanticFacts =
-                    _semanticDocument.Document.Project.Services.GetRequiredService<ISemanticFactsService>();
+                var semanticFacts = _semanticDocument
+                    .Document
+                    .Project
+                    .Services
+                    .GetRequiredService<ISemanticFactsService>();
                 foreach (var pair in symbolMap.Where(p => p.Key.Kind == SymbolKind.Field))
                 {
                     var field = (IFieldSymbol)pair.Key;

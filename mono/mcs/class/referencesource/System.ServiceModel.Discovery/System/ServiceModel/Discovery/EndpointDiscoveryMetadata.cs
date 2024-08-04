@@ -107,11 +107,13 @@ namespace System.ServiceModel.Discovery
                 ThrowIfOpen();
                 if (value < 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange(
-                        "value",
-                        value,
-                        SR2.DiscoveryMetadataVersionLessThanZero
-                    );
+                    throw FxTrace
+                        .Exception
+                        .ArgumentOutOfRange(
+                            "value",
+                            value,
+                            SR2.DiscoveryMetadataVersionLessThanZero
+                        );
                 }
 
                 this.metadataVersion = value;
@@ -226,8 +228,9 @@ namespace System.ServiceModel.Discovery
             endpointDiscoveryMetadata.Address = endpoint.Address;
             endpointDiscoveryMetadata.ListenUris.Add(listenUri);
 
-            EndpointDiscoveryBehavior endpointDiscoveryBehavior =
-                endpoint.Behaviors.Find<EndpointDiscoveryBehavior>();
+            EndpointDiscoveryBehavior endpointDiscoveryBehavior = endpoint
+                .Behaviors
+                .Find<EndpointDiscoveryBehavior>();
             if (endpointDiscoveryBehavior != null)
             {
                 if (!endpointDiscoveryBehavior.Enabled)
@@ -301,11 +304,16 @@ namespace System.ServiceModel.Discovery
                     continue;
                 }
 
-                endpointDiscoveryMetadata.Scopes.Add(
-                    FindCriteria.GetContractTypeNameScope(
-                        new XmlQualifiedName(endpoint.Contract.Name, endpoint.Contract.Namespace)
-                    )
-                );
+                endpointDiscoveryMetadata
+                    .Scopes
+                    .Add(
+                        FindCriteria.GetContractTypeNameScope(
+                            new XmlQualifiedName(
+                                endpoint.Contract.Name,
+                                endpoint.Contract.Namespace
+                            )
+                        )
+                    );
             }
         }
 
@@ -586,9 +594,9 @@ namespace System.ServiceModel.Discovery
         {
             if (this.isOpen)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR2.DiscoveryMetadataAlreadyOpen)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR2.DiscoveryMetadataAlreadyOpen));
             }
         }
 
@@ -605,11 +613,13 @@ namespace System.ServiceModel.Discovery
             {
                 if (this.isOpen)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR2.DiscoverySdmCollectionIsOpen(typeof(T).Name)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR2.DiscoverySdmCollectionIsOpen(typeof(T).Name)
+                            )
+                        );
                 }
             }
 
@@ -652,9 +662,9 @@ namespace System.ServiceModel.Discovery
             {
                 if ((item != null) && (item.Name == string.Empty))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ArgumentException(SR2.DiscoveryArgumentEmptyContractTypeName)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new ArgumentException(SR2.DiscoveryArgumentEmptyContractTypeName));
                 }
                 base.InsertItem(index, item);
             }
@@ -663,9 +673,9 @@ namespace System.ServiceModel.Discovery
             {
                 if ((item != null) && (item.Name == string.Empty))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ArgumentException(SR2.DiscoveryArgumentEmptyContractTypeName)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new ArgumentException(SR2.DiscoveryArgumentEmptyContractTypeName));
                 }
                 base.SetItem(index, item);
             }
@@ -680,9 +690,9 @@ namespace System.ServiceModel.Discovery
             {
                 if (item != null && !item.IsAbsoluteUri)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ArgumentException(SR2.DiscoveryArgumentInvalidScopeUri(item))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new ArgumentException(SR2.DiscoveryArgumentInvalidScopeUri(item)));
                 }
                 base.InsertItem(index, item);
             }
@@ -691,9 +701,9 @@ namespace System.ServiceModel.Discovery
             {
                 if (item != null && !item.IsAbsoluteUri)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ArgumentException(SR2.DiscoveryArgumentInvalidScopeUri(item))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new ArgumentException(SR2.DiscoveryArgumentInvalidScopeUri(item)));
                 }
                 base.SetItem(index, item);
             }

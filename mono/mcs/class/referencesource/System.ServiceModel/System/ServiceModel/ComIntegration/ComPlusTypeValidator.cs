@@ -44,12 +44,11 @@ namespace System.ServiceModel.ComIntegration
             bool allowReferences
         )
         {
-            object[] attributes =
-                System.ServiceModel.Description.ServiceReflector.GetCustomAttributes(
-                    attributeProvider,
-                    typeof(MarshalAsAttribute),
-                    true
-                );
+            object[] attributes = System
+                .ServiceModel
+                .Description
+                .ServiceReflector
+                .GetCustomAttributes(attributeProvider, typeof(MarshalAsAttribute), true);
 
             foreach (MarshalAsAttribute attr in attributes)
             {

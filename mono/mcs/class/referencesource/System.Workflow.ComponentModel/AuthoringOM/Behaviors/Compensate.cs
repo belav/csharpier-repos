@@ -167,10 +167,9 @@ namespace System.Workflow.ComponentModel
                             contextManager.DiscardPersistedExecutionContext(completedActivityInfo);
                         if (revokedExecutionContext.Activity is ICompensatableActivity)
                         {
-                            revokedExecutionContext.Activity.RegisterForStatusChange(
-                                Activity.ClosedEvent,
-                                this
-                            );
+                            revokedExecutionContext
+                                .Activity
+                                .RegisterForStatusChange(Activity.ClosedEvent, this);
                             revokedExecutionContext.CompensateActivity(
                                 revokedExecutionContext.Activity
                             );

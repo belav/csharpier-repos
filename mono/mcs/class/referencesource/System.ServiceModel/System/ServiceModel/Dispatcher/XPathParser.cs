@@ -1077,9 +1077,9 @@ namespace System.ServiceModel.Dispatcher
 
         internal void ThrowError(QueryCompileError error)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new QueryCompileException(error, this.lexer.ConsumedSubstring())
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new QueryCompileException(error, this.lexer.ConsumedSubstring()));
         }
 
         internal struct QName

@@ -85,21 +85,20 @@ namespace System.Text
                 // platforms default to replacing invalid characters with the Unicode replacement
                 // character U+FFFD.
 #if TARGET_WINDOWS
-                convertedChars = Interop.Kernel32.MultiByteToWideChar(
-                    Interop.Kernel32.CP_ACP,
-                    Interop.Kernel32.MB_PRECOMPOSED,
-                    (byte*)newBuffer,
-                    newLength,
-                    pChunkChars,
-                    newLength
-                );
+                convertedChars = Interop
+                    .Kernel32
+                    .MultiByteToWideChar(
+                        Interop.Kernel32.CP_ACP,
+                        Interop.Kernel32.MB_PRECOMPOSED,
+                        (byte*)newBuffer,
+                        newLength,
+                        pChunkChars,
+                        newLength
+                    );
 #else
-                convertedChars = Encoding.UTF8.GetChars(
-                    (byte*)newBuffer,
-                    newLength,
-                    pChunkChars,
-                    newLength
-                );
+                convertedChars = Encoding
+                    .UTF8
+                    .GetChars((byte*)newBuffer, newLength, pChunkChars, newLength);
 #endif
             }
 

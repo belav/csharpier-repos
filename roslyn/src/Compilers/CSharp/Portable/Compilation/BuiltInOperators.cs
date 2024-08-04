@@ -792,8 +792,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(_compilation.IsReadOnlySpanType(readonlySpanOfByte));
             Debug.Assert(
                 ((NamedTypeSymbol)readonlySpanOfByte)
-                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single()
-                    .Type.SpecialType is SpecialType.System_Byte
+                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    .Single()
+                    .Type
+                    .SpecialType is SpecialType.System_Byte
             );
 
             if (_builtInUtf8Concatenation is null)

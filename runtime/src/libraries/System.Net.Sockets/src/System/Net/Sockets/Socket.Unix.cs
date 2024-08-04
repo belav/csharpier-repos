@@ -86,13 +86,15 @@ namespace System.Net.Sockets
                 // address family, socket type, and protocol type, respectively.  On macOS, this will only succeed
                 // in getting the socket type, and the others will be unknown.  Subsequently the Socket ctor
                 // can use getsockname to retrieve the address family as part of trying to get the local end point.
-                Interop.Error e = Interop.Sys.GetSocketType(
-                    handle,
-                    out addressFamily,
-                    out socketType,
-                    out protocolType,
-                    out isListening
-                );
+                Interop.Error e = Interop
+                    .Sys
+                    .GetSocketType(
+                        handle,
+                        out addressFamily,
+                        out socketType,
+                        out protocolType,
+                        out isListening
+                    );
                 Debug.Assert(e == Interop.Error.SUCCESS, e.ToString());
             }
             else

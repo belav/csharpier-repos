@@ -648,8 +648,9 @@ namespace Mono.CSharp
                         case Modifiers.PROTECTED:
                             if (al == Modifiers.PROTECTED)
                             {
-                                same_access_restrictions =
-                                    mc.Parent.PartialContainer.IsBaseTypeDefinition(p_parent);
+                                same_access_restrictions = mc.Parent
+                                    .PartialContainer
+                                    .IsBaseTypeDefinition(p_parent);
                                 break;
                             }
 

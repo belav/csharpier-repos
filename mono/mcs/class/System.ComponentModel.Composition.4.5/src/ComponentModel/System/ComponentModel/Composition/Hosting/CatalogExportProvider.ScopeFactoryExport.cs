@@ -73,17 +73,18 @@ namespace System.ComponentModel.Composition.Hosting
                             ),
                             this._scopeFactoryExport._catalog.Children
                         );
-                        var childContainer =
-                            this._scopeFactoryExport._scopeManager.CreateChildContainer(
-                                filteredScopeDefinition
-                            );
+                        var childContainer = this._scopeFactoryExport
+                            ._scopeManager
+                            .CreateChildContainer(filteredScopeDefinition);
 
-                        var export = childContainer.CatalogExportProvider.CreateExport(
-                            this._scopeFactoryExport.UnderlyingPartDefinition,
-                            this._scopeFactoryExport.UnderlyingExportDefinition,
-                            false,
-                            CreationPolicy.Any
-                        );
+                        var export = childContainer
+                            .CatalogExportProvider
+                            .CreateExport(
+                                this._scopeFactoryExport.UnderlyingPartDefinition,
+                                this._scopeFactoryExport.UnderlyingExportDefinition,
+                                false,
+                                CreationPolicy.Any
+                            );
                         lock (this._lock)
                         {
                             if (this._export == null)

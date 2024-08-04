@@ -58,10 +58,12 @@ class X
                 );
             }
 
-            emitResult.Diagnostics.Verify(
-                // (7,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "x")
-            );
+            emitResult
+                .Diagnostics
+                .Verify(
+                    // (7,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "x")
+                );
         }
 
         [Fact]
@@ -192,28 +194,30 @@ namespace N.;
 
             Assert.False(emitResult.Success);
 
-            emitResult.Diagnostics.Verify(
-                // (13,13): error CS1001: Identifier expected
-                // namespace N.;
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(13, 13),
-                // (13,11): error CS8942: File-scoped namespace must precede all other members in a file.
-                // namespace N.;
-                Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "N.")
-                    .WithLocation(13, 11),
-                // (4,16): error CS0246: The type or namespace name 'Blah' could not be found (are you missing a using directive or an assembly reference?)
-                //         public Blah field;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Blah")
-                    .WithArguments("Blah")
-                    .WithLocation(4, 16),
-                // (8,13): error CS0198: A static readonly field cannot be assigned to (except in a static constructor or a variable initializer)
-                //             ro = 4;
-                Diagnostic(ErrorCode.ERR_AssgReadonlyStatic, "ro").WithLocation(8, 13),
-                // (4,21): warning CS0649: Field 'X.field' is never assigned to, and will always have its default value null
-                //         public Blah field;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
-                    .WithArguments("N.X.field", "null")
-                    .WithLocation(4, 21)
-            );
+            emitResult
+                .Diagnostics
+                .Verify(
+                    // (13,13): error CS1001: Identifier expected
+                    // namespace N.;
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(13, 13),
+                    // (13,11): error CS8942: File-scoped namespace must precede all other members in a file.
+                    // namespace N.;
+                    Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "N.")
+                        .WithLocation(13, 11),
+                    // (4,16): error CS0246: The type or namespace name 'Blah' could not be found (are you missing a using directive or an assembly reference?)
+                    //         public Blah field;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Blah")
+                        .WithArguments("Blah")
+                        .WithLocation(4, 16),
+                    // (8,13): error CS0198: A static readonly field cannot be assigned to (except in a static constructor or a variable initializer)
+                    //             ro = 4;
+                    Diagnostic(ErrorCode.ERR_AssgReadonlyStatic, "ro").WithLocation(8, 13),
+                    // (4,21): warning CS0649: Field 'X.field' is never assigned to, and will always have its default value null
+                    //         public Blah field;
+                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
+                        .WithArguments("N.X.field", "null")
+                        .WithLocation(4, 21)
+                );
         }
 
         [Fact]
@@ -307,9 +311,9 @@ namespace Goo.Bar
 }     
 ",
                 assemblyName: "test",
-                parseOptions: CSharpParseOptions.Default.WithDocumentationMode(
-                    DocumentationMode.None
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithDocumentationMode(DocumentationMode.None)
             );
 
             EmitResult emitResult;
@@ -363,9 +367,9 @@ namespace Goo.Bar
 }     
 ",
                 assemblyName: "test",
-                parseOptions: CSharpParseOptions.Default.WithDocumentationMode(
-                    DocumentationMode.None
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithDocumentationMode(DocumentationMode.None)
             );
 
             EmitResult emitResult;
@@ -420,9 +424,9 @@ namespace Goo.Bar
 }     
 ",
                 assemblyName: "test",
-                parseOptions: CSharpParseOptions.Default.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
 
             EmitResult emitResult;
@@ -443,18 +447,20 @@ namespace Goo.Bar
 
             // This should not fail the emit (as it's a warning).
             Assert.True(emitResult.Success);
-            emitResult.Diagnostics.Verify(
-                // (5,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
-                //     public class Test1
-                Diagnostic(ErrorCode.WRN_XMLParseError, "")
-                    .WithArguments("summary")
-                    .WithLocation(5, 1),
-                // (7,28): warning CS1591: Missing XML comment for publicly visible type or member 'Test1.SayHello()'
-                //         public static void SayHello()
-                Diagnostic(ErrorCode.WRN_MissingXMLComment, "SayHello")
-                    .WithArguments("Goo.Bar.Test1.SayHello()")
-                    .WithLocation(7, 28)
-            );
+            emitResult
+                .Diagnostics
+                .Verify(
+                    // (5,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+                    //     public class Test1
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "")
+                        .WithArguments("summary")
+                        .WithLocation(5, 1),
+                    // (7,28): warning CS1591: Missing XML comment for publicly visible type or member 'Test1.SayHello()'
+                    //         public static void SayHello()
+                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "SayHello")
+                        .WithArguments("Goo.Bar.Test1.SayHello()")
+                        .WithLocation(7, 28)
+                );
 
             Assert.True(mdOnlyImage.Length > 0, "no metadata emitted");
             Assert.Equal(
@@ -490,9 +496,9 @@ namespace Goo.Bar
 }     
 ",
                 assemblyName: "test",
-                parseOptions: CSharpParseOptions.Default.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
 
             EmitResult emitResult;
@@ -513,16 +519,20 @@ namespace Goo.Bar
 
             // This should not fail the emit (as it's a warning).
             Assert.True(emitResult.Success);
-            emitResult.Diagnostics.Verify(
-                // (4,29): warning CS1574: XML comment has cref attribute 'T' that could not be resolved
-                //     /// <summary><see cref="T"/></summary>
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "T").WithArguments("T").WithLocation(4, 29),
-                // (7,28): warning CS1591: Missing XML comment for publicly visible type or member 'Test1.SayHello()'
-                //         public static void SayHello()
-                Diagnostic(ErrorCode.WRN_MissingXMLComment, "SayHello")
-                    .WithArguments("Goo.Bar.Test1.SayHello()")
-                    .WithLocation(7, 28)
-            );
+            emitResult
+                .Diagnostics
+                .Verify(
+                    // (4,29): warning CS1574: XML comment has cref attribute 'T' that could not be resolved
+                    //     /// <summary><see cref="T"/></summary>
+                    Diagnostic(ErrorCode.WRN_BadXMLRef, "T")
+                        .WithArguments("T")
+                        .WithLocation(4, 29),
+                    // (7,28): warning CS1591: Missing XML comment for publicly visible type or member 'Test1.SayHello()'
+                    //         public static void SayHello()
+                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "SayHello")
+                        .WithArguments("Goo.Bar.Test1.SayHello()")
+                        .WithLocation(7, 28)
+                );
 
             Assert.True(mdOnlyImage.Length > 0, "no metadata emitted");
             Assert.Equal(
@@ -560,9 +570,9 @@ namespace Goo.Bar
 }     
 ",
                 assemblyName: "test",
-                parseOptions: CSharpParseOptions.Default.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
 
             EmitResult emitResult;
@@ -583,13 +593,15 @@ namespace Goo.Bar
 
             // This should not fail the emit (as it's a warning).
             Assert.True(emitResult.Success);
-            emitResult.Diagnostics.Verify(
-                // (7,28): warning CS1591: Missing XML comment for publicly visible type or member 'Test1.SayHello()'
-                //         public static void SayHello()
-                Diagnostic(ErrorCode.WRN_MissingXMLComment, "SayHello")
-                    .WithArguments("Goo.Bar.Test1.SayHello()")
-                    .WithLocation(7, 28)
-            );
+            emitResult
+                .Diagnostics
+                .Verify(
+                    // (7,28): warning CS1591: Missing XML comment for publicly visible type or member 'Test1.SayHello()'
+                    //         public static void SayHello()
+                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "SayHello")
+                        .WithArguments("Goo.Bar.Test1.SayHello()")
+                        .WithLocation(7, 28)
+                );
 
             Assert.True(mdOnlyImage.Length > 0, "no metadata emitted");
             Assert.Equal(
@@ -627,9 +639,9 @@ namespace Goo.Bar
 }     
 ",
                 assemblyName: "test",
-                parseOptions: CSharpParseOptions.Default.WithDocumentationMode(
-                    DocumentationMode.Parse
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithDocumentationMode(DocumentationMode.Parse)
             );
 
             EmitResult emitResult;
@@ -1170,7 +1182,8 @@ public class C
         public void RefAssembly_HasReferenceAssemblyAttribute()
         {
             var emitRefAssembly = EmitOptions
-                .Default.WithEmitMetadataOnly(true)
+                .Default
+                .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(false);
 
             Action<PEAssembly> assemblyValidator = assembly =>
@@ -1202,7 +1215,8 @@ public class C
         public void RefAssembly_HandlesMissingReferenceAssemblyAttribute()
         {
             var emitRefAssembly = EmitOptions
-                .Default.WithEmitMetadataOnly(true)
+                .Default
+                .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(false);
 
             Action<PEAssembly> assemblyValidator = assembly =>
@@ -1237,7 +1251,8 @@ public class C
         public void RefAssembly_ReferenceAssemblyAttributeAlsoInSource()
         {
             var emitRefAssembly = EmitOptions
-                .Default.WithEmitMetadataOnly(true)
+                .Default
+                .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(false);
 
             Action<PEAssembly> assemblyValidator = assembly =>
@@ -1607,7 +1622,8 @@ public class C
             );
             var image1 = comp1.EmitToStream(
                 EmitOptions
-                    .Default.WithEmitMetadataOnly(true)
+                    .Default
+                    .WithEmitMetadataOnly(true)
                     .WithIncludePrivateMembers(includePrivateMembers)
             );
 
@@ -1619,7 +1635,8 @@ public class C
             );
             var image2 = comp2.EmitToStream(
                 EmitOptions
-                    .Default.WithEmitMetadataOnly(true)
+                    .Default
+                    .WithEmitMetadataOnly(true)
                     .WithIncludePrivateMembers(includePrivateMembers)
             );
 
@@ -1750,7 +1767,8 @@ public class C
 
                 var metadataPEStream = new MemoryStream();
                 var refoutOptions = EmitOptions
-                    .Default.WithEmitMetadataOnly(false)
+                    .Default
+                    .WithEmitMetadataOnly(false)
                     .WithIncludePrivateMembers(false);
                 var peStream = comp.EmitToArray(
                     refoutOptions,
@@ -1775,7 +1793,8 @@ public class C
                 comp.VerifyDiagnostics();
 
                 var refonlyOptions = EmitOptions
-                    .Default.WithEmitMetadataOnly(true)
+                    .Default
+                    .WithEmitMetadataOnly(true)
                     .WithIncludePrivateMembers(false);
                 return comp.EmitToArray(
                     refonlyOptions,
@@ -1802,7 +1821,8 @@ public class C
             CSharpCompilation moduleComp = CreateEmptyCompilation(
                 "",
                 options: TestOptions
-                    .DebugDll.WithDeterministic(true)
+                    .DebugDll
+                    .WithDeterministic(true)
                     .WithOutputKind(OutputKind.NetModule)
             );
 
@@ -1823,7 +1843,8 @@ class Program
 
             // refonly
             var refonlyOptions = EmitOptions
-                .Default.WithEmitMetadataOnly(true)
+                .Default
+                .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(false);
             var refonlyDiagnostics = compilation
                 .Emit(
@@ -1841,7 +1862,8 @@ class Program
 
             // refout
             var refoutOptions = EmitOptions
-                .Default.WithEmitMetadataOnly(false)
+                .Default
+                .WithEmitMetadataOnly(false)
                 .WithIncludePrivateMembers(false);
             var refoutDiagnostics = compilation
                 .Emit(
@@ -2614,7 +2636,8 @@ public struct S
             using (var output = new MemoryStream())
             {
                 var options = EmitOptions
-                    .Default.WithEmitMetadataOnly(true)
+                    .Default
+                    .WithEmitMetadataOnly(true)
                     .WithIncludePrivateMembers(false);
                 comp.VerifyEmitDiagnostics();
                 var result = comp.Emit(output, options: options);
@@ -2645,9 +2668,9 @@ public struct S
         [Fact]
         public void RefAssembly_StrongNameProvider()
         {
-            var signedDllOptions = TestOptions.SigningReleaseDll.WithCryptoKeyFile(
-                SigningTestHelpers.KeyPairFile
-            );
+            var signedDllOptions = TestOptions
+                .SigningReleaseDll
+                .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile);
 
             var comp = CreateCompilation("public class C{}", options: signedDllOptions);
 
@@ -2665,7 +2688,8 @@ public struct S
         public void RefAssembly_StrongNameProvider_Arm64()
         {
             var signedDllOptions = TestOptions
-                .SigningReleaseDll.WithCryptoKeyFile(SigningTestHelpers.KeyPairFile)
+                .SigningReleaseDll
+                .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile)
                 .WithPlatform(Platform.Arm64)
                 .WithDeterministic(true);
 
@@ -2685,7 +2709,8 @@ public struct S
         public void RefAssembly_StrongNameProviderAndDelaySign()
         {
             var signedDllOptions = TestOptions
-                .SigningReleaseDll.WithCryptoKeyFile(SigningTestHelpers.KeyPairFile)
+                .SigningReleaseDll
+                .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile)
                 .WithDelaySign(true);
 
             var comp = CreateCompilation("public class C{}", options: signedDllOptions);
@@ -2787,9 +2812,11 @@ public class PublicClass
             AssertEx.Equal(
                 new[] { "<Module>", "<>f__AnonymousType0<<anonymous>j__TPar>", "PublicClass" },
                 compWithReal
-                    .SourceModule.GetReferencedAssemblySymbols()
+                    .SourceModule
+                    .GetReferencedAssemblySymbols()
                     .Last()
-                    .GlobalNamespace.GetMembers()
+                    .GlobalNamespace
+                    .GetMembers()
                     .Select(m => m.ToDisplayString())
             );
 
@@ -2824,7 +2851,8 @@ public class PublicClass
                     "System.Diagnostics.DebuggableAttribute",
                 },
                 compWithReal
-                    .SourceModule.GetReferencedAssemblySymbols()
+                    .SourceModule
+                    .GetReferencedAssemblySymbols()
                     .Last()
                     .GetAttributes()
                     .Select(a => a.AttributeClass.ToTestDisplayString())
@@ -2834,9 +2862,9 @@ public class PublicClass
             // Note this can happen because of binary clients compiled against old EmitOptions ctor which had IncludePrivateMembers=false by default.
             // In this case, IncludePrivateMembers is silently set to true when emitting
             // See https://github.com/dotnet/roslyn/issues/20873
-            var emitRegularWithoutPrivateMembers = EmitOptions.Default.WithIncludePrivateMembers(
-                false
-            );
+            var emitRegularWithoutPrivateMembers = EmitOptions
+                .Default
+                .WithIncludePrivateMembers(false);
             CompileAndVerify(
                 comp,
                 emitOptions: emitRegularWithoutPrivateMembers,
@@ -2853,9 +2881,11 @@ public class PublicClass
             AssertEx.Equal(
                 new[] { "<Module>", "<>f__AnonymousType0<<anonymous>j__TPar>", "PublicClass" },
                 compWithReal2
-                    .SourceModule.GetReferencedAssemblySymbols()
+                    .SourceModule
+                    .GetReferencedAssemblySymbols()
                     .Last()
-                    .GlobalNamespace.GetMembers()
+                    .GlobalNamespace
+                    .GetMembers()
                     .Select(m => m.ToDisplayString())
             );
 
@@ -2890,7 +2920,8 @@ public class PublicClass
                     "System.Diagnostics.DebuggableAttribute",
                 },
                 compWithReal2
-                    .SourceModule.GetReferencedAssemblySymbols()
+                    .SourceModule
+                    .GetReferencedAssemblySymbols()
                     .Last()
                     .GetAttributes()
                     .Select(a => a.AttributeClass.ToTestDisplayString())
@@ -2910,9 +2941,11 @@ public class PublicClass
             AssertEx.Equal(
                 new[] { "<Module>", "PublicClass" },
                 compWithMetadata
-                    .SourceModule.GetReferencedAssemblySymbols()
+                    .SourceModule
+                    .GetReferencedAssemblySymbols()
                     .Last()
-                    .GlobalNamespace.GetMembers()
+                    .GlobalNamespace
+                    .GetMembers()
                     .Select(m => m.ToDisplayString())
             );
 
@@ -2947,7 +2980,8 @@ public class PublicClass
                     "System.Diagnostics.DebuggableAttribute",
                 },
                 compWithMetadata
-                    .SourceModule.GetReferencedAssemblySymbols()
+                    .SourceModule
+                    .GetReferencedAssemblySymbols()
                     .Last()
                     .GetAttributes()
                     .Select(a => a.AttributeClass.ToTestDisplayString())
@@ -2957,7 +2991,8 @@ public class PublicClass
 
             // verify metadata (types, members, attributes) of the ref assembly
             var emitRefOnly = EmitOptions
-                .Default.WithEmitMetadataOnly(true)
+                .Default
+                .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(false);
             CompileAndVerify(comp, emitOptions: emitRefOnly, verify: Verification.Passes);
 
@@ -2971,9 +3006,11 @@ public class PublicClass
             AssertEx.Equal(
                 new[] { "<Module>", "PublicClass" },
                 compWithRef
-                    .SourceModule.GetReferencedAssemblySymbols()
+                    .SourceModule
+                    .GetReferencedAssemblySymbols()
                     .Last()
-                    .GlobalNamespace.GetMembers()
+                    .GlobalNamespace
+                    .GetMembers()
                     .Select(m => m.ToDisplayString())
             );
 
@@ -3003,7 +3040,8 @@ public class PublicClass
                     "System.Runtime.CompilerServices.ReferenceAssemblyAttribute",
                 },
                 compWithRef
-                    .SourceModule.GetReferencedAssemblySymbols()
+                    .SourceModule
+                    .GetReferencedAssemblySymbols()
                     .Last()
                     .GetAttributes()
                     .Select(a => a.AttributeClass.ToTestDisplayString())
@@ -3069,7 +3107,8 @@ public class C : I
 
             // verify metadata (types, members, attributes) of the ref assembly
             var emitRefOnly = EmitOptions
-                .Default.WithEmitMetadataOnly(true)
+                .Default
+                .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(false);
             CompileAndVerify(comp, emitOptions: emitRefOnly, verify: Verification.Passes);
 
@@ -3090,9 +3129,11 @@ public class C : I
                 AssertEx.Equal(
                     new[] { "<Module>", "I", "C" },
                     input
-                        .SourceModule.GetReferencedAssemblySymbols()
+                        .SourceModule
+                        .GetReferencedAssemblySymbols()
                         .Last()
-                        .GlobalNamespace.GetMembers()
+                        .GlobalNamespace
+                        .GetMembers()
                         .Select(m => m.ToDisplayString())
                 );
 
@@ -3169,7 +3210,8 @@ public class C : I
 
             // verify metadata (types, members, attributes) of the ref assembly
             var emitRefOnly = EmitOptions
-                .Default.WithEmitMetadataOnly(true)
+                .Default
+                .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(false);
             CompileAndVerify(comp, emitOptions: emitRefOnly, verify: Verification.Passes);
 
@@ -3190,9 +3232,11 @@ public class C : I
                 AssertEx.Equal(
                     new[] { "<Module>", "I", "C" },
                     input
-                        .SourceModule.GetReferencedAssemblySymbols()
+                        .SourceModule
+                        .GetReferencedAssemblySymbols()
                         .Last()
-                        .GlobalNamespace.GetMembers()
+                        .GlobalNamespace
+                        .GetMembers()
                         .Select(m => m.ToDisplayString())
                 );
 
@@ -3269,7 +3313,8 @@ public class C : I
 
             // verify metadata (types, members, attributes) of the ref assembly
             var emitRefOnly = EmitOptions
-                .Default.WithEmitMetadataOnly(true)
+                .Default
+                .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(false);
             CompileAndVerify(comp, emitOptions: emitRefOnly, verify: Verification.Passes);
 
@@ -3290,9 +3335,11 @@ public class C : I
                 AssertEx.Equal(
                     new[] { "<Module>", "I", "C" },
                     input
-                        .SourceModule.GetReferencedAssemblySymbols()
+                        .SourceModule
+                        .GetReferencedAssemblySymbols()
                         .Last()
-                        .GlobalNamespace.GetMembers()
+                        .GlobalNamespace
+                        .GetMembers()
                         .Select(m => m.ToDisplayString())
                 );
 
@@ -3332,7 +3379,8 @@ internal struct InternalStruct
 
             // verify metadata (types, members, attributes) of the ref assembly
             var emitRefOnly = EmitOptions
-                .Default.WithEmitMetadataOnly(true)
+                .Default
+                .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(false);
             CompileAndVerify(comp, emitOptions: emitRefOnly, verify: Verification.Passes);
 
@@ -3345,7 +3393,8 @@ internal struct InternalStruct
             );
 
             var globalNamespace = compWithRef
-                .SourceModule.GetReferencedAssemblySymbols()
+                .SourceModule
+                .GetReferencedAssemblySymbols()
                 .Last()
                 .GlobalNamespace;
 
@@ -3418,7 +3467,8 @@ struct S
 
             // verify metadata (types, members, attributes) of the ref assembly
             var emitRefOnly = EmitOptions
-                .Default.WithEmitMetadataOnly(true)
+                .Default
+                .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(false);
             CompileAndVerify(comp, emitOptions: emitRefOnly, verify: Verification.Passes);
 
@@ -3432,9 +3482,11 @@ struct S
             AssertEx.Equal(
                 new[] { "<Module>", "S" },
                 compWithRef
-                    .SourceModule.GetReferencedAssemblySymbols()
+                    .SourceModule
+                    .GetReferencedAssemblySymbols()
                     .Last()
-                    .GlobalNamespace.GetMembers()
+                    .GlobalNamespace
+                    .GetMembers()
                     .Select(m => m.ToDisplayString())
             );
 
@@ -3543,7 +3595,8 @@ struct S
                 "",
                 references: new[] { MscorlibRef },
                 options: TestOptions
-                    .DebugDll.WithDeterministic(true)
+                    .DebugDll
+                    .WithDeterministic(true)
                     .WithOutputKind(OutputKind.NetModule)
             );
 
@@ -3568,7 +3621,8 @@ struct S
                 "",
                 references: new[] { MscorlibRef },
                 options: TestOptions
-                    .DebugDll.WithDeterministic(true)
+                    .DebugDll
+                    .WithDeterministic(true)
                     .WithOutputKind(OutputKind.NetModule)
             );
 
@@ -3596,7 +3650,8 @@ struct S
                     output,
                     metadataPEStream: metadataOutput,
                     options: EmitOptions
-                        .Default.WithDebugInformationFormat(DebugInformationFormat.Embedded)
+                        .Default
+                        .WithDebugInformationFormat(DebugInformationFormat.Embedded)
                         .WithIncludePrivateMembers(false)
                 );
 
@@ -3641,7 +3696,8 @@ struct S
                         comp.Emit(
                             output,
                             options: EmitOptions
-                                .Default.WithEmitMetadataOnly(true)
+                                .Default
+                                .WithEmitMetadataOnly(true)
                                 .WithDebugInformationFormat(DebugInformationFormat.Embedded)
                         )
                 );
@@ -5070,17 +5126,16 @@ using System;
                 sourceSymbolValidator: delegate(ModuleSymbol m)
                 {
                     string[] expectedGlobalMembers = { "C1", "B", "A1", "F", "G", "E", "D" };
-                    var actualGlobalMembers = m
-                        .GlobalNamespace.GetMembers()
+                    var actualGlobalMembers = m.GlobalNamespace
+                        .GetMembers()
                         .Where(member => !member.IsImplicitlyDeclared)
                         .ToArray();
                     for (
                         int i = 0;
                         i
-                            < System.Math.Max(
-                                expectedGlobalMembers.Length,
-                                actualGlobalMembers.Length
-                            );
+                            < System
+                                .Math
+                                .Max(expectedGlobalMembers.Length, actualGlobalMembers.Length);
                         i++
                     )
                     {
@@ -5127,7 +5182,8 @@ using System;
                     };
 
                     var actualAMembers = ((SourceModuleSymbol)m)
-                        .GlobalNamespace.GetTypeMembers("A1")
+                        .GlobalNamespace
+                        .GetTypeMembers("A1")
                         .Single()
                         .GetMembers()
                         .ToArray();
@@ -5143,7 +5199,8 @@ using System;
 
                     string[] expectedBMembers = { ".ctor", "Invoke", "BeginInvoke", "EndInvoke" };
                     var actualBMembers = ((SourceModuleSymbol)m)
-                        .GlobalNamespace.GetTypeMembers("B")
+                        .GlobalNamespace
+                        .GetTypeMembers("B")
                         .Single()
                         .GetMembers()
                         .ToArray();
@@ -5159,7 +5216,8 @@ using System;
 
                     string[] expectedCMembers = { ".cctor", "C", "B", "F", "A", ".ctor" };
                     var actualCMembers = ((SourceModuleSymbol)m)
-                        .GlobalNamespace.GetTypeMembers("C1")
+                        .GlobalNamespace
+                        .GetTypeMembers("C1")
                         .Single()
                         .GetMembers()
                         .ToArray();
@@ -5203,8 +5261,8 @@ using System;
                         "M",
                     };
 
-                    var actualAMembers = m
-                        .GlobalNamespace.GetTypeMembers("A1")
+                    var actualAMembers = m.GlobalNamespace
+                        .GetTypeMembers("A1")
                         .Single()
                         .GetMembers()
                         .ToArray();
@@ -5212,8 +5270,8 @@ using System;
                     AssertEx.SetEqual(expectedAMembers, actualAMembers.Select(s => s.Name));
 
                     string[] expectedBMembers = { ".ctor", "BeginInvoke", "EndInvoke", "Invoke" };
-                    var actualBMembers = m
-                        .GlobalNamespace.GetTypeMembers("B")
+                    var actualBMembers = m.GlobalNamespace
+                        .GetTypeMembers("B")
                         .Single()
                         .GetMembers()
                         .ToArray();
@@ -5221,8 +5279,8 @@ using System;
                     AssertEx.SetEqual(expectedBMembers, actualBMembers.Select(s => s.Name));
 
                     string[] expectedCMembers = { "C", "B", "A", ".ctor", "F" };
-                    var actualCMembers = m
-                        .GlobalNamespace.GetTypeMembers("C1")
+                    var actualCMembers = m.GlobalNamespace
+                        .GetTypeMembers("C1")
                         .Single()
                         .GetMembers()
                         .ToArray();
@@ -5588,12 +5646,14 @@ public sealed class ContentType
                 new MemoryStream(),
                 options: new EmitOptions(outputNameOverride: "x\0x")
             );
-            result.Diagnostics.Verify(
-                // error CS2041: Invalid output name: Name contains invalid characters.
-                Diagnostic(ErrorCode.ERR_InvalidOutputName)
-                    .WithArguments("Name contains invalid characters.")
-                    .WithLocation(1, 1)
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS2041: Invalid output name: Name contains invalid characters.
+                    Diagnostic(ErrorCode.ERR_InvalidOutputName)
+                        .WithArguments("Name contains invalid characters.")
+                        .WithLocation(1, 1)
+                );
 
             Assert.False(result.Success);
         }
@@ -6872,7 +6932,8 @@ class Viewable
             var compilation = CreateCompilation(source, null, TestOptions.ReleaseDll);
             var peReader = ModuleMetadata
                 .CreateFromStream(compilation.EmitToStream())
-                .Module.GetMetadataReader();
+                .Module
+                .GetMetadataReader();
 
             int P1RVA = 0;
             int P2RVA = 0;
@@ -6977,12 +7038,14 @@ class C
 
             output.BreakHow = BrokenStream.BreakHowType.ThrowOnWrite;
             var result = compilation.Emit(output);
-            result.Diagnostics.Verify(
-                // error CS8104: An error occurred while writing the Portable Executable file.
-                Diagnostic(ErrorCode.ERR_PeWritingFailure)
-                    .WithArguments(output.ThrownException.ToString())
-                    .WithLocation(1, 1)
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS8104: An error occurred while writing the Portable Executable file.
+                    Diagnostic(ErrorCode.ERR_PeWritingFailure)
+                        .WithArguments(output.ThrownException.ToString())
+                        .WithLocation(1, 1)
+                );
 
             // Stream.Position is not called:
             output.BreakHow = BrokenStream.BreakHowType.ThrowOnSetPosition;
@@ -7009,16 +7072,18 @@ class C
                 var result = compilation.Emit(
                     output,
                     pdbStream,
-                    options: EmitOptions.Default.WithDebugInformationFormat(
-                        DebugInformationFormat.PortablePdb
-                    )
+                    options: EmitOptions
+                        .Default
+                        .WithDebugInformationFormat(DebugInformationFormat.PortablePdb)
                 );
-                result.Diagnostics.Verify(
-                    // error CS0041: Unexpected error writing debug information -- 'I/O error occurred.'
-                    Diagnostic(ErrorCode.FTL_DebugEmitFailure)
-                        .WithArguments("I/O error occurred.")
-                        .WithLocation(1, 1)
-                );
+                result
+                    .Diagnostics
+                    .Verify(
+                        // error CS0041: Unexpected error writing debug information -- 'I/O error occurred.'
+                        Diagnostic(ErrorCode.FTL_DebugEmitFailure)
+                            .WithArguments("I/O error occurred.")
+                            .WithLocation(1, 1)
+                    );
             }
         }
 
@@ -7323,12 +7388,14 @@ public class X
             broken.BreakHow = BrokenStream.BreakHowType.ThrowOnWrite;
             var result = compilation.Emit(broken);
             Assert.False(result.Success);
-            result.Diagnostics.Verify(
-                // error CS8104: An error occurred while writing the Portable Executable file.
-                Diagnostic(ErrorCode.ERR_PeWritingFailure)
-                    .WithArguments(broken.ThrownException.ToString())
-                    .WithLocation(1, 1)
-            );
+            result
+                .Diagnostics
+                .Verify(
+                    // error CS8104: An error occurred while writing the Portable Executable file.
+                    Diagnostic(ErrorCode.ERR_PeWritingFailure)
+                        .WithArguments(broken.ThrownException.ToString())
+                        .WithLocation(1, 1)
+                );
         }
 
         [Fact]
@@ -7340,19 +7407,21 @@ public class X
             using (new EnsureEnglishUICulture())
             using (var peStream = new MemoryStream())
             {
-                var portablePdbOptions = EmitOptions.Default.WithDebugInformationFormat(
-                    DebugInformationFormat.PortablePdb
-                );
+                var portablePdbOptions = EmitOptions
+                    .Default
+                    .WithDebugInformationFormat(DebugInformationFormat.PortablePdb);
 
                 var result = comp.Emit(peStream, pdbStream: broken, options: portablePdbOptions);
 
                 Assert.False(result.Success);
-                result.Diagnostics.Verify(
-                    // error CS0041: Unexpected error writing debug information -- 'I/O error occurred.'
-                    Diagnostic(ErrorCode.FTL_DebugEmitFailure)
-                        .WithArguments("I/O error occurred.")
-                        .WithLocation(1, 1)
-                );
+                result
+                    .Diagnostics
+                    .Verify(
+                        // error CS0041: Unexpected error writing debug information -- 'I/O error occurred.'
+                        Diagnostic(ErrorCode.FTL_DebugEmitFailure)
+                            .WithArguments("I/O error occurred.")
+                            .WithLocation(1, 1)
+                    );
 
                 // Allow for cancellation
                 broken = new BrokenStream();
@@ -7468,10 +7537,9 @@ public class DerivingClass<T> : BaseClass<T>
         [WorkItem(37779, "https://github.com/dotnet/roslyn/issues/37779")]
         public void WarnAsErrorDoesNotEmit_SpecificDiagnosticOption()
         {
-            var options = TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                "CS0169",
-                ReportDiagnostic.Error
-            );
+            var options = TestOptions
+                .DebugDll
+                .WithSpecificDiagnosticOptions("CS0169", ReportDiagnostic.Error);
             TestWarnAsErrorDoesNotEmitCore(options);
         }
 
@@ -7509,14 +7577,16 @@ class X
             // https://github.com/dotnet/roslyn/issues/37996 tracks revisiting the below behavior.
             Assert.True(xmlDocumentationStream.Length > 0);
 
-            emitResult.Diagnostics.Verify(
-                // (4,9): error CS0169: The field 'X._f' is never used
-                //     int _f;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "_f")
-                    .WithArguments("X._f")
-                    .WithLocation(4, 9)
-                    .WithWarningAsError(true)
-            );
+            emitResult
+                .Diagnostics
+                .Verify(
+                    // (4,9): error CS0169: The field 'X._f' is never used
+                    //     int _f;
+                    Diagnostic(ErrorCode.WRN_UnreferencedField, "_f")
+                        .WithArguments("X._f")
+                        .WithLocation(4, 9)
+                        .WithWarningAsError(true)
+                );
         }
 
         [Fact]
@@ -7531,10 +7601,9 @@ class X
         [WorkItem(37779, "https://github.com/dotnet/roslyn/issues/37779")]
         public void WarnAsErrorWithMetadataOnlyImageDoesEmit_SpecificDiagnosticOptions()
         {
-            var options = TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                "CS0612",
-                ReportDiagnostic.Error
-            );
+            var options = TestOptions
+                .DebugDll
+                .WithSpecificDiagnosticOptions("CS0612", ReportDiagnostic.Error);
             TestWarnAsErrorWithMetadataOnlyImageDoesEmitCore(options);
         }
 
@@ -7564,14 +7633,16 @@ public class Y { }
 
             Assert.True(output.Length > 0);
 
-            emitResult.Diagnostics.Verify(
-                // (4,19): error CS0612: 'Y' is obsolete
-                //     public void M(Y y)
-                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Y")
-                    .WithArguments("Y")
-                    .WithLocation(4, 19)
-                    .WithWarningAsError(true)
-            );
+            emitResult
+                .Diagnostics
+                .Verify(
+                    // (4,19): error CS0612: 'Y' is obsolete
+                    //     public void M(Y y)
+                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "Y")
+                        .WithArguments("Y")
+                        .WithLocation(4, 19)
+                        .WithWarningAsError(true)
+                );
         }
     }
 }

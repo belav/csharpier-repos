@@ -58,12 +58,11 @@ namespace System.Web.Compilation
             if (provider == null)
                 throw new HttpException("Assembly builder has no code provider");
 
-            System.Data.Design.TypedDataSetGenerator.Generate(
-                tr.ReadToEnd(),
-                unit,
-                dataSetCode,
-                provider
-            );
+            System
+                .Data
+                .Design
+                .TypedDataSetGenerator
+                .Generate(tr.ReadToEnd(), unit, dataSetCode, provider);
 
             assemblyBuilder.AddCodeCompileUnit(unit);
         }

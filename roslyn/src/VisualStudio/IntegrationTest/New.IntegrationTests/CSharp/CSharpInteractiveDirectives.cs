@@ -16,18 +16,17 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [IdeFact]
         public async Task VerifyHostCommandsCompletionList()
         {
-            await TestServices.InteractiveWindow.InsertCodeAsync(
-                "#",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.InvokeCompletionListAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .InteractiveWindow
+                .InsertCodeAsync("#", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .InvokeCompletionListAsync(HangMitigatingCancellationToken);
 
             var completionItems = (
-                await TestServices.InteractiveWindow.GetCompletionItemsAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .InteractiveWindow
+                    .GetCompletionItemsAsync(HangMitigatingCancellationToken)
             ).SelectAsArray(item => item.DisplayText);
             Assert.All(
                 [
@@ -56,22 +55,24 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 item => Assert.DoesNotContain(item, completionItems)
             );
 
-            await TestServices.InteractiveWindow.ClearReplTextAsync(
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.InsertCodeAsync(
-                @"int x = 1; //
+            await TestServices
+                .InteractiveWindow
+                .ClearReplTextAsync(HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .InsertCodeAsync(
+                    @"int x = 1; //
 #",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.InvokeCompletionListAsync(
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindow
+                .InvokeCompletionListAsync(HangMitigatingCancellationToken);
 
             completionItems = (
-                await TestServices.InteractiveWindow.GetCompletionItemsAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .InteractiveWindow
+                    .GetCompletionItemsAsync(HangMitigatingCancellationToken)
             ).SelectAsArray(item => item.DisplayText);
             Assert.All(
                 [
@@ -97,55 +98,53 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [IdeFact]
         public async Task VerifyHashRDirective()
         {
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#r \"System.Numerics\"",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                @"using System.Numerics;
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#r \"System.Numerics\"", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync(
+                    @"using System.Numerics;
 var bigInt = new BigInteger();
 bigInt",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                "[0]",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync("[0]", HangMitigatingCancellationToken);
         }
 
         [IdeFact]
         public async Task VerifyLocalDeclarationWithTheSameNameHidesImportedMembersFromHashR()
         {
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#r \"System.Numerics\"",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                @"using System.Numerics;
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#r \"System.Numerics\"", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync(
+                    @"using System.Numerics;
 class Complex { public int goo() { return 4; } }
 var comp = new Complex();
 comp.goo()",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                "4",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync("4", HangMitigatingCancellationToken);
         }
 
         [IdeFact]
         public async Task VerifyLocalDeclarationInCsxFileWithTheSameNameHidesImportedMembersFromHashR()
         {
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#r \"System.Numerics\"",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "using System.Numerics;",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#r \"System.Numerics\"", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("using System.Numerics;", HangMitigatingCancellationToken);
             using (
                 var temporaryTextFile = new TemporaryTextFile(
                     "directivesScenario4.csx",
@@ -154,34 +153,41 @@ comp.goo()",
             )
             {
                 temporaryTextFile.Create();
-                await TestServices.InteractiveWindow.SubmitTextAsync(
-                    string.Format("#load \"{0}\"", temporaryTextFile.FullName),
-                    HangMitigatingCancellationToken
-                );
-                await TestServices.InteractiveWindow.SubmitTextAsync(
-                    @"var comp = new Complex();
+                await TestServices
+                    .InteractiveWindow
+                    .SubmitTextAsync(
+                        string.Format("#load \"{0}\"", temporaryTextFile.FullName),
+                        HangMitigatingCancellationToken
+                    );
+                await TestServices
+                    .InteractiveWindow
+                    .SubmitTextAsync(
+                        @"var comp = new Complex();
 comp.goo()",
-                    HangMitigatingCancellationToken
-                );
-                await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                    "4",
-                    HangMitigatingCancellationToken
-                );
+                        HangMitigatingCancellationToken
+                    );
+                await TestServices
+                    .InteractiveWindow
+                    .WaitForLastReplOutputAsync("4", HangMitigatingCancellationToken);
             }
         }
 
         [IdeFact]
         public async Task VerifyAssembliesReferencedByDefault()
         {
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                @"using System.Diagnostics;
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync(
+                    @"using System.Diagnostics;
 Process.GetCurrentProcess().ProcessName",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                "\"InteractiveHost64\"",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync(
+                    "\"InteractiveHost64\"",
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -195,51 +201,54 @@ Process.GetCurrentProcess().ProcessName",
             )
             {
                 temporaryTextFile.Create();
-                await TestServices.InteractiveWindow.SubmitTextAsync(
-                    string.Format("#load \"{0}\"", temporaryTextFile.FullName),
-                    HangMitigatingCancellationToken
-                );
-                await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                    "2",
-                    HangMitigatingCancellationToken
-                );
-                await TestServices.InteractiveWindow.SubmitTextAsync(
-                    "#load text",
-                    HangMitigatingCancellationToken
-                );
-                await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                    "(1,7): error CS7010: Quoted file name expected",
-                    HangMitigatingCancellationToken
-                );
+                await TestServices
+                    .InteractiveWindow
+                    .SubmitTextAsync(
+                        string.Format("#load \"{0}\"", temporaryTextFile.FullName),
+                        HangMitigatingCancellationToken
+                    );
+                await TestServices
+                    .InteractiveWindow
+                    .WaitForLastReplOutputAsync("2", HangMitigatingCancellationToken);
+                await TestServices
+                    .InteractiveWindow
+                    .SubmitTextAsync("#load text", HangMitigatingCancellationToken);
+                await TestServices
+                    .InteractiveWindow
+                    .WaitForLastReplOutputAsync(
+                        "(1,7): error CS7010: Quoted file name expected",
+                        HangMitigatingCancellationToken
+                    );
             }
         }
 
         [IdeFact]
         public async Task VerifySquiggleAndErrorMessageUnderIncorrectDirective()
         {
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#goo",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                "(1,2): error CS1024: Preprocessor directive expected",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#goo", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync(
+                    "(1,2): error CS1024: Preprocessor directive expected",
+                    HangMitigatingCancellationToken
+                );
             // TODO implement GetErrorListErrorCount: https://github.com/dotnet/roslyn/issues/18035
             // VerifyErrorCount(1);
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#reset",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#reset", HangMitigatingCancellationToken);
 
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#bar",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                "(1,2): error CS1024: Preprocessor directive expected",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#bar", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync(
+                    "(1,2): error CS1024: Preprocessor directive expected",
+                    HangMitigatingCancellationToken
+                );
             // TODO implement GetErrorListErrorCount: https://github.com/dotnet/roslyn/issues/18035
             // VerifyErrorCount(2);
         }
@@ -247,12 +256,13 @@ Process.GetCurrentProcess().ProcessName",
         [IdeFact]
         public async Task VerifyHashHelpDirectiveOutputNoSquigglesUnderHashHelp()
         {
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#help",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                @"Keyboard shortcuts:
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#help", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync(
+                    @"Keyboard shortcuts:
   Enter                If the current submission appears to be complete, evaluate it.  Otherwise, insert a new line.
   Ctrl-Enter           Within the current submission, evaluate the current submission.
                        Within a previous submission, append the previous submission to the current submission.
@@ -272,8 +282,8 @@ REPL commands:
 Script directives:
   #r                   Add a metadata reference to specified assembly and all its dependencies, e.g. #r ""myLib.dll"".
   #load                Load specified script file and execute it, e.g. #load ""myScript.csx"".",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
             // TODO implement GetErrorListErrorCount: https://github.com/dotnet/roslyn/issues/18035
             // VerifyErrorCount(0);
@@ -282,10 +292,9 @@ Script directives:
         [IdeFact]
         public async Task VerifyHashCls()
         {
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#cls",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#cls", HangMitigatingCancellationToken);
             // TODO implement GetErrorListErrorCount: https://github.com/dotnet/roslyn/issues/18035
             // VerifyErrorCount(0);
         }
@@ -293,23 +302,22 @@ Script directives:
         [IdeFact]
         public async Task VerifyHashReset()
         {
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "1+1",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                "2",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#reset",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                @"Resetting execution engine.
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("1+1", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync("2", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#reset", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync(
+                    @"Resetting execution engine.
 Loading context from 'CSharpInteractive.rsp'.",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
             // TODO implement GetErrorListErrorCount: https://github.com/dotnet/roslyn/issues/18035
             // VerifyErrorCount(0);
         }
@@ -317,32 +325,36 @@ Loading context from 'CSharpInteractive.rsp'.",
         [IdeFact]
         public async Task VerifyDisplayCommandUsageOutputNoSquigglesUnderSlashHelp()
         {
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#reset /help",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputContainsAsync(
-                @"Usage:
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#reset /help", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputContainsAsync(
+                    @"Usage:
   #reset [noconfig]",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
             // TODO implement GetErrorListErrorCount: https://github.com/dotnet/roslyn/issues/18035
             // VerifyErrorCount(0);
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#load /help",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputContainsAsync(
-                "CS7010: Quoted file name expected",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#load /help", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputContainsAsync(
+                    "CS7010: Quoted file name expected",
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact(Skip = "https://github.com/dotnet/roslyn/issues/8281")]
         public async Task VerifyNoSquigglesErrorMessagesAndIntellisenseFeaturesContinueWorkingAfterReset()
         {
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                @"using static System.Console;
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync(
+                    @"using static System.Console;
 /// <summary>innertext
 /// </summary>
 /// --><!--comment--><!--
@@ -352,121 +364,116 @@ public static void Main(string[] args)
 {
     WriteLine(""Hello World"");
 }",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#reset",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "using",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "keyword",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "{",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "punctuation",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "Main",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "identifier",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "Hello",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "string",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "<summary",
-                charsOffset: -1,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendWithoutActivateAsync(
-                (VirtualKeyCode.RIGHT, VirtualKeyCode.MENU),
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "xml doc comment - delimiter",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "summary",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "xml doc comment - name",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "innertext",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "xml doc comment - text",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "--",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "xml doc comment - text",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "comment",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "xml doc comment - comment",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "CDATA",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "xml doc comment - delimiter",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "cdata",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "xml doc comment - cdata section",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "attribute",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "identifier",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.PlaceCaretAsync(
-                "Environment",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindowVerifier.CurrentTokenTypeAsync(
-                tokenType: "class name",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#reset", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("using", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(tokenType: "keyword", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("{", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(tokenType: "punctuation", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("Main", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(tokenType: "identifier", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("Hello", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(tokenType: "string", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("<summary", charsOffset: -1, HangMitigatingCancellationToken);
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync(
+                    (VirtualKeyCode.RIGHT, VirtualKeyCode.MENU),
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(
+                    tokenType: "xml doc comment - delimiter",
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("summary", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(
+                    tokenType: "xml doc comment - name",
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("innertext", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(
+                    tokenType: "xml doc comment - text",
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("--", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(
+                    tokenType: "xml doc comment - text",
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("comment", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(
+                    tokenType: "xml doc comment - comment",
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("CDATA", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(
+                    tokenType: "xml doc comment - delimiter",
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("cdata", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(
+                    tokenType: "xml doc comment - cdata section",
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("attribute", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(tokenType: "identifier", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .PlaceCaretAsync("Environment", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindowVerifier
+                .CurrentTokenTypeAsync(tokenType: "class name", HangMitigatingCancellationToken);
             // TODO implement GetErrorListErrorCount: https://github.com/dotnet/roslyn/issues/18035
             // VerifyErrorCount(0);
         }
@@ -477,15 +484,16 @@ public static void Main(string[] args)
         [InlineData("core")]
         public async Task WorkspaceClearedAfterReset(string environment)
         {
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                $"#reset {environment}",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                @"Resetting execution engine.
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync($"#reset {environment}", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync(
+                    @"Resetting execution engine.
 Loading context from 'CSharpInteractive.rsp'.",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
             var errorText = environment switch
             {
@@ -493,93 +501,82 @@ Loading context from 'CSharpInteractive.rsp'.",
                 _ => "StackOverflowException.",
             };
 
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "double M() { return 13.1; }",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "M()",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                "13.1",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "double M() { return M(); }",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "M()",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputContainsAsync(
-                errorText,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "M()",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputContainsAsync(
-                "CS0103",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "double M() { return M(); }",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "M()",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputContainsAsync(
-                errorText,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "double M() { return 13.2; }",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "M()",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                "13.2",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("double M() { return 13.1; }", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("M()", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync("13.1", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("double M() { return M(); }", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("M()", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputContainsAsync(errorText, HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("M()", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputContainsAsync("CS0103", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("double M() { return M(); }", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("M()", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputContainsAsync(errorText, HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("double M() { return 13.2; }", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("M()", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync("13.2", HangMitigatingCancellationToken);
         }
 
         [IdeFact]
         public async Task InitializationAfterReset()
         {
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#reset",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                @"Resetting execution engine.
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#reset", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync(
+                    @"Resetting execution engine.
 Loading context from 'CSharpInteractive.rsp'.",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#reset noconfig",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                "Resetting execution engine.",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.SubmitTextAsync(
-                "#reset 64",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.InteractiveWindow.WaitForLastReplOutputAsync(
-                @"Resetting execution engine.
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#reset noconfig", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync(
+                    "Resetting execution engine.",
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .InteractiveWindow
+                .SubmitTextAsync("#reset 64", HangMitigatingCancellationToken);
+            await TestServices
+                .InteractiveWindow
+                .WaitForLastReplOutputAsync(
+                    @"Resetting execution engine.
 Loading context from 'CSharpInteractive.rsp'.",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
         }
     }
 }

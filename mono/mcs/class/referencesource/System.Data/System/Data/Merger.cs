@@ -232,9 +232,11 @@ namespace System.Data
                     {
                         key = GetSrcKey(src, dst);
                         if (key.HasValue)
-                            ndxSearch = dst.primaryKey.Key.GetSortIndex(
-                                DataViewRowState.OriginalRows | DataViewRowState.Added
-                            );
+                            ndxSearch = dst.primaryKey
+                                .Key
+                                .GetSortIndex(
+                                    DataViewRowState.OriginalRows | DataViewRowState.Added
+                                );
                     }
                     // SQLBU 414992: Serious performance issue when calling Merge
                     // this improves performance by iterating over the rows instead of computing their position

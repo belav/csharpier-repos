@@ -66,7 +66,8 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                 if (constructorHandleType == HandleType.QualifiedMethod)
                 {
                     QualifiedMethod qualifiedMethod = _customAttribute
-                        .Constructor.ToQualifiedMethodHandle(reader)
+                        .Constructor
+                        .ToQualifiedMethodHandle(reader)
                         .GetQualifiedMethod(reader);
                     TypeDefinitionHandle declaringType = qualifiedMethod.EnclosingType;
                     MethodHandle methodHandle = qualifiedMethod.Method;
@@ -83,7 +84,8 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                 else if (constructorHandleType == HandleType.MemberReference)
                 {
                     MemberReference memberReference = _customAttribute
-                        .Constructor.ToMemberReferenceHandle(reader)
+                        .Constructor
+                        .ToMemberReferenceHandle(reader)
                         .GetMemberReference(reader);
 
                     // There is no chance a custom attribute type will be an open type specification so we can safely pass in the empty context here.
@@ -91,10 +93,9 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                         Array.Empty<RuntimeTypeInfo>(),
                         Array.Empty<RuntimeTypeInfo>()
                     );
-                    RuntimeTypeInfo attributeRuntimeTypeInfo = memberReference.Parent.Resolve(
-                        reader,
-                        typeContext
-                    );
+                    RuntimeTypeInfo attributeRuntimeTypeInfo = memberReference
+                        .Parent
+                        .Resolve(reader, typeContext);
                     Type attributeType = attributeRuntimeTypeInfo.ToType();
                     MethodSignature sig = memberReference.Signature.ParseMethodSignature(reader);
                     HandleCollection parameters = sig.Parameters;
@@ -135,18 +136,23 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
             {
                 case HandleType.QualifiedMethod:
                     parameterTypeSignatureHandles = _customAttribute
-                        .Constructor.ToQualifiedMethodHandle(_reader)
+                        .Constructor
+                        .ToQualifiedMethodHandle(_reader)
                         .GetQualifiedMethod(_reader)
-                        .Method.GetMethod(_reader)
-                        .Signature.GetMethodSignature(_reader)
+                        .Method
+                        .GetMethod(_reader)
+                        .Signature
+                        .GetMethodSignature(_reader)
                         .Parameters;
                     break;
 
                 case HandleType.MemberReference:
                     parameterTypeSignatureHandles = _customAttribute
-                        .Constructor.ToMemberReferenceHandle(_reader)
+                        .Constructor
+                        .ToMemberReferenceHandle(_reader)
                         .GetMemberReference(_reader)
-                        .Signature.ToMethodSignatureHandle(_reader)
+                        .Signature
+                        .ToMethodSignatureHandle(_reader)
                         .GetMethodSignature(_reader)
                         .Parameters;
                     break;
@@ -213,11 +219,13 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                 bool isField = (namedArgument.Flags == NamedArgumentMemberKind.Field);
 
                 Exception? exception = null;
-                RuntimeTypeInfo? argumentType = namedArgument.Type.TryResolve(
-                    _reader,
-                    AttributeType.ToRuntimeTypeInfo().TypeContext,
-                    ref exception
-                );
+                RuntimeTypeInfo? argumentType = namedArgument
+                    .Type
+                    .TryResolve(
+                        _reader,
+                        AttributeType.ToRuntimeTypeInfo().TypeContext,
+                        ref exception
+                    );
                 if (argumentType == null)
                 {
                     if (throwIfMissingMetadata)
@@ -278,9 +286,9 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                 );
 
             if (memberInfo == null)
-                throw ReflectionCoreExecution.ExecutionEnvironment.CreateMissingMetadataException(
-                    attributeType
-                );
+                throw ReflectionCoreExecution
+                    .ExecutionEnvironment
+                    .CreateMissingMetadataException(attributeType);
 
             return new CustomAttributeNamedArgument(memberInfo, typedValue);
         }

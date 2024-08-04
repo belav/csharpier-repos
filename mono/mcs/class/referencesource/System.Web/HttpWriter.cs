@@ -1050,9 +1050,12 @@ namespace System.Web
                 {
                     _substElements = new ArrayList();
                     // dynamic compression is not compatible with post cache substitution
-                    _response.Context.Request.SetDynamicCompression(
-                        false /*enable*/
-                    );
+                    _response
+                        .Context
+                        .Request
+                        .SetDynamicCompression(
+                            false /*enable*/
+                        );
                 }
                 return _substElements;
             }
@@ -1569,9 +1572,12 @@ namespace System.Web
             // re-enable dynamic compression if we are about to clear substitution blocks
             if (_substElements != null)
             {
-                _response.Context.Request.SetDynamicCompression(
-                    true /*enable*/
-                );
+                _response
+                    .Context
+                    .Request
+                    .SetDynamicCompression(
+                        true /*enable*/
+                    );
             }
 
             //VSWhidbey 559434: Private Bytes goes thru roof because unmanaged buffers are not recycled when Response.Flush is called
@@ -1664,9 +1670,12 @@ namespace System.Web
                 }
 
                 // re-enable dynamic compression when we have a snapshot of the subst blocks.
-                _response.Context.Request.SetDynamicCompression(
-                    true /*enable*/
-                );
+                _response
+                    .Context
+                    .Request
+                    .SetDynamicCompression(
+                        true /*enable*/
+                    );
             }
 
             return buffers;
@@ -2022,13 +2031,9 @@ namespace System.Web
                 }
 
                 int n = (count < _charBufferFree) ? count : _charBufferFree;
-                System.Array.Copy(
-                    buffer,
-                    index,
-                    charBuffer,
-                    _charBufferLength - _charBufferFree,
-                    n
-                );
+                System
+                    .Array
+                    .Copy(buffer, index, charBuffer, _charBufferLength - _charBufferFree, n);
                 _charBufferFree -= n;
                 index += n;
                 count -= n;

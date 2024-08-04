@@ -222,9 +222,9 @@ namespace System.Xaml
             {
                 ret = XamlLanguage.SpecialNames.Find(name, xamlNamespace);
                 if (ret == null)
-                    ret = XamlLanguage.AllTypes.FirstOrDefault(t =>
-                        TypeMatches(t, xamlNamespace, name, typeArguments)
-                    );
+                    ret = XamlLanguage
+                        .AllTypes
+                        .FirstOrDefault(t => TypeMatches(t, xamlNamespace, name, typeArguments));
                 if (ret != null)
                     return ret;
             }

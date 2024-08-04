@@ -110,19 +110,22 @@ namespace System.Data
         private readonly DataViewListener _dvListener;
 
         private static int s_objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref s_objectTypeCount
-        );
+        private readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref s_objectTypeCount);
 
         internal DataView(DataTable? table, bool locked)
         {
             GC.SuppressFinalize(this);
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataView.DataView|INFO> {0}, table={1}, locked={2}",
-                ObjectID,
-                (table != null) ? table.ObjectID : 0,
-                locked
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataView.DataView|INFO> {0}, table={1}, locked={2}",
+                    ObjectID,
+                    (table != null) ? table.ObjectID : 0,
+                    locked
+                );
 
             _dvListener = new DataViewListener(this);
             _locked = locked;
@@ -157,14 +160,16 @@ namespace System.Data
         public DataView(DataTable table, string? RowFilter, string? Sort, DataViewRowState RowState)
         {
             GC.SuppressFinalize(this);
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataView.DataView|API> {0}, table={1}, RowFilter='{2}', Sort='{3}', RowState={4}",
-                ObjectID,
-                (table != null) ? table.ObjectID : 0,
-                RowFilter,
-                Sort,
-                RowState
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataView.DataView|API> {0}, table={1}, RowFilter='{2}', Sort='{3}', RowState={4}",
+                    ObjectID,
+                    (table != null) ? table.ObjectID : 0,
+                    RowFilter,
+                    Sort,
+                    RowState
+                );
 
             if (table == null)
             {
@@ -208,12 +213,14 @@ namespace System.Data
         )
         {
             GC.SuppressFinalize(this);
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataView.DataView|API> %d#, table=%d, RowState=%d{ds.DataViewRowState}\n",
-                ObjectID,
-                (table != null) ? table.ObjectID : 0,
-                (int)RowState
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataView.DataView|API> %d#, table=%d, RowState=%d{ds.DataViewRowState}\n",
+                    ObjectID,
+                    (table != null) ? table.ObjectID : 0,
+                    (int)RowState
+                );
 
             if (table == null)
             {
@@ -278,11 +285,9 @@ namespace System.Data
             get { return _applyDefaultSort; }
             set
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataView.set_ApplyDefaultSort|API> {0}, {1}",
-                    ObjectID,
-                    value
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataView.set_ApplyDefaultSort|API> {0}, {1}", ObjectID, value);
                 if (_applyDefaultSort != value)
                 {
                     _comparison = null; // clear the delegate to allow the Sort string to be effective
@@ -378,11 +383,9 @@ namespace System.Data
             set
             {
                 value ??= string.Empty;
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataView.set_RowFilter|API> {0}, '{1}'",
-                    ObjectID,
-                    value
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataView.set_RowFilter|API> {0}, '{1}'", ObjectID, value);
 
                 if (_fInitInProgress)
                 {
@@ -454,11 +457,9 @@ namespace System.Data
             get { return _recordStates; }
             set
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataView.set_RowStateFilter|API> {0}, {1}",
-                    ObjectID,
-                    value
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataView.set_RowStateFilter|API> {0}, {1}", ObjectID, value);
                 if (_fInitInProgress)
                 {
                     _delayedRecordStates = value;
@@ -515,11 +516,9 @@ namespace System.Data
             set
             {
                 value ??= string.Empty;
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataView.set_Sort|API> {0}, '{1}'",
-                    ObjectID,
-                    value
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataView.set_Sort|API> {0}, '{1}'", ObjectID, value);
 
                 if (_fInitInProgress)
                 {
@@ -544,10 +543,9 @@ namespace System.Data
             get { return _comparison; }
             set
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataView.set_SortComparison|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataView.set_SortComparison|API> {0}", ObjectID);
                 if (!ReferenceEquals(_comparison, value))
                 {
                     _comparison = value;
@@ -569,11 +567,13 @@ namespace System.Data
             get { return _table; }
             set
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataView.set_Table|API> {0}, {1}",
-                    ObjectID,
-                    (value != null) ? value.ObjectID : 0
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace(
+                        "<ds.DataView.set_Table|API> {0}, {1}",
+                        ObjectID,
+                        (value != null) ? value.ObjectID : 0
+                    );
                 if (_fInitInProgress && value != null)
                 {
                     _delayedTable = value;
@@ -638,10 +638,9 @@ namespace System.Data
         /// </remarks>
         public virtual DataRowView AddNew()
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataView.AddNew|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataView.AddNew|API> {0}", ObjectID);
             try
             {
                 CheckOpen();
@@ -794,11 +793,9 @@ namespace System.Data
         {
             if (null != row)
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope(
-                    "<ds.DataView.Delete|API> {0}, row={1}",
-                    ObjectID,
-                    row._objectID
-                );
+                long logScopeId = DataCommonEventSource
+                    .Log
+                    .EnterScope("<ds.DataView.Delete|API> {0}, row={1}", ObjectID, row._objectID);
                 try
                 {
                     CheckOpen();
@@ -860,10 +857,9 @@ namespace System.Data
         /// <summary>Find DataRowView instances that match the specified primary key values.</summary>
         internal virtual DataRowView[] FindRowsByKey(object?[] key)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataView.FindRows|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataView.FindRows|API> {0}", ObjectID);
             try
             {
                 // TODO: This will throw NRE if _index isn't set (e.g. default ctor)
@@ -906,11 +902,9 @@ namespace System.Data
         internal void FinishAddNew(bool success)
         {
             Debug.Assert(null != _addNewRow, "null addNewRow");
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataView.FinishAddNew|INFO> {0}, success={1}",
-                ObjectID,
-                success
-            );
+            DataCommonEventSource
+                .Log
+                .Trace("<ds.DataView.FinishAddNew|INFO> {0}, success={1}", ObjectID, success);
 
             DataRow newRow = _addNewRow;
             if (success)
@@ -1014,9 +1008,11 @@ namespace System.Data
             // the index will only contain the original or current record, never proposed.
             // return index.GetIndex(rowview.GetRecord());
             return _index!.GetIndex(
-                rowview.Row.GetRecordFromVersion(
-                    rowview.Row.GetDefaultRowVersion(RowStateFilter) & ~DataRowVersion.Proposed
-                )
+                rowview
+                    .Row
+                    .GetRecordFromVersion(
+                        rowview.Row.GetDefaultRowVersion(RowStateFilter) & ~DataRowVersion.Proposed
+                    )
             );
         }
 
@@ -1116,10 +1112,9 @@ namespace System.Data
             }
             remove
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataView.remove_ListChanged|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataView.remove_ListChanged|API> {0}", ObjectID);
                 _onListChanged -= value;
             }
         }
@@ -1529,11 +1524,13 @@ namespace System.Data
         /// </summary>
         protected virtual void OnListChanged(ListChangedEventArgs e)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataView.OnListChanged|INFO> {0}, ListChangedType={1}",
-                ObjectID,
-                e.ListChangedType
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataView.OnListChanged|INFO> {0}, ListChangedType={1}",
+                    ObjectID,
+                    e.ListChangedType
+                );
             try
             {
                 DataColumn? col = null;
@@ -1734,12 +1731,14 @@ namespace System.Data
             bool fireEvent
         )
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataView.SetIndex|INFO> {0}, newSort='{1}', newRowStates={2}",
-                ObjectID,
-                newSort,
-                newRowStates
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataView.SetIndex|INFO> {0}, newSort='{1}', newRowStates={2}",
+                    ObjectID,
+                    newSort,
+                    newRowStates
+                );
             _sort = newSort;
             _recordStates = newRowStates;
             _rowFilter = newRowFilter;
@@ -1788,11 +1787,9 @@ namespace System.Data
 
         internal void UpdateIndex(bool force, bool fireEvent)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataView.UpdateIndex|INFO> {0}, force={1}",
-                ObjectID,
-                force
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataView.UpdateIndex|INFO> {0}, force={1}", ObjectID, force);
             try
             {
                 if (_open != _shouldOpen || force)
@@ -1937,12 +1934,14 @@ namespace System.Data
 
         public DataTable ToTable(string? tableName, bool distinct, params string[] columnNames)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataView.ToTable|API> {0}, TableName='{1}', distinct={2}",
-                ObjectID,
-                tableName,
-                distinct
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataView.ToTable|API> {0}, TableName='{1}', distinct={2}",
+                    ObjectID,
+                    tableName,
+                    distinct
+                );
 
             if (columnNames == null)
             {

@@ -18,9 +18,9 @@ namespace System.ServiceModel.MsmqIntegration
             if (null == message)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
             if (null == message.Properties)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "message.Properties"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("message.Properties");
 
             return message.Properties[Name] as MsmqIntegrationMessageProperty;
         }
@@ -180,37 +180,43 @@ namespace System.ServiceModel.MsmqIntegration
                     || priority.Value > MessagePriority.Highest
                 )
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException(
-                        "priority",
-                        (int)priority,
-                        typeof(MessagePriority)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "priority",
+                            (int)priority,
+                            typeof(MessagePriority)
+                        )
+                    );
         }
 
         static void ValidateTimeToReachQueue(TimeSpan? timeout)
         {
             if (timeout.HasValue && timeout.Value < TimeSpan.Zero)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "value",
-                        timeout,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
             }
 
             if (timeout.HasValue && TimeoutHelper.IsTooLarge(timeout.Value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "value",
-                        timeout,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
             }
         }
     }

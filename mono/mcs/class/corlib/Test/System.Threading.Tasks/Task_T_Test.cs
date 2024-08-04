@@ -107,10 +107,12 @@ namespace MonoTests.System.Threading.Tasks
         public void FaultedFutureTest()
         {
             var thrown = new ApplicationException();
-            var f = Task<int>.Factory.StartNew(() =>
-            {
-                throw thrown;
-            });
+            var f = Task<int>
+                .Factory
+                .StartNew(() =>
+                {
+                    throw thrown;
+                });
             AggregateException ex = null;
             try
             {

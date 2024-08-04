@@ -62,9 +62,9 @@ namespace System.Text.RegularExpressions.Generator
             AttributeData generatedRegexAttr = boundAttributes[0];
 
             if (
-                generatedRegexAttr.ConstructorArguments.Any(ca =>
-                    ca.Kind == TypedConstantKind.Error
-                )
+                generatedRegexAttr
+                    .ConstructorArguments
+                    .Any(ca => ca.Kind == TypedConstantKind.Error)
             )
             {
                 return new DiagnosticData(
@@ -219,11 +219,14 @@ namespace System.Text.RegularExpressions.Generator
             }
 
             // Determine the namespace the class is declared in, if any
-            string? ns = regexMethodSymbol.ContainingType?.ContainingNamespace?.ToDisplayString(
-                SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
-                    SymbolDisplayGlobalNamespaceStyle.Omitted
-                )
-            );
+            string? ns = regexMethodSymbol
+                .ContainingType
+                ?.ContainingNamespace
+                ?.ToDisplayString(
+                    SymbolDisplayFormat
+                        .FullyQualifiedFormat
+                        .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
+                );
 
             var regexType = new RegexType(
                 typeDec is RecordDeclarationSyntax rds

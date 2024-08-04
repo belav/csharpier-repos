@@ -62,8 +62,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp
             )
             {
                 _project = project;
-                _declarationService =
-                    project.Services.GetRequiredService<ISymbolDeclarationService>();
+                _declarationService = project
+                    .Services
+                    .GetRequiredService<ISymbolDeclarationService>();
                 _membersInType = membersInType.ToImmutableHashSet();
                 _member = member;
                 _cancellationToken = cancellationToken;

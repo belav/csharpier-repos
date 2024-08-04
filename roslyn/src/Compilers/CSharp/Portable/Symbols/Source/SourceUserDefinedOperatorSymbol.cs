@@ -28,10 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (SyntaxFacts.IsCheckedOperator(name))
             {
-                MessageID.IDS_FeatureCheckedUserDefinedOperators.CheckFeatureAvailability(
-                    diagnostics,
-                    syntax.CheckedKeyword
-                );
+                MessageID
+                    .IDS_FeatureCheckedUserDefinedOperators
+                    .CheckFeatureAvailability(diagnostics, syntax.CheckedKeyword);
             }
             else if (
                 !syntax.OperatorToken.IsMissing
@@ -47,10 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (name == WellKnownMemberNames.UnsignedRightShiftOperatorName)
             {
-                MessageID.IDS_FeatureUnsignedRightShift.CheckFeatureAvailability(
-                    diagnostics,
-                    syntax.OperatorToken
-                );
+                MessageID
+                    .IDS_FeatureUnsignedRightShift
+                    .CheckFeatureAvailability(diagnostics, syntax.OperatorToken);
             }
 
             var interfaceSpecifier = syntax.ExplicitInterfaceSpecifier;
@@ -136,10 +134,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             if (syntax.ExplicitInterfaceSpecifier != null)
-                MessageID.IDS_FeatureStaticAbstractMembersInInterfaces.CheckFeatureAvailability(
-                    diagnostics,
-                    syntax.ExplicitInterfaceSpecifier
-                );
+                MessageID
+                    .IDS_FeatureStaticAbstractMembersInInterfaces
+                    .CheckFeatureAvailability(diagnostics, syntax.ExplicitInterfaceSpecifier);
         }
 
         internal OperatorDeclarationSyntax GetSyntax()

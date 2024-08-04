@@ -345,7 +345,8 @@ public class SqlServerAnnotationCodeGeneratorTest
         MethodCallCodeFragment? GenerateFluentApiCall(string entityTypeName, string propertyName)
         {
             var property = modelBuilder
-                .Model.FindEntityType(entityTypeName)!
+                .Model
+                .FindEntityType(entityTypeName)!
                 .FindProperty(propertyName)!;
             var annotations = property.GetAnnotations().ToDictionary(a => a.Name, a => a);
             return generator

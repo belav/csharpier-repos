@@ -434,7 +434,8 @@ class ThreadTest
         );
 
         // Thread pool thread
-        Task.Factory.StartNew(
+        Task.Factory
+            .StartNew(
                 () => Expect(Thread.CurrentThread.IsBackground, "Expected IsBackground == true")
             )
             .Wait();

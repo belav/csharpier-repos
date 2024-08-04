@@ -162,9 +162,9 @@ namespace System.Web.UI.WebControls.WebParts
                 }
                 else
                 {
-                    _fieldName.Items.Add(
-                        new ListItem(SR.GetString(SR.RowToFieldTransformer_NoProviderSchema))
-                    );
+                    _fieldName
+                        .Items
+                        .Add(new ListItem(SR.GetString(SR.RowToFieldTransformer_NoProviderSchema)));
                     _fieldName.Enabled = false;
                 }
 

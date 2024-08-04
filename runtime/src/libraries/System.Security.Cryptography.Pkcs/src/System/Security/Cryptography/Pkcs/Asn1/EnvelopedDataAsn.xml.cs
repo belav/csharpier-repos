@@ -134,12 +134,18 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             )
             {
                 System.Security.Cryptography.Pkcs.Asn1.OriginatorInfoAsn tmpOriginatorInfo;
-                System.Security.Cryptography.Pkcs.Asn1.OriginatorInfoAsn.Decode(
-                    ref sequenceReader,
-                    new Asn1Tag(TagClass.ContextSpecific, 0),
-                    rebind,
-                    out tmpOriginatorInfo
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Pkcs
+                    .Asn1
+                    .OriginatorInfoAsn
+                    .Decode(
+                        ref sequenceReader,
+                        new Asn1Tag(TagClass.ContextSpecific, 0),
+                        rebind,
+                        out tmpOriginatorInfo
+                    );
                 decoded.OriginatorInfo = tmpOriginatorInfo;
             }
 
@@ -151,22 +157,26 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                 while (collectionReader.HasData)
                 {
-                    System.Security.Cryptography.Pkcs.Asn1.RecipientInfoAsn.Decode(
-                        ref collectionReader,
-                        rebind,
-                        out tmpItem
-                    );
+                    System
+                        .Security
+                        .Cryptography
+                        .Pkcs
+                        .Asn1
+                        .RecipientInfoAsn
+                        .Decode(ref collectionReader, rebind, out tmpItem);
                     tmpList.Add(tmpItem);
                 }
 
                 decoded.RecipientInfos = tmpList.ToArray();
             }
 
-            System.Security.Cryptography.Asn1.Pkcs7.EncryptedContentInfoAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.EncryptedContentInfo
-            );
+            System
+                .Security
+                .Cryptography
+                .Asn1
+                .Pkcs7
+                .EncryptedContentInfoAsn
+                .Decode(ref sequenceReader, rebind, out decoded.EncryptedContentInfo);
 
             if (
                 sequenceReader.HasData
@@ -185,11 +195,12 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System.Security.Cryptography.Asn1.AttributeAsn.Decode(
-                            ref collectionReader,
-                            rebind,
-                            out tmpItem
-                        );
+                        System
+                            .Security
+                            .Cryptography
+                            .Asn1
+                            .AttributeAsn
+                            .Decode(ref collectionReader, rebind, out tmpItem);
                         tmpList.Add(tmpItem);
                     }
 

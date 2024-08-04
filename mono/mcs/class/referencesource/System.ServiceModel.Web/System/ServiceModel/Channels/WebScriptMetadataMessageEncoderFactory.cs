@@ -98,9 +98,9 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("message")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("message"));
                 }
                 if (bufferManager == null)
                 {
@@ -148,15 +148,25 @@ namespace System.ServiceModel.Channels
                     MessageLogger.LogMessage(ref message, MessageLoggingSource.TransportSend);
                 }
                 if (
-                    System.ServiceModel.Diagnostics.Application.TD.MessageWrittenByEncoderIsEnabled()
+                    System
+                        .ServiceModel
+                        .Diagnostics
+                        .Application
+                        .TD
+                        .MessageWrittenByEncoderIsEnabled()
                     && messageData != null
                 )
                 {
-                    System.ServiceModel.Diagnostics.Application.TD.MessageWrittenByEncoder(
-                        EventTraceActivityHelper.TryExtractActivity(message),
-                        messageData.Count,
-                        this
-                    );
+                    System
+                        .ServiceModel
+                        .Diagnostics
+                        .Application
+                        .TD
+                        .MessageWrittenByEncoder(
+                            EventTraceActivityHelper.TryExtractActivity(message),
+                            messageData.Count,
+                            this
+                        );
                 }
                 return messageData;
             }
@@ -165,9 +175,9 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("message")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("message"));
                 }
                 if (stream == null)
                 {

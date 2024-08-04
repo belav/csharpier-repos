@@ -191,9 +191,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 // as we only parse when we have a non-empty sequence of virtual chars to begin with.
                 if (
                     text.Length > 0
-                    && compilationUnit.EndOfFileToken.LeadingTrivia.All(t =>
-                        t.Kind is JsonKind.WhitespaceTrivia or JsonKind.EndOfLineTrivia
-                    )
+                    && compilationUnit
+                        .EndOfFileToken
+                        .LeadingTrivia
+                        .All(t => t.Kind is JsonKind.WhitespaceTrivia or JsonKind.EndOfLineTrivia)
                 )
                 {
                     return new EmbeddedDiagnostic(FeaturesResources.Syntax_error, GetSpan(text));
@@ -437,9 +438,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             newLiteralToken = CreateToken(
                 literalToken.Kind,
                 ImmutableArray<JsonTrivia>.Empty,
-                literalToken.VirtualChars.GetSubSequence(
-                    TextSpan.FromBounds(1, literalToken.VirtualChars.Length)
-                ),
+                literalToken
+                    .VirtualChars
+                    .GetSubSequence(TextSpan.FromBounds(1, literalToken.VirtualChars.Length)),
                 literalToken.TrailingTrivia,
                 literalToken.Diagnostics
             );
@@ -490,12 +491,14 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 var nestedProperty = (JsonPropertyNode)value;
                 value = new JsonPropertyNode(
                     nestedProperty.NameToken,
-                    nestedProperty.ColonToken.AddDiagnosticIfNone(
-                        new EmbeddedDiagnostic(
-                            FeaturesResources.Nested_properties_not_allowed,
-                            nestedProperty.ColonToken.GetSpan()
-                        )
-                    ),
+                    nestedProperty
+                        .ColonToken
+                        .AddDiagnosticIfNone(
+                            new EmbeddedDiagnostic(
+                                FeaturesResources.Nested_properties_not_allowed,
+                                nestedProperty.ColonToken.GetSpan()
+                            )
+                        ),
                     nestedProperty.Value
                 );
             }

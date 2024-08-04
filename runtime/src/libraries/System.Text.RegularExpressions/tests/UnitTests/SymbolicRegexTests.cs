@@ -184,11 +184,9 @@ namespace System.Text.RegularExpressions.Tests
                 foreach (BDD minterm in minterms)
                 {
                     uint kind = GetCharKind(minterm);
-                    SymbolicRegexNode<BDD> target = source.Node.CreateDerivativeWithoutEffects(
-                        builder,
-                        minterm,
-                        source.Kind
-                    );
+                    SymbolicRegexNode<BDD> target = source
+                        .Node
+                        .CreateDerivativeWithoutEffects(builder, minterm, source.Kind);
 
                     //In the case of an NFA all the different alternatives in the DFA state become individual states themselves
                     foreach (SymbolicRegexNode<BDD> node in GetAlternatives(target))
@@ -229,9 +227,11 @@ namespace System.Text.RegularExpressions.Tests
                     ? CharKind.Newline
                     : // is \n
                     (
-                        !builder._solver.IsEmpty(
-                            builder._solver.And(builder._wordLetterForBoundariesSet, minterm)
-                        )
+                        !builder
+                            ._solver
+                            .IsEmpty(
+                                builder._solver.And(builder._wordLetterForBoundariesSet, minterm)
+                            )
                             ? CharKind.WordLetter
                             : // in \w
                             CharKind.General

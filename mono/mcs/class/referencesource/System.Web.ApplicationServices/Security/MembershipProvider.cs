@@ -214,11 +214,14 @@ namespace System.Web.Security
                     ApplicationServicesStrings.Can_not_use_encrypted_passwords_with_autogen_keys
                 );
 
-            return SystemWebProxy.Membership.EncryptOrDecryptData(
-                true,
-                password,
-                legacyPasswordCompatibilityMode == MembershipPasswordCompatibilityMode.Framework20
-            );
+            return SystemWebProxy
+                .Membership
+                .EncryptOrDecryptData(
+                    true,
+                    password,
+                    legacyPasswordCompatibilityMode
+                        == MembershipPasswordCompatibilityMode.Framework20
+                );
         }
 
         protected virtual byte[] DecryptPassword(byte[] encodedPassword)
@@ -230,11 +233,9 @@ namespace System.Web.Security
 
             try
             {
-                return SystemWebProxy.Membership.EncryptOrDecryptData(
-                    false,
-                    encodedPassword,
-                    false
-                );
+                return SystemWebProxy
+                    .Membership
+                    .EncryptOrDecryptData(false, encodedPassword, false);
             }
             catch
             {

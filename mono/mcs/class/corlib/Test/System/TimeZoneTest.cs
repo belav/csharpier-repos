@@ -272,9 +272,14 @@ namespace MonoTests.System
                     NZST(t1);
                     break;
                 default:
-                    NUnit.Framework.Assert.Ignore(
-                        "Your time zone (" + t1.StandardName + ") isn't defined in the test case"
-                    );
+                    NUnit
+                        .Framework
+                        .Assert
+                        .Ignore(
+                            "Your time zone ("
+                                + t1.StandardName
+                                + ") isn't defined in the test case"
+                        );
                     break;
             }
         }
@@ -965,25 +970,18 @@ namespace MonoTests.System
         [Category("MobileNotWorking")]
         public void GetUTCNowAtDSTBoundaries()
         {
-            TimeZoneInfo.TransitionTime startTransition =
-                TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 2, 0, 0),
-                    3,
-                    5,
-                    DayOfWeek.Sunday
-                );
+            TimeZoneInfo.TransitionTime startTransition = TimeZoneInfo
+                .TransitionTime
+                .CreateFloatingDateRule(new DateTime(1, 1, 1, 2, 0, 0), 3, 5, DayOfWeek.Sunday);
 
-            TimeZoneInfo.TransitionTime endTransition =
-                TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 3, 0, 0),
-                    10,
-                    5,
-                    DayOfWeek.Sunday
-                );
+            TimeZoneInfo.TransitionTime endTransition = TimeZoneInfo
+                .TransitionTime
+                .CreateFloatingDateRule(new DateTime(1, 1, 1, 3, 0, 0), 10, 5, DayOfWeek.Sunday);
 
             TimeSpan delta = TimeSpan.FromMinutes(60.0);
-            TimeZoneInfo.AdjustmentRule adjustment =
-                TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
+            TimeZoneInfo.AdjustmentRule adjustment = TimeZoneInfo
+                .AdjustmentRule
+                .CreateAdjustmentRule(
                     new DateTime(1970, 1, 1),
                     DateTime.MaxValue.Date,
                     delta,

@@ -69,52 +69,58 @@ public abstract class StoreValueGenerationFixtureBase
 
     protected override void Seed(StoreValueGenerationContext context)
     {
-        context.WithSomeDatabaseGenerated.AddRange(
-            new StoreValueGenerationData { Data2 = 1 },
-            new StoreValueGenerationData { Data2 = 2 }
-        );
-        context.WithSomeDatabaseGenerated2.AddRange(
-            new StoreValueGenerationData { Data2 = 1 },
-            new StoreValueGenerationData { Data2 = 2 }
-        );
+        context
+            .WithSomeDatabaseGenerated
+            .AddRange(
+                new StoreValueGenerationData { Data2 = 1 },
+                new StoreValueGenerationData { Data2 = 2 }
+            );
+        context
+            .WithSomeDatabaseGenerated2
+            .AddRange(
+                new StoreValueGenerationData { Data2 = 1 },
+                new StoreValueGenerationData { Data2 = 2 }
+            );
 
-        context.WithNoDatabaseGenerated.AddRange(
-            new StoreValueGenerationData
-            {
-                Id = 1,
-                Data1 = 10,
-                Data2 = 20,
-            },
-            new StoreValueGenerationData
-            {
-                Id = 2,
-                Data1 = 11,
-                Data2 = 21,
-            }
-        );
-        context.WithNoDatabaseGenerated2.AddRange(
-            new StoreValueGenerationData
-            {
-                Id = 1,
-                Data1 = 10,
-                Data2 = 20,
-            },
-            new StoreValueGenerationData
-            {
-                Id = 2,
-                Data1 = 11,
-                Data2 = 21,
-            }
-        );
+        context
+            .WithNoDatabaseGenerated
+            .AddRange(
+                new StoreValueGenerationData
+                {
+                    Id = 1,
+                    Data1 = 10,
+                    Data2 = 20,
+                },
+                new StoreValueGenerationData
+                {
+                    Id = 2,
+                    Data1 = 11,
+                    Data2 = 21,
+                }
+            );
+        context
+            .WithNoDatabaseGenerated2
+            .AddRange(
+                new StoreValueGenerationData
+                {
+                    Id = 1,
+                    Data1 = 10,
+                    Data2 = 20,
+                },
+                new StoreValueGenerationData
+                {
+                    Id = 2,
+                    Data1 = 11,
+                    Data2 = 21,
+                }
+            );
 
-        context.WithAllDatabaseGenerated.AddRange(
-            new StoreValueGenerationData(),
-            new StoreValueGenerationData()
-        );
-        context.WithAllDatabaseGenerated2.AddRange(
-            new StoreValueGenerationData(),
-            new StoreValueGenerationData()
-        );
+        context
+            .WithAllDatabaseGenerated
+            .AddRange(new StoreValueGenerationData(), new StoreValueGenerationData());
+        context
+            .WithAllDatabaseGenerated2
+            .AddRange(new StoreValueGenerationData(), new StoreValueGenerationData());
 
         context.SaveChanges();
     }

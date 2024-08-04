@@ -180,7 +180,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             var tokens = state
-                .Root.DescendantTokens()
+                .Root
+                .DescendantTokens()
                 .WhereAsArray(
                     static (token, state) => state.SyntaxFacts.IsGlobalNamespaceKeyword(token),
                     state

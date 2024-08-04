@@ -2423,11 +2423,13 @@ namespace System.Xml.Serialization
                             $"{a} = {castString}EnsureArrayIndex({a}, {c}, {outerClass.RaCodeGen.GetStringForTypeof(choiceTypeFullName, choiceUseReflection)});";
                         _choiceArraySource =
                             init
-                            + outerClass.RaCodeGen.GetStringForArrayMember(
-                                a,
-                                $"{c}++",
-                                mapping.ChoiceIdentifier.Mapping.TypeDesc
-                            );
+                            + outerClass
+                                .RaCodeGen
+                                .GetStringForArrayMember(
+                                    a,
+                                    $"{c}++",
+                                    mapping.ChoiceIdentifier.Mapping.TypeDesc
+                                );
                     }
                     else
                     {

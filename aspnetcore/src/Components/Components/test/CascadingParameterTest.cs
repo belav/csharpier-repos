@@ -729,9 +729,9 @@ public class CascadingParameterTest
         };
 
         // Act/Assert 1: Initial render
-        var componentId = await renderer.Dispatcher.InvokeAsync(
-            () => renderer.AssignRootComponentId(component)
-        );
+        var componentId = await renderer
+            .Dispatcher
+            .InvokeAsync(() => renderer.AssignRootComponentId(component));
         renderer.RenderRootComponent(componentId);
         var firstBatch = renderer.Batches.Single();
         var diff = firstBatch.DiffsByComponentId[componentId].Single();
@@ -825,9 +825,9 @@ public class CascadingParameterTest
         await cascadingValueSource.NotifyChangedAsync(updatedValue);
 
         // Assert: We see the supplied value, and the factory isn't used (it would have thrown)
-        var componentId = await renderer.Dispatcher.InvokeAsync(
-            () => renderer.AssignRootComponentId(component)
-        );
+        var componentId = await renderer
+            .Dispatcher
+            .InvokeAsync(() => renderer.AssignRootComponentId(component));
         renderer.RenderRootComponent(componentId);
         Assert.Same(updatedValue, component.GetCascadingParameterValue());
     }
@@ -1029,9 +1029,11 @@ public class CascadingParameterTest
 
     private static T FindComponent<T>(CapturedBatch batch, out int componentId)
     {
-        var componentFrame = batch.ReferenceFrames.Single(frame =>
-            frame.FrameType == RenderTreeFrameType.Component && frame.Component is T
-        );
+        var componentFrame = batch
+            .ReferenceFrames
+            .Single(frame =>
+                frame.FrameType == RenderTreeFrameType.Component && frame.Component is T
+            );
         componentId = componentFrame.ComponentId;
         return (T)componentFrame.Component;
     }

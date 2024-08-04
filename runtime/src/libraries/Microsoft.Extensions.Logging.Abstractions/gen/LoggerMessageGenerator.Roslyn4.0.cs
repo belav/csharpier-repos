@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.Logging.Generators
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations = context
-                .SyntaxProvider.ForAttributeWithMetadataName(
+                .SyntaxProvider
+                .ForAttributeWithMetadataName(
 #if !ROSLYN4_4_OR_GREATER
                     context,
 #endif
@@ -35,9 +36,9 @@ namespace Microsoft.Extensions.Logging.Generators
             IncrementalValueProvider<(
                 Compilation,
                 ImmutableArray<ClassDeclarationSyntax>
-            )> compilationAndClasses = context.CompilationProvider.Combine(
-                classDeclarations.Collect()
-            );
+            )> compilationAndClasses = context
+                .CompilationProvider
+                .Combine(classDeclarations.Collect());
 
             context.RegisterSourceOutput(
                 compilationAndClasses,

@@ -67,9 +67,9 @@ public class FakeScaffoldingModelFactory : RelationalScaffoldingModelFactory
 
                 if (foreignKey.PrincipalTable is DatabaseTableRef tableRef)
                 {
-                    foreignKey.PrincipalTable = databaseModel.Tables.First(t =>
-                        t.Name == tableRef.Name && t.Schema == tableRef.Schema
-                    );
+                    foreignKey.PrincipalTable = databaseModel
+                        .Tables
+                        .First(t => t.Name == tableRef.Name && t.Schema == tableRef.Schema);
                 }
 
                 FixupColumns(foreignKey.PrincipalTable, foreignKey.PrincipalColumns);

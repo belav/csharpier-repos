@@ -174,24 +174,32 @@ namespace Microsoft.Extensions.DependencyModel.Tests
 
             RuntimeLibrary runtimeLib = ReadGroupsRuntimeAssets(json);
             runtimeLib
-                .RuntimeAssemblyGroups.GetRuntimeFileAssets("unix")
+                .RuntimeAssemblyGroups
+                .GetRuntimeFileAssets("unix")
                 .Single()
-                .AssemblyVersion.Should()
+                .AssemblyVersion
+                .Should()
                 .Be("1.2.3");
             runtimeLib
-                .RuntimeAssemblyGroups.GetRuntimeFileAssets("unix")
+                .RuntimeAssemblyGroups
+                .GetRuntimeFileAssets("unix")
                 .Single()
-                .FileVersion.Should()
+                .FileVersion
+                .Should()
                 .Be("4.5.6");
             runtimeLib
-                .RuntimeAssemblyGroups.GetRuntimeFileAssets("win7")
+                .RuntimeAssemblyGroups
+                .GetRuntimeFileAssets("win7")
                 .Single()
-                .AssemblyVersion.Should()
+                .AssemblyVersion
+                .Should()
                 .BeNull();
             runtimeLib
-                .RuntimeAssemblyGroups.GetRuntimeFileAssets("win7")
+                .RuntimeAssemblyGroups
+                .GetRuntimeFileAssets("win7")
                 .Single()
-                .FileVersion.Should()
+                .FileVersion
+                .Should()
                 .Be("1.2.3");
         }
 
@@ -283,21 +291,30 @@ namespace Microsoft.Extensions.DependencyModel.Tests
 }"
             );
             context
-                .RuntimeGraph.Should()
+                .RuntimeGraph
+                .Should()
                 .Contain(p => p.Runtime == "osx.10.10-x64")
-                .Which.Fallbacks.Should()
+                .Which
+                .Fallbacks
+                .Should()
                 .BeEquivalentTo();
 
             context
-                .RuntimeGraph.Should()
+                .RuntimeGraph
+                .Should()
                 .Contain(p => p.Runtime == "osx.10.11-x64")
-                .Which.Fallbacks.Should()
+                .Which
+                .Fallbacks
+                .Should()
                 .BeEquivalentTo("osx");
 
             context
-                .RuntimeGraph.Should()
+                .RuntimeGraph
+                .Should()
                 .Contain(p => p.Runtime == "rhel.7-x64")
-                .Which.Fallbacks.Should()
+                .Which
+                .Fallbacks
+                .Should()
                 .BeEquivalentTo("linux-x64", "unix");
         }
 
@@ -347,7 +364,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             project.Type.Should().Be("project");
 
             var package = context
-                .CompileLibraries.Should()
+                .CompileLibraries
+                .Should()
                 .Contain(l => l.Name == "System.Banana")
                 .Subject;
             package.Version.Should().Be("1.0.0");
@@ -413,7 +431,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             context.CompileLibraries.Should().HaveCount(1);
 
             var package = context
-                .CompileLibraries.Should()
+                .CompileLibraries
+                .Should()
                 .Contain(l => l.Name == "System.Banana")
                 .Subject;
             package.Version.Should().Be("1.0.0");
@@ -456,7 +475,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             context.CompileLibraries.Should().HaveCount(1);
 
             var package = context
-                .CompileLibraries.Should()
+                .CompileLibraries
+                .Should()
                 .Contain(l => l.Name == "System.Banana")
                 .Subject;
             package.Version.Should().Be("1.0.0");
@@ -497,7 +517,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             context.CompileLibraries.Should().HaveCount(1);
 
             var package = context
-                .CompileLibraries.Should()
+                .CompileLibraries
+                .Should()
                 .Contain(l => l.Name == "System.Banana")
                 .Subject;
             package.Version.Should().Be("1.0.0");
@@ -637,7 +658,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             project.Type.Should().Be("project");
 
             var package = context
-                .RuntimeLibraries.Should()
+                .RuntimeLibraries
+                .Should()
                 .Contain(l => l.Name == "System.Banana")
                 .Subject;
             package.Version.Should().Be("1.0.0");
@@ -648,9 +670,12 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             package.HashPath.Should().Be("PackageHashPath");
             package.RuntimeStoreManifestName.Should().Be("placeHolderManifest.xml");
             package
-                .ResourceAssemblies.Should()
+                .ResourceAssemblies
+                .Should()
                 .Contain(a => a.Path == "System.Banana.resources.dll")
-                .Subject.Locale.Should()
+                .Subject
+                .Locale
+                .Should()
                 .Be("en-US");
 
             if (useAssemblyVersions)
@@ -665,17 +690,20 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             else
             {
                 package
-                    .RuntimeAssemblyGroups.GetDefaultAssets()
+                    .RuntimeAssemblyGroups
+                    .GetDefaultAssets()
                     .Should()
                     .Contain("lib/dotnet5.4/System.Banana.dll");
             }
 
             package
-                .RuntimeAssemblyGroups.GetRuntimeAssets("win7-x64")
+                .RuntimeAssemblyGroups
+                .GetRuntimeAssets("win7-x64")
                 .Should()
                 .Contain("lib/win7/System.Banana.dll");
             package
-                .NativeLibraryGroups.GetRuntimeAssets("win7-x64")
+                .NativeLibraryGroups
+                .GetRuntimeAssets("win7-x64")
                 .Should()
                 .Contain("lib/win7/Banana.dll");
         }
@@ -710,19 +738,26 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             context.CompileLibraries.Should().HaveCount(1);
 
             var package = context
-                .RuntimeLibraries.Should()
+                .RuntimeLibraries
+                .Should()
                 .Contain(l => l.Name == "System.Banana")
                 .Subject;
 
             package
-                .RuntimeAssemblyGroups.Should()
+                .RuntimeAssemblyGroups
+                .Should()
                 .Contain(g => g.Runtime == "win7-x64")
-                .Which.AssetPaths.Should()
+                .Which
+                .AssetPaths
+                .Should()
                 .BeEmpty();
             package
-                .NativeLibraryGroups.Should()
+                .NativeLibraryGroups
+                .Should()
                 .Contain(g => g.Runtime == "linux-x64")
-                .Which.AssetPaths.Should()
+                .Which
+                .AssetPaths
+                .Should()
                 .BeEmpty();
         }
 
@@ -759,19 +794,26 @@ namespace Microsoft.Extensions.DependencyModel.Tests
 }"
             );
             var package = context
-                .RuntimeLibraries.Should()
+                .RuntimeLibraries
+                .Should()
                 .Contain(l => l.Name == "System.Banana")
                 .Subject;
 
             package
-                .RuntimeAssemblyGroups.Should()
+                .RuntimeAssemblyGroups
+                .Should()
                 .Contain(g => g.Runtime == "win7-x64")
-                .Which.AssetPaths.Should()
+                .Which
+                .AssetPaths
+                .Should()
                 .BeEmpty();
             package
-                .NativeLibraryGroups.Should()
+                .NativeLibraryGroups
+                .Should()
                 .Contain(g => g.Runtime == "linux-x64")
-                .Which.AssetPaths.Should()
+                .Which
+                .AssetPaths
+                .Should()
                 .BeEmpty();
         }
 
@@ -869,7 +911,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
 }"
                         )
                 )
-                .Message.Should()
+                .Message
+                .Should()
                 .Contain("line 2 position 23");
         }
 

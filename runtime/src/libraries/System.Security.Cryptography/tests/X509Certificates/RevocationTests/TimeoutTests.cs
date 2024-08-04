@@ -374,7 +374,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
 
         private static X509ChainStatusFlags GetFlags(X509Chain chain, string thumbprint) =>
             chain
-                .ChainElements.Single(e => e.Certificate.Thumbprint == thumbprint)
-                .ChainElementStatus.Aggregate((X509ChainStatusFlags)0, (a, e) => a | e.Status);
+                .ChainElements
+                .Single(e => e.Certificate.Thumbprint == thumbprint)
+                .ChainElementStatus
+                .Aggregate((X509ChainStatusFlags)0, (a, e) => a | e.Status);
     }
 }

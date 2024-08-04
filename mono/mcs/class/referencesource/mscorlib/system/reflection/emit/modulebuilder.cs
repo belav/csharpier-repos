@@ -911,23 +911,27 @@ namespace System.Reflection.Emit
                         Contract.Assert(masmi != null);
 
                         methDef = masmi.GetGenericMethodDefinition();
-                        methDef = methDef.Module.ResolveMethod(
-                            method.MetadataToken,
-                            methDef.DeclaringType != null
-                                ? methDef.DeclaringType.GetGenericArguments()
-                                : null,
-                            methDef.GetGenericArguments()
-                        );
+                        methDef = methDef
+                            .Module
+                            .ResolveMethod(
+                                method.MetadataToken,
+                                methDef.DeclaringType != null
+                                    ? methDef.DeclaringType.GetGenericArguments()
+                                    : null,
+                                methDef.GetGenericArguments()
+                            );
                     }
                     else
                     {
-                        methDef = method.Module.ResolveMethod(
-                            method.MetadataToken,
-                            method.DeclaringType != null
-                                ? method.DeclaringType.GetGenericArguments()
-                                : null,
-                            null
-                        );
+                        methDef = method
+                            .Module
+                            .ResolveMethod(
+                                method.MetadataToken,
+                                method.DeclaringType != null
+                                    ? method.DeclaringType.GetGenericArguments()
+                                    : null,
+                                null
+                            );
                     }
                 }
 
@@ -1974,17 +1978,19 @@ namespace System.Reflection.Emit
 
             m_moduleData.m_fHasGlobal = true;
 
-            return m_moduleData.m_globalTypeBuilder.DefineMethod(
-                name,
-                attributes,
-                callingConvention,
-                returnType,
-                requiredReturnTypeCustomModifiers,
-                optionalReturnTypeCustomModifiers,
-                parameterTypes,
-                requiredParameterTypeCustomModifiers,
-                optionalParameterTypeCustomModifiers
-            );
+            return m_moduleData
+                .m_globalTypeBuilder
+                .DefineMethod(
+                    name,
+                    attributes,
+                    callingConvention,
+                    returnType,
+                    requiredReturnTypeCustomModifiers,
+                    optionalReturnTypeCustomModifiers,
+                    parameterTypes,
+                    requiredParameterTypeCustomModifiers,
+                    optionalParameterTypeCustomModifiers
+                );
         }
 
 #if FEATURE_CORECLR
@@ -2078,17 +2084,19 @@ namespace System.Reflection.Emit
             CheckContext(parameterTypes);
 
             m_moduleData.m_fHasGlobal = true;
-            return m_moduleData.m_globalTypeBuilder.DefinePInvokeMethod(
-                name,
-                dllName,
-                entryName,
-                attributes,
-                callingConvention,
-                returnType,
-                parameterTypes,
-                nativeCallConv,
-                nativeCharSet
-            );
+            return m_moduleData
+                .m_globalTypeBuilder
+                .DefinePInvokeMethod(
+                    name,
+                    dllName,
+                    entryName,
+                    attributes,
+                    callingConvention,
+                    returnType,
+                    parameterTypes,
+                    nativeCallConv,
+                    nativeCharSet
+                );
         }
 
         public void CreateGlobalFunctions()

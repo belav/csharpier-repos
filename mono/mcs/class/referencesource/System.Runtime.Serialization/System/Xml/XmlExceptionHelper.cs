@@ -50,9 +50,12 @@ namespace System.Xml
                 TD.ReaderQuotaExceeded(s);
             }
 
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(s)
-            );
+            throw System
+                .Runtime
+                .Serialization
+                .DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new XmlException(s));
         }
 
         public static void ThrowXmlException(XmlDictionaryReader reader, XmlException exception)
@@ -63,9 +66,12 @@ namespace System.Xml
             {
                 s += " " + SR.GetString(SR.XmlLineInfo, lineInfo.LineNumber, lineInfo.LinePosition);
             }
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(s)
-            );
+            throw System
+                .Runtime
+                .Serialization
+                .DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new XmlException(s));
         }
 
         static string GetName(string prefix, string localName)

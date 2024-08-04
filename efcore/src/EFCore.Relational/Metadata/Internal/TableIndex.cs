@@ -87,8 +87,12 @@ public class TableIndex : Annotatable, ITableIndex
             this,
             static constraint =>
                 constraint
-                    .Table.Model.Model.GetRelationalDependencies()
-                    .RowIndexValueFactoryFactory.Create(constraint)
+                    .Table
+                    .Model
+                    .Model
+                    .GetRelationalDependencies()
+                    .RowIndexValueFactoryFactory
+                    .Create(constraint)
         );
 
     /// <summary>

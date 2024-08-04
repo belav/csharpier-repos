@@ -836,10 +836,11 @@ namespace System.Web.UI
             // Always set the culture to Invariant when parsing (ASURT 99071)
             Thread currentThread = Thread.CurrentThread;
             CultureInfo prevCulture = currentThread.CurrentCulture;
-            System.Web.Util.Debug.Trace(
-                "Culture",
-                "Before parsing, culture is " + prevCulture.DisplayName
-            );
+            System
+                .Web
+                .Util
+                .Debug
+                .Trace("Culture", "Before parsing, culture is " + prevCulture.DisplayName);
             currentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
             try
@@ -854,15 +855,20 @@ namespace System.Web.UI
                 finally
                 {
                     // Restore the previous culture
-                    System.Web.Util.Debug.Trace(
-                        "Culture",
-                        "After parsing, culture is " + currentThread.CurrentCulture.DisplayName
-                    );
+                    System
+                        .Web
+                        .Util
+                        .Debug
+                        .Trace(
+                            "Culture",
+                            "After parsing, culture is " + currentThread.CurrentCulture.DisplayName
+                        );
                     currentThread.CurrentCulture = prevCulture;
-                    System.Web.Util.Debug.Trace(
-                        "Culture",
-                        "Restored culture to " + prevCulture.DisplayName
-                    );
+                    System
+                        .Web
+                        .Util
+                        .Debug
+                        .Trace("Culture", "Restored culture to " + prevCulture.DisplayName);
                 }
             }
             catch
@@ -3426,10 +3432,9 @@ namespace System.Web.UI
                 try
                 {
                     builder.SetTagInnerText(
-                        stackEntry._inputText.Substring(
-                            stackEntry._textPos,
-                            match.Index - stackEntry._textPos
-                        )
+                        stackEntry
+                            ._inputText
+                            .Substring(stackEntry._textPos, match.Index - stackEntry._textPos)
                     );
                 }
                 catch (Exception e)

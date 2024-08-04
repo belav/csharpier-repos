@@ -70,24 +70,28 @@ namespace ILCompiler.Metadata
 
             if (getterHasMetadata)
             {
-                result.MethodSemantics.Add(
-                    new MethodSemantics
-                    {
-                        Attributes = MethodSemanticsAttributes.Getter,
-                        Method = HandleMethodDefinition(getterMethod),
-                    }
-                );
+                result
+                    .MethodSemantics
+                    .Add(
+                        new MethodSemantics
+                        {
+                            Attributes = MethodSemanticsAttributes.Getter,
+                            Method = HandleMethodDefinition(getterMethod),
+                        }
+                    );
             }
 
             if (setterHasMetadata)
             {
-                result.MethodSemantics.Add(
-                    new MethodSemantics
-                    {
-                        Attributes = MethodSemanticsAttributes.Setter,
-                        Method = HandleMethodDefinition(setterMethod),
-                    }
-                );
+                result
+                    .MethodSemantics
+                    .Add(
+                        new MethodSemantics
+                        {
+                            Attributes = MethodSemanticsAttributes.Setter,
+                            Method = HandleMethodDefinition(setterMethod),
+                        }
+                    );
             }
 
             Ecma.ConstantHandle defaultValue = propDef.GetDefaultValue();

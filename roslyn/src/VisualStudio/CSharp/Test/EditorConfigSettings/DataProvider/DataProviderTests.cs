@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
             Assert.True(
                 workspace.TryApplyChanges(
                     workspace
-                        .CurrentSolution.AddProject(
+                        .CurrentSolution
+                        .AddProject(
                             ProjectInfo.Create(
                                 projectId,
                                 VersionStamp.Create(),
@@ -62,13 +63,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
 
         private static IWorkspaceSettingsProviderFactory<T> GettingSettingsProviderFactoryFromWorkspace<T>() =>
             GetWorkspace("/a/b/proj1.csproj")
-                .Services.GetRequiredService<IWorkspaceSettingsProviderFactory<T>>();
+                .Services
+                .GetRequiredService<IWorkspaceSettingsProviderFactory<T>>();
 
         private static ILanguageSettingsProviderFactory<T> GettingSettingsProviderFactoryFromLanguageService<T>(
             string languageName
         ) =>
             GetWorkspace("/a/b/proj1.csproj")
-                .Services.GetLanguageServices(languageName)
+                .Services
+                .GetLanguageServices(languageName)
                 .GetRequiredService<ILanguageSettingsProviderFactory<T>>();
 
         private static IWorkspaceSettingsProviderFactory<T> GettingSettingsProviderFactoryFromWorkspaceWithNullProjectPath<T>() =>
@@ -78,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
             string languageName
         ) =>
             GetWorkspace()
-                .Services.GetLanguageServices(languageName)
+                .Services
+                .GetLanguageServices(languageName)
                 .GetRequiredService<ILanguageSettingsProviderFactory<T>>();
 
         private static ISettingsProvider<T> TestGettingSettingsProviderFromWorkspace<T>()
@@ -155,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
             // We need to substract for string options that are not yet supported.
             // https://github.com/dotnet/roslyn/issues/62937
             var optionsWithUI = CodeStyleOptions2
-                .AllOptions.Remove(CodeStyleOptions2.OperatorPlacementWhenWrapping)
+                .AllOptions
+                .Remove(CodeStyleOptions2.OperatorPlacementWhenWrapping)
                 .Remove(CodeStyleOptions2.FileHeaderTemplate)
                 .Remove(CodeStyleOptions2.RemoveUnnecessarySuppressionExclusions)
                 .Remove(CodeStyleOptions2.ForEachExplicitCastInSource);
@@ -216,9 +221,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
             var dataSnapShot = settingsProvider.GetCurrentDataSnapshot();
 
             // We don't support PreferredModifierOrder yet:
-            var optionsWithUI = CSharpCodeStyleOptions.AllOptions.Remove(
-                CSharpCodeStyleOptions.PreferredModifierOrder
-            );
+            var optionsWithUI = CSharpCodeStyleOptions
+                .AllOptions
+                .Remove(CSharpCodeStyleOptions.PreferredModifierOrder);
 
             AssertEx.SetEqual(optionsWithUI, dataSnapShot.Select(setting => setting.Key.Option));
         }

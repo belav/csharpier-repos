@@ -225,10 +225,9 @@ namespace System.Data.Linq
                             assoc,
                             to.Current
                         );
-                        object cached = this.services.IdentityManager.Find(
-                            assoc.OtherType,
-                            keyValues
-                        );
+                        object cached = this.services
+                            .IdentityManager
+                            .Find(assoc.OtherType, keyValues);
 
                         if (cached != null)
                         {

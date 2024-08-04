@@ -34,10 +34,12 @@ namespace System.Security.Claims
             else
             {
                 foreach (
-                    System.IdentityModel.Claims.Claim claim in claimset.Issuer.FindClaims(
-                        System.IdentityModel.Claims.ClaimTypes.Name,
-                        System.IdentityModel.Claims.Rights.Identity
-                    )
+                    System.IdentityModel.Claims.Claim claim in claimset
+                        .Issuer
+                        .FindClaims(
+                            System.IdentityModel.Claims.ClaimTypes.Name,
+                            System.IdentityModel.Claims.Rights.Identity
+                        )
                 )
                 {
                     if ((claim != null) && (claim.Resource is string))

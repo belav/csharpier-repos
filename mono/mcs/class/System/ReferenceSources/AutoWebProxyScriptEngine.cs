@@ -124,11 +124,14 @@ namespace System.Net
         WebProxyData InitializeRegistryGlobalProxy()
         {
             int iProxyEnable = (int)
-                Microsoft.Win32.Registry.GetValue(
-                    "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings",
-                    "ProxyEnable",
-                    0
-                );
+                Microsoft
+                    .Win32
+                    .Registry
+                    .GetValue(
+                        "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings",
+                        "ProxyEnable",
+                        0
+                    );
 
             if (iProxyEnable > 0)
             {
@@ -137,11 +140,14 @@ namespace System.Net
                 ArrayList al = new ArrayList();
 
                 string strProxyServer = (string)
-                    Microsoft.Win32.Registry.GetValue(
-                        "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings",
-                        "ProxyServer",
-                        null
-                    );
+                    Microsoft
+                        .Win32
+                        .Registry
+                        .GetValue(
+                            "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings",
+                            "ProxyServer",
+                            null
+                        );
 
                 if (strProxyServer == null)
                 {
@@ -149,11 +155,14 @@ namespace System.Net
                 }
 
                 string strProxyOverrride = (string)
-                    Microsoft.Win32.Registry.GetValue(
-                        "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings",
-                        "ProxyOverride",
-                        null
-                    );
+                    Microsoft
+                        .Win32
+                        .Registry
+                        .GetValue(
+                            "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings",
+                            "ProxyOverride",
+                            null
+                        );
 
                 if (strProxyServer.Contains("="))
                 {

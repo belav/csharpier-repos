@@ -46,10 +46,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             get
             {
                 if (
-                    _textView.Properties.TryGetProperty(
-                        CompletionSource.PotentialCommitCharacters,
-                        out ImmutableArray<char> potentialCommitCharacters
-                    )
+                    _textView
+                        .Properties
+                        .TryGetProperty(
+                            CompletionSource.PotentialCommitCharacters,
+                            out ImmutableArray<char> potentialCommitCharacters
+                        )
                 )
                 {
                     return potentialCommitCharacters;
@@ -108,8 +110,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // We can make changes to buffers. We would like to be sure nobody can change them at the same time.
             _threadingContext.ThrowIfNotOnUIThread();
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return CommitResultUnhandled;
@@ -129,9 +132,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             var roslynItem = itemData.RoslynItem;
             var filterText =
-                session.ApplicableToSpan.GetText(
-                    session.ApplicableToSpan.TextBuffer.CurrentSnapshot
-                ) + typedChar;
+                session
+                    .ApplicableToSpan
+                    .GetText(session.ApplicableToSpan.TextBuffer.CurrentSnapshot) + typedChar;
 
             if (Helpers.IsFilterCharacter(roslynItem, typedChar, filterText))
             {
@@ -147,10 +150,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // This is done here instead of in `ShouldCommitCompletion` because `ShouldCommitCompletion` might be called before
             // CompletionSource add the `excludedCommitCharactersMap` to the session property bag.
             if (
-                session.Properties.TryGetProperty(
-                    CompletionSource.ExcludedCommitCharactersMap,
-                    out MultiDictionary<char, RoslynCompletionItem> excludedCommitCharactersMap
-                )
+                session
+                    .Properties
+                    .TryGetProperty(
+                        CompletionSource.ExcludedCommitCharactersMap,
+                        out MultiDictionary<char, RoslynCompletionItem> excludedCommitCharactersMap
+                    )
             )
             {
                 foreach (var potentialItemForSelection in excludedCommitCharactersMap[typedChar])
@@ -193,8 +198,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 return CommitResultUnhandled;
             }
 
-            var triggerDocument =
-                itemData.TriggerLocation.Value.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var triggerDocument = itemData
+                .TriggerLocation
+                .Value
+                .Snapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (triggerDocument == null)
             {
                 return CommitResultUnhandled;
@@ -407,8 +415,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             {
                 // The edit updates the snapshot however other extensions may make changes there.
                 // Therefore, it is required to use subjectBuffer.CurrentSnapshot for further calculations rather than the updated current snapshot defined above.
-                var currentDocument =
-                    subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                var currentDocument = subjectBuffer
+                    .CurrentSnapshot
+                    .GetOpenDocumentInCurrentContextWithChanges();
                 var formattingService =
                     currentDocument?.GetRequiredLanguageService<IFormattingInteractionService>();
 
@@ -436,19 +445,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             if (provider is INotifyCommittingItemCompletionProvider notifyProvider)
             {
-                _ = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
-                {
-                    // Make sure the notification isn't sent on UI thread.
-                    await TaskScheduler.Default;
-                    _ = notifyProvider
-                        .NotifyCommittingItemAsync(
-                            document,
-                            roslynItem,
-                            commitCharacter,
-                            cancellationToken
-                        )
-                        .ReportNonFatalErrorAsync();
-                });
+                _ = _threadingContext
+                    .JoinableTaskFactory
+                    .RunAsync(async () =>
+                    {
+                        // Make sure the notification isn't sent on UI thread.
+                        await TaskScheduler.Default;
+                        _ = notifyProvider
+                            .NotifyCommittingItemAsync(
+                                document,
+                                roslynItem,
+                                commitCharacter,
+                                cancellationToken
+                            )
+                            .ReportNonFatalErrorAsync();
+                    });
             }
 
             if (includesCommitCharacter)

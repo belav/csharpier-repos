@@ -3418,9 +3418,11 @@ namespace System.Workflow.ComponentModel.Design
                     if (!bounds.IsEmpty)
                     {
                         WorkflowView workflowView =
-                            this.itemStrip.parentDesigner.Activity.Site.GetService(
-                                typeof(WorkflowView)
-                            ) as WorkflowView;
+                            this.itemStrip
+                                .parentDesigner
+                                .Activity
+                                .Site
+                                .GetService(typeof(WorkflowView)) as WorkflowView;
                         if (workflowView != null)
                             bounds = new Rectangle(
                                 workflowView.LogicalPointToScreen(bounds.Location),
@@ -3606,12 +3608,15 @@ namespace System.Workflow.ComponentModel.Design
                 else if (navdir == AccessibleNavigation.Next)
                 {
                     int accessibilityObjectCount = this.itemStrip.AccessibilityObjects.Length;
-                    int childCount =
-                        this.itemStrip.parentDesigner.AccessibilityObject.GetChildCount();
+                    int childCount = this.itemStrip
+                        .parentDesigner
+                        .AccessibilityObject
+                        .GetChildCount();
                     if (childCount > accessibilityObjectCount)
-                        return this.itemStrip.parentDesigner.AccessibilityObject.GetChild(
-                            accessibilityObjectCount
-                        );
+                        return this.itemStrip
+                            .parentDesigner
+                            .AccessibilityObject
+                            .GetChild(accessibilityObjectCount);
                     else
                         return this.itemStrip.parentDesigner.AccessibilityObject.Navigate(navdir);
                 }
@@ -4308,29 +4313,36 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (navdir == AccessibleNavigation.Previous)
                 {
-                    int childCount =
-                        this.previewWindow.parentDesigner.AccessibilityObject.GetChildCount();
+                    int childCount = this.previewWindow
+                        .parentDesigner
+                        .AccessibilityObject
+                        .GetChildCount();
                     if ((childCount - 3) >= 0)
-                        return this.previewWindow.parentDesigner.AccessibilityObject.GetChild(
-                            childCount - 3
-                        );
+                        return this.previewWindow
+                            .parentDesigner
+                            .AccessibilityObject
+                            .GetChild(childCount - 3);
                 }
                 else if (navdir == AccessibleNavigation.Next)
                 {
                     if (!this.previewWindow.PreviewMode)
                     {
-                        int childCount =
-                            this.previewWindow.parentDesigner.AccessibilityObject.GetChildCount();
+                        int childCount = this.previewWindow
+                            .parentDesigner
+                            .AccessibilityObject
+                            .GetChildCount();
                         if ((childCount - 1) >= 0)
-                            return this.previewWindow.parentDesigner.AccessibilityObject.GetChild(
-                                childCount - 1
-                            );
+                            return this.previewWindow
+                                .parentDesigner
+                                .AccessibilityObject
+                                .GetChild(childCount - 1);
                     }
                     else
                     {
-                        return this.previewWindow.parentDesigner.AccessibilityObject.Navigate(
-                            navdir
-                        );
+                        return this.previewWindow
+                            .parentDesigner
+                            .AccessibilityObject
+                            .Navigate(navdir);
                     }
                 }
 

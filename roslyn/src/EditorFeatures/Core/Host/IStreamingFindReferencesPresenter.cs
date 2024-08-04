@@ -147,9 +147,9 @@ namespace Microsoft.CodeAnalysis.Editor.Host
                 async (options, cancellationToken) =>
                 {
                     // Can only navigate or present items on UI thread.
-                    await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationToken
-                    );
+                    await threadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken);
 
                     // We have multiple definitions, or we have definitions with multiple locations. Present this to the
                     // user so they can decide where they want to go to.

@@ -36,9 +36,9 @@ namespace System.ServiceModel.Security
         {
             if (securityContextTokenId == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("securityContextTokenId")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("securityContextTokenId"));
             }
 
             this.excludedActions = excludedActions;
@@ -168,15 +168,15 @@ namespace System.ServiceModel.Security
             {
                 if (standardsManager == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "standardsManager"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("standardsManager");
                 }
                 if (excludedActions == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "excludedActions"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("excludedActions");
                 }
                 this.standardsManager = standardsManager;
                 this.excludedActions = new string[excludedActions.Length];
@@ -278,27 +278,33 @@ namespace System.ServiceModel.Security
                             filter.GetType()
                         )
                     );
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.UnknownFilterType, filter.GetType())
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.UnknownFilterType, filter.GetType())
+                            )
+                        );
                 }
                 if (sessionFilter.standardsManager != this.standardsManager)
                 {
                     Fx.Assert("Standards manager of filter does not match that of filter table");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(SR.GetString(SR.StandardsManagerDoesNotMatch))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(SR.GetString(SR.StandardsManagerDoesNotMatch))
+                        );
                 }
                 if (sessionFilter.isStrictMode != this.isStrictMode)
                 {
                     Fx.Assert(
                         "Session filter's isStrictMode differs from filter table's isStrictMode"
                     );
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(SR.GetString(SR.FilterStrictModeDifferent))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(SR.GetString(SR.FilterStrictModeDifferent))
+                        );
                 }
                 if (this.contextMappings.ContainsKey(sessionFilter.SecurityContextTokenId))
                 {
@@ -308,14 +314,16 @@ namespace System.ServiceModel.Security
                             sessionFilter.SecurityContextTokenId
                         )
                     );
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SecuritySessionIdAlreadyPresentInFilterTable,
-                                sessionFilter.SecurityContextTokenId
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SecuritySessionIdAlreadyPresentInFilterTable,
+                                    sessionFilter.SecurityContextTokenId
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 this.filterMappings.Add(filter, data);
                 this.contextMappings.Add(

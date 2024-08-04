@@ -166,10 +166,12 @@ namespace System.ServiceModel.Channels
 
                 if (value.Scheme != PeerStrings.Scheme)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.InvalidUriScheme, value.Scheme, PeerStrings.Scheme)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            "value",
+                            SR.GetString(SR.InvalidUriScheme, value.Scheme, PeerStrings.Scheme)
+                        );
                 }
 
                 Fx.Assert(value.PathAndQuery == "/", "PeerUriCannotContainPath");
@@ -357,11 +359,13 @@ namespace System.ServiceModel.Channels
                 );
             if (
                 -1
-                != message.Headers.FindHeader(
-                    PeerOperationNames.Flood,
-                    PeerStrings.Namespace,
-                    PeerOperationNames.Demuxer
-                )
+                != message
+                    .Headers
+                    .FindHeader(
+                        PeerOperationNames.Flood,
+                        PeerStrings.Namespace,
+                        PeerOperationNames.Demuxer
+                    )
             )
                 PeerExceptionHelper.ThrowInvalidOperation_ConflictingHeader(
                     PeerOperationNames.Flood
@@ -369,13 +373,15 @@ namespace System.ServiceModel.Channels
 
             message.Headers.Add(PeerDictionaryHeader.CreateMessageIdHeader(messageId));
             message.Properties.Via = via;
-            message.Headers.Add(
-                MessageHeader.CreateHeader(
-                    PeerOperationNames.PeerTo,
-                    PeerStrings.Namespace,
-                    message.Headers.To
-                )
-            );
+            message
+                .Headers
+                .Add(
+                    MessageHeader.CreateHeader(
+                        PeerOperationNames.PeerTo,
+                        PeerStrings.Namespace,
+                        message.Headers.To
+                    )
+                );
             message.Headers.Add(PeerDictionaryHeader.CreateViaHeader(via));
             message.Headers.Add(PeerDictionaryHeader.CreateFloodRole());
             return result;
@@ -875,11 +881,13 @@ namespace System.ServiceModel.Channels
             PeerNodeImplementation node = null;
             if (!TryGet(listenUri, out node))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.NoTransportManagerForUri, listenUri)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.NoTransportManagerForUri, listenUri)
+                        )
+                    );
             }
             return node;
         }
@@ -893,10 +901,12 @@ namespace System.ServiceModel.Channels
 
             if (listenUri.Scheme != PeerStrings.Scheme)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "listenUri",
-                    SR.GetString(SR.InvalidUriScheme, listenUri.Scheme, PeerStrings.Scheme)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "listenUri",
+                        SR.GetString(SR.InvalidUriScheme, listenUri.Scheme, PeerStrings.Scheme)
+                    );
             }
             result = null;
             bool success = false;
@@ -931,10 +941,12 @@ namespace System.ServiceModel.Channels
 
             if (listenUri.Scheme != PeerStrings.Scheme)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "listenUri",
-                    SR.GetString(SR.InvalidUriScheme, listenUri.Scheme, PeerStrings.Scheme)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "listenUri",
+                        SR.GetString(SR.InvalidUriScheme, listenUri.Scheme, PeerStrings.Scheme)
+                    );
             }
 
             // build base uri
@@ -1023,11 +1035,13 @@ namespace System.ServiceModel.Channels
             if (via == null)
             {
                 Fx.Assert("FloodMessage doesn't contain Via header!");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.PeerMessageMustHaveVia, message.Headers.Action)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.PeerMessageMustHaveVia, message.Headers.Action)
+                        )
+                    );
             }
             if (TryGetSecurityProtocol(via, out protocol))
             {
@@ -1079,11 +1093,13 @@ namespace System.ServiceModel.Channels
                 Fx.Assert("No VIA in the forwarded message!");
                 using (Message message = messageBuffer.CreateMessage())
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.PeerMessageMustHaveVia, message.Headers.Action)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.PeerMessageMustHaveVia, message.Headers.Action)
+                            )
+                        );
                 }
             }
             if ((propagateFlags & PeerMessagePropagation.Local) != 0)
@@ -1154,10 +1170,9 @@ namespace System.ServiceModel.Channels
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(
-                        SR.GetString(SR.MessagePropagationException),
-                        e
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperCallback(SR.GetString(SR.MessagePropagationException), e);
                 }
             }
 
@@ -1283,9 +1298,11 @@ namespace System.ServiceModel.Channels
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(SR.GetString(SR.ResolverException), e)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(SR.GetString(SR.ResolverException), e)
+                        );
                 }
                 lock (ThisLock)
                 {
@@ -1340,9 +1357,11 @@ namespace System.ServiceModel.Channels
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(SR.GetString(SR.ResolverException), e)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(SR.GetString(SR.ResolverException), e)
+                        );
                 }
             }
         }
@@ -1463,17 +1482,21 @@ namespace System.ServiceModel.Channels
                         !TimeoutHelper.WaitOne(connectCompletedEvent, timeoutHelper.RemainingTime())
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new TimeoutException()
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new TimeoutException());
                     }
                 }
 
                 if (aborted)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationObjectAbortedException(SR.GetString(SR.PeerNodeAborted))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationObjectAbortedException(
+                                SR.GetString(SR.PeerNodeAborted)
+                            )
+                        );
                 }
 
                 // retrieve listen addresses and register with the resolver
@@ -1534,11 +1557,13 @@ namespace System.ServiceModel.Channels
             {
                 if (ListenUri == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ListenUriNotSet, this.GetType())
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ListenUriNotSet, this.GetType())
+                            )
+                        );
                 }
 
                 // extract mesh id from listen uri
@@ -1766,10 +1791,12 @@ namespace System.ServiceModel.Channels
                         //mark security header as understood.
                         try
                         {
-                            int i = localCopy.Headers.FindHeader(
-                                SecurityJan2004Strings.Security,
-                                SecurityJan2004Strings.Namespace
-                            );
+                            int i = localCopy
+                                .Headers
+                                .FindHeader(
+                                    SecurityJan2004Strings.Security,
+                                    SecurityJan2004Strings.Namespace
+                                );
                             if (i >= 0)
                             {
                                 localCopy.Headers.AddUnderstood(i);
@@ -1927,9 +1954,11 @@ namespace System.ServiceModel.Channels
         {
             if (!isOpen)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.TransportManagerNotOpen))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.TransportManagerNotOpen))
+                    );
             }
         }
 
@@ -1937,9 +1966,11 @@ namespace System.ServiceModel.Channels
         {
             if (isOpen)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.TransportManagerOpen))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.TransportManagerOpen))
+                    );
             }
         }
 
@@ -1980,11 +2011,13 @@ namespace System.ServiceModel.Channels
         {
             int viaSize = Encoding.UTF8.GetByteCount(uri.OriginalString);
             if (viaSize > maxViaSize)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataException(
-                        SR.GetString(SR.PeerChannelViaTooLong, uri, viaSize, maxViaSize)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataException(
+                            SR.GetString(SR.PeerChannelViaTooLong, uri, viaSize, maxViaSize)
+                        )
+                    );
         }
 
         internal class ChannelRegistration
@@ -2021,9 +2054,11 @@ namespace System.ServiceModel.Channels
             {
                 if (factory.Resolver == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.PeerResolverRequired))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.PeerResolverRequired))
+                        );
                 }
                 if (factory.ListenIPAddress != null)
                 {

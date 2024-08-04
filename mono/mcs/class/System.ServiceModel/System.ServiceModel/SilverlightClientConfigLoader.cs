@@ -116,9 +116,9 @@ namespace System.ServiceModel
                                                 reader.Skip();
                                                 continue;
                                             }
-                                            ret.Bindings.CustomBinding.Add(
-                                                ReadCustomBinding(reader)
-                                            );
+                                            ret.Bindings
+                                                .CustomBinding
+                                                .Add(ReadCustomBinding(reader));
                                         }
                                         reader.ReadEndElement();
                                         break;
@@ -138,9 +138,9 @@ namespace System.ServiceModel
                                                 reader.Skip();
                                                 continue;
                                             }
-                                            ret.Bindings.BasicHttpBinding.Add(
-                                                ReadBasicHttpBinding(reader)
-                                            );
+                                            ret.Bindings
+                                                .BasicHttpBinding
+                                                .Add(ReadBasicHttpBinding(reader));
                                         }
                                         reader.ReadEndElement();
                                         break;

@@ -44,19 +44,23 @@ namespace System.IdentityModel
                 // as the depth, we narrow our range of support so that we require
                 // that the enveloped signature be a direct child of the element
                 // being signed.
-                reader.XmlTokens.SetElementExclusion(
-                    XmlSignatureConstants.Elements.Signature,
-                    XmlSignatureConstants.Namespace,
-                    1
-                );
+                reader
+                    .XmlTokens
+                    .SetElementExclusion(
+                        XmlSignatureConstants.Elements.Signature,
+                        XmlSignatureConstants.Namespace,
+                        1
+                    );
                 return reader;
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
+                    )
+                );
         }
 
         // this transform is not allowed as the last one in a chain
@@ -67,9 +71,11 @@ namespace System.IdentityModel
             DictionaryManager dictionaryManager
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(SR.GetString(SR.UnsupportedLastTransform))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.UnsupportedLastTransform))
+                );
         }
 
         public override void ReadFrom(
@@ -88,9 +94,11 @@ namespace System.IdentityModel
             );
             if (algorithm != this.Algorithm)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CryptographicException(SR.GetString(SR.AlgorithmMismatchForTransform))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CryptographicException(SR.GetString(SR.AlgorithmMismatchForTransform))
+                    );
             }
         }
 

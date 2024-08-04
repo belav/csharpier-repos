@@ -167,15 +167,17 @@ public sealed partial class QuicStream
         {
             QUIC_HANDLE* handle;
             ThrowHelper.ThrowIfMsQuicError(
-                MsQuicApi.Api.StreamOpen(
-                    connectionHandle,
-                    type == QuicStreamType.Unidirectional
-                        ? QUIC_STREAM_OPEN_FLAGS.UNIDIRECTIONAL
-                        : QUIC_STREAM_OPEN_FLAGS.NONE,
-                    &NativeCallback,
-                    (void*)GCHandle.ToIntPtr(context),
-                    &handle
-                ),
+                MsQuicApi
+                    .Api
+                    .StreamOpen(
+                        connectionHandle,
+                        type == QuicStreamType.Unidirectional
+                            ? QUIC_STREAM_OPEN_FLAGS.UNIDIRECTIONAL
+                            : QUIC_STREAM_OPEN_FLAGS.NONE,
+                        &NativeCallback,
+                        (void*)GCHandle.ToIntPtr(context),
+                        &handle
+                    ),
                 "StreamOpen failed"
             );
             _handle = new MsQuicContextSafeHandle(
@@ -230,11 +232,9 @@ public sealed partial class QuicStream
                 void*,
                 QUIC_STREAM_EVENT*,
                 int> nativeCallback = &NativeCallback;
-            MsQuicApi.Api.SetCallbackHandler(
-                _handle,
-                nativeCallback,
-                (void*)GCHandle.ToIntPtr(context)
-            );
+            MsQuicApi
+                .Api
+                .SetCallbackHandler(_handle, nativeCallback, (void*)GCHandle.ToIntPtr(context));
         }
         catch
         {
@@ -270,11 +270,13 @@ public sealed partial class QuicStream
         {
             unsafe
             {
-                int status = MsQuicApi.Api.StreamStart(
-                    _handle,
-                    QUIC_STREAM_START_FLAGS.SHUTDOWN_ON_FAIL
-                        | QUIC_STREAM_START_FLAGS.INDICATE_PEER_ACCEPT
-                );
+                int status = MsQuicApi
+                    .Api
+                    .StreamStart(
+                        _handle,
+                        QUIC_STREAM_START_FLAGS.SHUTDOWN_ON_FAIL
+                            | QUIC_STREAM_START_FLAGS.INDICATE_PEER_ACCEPT
+                    );
                 if (
                     ThrowHelper.TryGetStreamExceptionForMsQuicStatus(
                         status,
@@ -439,13 +441,15 @@ public sealed partial class QuicStream
             unsafe
             {
                 _sendBuffers.Initialize(buffer);
-                int status = MsQuicApi.Api.StreamSend(
-                    _handle,
-                    _sendBuffers.Buffers,
-                    (uint)_sendBuffers.Count,
-                    completeWrites ? QUIC_SEND_FLAGS.FIN : QUIC_SEND_FLAGS.NONE,
-                    null
-                );
+                int status = MsQuicApi
+                    .Api
+                    .StreamSend(
+                        _handle,
+                        _sendBuffers.Buffers,
+                        (uint)_sendBuffers.Count,
+                        completeWrites ? QUIC_SEND_FLAGS.FIN : QUIC_SEND_FLAGS.NONE,
+                        null
+                    );
                 // No SEND_COMPLETE expected, release buffer and unlock.
                 if (StatusFailed(status))
                 {

@@ -22,10 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static readonly ImmutableDictionary<
             SingleNamespaceDeclaration,
             AliasesAndUsings
-        > s_emptyMap = ImmutableDictionary<
-            SingleNamespaceDeclaration,
-            AliasesAndUsings
-        >.Empty.WithComparers(ReferenceEqualityComparer.Instance);
+        > s_emptyMap = ImmutableDictionary<SingleNamespaceDeclaration, AliasesAndUsings>
+            .Empty
+            .WithComparers(ReferenceEqualityComparer.Instance);
 
         private readonly SourceModuleSymbol _module;
         private readonly Symbol _container;
@@ -162,9 +161,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // SyntaxReference in the namespace declaration points to the name node of the namespace decl node not
             // namespace decl node we want to return. here we will wrap the original syntax reference in
             // the translation syntax reference so that we can lazily manipulate a node return to the caller
-            return _mergedDeclaration.Declarations.SelectAsArray(
-                s_declaringSyntaxReferencesSelector
-            );
+            return _mergedDeclaration
+                .Declarations
+                .SelectAsArray(s_declaringSyntaxReferencesSelector);
         }
 
         internal override ImmutableArray<Symbol> GetMembersUnordered()

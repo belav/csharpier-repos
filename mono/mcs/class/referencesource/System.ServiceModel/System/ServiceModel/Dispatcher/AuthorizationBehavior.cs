@@ -44,9 +44,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!serviceAuthorizationManager.CheckAccess(rpc.OperationContext, ref rpc.Request))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateAccessDeniedFaultException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(CreateAccessDeniedFaultException());
                 }
             }
             catch (Exception ex)
@@ -160,9 +160,9 @@ namespace System.ServiceModel.Dispatcher
         public static AuthorizationBehavior TryCreate(DispatchRuntime dispatch)
         {
             if (dispatch == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("dispatch")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("dispatch"));
 
             if (!dispatch.RequiresAuthorization)
                 return null;

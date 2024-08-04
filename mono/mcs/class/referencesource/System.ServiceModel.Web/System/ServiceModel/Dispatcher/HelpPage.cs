@@ -92,9 +92,11 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new WebFaultException(HttpStatusCode.NotFound)
-                    );
+                    throw System
+                        .ServiceModel
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new WebFaultException(HttpStatusCode.NotFound));
                 }
             }
             return WebOperationContext.Current.CreateTextResponse(helpPage, "text/html");
@@ -121,10 +123,14 @@ namespace System.ServiceModel.Dispatcher
             {
                 HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.Public);
                 HttpContext.Current.Response.Cache.SetMaxAge(TimeSpan.MaxValue);
-                HttpContext.Current.Response.Cache.AddValidationCallback(
-                    new HttpCacheValidateHandler(this.CacheValidationCallback),
-                    this.startupTime
-                );
+                HttpContext
+                    .Current
+                    .Response
+                    .Cache
+                    .AddValidationCallback(
+                        new HttpCacheValidateHandler(this.CacheValidationCallback),
+                        this.startupTime
+                    );
                 HttpContext.Current.Response.Cache.SetValidUntilExpires(true);
             }
             switch ((string)match.Data)

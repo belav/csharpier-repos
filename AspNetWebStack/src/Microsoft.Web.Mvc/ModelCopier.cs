@@ -42,9 +42,9 @@ namespace Microsoft.Web.Mvc
                 if (toProperty != null && !toProperty.IsReadOnly)
                 {
                     // Can from.Property reference just be assigned directly to to.Property reference?
-                    bool isDirectlyAssignable = toProperty.PropertyType.IsAssignableFrom(
-                        fromProperty.PropertyType
-                    );
+                    bool isDirectlyAssignable = toProperty
+                        .PropertyType
+                        .IsAssignableFrom(fromProperty.PropertyType);
                     // Is from.Property just the nullable form of to.Property?
                     bool liftedValueType =
                         (isDirectlyAssignable)

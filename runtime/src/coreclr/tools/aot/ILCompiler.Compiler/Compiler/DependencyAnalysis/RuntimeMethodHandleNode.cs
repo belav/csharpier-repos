@@ -72,19 +72,19 @@ namespace ILCompiler.DependencyAnalysis
                 // GVM analysis happens on canonical forms, but this is potentially injecting new genericness
                 // into the system. Ensure reflection analysis can still see this.
                 if (_targetMethod.IsAbstract)
-                    factory.MetadataManager.GetDependenciesDueToMethodCodePresence(
-                        ref dependencies,
-                        factory,
-                        canonMethod,
-                        methodIL: null
-                    );
+                    factory
+                        .MetadataManager
+                        .GetDependenciesDueToMethodCodePresence(
+                            ref dependencies,
+                            factory,
+                            canonMethod,
+                            methodIL: null
+                        );
             }
 
-            factory.MetadataManager.GetDependenciesDueToLdToken(
-                ref dependencies,
-                factory,
-                _targetMethod
-            );
+            factory
+                .MetadataManager
+                .GetDependenciesDueToLdToken(ref dependencies, factory, _targetMethod);
 
             return dependencies;
         }
@@ -101,14 +101,17 @@ namespace ILCompiler.DependencyAnalysis
             objData.RequireInitialPointerAlignment();
             objData.AddSymbol(this);
 
-            NativeLayoutMethodLdTokenVertexNode ldtokenSigNode =
-                factory.NativeLayout.MethodLdTokenVertex(_targetMethod);
+            NativeLayoutMethodLdTokenVertexNode ldtokenSigNode = factory
+                .NativeLayout
+                .MethodLdTokenVertex(_targetMethod);
             objData.EmitPointerReloc(
-                factory.NativeLayout.NativeLayoutSignature(
-                    ldtokenSigNode,
-                    s_NativeLayoutSignaturePrefix,
-                    _targetMethod
-                )
+                factory
+                    .NativeLayout
+                    .NativeLayoutSignature(
+                        ldtokenSigNode,
+                        s_NativeLayoutSignaturePrefix,
+                        _targetMethod
+                    )
             );
 
             return objData.ToObjectData();

@@ -71,10 +71,9 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 1);
 
-            var creator =
-                LateBoundReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                    constructor
-                );
+            var creator = LateBoundReflectionDelegateFactory
+                .Instance
+                .CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Value" };
             InTestClass o = (InTestClass)creator(args);
@@ -89,10 +88,9 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 2);
 
-            var creator =
-                LateBoundReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                    constructor
-                );
+            var creator = LateBoundReflectionDelegateFactory
+                .Instance
+                .CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Value", true };
             InTestClass o = (InTestClass)creator(args);
@@ -108,10 +106,9 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors(typeof(OutAndRefTestClass))
                 .Single(c => c.GetParameters().Count() == 1);
 
-            var creator =
-                LateBoundReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                    constructor
-                );
+            var creator = LateBoundReflectionDelegateFactory
+                .Instance
+                .CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Input" };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -126,10 +123,9 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors(typeof(OutAndRefTestClass))
                 .Single(c => c.GetParameters().Count() == 2);
 
-            var creator =
-                LateBoundReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                    constructor
-                );
+            var creator = LateBoundReflectionDelegateFactory
+                .Instance
+                .CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Input", null };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -144,10 +140,9 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors(typeof(OutAndRefTestClass))
                 .Single(c => c.GetParameters().Count() == 3);
 
-            var creator =
-                LateBoundReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                    constructor
-                );
+            var creator = LateBoundReflectionDelegateFactory
+                .Instance
+                .CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Input", true, null };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);

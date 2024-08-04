@@ -48,8 +48,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var document = context.GetRequiredDocument();
             var clientCapabilities = context.GetRequiredClientCapabilities();
 
-            var navBarService =
-                document.Project.Services.GetRequiredService<INavigationBarItemService>();
+            var navBarService = document
+                .Project
+                .Services
+                .GetRequiredService<INavigationBarItemService>();
             var navBarItems = await navBarService
                 .GetItemsAsync(
                     document,
@@ -111,8 +113,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             )
                 return null;
 
-            var service =
-                document.Project.Solution.Services.GetRequiredService<ILspSymbolInformationCreationService>();
+            var service = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<ILspSymbolInformationCreationService>();
             return service.Create(
                 GetDocumentSymbolName(item.Text),
                 containerName,

@@ -373,9 +373,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.IsDisposed)
             {
-                throw FxTrace.Exception.AsError(
-                    new ObjectDisposedException("SocketReceiveManager")
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new ObjectDisposedException("SocketReceiveManager"));
             }
         }
 
@@ -396,10 +396,9 @@ namespace System.ServiceModel.Channels
             try
             {
                 EndPoint remoteEndpoint = null;
-                ArraySegment<byte> messageBytes = state.Socket.EndReceiveFrom(
-                    result,
-                    ref remoteEndpoint
-                );
+                ArraySegment<byte> messageBytes = state
+                    .Socket
+                    .EndReceiveFrom(result, ref remoteEndpoint);
                 state.RemoteEndPoint = remoteEndpoint;
                 Fx.Assert(
                     messageBytes.Array == state.ReceiveBuffer,

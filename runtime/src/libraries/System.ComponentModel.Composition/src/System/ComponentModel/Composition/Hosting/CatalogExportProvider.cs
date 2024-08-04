@@ -900,9 +900,9 @@ namespace System.ComponentModel.Composition.Hosting
                     }
 
                     foreach (
-                        var import in definition.ImportDefinitions.Where(
-                            ImportEngine.IsRequiredImportForPreview
-                        )
+                        var import in definition
+                            .ImportDefinitions
+                            .Where(ImportEngine.IsRequiredImportForPreview)
                     )
                     {
                         if (changedExports.Any(import.IsConstraintSatisfiedBy))

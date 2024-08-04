@@ -69,7 +69,8 @@ namespace SourceGenerators.Tests
             }
 
             return workspace
-                .CurrentSolution.AddProject("Test", "test.dll", "C#")
+                .CurrentSolution
+                .AddProject("Test", "test.dll", "C#")
                 .WithMetadataReferences(refs)
                 .WithCompilationOptions(
                     new CSharpCompilationOptions(

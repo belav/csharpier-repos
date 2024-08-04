@@ -371,10 +371,9 @@ namespace System.Web.UI
             string dummyFile = Path.Combine(
                 dir,
                 "~AspAccessCheck_"
-                    + HostingEnvironment.AppDomainUniqueInteger.ToString(
-                        "x",
-                        CultureInfo.InvariantCulture
-                    )
+                    + HostingEnvironment
+                        .AppDomainUniqueInteger
+                        .ToString("x", CultureInfo.InvariantCulture)
                     + SafeNativeMethods.GetCurrentThreadId()
                     + ".tmp"
             );
@@ -415,7 +414,8 @@ namespace System.Web.UI
 
                 // QFE number is not included in client path
                 string version = VersionInfo
-                    .SystemWebVersion.Substring(0, VersionInfo.SystemWebVersion.LastIndexOf('.'))
+                    .SystemWebVersion
+                    .Substring(0, VersionInfo.SystemWebVersion.LastIndexOf('.'))
                     .Replace('.', '_');
                 location = String.Format(CultureInfo.InvariantCulture, location, assembly, version);
             }
@@ -544,7 +544,9 @@ namespace System.Web.UI
                         // include a unique token as part of the new name, to avoid
                         // conflicts with previous renames (VSWhidbey 79996)
                         string uniqueToken = DateTime
-                            .Now.Ticks.GetHashCode()
+                            .Now
+                            .Ticks
+                            .GetHashCode()
                             .ToString("x", CultureInfo.InvariantCulture);
                         string newName = f.FullName + "." + uniqueToken + ".delete";
                         f.MoveTo(newName);
@@ -1031,9 +1033,11 @@ namespace System.Web.UI
             foreach (string part in parts)
             {
                 if (
-                    !System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(
-                        part
-                    )
+                    !System
+                        .CodeDom
+                        .Compiler
+                        .CodeGenerator
+                        .IsValidLanguageIndependentIdentifier(part)
                 )
                 {
                     throw new HttpException(SR.GetString(SR.Invalid_attribute_value, value, name));
@@ -1965,11 +1969,10 @@ namespace System.Web.UI
             string argument
         )
         {
-            string postbackReference = control.Page.ClientScript.GetPostBackEventReference(
-                control,
-                argument,
-                true
-            );
+            string postbackReference = control
+                .Page
+                .ClientScript
+                .GetPostBackEventReference(control, argument, true);
             return GetClientValidateEvent(validationGroup) + postbackReference;
         }
 
@@ -2000,11 +2003,10 @@ namespace System.Web.UI
                 }
                 else
                 {
-                    injectedOnClick = control.Page.ClientScript.GetPostBackEventReference(
-                        control,
-                        String.Empty,
-                        true
-                    );
+                    injectedOnClick = control
+                        .Page
+                        .ClientScript
+                        .GetPostBackEventReference(control, String.Empty, true);
                 }
             }
             else

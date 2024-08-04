@@ -48,9 +48,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         /// The map from monikers to open text buffers; because we can only fetch the text buffer on the UI thread, all updates to this must be done from the UI thread.
         /// </summary>
         private ImmutableDictionary<string, ITextBuffer> _monikerToTextBufferMap =
-            ImmutableDictionary<string, ITextBuffer>.Empty.WithComparers(
-                StringComparer.OrdinalIgnoreCase
-            );
+            ImmutableDictionary<string, ITextBuffer>
+                .Empty
+                .WithComparers(StringComparer.OrdinalIgnoreCase);
 
         private uint _runningDocumentTableEventsCookie;
 

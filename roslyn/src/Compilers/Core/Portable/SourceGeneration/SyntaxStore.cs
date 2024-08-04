@@ -136,12 +136,8 @@ namespace Microsoft.CodeAnalysis
                                     {
                                         _cancellationToken.ThrowIfCancellationRequested();
                                         syntaxInputBuilders[i]
-                                            .builder.VisitTree(
-                                                root,
-                                                state,
-                                                model,
-                                                _cancellationToken
-                                            );
+                                            .builder
+                                            .VisitTree(root, state, model, _cancellationToken);
                                     }
                                     finally
                                     {

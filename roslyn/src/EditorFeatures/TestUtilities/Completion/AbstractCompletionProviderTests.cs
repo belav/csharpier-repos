@@ -40,8 +40,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
     public abstract class AbstractCompletionProviderTests<TWorkspaceFixture> : TestBase
         where TWorkspaceFixture : TestWorkspaceFixture, new()
     {
-        private static readonly TestComposition s_baseComposition =
-            EditorTestCompositions.EditorFeatures.AddExcludedPartTypes(typeof(CompletionProvider));
+        private static readonly TestComposition s_baseComposition = EditorTestCompositions
+            .EditorFeatures
+            .AddExcludedPartTypes(typeof(CompletionProvider));
 
         private readonly TestFixtureHelper<TWorkspaceFixture> _fixtureHelper = new();
 
@@ -203,9 +204,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
 
             if (usePreviousCharAsTrigger)
             {
-                trigger = RoslynCompletion.CompletionTrigger.CreateInsertionTrigger(
-                    insertedCharacter: code.ElementAt(position - 1)
-                );
+                trigger = RoslynCompletion
+                    .CompletionTrigger
+                    .CreateInsertionTrigger(insertedCharacter: code.ElementAt(position - 1));
             }
 
             var displayOptions = SymbolDescriptionOptions.Default;
@@ -251,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                                 expectedDescriptionOrNull != null
                                     ? completionService
                                         .GetDescriptionAsync(document, c, options, displayOptions)
-                                        .Result.Text == expectedDescriptionOrNull
+                                        .Result
+                                        .Text == expectedDescriptionOrNull
                                     : true
                             )
                     );
@@ -283,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                     expectedDescriptionOrNull != null
                     && completionService
                         .GetDescriptionAsync(document, c, options, displayOptions)
-                        .Result.Text != expectedDescriptionOrNull
+                        .Result
+                        .Text != expectedDescriptionOrNull
                 )
                     return false;
                 if (glyph.HasValue && !c.Tags.SequenceEqual(GlyphTags.GetTags((Glyph)glyph.Value)))
@@ -378,18 +381,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
         )
         {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
-            var workspace = workspaceFixture.Target.GetWorkspace(
-                markup,
-                GetComposition(),
-                workspaceKind: workspaceKind
-            );
+            var workspace = workspaceFixture
+                .Target
+                .GetWorkspace(markup, GetComposition(), workspaceKind: workspaceKind);
 
             // Set options that are not CompletionOptions
             NonCompletionOptions?.SetGlobalOptions(workspace.GlobalOptions);
 
-            var currentDocument = workspace.CurrentSolution.GetDocument(
-                workspaceFixture.Target.CurrentDocument.Id
-            );
+            var currentDocument = workspace
+                .CurrentSolution
+                .GetDocument(workspaceFixture.Target.CurrentDocument.Id);
             var position = workspaceFixture.Target.Position;
 
             var options = GetCompletionOptions();
@@ -697,11 +698,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
 
             if (!skipSpeculation && await CanUseSpeculativeSemanticModelAsync(document1, position))
             {
-                var document2 = workspaceFixture.Target.UpdateDocument(
-                    code,
-                    sourceCodeKind,
-                    cleanBeforeUpdate: false
-                );
+                var document2 = workspaceFixture
+                    .Target
+                    .UpdateDocument(code, sourceCodeKind, cleanBeforeUpdate: false);
                 await CheckResultsAsync(
                     document2,
                     position,
@@ -745,10 +744,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             // Set options that are not CompletionOptions
             NonCompletionOptions?.SetGlobalOptions(workspace.GlobalOptions);
 
-            var document1 = workspaceFixture.Target.UpdateDocument(
-                codeBeforeCommit,
-                sourceCodeKind
-            );
+            var document1 = workspaceFixture
+                .Target
+                .UpdateDocument(codeBeforeCommit, sourceCodeKind);
             await VerifyCustomCommitProviderCheckResultsAsync(
                 document1,
                 codeBeforeCommit,
@@ -760,11 +758,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
 
             if (await CanUseSpeculativeSemanticModelAsync(document1, position))
             {
-                var document2 = workspaceFixture.Target.UpdateDocument(
-                    codeBeforeCommit,
-                    sourceCodeKind,
-                    cleanBeforeUpdate: false
-                );
+                var document2 = workspaceFixture
+                    .Target
+                    .UpdateDocument(codeBeforeCommit, sourceCodeKind, cleanBeforeUpdate: false);
                 await VerifyCustomCommitProviderCheckResultsAsync(
                     document2,
                     codeBeforeCommit,
@@ -957,10 +953,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             // Set options that are not CompletionOptions
             NonCompletionOptions?.SetGlobalOptions(workspace.GlobalOptions);
 
-            var document1 = workspaceFixture.Target.UpdateDocument(
-                codeBeforeCommit,
-                sourceCodeKind
-            );
+            var document1 = workspaceFixture
+                .Target
+                .UpdateDocument(codeBeforeCommit, sourceCodeKind);
             await VerifyProviderCommitCheckResultsAsync(
                 document1,
                 position,
@@ -971,11 +966,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
 
             if (await CanUseSpeculativeSemanticModelAsync(document1, position))
             {
-                var document2 = workspaceFixture.Target.UpdateDocument(
-                    codeBeforeCommit,
-                    sourceCodeKind,
-                    cleanBeforeUpdate: false
-                );
+                var document2 = workspaceFixture
+                    .Target
+                    .UpdateDocument(codeBeforeCommit, sourceCodeKind, cleanBeforeUpdate: false);
                 await VerifyProviderCommitCheckResultsAsync(
                     document2,
                     position,
@@ -1414,8 +1407,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             )
             {
                 var position = testWorkspace
-                    .Documents.Single(d => d.Name == "SourceDocument")
-                    .CursorPosition.Value;
+                    .Documents
+                    .Single(d => d.Name == "SourceDocument")
+                    .CursorPosition
+                    .Value;
                 var solution = testWorkspace.CurrentSolution;
                 var documentId = testWorkspace.Documents.Single(d => d.Name == "SourceDocument").Id;
                 var document = solution.GetDocument(documentId);
@@ -1441,9 +1436,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                         c => CompareItems(c.DisplayText, expectedItem)
                     );
 
-                    var item = completionList.ItemsList.First(c =>
-                        CompareItems(c.DisplayText, expectedItem)
-                    );
+                    var item = completionList
+                        .ItemsList
+                        .First(c => CompareItems(c.DisplayText, expectedItem));
                     var description = await completionService.GetDescriptionAsync(
                         document,
                         item,
@@ -1511,8 +1506,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             )
             {
                 var position = testWorkspace
-                    .Documents.Single(d => d.Name == "SourceDocument")
-                    .CursorPosition.Value;
+                    .Documents
+                    .Single(d => d.Name == "SourceDocument")
+                    .CursorPosition
+                    .Value;
                 var solution = testWorkspace.CurrentSolution;
                 var documentId = testWorkspace.Documents.Single(d => d.Name == "SourceDocument").Id;
                 var document = solution.GetDocument(documentId);
@@ -1527,9 +1524,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                     triggerInfo
                 );
 
-                var item = completionList.ItemsList.FirstOrDefault(i =>
-                    i.DisplayText == expectedItem
-                );
+                var item = completionList
+                    .ItemsList
+                    .FirstOrDefault(i => i.DisplayText == expectedItem);
                 Assert.Equal(
                     expectedDescription,
                     (
@@ -1573,7 +1570,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                 var position = testWorkspace.Documents.First().CursorPosition.Value;
                 var solution = testWorkspace.CurrentSolution;
                 var textContainer = testWorkspace
-                    .Documents.First()
+                    .Documents
+                    .First()
                     .GetTextBuffer()
                     .AsTextContainer();
                 var currentContextDocumentId = testWorkspace.GetDocumentIdInCurrentContext(
@@ -1918,9 +1916,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                 Assert.Same(hostDocument, workspace.Documents.Single());
                 var position = hostDocument.CursorPosition.Value;
                 var text = hostDocument.GetTextBuffer().CurrentSnapshot.AsText();
-                var trigger = RoslynCompletion.CompletionTrigger.CreateInsertionTrigger(
-                    text[position]
-                );
+                var trigger = RoslynCompletion
+                    .CompletionTrigger
+                    .CreateInsertionTrigger(text[position]);
 
                 var document = workspace.CurrentSolution.GetDocument(hostDocument.Id);
                 var service = GetCompletionService(document.Project);
@@ -2031,9 +2029,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                     position,
                     RoslynCompletion.CompletionTrigger.Invoke
                 );
-                var item = completionList.ItemsList.First(i =>
-                    i.DisplayText.StartsWith(textTypedSoFar)
-                );
+                var item = completionList
+                    .ItemsList
+                    .First(i => i.DisplayText.StartsWith(textTypedSoFar));
 
                 foreach (var ch in validChars)
                 {
@@ -2069,9 +2067,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             var document = workspaceFixture.Target.UpdateDocument(code, sourceCodeKind);
 
             var trigger = usePreviousCharAsTrigger
-                ? RoslynCompletion.CompletionTrigger.CreateInsertionTrigger(
-                    insertedCharacter: code.ElementAt(position - 1)
-                )
+                ? RoslynCompletion
+                    .CompletionTrigger
+                    .CreateInsertionTrigger(insertedCharacter: code.ElementAt(position - 1))
                 : RoslynCompletion.CompletionTrigger.Invoke;
 
             var completionService = GetCompletionService(document.Project);

@@ -451,10 +451,12 @@ namespace System.Threading
             return currentThreadId;
 
             Wait:
-            bool areContentionEventsEnabled = NativeRuntimeEventSource.Log.IsEnabled(
-                EventLevel.Informational,
-                NativeRuntimeEventSource.Keywords.ContentionKeyword
-            );
+            bool areContentionEventsEnabled = NativeRuntimeEventSource
+                .Log
+                .IsEnabled(
+                    EventLevel.Informational,
+                    NativeRuntimeEventSource.Keywords.ContentionKeyword
+                );
             AutoResetEvent waitEvent = _waitEvent ?? CreateWaitEvent(areContentionEventsEnabled);
             if (State.TryLockBeforeWait(this))
             {

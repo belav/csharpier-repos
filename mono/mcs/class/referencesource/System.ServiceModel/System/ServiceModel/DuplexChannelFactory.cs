@@ -113,9 +113,9 @@ namespace System.ServiceModel
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "callbackObject"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("callbackObject");
                 }
 
                 this.CheckAndAssignCallbackInstance(callbackObject);
@@ -154,16 +154,16 @@ namespace System.ServiceModel
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "callbackObject"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("callbackObject");
                 }
 
                 if (endpointConfigurationName == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "endpointConfigurationName"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("endpointConfigurationName");
                 }
 
                 this.CheckAndAssignCallbackInstance(callbackObject);
@@ -206,9 +206,9 @@ namespace System.ServiceModel
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "callbackObject"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("callbackObject");
                 }
 
                 if (binding == null)
@@ -244,9 +244,9 @@ namespace System.ServiceModel
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "callbackObject"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("callbackObject");
                 }
 
                 if (endpoint == null)
@@ -308,46 +308,61 @@ namespace System.ServiceModel
 
             if (this.CallbackType != null && callbackInstance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxCreateDuplexChannelNoCallback1)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxCreateDuplexChannelNoCallback1)
+                        )
+                    );
             }
             if (callbackInstance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxCreateDuplexChannelNoCallback))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxCreateDuplexChannelNoCallback)
+                        )
+                    );
             }
 
             if (callbackInstance.UserObject == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxCreateDuplexChannelNoCallbackUserObject)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxCreateDuplexChannelNoCallbackUserObject)
+                        )
+                    );
             }
 
             if (!this.HasDuplexOperations())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxCreateDuplexChannel1, this.Endpoint.Contract.Name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxCreateDuplexChannel1, this.Endpoint.Contract.Name)
+                        )
+                    );
             }
 
             Type userObjectType = callbackInstance.UserObject.GetType();
             Type callbackType = this.Endpoint.Contract.CallbackContractType;
             if (callbackType != null && !callbackType.IsAssignableFrom(userObjectType))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxCreateDuplexChannelBadCallbackUserObject, callbackType)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxCreateDuplexChannelBadCallbackUserObject,
+                                callbackType
+                            )
+                        )
+                    );
             }
 
             EnsureOpened();

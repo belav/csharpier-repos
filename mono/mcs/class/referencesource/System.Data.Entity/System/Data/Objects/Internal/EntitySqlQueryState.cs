@@ -299,12 +299,14 @@ namespace System.Data.Objects
                         // Since ObjectParameters do not allow users to specify 'facets', make
                         // sure that the parameter TypeUsage is not populated with the provider
                         // default facet values.
-                        this.ObjectContext.Perspective.TryGetTypeByName(
-                            parameter.MappableType.FullName,
-                            false /* bIgnoreCase */
-                            ,
-                            out typeUsage
-                        );
+                        this.ObjectContext
+                            .Perspective
+                            .TryGetTypeByName(
+                                parameter.MappableType.FullName,
+                                false /* bIgnoreCase */
+                                ,
+                                out typeUsage
+                            );
                     }
 
                     Debug.Assert(typeUsage != null, "typeUsage != null");

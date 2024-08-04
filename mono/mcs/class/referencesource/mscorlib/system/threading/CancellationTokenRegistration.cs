@@ -50,11 +50,9 @@ namespace System.Threading
             // Try to remove the callback info from the array.
             // It is possible the callback info is missing (removed for run, or removed by someone else)
             // It is also possible there is info in the array but it doesn't match our current registration's callback info.
-            CancellationCallbackInfo prevailingCallbackInfoInSlot =
-                m_registrationInfo.Source.SafeAtomicRemove(
-                    m_registrationInfo.Index,
-                    m_callbackInfo
-                );
+            CancellationCallbackInfo prevailingCallbackInfoInSlot = m_registrationInfo
+                .Source
+                .SafeAtomicRemove(m_registrationInfo.Index, m_callbackInfo);
 
             if (prevailingCallbackInfoInSlot != m_callbackInfo)
                 return false; //the callback in the slot wasn't us.

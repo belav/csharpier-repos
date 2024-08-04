@@ -75,10 +75,9 @@ public class MethodHub : TestHub
 
     public Task BroadcastItem()
     {
-        return Clients.All.SendAsync(
-            "Broadcast",
-            new Result { Message = "test", paramName = "param" }
-        );
+        return Clients
+            .All
+            .SendAsync("Broadcast", new Result { Message = "test", paramName = "param" });
     }
 
     public Task SendArray()
@@ -759,18 +758,20 @@ public class StreamingHub : TestHub
     public ChannelReader<int> ChannelClosedExceptionStream()
     {
         var channel = Channel.CreateUnbounded<int>();
-        channel.Writer.TryComplete(
-            new ChannelClosedException("ChannelClosedException from channel")
-        );
+        channel
+            .Writer
+            .TryComplete(new ChannelClosedException("ChannelClosedException from channel"));
         return channel.Reader;
     }
 
     public ChannelReader<int> ChannelClosedExceptionInnerExceptionStream()
     {
         var channel = Channel.CreateUnbounded<int>();
-        channel.Writer.TryComplete(
-            new ChannelClosedException(new Exception("ChannelClosedException from channel"))
-        );
+        channel
+            .Writer
+            .TryComplete(
+                new ChannelClosedException(new Exception("ChannelClosedException from channel"))
+            );
         return channel.Reader;
     }
 
@@ -1263,10 +1264,12 @@ public class ErrorInAbortedTokenHub : Hub
     {
         Context.Items[nameof(OnConnectedAsync)] = true;
 
-        Context.ConnectionAborted.Register(() =>
-        {
-            throw new InvalidOperationException("BOOM");
-        });
+        Context
+            .ConnectionAborted
+            .Register(() =>
+            {
+                throw new InvalidOperationException("BOOM");
+            });
 
         return base.OnConnectedAsync();
     }
@@ -1292,10 +1295,12 @@ public class ConnectionLifetimeHub : Hub
     {
         _state.TokenStateInConnected = Context.ConnectionAborted.IsCancellationRequested;
 
-        Context.ConnectionAborted.Register(() =>
-        {
-            _state.TokenCallbackTriggered = true;
-        });
+        Context
+            .ConnectionAborted
+            .Register(() =>
+            {
+                _state.TokenCallbackTriggered = true;
+            });
 
         return base.OnConnectedAsync();
     }

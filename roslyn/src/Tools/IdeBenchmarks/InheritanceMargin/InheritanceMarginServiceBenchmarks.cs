@@ -45,7 +45,8 @@ namespace IdeBenchmarks.InheritanceMargin
 
             Console.WriteLine("Found solution.");
             var assemblies = MSBuildMefHostServices
-                .DefaultAssemblies.AddRange(EditorTestCompositions.EditorFeatures.Assemblies)
+                .DefaultAssemblies
+                .AddRange(EditorTestCompositions.EditorFeatures.Assemblies)
                 .Distinct();
 
             var hostService = MefHostServices.Create(assemblies);

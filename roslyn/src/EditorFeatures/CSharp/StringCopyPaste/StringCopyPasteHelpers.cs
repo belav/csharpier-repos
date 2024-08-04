@@ -619,7 +619,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         public static TextSpan MapSpan(TextSpan span, ITextSnapshot from, ITextSnapshot to) =>
             from.CreateTrackingSpan(span.ToSpan(), SpanTrackingMode.EdgeInclusive)
                 .GetSpan(to)
-                .Span.ToTextSpan();
+                .Span
+                .ToTextSpan();
 
         public static bool RawContentMustBeMultiLine(
             SourceText text,

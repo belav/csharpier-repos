@@ -106,11 +106,13 @@ namespace System.ServiceModel.Configuration
                 }
                 else if (1 == elementKeys.Count)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(SR.ConfigElementKeyNull, elementKeys[0])
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(SR.ConfigElementKeyNull, elementKeys[0])
+                            )
+                        );
                 }
                 else
                 {
@@ -125,11 +127,13 @@ namespace System.ServiceModel.Configuration
                         elementKeys[elementKeys.Count - 1]
                     );
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(SR.ConfigElementKeysNull, elementKeys.ToString())
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(SR.ConfigElementKeysNull, elementKeys.ToString())
+                            )
+                        );
                 }
             }
             else
@@ -152,10 +156,12 @@ namespace System.ServiceModel.Configuration
 
             if (start < 0 || start >= array.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "start",
-                    SR.GetString(SR.ConfigInvalidStartValue, array.Length - 1, start)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "start",
+                        SR.GetString(SR.ConfigInvalidStartValue, array.Length - 1, start)
+                    );
             }
             ((ICollection)this).CopyTo(array, start);
         }
@@ -225,11 +231,16 @@ namespace System.ServiceModel.Configuration
                 ConfigurationElementType retval = (ConfigurationElementType)this.BaseGet(key);
                 if (retval == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new System.Collections.Generic.KeyNotFoundException(
-                            SR.GetString(SR.ConfigKeyNotFoundInElementCollection, key.ToString())
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new System.Collections.Generic.KeyNotFoundException(
+                                SR.GetString(
+                                    SR.ConfigKeyNotFoundInElementCollection,
+                                    key.ToString()
+                                )
+                            )
+                        );
                 }
                 return retval;
             }
@@ -263,13 +274,15 @@ namespace System.ServiceModel.Configuration
                 else
                 {
 #pragma warning disable 56506 //Microsoft; Variable 'key' checked for null previously
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.ConfigKeysDoNotMatch,
-                            this.GetElementKey(value).ToString(),
-                            key.ToString()
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.ConfigKeysDoNotMatch,
+                                this.GetElementKey(value).ToString(),
+                                key.ToString()
+                            )
+                        );
 #pragma warning restore
                 }
             }

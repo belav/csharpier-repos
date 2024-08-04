@@ -233,9 +233,9 @@ namespace System.Workflow.Activities
             {
                 // Refresh the referenced design time types in the serviceoperationInfo object properties;
                 //ServiceOperationHelpers.RefreshReferencedDesignTimeTypes(this.Activity.Site as IServiceProvider, operation);
-                isOneWay = this.ReceiveActivity.ServiceOperationInfo.GetIsOneWay(
-                    this.Activity.Site as IServiceProvider
-                );
+                isOneWay = this.ReceiveActivity
+                    .ServiceOperationInfo
+                    .GetIsOneWay(this.Activity.Site as IServiceProvider);
             }
             if (!isOneWay)
             {

@@ -60,10 +60,13 @@ namespace System.Diagnostics.Contracts
         {
 #if !NETCORE
             if (_assertingMustUseRewriter)
-                System.Diagnostics.Assert.Fail(
-                    "Asserting that we must use the rewriter went reentrant.",
-                    "Didn't rewrite this mscorlib?"
-                );
+                System
+                    .Diagnostics
+                    .Assert
+                    .Fail(
+                        "Asserting that we must use the rewriter went reentrant.",
+                        "Didn't rewrite this mscorlib?"
+                    );
 #endif
             _assertingMustUseRewriter = true;
 
@@ -85,13 +88,17 @@ namespace System.Diagnostics.Contracts
             if (probablyNotRewritten == null)
                 probablyNotRewritten = thisAssembly;
             String simpleName = probablyNotRewritten.GetName().Name;
-            System.Runtime.CompilerServices.ContractHelper.TriggerFailure(
-                kind,
-                Environment.GetResourceString("MustUseCCRewrite", contractKind, simpleName),
-                null,
-                null,
-                null
-            );
+            System
+                .Runtime
+                .CompilerServices
+                .ContractHelper
+                .TriggerFailure(
+                    kind,
+                    Environment.GetResourceString("MustUseCCRewrite", contractKind, simpleName),
+                    null,
+                    null,
+                    null
+                );
 
             _assertingMustUseRewriter = false;
         }
@@ -133,24 +140,26 @@ namespace System.Diagnostics.Contracts
             Contract.EndContractBlock();
 
             // displayMessage == null means: yes we handled it. Otherwise it is the localized failure message
-            var displayMessage =
-                System.Runtime.CompilerServices.ContractHelper.RaiseContractFailedEvent(
-                    failureKind,
-                    userMessage,
-                    conditionText,
-                    innerException
-                );
+            var displayMessage = System
+                .Runtime
+                .CompilerServices
+                .ContractHelper
+                .RaiseContractFailedEvent(failureKind, userMessage, conditionText, innerException);
 
             if (displayMessage == null)
                 return;
 
-            System.Runtime.CompilerServices.ContractHelper.TriggerFailure(
-                failureKind,
-                displayMessage,
-                userMessage,
-                conditionText,
-                innerException
-            );
+            System
+                .Runtime
+                .CompilerServices
+                .ContractHelper
+                .TriggerFailure(
+                    failureKind,
+                    displayMessage,
+                    userMessage,
+                    conditionText,
+                    innerException
+                );
         }
 
         /// <summary>
@@ -410,7 +419,11 @@ namespace System.Runtime.CompilerServices
                 // would be a perf hit and wouldn't significantly improve reliability.
                 // UE: Please mention reliable event handlers should also be marked with the
                 // PrePrepareMethodAttribute to avoid CER eager preparation work when ngen'ed.
-                System.Runtime.CompilerServices.RuntimeHelpers.PrepareContractedDelegate(value);
+                System
+                    .Runtime
+                    .CompilerServices
+                    .RuntimeHelpers
+                    .PrepareContractedDelegate(value);
                 lock (lockObject)
                 {
                     contractFailedEvent += value;
@@ -609,14 +622,17 @@ namespace System.Runtime.CompilerServices
             // Optional info like string for collapsed text vs. expanded text.
             String windowTitle = Environment.GetResourceString(GetResourceNameForFailure(kind));
             const int numStackFramesToSkip = 2; // To make stack traces easier to read
-            System.Diagnostics.Assert.Fail(
-                conditionText,
-                displayMessage,
-                windowTitle,
-                COR_E_CODECONTRACTFAILED,
-                StackTrace.TraceFormat.Normal,
-                numStackFramesToSkip
-            );
+            System
+                .Diagnostics
+                .Assert
+                .Fail(
+                    conditionText,
+                    displayMessage,
+                    windowTitle,
+                    COR_E_CODECONTRACTFAILED,
+                    StackTrace.TraceFormat.Normal,
+                    numStackFramesToSkip
+                );
             // If we got here, the user selected Ignore.  Continue.
         }
 

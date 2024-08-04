@@ -56,130 +56,152 @@ namespace MonoTests.System.Data.Utils
             dtChild.Columns.Add("ChildDateTime", typeof(DateTime));
             dtChild.Columns.Add("ChildDouble", typeof(double));
 
-            dtChild.Rows.Add(
-                new object[]
-                {
-                    1,
-                    1,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(2000, 1, 1, 0, 0, 0, 0),
-                    1.534,
-                }
-            );
-            dtChild.Rows.Add(
-                new object[] { 1, 2, "2-String1", "2-String2", DateTime.MaxValue, -1.534 }
-            );
-            dtChild.Rows.Add(
-                new object[]
-                {
-                    1,
-                    3,
-                    "3-String1",
-                    "3-String2",
-                    DateTime.MinValue,
-                    double.MaxValue / 10000,
-                }
-            );
-            dtChild.Rows.Add(
-                new object[]
-                {
-                    2,
-                    1,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(1973, 6, 20, 0, 0, 0, 0),
-                    double.MinValue * 10000,
-                }
-            );
-            dtChild.Rows.Add(
-                new object[]
-                {
-                    2,
-                    2,
-                    "2-String1",
-                    "2-String2",
-                    new DateTime(2008, 12, 1, 13, 59, 59, 59),
-                    0.45,
-                }
-            );
-            dtChild.Rows.Add(
-                new object[]
-                {
-                    2,
-                    3,
-                    "3-String1",
-                    "3-String2",
-                    new DateTime(2003, 1, 1, 1, 1, 1, 1),
-                    0.55,
-                }
-            );
-            dtChild.Rows.Add(
-                new object[]
-                {
-                    5,
-                    1,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(2002, 1, 1, 1, 1, 1, 1),
-                    0,
-                }
-            );
-            dtChild.Rows.Add(
-                new object[]
-                {
-                    5,
-                    2,
-                    "2-String1",
-                    "2-String2",
-                    new DateTime(2001, 1, 1, 1, 1, 1, 1),
-                    10,
-                }
-            );
-            dtChild.Rows.Add(
-                new object[]
-                {
-                    5,
-                    3,
-                    "3-String1",
-                    "3-String2",
-                    new DateTime(2000, 1, 1, 1, 1, 1, 1),
-                    20,
-                }
-            );
-            dtChild.Rows.Add(
-                new object[]
-                {
-                    6,
-                    1,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(2000, 1, 1, 1, 1, 1, 0),
-                    25,
-                }
-            );
-            dtChild.Rows.Add(
-                new object[]
-                {
-                    6,
-                    2,
-                    "2-String1",
-                    "2-String2",
-                    new DateTime(2000, 1, 1, 1, 1, 0, 0),
-                    30,
-                }
-            );
-            dtChild.Rows.Add(
-                new object[]
-                {
-                    6,
-                    3,
-                    "3-String1",
-                    "3-String2",
-                    new DateTime(2000, 1, 1, 0, 0, 0, 0),
-                    35,
-                }
-            );
+            dtChild
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        1,
+                        1,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(2000, 1, 1, 0, 0, 0, 0),
+                        1.534,
+                    }
+                );
+            dtChild
+                .Rows
+                .Add(new object[] { 1, 2, "2-String1", "2-String2", DateTime.MaxValue, -1.534 });
+            dtChild
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        1,
+                        3,
+                        "3-String1",
+                        "3-String2",
+                        DateTime.MinValue,
+                        double.MaxValue / 10000,
+                    }
+                );
+            dtChild
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        2,
+                        1,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(1973, 6, 20, 0, 0, 0, 0),
+                        double.MinValue * 10000,
+                    }
+                );
+            dtChild
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        2,
+                        2,
+                        "2-String1",
+                        "2-String2",
+                        new DateTime(2008, 12, 1, 13, 59, 59, 59),
+                        0.45,
+                    }
+                );
+            dtChild
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        2,
+                        3,
+                        "3-String1",
+                        "3-String2",
+                        new DateTime(2003, 1, 1, 1, 1, 1, 1),
+                        0.55,
+                    }
+                );
+            dtChild
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        5,
+                        1,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(2002, 1, 1, 1, 1, 1, 1),
+                        0,
+                    }
+                );
+            dtChild
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        5,
+                        2,
+                        "2-String1",
+                        "2-String2",
+                        new DateTime(2001, 1, 1, 1, 1, 1, 1),
+                        10,
+                    }
+                );
+            dtChild
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        5,
+                        3,
+                        "3-String1",
+                        "3-String2",
+                        new DateTime(2000, 1, 1, 1, 1, 1, 1),
+                        20,
+                    }
+                );
+            dtChild
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        6,
+                        1,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(2000, 1, 1, 1, 1, 1, 0),
+                        25,
+                    }
+                );
+            dtChild
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        6,
+                        2,
+                        "2-String1",
+                        "2-String2",
+                        new DateTime(2000, 1, 1, 1, 1, 0, 0),
+                        30,
+                    }
+                );
+            dtChild
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        6,
+                        3,
+                        "3-String1",
+                        "3-String2",
+                        new DateTime(2000, 1, 1, 0, 0, 0, 0),
+                        35,
+                    }
+                );
             dtChild.AcceptChanges();
             return dtChild;
         }
@@ -196,72 +218,84 @@ namespace MonoTests.System.Data.Utils
             dtParent.Columns.Add("ParentDouble", typeof(double));
             dtParent.Columns.Add("ParentBool", typeof(bool));
 
-            dtParent.Rows.Add(
-                new object[]
-                {
-                    1,
-                    "1-String1",
-                    "1-String2",
-                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
-                    1.534,
-                    true,
-                }
-            );
-            dtParent.Rows.Add(
-                new object[]
-                {
-                    2,
-                    "2-String1",
-                    "2-String2",
-                    new DateTime(2004, 1, 1, 0, 0, 0, 1),
-                    -1.534,
-                    true,
-                }
-            );
-            dtParent.Rows.Add(
-                new object[]
-                {
-                    3,
-                    "3-String1",
-                    "3-String2",
-                    new DateTime(2003, 1, 1, 0, 0, 1, 0),
-                    double.MinValue * 10000,
-                    false,
-                }
-            );
-            dtParent.Rows.Add(
-                new object[]
-                {
-                    4,
-                    "4-String1",
-                    "4-String2",
-                    new DateTime(2002, 1, 1, 0, 1, 0, 0),
-                    double.MaxValue / 10000,
-                    true,
-                }
-            );
-            dtParent.Rows.Add(
-                new object[]
-                {
-                    5,
-                    "5-String1",
-                    "5-String2",
-                    new DateTime(2001, 1, 1, 1, 0, 0, 0),
-                    0.755,
-                    true,
-                }
-            );
-            dtParent.Rows.Add(
-                new object[]
-                {
-                    6,
-                    "6-String1",
-                    "6-String2",
-                    new DateTime(2000, 1, 1, 0, 0, 0, 0),
-                    0.001,
-                    false,
-                }
-            );
+            dtParent
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        1,
+                        "1-String1",
+                        "1-String2",
+                        new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                        1.534,
+                        true,
+                    }
+                );
+            dtParent
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        2,
+                        "2-String1",
+                        "2-String2",
+                        new DateTime(2004, 1, 1, 0, 0, 0, 1),
+                        -1.534,
+                        true,
+                    }
+                );
+            dtParent
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        3,
+                        "3-String1",
+                        "3-String2",
+                        new DateTime(2003, 1, 1, 0, 0, 1, 0),
+                        double.MinValue * 10000,
+                        false,
+                    }
+                );
+            dtParent
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        4,
+                        "4-String1",
+                        "4-String2",
+                        new DateTime(2002, 1, 1, 0, 1, 0, 0),
+                        double.MaxValue / 10000,
+                        true,
+                    }
+                );
+            dtParent
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        5,
+                        "5-String1",
+                        "5-String2",
+                        new DateTime(2001, 1, 1, 1, 0, 0, 0),
+                        0.755,
+                        true,
+                    }
+                );
+            dtParent
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        6,
+                        "6-String1",
+                        "6-String2",
+                        new DateTime(2000, 1, 1, 0, 0, 0, 0),
+                        0.001,
+                        false,
+                    }
+                );
             dtParent.AcceptChanges();
             return dtParent;
         }

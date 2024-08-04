@@ -328,9 +328,9 @@ namespace System.Data.Objects.DataClasses
                 return null;
             }
 
-            EntityEntry stateEntry = _context.ObjectStateManager.FindEntityEntry(
-                _wrappedOwner.Entity
-            );
+            EntityEntry stateEntry = _context
+                .ObjectStateManager
+                .FindEntityEntry(_wrappedOwner.Entity);
             EntityState entityState;
             if (stateEntry == null)
             {
@@ -428,10 +428,9 @@ namespace System.Data.Objects.DataClasses
                     // The type name used in the OfType clause must be the name of the
                     // corresponding O-Space Entity type, since the source query will be
                     // parsed using the CLR perspective (by ObjectQuery).
-                    TypeUsage targetOSpaceTypeUsage =
-                        ObjectContext.MetadataWorkspace.GetOSpaceTypeUsage(
-                            TypeUsage.Create(targetEntityType)
-                        );
+                    TypeUsage targetOSpaceTypeUsage = ObjectContext
+                        .MetadataWorkspace
+                        .GetOSpaceTypeUsage(TypeUsage.Create(targetEntityType));
                     targetEntityType = (EntityType)targetOSpaceTypeUsage.EdmType;
                 }
 
@@ -606,7 +605,9 @@ namespace System.Data.Objects.DataClasses
                 {
                     // retrieve the value from the entity key (independent association lookup)
                     value = _wrappedOwner
-                        .EntityKey.EntityKeyValues.Single(ekv => ekv.Key == parameterMember.Name)
+                        .EntityKey
+                        .EntityKeyValues
+                        .Single(ekv => ekv.Key == parameterMember.Name)
                         .Value;
                 }
                 else
@@ -638,9 +639,9 @@ namespace System.Data.Objects.DataClasses
                         ? ((PrimitiveType)parameterEdmType).ClrEquivalentType
                         : (
                             (ClrEnumType)
-                                ObjectContext.MetadataWorkspace.GetObjectSpaceType(
-                                    (EnumType)parameterEdmType
-                                )
+                                ObjectContext
+                                    .MetadataWorkspace
+                                    .GetObjectSpaceType((EnumType)parameterEdmType)
                         ).ClrType;
 
                     queryParam = new ObjectParameter(paramNameGen.Next(), parameterClrType);
@@ -676,8 +677,9 @@ namespace System.Data.Objects.DataClasses
         {
             // retrieve member accessor from the object context (which already keeps track of the relevant
             // metadata)
-            StateManagerTypeMetadata metaType =
-                _context.ObjectStateManager.GetOrAddStateManagerTypeMetadata(member.DeclaringType);
+            StateManagerTypeMetadata metaType = _context
+                .ObjectStateManager
+                .GetOrAddStateManagerTypeMetadata(member.DeclaringType);
             StateManagerMemberMetadata metaMember = metaType.Member(
                 metaType.GetOrdinalforCLayerMemberName(member.Name)
             );
@@ -757,9 +759,9 @@ namespace System.Data.Objects.DataClasses
                 throw EntityUtil.RelatedEndNotAttachedToContext(relatedEndName);
             }
 
-            EntityEntry entry = ObjectContext.ObjectStateManager.FindEntityEntry(
-                _wrappedOwner.Entity
-            );
+            EntityEntry entry = ObjectContext
+                .ObjectStateManager
+                .FindEntityEntry(_wrappedOwner.Entity);
             //Throw in case entity is in deleted state
             if (entry != null && entry.State == EntityState.Deleted)
             {
@@ -996,9 +998,9 @@ namespace System.Data.Objects.DataClasses
                     MergeOption.OverwriteChanges,
                     false /*setIsLoaded*/
                 );
-                ReferentialConstraint constraint = (
-                    (AssociationType)RelationMetadata
-                ).ReferentialConstraints.FirstOrDefault();
+                ReferentialConstraint constraint = ((AssociationType)RelationMetadata)
+                    .ReferentialConstraints
+                    .FirstOrDefault();
                 if (constraint != null)
                 {
                     ObjectStateManager stateManager = ObjectContext.ObjectStateManager;
@@ -1070,9 +1072,9 @@ namespace System.Data.Objects.DataClasses
             }
 
             // find state entry
-            EntityEntry stateEntry = this.ObjectContext.ObjectStateManager.GetEntityEntry(
-                _wrappedOwner.Entity
-            );
+            EntityEntry stateEntry = this.ObjectContext
+                .ObjectStateManager
+                .GetEntityEntry(_wrappedOwner.Entity);
             if (
                 stateEntry.State != EntityState.Modified
                 && stateEntry.State != EntityState.Unchanged
@@ -1110,9 +1112,9 @@ namespace System.Data.Objects.DataClasses
                 "ObjectContext must not be null after call to ValidateOwnerForAttach"
             );
             Debug.Assert(!UsingNoTracking, "We should not be here for NoTracking case.");
-            EntityEntry stateEntry = ObjectContext.ObjectStateManager.FindEntityEntry(
-                wrappedEntity.Entity
-            );
+            EntityEntry stateEntry = ObjectContext
+                .ObjectStateManager
+                .FindEntityEntry(wrappedEntity.Entity);
             if (
                 null == stateEntry
                 || !Object.ReferenceEquals(stateEntry.Entity, wrappedEntity.Entity)
@@ -1320,9 +1322,9 @@ namespace System.Data.Objects.DataClasses
         internal void ValidateStateForAdd(IEntityWrapper wrappedEntity)
         {
             Debug.Assert(wrappedEntity != null, "IEntityWrapper instance is null.");
-            EntityEntry entry = this.ObjectContext.ObjectStateManager.FindEntityEntry(
-                wrappedEntity.Entity
-            );
+            EntityEntry entry = this.ObjectContext
+                .ObjectStateManager
+                .FindEntityEntry(wrappedEntity.Entity);
             if (entry != null && entry.State == EntityState.Deleted)
             {
                 throw EntityUtil.UnableToAddRelationshipWithDeletedEntity();
@@ -1536,19 +1538,30 @@ namespace System.Data.Objects.DataClasses
                             {
                                 // The Entity could have been already wrapped by DetectChanges
                                 if (
-                                    !attachedRelatedEnd.WrappedOwner.Context.ObjectStateManager.TransactionManager.WrappedEntities.ContainsKey(
-                                        entityToAdd.Entity
-                                    )
+                                    !attachedRelatedEnd
+                                        .WrappedOwner
+                                        .Context
+                                        .ObjectStateManager
+                                        .TransactionManager
+                                        .WrappedEntities
+                                        .ContainsKey(entityToAdd.Entity)
                                 )
                                 {
-                                    attachedRelatedEnd.WrappedOwner.Context.ObjectStateManager.TransactionManager.WrappedEntities.Add(
-                                        entityToAdd.Entity,
-                                        entityToAdd
-                                    );
+                                    attachedRelatedEnd
+                                        .WrappedOwner
+                                        .Context
+                                        .ObjectStateManager
+                                        .TransactionManager
+                                        .WrappedEntities
+                                        .Add(entityToAdd.Entity, entityToAdd);
                                 }
-                                attachedRelatedEnd.WrappedOwner.Context.ObjectStateManager.TransactionManager.ProcessedEntities.Add(
-                                    attachedRelatedEnd.WrappedOwner
-                                );
+                                attachedRelatedEnd
+                                    .WrappedOwner
+                                    .Context
+                                    .ObjectStateManager
+                                    .TransactionManager
+                                    .ProcessedEntities
+                                    .Add(attachedRelatedEnd.WrappedOwner);
                             }
 
                             attachedRelatedEnd.AddGraphToObjectStateManager(
@@ -1583,7 +1596,11 @@ namespace System.Data.Objects.DataClasses
                                     "entityToAdd should be set if attachedRelatedEnd is set"
                                 );
 
-                                attachedRelatedEnd.WrappedOwner.Context.ObjectStateManager.DegradePromotedRelationships();
+                                attachedRelatedEnd
+                                    .WrappedOwner
+                                    .Context
+                                    .ObjectStateManager
+                                    .DegradePromotedRelationships();
 
                                 // Remove the source entity from the target related end
                                 attachedRelatedEnd.FixupOtherEndOfRelationshipForRemove(
@@ -1609,7 +1626,12 @@ namespace System.Data.Objects.DataClasses
                     }
                     finally
                     {
-                        attachedRelatedEnd.WrappedOwner.Context.ObjectStateManager.TransactionManager.EndAddTracking();
+                        attachedRelatedEnd
+                            .WrappedOwner
+                            .Context
+                            .ObjectStateManager
+                            .TransactionManager
+                            .EndAddTracking();
                     }
                 }
             }
@@ -1691,12 +1713,12 @@ namespace System.Data.Objects.DataClasses
                     this.UpdateSnapshotOfRelationships(wrappedEntity);
                     if (doAttach)
                     {
-                        EntityEntry entry = _context.ObjectStateManager.GetEntityEntry(
-                            wrappedEntity.Entity
-                        );
-                        wrappedEntity.RelationshipManager.CheckReferentialConstraintProperties(
-                            entry
-                        );
+                        EntityEntry entry = _context
+                            .ObjectStateManager
+                            .GetEntityEntry(wrappedEntity.Entity);
+                        wrappedEntity
+                            .RelationshipManager
+                            .CheckReferentialConstraintProperties(entry);
                     }
                 }
             }
@@ -1966,9 +1988,9 @@ namespace System.Data.Objects.DataClasses
             //check to see if entity is already added to the cache
             //search by object reference so that we will not find any entries with the same key but a different object instance
             // NOTE: if (cacheEntry.Entity == entity) then this part of the graph is skipped
-            EntityEntry cacheEntry = _context.ObjectStateManager.FindEntityEntry(
-                wrappedEntity.Entity
-            );
+            EntityEntry cacheEntry = _context
+                .ObjectStateManager
+                .FindEntityEntry(wrappedEntity.Entity);
             Debug.Assert(
                 cacheEntry == null || cacheEntry.Entity == wrappedEntity.Entity,
                 "Expected to have looked up this state entry by reference, how did we get a different entity?"
@@ -2022,10 +2044,14 @@ namespace System.Data.Objects.DataClasses
                     )
                     {
                         throw new InvalidOperationException(
-                            System.Data.Entity.Strings.ObjectStateManager_ConflictingChangesOfRelationshipDetected(
-                                otherEndAsRef.RelationshipNavigation.To,
-                                otherEndAsRef.RelationshipNavigation.RelationshipName
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ObjectStateManager_ConflictingChangesOfRelationshipDetected(
+                                    otherEndAsRef.RelationshipNavigation.To,
+                                    otherEndAsRef.RelationshipNavigation.RelationshipName
+                                )
                         );
                     }
                 }
@@ -2109,13 +2135,12 @@ namespace System.Data.Objects.DataClasses
                         this.UpdateSnapshotOfRelationships(wrappedEntity);
                         if (doAttach && cacheEntry.State != EntityState.Added)
                         {
-                            EntityEntry entry =
-                                this.ObjectContext.ObjectStateManager.GetEntityEntry(
-                                    wrappedEntity.Entity
-                                );
-                            wrappedEntity.RelationshipManager.CheckReferentialConstraintProperties(
-                                entry
-                            );
+                            EntityEntry entry = this.ObjectContext
+                                .ObjectStateManager
+                                .GetEntityEntry(wrappedEntity.Entity);
+                            wrappedEntity
+                                .RelationshipManager
+                                .CheckReferentialConstraintProperties(entry);
                         }
                     }
                 }
@@ -2205,15 +2230,17 @@ namespace System.Data.Objects.DataClasses
                     _context.ObjectStateManager.TransactionManager.IsAttachTracking
                     || _context.ObjectStateManager.TransactionManager.IsAddTracking
                 )
-                || _context.ObjectStateManager.TransactionManager.ProcessedEntities.Contains(
-                    wrappedEntity
-                )
+                || _context
+                    .ObjectStateManager
+                    .TransactionManager
+                    .ProcessedEntities
+                    .Contains(wrappedEntity)
             )
             {
                 //check to see if entity is already removed from the cache
-                EntityEntry cacheEntry = _context.ObjectStateManager.FindEntityEntry(
-                    wrappedEntity.Entity
-                );
+                EntityEntry cacheEntry = _context
+                    .ObjectStateManager
+                    .FindEntityEntry(wrappedEntity.Entity);
 
                 if (
                     null != cacheEntry
@@ -2264,11 +2291,13 @@ namespace System.Data.Objects.DataClasses
             );
             EntityKey entityKey = wrappedEntity.EntityKey;
             EntityKey ownerKey = _wrappedOwner.EntityKey;
-            return this._context.ObjectStateManager.FindRelationship(
-                _relationshipSet,
-                new KeyValuePair<string, EntityKey>(_navigation.From, ownerKey),
-                new KeyValuePair<string, EntityKey>(_navigation.To, entityKey)
-            );
+            return this._context
+                .ObjectStateManager
+                .FindRelationship(
+                    _relationshipSet,
+                    new KeyValuePair<string, EntityKey>(_navigation.From, ownerKey),
+                    new KeyValuePair<string, EntityKey>(_navigation.To, entityKey)
+                );
         }
 
         internal void Clear(
@@ -2440,10 +2469,9 @@ namespace System.Data.Objects.DataClasses
             }
             else
             {
-                principalKey = _context.ObjectStateManager.CreateEntityKey(
-                    principalEntitySet,
-                    wrappedRelatedEntity.Entity
-                );
+                principalKey = _context
+                    .ObjectStateManager
+                    .CreateEntityKey(principalEntitySet, wrappedRelatedEntity.Entity);
             }
             return principalKey;
         }
@@ -2779,18 +2807,20 @@ namespace System.Data.Objects.DataClasses
             EntityUtil.CheckEntityKeyNull(ownerKey);
             EntityUtil.CheckEntityKeyNull(entityKey);
 
-            return this.ObjectContext.ObjectStateManager.AddRelation(
-                new RelationshipWrapper(
-                    (AssociationSet)_relationshipSet,
-                    new KeyValuePair<string, EntityKey>(_navigation.From, ownerKey),
-                    new KeyValuePair<string, EntityKey>(_navigation.To, entityKey)
-                ),
-                // When Add method is called through Load API the relationship cache entries
-                // needs to be added to ObjectStateManager in Unchanged state rather then Added state
-                (addRelationshipAsUnchanged || doAttach)
-                    ? EntityState.Unchanged
-                    : EntityState.Added
-            );
+            return this.ObjectContext
+                .ObjectStateManager
+                .AddRelation(
+                    new RelationshipWrapper(
+                        (AssociationSet)_relationshipSet,
+                        new KeyValuePair<string, EntityKey>(_navigation.From, ownerKey),
+                        new KeyValuePair<string, EntityKey>(_navigation.To, entityKey)
+                    ),
+                    // When Add method is called through Load API the relationship cache entries
+                    // needs to be added to ObjectStateManager in Unchanged state rather then Added state
+                    (addRelationshipAsUnchanged || doAttach)
+                        ? EntityState.Unchanged
+                        : EntityState.Added
+                );
         }
 
         private static void WalkObjectGraphToIncludeAllRelatedEntities(
@@ -2814,10 +2844,12 @@ namespace System.Data.Objects.DataClasses
             if (
                 wrappedEntity.Context != null
                 && wrappedEntity.Context.ObjectStateManager.TransactionManager.IsAttachTracking
-                && wrappedEntity.Context.ObjectStateManager.TransactionManager.PromotedKeyEntries.TryGetValue(
-                    wrappedEntity.Entity,
-                    out entry
-                )
+                && wrappedEntity
+                    .Context
+                    .ObjectStateManager
+                    .TransactionManager
+                    .PromotedKeyEntries
+                    .TryGetValue(wrappedEntity.Entity, out entry)
             )
             {
                 // This is executed only in the cleanup code from ObjectContext.AttachTo()
@@ -2886,9 +2918,10 @@ namespace System.Data.Objects.DataClasses
             EntityEntry entry = null;
             if (wrappedEntity.Context != null)
             {
-                entry = wrappedEntity.Context.ObjectStateManager.FindEntityEntry(
-                    wrappedEntity.Entity
-                );
+                entry = wrappedEntity
+                    .Context
+                    .ObjectStateManager
+                    .FindEntityEntry(wrappedEntity.Entity);
 
                 if (entry != null)
                 {
@@ -2923,11 +2956,14 @@ namespace System.Data.Objects.DataClasses
                 EntityKey ownerKey = wrappedOwner.EntityKey;
                 EntityKey entityKey = wrappedEntity.EntityKey;
 
-                entry = wrappedEntity.Context.ObjectStateManager.DeleteRelationship(
-                    relationshipSet,
-                    new KeyValuePair<string, EntityKey>(navigation.From, ownerKey),
-                    new KeyValuePair<string, EntityKey>(navigation.To, entityKey)
-                );
+                entry = wrappedEntity
+                    .Context
+                    .ObjectStateManager
+                    .DeleteRelationship(
+                        relationshipSet,
+                        new KeyValuePair<string, EntityKey>(navigation.From, ownerKey),
+                        new KeyValuePair<string, EntityKey>(navigation.To, entityKey)
+                    );
             }
             return entry;
         }
@@ -2948,11 +2984,14 @@ namespace System.Data.Objects.DataClasses
             {
                 EntityKey ownerKey = wrappedOwner.EntityKey;
                 EntityKey entityKey = wrappedEntity.EntityKey;
-                RelationshipEntry entry = wrappedEntity.Context.ObjectStateManager.FindRelationship(
-                    relationshipSet,
-                    new KeyValuePair<string, EntityKey>(navigation.From, ownerKey),
-                    new KeyValuePair<string, EntityKey>(navigation.To, entityKey)
-                );
+                RelationshipEntry entry = wrappedEntity
+                    .Context
+                    .ObjectStateManager
+                    .FindRelationship(
+                        relationshipSet,
+                        new KeyValuePair<string, EntityKey>(navigation.From, ownerKey),
+                        new KeyValuePair<string, EntityKey>(navigation.To, entityKey)
+                    );
                 if (entry != null)
                 {
                     entry.DetachRelationshipEntry();
@@ -3159,10 +3198,9 @@ namespace System.Data.Objects.DataClasses
             );
 
             // find the TypeMetadata for the given relationship
-            relationshipType = context.MetadataWorkspace.GetItem<EdmType>(
-                _navigation.RelationshipName,
-                DataSpace.CSpace
-            );
+            relationshipType = context
+                .MetadataWorkspace
+                .GetItem<EdmType>(_navigation.RelationshipName, DataSpace.CSpace);
             if (relationshipType == null)
             {
                 throw EntityUtil.NoRelationshipSetMatched(_navigation.RelationshipName);
@@ -3231,10 +3269,9 @@ namespace System.Data.Objects.DataClasses
             Debug.Assert(wrappedEntity != null, "IEntityWrapper instance is null.");
             EnsureRelationshipNavigationAccessorsInitialized();
             return (RelatedEnd)
-                wrappedEntity.RelationshipManager.GetRelatedEnd(
-                    _navigation.Reverse,
-                    _relationshipFixer
-                );
+                wrappedEntity
+                    .RelationshipManager
+                    .GetRelatedEnd(_navigation.Reverse, _relationshipFixer);
         }
 
         // We have to allow a default constructor for serialization, so we need to make sure that the only
@@ -3312,24 +3349,25 @@ namespace System.Data.Objects.DataClasses
                 {
                     string navigationPropertyName = this.TargetAccessor.PropertyName;
 
-                    EntityType entityType =
-                        _wrappedOwner.Context.MetadataWorkspace.GetItem<EntityType>(
-                            _wrappedOwner.IdentityType.FullName,
-                            DataSpace.OSpace
-                        );
+                    EntityType entityType = _wrappedOwner
+                        .Context
+                        .MetadataWorkspace
+                        .GetItem<EntityType>(_wrappedOwner.IdentityType.FullName, DataSpace.OSpace);
                     NavigationProperty member;
                     if (
-                        !entityType.NavigationProperties.TryGetValue(
-                            navigationPropertyName,
-                            false,
-                            out member
-                        )
+                        !entityType
+                            .NavigationProperties
+                            .TryGetValue(navigationPropertyName, false, out member)
                     )
                     {
                         throw new InvalidOperationException(
-                            System.Data.Entity.Strings.RelationshipManager_NavigationPropertyNotFound(
-                                navigationPropertyName
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .RelationshipManager_NavigationPropertyNotFound(
+                                    navigationPropertyName
+                                )
                         );
                     }
                     // Avoid metadata lookups by caching the navigation property locally
@@ -3393,11 +3431,9 @@ namespace System.Data.Objects.DataClasses
                 {
                     AssociationEndMember sourceEnd;
                     if (
-                        associationType.AssociationEndMembers.TryGetValue(
-                            sourceRoleName,
-                            false,
-                            out sourceEnd
-                        )
+                        associationType
+                            .AssociationEndMembers
+                            .TryGetValue(sourceRoleName, false, out sourceEnd)
                     )
                     {
                         EntityType sourceEntityType = MetadataHelper.GetEntityTypeForEnd(sourceEnd);
@@ -3411,11 +3447,9 @@ namespace System.Data.Objects.DataClasses
 
                     AssociationEndMember targetEnd;
                     if (
-                        associationType.AssociationEndMembers.TryGetValue(
-                            targetRoleName,
-                            false,
-                            out targetEnd
-                        )
+                        associationType
+                            .AssociationEndMembers
+                            .TryGetValue(targetRoleName, false, out targetEnd)
                     )
                     {
                         EntityType targetEntityType = MetadataHelper.GetEntityTypeForEnd(targetEnd);

@@ -301,12 +301,15 @@ namespace Mono.CSharp
                         {
                             ctx.Module.Compiler.Report.SymbolRelatedToPreviousError(best);
                             ctx.Module.Compiler.Report.SymbolRelatedToPreviousError(ts);
-                            ctx.Module.Compiler.Report.Error(
-                                433,
-                                loc,
-                                "The imported type `{0}' is defined multiple times",
-                                ts.GetSignatureForError()
-                            );
+                            ctx.Module
+                                .Compiler
+                                .Report
+                                .Error(
+                                    433,
+                                    loc,
+                                    "The imported type `{0}' is defined multiple times",
+                                    ts.GetSignatureForError()
+                                );
                         }
 
                         break;
@@ -333,13 +336,16 @@ namespace Mono.CSharp
                         ctx.Module.Compiler.Report.SymbolRelatedToPreviousError(ts);
                     }
 
-                    ctx.Module.Compiler.Report.Warning(
-                        436,
-                        2,
-                        loc,
-                        "The type `{0}' conflicts with the imported type of same name'. Ignoring the imported type definition",
-                        best.GetSignatureForError()
-                    );
+                    ctx.Module
+                        .Compiler
+                        .Report
+                        .Warning(
+                            436,
+                            2,
+                            loc,
+                            "The type `{0}' conflicts with the imported type of same name'. Ignoring the imported type definition",
+                            best.GetSignatureForError()
+                        );
                 }
 
                 //
@@ -394,14 +400,17 @@ namespace Mono.CSharp
                 {
                     //ctx.Module.Compiler.Report.SymbolRelatedToPreviousError (texpr.Type);
                     // ctx.Module.Compiler.Report.SymbolRelatedToPreviousError (ns.loc, "");
-                    ctx.Module.Compiler.Report.Warning(
-                        437,
-                        2,
-                        loc,
-                        "The type `{0}' conflicts with the imported namespace `{1}'. Using the definition found in the source file",
-                        texpr.GetSignatureForError(),
-                        ns.GetSignatureForError()
-                    );
+                    ctx.Module
+                        .Compiler
+                        .Report
+                        .Warning(
+                            437,
+                            2,
+                            loc,
+                            "The type `{0}' conflicts with the imported namespace `{1}'. Using the definition found in the source file",
+                            texpr.GetSignatureForError(),
+                            ns.GetSignatureForError()
+                        );
                 }
 
                 if (texpr.MemberDefinition.IsImported)
@@ -691,13 +700,16 @@ namespace Mono.CSharp
                     }
                 }
 
-                compiled.Compiler.Report.Warning(
-                    3005,
-                    1,
-                    compiled.Location,
-                    "Identifier `{0}' differing only in case is not CLS-compliant",
-                    compiled.GetSignatureForError()
-                );
+                compiled
+                    .Compiler
+                    .Report
+                    .Warning(
+                        3005,
+                        1,
+                        compiled.Location,
+                        "Identifier `{0}' differing only in case is not CLS-compliant",
+                        compiled.GetSignatureForError()
+                    );
             }
         }
     }
@@ -884,11 +896,13 @@ namespace Mono.CSharp
         {
             if (DeclarationFound)
             {
-                Compiler.Report.Error(
-                    1529,
-                    un.Location,
-                    "A using clause must precede all other namespace elements except extern alias declarations"
-                );
+                Compiler
+                    .Report
+                    .Error(
+                        1529,
+                        un.Location,
+                        "A using clause must precede all other namespace elements except extern alias declarations"
+                    );
             }
 
             if (clauses == null)
@@ -901,11 +915,13 @@ namespace Mono.CSharp
         {
             if (DeclarationFound)
             {
-                Compiler.Report.Error(
-                    1529,
-                    un.Location,
-                    "A using clause must precede all other namespace elements except extern alias declarations"
-                );
+                Compiler
+                    .Report
+                    .Error(
+                        1529,
+                        un.Location,
+                        "A using clause must precede all other namespace elements except extern alias declarations"
+                    );
             }
 
             AddAlias(un);
@@ -925,12 +941,14 @@ namespace Mono.CSharp
                     if (a != null && a.Alias.Value == un.Alias.Value)
                     {
                         Compiler.Report.SymbolRelatedToPreviousError(a.Location, "");
-                        Compiler.Report.Error(
-                            1537,
-                            un.Location,
-                            "The using alias `{0}' appeared previously in this namespace",
-                            un.Alias.Value
-                        );
+                        Compiler
+                            .Report
+                            .Error(
+                                1537,
+                                un.Location,
+                                "The using alias `{0}' appeared previously in this namespace",
+                                un.Alias.Value
+                            );
                     }
                 }
             }
@@ -1333,13 +1351,15 @@ namespace Mono.CSharp
                         // TODO: Namespace has broken location
                         //Report.SymbolRelatedToPreviousError (fne.Location, null);
                         Compiler.Report.SymbolRelatedToPreviousError(uan.Location, null);
-                        Compiler.Report.Error(
-                            576,
-                            loc,
-                            "Namespace `{0}' contains a definition with same name as alias `{1}'",
-                            GetSignatureForError(),
-                            name
-                        );
+                        Compiler
+                            .Report
+                            .Error(
+                                576,
+                                loc,
+                                "Namespace `{0}' contains a definition with same name as alias `{1}'",
+                                GetSignatureForError(),
+                                name
+                            );
                     }
 
                     if (uan.ResolvedExpression == null)
@@ -1715,13 +1735,15 @@ namespace Mono.CSharp
 
         void Warning_DuplicateEntry(UsingClause entry)
         {
-            Compiler.Report.Warning(
-                105,
-                3,
-                entry.Location,
-                "The using directive for `{0}' appeared previously in this namespace",
-                entry.ResolvedExpression.GetSignatureForError()
-            );
+            Compiler
+                .Report
+                .Warning(
+                    105,
+                    3,
+                    entry.Location,
+                    "The using directive for `{0}' appeared previously in this namespace",
+                    entry.ResolvedExpression.GetSignatureForError()
+                );
         }
 
         public override void Accept(StructuralVisitor visitor)
@@ -1750,12 +1772,14 @@ namespace Mono.CSharp
                 resolved = null;
 
                 compiler.Report.SymbolRelatedToPreviousError(type);
-                compiler.Report.Error(
-                    138,
-                    Location,
-                    "A `using' directive can only be applied to namespaces but `{0}' denotes a type. Consider using a `using static' instead",
-                    type.GetSignatureForError()
-                );
+                compiler
+                    .Report
+                    .Error(
+                        138,
+                        Location,
+                        "A `using' directive can only be applied to namespaces but `{0}' denotes a type. Consider using a `using static' instead",
+                        type.GetSignatureForError()
+                    );
             }
         }
     }
@@ -1776,12 +1800,14 @@ namespace Mono.CSharp
             if (ns != null)
             {
                 var compiler = ctx.Module.Compiler;
-                compiler.Report.Error(
-                    7007,
-                    Location,
-                    "A 'using static' directive can only be applied to types but `{0}' denotes a namespace. Consider using a `using' directive instead",
-                    ns.GetSignatureForError()
-                );
+                compiler
+                    .Report
+                    .Error(
+                        7007,
+                        Location,
+                        "A 'using static' directive can only be applied to types but `{0}' denotes a namespace. Consider using a `using' directive instead",
+                        ns.GetSignatureForError()
+                    );
                 return;
             }
 
@@ -1855,12 +1881,15 @@ namespace Mono.CSharp
             var ns = ctx.Module.GetRootNamespace(Alias.Value);
             if (ns == null)
             {
-                ctx.Module.Compiler.Report.Error(
-                    430,
-                    Location,
-                    "The extern alias `{0}' was not specified in -reference option",
-                    Alias.Value
-                );
+                ctx.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        430,
+                        Location,
+                        "The extern alias `{0}' was not specified in -reference option",
+                        Alias.Value
+                    );
                 return;
             }
 

@@ -304,11 +304,13 @@ namespace MonoTests.System
             AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = ASSEMBLY_NAME;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
-            var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                assemblyName,
-                AssemblyBuilderAccess.RunAndSave,
-                Path.GetTempPath()
-            );
+            var assembly = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(
+                    assemblyName,
+                    AssemblyBuilderAccess.RunAndSave,
+                    Path.GetTempPath()
+                );
             module = assembly.DefineDynamicModule("module1");
 #endif
         }
@@ -431,11 +433,13 @@ namespace MonoTests.System
             );
             Assert.IsTrue(
                 mi.GetParameters()[2]
-                    .ParameterType.IsAssignableFrom(mi.GetParameters()[1].ParameterType)
+                    .ParameterType
+                    .IsAssignableFrom(mi.GetParameters()[1].ParameterType)
             );
             Assert.IsTrue(
                 mi.GetParameters()[1]
-                    .ParameterType.IsAssignableFrom(mi.GetParameters()[1].ParameterType)
+                    .ParameterType
+                    .IsAssignableFrom(mi.GetParameters()[1].ParameterType)
             );
 
             // Tests for type parameters
@@ -445,7 +449,8 @@ namespace MonoTests.System
             );
             Assert.IsTrue(
                 mi.GetParameters()[0]
-                    .ParameterType.IsAssignableFrom(mi.GetParameters()[0].ParameterType)
+                    .ParameterType
+                    .IsAssignableFrom(mi.GetParameters()[0].ParameterType)
             );
             Assert.IsFalse(mi.GetParameters()[0].ParameterType.IsAssignableFrom(typeof(int)));
 
@@ -4157,7 +4162,8 @@ namespace MonoTests.System
                 var x = typeof(DeclaringMethodFoo)
                     .GetMethod("Test2")
                     .GetParameters()[0]
-                    .ParameterType.DeclaringMethod;
+                    .ParameterType
+                    .DeclaringMethod;
                 Assert.Fail("#4");
             }
             catch (InvalidOperationException) { }
@@ -4167,7 +4173,8 @@ namespace MonoTests.System
                 var x = typeof(DeclaringMethodBar<>)
                     .GetMethod("Test2")
                     .GetParameters()[0]
-                    .ParameterType.DeclaringMethod;
+                    .ParameterType
+                    .DeclaringMethod;
                 Assert.Fail("#5");
             }
             catch (InvalidOperationException) { }

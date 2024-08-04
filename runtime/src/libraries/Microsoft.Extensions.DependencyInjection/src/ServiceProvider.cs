@@ -223,9 +223,10 @@ namespace Microsoft.Extensions.DependencyInjection
             OnResolve(serviceAccessor.CallSite, serviceProviderEngineScope);
             DependencyInjectionEventSource.Log.ServiceResolved(this, serviceIdentifier.ServiceType);
             object? result = serviceAccessor.RealizedService?.Invoke(serviceProviderEngineScope);
-            System.Diagnostics.Debug.Assert(
-                result is null || CallSiteFactory.IsService(serviceIdentifier)
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(result is null || CallSiteFactory.IsService(serviceIdentifier));
             return result;
         }
 
@@ -267,11 +268,9 @@ namespace Microsoft.Extensions.DependencyInjection
             );
             if (callSite != null)
             {
-                DependencyInjectionEventSource.Log.CallSiteBuilt(
-                    this,
-                    serviceIdentifier.ServiceType,
-                    callSite
-                );
+                DependencyInjectionEventSource
+                    .Log
+                    .CallSiteBuilt(this, serviceIdentifier.ServiceType, callSite);
                 OnCreate(callSite);
 
                 // Optimize singleton case

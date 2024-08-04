@@ -456,7 +456,8 @@ namespace System.Management
         public static string ToDmtfTimeInterval(TimeSpan timespan)
         {
             string dmtftimespan = timespan
-                .Days.ToString((IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(int)))
+                .Days
+                .ToString((IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(int)))
                 .PadLeft(8, '0');
             IFormatProvider frmInt32 = (IFormatProvider)
                 CultureInfo.InvariantCulture.GetFormat(typeof(int));

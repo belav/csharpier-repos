@@ -38,9 +38,9 @@ namespace System.IdentityModel.Configuration
                 SystemIdentityModelSection section = SystemIdentityModelSection.Current;
 
                 return (section != null)
-                    ? section.IdentityConfigurationElements.GetElement(
-                        ConfigurationStrings.DefaultServiceName
-                    )
+                    ? section
+                        .IdentityConfigurationElements
+                        .GetElement(ConfigurationStrings.DefaultServiceName)
                     : null;
             }
         }

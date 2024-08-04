@@ -89,12 +89,14 @@ namespace System.Formats.Tar.Tests
 
                             // Creating device files needs elevation
                             Interop.CheckIo(
-                                Interop.Sys.CreateBlockDevice(
-                                    blockDevicePath,
-                                    (int)DefaultFileMode,
-                                    TestBlockDeviceMajor,
-                                    TestBlockDeviceMinor
-                                )
+                                Interop
+                                    .Sys
+                                    .CreateBlockDevice(
+                                        blockDevicePath,
+                                        (int)DefaultFileMode,
+                                        TestBlockDeviceMajor,
+                                        TestBlockDeviceMinor
+                                    )
                             );
 
                             await using (MemoryStream archive = new MemoryStream())
@@ -162,12 +164,14 @@ namespace System.Formats.Tar.Tests
 
                             // Creating device files needs elevation
                             Interop.CheckIo(
-                                Interop.Sys.CreateCharacterDevice(
-                                    characterDevicePath,
-                                    (int)DefaultFileMode,
-                                    TestCharacterDeviceMajor,
-                                    TestCharacterDeviceMinor
-                                )
+                                Interop
+                                    .Sys
+                                    .CreateCharacterDevice(
+                                        characterDevicePath,
+                                        (int)DefaultFileMode,
+                                        TestCharacterDeviceMajor,
+                                        TestCharacterDeviceMinor
+                                    )
                             );
 
                             await using (MemoryStream archive = new MemoryStream())

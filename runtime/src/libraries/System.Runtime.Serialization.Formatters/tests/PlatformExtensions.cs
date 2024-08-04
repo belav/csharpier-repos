@@ -13,7 +13,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         private static bool IsNetFxPatchedVersion(int build)
         {
             string versionRaw = RuntimeInformation
-                .FrameworkDescription.Replace(".NET Framework", "")
+                .FrameworkDescription
+                .Replace(".NET Framework", "")
                 .Trim();
             if (Version.TryParse(versionRaw, out Version version))
             {

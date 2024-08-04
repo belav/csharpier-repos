@@ -111,15 +111,17 @@ namespace System
                 }
                 if (array[a].queries.Count == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.UTTDuplicate,
-                                array[a].ToString(),
-                                array[a - 1].ToString()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.UTTDuplicate,
+                                    array[a].ToString(),
+                                    array[a - 1].ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 if (b - a == 1)
                 {
@@ -192,11 +194,13 @@ namespace System
             {
                 if (varEndIndex != -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(
-                            SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, part)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(
+                                SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, part)
+                            )
+                        );
                 }
                 return UriTemplatePartType.Literal;
             }
@@ -204,11 +208,13 @@ namespace System
             {
                 if (varEndIndex < varStartIndex + 2)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(
-                            SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, part)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(
+                                SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, part)
+                            )
+                        );
                 }
                 if (varStartIndex > 0)
                 {
@@ -354,11 +360,13 @@ namespace System
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UTTOtherAmbiguousQueries, array[a].ToString())
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.UTTOtherAmbiguousQueries, array[a].ToString())
+                            )
+                        );
                 }
             }
             // now just ensure that each template has a unique tuple of values for the names
@@ -375,28 +383,32 @@ namespace System
                     {
                         if (!array[i + a].IsEquivalentTo(array[j + a]))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.UTTAmbiguousQueries,
-                                        array[a + i].ToString(),
-                                        array[j + a].ToString()
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.UTTAmbiguousQueries,
+                                            array[a + i].ToString(),
+                                            array[j + a].ToString()
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         Fx.Assert(array[i + a].IsEquivalentTo(array[j + a]), "bad equiv logic");
                         if (!allowDuplicateEquivalentUriTemplates)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.UTTDuplicate,
-                                        array[a + i].ToString(),
-                                        array[j + a].ToString()
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.UTTDuplicate,
+                                            array[a + i].ToString(),
+                                            array[j + a].ToString()
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                 }

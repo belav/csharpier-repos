@@ -29,9 +29,9 @@ namespace System.ServiceModel
             {
                 if (!BasicHttpMessageCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.clientCredentialType = value;
             }
@@ -73,20 +73,22 @@ namespace System.ServiceModel
                         break;
                     default:
                         Fx.Assert("Unsupported basic http message credential type");
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException()
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new NotSupportedException());
                 }
             }
             else
             {
                 if (this.clientCredentialType != BasicHttpMessageCredentialType.Certificate)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.BasicHttpMessageSecurityRequiresCertificate)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.BasicHttpMessageSecurityRequiresCertificate)
+                            )
+                        );
                 }
                 result = SecurityBindingElement.CreateMutualCertificateBindingElement(
                     MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10,

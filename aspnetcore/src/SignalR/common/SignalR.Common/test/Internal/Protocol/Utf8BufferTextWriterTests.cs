@@ -102,9 +102,9 @@ public class Utf8BufferTextWriterTests
         textWriter.Flush();
         Assert.Equal(4004, bufferWriter.Position);
 
-        var result = Encoding.UTF8.GetString(
-            bufferWriter.CurrentSegment.Slice(0, bufferWriter.Position).ToArray()
-        );
+        var result = Encoding
+            .UTF8
+            .GetString(bufferWriter.CurrentSegment.Slice(0, bufferWriter.Position).ToArray());
         Assert.Equal(2004, result.Length);
 
         Assert.Equal('[', result[0]);

@@ -87,16 +87,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             // make a callsite as if it is contained inside "Microsoft.CSharp.RuntimeBinder.RuntimeBinderException"
             MySite.mySite = CallSite<Action<CallSite, object>>.Create(
-                Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(
-                    CSharpBinderFlags.ResultDiscarded,
-                    "Foo",
-                    null,
-                    typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException),
-                    new CSharpArgumentInfo[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    }
-                )
+                Microsoft
+                    .CSharp
+                    .RuntimeBinder
+                    .Binder
+                    .InvokeMember(
+                        CSharpBinderFlags.ResultDiscarded,
+                        "Foo",
+                        null,
+                        typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException),
+                        new CSharpArgumentInfo[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                        }
+                    )
             );
 
             MySite.mySite.Target(MySite.mySite, typed);
@@ -106,16 +110,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             // make a callsite as if it is contained inside "System.Exception"
             MySite.mySite = CallSite<Action<CallSite, object>>.Create(
-                Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(
-                    CSharpBinderFlags.ResultDiscarded,
-                    "Foo",
-                    null,
-                    typeof(System.Exception),
-                    new CSharpArgumentInfo[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    }
-                )
+                Microsoft
+                    .CSharp
+                    .RuntimeBinder
+                    .Binder
+                    .InvokeMember(
+                        CSharpBinderFlags.ResultDiscarded,
+                        "Foo",
+                        null,
+                        typeof(System.Exception),
+                        new CSharpArgumentInfo[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                        }
+                    )
             );
 
             // call should fail because "Foo" is internal to the calling context.

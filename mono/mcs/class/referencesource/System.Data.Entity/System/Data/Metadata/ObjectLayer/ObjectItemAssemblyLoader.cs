@@ -72,11 +72,13 @@ namespace System.Data.Metadata.Edm
             // Inside the OcCache on EdmItemCollection -> cachedassembly
             // If none of above, setup the LoaderFactory based on the current assembly and EdmItemCollection
             if (
-                sessionData.KnownAssemblies.Contains(
-                    assembly,
-                    sessionData.ObjectItemAssemblyLoaderFactory,
-                    sessionData.EdmItemCollection
-                )
+                sessionData
+                    .KnownAssemblies
+                    .Contains(
+                        assembly,
+                        sessionData.ObjectItemAssemblyLoaderFactory,
+                        sessionData.EdmItemCollection
+                    )
             )
             {
                 return new ObjectItemNoOpAssemblyLoader(assembly, sessionData);
@@ -100,23 +102,25 @@ namespace System.Data.Metadata.Edm
                 {
                     // we were loading in convention mode, and ran into an assembly that can't be loaded by convention
                     // we know this because all cached assemblies are attribute based at the moment.
-                    sessionData.EdmItemErrors.Add(
-                        new EdmItemError(
-                            Strings.Validator_OSpace_Convention_AttributeAssemblyReferenced(
-                                assembly.FullName
-                            ),
-                            null
-                        )
-                    );
+                    sessionData
+                        .EdmItemErrors
+                        .Add(
+                            new EdmItemError(
+                                Strings.Validator_OSpace_Convention_AttributeAssemblyReferenced(
+                                    assembly.FullName
+                                ),
+                                null
+                            )
+                        );
                 }
                 return new ObjectItemCachedAssemblyLoader(assembly, cacheEntry, sessionData);
             }
             else if (
                 sessionData.EdmItemCollection != null
-                && sessionData.EdmItemCollection.ConventionalOcCache.TryGetConventionalOcCacheFromAssemblyCache(
-                    assembly,
-                    out cacheEntry
-                )
+                && sessionData
+                    .EdmItemCollection
+                    .ConventionalOcCache
+                    .TryGetConventionalOcCacheFromAssemblyCache(assembly, out cacheEntry)
             )
             {
                 sessionData.ObjectItemAssemblyLoaderFactory =
@@ -190,17 +194,21 @@ namespace System.Data.Metadata.Edm
         protected virtual void AddToKnownAssemblies()
         {
             Debug.Assert(
-                !_sessionData.KnownAssemblies.Contains(
-                    _assembly,
-                    SessionData.ObjectItemAssemblyLoaderFactory,
-                    _sessionData.EdmItemCollection
-                ),
+                !_sessionData
+                    .KnownAssemblies
+                    .Contains(
+                        _assembly,
+                        SessionData.ObjectItemAssemblyLoaderFactory,
+                        _sessionData.EdmItemCollection
+                    ),
                 "This assembly must not be present in the list of known assemblies"
             );
-            _sessionData.KnownAssemblies.Add(
-                _assembly,
-                new KnownAssemblyEntry(CacheEntry, SessionData.EdmItemCollection != null)
-            );
+            _sessionData
+                .KnownAssemblies
+                .Add(
+                    _assembly,
+                    new KnownAssemblyEntry(CacheEntry, SessionData.EdmItemCollection != null)
+                );
         }
 
         protected static void LoadAssemblies(
@@ -220,10 +228,9 @@ namespace System.Data.Metadata.Edm
 
         protected bool TryGetPrimitiveType(Type type, out PrimitiveType primitiveType)
         {
-            return ClrProviderManifest.Instance.TryGetPrimitiveType(
-                Nullable.GetUnderlyingType(type) ?? type,
-                out primitiveType
-            );
+            return ClrProviderManifest
+                .Instance
+                .TryGetPrimitiveType(Nullable.GetUnderlyingType(type) ?? type, out primitiveType);
         }
 
         protected ObjectItemLoadingSessionData SessionData

@@ -1603,7 +1603,8 @@ namespace RootNamespace
                     new[] { orderEntityType, shippingEntityType },
                     orderTable
                         .FindColumn("Shadow")
-                        .PropertyMappings.Select(m => m.TableMapping.TypeBase)
+                        .PropertyMappings
+                        .Select(m => m.TableMapping.TypeBase)
                 );
 
                 var fragment = orderEntityType.GetMappingFragments().Single();
@@ -1615,7 +1616,8 @@ namespace RootNamespace
                     new[] { billingEntityType, orderEntityType },
                     splitTable
                         .FindColumn("Shadow")
-                        .PropertyMappings.Select(m => m.TableMapping.TypeBase)
+                        .PropertyMappings
+                        .Select(m => m.TableMapping.TypeBase)
                 );
                 Assert.Equal("bar", fragment["foo"]);
 
@@ -1633,7 +1635,8 @@ namespace RootNamespace
                     new[] { billingEntityType },
                     billingTable
                         .FindColumn("Shadow")
-                        .PropertyMappings.Select(m => m.TableMapping.TypeBase)
+                        .PropertyMappings
+                        .Select(m => m.TableMapping.TypeBase)
                 );
 
                 var shippingFragment = shippingEntityType.GetMappingFragments().Single();
@@ -1645,7 +1648,8 @@ namespace RootNamespace
                     new[] { shippingEntityType },
                     shippingTable
                         .FindColumn("ShippingShadow")
-                        .PropertyMappings.Select(m => m.TableMapping.TypeBase)
+                        .PropertyMappings
+                        .Select(m => m.TableMapping.TypeBase)
                 );
 
                 Assert.Equal(new[] { "Id", "Shadow" }, orderTable.Columns.Select(c => c.Name));
@@ -5098,10 +5102,12 @@ namespace RootNamespace
                 modelBuilder.Entity<EntityWithEnumType>(x =>
                 {
                     x.Property(e => e.Id)
-                        .Metadata.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.None);
+                        .Metadata
+                        .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.None);
                     x.Property(e => e.Day)
                         .ValueGeneratedOnAdd()
-                        .Metadata.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.None);
+                        .Metadata
+                        .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.None);
                 }),
             AddBoilerPlate(
                 GetHeading()
@@ -8579,7 +8585,8 @@ namespace RootNamespace
                     o.FindEntityType(typeof(EntityWithOneProperty))
                         .GetNavigations()
                         .First()
-                        .ForeignKey.IsRequiredDependent
+                        .ForeignKey
+                        .IsRequiredDependent
                 )
         );
 

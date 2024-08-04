@@ -35,16 +35,18 @@ namespace System.IO
                 using (DisableMediaInsertionPrompt.Create())
                 {
                     if (
-                        !Interop.Kernel32.GetVolumeInformation(
-                            Name,
-                            null,
-                            0,
-                            null,
-                            null,
-                            out int fileSystemFlags,
-                            fileSystemName,
-                            Interop.Kernel32.MAX_PATH + 1
-                        )
+                        !Interop
+                            .Kernel32
+                            .GetVolumeInformation(
+                                Name,
+                                null,
+                                0,
+                                null,
+                                null,
+                                out int fileSystemFlags,
+                                fileSystemName,
+                                Interop.Kernel32.MAX_PATH + 1
+                            )
                     )
                     {
                         throw Error.GetExceptionForLastWin32DriveError(Name);
@@ -62,18 +64,14 @@ namespace System.IO
                     totalBytes,
                     freeBytes;
                 uint oldMode;
-                bool success = Interop.Kernel32.SetThreadErrorMode(
-                    Interop.Kernel32.SEM_FAILCRITICALERRORS,
-                    out oldMode
-                );
+                bool success = Interop
+                    .Kernel32
+                    .SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS, out oldMode);
                 try
                 {
-                    bool r = Interop.Kernel32.GetDiskFreeSpaceEx(
-                        Name,
-                        out userBytes,
-                        out totalBytes,
-                        out freeBytes
-                    );
+                    bool r = Interop
+                        .Kernel32
+                        .GetDiskFreeSpaceEx(Name, out userBytes, out totalBytes, out freeBytes);
                     if (!r)
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                 }
@@ -94,18 +92,14 @@ namespace System.IO
                     totalBytes,
                     freeBytes;
                 uint oldMode;
-                bool success = Interop.Kernel32.SetThreadErrorMode(
-                    Interop.Kernel32.SEM_FAILCRITICALERRORS,
-                    out oldMode
-                );
+                bool success = Interop
+                    .Kernel32
+                    .SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS, out oldMode);
                 try
                 {
-                    bool r = Interop.Kernel32.GetDiskFreeSpaceEx(
-                        Name,
-                        out userBytes,
-                        out totalBytes,
-                        out freeBytes
-                    );
+                    bool r = Interop
+                        .Kernel32
+                        .GetDiskFreeSpaceEx(Name, out userBytes, out totalBytes, out freeBytes);
                     if (!r)
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                 }
@@ -128,18 +122,14 @@ namespace System.IO
                     totalBytes,
                     freeBytes;
                 uint oldMode;
-                Interop.Kernel32.SetThreadErrorMode(
-                    Interop.Kernel32.SEM_FAILCRITICALERRORS,
-                    out oldMode
-                );
+                Interop
+                    .Kernel32
+                    .SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS, out oldMode);
                 try
                 {
-                    bool r = Interop.Kernel32.GetDiskFreeSpaceEx(
-                        Name,
-                        out userBytes,
-                        out totalBytes,
-                        out freeBytes
-                    );
+                    bool r = Interop
+                        .Kernel32
+                        .GetDiskFreeSpaceEx(Name, out userBytes, out totalBytes, out freeBytes);
                     if (!r)
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                 }
@@ -173,16 +163,18 @@ namespace System.IO
                 using (DisableMediaInsertionPrompt.Create())
                 {
                     if (
-                        !Interop.Kernel32.GetVolumeInformation(
-                            Name,
-                            volumeName,
-                            Interop.Kernel32.MAX_PATH + 1,
-                            null,
-                            null,
-                            out int fileSystemFlags,
-                            null,
-                            0
-                        )
+                        !Interop
+                            .Kernel32
+                            .GetVolumeInformation(
+                                Name,
+                                volumeName,
+                                Interop.Kernel32.MAX_PATH + 1,
+                                null,
+                                null,
+                                out int fileSystemFlags,
+                                null,
+                                0
+                            )
                     )
                     {
                         throw Error.GetExceptionForLastWin32DriveError(Name);
@@ -195,10 +187,9 @@ namespace System.IO
             set
             {
                 uint oldMode;
-                bool success = Interop.Kernel32.SetThreadErrorMode(
-                    Interop.Kernel32.SEM_FAILCRITICALERRORS,
-                    out oldMode
-                );
+                bool success = Interop
+                    .Kernel32
+                    .SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS, out oldMode);
                 try
                 {
                     bool r = Interop.Kernel32.SetVolumeLabel(Name, value);

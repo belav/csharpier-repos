@@ -209,12 +209,9 @@ class SomeClass
 }
 dynamic d = new SomeClass();
 d.Do();",
-                ScriptOptions.Default.WithReferences(
-                    MscorlibRef,
-                    SystemRef,
-                    SystemCoreRef,
-                    CSharpRef
-                )
+                ScriptOptions
+                    .Default
+                    .WithReferences(MscorlibRef, SystemRef, SystemCoreRef, CSharpRef)
             );
         }
 
@@ -231,12 +228,9 @@ class SomeClass
 }
 dynamic d = new SomeClass();
 d.Do()",
-                ScriptOptions.Default.WithReferences(
-                    MscorlibRef,
-                    SystemRef,
-                    SystemCoreRef,
-                    CSharpRef
-                )
+                ScriptOptions
+                    .Default
+                    .WithReferences(MscorlibRef, SystemRef, SystemCoreRef, CSharpRef)
             );
         }
 
@@ -1008,7 +1002,8 @@ i",
             try
             {
                 var opts = ScriptOptions
-                    .Default.WithEmitDebugInformation(true)
+                    .Default
+                    .WithEmitDebugInformation(true)
                     .WithFilePath("debug.csx")
                     .WithFileEncoding(null);
                 var script = await CSharpScript.RunAsync(code, opts);
@@ -1030,7 +1025,8 @@ i",
         public Task Pdb_CreateFromString_CodeFromFile_WithEmitDebugInformation_WithFileEncoding_ResultInPdbEmitted()
         {
             var opts = ScriptOptions
-                .Default.WithEmitDebugInformation(true)
+                .Default
+                .WithEmitDebugInformation(true)
                 .WithFilePath("debug.csx")
                 .WithFileEncoding(Encoding.UTF8);
             return VerifyStackTraceAsync(
@@ -1048,7 +1044,8 @@ i",
         public Task Pdb_CreateFromString_CodeFromFile_WithoutEmitDebugInformation_WithoutFileEncoding_ResultInPdbNotEmitted()
         {
             var opts = ScriptOptions
-                .Default.WithEmitDebugInformation(false)
+                .Default
+                .WithEmitDebugInformation(false)
                 .WithFilePath(null)
                 .WithFileEncoding(null);
             return VerifyStackTraceAsync(
@@ -1063,7 +1060,8 @@ i",
         public Task Pdb_CreateFromString_CodeFromFile_WithoutEmitDebugInformation_WithFileEncoding_ResultInPdbNotEmitted()
         {
             var opts = ScriptOptions
-                .Default.WithEmitDebugInformation(false)
+                .Default
+                .WithEmitDebugInformation(false)
                 .WithFilePath("debug.csx")
                 .WithFileEncoding(Encoding.UTF8);
             return VerifyStackTraceAsync(
@@ -1079,7 +1077,8 @@ i",
         public Task Pdb_CreateFromStream_CodeFromFile_WithEmitDebugInformation_ResultInPdbEmitted()
         {
             var opts = ScriptOptions
-                .Default.WithEmitDebugInformation(true)
+                .Default
+                .WithEmitDebugInformation(true)
                 .WithFilePath("debug.csx");
             return VerifyStackTraceAsync(
                 () =>
@@ -1097,7 +1096,8 @@ i",
         public Task Pdb_CreateFromStream_CodeFromFile_WithoutEmitDebugInformation_ResultInPdbNotEmitted()
         {
             var opts = ScriptOptions
-                .Default.WithEmitDebugInformation(false)
+                .Default
+                .WithEmitDebugInformation(false)
                 .WithFilePath("debug.csx");
             return VerifyStackTraceAsync(
                 () =>
@@ -1132,7 +1132,8 @@ i",
         public Task Pdb_CreateFromString_InlineCode_WithEmitDebugInformation_WithFileEncoding_ResultInPdbEmitted()
         {
             var opts = ScriptOptions
-                .Default.WithEmitDebugInformation(true)
+                .Default
+                .WithEmitDebugInformation(true)
                 .WithFileEncoding(Encoding.UTF8);
             return VerifyStackTraceAsync(
                 () => CSharpScript.Create("throw new System.Exception();", opts),
@@ -1155,7 +1156,8 @@ i",
         public Task Pdb_CreateFromString_InlineCode_WithoutEmitDebugInformation_WithFileEncoding_ResultInPdbNotEmitted()
         {
             var opts = ScriptOptions
-                .Default.WithEmitDebugInformation(false)
+                .Default
+                .WithEmitDebugInformation(false)
                 .WithFileEncoding(Encoding.UTF8);
             return VerifyStackTraceAsync(
                 () => CSharpScript.Create("throw new System.Exception();", opts)

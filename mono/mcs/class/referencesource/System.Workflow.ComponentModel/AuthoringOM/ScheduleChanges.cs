@@ -328,10 +328,9 @@ namespace System.Workflow.ComponentModel
                 workflowCoreRuntime.OnBeforeDynamicChange(this.modelChangeActions);
 
                 // set the new Workflow Definition
-                workflowCoreRuntime.RootActivity.SetValue(
-                    Activity.WorkflowDefinitionProperty,
-                    this.clonedRootActivity
-                );
+                workflowCoreRuntime
+                    .RootActivity
+                    .SetValue(Activity.WorkflowDefinitionProperty, this.clonedRootActivity);
 
                 // apply changes to all context Activities
                 foreach (Activity contextActivity in contextActivities)
@@ -609,17 +608,26 @@ namespace System.Workflow.ComponentModel
                                     != ActivityExecutionResult.Uninitialized
                                 )
                                 {
-                                    removedActivityAction.OriginalRemovedActivity.Uninitialize(
+                                    removedActivityAction
+                                        .OriginalRemovedActivity
+                                        .Uninitialize(
+                                            executionContext
+                                                .Activity
+                                                .RootActivity
+                                                .WorkflowCoreRuntime
+                                        );
+                                    removedActivityAction
+                                        .OriginalRemovedActivity
+                                        .SetValue(
+                                            Activity.ExecutionResultProperty,
+                                            ActivityExecutionResult.Uninitialized
+                                        );
+                                }
+                                removedActivityAction
+                                    .OriginalRemovedActivity
+                                    .OnActivityExecutionContextUnload(
                                         executionContext.Activity.RootActivity.WorkflowCoreRuntime
                                     );
-                                    removedActivityAction.OriginalRemovedActivity.SetValue(
-                                        Activity.ExecutionResultProperty,
-                                        ActivityExecutionResult.Uninitialized
-                                    );
-                                }
-                                removedActivityAction.OriginalRemovedActivity.OnActivityExecutionContextUnload(
-                                    executionContext.Activity.RootActivity.WorkflowCoreRuntime
-                                );
                                 removedActivityAction.OriginalRemovedActivity.Dispose();
                             }
                         }
@@ -655,10 +663,12 @@ namespace System.Workflow.ComponentModel
         )
         {
             List<WorkflowChangeAction> listChanges = new List<WorkflowChangeAction>();
-            IEnumerator<Activity> clonedActivitiesEnum =
-                clonedCompositeActivity.Activities.GetEnumerator();
-            IEnumerator<Activity> originalActivitiesEnum =
-                originalCompositeActivity.Activities.GetEnumerator();
+            IEnumerator<Activity> clonedActivitiesEnum = clonedCompositeActivity
+                .Activities
+                .GetEnumerator();
+            IEnumerator<Activity> originalActivitiesEnum = originalCompositeActivity
+                .Activities
+                .GetEnumerator();
             int currentRemoveIndex = 0;
             while (originalActivitiesEnum.MoveNext())
             {

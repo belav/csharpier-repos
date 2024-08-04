@@ -86,10 +86,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
                 .Value;
 
             if (
-                CSharpOrderModifiersHelper.Instance.TryGetOrComputePreferredOrder(
-                    preferredModifierOrderString,
-                    out var preferredOrder
-                )
+                CSharpOrderModifiersHelper
+                    .Instance
+                    .TryGetOrComputePreferredOrder(
+                        preferredModifierOrderString,
+                        out var preferredOrder
+                    )
                 && preferredOrder.TryGetValue(
                     (int)SyntaxKind.PublicKeyword,
                     out var publicModifierOrder
@@ -168,9 +170,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             );
 
             var newTypeDeclaration = originalTypeDeclaration.WithCloseBraceToken(
-                originalTypeDeclaration.CloseBraceToken.WithPrependedLeadingTrivia(
-                    SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
-                )
+                originalTypeDeclaration
+                    .CloseBraceToken
+                    .WithPrependedLeadingTrivia(
+                        SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
+                    )
             );
 
             var newRoot = root.ReplaceNode(

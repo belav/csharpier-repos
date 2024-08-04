@@ -363,10 +363,14 @@ namespace System.Web
                 // Send to IIS tracing
                 if (_context != null && _context.WorkerRequest != null)
                 {
-                    _context.WorkerRequest.RaiseTraceEvent(
-                        isWarning ? IntegratedTraceType.TraceWarn : IntegratedTraceType.TraceWrite,
-                        msg
-                    );
+                    _context
+                        .WorkerRequest
+                        .RaiseTraceEvent(
+                            isWarning
+                                ? IntegratedTraceType.TraceWarn
+                                : IntegratedTraceType.TraceWrite,
+                            msg
+                        );
                 }
             }
 
@@ -634,10 +638,12 @@ namespace System.Web
 
             // request cookie info
             HttpCookieCollection cookieCollection = new HttpCookieCollection();
-            _context.Request.FillInCookiesCollection(
-                cookieCollection,
-                false /*includeResponse */
-            );
+            _context
+                .Request
+                .FillInCookiesCollection(
+                    cookieCollection,
+                    false /*includeResponse */
+                );
             HttpCookie[] cookies = new HttpCookie[cookieCollection.Count];
             cookieCollection.CopyTo(cookies, 0);
             for (i = 0; i < cookies.Length; i++)

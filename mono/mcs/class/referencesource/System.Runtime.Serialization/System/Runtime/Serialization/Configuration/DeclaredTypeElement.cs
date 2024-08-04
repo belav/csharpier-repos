@@ -18,9 +18,12 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (String.IsNullOrEmpty(typeName))
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "typeName"
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("typeName");
             }
             this.Type = typeName;
         }
@@ -62,11 +65,16 @@ namespace System.Runtime.Serialization.Configuration
             }
             if (!PartialTrustHelpers.IsInFullTrust())
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigDataContractSerializerSectionLoadError)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigDataContractSerializerSectionLoadError)
+                        )
+                    );
             }
         }
     }

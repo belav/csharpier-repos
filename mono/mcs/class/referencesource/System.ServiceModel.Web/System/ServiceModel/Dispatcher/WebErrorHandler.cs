@@ -64,15 +64,18 @@ namespace System.ServiceModel.Dispatcher
                     context.OutgoingResponse.StatusCode = webFaultException.StatusCode;
                     string operationName;
                     if (
-                        OperationContext.Current.IncomingMessageProperties.TryGetValue<string>(
-                            WebHttpDispatchOperationSelector.HttpOperationNamePropertyName,
-                            out operationName
-                        )
+                        OperationContext
+                            .Current
+                            .IncomingMessageProperties
+                            .TryGetValue<string>(
+                                WebHttpDispatchOperationSelector.HttpOperationNamePropertyName,
+                                out operationName
+                            )
                     )
                     {
-                        OperationDescription description = this.contractDescription.Operations.Find(
-                            operationName
-                        );
+                        OperationDescription description = this.contractDescription
+                            .Operations
+                            .Find(operationName);
                         bool isXmlSerializerFaultFormat =
                             WebHttpBehavior.IsXmlSerializerFaultFormat(description);
                         if (
@@ -81,16 +84,20 @@ namespace System.ServiceModel.Dispatcher
                                 == WebMessageFormat.Json
                         )
                         {
-                            throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR2.GetString(
-                                        SR2.JsonFormatRequiresDataContract,
-                                        description.Name,
-                                        description.DeclaringContract.Name,
-                                        description.DeclaringContract.Namespace
+                            throw System
+                                .ServiceModel
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR2.GetString(
+                                            SR2.JsonFormatRequiresDataContract,
+                                            description.Name,
+                                            description.DeclaringContract.Name,
+                                            description.DeclaringContract.Namespace
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         WebMessageFormat? nullableFormat = !isXmlSerializerFaultFormat
                             ? context.OutgoingResponse.Format
@@ -139,10 +146,13 @@ namespace System.ServiceModel.Dispatcher
                         {
                             HttpResponseMessageProperty property;
                             if (
-                                OperationContext.Current.OutgoingMessageProperties.TryGetValue<HttpResponseMessageProperty>(
-                                    HttpResponseMessageProperty.Name,
-                                    out property
-                                )
+                                OperationContext
+                                    .Current
+                                    .OutgoingMessageProperties
+                                    .TryGetValue<HttpResponseMessageProperty>(
+                                        HttpResponseMessageProperty.Name,
+                                        out property
+                                    )
                                 && property != null
                             )
                             {
@@ -150,18 +160,24 @@ namespace System.ServiceModel.Dispatcher
                             }
                             if (format == WebMessageFormat.Json)
                             {
-                                fault.Properties.Add(
-                                    WebBodyFormatMessageProperty.Name,
-                                    WebBodyFormatMessageProperty.JsonProperty
-                                );
+                                fault
+                                    .Properties
+                                    .Add(
+                                        WebBodyFormatMessageProperty.Name,
+                                        WebBodyFormatMessageProperty.JsonProperty
+                                    );
                             }
                         }
                     }
                     else
                     {
-                        throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR2.OperationNameNotFound)
-                        );
+                        throw System
+                            .ServiceModel
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(SR2.OperationNameNotFound)
+                            );
                     }
                 }
                 else
@@ -177,12 +193,15 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (System.ServiceModel.DiagnosticUtility.ShouldTraceWarning)
                 {
-                    System.ServiceModel.DiagnosticUtility.TraceHandledException(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.HelpPageFailedToCreateErrorMessage)
-                        ),
-                        TraceEventType.Warning
-                    );
+                    System
+                        .ServiceModel
+                        .DiagnosticUtility
+                        .TraceHandledException(
+                            new InvalidOperationException(
+                                SR2.GetString(SR2.HelpPageFailedToCreateErrorMessage)
+                            ),
+                            TraceEventType.Warning
+                        );
                 }
 
                 WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
@@ -224,10 +243,9 @@ namespace System.ServiceModel.Dispatcher
                 );
             }
             Message response = new HttpStreamMessage(bodyWriter);
-            response.Properties.Add(
-                WebBodyFormatMessageProperty.Name,
-                WebBodyFormatMessageProperty.RawProperty
-            );
+            response
+                .Properties
+                .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
 
             HttpResponseMessageProperty responseProperty = GetResponseProperty(
                 WebOperationContext.Current,

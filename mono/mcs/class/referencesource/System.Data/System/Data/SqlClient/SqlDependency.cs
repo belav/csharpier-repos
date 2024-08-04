@@ -307,9 +307,10 @@ namespace System.Data.SqlClient
 
         internal const Bid.ApiGroup NotificationsTracePoints = (Bid.ApiGroup)0x2000;
 
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        private readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
         private static int _objectTypeCount; // Bid counter
         internal int ObjectID
         {
@@ -1430,11 +1431,9 @@ namespace System.Data.SqlClient
                     command
                 ); // calculate the string representation of command
 
-                string idString =
-                    SqlDependencyPerAppDomainDispatcher.SingletonInstance.AddCommandEntry(
-                        commandHash,
-                        this
-                    ); // Add to map.
+                string idString = SqlDependencyPerAppDomainDispatcher
+                    .SingletonInstance
+                    .AddCommandEntry(commandHash, this); // Add to map.
                 Bid.NotificationsTrace(
                     "<sc.SqlDependency.ComputeHashAndAddToDispatcher|DEP> computed id string: '%ls'.\n",
                     idString

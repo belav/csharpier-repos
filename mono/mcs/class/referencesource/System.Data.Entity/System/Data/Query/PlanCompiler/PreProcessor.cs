@@ -378,12 +378,14 @@ namespace System.Data.Query.PlanCompiler
                 requiredType = (EntityTypeBase)typeFilter.IsOfType.EdmType;
                 includeSubtypes = !typeFilter.IsOfOnly;
                 if (
-                    m_command.MetadataWorkspace.TryGetGeneratedViewOfType(
-                        entitySet,
-                        requiredType,
-                        includeSubtypes,
-                        out definingQuery
-                    )
+                    m_command
+                        .MetadataWorkspace
+                        .TryGetGeneratedViewOfType(
+                            entitySet,
+                            requiredType,
+                            includeSubtypes,
+                            out definingQuery
+                        )
                 )
                 {
                     //
@@ -1354,16 +1356,17 @@ namespace System.Data.Query.PlanCompiler
 
                 FunctionImportMapping functionImportMapping = null;
                 if (
-                    !m_command.MetadataWorkspace.TryGetFunctionImportMapping(
-                        op.Function,
-                        out functionImportMapping
-                    )
+                    !m_command
+                        .MetadataWorkspace
+                        .TryGetFunctionImportMapping(op.Function, out functionImportMapping)
                 )
                 {
                     throw EntityUtil.Metadata(
-                        System.Data.Entity.Strings.EntityClient_UnmappedFunctionImport(
-                            op.Function.FullName
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .EntityClient_UnmappedFunctionImport(op.Function.FullName)
                     );
                 }
                 PlanCompiler.Assert(
@@ -1526,10 +1529,14 @@ namespace System.Data.Query.PlanCompiler
             if (!TypeSemantics.IsStructurallyEqualOrPromotableTo(resultType, op.Type))
             {
                 throw EntityUtil.Metadata(
-                    System.Data.Entity.Strings.EntityClient_IncompatibleNavigationPropertyResult(
-                        navProperty.DeclaringType.FullName,
-                        navProperty.Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .EntityClient_IncompatibleNavigationPropertyResult(
+                            navProperty.DeclaringType.FullName,
+                            navProperty.Name
+                        )
                 );
             }
         }
@@ -1837,7 +1844,8 @@ namespace System.Data.Query.PlanCompiler
                     rs != null
                     && rs.ElementType.EdmEquals(relProperty.Relationship)
                     && rs.AssociationSetEnds[relProperty.FromEnd.Identity]
-                        .EntitySet.EdmEquals(entitySet)
+                        .EntitySet
+                        .EdmEquals(entitySet)
                 )
                 {
                     return rs;

@@ -106,10 +106,9 @@ namespace System.Web
             // Step 1: Set the ID (if necessary)
             if (needToSetThreadActivityId)
             {
-                ActivityIdHelper.Instance.SetCurrentThreadActivityId(
-                    iisActivityId,
-                    out originalThreadActivityId
-                );
+                ActivityIdHelper
+                    .Instance
+                    .SetCurrentThreadActivityId(iisActivityId, out originalThreadActivityId);
             }
 
             // Step 2: Write to ETW, providing the recipient activity ID.
@@ -124,10 +123,9 @@ namespace System.Web
             if (needToSetThreadActivityId)
             {
                 Guid unused;
-                ActivityIdHelper.Instance.SetCurrentThreadActivityId(
-                    originalThreadActivityId,
-                    out unused
-                );
+                ActivityIdHelper
+                    .Instance
+                    .SetCurrentThreadActivityId(originalThreadActivityId, out unused);
             }
         }
 

@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
         protected SimplifyTypeNamesDiagnosticAnalyzerBase()
             : base(
                 ImmutableDictionary<DiagnosticDescriptor, ImmutableHashSet<IOption2>>
-                    .Empty.Add(s_descriptorSimplifyNames, ImmutableHashSet<IOption2>.Empty)
+                    .Empty
+                    .Add(s_descriptorSimplifyNames, ImmutableHashSet<IOption2>.Empty)
                     .Add(s_descriptorSimplifyMemberAccess, ImmutableHashSet<IOption2>.Empty)
                     .Add(
                         s_descriptorPreferBuiltinOrFrameworkType,
@@ -216,16 +217,16 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             {
                 case IDEDiagnosticIds.SimplifyNamesDiagnosticId:
                     descriptor = s_descriptorSimplifyNames;
-                    notificationOption = descriptor.DefaultSeverity.ToNotificationOption(
-                        isOverridenSeverity: false
-                    );
+                    notificationOption = descriptor
+                        .DefaultSeverity
+                        .ToNotificationOption(isOverridenSeverity: false);
                     break;
 
                 case IDEDiagnosticIds.SimplifyMemberAccessDiagnosticId:
                     descriptor = s_descriptorSimplifyMemberAccess;
-                    notificationOption = descriptor.DefaultSeverity.ToNotificationOption(
-                        isOverridenSeverity: false
-                    );
+                    notificationOption = descriptor
+                        .DefaultSeverity
+                        .ToNotificationOption(isOverridenSeverity: false);
                     break;
 
                 case IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId:

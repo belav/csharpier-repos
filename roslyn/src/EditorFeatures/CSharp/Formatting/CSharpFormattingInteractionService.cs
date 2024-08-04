@@ -42,10 +42,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         public bool SupportsFormattingOnTypedCharacter(Document document, char ch)
         {
             var isSmartIndent =
-                _editorOptionsService.GlobalOptions.GetOption(
-                    IndentationOptionsStorage.SmartIndent,
-                    LanguageNames.CSharp
-                ) == FormattingOptions2.IndentStyle.Smart;
+                _editorOptionsService
+                    .GlobalOptions
+                    .GetOption(IndentationOptionsStorage.SmartIndent, LanguageNames.CSharp)
+                == FormattingOptions2.IndentStyle.Smart;
 
             // We consider the proper placement of a close curly or open curly when it is typed at
             // the start of the line to be a smart-indentation operation.  As such, even if "format
@@ -58,9 +58,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 return true;
             }
 
-            var options = _editorOptionsService.GlobalOptions.GetAutoFormattingOptions(
-                LanguageNames.CSharp
-            );
+            var options = _editorOptionsService
+                .GlobalOptions
+                .GetAutoFormattingOptions(LanguageNames.CSharp);
 
             // If format-on-typing is not on, then we don't support formatting on any other characters.
             var autoFormattingOnTyping = options.FormatOnTyping;
@@ -134,8 +134,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 parsedDocument.LanguageServices,
                 explicitFormat: true
             );
-            var service =
-                parsedDocument.LanguageServices.GetRequiredService<ISyntaxFormattingService>();
+            var service = parsedDocument
+                .LanguageServices
+                .GetRequiredService<ISyntaxFormattingService>();
             return Task.FromResult(
                 service.GetFormattingChangesOnPaste(
                     parsedDocument,
@@ -161,8 +162,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         )
         {
             var parsedDocument = ParsedDocument.CreateSynchronously(document, cancellationToken);
-            var service =
-                parsedDocument.LanguageServices.GetRequiredService<ISyntaxFormattingService>();
+            var service = parsedDocument
+                .LanguageServices
+                .GetRequiredService<ISyntaxFormattingService>();
 
             if (
                 service.ShouldFormatOnTypedCharacter(

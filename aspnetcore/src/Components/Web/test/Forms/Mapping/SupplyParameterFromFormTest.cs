@@ -49,7 +49,8 @@ public class SupplyParameterFromFormTest
         var componentId = renderer.AssignRootComponentId(formMappingScope);
         await renderer.RenderRootComponentAsync(componentId);
         var formComponentState = renderer
-            .Batches.Single()
+            .Batches
+            .Single()
             .GetComponentFrames<FormParametersComponentWithName>()
             .Single()
             .ComponentState;

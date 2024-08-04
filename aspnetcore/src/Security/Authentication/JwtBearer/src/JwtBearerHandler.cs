@@ -188,12 +188,14 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
 
                 if (Options.SaveToken)
                 {
-                    tokenValidatedContext.Properties.StoreTokens(
-                        new[]
-                        {
-                            new AuthenticationToken { Name = "access_token", Value = token },
-                        }
-                    );
+                    tokenValidatedContext
+                        .Properties
+                        .StoreTokens(
+                            new[]
+                            {
+                                new AuthenticationToken { Name = "access_token", Value = token },
+                            }
+                        );
                 }
 
                 tokenValidatedContext.Success();
@@ -287,9 +289,9 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
             if (Options.ConfigurationManager != null)
             {
                 // GetConfigurationAsync has a time interval that must pass before new http request will be issued.
-                var configuration = await Options.ConfigurationManager.GetConfigurationAsync(
-                    Context.RequestAborted
-                );
+                var configuration = await Options
+                    .ConfigurationManager
+                    .GetConfigurationAsync(Context.RequestAborted);
                 var issuers = new[] { configuration.Issuer };
                 tokenValidationParameters.ValidIssuers = (
                     tokenValidationParameters.ValidIssuers == null
@@ -299,9 +301,9 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
                 tokenValidationParameters.IssuerSigningKeys = (
                     tokenValidationParameters.IssuerSigningKeys == null
                         ? configuration.SigningKeys
-                        : tokenValidationParameters.IssuerSigningKeys.Concat(
-                            configuration.SigningKeys
-                        )
+                        : tokenValidationParameters
+                            .IssuerSigningKeys
+                            .Concat(configuration.SigningKeys)
                 );
             }
         }

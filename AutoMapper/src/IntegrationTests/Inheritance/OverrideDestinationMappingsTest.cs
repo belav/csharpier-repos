@@ -12,14 +12,16 @@ public class OverrideDestinationMappingsTest
     {
         protected override void Seed(Context context)
         {
-            context.Entity.AddRange(
-                new[]
-                {
-                    new Entity { Child = new ChildEntity { SomeValue = "Alain Brito" } },
-                    new Entity { Child = new ChildEntity { SomeValue = "Jimmy Bogard" } },
-                    new Entity { Child = new ChildEntity { SomeValue = "Bill Gates" } },
-                }
-            );
+            context
+                .Entity
+                .AddRange(
+                    new[]
+                    {
+                        new Entity { Child = new ChildEntity { SomeValue = "Alain Brito" } },
+                        new Entity { Child = new ChildEntity { SomeValue = "Jimmy Bogard" } },
+                        new Entity { Child = new ChildEntity { SomeValue = "Bill Gates" } },
+                    }
+                );
             base.Seed(context);
         }
     }

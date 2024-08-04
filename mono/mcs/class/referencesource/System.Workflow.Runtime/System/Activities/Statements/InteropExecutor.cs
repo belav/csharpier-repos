@@ -518,10 +518,9 @@ namespace System.Activities.Statements
                     //If there was a naming collision, we renamed the InArguments and need to strip "In" from the end of the property name
                     if (hasNameCollision)
                     {
-                        string truncatedName = input.Key.Substring(
-                            0,
-                            input.Key.Length - suffixLength
-                        );
+                        string truncatedName = input
+                            .Key
+                            .Substring(0, input.Key.Length - suffixLength);
                         propertyInfo = definition.GetType().GetProperty(truncatedName);
                     }
                     else
@@ -540,16 +539,18 @@ namespace System.Activities.Statements
         {
             if (this.abortTransaction)
             {
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Information,
-                    1127,
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        ExecutionStringManager.InteropExceptionTraceMessage,
-                        this.ServiceProvider.Activity.DisplayName,
-                        this.lastExceptionThrown.ToString()
-                    )
-                );
+                WorkflowTrace
+                    .Runtime
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        1127,
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            ExecutionStringManager.InteropExceptionTraceMessage,
+                            this.ServiceProvider.Activity.DisplayName,
+                            this.lastExceptionThrown.ToString()
+                        )
+                    );
                 throw this.lastExceptionThrown;
             }
 
@@ -574,16 +575,18 @@ namespace System.Activities.Statements
                 }
                 if (this.outstandingException != null)
                 {
-                    WorkflowTrace.Runtime.TraceEvent(
-                        TraceEventType.Information,
-                        1127,
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            ExecutionStringManager.InteropExceptionTraceMessage,
-                            this.ServiceProvider.Activity.DisplayName,
-                            this.outstandingException.ToString()
-                        )
-                    );
+                    WorkflowTrace
+                        .Runtime
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            1127,
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                ExecutionStringManager.InteropExceptionTraceMessage,
+                                this.ServiceProvider.Activity.DisplayName,
+                                this.outstandingException.ToString()
+                            )
+                        );
                     throw this.outstandingException;
                 }
             }
@@ -1102,10 +1105,9 @@ namespace System.Activities.Statements
                 if (this.schedulerQueue == null)
                 {
                     this.schedulerQueue = new Queue<SchedulableItem>();
-                    owner.RootActivity.SetValue(
-                        Scheduler.SchedulerQueueProperty,
-                        this.schedulerQueue
-                    );
+                    owner
+                        .RootActivity
+                        .SetValue(Scheduler.SchedulerQueueProperty, this.schedulerQueue);
                 }
 
                 this.atomicActivityQueue =
@@ -1114,10 +1116,9 @@ namespace System.Activities.Statements
                 if (this.atomicActivityQueue == null)
                 {
                     this.atomicActivityQueue = new Queue<SchedulableItem>();
-                    owner.RootActivity.SetValue(
-                        Scheduler.AtomicActivityQueueProperty,
-                        this.atomicActivityQueue
-                    );
+                    owner
+                        .RootActivity
+                        .SetValue(Scheduler.AtomicActivityQueueProperty, this.atomicActivityQueue);
                 }
             }
 

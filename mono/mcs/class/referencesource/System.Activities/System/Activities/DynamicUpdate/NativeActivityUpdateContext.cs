@@ -1979,9 +1979,9 @@ namespace System.Activities.DynamicUpdate
         {
             if (this.isDisposed)
             {
-                throw FxTrace.Exception.AsError(
-                    new ObjectDisposedException(this.GetType().FullName, SR.NAUCDisposed)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new ObjectDisposedException(this.GetType().FullName, SR.NAUCDisposed));
             }
         }
     }

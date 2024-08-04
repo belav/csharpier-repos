@@ -35,10 +35,12 @@ namespace System.Workflow.ComponentModel.Design
                             type.Assembly == Assembly.GetExecutingAssembly()
                             || type.Assembly != null
                                 && type.Assembly.FullName != null
-                                && type.Assembly.FullName.Equals(
-                                    AssemblyRef.ActivitiesAssemblyRef,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                && type.Assembly
+                                    .FullName
+                                    .Equals(
+                                        AssemblyRef.ActivitiesAssemblyRef,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                         )
                         && type.Name.EndsWith(ActivitySuffix, StringComparison.Ordinal)
                         && !type.Name.Equals(ActivitySuffix, StringComparison.Ordinal)
@@ -166,14 +168,20 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (
                     (
-                        activityType.Assembly.FullName.Equals(
-                            AssemblyRef.ActivitiesAssemblyRef,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        || activityType.Assembly.FullName.Equals(
-                            Assembly.GetExecutingAssembly().FullName,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        activityType
+                            .Assembly
+                            .FullName
+                            .Equals(
+                                AssemblyRef.ActivitiesAssemblyRef,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        || activityType
+                            .Assembly
+                            .FullName
+                            .Equals(
+                                Assembly.GetExecutingAssembly().FullName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     && displayName.EndsWith(ActivitySuffix, StringComparison.Ordinal)
                     && !displayName.Equals(ActivitySuffix, StringComparison.Ordinal)

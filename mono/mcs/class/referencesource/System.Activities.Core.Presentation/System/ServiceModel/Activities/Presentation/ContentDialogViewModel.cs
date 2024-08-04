@@ -120,7 +120,8 @@ namespace System.ServiceModel.Activities.Presentation
                     contentProperty.SetValue(new TMessage());
                     contentProperty.Value.Properties["Message"].SetValue(this.MessageExpression);
                     contentProperty
-                        .Value.Properties["DeclaredMessageType"]
+                        .Value
+                        .Properties["DeclaredMessageType"]
                         .SetValue(this.DeclaredMessageType);
                 }
             }

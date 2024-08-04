@@ -144,28 +144,34 @@ namespace System.Xml.Serialization
                     codeClass.CustomAttributes.Add(GeneratedCodeAttribute);
 
                     // Add [SerializableAttribute]
-                    codeClass.CustomAttributes.Add(
-                        new CodeAttributeDeclaration(typeof(SerializableAttribute).FullName)
-                    );
+                    codeClass
+                        .CustomAttributes
+                        .Add(new CodeAttributeDeclaration(typeof(SerializableAttribute).FullName));
 
                     if (!codeClass.IsEnum)
                     {
                         // Add [DebuggerStepThrough]
-                        codeClass.CustomAttributes.Add(
-                            new CodeAttributeDeclaration(
-                                typeof(DebuggerStepThroughAttribute).FullName
-                            )
-                        );
+                        codeClass
+                            .CustomAttributes
+                            .Add(
+                                new CodeAttributeDeclaration(
+                                    typeof(DebuggerStepThroughAttribute).FullName
+                                )
+                            );
                         // Add [DesignerCategory("code")]
-                        codeClass.CustomAttributes.Add(
-                            new CodeAttributeDeclaration(
-                                typeof(DesignerCategoryAttribute).FullName,
-                                new CodeAttributeArgument[]
-                                {
-                                    new CodeAttributeArgument(new CodePrimitiveExpression("code")),
-                                }
-                            )
-                        );
+                        codeClass
+                            .CustomAttributes
+                            .Add(
+                                new CodeAttributeDeclaration(
+                                    typeof(DesignerCategoryAttribute).FullName,
+                                    new CodeAttributeArgument[]
+                                    {
+                                        new CodeAttributeArgument(
+                                            new CodePrimitiveExpression("code")
+                                        ),
+                                    }
+                                )
+                            );
                     }
                     AddTypeMetadata(
                         codeClass.CustomAttributes,
@@ -294,24 +300,28 @@ namespace System.Xml.Serialization
             );
             if (elementName != null)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(new CodePrimitiveExpression(elementName))
-                );
+                attribute
+                    .Arguments
+                    .Add(new CodeAttributeArgument(new CodePrimitiveExpression(elementName)));
             }
             if (typeDesc != null && typeDesc.IsAmbiguousDataType)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(
-                        "DataType",
-                        new CodePrimitiveExpression(typeDesc.DataType.Name)
-                    )
-                );
+                attribute
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            "DataType",
+                            new CodePrimitiveExpression(typeDesc.DataType.Name)
+                        )
+                    );
             }
             if (isNullable)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument("IsNullable", new CodePrimitiveExpression(true))
-                );
+                attribute
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument("IsNullable", new CodePrimitiveExpression(true))
+                    );
             }
             metadata.Add(attribute);
         }

@@ -29,12 +29,14 @@ namespace Internal.Reflection.Extensions.NonPortable
             bool skipTypeValidation = false
         )
         {
-            return AssemblyCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
-                element,
-                optionalAttributeTypeFilter,
-                inherit: false,
-                skipTypeValidation: skipTypeValidation
-            );
+            return AssemblyCustomAttributeSearcher
+                .Default
+                .GetMatchingCustomAttributes(
+                    element,
+                    optionalAttributeTypeFilter,
+                    inherit: false,
+                    skipTypeValidation: skipTypeValidation
+                );
         }
 
         public static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(
@@ -43,12 +45,14 @@ namespace Internal.Reflection.Extensions.NonPortable
             bool skipTypeValidation = false
         )
         {
-            return ModuleCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
-                element,
-                optionalAttributeTypeFilter,
-                inherit: false,
-                skipTypeValidation: skipTypeValidation
-            );
+            return ModuleCustomAttributeSearcher
+                .Default
+                .GetMatchingCustomAttributes(
+                    element,
+                    optionalAttributeTypeFilter,
+                    inherit: false,
+                    skipTypeValidation: skipTypeValidation
+                );
         }
 
         public static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(
@@ -58,12 +62,14 @@ namespace Internal.Reflection.Extensions.NonPortable
             bool skipTypeValidation = false
         )
         {
-            return ParameterCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
-                element,
-                optionalAttributeTypeFilter,
-                inherit,
-                skipTypeValidation: skipTypeValidation
-            );
+            return ParameterCustomAttributeSearcher
+                .Default
+                .GetMatchingCustomAttributes(
+                    element,
+                    optionalAttributeTypeFilter,
+                    inherit,
+                    skipTypeValidation: skipTypeValidation
+                );
         }
 
         public static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(
@@ -76,62 +82,74 @@ namespace Internal.Reflection.Extensions.NonPortable
             {
                 Type? type = element as Type;
                 if (type != null)
-                    return TypeCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
-                        type,
-                        optionalAttributeTypeFilter,
-                        inherit,
-                        skipTypeValidation: skipTypeValidation
-                    );
+                    return TypeCustomAttributeSearcher
+                        .Default
+                        .GetMatchingCustomAttributes(
+                            type,
+                            optionalAttributeTypeFilter,
+                            inherit,
+                            skipTypeValidation: skipTypeValidation
+                        );
             }
             {
                 ConstructorInfo? constructorInfo = element as ConstructorInfo;
                 if (constructorInfo != null)
-                    return ConstructorCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
-                        constructorInfo,
-                        optionalAttributeTypeFilter,
-                        inherit: false,
-                        skipTypeValidation: skipTypeValidation
-                    );
+                    return ConstructorCustomAttributeSearcher
+                        .Default
+                        .GetMatchingCustomAttributes(
+                            constructorInfo,
+                            optionalAttributeTypeFilter,
+                            inherit: false,
+                            skipTypeValidation: skipTypeValidation
+                        );
             }
             {
                 MethodInfo? methodInfo = element as MethodInfo;
                 if (methodInfo != null)
-                    return MethodCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
-                        methodInfo,
-                        optionalAttributeTypeFilter,
-                        inherit,
-                        skipTypeValidation: skipTypeValidation
-                    );
+                    return MethodCustomAttributeSearcher
+                        .Default
+                        .GetMatchingCustomAttributes(
+                            methodInfo,
+                            optionalAttributeTypeFilter,
+                            inherit,
+                            skipTypeValidation: skipTypeValidation
+                        );
             }
             {
                 FieldInfo? fieldInfo = element as FieldInfo;
                 if (fieldInfo != null)
-                    return FieldCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
-                        fieldInfo,
-                        optionalAttributeTypeFilter,
-                        inherit: false,
-                        skipTypeValidation: skipTypeValidation
-                    );
+                    return FieldCustomAttributeSearcher
+                        .Default
+                        .GetMatchingCustomAttributes(
+                            fieldInfo,
+                            optionalAttributeTypeFilter,
+                            inherit: false,
+                            skipTypeValidation: skipTypeValidation
+                        );
             }
             {
                 PropertyInfo? propertyInfo = element as PropertyInfo;
                 if (propertyInfo != null)
-                    return PropertyCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
-                        propertyInfo,
-                        optionalAttributeTypeFilter,
-                        inherit,
-                        skipTypeValidation: skipTypeValidation
-                    );
+                    return PropertyCustomAttributeSearcher
+                        .Default
+                        .GetMatchingCustomAttributes(
+                            propertyInfo,
+                            optionalAttributeTypeFilter,
+                            inherit,
+                            skipTypeValidation: skipTypeValidation
+                        );
             }
             {
                 EventInfo? eventInfo = element as EventInfo;
                 if (eventInfo != null)
-                    return EventCustomAttributeSearcher.Default.GetMatchingCustomAttributes(
-                        eventInfo,
-                        optionalAttributeTypeFilter,
-                        inherit,
-                        skipTypeValidation: skipTypeValidation
-                    );
+                    return EventCustomAttributeSearcher
+                        .Default
+                        .GetMatchingCustomAttributes(
+                            eventInfo,
+                            optionalAttributeTypeFilter,
+                            inherit,
+                            skipTypeValidation: skipTypeValidation
+                        );
             }
 
             ArgumentNullException.ThrowIfNull(element);
@@ -248,9 +266,9 @@ namespace Internal.Reflection.Extensions.NonPortable
 
             public sealed override MethodInfo GetParent(MethodInfo e)
             {
-                return ReflectionAugments.ReflectionCoreCallbacks.GetImplicitlyOverriddenBaseClassMethod(
-                    e
-                );
+                return ReflectionAugments
+                    .ReflectionCoreCallbacks
+                    .GetImplicitlyOverriddenBaseClassMethod(e);
             }
 
             public static readonly MethodCustomAttributeSearcher Default =
@@ -271,9 +289,9 @@ namespace Internal.Reflection.Extensions.NonPortable
 
             public sealed override PropertyInfo GetParent(PropertyInfo e)
             {
-                return ReflectionAugments.ReflectionCoreCallbacks.GetImplicitlyOverriddenBaseClassProperty(
-                    e
-                );
+                return ReflectionAugments
+                    .ReflectionCoreCallbacks
+                    .GetImplicitlyOverriddenBaseClassProperty(e);
             }
 
             public static readonly PropertyCustomAttributeSearcher Default =
@@ -294,9 +312,9 @@ namespace Internal.Reflection.Extensions.NonPortable
 
             public sealed override EventInfo GetParent(EventInfo e)
             {
-                return ReflectionAugments.ReflectionCoreCallbacks.GetImplicitlyOverriddenBaseClassEvent(
-                    e
-                );
+                return ReflectionAugments
+                    .ReflectionCoreCallbacks
+                    .GetImplicitlyOverriddenBaseClassEvent(e);
             }
 
             public static readonly EventCustomAttributeSearcher Default =

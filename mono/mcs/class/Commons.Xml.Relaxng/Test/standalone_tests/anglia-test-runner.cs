@@ -70,12 +70,14 @@ public class Driver
                         if (stopOnError)
                             throw;
                         failure++;
-                        Console.Error.WriteLine(
-                            "INCORRECTLY INVALID "
-                                + id
-                                + " --> "
-                                + (details ? ex.ToString() : ex.Message)
-                        );
+                        Console
+                            .Error
+                            .WriteLine(
+                                "INCORRECTLY INVALID "
+                                    + id
+                                    + " --> "
+                                    + (details ? ex.ToString() : ex.Message)
+                            );
                     }
                     else
                     {

@@ -89,37 +89,39 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
                     {
                         var text = document.GetTextSynchronously(cancellationToken);
 
-                        var indentStyle = _provider._globalOptions.GetOption(
-                            IndentationOptionsStorage.SmartIndent,
-                            document.Project.Language
-                        );
+                        var indentStyle = _provider
+                            ._globalOptions
+                            .GetOption(
+                                IndentationOptionsStorage.SmartIndent,
+                                document.Project.Language
+                            );
 
                         var fsharpOptions = new FSharpIndentationOptions(
-                            TabSize: _textView.Options.GetOptionValue(
-                                DefaultOptions.TabSizeOptionId
-                            ),
+                            TabSize: _textView
+                                .Options
+                                .GetOptionValue(DefaultOptions.TabSizeOptionId),
                             IndentStyle: (FormattingOptions.IndentStyle)indentStyle
                         );
 
 #pragma warning disable 0618 // Compat with existing EA api
-                        result = _provider._service.GetDesiredIndentation(
-                            document.Project.LanguageServices,
-                            text,
-                            document.Id,
-                            document.FilePath,
-                            line.LineNumber,
-                            fsharpOptions
-                        );
+                        result = _provider
+                            ._service
+                            .GetDesiredIndentation(
+                                document.Project.LanguageServices,
+                                text,
+                                document.Id,
+                                document.FilePath,
+                                line.LineNumber,
+                                fsharpOptions
+                            );
 #pragma warning restore
                     }
                     else
                     {
                         Contract.ThrowIfNull(_provider._legacyService);
-                        result = _provider._legacyService.GetDesiredIndentation(
-                            document,
-                            line.LineNumber,
-                            cancellationToken
-                        );
+                        result = _provider
+                            ._legacyService
+                            .GetDesiredIndentation(document, line.LineNumber, cancellationToken);
                     }
 
                     return result.HasValue

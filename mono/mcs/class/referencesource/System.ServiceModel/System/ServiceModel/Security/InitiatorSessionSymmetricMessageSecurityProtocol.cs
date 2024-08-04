@@ -38,14 +38,16 @@ namespace System.ServiceModel.Security
             if (factory.ActAsInitiator != true)
             {
                 Fx.Assert("This protocol can only be used at the initiator.");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(
-                            SR.ProtocolMustBeInitiator,
-                            "InitiatorSessionSymmetricMessageSecurityProtocol"
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.ProtocolMustBeInitiator,
+                                "InitiatorSessionSymmetricMessageSecurityProtocol"
+                            )
                         )
-                    )
-                );
+                    );
             }
             this.requireDerivedKeys = factory.SecurityTokenParameters.RequireDerivedKeys;
             if (requireDerivedKeys)
@@ -129,38 +131,40 @@ namespace System.ServiceModel.Security
                     this.derivedSignatureToken = new DerivedKeySecurityToken(
                         -1,
                         0,
-                        this.Factory.OutgoingAlgorithmSuite.GetSignatureKeyDerivationLength(
-                            token,
-                            this.sessionStandardsManager
-                                .MessageSecurityVersion
-                                .SecureConversationVersion
-                        ),
+                        this.Factory
+                            .OutgoingAlgorithmSuite
+                            .GetSignatureKeyDerivationLength(
+                                token,
+                                this.sessionStandardsManager
+                                    .MessageSecurityVersion
+                                    .SecureConversationVersion
+                            ),
                         null,
                         DerivedKeySecurityToken.DefaultNonceLength,
                         token,
-                        this.Factory.SecurityTokenParameters.CreateKeyIdentifierClause(
-                            token,
-                            SecurityTokenReferenceStyle.Internal
-                        ),
+                        this.Factory
+                            .SecurityTokenParameters
+                            .CreateKeyIdentifierClause(token, SecurityTokenReferenceStyle.Internal),
                         derivationAlgorithm,
                         SecurityUtils.GenerateId()
                     );
                     this.derivedEncryptionToken = new DerivedKeySecurityToken(
                         -1,
                         0,
-                        this.Factory.OutgoingAlgorithmSuite.GetEncryptionKeyDerivationLength(
-                            token,
-                            this.sessionStandardsManager
-                                .MessageSecurityVersion
-                                .SecureConversationVersion
-                        ),
+                        this.Factory
+                            .OutgoingAlgorithmSuite
+                            .GetEncryptionKeyDerivationLength(
+                                token,
+                                this.sessionStandardsManager
+                                    .MessageSecurityVersion
+                                    .SecureConversationVersion
+                            ),
                         null,
                         DerivedKeySecurityToken.DefaultNonceLength,
                         token,
-                        this.Factory.SecurityTokenParameters.CreateKeyIdentifierClause(
-                            token,
-                            SecurityTokenReferenceStyle.Internal
-                        ),
+                        this.Factory
+                            .SecurityTokenParameters
+                            .CreateKeyIdentifierClause(token, SecurityTokenReferenceStyle.Internal),
                         derivationAlgorithm,
                         SecurityUtils.GenerateId()
                     );
@@ -430,9 +434,13 @@ namespace System.ServiceModel.Security
             }
             if (!isSessionToken)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new MessageSecurityException(SR.GetString(SR.NoSessionTokenPresentInMessage))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(SR.NoSessionTokenPresentInMessage)
+                        )
+                    );
             }
             if (factory.RequireIntegrity)
             {

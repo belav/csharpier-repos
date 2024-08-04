@@ -64,14 +64,13 @@ class C
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendAsync(
-                "var m = Method(1,",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendAsync("var m = Method(1,", HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeSignatureHelpAsync(HangMitigatingCancellationToken);
-            var signature = await TestServices.Editor.GetCurrentSignatureAsync(
-                HangMitigatingCancellationToken
-            );
+            var signature = await TestServices
+                .Editor
+                .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal("C C.Method(int i, int i2)\r\nHello World 2.0!", signature.Content);
             Assert.Equal("i2", signature.CurrentParameter.Name);
             Assert.Equal(
@@ -94,22 +93,23 @@ class C
                 ]
             );
 
-            await TestServices.Input.SendAsync(
-                [
-                    VirtualKeyCode.HOME,
-                    (VirtualKeyCode.END, VirtualKeyCode.SHIFT),
-                    VirtualKeyCode.DELETE,
-                ],
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendAsync(
-                "var op = OutAndParam(",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendAsync(
+                    [
+                        VirtualKeyCode.HOME,
+                        (VirtualKeyCode.END, VirtualKeyCode.SHIFT),
+                        VirtualKeyCode.DELETE,
+                    ],
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .Input
+                .SendAsync("var op = OutAndParam(", HangMitigatingCancellationToken);
 
-            signature = await TestServices.Editor.GetCurrentSignatureAsync(
-                HangMitigatingCancellationToken
-            );
+            signature = await TestServices
+                .Editor
+                .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 "void C.OutAndParam(ref string[][,] strings, out string[] outArr, params dynamic d)\r\nComplex Method Params",
                 signature.Content
@@ -182,9 +182,9 @@ class C
             );
 
             await TestServices.Editor.InvokeSignatureHelpAsync(HangMitigatingCancellationToken);
-            var signature = await TestServices.Editor.GetCurrentSignatureAsync(
-                HangMitigatingCancellationToken
-            );
+            var signature = await TestServices
+                .Editor
+                .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal("C C.GenericMethod<T1, T2>(T1 i, T2 i2)", signature.Content);
             Assert.Equal("T1", signature.CurrentParameter.Name);
             Assert.Equal("", signature.CurrentParameter.Documentation);
@@ -249,9 +249,9 @@ class C
             );
 
             await TestServices.Editor.InvokeSignatureHelpAsync(HangMitigatingCancellationToken);
-            var signature = await TestServices.Editor.GetCurrentSignatureAsync(
-                HangMitigatingCancellationToken
-            );
+            var signature = await TestServices
+                .Editor
+                .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal("C C.GenericMethod<string, int>(string i, int i2)", signature.Content);
             Assert.Equal("i", signature.CurrentParameter.Name);
             Assert.Equal("", signature.CurrentParameter.Documentation);
@@ -292,11 +292,13 @@ class C
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Workspace.SetTriggerCompletionInArgumentListsAsync(
-                LanguageNames.CSharp,
-                true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Workspace
+                .SetTriggerCompletionInArgumentListsAsync(
+                    LanguageNames.CSharp,
+                    true,
+                    HangMitigatingCancellationToken
+                );
 
             await TestServices.Input.SendAsync("(", HangMitigatingCancellationToken);
 
@@ -304,9 +306,9 @@ class C
                 await TestServices.Editor.IsCompletionActiveAsync(HangMitigatingCancellationToken)
             );
             Assert.True(
-                await TestServices.Editor.IsSignatureHelpActiveAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Editor
+                    .IsSignatureHelpActiveAsync(HangMitigatingCancellationToken)
             );
 
             await TestServices.Editor.InvokeSignatureHelpAsync(HangMitigatingCancellationToken);
@@ -315,31 +317,30 @@ class C
                 await TestServices.Editor.IsCompletionActiveAsync(HangMitigatingCancellationToken)
             );
             Assert.True(
-                await TestServices.Editor.IsSignatureHelpActiveAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Editor
+                    .IsSignatureHelpActiveAsync(HangMitigatingCancellationToken)
             );
 
             Assert.Equal(
                 "void C.Test()",
                 (
-                    await TestServices.Editor.GetCurrentSignatureAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices
+                        .Editor
+                        .GetCurrentSignatureAsync(HangMitigatingCancellationToken)
                 ).Content
             );
 
-            await TestServices.Input.SendAsync(
-                VirtualKeyCode.DOWN,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendAsync(VirtualKeyCode.DOWN, HangMitigatingCancellationToken);
 
             Assert.Equal(
                 "void C.Test(int x)",
                 (
-                    await TestServices.Editor.GetCurrentSignatureAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices
+                        .Editor
+                        .GetCurrentSignatureAsync(HangMitigatingCancellationToken)
                 ).Content
             );
         }

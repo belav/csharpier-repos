@@ -860,10 +860,9 @@ namespace System.Text.Json.Serialization.Tests
 
             if (isCompatibilitySwitchExplicitlyDisabled)
             {
-                options.RuntimeConfigurationOptions.Add(
-                    "System.Text.Json.Serialization.EnableSourceGenReflectionFallback",
-                    false
-                );
+                options
+                    .RuntimeConfigurationOptions
+                    .Add("System.Text.Json.Serialization.EnableSourceGenReflectionFallback", false);
             }
 
             RemoteExecutor
@@ -940,9 +939,10 @@ namespace System.Text.Json.Serialization.Tests
                         JsonTestHelper.AssertJsonEqual("""{"Value":"value", "Thing":null}""", json);
 
                         // A converter can be resolved when looking up JsonSerializerOptions
-                        JsonConverter converter = JsonContext.Default.Options.GetConverter(
-                            typeof(MyClass)
-                        );
+                        JsonConverter converter = JsonContext
+                            .Default
+                            .Options
+                            .GetConverter(typeof(MyClass));
                         Assert.IsAssignableFrom<JsonConverter<MyClass>>(converter);
 
                         // Serialization using JsonSerializerContext now uses the reflection fallback.
@@ -1261,10 +1261,9 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Same(original, newOptions.TypeInfoResolver);
 
             // resolving metadata returns metadata tied to the new options
-            JsonTypeInfo typeInfo = newOptions.TypeInfoResolver.GetTypeInfo(
-                typeof(int),
-                newOptions
-            );
+            JsonTypeInfo typeInfo = newOptions
+                .TypeInfoResolver
+                .GetTypeInfo(typeof(int), newOptions);
             Assert.Same(typeInfo.Options, newOptions);
 
             // it is possible to reset the resolver

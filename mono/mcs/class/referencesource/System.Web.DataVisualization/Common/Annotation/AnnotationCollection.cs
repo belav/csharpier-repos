@@ -244,19 +244,17 @@ namespace System.Web.UI.DataVisualization.Charting
                         && this.Chart.paintBufferBitmap.Size.Height >= chartPosition.Size.Height
                     )
                     {
-                        chartPicture.nonTopLevelChartBuffer = this.Chart.paintBufferBitmap.Clone(
-                            chartPosition,
-                            this.Chart.paintBufferBitmap.PixelFormat
-                        );
+                        chartPicture.nonTopLevelChartBuffer = this.Chart
+                            .paintBufferBitmap
+                            .Clone(chartPosition, this.Chart.paintBufferBitmap.PixelFormat);
                     }
                 }
                 else if (drawAnnotationOnly && chartPicture.nonTopLevelChartBuffer != null)
                 {
                     // Restore previous background
-                    this.Chart.paintBufferBitmapGraphics.DrawImageUnscaled(
-                        chartPicture.nonTopLevelChartBuffer,
-                        chartPosition
-                    );
+                    this.Chart
+                        .paintBufferBitmapGraphics
+                        .DrawImageUnscaled(chartPicture.nonTopLevelChartBuffer, chartPosition);
                 }
             }
 #endif // Microsoft_CONTROL

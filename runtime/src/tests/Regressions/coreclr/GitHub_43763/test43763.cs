@@ -8,9 +8,9 @@ public class Program
     [Fact]
     public static void TestEntryPoint()
     {
-        System.Console.WriteLine(
-            System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
-        );
+        System
+            .Console
+            .WriteLine(System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
         CallC();
         CallB();
         CallC2();

@@ -1058,8 +1058,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
                     .Select(o => new
                     {
                         o.OrderID,
-                        Sum = o
-                            .OrderDetails.Select(i => i.UnitPrice * i.UnitPrice)
+                        Sum = o.OrderDetails
+                            .Select(i => i.UnitPrice * i.UnitPrice)
                             .Sum(i => Math.Round(i, 2)),
                     }),
             elementSorter: e => e.OrderID,
@@ -1102,8 +1102,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
                     .Select(o => new
                     {
                         o.OrderID,
-                        Sum = o
-                            .OrderDetails.Select(i => i.UnitPrice * i.UnitPrice)
+                        Sum = o.OrderDetails
+                            .Select(i => i.UnitPrice * i.UnitPrice)
                             .Sum(i => Math.Truncate(i)),
                     }),
             elementSorter: e => e.OrderID,

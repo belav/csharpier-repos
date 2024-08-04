@@ -45,7 +45,8 @@ public class SourceToDestinationNameMapperAttributesMember : ISourceToDestinatio
         if (!_allSourceMembers.TryGetValue(sourceTypeDetails, out SourceMember[] sourceMembers))
         {
             sourceMembers = sourceTypeDetails
-                .ReadAccessors.Select(sourceMember => new SourceMember(sourceMember))
+                .ReadAccessors
+                .Select(sourceMember => new SourceMember(sourceMember))
                 .Where(s => s.Attribute != null)
                 .ToArray();
             _allSourceMembers[sourceTypeDetails] =
@@ -102,9 +103,9 @@ public class MapToAttributeTest : AutoMapperSpecBase
         new(cfg =>
         {
             cfg.Internal()
-                .MemberConfiguration.NameToMemberMappers.Add(
-                    new SourceToDestinationNameMapperAttributesMember()
-                );
+                .MemberConfiguration
+                .NameToMemberMappers
+                .Add(new SourceToDestinationNameMapperAttributesMember());
             cfg.CreateProfile(
                 "New Profile",
                 profile =>

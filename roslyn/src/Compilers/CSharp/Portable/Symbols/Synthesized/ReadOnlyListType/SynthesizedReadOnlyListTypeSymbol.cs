@@ -875,9 +875,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 var constructor = (MethodSymbol)
-                    method.DeclaringCompilation.GetWellKnownTypeMember(
-                        WellKnownMember.System_NotSupportedException__ctor
-                    )!;
+                    method
+                        .DeclaringCompilation
+                        .GetWellKnownTypeMember(
+                            WellKnownMember.System_NotSupportedException__ctor
+                        )!;
                 // throw new System.NotSupportedException();
                 return f.Throw(f.New(constructor));
             }
@@ -896,10 +898,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             Debug.Assert(symbol is { });
             Debug.Assert(
-                _field.Type.OriginalDefinition.Equals(
-                    symbol.ContainingType,
-                    TypeCompareKind.AllIgnoreOptions
-                )
+                _field
+                    .Type
+                    .OriginalDefinition
+                    .Equals(symbol.ContainingType, TypeCompareKind.AllIgnoreOptions)
             );
 
             return symbol.SymbolAsMember((NamedTypeSymbol)_field.Type);

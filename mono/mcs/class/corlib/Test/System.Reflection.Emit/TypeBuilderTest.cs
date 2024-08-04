@@ -12413,10 +12413,9 @@ namespace MonoTests.System.Reflection.Emit
         public void DefinedDefaultConstructorWorksWithGenericBaseType()
         {
             AssemblyName assemblyName = new AssemblyName("a");
-            AssemblyBuilder ass = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                assemblyName,
-                AssemblyBuilderAccess.RunAndSave
-            );
+            AssemblyBuilder ass = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
             var mb = ass.DefineDynamicModule("a.dll");
 
             var tb = mb.DefineType("Base");
@@ -12799,10 +12798,9 @@ namespace MonoTests.System.Reflection.Emit
         [Category("MobileNotWorking")] // Mono.CompilerServices.SymbolWriter not available in XA
         public void CircularArrayType()
         {
-            var assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName("Test"),
-                AssemblyBuilderAccess.RunAndSave
-            );
+            var assemblyBuilder = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(new AssemblyName("Test"), AssemblyBuilderAccess.RunAndSave);
             var moduleBuilder = assemblyBuilder.DefineDynamicModule("Test", "Test.dll", true);
             var typeBuilder = moduleBuilder.DefineType("Foo", TypeAttributes.Public);
             var fieldBuilder = typeBuilder.DefineField(
@@ -12899,11 +12897,9 @@ namespace MonoTests.System.Reflection.Emit
         public void TypeWithFieldRVAWorksUnderSgen()
         {
             AssemblyName an = new AssemblyName("MAIN");
-            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                an,
-                AssemblyBuilderAccess.Run,
-                "."
-            );
+            AssemblyBuilder ab = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(an, AssemblyBuilderAccess.Run, ".");
             ModuleBuilder mob = ab.DefineDynamicModule("MAIN");
             TypeBuilder tb = mob.DefineType(
                 "MAIN",
@@ -12964,10 +12960,9 @@ namespace MonoTests.System.Reflection.Emit
                 base_class
             );
 
-            var field = builder.BaseType.GetField(
-                "Field",
-                BindingFlags.Instance | BindingFlags.Public
-            );
+            var field = builder
+                .BaseType
+                .GetField("Field", BindingFlags.Instance | BindingFlags.Public);
 
             var cb = builder.DefineConstructor(
                 MethodAttributes.Public | MethodAttributes.SpecialName,
@@ -13015,10 +13010,9 @@ namespace MonoTests.System.Reflection.Emit
 
             var assemblyBuilderAccess = AssemblyBuilderAccess.Save;
             var assemblyName = new AssemblyName(AssemblyName);
-            var assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                assemblyName,
-                assemblyBuilderAccess
-            );
+            var assemblyBuilder = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(assemblyName, assemblyBuilderAccess);
             var moduleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName, AssemblyFileName);
 
             var builder = moduleBuilder.DefineType(
@@ -13027,10 +13021,9 @@ namespace MonoTests.System.Reflection.Emit
                 base_class
             );
 
-            var field = builder.BaseType.GetField(
-                "Field",
-                BindingFlags.Instance | BindingFlags.Public
-            );
+            var field = builder
+                .BaseType
+                .GetField("Field", BindingFlags.Instance | BindingFlags.Public);
 
             var cb = builder.DefineConstructor(
                 MethodAttributes.Public | MethodAttributes.SpecialName,
@@ -13190,10 +13183,9 @@ namespace MonoTests.System.Reflection.Emit
              * }
              */
             var aname = new AssemblyName("example1");
-            var ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                aname,
-                AssemblyBuilderAccess.Run
-            );
+            var ab = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(aname, AssemblyBuilderAccess.Run);
             var mb = ab.DefineDynamicModule(aname.Name);
             var tbS = mb.DefineType("S", TypeAttributes.Public);
             tbS.DefineGenericParameters(new String[] { "T" });
@@ -13226,10 +13218,9 @@ namespace MonoTests.System.Reflection.Emit
              * }
              */
             var aname = new AssemblyName("example1");
-            var ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                aname,
-                AssemblyBuilderAccess.Run
-            );
+            var ab = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(aname, AssemblyBuilderAccess.Run);
             var mb = ab.DefineDynamicModule(aname.Name);
             var tbS = mb.DefineType("S", TypeAttributes.Public);
             tbS.DefineGenericParameters(new String[] { "T" });
@@ -13257,10 +13248,9 @@ namespace MonoTests.System.Reflection.Emit
         public void GetGenericTypeDefinitionAfterCreateReturnsBuilder()
         {
             var aname = new AssemblyName("genericDefnAfterCreate");
-            var ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                aname,
-                AssemblyBuilderAccess.Run
-            );
+            var ab = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(aname, AssemblyBuilderAccess.Run);
             var mb = ab.DefineDynamicModule(aname.Name);
             var buildX = mb.DefineType("X", TypeAttributes.Public);
             buildX.DefineGenericParameters("T", "U");

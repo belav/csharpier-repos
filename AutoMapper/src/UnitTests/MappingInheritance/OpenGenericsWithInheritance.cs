@@ -274,5 +274,6 @@ public class IncludeBaseOpenGenerics : AutoMapperSpecBase
     public void Shoud_work() =>
         Mapper
             .Map<InternetOrder>(new InternetOrderModel { Number = "42" })
-            .OrderNumber.ShouldBe("42");
+            .OrderNumber
+            .ShouldBe("42");
 }

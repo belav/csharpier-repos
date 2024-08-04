@@ -110,14 +110,16 @@ namespace Microsoft.Extensions.Hosting
             var waitForStop = new TaskCompletionSource<object?>(
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
-            applicationLifetime.ApplicationStopping.Register(
-                obj =>
-                {
-                    var tcs = (TaskCompletionSource<object?>)obj!;
-                    tcs.TrySetResult(null);
-                },
-                waitForStop
-            );
+            applicationLifetime
+                .ApplicationStopping
+                .Register(
+                    obj =>
+                    {
+                        var tcs = (TaskCompletionSource<object?>)obj!;
+                        tcs.TrySetResult(null);
+                    },
+                    waitForStop
+                );
 
             await waitForStop.Task.ConfigureAwait(false);
 #endif

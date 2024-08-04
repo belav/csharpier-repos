@@ -770,11 +770,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                             " Required Object ",
                             record.PRobjectId
                         );
-                        objectInfo.objectManager.RecordDelayedFixup(
-                            parent.PRobjectId,
-                            memberName,
-                            record.PRobjectId
-                        );
+                        objectInfo
+                            .objectManager
+                            .RecordDelayedFixup(parent.PRobjectId, memberName, record.PRobjectId);
                         //                          Console.WriteLine("SerializationInfo: Main Object ({0}): {1}. SubObject ({2}): {3}", parent.PRobjectId,
                         //                                            objectInfo.obj, record.PRobjectId, obj);
                     }
@@ -791,11 +789,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                             record.PRobjectId
                         );
                         if (memberInfo != null)
-                            objectInfo.objectManager.RecordFixup(
-                                parent.PRobjectId,
-                                memberInfo,
-                                record.PRobjectId
-                            );
+                            objectInfo
+                                .objectManager
+                                .RecordFixup(parent.PRobjectId, memberInfo, record.PRobjectId);
                         //                          Console.WriteLine("MemberFixup: Main Object({0}): {1}. SubObject({2}): {3}", parent.PRobjectId,
                         //                                            objectInfo.obj.GetType(), record.PRobjectId, obj.GetType());
                     }

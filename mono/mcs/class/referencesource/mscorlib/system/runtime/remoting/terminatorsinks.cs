@@ -228,7 +228,8 @@ namespace System.Runtime.Remoting.Messaging
             else
             {
                 msgCtrl = Thread
-                    .CurrentContext.GetClientContextChain()
+                    .CurrentContext
+                    .GetClientContextChain()
                     .AsyncProcessMessage(reqMsg, replySink);
             }
             return msgCtrl;
@@ -318,9 +319,9 @@ namespace System.Runtime.Remoting.Messaging
                     return errMsg;
                 }
 
-                replyMsg = ((IConstructionCallMessage)reqMsg).Activator.Activate(
-                    (IConstructionCallMessage)reqMsg
-                );
+                replyMsg = ((IConstructionCallMessage)reqMsg)
+                    .Activator
+                    .Activate((IConstructionCallMessage)reqMsg);
                 BCLDebug.Assert(replyMsg is IConstructionReturnMessage, "bad ctorRetMsg");
                 errMsg = ctx.NotifyActivatorProperties(
                     replyMsg,
@@ -353,11 +354,9 @@ namespace System.Runtime.Remoting.Messaging
                 if (channelSink != CrossContextChannel.MessageSink)
                 {
                     replyMsg = (IMessage)
-                        Thread.CurrentThread.InternalCrossContextCallback(
-                            Context.DefaultContext,
-                            xctxDel,
-                            args
-                        );
+                        Thread
+                            .CurrentThread
+                            .InternalCrossContextCallback(Context.DefaultContext, xctxDel, args);
                 }
                 else
                 {
@@ -470,11 +469,9 @@ namespace System.Runtime.Remoting.Messaging
                 if (channelSink != CrossContextChannel.MessageSink)
                 {
                     msgCtrl = (IMessageCtrl)
-                        Thread.CurrentThread.InternalCrossContextCallback(
-                            Context.DefaultContext,
-                            xctxDel,
-                            args
-                        );
+                        Thread
+                            .CurrentThread
+                            .InternalCrossContextCallback(Context.DefaultContext, xctxDel, args);
                 }
                 else
                 {
@@ -522,13 +519,15 @@ namespace System.Runtime.Remoting.Messaging
 
             // Call the dynamic sinks to notify that the async call
             // has completed
-            Thread.CurrentContext.NotifyDynamicSinks(
-                reqMsg, // this is the async reply
-                true, // bCliSide
-                false, // bStart
-                true, // bAsync
-                true
-            ); // bNotifyGlobals
+            Thread
+                .CurrentContext
+                .NotifyDynamicSinks(
+                    reqMsg, // this is the async reply
+                    true, // bCliSide
+                    false, // bStart
+                    true, // bAsync
+                    true
+                ); // bNotifyGlobals
 
             // call the original reply sink now that we have moved
             // to the correct client context
@@ -622,9 +621,9 @@ namespace System.Runtime.Remoting.Messaging
                     return errMsg;
                 }
 
-                replyMsg = ((IConstructionCallMessage)reqMsg).Activator.Activate(
-                    (IConstructionCallMessage)reqMsg
-                );
+                replyMsg = ((IConstructionCallMessage)reqMsg)
+                    .Activator
+                    .Activate((IConstructionCallMessage)reqMsg);
                 BCLDebug.Assert(replyMsg is IConstructionReturnMessage, "bad ctorRetMsg");
                 errMsg = ctx.NotifyActivatorProperties(
                     replyMsg,

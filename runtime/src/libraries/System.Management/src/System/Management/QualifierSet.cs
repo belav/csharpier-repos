@@ -95,15 +95,13 @@ namespace System.Management
                 QualifierType.ObjectQualifier
                     => parent.wbemObject.GetQualifierSet_(out qualifierSet),
                 QualifierType.PropertyQualifier
-                    => parent.wbemObject.GetPropertyQualifierSet_(
-                        propertyOrMethodName,
-                        out qualifierSet
-                    ),
+                    => parent
+                        .wbemObject
+                        .GetPropertyQualifierSet_(propertyOrMethodName, out qualifierSet),
                 QualifierType.MethodQualifier
-                    => parent.wbemObject.GetMethodQualifierSet_(
-                        propertyOrMethodName,
-                        out qualifierSet
-                    ),
+                    => parent
+                        .wbemObject
+                        .GetMethodQualifierSet_(propertyOrMethodName, out qualifierSet),
                 _ => throw new ManagementException(ManagementStatus.Unexpected, null, null), // Is this the best fit error ??
             };
             if (status < 0)
@@ -357,15 +355,13 @@ namespace System.Management
                     QualifierType.ObjectQualifier
                         => parent.wbemObject.GetQualifierSet_(out qualifierSet),
                     QualifierType.PropertyQualifier
-                        => parent.wbemObject.GetPropertyQualifierSet_(
-                            propertyOrMethodName,
-                            out qualifierSet
-                        ),
+                        => parent
+                            .wbemObject
+                            .GetPropertyQualifierSet_(propertyOrMethodName, out qualifierSet),
                     QualifierType.MethodQualifier
-                        => parent.wbemObject.GetMethodQualifierSet_(
-                            propertyOrMethodName,
-                            out qualifierSet
-                        ),
+                        => parent
+                            .wbemObject
+                            .GetMethodQualifierSet_(propertyOrMethodName, out qualifierSet),
                     _ => throw new ManagementException(ManagementStatus.Unexpected, null, null), // Is this the best fit error ??
                 };
 

@@ -325,8 +325,9 @@
                 };
                 endpointDispatcher.DispatchRuntime.Operations.Add(operationDispatcher);
 
-                OperationBehaviorAttribute operationAttribute =
-                    operation.Behaviors.Find<OperationBehaviorAttribute>();
+                OperationBehaviorAttribute operationAttribute = operation
+                    .Behaviors
+                    .Find<OperationBehaviorAttribute>();
                 ((IOperationBehavior)operationAttribute).ApplyDispatchBehavior(
                     operation,
                     operationDispatcher
@@ -344,10 +345,14 @@
             );
 
             //Create the Channel Dispatcher
-            ServiceDebugBehavior serviceDebugBehavior =
-                workflowServiceHost.Description.Behaviors.Find<ServiceDebugBehavior>();
-            ServiceBehaviorAttribute serviceBehaviorAttribute =
-                workflowServiceHost.Description.Behaviors.Find<ServiceBehaviorAttribute>();
+            ServiceDebugBehavior serviceDebugBehavior = workflowServiceHost
+                .Description
+                .Behaviors
+                .Find<ServiceDebugBehavior>();
+            ServiceBehaviorAttribute serviceBehaviorAttribute = workflowServiceHost
+                .Description
+                .Behaviors
+                .Find<ServiceBehaviorAttribute>();
 
             bool includeDebugInfo = false;
             if (serviceDebugBehavior != null)
@@ -386,10 +391,9 @@
                 }
                 catch (IdentityNotMappedException)
                 {
-                    throw FxTrace.Exception.Argument(
-                        windowsGroup,
-                        SR.WindowsGroupNotFound(windowsGroup)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument(windowsGroup, SR.WindowsGroupNotFound(windowsGroup));
                 }
             }
 

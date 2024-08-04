@@ -45,10 +45,9 @@ namespace System.Web.Services.Description
             methodName = CodeIdentifier.MakeValid(ImportContext.OperationBinding.Name);
 
             MimeTextReturn importedReturn = new MimeTextReturn();
-            importedReturn.TypeName = ImportContext.ClassNames.AddUnique(
-                methodName + "Matches",
-                mimeTextBinding
-            );
+            importedReturn.TypeName = ImportContext
+                .ClassNames
+                .AddUnique(methodName + "Matches", mimeTextBinding);
             importedReturn.TextBinding = mimeTextBinding;
             importedReturn.ReaderType = typeof(TextReturnReader);
             return importedReturn;
@@ -156,10 +155,12 @@ namespace System.Web.Services.Description
                 string fieldTypeName;
                 if (match.Matches.Count > 0)
                 {
-                    fieldTypeName = ImportContext.ClassNames.AddUnique(
-                        CodeIdentifier.MakeValid(match.Type.Length == 0 ? name : match.Type),
-                        match
-                    );
+                    fieldTypeName = ImportContext
+                        .ClassNames
+                        .AddUnique(
+                            CodeIdentifier.MakeValid(match.Type.Length == 0 ? name : match.Type),
+                            match
+                        );
                     fieldTypeNames[i] = fieldTypeName;
                 }
                 else

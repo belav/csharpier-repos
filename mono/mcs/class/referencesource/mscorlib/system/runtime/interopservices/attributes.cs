@@ -1182,7 +1182,8 @@ namespace System.Runtime.InteropServices
             type.GetPacking(out pack, out size);
 #else
             type.GetRuntimeModule()
-                .MetadataImport.GetClassLayout(type.MetadataToken, out pack, out size);
+                .MetadataImport
+                .GetClassLayout(type.MetadataToken, out pack, out size);
 #endif
 
             // Metadata parameter checking should not have allowed 0 for packing size.
@@ -1246,7 +1247,8 @@ namespace System.Runtime.InteropServices
 #else
                 field
                     .GetRuntimeModule()
-                    .MetadataImport.GetFieldOffset(
+                    .MetadataImport
+                    .GetFieldOffset(
                         field.DeclaringType.MetadataToken,
                         field.MetadataToken,
                         out fieldOffset

@@ -32,10 +32,9 @@ namespace Microsoft.Build.Tasks.Xaml
             ValidateType(type);
             if (textValue == null && type.UnderlyingType.IsValueType)
             {
-                throw FxTrace.Exception.Argument(
-                    "value",
-                    SR.AttributeValueNotNullable(type.UnderlyingType)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("value", SR.AttributeValueNotNullable(type.UnderlyingType));
             }
 
             this.Type = type;
@@ -51,17 +50,18 @@ namespace Microsoft.Build.Tasks.Xaml
             ValidateType(type);
             if (value == null && type.UnderlyingType.IsValueType)
             {
-                throw FxTrace.Exception.Argument(
-                    "value",
-                    SR.AttributeValueNotNullable(type.UnderlyingType)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("value", SR.AttributeValueNotNullable(type.UnderlyingType));
             }
             if (value != null && !type.UnderlyingType.IsAssignableFrom(value.GetType()))
             {
-                throw FxTrace.Exception.Argument(
-                    "value",
-                    SR.AttributeValueNotAssignableToType(value.GetType(), type.UnderlyingType)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument(
+                        "value",
+                        SR.AttributeValueNotAssignableToType(value.GetType(), type.UnderlyingType)
+                    );
             }
 
             this.Type = type;
@@ -147,17 +147,15 @@ namespace Microsoft.Build.Tasks.Xaml
             }
             if (type.IsUnknown)
             {
-                throw FxTrace.Exception.Argument(
-                    "type",
-                    SR.AttributeParameterTypeUnknownNoErrNum(type)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("type", SR.AttributeParameterTypeUnknownNoErrNum(type));
             }
             if (!AttributeData.IsSupportedParameterType(type.UnderlyingType))
             {
-                throw FxTrace.Exception.Argument(
-                    "type",
-                    SR.AttributeParamTypeNotSupportedNoErrNum(type)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("type", SR.AttributeParamTypeNotSupportedNoErrNum(type));
             }
         }
     }

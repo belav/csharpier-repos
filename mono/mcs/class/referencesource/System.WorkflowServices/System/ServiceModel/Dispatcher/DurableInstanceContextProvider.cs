@@ -161,14 +161,16 @@ namespace System.ServiceModel.Dispatcher
 
             if (durableInstance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.RequiredInstanceContextExtensionNotFound,
-                            typeof(DurableInstance).Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.RequiredInstanceContextExtensionNotFound,
+                                typeof(DurableInstance).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             lock (instanceContext.ThisLock)
@@ -234,10 +236,9 @@ namespace System.ServiceModel.Dispatcher
                 if (ContextMessageProperty.TryGet(message, out contextProperties))
                 {
                     if (
-                        contextProperties.Context.TryGetValue(
-                            WellKnownContextProperties.InstanceId,
-                            out instanceId
-                        )
+                        contextProperties
+                            .Context
+                            .TryGetValue(WellKnownContextProperties.InstanceId, out instanceId)
                     )
                     {
                         return Fx.CreateGuid(instanceId);
@@ -484,9 +485,9 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (value == null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                                "value"
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperArgumentNull("value");
                         }
                         this.context = value;
                         lock (this.lockObject)

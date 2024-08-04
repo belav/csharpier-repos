@@ -249,15 +249,17 @@ namespace System.Text.Json.Serialization.Tests
 
                 for (int j = 0; j < 5; j++)
                 {
-                    response.Speakers.Add(
-                        new Speaker()
-                        {
-                            Bio = new string('B', 50),
-                            Id = j,
-                            Name = new string('N', i),
-                            WebSite = new string('W', 20),
-                        }
-                    );
+                    response
+                        .Speakers
+                        .Add(
+                            new Speaker()
+                            {
+                                Bio = new string('B', 50),
+                                Id = j,
+                                Name = new string('N', i),
+                                WebSite = new string('W', 20),
+                            }
+                        );
                 }
 
                 list.Add(response);

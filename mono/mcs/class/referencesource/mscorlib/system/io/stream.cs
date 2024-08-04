@@ -463,11 +463,9 @@ namespace System.IO
                     );
 
                     // Do the Read and return the number of bytes read
-                    var bytesRead = thisTask._stream.Read(
-                        thisTask._buffer,
-                        thisTask._offset,
-                        thisTask._count
-                    );
+                    var bytesRead = thisTask
+                        ._stream
+                        .Read(thisTask._buffer, thisTask._offset, thisTask._count);
                     thisTask.ClearBeginState(); // just to help alleviate some memory pressure
                     return bytesRead;
                 },

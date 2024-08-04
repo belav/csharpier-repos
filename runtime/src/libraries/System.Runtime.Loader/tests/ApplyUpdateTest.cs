@@ -344,7 +344,9 @@ namespace System.Reflection.Metadata
                 Assert.NotNull(mi);
 
                 string result = ApplyUpdate
-                    .Test.AsyncMethodChange.TestTaskMethod()
+                    .Test
+                    .AsyncMethodChange
+                    .TestTaskMethod()
                     .GetAwaiter()
                     .GetResult();
                 Assert.Equal("TestTaskMethod v1", result);
@@ -951,7 +953,14 @@ namespace System.Reflection.Metadata
 
                 Assert.Equal("123", i.ItfMethod(123));
 
-                System.Reflection.Metadata.ApplyUpdate.Test.ReflectionAddNewType.ZExistingClass.ExistingMethod();
+                System
+                    .Reflection
+                    .Metadata
+                    .ApplyUpdate
+                    .Test
+                    .ReflectionAddNewType
+                    .ZExistingClass
+                    .ExistingMethod();
             });
         }
 

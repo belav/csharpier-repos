@@ -1125,14 +1125,16 @@ namespace System.Text.RegularExpressions.Symbolic
                 if (endState.IsNullableFor(GetCharKind<TInputReader>(input, iEnd)))
                 {
                     // Apply effects for finishing at the stored end state
-                    endState.Node.ApplyEffects(
-                        (effect, args) => args.Registers.ApplyEffect(effect, args.Pos),
-                        CharKind.Context(
-                            endState.PrevCharKind,
-                            GetCharKind<TInputReader>(input, iEnd)
-                        ),
-                        (Registers: endRegisters, Pos: iEnd)
-                    );
+                    endState
+                        .Node
+                        .ApplyEffects(
+                            (effect, args) => args.Registers.ApplyEffect(effect, args.Pos),
+                            CharKind.Context(
+                                endState.PrevCharKind,
+                                GetCharKind<TInputReader>(input, iEnd)
+                            ),
+                            (Registers: endRegisters, Pos: iEnd)
+                        );
                     return endRegisters;
                 }
             }

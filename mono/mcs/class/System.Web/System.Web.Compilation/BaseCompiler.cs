@@ -426,9 +426,9 @@ namespace System.Web.Compilation
                 if (sss == null)
                     continue;
 
-                mainClass.Members.Add(
-                    AddLinePragma(new CodeSnippetTypeMember(sss.Script), sss.Location)
-                );
+                mainClass
+                    .Members
+                    .Add(AddLinePragma(new CodeSnippetTypeMember(sss.Script), sss.Location));
             }
         }
 

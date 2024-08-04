@@ -45,10 +45,13 @@ public class Program
                                         {
                                             // allow the tls connection without a client certificate
                                             if (
-                                                connectionContext.ClientHelloInfo.ServerName.Equals(
-                                                    HostWithoutCert,
-                                                    StringComparison.OrdinalIgnoreCase
-                                                )
+                                                connectionContext
+                                                    .ClientHelloInfo
+                                                    .ServerName
+                                                    .Equals(
+                                                        HostWithoutCert,
+                                                        StringComparison.OrdinalIgnoreCase
+                                                    )
                                             )
                                             {
                                                 return new ValueTask<SslServerAuthenticationOptions>(

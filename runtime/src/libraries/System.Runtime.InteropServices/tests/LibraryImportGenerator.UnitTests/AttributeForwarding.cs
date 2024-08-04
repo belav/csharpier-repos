@@ -74,10 +74,9 @@ namespace LibraryImportGenerator.UnitTests
                     Assert.Contains(
                         targetMethod.GetAttributes(),
                         attr =>
-                            SymbolEqualityComparer.Default.Equals(
-                                attr.AttributeClass,
-                                attributeType
-                            )
+                            SymbolEqualityComparer
+                                .Default
+                                .Equals(attr.AttributeClass, attributeType)
                     );
                 }
             );
@@ -129,10 +128,9 @@ namespace LibraryImportGenerator.UnitTests
                     Assert.Contains(
                         targetMethod.GetAttributes(),
                         attr =>
-                            SymbolEqualityComparer.Default.Equals(
-                                attr.AttributeClass,
-                                attributeType
-                            )
+                            SymbolEqualityComparer
+                                .Default
+                                .Equals(attr.AttributeClass, attributeType)
                             && attr.NamedArguments.Length == 1
                             && attr.NamedArguments[0].Key == "CallConvs"
                             && attr.NamedArguments[0].Value.Values.Length == 0
@@ -190,17 +188,19 @@ namespace LibraryImportGenerator.UnitTests
                     Assert.Contains(
                         targetMethod.GetAttributes(),
                         attr =>
-                            SymbolEqualityComparer.Default.Equals(
-                                attr.AttributeClass,
-                                attributeType
-                            )
+                            SymbolEqualityComparer
+                                .Default
+                                .Equals(attr.AttributeClass, attributeType)
                             && attr.NamedArguments.Length == 1
                             && attr.NamedArguments[0].Key == "CallConvs"
                             && attr.NamedArguments[0].Value.Values.Length == 1
-                            && SymbolEqualityComparer.Default.Equals(
-                                (INamedTypeSymbol?)attr.NamedArguments[0].Value.Values[0].Value!,
-                                callConvType
-                            )
+                            && SymbolEqualityComparer
+                                .Default
+                                .Equals(
+                                    (INamedTypeSymbol?)
+                                        attr.NamedArguments[0].Value.Values[0].Value!,
+                                    callConvType
+                                )
                     );
                 }
             );
@@ -258,21 +258,26 @@ namespace LibraryImportGenerator.UnitTests
                     Assert.Contains(
                         targetMethod.GetAttributes(),
                         attr =>
-                            SymbolEqualityComparer.Default.Equals(
-                                attr.AttributeClass,
-                                attributeType
-                            )
+                            SymbolEqualityComparer
+                                .Default
+                                .Equals(attr.AttributeClass, attributeType)
                             && attr.NamedArguments.Length == 1
                             && attr.NamedArguments[0].Key == "CallConvs"
                             && attr.NamedArguments[0].Value.Values.Length == 2
-                            && SymbolEqualityComparer.Default.Equals(
-                                (INamedTypeSymbol?)attr.NamedArguments[0].Value.Values[0].Value!,
-                                callConvType
-                            )
-                            && SymbolEqualityComparer.Default.Equals(
-                                (INamedTypeSymbol?)attr.NamedArguments[0].Value.Values[1].Value!,
-                                callConvType2
-                            )
+                            && SymbolEqualityComparer
+                                .Default
+                                .Equals(
+                                    (INamedTypeSymbol?)
+                                        attr.NamedArguments[0].Value.Values[0].Value!,
+                                    callConvType
+                                )
+                            && SymbolEqualityComparer
+                                .Default
+                                .Equals(
+                                    (INamedTypeSymbol?)
+                                        attr.NamedArguments[0].Value.Values[1].Value!,
+                                    callConvType2
+                                )
                     );
                 }
             );
@@ -327,10 +332,9 @@ namespace LibraryImportGenerator.UnitTests
                     Assert.Contains(
                         targetMethod.GetAttributes(),
                         attr =>
-                            SymbolEqualityComparer.Default.Equals(
-                                attr.AttributeClass,
-                                attributeType
-                            )
+                            SymbolEqualityComparer
+                                .Default
+                                .Equals(attr.AttributeClass, attributeType)
                             && attr.ConstructorArguments.Length == 1
                             && expected == (DllImportSearchPath)attr.ConstructorArguments[0].Value!
                     );
@@ -386,10 +390,9 @@ namespace LibraryImportGenerator.UnitTests
                     Assert.DoesNotContain(
                         targetMethod.GetAttributes(),
                         attr =>
-                            SymbolEqualityComparer.Default.Equals(
-                                attr.AttributeClass,
-                                attributeType
-                            )
+                            SymbolEqualityComparer
+                                .Default
+                                .Equals(attr.AttributeClass, attributeType)
                     );
                 }
             );

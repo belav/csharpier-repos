@@ -207,18 +207,20 @@ namespace System.Workflow.ComponentModel.Compiler
                         {
                             CompositeActivity compositeActivity = activity as CompositeActivity;
                             if (compositeActivity.CanModifyActivities)
-                                results.Errors.Add(
-                                    CreateXomlCompilerError(
-                                        new ValidationError(
-                                            SR.GetString(
-                                                SR.Error_Missing_CanModifyProperties_False,
-                                                activity.GetType().FullName
+                                results
+                                    .Errors
+                                    .Add(
+                                        CreateXomlCompilerError(
+                                            new ValidationError(
+                                                SR.GetString(
+                                                    SR.Error_Missing_CanModifyProperties_False,
+                                                    activity.GetType().FullName
+                                                ),
+                                                ErrorNumbers.Error_CustomActivityCantCreate
                                             ),
-                                            ErrorNumbers.Error_CustomActivityCantCreate
-                                        ),
-                                        parameters
-                                    )
-                                );
+                                            parameters
+                                        )
+                                    );
                         }
                         if (sourceAttrs.Length > 0)
                         {
@@ -254,60 +256,68 @@ namespace System.Workflow.ComponentModel.Compiler
                             tie.InnerException is TypeInitializationException
                             && tie.InnerException.InnerException != null
                         )
-                            results.Errors.Add(
-                                CreateXomlCompilerError(
-                                    new ValidationError(
-                                        SR.GetString(
-                                            SR.Error_CustomActivityCantCreate,
-                                            type.FullName,
-                                            tie.InnerException.InnerException.ToString()
+                            results
+                                .Errors
+                                .Add(
+                                    CreateXomlCompilerError(
+                                        new ValidationError(
+                                            SR.GetString(
+                                                SR.Error_CustomActivityCantCreate,
+                                                type.FullName,
+                                                tie.InnerException.InnerException.ToString()
+                                            ),
+                                            ErrorNumbers.Error_CustomActivityCantCreate
                                         ),
-                                        ErrorNumbers.Error_CustomActivityCantCreate
-                                    ),
-                                    parameters
-                                )
-                            );
+                                        parameters
+                                    )
+                                );
                         else if (tie.InnerException.InnerException != null)
-                            results.Errors.Add(
-                                CreateXomlCompilerError(
-                                    new ValidationError(
-                                        tie.InnerException.InnerException.ToString(),
-                                        ErrorNumbers.Error_CustomActivityCantCreate
-                                    ),
-                                    parameters
-                                )
-                            );
-                        else
-                            results.Errors.Add(
-                                CreateXomlCompilerError(
-                                    new ValidationError(
-                                        SR.GetString(
-                                            SR.Error_CustomActivityCantCreate,
-                                            type.FullName,
-                                            tie.InnerException.ToString()
+                            results
+                                .Errors
+                                .Add(
+                                    CreateXomlCompilerError(
+                                        new ValidationError(
+                                            tie.InnerException.InnerException.ToString(),
+                                            ErrorNumbers.Error_CustomActivityCantCreate
                                         ),
-                                        ErrorNumbers.Error_CustomActivityCantCreate
-                                    ),
-                                    parameters
-                                )
-                            );
+                                        parameters
+                                    )
+                                );
+                        else
+                            results
+                                .Errors
+                                .Add(
+                                    CreateXomlCompilerError(
+                                        new ValidationError(
+                                            SR.GetString(
+                                                SR.Error_CustomActivityCantCreate,
+                                                type.FullName,
+                                                tie.InnerException.ToString()
+                                            ),
+                                            ErrorNumbers.Error_CustomActivityCantCreate
+                                        ),
+                                        parameters
+                                    )
+                                );
                         continue;
                     }
                     catch (Exception e)
                     {
-                        results.Errors.Add(
-                            CreateXomlCompilerError(
-                                new ValidationError(
-                                    SR.GetString(
-                                        SR.Error_CustomActivityCantCreate,
-                                        type.FullName,
-                                        e.ToString()
+                        results
+                            .Errors
+                            .Add(
+                                CreateXomlCompilerError(
+                                    new ValidationError(
+                                        SR.GetString(
+                                            SR.Error_CustomActivityCantCreate,
+                                            type.FullName,
+                                            e.ToString()
+                                        ),
+                                        ErrorNumbers.Error_CustomActivityCantCreate
                                     ),
-                                    ErrorNumbers.Error_CustomActivityCantCreate
-                                ),
-                                parameters
-                            )
-                        );
+                                    parameters
+                                )
+                            );
                         continue;
                     }
 
@@ -452,7 +462,8 @@ namespace System.Workflow.ComponentModel.Compiler
                         && (
                             string.IsNullOrEmpty(parameters.CompilerOptions)
                             || !parameters
-                                .CompilerOptions.ToLower(CultureInfo.InvariantCulture)
+                                .CompilerOptions
+                                .ToLower(CultureInfo.InvariantCulture)
                                 .Contains("/delaysign")
                         )
                     )
@@ -736,9 +747,9 @@ namespace System.Workflow.ComponentModel.Compiler
                         string.Empty,
                         0,
                         0,
-                        ErrorNumbers.Error_InvalidReferencedAssembly.ToString(
-                            CultureInfo.InvariantCulture
-                        ),
+                        ErrorNumbers
+                            .Error_InvalidReferencedAssembly
+                            .ToString(CultureInfo.InvariantCulture),
                         SR.GetString(SR.Error_ReferencedAssemblyIsInvalid, reference)
                     );
                     results.Errors.Add(compilerError);

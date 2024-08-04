@@ -31,16 +31,16 @@ namespace System.Activities.DurableInstancing
         {
             if (!view.IsBoundToInstance)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SRCore.InstanceRequired)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SRCore.InstanceRequired));
             }
 
             if (!view.IsBoundToInstanceOwner)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SRCore.OwnerRequired)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SRCore.OwnerRequired));
             }
         }
     }

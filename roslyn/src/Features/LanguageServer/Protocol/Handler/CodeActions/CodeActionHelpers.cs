@@ -124,9 +124,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             suggestedAction.OriginalCodeAction is CodeActionWithOptions
             // Skip code actions that requires non-document changes.  We can't apply them in LSP currently.
             // https://github.com/dotnet/roslyn/issues/48698
-            || suggestedAction.OriginalCodeAction.Tags.Contains(
-                CodeAction.RequiresNonDocumentChange
-            );
+            || suggestedAction
+                .OriginalCodeAction
+                .Tags
+                .Contains(CodeAction.RequiresNonDocumentChange);
 
         /// <summary>
         /// Generate the matching code actions for <paramref name="suggestedAction"/>. If it contains nested code actions, flatten them into an array.
@@ -285,7 +286,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             )
             {
                 var fixAllFlavors = unifiedCodeFixSuggestedAction
-                    .FixAllFlavors.Actions.OfType<UnifiedFixAllCodeFixSuggestedAction>()
+                    .FixAllFlavors
+                    .Actions
+                    .OfType<UnifiedFixAllCodeFixSuggestedAction>()
                     .Select(action => action.FixAllState.Scope.ToString());
                 var fixAllTitle = string.Format(FeaturesResources.Fix_All_0, title);
                 var command = new LSP.Command
@@ -441,9 +444,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             {
                 // Associate the diagnostics from the request that match the diagnostic fixed by the code action by ID.
                 // The request diagnostics are already restricted to the code fix location by the request.
-                var diagnosticCodesFixedByAction = codeFixAction.CodeFix.Diagnostics.Select(d =>
-                    d.Id
-                );
+                var diagnosticCodesFixedByAction = codeFixAction
+                    .CodeFix
+                    .Diagnostics
+                    .Select(d => d.Id);
                 using var _ = ArrayBuilder<LSP.Diagnostic>.GetInstance(out var diagnosticsBuilder);
                 foreach (var requestDiagnostic in context.Diagnostics)
                 {
@@ -570,7 +574,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             // Retrieves the fix all code action based on the scope that was selected.
             // Creates a FixAllCodeAction type so that we can get the correct operations for the selected scope.
             var fixAllFlavor = unifiedCodeFixSuggestedAction
-                .FixAllFlavors.Actions.OfType<UnifiedFixAllCodeFixSuggestedAction>()
+                .FixAllFlavors
+                .Actions
+                .OfType<UnifiedFixAllCodeFixSuggestedAction>()
                 .Where(action => action.FixAllState.Scope.ToString() == fixAllScope)
                 .First();
             codeActions.Add(

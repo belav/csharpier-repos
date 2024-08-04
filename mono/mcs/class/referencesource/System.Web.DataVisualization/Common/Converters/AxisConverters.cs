@@ -78,7 +78,8 @@ namespace System.Web.UI.DataVisualization.Charting
 
                     // Get IntervalType property using reflection
                     PropertyInfo propertyInfo = context
-                        .Instance.GetType()
+                        .Instance
+                        .GetType()
                         .GetProperty("IntervalType");
                     if (propertyInfo != null)
                     {

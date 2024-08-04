@@ -1221,7 +1221,9 @@ namespace System.Windows.Forms
             {
                 switch (
                     System
-                        .IO.Path.GetFileNameWithoutExtension(
+                        .IO
+                        .Path
+                        .GetFileNameWithoutExtension(
                             VisualStylesEngine.Instance.VisualStyleInformationFileName
                         )
                         .ToLowerInvariant()

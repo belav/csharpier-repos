@@ -47,24 +47,28 @@ namespace System.Activities.DurableInstancing
 
         protected override void GenerateSqlCommand(SqlCommand sqlCommand)
         {
-            sqlCommand.Parameters.Add(
-                new SqlParameter
-                {
-                    ParameterName = "@workflowHostType",
-                    SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = base.Store.WorkflowHostType,
-                }
-            );
-            if (base.Store.DatabaseVersion >= StoreUtilities.Version45)
-            {
-                sqlCommand.Parameters.Add(
+            sqlCommand
+                .Parameters
+                .Add(
                     new SqlParameter
                     {
-                        ParameterName = "@surrogateLockOwnerId",
-                        SqlDbType = SqlDbType.BigInt,
-                        Value = base.StoreLock.SurrogateLockOwnerId,
+                        ParameterName = "@workflowHostType",
+                        SqlDbType = SqlDbType.UniqueIdentifier,
+                        Value = base.Store.WorkflowHostType,
                     }
                 );
+            if (base.Store.DatabaseVersion >= StoreUtilities.Version45)
+            {
+                sqlCommand
+                    .Parameters
+                    .Add(
+                        new SqlParameter
+                        {
+                            ParameterName = "@surrogateLockOwnerId",
+                            SqlDbType = SqlDbType.BigInt,
+                            Value = base.StoreLock.SurrogateLockOwnerId,
+                        }
+                    );
             }
         }
 

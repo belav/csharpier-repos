@@ -2608,9 +2608,11 @@ public class Program
                     source + InstrumentationHelperSource
                 )
                 .GetEmitDiagnostics(
-                    EmitOptions.Default.WithInstrumentationKinds(
-                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                    )
+                    EmitOptions
+                        .Default
+                        .WithInstrumentationKinds(
+                            ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                        )
                 );
             foreach (Diagnostic diagnostic in diagnostics)
             {
@@ -3184,9 +3186,11 @@ class D
 
             var verifier = CompileAndVerify(
                 c,
-                emitOptions: EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                emitOptions: EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
             c.VerifyEmitDiagnostics();
 
@@ -3229,9 +3233,11 @@ class D
 
             var verifier = CompileAndVerify(
                 c,
-                emitOptions: EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                emitOptions: EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
             c.VerifyEmitDiagnostics();
 
@@ -3885,9 +3891,11 @@ static void Test()
                 expectedOutput: expectedOutput,
                 options: (options ?? TestOptions.ReleaseExe).WithDeterministic(true),
                 parseOptions: parseOptions,
-                emitOptions: EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                ),
+                emitOptions: EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    ),
                 verify: verify
             );
         }
@@ -3913,9 +3921,11 @@ static void Test()
             return base.CompileAndVerify(
                 compilation,
                 expectedOutput: expectedOutput,
-                emitOptions: EmitOptions.Default.WithInstrumentationKinds(
-                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
-                )
+                emitOptions: EmitOptions
+                    .Default
+                    .WithInstrumentationKinds(
+                        ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                    )
             );
         }
     }

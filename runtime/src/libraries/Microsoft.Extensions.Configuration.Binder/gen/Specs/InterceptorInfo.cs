@@ -174,7 +174,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
         public ImmutableEquatableArray<TypedInterceptorInvocationInfo>? ToIncrementalValue() =>
             _invocationInfoBuilderCache
-                .Values.Select(b => b.ToIncrementalValue())
+                .Values
+                .Select(b => b.ToIncrementalValue())
                 .ToImmutableEquatableArray();
     }
 

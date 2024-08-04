@@ -72,9 +72,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 return ImmutableArray<CompletionItem>.Empty;
 
             var isSameLanguage = Language == language;
-            var isInternalsVisible = originCompilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
-                assemblySymbol
-            );
+            var isInternalsVisible = originCompilation
+                .Assembly
+                .IsSameAssemblyOrHasFriendAccessTo(assemblySymbol);
             using var _ = ArrayBuilder<CompletionItem>.GetInstance(out var builder);
 
             // PERF: try set the capacity upfront to avoid allocation from Resize
@@ -146,10 +146,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             )
             {
                 if (
-                    attributeItem.DisplayText.TryGetWithoutAttributeSuffix(
-                        isCaseSensitive: isCaseSensitive,
-                        out var attributeNameWithoutSuffix
-                    )
+                    attributeItem
+                        .DisplayText
+                        .TryGetWithoutAttributeSuffix(
+                            isCaseSensitive: isCaseSensitive,
+                            out var attributeNameWithoutSuffix
+                        )
                 )
                 {
                     // We don't want to cache this item.

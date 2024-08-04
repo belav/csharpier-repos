@@ -84,8 +84,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 var targetDocument = solution.GetDocument(sourceLocation.SourceTree);
                 if (targetDocument != null)
                 {
-                    var navigationService =
-                        solution.Services.GetRequiredService<IDocumentNavigationService>();
+                    var navigationService = solution
+                        .Services
+                        .GetRequiredService<IDocumentNavigationService>();
                     return await navigationService
                         .GetLocationForSpanAsync(
                             solution.Workspace,
@@ -111,7 +112,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             if (docCommentId != null && assemblyName != null)
             {
                 foreach (
-                    var lazyService in solution.Services.ExportProvider.GetExports<ICrossLanguageSymbolNavigationService>()
+                    var lazyService in solution
+                        .Services
+                        .ExportProvider
+                        .GetExports<ICrossLanguageSymbolNavigationService>()
                 )
                 {
                     var crossLanguageService = lazyService.Value;
@@ -140,11 +144,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 var compilation = await project
                     .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var navInfo = libraryService.NavInfoFactory.CreateForSymbol(
-                    symbol,
-                    project,
-                    compilation
-                );
+                var navInfo = libraryService
+                    .NavInfoFactory
+                    .CreateForSymbol(symbol, project, compilation);
                 navInfo ??= libraryService.NavInfoFactory.CreateForProject(project);
 
                 if (navInfo != null)
@@ -156,9 +158,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     return new NavigableLocation(
                         async (options, cancellationToken) =>
                         {
-                            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                                cancellationToken
-                            );
+                            await this.ThreadingContext
+                                .JoinableTaskFactory
+                                .SwitchToMainThreadAsync(cancellationToken);
                             return navigationTool.NavigateToNavInfo(navInfo) == VSConstants.S_OK;
                         }
                     );
@@ -194,9 +196,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return new NavigableLocation(
                 async (options, cancellationToken) =>
                 {
-                    await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationToken
-                    );
+                    await this.ThreadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken);
 
                     var vsRunningDocumentTable4 = _serviceProvider.GetServiceOnMainThread<
                         SVsRunningDocumentTable,
@@ -252,8 +254,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     if (openedDocument != null)
                     {
                         var editorWorkspace = openedDocument.Project.Solution.Workspace;
-                        var navigationService =
-                            editorWorkspace.Services.GetRequiredService<IDocumentNavigationService>();
+                        var navigationService = editorWorkspace
+                            .Services
+                            .GetRequiredService<IDocumentNavigationService>();
 
                         await navigationService
                             .TryNavigateToSpanAsync(
@@ -281,9 +284,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             CancellationToken cancellationToken
         )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
 
             AssertIsForeground();
 
@@ -360,9 +363,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             var navigateToTextSpan = new Microsoft.VisualStudio.TextManager.Interop.TextSpan[1];
 
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
 
             var queryNavigateStatusCode = navigationNotify.QueryNavigateToSymbol(
                 hierarchy,
@@ -417,9 +420,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             var documentToUse = generatedDocuments.FirstOrDefault() ?? documents.First();
 
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
 
             if (!TryGetVsHierarchyAndItemId(documentToUse, out var hierarchy, out var itemID))
                 return null;

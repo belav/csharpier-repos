@@ -25,8 +25,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderOrder()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeaturesWpf.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeaturesWpf
+                .ExportProviderFactory
+                .CreateExportProvider();
             var completionProviderExports = exportProvider.GetExports<
                 CompletionProvider,
                 CompletionProviderMetadata
@@ -97,8 +99,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderOrderMetadata()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var completionProviderExports = exportProvider.GetExports<
                 CompletionProvider,
                 CompletionProviderMetadata
@@ -125,9 +129,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     // marker, or the last completion marker comes after the last "real" provider.
                     if (
                         !orderedCSharpCompletionProviders[i]
-                            .Metadata.AfterTyped.Contains(
-                                orderedCSharpCompletionProviders[i - 1].Metadata.Name
-                            )
+                            .Metadata
+                            .AfterTyped
+                            .Contains(orderedCSharpCompletionProviders[i - 1].Metadata.Name)
                     )
                     {
                         // Make sure the last built-in provider comes before the marker
@@ -158,8 +162,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderFirstNameMetadata()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var completionProviderExports = exportProvider.GetExports<
                 CompletionProvider,
                 CompletionProviderMetadata
@@ -177,8 +183,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderLastNameMetadata()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var completionProviderExports = exportProvider.GetExports<
                 CompletionProvider,
                 CompletionProviderMetadata
@@ -196,8 +204,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderNameMetadata()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var completionProviderExports = exportProvider.GetExports<
                 CompletionProvider,
                 CompletionProviderMetadata

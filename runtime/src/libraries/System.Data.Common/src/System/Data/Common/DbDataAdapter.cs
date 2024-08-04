@@ -237,11 +237,13 @@ namespace System.Data.Common
         )]
         public DataTable? FillSchema(DataTable dataTable, SchemaType schemaType)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.FillSchema|API> {0}, dataTable, schemaType={1}",
-                ObjectID,
-                schemaType
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.FillSchema|API> {0}, dataTable, schemaType={1}",
+                    ObjectID,
+                    schemaType
+                );
             try
             {
                 IDbCommand? selectCmd = _IDbDataAdapter.SelectCommand;
@@ -259,11 +261,13 @@ namespace System.Data.Common
         )]
         public override DataTable[] FillSchema(DataSet dataSet, SchemaType schemaType)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.FillSchema|API> {0}, dataSet, schemaType={1}",
-                ObjectID,
-                schemaType
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.FillSchema|API> {0}, dataSet, schemaType={1}",
+                    ObjectID,
+                    schemaType
+                );
             try
             {
                 IDbCommand? command = _IDbDataAdapter.SelectCommand;
@@ -298,12 +302,14 @@ namespace System.Data.Common
         )]
         public DataTable[] FillSchema(DataSet dataSet, SchemaType schemaType, string srcTable)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.FillSchema|API> {0}, dataSet, schemaType={1}, srcTable={2}",
-                ObjectID,
-                (int)schemaType,
-                srcTable
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.FillSchema|API> {0}, dataSet, schemaType={1}, srcTable={2}",
+                    ObjectID,
+                    (int)schemaType,
+                    srcTable
+                );
             try
             {
                 IDbCommand? selectCmd = _IDbDataAdapter.SelectCommand;
@@ -327,11 +333,13 @@ namespace System.Data.Common
             CommandBehavior behavior
         )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.FillSchema|API> {0}, dataSet, schemaType, command, srcTable, behavior={1}",
-                ObjectID,
-                behavior
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.FillSchema|API> {0}, dataSet, schemaType, command, srcTable, behavior={1}",
+                    ObjectID,
+                    behavior
+                );
             try
             {
                 if (null == dataSet)
@@ -370,11 +378,13 @@ namespace System.Data.Common
             CommandBehavior behavior
         )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.FillSchema|API> {0}, dataTable, schemaType, command, behavior={1}",
-                ObjectID,
-                behavior
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.FillSchema|API> {0}, dataTable, schemaType, command, behavior={1}",
+                    ObjectID,
+                    behavior
+                );
             try
             {
                 if (null == dataTable)
@@ -469,10 +479,9 @@ namespace System.Data.Common
 
         public override int Fill(DataSet dataSet)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.Fill|API> {0}, dataSet",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<comm.DbDataAdapter.Fill|API> {0}, dataSet", ObjectID);
             try
             {
                 // delegate to Fill4
@@ -495,11 +504,13 @@ namespace System.Data.Common
 
         public int Fill(DataSet dataSet, string srcTable)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.Fill|API> {0}, dataSet, srcTable='{1}'",
-                ObjectID,
-                srcTable
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.Fill|API> {0}, dataSet, srcTable='{1}'",
+                    ObjectID,
+                    srcTable
+                );
             try
             {
                 // delegate to Fill4
@@ -515,13 +526,15 @@ namespace System.Data.Common
 
         public int Fill(DataSet dataSet, int startRecord, int maxRecords, string srcTable)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.Fill|API> {0}, dataSet, startRecord={1}, maxRecords={2}, srcTable='{3}'",
-                ObjectID,
-                startRecord,
-                maxRecords,
-                srcTable
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.Fill|API> {0}, dataSet, startRecord={1}, maxRecords={2}, srcTable='{3}'",
+                    ObjectID,
+                    startRecord,
+                    maxRecords,
+                    srcTable
+                );
             try
             {
                 // delegate to Fill4
@@ -544,11 +557,13 @@ namespace System.Data.Common
             CommandBehavior behavior
         )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.Fill|API> {0}, dataSet, startRecord, maxRecords, srcTable, command, behavior={1}",
-                ObjectID,
-                behavior
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.Fill|API> {0}, dataSet, startRecord, maxRecords, srcTable, command, behavior={1}",
+                    ObjectID,
+                    behavior
+                );
             try
             {
                 if (null == dataSet)
@@ -589,10 +604,9 @@ namespace System.Data.Common
 
         public int Fill(DataTable dataTable)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.Fill|API> {0}, dataTable",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<comm.DbDataAdapter.Fill|API> {0}, dataTable", ObjectID);
             try
             {
                 // delegate to Fill8
@@ -609,12 +623,14 @@ namespace System.Data.Common
 
         public int Fill(int startRecord, int maxRecords, params DataTable[] dataTables)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.Fill|API> {0}, startRecord={1}, maxRecords={2}, dataTable[]",
-                ObjectID,
-                startRecord,
-                maxRecords
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.Fill|API> {0}, startRecord={1}, maxRecords={2}, dataTable[]",
+                    ObjectID,
+                    startRecord,
+                    maxRecords
+                );
             try
             {
                 // delegate to Fill8
@@ -634,11 +650,13 @@ namespace System.Data.Common
             CommandBehavior behavior
         )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.Fill|API> {0}, dataTable, command, behavior={1}",
-                ObjectID,
-                behavior
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.Fill|API> {0}, dataTable, command, behavior={1}",
+                    ObjectID,
+                    behavior
+                );
             try
             {
                 // delegate to Fill8
@@ -659,11 +677,13 @@ namespace System.Data.Common
             CommandBehavior behavior
         )
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.Fill|API> {0}, dataTables[], startRecord, maxRecords, command, behavior={1}",
-                ObjectID,
-                behavior
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.Fill|API> {0}, dataTables[], startRecord, maxRecords, command, behavior={1}",
+                    ObjectID,
+                    behavior
+                );
             try
             {
                 if ((null == dataTables) || (0 == dataTables.Length) || (null == dataTables[0]))
@@ -996,10 +1016,9 @@ namespace System.Data.Common
         )]
         public int Update(DataRow[] dataRows)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.Update|API> {0}, dataRows[]",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<comm.DbDataAdapter.Update|API> {0}, dataRows[]", ObjectID);
             try
             {
                 int rowsAffected = 0;
@@ -1040,10 +1059,9 @@ namespace System.Data.Common
         )]
         public int Update(DataTable dataTable)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.Update|API> {0}, dataTable",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<comm.DbDataAdapter.Update|API> {0}, dataTable", ObjectID);
             try
             {
                 if (null == dataTable)
@@ -1081,11 +1099,13 @@ namespace System.Data.Common
         )]
         public int Update(DataSet dataSet, string srcTable)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.Update|API> {0}, dataSet, srcTable='{1}'",
-                ObjectID,
-                srcTable
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.Update|API> {0}, dataSet, srcTable='{1}'",
+                    ObjectID,
+                    srcTable
+                );
             try
             {
                 if (null == dataSet)
@@ -1138,10 +1158,12 @@ namespace System.Data.Common
         )]
         protected virtual int Update(DataRow[] dataRows, DataTableMapping tableMapping)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<comm.DbDataAdapter.Update|API> {0}, dataRows[], tableMapping",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<comm.DbDataAdapter.Update|API> {0}, dataRows[], tableMapping",
+                    ObjectID
+                );
             try
             {
                 Debug.Assert((null != dataRows) && (0 < dataRows.Length), "Update: bad dataRows");

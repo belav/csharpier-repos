@@ -597,9 +597,9 @@ namespace System.Workflow.Runtime.DebugEngine
                 {
                     try
                     {
-                        RegistryKey debugEngineSubKey = Registry.LocalMachine.OpenSubKey(
-                            RegistryKeys.DebuggerSubKey
-                        );
+                        RegistryKey debugEngineSubKey = Registry
+                            .LocalMachine
+                            .OpenSubKey(RegistryKeys.DebuggerSubKey);
                         if (debugEngineSubKey != null)
                         {
                             string controllerConduitTypeName =
@@ -696,10 +696,9 @@ namespace System.Workflow.Runtime.DebugEngine
                     // In here we load all schedule types defined as they are - with no dynamic updates
                     ReadOnlyCollection<Type> types;
                     ReadOnlyCollection<Activity> values;
-                    this.serviceContainer.DefinitionDispenser.GetWorkflowTypes(
-                        out types,
-                        out values
-                    );
+                    this.serviceContainer
+                        .DefinitionDispenser
+                        .GetWorkflowTypes(out types, out values);
                     for (int i = 0; i < types.Count; i++)
                     {
                         Type scheduleType = types[i];
@@ -713,10 +712,9 @@ namespace System.Workflow.Runtime.DebugEngine
                     }
 
                     ReadOnlyCollection<byte[]> keys;
-                    this.serviceContainer.DefinitionDispenser.GetWorkflowDefinitions(
-                        out keys,
-                        out values
-                    );
+                    this.serviceContainer
+                        .DefinitionDispenser
+                        .GetWorkflowDefinitions(out keys, out values);
                     for (int i = 0; i < keys.Count; i++)
                     {
                         byte[] scheduleDefHash = keys[i];
@@ -952,9 +950,9 @@ namespace System.Workflow.Runtime.DebugEngine
             {
                 if (args.WorkflowType != null)
                 {
-                    Activity rootActivity = (
-                        (WorkflowRuntime)sender
-                    ).DefinitionDispenser.GetWorkflowDefinition(args.WorkflowType);
+                    Activity rootActivity = ((WorkflowRuntime)sender)
+                        .DefinitionDispenser
+                        .GetWorkflowDefinition(args.WorkflowType);
                     LoadExistingScheduleType(
                         GetScheduleTypeId(args.WorkflowType),
                         args.WorkflowType,
@@ -964,9 +962,9 @@ namespace System.Workflow.Runtime.DebugEngine
                 }
                 else
                 {
-                    Activity rootActivity = (
-                        (WorkflowRuntime)sender
-                    ).DefinitionDispenser.GetWorkflowDefinition(args.WorkflowDefinitionHashCode);
+                    Activity rootActivity = ((WorkflowRuntime)sender)
+                        .DefinitionDispenser
+                        .GetWorkflowDefinition(args.WorkflowDefinitionHashCode);
                     LoadExistingScheduleType(
                         GetScheduleTypeId(args.WorkflowDefinitionHashCode),
                         rootActivity.GetType(),

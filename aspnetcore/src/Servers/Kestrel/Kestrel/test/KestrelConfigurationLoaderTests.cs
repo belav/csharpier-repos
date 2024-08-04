@@ -2347,10 +2347,9 @@ public class KestrelConfigurationLoaderTests
         serverOptions.Configure();
 
         serverOptions.ConfigurationLoader.LocalhostEndpoint(5000, _ => numEndpointsAdded++);
-        serverOptions.ConfigurationLoader.LocalhostEndpoint(
-            5001,
-            _ => throw new InvalidOperationException()
-        );
+        serverOptions
+            .ConfigurationLoader
+            .LocalhostEndpoint(5001, _ => throw new InvalidOperationException());
         serverOptions.ConfigurationLoader.LocalhostEndpoint(5002, _ => numEndpointsAdded++);
 
         Assert.Throws<InvalidOperationException>(
@@ -2385,10 +2384,12 @@ public class KestrelConfigurationLoaderTests
 
         mockConfig.Invocations.Clear();
 
-        serverOptions.ConfigurationLoader.LocalhostEndpoint(
-            7000,
-            _ => Assert.Fail("New endpoints should not be added after ProcessEndpointsToAdd")
-        );
+        serverOptions
+            .ConfigurationLoader
+            .LocalhostEndpoint(
+                7000,
+                _ => Assert.Fail("New endpoints should not be added after ProcessEndpointsToAdd")
+            );
 
         serverOptions.ConfigurationLoader.Load();
 
@@ -2411,10 +2412,12 @@ public class KestrelConfigurationLoaderTests
 
         mockConfig.Invocations.Clear();
 
-        serverOptions.ConfigurationLoader.LocalhostEndpoint(
-            7000,
-            _ => Assert.Fail("New endpoints should not be added after Load")
-        );
+        serverOptions
+            .ConfigurationLoader
+            .LocalhostEndpoint(
+                7000,
+                _ => Assert.Fail("New endpoints should not be added after Load")
+            );
 
         Assert.Single(serverOptions.CodeBackedListenOptions);
         serverOptions.ConfigurationLoader.ProcessEndpointsToAdd();
@@ -2426,10 +2429,12 @@ public class KestrelConfigurationLoaderTests
         var serverOptions = CreateServerOptions();
         serverOptions.Configure();
 
-        serverOptions.ConfigurationLoader.LocalhostEndpoint(
-            7000,
-            _ => Assert.Fail("New endpoints should not be added by LoadInternal")
-        );
+        serverOptions
+            .ConfigurationLoader
+            .LocalhostEndpoint(
+                7000,
+                _ => Assert.Fail("New endpoints should not be added by LoadInternal")
+            );
 
         serverOptions.ConfigurationLoader.LoadInternal();
     }
@@ -2442,10 +2447,12 @@ public class KestrelConfigurationLoaderTests
 
         serverOptions.ConfigurationLoader.Load();
 
-        serverOptions.ConfigurationLoader.LocalhostEndpoint(
-            7000,
-            _ => Assert.Fail("New endpoints should not be added by Reload")
-        );
+        serverOptions
+            .ConfigurationLoader
+            .LocalhostEndpoint(
+                7000,
+                _ => Assert.Fail("New endpoints should not be added by Reload")
+            );
 
         _ = serverOptions.ConfigurationLoader.Reload();
     }

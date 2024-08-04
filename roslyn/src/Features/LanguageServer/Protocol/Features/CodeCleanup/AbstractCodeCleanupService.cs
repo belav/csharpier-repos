@@ -302,8 +302,11 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 return document;
             }
 
-            var fixAllService =
-                document.Project.Solution.Services.GetRequiredService<IFixAllGetFixesService>();
+            var fixAllService = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<IFixAllGetFixesService>();
 
             var solution = await fixAllService
                 .GetFixAllChangedSolutionAsync(
@@ -410,9 +413,10 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 Document updatedDocument
             )
             {
-                var solutionChanges = updatedDocument.Project.Solution.GetChanges(
-                    currentDocument.Project.Solution
-                );
+                var solutionChanges = updatedDocument
+                    .Project
+                    .Solution
+                    .GetChanges(currentDocument.Project.Solution);
                 return solutionChanges.GetAddedProjects().Any()
                     || solutionChanges.GetRemovedProjects().Any()
                     || solutionChanges.GetAddedAnalyzerReferences().Any()

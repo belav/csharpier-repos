@@ -25,7 +25,9 @@ namespace System.CommandLine.Tests
                 .GetCompletionContext()
                 .Should()
                 .BeOfType<TextCompletionContext>()
-                .Which.CommandLineText.Should()
+                .Which
+                .CommandLineText
+                .Should()
                 .Be(commandLine);
         }
 

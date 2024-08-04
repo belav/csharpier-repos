@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 // so we have to check to see if it's there at runtime.
                 var registryType = typeof(object)
                     .GetTypeInfo()
-                    .Assembly.GetType("Microsoft.Win32.Registry");
+                    .Assembly
+                    .GetType("Microsoft.Win32.Registry");
                 if (registryType != null)
                 {
                     var hKeyCurrentUserField = registryType

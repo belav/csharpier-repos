@@ -236,9 +236,9 @@ void local() => System.Console.WriteLine(2);
 
             comp = CreateCompilation(
                 text1,
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                ),
+                options: TestOptions
+                    .DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Enable),
                 parseOptions: DefaultParseOptions
             );
             verifyModel(comp, comp.SyntaxTrees[0], nullableEnabled: true);
@@ -412,9 +412,9 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'local(); .
 
             comp = CreateCompilation(
                 new[] { text1, text2 },
-                options: TestOptions.DebugExe.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                ),
+                options: TestOptions
+                    .DebugExe
+                    .WithNullableContextOptions(NullableContextOptions.Enable),
                 parseOptions: DefaultParseOptions
             );
             verifyModel(comp, comp.SyntaxTrees[0], comp.SyntaxTrees[1], nullableEnabled: true);
@@ -8588,9 +8588,11 @@ static extern void local1();
             {
                 var fromSource = module is SourceModuleSymbol;
 
-                var program = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
-                );
+                var program = module
+                    .GlobalNamespace
+                    .GetMember<NamedTypeSymbol>(
+                        WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
+                    );
                 var programAttributes = GetAttributeNames(
                     program.GetAttributes().As<CSharpAttributeData>()
                 );
@@ -12437,9 +12439,11 @@ System.Console.WriteLine(""Hi!"");
             void validate(ModuleSymbol module)
             {
                 bool fromSource = module is SourceModuleSymbol;
-                var program = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
-                );
+                var program = module
+                    .GlobalNamespace
+                    .GetMember<NamedTypeSymbol>(
+                        WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
+                    );
                 Assert.False(program.IsImplicitlyDeclared);
                 if (fromSource)
                 {
@@ -12517,9 +12521,11 @@ public partial class Program
 
             void validate(ModuleSymbol module)
             {
-                var program = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
-                );
+                var program = module
+                    .GlobalNamespace
+                    .GetMember<NamedTypeSymbol>(
+                        WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
+                    );
                 Assert.Empty(program.GetAttributes().As<CSharpAttributeData>());
                 Assert.False(program.IsImplicitlyDeclared);
                 Assert.Empty(
@@ -12961,7 +12967,8 @@ partial class Program
             {
                 bool fromSource = module is SourceModuleSymbol;
                 var field = module
-                    .GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
+                    .GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("Program")
                     .GetField("<Property>k__BackingField");
                 Assert.False(field.ContainingType.IsImplicitlyDeclared);
                 var fieldAttributes = GetAttributeNames(
@@ -13225,7 +13232,8 @@ public class C
             model.TryGetSpeculativeSemanticModel(
                 root.DescendantNodes()
                     .Single(n => n is ExpressionStatementSyntax { Parent: GlobalStatementSyntax })
-                    .Span.End,
+                    .Span
+                    .End,
                 nodeToSpeculate,
                 out var speculativeModelInTopLevel
             );
@@ -13238,7 +13246,8 @@ public class C
             model.TryGetSpeculativeSemanticModel(
                 root.DescendantNodes()
                     .Single(n => n is ExpressionStatementSyntax { Parent: BlockSyntax })
-                    .Span.End,
+                    .Span
+                    .End,
                 nodeToSpeculate,
                 out var speculativeModelOutsideTopLevel
             );

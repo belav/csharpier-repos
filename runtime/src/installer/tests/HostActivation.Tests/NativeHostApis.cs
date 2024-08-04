@@ -33,8 +33,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining("Done waiting for breadcrumb thread to exit...");
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining("Done waiting for breadcrumb thread to exit...");
         }
 
         [Fact]
@@ -51,9 +53,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining("Unhandled exception.")
-                .And.HaveStdErrContaining("System.Exception: Goodbye World")
-                .And.NotHaveStdErrContaining("Done waiting for breadcrumb thread to exit...");
+                .And
+                .HaveStdErrContaining("Unhandled exception.")
+                .And
+                .HaveStdErrContaining("System.Exception: Goodbye World")
+                .And
+                .NotHaveStdErrContaining("Done waiting for breadcrumb thread to exit...");
         }
 
         private class SdkResolutionFixture
@@ -169,7 +174,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             using (TestOnlyProductBehavior.Enable(f.Dotnet.GreatestVersionHostFxrFilePath))
             {
-                f.Dotnet.Exec(f.AppDll, new[] { "hostfxr_get_available_sdks", f.ExeDir })
+                f.Dotnet
+                    .Exec(f.AppDll, new[] { "hostfxr_get_available_sdks", f.ExeDir })
                     .EnvironmentVariable("TEST_MULTILEVEL_LOOKUP_PROGRAM_FILES", f.ProgramFiles)
                     .EnvironmentVariable("TEST_MULTILEVEL_LOOKUP_SELF_REGISTERED", f.SelfRegistered)
                     .CaptureStdOut()
@@ -177,8 +183,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("hostfxr_get_available_sdks:Success")
-                    .And.HaveStdOutContaining($"hostfxr_get_available_sdks sdks:[{expectedList}]");
+                    .And
+                    .HaveStdOutContaining("hostfxr_get_available_sdks:Success")
+                    .And
+                    .HaveStdOutContaining($"hostfxr_get_available_sdks sdks:[{expectedList}]");
             }
         }
 
@@ -199,14 +207,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 }
             );
 
-            f.Dotnet.Exec(f.AppDll, new[] { "hostfxr_get_available_sdks", f.ExeDir })
+            f.Dotnet
+                .Exec(f.AppDll, new[] { "hostfxr_get_available_sdks", f.ExeDir })
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("hostfxr_get_available_sdks:Success")
-                .And.HaveStdOutContaining($"hostfxr_get_available_sdks sdks:[{expectedList}]");
+                .And
+                .HaveStdOutContaining("hostfxr_get_available_sdks:Success")
+                .And
+                .HaveStdOutContaining($"hostfxr_get_available_sdks sdks:[{expectedList}]");
         }
 
         [Fact]
@@ -221,14 +232,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 new[] { ("resolved_sdk_dir", Path.Combine(f.LocalSdkDir, "5.6.7-preview")) }
             );
 
-            f.Dotnet.Exec(f.AppDll, new[] { "hostfxr_resolve_sdk2", f.ExeDir, f.WorkingDir, "0" })
+            f.Dotnet
+                .Exec(f.AppDll, new[] { "hostfxr_resolve_sdk2", f.ExeDir, f.WorkingDir, "0" })
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("hostfxr_resolve_sdk2:Success")
-                .And.HaveStdOutContaining($"hostfxr_resolve_sdk2 data:[{expectedData}]");
+                .And
+                .HaveStdOutContaining("hostfxr_resolve_sdk2:Success")
+                .And
+                .HaveStdOutContaining($"hostfxr_resolve_sdk2 data:[{expectedData}]");
         }
 
         [Fact]
@@ -243,7 +257,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 new[] { ("resolved_sdk_dir", Path.Combine(f.LocalSdkDir, "1.2.3")) }
             );
 
-            f.Dotnet.Exec(
+            f.Dotnet
+                .Exec(
                     f.AppDll,
                     new[] { "hostfxr_resolve_sdk2", f.ExeDir, f.WorkingDir, "disallow_prerelease" }
                 )
@@ -252,8 +267,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("hostfxr_resolve_sdk2:Success")
-                .And.HaveStdOutContaining($"hostfxr_resolve_sdk2 data:[{expectedData}]");
+                .And
+                .HaveStdOutContaining("hostfxr_resolve_sdk2:Success")
+                .And
+                .HaveStdOutContaining($"hostfxr_resolve_sdk2 data:[{expectedData}]");
         }
 
         [Fact]
@@ -280,7 +297,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 }
             );
 
-            f.Dotnet.Exec(
+            f.Dotnet
+                .Exec(
                     f.AppDll,
                     new[] { "hostfxr_resolve_sdk2", f.ExeDir, f.WorkingDir, "disallow_prerelease" }
                 )
@@ -289,8 +307,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("hostfxr_resolve_sdk2:Success")
-                .And.HaveStdOutContaining($"hostfxr_resolve_sdk2 data:[{expectedData}]");
+                .And
+                .HaveStdOutContaining("hostfxr_resolve_sdk2:Success")
+                .And
+                .HaveStdOutContaining($"hostfxr_resolve_sdk2 data:[{expectedData}]");
         }
 
         [Fact]
@@ -299,7 +319,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var fixture = sharedTestState.HostApiInvokerAppFixture.Copy();
 
             fixture
-                .BuiltDotnet.Exec(fixture.TestProject.AppDll, "Test_hostfxr_set_error_writer")
+                .BuiltDotnet
+                .Exec(fixture.TestProject.AppDll, "Test_hostfxr_set_error_writer")
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
@@ -346,26 +367,33 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 }
             );
 
-            f.Dotnet.Exec(f.AppDll, new[] { "hostfxr_get_dotnet_environment_info", f.ExeDir })
+            f.Dotnet
+                .Exec(f.AppDll, new[] { "hostfxr_get_dotnet_environment_info", f.ExeDir })
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
+                .And
+                .HaveStdOutContaining(
                     $"hostfxr_get_dotnet_environment_info sdk versions:[{expectedSdkVersions}]"
                 )
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"hostfxr_get_dotnet_environment_info sdk paths:[{expectedSdkPaths}]"
                 )
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"hostfxr_get_dotnet_environment_info framework names:[{expectedFrameworkNames}]"
                 )
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"hostfxr_get_dotnet_environment_info framework versions:[{expectedFrameworkVersions}]"
                 )
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"hostfxr_get_dotnet_environment_info framework paths:[{expectedFrameworkPaths}]"
                 );
         }
@@ -412,7 +440,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             using (TestOnlyProductBehavior.Enable(f.Dotnet.GreatestVersionHostFxrFilePath))
             {
-                f.Dotnet.Exec(f.AppDll, new[] { "hostfxr_get_dotnet_environment_info", f.ExeDir })
+                f.Dotnet
+                    .Exec(f.AppDll, new[] { "hostfxr_get_dotnet_environment_info", f.ExeDir })
                     .EnvironmentVariable("TEST_MULTILEVEL_LOOKUP_PROGRAM_FILES", f.ProgramFiles)
                     .EnvironmentVariable("TEST_MULTILEVEL_LOOKUP_SELF_REGISTERED", f.SelfRegistered)
                     .CaptureStdOut()
@@ -420,20 +449,26 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info sdk versions:[{expectedSdkVersions}]"
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info sdk paths:[{expectedSdkPaths}]"
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework names:[{expectedFrameworkNames}]"
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework versions:[{expectedFrameworkVersions}]"
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework paths:[{expectedFrameworkPaths}]"
                     );
             }
@@ -451,10 +486,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             {
                 // We pass f.WorkingDir so that we don't resolve dotnet_dir to the global installation
                 // in the native side.
-                f.Dotnet.Exec(
-                        f.AppDll,
-                        new[] { "hostfxr_get_dotnet_environment_info", f.WorkingDir }
-                    )
+                f.Dotnet
+                    .Exec(f.AppDll, new[] { "hostfxr_get_dotnet_environment_info", f.WorkingDir })
                     .EnvironmentVariable("TEST_MULTILEVEL_LOOKUP_PROGRAM_FILES", f.ProgramFiles)
                     .EnvironmentVariable("TEST_MULTILEVEL_LOOKUP_SELF_REGISTERED", f.SelfRegistered)
                     .CaptureStdOut()
@@ -462,18 +495,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
-                    .And.HaveStdOutContaining(
-                        $"hostfxr_get_dotnet_environment_info sdk versions:[]"
-                    )
-                    .And.HaveStdOutContaining($"hostfxr_get_dotnet_environment_info sdk paths:[]")
-                    .And.HaveStdOutContaining(
-                        $"hostfxr_get_dotnet_environment_info framework names:[]"
-                    )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
+                    .And
+                    .HaveStdOutContaining($"hostfxr_get_dotnet_environment_info sdk versions:[]")
+                    .And
+                    .HaveStdOutContaining($"hostfxr_get_dotnet_environment_info sdk paths:[]")
+                    .And
+                    .HaveStdOutContaining($"hostfxr_get_dotnet_environment_info framework names:[]")
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework versions:[]"
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework paths:[]"
                     );
             }
@@ -489,10 +524,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             {
                 // We pass f.WorkingDir so that we don't resolve dotnet_dir to the global installation
                 // in the native side.
-                f.Dotnet.Exec(
-                        f.AppDll,
-                        new[] { "hostfxr_get_dotnet_environment_info", f.WorkingDir }
-                    )
+                f.Dotnet
+                    .Exec(f.AppDll, new[] { "hostfxr_get_dotnet_environment_info", f.WorkingDir })
                     .EnvironmentVariable("TEST_MULTILEVEL_LOOKUP_PROGRAM_FILES", f.ProgramFiles)
                     // Test with a self-registered path the same as ProgramFiles, with a trailing slash.  Expect this to be de-duped
                     .EnvironmentVariable(
@@ -504,14 +537,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
-                    .And.HaveStdOutContaining(
-                        $"hostfxr_get_dotnet_environment_info framework names:[]"
-                    )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
+                    .And
+                    .HaveStdOutContaining($"hostfxr_get_dotnet_environment_info framework names:[]")
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework versions:[]"
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework paths:[]"
                     );
             }
@@ -522,13 +557,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             var f = new SdkResolutionFixture(sharedTestState);
 
-            f.Dotnet.Exec(f.AppDll, new[] { "hostfxr_get_dotnet_environment_info" })
+            f.Dotnet
+                .Exec(f.AppDll, new[] { "hostfxr_get_dotnet_environment_info" })
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success");
+                .And
+                .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success");
         }
 
         [Fact]
@@ -536,7 +573,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             var f = new SdkResolutionFixture(sharedTestState);
 
-            f.Dotnet.Exec(
+            f.Dotnet
+                .Exec(
                     f.AppDll,
                     new[] { "hostfxr_get_dotnet_environment_info", "test_invalid_result_ptr" }
                 )
@@ -545,8 +583,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Should()
                 .Pass()
                 // 0x80008081 (InvalidArgFailure)
-                .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Fail[-2147450751]")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Fail[-2147450751]")
+                .And
+                .HaveStdErrContaining(
                     "hostfxr_get_dotnet_environment_info received an invalid argument: result should not be null."
                 );
         }
@@ -556,7 +596,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             var f = new SdkResolutionFixture(sharedTestState);
 
-            f.Dotnet.Exec(
+            f.Dotnet
+                .Exec(
                     f.AppDll,
                     new[] { "hostfxr_get_dotnet_environment_info", "test_invalid_reserved_ptr" }
                 )
@@ -565,8 +606,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Should()
                 .Pass()
                 // 0x80008081 (InvalidArgFailure)
-                .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Fail[-2147450751]")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Fail[-2147450751]")
+                .And
+                .HaveStdErrContaining(
                     "hostfxr_get_dotnet_environment_info received an invalid argument: reserved should be null."
                 );
         }
@@ -577,7 +620,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var fixture = sharedTestState.HostApiInvokerAppFixture.Copy();
 
             fixture
-                .BuiltDotnet.Exec(fixture.TestProject.AppDll, "Test_corehost_set_error_writer")
+                .BuiltDotnet
+                .Exec(fixture.TestProject.AppDll, "Test_corehost_set_error_writer")
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
@@ -591,7 +635,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var fixture = sharedTestState.HostApiInvokerAppFixture;
 
             fixture
-                .BuiltDotnet.Exec(
+                .BuiltDotnet
+                .Exec(
                     fixture.TestProject.AppDll,
                     "host_runtime_contract.get_runtime_property",
                     "APP_CONTEXT_BASE_DIRECTORY",
@@ -604,14 +649,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"APP_CONTEXT_BASE_DIRECTORY = {Path.GetDirectoryName(fixture.TestProject.AppDll)}"
                 )
-                .And.HaveStdOutContaining($"RUNTIME_IDENTIFIER = {TestContext.BuildRID}")
-                .And.HaveStdOutContaining($"DOES_NOT_EXIST = <none>")
-                .And.HaveStdOutContaining(
-                    $"ENTRY_ASSEMBLY_NAME = {fixture.TestProject.AssemblyName}"
-                );
+                .And
+                .HaveStdOutContaining($"RUNTIME_IDENTIFIER = {TestContext.BuildRID}")
+                .And
+                .HaveStdOutContaining($"DOES_NOT_EXIST = <none>")
+                .And
+                .HaveStdOutContaining($"ENTRY_ASSEMBLY_NAME = {fixture.TestProject.AssemblyName}");
         }
 
         public class SharedTestState : IDisposable

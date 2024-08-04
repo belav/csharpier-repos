@@ -47,8 +47,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining(
                     $"--- Invoked apphost [version: {TestContext.MicrosoftNETCoreAppVersion}"
                 );
 
@@ -63,8 +65,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining(
                     $"--- Invoked apphost [version: {TestContext.MicrosoftNETCoreAppVersion}"
                 );
         }
@@ -100,8 +104,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining($"--- Invoked apphost [version: {previousVersion}");
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining($"--- Invoked apphost [version: {previousVersion}");
 
             // Use the older apphost and hostfxr
             // This emulates the case when:
@@ -117,8 +123,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("Hello World")
-                    .And.HaveStdErrContaining($"--- Invoked apphost [version: {previousVersion}");
+                    .And
+                    .HaveStdOutContaining("Hello World")
+                    .And
+                    .HaveStdErrContaining($"--- Invoked apphost [version: {previousVersion}");
             }
         }
 

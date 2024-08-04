@@ -31,10 +31,12 @@ namespace System.Activities
             if (this.CurrentInstance.PropertyManager != null)
             {
                 return (THandle)
-                    this.CurrentInstance.PropertyManager.GetProperty(
-                        Handle.GetPropertyName(typeof(THandle)),
-                        this.Activity.MemberOf
-                    );
+                    this.CurrentInstance
+                        .PropertyManager
+                        .GetProperty(
+                            Handle.GetPropertyName(typeof(THandle)),
+                            this.Activity.MemberOf
+                        );
             }
             else
             {

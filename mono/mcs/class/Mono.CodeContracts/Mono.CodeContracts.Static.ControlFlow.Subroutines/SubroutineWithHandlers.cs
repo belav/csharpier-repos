@@ -111,12 +111,14 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
         )
         {
             if (current.Subroutine != this)
-                return current.Subroutine.EdgeSubroutinesOuterToInner(
-                    current,
-                    succ,
-                    out isExceptionHandlerEdge,
-                    context
-                );
+                return current
+                    .Subroutine
+                    .EdgeSubroutinesOuterToInner(
+                        current,
+                        succ,
+                        out isExceptionHandlerEdge,
+                        context
+                    );
 
             Sequence<Handler> l1 = ProtectingHandlerList(current);
             Sequence<Handler> l2 = ProtectingHandlerList(succ);

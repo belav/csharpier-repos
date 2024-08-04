@@ -276,11 +276,9 @@ namespace System.IO.Pipes
                         int startTime
                     ))
                         state!;
-                    tuple.stream.ConnectInternal(
-                        tuple.timeout,
-                        tuple.cancellationToken,
-                        tuple.startTime
-                    );
+                    tuple
+                        .stream
+                        .ConnectInternal(tuple.timeout, tuple.cancellationToken, tuple.startTime);
                 },
                 (this, timeout, cancellationToken, startTime),
                 cancellationToken,

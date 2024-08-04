@@ -830,10 +830,9 @@ namespace System
             if (domainManager == null)
                 domainManager = new AppDomainManager();
 
-            return domainManager.ApplicationActivator.CreateInstance(
-                activationContext,
-                activationCustomData
-            );
+            return domainManager
+                .ApplicationActivator
+                .CreateInstance(activationContext, activationCustomData);
         }
 #else
         [Obsolete ("Activator.CreateInstance (ActivationContext) is not supported on this platform.", true)]

@@ -64,7 +64,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     return _r2rReader
                         .ImportSections[tableIndex]
                         .Entries[fixupIndex]
-                        .Signature.ToString(_formatOptions);
+                        .Signature
+                        .ToString(_formatOptions);
                 }
             }
 
@@ -81,7 +82,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     return _r2rReader
                         .ImportSections[tableIndex]
                         .Entries[fixupIndex]
-                        .Signature.ToString(_formatOptions);
+                        .Signature
+                        .ToString(_formatOptions);
                 }
             }
         }

@@ -928,9 +928,9 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 try
                 {
-                    RegistryKey winoeKey = Registry.LocalMachine.OpenSubKey(
-                        Helpers.ProductRootRegKey
-                    );
+                    RegistryKey winoeKey = Registry
+                        .LocalMachine
+                        .OpenSubKey(Helpers.ProductRootRegKey);
                     if (winoeKey != null)
                     {
                         object obj = winoeKey.GetValue("KeepTempFiles");

@@ -139,12 +139,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         }
 
         private LineFormattingOptions GetLineFormattingOptions() =>
-            State.ThreadingContext.JoinableTaskFactory.Run(
-                () =>
-                    GetDocument()
-                        .GetLineFormattingOptionsAsync(GlobalOptions, CancellationToken.None)
-                        .AsTask()
-            );
+            State
+                .ThreadingContext
+                .JoinableTaskFactory
+                .Run(
+                    () =>
+                        GetDocument()
+                            .GetLineFormattingOptionsAsync(GlobalOptions, CancellationToken.None)
+                            .AsTask()
+                );
 
         public EnvDTE.TextPoint StartPoint
         {

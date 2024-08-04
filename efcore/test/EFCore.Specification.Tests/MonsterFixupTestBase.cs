@@ -532,12 +532,12 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
                 ? context.ProductPhotos.ToList().Single(e => e.Photo[0] == 105)
                 : context.ProductPhotos.Single(e => e.Photo[0] == 105);
 
-            var productWebFeature1 = context.ProductWebFeatures.Single(e =>
-                e.Heading.StartsWith("Waffle")
-            );
-            var productWebFeature2 = context.ProductWebFeatures.Single(e =>
-                e.Heading.StartsWith("What")
-            );
+            var productWebFeature1 = context
+                .ProductWebFeatures
+                .Single(e => e.Heading.StartsWith("Waffle"));
+            var productWebFeature2 = context
+                .ProductWebFeatures
+                .Single(e => e.Heading.StartsWith("What"));
 
             Assert.NotNull(product2);
             AssertPhotosConsistent(productPhoto1, productWebFeature1);
@@ -873,7 +873,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
             Assert.Equal(
                 new[] { "101", "103", "105" },
                 context
-                    .ProductPhotos.ToList()
+                    .ProductPhotos
+                    .ToList()
                     .Select(c => c.Photo.First().ToString())
                     .OrderBy(n => n)
             );
@@ -899,7 +900,8 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         Assert.Equal(
             new[] { "201", "202" },
             context
-                .SupplierLogos.ToList()
+                .SupplierLogos
+                .ToList()
                 .SelectMany(c => c.Logo)
                 .Select(l => l.ToString())
                 .OrderBy(n => n)
@@ -993,15 +995,15 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         Assert.Equal(customer2.CustomerId, login2.CustomerId);
         Assert.Equal(customer3.CustomerId, login3.CustomerId);
 
-        var suspiciousActivity1 = context.SuspiciousActivities.Single(e =>
-            e.Activity.StartsWith("Pig")
-        );
-        var suspiciousActivity2 = context.SuspiciousActivities.Single(e =>
-            e.Activity.StartsWith("Crumbs")
-        );
-        var suspiciousActivity3 = context.SuspiciousActivities.Single(e =>
-            e.Activity.StartsWith("Donuts")
-        );
+        var suspiciousActivity1 = context
+            .SuspiciousActivities
+            .Single(e => e.Activity.StartsWith("Pig"));
+        var suspiciousActivity2 = context
+            .SuspiciousActivities
+            .Single(e => e.Activity.StartsWith("Crumbs"));
+        var suspiciousActivity3 = context
+            .SuspiciousActivities
+            .Single(e => e.Activity.StartsWith("Donuts"));
 
         Assert.Equal(login3.Username, suspiciousActivity1.Username);
         Assert.Equal(login3.Username, suspiciousActivity2.Username);
@@ -1108,12 +1110,12 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         Assert.Equal(product1.ProductId, productPhoto2.ProductId);
         Assert.Equal(product3.ProductId, productPhoto3.ProductId);
 
-        var productWebFeature1 = context.ProductWebFeatures.Single(e =>
-            e.Heading.StartsWith("Waffle")
-        );
-        var productWebFeature2 = context.ProductWebFeatures.Single(e =>
-            e.Heading.StartsWith("What")
-        );
+        var productWebFeature1 = context
+            .ProductWebFeatures
+            .Single(e => e.Heading.StartsWith("Waffle"));
+        var productWebFeature2 = context
+            .ProductWebFeatures
+            .Single(e => e.Heading.StartsWith("What"));
 
         Assert.Equal(product1.ProductId, productWebFeature1.ProductId);
         Assert.Equal(product2.ProductId, productWebFeature2.ProductId);
@@ -1131,26 +1133,26 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
 
         Assert.Equal(supplier1.SupplierId, supplierLogo1.SupplierId);
 
-        var supplierInfo1 = context.SupplierInformation.Single(e =>
-            e.Information.StartsWith("Seems")
-        );
-        var supplierInfo2 = context.SupplierInformation.Single(e =>
-            e.Information.StartsWith("Orange")
-        );
-        var supplierInfo3 = context.SupplierInformation.Single(e =>
-            e.Information.StartsWith("Very")
-        );
+        var supplierInfo1 = context
+            .SupplierInformation
+            .Single(e => e.Information.StartsWith("Seems"));
+        var supplierInfo2 = context
+            .SupplierInformation
+            .Single(e => e.Information.StartsWith("Orange"));
+        var supplierInfo3 = context
+            .SupplierInformation
+            .Single(e => e.Information.StartsWith("Very"));
 
         Assert.Equal(supplier1.SupplierId, supplierInfo1.SupplierId);
         Assert.Equal(supplier1.SupplierId, supplierInfo2.SupplierId);
         Assert.Equal(supplier2.SupplierId, supplierInfo3.SupplierId);
 
-        var customerInfo1 = context.CustomerInformation.Single(e =>
-            e.Information.StartsWith("Really")
-        );
-        var customerInfo2 = context.CustomerInformation.Single(e =>
-            e.Information.StartsWith("Mrs")
-        );
+        var customerInfo1 = context
+            .CustomerInformation
+            .Single(e => e.Information.StartsWith("Really"));
+        var customerInfo2 = context
+            .CustomerInformation
+            .Single(e => e.Information.StartsWith("Mrs"));
 
         Assert.Equal(customer1.CustomerId, customerInfo1.CustomerInfoId);
         Assert.Equal(customer2.CustomerId, customerInfo2.CustomerInfoId);
@@ -1158,12 +1160,12 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         var computer1 = context.Computers.Single(e => e.Name == "markash420");
         var computer2 = context.Computers.Single(e => e.Name == "unicorns420");
 
-        var computerDetail1 = context.ComputerDetails.Single(e =>
-            e.Specifications == "It's a Dell!"
-        );
-        var computerDetail2 = context.ComputerDetails.Single(e =>
-            e.Specifications == "It's not a Dell!"
-        );
+        var computerDetail1 = context
+            .ComputerDetails
+            .Single(e => e.Specifications == "It's a Dell!");
+        var computerDetail2 = context
+            .ComputerDetails
+            .Single(e => e.Specifications == "It's not a Dell!");
 
         Assert.Equal(computer1.ComputerId, computerDetail1.ComputerDetailId);
         Assert.Equal(computer2.ComputerId, computerDetail2.ComputerDetailId);
@@ -1408,12 +1410,12 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         Assert.Same(productPhoto3, product3.Photos.Single());
         Assert.True(product2.Photos == null || product2.Photos.Count == 0);
 
-        var productWebFeature1 = context.ProductWebFeatures.Single(e =>
-            e.Heading.StartsWith("Waffle")
-        );
-        var productWebFeature2 = context.ProductWebFeatures.Single(e =>
-            e.Heading.StartsWith("What")
-        );
+        var productWebFeature1 = context
+            .ProductWebFeatures
+            .Single(e => e.Heading.StartsWith("Waffle"));
+        var productWebFeature2 = context
+            .ProductWebFeatures
+            .Single(e => e.Heading.StartsWith("What"));
 
         Assert.Same(productPhoto1, productWebFeature1.Photo);
         Assert.Same(productWebFeature1, productPhoto1.Features.Single());
@@ -1439,26 +1441,26 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
 
         Assert.Same(supplierLogo1, supplier1.Logo);
 
-        var supplierInfo1 = context.SupplierInformation.Single(e =>
-            e.Information.StartsWith("Seems")
-        );
-        var supplierInfo2 = context.SupplierInformation.Single(e =>
-            e.Information.StartsWith("Orange")
-        );
-        var supplierInfo3 = context.SupplierInformation.Single(e =>
-            e.Information.StartsWith("Very")
-        );
+        var supplierInfo1 = context
+            .SupplierInformation
+            .Single(e => e.Information.StartsWith("Seems"));
+        var supplierInfo2 = context
+            .SupplierInformation
+            .Single(e => e.Information.StartsWith("Orange"));
+        var supplierInfo3 = context
+            .SupplierInformation
+            .Single(e => e.Information.StartsWith("Very"));
 
         Assert.Same(supplier1, supplierInfo1.Supplier);
         Assert.Same(supplier1, supplierInfo2.Supplier);
         Assert.Same(supplier2, supplierInfo3.Supplier);
 
-        var customerInfo1 = context.CustomerInformation.Single(e =>
-            e.Information.StartsWith("Really")
-        );
-        var customerInfo2 = context.CustomerInformation.Single(e =>
-            e.Information.StartsWith("Mrs")
-        );
+        var customerInfo1 = context
+            .CustomerInformation
+            .Single(e => e.Information.StartsWith("Really"));
+        var customerInfo2 = context
+            .CustomerInformation
+            .Single(e => e.Information.StartsWith("Mrs"));
 
         Assert.Same(customerInfo1, customer1.Info);
         Assert.Same(customerInfo2, customer2.Info);
@@ -1466,12 +1468,12 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         var computer1 = context.Computers.Single(e => e.Name == "markash420");
         var computer2 = context.Computers.Single(e => e.Name == "unicorns420");
 
-        var computerDetail1 = context.ComputerDetails.Single(e =>
-            e.Specifications == "It's a Dell!"
-        );
-        var computerDetail2 = context.ComputerDetails.Single(e =>
-            e.Specifications == "It's not a Dell!"
-        );
+        var computerDetail1 = context
+            .ComputerDetails
+            .Single(e => e.Specifications == "It's a Dell!");
+        var computerDetail2 = context
+            .ComputerDetails
+            .Single(e => e.Specifications == "It's not a Dell!");
 
         Assert.Same(computer1, computerDetail1.Computer);
         Assert.Same(computerDetail1, computer1.ComputerDetail);
@@ -1769,10 +1771,12 @@ public abstract class MonsterFixupTestBase<TFixture> : IClassFixture<TFixture>, 
         if (expectedDependent != null)
         {
             Assert.True(
-                StructuralComparisons.StructuralEqualityComparer.Equals(
-                    expectedPrincipal == null ? null : getPrincipalKey(expectedPrincipal),
-                    getForeignKey(expectedDependent)
-                )
+                StructuralComparisons
+                    .StructuralEqualityComparer
+                    .Equals(
+                        expectedPrincipal == null ? null : getPrincipalKey(expectedPrincipal),
+                        getForeignKey(expectedDependent)
+                    )
             );
         }
     }

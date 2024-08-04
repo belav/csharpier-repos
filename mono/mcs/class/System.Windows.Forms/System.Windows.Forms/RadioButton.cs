@@ -192,24 +192,28 @@ namespace System.Windows.Forms
             Rectangle text_rectangle;
             Rectangle image_rectangle;
 
-            ThemeEngine.Current.CalculateRadioButtonTextAndImageLayout(
-                this,
-                Point.Empty,
-                out glyph_rectangle,
-                out text_rectangle,
-                out image_rectangle
-            );
+            ThemeEngine
+                .Current
+                .CalculateRadioButtonTextAndImageLayout(
+                    this,
+                    Point.Empty,
+                    out glyph_rectangle,
+                    out text_rectangle,
+                    out image_rectangle
+                );
 
             // Draw our button
             if (FlatStyle != FlatStyle.System && Appearance != Appearance.Button)
-                ThemeEngine.Current.DrawRadioButton(
-                    pe.Graphics,
-                    this,
-                    glyph_rectangle,
-                    text_rectangle,
-                    image_rectangle,
-                    pe.ClipRectangle
-                );
+                ThemeEngine
+                    .Current
+                    .DrawRadioButton(
+                        pe.Graphics,
+                        this,
+                        glyph_rectangle,
+                        text_rectangle,
+                        image_rectangle,
+                        pe.ClipRectangle
+                    );
             else
                 ThemeEngine.Current.DrawRadioButton(pe.Graphics, this.ClientRectangle, this);
         }

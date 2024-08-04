@@ -63,9 +63,11 @@ namespace System.Activities.Core.Presentation
                 SetupBinding();
 
                 if (
-                    this
-                        .Context.Services.GetService<DesignerConfigurationService>()
-                        .TargetFrameworkName.IsLessThan45()
+                    this.Context
+                        .Services
+                        .GetService<DesignerConfigurationService>()
+                        .TargetFrameworkName
+                        .IsLessThan45()
                 )
                 {
                     this.displayNameTextBox.IsReadOnly = true;

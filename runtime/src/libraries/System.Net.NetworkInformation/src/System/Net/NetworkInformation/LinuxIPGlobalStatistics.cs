@@ -199,13 +199,15 @@ namespace System.Net.NetworkInformation
         private static unsafe int GetNumIPAddresses()
         {
             int count = 0;
-            Interop.Sys.EnumerateInterfaceAddresses(
-                &count,
-                &ProcessIpv4Address,
-                &ProcessIpv6Address,
-                // Ignore link-layer addresses that are discovered; don't create a callback.
-                null
-            );
+            Interop
+                .Sys
+                .EnumerateInterfaceAddresses(
+                    &count,
+                    &ProcessIpv4Address,
+                    &ProcessIpv6Address,
+                    // Ignore link-layer addresses that are discovered; don't create a callback.
+                    null
+                );
             return count;
         }
     }

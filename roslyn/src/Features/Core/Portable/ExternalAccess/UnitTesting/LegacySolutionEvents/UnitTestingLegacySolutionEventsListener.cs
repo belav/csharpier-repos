@@ -27,8 +27,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.LegacySolutionEvents
 
         private static IUnitTestingWorkCoordinator? GetCoordinator(Solution solution)
         {
-            var service =
-                solution.Services.GetService<IUnitTestingSolutionCrawlerRegistrationService>();
+            var service = solution
+                .Services
+                .GetService<IUnitTestingSolutionCrawlerRegistrationService>();
             if (service == null)
                 return null;
 

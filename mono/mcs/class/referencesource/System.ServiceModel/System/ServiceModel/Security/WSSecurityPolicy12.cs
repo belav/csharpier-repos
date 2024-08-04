@@ -620,11 +620,13 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
             }
 
             if (
@@ -639,11 +641,13 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
             }
 
             if (
@@ -658,11 +662,13 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
             }
 
             if (
@@ -677,11 +683,13 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
             }
 
             return true;
@@ -768,9 +776,9 @@ namespace System.ServiceModel.Security
             }
             if (optionalSignedEncrypted == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "optionalSignedEncrypted"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("optionalSignedEncrypted");
             }
 
             bool result = true;
@@ -852,11 +860,16 @@ namespace System.ServiceModel.Security
                         out assertion
                     )
                 )
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.UnsupportedSecurityPolicyAssertion,
+                                    assertion.OuterXml
+                                )
+                            )
+                        );
             }
 
             return true;

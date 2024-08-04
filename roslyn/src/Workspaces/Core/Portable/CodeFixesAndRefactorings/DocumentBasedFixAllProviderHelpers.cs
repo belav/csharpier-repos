@@ -145,10 +145,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                                 async () =>
                                 {
                                     var cleanedDocument = await PostProcessCodeAction
-                                        .Instance.PostProcessChangesAsync(
-                                            dirtyDocument,
-                                            cancellationToken
-                                        )
+                                        .Instance
+                                        .PostProcessChangesAsync(dirtyDocument, cancellationToken)
                                         .ConfigureAwait(false);
                                     var cleanedText = await cleanedDocument
                                         .GetValueTextAsync(cancellationToken)

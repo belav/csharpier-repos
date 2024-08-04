@@ -89,10 +89,9 @@ internal abstract class Http1MessageBody : MessageBody
     {
         Log.RequestBodyNotEntirelyRead(_context.ConnectionIdFeature, _context.TraceIdentifier);
 
-        _context.TimeoutControl.SetTimeout(
-            Constants.RequestBodyDrainTimeout,
-            TimeoutReason.RequestBodyDrain
-        );
+        _context
+            .TimeoutControl
+            .SetTimeout(Constants.RequestBodyDrainTimeout, TimeoutReason.RequestBodyDrain);
 
         try
         {

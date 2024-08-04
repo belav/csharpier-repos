@@ -313,9 +313,9 @@ namespace System.Activities.Core.Presentation
                     || !converter.CanConvertTo(typeof(string))
                 )
                 {
-                    throw FxTrace.Exception.AsError(
-                        new NotSupportedException(SR.NotSupportedCaseKeyStringConversion)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new NotSupportedException(SR.NotSupportedCaseKeyStringConversion));
                 }
 
                 result = converter.ConvertFromString(this.Text);

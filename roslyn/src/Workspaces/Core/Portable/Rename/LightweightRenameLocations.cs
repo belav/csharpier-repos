@@ -142,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         if (result.HasValue && result.Value != null)
                         {
                             var rehydratedLocations = await result
-                                .Value.RehydrateLocationsAsync(solution, cancellationToken)
+                                .Value
+                                .RehydrateLocationsAsync(solution, cancellationToken)
                                 .ConfigureAwait(false);
                             return new LightweightRenameLocations(
                                 solution,
@@ -175,12 +176,16 @@ namespace Microsoft.CodeAnalysis.Rename
                 options,
                 fallbackOptions,
                 renameLocations.Locations,
-                renameLocations.ImplicitLocations.SelectAsArray(loc =>
-                    SerializableReferenceLocation.Dehydrate(loc, cancellationToken)
-                ),
-                renameLocations.ReferencedSymbols.SelectAsArray(sym =>
-                    SerializableSymbolAndProjectId.Dehydrate(solution, sym, cancellationToken)
-                )
+                renameLocations
+                    .ImplicitLocations
+                    .SelectAsArray(loc =>
+                        SerializableReferenceLocation.Dehydrate(loc, cancellationToken)
+                    ),
+                renameLocations
+                    .ReferencedSymbols
+                    .SelectAsArray(sym =>
+                        SerializableSymbolAndProjectId.Dehydrate(solution, sym, cancellationToken)
+                    )
             );
         }
 

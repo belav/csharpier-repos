@@ -158,12 +158,15 @@ namespace DebuggerTests
                         );
 
                         string actual_fn_name = pause_location["callFrames"]
-                            ?[0]?["functionName"]?.Value<string>();
+                            ?[0]
+                            ?["functionName"]
+                            ?.Value<string>();
 
                         // return if we hit a managed exception, or an uncaught one
                         if (
                             pause_location["data"]
-                                ?["objectId"]?.Value<string>()
+                                ?["objectId"]
+                                ?.Value<string>()
                                 ?.StartsWith("dotnet:object:", StringComparison.Ordinal) == true
                         )
                         {
@@ -568,7 +571,8 @@ namespace DebuggerTests
                     // return in case of a managed exception, and ignore JS ones
                     if (
                         pause_location["data"]
-                            ?["objectId"]?.Value<string>()
+                            ?["objectId"]
+                            ?.Value<string>()
                             ?.StartsWith("dotnet:object:", StringComparison.Ordinal) == true
                         || pause_location["data"]?["uncaught"]?.Value<bool>() == true
                     )

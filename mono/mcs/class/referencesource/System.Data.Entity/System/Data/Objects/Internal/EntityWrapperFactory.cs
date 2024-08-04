@@ -320,10 +320,10 @@ namespace System.Data.Objects.Internal
                 if (stateManager.TransactionManager.TrackProcessedEntities)
                 {
                     if (
-                        stateManager.TransactionManager.WrappedEntities.TryGetValue(
-                            entity,
-                            out wrapper
-                        )
+                        stateManager
+                            .TransactionManager
+                            .WrappedEntities
+                            .TryGetValue(entity, out wrapper)
                     )
                     {
                         return wrapper;
@@ -383,10 +383,9 @@ namespace System.Data.Objects.Internal
         {
             if (wrapper.EntityKey == null)
             {
-                wrapper.EntityKey = context.ObjectStateManager.CreateEntityKey(
-                    entitySet,
-                    wrapper.Entity
-                );
+                wrapper.EntityKey = context
+                    .ObjectStateManager
+                    .CreateEntityKey(entitySet, wrapper.Entity);
             }
             if (wrapper.Context == null)
             {

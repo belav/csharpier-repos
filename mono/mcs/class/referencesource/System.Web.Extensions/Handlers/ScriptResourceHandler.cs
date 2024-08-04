@@ -953,9 +953,9 @@ namespace System.Web.Handlers
                                 {
                                     ThrowUnknownResource(resourceAndCulture.Item1);
                                 }
-                                Stream scriptStream = assemblyData.Item1.GetManifestResourceStream(
-                                    resourceInfo.ScriptName
-                                );
+                                Stream scriptStream = assemblyData
+                                    .Item1
+                                    .GetManifestResourceStream(resourceInfo.ScriptName);
                                 if (scriptStream == null)
                                 {
                                     ThrowUnknownResource(resourceAndCulture.Item1);

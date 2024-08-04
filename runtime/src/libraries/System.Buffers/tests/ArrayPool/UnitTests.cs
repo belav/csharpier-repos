@@ -823,9 +823,9 @@ namespace System.Buffers.ArrayPool.Tests
                         expectedMaxArraysPerPartition
                     ) =>
                     {
-                        Type staticsType = typeof(ArrayPool<>).Assembly.GetType(
-                            "System.Buffers.SharedArrayPoolStatics"
-                        );
+                        Type staticsType = typeof(ArrayPool<>)
+                            .Assembly
+                            .GetType("System.Buffers.SharedArrayPoolStatics");
                         Assert.NotNull(staticsType);
 
                         FieldInfo partitionCountField = staticsType.GetField(

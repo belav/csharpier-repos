@@ -17,7 +17,8 @@ const string rulesMissingDocumentationFileName = "RulesMissingDocumentation.md";
 if (args.Length != expectedArguments)
 {
     await Console
-        .Error.WriteLineAsync(
+        .Error
+        .WriteLineAsync(
             $"Excepted {expectedArguments} arguments, found {args.Length}: {string.Join(';', args)}"
         )
         .ConfigureAwait(false);
@@ -27,7 +28,8 @@ if (args.Length != expectedArguments)
 if (!args[0].StartsWith(validateOnlyPrefix, StringComparison.OrdinalIgnoreCase))
 {
     await Console
-        .Error.WriteLineAsync(
+        .Error
+        .WriteLineAsync(
             $"Excepted the first argument to start with `{validateOnlyPrefix}`. found `{args[0]}`."
         )
         .ConfigureAwait(false);
@@ -96,7 +98,8 @@ foreach (var ruleById in allRulesById)
         if (!actualContent.Contains(line))
         {
             await Console
-                .Error.WriteLineAsync(
+                .Error
+                .WriteLineAsync(
                     $"Missing entry in '{fileWithPath}'. Please add the below entry to this file to fix the build:"
                 )
                 .ConfigureAwait(false);

@@ -85,10 +85,9 @@ namespace System.Web.Mvc.Html.Test
 
             // Developers might need to do something similar (including MetadataOverrideScope or another approach
             // replacing ModelMetadataProviders.Current) since for example [DisplayFormat] cannot be applied to a class.
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                () => null,
-                typeof(ObjectTemplateModel)
-            );
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => null, typeof(ObjectTemplateModel));
             metadata.HtmlEncode = htmlEncode;
 
             string editorResult;
@@ -135,10 +134,9 @@ namespace System.Web.Mvc.Html.Test
 
             // Developers might need to do something similar (including MetadataOverrideScope or another approach
             // replacing ModelMetadataProviders.Current) since for example [DisplayFormat] cannot be applied to a class.
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                () => null,
-                typeof(ObjectTemplateModel)
-            );
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => null, typeof(ObjectTemplateModel));
             metadata.HtmlEncode = htmlEncode;
             metadata.NullDisplayText = text;
 

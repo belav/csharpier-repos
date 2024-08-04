@@ -12,10 +12,12 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [Fact]
         public static void CreateTrustPassword_Random()
         {
-            Type trustHelperType = typeof(Domain).Assembly.GetType(
-                "System.DirectoryServices.ActiveDirectory.TrustHelper",
-                throwOnError: true
-            );
+            Type trustHelperType = typeof(Domain)
+                .Assembly
+                .GetType(
+                    "System.DirectoryServices.ActiveDirectory.TrustHelper",
+                    throwOnError: true
+                );
             MethodInfo createTrustPasswordMethod = trustHelperType.GetMethod(
                 "CreateTrustPassword",
                 BindingFlags.NonPublic | BindingFlags.Static

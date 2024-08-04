@@ -29,9 +29,9 @@ public class GearsController : TestODataController, IDisposable
     [EnableQuery]
     public ITestActionResult Get([FromODataUri] string keyNickname, [FromODataUri] int keySquadId)
     {
-        var result = _context.Gears.FirstOrDefault(e =>
-            e.Nickname == keyNickname && e.SquadId == keySquadId
-        );
+        var result = _context
+            .Gears
+            .FirstOrDefault(e => e.Nickname == keyNickname && e.SquadId == keySquadId);
 
         return result == null ? NotFound() : Ok(result);
     }
@@ -181,9 +181,9 @@ public class SquadMissionsController : TestODataController, IDisposable
     [EnableQuery]
     public ITestActionResult Get([FromODataUri] int keySquadId, [FromODataUri] int keyMissionId)
     {
-        var result = _context.SquadMissions.FirstOrDefault(e =>
-            e.SquadId == keySquadId && e.MissionId == keyMissionId
-        );
+        var result = _context
+            .SquadMissions
+            .FirstOrDefault(e => e.SquadId == keySquadId && e.MissionId == keyMissionId);
 
         return result == null ? NotFound() : Ok(result);
     }

@@ -18,7 +18,9 @@ namespace System.Linq.Expressions.Tests
             foreach (TTestCase testCase in testCases)
             {
                 Xunit.Abstractions.IAttributeInfo orderAttribute = testCase
-                    .TestMethod.Method.GetCustomAttributes(typeof(TestOrderAttribute))
+                    .TestMethod
+                    .Method
+                    .GetCustomAttributes(typeof(TestOrderAttribute))
                     .FirstOrDefault();
                 int order;
                 if (

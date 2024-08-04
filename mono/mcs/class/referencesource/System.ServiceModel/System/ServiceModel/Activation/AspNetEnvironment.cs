@@ -207,11 +207,13 @@ namespace System.ServiceModel.Activation
             // validate that hosting settings are compatible with the requested requirements
             if (compatibilityMode == AspNetCompatibilityRequirementsMode.Required)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.Hosting_CompatibilityServiceNotHosted)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.Hosting_CompatibilityServiceNotHosted)
+                        )
+                    );
             }
         }
 

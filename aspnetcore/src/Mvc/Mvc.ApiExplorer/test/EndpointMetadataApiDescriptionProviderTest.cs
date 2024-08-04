@@ -684,7 +684,9 @@ public class EndpointMetadataApiDescriptionProviderTest
         Assert.NotEmpty(apiDescription.ActionDescriptor.EndpointMetadata);
 
         var apiExplorerSettings = apiDescription
-            .ActionDescriptor.EndpointMetadata.OfType<ApiExplorerSettingsAttribute>()
+            .ActionDescriptor
+            .EndpointMetadata
+            .OfType<ApiExplorerSettingsAttribute>()
             .FirstOrDefault();
 
         Assert.NotNull(apiExplorerSettings);
@@ -1441,13 +1443,17 @@ public class EndpointMetadataApiDescriptionProviderTest
         Assert.NotEmpty(apiDescription.ActionDescriptor.EndpointMetadata);
 
         var descriptionMetadata = apiDescription
-            .ActionDescriptor.EndpointMetadata.OfType<IEndpointDescriptionMetadata>()
+            .ActionDescriptor
+            .EndpointMetadata
+            .OfType<IEndpointDescriptionMetadata>()
             .SingleOrDefault();
         Assert.NotNull(descriptionMetadata);
         Assert.Equal("A description", descriptionMetadata!.Description);
 
         var summaryMetadata = apiDescription
-            .ActionDescriptor.EndpointMetadata.OfType<IEndpointSummaryMetadata>()
+            .ActionDescriptor
+            .EndpointMetadata
+            .OfType<IEndpointSummaryMetadata>()
             .SingleOrDefault();
         Assert.NotNull(summaryMetadata);
         Assert.Equal("A summary", summaryMetadata!.Summary);
@@ -1481,13 +1487,17 @@ public class EndpointMetadataApiDescriptionProviderTest
         Assert.NotEmpty(apiDescription.ActionDescriptor.EndpointMetadata);
 
         var descriptionMetadata = apiDescription
-            .ActionDescriptor.EndpointMetadata.OfType<IEndpointDescriptionMetadata>()
+            .ActionDescriptor
+            .EndpointMetadata
+            .OfType<IEndpointDescriptionMetadata>()
             .SingleOrDefault();
         Assert.NotNull(descriptionMetadata);
         Assert.Equal("A description", descriptionMetadata!.Description);
 
         var summaryMetadata = apiDescription
-            .ActionDescriptor.EndpointMetadata.OfType<IEndpointSummaryMetadata>()
+            .ActionDescriptor
+            .EndpointMetadata
+            .OfType<IEndpointSummaryMetadata>()
             .SingleOrDefault();
         Assert.NotNull(summaryMetadata);
         Assert.Equal("A summary", summaryMetadata!.Summary);
@@ -1524,7 +1534,8 @@ public class EndpointMetadataApiDescriptionProviderTest
     private static IEnumerable<string> GetSortedMediaTypes(ApiResponseType apiResponseType)
     {
         return apiResponseType
-            .ApiResponseFormats.OrderBy(format => format.MediaType)
+            .ApiResponseFormats
+            .OrderBy(format => format.MediaType)
             .Select(format => format.MediaType);
     }
 

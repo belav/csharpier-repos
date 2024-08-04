@@ -713,23 +713,24 @@ class MainClass
                 new TextSpan(),
                 new LinePositionSpan(new LinePosition(2, 1), new LinePosition(3, 1))
             );
-            var diagnostic = CodeAnalysis.Diagnostic.Create(
-                "CS0000",
-                "",
-                "msg",
-                DiagnosticSeverity.Warning,
-                DiagnosticSeverity.Warning,
-                true,
-                1,
-                location: location
-            );
+            var diagnostic = CodeAnalysis
+                .Diagnostic
+                .Create(
+                    "CS0000",
+                    "",
+                    "msg",
+                    DiagnosticSeverity.Warning,
+                    DiagnosticSeverity.Warning,
+                    true,
+                    1,
+                    location: location
+                );
 
             Assert.Equal(
                 "test.txt(3,2): warning CS0000: msg",
-                CSharpDiagnosticFormatter.Instance.Format(
-                    diagnostic,
-                    EnsureEnglishUICulture.PreferredOrNull
-                )
+                CSharpDiagnosticFormatter
+                    .Instance
+                    .Format(diagnostic, EnsureEnglishUICulture.PreferredOrNull)
             );
         }
 
@@ -755,40 +756,42 @@ class MainClass
             );
             Assert.NotEqual(locationWithMapping, locationWithoutMapping);
 
-            var diagnosticWithoutMapping = CodeAnalysis.Diagnostic.Create(
-                "CS0000",
-                "",
-                "msg",
-                DiagnosticSeverity.Warning,
-                DiagnosticSeverity.Warning,
-                true,
-                1,
-                location: locationWithoutMapping
-            );
+            var diagnosticWithoutMapping = CodeAnalysis
+                .Diagnostic
+                .Create(
+                    "CS0000",
+                    "",
+                    "msg",
+                    DiagnosticSeverity.Warning,
+                    DiagnosticSeverity.Warning,
+                    true,
+                    1,
+                    location: locationWithoutMapping
+                );
             Assert.Equal(
                 "test.txt(3,2): warning CS0000: msg",
-                CSharpDiagnosticFormatter.Instance.Format(
-                    diagnosticWithoutMapping,
-                    EnsureEnglishUICulture.PreferredOrNull
-                )
+                CSharpDiagnosticFormatter
+                    .Instance
+                    .Format(diagnosticWithoutMapping, EnsureEnglishUICulture.PreferredOrNull)
             );
 
-            var diagnosticWithMapping = CodeAnalysis.Diagnostic.Create(
-                "CS0000",
-                "",
-                "msg",
-                DiagnosticSeverity.Warning,
-                DiagnosticSeverity.Warning,
-                true,
-                1,
-                location: locationWithMapping
-            );
+            var diagnosticWithMapping = CodeAnalysis
+                .Diagnostic
+                .Create(
+                    "CS0000",
+                    "",
+                    "msg",
+                    DiagnosticSeverity.Warning,
+                    DiagnosticSeverity.Warning,
+                    true,
+                    1,
+                    location: locationWithMapping
+                );
             Assert.Equal(
                 "test2.txt(4,3): warning CS0000: msg",
-                CSharpDiagnosticFormatter.Instance.Format(
-                    diagnosticWithMapping,
-                    EnsureEnglishUICulture.PreferredOrNull
-                )
+                CSharpDiagnosticFormatter
+                    .Instance
+                    .Format(diagnosticWithMapping, EnsureEnglishUICulture.PreferredOrNull)
             );
 
             var lineInfo = locationWithoutMapping.GetLineSpan();
@@ -825,8 +828,8 @@ class MainClass
             );
 
             // create node with error that would place itself outside the tree.
-            var nodeWithBadError = node
-                .Green.WithDiagnosticsGreen(
+            var nodeWithBadError = node.Green
+                .WithDiagnosticsGreen(
                     new DiagnosticInfo[]
                     {
                         new SyntaxDiagnosticInfo(10, 10, ErrorCode.ERR_NoBaseClass),

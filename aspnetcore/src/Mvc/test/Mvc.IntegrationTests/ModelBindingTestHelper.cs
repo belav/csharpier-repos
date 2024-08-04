@@ -173,12 +173,14 @@ public static class ModelBindingTestHelper
     )
     {
         var httpContext = new DefaultHttpContext();
-        httpContext.Features.Set<IHttpRequestLifetimeFeature>(
-            new CancellableRequestLifetimeFeature()
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new NonZeroContentLengthRequestBodyDetectionFeature(httpContext)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestLifetimeFeature>(new CancellableRequestLifetimeFeature());
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(
+                new NonZeroContentLengthRequestBodyDetectionFeature(httpContext)
+            );
 
         updateRequest?.Invoke(httpContext.Request);
 

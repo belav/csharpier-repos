@@ -46,15 +46,17 @@ namespace System.ServiceModel.Activities
             // setting TransactionScopeRequired to false or remove the TransactionFlowAttribute from the operation.
             foreach (OperationDescription operationDescription in this.Contract.Operations)
             {
-                TransactionFlowAttribute transactionFlow =
-                    operationDescription.Behaviors.Find<TransactionFlowAttribute>();
+                TransactionFlowAttribute transactionFlow = operationDescription
+                    .Behaviors
+                    .Find<TransactionFlowAttribute>();
                 if (
                     transactionFlow != null
                     && transactionFlow.Transactions != TransactionFlowOption.NotAllowed
                 )
                 {
-                    OperationBehaviorAttribute operationAttribute =
-                        operationDescription.Behaviors.Find<OperationBehaviorAttribute>();
+                    OperationBehaviorAttribute operationAttribute = operationDescription
+                        .Behaviors
+                        .Find<OperationBehaviorAttribute>();
                     operationAttribute.TransactionScopeRequired = true;
                 }
             }

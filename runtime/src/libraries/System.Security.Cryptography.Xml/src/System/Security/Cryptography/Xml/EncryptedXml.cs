@@ -961,21 +961,18 @@ namespace System.Security.Cryptography.Xml
                     }
                 }
 
-                XmlNode importedNode = inputElement.OwnerDocument.ImportNode(
-                    importDocument.DocumentElement!,
-                    true
-                );
+                XmlNode importedNode = inputElement
+                    .OwnerDocument
+                    .ImportNode(importDocument.DocumentElement!, true);
 
                 parent.RemoveChild(inputElement);
                 parent.AppendChild(importedNode);
             }
             else
             {
-                XmlNode dummy = parent.OwnerDocument!.CreateElement(
-                    parent.Prefix,
-                    parent.LocalName,
-                    parent.NamespaceURI
-                );
+                XmlNode dummy = parent
+                    .OwnerDocument!
+                    .CreateElement(parent.Prefix, parent.LocalName, parent.NamespaceURI);
 
                 try
                 {

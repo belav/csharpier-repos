@@ -480,8 +480,8 @@ namespace System.Reflection.Tests
                 return type.GetElementType().ToSignatureType().MakePointerType();
             if (type.IsConstructedGenericType)
             {
-                Type[] genericTypeArguments = type
-                    .GenericTypeArguments.Select(t => t.ToSignatureType())
+                Type[] genericTypeArguments = type.GenericTypeArguments
+                    .Select(t => t.ToSignatureType())
                     .ToArray();
                 return type.GetGenericTypeDefinition().MakeGenericType(genericTypeArguments);
             }

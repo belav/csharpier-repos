@@ -50,7 +50,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
         public async Task Proxy(TestHost testHost)
         {
             var localComposition = EditorTestCompositions
-                .EditorFeatures.WithTestHostParts(testHost)
+                .EditorFeatures
+                .WithTestHostParts(testHost)
                 .AddExcludedPartTypes(typeof(DiagnosticAnalyzerService))
                 .AddParts(
                     typeof(MockDiagnosticAnalyzerService),
@@ -91,7 +92,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                 var remoteWorkspace = client.TestData.WorkspaceManager.GetWorkspace();
                 mockEncService = (MockEditAndContinueWorkspaceService)
                     remoteWorkspace
-                        .Services.GetRequiredService<IEditAndContinueWorkspaceService>()
+                        .Services
+                        .GetRequiredService<IEditAndContinueWorkspaceService>()
                         .Service;
             }
 
@@ -102,7 +104,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
 
             await localWorkspace.ChangeSolutionAsync(
                 localWorkspace
-                    .CurrentSolution.AddProject(projectId, "proj", "proj", LanguageNames.CSharp)
+                    .CurrentSolution
+                    .AddProject(projectId, "proj", "proj", LanguageNames.CSharp)
                     .AddMetadataReferences(
                         projectId,
                         TargetFrameworkUtil.GetReferences(TargetFramework.Mscorlib40)

@@ -371,7 +371,8 @@ namespace System.Runtime.Remoting.Channels
             }
 
             LogicalCallContext lcc = Thread
-                .CurrentThread.GetMutableExecutionContext()
+                .CurrentThread
+                .GetMutableExecutionContext()
                 .LogicalCallContext;
             lcc.SetData(LCC_DATA_KEY, true);
             // now we can delegate to the DispatchMessage to do the rest
@@ -459,13 +460,15 @@ namespace System.Runtime.Remoting.Channels
             Object[] args = new Object[] { reqStmBuff, smuggledMcm, null };
 
             retBuff = (byte[])
-                Thread.CurrentThread.InternalCrossContextCallback(
-                    null,
-                    _xadData.ContextID,
-                    _xadData.DomainID,
-                    s_xctxDel,
-                    args
-                );
+                Thread
+                    .CurrentThread
+                    .InternalCrossContextCallback(
+                        null,
+                        _xadData.ContextID,
+                        _xadData.DomainID,
+                        s_xctxDel,
+                        args
+                    );
 
 #if !FEATURE_CORECLR
             Message.DebugOut(

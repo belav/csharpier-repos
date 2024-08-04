@@ -77,13 +77,8 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
             Func<Task> createWorkAsync,
             CancellationToken cancellationToken
         ) =>
-            Task
-                .Factory.StartNew(
-                    createWorkAsync,
-                    cancellationToken,
-                    TaskCreationOptions.None,
-                    _scheduler
-                )
+            Task.Factory
+                .StartNew(createWorkAsync, cancellationToken, TaskCreationOptions.None, _scheduler)
                 .Unwrap();
 
         /// <summary>
@@ -117,7 +112,8 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
 
             var referencingProjects = new HashSet<ProjectId>(
                 solution
-                    .Projects.Where(p => p.MetadataReferences.Contains(reference))
+                    .Projects
+                    .Where(p => p.MetadataReferences.Contains(reference))
                     .Select(p => p.Id)
             );
 
@@ -198,7 +194,8 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
             // in parallel as we won't be trying to update the associated data for the same reference at the same time.
             foreach (
                 var reference in project
-                    .MetadataReferences.OfType<PortableExecutableReference>()
+                    .MetadataReferences
+                    .OfType<PortableExecutableReference>()
                     .Distinct()
             )
                 tasks.Add(

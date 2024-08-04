@@ -200,16 +200,14 @@ namespace System.Linq.Expressions.Compiler
                 !node.Method.IsStatic
                 && node.Object.Type.IsArray
                 && node.Method
-                    == node.Object.Type.GetMethod(
-                        "Get",
-                        BindingFlags.Public | BindingFlags.Instance
-                    )
+                    == node.Object
+                        .Type
+                        .GetMethod("Get", BindingFlags.Public | BindingFlags.Instance)
             )
             {
-                MethodInfo mi = node.Object.Type.GetMethod(
-                    "Address",
-                    BindingFlags.Public | BindingFlags.Instance
-                );
+                MethodInfo mi = node.Object
+                    .Type
+                    .GetMethod("Address", BindingFlags.Public | BindingFlags.Instance);
 
                 EmitMethodCall(node.Object, mi, node);
             }
@@ -235,10 +233,9 @@ namespace System.Linq.Expressions.Compiler
             }
             else
             {
-                var address = node.Object.Type.GetMethod(
-                    "Address",
-                    BindingFlags.Public | BindingFlags.Instance
-                );
+                var address = node.Object
+                    .Type
+                    .GetMethod("Address", BindingFlags.Public | BindingFlags.Instance);
                 EmitMethodCall(node.Object, address, node);
             }
         }

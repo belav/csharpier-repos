@@ -34,19 +34,28 @@ namespace System.Workflow.Activities
             {
                 if (manager.Context == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR2.GetString(SR2.Error_ContextStackMissing))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(SR2.Error_ContextStackMissing)
+                            )
+                        );
                 }
 
                 Activity rootActivity = manager.Context[typeof(Activity)] as Activity;
                 if (rootActivity == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.Error_ContextStackItemMissing, typeof(Activity).Name)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.Error_ContextStackItemMissing,
+                                    typeof(Activity).Name
+                                )
+                            )
+                        );
                 }
                 else
                 {

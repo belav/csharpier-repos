@@ -63,9 +63,15 @@ namespace System.ServiceModel.Security
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException("value", (int)value, typeof(ProtectionLevel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(ProtectionLevel)
+                        )
+                    );
             }
         }
 
@@ -97,9 +103,15 @@ namespace System.ServiceModel.Security
                 switch ((ProtectionLevel)p)
                 {
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidEnumArgumentException("p", (int)p, typeof(ProtectionLevel))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidEnumArgumentException(
+                                    "p",
+                                    (int)p,
+                                    typeof(ProtectionLevel)
+                                )
+                            );
                     case ProtectionLevel.None:
                         return 2;
                     case ProtectionLevel.Sign:
@@ -129,9 +141,11 @@ namespace System.ServiceModel.Security
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException("value", (int)value, typeof(SslProtocols))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException("value", (int)value, typeof(SslProtocols))
+                    );
             }
         }
     }
@@ -153,13 +167,15 @@ namespace System.ServiceModel.Security
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException(
-                        "value",
-                        (int)value,
-                        typeof(TokenImpersonationLevel)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(TokenImpersonationLevel)
+                        )
+                    );
             }
         }
 
@@ -197,13 +213,15 @@ namespace System.ServiceModel.Security
             }
 
             Fx.Assert("unknown token impersonation level");
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidEnumArgumentException(
-                    "impersonationLevel",
-                    (int)impersonationLevel,
-                    typeof(TokenImpersonationLevel)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "impersonationLevel",
+                        (int)impersonationLevel,
+                        typeof(TokenImpersonationLevel)
+                    )
+                );
         }
 
         internal static bool IsGreaterOrEqual(TokenImpersonationLevel x, TokenImpersonationLevel y)
@@ -248,26 +266,30 @@ namespace System.ServiceModel.Security
                                 result = -1;
                                 break;
                             default:
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new InvalidEnumArgumentException(
-                                        "y",
-                                        (int)y,
-                                        typeof(TokenImpersonationLevel)
-                                    )
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new InvalidEnumArgumentException(
+                                            "y",
+                                            (int)y,
+                                            typeof(TokenImpersonationLevel)
+                                        )
+                                    );
                         }
                         break;
                     case TokenImpersonationLevel.Delegation:
                         result = 1;
                         break;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidEnumArgumentException(
-                                "x",
-                                (int)x,
-                                typeof(TokenImpersonationLevel)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidEnumArgumentException(
+                                    "x",
+                                    (int)x,
+                                    typeof(TokenImpersonationLevel)
+                                )
+                            );
                 }
             }
 
@@ -601,9 +623,9 @@ namespace System.ServiceModel.Security
             TokenImpersonationLevelHelper.Validate(impersonationLevel);
 
             if (impersonationLevel == TokenImpersonationLevel.Identification)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("impersonationLevel")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("impersonationLevel"));
 
             bool result = true;
 
@@ -633,9 +655,9 @@ namespace System.ServiceModel.Security
             get
             {
                 if (combinedHashLabel == null)
-                    combinedHashLabel = Encoding.UTF8.GetBytes(
-                        TrustApr2004Strings.CombinedHashLabel
-                    );
+                    combinedHashLabel = Encoding
+                        .UTF8
+                        .GetBytes(TrustApr2004Strings.CombinedHashLabel);
                 return combinedHashLabel;
             }
         }
@@ -653,14 +675,16 @@ namespace System.ServiceModel.Security
                     {
                         if (result != null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                                new MessageSecurityException(
-                                    SR.GetString(
-                                        SR.MultipleMatchingCryptosFound,
-                                        typeof(T).ToString()
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperWarning(
+                                    new MessageSecurityException(
+                                        SR.GetString(
+                                            SR.MultipleMatchingCryptosFound,
+                                            typeof(T).ToString()
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         else
                         {
@@ -697,12 +721,16 @@ namespace System.ServiceModel.Security
                 || !CryptoHelper.IsEqual(c1.GetSymmetricKey(), c2.GetSymmetricKey())
             )
             {
-                throw System.ServiceModel.Diagnostics.TraceUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.TokenNotExpectedInSecurityHeader, t2)
-                    ),
-                    message
-                );
+                throw System
+                    .ServiceModel
+                    .Diagnostics
+                    .TraceUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.TokenNotExpectedInSecurityHeader, t2)
+                        ),
+                        message
+                    );
             }
         }
 
@@ -770,11 +798,13 @@ namespace System.ServiceModel.Security
             }
             if (unwrappingSecurityKey == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new MessageSecurityException(
-                        SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)
+                        )
+                    );
             }
             return unwrappingSecurityKey.DecryptKey(encryptionMethod, wrappedKey);
         }
@@ -799,9 +829,11 @@ namespace System.ServiceModel.Security
             }
             if (wrappingSecurityKey == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)
+                    );
             }
             return wrappingSecurityKey.EncryptKey(encryptionMethod, keyToWrap);
         }
@@ -831,11 +863,13 @@ namespace System.ServiceModel.Security
                     read += actual;
                 }
                 if (totalRead > maxBufferSize - read)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new QuotaExceededException(
-                            SR.GetString(SR.BufferQuotaExceededReadingBase64, maxBufferSize)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new QuotaExceededException(
+                                SR.GetString(SR.BufferQuotaExceededReadingBase64, maxBufferSize)
+                            )
+                        );
                 totalRead += read;
                 if (read < buffer.Length)
                     break;
@@ -868,11 +902,13 @@ namespace System.ServiceModel.Security
                 || !symmetricSecurityKey.IsSupportedAlgorithm(derivationAlgorithm)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new MessageSecurityException(
-                        SR.GetString(SR.CannotFindMatchingCrypto, derivationAlgorithm)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(SR.CannotFindMatchingCrypto, derivationAlgorithm)
+                        )
+                    );
             }
             return symmetricSecurityKey.GenerateDerivedKey(
                 derivationAlgorithm,
@@ -911,11 +947,13 @@ namespace System.ServiceModel.Security
             }
             if (!foundSpn)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.CannotDetermineSPNBasedOnAddress, target)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.CannotDetermineSPNBasedOnAddress, target)
+                        )
+                    );
             }
             return spn;
         }
@@ -1061,12 +1099,17 @@ namespace System.ServiceModel.Security
             }
             if (!canDoKeyExchange)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.SslCertMayNotDoKeyExchange, certificate.SubjectName.Name),
-                        innerException
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.SslCertMayNotDoKeyExchange,
+                                certificate.SubjectName.Name
+                            ),
+                            innerException
+                        )
+                    );
             }
         }
 
@@ -1395,10 +1438,9 @@ namespace System.ServiceModel.Security
             try
             {
                 using (
-                    RegistryKey channelBindingPolicyKey = Registry.LocalMachine.OpenSubKey(
-                        suppressChannelBindingRegistryKey,
-                        false
-                    )
+                    RegistryKey channelBindingPolicyKey = Registry
+                        .LocalMachine
+                        .OpenSubKey(suppressChannelBindingRegistryKey, false)
                 )
                 {
                     if (channelBindingPolicyKey != null)
@@ -1517,24 +1559,28 @@ namespace System.ServiceModel.Security
                         && subCode.Namespace == DotNetSecurityStrings.Namespace
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ServerTooBusyException(
-                                SR.GetString(SR.SecurityServerTooBusy, target),
-                                faultException
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ServerTooBusyException(
+                                    SR.GetString(SR.SecurityServerTooBusy, target),
+                                    faultException
+                                )
+                            );
                     }
                     else if (
                         subCode.Name == AddressingStrings.EndpointUnavailable
                         && subCode.Namespace == message.Version.Addressing.Namespace
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new EndpointNotFoundException(
-                                SR.GetString(SR.SecurityEndpointNotFound, target),
-                                faultException
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new EndpointNotFoundException(
+                                    SR.GetString(SR.SecurityEndpointNotFound, target),
+                                    faultException
+                                )
+                            );
                     }
                 }
                 throw TraceUtility.ThrowHelperError(faultException, message);
@@ -1737,7 +1783,9 @@ namespace System.ServiceModel.Security
                 if (
                     (token != null)
                     && !messageProperty
-                        .TransportToken.SecurityToken.GetType()
+                        .TransportToken
+                        .SecurityToken
+                        .GetType()
                         .IsSubclassOf(typeof(UserNameSecurityToken))
                 )
                 {
@@ -1755,7 +1803,9 @@ namespace System.ServiceModel.Security
                 if (
                     (token != null)
                     && !messageProperty
-                        .ProtectionToken.SecurityToken.GetType()
+                        .ProtectionToken
+                        .SecurityToken
+                        .GetType()
                         .IsSubclassOf(typeof(UserNameSecurityToken))
                 )
                 {
@@ -1777,7 +1827,8 @@ namespace System.ServiceModel.Security
                     if (
                         (token != null)
                         && !supportingTokenSpecification
-                            .SecurityToken.GetType()
+                            .SecurityToken
+                            .GetType()
                             .IsSubclassOf(typeof(UserNameSecurityToken))
                     )
                     {
@@ -2325,9 +2376,9 @@ namespace System.ServiceModel.Security
                     tokenManager
                 );
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException());
         }
 
         internal static SecurityStandardsManager CreateSecurityStandardsManager(
@@ -2337,15 +2388,15 @@ namespace System.ServiceModel.Security
         {
             if (securityVersion == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("securityVersion")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("securityVersion"));
             }
             if (securityTokenSerializer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenSerializer"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenSerializer");
             }
             return new SecurityStandardsManager(securityVersion, securityTokenSerializer);
         }
@@ -2740,17 +2791,19 @@ namespace System.ServiceModel.Security
                 true
             );
             if (certificate == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.CannotFindCert,
-                            storeName,
-                            storeLocation,
-                            findType,
-                            findValue
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.CannotFindCert,
+                                storeName,
+                                storeLocation,
+                                findType,
+                                findValue
+                            )
                         )
-                    )
-                );
+                    );
 
             return certificate;
         }
@@ -2800,16 +2853,18 @@ namespace System.ServiceModel.Security
                 }
                 if (throwIfMultipleOrNoMatch)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateCertificateLoadException(
-                            storeName,
-                            storeLocation,
-                            findType,
-                            findValue,
-                            target,
-                            certs.Count
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            CreateCertificateLoadException(
+                                storeName,
+                                storeLocation,
+                                findType,
+                                findValue,
+                                target,
+                                certs.Count
+                            )
+                        );
                 }
                 else
                 {
@@ -2904,9 +2959,11 @@ namespace System.ServiceModel.Security
             Binding binding = requirement.IssuerBinding;
             if (binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.IssuerBindingNotPresentInTokenRequirement, requirement)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.IssuerBindingNotPresentInTokenRequirement, requirement)
+                    );
             }
             BindingElementCollection bindingElements = binding.CreateBindingElements();
             return bindingElements.Find<SecurityBindingElement>();
@@ -2914,8 +2971,9 @@ namespace System.ServiceModel.Security
 
         public static int GetMaxNegotiationBufferSize(BindingContext bindingContext)
         {
-            TransportBindingElement transport =
-                bindingContext.RemainingBindingElements.Find<TransportBindingElement>();
+            TransportBindingElement transport = bindingContext
+                .RemainingBindingElements
+                .Find<TransportBindingElement>();
             Fx.Assert(transport != null, "TransportBindingElement is null!");
             int maxNegoMessageSize;
             if (transport is ConnectionOrientedTransportBindingElement)
@@ -3008,11 +3066,13 @@ namespace System.ServiceModel.Security
                 && identity.User.IsWellKnown(WellKnownSidType.AnonymousSid)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new SecurityTokenValidationException(
-                        SR.GetString(SR.AnonymousLogonsAreNotAllowed)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new SecurityTokenValidationException(
+                            SR.GetString(SR.AnonymousLogonsAreNotAllowed)
+                        )
+                    );
             }
         }
 
@@ -3101,15 +3161,17 @@ namespace System.ServiceModel.Security
         {
             if (ShouldValidateSslCipherStrength() && keySizeInBits < MinimumSslCipherStrength)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new SecurityNegotiationException(
-                        SR.GetString(
-                            SR.SslCipherKeyTooSmall,
-                            keySizeInBits,
-                            MinimumSslCipherStrength
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new SecurityNegotiationException(
+                            SR.GetString(
+                                SR.SslCipherKeyTooSmall,
+                                keySizeInBits,
+                                MinimumSslCipherStrength
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -3136,9 +3198,9 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException());
             }
 
             return derivationAlgorithm;

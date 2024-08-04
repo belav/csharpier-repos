@@ -244,11 +244,13 @@ namespace R2RTest
                         causeOfFailure = "Unknown cause of failure";
                     }
 
-                    Console.Error.WriteLine(
-                        "Error running R2R dump on {0}: {1}",
-                        string.Join(", ", r2rDumpExecution.Parameters.InputFileNames),
-                        causeOfFailure
-                    );
+                    Console
+                        .Error
+                        .WriteLine(
+                            "Error running R2R dump on {0}: {1}",
+                            string.Join(", ", r2rDumpExecution.Parameters.InputFileNames),
+                            causeOfFailure
+                        );
                     success = false;
                 }
             }
@@ -498,11 +500,13 @@ namespace R2RTest
                         causeOfFailure = "Unknown cause of failure";
                     }
 
-                    Console.Error.WriteLine(
-                        "Error running R2R dump on {0}: {1}",
-                        string.Join(", ", r2rDumpExecution.Parameters.InputFileNames),
-                        causeOfFailure
-                    );
+                    Console
+                        .Error
+                        .WriteLine(
+                            "Error running R2R dump on {0}: {1}",
+                            string.Join(", ", r2rDumpExecution.Parameters.InputFileNames),
+                            causeOfFailure
+                        );
                     success = false;
                 }
             }
@@ -547,11 +551,13 @@ namespace R2RTest
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(
-                    "Error reading log file {0}: {1}",
-                    compilationProcess.Parameters.LogPath,
-                    ex.Message
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "Error reading log file {0}: {1}",
+                        compilationProcess.Parameters.LogPath,
+                        ex.Message
+                    );
             }
         }
 
@@ -1285,10 +1291,12 @@ namespace R2RTest
                         }
                         catch (Exception)
                         {
-                            Console.Error.WriteLine(
-                                "Cannot find CPAOT output file '{0}', ignoring in size stats",
-                                cpaotCompilation.Parameters.OutputFileName
-                            );
+                            Console
+                                .Error
+                                .WriteLine(
+                                    "Cannot find CPAOT output file '{0}', ignoring in size stats",
+                                    cpaotCompilation.Parameters.OutputFileName
+                                );
                             continue;
                         }
 
@@ -1301,10 +1309,12 @@ namespace R2RTest
                         }
                         catch (Exception)
                         {
-                            Console.Error.WriteLine(
-                                "Cannot find Crossgen output file '{0}', ignoring in size stats",
-                                crossgenCompilation.Parameters.OutputFileName
-                            );
+                            Console
+                                .Error
+                                .WriteLine(
+                                    "Cannot find Crossgen output file '{0}', ignoring in size stats",
+                                    crossgenCompilation.Parameters.OutputFileName
+                                );
                             continue;
                         }
 

@@ -454,10 +454,9 @@ namespace System.Net.Security
                     }
 
                     if (NetEventSource.Log.IsEnabled())
-                        NetEventSource.Log.SelectedCert(
-                            _sslAuthenticationOptions.ClientCertificates[i],
-                            this
-                        );
+                        NetEventSource
+                            .Log
+                            .SelectedCert(_sslAuthenticationOptions.ClientCertificates[i], this);
 
                     EnsureInitialized(ref filteredCerts)
                         .Add(_sslAuthenticationOptions.ClientCertificates[i]);
@@ -1183,9 +1182,10 @@ namespace System.Net.Security
                 if (
                     _remoteCertificate != null
                     && certificate != null
-                    && certificate.RawDataMemory.Span.SequenceEqual(
-                        _remoteCertificate.RawDataMemory.Span
-                    )
+                    && certificate
+                        .RawDataMemory
+                        .Span
+                        .SequenceEqual(_remoteCertificate.RawDataMemory.Span)
                 )
                 {
                     // This is renegotiation or TLS 1.3 and the certificate did not change.
@@ -1223,9 +1223,10 @@ namespace System.Net.Security
                             chain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
                             if (trust._store != null)
                             {
-                                chain.ChainPolicy.CustomTrustStore.AddRange(
-                                    trust._store.Certificates
-                                );
+                                chain
+                                    .ChainPolicy
+                                    .CustomTrustStore
+                                    .AddRange(trust._store.Certificates);
                             }
                             if (trust._trustList != null)
                             {
@@ -1238,9 +1239,14 @@ namespace System.Net.Security
                     if (chain.ChainPolicy.ApplicationPolicy.Count == 0)
                     {
                         // Authenticate the remote party: (e.g. when operating in server mode, authenticate the client).
-                        chain.ChainPolicy.ApplicationPolicy.Add(
-                            _sslAuthenticationOptions.IsServer ? s_clientAuthOid : s_serverAuthOid
-                        );
+                        chain
+                            .ChainPolicy
+                            .ApplicationPolicy
+                            .Add(
+                                _sslAuthenticationOptions.IsServer
+                                    ? s_clientAuthOid
+                                    : s_serverAuthOid
+                            );
                     }
 
                     sslPolicyErrors |= CertificateValidationPal.VerifyCertificateProperties(
@@ -1491,18 +1497,16 @@ namespace System.Net.Security
                 NetEventSource.Log.RemoteCertificateError(this, SR.net_log_remote_cert_has_errors);
                 if ((sslPolicyErrors & SslPolicyErrors.RemoteCertificateNotAvailable) != 0)
                 {
-                    NetEventSource.Log.RemoteCertificateError(
-                        this,
-                        SR.net_log_remote_cert_not_available
-                    );
+                    NetEventSource
+                        .Log
+                        .RemoteCertificateError(this, SR.net_log_remote_cert_not_available);
                 }
 
                 if ((sslPolicyErrors & SslPolicyErrors.RemoteCertificateNameMismatch) != 0)
                 {
-                    NetEventSource.Log.RemoteCertificateError(
-                        this,
-                        SR.net_log_remote_cert_name_mismatch
-                    );
+                    NetEventSource
+                        .Log
+                        .RemoteCertificateError(this, SR.net_log_remote_cert_name_mismatch);
                 }
 
                 if ((sslPolicyErrors & SslPolicyErrors.RemoteCertificateChainErrors) != 0)

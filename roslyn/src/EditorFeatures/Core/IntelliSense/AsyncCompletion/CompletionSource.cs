@@ -114,8 +114,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     return AsyncCompletionData.CompletionStartData.DoesNotParticipateInCompletion;
                 }
 
-                var document =
-                    triggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                var document = triggerLocation
+                    .Snapshot
+                    .GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                 {
                     return AsyncCompletionData.CompletionStartData.DoesNotParticipateInCompletion;
@@ -127,22 +128,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     return AsyncCompletionData.CompletionStartData.DoesNotParticipateInCompletion;
                 }
 
-                var options = _editorOptionsService.GlobalOptions.GetCompletionOptions(
-                    document.Project.Language
-                );
+                var options = _editorOptionsService
+                    .GlobalOptions
+                    .GetCompletionOptions(document.Project.Language);
 
                 // The Editor supports the option per textView.
                 // There could be mixed desired behavior per textView and even per same completion session.
                 // The right fix would be to send this information as a result of the method.
                 // Then, the Editor would choose the right behavior for mixed cases.
-                var blockForCompletionItem = _editorOptionsService.GlobalOptions.GetOption(
-                    CompletionViewOptionsStorage.BlockForCompletionItems,
-                    service.Language
-                );
-                _textView.Options.GlobalOptions.SetOptionValue(
-                    s_nonBlockingCompletionEditorOption,
-                    !blockForCompletionItem
-                );
+                var blockForCompletionItem = _editorOptionsService
+                    .GlobalOptions
+                    .GetOption(
+                        CompletionViewOptionsStorage.BlockForCompletionItems,
+                        service.Language
+                    );
+                _textView
+                    .Options
+                    .GlobalOptions
+                    .SetOptionValue(s_nonBlockingCompletionEditorOption, !blockForCompletionItem);
 
                 // In case of calls with multiple completion services for the same view (e.g. TypeScript and C#), those completion services must not be called simultaneously for the same session.
                 // Therefore, in each completion session we use a list of commit character for a specific completion service and a specific content type.
@@ -277,8 +280,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 if (session is null)
                     throw new ArgumentNullException(nameof(session));
 
-                var document =
-                    triggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                var document = triggerLocation
+                    .Snapshot
+                    .GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                     return VSCompletionContext.Empty;
 
@@ -318,13 +322,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 // contemplate such action thus typing slower before commit and/or spending more time examining the list, which give us some opportunities
                 // to still provide those items later before they are truly required.
 
-                var showCompletionItemFilters = _editorOptionsService.GlobalOptions.GetOption(
-                    CompletionViewOptionsStorage.ShowCompletionItemFilters,
-                    document.Project.Language
-                );
-                var options = _editorOptionsService.GlobalOptions.GetCompletionOptions(
-                    document.Project.Language
-                ) with
+                var showCompletionItemFilters = _editorOptionsService
+                    .GlobalOptions
+                    .GetOption(
+                        CompletionViewOptionsStorage.ShowCompletionItemFilters,
+                        document.Project.Language
+                    );
+                var options = _editorOptionsService
+                    .GlobalOptions
+                    .GetCompletionOptions(document.Project.Language) with
                 {
                     PerformSort = false,
                     UpdateImportCompletionCacheInBackground = true,
@@ -476,15 +482,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 {
                     // We only reach here when expanded items are disabled, but user requested them explicitly via expander.
                     // In this case, enable expanded items and trigger the completion only for them.
-                    var document =
-                        initialTriggerLocation.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                    var document = initialTriggerLocation
+                        .Snapshot
+                        .GetOpenDocumentInCurrentContextWithChanges();
                     if (document != null)
                     {
                         // User selected expander explicitly, which means we need to collect and return
                         // items from unimported namespace (and only those items) regardless of whether it's enabled.
-                        var options = _editorOptionsService.GlobalOptions.GetCompletionOptions(
-                            document.Project.Language
-                        ) with
+                        var options = _editorOptionsService
+                            .GlobalOptions
+                            .GetCompletionOptions(document.Project.Language) with
                         {
                             ShowItemsFromUnimportedNamespaces = true,
                             ExpandedCompletionBehavior = ExpandedCompletionMode.ExpandedItemsOnly,
@@ -555,9 +562,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 document.Project.Language is LanguageNames.CSharp or LanguageNames.VisualBasic
             );
             var completionItemList = session.CreateCompletionList(
-                completionList.ItemsList.Select(i =>
-                    Convert(document, i, filterSet, triggerLocation, cancellationToken)
-                )
+                completionList
+                    .ItemsList
+                    .Select(i =>
+                        Convert(document, i, filterSet, triggerLocation, cancellationToken)
+                    )
             );
 
             var filters = filterSet.GetFilterStatesInSet();
@@ -577,10 +586,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             var suggestionItemOptions = new AsyncCompletionData.SuggestionItemOptions(
                 completionList.SuggestionModeItem.DisplayText,
-                completionList.SuggestionModeItem.TryGetProperty(
-                    CommonCompletionItem.DescriptionProperty,
-                    out var description
-                )
+                completionList
+                    .SuggestionModeItem
+                    .TryGetProperty(CommonCompletionItem.DescriptionProperty, out var description)
                     ? description
                     : string.Empty
             );
@@ -621,10 +629,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 completionList.ItemsList
             );
             if (
-                session.Properties.TryGetProperty(
-                    ExcludedCommitCharactersMap,
-                    out MultiDictionary<char, RoslynCompletionItem> excludedCommitCharactersMap
-                )
+                session
+                    .Properties
+                    .TryGetProperty(
+                        ExcludedCommitCharactersMap,
+                        out MultiDictionary<char, RoslynCompletionItem> excludedCommitCharactersMap
+                    )
             )
             {
                 foreach (var kvp in excludedCommitCharactersFromList)
@@ -641,8 +651,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             }
 
             session.Properties[ExcludedCommitCharactersMap] = excludedCommitCharactersMap;
-            session.Properties[ExcludedCommitCharacters] =
-                excludedCommitCharactersMap.Keys.ToImmutableArray();
+            session.Properties[ExcludedCommitCharacters] = excludedCommitCharactersMap
+                .Keys
+                .ToImmutableArray();
 
             // We need to remember the trigger location for when a completion service claims expanded items are available
             // since the initial trigger we are able to get from IAsyncCompletionSession might not be the same (e.g. in projection scenarios)
@@ -681,12 +692,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (service == null)
                 return null;
 
-            var completionOptions = _editorOptionsService.GlobalOptions.GetCompletionOptions(
-                document.Project.Language
-            );
-            var displayOptions = _editorOptionsService.GlobalOptions.GetSymbolDescriptionOptions(
-                document.Project.Language
-            );
+            var completionOptions = _editorOptionsService
+                .GlobalOptions
+                .GetCompletionOptions(document.Project.Language);
+            var displayOptions = _editorOptionsService
+                .GlobalOptions
+                .GetSymbolDescriptionOptions(document.Project.Language);
             var description = await service
                 .GetDescriptionAsync(
                     document,
@@ -699,10 +710,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (description == null)
                 return null;
 
-            var lineFormattingOptions = snapshot.TextBuffer.GetLineFormattingOptions(
-                _editorOptionsService,
-                explicitFormat: false
-            );
+            var lineFormattingOptions = snapshot
+                .TextBuffer
+                .GetLineFormattingOptions(_editorOptionsService, explicitFormat: false);
             var context = new IntellisenseQuickInfoBuilderContext(
                 document,
                 displayOptions.ClassificationOptions,
@@ -714,7 +724,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             );
 
             var elements = IntelliSense
-                .Helpers.BuildInteractiveTextElements(description.TaggedParts, context)
+                .Helpers
+                .BuildInteractiveTextElements(description.TaggedParts, context)
                 .ToArray();
             if (elements.Length == 0)
                 return new ClassifiedTextElement();

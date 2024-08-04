@@ -23,8 +23,10 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
         [ConditionalFact(typeof(ServerCertificateTest), nameof(DowngradeToHTTP1IfClientCertSet))]
         public async Task UseClientCertOnHttp2_DowngradedToHttp1MutualAuth_Success()
         {
-            using X509Certificate2 clientCert =
-                Test.Common.Configuration.Certificates.GetClientCertificate();
+            using X509Certificate2 clientCert = Test.Common
+                .Configuration
+                .Certificates
+                .GetClientCertificate();
             await LoopbackServer.CreateClientAndServerAsync(
                 async address =>
                 {
@@ -78,8 +80,10 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
         )]
         public async Task UseClientCertOnHttp2_OSSupportsIt_Success()
         {
-            using X509Certificate2 clientCert =
-                Test.Common.Configuration.Certificates.GetClientCertificate();
+            using X509Certificate2 clientCert = Test.Common
+                .Configuration
+                .Certificates
+                .GetClientCertificate();
             await Http2LoopbackServer.CreateClientAndServerAsync(
                 async address =>
                 {

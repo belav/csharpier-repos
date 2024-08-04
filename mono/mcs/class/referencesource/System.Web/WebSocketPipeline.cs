@@ -118,8 +118,9 @@ namespace System.Web
                 // Create the AspNetWebSocket. There's a chance that the client disconnected before we
                 // hit this code. If this is the case, we'll pass a null WebSocketPipe to the
                 // AspNetWebSocket ctor, which immediately sets the socket into an aborted state.
-                UnmanagedWebSocketContext unmanagedWebSocketContext =
-                    _root.WorkerRequest.GetWebSocketContext();
+                UnmanagedWebSocketContext unmanagedWebSocketContext = _root
+                    .WorkerRequest
+                    .GetWebSocketContext();
                 WebSocketPipe pipe =
                     (unmanagedWebSocketContext != null)
                         ? new WebSocketPipe(unmanagedWebSocketContext, PerfCounters.Instance)

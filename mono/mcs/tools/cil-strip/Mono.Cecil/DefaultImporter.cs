@@ -88,10 +88,9 @@ namespace Mono.Cecil
                 GenericInstanceType git = original as GenericInstanceType;
                 GenericInstanceType genElemType = new GenericInstanceType(elementType);
 
-                context.GenericContext.CheckProvider(
-                    genElemType.GetOriginalType(),
-                    git.GenericArguments.Count
-                );
+                context
+                    .GenericContext
+                    .CheckProvider(genElemType.GetOriginalType(), git.GenericArguments.Count);
                 foreach (TypeReference arg in git.GenericArguments)
                     genElemType.GenericArguments.Add(ImportTypeReference(arg, context));
 
@@ -123,11 +122,13 @@ namespace Mono.Cecil
                 );
 
                 foreach (ParameterDefinition parameter in ori.Parameters)
-                    fnptr.Parameters.Add(
-                        new ParameterDefinition(
-                            ImportTypeReference(parameter.ParameterType, context)
-                        )
-                    );
+                    fnptr
+                        .Parameters
+                        .Add(
+                            new ParameterDefinition(
+                                ImportTypeReference(parameter.ParameterType, context)
+                            )
+                        );
 
                 typeSpec = fnptr;
             }
@@ -240,10 +241,9 @@ namespace Mono.Cecil
                 ImportMethodReference(gim.ElementMethod, context)
             );
 
-            context.GenericContext.CheckProvider(
-                ngim.GetOriginalMethod(),
-                gim.GenericArguments.Count
-            );
+            context
+                .GenericContext
+                .CheckProvider(ngim.GetOriginalMethod(), gim.GenericArguments.Count);
             foreach (TypeReference arg in gim.GenericArguments)
                 ngim.GenericArguments.Add(ImportTypeReference(arg, context));
 

@@ -177,9 +177,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -259,9 +261,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -339,9 +343,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -420,9 +426,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -513,9 +521,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -572,9 +582,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -626,9 +638,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -673,9 +687,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -730,9 +746,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -789,9 +807,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -846,9 +866,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -896,9 +918,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -950,9 +974,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result
@@ -1002,9 +1028,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result
@@ -1046,9 +1074,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result
@@ -1090,9 +1120,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result
@@ -1145,9 +1177,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result
@@ -1201,9 +1235,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result
@@ -1246,9 +1282,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result

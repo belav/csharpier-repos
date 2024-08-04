@@ -502,43 +502,61 @@ namespace System.Runtime.Serialization.Json
         {
             if (MaxItemsInObjectGraph == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        System.Runtime.Serialization.SR.GetString(
-                            System.Runtime.Serialization.SR.ExceededMaxItemsQuota,
-                            MaxItemsInObjectGraph
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            System
+                                .Runtime
+                                .Serialization
+                                .SR
+                                .GetString(
+                                    System.Runtime.Serialization.SR.ExceededMaxItemsQuota,
+                                    MaxItemsInObjectGraph
+                                )
                         )
-                    )
-                );
+                    );
             }
 
             if (verifyObjectName)
             {
                 if (!InternalIsStartObject(xmlReader))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
-                            System.Runtime.Serialization.SR.GetString(
-                                System.Runtime.Serialization.SR.ExpectingElement,
-                                XmlDictionaryString.Empty,
-                                RootName
-                            ),
-                            xmlReader
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
+                                System
+                                    .Runtime
+                                    .Serialization
+                                    .SR
+                                    .GetString(
+                                        System.Runtime.Serialization.SR.ExpectingElement,
+                                        XmlDictionaryString.Empty,
+                                        RootName
+                                    ),
+                                xmlReader
+                            )
+                        );
                 }
             }
             else if (!IsStartElement(xmlReader))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
-                        System.Runtime.Serialization.SR.GetString(
-                            System.Runtime.Serialization.SR.ExpectingElementAtDeserialize,
-                            XmlNodeType.Element
-                        ),
-                        xmlReader
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
+                            System
+                                .Runtime
+                                .Serialization
+                                .SR
+                                .GetString(
+                                    System.Runtime.Serialization.SR.ExpectingElementAtDeserialize,
+                                    XmlNodeType.Element
+                                ),
+                            xmlReader
+                        )
+                    );
             }
 
             DataContract contract = RootContract;
@@ -568,14 +586,20 @@ namespace System.Runtime.Serialization.Json
         {
             if (MaxItemsInObjectGraph == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        System.Runtime.Serialization.SR.GetString(
-                            System.Runtime.Serialization.SR.ExceededMaxItemsQuota,
-                            MaxItemsInObjectGraph
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            System
+                                .Runtime
+                                .Serialization
+                                .SR
+                                .GetString(
+                                    System.Runtime.Serialization.SR.ExceededMaxItemsQuota,
+                                    MaxItemsInObjectGraph
+                                )
                         )
-                    )
-                );
+                    );
             }
 
             DataContract contract = RootContract;
@@ -686,9 +710,9 @@ namespace System.Runtime.Serialization.Json
                     && (itemType.GetGenericTypeDefinition() == Globals.TypeOfKeyValue)
                 )
                 {
-                    itemType = Globals.TypeOfKeyValuePair.MakeGenericType(
-                        itemType.GetGenericArguments()
-                    );
+                    itemType = Globals
+                        .TypeOfKeyValuePair
+                        .MakeGenericType(itemType.GetGenericArguments());
                 }
                 this.knownTypeList.Add(itemType);
                 typeToCheck = itemType;
@@ -725,14 +749,18 @@ namespace System.Runtime.Serialization.Json
 
             if (maxItemsInObjectGraph < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "maxItemsInObjectGraph",
-                        System.Runtime.Serialization.SR.GetString(
-                            System.Runtime.Serialization.SR.ValueMustBeNonNegative
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "maxItemsInObjectGraph",
+                            System
+                                .Runtime
+                                .Serialization
+                                .SR
+                                .GetString(System.Runtime.Serialization.SR.ValueMustBeNonNegative)
                         )
-                    )
-                );
+                    );
             }
             this.maxItemsInObjectGraph = maxItemsInObjectGraph;
             this.ignoreExtensionDataObject = ignoreExtensionDataObject;
@@ -775,15 +803,17 @@ namespace System.Runtime.Serialization.Json
         {
             if (dataContract.IsReference)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.GetString(
-                            SR.JsonUnsupportedForIsReference,
-                            DataContract.GetClrTypeFullName(dataContract.UnderlyingType),
-                            dataContract.IsReference
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.JsonUnsupportedForIsReference,
+                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType),
+                                dataContract.IsReference
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 

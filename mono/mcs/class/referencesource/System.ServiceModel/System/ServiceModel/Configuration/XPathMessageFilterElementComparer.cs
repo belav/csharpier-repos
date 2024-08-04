@@ -78,14 +78,16 @@ namespace System.ServiceModel.Configuration
                         {
                             if (throwOnFailure)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new IndexOutOfRangeException(
-                                        SR.GetString(
-                                            SR.ConfigXPathNamespacePrefixNotFound,
-                                            nsPrefix
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new IndexOutOfRangeException(
+                                            SR.GetString(
+                                                SR.ConfigXPathNamespacePrefixNotFound,
+                                                nsPrefix
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                         }
                     }
@@ -124,14 +126,16 @@ namespace System.ServiceModel.Configuration
 
             if (String.IsNullOrEmpty(elementKey))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.ConfigCannotParseXPathFilter,
-                            obj.GetType().AssemblyQualifiedName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ConfigCannotParseXPathFilter,
+                                obj.GetType().AssemblyQualifiedName
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             return elementKey;

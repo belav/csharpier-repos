@@ -61,43 +61,46 @@ public partial class Test
     }
 }";
 
-            await TestServices.SolutionExplorer.AddFileAsync(
-                ProjectName,
-                "PartialType2.cs",
-                secondPartialDecl,
-                open: false,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.SolutionExplorer.AddFileAsync(
-                ProjectName,
-                "PartialType3.cs",
-                thirdPartialDecl,
-                open: false,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    ProjectName,
+                    "PartialType2.cs",
+                    secondPartialDecl,
+                    open: false,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    ProjectName,
+                    "PartialType3.cs",
+                    thirdPartialDecl,
+                    open: false,
+                    HangMitigatingCancellationToken
+                );
 
             // Typing intermixed with explicit Wait operations to ensure that
             // we trigger multiple open file analyses along with cancellations.
-            await TestServices.Input.SendAsync(
-                VirtualKeyCode.RETURN,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendAsync(VirtualKeyCode.RETURN, HangMitigatingCancellationToken);
             await Task.Delay(TimeSpan.FromSeconds(1));
             await TestServices.Input.SendAsync("f = 1;", HangMitigatingCancellationToken);
             await Task.Delay(TimeSpan.FromSeconds(1));
-            await TestServices.Input.SendAsync(
-                VirtualKeyCode.BACK,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendAsync(
-                VirtualKeyCode.BACK,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendAsync(VirtualKeyCode.BACK, HangMitigatingCancellationToken);
+            await TestServices
+                .Input
+                .SendAsync(VirtualKeyCode.BACK, HangMitigatingCancellationToken);
             await Task.Delay(TimeSpan.FromSeconds(1));
             await TestServices.Input.SendAsync("2;", HangMitigatingCancellationToken);
 
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    @"
 public partial class Test
 {
     private int f;
@@ -109,7 +112,7 @@ public partial class Test
         f = 2;
     }
 }"
-            );
+                );
         }
     }
 }

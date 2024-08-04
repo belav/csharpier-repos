@@ -27,9 +27,10 @@ namespace TestMonoWeb
             Object extraData
         )
         {
-            ((HttpApplication)source).Context.Response.Write(
-                "AsyncModule.BeginPreHandlerExecute()<br>\n"
-            );
+            ((HttpApplication)source)
+                .Context
+                .Response
+                .Write("AsyncModule.BeginPreHandlerExecute()<br>\n");
 
             AsynchOperation asynch = new AsynchOperation(cb, _app.Context, extraData);
             asynch.StartAsyncWork();
@@ -38,9 +39,10 @@ namespace TestMonoWeb
 
         void EndPreHandlerExecute(IAsyncResult ar)
         {
-            ((AsynchOperation)ar).Context.Response.Write(
-                "AsyncModule.EndPreHandlerExecute()<br>\n"
-            );
+            ((AsynchOperation)ar)
+                .Context
+                .Response
+                .Write("AsyncModule.EndPreHandlerExecute()<br>\n");
         }
 
         public void Dispose() { }

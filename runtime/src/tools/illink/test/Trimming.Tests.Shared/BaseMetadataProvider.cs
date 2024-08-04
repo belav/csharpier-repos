@@ -32,9 +32,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         protected T? GetOptionAttributeValue<T>(string attributeName, T? defaultValue)
         {
-            var attribute = _testCaseTypeDefinition.CustomAttributes.FirstOrDefault(attr =>
-                attr.AttributeType.Name == attributeName
-            );
+            var attribute = _testCaseTypeDefinition
+                .CustomAttributes
+                .FirstOrDefault(attr => attr.AttributeType.Name == attributeName);
             if (attribute != null)
                 return (T?)attribute.ConstructorArguments.First().Value;
 
@@ -74,7 +74,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 var pathElements = pathRelativeToAssembly.Elements.ToArray();
                 var topMostDirectoryName = pathElements[0];
                 var topMostDirectory = _testCase
-                    .SourceFile.RecursiveParents.Reverse()
+                    .SourceFile
+                    .RecursiveParents
+                    .Reverse()
                     .FirstOrDefault(d => !d.IsRoot && d.FileName == topMostDirectoryName);
 
                 if (topMostDirectory == null)
@@ -87,7 +89,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     {
                         topMostDirectoryName = $"{pathElements[0]}.{pathElements[1]}";
                         topMostDirectory = _testCase
-                            .SourceFile.RecursiveParents.Reverse()
+                            .SourceFile
+                            .RecursiveParents
+                            .Reverse()
                             .FirstOrDefault(d => !d.IsRoot && d.FileName == topMostDirectoryName);
                         pathRelativeToAssembly = topMostDirectoryName
                             .ToNPath()

@@ -251,9 +251,9 @@ namespace MonoTests.Security.Cryptography
                 0x9d,
                 0x9f,
             };
-            byte[] input = Encoding.Default.GetBytes(
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            );
+            byte[] input = Encoding
+                .Default
+                .GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
 
             string testName = className + " 6";
             RFC1321_a(testName, hash, input, result);
@@ -288,9 +288,11 @@ namespace MonoTests.Security.Cryptography
                 0xb6,
                 0x7a,
             };
-            byte[] input = Encoding.Default.GetBytes(
-                "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
-            );
+            byte[] input = Encoding
+                .Default
+                .GetBytes(
+                    "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+                );
 
             string testName = className + " 7";
             RFC1321_a(testName, hash, input, result);

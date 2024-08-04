@@ -124,10 +124,13 @@ namespace Microsoft.CodeAnalysis
                 IAssignmentOperation assignment
                     => IsSymbolReferencedByOperation(assignment.Target, symbol),
                 ITupleOperation tupleOperation
-                    => tupleOperation.Elements.Any(
-                        static (element, symbol) => IsSymbolReferencedByOperation(element, symbol),
-                        symbol
-                    ),
+                    => tupleOperation
+                        .Elements
+                        .Any(
+                            static (element, symbol) =>
+                                IsSymbolReferencedByOperation(element, symbol),
+                            symbol
+                        ),
                 IForEachLoopOperation
                 {
                     LoopControlVariable: IVariableDeclaratorOperation variableDeclarator

@@ -153,7 +153,8 @@ namespace Castle.Components.DictionaryAdapter
         {
             return property == null
                 || property
-                    .Setters.OfType<RemoveIfAttribute>()
+                    .Setters
+                    .OfType<RemoveIfAttribute>()
                     .Where(remove => remove.ShouldRemove(value))
                     .Any();
         }

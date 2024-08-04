@@ -120,10 +120,9 @@ namespace Microsoft.Build.BuildEngine
 
             if (FromXml)
             {
-                XmlElement element = itemGroupElement.OwnerDocument.CreateElement(
-                    itemName,
-                    Project.XmlNamespace
-                );
+                XmlElement element = itemGroupElement
+                    .OwnerDocument
+                    .CreateElement(itemName, Project.XmlNamespace);
                 itemGroupElement.AppendChild(element);
                 element.SetAttribute("Include", itemInclude);
                 item = new BuildItem(element, this);

@@ -176,17 +176,19 @@ namespace Mono.ServiceContractTool
             creator.Name = "CreateChannel";
             creator.Attributes = MemberAttributes.Family | MemberAttributes.Override;
             creator.ReturnType = gt;
-            creator.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeCastExpression(
-                        gt,
-                        new CodeObjectCreateExpression(
-                            new CodeTypeReference(name),
-                            new CodeThisReferenceExpression()
+            creator
+                .Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeCastExpression(
+                            gt,
+                            new CodeObjectCreateExpression(
+                                new CodeTypeReference(name),
+                                new CodeThisReferenceExpression()
+                            )
                         )
                     )
-                )
-            );
+                );
             parentClass.Members.Add(creator);
 
             // clear IExtensibleDataObject. Since there is *no* way

@@ -20,9 +20,11 @@ public class IISSubAppSiteFixture : IISTestSiteFixture
         }
         else // IIS Express
         {
-            using var stream = typeof(IISExpressDeployer).Assembly.GetManifestResourceStream(
-                "Microsoft.AspNetCore.Server.IntegrationTesting.IIS.Http.SubApp.config"
-            );
+            using var stream = typeof(IISExpressDeployer)
+                .Assembly
+                .GetManifestResourceStream(
+                    "Microsoft.AspNetCore.Server.IntegrationTesting.IIS.Http.SubApp.config"
+                );
             using var reader = new StreamReader(stream);
             deploymentParameters.ServerConfigTemplateContent = reader.ReadToEnd();
         }

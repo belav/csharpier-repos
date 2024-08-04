@@ -146,11 +146,10 @@ namespace System.Collections
             {
                 if (_syncRoot == null)
                 {
-                    System.Threading.Interlocked.CompareExchange<Object>(
-                        ref _syncRoot,
-                        new Object(),
-                        null
-                    );
+                    System
+                        .Threading
+                        .Interlocked
+                        .CompareExchange<Object>(ref _syncRoot, new Object(), null);
                 }
                 return _syncRoot;
             }

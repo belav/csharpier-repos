@@ -847,13 +847,9 @@ namespace System.Net
             {
                 for (; ; )
                 {
-                    IAsyncResult result = this.parent.BaseStream.BeginRead(
-                        this.buffer,
-                        this.offset,
-                        this.count,
-                        onRead,
-                        this
-                    );
+                    IAsyncResult result = this.parent
+                        .BaseStream
+                        .BeginRead(this.buffer, this.offset, this.count, onRead, this);
                     if (!result.CompletedSynchronously || CompleteRead(result))
                         break;
                 }
@@ -926,13 +922,15 @@ namespace System.Net
                     );
                     if (this.written < this.count)
                     {
-                        IAsyncResult result = this.parent.BaseStream.BeginWrite(
-                            this.parent.WriteState.Buffer,
-                            0,
-                            this.parent.WriteState.Length,
-                            onWrite,
-                            this
-                        );
+                        IAsyncResult result = this.parent
+                            .BaseStream
+                            .BeginWrite(
+                                this.parent.WriteState.Buffer,
+                                0,
+                                this.parent.WriteState.Length,
+                                onWrite,
+                                this
+                            );
                         if (!result.CompletedSynchronously)
                             break;
                         CompleteWrite(result);

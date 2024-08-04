@@ -59,9 +59,10 @@ public class VirtualFileResult : FileResult
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<
-            IActionResultExecutor<VirtualFileResult>
-        >();
+        var executor = context
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<IActionResultExecutor<VirtualFileResult>>();
         return executor.ExecuteAsync(context, this);
     }
 }

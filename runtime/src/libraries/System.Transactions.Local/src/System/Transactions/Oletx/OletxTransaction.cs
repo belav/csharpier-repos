@@ -890,9 +890,9 @@ namespace System.Transactions.Oletx
                         if (needVoterEnlistment)
                         {
                             // We need to use shims if native threads are not allowed to enter managed code.
-                            OletxTransactionManagerInstance.DtcTransactionManagerLock.AcquireReaderLock(
-                                -1
-                            );
+                            OletxTransactionManagerInstance
+                                .DtcTransactionManagerLock
+                                .AcquireReaderLock(-1);
                             try
                             {
                                 _transactionShim!.CreateVoter(
@@ -902,7 +902,9 @@ namespace System.Transactions.Oletx
                             }
                             finally
                             {
-                                OletxTransactionManagerInstance.DtcTransactionManagerLock.ReleaseReaderLock();
+                                OletxTransactionManagerInstance
+                                    .DtcTransactionManagerLock
+                                    .ReleaseReaderLock();
                             }
 
                             localPhase1VolatileContainer!.VoterBallotShim = voterShim;
@@ -1483,9 +1485,9 @@ namespace System.Transactions.Oletx
                         && realOletxTransaction.Phase1EnlistVolatilementContainer != null
                     )
                     {
-                        realOletxTransaction.Phase1EnlistVolatilementContainer.OutcomeFromTransaction(
-                            status
-                        );
+                        realOletxTransaction
+                            .Phase1EnlistVolatilementContainer
+                            .OutcomeFromTransaction(status);
                     }
                 }
 

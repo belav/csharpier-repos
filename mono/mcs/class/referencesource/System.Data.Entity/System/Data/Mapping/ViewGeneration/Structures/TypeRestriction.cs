@@ -173,8 +173,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             else
             {
                 // Multiple values: build list of var IsOnOnly(t1), var = IsOnOnly(t1), ..., then OR them all.
-                List<DbExpression> operands = this
-                    .Domain.Values.Select(t =>
+                List<DbExpression> operands = this.Domain
+                    .Values
+                    .Select(t =>
                         (DbExpression)cqt.IsOfOnly(TypeUsage.Create(((TypeConstant)t).EdmType))
                     )
                     .ToList();

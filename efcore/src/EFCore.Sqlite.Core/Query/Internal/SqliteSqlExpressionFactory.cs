@@ -27,10 +27,9 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
     public SqliteSqlExpressionFactory(SqlExpressionFactoryDependencies dependencies)
         : base(dependencies)
     {
-        _boolTypeMapping = dependencies.TypeMappingSource.FindMapping(
-            typeof(bool),
-            dependencies.Model
-        )!;
+        _boolTypeMapping = dependencies
+            .TypeMappingSource
+            .FindMapping(typeof(bool), dependencies.Model)!;
     }
 
     /// <summary>
@@ -178,10 +177,9 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
     {
         var inferredTypeMapping =
             ExpressionExtensions.InferTypeMapping(globExpression.Match, globExpression.Pattern)
-            ?? Dependencies.TypeMappingSource.FindMapping(
-                globExpression.Match.Type,
-                Dependencies.Model
-            );
+            ?? Dependencies
+                .TypeMappingSource
+                .FindMapping(globExpression.Match.Type, Dependencies.Model);
 
         var match = ApplyTypeMapping(globExpression.Match, inferredTypeMapping);
         var pattern = ApplyTypeMapping(globExpression.Pattern, inferredTypeMapping);
@@ -198,10 +196,9 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
     {
         var inferredTypeMapping =
             ExpressionExtensions.InferTypeMapping(regexpExpression.Match, regexpExpression.Pattern)
-            ?? Dependencies.TypeMappingSource.FindMapping(
-                regexpExpression.Match.Type,
-                Dependencies.Model
-            );
+            ?? Dependencies
+                .TypeMappingSource
+                .FindMapping(regexpExpression.Match.Type, Dependencies.Model);
 
         var match = ApplyTypeMapping(regexpExpression.Match, inferredTypeMapping);
         var pattern = ApplyTypeMapping(regexpExpression.Pattern, inferredTypeMapping);

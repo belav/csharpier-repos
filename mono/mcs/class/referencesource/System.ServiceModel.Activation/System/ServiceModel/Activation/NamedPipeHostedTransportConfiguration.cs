@@ -16,9 +16,9 @@ namespace System.ServiceModel.Activation
         public NamedPipeHostedTransportConfiguration()
             : base(Uri.UriSchemeNetPipe)
         {
-            string[] bindings = HostedTransportConfigurationManager.MetabaseSettings.GetBindings(
-                Uri.UriSchemeNetPipe
-            );
+            string[] bindings = HostedTransportConfigurationManager
+                .MetabaseSettings
+                .GetBindings(Uri.UriSchemeNetPipe);
             for (int i = 0; i < bindings.Length; i++)
             {
                 BaseUriWithWildcard listenAddress = BaseUriWithWildcard.CreateHostedPipeUri(
@@ -39,11 +39,13 @@ namespace System.ServiceModel.Activation
                     "Registering the unique NamedPipeTransportManager with ListenUri:"
                         + listenAddress.BaseAddress
                 );
-                NamedPipeChannelListener.StaticTransportManagerTable.RegisterUri(
-                    listenAddress.BaseAddress,
-                    listenAddress.HostNameComparisonMode,
-                    uniqueManager
-                );
+                NamedPipeChannelListener
+                    .StaticTransportManagerTable
+                    .RegisterUri(
+                        listenAddress.BaseAddress,
+                        listenAddress.HostNameComparisonMode,
+                        uniqueManager
+                    );
             }
         }
 

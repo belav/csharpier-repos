@@ -770,24 +770,21 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     {
                         // Add hot region path as rectangle
                         pathBounds.Inflate(pen.Width, pen.Width);
-                        this.Common.HotRegionsList.AddHotRegion(
-                            Graph.GetRelativeRectangle(pathBounds),
-                            point,
-                            point.series.Name,
-                            pointIndex
-                        );
+                        this.Common
+                            .HotRegionsList
+                            .AddHotRegion(
+                                Graph.GetRelativeRectangle(pathBounds),
+                                point,
+                                point.series.Name,
+                                pointIndex
+                            );
                     }
                     else
                     {
                         // Add hot region path as polygon
-                        this.Common.HotRegionsList.AddHotRegion(
-                            path,
-                            false,
-                            Graph,
-                            point,
-                            point.series.Name,
-                            pointIndex
-                        );
+                        this.Common
+                            .HotRegionsList
+                            .AddHotRegion(path, false, Graph, point, point.series.Name, pointIndex);
                     }
                 }
             }

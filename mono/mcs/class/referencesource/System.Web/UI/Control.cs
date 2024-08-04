@@ -338,13 +338,15 @@ namespace System.Web.UI
                             {
                                 EffectiveClientIDModeValue = RuntimeConfig
                                     .GetConfig(context)
-                                    .Pages.ClientIDMode;
+                                    .Pages
+                                    .ClientIDMode;
                             }
                             else
                             {
                                 EffectiveClientIDModeValue = RuntimeConfig
                                     .GetConfig()
-                                    .Pages.ClientIDMode;
+                                    .Pages
+                                    .ClientIDMode;
                             }
                         }
                     }
@@ -4267,11 +4269,9 @@ namespace System.Web.UI
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetTraceData(object tracedObject, object traceDataKey, object traceDataValue)
         {
-            RenderTraceListener.CurrentListeners.SetTraceData(
-                tracedObject,
-                traceDataKey,
-                traceDataValue
-            );
+            RenderTraceListener
+                .CurrentListeners
+                .SetTraceData(tracedObject, traceDataKey, traceDataValue);
         }
 
         #region IControlDesignerAccessor implementation

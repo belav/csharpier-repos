@@ -67,9 +67,11 @@ internal partial class XmlSnippetParser
             var snippets = ReadSnippets(document);
             Contract.ThrowIfNull(snippets, $"Did not find any code snippets in {filePath}");
 
-            var matchingSnippet = snippets.Value.Single(s =>
-                string.Equals(s.Title, snippetTitle, StringComparison.OrdinalIgnoreCase)
-            );
+            var matchingSnippet = snippets
+                .Value
+                .Single(s =>
+                    string.Equals(s.Title, snippetTitle, StringComparison.OrdinalIgnoreCase)
+                );
             return matchingSnippet;
         }
 
@@ -80,10 +82,10 @@ internal partial class XmlSnippetParser
                 return null;
 
             if (
-                codeSnippetsElement.Name.LocalName.Equals(
-                    "CodeSnippets",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                codeSnippetsElement
+                    .Name
+                    .LocalName
+                    .Equals("CodeSnippets", StringComparison.OrdinalIgnoreCase)
             )
             {
                 return codeSnippetsElement
@@ -94,10 +96,10 @@ internal partial class XmlSnippetParser
                     .ToImmutableArray();
             }
             else if (
-                codeSnippetsElement.Name.LocalName.Equals(
-                    "CodeSnippet",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                codeSnippetsElement
+                    .Name
+                    .LocalName
+                    .Equals("CodeSnippet", StringComparison.OrdinalIgnoreCase)
             )
             {
                 return ImmutableArray.Create(codeSnippetsElement);

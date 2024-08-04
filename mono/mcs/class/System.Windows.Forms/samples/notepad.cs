@@ -74,28 +74,32 @@ namespace NotePadExample
             this.menuItemGeneral = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
 
-            this.mainMenu1.MenuItems.AddRange(
-                new System.Windows.Forms.MenuItem[]
-                {
-                    this.menuItemFile,
-                    this.menuItemEdit,
-                    this.menuItemHelp,
-                    this.menuItemBlank,
-                }
-            );
+            this.mainMenu1
+                .MenuItems
+                .AddRange(
+                    new System.Windows.Forms.MenuItem[]
+                    {
+                        this.menuItemFile,
+                        this.menuItemEdit,
+                        this.menuItemHelp,
+                        this.menuItemBlank,
+                    }
+                );
 
             this.menuItemFile.Index = 0;
-            this.menuItemFile.MenuItems.AddRange(
-                new System.Windows.Forms.MenuItem[]
-                {
-                    this.menuItemNew,
-                    this.menuItemOpen,
-                    this.menuItemSep1,
-                    this.menuItemSave,
-                    this.menuItemSep2,
-                    this.menuItemExit,
-                }
-            );
+            this.menuItemFile
+                .MenuItems
+                .AddRange(
+                    new System.Windows.Forms.MenuItem[]
+                    {
+                        this.menuItemNew,
+                        this.menuItemOpen,
+                        this.menuItemSep1,
+                        this.menuItemSave,
+                        this.menuItemSep2,
+                        this.menuItemExit,
+                    }
+                );
             this.menuItemFile.Text = "File";
 
             this.menuItemNew.Index = 0;
@@ -121,15 +125,17 @@ namespace NotePadExample
             this.menuItemExit.Click += new System.EventHandler(this.menuItemExit_Click_1);
 
             this.menuItemEdit.Index = 1;
-            this.menuItemEdit.MenuItems.AddRange(
-                new System.Windows.Forms.MenuItem[]
-                {
-                    this.menuItemCut,
-                    this.menuItemCopy,
-                    this.menuItemPaste,
-                    this.menuItemSelectAll,
-                }
-            );
+            this.menuItemEdit
+                .MenuItems
+                .AddRange(
+                    new System.Windows.Forms.MenuItem[]
+                    {
+                        this.menuItemCut,
+                        this.menuItemCopy,
+                        this.menuItemPaste,
+                        this.menuItemSelectAll,
+                    }
+                );
             this.menuItemEdit.Text = "Edit";
 
             this.menuItemCut.Index = 0;
@@ -149,9 +155,11 @@ namespace NotePadExample
             this.menuItemSelectAll.Click += new System.EventHandler(this.menuItemSelectAll_Click);
 
             this.menuItemHelp.Index = 2;
-            this.menuItemHelp.MenuItems.AddRange(
-                new System.Windows.Forms.MenuItem[] { this.menuItemAbout, this.menuItemGeneral }
-            );
+            this.menuItemHelp
+                .MenuItems
+                .AddRange(
+                    new System.Windows.Forms.MenuItem[] { this.menuItemAbout, this.menuItemGeneral }
+                );
             this.menuItemHelp.Text = "Help";
 
             this.menuItemAbout.Index = 0;

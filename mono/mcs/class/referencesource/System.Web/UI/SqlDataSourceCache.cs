@@ -53,10 +53,11 @@ namespace System.Web.UI
             )
             {
                 // Call internal helper method to parse the dependency list
-                CacheDependency sqlDependency =
-                    System.Web.Caching.SqlCacheDependency.CreateOutputCacheDependency(
-                        sqlCacheDependency
-                    );
+                CacheDependency sqlDependency = System
+                    .Web
+                    .Caching
+                    .SqlCacheDependency
+                    .CreateOutputCacheDependency(sqlCacheDependency);
 
                 if (dependency != null)
                 {

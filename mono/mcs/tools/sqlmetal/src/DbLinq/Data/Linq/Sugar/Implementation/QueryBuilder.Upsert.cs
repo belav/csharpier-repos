@@ -183,9 +183,9 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 {
                     upsertParameters.PKColumns.Add(column);
                     upsertParameters.PKParameters.Add(inputParameter);
-                    upsertParameters.PKValues.Add(
-                        sqlProvider.GetParameterName(inputParameter.Alias)
-                    );
+                    upsertParameters
+                        .PKValues
+                        .Add(sqlProvider.GetParameterName(inputParameter.Alias));
                 }
 
                 if (type == ParameterType.Output)
@@ -210,9 +210,9 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
                     upsertParameters.OutputColumns.Add(column);
                     upsertParameters.OutputParameters.Add(outputParameter);
-                    upsertParameters.OutputValues.Add(
-                        sqlProvider.GetParameterName(outputParameter.Alias)
-                    );
+                    upsertParameters
+                        .OutputValues
+                        .Add(sqlProvider.GetParameterName(outputParameter.Alias));
                     upsertParameters.OutputExpressions.Add(dataMember.Expression);
                 }
                 else // standard column
@@ -220,9 +220,9 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     if (type == ParameterType.InputPK)
                     {
                         upsertParameters.InputPKColumns.Add(column);
-                        upsertParameters.InputPKValues.Add(
-                            sqlProvider.GetParameterName(inputParameter.Alias)
-                        );
+                        upsertParameters
+                            .InputPKValues
+                            .Add(sqlProvider.GetParameterName(inputParameter.Alias));
                         upsertParameters.InputParameters.Add(inputParameter);
                     }
                     // for a standard column, we keep it only if modifiedMembers contains the specified memberInfo
@@ -230,9 +230,9 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     else if (modifiedMembers == null || modifiedMembers.Contains(memberInfo))
                     {
                         upsertParameters.InputColumns.Add(column);
-                        upsertParameters.InputValues.Add(
-                            sqlProvider.GetParameterName(inputParameter.Alias)
-                        );
+                        upsertParameters
+                            .InputValues
+                            .Add(sqlProvider.GetParameterName(inputParameter.Alias));
                         upsertParameters.InputParameters.Add(inputParameter);
                     }
 
@@ -249,9 +249,9 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                         );
                         upsertParameters.OutputColumns.Add(column);
                         upsertParameters.OutputParameters.Add(outputParameter);
-                        upsertParameters.OutputValues.Add(
-                            sqlProvider.GetParameterName(outputParameter.Alias)
-                        );
+                        upsertParameters
+                            .OutputValues
+                            .Add(sqlProvider.GetParameterName(outputParameter.Alias));
                         upsertParameters.OutputExpressions.Add(dataMember.Expression);
                     }
                 }

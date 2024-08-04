@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             }
 
             var allFixers = projectAnalyzersAndFixers
-                .Values.SelectMany(analyzersAndFixers => analyzersAndFixers.Fixers)
+                .Values
+                .SelectMany(analyzersAndFixers => analyzersAndFixers.Fixers)
                 .ToImmutableArray();
 
             // Only include compiler diagnostics if we have an associated fixer that supports FixAllScope.Solution
@@ -95,9 +96,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                             ?.Contains(FixAllScope.Solution) == true
                     )
                     .SelectMany(codefix =>
-                        codefix.FixableDiagnosticIds.Where(id =>
-                            id.StartsWith("CS") || id.StartsWith("BC")
-                        )
+                        codefix
+                            .FixableDiagnosticIds
+                            .Where(id => id.StartsWith("CS") || id.StartsWith("BC"))
                     )
                     .ToImmutableHashSet()
                 : ImmutableHashSet<string>.Empty;
@@ -229,9 +230,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             var projects =
                 options.WorkspaceType == WorkspaceType.Solution
                     ? solution.Projects
-                    : solution.Projects.Where(project =>
-                        project.FilePath == options.WorkspaceFilePath
-                    );
+                    : solution
+                        .Projects
+                        .Where(project => project.FilePath == options.WorkspaceFilePath);
             foreach (var project in projects)
             {
                 var analyzers = projectAnalyzers[project.Id];
@@ -265,10 +266,12 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 formattedFiles
             );
 
-            return result.Diagnostics.ToImmutableDictionary(
-                kvp => kvp.Key.Id,
-                kvp => kvp.Value.Select(diagnostic => diagnostic.Id).ToImmutableHashSet()
-            );
+            return result
+                .Diagnostics
+                .ToImmutableDictionary(
+                    kvp => kvp.Key.Id,
+                    kvp => kvp.Value.Select(diagnostic => diagnostic.Id).ToImmutableHashSet()
+                );
 
             static void LogDiagnosticLocations(
                 Solution solution,
@@ -375,9 +378,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
                     var analyzers = projectAnalyzers[project.Id]
                         .Where(analyzer =>
-                            analyzer.SupportedDiagnostics.Any(descriptor =>
-                                descriptor.Id == diagnosticId
-                            )
+                            analyzer
+                                .SupportedDiagnostics
+                                .Any(descriptor => descriptor.Id == diagnosticId)
                         )
                         .ToImmutableArray();
                     await _runner
@@ -473,9 +476,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
                 // Skip if the project does not contain any of the formattable paths.
                 if (
-                    !project.Documents.Any(d =>
-                        d.FilePath is not null && formattablePaths.Contains(d.FilePath)
-                    )
+                    !project
+                        .Documents
+                        .Any(d => d.FilePath is not null && formattablePaths.Contains(d.FilePath))
                 )
                 {
                     projectAnalyzers.Add(projectId, ImmutableArray<DiagnosticAnalyzer>.Empty);
@@ -486,17 +489,16 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
                 // Filter analyzers by project's language
                 var filteredAnalyzer = projectAnalyzersAndFixers[projectId]
-                    .Analyzers.Where(analyzer =>
-                        DoesAnalyzerSupportLanguage(analyzer, project.Language)
-                    );
+                    .Analyzers
+                    .Where(analyzer => DoesAnalyzerSupportLanguage(analyzer, project.Language));
                 foreach (var analyzer in filteredAnalyzer)
                 {
                     // Filter by excluded diagnostics
                     if (
                         !excludeDiagnostics.IsEmpty
-                        && analyzer.SupportedDiagnostics.All(descriptor =>
-                            excludeDiagnostics.Contains(descriptor.Id)
-                        )
+                        && analyzer
+                            .SupportedDiagnostics
+                            .All(descriptor => excludeDiagnostics.Contains(descriptor.Id))
                     )
                     {
                         continue;
@@ -505,9 +507,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     // Filter by diagnostics
                     if (
                         !diagnostics.IsEmpty
-                        && !analyzer.SupportedDiagnostics.Any(descriptor =>
-                            diagnostics.Contains(descriptor.Id)
-                        )
+                        && !analyzer
+                            .SupportedDiagnostics
+                            .Any(descriptor => diagnostics.Contains(descriptor.Id))
                     )
                     {
                         continue;

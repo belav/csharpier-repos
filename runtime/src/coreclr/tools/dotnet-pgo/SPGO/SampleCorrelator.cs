@@ -88,10 +88,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             }
 
             if (
-                !region.NativeToILMap.TryLookup(
-                    checked((uint)(ip - region.StartAddress)),
-                    out IPMapping mapping
-                )
+                !region
+                    .NativeToILMap
+                    .TryLookup(checked((uint)(ip - region.StartAddress)), out IPMapping mapping)
             )
             {
                 SamplesInManagedCodeOutsideMappings += numSamples;

@@ -1041,7 +1041,8 @@ public class EmitterTests
         );
 
         var typeDeclarations = sources[0]
-            .SyntaxTree.GetRoot()
+            .SyntaxTree
+            .GetRoot()
             .DescendantNodes()
             .OfType<TypeDeclarationSyntax>()
             .ToArray();
@@ -1823,7 +1824,8 @@ public class EmitterTests
             .AddReferences(
                 MetadataReference.CreateFromFile(
                     AppDomain
-                        .CurrentDomain.GetAssemblies()
+                        .CurrentDomain
+                        .GetAssemblies()
                         .FirstOrDefault(a => a.GetName().Name == "System.Runtime")
                         .Location
                 )

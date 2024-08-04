@@ -45,9 +45,9 @@ namespace System.Net
             }
 
             X509Certificate2? result = null;
-            IntPtr remoteCertificate = Interop.OpenSsl.GetPeerCertificate(
-                (SafeSslHandle)securityContext
-            );
+            IntPtr remoteCertificate = Interop
+                .OpenSsl
+                .GetPeerCertificate((SafeSslHandle)securityContext);
             try
             {
                 if (remoteCertificate == IntPtr.Zero)
@@ -66,8 +66,9 @@ namespace System.Net
                     }
 
                     using (
-                        SafeSharedX509StackHandle chainStack =
-                            Interop.OpenSsl.GetPeerCertificateChain((SafeSslHandle)securityContext)
+                        SafeSharedX509StackHandle chainStack = Interop
+                            .OpenSsl
+                            .GetPeerCertificateChain((SafeSslHandle)securityContext)
                     )
                     {
                         if (!chainStack.IsInvalid)
@@ -122,9 +123,9 @@ namespace System.Net
         internal static string[] GetRequestCertificateAuthorities(SafeDeleteContext securityContext)
         {
             using (
-                SafeSharedX509NameStackHandle names = Interop.Ssl.SslGetClientCAList(
-                    (SafeSslHandle)securityContext
-                )
+                SafeSharedX509NameStackHandle names = Interop
+                    .Ssl
+                    .SslGetClientCAList((SafeSslHandle)securityContext)
             )
             {
                 if (names.IsInvalid)
@@ -144,10 +145,9 @@ namespace System.Net
                 for (int i = 0; i < nameCount; i++)
                 {
                     using (
-                        SafeSharedX509NameHandle nameHandle = Interop.Crypto.GetX509NameStackField(
-                            names,
-                            i
-                        )
+                        SafeSharedX509NameHandle nameHandle = Interop
+                            .Crypto
+                            .GetX509NameStackField(names, i)
                     )
                     {
                         X500DistinguishedName dn = Interop.Crypto.LoadX500Name(nameHandle);

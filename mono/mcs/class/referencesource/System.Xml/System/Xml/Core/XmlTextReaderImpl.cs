@@ -743,12 +743,9 @@ namespace System.Xml
             {
                 //this will be hit when user create a XmlReader by setting Async, but the first call is Read() instead of ReadAsync(),
                 //then we still should create an async stream here. And wait for the method finish.
-                System.Threading.Tasks.Task<object> t =
-                    laterInitParam.inputUriResolver.GetEntityAsync(
-                        laterInitParam.inputbaseUri,
-                        string.Empty,
-                        typeof(Stream)
-                    );
+                System.Threading.Tasks.Task<object> t = laterInitParam
+                    .inputUriResolver
+                    .GetEntityAsync(laterInitParam.inputbaseUri, string.Empty, typeof(Stream));
                 t.Wait();
                 stream = (Stream)t.Result;
             }
@@ -756,11 +753,9 @@ namespace System.Xml
 #endif
             {
                 stream = (Stream)
-                    laterInitParam.inputUriResolver.GetEntity(
-                        laterInitParam.inputbaseUri,
-                        string.Empty,
-                        typeof(Stream)
-                    );
+                    laterInitParam
+                        .inputUriResolver
+                        .GetEntity(laterInitParam.inputbaseUri, string.Empty, typeof(Stream));
             }
 
             if (stream == null)

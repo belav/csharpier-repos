@@ -43,25 +43,28 @@ public class ConstructorBindingConvention : IModelFinalizingConvention
         {
             if (
                 !entityType.ClrType.IsAbstract
-                && ConfigurationSource.Convention.Overrides(
-                    entityType.GetConstructorBindingConfigurationSource()
-                )
+                && ConfigurationSource
+                    .Convention
+                    .Overrides(entityType.GetConstructorBindingConfigurationSource())
             )
             {
-                Dependencies.ConstructorBindingFactory.GetBindings(
-                    (IMutableEntityType)entityType,
-                    out var constructorBinding,
-                    out var serviceOnlyBinding
-                );
+                Dependencies
+                    .ConstructorBindingFactory
+                    .GetBindings(
+                        (IMutableEntityType)entityType,
+                        out var constructorBinding,
+                        out var serviceOnlyBinding
+                    );
 
-                entityType.Builder.HasConstructorBinding(
-                    constructorBinding,
-                    ConfigurationSource.Convention
-                );
-                entityType.Builder.HasServiceOnlyConstructorBinding(
-                    serviceOnlyBinding,
-                    ConfigurationSource.Convention
-                );
+                entityType
+                    .Builder
+                    .HasConstructorBinding(constructorBinding, ConfigurationSource.Convention);
+                entityType
+                    .Builder
+                    .HasServiceOnlyConstructorBinding(
+                        serviceOnlyBinding,
+                        ConfigurationSource.Convention
+                    );
             }
 
             foreach (var complexProperty in entityType.GetDeclaredComplexProperties())
@@ -75,24 +78,23 @@ public class ConstructorBindingConvention : IModelFinalizingConvention
     {
         if (
             !complexType.ClrType.IsAbstract
-            && ConfigurationSource.Convention.Overrides(
-                complexType.GetConstructorBindingConfigurationSource()
-            )
+            && ConfigurationSource
+                .Convention
+                .Overrides(complexType.GetConstructorBindingConfigurationSource())
         )
         {
-            Dependencies.ConstructorBindingFactory.GetBindings(
-                complexType,
-                out var constructorBinding,
-                out var serviceOnlyBinding
-            );
-            complexType.Builder.HasConstructorBinding(
-                constructorBinding,
-                ConfigurationSource.Convention
-            );
-            complexType.Builder.HasServiceOnlyConstructorBinding(
-                serviceOnlyBinding,
-                ConfigurationSource.Convention
-            );
+            Dependencies
+                .ConstructorBindingFactory
+                .GetBindings(complexType, out var constructorBinding, out var serviceOnlyBinding);
+            complexType
+                .Builder
+                .HasConstructorBinding(constructorBinding, ConfigurationSource.Convention);
+            complexType
+                .Builder
+                .HasServiceOnlyConstructorBinding(
+                    serviceOnlyBinding,
+                    ConfigurationSource.Convention
+                );
         }
 
         foreach (var complexProperty in complexType.GetDeclaredComplexProperties())

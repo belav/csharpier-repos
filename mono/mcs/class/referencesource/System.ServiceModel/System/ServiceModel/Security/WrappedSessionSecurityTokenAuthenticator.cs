@@ -54,23 +54,23 @@ namespace System.ServiceModel.Security
         {
             if (sessionTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "sessionTokenHandler"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("sessionTokenHandler");
             }
 
             if (wcfSessionAuthenticator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wcfSessionAuthenticator"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("wcfSessionAuthenticator");
             }
 
             if (sctClaimsHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "sctClaimsHandler"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("sctClaimsHandler");
             }
 
             if (exceptionMapper == null)
@@ -82,17 +82,17 @@ namespace System.ServiceModel.Security
                 wcfSessionAuthenticator as IIssuanceSecurityTokenAuthenticator;
             if (_issuanceSecurityTokenAuthenticator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                    SR.GetString(SR.ID4244)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperInvalidOperation(SR.GetString(SR.ID4244));
             }
 
             _communicationObject = wcfSessionAuthenticator as ICommunicationObject;
             if (_communicationObject == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                    SR.GetString(SR.ID4245)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperInvalidOperation(SR.GetString(SR.ID4245));
             }
 
             _sessionTokenHandler = sessionTokenHandler;

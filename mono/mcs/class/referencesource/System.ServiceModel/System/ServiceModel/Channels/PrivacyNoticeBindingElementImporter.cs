@@ -34,8 +34,9 @@ namespace System.ServiceModel.Channels
             );
             if (privacyNoticeAssertion != null)
             {
-                PrivacyNoticeBindingElement settings =
-                    policyContext.BindingElements.Find<PrivacyNoticeBindingElement>();
+                PrivacyNoticeBindingElement settings = policyContext
+                    .BindingElements
+                    .Find<PrivacyNoticeBindingElement>();
 
                 if (null == settings)
                 {
@@ -50,21 +51,27 @@ namespace System.ServiceModel.Channels
                 );
                 if (string.IsNullOrEmpty(versionString))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.CannotImportPrivacyNoticeElementWithoutVersionAttribute)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.CannotImportPrivacyNoticeElementWithoutVersionAttribute
+                                )
+                            )
+                        );
                 }
 
                 int version = 0;
                 if (!Int32.TryParse(versionString, out version))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.PrivacyNoticeElementVersionAttributeInvalid)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.PrivacyNoticeElementVersionAttributeInvalid)
+                            )
+                        );
                 }
                 settings.Version = version;
             }

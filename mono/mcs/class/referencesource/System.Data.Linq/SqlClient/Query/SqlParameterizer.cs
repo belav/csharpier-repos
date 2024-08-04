@@ -309,9 +309,9 @@ namespace System.Data.Linq.SqlClient
                 {
                     return false;
                 }
-                ProviderType newType = this.parameterizer.typeProvider.GetBestLargeType(
-                    node.SqlType
-                );
+                ProviderType newType = this.parameterizer
+                    .typeProvider
+                    .GetBestLargeType(node.SqlType);
                 if (node.SqlType != newType)
                 {
                     node.SetSqlType(newType);
@@ -319,19 +319,21 @@ namespace System.Data.Linq.SqlClient
                 }
                 // Since we are dealing with a long out parameter that hasn't been
                 // retyped, we need to annotate
-                this.parameterizer.annotations.Add(
-                    node,
-                    new SqlServerCompatibilityAnnotation(
+                this.parameterizer
+                    .annotations
+                    .Add(
+                        node,
+                        new SqlServerCompatibilityAnnotation(
 #if (MONO)
-                        Strings.MaxSizeNotSupported(node.SourceExpression),
-                        SqlProvider.ProviderMode.Sql2000
-                    )
-                );
+                            Strings.MaxSizeNotSupported(node.SourceExpression),
+                            SqlProvider.ProviderMode.Sql2000
+                        )
+                    );
 #else
-                        SqlClient.Strings.MaxSizeNotSupported(node.SourceExpression),
-                        SqlProvider.ProviderMode.Sql2000
-                    )
-                );
+                            SqlClient.Strings.MaxSizeNotSupported(node.SourceExpression),
+                            SqlProvider.ProviderMode.Sql2000
+                        )
+                    );
 #endif
                 return false;
             }

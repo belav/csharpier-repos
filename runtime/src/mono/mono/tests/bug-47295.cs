@@ -32,10 +32,9 @@ public class Testing
         AssemblyName asmName = new AssemblyName();
         asmName.Name = "DynamicAssembly";
 
-        AssemblyBuilder asmBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-            asmName,
-            AssemblyBuilderAccess.Run
-        );
+        AssemblyBuilder asmBuilder = AppDomain
+            .CurrentDomain
+            .DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
 
         ModuleBuilder modBuilder = asmBuilder.DefineDynamicModule("DynamicModule");
 

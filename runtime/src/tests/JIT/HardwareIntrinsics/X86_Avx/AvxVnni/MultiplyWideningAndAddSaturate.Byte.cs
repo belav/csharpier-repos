@@ -710,20 +710,22 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AvxVnni)}.{nameof(AvxVnni.MultiplyWideningAndAddSaturate)}<Int32>(Vector256<Int32>, Vector256<Int32>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  addend: ({string.Join(", ", addend)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(AvxVnni)}.{nameof(AvxVnni.MultiplyWideningAndAddSaturate)}<Int32>(Vector256<Int32>, Vector256<Int32>): {method} failed:"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  addend: ({string.Join(", ", addend)})");
                 TestLibrary.TestFramework.LogInformation($"  left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"  right: ({string.Join(", ", right)})");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", result)})"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  valid: ({string.Join(", ", outArray)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  valid: ({string.Join(", ", outArray)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -2989,14 +2989,14 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
         var commandHandler = workspace.GetService<FormatCommandHandler>();
         var typedChar = subjectDocument
             .GetTextBuffer()
-            .CurrentSnapshot.GetText(subjectDocument.CursorPosition!.Value - 1, 1);
+            .CurrentSnapshot
+            .GetText(subjectDocument.CursorPosition!.Value - 1, 1);
         var textView = subjectDocument.GetTextView();
 
         globalOptions?.SetGlobalOptions(workspace.GlobalOptions);
-        workspace.GlobalOptions.SetEditorOptions(
-            textView.Options.GlobalOptions,
-            subjectDocument.Project.Language
-        );
+        workspace
+            .GlobalOptions
+            .SetEditorOptions(textView.Options.GlobalOptions, subjectDocument.Project.Language);
 
         commandHandler.ExecuteCommand(
             new TypeCharCommandArgs(textView, subjectDocument.GetTextBuffer(), typedChar[0]),

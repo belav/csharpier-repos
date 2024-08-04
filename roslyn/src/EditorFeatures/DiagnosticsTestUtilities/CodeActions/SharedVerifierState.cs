@@ -67,9 +67,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 if (_analyzerConfigIndex is null)
                 {
                     _analyzerConfigIndex = _test.TestState.AnalyzerConfigFiles.Count;
-                    _test.TestState.AnalyzerConfigFiles.Add(
-                        ("/.editorconfig", analyzerConfigSource)
-                    );
+                    _test
+                        .TestState
+                        .AnalyzerConfigFiles
+                        .Add(("/.editorconfig", analyzerConfigSource));
                 }
                 else
                 {

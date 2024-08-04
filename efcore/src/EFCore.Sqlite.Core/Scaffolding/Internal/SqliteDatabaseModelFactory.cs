@@ -183,10 +183,12 @@ public class SqliteDatabaseModelFactory : DatabaseModelFactory
             }
 
             var nullableKeyColumns = databaseModel
-                .Tables.SelectMany(t => t.PrimaryKey?.Columns ?? Array.Empty<DatabaseColumn>())
+                .Tables
+                .SelectMany(t => t.PrimaryKey?.Columns ?? Array.Empty<DatabaseColumn>())
                 .Concat(
                     databaseModel
-                        .Tables.SelectMany(t => t.ForeignKeys)
+                        .Tables
+                        .SelectMany(t => t.ForeignKeys)
                         .SelectMany(fk => fk.PrincipalColumns)
                 )
                 .Where(c => c.IsNullable)
@@ -357,27 +359,29 @@ ORDER BY "cid"
                 SqliteException.ThrowExceptionForRC(rc, db);
             }
 
-            table.Columns.Add(
-                new DatabaseColumn
-                {
-                    Table = table,
-                    Name = columnName,
-                    StoreType = dataType,
-                    IsNullable = !notNull,
-                    DefaultValueSql = defaultValueSql,
-                    ValueGenerated =
-                        autoIncrement != 0 ? ValueGenerated.OnAdd : default(ValueGenerated?),
-                    ComputedColumnSql = hidden != 2L && hidden != 3L ? null : string.Empty,
-                    IsStored = hidden != 3L ? default(bool?) : true,
-                    Collation = string.Equals(
-                        collation,
-                        "BINARY",
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                        ? null
-                        : collation,
-                }
-            );
+            table
+                .Columns
+                .Add(
+                    new DatabaseColumn
+                    {
+                        Table = table,
+                        Name = columnName,
+                        StoreType = dataType,
+                        IsNullable = !notNull,
+                        DefaultValueSql = defaultValueSql,
+                        ValueGenerated =
+                            autoIncrement != 0 ? ValueGenerated.OnAdd : default(ValueGenerated?),
+                        ComputedColumnSql = hidden != 2L && hidden != 3L ? null : string.Empty,
+                        IsStored = hidden != 3L ? default(bool?) : true,
+                        Collation = string.Equals(
+                            collation,
+                            "BINARY",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                            ? null
+                            : collation,
+                    }
+                );
         }
 
         InferClrTypes(connection, table);
@@ -933,9 +937,11 @@ ORDER BY "seqno"
             var columnName = reader.GetString(0);
             var column =
                 table.Columns.FirstOrDefault(c => c.Name == columnName)
-                ?? table.Columns.FirstOrDefault(c =>
-                    c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
-                );
+                ?? table
+                    .Columns
+                    .FirstOrDefault(c =>
+                        c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
+                    );
             Check.DebugAssert(column != null, "column is null.");
 
             primaryKey.Columns.Add(column);
@@ -967,9 +973,9 @@ WHERE "pk" = 1
         var columnName = reader.GetString(0);
         var column =
             table.Columns.FirstOrDefault(c => c.Name == columnName)
-            ?? table.Columns.FirstOrDefault(c =>
-                c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
-            );
+            ?? table
+                .Columns
+                .FirstOrDefault(c => c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase));
         Check.DebugAssert(column != null, "column is null.");
 
         Check.DebugAssert(!reader.Read(), "Unexpected composite primary key.");
@@ -1030,9 +1036,11 @@ ORDER BY "seqno"
                     var columnName = reader2.GetString(0);
                     var column =
                         table.Columns.FirstOrDefault(c => c.Name == columnName)
-                        ?? table.Columns.FirstOrDefault(c =>
-                            c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
-                        );
+                        ?? table
+                            .Columns
+                            .FirstOrDefault(c =>
+                                c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
+                            );
                     Check.DebugAssert(column != null, "column is null.");
 
                     uniqueConstraint.Columns.Add(column);
@@ -1090,9 +1098,9 @@ ORDER BY "seqno"
                     var name = reader2.GetString(0);
                     var column =
                         table.Columns.FirstOrDefault(c => c.Name == name)
-                        ?? table.Columns.FirstOrDefault(c =>
-                            c.Name.Equals(name, StringComparison.Ordinal)
-                        );
+                        ?? table
+                            .Columns
+                            .FirstOrDefault(c => c.Name.Equals(name, StringComparison.Ordinal));
                     Check.DebugAssert(column != null, "column is null.");
 
                     index.Columns.Add(column);
@@ -1181,9 +1189,11 @@ ORDER BY "seq"
                     var columnName = reader2.GetString(1);
                     var column =
                         table.Columns.FirstOrDefault(c => c.Name == columnName)
-                        ?? table.Columns.FirstOrDefault(c =>
-                            c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
-                        );
+                        ?? table
+                            .Columns
+                            .FirstOrDefault(c =>
+                                c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
+                            );
                     Check.DebugAssert(column != null, "column is null.");
 
                     var principalColumnName = reader2.IsDBNull(2) ? null : reader2.GetString(2);
@@ -1191,15 +1201,19 @@ ORDER BY "seq"
                     if (principalColumnName != null)
                     {
                         principalColumn =
-                            foreignKey.PrincipalTable.Columns.FirstOrDefault(c =>
-                                c.Name == principalColumnName
-                            )
-                            ?? foreignKey.PrincipalTable.Columns.FirstOrDefault(c =>
-                                c.Name.Equals(
-                                    principalColumnName,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                            );
+                            foreignKey
+                                .PrincipalTable
+                                .Columns
+                                .FirstOrDefault(c => c.Name == principalColumnName)
+                            ?? foreignKey
+                                .PrincipalTable
+                                .Columns
+                                .FirstOrDefault(c =>
+                                    c.Name.Equals(
+                                        principalColumnName,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                );
                     }
                     else if (principalTable?.PrimaryKey != null)
                     {

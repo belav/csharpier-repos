@@ -40,7 +40,8 @@ class Test
             void validate(ModuleSymbol module)
             {
                 var type = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetTypeMember("S1");
                 AssertReferencedIsByRefLike(
                     type,
@@ -122,7 +123,8 @@ class Test
                 symbolValidator: module =>
                 {
                     var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
                     AssertReferencedIsByRefLike(
                         type,
@@ -199,7 +201,8 @@ class Test<T>
                 symbolValidator: module =>
                 {
                     var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test`1")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Test`1")
                         .GetTypeMember("S1");
                     AssertReferencedIsByRefLike(
                         type,
@@ -247,7 +250,8 @@ class Test
                 symbolValidator: module =>
                 {
                     var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
 
                     AssertReferencedIsByRefLike(
@@ -646,7 +650,8 @@ public class Test
                 symbolValidator: module =>
                 {
                     var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
 
                     AssertReferencedIsByRefLike(type);
@@ -735,9 +740,11 @@ class Test
                 symbolValidator: module =>
                 {
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module
+                            .ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                 }
             );
@@ -959,7 +966,8 @@ class Test
             void validate(ModuleSymbol module)
             {
                 var type = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetTypeMember("S1");
                 Assert.True(type.IsRefLikeType);
 
@@ -1031,7 +1039,8 @@ namespace System
                 symbolValidator: module =>
                 {
                     var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
                     AssertReferencedIsByRefLike(type, hasObsolete: false);
                 }
@@ -1085,7 +1094,8 @@ class Test
                 symbolValidator: module =>
                 {
                     var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
                     Assert.True(type.IsRefLikeType);
 
@@ -1155,7 +1165,8 @@ class Test
                 symbolValidator: module =>
                 {
                     var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
                     Assert.True(type.IsRefLikeType);
 
@@ -1434,9 +1445,9 @@ namespace System
                 verify: Verification.FailsPEVerify,
                 symbolValidator: module =>
                 {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(
-                        "System.TypedReference"
-                    );
+                    var type = module
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("System.TypedReference");
                     AssertReferencedIsByRefLike(
                         type,
                         hasObsolete: false,
@@ -1450,9 +1461,9 @@ namespace System
                         hasCompilerFeatureRequired: includeCompilerFeatureRequired
                     );
 
-                    type = module.ContainingAssembly.GetTypeByMetadataName(
-                        "System.RuntimeArgumentHandle"
-                    );
+                    type = module
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("System.RuntimeArgumentHandle");
                     AssertReferencedIsByRefLike(
                         type,
                         hasObsolete: false,
@@ -1460,9 +1471,9 @@ namespace System
                     );
 
                     // control case. Not a special type.
-                    type = module.ContainingAssembly.GetTypeByMetadataName(
-                        "System.NotTypedReference"
-                    );
+                    type = module
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("System.NotTypedReference");
                     AssertReferencedIsByRefLike(
                         type,
                         hasObsolete: true,
@@ -1493,9 +1504,9 @@ namespace System
                 verify: Verification.Passes,
                 symbolValidator: module =>
                 {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(
-                        "System.TypedReference"
-                    );
+                    var type = module
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("System.TypedReference");
 
                     AssertReferencedIsByRefLike(
                         type,
@@ -1519,8 +1530,9 @@ namespace System
 
             var peModule = (PEModuleSymbol)peType.ContainingModule;
             var decoder = new MetadataDecoder(peModule);
-            var obsoleteAttribute =
-                peModule.Module.TryGetDeprecatedOrExperimentalOrObsoleteAttribute(
+            var obsoleteAttribute = peModule
+                .Module
+                .TryGetDeprecatedOrExperimentalOrObsoleteAttribute(
                     peType.Handle,
                     decoder,
                     ignoreByRefLikeMarker: false,
@@ -1551,16 +1563,18 @@ namespace System
             MetadataDecoder decoder
         )
         {
-            var compilerFeatureRequiredToken =
-                peModule.Module.GetFirstUnsupportedCompilerFeatureFromToken(
+            var compilerFeatureRequiredToken = peModule
+                .Module
+                .GetFirstUnsupportedCompilerFeatureFromToken(
                     peType.Handle,
                     decoder,
                     CompilerFeatureRequiredFeatures.RefStructs
                 );
             Assert.Null(compilerFeatureRequiredToken);
 
-            compilerFeatureRequiredToken =
-                peModule.Module.GetFirstUnsupportedCompilerFeatureFromToken(
+            compilerFeatureRequiredToken = peModule
+                .Module
+                .GetFirstUnsupportedCompilerFeatureFromToken(
                     peType.Handle,
                     decoder,
                     CompilerFeatureRequiredFeatures.None

@@ -90,9 +90,10 @@ namespace System.Data
         internal SimpleType simpleType = null;
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        private readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         /// <devdoc>
         ///    <para>
@@ -484,9 +485,14 @@ namespace System.Data
                         encodedColumnName = null;
                         if (table != null)
                         {
-                            table.Columns.OnColumnPropertyChanged(
-                                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
-                            );
+                            table
+                                .Columns
+                                .OnColumnPropertyChanged(
+                                    new CollectionChangeEventArgs(
+                                        CollectionChangeAction.Refresh,
+                                        this
+                                    )
+                                );
                         }
                     }
                     else if (_columnName != value)
@@ -496,9 +502,14 @@ namespace System.Data
                         encodedColumnName = null;
                         if (table != null)
                         {
-                            table.Columns.OnColumnPropertyChanged(
-                                new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
-                            );
+                            table
+                                .Columns
+                                .OnColumnPropertyChanged(
+                                    new CollectionChangeEventArgs(
+                                        CollectionChangeAction.Refresh,
+                                        this
+                                    )
+                                );
                         }
                     }
                 }
@@ -1553,8 +1564,9 @@ namespace System.Data
                             else
                             {
                                 for (
-                                    System.Collections.IEnumerator e =
-                                        Table.Constraints.GetEnumerator();
+                                    System.Collections.IEnumerator e = Table
+                                        .Constraints
+                                        .GetEnumerator();
                                     e.MoveNext();
 
                                 )

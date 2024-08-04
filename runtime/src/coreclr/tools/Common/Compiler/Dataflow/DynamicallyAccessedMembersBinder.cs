@@ -435,7 +435,8 @@ namespace ILCompiler.Dataflow
 
                 foreach (
                     var propertyHandle in ecmaType
-                        .MetadataReader.GetTypeDefinition(ecmaType.Handle)
+                        .MetadataReader
+                        .GetTypeDefinition(ecmaType.Handle)
                         .GetProperties()
                 )
                 {
@@ -533,7 +534,8 @@ namespace ILCompiler.Dataflow
 
                 foreach (
                     var eventHandle in ecmaType
-                        .MetadataReader.GetTypeDefinition(ecmaType.Handle)
+                        .MetadataReader
+                        .GetTypeDefinition(ecmaType.Handle)
                         .GetEvents()
                 )
                 {

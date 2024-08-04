@@ -181,7 +181,8 @@ public class MapperConfiguration : IGlobalConfiguration
     {
         foreach (
             var request in _resolvedMaps
-                .Keys.Where(t => !t.ContainsGenericParameters)
+                .Keys
+                .Where(t => !t.ContainsGenericParameters)
                 .Select(types => new MapRequest(types, types, MemberMap.Instance))
                 .ToArray()
         )

@@ -260,11 +260,9 @@ namespace System.Net.Cache
             {
                 fixed (byte* entryPtr = buffer)
                 {
-                    bool found = UnsafeNclNativeMethods.UnsafeWinInetCache.GetUrlCacheEntryInfoW(
-                        entry.Key,
-                        entryPtr,
-                        ref size
-                    );
+                    bool found = UnsafeNclNativeMethods
+                        .UnsafeWinInetCache
+                        .GetUrlCacheEntryInfoW(entry.Key, entryPtr, ref size);
 
                     if (found)
                     {
@@ -407,13 +405,9 @@ namespace System.Net.Cache
                 UnsafeNclNativeMethods.UnsafeWinInetCache.MAX_PATH
             );
             if (
-                UnsafeNclNativeMethods.UnsafeWinInetCache.CreateUrlCacheEntryW(
-                    entry.Key,
-                    entry.OptionalLength,
-                    entry.FileExt,
-                    sb,
-                    0
-                )
+                UnsafeNclNativeMethods
+                    .UnsafeWinInetCache
+                    .CreateUrlCacheEntryW(entry.Key, entry.OptionalLength, entry.FileExt, sb, 0)
             )
             {
                 entry.Filename = sb.ToString();
@@ -454,18 +448,20 @@ namespace System.Net.Cache
                 {
                     byte* realBytesPtr = s.Length == 0 ? null : (byte*)ptr;
                     if (
-                        !UnsafeNclNativeMethods.UnsafeWinInetCache.CommitUrlCacheEntryW(
-                            entry.Key,
-                            entry.Filename,
-                            entry.Info.ExpireTime,
-                            entry.Info.LastModifiedTime,
-                            entry.Info.EntryType,
-                            realBytesPtr,
-                            s.Length,
-                            null, // FileExt is reserved, must be null
-                            entry.OriginalUrl // It's better to not play with redirections
-                        // OrigianlUri should be nulled by the caller
-                        )
+                        !UnsafeNclNativeMethods
+                            .UnsafeWinInetCache
+                            .CommitUrlCacheEntryW(
+                                entry.Key,
+                                entry.Filename,
+                                entry.Info.ExpireTime,
+                                entry.Info.LastModifiedTime,
+                                entry.Info.EntryType,
+                                realBytesPtr,
+                                s.Length,
+                                null, // FileExt is reserved, must be null
+                                entry.OriginalUrl // It's better to not play with redirections
+                            // OrigianlUri should be nulled by the caller
+                            )
                     )
                     {
                         entry.Error = (Status)Marshal.GetLastWin32Error();
@@ -499,11 +495,9 @@ namespace System.Net.Cache
                     if ((attributes & Entry_FC.Headerinfo) == 0)
                     {
                         if (
-                            !UnsafeNclNativeMethods.UnsafeWinInetCache.SetUrlCacheEntryInfoW(
-                                newEntry.Key,
-                                bytePtr,
-                                attributes
-                            )
+                            !UnsafeNclNativeMethods
+                                .UnsafeWinInetCache
+                                .SetUrlCacheEntryInfoW(newEntry.Key, bytePtr, attributes)
                         )
                         {
                             newEntry.Error = (Status)Marshal.GetLastWin32Error();
@@ -689,11 +683,13 @@ namespace System.Net.Cache
             {
                 --bufferCharLength;
             }
-            entry.MetaInfo = Encoding.Unicode.GetString(
-                buffer,
-                (int)bufferPtr->_OffsetHeaderInfo,
-                (bufferCharLength - (int)bufferPtr->_OffsetHeaderInfo / 2) * 2
-            );
+            entry.MetaInfo = Encoding
+                .Unicode
+                .GetString(
+                    buffer,
+                    (int)bufferPtr->_OffsetHeaderInfo,
+                    (bufferCharLength - (int)bufferPtr->_OffsetHeaderInfo / 2) * 2
+                );
             return entry.Error;
         }
         /********************

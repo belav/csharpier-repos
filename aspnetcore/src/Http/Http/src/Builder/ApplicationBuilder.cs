@@ -208,10 +208,10 @@ public partial class ApplicationBuilder : IApplicationBuilder
             get
             {
                 if (
-                    _applicationBuilder.Properties.TryGetValue(
-                        "__MiddlewareDescriptions",
-                        out var value
-                    ) && value is IList<string> descriptions
+                    _applicationBuilder
+                        .Properties
+                        .TryGetValue("__MiddlewareDescriptions", out var value)
+                    && value is IList<string> descriptions
                 )
                 {
                     return descriptions;

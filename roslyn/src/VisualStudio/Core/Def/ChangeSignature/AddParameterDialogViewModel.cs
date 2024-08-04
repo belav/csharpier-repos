@@ -25,8 +25,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
         public AddParameterDialogViewModel(Document document, int positionForTypeBinding)
         {
-            _notificationService =
-                document.Project.Solution.Services.GetService<INotificationService>();
+            _notificationService = document
+                .Project
+                .Solution
+                .Services
+                .GetService<INotificationService>();
             _semanticModel = document
                 .GetRequiredSemanticModelAsync(CancellationToken.None)
                 .AsTask()

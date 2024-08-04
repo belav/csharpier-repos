@@ -40,9 +40,9 @@ namespace ComInterfaceGenerator.Unit.Tests
                 new Microsoft.Interop.VtableIndexStubGenerator()
             );
 
-            INamedTypeSymbol? userDefinedInterface = newComp.Assembly.GetTypeByMetadataName(
-                "INativeAPI"
-            );
+            INamedTypeSymbol? userDefinedInterface = newComp
+                .Assembly
+                .GetTypeByMetadataName("INativeAPI");
             Assert.NotNull(userDefinedInterface);
 
             Assert.Single(userDefinedInterface.GetTypeMembers("Native"));
@@ -72,9 +72,9 @@ namespace ComInterfaceGenerator.Unit.Tests
                 new Microsoft.Interop.VtableIndexStubGenerator()
             );
 
-            INamedTypeSymbol? userDefinedInterface = newComp.Assembly.GetTypeByMetadataName(
-                "INativeAPI"
-            );
+            INamedTypeSymbol? userDefinedInterface = newComp
+                .Assembly
+                .GetTypeByMetadataName("INativeAPI");
             Assert.NotNull(userDefinedInterface);
 
             Assert.Equal(
@@ -140,9 +140,9 @@ namespace ComInterfaceGenerator.Unit.Tests
                 new Microsoft.Interop.VtableIndexStubGenerator()
             );
 
-            INamedTypeSymbol? userDefinedInterface = newComp.Assembly.GetTypeByMetadataName(
-                "INativeAPI"
-            );
+            INamedTypeSymbol? userDefinedInterface = newComp
+                .Assembly
+                .GetTypeByMetadataName("INativeAPI");
             Assert.NotNull(userDefinedInterface);
 
             INamedTypeSymbol dynamicInterfaceCastableImplementationAttribute =
@@ -184,9 +184,9 @@ namespace ComInterfaceGenerator.Unit.Tests
                 new Microsoft.Interop.VtableIndexStubGenerator()
             );
 
-            INamedTypeSymbol? userDefinedInterface = newComp.Assembly.GetTypeByMetadataName(
-                "INativeAPI"
-            );
+            INamedTypeSymbol? userDefinedInterface = newComp
+                .Assembly
+                .GetTypeByMetadataName("INativeAPI");
             Assert.NotNull(userDefinedInterface);
 
             INamedTypeSymbol nativeInterface = Assert.Single(

@@ -32,9 +32,9 @@ namespace System.Xml.Serialization.TrimmingTests
             Response obj = (Response)new XmlSerializer(typeof(Response)).Deserialize(stringReader);
             if (
                 obj.DataUpdates.DataUpdateInfo.Count == 3
-                && obj.DataUpdates.DataUpdateInfo.All(i =>
-                    i.DataDate.Year == 2009 && i.LastUpdatedDate.Year == 2010
-                )
+                && obj.DataUpdates
+                    .DataUpdateInfo
+                    .All(i => i.DataDate.Year == 2009 && i.LastUpdatedDate.Year == 2010)
             )
             {
                 return 100;

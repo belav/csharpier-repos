@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests
             this SyntaxTree syntaxTree
         ) =>
             (syntaxTree.GetRoot() as CompilationUnitSyntax)
-                .Members.OfType<TypeDeclarationSyntax>()
+                .Members
+                .OfType<TypeDeclarationSyntax>()
                 .First();
     }
 }

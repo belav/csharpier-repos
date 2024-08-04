@@ -68,24 +68,28 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case ClosureKind.Singleton: // all type parameters on method (except the top level method's)
                 case ClosureKind.General: // only lambda's type parameters on method (rest on class)
                     RoslynDebug.Assert(!(lambdaFrame is null));
-                    typeMap = lambdaFrame.TypeMap.WithConcatAlphaRename(
-                        originalMethod,
-                        this,
-                        out typeParameters,
-                        out _,
-                        lambdaFrame.OriginalContainingMethodOpt
-                    );
+                    typeMap = lambdaFrame
+                        .TypeMap
+                        .WithConcatAlphaRename(
+                            originalMethod,
+                            this,
+                            out typeParameters,
+                            out _,
+                            lambdaFrame.OriginalContainingMethodOpt
+                        );
                     break;
                 case ClosureKind.ThisOnly: // all type parameters on method
                 case ClosureKind.Static:
                     RoslynDebug.Assert(lambdaFrame is null);
-                    typeMap = TypeMap.Empty.WithConcatAlphaRename(
-                        originalMethod,
-                        this,
-                        out typeParameters,
-                        out _,
-                        stopAt: null
-                    );
+                    typeMap = TypeMap
+                        .Empty
+                        .WithConcatAlphaRename(
+                            originalMethod,
+                            this,
+                            out typeParameters,
+                            out _,
+                            stopAt: null
+                        );
                     break;
                 default:
                     throw ExceptionUtilities.UnexpectedValue(closureKind);

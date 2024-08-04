@@ -37,11 +37,9 @@ namespace System.Security.Cryptography
 
                     using (SafeBioHandle bio = Interop.Crypto.CreateMemoryBio())
                     using (
-                        SafeX509ExtensionHandle x509Ext = Interop.Crypto.X509ExtensionCreateByObj(
-                            asnOid,
-                            false,
-                            octetString
-                        )
+                        SafeX509ExtensionHandle x509Ext = Interop
+                            .Crypto
+                            .X509ExtensionCreateByObj(asnOid, false, octetString)
                     )
                     {
                         if (bio.IsInvalid || x509Ext.IsInvalid)

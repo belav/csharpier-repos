@@ -75,7 +75,9 @@ public static class WebHost
     {
         var startupAssemblyName = routeBuilder
             .GetMethodInfo()
-            .DeclaringType!.Assembly.GetName()
+            .DeclaringType!
+            .Assembly
+            .GetName()
             .Name;
         return StartWith(
             url,

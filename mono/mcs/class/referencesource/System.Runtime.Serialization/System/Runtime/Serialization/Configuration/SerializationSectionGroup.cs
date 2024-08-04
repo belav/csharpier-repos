@@ -11,9 +11,12 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (config == null)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "config"
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("config");
             }
 #pragma warning suppress 56506 // Microsoft, config is checked above
             return (SerializationSectionGroup)

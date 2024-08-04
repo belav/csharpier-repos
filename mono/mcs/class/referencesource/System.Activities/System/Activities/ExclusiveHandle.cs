@@ -124,9 +124,11 @@ namespace System.Activities
                 || (this.UnimportantBookmarks != null && this.UnimportantBookmarks.Count != 0)
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.ExclusiveHandleRegisterBookmarkScopeFailed)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.ExclusiveHandleRegisterBookmarkScopeFailed)
+                    );
             }
 
             if (this.bookmarkScopesListIsDefault)
@@ -158,9 +160,9 @@ namespace System.Activities
                 || (this.UnimportantBookmarks != null && this.UnimportantBookmarks.Count != 0)
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.ExclusiveHandleReinitializeFailed)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.ExclusiveHandleReinitializeFailed));
             }
             this.bookmarkScopes.Clear();
             this.readOnlyBookmarkScopeCollection = null;

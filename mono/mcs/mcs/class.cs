@@ -106,10 +106,9 @@ namespace Mono.CSharp
         public virtual void AddPartial(TypeDefinition next_part)
         {
             MemberCore mc;
-            (PartialContainer ?? this).defined_names.TryGetValue(
-                next_part.MemberName.Basename,
-                out mc
-            );
+            (PartialContainer ?? this)
+                .defined_names
+                .TryGetValue(next_part.MemberName.Basename, out mc);
 
             AddPartial(next_part, mc as TypeDefinition);
         }
@@ -1602,12 +1601,14 @@ namespace Mono.CSharp
             }
             else
             {
-                TypeBuilder = parent_def.TypeBuilder.DefineNestedType(
-                    FilterNestedName(MemberName.Basename),
-                    TypeAttr,
-                    null,
-                    type_size
-                );
+                TypeBuilder = parent_def
+                    .TypeBuilder
+                    .DefineNestedType(
+                        FilterNestedName(MemberName.Basename),
+                        TypeAttr,
+                        null,
+                        type_size
+                    );
             }
 
             if (DeclaringAssembly.Importer != null)
@@ -3705,17 +3706,15 @@ namespace Mono.CSharp
             if (base_type != null)
             {
                 if (base_type.HasDynamicElement)
-                    Module.PredefinedAttributes.Dynamic.EmitAttribute(
-                        TypeBuilder,
-                        base_type,
-                        Location
-                    );
+                    Module
+                        .PredefinedAttributes
+                        .Dynamic
+                        .EmitAttribute(TypeBuilder, base_type, Location);
                 if (base_type.HasNamedTupleElement)
-                    Module.PredefinedAttributes.TupleElementNames.EmitAttribute(
-                        TypeBuilder,
-                        base_type,
-                        Location
-                    );
+                    Module
+                        .PredefinedAttributes
+                        .TupleElementNames
+                        .EmitAttribute(TypeBuilder, base_type, Location);
             }
         }
 
@@ -4548,10 +4547,9 @@ namespace Mono.CSharp
 
         protected virtual bool CheckForDuplications()
         {
-            return Parent.MemberCache.CheckExistingMembersOverloads(
-                this,
-                ParametersCompiled.EmptyReadOnlyParameters
-            );
+            return Parent
+                .MemberCache
+                .CheckExistingMembersOverloads(this, ParametersCompiled.EmptyReadOnlyParameters);
         }
 
         //
@@ -4690,9 +4688,10 @@ namespace Mono.CSharp
                 //
                 if ((thisp & Modifiers.INTERNAL) != 0)
                 {
-                    return base_member.DeclaringType.MemberDefinition.IsInternalAsPublic(
-                        this_member.Module.DeclaringAssembly
-                    );
+                    return base_member
+                        .DeclaringType
+                        .MemberDefinition
+                        .IsInternalAsPublic(this_member.Module.DeclaringAssembly);
                 }
 
                 //
@@ -4700,9 +4699,10 @@ namespace Mono.CSharp
                 // requires internal modifier as well
                 //
                 if (
-                    base_member.DeclaringType.MemberDefinition.IsInternalAsPublic(
-                        this_member.Module.DeclaringAssembly
-                    )
+                    base_member
+                        .DeclaringType
+                        .MemberDefinition
+                        .IsInternalAsPublic(this_member.Module.DeclaringAssembly)
                 )
                 {
                     return false;
@@ -4908,9 +4908,10 @@ namespace Mono.CSharp
             if (
                 (base_modifiers & Modifiers.AccessibilityMask)
                     == (Modifiers.PROTECTED | Modifiers.INTERNAL)
-                && !base_member.DeclaringType.MemberDefinition.IsInternalAsPublic(
-                    member.Module.DeclaringAssembly
-                )
+                && !base_member
+                    .DeclaringType
+                    .MemberDefinition
+                    .IsInternalAsPublic(member.Module.DeclaringAssembly)
             )
                 base_modifiers = Modifiers.PROTECTED;
 

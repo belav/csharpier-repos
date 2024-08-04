@@ -70,10 +70,9 @@ namespace System.Runtime.Serialization
             // IsOpen, etc.) are ignored since we allow the MemoryStream ctor to set them itself.
 
             byte[] buffer = value.Buffer!; // we don't expect this to be null, but if it is we'll throw NRE below
-            Span<byte> slicedBuffer = value.Buffer.AsSpan(
-                value.Origin,
-                value.Length - value.Origin
-            );
+            Span<byte> slicedBuffer = value
+                .Buffer
+                .AsSpan(value.Origin, value.Length - value.Origin);
             if (slicedBuffer.Length < buffer.Length)
             {
                 buffer = slicedBuffer.ToArray(); // trim leading and trailing data

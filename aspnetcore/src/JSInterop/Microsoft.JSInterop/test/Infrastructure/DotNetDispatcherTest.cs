@@ -9,7 +9,8 @@ namespace Microsoft.JSInterop.Infrastructure;
 public class DotNetDispatcherTest
 {
     private static readonly string thisAssemblyName = typeof(DotNetDispatcherTest)
-        .Assembly.GetName()
+        .Assembly
+        .GetName()
         .Name;
 
     [Fact]

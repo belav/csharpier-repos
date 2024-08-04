@@ -31,9 +31,9 @@ public class InMemoryTypeMappingSource : TypeMappingSource
         var clrType = mappingInfo.ClrType;
         Check.DebugAssert(clrType != null, "ClrType is null");
 
-        var jsonValueReaderWriter = Dependencies.JsonValueReaderWriterSource.FindReaderWriter(
-            clrType
-        );
+        var jsonValueReaderWriter = Dependencies
+            .JsonValueReaderWriterSource
+            .FindReaderWriter(clrType);
 
         if (
             clrType.IsValueType

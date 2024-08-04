@@ -35,9 +35,9 @@ namespace System.ServiceModel
         {
             if (wrappedServiceAuthManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wrappedServiceAuthManager"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("wrappedServiceAuthManager");
             }
 
             this.wrappedAuthenticationManager = wrappedServiceAuthManager;
@@ -96,9 +96,9 @@ namespace System.ServiceModel
         {
             if (wrappedServiceAuthManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wrappedServiceAuthManager"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("wrappedServiceAuthManager");
             }
 
             if ((actionUriFilter != null) && (actionUriFilter.Length > 0))

@@ -316,7 +316,8 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
             async,
             contextFactory.CreateContext,
             ss =>
-                ss.Orders.Where(o => o.Id == 1)
+                ss.Orders
+                    .Where(o => o.Id == 1)
                     .Select(o => new { Order = o, Total = o.OrderProducts.Sum(op => op.Amount) }),
             s => s.SetProperty(x => x.Order.Total, x => x.Total),
             rowsAffectedCount: 1

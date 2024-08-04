@@ -1013,9 +1013,9 @@ public class HttpParserTests : LoggedTest
         HttpParsingData.RequestLineIncompleteData.Select(requestLine => new[] { requestLine });
 
     public static IEnumerable<object[]> RequestLineInvalidDataLineFeedTerminator =>
-        HttpParsingData.RequestLineInvalidDataLineFeedTerminator.Select(requestLine =>
-            new[] { requestLine }
-        );
+        HttpParsingData
+            .RequestLineInvalidDataLineFeedTerminator
+            .Select(requestLine => new[] { requestLine });
 
     public static IEnumerable<object[]> RequestLineInvalidData =>
         HttpParsingData.RequestLineInvalidData.Select(requestLine => new[] { requestLine });

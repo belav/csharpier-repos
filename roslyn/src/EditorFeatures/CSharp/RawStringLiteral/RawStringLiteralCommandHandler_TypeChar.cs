@@ -81,9 +81,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
             edit.Apply();
 
             // ensure the caret is placed after where the original quote got added.
-            textView.Caret.MoveTo(
-                new SnapshotPoint(subjectBuffer.CurrentSnapshot, caret.Value.Position + 1)
-            );
+            textView
+                .Caret
+                .MoveTo(new SnapshotPoint(subjectBuffer.CurrentSnapshot, caret.Value.Position + 1));
 
             transaction?.Complete();
             return true;

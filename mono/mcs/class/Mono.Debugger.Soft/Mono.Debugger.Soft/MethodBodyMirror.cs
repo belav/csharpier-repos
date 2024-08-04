@@ -35,8 +35,8 @@ namespace Mono.Debugger.Soft
             get
             {
                 vm.CheckProtocolVersion(2, 18);
-                return info
-                    .clauses.Select(c =>
+                return info.clauses
+                    .Select(c =>
                     {
                         var handler = new ILExceptionHandler(
                             c.try_offset,

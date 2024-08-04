@@ -114,7 +114,8 @@ public class NonNullableReferencePropertyConventionTest
             entityTypeBuilder
                 .PrimitiveCollection(a => a.PrimitiveCollectionWithNonNullableElement)
                 .ElementType()
-                .Metadata.IsNullable
+                .Metadata
+                .IsNullable
         );
     }
 
@@ -128,7 +129,8 @@ public class NonNullableReferencePropertyConventionTest
             entityTypeBuilder
                 .PrimitiveCollection(a => a.PrimitiveCollectionWithNullableElement)
                 .ElementType()
-                .Metadata.IsNullable
+                .Metadata
+                .IsNullable
         );
     }
 
@@ -147,9 +149,9 @@ public class NonNullableReferencePropertyConventionTest
     private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
     {
         var conventionSet = new ConventionSet();
-        conventionSet.EntityTypeAddedConventions.Add(
-            new PropertyDiscoveryConvention(CreateDependencies())
-        );
+        conventionSet
+            .EntityTypeAddedConventions
+            .Add(new PropertyDiscoveryConvention(CreateDependencies()));
 
         var modelBuilder = new InternalModelBuilder(new Model(conventionSet));
 
@@ -158,7 +160,8 @@ public class NonNullableReferencePropertyConventionTest
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
         InMemoryTestHelpers
-            .Instance.CreateContextServices()
+            .Instance
+            .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     // ReSharper disable PropertyCanBeMadeInitOnly.Local

@@ -213,9 +213,9 @@ namespace Mono.CodeContracts.Static.Lattices
             if (map.Count < that.map.Count)
                 return false;
 
-            return that.map.Keys.All(key =>
-                map.ContainsKey(key) && map[key].LessEqual(that.map[key])
-            );
+            return that.map
+                .Keys
+                .All(key => map.ContainsKey(key) && map[key].LessEqual(that.map[key]));
         }
 
         public EnvironmentDomain<K, V> ImmutableVersion()

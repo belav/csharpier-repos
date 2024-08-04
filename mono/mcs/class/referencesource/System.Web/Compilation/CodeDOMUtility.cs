@@ -293,12 +293,14 @@ namespace System.Web.Compilation
                         }
 
                         methCall.Parameters.Add(new CodePrimitiveExpression(s));
-                        methCall.Parameters.Add(
-                            new CodePropertyReferenceExpression(
-                                BuildGlobalCodeTypeReferenceExpression(typeof(CultureInfo)),
-                                "InvariantCulture"
-                            )
-                        );
+                        methCall
+                            .Parameters
+                            .Add(
+                                new CodePropertyReferenceExpression(
+                                    BuildGlobalCodeTypeReferenceExpression(typeof(CultureInfo)),
+                                    "InvariantCulture"
+                                )
+                            );
                         rightExpr = methCall;
                     }
                     else if (valueType.GetMethod("Parse", new Type[] { typeof(string) }) != null)
@@ -441,12 +443,14 @@ namespace System.Web.Compilation
             );
             invokeExpr.Method.MethodName = "ToString";
             invokeExpr.Parameters.Add(value);
-            invokeExpr.Parameters.Add(
-                new CodePropertyReferenceExpression(
-                    BuildGlobalCodeTypeReferenceExpression(typeof(CultureInfo)),
-                    "CurrentCulture"
-                )
-            );
+            invokeExpr
+                .Parameters
+                .Add(
+                    new CodePropertyReferenceExpression(
+                        BuildGlobalCodeTypeReferenceExpression(typeof(CultureInfo)),
+                        "CurrentCulture"
+                    )
+                );
 
             return invokeExpr;
         }

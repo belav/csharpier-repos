@@ -42,9 +42,9 @@ namespace System.Web.WebPages.Administration.PackageManager
             _projectManager = new ProjectManager(
                 sourceRepository: PackageRepositoryFactory.Default.CreateRepository(remoteSource),
                 pathResolver: new DefaultPackagePathResolver(webRepositoryDirectory),
-                localRepository: PackageRepositoryFactory.Default.CreateRepository(
-                    webRepositoryDirectory
-                ),
+                localRepository: PackageRepositoryFactory
+                    .Default
+                    .CreateRepository(webRepositoryDirectory),
                 project: new WebProjectSystem(siteRoot)
             );
         }

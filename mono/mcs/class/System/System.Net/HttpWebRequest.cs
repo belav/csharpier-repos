@@ -1838,9 +1838,9 @@ namespace System.Net
                 if (isProxy && (request.proxy == null || request.proxy.Credentials == null))
                     return false;
 
-                string[] authHeaders = response.Headers.GetValues(
-                    isProxy ? "Proxy-Authenticate" : "WWW-Authenticate"
-                );
+                string[] authHeaders = response
+                    .Headers
+                    .GetValues(isProxy ? "Proxy-Authenticate" : "WWW-Authenticate");
                 if (authHeaders == null || authHeaders.Length == 0)
                     return false;
 
@@ -1867,9 +1867,9 @@ namespace System.Net
             {
                 isCompleted = false;
                 ntlm_auth_state = NtlmAuthState.None;
-                request.webHeaders.RemoveInternal(
-                    isProxy ? "Proxy-Authorization" : "Authorization"
-                );
+                request
+                    .webHeaders
+                    .RemoveInternal(isProxy ? "Proxy-Authorization" : "Authorization");
             }
 
             public override string ToString()

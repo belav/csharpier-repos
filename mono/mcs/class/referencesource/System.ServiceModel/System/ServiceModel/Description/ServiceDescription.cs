@@ -113,10 +113,15 @@ namespace System.ServiceModel.Description
         {
             Type type = serviceDescription.ServiceType;
 
-            System.ServiceModel.Description.TypeLoader.ApplyServiceInheritance<
-                IServiceBehavior,
-                KeyedByTypeCollection<IServiceBehavior>
-            >(type, serviceDescription.Behaviors, ServiceDescription.GetIServiceBehaviorAttributes);
+            System
+                .ServiceModel
+                .Description
+                .TypeLoader
+                .ApplyServiceInheritance<IServiceBehavior, KeyedByTypeCollection<IServiceBehavior>>(
+                    type,
+                    serviceDescription.Behaviors,
+                    ServiceDescription.GetIServiceBehaviorAttributes
+                );
 
             ServiceBehaviorAttribute serviceBehavior = EnsureBehaviorAttribute(serviceDescription);
 
@@ -147,9 +152,11 @@ namespace System.ServiceModel.Description
             );
             if (constructor == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor))
+                    );
             }
 
             // Stop the partially trusted callers to use the ServiceDescription.GetService(Type) method to
@@ -186,11 +193,16 @@ namespace System.ServiceModel.Description
                         methodAccessException,
                         TraceEventType.Warning
                     );
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(
-                            SR.GetString(SR.PartialTrustServiceCtorNotVisible, serviceType.FullName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(
+                                    SR.PartialTrustServiceCtorNotVisible,
+                                    serviceType.FullName
+                                )
+                            )
+                        );
                 }
                 else
                 {
@@ -221,11 +233,13 @@ namespace System.ServiceModel.Description
                 ServiceEndpoint endpoint = this.Endpoints[i];
                 if (endpoint == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.AChannelServiceEndpointIsNull0)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.AChannelServiceEndpointIsNull0)
+                            )
+                        );
                 }
                 endpoint.EnsureInvariants();
             }
@@ -271,9 +285,9 @@ namespace System.ServiceModel.Description
         {
             if (serviceImplementation == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "serviceImplementation"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("serviceImplementation");
             }
 
             Type serviceType = serviceImplementation.GetType();

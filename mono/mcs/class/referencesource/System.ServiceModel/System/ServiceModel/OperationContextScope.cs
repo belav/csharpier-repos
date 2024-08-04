@@ -83,19 +83,29 @@ namespace System.ServiceModel
                 ServiceModelAppSettings.DisableOperationContextAsyncFlow
                 && this.thread != Thread.CurrentThread
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxInvalidContextScopeThread0))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxInvalidContextScopeThread0)
+                        )
+                    );
 
             if (CurrentScope != this)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxInterleavedContextScopes0))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SFxInterleavedContextScopes0))
+                    );
 
             if (OperationContext.Current != this.currentContext)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxContextModifiedInsideScope0))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxContextModifiedInsideScope0)
+                        )
+                    );
 
             CurrentScope = this.originalScope;
             OperationContext.Current = this.originalContext;

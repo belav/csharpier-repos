@@ -33,9 +33,11 @@ namespace System.ServiceModel.Security
             }
             else if (this.State != EncryptionState.Decrypted)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(SR.GetString(SR.BadEncryptionState))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(SR.GetString(SR.BadEncryptionState))
+                    );
             }
         }
 
@@ -82,9 +84,11 @@ namespace System.ServiceModel.Security
         {
             if (this.State != EncryptionState.Read)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(SR.GetString(SR.BadEncryptionState))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(SR.GetString(SR.BadEncryptionState))
+                    );
             }
             if (algorithm == null)
             {
@@ -98,9 +102,11 @@ namespace System.ServiceModel.Security
         {
             if (this.State != EncryptionState.New)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(SR.GetString(SR.BadEncryptionState))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(SR.GetString(SR.BadEncryptionState))
+                    );
             }
             if (algorithm == null)
             {

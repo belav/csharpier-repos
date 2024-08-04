@@ -585,12 +585,14 @@ namespace System.ServiceModel.Description
         void ExportParameters(CodeMemberMethod method, ParameterInfo[] parameters)
         {
             foreach (ParameterInfo pi in parameters)
-                method.Parameters.Add(
-                    new CodeParameterDeclarationExpression(
-                        new CodeTypeReference(pi.ParameterType),
-                        pi.Name
-                    )
-                );
+                method
+                    .Parameters
+                    .Add(
+                        new CodeParameterDeclarationExpression(
+                            new CodeTypeReference(pi.ParameterType),
+                            pi.Name
+                        )
+                    );
         }
 
         void AddImplementationClientMethods(CodeTypeDeclaration type, ContractDescription cd)
@@ -817,9 +819,9 @@ namespace System.ServiceModel.Description
                 retCreate.Initializers.Add(new CodeVariableReferenceExpression("__ret"));
             }
             foreach (var outArgRef in outArgRefs)
-                retCreate.Initializers.Add(
-                    new CodeVariableReferenceExpression(outArgRef.VariableName)
-                );
+                retCreate
+                    .Initializers
+                    .Add(new CodeVariableReferenceExpression(outArgRef.VariableName));
 
             cm.Statements.Add(new CodeMethodReturnStatement(retCreate));
 
@@ -895,28 +897,30 @@ namespace System.ServiceModel.Description
             {
                 Attributes = MemberAttributes.Public | MemberAttributes.Final,
             };
-            argsCtor.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(object[]), "results")
-            );
-            argsCtor.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(Exception), "error")
-            );
-            argsCtor.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(bool), "cancelled")
-            );
-            argsCtor.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(object), "userState")
-            );
+            argsCtor
+                .Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(object[]), "results"));
+            argsCtor
+                .Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(Exception), "error"));
+            argsCtor
+                .Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(bool), "cancelled"));
+            argsCtor
+                .Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(object), "userState"));
             argsCtor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("error"));
             argsCtor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("cancelled"));
             argsCtor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("userState"));
             var resultsField = new CodeFieldReferenceExpression(thisExpr, "results");
-            argsCtor.Statements.Add(
-                new CodeAssignStatement(
-                    resultsField,
-                    new CodeArgumentReferenceExpression("results")
-                )
-            );
+            argsCtor
+                .Statements
+                .Add(
+                    new CodeAssignStatement(
+                        resultsField,
+                        new CodeArgumentReferenceExpression("results")
+                    )
+                );
             argsType.Members.Add(argsCtor);
 
             argsType.Members.Add(new CodeMemberField(typeof(object[]), "results"));
@@ -929,17 +933,19 @@ namespace System.ServiceModel.Description
                     Type = resultType,
                     Attributes = MemberAttributes.Public | MemberAttributes.Final,
                 };
-                resultProp.GetStatements.Add(
-                    new CodeMethodReturnStatement(
-                        new CodeCastExpression(
-                            resultProp.Type,
-                            new CodeArrayIndexerExpression(
-                                resultsField,
-                                new CodePrimitiveExpression(0)
+                resultProp
+                    .GetStatements
+                    .Add(
+                        new CodeMethodReturnStatement(
+                            new CodeCastExpression(
+                                resultProp.Type,
+                                new CodeArrayIndexerExpression(
+                                    resultsField,
+                                    new CodePrimitiveExpression(0)
+                                )
                             )
                         )
-                    )
-                );
+                    );
                 argsType.Members.Add(resultProp);
             }
 
@@ -1124,12 +1130,14 @@ namespace System.ServiceModel.Description
                 {
                     ExportDataContract(parts[i]);
 
-                    method.Parameters.Add(
-                        new CodeParameterDeclarationExpression(
-                            parts[i].CodeTypeReference,
-                            parts[i].Name
-                        )
-                    );
+                    method
+                        .Parameters
+                        .Add(
+                            new CodeParameterDeclarationExpression(
+                                parts[i].CodeTypeReference,
+                                parts[i].Name
+                            )
+                        );
 
                     if (return_args)
                         args[i] = new CodeArgumentReferenceExpression(parts[i].Name);

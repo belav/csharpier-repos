@@ -122,10 +122,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
                     && !objectCreationExpression.ArgumentList.CloseParenToken.IsMissing
                 )
                 {
-                    var symbolInfo = document.SemanticModel.GetSymbolInfo(
-                        objectCreationExpression.Type,
-                        cancellationToken
-                    );
+                    var symbolInfo = document
+                        .SemanticModel
+                        .GetSymbolInfo(objectCreationExpression.Type, cancellationToken);
                     token = simpleName.Identifier;
                     arguments = GetArguments(objectCreationExpression.ArgumentList.Arguments);
                     typeToGenerateIn = symbolInfo.GetAnySymbol() as INamedTypeSymbol;
@@ -160,10 +159,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
                     && !attribute.ArgumentList.CloseParenToken.IsMissing
                 )
                 {
-                    var symbolInfo = document.SemanticModel.GetSymbolInfo(
-                        attribute,
-                        cancellationToken
-                    );
+                    var symbolInfo = document
+                        .SemanticModel
+                        .GetSymbolInfo(attribute, cancellationToken);
                     if (
                         symbolInfo.CandidateReason == CandidateReason.OverloadResolutionFailure
                         && !symbolInfo.CandidateSymbols.IsEmpty
@@ -201,10 +199,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
                 && !implicitObjectCreation.ArgumentList.CloseParenToken.IsMissing
             )
             {
-                var typeInfo = document.SemanticModel.GetTypeInfo(
-                    implicitObjectCreation,
-                    cancellationToken
-                );
+                var typeInfo = document
+                    .SemanticModel
+                    .GetTypeInfo(implicitObjectCreation, cancellationToken);
                 if (typeInfo.Type is INamedTypeSymbol typeSymbol)
                 {
                     token = implicitObjectCreation.NewKeyword;
@@ -266,9 +263,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
             if (
                 constructor.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken)
                     is ConstructorDeclarationSyntax constructorDeclarationSyntax
-                && constructorDeclarationSyntax.Initializer.IsKind(
-                    SyntaxKind.ThisConstructorInitializer
-                )
+                && constructorDeclarationSyntax
+                    .Initializer
+                    .IsKind(SyntaxKind.ThisConstructorInitializer)
             )
             {
                 return semanticModel

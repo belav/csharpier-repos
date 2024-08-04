@@ -132,9 +132,9 @@ internal class UrlMatchingTree
             )
 #endif
             {
-                current.Matches.Add(
-                    new InboundMatch() { Entry = entry, TemplateMatcher = matcher }
-                );
+                current
+                    .Matches
+                    .Add(new InboundMatch() { Entry = entry, TemplateMatcher = matcher });
             }
 
 #if !COMPONENTS
@@ -243,29 +243,31 @@ internal class UrlMatchingTree
         }
 
         current.Matches.Add(new InboundMatch() { Entry = entry, TemplateMatcher = matcher });
-        current.Matches.Sort(
-            (x, y) =>
-            {
-                var result = x.Entry.Precedence.CompareTo(y.Entry.Precedence);
+        current
+            .Matches
+            .Sort(
+                (x, y) =>
+                {
+                    var result = x.Entry.Precedence.CompareTo(y.Entry.Precedence);
 #if !COMPONENTS
-                return result == 0
-                    ? string.Compare(
-                        x.Entry.RouteTemplate.TemplateText,
-                        y.Entry.RouteTemplate.TemplateText,
-                        StringComparison.Ordinal
-                    )
-                    : result;
+                    return result == 0
+                        ? string.Compare(
+                            x.Entry.RouteTemplate.TemplateText,
+                            y.Entry.RouteTemplate.TemplateText,
+                            StringComparison.Ordinal
+                        )
+                        : result;
 #else
-                return result == 0
-                    ? string.Compare(
-                        x.Entry.RoutePattern.RawText,
-                        y.Entry.RoutePattern.RawText,
-                        StringComparison.Ordinal
-                    )
-                    : result;
+                    return result == 0
+                        ? string.Compare(
+                            x.Entry.RoutePattern.RawText,
+                            y.Entry.RoutePattern.RawText,
+                            StringComparison.Ordinal
+                        )
+                        : result;
 #endif
-            }
-        );
+                }
+            );
     }
 
 #if !COMPONENTS

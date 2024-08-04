@@ -1750,9 +1750,9 @@ namespace System.Data.Query.PlanCompiler
                 {
                     //SQLBUDT #507170 - We can't just add the sort keys, we need to copy them,
                     // to avoid changes to one to affect the other
-                    inputNestOp.PrefixSortKeys.Add(
-                        Command.CreateSortKey(sk.Var, sk.AscendingSort, sk.Collation)
-                    );
+                    inputNestOp
+                        .PrefixSortKeys
+                        .Add(Command.CreateSortKey(sk.Var, sk.AscendingSort, sk.Collation));
                 }
                 result = inputNestOp;
             }

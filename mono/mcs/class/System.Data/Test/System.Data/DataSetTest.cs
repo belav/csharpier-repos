@@ -1825,13 +1825,13 @@ namespace MonoTests.System.Data
 
             ds.Tables.Add(new DataTable("ExampleDataTable"));
             ds.Tables["ExampleDataTable"]
-                .Columns.Add(
-                    new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute)
-                );
+                .Columns
+                .Add(new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute));
             ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"].AllowDBNull = false;
 
             ds.Tables["ExampleDataTable"]
-                .Constraints.Add(
+                .Constraints
+                .Add(
                     "PK_ExampleDataTable",
                     ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"],
                     true
@@ -2035,7 +2035,8 @@ namespace MonoTests.System.Data
             ds.Tables.Add("MyType");
 
             ds.Tables["MyType"]
-                .Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
+                .Columns
+                .Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
             ds.Tables["MyType"].Columns["Desc"].MaxLength = 32;
 
             ds.AcceptChanges();
@@ -2370,9 +2371,11 @@ namespace MonoTests.System.Data
             parent.Columns.Add("id", typeof(int));
             child.Columns.Add("ref_id", typeof(int));
 
-            child.Constraints.Add(
-                new ForeignKeyConstraint("fk_constraint", parent.Columns[0], child.Columns[0])
-            );
+            child
+                .Constraints
+                .Add(
+                    new ForeignKeyConstraint("fk_constraint", parent.Columns[0], child.Columns[0])
+                );
 
             DataRow dr = parent.NewRow();
             dr[0] = 1;

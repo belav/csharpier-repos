@@ -18,10 +18,12 @@ class FakeTrustedRealms : ITrustedRealmService
     public IRealmReferral? ProposeTransit(KrbTgsReq tgsReq, PreAuthenticationContext context)
     {
         if (
-            !tgsReq.Body.SName.FullyQualifiedName.EndsWith(
-                _currentRealm,
-                StringComparison.InvariantCultureIgnoreCase
-            ) && !tgsReq.Body.SName.FullyQualifiedName.Contains("not.found")
+            !tgsReq
+                .Body
+                .SName
+                .FullyQualifiedName
+                .EndsWith(_currentRealm, StringComparison.InvariantCultureIgnoreCase)
+            && !tgsReq.Body.SName.FullyQualifiedName.Contains("not.found")
         )
         {
             return new FakeRealmReferral(tgsReq.Body);

@@ -66,9 +66,11 @@ namespace MonoTests.System.Windows.Forms
 
             // I
             ImageList myImageList = new ImageList();
-            myImageList.Images.Add(
-                Image.FromFile(TestResourceHelper.GetFullPathOfResource("Test/resources/M.gif"))
-            );
+            myImageList
+                .Images
+                .Add(
+                    Image.FromFile(TestResourceHelper.GetFullPathOfResource("Test/resources/M.gif"))
+                );
             myToolBar.ImageList = myImageList;
             Assert.AreEqual(1, myToolBar.ImageList.Images.Count, "#I1");
             Assert.AreEqual(16, myToolBar.ImageSize.Height, "#I2");

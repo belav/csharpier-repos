@@ -388,16 +388,22 @@ namespace System.Runtime.Serialization
 #if MONO
         private static Object nativeGetUninitializedObject(RuntimeType type)
         {
-            return System.Runtime.Remoting.Activation.ActivationServices.AllocateUninitializedClassInstance(
-                type
-            );
+            return System
+                .Runtime
+                .Remoting
+                .Activation
+                .ActivationServices
+                .AllocateUninitializedClassInstance(type);
         }
 
         private static Object nativeGetSafeUninitializedObject(RuntimeType type)
         {
-            return System.Runtime.Remoting.Activation.ActivationServices.AllocateUninitializedClassInstance(
-                type
-            );
+            return System
+                .Runtime
+                .Remoting
+                .Activation
+                .ActivationServices
+                .AllocateUninitializedClassInstance(type);
         }
 #else
         [System.Security.SecurityCritical] // auto-generated

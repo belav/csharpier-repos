@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 
             var languageName = GetLanguageName(invocationInfo);
             var languageServices = workspace
-                .Services.GetLanguageServices(languageName)
+                .Services
+                .GetLanguageServices(languageName)
                 .LanguageServices;
 
             var mapPath = GetPathMapper(invocationInfo);
@@ -76,8 +77,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 }
             }
 
-            var documentationProvider =
-                workspace.Services.GetRequiredService<IDocumentationProviderService>();
+            var documentationProvider = workspace
+                .Services
+                .GetRequiredService<IDocumentationProviderService>();
             var commandLineParserService =
                 languageServices.GetRequiredService<ICommandLineParserService>();
             var parsedCommandLine = commandLineParserService.Parse(
@@ -107,24 +109,26 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 parsedCommandLine.ParseOptions,
                 parsedCommandLine.SourceFiles.Select(s => CreateDocumentInfo(unmappedPath: s.Path)),
                 projectReferences: null,
-                metadataReferences: parsedCommandLine.MetadataReferences.Select(r =>
-                {
-                    var mappedPath = mapPath(r.Reference);
-                    return MetadataReference.CreateFromFile(
-                        mappedPath,
-                        r.Properties,
-                        documentationProvider.GetDocumentationProvider(mappedPath)
-                    );
-                }),
-                additionalDocuments: parsedCommandLine.AdditionalFiles.Select(f =>
-                    CreateDocumentInfo(unmappedPath: f.Path)
-                ),
-                analyzerReferences: parsedCommandLine.AnalyzerReferences.Select(
-                    r => new AnalyzerFileReference(r.FilePath, analyzerLoader)
-                ),
-                analyzerConfigDocuments: parsedCommandLine.AnalyzerConfigPaths.Select(
-                    CreateDocumentInfo
-                ),
+                metadataReferences: parsedCommandLine
+                    .MetadataReferences
+                    .Select(r =>
+                    {
+                        var mappedPath = mapPath(r.Reference);
+                        return MetadataReference.CreateFromFile(
+                            mappedPath,
+                            r.Properties,
+                            documentationProvider.GetDocumentationProvider(mappedPath)
+                        );
+                    }),
+                additionalDocuments: parsedCommandLine
+                    .AdditionalFiles
+                    .Select(f => CreateDocumentInfo(unmappedPath: f.Path)),
+                analyzerReferences: parsedCommandLine
+                    .AnalyzerReferences
+                    .Select(r => new AnalyzerFileReference(r.FilePath, analyzerLoader)),
+                analyzerConfigDocuments: parsedCommandLine
+                    .AnalyzerConfigPaths
+                    .Select(CreateDocumentInfo),
                 hostObjectType: null
             );
 

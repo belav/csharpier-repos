@@ -36,10 +36,9 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase
         var level1 = level1Builder.Metadata;
 
         ForeignKey level2Fk;
-        var level2 = level1.Model.AddEntityType(
-            "Level1.OneToOne_Required_PK1#Level2",
-            typeof(Level2)
-        );
+        var level2 = level1
+            .Model
+            .AddEntityType("Level1.OneToOne_Required_PK1#Level2", typeof(Level2));
         using (var batch = ((Model)modelBuilder.Model).ConventionDispatcher.DelayConventions())
         {
             level2Fk = (ForeignKey)
@@ -187,10 +186,12 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase
             .IsRequired(false);
 
         ForeignKey level3Fk;
-        var level3 = level2.Model.AddEntityType(
-            "Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3",
-            typeof(Level3)
-        );
+        var level3 = level2
+            .Model
+            .AddEntityType(
+                "Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3",
+                typeof(Level3)
+            );
         using (var batch = ((Model)level2.Model).ConventionDispatcher.DelayConventions())
         {
             level3Fk = (ForeignKey)
@@ -252,10 +253,12 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase
             .IsRequired(false);
 
         ForeignKey level4Fk;
-        var level4 = level3.Model.AddEntityType(
-            "Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3.OneToOne_Required_PK3#Level4",
-            typeof(Level4)
-        );
+        var level4 = level3
+            .Model
+            .AddEntityType(
+                "Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3.OneToOne_Required_PK3#Level4",
+                typeof(Level4)
+            );
         using (var batch = ((Model)level3.Model).ConventionDispatcher.DelayConventions())
         {
             level4Fk = (ForeignKey)

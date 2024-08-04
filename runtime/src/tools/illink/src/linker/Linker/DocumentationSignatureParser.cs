@@ -107,11 +107,10 @@ namespace Mono.Linker
         static string GetSignaturePart(TypeReference type, ITryResolveMetadata resolver)
         {
             var builder = new StringBuilder();
-            DocumentationSignatureGenerator.PartVisitor.Instance.VisitTypeReference(
-                type,
-                builder,
-                resolver
-            );
+            DocumentationSignatureGenerator
+                .PartVisitor
+                .Instance
+                .VisitTypeReference(type, builder, resolver);
             return builder.ToString();
         }
 

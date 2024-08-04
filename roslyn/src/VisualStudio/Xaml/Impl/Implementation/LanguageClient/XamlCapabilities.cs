@@ -23,7 +23,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                     ResolveProvider = true,
                     TriggerCharacters = ["<", " ", ":", ".", "=", "\"", "'", "{", ",", "("],
                     AllCommitCharacters = RoslynCompletion
-                        .CompletionRules.Default.DefaultCommitCharacters.Select(c => c.ToString())
+                        .CompletionRules
+                        .Default
+                        .DefaultCommitCharacters
+                        .Select(c => c.ToString())
                         .ToArray(),
                 },
                 HoverProvider = true,

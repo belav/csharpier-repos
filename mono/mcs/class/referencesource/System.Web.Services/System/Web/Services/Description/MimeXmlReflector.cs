@@ -42,11 +42,9 @@ namespace System.Web.Services.Description
 
                 LogicalMethodInfo methodInfo = ReflectionContext.Method;
                 XmlAttributes a = new XmlAttributes(methodInfo.ReturnTypeCustomAttributeProvider);
-                XmlTypeMapping xmlTypeMapping =
-                    ReflectionContext.ReflectionImporter.ImportTypeMapping(
-                        methodInfo.ReturnType,
-                        a.XmlRoot
-                    );
+                XmlTypeMapping xmlTypeMapping = ReflectionContext
+                    .ReflectionImporter
+                    .ImportTypeMapping(methodInfo.ReturnType, a.XmlRoot);
                 xmlTypeMapping.SetKey(methodInfo.GetKey() + ":Return");
                 ReflectionContext.SchemaExporter.ExportTypeMapping(xmlTypeMapping);
                 part.Element = new XmlQualifiedName(

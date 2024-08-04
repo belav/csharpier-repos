@@ -37,9 +37,11 @@ namespace System.Web.DynamicData.ModelProviders
             {
                 EntityType value = (EntityType)
                     navigationProperty
-                        .ToEndMember.TypeUsage.EdmType.MetadataProperties.Single(prop =>
-                            prop.Name == "ElementType"
-                        )
+                        .ToEndMember
+                        .TypeUsage
+                        .EdmType
+                        .MetadataProperties
+                        .Single(prop => prop.Name == "ElementType")
                         .Value;
                 ToTable = parentEntityModel.TableEndLookup[value];
             }
@@ -81,7 +83,9 @@ namespace System.Web.DynamicData.ModelProviders
             {
                 var foreignKeyNames = new List<string>();
                 var primaryKeyNames = FromColumn
-                    .Table.Columns.Where(c => c.IsPrimaryKey)
+                    .Table
+                    .Columns
+                    .Where(c => c.IsPrimaryKey)
                     .Select(c => c.Name);
 
                 // Add the foreign keys for this association.
@@ -180,10 +184,9 @@ namespace System.Web.DynamicData.ModelProviders
                     // to build a foreign key name of the form "Item.ItemID", but we want just "ItemID".
                     AssociationType relationshipType = (AssociationType)
                         navigationProperty.RelationshipType;
-                    ReferentialConstraint constraint =
-                        relationshipType.ReferentialConstraints.FirstOrDefault(c =>
-                            c.ToRole == navigationProperty.ToEndMember
-                        );
+                    ReferentialConstraint constraint = relationshipType
+                        .ReferentialConstraints
+                        .FirstOrDefault(c => c.ToRole == navigationProperty.ToEndMember);
                     if (constraint != null)
                     {
                         return constraint.FromProperties.Select(p => p.Name);
@@ -192,8 +195,10 @@ namespace System.Web.DynamicData.ModelProviders
                     // Fall back on the primary keys if no constraints were found but only if we are on the parent side. i.e the 1 side Item side in an Item-ItemDetail
                     // Get the primary keys on the "from" side of the relationship. i.e Product.Category -> ProductID
                     return navigationProperty
-                        .FromEndMember.GetEntityType()
-                        .KeyMembers.Select(m => m.Name);
+                        .FromEndMember
+                        .GetEntityType()
+                        .KeyMembers
+                        .Select(m => m.Name);
                 }
             }
             return navigationProperty.GetDependentProperties().Select(m => m.Name);

@@ -223,9 +223,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                 WriteAttribute(
                     @"Ignore",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Boolean)((global::System.Boolean)o.@Ignore)
-                    )
+                    System
+                        .Xml
+                        .XmlConvert
+                        .ToString((global::System.Boolean)((global::System.Boolean)o.@Ignore))
                 );
             }
             if (o.@IsMergeResultSpecified)
@@ -233,9 +234,12 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                 WriteAttribute(
                     @"IsMergeResult",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Boolean)((global::System.Boolean)o.@IsMergeResult)
-                    )
+                    System
+                        .Xml
+                        .XmlConvert
+                        .ToString(
+                            (global::System.Boolean)((global::System.Boolean)o.@IsMergeResult)
+                        )
                 );
             }
             if (o.@SourceIdSpecified)
@@ -243,9 +247,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                 WriteAttribute(
                     @"SourceId",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Int32)((global::System.Int32)o.@SourceId)
-                    )
+                    System
+                        .Xml
+                        .XmlConvert
+                        .ToString((global::System.Int32)((global::System.Int32)o.@SourceId))
                 );
             }
             WriteAttribute(@"SourceUrl", @"", ((global::System.String)o.@SourceUrl));
@@ -325,9 +330,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
             WriteAttribute(
                 @"SourceId",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@SourceId)
-                )
+                System
+                    .Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@SourceId))
             );
             WriteEndElement(o);
         }
@@ -361,28 +367,39 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
             WriteElementStringRaw(
                 @"GenerateAsynchronousMethods",
                 @"urn:schemas-microsoft-com:xml-wcfservicemap",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Boolean)((global::System.Boolean)o.@GenerateAsynchronousMethods)
-                )
+                System
+                    .Xml
+                    .XmlConvert
+                    .ToString(
+                        (global::System.Boolean)(
+                            (global::System.Boolean)o.@GenerateAsynchronousMethods
+                        )
+                    )
             );
             if (o.@GenerateTaskBasedAsynchronousMethodSpecified)
             {
                 WriteElementStringRaw(
                     @"GenerateTaskBasedAsynchronousMethod",
                     @"urn:schemas-microsoft-com:xml-wcfservicemap",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Boolean)(
-                            (global::System.Boolean)o.@GenerateTaskBasedAsynchronousMethod
+                    System
+                        .Xml
+                        .XmlConvert
+                        .ToString(
+                            (global::System.Boolean)(
+                                (global::System.Boolean)o.@GenerateTaskBasedAsynchronousMethod
+                            )
                         )
-                    )
                 );
             }
             WriteElementStringRaw(
                 @"EnableDataBinding",
                 @"urn:schemas-microsoft-com:xml-wcfservicemap",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Boolean)((global::System.Boolean)o.@EnableDataBinding)
-                )
+                System
+                    .Xml
+                    .XmlConvert
+                    .ToString(
+                        (global::System.Boolean)((global::System.Boolean)o.@EnableDataBinding)
+                    )
             );
             {
                 global::System.Collections.Generic.List<global::System.Web.Compilation.WCFModel.ReferencedType> a =
@@ -414,23 +431,32 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
             WriteElementStringRaw(
                 @"ImportXmlTypes",
                 @"urn:schemas-microsoft-com:xml-wcfservicemap",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Boolean)((global::System.Boolean)o.@ImportXmlTypes)
-                )
+                System
+                    .Xml
+                    .XmlConvert
+                    .ToString((global::System.Boolean)((global::System.Boolean)o.@ImportXmlTypes))
             );
             WriteElementStringRaw(
                 @"GenerateInternalTypes",
                 @"urn:schemas-microsoft-com:xml-wcfservicemap",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Boolean)((global::System.Boolean)o.@GenerateInternalTypes)
-                )
+                System
+                    .Xml
+                    .XmlConvert
+                    .ToString(
+                        (global::System.Boolean)((global::System.Boolean)o.@GenerateInternalTypes)
+                    )
             );
             WriteElementStringRaw(
                 @"GenerateMessageContracts",
                 @"urn:schemas-microsoft-com:xml-wcfservicemap",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Boolean)((global::System.Boolean)o.@GenerateMessageContracts)
-                )
+                System
+                    .Xml
+                    .XmlConvert
+                    .ToString(
+                        (global::System.Boolean)(
+                            (global::System.Boolean)o.@GenerateMessageContracts
+                        )
+                    )
             );
             {
                 global::System.Collections.Generic.List<global::System.Web.Compilation.WCFModel.NamespaceMapping> a =
@@ -492,9 +518,14 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
             WriteElementStringRaw(
                 @"GenerateSerializableTypes",
                 @"urn:schemas-microsoft-com:xml-wcfservicemap",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Boolean)((global::System.Boolean)o.@GenerateSerializableTypes)
-                )
+                System
+                    .Xml
+                    .XmlConvert
+                    .ToString(
+                        (global::System.Boolean)(
+                            (global::System.Boolean)o.@GenerateSerializableTypes
+                        )
+                    )
             );
             WriteElementString(
                 @"Serializer",
@@ -511,9 +542,14 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                 WriteElementStringRaw(
                     @"UseSerializerForFaults",
                     @"urn:schemas-microsoft-com:xml-wcfservicemap",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Boolean)((global::System.Boolean)o.@UseSerializerForFaults)
-                    )
+                    System
+                        .Xml
+                        .XmlConvert
+                        .ToString(
+                            (global::System.Boolean)(
+                                (global::System.Boolean)o.@UseSerializerForFaults
+                            )
+                        )
                 );
             }
             if (o.@WrappedSpecified)
@@ -521,17 +557,21 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                 WriteElementStringRaw(
                     @"Wrapped",
                     @"urn:schemas-microsoft-com:xml-wcfservicemap",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Boolean)((global::System.Boolean)o.@Wrapped)
-                    )
+                    System
+                        .Xml
+                        .XmlConvert
+                        .ToString((global::System.Boolean)((global::System.Boolean)o.@Wrapped))
                 );
             }
             WriteElementStringRaw(
                 @"ReferenceAllAssemblies",
                 @"urn:schemas-microsoft-com:xml-wcfservicemap",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Boolean)((global::System.Boolean)o.@ReferenceAllAssemblies)
-                )
+                System
+                    .Xml
+                    .XmlConvert
+                    .ToString(
+                        (global::System.Boolean)((global::System.Boolean)o.@ReferenceAllAssemblies)
+                    )
             );
             {
                 global::System.Collections.Generic.List<global::System.Web.Compilation.WCFModel.ReferencedAssembly> a =
@@ -1692,9 +1732,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     )
                     {
                         {
-                            o.@GenerateAsynchronousMethods = System.Xml.XmlConvert.ToBoolean(
-                                Reader.ReadElementString()
-                            );
+                            o.@GenerateAsynchronousMethods = System
+                                .Xml
+                                .XmlConvert
+                                .ToBoolean(Reader.ReadElementString());
                         }
                         paramsRead[0] = true;
                     }
@@ -1707,8 +1748,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     )
                     {
                         {
-                            o.@GenerateTaskBasedAsynchronousMethod =
-                                System.Xml.XmlConvert.ToBoolean(Reader.ReadElementString());
+                            o.@GenerateTaskBasedAsynchronousMethod = System
+                                .Xml
+                                .XmlConvert
+                                .ToBoolean(Reader.ReadElementString());
                         }
                         paramsRead[1] = true;
                     }
@@ -1721,9 +1764,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     )
                     {
                         {
-                            o.@EnableDataBinding = System.Xml.XmlConvert.ToBoolean(
-                                Reader.ReadElementString()
-                            );
+                            o.@EnableDataBinding = System
+                                .Xml
+                                .XmlConvert
+                                .ToBoolean(Reader.ReadElementString());
                         }
                         paramsRead[2] = true;
                     }
@@ -1800,9 +1844,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     )
                     {
                         {
-                            o.@ImportXmlTypes = System.Xml.XmlConvert.ToBoolean(
-                                Reader.ReadElementString()
-                            );
+                            o.@ImportXmlTypes = System
+                                .Xml
+                                .XmlConvert
+                                .ToBoolean(Reader.ReadElementString());
                         }
                         paramsRead[4] = true;
                     }
@@ -1815,9 +1860,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     )
                     {
                         {
-                            o.@GenerateInternalTypes = System.Xml.XmlConvert.ToBoolean(
-                                Reader.ReadElementString()
-                            );
+                            o.@GenerateInternalTypes = System
+                                .Xml
+                                .XmlConvert
+                                .ToBoolean(Reader.ReadElementString());
                         }
                         paramsRead[5] = true;
                     }
@@ -1830,9 +1876,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     )
                     {
                         {
-                            o.@GenerateMessageContracts = System.Xml.XmlConvert.ToBoolean(
-                                Reader.ReadElementString()
-                            );
+                            o.@GenerateMessageContracts = System
+                                .Xml
+                                .XmlConvert
+                                .ToBoolean(Reader.ReadElementString());
                         }
                         paramsRead[6] = true;
                     }
@@ -1975,9 +2022,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     )
                     {
                         {
-                            o.@GenerateSerializableTypes = System.Xml.XmlConvert.ToBoolean(
-                                Reader.ReadElementString()
-                            );
+                            o.@GenerateSerializableTypes = System
+                                .Xml
+                                .XmlConvert
+                                .ToBoolean(Reader.ReadElementString());
                         }
                         paramsRead[9] = true;
                     }
@@ -2003,9 +2051,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     )
                     {
                         {
-                            o.@UseSerializerForFaults = System.Xml.XmlConvert.ToBoolean(
-                                Reader.ReadElementString()
-                            );
+                            o.@UseSerializerForFaults = System
+                                .Xml
+                                .XmlConvert
+                                .ToBoolean(Reader.ReadElementString());
                         }
                         paramsRead[11] = true;
                     }
@@ -2018,9 +2067,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     )
                     {
                         {
-                            o.@Wrapped = System.Xml.XmlConvert.ToBoolean(
-                                Reader.ReadElementString()
-                            );
+                            o.@Wrapped = System
+                                .Xml
+                                .XmlConvert
+                                .ToBoolean(Reader.ReadElementString());
                         }
                         paramsRead[12] = true;
                     }
@@ -2033,9 +2083,10 @@ namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
                     )
                     {
                         {
-                            o.@ReferenceAllAssemblies = System.Xml.XmlConvert.ToBoolean(
-                                Reader.ReadElementString()
-                            );
+                            o.@ReferenceAllAssemblies = System
+                                .Xml
+                                .XmlConvert
+                                .ToBoolean(Reader.ReadElementString());
                         }
                         paramsRead[13] = true;
                     }

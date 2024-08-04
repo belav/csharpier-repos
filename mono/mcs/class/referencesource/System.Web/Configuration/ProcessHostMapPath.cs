@@ -329,11 +329,14 @@ namespace System.Web.Configuration
                     // Add to the cache.
                     // No need to have a lock here. UtcAdd will add the entry if it doesn't exist.
                     // If it does exist, the existing value will be returned (Dev10 Bug 755034).
-                    object existingEntry = HttpRuntime.Cache.InternalCache.Add(
-                        cacheKey,
-                        cacheInfo,
-                        new CacheInsertOptions() { SlidingExpiration = slidingExpiration }
-                    );
+                    object existingEntry = HttpRuntime
+                        .Cache
+                        .InternalCache
+                        .Add(
+                            cacheKey,
+                            cacheInfo,
+                            new CacheInsertOptions() { SlidingExpiration = slidingExpiration }
+                        );
                     if (existingEntry != null)
                     {
                         cacheInfo = existingEntry as MapPathCacheInfo;

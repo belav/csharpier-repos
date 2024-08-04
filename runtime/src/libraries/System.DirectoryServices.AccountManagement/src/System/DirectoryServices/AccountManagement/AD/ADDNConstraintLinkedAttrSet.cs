@@ -118,7 +118,8 @@ namespace System.DirectoryServices.AccountManagement
                             else
                                 dn = ((DirectoryEntry)this.current)
                                     .Properties["distinguishedName"]
-                                    .Value.ToString();
+                                    .Value
+                                    .ToString();
 
                             if (dn.EndsWith((string)_constraintData, StringComparison.Ordinal))
                                 match = true;

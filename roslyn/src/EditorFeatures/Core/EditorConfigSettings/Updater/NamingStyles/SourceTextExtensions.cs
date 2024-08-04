@@ -123,10 +123,13 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                 NamingStylePreferences csharp,
                 NamingStylePreferences visualBasic
             ) =>
-                csharp.Rules.NamingRules.Intersect(
-                    visualBasic.Rules.NamingRules,
-                    NamingRuleComparerIgnoreGUIDs.Instance
-                );
+                csharp
+                    .Rules
+                    .NamingRules
+                    .Intersect(
+                        visualBasic.Rules.NamingRules,
+                        NamingRuleComparerIgnoreGUIDs.Instance
+                    );
 
             static IEnumerable<NamingRule> GetOptionsUniqueOptions(
                 NamingStylePreferences csharp,
@@ -144,26 +147,23 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
             public bool Equals(NamingRule left, NamingRule right)
             {
                 return left.EnforcementLevel == right.EnforcementLevel
-                    && NamingStyleComparerIgnoreGUIDs.Instance.Equals(
-                        left.NamingStyle,
-                        right.NamingStyle
-                    )
-                    && SymbolSpecificationComparerIgnoreGUIDs.Instance.Equals(
-                        left.SymbolSpecification,
-                        right.SymbolSpecification
-                    );
+                    && NamingStyleComparerIgnoreGUIDs
+                        .Instance
+                        .Equals(left.NamingStyle, right.NamingStyle)
+                    && SymbolSpecificationComparerIgnoreGUIDs
+                        .Instance
+                        .Equals(left.SymbolSpecification, right.SymbolSpecification);
             }
 
             public int GetHashCode(NamingRule rule)
             {
                 var enforcementLevelHashCode = (int)rule.EnforcementLevel;
-                var namingStyleHashCode = NamingStyleComparerIgnoreGUIDs.Instance.GetHashCode(
-                    rule.NamingStyle
-                );
-                var symbolSpecificationHashCode =
-                    SymbolSpecificationComparerIgnoreGUIDs.Instance.GetHashCode(
-                        rule.SymbolSpecification
-                    );
+                var namingStyleHashCode = NamingStyleComparerIgnoreGUIDs
+                    .Instance
+                    .GetHashCode(rule.NamingStyle);
+                var symbolSpecificationHashCode = SymbolSpecificationComparerIgnoreGUIDs
+                    .Instance
+                    .GetHashCode(rule.SymbolSpecification);
                 return Hash.Combine(
                     enforcementLevelHashCode,
                     Hash.Combine(namingStyleHashCode, symbolSpecificationHashCode)

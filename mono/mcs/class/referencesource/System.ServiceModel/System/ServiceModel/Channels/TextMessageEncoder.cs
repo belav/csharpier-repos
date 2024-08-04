@@ -96,11 +96,13 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.EnvelopeVersionNotSupported, version.Envelope)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.EnvelopeVersionNotSupported, version.Envelope)
+                        )
+                    );
             }
             return mediaType;
         }
@@ -261,17 +263,21 @@ namespace System.ServiceModel.Channels
             }
             catch (FormatException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(SR.GetString(SR.EncoderBadContentType), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ProtocolException(SR.GetString(SR.EncoderBadContentType), e)
+                    );
             }
 
             if (TryGetEncodingFromCharSet(charSet, out enc))
                 return enc;
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new ProtocolException(SR.GetString(SR.EncoderUnrecognizedCharSet, charSet))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new ProtocolException(SR.GetString(SR.EncoderUnrecognizedCharSet, charSet))
+                );
         }
 
         internal static bool TryGetEncodingFromCharSet(string charSet, out Encoding encoding)
@@ -324,9 +330,9 @@ namespace System.ServiceModel.Channels
                 if (version == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("version");
                 if (writeEncoding == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "writeEncoding"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("writeEncoding");
 
                 TextEncoderDefaults.ValidateEncoding(writeEncoding);
                 this.writeEncoding = writeEncoding;
@@ -366,11 +372,13 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.EnvelopeVersionNotSupported, version.Envelope)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.EnvelopeVersionNotSupported, version.Envelope)
+                            )
+                        );
                 }
             }
 
@@ -469,9 +477,9 @@ namespace System.ServiceModel.Channels
             )
             {
                 if (bufferManager == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("bufferManager")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("bufferManager"));
 
                 if (TD.TextMessageDecodingStartIsEnabled())
                 {
@@ -515,9 +523,9 @@ namespace System.ServiceModel.Channels
             )
             {
                 if (stream == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("stream")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("stream"));
 
                 if (TD.TextMessageDecodingStartIsEnabled())
                 {
@@ -551,9 +559,9 @@ namespace System.ServiceModel.Channels
             )
             {
                 if (message == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("message")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("message"));
                 if (bufferManager == null)
                     throw TraceUtility.ThrowHelperError(
                         new ArgumentNullException("bufferManager"),
@@ -629,9 +637,9 @@ namespace System.ServiceModel.Channels
             public override void WriteMessage(Message message, Stream stream)
             {
                 if (message == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("message")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("message"));
                 if (stream == null)
                     throw TraceUtility.ThrowHelperError(
                         new ArgumentNullException("stream"),
@@ -680,9 +688,9 @@ namespace System.ServiceModel.Channels
             )
             {
                 if (message == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("message")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("message"));
                 if (stream == null)
                     throw TraceUtility.ThrowHelperError(
                         new ArgumentNullException("stream"),

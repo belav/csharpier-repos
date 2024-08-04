@@ -40,11 +40,13 @@ public class InputTextArea : InputBase<string?>
         builder.AddAttribute(
             5,
             "onchange",
-            EventCallback.Factory.CreateBinder<string?>(
-                this,
-                __value => CurrentValueAsString = __value,
-                CurrentValueAsString
-            )
+            EventCallback
+                .Factory
+                .CreateBinder<string?>(
+                    this,
+                    __value => CurrentValueAsString = __value,
+                    CurrentValueAsString
+                )
         );
         builder.SetUpdatesAttributeName("value");
         builder.AddElementReferenceCapture(6, __inputReference => Element = __inputReference);

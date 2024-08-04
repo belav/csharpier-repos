@@ -128,17 +128,19 @@ public static class MapRouteRouteBuilderExtensions
             );
         }
 
-        routeBuilder.Routes.Add(
-            new Route(
-                routeBuilder.DefaultHandler,
-                name,
-                template,
-                new RouteValueDictionary(defaults),
-                new RouteValueDictionary(constraints)!,
-                new RouteValueDictionary(dataTokens),
-                CreateInlineConstraintResolver(routeBuilder.ServiceProvider)
-            )
-        );
+        routeBuilder
+            .Routes
+            .Add(
+                new Route(
+                    routeBuilder.DefaultHandler,
+                    name,
+                    template,
+                    new RouteValueDictionary(defaults),
+                    new RouteValueDictionary(constraints)!,
+                    new RouteValueDictionary(dataTokens),
+                    CreateInlineConstraintResolver(routeBuilder.ServiceProvider)
+                )
+            );
 
         return routeBuilder;
     }

@@ -167,7 +167,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 // reuse any existing cached data for it.  This also ensures that we can do things like find the same
                 // method body node prior to an edit just by counting it's top-level index in the file.
                 var topLevelSemanticVersion = await document
-                    .Project.GetDependentSemanticVersionAsync(cancellationToken)
+                    .Project
+                    .GetDependentSemanticVersionAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 // If we are able to reuse a semantic model, then ensure that this is now the semantic model we're now

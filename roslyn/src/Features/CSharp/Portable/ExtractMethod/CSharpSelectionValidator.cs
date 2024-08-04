@@ -188,9 +188,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return selectionInfo;
             }
 
-            var expressionNode = selectionInfo.FirstTokenInFinalSpan.GetCommonRoot(
-                selectionInfo.LastTokenInFinalSpan
-            );
+            var expressionNode = selectionInfo
+                .FirstTokenInFinalSpan
+                .GetCommonRoot(selectionInfo.LastTokenInFinalSpan);
             if (!expressionNode.IsAnyAssignExpression())
             {
                 return selectionInfo;
@@ -238,9 +238,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
 
             // get the node that covers the selection
-            var node = selectionInfo.FirstTokenInFinalSpan.GetCommonRoot(
-                selectionInfo.LastTokenInFinalSpan
-            );
+            var node = selectionInfo
+                .FirstTokenInFinalSpan
+                .GetCommonRoot(selectionInfo.LastTokenInFinalSpan);
 
             var validNode = Check(semanticModel, node, cancellationToken);
             if (validNode)
@@ -415,9 +415,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
 
             // get the node that covers the selection
-            var commonNode = selectionInfo.FirstTokenInFinalSpan.GetCommonRoot(
-                selectionInfo.LastTokenInFinalSpan
-            );
+            var commonNode = selectionInfo
+                .FirstTokenInFinalSpan
+                .GetCommonRoot(selectionInfo.LastTokenInFinalSpan);
 
             if (
                 (selectionInfo.SelectionInExpression || selectionInfo.SelectionInSingleStatement)
@@ -555,8 +555,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             if (statement1 == statement2)
             {
                 // check one more time to see whether it is an expression case
-                var expression =
-                    selectionInfo.CommonRootFromOriginalSpan.GetAncestor<ExpressionSyntax>();
+                var expression = selectionInfo
+                    .CommonRootFromOriginalSpan
+                    .GetAncestor<ExpressionSyntax>();
                 if (expression != null && statement1.Span.Contains(expression.Span))
                 {
                     return selectionInfo

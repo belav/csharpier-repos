@@ -189,14 +189,16 @@ namespace System.Web.Compilation
             // [EditorBrowsable(EditorBrowsableState.Never)]
             CodeAttributeDeclaration editorBrowsableAttribute = new CodeAttributeDeclaration();
             editorBrowsableAttribute.Name = typeof(EditorBrowsableAttribute).FullName;
-            editorBrowsableAttribute.Arguments.Add(
-                new CodeAttributeArgument(
-                    new CodeFieldReferenceExpression(
-                        new CodeTypeReferenceExpression(typeof(EditorBrowsableState)),
-                        "Never"
+            editorBrowsableAttribute
+                .Arguments
+                .Add(
+                    new CodeAttributeArgument(
+                        new CodeFieldReferenceExpression(
+                            new CodeTypeReferenceExpression(typeof(EditorBrowsableState)),
+                            "Never"
+                        )
                     )
-                )
-            );
+                );
             member.CustomAttributes.Add(editorBrowsableAttribute);
         }
 
@@ -303,11 +305,13 @@ namespace System.Web.Compilation
                     _sourceDataClass = new CodeTypeDeclaration(generatedClassName);
                     // VSWhidbey 411701. Always use global type reference for the baseType
                     // when codefile is present.
-                    _sourceDataClass.BaseTypes.Add(
-                        CodeDomUtility.BuildGlobalCodeTypeReference(
-                            Util.MakeFullTypeName(Parser.BaseTypeNamespace, Parser.BaseTypeName)
-                        )
-                    );
+                    _sourceDataClass
+                        .BaseTypes
+                        .Add(
+                            CodeDomUtility.BuildGlobalCodeTypeReference(
+                                Util.MakeFullTypeName(Parser.BaseTypeNamespace, Parser.BaseTypeName)
+                            )
+                        );
 
                     _sourceDataNamespace.Types.Add(_sourceDataClass);
                 }
@@ -317,9 +321,9 @@ namespace System.Web.Compilation
                 // The page is not using code besides
 
                 _intermediateClass = new CodeTypeDeclaration(generatedClassName);
-                _intermediateClass.BaseTypes.Add(
-                    CodeDomUtility.BuildGlobalCodeTypeReference(Parser.BaseType)
-                );
+                _intermediateClass
+                    .BaseTypes
+                    .Add(CodeDomUtility.BuildGlobalCodeTypeReference(Parser.BaseType));
                 _sourceDataNamespace.Types.Add(_intermediateClass);
 
                 // There is only one class, so make both fields point to the same thing
@@ -463,12 +467,14 @@ namespace System.Web.Compilation
 
             this.BuildInitStatements(initializedCondition.TrueStatements, _ctor.Statements);
 
-            initializedCondition.TrueStatements.Add(
-                new CodeAssignStatement(
-                    new CodeFieldReferenceExpression(_classTypeExpr, initializedFieldName),
-                    new CodePrimitiveExpression(true)
-                )
-            );
+            initializedCondition
+                .TrueStatements
+                .Add(
+                    new CodeAssignStatement(
+                        new CodeFieldReferenceExpression(_classTypeExpr, initializedFieldName),
+                        new CodePrimitiveExpression(true)
+                    )
+                );
 
             // i.e. __intialized = true;
             _ctor.Statements.Add(initializedCondition);

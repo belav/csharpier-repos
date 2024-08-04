@@ -241,8 +241,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             // Defer to the host we're in to determine the sort of result to return.  In simple hosts this will just be
             // a Location.  In richer hosts this can include far more data to enhance the user experience.
-            var service =
-                _workspace.Services.GetRequiredService<ILspReferencesResultCreationService>();
+            var service = _workspace
+                .Services
+                .GetRequiredService<ILspReferencesResultCreationService>();
             return service.CreateReference(
                 definitionId,
                 id,

@@ -55,14 +55,16 @@ namespace System.ServiceModel.Dispatcher
 
             if (durableInstance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.InvokeCalledWithWrongType,
-                            typeof(DurableServiceAttribute).Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.InvokeCalledWithWrongType,
+                                typeof(DurableServiceAttribute).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             object serviceInstance = durableInstance.StartOperation(this.canCreateInstance);
@@ -114,14 +116,16 @@ namespace System.ServiceModel.Dispatcher
 
             if (durableInstance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.InvokeCalledWithWrongType,
-                            typeof(DurableServiceAttribute).Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.InvokeCalledWithWrongType,
+                                typeof(DurableServiceAttribute).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             return new InvokeAsyncResult(
@@ -250,11 +254,14 @@ namespace System.ServiceModel.Dispatcher
 
                 try
                 {
-                    invokeResult.returnValue = invokeResult.invoker.innerInvoker.InvokeEnd(
-                        invokeResult.serviceInstance,
-                        out invokeResult.outputs,
-                        resultParameter
-                    );
+                    invokeResult.returnValue = invokeResult
+                        .invoker
+                        .innerInvoker
+                        .InvokeEnd(
+                            invokeResult.serviceInstance,
+                            out invokeResult.outputs,
+                            resultParameter
+                        );
                 }
                 catch (Exception e)
                 {
@@ -294,9 +301,9 @@ namespace System.ServiceModel.Dispatcher
 
                 try
                 {
-                    invokeResult.serviceInstance = invokeResult.durableInstance.EndStartOperation(
-                        resultParameter
-                    );
+                    invokeResult.serviceInstance = invokeResult
+                        .durableInstance
+                        .EndStartOperation(resultParameter);
                 }
                 catch (Exception e)
                 {
@@ -367,21 +374,16 @@ namespace System.ServiceModel.Dispatcher
                         )
                     )
                     {
-                        result = this.invoker.innerInvoker.InvokeBegin(
-                            this.serviceInstance,
-                            this.inputs,
-                            invokeCallback,
-                            this
-                        );
+                        result = this.invoker
+                            .innerInvoker
+                            .InvokeBegin(this.serviceInstance, this.inputs, invokeCallback, this);
                     }
 
                     if (result.CompletedSynchronously)
                     {
-                        this.returnValue = this.invoker.innerInvoker.InvokeEnd(
-                            this.serviceInstance,
-                            out this.outputs,
-                            result
-                        );
+                        this.returnValue = this.invoker
+                            .innerInvoker
+                            .InvokeEnd(this.serviceInstance, out this.outputs, result);
                         finishNow = true;
                     }
                 }

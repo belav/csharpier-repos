@@ -28,9 +28,9 @@ public class RedisProtocolTests
         CreateTestData("Uint32", 70_000, 0x91, 0xCE, 0x00, 0x01, 0x11, 0x70),
     }.ToDictionary(t => t.Name);
 
-    public static IEnumerable<object[]> AckTestData = _ackTestData.Keys.Select(k =>
-        new object[] { k }
-    );
+    public static IEnumerable<object[]> AckTestData = _ackTestData
+        .Keys
+        .Select(k => new object[] { k });
 
     [Theory]
     [MemberData(nameof(AckTestData))]
@@ -89,9 +89,9 @@ public class RedisProtocolTests
         ),
     }.ToDictionary(t => t.Name);
 
-    public static IEnumerable<object[]> GroupCommandTestData = _groupCommandTestData.Keys.Select(
-        k => new object[] { k }
-    );
+    public static IEnumerable<object[]> GroupCommandTestData = _groupCommandTestData
+        .Keys
+        .Select(k => new object[] { k });
 
     [Theory]
     [MemberData(nameof(GroupCommandTestData))]
@@ -210,9 +210,9 @@ public class RedisProtocolTests
         ),
     }.ToDictionary(t => t.Name);
 
-    public static IEnumerable<object[]> InvocationTestData = _invocationTestData.Keys.Select(k =>
-        new object[] { k }
-    );
+    public static IEnumerable<object[]> InvocationTestData = _invocationTestData
+        .Keys
+        .Select(k => new object[] { k });
 
     [Theory]
     [MemberData(nameof(InvocationTestData))]
@@ -404,8 +404,9 @@ public class RedisProtocolTests
         ), // 42
     }.ToDictionary(t => t.Name);
 
-    public static IEnumerable<object[]> CompletionMessageTestData =
-        _completionMessageTestData.Keys.Select(k => new object[] { k });
+    public static IEnumerable<object[]> CompletionMessageTestData = _completionMessageTestData
+        .Keys
+        .Select(k => new object[] { k });
 
     [Theory]
     [MemberData(nameof(CompletionMessageTestData))]

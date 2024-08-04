@@ -230,7 +230,8 @@ namespace MonoTests.System.IO.IsolatedStorageTest
             Assert.IsTrue((isf.AssemblyIdentity is Url), "AssemblyIdentity");
             Assert.IsTrue(
                 (
-                    isf.AssemblyIdentity.ToString()
+                    isf.AssemblyIdentity
+                        .ToString()
                         .IndexOf(Assembly.GetExecutingAssembly().CodeBase) > 0
                 ),
                 "Url"

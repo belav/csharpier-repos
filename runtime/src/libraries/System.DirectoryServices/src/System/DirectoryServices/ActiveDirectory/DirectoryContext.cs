@@ -764,9 +764,11 @@ namespace System.DirectoryServices.ActiveDirectory
                         {
                             throw ExceptionHelper.GetExceptionFromErrorCode(
                                 (int)
-                                    global::Interop.Advapi32.LsaNtStatusToWinError(
-                                        (result != 0) ? result : protocolStatus
-                                    )
+                                    global::Interop
+                                        .Advapi32
+                                        .LsaNtStatusToWinError(
+                                            (result != 0) ? result : protocolStatus
+                                        )
                             );
                         }
                     }
@@ -873,9 +875,9 @@ namespace System.DirectoryServices.ActiveDirectory
             // not get the ADAM handle
             // got to the windows\adam directory
             DirectoryInfo windowsDirectory = Directory.GetParent(systemPath)!;
-            tempHandle = global::Interop.Kernel32.LoadLibrary(
-                windowsDirectory.FullName + "\\ADAM\\ntdsapi.dll"
-            );
+            tempHandle = global::Interop
+                .Kernel32
+                .LoadLibrary(windowsDirectory.FullName + "\\ADAM\\ntdsapi.dll");
             if (tempHandle == (IntPtr)0)
             {
                 ADAMHandle = ADHandle;

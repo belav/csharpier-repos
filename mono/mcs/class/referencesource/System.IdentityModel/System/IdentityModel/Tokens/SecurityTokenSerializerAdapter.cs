@@ -38,9 +38,9 @@ namespace System.IdentityModel.Tokens
         {
             if (securityTokenHandlerCollection == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenHandlerCollection"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenHandlerCollection");
             }
             _securityTokenHandlers = securityTokenHandlerCollection;
 
@@ -151,10 +151,9 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperXml(
-                    reader,
-                    SR.GetString(SR.ID4192)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperXml(reader, SR.GetString(SR.ID4192));
             }
         }
 
@@ -216,9 +215,9 @@ namespace System.IdentityModel.Tokens
 
             return (_securityTokenHandlers.KeyInfoSerializer == null)
                 ? false
-                : _securityTokenHandlers.KeyInfoSerializer.CanWriteKeyIdentifierClause(
-                    keyIdentifierClause
-                );
+                : _securityTokenHandlers
+                    .KeyInfoSerializer
+                    .CanWriteKeyIdentifierClause(keyIdentifierClause);
         }
 
         /// <summary>

@@ -53,10 +53,9 @@ namespace System.Collections.Immutable
         )
             where TKey : notnull
         {
-            return ImmutableSortedDictionary<TKey, TValue>.Empty.WithComparers(
-                keyComparer,
-                valueComparer
-            );
+            return ImmutableSortedDictionary<TKey, TValue>
+                .Empty
+                .WithComparers(keyComparer, valueComparer);
         }
 
         /// <summary>
@@ -89,7 +88,8 @@ namespace System.Collections.Immutable
             where TKey : notnull
         {
             return ImmutableSortedDictionary<TKey, TValue>
-                .Empty.WithComparers(keyComparer)
+                .Empty
+                .WithComparers(keyComparer)
                 .AddRange(items);
         }
 
@@ -110,7 +110,8 @@ namespace System.Collections.Immutable
             where TKey : notnull
         {
             return ImmutableSortedDictionary<TKey, TValue>
-                .Empty.WithComparers(keyComparer, valueComparer)
+                .Empty
+                .WithComparers(keyComparer, valueComparer)
                 .AddRange(items);
         }
 
@@ -188,7 +189,8 @@ namespace System.Collections.Immutable
             Requires.NotNull(elementSelector, nameof(elementSelector));
 
             return ImmutableSortedDictionary<TKey, TValue>
-                .Empty.WithComparers(keyComparer, valueComparer)
+                .Empty
+                .WithComparers(keyComparer, valueComparer)
                 .AddRange(
                     source.Select(element => new KeyValuePair<TKey, TValue>(
                         keySelector(element),
@@ -296,7 +298,8 @@ namespace System.Collections.Immutable
             }
 
             return ImmutableSortedDictionary<TKey, TValue>
-                .Empty.WithComparers(keyComparer, valueComparer)
+                .Empty
+                .WithComparers(keyComparer, valueComparer)
                 .AddRange(source);
         }
 

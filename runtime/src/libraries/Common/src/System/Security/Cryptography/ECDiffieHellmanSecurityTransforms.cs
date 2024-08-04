@@ -243,12 +243,9 @@ namespace System.Security.Cryptography
                     // 66 bytes ((521 + 7) / 8), the Span path will always succeed.
                     Span<byte> secretSpan = stackalloc byte[66];
 
-                    byte[]? secret = Interop.AppleCrypto.EcdhKeyAgree(
-                        thisPrivate,
-                        otherPublic,
-                        secretSpan,
-                        out int bytesWritten
-                    );
+                    byte[]? secret = Interop
+                        .AppleCrypto
+                        .EcdhKeyAgree(thisPrivate, otherPublic, secretSpan, out int bytesWritten);
 
                     // Either we wrote to the span or we returned an array, but not both, and not neither.
                     // ("neither" would have thrown)

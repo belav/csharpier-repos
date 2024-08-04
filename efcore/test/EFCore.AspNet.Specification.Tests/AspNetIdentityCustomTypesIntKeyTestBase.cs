@@ -50,7 +50,8 @@ public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
             async context =>
             {
                 var user = await context
-                    .Users.Include(e => e.Claims)
+                    .Users
+                    .Include(e => e.Claims)
                     .Include(e => e.Logins)
                     .Include(e => e.Tokens)
                     .Include(e => e.UserRoles)

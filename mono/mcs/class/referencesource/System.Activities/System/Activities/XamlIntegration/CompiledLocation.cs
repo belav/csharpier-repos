@@ -279,11 +279,13 @@ namespace System.Activities.XamlIntegration
                     return compiledExpressionRoot;
                 }
             }
-            throw FxTrace.Exception.AsError(
-                new InvalidOperationException(
-                    SR.UnableToLocateCompiledLocationContext(this.expressionText)
-                )
-            );
+            throw FxTrace
+                .Exception
+                .AsError(
+                    new InvalidOperationException(
+                        SR.UnableToLocateCompiledLocationContext(this.expressionText)
+                    )
+                );
         }
 
         bool FindCompiledExpressionRoot(
@@ -354,9 +356,11 @@ namespace System.Activities.XamlIntegration
                 // We should never hit this, these references are strictly for preserving location names/types
                 // through persistence to allow for revalidation on the other side
                 // Actual execution occurs through the locations that were stored separately
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.CompiledLocationReferenceGetLocation)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.CompiledLocationReferenceGetLocation)
+                    );
             }
         }
     }

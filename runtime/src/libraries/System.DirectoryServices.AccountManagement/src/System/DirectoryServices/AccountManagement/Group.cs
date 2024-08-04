@@ -186,10 +186,9 @@ namespace System.DirectoryServices.AccountManagement
                             "Members: persisted, querying group membership"
                         );
 
-                        BookmarkableResultSet refs = ContextRaw.QueryCtx.GetGroupMembership(
-                            this,
-                            false
-                        );
+                        BookmarkableResultSet refs = ContextRaw
+                            .QueryCtx
+                            .GetGroupMembership(this, false);
                         _members = new PrincipalCollection(refs, this);
                     }
                     else

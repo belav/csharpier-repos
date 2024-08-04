@@ -260,12 +260,12 @@ namespace System.Windows.Forms
             MenuItem close = new MenuItem("&Close", new EventHandler(CloseItemHandler));
             MenuItem next = new MenuItem("Nex&t", new EventHandler(NextItemHandler));
 
-            icon_menu.MenuItems.AddRange(
-                new MenuItem[] { restore, move, size, minimize, maximize, close, next }
-            );
-            icon_popup_menu.MenuItems.AddRange(
-                new MenuItem[] { restore, move, size, minimize, maximize, close, next }
-            );
+            icon_menu
+                .MenuItems
+                .AddRange(new MenuItem[] { restore, move, size, minimize, maximize, close, next });
+            icon_popup_menu
+                .MenuItems
+                .AddRange(new MenuItem[] { restore, move, size, minimize, maximize, close, next });
         }
 
         private void ClickIconMenuItem(object sender, EventArgs e)

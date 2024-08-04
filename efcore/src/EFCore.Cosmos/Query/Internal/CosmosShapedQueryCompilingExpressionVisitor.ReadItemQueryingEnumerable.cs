@@ -69,16 +69,17 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
         {
             partitionKey = null;
 
-            var partitionKeyPropertyName =
-                _readItemExpression.EntityType.GetPartitionKeyPropertyName();
+            var partitionKeyPropertyName = _readItemExpression
+                .EntityType
+                .GetPartitionKeyPropertyName();
             if (partitionKeyPropertyName == null)
             {
                 return true;
             }
 
-            var partitionKeyProperty = _readItemExpression.EntityType.FindProperty(
-                partitionKeyPropertyName
-            );
+            var partitionKeyProperty = _readItemExpression
+                .EntityType
+                .FindProperty(partitionKeyPropertyName);
 
             if (TryGetParameterValue(partitionKeyProperty, out var value))
             {
@@ -93,7 +94,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
         private bool TryGetResourceId(out string resourceId)
         {
             var idProperty = _readItemExpression
-                .EntityType.GetProperties()
+                .EntityType
+                .GetProperties()
                 .FirstOrDefault(p =>
                     p.GetJsonPropertyName() == StoreKeyConvention.IdPropertyJsonName
                 );
@@ -124,10 +126,10 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
         private bool TryGetParameterValue(IProperty property, out object value)
         {
             value = null;
-            return _readItemExpression.PropertyParameters.TryGetValue(
-                    property,
-                    out var parameterName
-                ) && _cosmosQueryContext.ParameterValues.TryGetValue(parameterName, out value);
+            return _readItemExpression
+                    .PropertyParameters
+                    .TryGetValue(property, out var parameterName)
+                && _cosmosQueryContext.ParameterValues.TryGetValue(parameterName, out value);
         }
 
         private static string GetString(IProperty property, object value)
@@ -238,11 +240,13 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
 
                             EntityFrameworkEventSource.Log.QueryExecuting();
 
-                            _item = _cosmosQueryContext.CosmosClient.ExecuteReadItem(
-                                _readItemExpression.Container,
-                                partitionKey,
-                                resourceId
-                            );
+                            _item = _cosmosQueryContext
+                                .CosmosClient
+                                .ExecuteReadItem(
+                                    _readItemExpression.Container,
+                                    partitionKey,
+                                    resourceId
+                                );
 
                             return ShapeResult();
                         }
@@ -296,7 +300,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                             EntityFrameworkEventSource.Log.QueryExecuting();
 
                             _item = await _cosmosQueryContext
-                                .CosmosClient.ExecuteReadItemAsync(
+                                .CosmosClient
+                                .ExecuteReadItemAsync(
                                     _readItemExpression.Container,
                                     partitionKey,
                                     resourceId,

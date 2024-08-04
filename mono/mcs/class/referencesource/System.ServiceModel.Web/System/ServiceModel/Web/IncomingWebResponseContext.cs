@@ -72,9 +72,9 @@ namespace System.ServiceModel.Web
                     return null;
                 }
                 if (
-                    !operationContext.IncomingMessageProperties.ContainsKey(
-                        HttpResponseMessageProperty.Name
-                    )
+                    !operationContext
+                        .IncomingMessageProperties
+                        .ContainsKey(HttpResponseMessageProperty.Name)
                 )
                 {
                     return null;
@@ -88,14 +88,16 @@ namespace System.ServiceModel.Web
         {
             if (this.MessageProperty == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.HttpContextNoIncomingMessageProperty,
-                            typeof(HttpResponseMessageProperty).Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.HttpContextNoIncomingMessageProperty,
+                                typeof(HttpResponseMessageProperty).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
             return this.MessageProperty;
         }

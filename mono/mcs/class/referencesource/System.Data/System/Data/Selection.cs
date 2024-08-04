@@ -105,9 +105,10 @@ namespace System.Data
         internal const Int32 MaskBits = unchecked((int)0x7FFFFFFF);
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        private readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         public Index(
             DataTable table,
@@ -418,7 +419,8 @@ namespace System.Data
                 // Need to use compare because subtraction will wrap
                 // to positive for very large neg numbers, etc.
                 return table
-                    .Rows.IndexOf(table.recordManager[record1])
+                    .Rows
+                    .IndexOf(table.recordManager[record1])
                     .CompareTo(table.Rows.IndexOf(table.recordManager[record2]));
             }
         }
@@ -471,7 +473,8 @@ namespace System.Data
             // to positive for very large neg numbers, etc.
             int diff = table
                 .recordManager[record1]
-                .rowID.CompareTo(table.recordManager[record2].rowID);
+                .rowID
+                .CompareTo(table.recordManager[record2].rowID);
 
             // if they're two records in the same row, we need to be able to distinguish them.
             if ((diff == 0) && (record1 != record2))

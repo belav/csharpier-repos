@@ -313,7 +313,8 @@ public class VisualStudioOptionStorageTests
             .CollectOptions(
                 Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
             )
-            .Values.Select(optionTestInfo => optionTestInfo.Option.Definition.Group)
+            .Values
+            .Select(optionTestInfo => optionTestInfo.Option.Definition.Group)
             .Distinct();
 
         var allGroupNames = allOptionGroups.Select(GetFullOptionGroupName);

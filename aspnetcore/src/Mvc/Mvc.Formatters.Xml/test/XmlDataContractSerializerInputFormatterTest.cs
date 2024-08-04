@@ -546,9 +546,9 @@ public class XmlDataContractSerializerInputFormatterTest
     {
         // Arrange
         var expectedException = typeof(XmlException);
-        var inpStart = Encoding.Unicode.GetBytes(
-            "<?xml version=\"1.0\" encoding=\"UTF-16\"?>" + "<DummyClass><SampleInt>"
-        );
+        var inpStart = Encoding
+            .Unicode
+            .GetBytes("<?xml version=\"1.0\" encoding=\"UTF-16\"?>" + "<DummyClass><SampleInt>");
         byte[] inp = { 192, 193 };
         var inpEnd = Encoding.Unicode.GetBytes("</SampleInt></DummyClass>");
 
@@ -572,10 +572,12 @@ public class XmlDataContractSerializerInputFormatterTest
         // Arrange
         var expectedException = typeof(XmlException);
 
-        var inputBytes = Encoding.UTF8.GetBytes(
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + "<DummyClass><SampleInt>1000</SampleInt></DummyClass>"
-        );
+        var inputBytes = Encoding
+            .UTF8
+            .GetBytes(
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                    + "<DummyClass><SampleInt>1000</SampleInt></DummyClass>"
+            );
 
         var formatter = new XmlDataContractSerializerInputFormatter(new MvcOptions());
 
@@ -607,12 +609,14 @@ public class XmlDataContractSerializerInputFormatterTest
         // Arrange
         var sampleString = "Test";
         var sampleStringBytes = Encoding.UTF8.GetBytes(sampleString);
-        var inputStart = Encoding.UTF8.GetBytes(
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                + Environment.NewLine
-                + "<TestLevelTwo><SampleString>"
-                + sampleString
-        );
+        var inputStart = Encoding
+            .UTF8
+            .GetBytes(
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                    + Environment.NewLine
+                    + "<TestLevelTwo><SampleString>"
+                    + sampleString
+            );
         byte[] bom = { 0xef, 0xbb, 0xbf };
         var inputEnd = Encoding.UTF8.GetBytes("</SampleString></TestLevelTwo>");
         var expectedBytes = new byte[sampleString.Length + bom.Length];

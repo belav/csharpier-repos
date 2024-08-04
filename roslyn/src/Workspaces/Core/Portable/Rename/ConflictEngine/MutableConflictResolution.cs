@@ -164,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         public ConflictResolution ToConflictResolution()
         {
             var documentIds = renamedSpansTracker
-                .DocumentIds.Concat(this.RelatedLocations.Select(l => l.DocumentId))
+                .DocumentIds
+                .Concat(this.RelatedLocations.Select(l => l.DocumentId))
                 .Distinct()
                 .ToImmutableArray();
 
@@ -173,8 +174,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             var documentToModifiedSpansMap = renamedSpansTracker.GetDocumentToModifiedSpansMap();
             var documentToComplexifiedSpansMap =
                 renamedSpansTracker.GetDocumentToComplexifiedSpansMap();
-            var documentToRelatedLocationsMap = this
-                .RelatedLocations.GroupBy(loc => loc.DocumentId)
+            var documentToRelatedLocationsMap = this.RelatedLocations
+                .GroupBy(loc => loc.DocumentId)
                 .ToImmutableDictionary(g => g.Key, g => g.ToImmutableArray());
 
             return new ConflictResolution(

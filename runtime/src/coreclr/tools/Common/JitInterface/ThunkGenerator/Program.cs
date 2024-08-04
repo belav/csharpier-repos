@@ -283,11 +283,9 @@ namespace Thunkerator
                 }
                 catch (Exception e)
                 {
-                    Console.Error.WriteLine(
-                        "Error parsing line {0} : {1}",
-                        currentLineIndex,
-                        e.Message
-                    );
+                    Console
+                        .Error
+                        .WriteLine("Error parsing line {0} : {1}", currentLineIndex, e.Message);
                 }
             }
 

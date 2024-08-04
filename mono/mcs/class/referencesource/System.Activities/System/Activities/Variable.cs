@@ -152,9 +152,11 @@ namespace System.Activities
         {
             if (!this.IsInTree)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.VariableNotOpen(this.Name, this.Type))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.VariableNotOpen(this.Name, this.Type))
+                    );
             }
         }
 
@@ -162,9 +164,9 @@ namespace System.Activities
         {
             if (this.IsHandle)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.CannotPerformOperationOnHandle)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.CannotPerformOperationOnHandle));
             }
         }
 
@@ -185,21 +187,23 @@ namespace System.Activities
             {
                 if (this.IsPublic || !object.ReferenceEquals(this.Owner, context.Activity))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.VariableOnlyAccessibleAtScopeOfDeclaration(
-                                context.Activity,
-                                this.Owner
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.VariableOnlyAccessibleAtScopeOfDeclaration(
+                                    context.Activity,
+                                    this.Owner
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 if (!context.Environment.TryGetLocation(this.Id, out location))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.VariableDoesNotExist(this.Name))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new InvalidOperationException(SR.VariableDoesNotExist(this.Name)));
                 }
             }
             else
@@ -208,9 +212,9 @@ namespace System.Activities
 
                 if (!context.Environment.TryGetLocation(this.Id, this.Owner, out location))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.VariableDoesNotExist(this.Name))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new InvalidOperationException(SR.VariableDoesNotExist(this.Name)));
                 }
             }
 
@@ -253,9 +257,9 @@ namespace System.Activities
             Location location;
             if (!environment.TryGetLocation(this.Id, this.Owner, out location))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.VariableDoesNotExist(this.Name))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.VariableDoesNotExist(this.Name)));
             }
             return location;
         }
@@ -544,17 +548,21 @@ namespace System.Activities
                         // We only allow sets on null or uninitialized handles
                         if (currentValue != null && currentValue.IsInitialized)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(SR.CannotPerformOperationOnHandle)
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(SR.CannotPerformOperationOnHandle)
+                                );
                         }
 
                         // We only allow setting it to null
                         if (value != null)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(SR.CannotPerformOperationOnHandle)
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(SR.CannotPerformOperationOnHandle)
+                                );
                         }
                     }
 
@@ -566,9 +574,11 @@ namespace System.Activities
                         }
                         else
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(SR.ConstVariableCannotBeSet)
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(SR.ConstVariableCannotBeSet)
+                                );
                         }
                     }
 

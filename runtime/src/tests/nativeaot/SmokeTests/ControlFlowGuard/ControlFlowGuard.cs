@@ -161,7 +161,8 @@ unsafe class ControlFlowGuardTests
             // and replace it with a new value that is not in the control flow guard bitmask.
             IntPtr toStringMethod = testOfString
                 .GetMethod("ToString")
-                .MethodHandle.GetFunctionPointer();
+                .MethodHandle
+                .GetFunctionPointer();
             var methodTableMemory = new Span<IntPtr>((void*)testOfString.TypeHandle.Value, 64);
             int slotIndex = methodTableMemory.IndexOf(toStringMethod);
             if (slotIndex < 0)

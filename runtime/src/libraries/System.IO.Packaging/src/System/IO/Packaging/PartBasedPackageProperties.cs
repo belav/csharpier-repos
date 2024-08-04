@@ -373,9 +373,9 @@ namespace System.IO.Packaging
 
             propertiesPart = _package.GetPart(propertiesPartUri);
             if (
-                !propertiesPart.ValidatedContentType.AreTypeAndSubTypeEqual(
-                    s_coreDocumentPropertiesContentType
-                )
+                !propertiesPart
+                    .ValidatedContentType
+                    .AreTypeAndSubTypeEqual(s_coreDocumentPropertiesContentType)
             )
             {
                 throw new FileFormatException(SR.WrongContentTypeForPropertyPart);

@@ -81,8 +81,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override MethodInfo[] GetAccessors(bool nonPublic)
         {
-            return this
-                .Property.GetAccessors(nonPublic)
+            return this.Property
+                .GetAccessors(nonPublic)
                 .Select(a => new MethodInfoImpl(a))
                 .ToArray();
         }
@@ -104,8 +104,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
-            return this
-                .Property.GetCustomAttributesData()
+            return this.Property
+                .GetCustomAttributesData()
                 .Select(a => new CustomAttributeDataImpl(a))
                 .ToArray();
         }
@@ -118,8 +118,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override ParameterInfo[] GetIndexParameters()
         {
-            return this
-                .Property.GetIndexParameters()
+            return this.Property
+                .GetIndexParameters()
                 .Select(p => new ParameterInfoImpl(p))
                 .ToArray();
         }

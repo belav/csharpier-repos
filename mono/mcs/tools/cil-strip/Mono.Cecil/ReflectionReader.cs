@@ -1275,9 +1275,9 @@ namespace Mono.Cecil
                     context.CheckProvider(instance.GetOriginalType(), ginst.Signature.Arity);
 
                     for (int i = 0; i < ginst.Signature.Arity; i++)
-                        instance.GenericArguments.Add(
-                            GetGenericArg(ginst.Signature.Types[i], context)
-                        );
+                        instance
+                            .GenericArguments
+                            .Add(GetGenericArg(ginst.Signature.Types[i], context));
 
                     return instance;
                 default:

@@ -98,10 +98,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             )
             {
                 var document = await result
-                    .NavigableItem.Document.GetRequiredDocumentAsync(
-                        project.Solution,
-                        cancellationToken
-                    )
+                    .NavigableItem
+                    .Document
+                    .GetRequiredDocumentAsync(project.Solution, cancellationToken)
                     .ConfigureAwait(false);
 
                 var location = await ProtocolConversions
@@ -116,8 +115,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 if (location == null)
                     return;
 
-                var service =
-                    project.Solution.Services.GetRequiredService<ILspSymbolInformationCreationService>();
+                var service = project
+                    .Solution
+                    .Services
+                    .GetRequiredService<ILspSymbolInformationCreationService>();
                 var symbolInfo = service.Create(
                     result.Name,
                     result.AdditionalInformation,

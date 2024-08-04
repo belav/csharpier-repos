@@ -184,7 +184,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ss.Set<OwnedPerson>()
                     .Select(p =>
-                        p.Orders.OrderBy(o => o.Id)
+                        p.Orders
+                            .OrderBy(o => o.Id)
                             .Select(o => o.Client.PersonAddress.Country.Name)
                             .FirstOrDefault()
                     )
@@ -267,8 +268,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .OrderBy(p => p.Id)
                     .Select(p => new
                     {
-                        Count = p
-                            .Orders.Where(o => o.Client.PersonAddress.Country.Planet.Star.Id != 42)
+                        Count = p.Orders
+                            .Where(o => o.Client.PersonAddress.Country.Planet.Star.Id != 42)
                             .Count(),
                         p.PersonAddress.Country.Planet,
                     }),
@@ -1293,8 +1294,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                             Assert.Equal(ee.Name, aa.Name);
                             Assert.Equal(ee.Composition.Count, aa.Composition.Count);
                             foreach (
-                                var (eec, aac) in ee
-                                    .Composition.OrderBy(eec => eec.Id)
+                                var (eec, aac) in ee.Composition
+                                    .OrderBy(eec => eec.Id)
                                     .Zip(aa.Composition.OrderBy(aac => aac.Id))
                             )
                             {

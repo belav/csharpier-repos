@@ -103,10 +103,10 @@ namespace System.Windows.Forms
                     // UIA Framework: Generate event to associate UserControl with ErrorProvider
                     ErrorProvider.OnUIAControlHookUp(control, new ControlEventArgs(window));
                     control.Parent.Controls.Add(window);
-                    control.Parent.Controls.SetChildIndex(
-                        window,
-                        control.Parent.Controls.IndexOf(control) + 1
-                    );
+                    control
+                        .Parent
+                        .Controls
+                        .SetChildIndex(window, control.Parent.Controls.IndexOf(control) + 1);
                 }
 
                 window.Paint += new PaintEventHandler(window_Paint);
@@ -313,10 +313,10 @@ namespace System.Windows.Forms
                     // UIA Framework: Generate event to disassociate UserControl with ErrorProvider
                     ErrorProvider.OnUIAControlUnhookUp(control, new ControlEventArgs(window));
                     control.Parent.Controls.Add(window);
-                    control.Parent.Controls.SetChildIndex(
-                        window,
-                        control.Parent.Controls.IndexOf(control) + 1
-                    );
+                    control
+                        .Parent
+                        .Controls
+                        .SetChildIndex(window, control.Parent.Controls.IndexOf(control) + 1);
 
                     // UIA Framework: Generate event to associate UserControl with ErrorProvider
                     ErrorProvider.OnUIAControlHookUp(control, new ControlEventArgs(window));

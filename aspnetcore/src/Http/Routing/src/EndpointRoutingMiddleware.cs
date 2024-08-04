@@ -340,7 +340,8 @@ internal sealed partial class EndpointRoutingMiddleware
     {
         var sizeLimitMetadata = context
             .GetEndpoint()
-            ?.Metadata?.GetMetadata<IRequestSizeLimitMetadata>();
+            ?.Metadata
+            ?.GetMetadata<IRequestSizeLimitMetadata>();
         if (sizeLimitMetadata == null)
         {
             Log.RequestSizeLimitMetadataNotFound(_logger);

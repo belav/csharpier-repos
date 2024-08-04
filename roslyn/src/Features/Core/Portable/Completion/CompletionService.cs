@@ -180,8 +180,9 @@ namespace Microsoft.CodeAnalysis.Completion
                 return char.IsLetterOrDigit(trigger.Character) || trigger.Character == '.';
             }
 
-            var extensionManager =
-                languageServices.SolutionServices.GetRequiredService<IExtensionManager>();
+            var extensionManager = languageServices
+                .SolutionServices
+                .GetRequiredService<IExtensionManager>();
 
             var providers = _providerManager.GetFilteredProviders(project, roles, trigger, options);
             return providers.Any(p =>
@@ -268,8 +269,12 @@ namespace Microsoft.CodeAnalysis.Completion
             if (provider is null)
                 return CompletionDescription.Empty;
 
-            var extensionManager =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+            var extensionManager = document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetRequiredService<IExtensionManager>();
 
             // We don't need SemanticModel here, just want to make sure it won't get GC'd before CompletionProviders are able to get it.
             (document, var semanticModel) = await GetDocumentWithFrozenPartialSemanticsAsync(
@@ -314,8 +319,12 @@ namespace Microsoft.CodeAnalysis.Completion
             var provider = GetProvider(item, document.Project);
             if (provider != null)
             {
-                var extensionManager =
-                    document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+                var extensionManager = document
+                    .Project
+                    .Solution
+                    .Workspace
+                    .Services
+                    .GetRequiredService<IExtensionManager>();
 
                 // We don't need SemanticModel here, just want to make sure it won't get GC'd before CompletionProviders are able to get it.
                 (document, var semanticModel) = await GetDocumentWithFrozenPartialSemanticsAsync(
@@ -504,14 +513,16 @@ namespace Microsoft.CodeAnalysis.Completion
                 ImmutableHashSet<string> roles
             ) =>
                 _completionServiceWithProviders
-                    ._providerManager.GetTestAccessor()
+                    ._providerManager
+                    .GetTestAccessor()
                     .GetImportedAndBuiltInProviders(roles);
 
             public Task<ImmutableArray<CompletionProvider>> GetProjectProvidersAsync(
                 Project project
             ) =>
                 _completionServiceWithProviders
-                    ._providerManager.GetTestAccessor()
+                    ._providerManager
+                    .GetTestAccessor()
                     .GetProjectProvidersAsync(project);
 
             public async Task<CompletionContext> GetContextAsync(

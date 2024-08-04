@@ -59,9 +59,9 @@ namespace System.ServiceModel.Activation
             {
                 fileMapping.SetHandleAsInvalid();
                 fileMapping.Close();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(errorCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(errorCode));
             }
 
             SharedMemory sharedMemory = new SharedMemory(fileMapping);
@@ -122,9 +122,9 @@ namespace System.ServiceModel.Activation
                     return false;
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(errorCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(errorCode));
             }
         }
 
@@ -137,9 +137,9 @@ namespace System.ServiceModel.Activation
                 return content;
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new Win32Exception(UnsafeNativeMethods.ERROR_FILE_NOT_FOUND)
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new Win32Exception(UnsafeNativeMethods.ERROR_FILE_NOT_FOUND));
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
@@ -163,9 +163,9 @@ namespace System.ServiceModel.Activation
                     return false;
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(errorCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(errorCode));
             }
 
             try

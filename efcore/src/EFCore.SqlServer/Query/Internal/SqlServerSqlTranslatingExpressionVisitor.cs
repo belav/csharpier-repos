@@ -155,13 +155,15 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
             var isBinaryMaxDataType =
                 GetProviderType(sqlExpression) == "varbinary(max)"
                 || sqlExpression is SqlParameterExpression;
-            var dataLengthSqlFunction = Dependencies.SqlExpressionFactory.Function(
-                "DATALENGTH",
-                new[] { sqlExpression },
-                nullable: true,
-                argumentsPropagateNullability: new[] { true },
-                isBinaryMaxDataType ? typeof(long) : typeof(int)
-            );
+            var dataLengthSqlFunction = Dependencies
+                .SqlExpressionFactory
+                .Function(
+                    "DATALENGTH",
+                    new[] { sqlExpression },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { true },
+                    isBinaryMaxDataType ? typeof(long) : typeof(int)
+                );
 
             return isBinaryMaxDataType
                 ? Dependencies.SqlExpressionFactory.Convert(dataLengthSqlFunction, typeof(int))
@@ -339,10 +341,12 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                 }
 
                 case SqlParameterExpression patternParameter
-                    when patternParameter.Name.StartsWith(
-                        QueryCompilationContext.QueryParameterPrefix,
-                        StringComparison.Ordinal
-                    ):
+                    when patternParameter
+                        .Name
+                        .StartsWith(
+                            QueryCompilationContext.QueryParameterPrefix,
+                            StringComparison.Ordinal
+                        ):
                 {
                     // The pattern is a parameter, register a runtime parameter that will contain the rewritten LIKE pattern, where
                     // all special characters have been escaped.
@@ -547,24 +551,32 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
         var visitedIndex = Visit(index);
 
         return visitedArray is SqlExpression sqlArray && visitedIndex is SqlExpression sqlIndex
-            ? Dependencies.SqlExpressionFactory.Convert(
-                Dependencies.SqlExpressionFactory.Function(
-                    "SUBSTRING",
-                    new[]
-                    {
-                        sqlArray,
-                        Dependencies.SqlExpressionFactory.Add(
-                            Dependencies.SqlExpressionFactory.ApplyDefaultTypeMapping(sqlIndex),
-                            Dependencies.SqlExpressionFactory.Constant(1)
+            ? Dependencies
+                .SqlExpressionFactory
+                .Convert(
+                    Dependencies
+                        .SqlExpressionFactory
+                        .Function(
+                            "SUBSTRING",
+                            new[]
+                            {
+                                sqlArray,
+                                Dependencies
+                                    .SqlExpressionFactory
+                                    .Add(
+                                        Dependencies
+                                            .SqlExpressionFactory
+                                            .ApplyDefaultTypeMapping(sqlIndex),
+                                        Dependencies.SqlExpressionFactory.Constant(1)
+                                    ),
+                                Dependencies.SqlExpressionFactory.Constant(1),
+                            },
+                            nullable: true,
+                            argumentsPropagateNullability: new[] { true, true, true },
+                            typeof(byte[])
                         ),
-                        Dependencies.SqlExpressionFactory.Constant(1),
-                    },
-                    nullable: true,
-                    argumentsPropagateNullability: new[] { true, true, true },
-                    typeof(byte[])
-                ),
-                resultType
-            )
+                    resultType
+                )
             : QueryCompilationContext.NotTranslatedExpression;
     }
 

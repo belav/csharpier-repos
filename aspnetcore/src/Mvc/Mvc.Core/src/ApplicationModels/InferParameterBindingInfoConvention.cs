@@ -93,7 +93,8 @@ public class InferParameterBindingInfoConvention : IActionModelConvention
         }
 
         var fromBodyParameters = action
-            .Parameters.Where(p => p.BindingInfo!.BindingSource == BindingSource.Body)
+            .Parameters
+            .Where(p => p.BindingInfo!.BindingSource == BindingSource.Body)
             .ToList();
         if (fromBodyParameters.Count > 1)
         {

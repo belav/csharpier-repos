@@ -37,15 +37,17 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else if (contracts[qname] != endpoint.Contract)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxMultipleContractsWithSameName,
-                                qname.Name,
-                                qname.Namespace
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxMultipleContractsWithSameName,
+                                    qname.Name,
+                                    qname.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }

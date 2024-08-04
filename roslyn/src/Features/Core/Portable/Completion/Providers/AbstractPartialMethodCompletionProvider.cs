@@ -112,15 +112,17 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 explicitInterfaceImplementations: default,
                 name: member.Name,
                 typeParameters: method.TypeParameters,
-                parameters: method.Parameters.SelectAsArray(p =>
-                    CodeGenerationSymbolFactory.CreateParameterSymbol(
-                        p.GetAttributes(),
-                        p.RefKind,
-                        p.IsParams,
-                        p.Type,
-                        p.Name
-                    )
-                ),
+                parameters: method
+                    .Parameters
+                    .SelectAsArray(p =>
+                        CodeGenerationSymbolFactory.CreateParameterSymbol(
+                            p.GetAttributes(),
+                            p.RefKind,
+                            p.IsParams,
+                            p.Type,
+                            p.Name
+                        )
+                    ),
                 statements: syntaxFactory.CreateThrowNotImplementedStatementBlock(
                     semanticModel.Compilation
                 )

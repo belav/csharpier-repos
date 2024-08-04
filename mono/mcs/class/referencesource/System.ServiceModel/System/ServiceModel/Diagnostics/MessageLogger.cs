@@ -552,12 +552,14 @@ namespace System.ServiceModel.Diagnostics
             }
             if (shouldLogError)
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToLogMessage,
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToLogMessage,
+                        e.ToString()
+                    );
             }
         }
 
@@ -633,12 +635,14 @@ namespace System.ServiceModel.Diagnostics
                         MessageLogger.Filters.Remove(filter);
                         PlainXmlWriter writer = new PlainXmlWriter();
                         filter.WriteXPathTo(writer, null, ConfigurationStrings.Filter, null, true);
-                        DiagnosticUtility.EventLog.LogEvent(
-                            TraceEventType.Error,
-                            (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
-                            (uint)System.Runtime.Diagnostics.EventLogEventId.RemovedBadFilter,
-                            writer.Navigator.ToString()
-                        );
+                        DiagnosticUtility
+                            .EventLog
+                            .LogEvent(
+                                TraceEventType.Error,
+                                (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
+                                (uint)System.Runtime.Diagnostics.EventLogEventId.RemovedBadFilter,
+                                writer.Navigator.ToString()
+                            );
                     }
 
                     if (MessageLogger.FilterCount == 0)
@@ -923,18 +927,20 @@ namespace System.ServiceModel.Diagnostics
         [SecuritySafeCritical]
         static void LogNonFatalInitializationException(Exception e)
         {
-            DiagnosticUtility.UnsafeEventLog.UnsafeLogEvent(
-                TraceEventType.Critical,
-                (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
-                (uint)
-                    System
-                        .Runtime
-                        .Diagnostics
-                        .EventLogEventId
-                        .FailedToCreateMessageLoggingTraceSource,
-                true,
-                e.ToString()
-            );
+            DiagnosticUtility
+                .UnsafeEventLog
+                .UnsafeLogEvent(
+                    TraceEventType.Critical,
+                    (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
+                    (uint)
+                        System
+                            .Runtime
+                            .Diagnostics
+                            .EventLogEventId
+                            .FailedToCreateMessageLoggingTraceSource,
+                    true,
+                    e.ToString()
+                );
         }
 
         static void ExitOrUnloadEventHandler(object sender, EventArgs e)
@@ -954,12 +960,14 @@ namespace System.ServiceModel.Diagnostics
         {
             if ((source & MessageLoggingSource.Malformed) == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.OnlyMalformedMessagesAreSupported),
-                        "source"
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.OnlyMalformedMessagesAreSupported),
+                            "source"
+                        )
+                    );
             }
         }
 
@@ -969,20 +977,24 @@ namespace System.ServiceModel.Diagnostics
             {
                 if (null != MessageLogger.messageTraceSource)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(
-                        TraceEventType.Information,
-                        (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
-                        (uint)System.Runtime.Diagnostics.EventLogEventId.MessageLoggingOn
-                    );
+                    DiagnosticUtility
+                        .EventLog
+                        .LogEvent(
+                            TraceEventType.Information,
+                            (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
+                            (uint)System.Runtime.Diagnostics.EventLogEventId.MessageLoggingOn
+                        );
                 }
             }
             else
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Information,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.MessageLoggingOff
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Information,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.MessageLoggingOff
+                    );
             }
         }
 

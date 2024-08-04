@@ -606,10 +606,12 @@ namespace System.Diagnostics.Tracing
 #endif // FEATURE_PERFTRACING
 #if TARGET_WINDOWS
             // Set the activity id via ETW.
-            Interop.Advapi32.EventActivityIdControl(
-                Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_SET_ID,
-                ref activityId
-            );
+            Interop
+                .Advapi32
+                .EventActivityIdControl(
+                    Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_SET_ID,
+                    ref activityId
+                );
 #endif // TARGET_WINDOWS
         }
 
@@ -629,10 +631,12 @@ namespace System.Diagnostics.Tracing
                 // errors. Note we can't access m_throwOnWrites because this is a static method.
                 Guid retVal = default;
 #if TARGET_WINDOWS
-                Interop.Advapi32.EventActivityIdControl(
-                    Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_GET_ID,
-                    ref retVal
-                );
+                Interop
+                    .Advapi32
+                    .EventActivityIdControl(
+                        Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_GET_ID,
+                        ref retVal
+                    );
 #elif FEATURE_PERFTRACING
                 EventPipeEventProvider.EventActivityIdControl(
                     Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_GET_ID,
@@ -690,10 +694,12 @@ namespace System.Diagnostics.Tracing
 #endif // FEATURE_PERFTRACING && TARGET_WINDOWS
 
 #if TARGET_WINDOWS
-            Interop.Advapi32.EventActivityIdControl(
-                Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_GET_SET_ID,
-                ref oldActivityThatWillContinue
-            );
+            Interop
+                .Advapi32
+                .EventActivityIdControl(
+                    Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_GET_SET_ID,
+                    ref oldActivityThatWillContinue
+                );
 #endif // TARGET_WINDOWS
 
             // We don't call the activityDying callback here because the caller has declared that
@@ -784,9 +790,9 @@ namespace System.Diagnostics.Tracing
                 if (eventID == 0)
                     continue;
 
-                byte[]? metadata = EventPipeMetadataGenerator.Instance.GenerateEventMetadata(
-                    m_eventData[i]
-                );
+                byte[]? metadata = EventPipeMetadataGenerator
+                    .Instance
+                    .GenerateEventMetadata(m_eventData[i]);
                 uint metadataLength = (metadata != null) ? (uint)metadata.Length : 0;
 
                 string eventName = m_eventData[i].Name;
@@ -796,15 +802,17 @@ namespace System.Diagnostics.Tracing
 
                 fixed (byte* pMetadata = metadata)
                 {
-                    IntPtr eventHandle = m_eventPipeProvider._eventProvider.DefineEventHandle(
-                        eventID,
-                        eventName,
-                        keywords,
-                        eventVersion,
-                        level,
-                        pMetadata,
-                        metadataLength
-                    );
+                    IntPtr eventHandle = m_eventPipeProvider
+                        ._eventProvider
+                        .DefineEventHandle(
+                            eventID,
+                            eventName,
+                            keywords,
+                            eventVersion,
+                            level,
+                            pMetadata,
+                            metadataLength
+                        );
 
                     Debug.Assert(eventHandle != IntPtr.Zero);
                     m_eventData[i].EventHandle = eventHandle;
@@ -2587,8 +2595,9 @@ namespace System.Diagnostics.Tracing
                                     string eventName = "EventSourceMessage";
                                     EventParameterInfo paramInfo = default(EventParameterInfo);
                                     paramInfo.SetInfo("message", typeof(string));
-                                    byte[]? metadata =
-                                        EventPipeMetadataGenerator.Instance.GenerateMetadata(
+                                    byte[]? metadata = EventPipeMetadataGenerator
+                                        .Instance
+                                        .GenerateMetadata(
                                             0,
                                             eventName,
                                             keywords,
@@ -2602,8 +2611,9 @@ namespace System.Diagnostics.Tracing
 
                                     fixed (byte* pMetadata = metadata)
                                     {
-                                        m_writeEventStringEventHandle =
-                                            m_eventPipeProvider._eventProvider.DefineEventHandle(
+                                        m_writeEventStringEventHandle = m_eventPipeProvider
+                                            ._eventProvider
+                                            .DefineEventHandle(
                                                 0,
                                                 eventName,
                                                 keywords,
@@ -3592,14 +3602,12 @@ namespace System.Diagnostics.Tracing
                     reflectedAttributeType.Name,
                     StringComparison.Ordinal
                 )
-                    && attributeType.Namespace!.EndsWith(
-                        "Diagnostics.Tracing",
-                        StringComparison.Ordinal
-                    )
-                    && reflectedAttributeType.Namespace!.EndsWith(
-                        "Diagnostics.Tracing",
-                        StringComparison.Ordinal
-                    );
+                    && attributeType
+                        .Namespace!
+                        .EndsWith("Diagnostics.Tracing", StringComparison.Ordinal)
+                    && reflectedAttributeType
+                        .Namespace!
+                        .EndsWith("Diagnostics.Tracing", StringComparison.Ordinal);
         }
 
         private static Type? GetEventSourceBaseType(
@@ -3923,16 +3931,19 @@ namespace System.Diagnostics.Tracing
                                         if (
                                             startEventMetadata.Descriptor.Opcode
                                                 == (byte)EventOpcode.Start
-                                            && startEventMetadata.Name.EndsWith(
-                                                ActivityStartSuffix,
-                                                StringComparison.Ordinal
-                                            )
+                                            && startEventMetadata
+                                                .Name
+                                                .EndsWith(
+                                                    ActivityStartSuffix,
+                                                    StringComparison.Ordinal
+                                                )
                                             && eventName.EndsWith(
                                                 ActivityStopSuffix,
                                                 StringComparison.Ordinal
                                             )
                                             && startEventMetadata
-                                                .Name.AsSpan()[..^ActivityStartSuffix.Length]
+                                                .Name
+                                                .AsSpan()[..^ActivityStartSuffix.Length]
                                                 .SequenceEqual(
                                                     eventName.AsSpan()[..^ActivityStopSuffix.Length]
                                                 )
@@ -4825,13 +4836,15 @@ namespace System.Diagnostics.Tracing
 
 #if FEATURE_PERFTRACING
             // Remove the listener from the EventPipe dispatcher. EventCommand.Update with enable==false removes it.
-            EventPipeEventDispatcher.Instance.SendCommand(
-                this,
-                EventCommand.Update,
-                false,
-                EventLevel.LogAlways,
-                (EventKeywords)0
-            );
+            EventPipeEventDispatcher
+                .Instance
+                .SendCommand(
+                    this,
+                    EventCommand.Update,
+                    false,
+                    EventLevel.LogAlways,
+                    (EventKeywords)0
+                );
 #endif // FEATURE_PERFTRACING
         }
 
@@ -4908,13 +4921,9 @@ namespace System.Diagnostics.Tracing
 #if FEATURE_PERFTRACING
             if (eventSource.GetType() == typeof(NativeRuntimeEventSource))
             {
-                EventPipeEventDispatcher.Instance.SendCommand(
-                    this,
-                    EventCommand.Update,
-                    true,
-                    level,
-                    matchAnyKeyword
-                );
+                EventPipeEventDispatcher
+                    .Instance
+                    .SendCommand(this, EventCommand.Update, true, level, matchAnyKeyword);
             }
 #endif // FEATURE_PERFTRACING
         }
@@ -4942,13 +4951,15 @@ namespace System.Diagnostics.Tracing
 #if FEATURE_PERFTRACING
             if (eventSource.GetType() == typeof(NativeRuntimeEventSource))
             {
-                EventPipeEventDispatcher.Instance.SendCommand(
-                    this,
-                    EventCommand.Update,
-                    false,
-                    EventLevel.LogAlways,
-                    EventKeywords.None
-                );
+                EventPipeEventDispatcher
+                    .Instance
+                    .SendCommand(
+                        this,
+                        EventCommand.Update,
+                        false,
+                        EventLevel.LogAlways,
+                        EventKeywords.None
+                    );
             }
 #endif // FEATURE_PERFTRACING
         }

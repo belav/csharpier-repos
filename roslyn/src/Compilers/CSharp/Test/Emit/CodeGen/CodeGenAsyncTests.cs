@@ -90,7 +90,8 @@ class Test
                 symbolValidator: module =>
                 {
                     var stateMachine = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("Test")
+                        .GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("Test")
                         .GetMember<NamedTypeSymbol>("<F>d__0");
                     Assert.Equal(TypeKind.Struct, stateMachine.TypeKind);
                 },
@@ -105,7 +106,8 @@ class Test
                 symbolValidator: module =>
                 {
                     var stateMachine = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("Test")
+                        .GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("Test")
                         .GetMember<NamedTypeSymbol>("<F>d__0");
                     Assert.Equal(TypeKind.Struct, stateMachine.TypeKind);
                 },
@@ -120,7 +122,8 @@ class Test
                 symbolValidator: module =>
                 {
                     var stateMachine = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("Test")
+                        .GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("Test")
                         .GetMember<NamedTypeSymbol>("<F>d__0");
                     Assert.Equal(TypeKind.Class, stateMachine.TypeKind);
                 },
@@ -977,9 +980,9 @@ class Driver
 
             CompileAndVerify(
                     source,
-                    options: TestOptions.UnsafeDebugExe.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    ),
+                    options: TestOptions
+                        .UnsafeDebugExe
+                        .WithMetadataImportOptions(MetadataImportOptions.All),
                     expectedOutput: "11",
                     symbolValidator: debugSymbolValidator,
                     verify: Verification.Fails
@@ -987,9 +990,9 @@ class Driver
                 .VerifyDiagnostics(diagnostics);
             CompileAndVerify(
                     source,
-                    options: TestOptions.UnsafeReleaseExe.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    ),
+                    options: TestOptions
+                        .UnsafeReleaseExe
+                        .WithMetadataImportOptions(MetadataImportOptions.All),
                     expectedOutput: "11",
                     symbolValidator: releaseSymbolValidator,
                     verify: Verification.Fails
@@ -998,18 +1001,18 @@ class Driver
 
             void debugSymbolValidator(ModuleSymbol module)
             {
-                var stateMachine = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    "Program.<Main>d__0"
-                );
+                var stateMachine = module
+                    .GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("Program.<Main>d__0");
                 var hoistedField = stateMachine.GetMember<FieldSymbol>("<x>5__1");
                 Assert.Equal(SpecialType.System_Int64, hoistedField.Type.SpecialType);
             }
 
             void releaseSymbolValidator(ModuleSymbol module)
             {
-                var stateMachine = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    "Program.<Main>d__0"
-                );
+                var stateMachine = module
+                    .GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("Program.<Main>d__0");
                 // Test that there is no state-machine field based on 'x'.
                 Assert.Empty(stateMachine.GetMembers().Where(m => m.Name.StartsWith("<x>")));
             }
@@ -1056,9 +1059,9 @@ class Driver
 
             CompileAndVerify(
                     source,
-                    options: TestOptions.UnsafeDebugExe.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    ),
+                    options: TestOptions
+                        .UnsafeDebugExe
+                        .WithMetadataImportOptions(MetadataImportOptions.All),
                     expectedOutput: "11",
                     symbolValidator: debugSymbolValidator,
                     verify: Verification.Fails
@@ -1066,9 +1069,9 @@ class Driver
                 .VerifyDiagnostics(diagnostics);
             CompileAndVerify(
                     source,
-                    options: TestOptions.UnsafeReleaseExe.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    ),
+                    options: TestOptions
+                        .UnsafeReleaseExe
+                        .WithMetadataImportOptions(MetadataImportOptions.All),
                     expectedOutput: "10",
                     symbolValidator: releaseSymbolValidator,
                     verify: Verification.Fails
@@ -1077,18 +1080,18 @@ class Driver
 
             void debugSymbolValidator(ModuleSymbol module)
             {
-                var stateMachine = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    "Program.<Main>d__0"
-                );
+                var stateMachine = module
+                    .GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("Program.<Main>d__0");
                 var hoistedField = stateMachine.GetMember<FieldSymbol>("<x>5__1");
                 Assert.Equal(SpecialType.System_Int64, hoistedField.Type.SpecialType);
             }
 
             void releaseSymbolValidator(ModuleSymbol module)
             {
-                var stateMachine = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                    "Program.<Main>d__0"
-                );
+                var stateMachine = module
+                    .GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("Program.<Main>d__0");
                 // Test that there is no state-machine field based on 'x'.
                 Assert.Empty(stateMachine.GetMembers().Where(m => m.Name.StartsWith("<x>")));
             }

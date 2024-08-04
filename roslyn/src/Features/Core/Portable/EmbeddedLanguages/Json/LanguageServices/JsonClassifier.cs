@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
         public void RegisterClassifications(EmbeddedLanguageClassificationContext context)
         {
             var info = context
-                .Project.GetRequiredLanguageService<IEmbeddedLanguagesProvider>()
+                .Project
+                .GetRequiredLanguageService<IEmbeddedLanguagesProvider>()
                 .EmbeddedLanguageInfo;
 
             var token = context.SyntaxToken;

@@ -44,21 +44,21 @@ namespace Roslyn.VisualStudio.IntegrationTests
             {
                 RoslynDebug.AssertNotNull(_projectTemplate);
 
-                await TestServices.SolutionExplorer.CreateSolutionAsync(
-                    _solutionName,
-                    HangMitigatingCancellationToken
-                );
-                await TestServices.SolutionExplorer.AddProjectAsync(
-                    ProjectName,
-                    _projectTemplate,
-                    _templateGroupId,
-                    LanguageName,
-                    HangMitigatingCancellationToken
-                );
-                await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(
-                    ProjectName,
-                    HangMitigatingCancellationToken
-                );
+                await TestServices
+                    .SolutionExplorer
+                    .CreateSolutionAsync(_solutionName, HangMitigatingCancellationToken);
+                await TestServices
+                    .SolutionExplorer
+                    .AddProjectAsync(
+                        ProjectName,
+                        _projectTemplate,
+                        _templateGroupId,
+                        LanguageName,
+                        HangMitigatingCancellationToken
+                    );
+                await TestServices
+                    .SolutionExplorer
+                    .RestoreNuGetPackagesAsync(ProjectName, HangMitigatingCancellationToken);
 
                 // Winforms and XAML do not open text files on creation
                 // so these editor tasks will not work if that is the project template being used.
@@ -99,44 +99,37 @@ namespace Roslyn.VisualStudio.IntegrationTests
             await TestServices.Editor.DismissCompletionSessionsAsync(cancellationToken);
             await TestServices.Editor.DismissLightBulbSessionAsync(cancellationToken);
 
-            var originalValue = await TestServices.Workspace.IsPrettyListingOnAsync(
-                LanguageName,
-                cancellationToken
-            );
+            var originalValue = await TestServices
+                .Workspace
+                .IsPrettyListingOnAsync(LanguageName, cancellationToken);
 
-            await TestServices.Workspace.SetPrettyListingAsync(
-                LanguageName,
-                false,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .SetPrettyListingAsync(LanguageName, false, cancellationToken);
             try
             {
                 await TestServices.Editor.SetTextAsync(code, cancellationToken);
 
                 if (caretPosition.HasValue)
                 {
-                    await TestServices.Editor.MoveCaretAsync(
-                        caretPosition.Value,
-                        cancellationToken
-                    );
+                    await TestServices
+                        .Editor
+                        .MoveCaretAsync(caretPosition.Value, cancellationToken);
                 }
                 else
                 {
-                    await TestServices.Editor.SetMultiSelectionAsync(
-                        spans["selection"],
-                        cancellationToken
-                    );
+                    await TestServices
+                        .Editor
+                        .SetMultiSelectionAsync(spans["selection"], cancellationToken);
                 }
 
                 await TestServices.Editor.ActivateAsync(cancellationToken);
             }
             finally
             {
-                await TestServices.Workspace.SetPrettyListingAsync(
-                    LanguageName,
-                    originalValue,
-                    cancellationToken
-                );
+                await TestServices
+                    .Workspace
+                    .SetPrettyListingAsync(LanguageName, originalValue, cancellationToken);
             }
         }
     }

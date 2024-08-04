@@ -76,9 +76,9 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
                     result.Members.Length == 1 ? syntaxTree.GetLocation(_textSpan) : null;
 
                 var generator = SyntaxGenerator.GetGenerator(_document);
-                var memberTasks = result.Members.SelectAsArray(m =>
-                    GenerateOverrideAsync(generator, m, cancellationToken)
-                );
+                var memberTasks = result
+                    .Members
+                    .SelectAsArray(m => GenerateOverrideAsync(generator, m, cancellationToken));
 
                 var members = await Task.WhenAll(memberTasks).ConfigureAwait(false);
 
@@ -125,8 +125,9 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
 
                 public override void Apply(Workspace workspace, CancellationToken cancellationToken)
                 {
-                    var service =
-                        workspace.Services.GetService<ILegacyGlobalOptionsWorkspaceService>();
+                    var service = workspace
+                        .Services
+                        .GetService<ILegacyGlobalOptionsWorkspaceService>();
                     if (service != null)
                     {
                         service.GenerateOverrides = _selectedAll;

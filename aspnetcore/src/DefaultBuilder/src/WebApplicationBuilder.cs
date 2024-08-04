@@ -108,16 +108,20 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         // This won't be added by CreateEmptyApplicationBuilder.
         configuration.AddEnvironmentVariables(prefix: "DOTNET_");
 
-        _hostApplicationBuilder = Microsoft.Extensions.Hosting.Host.CreateEmptyApplicationBuilder(
-            new HostApplicationBuilderSettings
-            {
-                Args = options.Args,
-                ApplicationName = options.ApplicationName,
-                EnvironmentName = options.EnvironmentName,
-                ContentRootPath = options.ContentRootPath,
-                Configuration = configuration,
-            }
-        );
+        _hostApplicationBuilder = Microsoft
+            .Extensions
+            .Hosting
+            .Host
+            .CreateEmptyApplicationBuilder(
+                new HostApplicationBuilderSettings
+                {
+                    Args = options.Args,
+                    ApplicationName = options.ApplicationName,
+                    EnvironmentName = options.EnvironmentName,
+                    ContentRootPath = options.ContentRootPath,
+                    Configuration = configuration,
+                }
+            );
 
         // Ensure the same behavior of the non-slim WebApplicationBuilder by adding the default "app" Configuration sources
         ApplyDefaultAppConfigurationSlim(
@@ -186,16 +190,20 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         // empty builder should still default the ContentRoot as usual. This is the expected behavior for all WebApplicationBuilders.
         SetDefaultContentRoot(options, configuration);
 
-        _hostApplicationBuilder = Microsoft.Extensions.Hosting.Host.CreateEmptyApplicationBuilder(
-            new HostApplicationBuilderSettings
-            {
-                Args = options.Args,
-                ApplicationName = options.ApplicationName,
-                EnvironmentName = options.EnvironmentName,
-                ContentRootPath = options.ContentRootPath,
-                Configuration = configuration,
-            }
-        );
+        _hostApplicationBuilder = Microsoft
+            .Extensions
+            .Hosting
+            .Host
+            .CreateEmptyApplicationBuilder(
+                new HostApplicationBuilderSettings
+                {
+                    Args = options.Args,
+                    ApplicationName = options.ApplicationName,
+                    EnvironmentName = options.EnvironmentName,
+                    ContentRootPath = options.ContentRootPath,
+                    Configuration = configuration,
+                }
+            );
 
         // Set WebRootPath if necessary
         if (options.WebRootPath is not null)
@@ -503,10 +511,9 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         {
             // If this is set, someone called UseRouting() when a global route builder was already set
             if (
-                !_builtApplication.Properties.TryGetValue(
-                    EndpointRouteBuilderKey,
-                    out var localRouteBuilder
-                )
+                !_builtApplication
+                    .Properties
+                    .TryGetValue(EndpointRouteBuilderKey, out var localRouteBuilder)
             )
             {
                 app.UseRouting();
@@ -522,8 +529,9 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
 
         // Process authorization and authentication middlewares independently to avoid
         // registering middlewares for services that do not exist
-        var serviceProviderIsService =
-            _builtApplication.Services.GetService<IServiceProviderIsService>();
+        var serviceProviderIsService = _builtApplication
+            .Services
+            .GetService<IServiceProviderIsService>();
         if (serviceProviderIsService?.IsService(typeof(IAuthenticationSchemeProvider)) is true)
         {
             // Don't add more than one instance of the middleware

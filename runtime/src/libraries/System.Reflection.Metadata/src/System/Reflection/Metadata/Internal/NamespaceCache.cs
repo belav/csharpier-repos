@@ -365,8 +365,9 @@ namespace System.Reflection.Metadata.Ecma335
                     continue;
                 }
 
-                NamespaceDefinitionHandle namespaceHandle =
-                    _metadataReader.TypeDefTable.GetNamespaceDefinition(typeHandle);
+                NamespaceDefinitionHandle namespaceHandle = _metadataReader
+                    .TypeDefTable
+                    .GetNamespaceDefinition(typeHandle);
                 NamespaceDataBuilder? builder;
                 if (table.TryGetValue(namespaceHandle, out builder))
                 {

@@ -135,7 +135,8 @@ internal sealed class DatabaseOperations : IDatabaseOperations
         using (var upsertCommand = new SqlCommand(SqlQueries.SetCacheItem, connection))
         {
             upsertCommand
-                .Parameters.AddCacheItemId(key)
+                .Parameters
+                .AddCacheItemId(key)
                 .AddCacheItemValue(value)
                 .AddSlidingExpirationInSeconds(options.SlidingExpiration)
                 .AddAbsoluteExpiration(absoluteExpiration)
@@ -180,7 +181,8 @@ internal sealed class DatabaseOperations : IDatabaseOperations
         using (var upsertCommand = new SqlCommand(SqlQueries.SetCacheItem, connection))
         {
             upsertCommand
-                .Parameters.AddCacheItemId(key)
+                .Parameters
+                .AddCacheItemId(key)
                 .AddCacheItemValue(value)
                 .AddSlidingExpirationInSeconds(options.SlidingExpiration)
                 .AddAbsoluteExpiration(absoluteExpiration)
@@ -226,7 +228,8 @@ internal sealed class DatabaseOperations : IDatabaseOperations
         using (var command = new SqlCommand(query, connection))
         {
             command
-                .Parameters.AddCacheItemId(key)
+                .Parameters
+                .AddCacheItemId(key)
                 .AddWithValue("UtcNow", SqlDbType.DateTimeOffset, utcNow);
 
             connection.Open();
@@ -281,7 +284,8 @@ internal sealed class DatabaseOperations : IDatabaseOperations
         using (var command = new SqlCommand(query, connection))
         {
             command
-                .Parameters.AddCacheItemId(key)
+                .Parameters
+                .AddCacheItemId(key)
                 .AddWithValue("UtcNow", SqlDbType.DateTimeOffset, utcNow);
 
             await connection.OpenAsync(token).ConfigureAwait(false);

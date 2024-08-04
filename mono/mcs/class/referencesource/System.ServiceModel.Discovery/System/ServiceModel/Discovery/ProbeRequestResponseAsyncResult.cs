@@ -160,9 +160,11 @@ namespace System.ServiceModel.Discovery
                 {
                     if (this.probeRequestResponseAsyncResult.isFindCompleted)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.DiscoveryCannotAddMatchingEndpoint)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(SR.DiscoveryCannotAddMatchingEndpoint)
+                            );
                     }
                     else
                     {

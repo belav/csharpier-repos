@@ -39,8 +39,9 @@ namespace System.Web.Http.ModelBinding
         /// </summary>
         private static void EnsureOneBodyParameter(HttpActionBinding actionBinding)
         {
-            IList<HttpParameterDescriptor> parameters =
-                actionBinding.ActionDescriptor.GetParameters();
+            IList<HttpParameterDescriptor> parameters = actionBinding
+                .ActionDescriptor
+                .GetParameters();
 
             int idxFromBody = -1;
             for (int i = 0; i < actionBinding.ParameterBindings.Length; i++)

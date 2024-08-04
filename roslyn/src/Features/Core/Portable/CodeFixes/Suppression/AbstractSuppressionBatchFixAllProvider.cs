@@ -363,11 +363,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     fixAllState.Document!,
                     fixAllState.Project
                 );
-                return CodeAction.SolutionChangeAction.Create(
-                    title,
-                    _ => Task.FromResult(newSolution),
-                    title
-                );
+                return CodeAction
+                    .SolutionChangeAction
+                    .Create(title, _ => Task.FromResult(newSolution), title);
             }
 
             return null;

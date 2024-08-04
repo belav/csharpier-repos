@@ -939,7 +939,8 @@ public class A
 
                     // Find the handle and row for A.
                     var pairA = peFileReader
-                        .TypeDefinitions.AsEnumerable()
+                        .TypeDefinitions
+                        .AsEnumerable()
                         .Select(handle => new
                         {
                             handle = handle,
@@ -963,7 +964,8 @@ public class A
 
                     // Find the handle for System.Object.
                     TypeReferenceHandle handleObject = peFileReader
-                        .TypeReferences.AsEnumerable()
+                        .TypeReferences
+                        .AsEnumerable()
                         .Select(handle => new
                         {
                             handle = handle,
@@ -977,7 +979,8 @@ public class A
 
                     // Find the handle for System.Object's destructor.
                     MemberReferenceHandle handleDestructorObject = peFileReader
-                        .MemberReferences.AsEnumerable()
+                        .MemberReferences
+                        .AsEnumerable()
                         .Select(handle => new
                         {
                             handle = handle,

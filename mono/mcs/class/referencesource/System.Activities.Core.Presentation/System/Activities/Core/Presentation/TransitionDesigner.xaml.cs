@@ -336,7 +336,8 @@ namespace System.Activities.Core.Presentation
                     if (wrapper.Item != this.ModelItem)
                     {
                         wrapper
-                            .Item.Properties[TriggerPropertyName]
+                            .Item
+                            .Properties[TriggerPropertyName]
                             .SetValue(this.ModelItem.Properties[TriggerPropertyName].Value);
                     }
                 }
@@ -382,7 +383,9 @@ namespace System.Activities.Core.Presentation
                             ].Item;
                             SwapItems(transitionsCollection, previousModelItem, movedModelItem);
                         }
-                        this.Context.Services.GetService<ModelTreeManager>()
+                        this.Context
+                            .Services
+                            .GetService<ModelTreeManager>()
                             .AddToCurrentEditingScope(new TransitionReorderChange());
                         scope.Complete();
                     }
@@ -471,7 +474,9 @@ namespace System.Activities.Core.Presentation
 
         void OnCopyCommandExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            this.Context.Services.GetService<DesignerPerfEventProvider>()
+            this.Context
+                .Services
+                .GetService<DesignerPerfEventProvider>()
                 .WorkflowDesignerCopyStart();
             CutCopyPasteHelper.DoCopy(this.Context);
             e.Handled = true;
@@ -606,9 +611,10 @@ namespace System.Activities.Core.Presentation
                 ModelItem triggerModelItem = this.ModelItem.Properties[TriggerPropertyName].Value;
                 State toState = toStateModelItem.GetCurrentValue() as State;
 
-                ModelItem newTransitionItem = this
-                    .parentStateModelItem.Properties[StateDesigner.TransitionsPropertyName]
-                    .Collection.Add(
+                ModelItem newTransitionItem = this.parentStateModelItem
+                    .Properties[StateDesigner.TransitionsPropertyName]
+                    .Collection
+                    .Add(
                         new Transition()
                         {
                             Trigger =
@@ -720,7 +726,8 @@ namespace System.Activities.Core.Presentation
                     ? SR.EmptyName
                     : modelItem
                         .Properties[StateDesigner.DisplayNamePropertyName]
-                        .Value.GetCurrentValue()
+                        .Value
+                        .GetCurrentValue()
             );
         }
 

@@ -618,14 +618,16 @@ namespace System.Net
                 return null;
 
             byte[] bytes = Encoding.UTF8.GetBytes(value);
-            return Encoding.UTF8.GetString(
-                UrlEncode(
-                    bytes,
-                    0,
-                    bytes.Length,
-                    false /* alwaysCreateNewReturnValue */
-                )
-            );
+            return Encoding
+                .UTF8
+                .GetString(
+                    UrlEncode(
+                        bytes,
+                        0,
+                        bytes.Length,
+                        false /* alwaysCreateNewReturnValue */
+                    )
+                );
         }
 
         public static byte[] UrlEncodeToBytes(byte[] value, int offset, int count)

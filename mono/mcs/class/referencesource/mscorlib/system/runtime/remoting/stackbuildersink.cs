@@ -69,7 +69,8 @@ namespace System.Runtime.Remoting.Messaging
             LogicalCallContext oldCallCtx = null;
 
             LogicalCallContext lcc = Thread
-                .CurrentThread.GetMutableExecutionContext()
+                .CurrentThread
+                .GetMutableExecutionContext()
                 .LogicalCallContext;
             object xADCall = lcc.GetData(CrossAppDomainSink.LCC_DATA_KEY);
 
@@ -125,7 +126,8 @@ namespace System.Runtime.Remoting.Messaging
 
                     // call context could be different then the one from before the call.
                     LogicalCallContext latestCallContext = Thread
-                        .CurrentThread.GetMutableExecutionContext()
+                        .CurrentThread
+                        .GetMutableExecutionContext()
                         .LogicalCallContext;
                     // retrieve outgoing response headers
                     latestCallContext.PropagateOutgoingHeadersToMessage(retMessage);
@@ -151,7 +153,8 @@ namespace System.Runtime.Remoting.Messaging
 
                     // call context could be different then the one from before the call.
                     LogicalCallContext latestCallContext = Thread
-                        .CurrentThread.GetMutableExecutionContext()
+                        .CurrentThread
+                        .GetMutableExecutionContext()
                         .LogicalCallContext;
 
                     if (xADCall != null && ((bool)xADCall) == true && latestCallContext != null)
@@ -249,7 +252,8 @@ namespace System.Runtime.Remoting.Messaging
                     {
                         // call context could be different then the one from before the call.
                         LogicalCallContext latestCallContext = Thread
-                            .CurrentThread.GetMutableExecutionContext()
+                            .CurrentThread
+                            .GetMutableExecutionContext()
                             .LogicalCallContext;
 
                         if (latestCallContext != null)

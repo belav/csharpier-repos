@@ -19,7 +19,8 @@ public class SqlServerValueGeneratorCacheTest
         var property1 = GetProperty1(model);
         var property2 = GetProperty2(model);
         var cache = SqlServerTestHelpers
-            .Instance.CreateContextServices(model)
+            .Instance
+            .CreateContextServices(model)
             .GetRequiredService<ISqlServerValueGeneratorCache>();
 
         var generator1 = cache.GetOrAdd(
@@ -54,7 +55,8 @@ public class SqlServerValueGeneratorCacheTest
         var property2 = GetProperty2(model);
         var property3 = GetProperty3(model);
         var cache = SqlServerTestHelpers
-            .Instance.CreateContextServices(model)
+            .Instance
+            .CreateContextServices(model)
             .GetRequiredService<ISqlServerValueGeneratorCache>();
         var connection = CreateConnection();
 
@@ -79,7 +81,8 @@ public class SqlServerValueGeneratorCacheTest
         var model = CreateModel();
         var property1 = GetProperty1(model);
         var cache = SqlServerTestHelpers
-            .Instance.CreateContextServices(model)
+            .Instance
+            .CreateContextServices(model)
             .GetRequiredService<ISqlServerValueGeneratorCache>();
         var connection1 = CreateConnection("DbOne");
         var connection2 = CreateConnection("DbTwo");
@@ -100,7 +103,8 @@ public class SqlServerValueGeneratorCacheTest
         var model = CreateModel();
         var property1 = GetProperty1(model);
         var cache = SqlServerTestHelpers
-            .Instance.CreateContextServices(model)
+            .Instance
+            .CreateContextServices(model)
             .GetRequiredService<ISqlServerValueGeneratorCache>();
         var connection1 = CreateConnection(serverName: "ServerOne");
         var connection2 = CreateConnection(serverName: "ServerTwo");
@@ -145,7 +149,8 @@ public class SqlServerValueGeneratorCacheTest
             10,
             cache
                 .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                .Sequence.IncrementBy
+                .Sequence
+                .IncrementBy
         );
     }
 
@@ -168,7 +173,8 @@ public class SqlServerValueGeneratorCacheTest
             10,
             cache
                 .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                .Sequence.IncrementBy
+                .Sequence
+                .IncrementBy
         );
     }
 
@@ -187,7 +193,8 @@ public class SqlServerValueGeneratorCacheTest
             10,
             cache
                 .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                .Sequence.IncrementBy
+                .Sequence
+                .IncrementBy
         );
     }
 
@@ -210,7 +217,8 @@ public class SqlServerValueGeneratorCacheTest
             10,
             cache
                 .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                .Sequence.IncrementBy
+                .Sequence
+                .IncrementBy
         );
     }
 
@@ -234,7 +242,8 @@ public class SqlServerValueGeneratorCacheTest
             11,
             cache
                 .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                .Sequence.IncrementBy
+                .Sequence
+                .IncrementBy
         );
     }
 
@@ -261,7 +270,8 @@ public class SqlServerValueGeneratorCacheTest
                     () =>
                         cache
                             .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                            .Sequence.IncrementBy
+                            .Sequence
+                            .IncrementBy
                 )
                 .Message
         );
@@ -287,7 +297,8 @@ public class SqlServerValueGeneratorCacheTest
             11,
             cache
                 .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                .Sequence.IncrementBy
+                .Sequence
+                .IncrementBy
         );
     }
 

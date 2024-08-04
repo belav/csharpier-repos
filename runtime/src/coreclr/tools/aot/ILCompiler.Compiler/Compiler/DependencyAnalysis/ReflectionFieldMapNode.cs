@@ -207,7 +207,8 @@ namespace ILCompiler.DependencyAnalysis
                 }
 
                 int hashCode = field
-                    .OwningType.ConvertToCanonForm(CanonicalFormKind.Specific)
+                    .OwningType
+                    .ConvertToCanonForm(CanonicalFormKind.Specific)
                     .GetHashCode();
                 fieldMapHashTable.Append((uint)hashCode, hashTableSection.Place(vertex));
             }

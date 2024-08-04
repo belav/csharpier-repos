@@ -368,7 +368,8 @@ public class ControllerActionDescriptorProviderTests
                 );
 
                 var lastHttpMethodMetadata = descriptor
-                    .EndpointMetadata.OfType<IHttpMethodMetadata>()
+                    .EndpointMetadata
+                    .OfType<IHttpMethodMetadata>()
                     .Last();
                 Assert.Equal(
                     httpMethod,
@@ -719,7 +720,8 @@ public class ControllerActionDescriptorProviderTests
             var action = Assert.Single(
                 actions,
                 a =>
-                    a.ActionConstraints.OfType<HttpMethodActionConstraint>()
+                    a.ActionConstraints
+                        .OfType<HttpMethodActionConstraint>()
                         .SelectMany(c => c.HttpMethods)
                         .Contains(method)
             );
@@ -1551,22 +1553,26 @@ public class ControllerActionDescriptorProviderTests
     {
         // Arrange
         var context = new ActionDescriptorProviderContext();
-        context.Results.Add(
-            new ActionDescriptor()
-            {
-                RouteValues = new Dictionary<string, string>()
+        context
+            .Results
+            .Add(
+                new ActionDescriptor()
                 {
-                    { "controller", "Home" },
-                    { "action", "Index" },
-                },
-            }
-        );
-        context.Results.Add(
-            new ActionDescriptor()
-            {
-                RouteValues = new Dictionary<string, string>() { { "page", "/Some/Page" } },
-            }
-        );
+                    RouteValues = new Dictionary<string, string>()
+                    {
+                        { "controller", "Home" },
+                        { "action", "Index" },
+                    },
+                }
+            );
+        context
+            .Results
+            .Add(
+                new ActionDescriptor()
+                {
+                    RouteValues = new Dictionary<string, string>() { { "page", "/Some/Page" } },
+                }
+            );
 
         var provider = GetProvider();
 
@@ -2214,12 +2220,14 @@ public class ControllerActionDescriptorProviderTests
     {
         public void Apply(ActionModel action)
         {
-            action.Selectors.Add(
-                new SelectorModel()
-                {
-                    AttributeRouteModel = new AttributeRouteModel() { Template = "/!!!" },
-                }
-            );
+            action
+                .Selectors
+                .Add(
+                    new SelectorModel()
+                    {
+                        AttributeRouteModel = new AttributeRouteModel() { Template = "/!!!" },
+                    }
+                );
         }
     }
 

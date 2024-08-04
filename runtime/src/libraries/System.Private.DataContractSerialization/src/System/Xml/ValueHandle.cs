@@ -441,13 +441,9 @@ namespace System.Xml
                         }
                     }
                     byte[] buffer = new byte[expectedLength];
-                    int actualLength = DataContractSerializer.Base64Encoding.GetBytes(
-                        _bufferReader.Buffer,
-                        _offset,
-                        _length,
-                        buffer,
-                        0
-                    );
+                    int actualLength = DataContractSerializer
+                        .Base64Encoding
+                        .GetBytes(_bufferReader.Buffer, _offset, _length, buffer, 0);
                     if (actualLength != buffer.Length)
                     {
                         byte[] newBuffer = new byte[actualLength];
@@ -463,9 +459,9 @@ namespace System.Xml
             }
             try
             {
-                return DataContractSerializer.Base64Encoding.GetBytes(
-                    XmlConverter.StripWhitespace(GetString())
-                );
+                return DataContractSerializer
+                    .Base64Encoding
+                    .GetBytes(XmlConverter.StripWhitespace(GetString()));
             }
             catch (FormatException exception)
             {
@@ -686,13 +682,9 @@ namespace System.Xml
                 try
                 {
                     int charCount = Math.Min(count / 3 * 4, _length);
-                    actual = DataContractSerializer.Base64Encoding.GetBytes(
-                        _bufferReader.Buffer,
-                        _offset,
-                        charCount,
-                        buffer,
-                        offset
-                    );
+                    actual = DataContractSerializer
+                        .Base64Encoding
+                        .GetBytes(_bufferReader.Buffer, _offset, charCount, buffer, offset);
                     _offset += charCount;
                     _length -= charCount;
                     return true;

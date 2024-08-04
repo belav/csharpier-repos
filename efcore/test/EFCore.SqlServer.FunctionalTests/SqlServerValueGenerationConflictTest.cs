@@ -96,10 +96,13 @@ public class SqlServerValueGenerationStrategyNoThrowTest
         // Assert - this does not throw
         Validate(modelBuilder);
 
-        var logEntry = Fixture.ListLoggerFactory.Log.Single(l =>
-            l.Level == LogLevel.Warning
-            && l.Id == SqlServerEventId.ConflictingValueGenerationStrategiesWarning
-        );
+        var logEntry = Fixture
+            .ListLoggerFactory
+            .Log
+            .Single(l =>
+                l.Level == LogLevel.Warning
+                && l.Id == SqlServerEventId.ConflictingValueGenerationStrategiesWarning
+            );
         Assert.Equal(
             SqlServerResources
                 .LogConflictingValueGenerationStrategies(

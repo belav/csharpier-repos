@@ -369,10 +369,9 @@ namespace System.Net.Http.Functional.Tests
                     handler.CookieContainer = new CookieContainer();
                     handler.CookieContainer.Add(url1, new Cookie("cookie1", "value1", path1));
                     handler.CookieContainer.Add(url2, new Cookie("cookie2", "value2", path2));
-                    handler.CookieContainer.Add(
-                        unusedUrl,
-                        new Cookie("cookie3", "value3", unusedPath)
-                    );
+                    handler
+                        .CookieContainer
+                        .Add(unusedUrl, new Cookie("cookie3", "value3", unusedPath));
 
                     using (HttpClient client = CreateHttpClient(handler))
                     {

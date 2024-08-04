@@ -230,8 +230,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
 
             // TODO: fallback options https://github.com/dotnet/roslyn/issues/60786
-            var globalOptions =
-                document.Project.Solution.Services.GetService<ILegacyGlobalCleanCodeGenerationOptionsWorkspaceService>();
+            var globalOptions = document
+                .Project
+                .Solution
+                .Services
+                .GetService<ILegacyGlobalCleanCodeGenerationOptionsWorkspaceService>();
             var fallbackOptions = globalOptions?.Provider ?? CodeActionOptions.DefaultProvider;
 
             var addImportsOptions = await document
@@ -244,7 +247,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var importNode = CreateImport(document, containingNamespace);
 
             var compilation = await document
-                .Project.GetRequiredCompilationAsync(cancellationToken)
+                .Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var rootWithImport = addImportService.AddImport(
                 compilation,
@@ -361,7 +365,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             // Certain documents, e.g. Razor document, don't support adding imports
             return completionOptions?.CanAddImportStatement != false
                 && document
-                    .Project.Solution.Services.GetRequiredService<IDocumentSupportsFeatureService>()
+                    .Project
+                    .Solution
+                    .Services
+                    .GetRequiredService<IDocumentSupportsFeatureService>()
                     .SupportsRefactorings(document);
         }
 

@@ -129,11 +129,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
             );
             var language = workspace.Projects.Single().Language;
 
-            workspace.GlobalOptions.SetGlobalOption(
-                CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
-                language,
-                new CodeStyleOption2<bool>(value: true, notification: NotificationOption2.Error)
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    language,
+                    new CodeStyleOption2<bool>(value: true, notification: NotificationOption2.Error)
+                );
 
             var analyzerMap = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>
             {
@@ -153,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
             >.GetDiagnosticsAndErrorSpans(workspace, analyzerMap);
 
             var spans = diagnosticsAndSpans
-                .Item1.Zip(diagnosticsAndSpans.Item2, (diagnostic, span) => (diagnostic, span))
+                .Item1
+                .Zip(diagnosticsAndSpans.Item2, (diagnostic, span) => (diagnostic, span))
                 .OrderBy(s => s.span.Span.Span.Start)
                 .ToImmutableArray();
 
@@ -169,12 +172,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "IDE0005",
-                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
-                            new Uri(
-                                "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005",
-                                UriKind.Absolute
-                            )
-                        ),
+                        QuickInfoHyperLink
+                            .TestAccessor
+                            .CreateNavigationAction(
+                                new Uri(
+                                    "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005",
+                                    UriKind.Absolute
+                                )
+                            ),
                         "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005"
                     ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
@@ -198,12 +203,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "IDE0005",
-                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
-                            new Uri(
-                                "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005",
-                                UriKind.Absolute
-                            )
-                        ),
+                        QuickInfoHyperLink
+                            .TestAccessor
+                            .CreateNavigationAction(
+                                new Uri(
+                                    "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005",
+                                    UriKind.Absolute
+                                )
+                            ),
                         "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005"
                     ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
@@ -227,9 +234,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "id",
-                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
-                            new Uri("https://github.com/dotnet/roslyn", UriKind.Absolute)
-                        ),
+                        QuickInfoHyperLink
+                            .TestAccessor
+                            .CreateNavigationAction(
+                                new Uri("https://github.com/dotnet/roslyn", UriKind.Absolute)
+                            ),
                         "https://github.com/dotnet/roslyn"
                     ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
@@ -250,12 +259,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "IDE0049",
-                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
-                            new Uri(
-                                "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0049",
-                                UriKind.Absolute
-                            )
-                        ),
+                        QuickInfoHyperLink
+                            .TestAccessor
+                            .CreateNavigationAction(
+                                new Uri(
+                                    "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0049",
+                                    UriKind.Absolute
+                                )
+                            ),
                         "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0049"
                     ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
@@ -306,12 +317,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "CS0246",
-                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
-                            new Uri(
-                                "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0246)",
-                                UriKind.Absolute
-                            )
-                        ),
+                        QuickInfoHyperLink
+                            .TestAccessor
+                            .CreateNavigationAction(
+                                new Uri(
+                                    "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0246)",
+                                    UriKind.Absolute
+                                )
+                            ),
                         "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0246)"
                     ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
@@ -334,9 +347,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
             >(workspace);
 
             var firstDocument = workspace.Documents.First();
-            var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
-                firstDocument.GetTextBuffer()
-            );
+            var tagger = wrapper
+                .TaggerProvider
+                .CreateTagger<IErrorTag>(firstDocument.GetTextBuffer());
             using var disposable = tagger as IDisposable;
             await wrapper.WaitForTags();
 
@@ -367,9 +380,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
             >(workspace);
 
             var firstDocument = workspace.Documents.First();
-            var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
-                firstDocument.GetTextBuffer()
-            );
+            var tagger = wrapper
+                .TaggerProvider
+                .CreateTagger<IErrorTag>(firstDocument.GetTextBuffer());
             using var disposable = tagger as IDisposable;
             await wrapper.WaitForTags();
 
@@ -392,7 +405,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
         }
 
         private static readonly TestComposition s_mockComposition = EditorTestCompositions
-            .EditorFeatures.AddExcludedPartTypes(typeof(IDiagnosticAnalyzerService))
+            .EditorFeatures
+            .AddExcludedPartTypes(typeof(IDiagnosticAnalyzerService))
             .AddParts(typeof(MockDiagnosticAnalyzerService));
 
         [WpfFact]

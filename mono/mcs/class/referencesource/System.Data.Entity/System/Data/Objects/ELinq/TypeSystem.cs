@@ -184,12 +184,14 @@ namespace System.Data.Objects.ELinq
                 {
                     // try to find a property with the given getter
                     foreach (
-                        PropertyInfo property in method.DeclaringType.GetProperties(
-                            BindingFlags.Static
-                                | BindingFlags.Instance
-                                | BindingFlags.Public
-                                | BindingFlags.NonPublic
-                        )
+                        PropertyInfo property in method
+                            .DeclaringType
+                            .GetProperties(
+                                BindingFlags.Static
+                                    | BindingFlags.Instance
+                                    | BindingFlags.Public
+                                    | BindingFlags.NonPublic
+                            )
                     )
                     {
                         if (property.CanRead && (property.GetGetMethod(true) == method))
@@ -349,9 +351,9 @@ namespace System.Data.Objects.ELinq
             MethodInfo getInterfaceProp = interfaceProp.GetGetMethod();
 
             // Retrieve the interface mapping for the interface on the candidate property's declaring type.
-            InterfaceMapping interfaceMap = propertyInfo.DeclaringType.GetInterfaceMap(
-                interfaceType
-            );
+            InterfaceMapping interfaceMap = propertyInfo
+                .DeclaringType
+                .GetInterfaceMap(interfaceType);
 
             // Find the index of the interface's get_<Property> method in the interface methods of the interface map
             int propIndex = Array.IndexOf(interfaceMap.InterfaceMethods, getInterfaceProp);

@@ -45,10 +45,8 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
             if (!jsonColumns)
             {
                 eb.Property(e => e.Id)
-                    .Metadata.SetColumnName(
-                        "DerivedId",
-                        StoreObjectIdentifier.Table("PrincipalDerived")
-                    );
+                    .Metadata
+                    .SetColumnName("DerivedId", StoreObjectIdentifier.Table("PrincipalDerived"));
             }
 
             eb.HasKey(e => new { e.Id, e.AlternateId }).HasName("PK");
@@ -1295,13 +1293,15 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                 .IsNullable(false)
                 .HasParameter("id")
                 .PropagatesNullability()
-                .Metadata.SetAnnotation("MyAnnotation", new[] { 1L });
+                .Metadata
+                .SetAnnotation("MyAnnotation", new[] { 1L });
 
             modelBuilder
                 .HasDbFunction(typeof(DbFunctionContext).GetMethod(nameof(IsDateStatic))!)
                 .HasName("IsDate")
                 .IsBuiltIn()
-                .Metadata.SetAnnotation("MyGuid", new Guid());
+                .Metadata
+                .SetAnnotation("MyGuid", new Guid());
 
             modelBuilder.HasDbFunction(
                 typeof(DbFunctionContext).GetMethod(nameof(GetData), new[] { typeof(int) })!
@@ -1352,7 +1352,8 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                 .HasDbFunction(
                     typeof(FunctionTypeMappingContext).GetMethod(nameof(GetSqlFragmentStatic))!
                 )
-                .Metadata.TypeMapping = new StringTypeMapping("varchar", DbType.AnsiString);
+                .Metadata
+                .TypeMapping = new StringTypeMapping("varchar", DbType.AnsiString);
         }
     }
 
@@ -1389,7 +1390,8 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                     )!
                 )
                 .HasParameter("param")
-                .Metadata.TypeMapping = new StringTypeMapping("varchar", DbType.AnsiString);
+                .Metadata
+                .TypeMapping = new StringTypeMapping("varchar", DbType.AnsiString);
         }
     }
 
@@ -1429,9 +1431,13 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
     {
         base.AddReferences(build, filePath);
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Relational"));
-        build.References.Add(
-            BuildReference.ByName("Microsoft.EntityFrameworkCore.Relational.Specification.Tests")
-        );
+        build
+            .References
+            .Add(
+                BuildReference.ByName(
+                    "Microsoft.EntityFrameworkCore.Relational.Specification.Tests"
+                )
+            );
         return build;
     }
 

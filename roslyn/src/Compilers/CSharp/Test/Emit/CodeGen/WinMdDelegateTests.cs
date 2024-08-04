@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 m =>
                 {
                     {
-                        var actualMembers = m
-                            .GlobalNamespace.GetMember<NamespaceSymbol>("Test")
+                        var actualMembers = m.GlobalNamespace
+                            .GetMember<NamespaceSymbol>("Test")
                             .GetMember<NamedTypeSymbol>("voidDelegate")
                             .GetMembers()
                             .ToArray();
@@ -62,9 +62,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                     sourceSymbolValidator: validator,
                     symbolValidator: validator,
                     options: winmd ? TestOptions.ReleaseWinMD : TestOptions.ReleaseDll,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.Preview
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.Preview)
                 );
                 verifier.VerifyDiagnostics();
             };

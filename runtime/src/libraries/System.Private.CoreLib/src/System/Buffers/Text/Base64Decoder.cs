@@ -1315,7 +1315,8 @@ namespace System.Buffers.Text
                         6
                     );
                     Vector128<ushort> odds = AdvSimd
-                        .Arm64.TransposeOdd(str, Vector128<byte>.Zero)
+                        .Arm64
+                        .TransposeOdd(str, Vector128<byte>.Zero)
                         .AsUInt16();
                     merge_ab_and_bc = Vector128.Add(evens, odds).AsInt16();
                 }
@@ -1336,7 +1337,8 @@ namespace System.Buffers.Text
                         12
                     );
                     Vector128<int> iodds = AdvSimd
-                        .Arm64.TransposeOdd(merge_ab_and_bc, Vector128<short>.Zero)
+                        .Arm64
+                        .TransposeOdd(merge_ab_and_bc, Vector128<short>.Zero)
                         .AsInt32();
                     output = Vector128.Add(ievens, iodds).AsInt32();
                 }

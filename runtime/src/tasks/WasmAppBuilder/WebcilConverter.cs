@@ -41,10 +41,10 @@ public class WebcilConverter
         TaskLoggingHelper logger
     )
     {
-        var converter = NET.WebAssembly.Webcil.WebcilConverter.FromPortableExecutable(
-            inputPath,
-            outputPath
-        );
+        var converter = NET.WebAssembly
+            .Webcil
+            .WebcilConverter
+            .FromPortableExecutable(inputPath, outputPath);
         return new WebcilConverter(converter, inputPath, outputPath, logger);
     }
 

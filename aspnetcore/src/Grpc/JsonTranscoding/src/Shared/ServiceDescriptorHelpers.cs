@@ -342,8 +342,10 @@ internal static class ServiceDescriptorHelpers
                     const int WrapperValueFieldNumber = Int32Value.ValueFieldNumber;
 
                     var wrappedValue = messageValue
-                        .Descriptor.Fields[WrapperValueFieldNumber]
-                        .Accessor.GetValue(messageValue);
+                        .Descriptor
+                        .Fields[WrapperValueFieldNumber]
+                        .Accessor
+                        .GetValue(messageValue);
                     field.Accessor.SetValue(message, wrappedValue);
                 }
                 else

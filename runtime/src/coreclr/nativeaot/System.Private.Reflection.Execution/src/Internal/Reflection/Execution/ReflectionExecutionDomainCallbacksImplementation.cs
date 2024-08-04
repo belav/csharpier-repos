@@ -85,22 +85,26 @@ namespace Internal.Reflection.Execution
             RuntimeTypeHandle declaringTypeHandle = default(RuntimeTypeHandle);
             QMethodDefinition methodHandle;
             if (
-                !ReflectionExecution.ExecutionEnvironment.TryGetMethodForStartAddress(
-                    methodStartAddress,
-                    ref declaringTypeHandle,
-                    out methodHandle
-                )
+                !ReflectionExecution
+                    .ExecutionEnvironment
+                    .TryGetMethodForStartAddress(
+                        methodStartAddress,
+                        ref declaringTypeHandle,
+                        out methodHandle
+                    )
             )
             {
                 return null;
             }
 
             // We don't use the type argument handles as we want the uninstantiated method info
-            return ReflectionCoreExecution.ExecutionDomain.GetMethod(
-                declaringTypeHandle,
-                methodHandle,
-                genericMethodTypeArgumentHandles: null
-            );
+            return ReflectionCoreExecution
+                .ExecutionDomain
+                .GetMethod(
+                    declaringTypeHandle,
+                    methodHandle,
+                    genericMethodTypeArgumentHandles: null
+                );
         }
 
         public sealed override Assembly GetAssemblyForHandle(RuntimeTypeHandle typeHandle)

@@ -215,9 +215,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
 
             if (languageName == LanguageNames.FSharp)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 var shell = await _serviceProvider
                     .GetServiceAsync<SVsShell, IVsShell7>(_threadingContext.JoinableTaskFactory)

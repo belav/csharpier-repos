@@ -258,8 +258,12 @@ namespace Microsoft.CodeAnalysis.Completion
                 CancellationToken cancellationToken
             )
             {
-                var extensionManager =
-                    document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+                var extensionManager = document
+                    .Project
+                    .Solution
+                    .Workspace
+                    .Services
+                    .GetRequiredService<IExtensionManager>();
                 var additionalAugmentingProviders = ArrayBuilder<CompletionProvider>.GetInstance(
                     triggeredProviders.Length
                 );
@@ -495,8 +499,12 @@ namespace Microsoft.CodeAnalysis.Completion
             CancellationToken cancellationToken
         )
         {
-            var extensionManager =
-                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+            var extensionManager = document
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetRequiredService<IExtensionManager>();
 
             var context = new CompletionContext(
                 provider,

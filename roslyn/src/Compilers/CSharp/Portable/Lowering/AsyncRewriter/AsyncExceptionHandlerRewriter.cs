@@ -1166,14 +1166,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             public void HoistLocal(LocalSymbol local, SyntheticBoundNodeFactory F)
             {
                 if (
-                    !_hoistedLocals.Keys.Any(l =>
-                        l.Name == local.Name
-                        && TypeSymbol.Equals(
-                            l.Type,
-                            local.Type,
-                            TypeCompareKind.ConsiderEverything2
+                    !_hoistedLocals
+                        .Keys
+                        .Any(l =>
+                            l.Name == local.Name
+                            && TypeSymbol.Equals(
+                                l.Type,
+                                local.Type,
+                                TypeCompareKind.ConsiderEverything2
+                            )
                         )
-                    )
                 )
                 {
                     _hoistedLocals.Add(local, local);

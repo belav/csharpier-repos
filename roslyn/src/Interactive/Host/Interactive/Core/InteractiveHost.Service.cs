@@ -159,9 +159,9 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                 var initialState = new EvaluationState(
                     scriptState: null,
-                    scriptOptions: ScriptOptions.Default.WithMetadataResolver(
-                        new ScriptMetadataResolver(referenceResolver)
-                    ),
+                    scriptOptions: ScriptOptions
+                        .Default
+                        .WithMetadataResolver(new ScriptMetadataResolver(referenceResolver)),
                     ImmutableArray<string>.Empty,
                     workingDirectory
                 );
@@ -398,11 +398,14 @@ namespace Microsoft.CodeAnalysis.Interactive
                 var success = false;
                 try
                 {
-                    var resolvedReferences = state.ScriptOptions.MetadataResolver.ResolveReference(
-                        reference,
-                        baseFilePath: null,
-                        properties: MetadataReferenceProperties.Assembly
-                    );
+                    var resolvedReferences = state
+                        .ScriptOptions
+                        .MetadataResolver
+                        .ResolveReference(
+                            reference,
+                            baseFilePath: null,
+                            properties: MetadataReferenceProperties.Assembly
+                        );
                     if (!resolvedReferences.IsDefaultOrEmpty)
                     {
                         state = state.WithOptions(
@@ -412,12 +415,14 @@ namespace Microsoft.CodeAnalysis.Interactive
                     }
                     else
                     {
-                        Console.Error.WriteLine(
-                            string.Format(
-                                InteractiveHostResources.Cannot_resolve_reference_0,
-                                reference
-                            )
-                        );
+                        Console
+                            .Error
+                            .WriteLine(
+                                string.Format(
+                                    InteractiveHostResources.Cannot_resolve_reference_0,
+                                    reference
+                                )
+                            );
                     }
                 }
                 catch (Exception e)
@@ -504,9 +509,11 @@ namespace Microsoft.CodeAnalysis.Interactive
                 }
                 else
                 {
-                    Console.Error.Write(
-                        GetServiceState().ReplServiceProvider.ObjectFormatter.FormatException(e)
-                    );
+                    Console
+                        .Error
+                        .Write(
+                            GetServiceState().ReplServiceProvider.ObjectFormatter.FormatException(e)
+                        );
                 }
             }
 
@@ -654,12 +661,14 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                     if (File.Exists(initializationFilePath))
                     {
-                        Console.Out.WriteLine(
-                            string.Format(
-                                InteractiveHostResources.Loading_context_from_0,
-                                Path.GetFileName(initializationFilePath)
-                            )
-                        );
+                        Console
+                            .Out
+                            .WriteLine(
+                                string.Format(
+                                    InteractiveHostResources.Loading_context_from_0,
+                                    Path.GetFileName(initializationFilePath)
+                                )
+                            );
                         var parser = serviceState.ReplServiceProvider.CommandLineParser;
 
                         // Add the Framework runtime directory to reference search paths when running on .NET Framework (PlatformAssemblyPaths list is empty).
@@ -692,11 +701,12 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                             // TODO: Workaround for https://github.com/dotnet/roslyn/issues/45346
                             var referencePathsWithoutRspDir = referencePaths.Remove(rspDirectory);
-                            var metadataResolver = state.MetadataReferenceResolver.WithSearchPaths(
-                                referencePathsWithoutRspDir
-                            );
+                            var metadataResolver = state
+                                .MetadataReferenceResolver
+                                .WithSearchPaths(referencePathsWithoutRspDir);
                             var rspMetadataResolver = state
-                                .MetadataReferenceResolver.WithSearchPaths(referencePaths)
+                                .MetadataReferenceResolver
+                                .WithSearchPaths(referencePaths)
                                 .WithBaseDirectory(rspDirectory);
 
                             var sourceResolver = CreateSourceReferenceResolver(
@@ -737,7 +747,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                             var rspState = new EvaluationState(
                                 state.ScriptState,
                                 state
-                                    .ScriptOptions.WithFilePath(initializationScriptPath)
+                                    .ScriptOptions
+                                    .WithFilePath(initializationScriptPath)
                                     .WithReferences(metadataReferences)
                                     .WithImports(initialImports)
                                     .WithMetadataResolver(metadataResolver)
@@ -779,9 +790,11 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                     if (!isRestarting)
                     {
-                        Console.Out.WriteLine(
-                            InteractiveHostResources.Type_Sharphelp_for_more_information
-                        );
+                        Console
+                            .Out
+                            .WriteLine(
+                                InteractiveHostResources.Type_Sharphelp_for_more_information
+                            );
                     }
                 }
                 catch (Exception e)
@@ -826,10 +839,12 @@ namespace Microsoft.CodeAnalysis.Interactive
                 {
                     if (displayPath)
                     {
-                        Console.Error.WriteLine(
-                            InteractiveHostResources.Specified_file_not_found_colon_0,
-                            path
-                        );
+                        Console
+                            .Error
+                            .WriteLine(
+                                InteractiveHostResources.Specified_file_not_found_colon_0,
+                                path
+                            );
                     }
                     else
                     {
@@ -864,12 +879,14 @@ namespace Microsoft.CodeAnalysis.Interactive
                 }
                 else
                 {
-                    script = serviceState.ReplServiceProvider.CreateScript<object>(
-                        code,
-                        scriptOptions,
-                        serviceState.Globals.GetType(),
-                        serviceState.AssemblyLoader
-                    );
+                    script = serviceState
+                        .ReplServiceProvider
+                        .CreateScript<object>(
+                            code,
+                            scriptOptions,
+                            serviceState.Globals.GetType(),
+                            serviceState.AssemblyLoader
+                        );
                 }
 
                 var diagnostics = script.Compile();

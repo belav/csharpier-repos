@@ -14,18 +14,16 @@ namespace Internal.TypeSystem.Interop
 
         public static MetadataType GetSafeHandle(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices",
-                "SafeHandle"
-            );
+            return context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices", "SafeHandle");
         }
 
         public static MetadataType GetCriticalHandle(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices",
-                "CriticalHandle"
-            );
+            return context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices", "CriticalHandle");
         }
 
         public static MetadataType GetHandleRef(TypeSystemContext context)
@@ -35,10 +33,9 @@ namespace Internal.TypeSystem.Interop
 
         public static MetadataType GetPInvokeMarshal(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices",
-                "PInvokeMarshal"
-            );
+            return context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices", "PInvokeMarshal");
         }
 
         public static MetadataType GetMarshal(TypeSystemContext context)
@@ -48,34 +45,30 @@ namespace Internal.TypeSystem.Interop
 
         public static MetadataType GetMemoryMarshal(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices",
-                "MemoryMarshal"
-            );
+            return context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices", "MemoryMarshal");
         }
 
         public static MetadataType GetNativeFunctionPointerWrapper(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices",
-                "NativeFunctionPointerWrapper"
-            );
+            return context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices", "NativeFunctionPointerWrapper");
         }
 
         public static MetadataType GetMarshalDirectiveException(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices",
-                "MarshalDirectiveException"
-            );
+            return context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices", "MarshalDirectiveException");
         }
 
         public static MetadataType GetVariant(TypeSystemContext context)
         {
-            return context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices.Marshalling",
-                "ComVariant"
-            );
+            return context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices.Marshalling", "ComVariant");
         }
 
         public static bool IsSafeHandle(TypeSystemContext context, TypeDesc type)

@@ -162,12 +162,14 @@ namespace System.Xml.Xsl.XsltOld
             {
                 Debug.Assert(!(union.qy2 is UnionExpr), "only qy1 can be union");
                 TemplateAction copy = this.CloneWithoutName();
-                compiler.QueryStore.Add(
-                    new TheQuery(
-                        new CompiledXpathExpr(union.qy2, expr.Expression, false),
-                        theQuery._ScopeManager
-                    )
-                );
+                compiler
+                    .QueryStore
+                    .Add(
+                        new TheQuery(
+                            new CompiledXpathExpr(union.qy2, expr.Expression, false),
+                            theQuery._ScopeManager
+                        )
+                    );
                 copy.matchKey = compiler.QueryStore.Count - 1;
                 copy.priority = union.qy2.XsltDefaultPriority;
                 compiler.AddTemplate(copy);

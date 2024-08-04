@@ -155,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                 )
                 {
                     var trailingTrivia = declarationPattern
-                        .Type.GetTrailingTrivia()
+                        .Type
+                        .GetTrailingTrivia()
                         .AddRange(triviaToAppend);
                     return SyntaxFactory
                         .TypePattern(declarationPattern.Type)
@@ -306,24 +307,25 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                 if (!originalCompoundAssignment.IsKind(SyntaxKind.CoalesceAssignmentExpression))
                 {
                     // Case 1. Simple compound assignment parented by an expression statement.
-                    return editor.Generator.AssignmentStatement(
-                        newAssignmentTarget,
-                        rightOfAssignment
-                    );
+                    return editor
+                        .Generator
+                        .AssignmentStatement(newAssignmentTarget, rightOfAssignment);
                 }
                 else
                 {
                     // Case 2. Null coalescing compound assignment parented by an expression statement.
                     // Remove leading trivia from 'leftOfAssignment' as it should have been moved to 'newAssignmentTarget'.
                     leftOfAssignment = leftOfAssignment.WithoutLeadingTrivia();
-                    return editor.Generator.AssignmentStatement(
-                        newAssignmentTarget,
-                        SyntaxFactory.BinaryExpression(
-                            SyntaxKind.CoalesceExpression,
-                            leftOfAssignment,
-                            rightOfAssignment
-                        )
-                    );
+                    return editor
+                        .Generator
+                        .AssignmentStatement(
+                            newAssignmentTarget,
+                            SyntaxFactory.BinaryExpression(
+                                SyntaxKind.CoalesceExpression,
+                                leftOfAssignment,
+                                rightOfAssignment
+                            )
+                        );
                 }
             }
             else

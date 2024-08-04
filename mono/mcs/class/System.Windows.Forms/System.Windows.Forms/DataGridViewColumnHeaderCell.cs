@@ -359,11 +359,9 @@ namespace System.Windows.Forms
         )
         {
             if (
-                ThemeEngine.Current.DataGridViewColumnHeaderCellDrawBorder(
-                    this,
-                    graphics,
-                    cellBounds
-                )
+                ThemeEngine
+                    .Current
+                    .DataGridViewColumnHeaderCellDrawBorder(this, graphics, cellBounds)
             )
                 return;
 
@@ -444,11 +442,9 @@ namespace System.Windows.Forms
         )
         {
             if (
-                ThemeEngine.Current.DataGridViewColumnHeaderCellDrawBackground(
-                    this,
-                    graphics,
-                    cellBounds
-                )
+                ThemeEngine
+                    .Current
+                    .DataGridViewColumnHeaderCellDrawBackground(this, graphics, cellBounds)
             )
                 return;
             base.PaintPartBackground(graphics, cellBounds, style);

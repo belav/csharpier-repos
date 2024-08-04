@@ -261,11 +261,9 @@ namespace System.Activities
                 }
                 // cancel only throws TimeoutException and shouldnt throw at all if timeout is infinite
                 // cancel does not need to raise InvokeCompleted since the InvokeAsync invocation would raise it
-                IAsyncResult result = context.WorkflowApplication.BeginCancel(
-                    TimeSpan.MaxValue,
-                    cancelCallback,
-                    context
-                );
+                IAsyncResult result = context
+                    .WorkflowApplication
+                    .BeginCancel(TimeSpan.MaxValue, cancelCallback, context);
                 if (result.CompletedSynchronously)
                 {
                     context.WorkflowApplication.EndCancel(result);
@@ -445,9 +443,11 @@ namespace System.Activities
             {
                 if (this.PendingInvokes.ContainsKey(context.UserState))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.SameUserStateUsedForMultipleInvokes)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(SR.SameUserStateUsedForMultipleInvokes)
+                        );
                 }
                 this.PendingInvokes.Add(context.UserState, context);
             }

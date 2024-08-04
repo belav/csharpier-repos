@@ -98,7 +98,8 @@ internal sealed class JwtIssuer
         if (
             handler
                 .ValidateToken(encodedToken, tokenValidationParameters, out _)
-                .Identity?.IsAuthenticated == true
+                .Identity
+                ?.IsAuthenticated == true
         )
         {
             return true;

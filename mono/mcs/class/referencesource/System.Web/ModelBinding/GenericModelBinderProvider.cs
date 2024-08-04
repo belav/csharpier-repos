@@ -118,9 +118,9 @@
             {
                 if (
                     SuppressPrefixCheck
-                    || bindingContext.UnvalidatedValueProvider.ContainsPrefix(
-                        bindingContext.ModelName
-                    )
+                    || bindingContext
+                        .UnvalidatedValueProvider
+                        .ContainsPrefix(bindingContext.ModelName)
                 )
                 {
                     return _modelBinderFactory(typeArguments);

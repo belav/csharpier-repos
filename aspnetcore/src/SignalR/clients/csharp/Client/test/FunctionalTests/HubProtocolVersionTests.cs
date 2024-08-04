@@ -78,9 +78,9 @@ public class HubProtocolVersionTests : FunctionalTestBase
             var connectionBuilder = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
                 .WithUrl(server.Url + "/version", transportType);
-            connectionBuilder.Services.AddSingleton<IHubProtocol>(
-                new VersionedJsonHubProtocol(1000)
-            );
+            connectionBuilder
+                .Services
+                .AddSingleton<IHubProtocol>(new VersionedJsonHubProtocol(1000));
 
             var connection = connectionBuilder.Build();
 
@@ -131,9 +131,9 @@ public class HubProtocolVersionTests : FunctionalTestBase
             var connectionBuilder = new HubConnectionBuilder()
                 .WithUrl(new Uri(server.Url + "/version"))
                 .WithLoggerFactory(LoggerFactory);
-            connectionBuilder.Services.AddSingleton<IHubProtocol>(
-                new VersionedJsonHubProtocol(1000)
-            );
+            connectionBuilder
+                .Services
+                .AddSingleton<IHubProtocol>(new VersionedJsonHubProtocol(1000));
             connectionBuilder.Services.AddSingleton<IConnectionFactory>(proxyConnectionFactory);
 
             var connection = connectionBuilder.Build();
@@ -155,9 +155,10 @@ public class HubProtocolVersionTests : FunctionalTestBase
                 // Simulate a new call from the client
                 var messageToken = new JObject { ["type"] = int.MaxValue };
 
-                connectionContext.Transport.Output.Write(
-                    Encoding.UTF8.GetBytes(messageToken.ToString())
-                );
+                connectionContext
+                    .Transport
+                    .Output
+                    .Write(Encoding.UTF8.GetBytes(messageToken.ToString()));
                 connectionContext.Transport.Output.Write(new[] { (byte)0x1e });
                 await connectionContext.Transport.Output.FlushAsync().DefaultTimeout();
 
@@ -194,12 +195,14 @@ public class HubProtocolVersionTests : FunctionalTestBase
             var connectionBuilder = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
                 .WithUrl(server.Url + "/version", transportType);
-            connectionBuilder.Services.AddSingleton<IHubProtocol>(
-                new SingleVersionHubProtocol(
-                    new VersionedJsonHubProtocol(int.MaxValue),
-                    int.MaxValue
-                )
-            );
+            connectionBuilder
+                .Services
+                .AddSingleton<IHubProtocol>(
+                    new SingleVersionHubProtocol(
+                        new VersionedJsonHubProtocol(int.MaxValue),
+                        int.MaxValue
+                    )
+                );
 
             var connection = connectionBuilder.Build();
 

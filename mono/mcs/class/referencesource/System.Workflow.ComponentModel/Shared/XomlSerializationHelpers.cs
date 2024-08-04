@@ -373,12 +373,20 @@ namespace System.Workflow.ComponentModel.Serialization
                                     new CodeAttributeDeclaration(
                                         typeof(WorkflowMarkupSourceAttribute).FullName
                                     );
-                                xomlSourceAttribute.Arguments.Add(
-                                    new CodeAttributeArgument(new CodePrimitiveExpression(filePath))
-                                );
-                                xomlSourceAttribute.Arguments.Add(
-                                    new CodeAttributeArgument(new CodePrimitiveExpression(checksum))
-                                );
+                                xomlSourceAttribute
+                                    .Arguments
+                                    .Add(
+                                        new CodeAttributeArgument(
+                                            new CodePrimitiveExpression(filePath)
+                                        )
+                                    );
+                                xomlSourceAttribute
+                                    .Arguments
+                                    .Add(
+                                        new CodeAttributeArgument(
+                                            new CodePrimitiveExpression(checksum)
+                                        )
+                                    );
                                 activityTypeDeclaration.CustomAttributes.Add(xomlSourceAttribute);
                             }
 

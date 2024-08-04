@@ -61,9 +61,9 @@ namespace System.Collections.ObjectModel
         {
             if (this.frozen)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.ObjectIsReadOnly)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.ObjectIsReadOnly));
             }
         }
     }

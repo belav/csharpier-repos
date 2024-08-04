@@ -99,11 +99,10 @@ public class RequestTests : LoggedTest
                             var received = 0;
                             while (
                                 (
-                                    received = await context.Request.Body.ReadAsync(
-                                        receivedBytes,
-                                        0,
-                                        receivedBytes.Length
-                                    )
+                                    received = await context
+                                        .Request
+                                        .Body
+                                        .ReadAsync(receivedBytes, 0, receivedBytes.Length)
                                 ) > 0
                             )
                             {
@@ -724,10 +723,12 @@ public class RequestTests : LoggedTest
                     var abortedTcs = new TaskCompletionSource(
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
-                    context.RequestAborted.Register(() =>
-                    {
-                        abortedTcs.SetResult();
-                    });
+                    context
+                        .RequestAborted
+                        .Register(() =>
+                        {
+                            abortedTcs.SetResult();
+                        });
 
                     beforeAbort = context.RequestAborted;
 
@@ -833,11 +834,12 @@ public class RequestTests : LoggedTest
                 {
                     appStartedTcs.SetResult();
 
-                    var connectionLifetimeFeature =
-                        context.Features.Get<IConnectionLifetimeFeature>();
-                    connectionLifetimeFeature.ConnectionClosed.Register(
-                        () => connectionClosedTcs.SetResult()
-                    );
+                    var connectionLifetimeFeature = context
+                        .Features
+                        .Get<IConnectionLifetimeFeature>();
+                    connectionLifetimeFeature
+                        .ConnectionClosed
+                        .Register(() => connectionClosedTcs.SetResult());
 
                     return Task.CompletedTask;
                 },
@@ -872,11 +874,12 @@ public class RequestTests : LoggedTest
             var server = new TestServer(
                 context =>
                 {
-                    var connectionLifetimeFeature =
-                        context.Features.Get<IConnectionLifetimeFeature>();
-                    connectionLifetimeFeature.ConnectionClosed.Register(
-                        () => connectionClosedTcs.SetResult()
-                    );
+                    var connectionLifetimeFeature = context
+                        .Features
+                        .Get<IConnectionLifetimeFeature>();
+                    connectionLifetimeFeature
+                        .ConnectionClosed
+                        .Register(() => connectionClosedTcs.SetResult());
 
                     return Task.CompletedTask;
                 },
@@ -916,11 +919,12 @@ public class RequestTests : LoggedTest
             var server = new TestServer(
                 context =>
                 {
-                    var connectionLifetimeFeature =
-                        context.Features.Get<IConnectionLifetimeFeature>();
-                    connectionLifetimeFeature.ConnectionClosed.Register(
-                        () => connectionClosedTcs.SetResult()
-                    );
+                    var connectionLifetimeFeature = context
+                        .Features
+                        .Get<IConnectionLifetimeFeature>();
+                    connectionLifetimeFeature
+                        .ConnectionClosed
+                        .Register(() => connectionClosedTcs.SetResult());
 
                     context.Abort();
 
@@ -1038,10 +1042,12 @@ public class RequestTests : LoggedTest
         Assert.Equal(2, abortedRequestId);
 
         Assert.Single(
-            TestSink.Writes.Where(w =>
-                w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Connections"
-                && w.EventId == applicationAbortedConnectionId
-            )
+            TestSink
+                .Writes
+                .Where(w =>
+                    w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Connections"
+                    && w.EventId == applicationAbortedConnectionId
+                )
         );
     }
 
@@ -1252,17 +1258,21 @@ public class RequestTests : LoggedTest
                         app.Run(async context =>
                         {
                             var connection = context.Connection;
-                            await context.Response.WriteAsync(
-                                JsonConvert.SerializeObject(
-                                    new
-                                    {
-                                        RemoteIPAddress = connection.RemoteIpAddress?.ToString(),
-                                        RemotePort = connection.RemotePort,
-                                        LocalIPAddress = connection.LocalIpAddress?.ToString(),
-                                        LocalPort = connection.LocalPort,
-                                    }
-                                )
-                            );
+                            await context
+                                .Response
+                                .WriteAsync(
+                                    JsonConvert.SerializeObject(
+                                        new
+                                        {
+                                            RemoteIPAddress = connection
+                                                .RemoteIpAddress
+                                                ?.ToString(),
+                                            RemotePort = connection.RemotePort,
+                                            LocalIPAddress = connection.LocalIpAddress?.ToString(),
+                                            LocalPort = connection.LocalPort,
+                                        }
+                                    )
+                                );
                         });
                     });
             })

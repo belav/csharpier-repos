@@ -159,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 Debug.Assert(
                     transformedLHS
-                        .Type.GetNullableUnderlyingType()
+                        .Type
+                        .GetNullableUnderlyingType()
                         .Equals(tmp.Type.StrippedType(), TypeCompareKind.AllIgnoreOptions)
                 );
 

@@ -194,10 +194,9 @@ namespace System.Web.Http.Dispatcher
 
         private static string GetDefaultControllerRouteName(Type controllerType)
         {
-            return controllerType.Name.Substring(
-                0,
-                controllerType.Name.Length - "Controller".Length
-            );
+            return controllerType
+                .Name
+                .Substring(0, controllerType.Name.Length - "Controller".Length);
         }
     }
 

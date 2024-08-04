@@ -358,10 +358,9 @@ namespace System.Activities
 
                 if (!this.BoundArgument.IsEmpty)
                 {
-                    return this.BoundArgument.Expression.InitializeRelationship(
-                        this,
-                        ref validationErrors
-                    );
+                    return this.BoundArgument
+                        .Expression
+                        .InitializeRelationship(this, ref validationErrors);
                 }
             }
 
@@ -444,26 +443,30 @@ namespace System.Activities
             {
                 if (!object.ReferenceEquals(this.Owner, context.Activity))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.CanOnlyGetOwnedArguments(
-                                context.Activity.DisplayName,
-                                this.Name,
-                                this.Owner.DisplayName
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.CanOnlyGetOwnedArguments(
+                                    context.Activity.DisplayName,
+                                    this.Name,
+                                    this.Owner.DisplayName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 if (object.ReferenceEquals(context.Environment.Definition, context.Activity))
                 {
                     if (!context.Environment.TryGetLocation(this.Id, out location))
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR.ArgumentDoesNotExistInEnvironment(this.Name)
-                            )
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.ArgumentDoesNotExistInEnvironment(this.Name)
+                                )
+                            );
                     }
                 }
                 else
@@ -491,11 +494,13 @@ namespace System.Activities
 
                 if (!context.Environment.TryGetLocation(this.Id, this.Owner, out location))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.ArgumentDoesNotExistInEnvironment(this.Name)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.ArgumentDoesNotExistInEnvironment(this.Name)
+                            )
+                        );
                 }
             }
 
@@ -531,9 +536,13 @@ namespace System.Activities
             Location location;
             if (!environment.TryGetLocation(this.Id, this.Owner, out location))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.ArgumentDoesNotExistInEnvironment(this.Name))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.ArgumentDoesNotExistInEnvironment(this.Name)
+                        )
+                    );
             }
             return location;
         }
@@ -551,9 +560,9 @@ namespace System.Activities
         {
             if (!this.IsInTree)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.RuntimeArgumentNotOpen(this.Name))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.RuntimeArgumentNotOpen(this.Name)));
             }
         }
 
@@ -622,9 +631,9 @@ namespace System.Activities
                 {
                     if (y.IsEvaluationOrderSpecified)
                     {
-                        return x.BoundArgument.EvaluationOrder.CompareTo(
-                            y.BoundArgument.EvaluationOrder
-                        );
+                        return x.BoundArgument
+                            .EvaluationOrder
+                            .CompareTo(y.BoundArgument.EvaluationOrder);
                     }
                     else
                     {

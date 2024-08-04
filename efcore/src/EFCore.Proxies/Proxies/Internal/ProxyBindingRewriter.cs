@@ -169,17 +169,17 @@ public class ProxyBindingRewriter : IModelFinalizingConvention
                     )
                     {
                         if (
-                            !ConfigurationSource.Convention.Overrides(
-                                conflictingProperty.GetConfigurationSource()
-                            )
+                            !ConfigurationSource
+                                .Convention
+                                .Overrides(conflictingProperty.GetConfigurationSource())
                         )
                         {
                             break;
                         }
 
-                        conflictingProperty.DeclaringEntityType.RemoveServiceProperty(
-                            conflictingProperty.Name
-                        );
+                        conflictingProperty
+                            .DeclaringEntityType
+                            .RemoveServiceProperty(conflictingProperty.Name);
                     }
 
                     var serviceProperty = entityType

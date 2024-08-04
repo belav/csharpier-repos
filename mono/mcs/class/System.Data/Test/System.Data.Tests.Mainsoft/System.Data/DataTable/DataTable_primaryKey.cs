@@ -346,9 +346,9 @@ namespace tests.system_data_dll.System_Data
                 dr["ParentDateTime"] = DateTime.Now;
                 dtParent.Rows.Add(dr);
                 base.Compare(
-                    dtParent.Rows.Contains(
-                        new object[] { dr["ParentDouble"], dr["ParentDateTime"] }
-                    ),
+                    dtParent
+                        .Rows
+                        .Contains(new object[] { dr["ParentDouble"], dr["ParentDateTime"] }),
                     true
                 );
                 exp = null;
@@ -374,9 +374,9 @@ namespace tests.system_data_dll.System_Data
                 dr["ParentDouble"] = 99.399;
                 dtParent.Rows.Add(dr);
                 base.Compare(
-                    dtParent.Rows.Contains(
-                        new object[] { dr["ParentDouble"], dr["ParentDateTime"] }
-                    ),
+                    dtParent
+                        .Rows
+                        .Contains(new object[] { dr["ParentDouble"], dr["ParentDateTime"] }),
                     true
                 );
                 exp = null;

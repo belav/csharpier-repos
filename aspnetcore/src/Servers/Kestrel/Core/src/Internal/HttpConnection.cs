@@ -93,10 +93,12 @@ internal sealed class HttpConnection : ITimeoutHandler
 
             if (requestProcessor != null)
             {
-                var connectionHeartbeatFeature =
-                    _context.ConnectionFeatures.Get<IConnectionHeartbeatFeature>();
-                var connectionLifetimeNotificationFeature =
-                    _context.ConnectionFeatures.Get<IConnectionLifetimeNotificationFeature>();
+                var connectionHeartbeatFeature = _context
+                    .ConnectionFeatures
+                    .Get<IConnectionHeartbeatFeature>();
+                var connectionLifetimeNotificationFeature = _context
+                    .ConnectionFeatures
+                    .Get<IConnectionLifetimeNotificationFeature>();
 
                 // These features should never be null in Kestrel itself, if this middleware is ever refactored to run outside of kestrel,
                 // we'll need to handle these missing.
@@ -118,17 +120,15 @@ internal sealed class HttpConnection : ITimeoutHandler
                 );
 
                 // Register for graceful shutdown of the server
-                using var shutdownRegistration =
-                    connectionLifetimeNotificationFeature?.ConnectionClosedRequested.Register(
-                        state => ((HttpConnection)state!).StopProcessingNextRequest(),
-                        this
-                    );
+                using var shutdownRegistration = connectionLifetimeNotificationFeature
+                    ?.ConnectionClosedRequested
+                    .Register(state => ((HttpConnection)state!).StopProcessingNextRequest(), this);
 
                 // Register for connection close
-                using var closedRegistration = _context.ConnectionContext.ConnectionClosed.Register(
-                    state => ((HttpConnection)state!).OnConnectionClosed(),
-                    this
-                );
+                using var closedRegistration = _context
+                    .ConnectionContext
+                    .ConnectionClosed
+                    .Register(state => ((HttpConnection)state!).OnConnectionClosed(), this);
 
                 await requestProcessor.ProcessRequestsAsync(httpApplication);
             }
@@ -150,12 +150,12 @@ internal sealed class HttpConnection : ITimeoutHandler
             { } metricsTags
         )
         {
-            metricsTags.Tags.Add(
-                new KeyValuePair<string, object?>("network.protocol.name", "http")
-            );
-            metricsTags.Tags.Add(
-                new KeyValuePair<string, object?>("network.protocol.version", httpVersion)
-            );
+            metricsTags
+                .Tags
+                .Add(new KeyValuePair<string, object?>("network.protocol.name", "http"));
+            metricsTags
+                .Tags
+                .Add(new KeyValuePair<string, object?>("network.protocol.version", httpVersion));
         }
     }
 

@@ -57,11 +57,13 @@ public class ProxyFactory : IProxyFactory
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual Type CreateProxyType(IEntityType entityType) =>
-        _generator.ProxyBuilder.CreateClassProxyType(
-            entityType.ClrType,
-            GetInterfacesToProxy(entityType),
-            GenerationOptions
-        );
+        _generator
+            .ProxyBuilder
+            .CreateClassProxyType(
+                entityType.ClrType,
+                GetInterfacesToProxy(entityType),
+                GenerationOptions
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

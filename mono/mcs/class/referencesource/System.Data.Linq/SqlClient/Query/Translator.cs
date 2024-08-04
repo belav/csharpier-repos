@@ -183,12 +183,14 @@ namespace System.Data.Linq.SqlClient
                     bindings.Add(new SqlMemberAssign(mm.Member, sql.Member(item, mm)));
                 }
             }
-            ConstructorInfo cons = rowType.Type.GetConstructor(
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-                null,
-                System.Type.EmptyTypes,
-                null
-            );
+            ConstructorInfo cons = rowType
+                .Type
+                .GetConstructor(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                    null,
+                    System.Type.EmptyTypes,
+                    null
+                );
             if (cons == null)
             {
                 throw Error.MappedTypeMustHaveDefaultConstructor(rowType.Type);
@@ -267,9 +269,9 @@ namespace System.Data.Linq.SqlClient
 
             if (context.LoadOptions != null)
             {
-                LambdaExpression subquery = context.LoadOptions.GetAssociationSubquery(
-                    association.ThisMember.Member
-                );
+                LambdaExpression subquery = context
+                    .LoadOptions
+                    .GetAssociationSubquery(association.ThisMember.Member);
                 if (subquery != null)
                 {
                     RelationComposer rc = new RelationComposer(
@@ -506,12 +508,15 @@ namespace System.Data.Linq.SqlClient
         )]
         internal SqlExpression TranslateEquals(SqlBinary expr)
         {
-            System.Diagnostics.Debug.Assert(
-                expr.NodeType == SqlNodeType.EQ
-                    || expr.NodeType == SqlNodeType.NE
-                    || expr.NodeType == SqlNodeType.EQ2V
-                    || expr.NodeType == SqlNodeType.NE2V
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    expr.NodeType == SqlNodeType.EQ
+                        || expr.NodeType == SqlNodeType.NE
+                        || expr.NodeType == SqlNodeType.EQ2V
+                        || expr.NodeType == SqlNodeType.NE2V
+                );
             SqlExpression eLeft = expr.Left;
             SqlExpression eRight = expr.Right;
 
@@ -773,9 +778,12 @@ namespace System.Data.Linq.SqlClient
 
         internal SqlExpression TranslateLinkIsNull(SqlUnary expr)
         {
-            System.Diagnostics.Debug.Assert(
-                expr.NodeType == SqlNodeType.IsNull || expr.NodeType == SqlNodeType.IsNotNull
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    expr.NodeType == SqlNodeType.IsNull || expr.NodeType == SqlNodeType.IsNotNull
+                );
 
             SqlLink link = expr.Operand as SqlLink;
             if (

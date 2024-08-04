@@ -93,7 +93,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 var spanStart = documentationComment.SpanStart;
                 var line = syntaxTree
                     .GetText(cancellationToken)
-                    .Lines.GetLineFromPosition(spanStart);
+                    .Lines
+                    .GetLineFromPosition(spanStart);
                 text =
                     prefix
                     + " "

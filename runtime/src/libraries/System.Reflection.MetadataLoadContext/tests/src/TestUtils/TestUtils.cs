@@ -75,11 +75,11 @@ namespace System.Reflection.Tests
             );
             Assert.NotNull(runtimeConstructor);
 
-            IList<CustomAttributeTypedArgument> runtimeCats = cad
-                .ConstructorArguments.Select(ct => ct.ProjectBackToRuntime())
+            IList<CustomAttributeTypedArgument> runtimeCats = cad.ConstructorArguments
+                .Select(ct => ct.ProjectBackToRuntime())
                 .ToArray();
-            IList<CustomAttributeNamedArgument> runtimeCans = cad
-                .NamedArguments.Select(cn => cn.ProjectBackToRuntime())
+            IList<CustomAttributeNamedArgument> runtimeCans = cad.NamedArguments
+                .Select(cn => cn.ProjectBackToRuntime())
                 .ToArray();
 
             return new TestCustomAttributeData(runtimeConstructor, runtimeCats, runtimeCans);
@@ -132,10 +132,9 @@ namespace System.Reflection.Tests
             else
             {
                 // Assume it's from SampleMetadata.
-                return typeof(SampleMetadata.Base1).Assembly.GetType(
-                    type.FullName,
-                    throwOnError: true
-                );
+                return typeof(SampleMetadata.Base1)
+                    .Assembly
+                    .GetType(type.FullName, throwOnError: true);
             }
         }
 

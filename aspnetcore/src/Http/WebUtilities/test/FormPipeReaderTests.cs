@@ -226,9 +226,9 @@ public class FormPipeReaderTests
     public void ReadFormAsync_ChunkedDataNoDelimiter_ThrowsEarly()
     {
         var bytes = CreateBytes_NoDelimiter(10 * 1024);
-        var readOnlySequence = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(
-            bytes
-        );
+        var readOnlySequence = ReadOnlySequenceFactory
+            .SegmentPerByteFactory
+            .CreateWithContent(bytes);
         KeyValueAccumulator accumulator = default;
         var valueLengthLimit = 1024;
         var keyLengthLimit = 10;
@@ -301,9 +301,9 @@ public class FormPipeReaderTests
     [MemberData(nameof(Encodings))]
     public void TryParseFormValues_Works(Encoding encoding)
     {
-        var readOnlySequence = ReadOnlySequenceFactory.SingleSegmentFactory.CreateWithContent(
-            encoding.GetBytes("foo=bar&baz=boo&t=")
-        );
+        var readOnlySequence = ReadOnlySequenceFactory
+            .SingleSegmentFactory
+            .CreateWithContent(encoding.GetBytes("foo=bar&baz=boo&t="));
 
         KeyValueAccumulator accumulator = default;
 
@@ -322,9 +322,9 @@ public class FormPipeReaderTests
     [MemberData(nameof(Encodings))]
     public void TryParseFormValues_LimitsCanBeLarge(Encoding encoding)
     {
-        var readOnlySequence = ReadOnlySequenceFactory.SingleSegmentFactory.CreateWithContent(
-            encoding.GetBytes("foo=bar&baz=boo&t=")
-        );
+        var readOnlySequence = ReadOnlySequenceFactory
+            .SingleSegmentFactory
+            .CreateWithContent(encoding.GetBytes("foo=bar&baz=boo&t="));
 
         KeyValueAccumulator accumulator = default;
 
@@ -346,9 +346,9 @@ public class FormPipeReaderTests
     [MemberData(nameof(Encodings))]
     public void TryParseFormValues_SplitAcrossSegmentsWorks(Encoding encoding)
     {
-        var readOnlySequence = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(
-            encoding.GetBytes("foo=bar&baz=boo&t=")
-        );
+        var readOnlySequence = ReadOnlySequenceFactory
+            .SegmentPerByteFactory
+            .CreateWithContent(encoding.GetBytes("foo=bar&baz=boo&t="));
 
         KeyValueAccumulator accumulator = default;
 
@@ -367,9 +367,9 @@ public class FormPipeReaderTests
     [MemberData(nameof(Encodings))]
     public void TryParseFormValues_SplitAcrossSegmentsWorks_LimitsCanBeLarge(Encoding encoding)
     {
-        var readOnlySequence = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(
-            encoding.GetBytes("foo=bar&baz=boo&t=")
-        );
+        var readOnlySequence = ReadOnlySequenceFactory
+            .SegmentPerByteFactory
+            .CreateWithContent(encoding.GetBytes("foo=bar&baz=boo&t="));
 
         KeyValueAccumulator accumulator = default;
 
@@ -391,9 +391,9 @@ public class FormPipeReaderTests
     [MemberData(nameof(Encodings))]
     public void TryParseFormValues_MultiSegmentWithArrayPoolAcrossSegmentsWorks(Encoding encoding)
     {
-        var readOnlySequence = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(
-            encoding.GetBytes("foo=bar&baz=bo" + new string('a', 128))
-        );
+        var readOnlySequence = ReadOnlySequenceFactory
+            .SegmentPerByteFactory
+            .CreateWithContent(encoding.GetBytes("foo=bar&baz=bo" + new string('a', 128)));
 
         KeyValueAccumulator accumulator = default;
 
@@ -411,9 +411,9 @@ public class FormPipeReaderTests
     [MemberData(nameof(Encodings))]
     public void TryParseFormValues_MultiSegmentSplitAcrossSegmentsWithPlusesWorks(Encoding encoding)
     {
-        var readOnlySequence = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(
-            encoding.GetBytes("+++=+++&++++=++++&+=")
-        );
+        var readOnlySequence = ReadOnlySequenceFactory
+            .SegmentPerByteFactory
+            .CreateWithContent(encoding.GetBytes("+++=+++&++++=++++&+="));
 
         KeyValueAccumulator accumulator = default;
 
@@ -432,9 +432,9 @@ public class FormPipeReaderTests
     [MemberData(nameof(Encodings))]
     public void TryParseFormValues_DecodedPlusesWorks(Encoding encoding)
     {
-        var readOnlySequence = ReadOnlySequenceFactory.SingleSegmentFactory.CreateWithContent(
-            encoding.GetBytes("++%2B=+++%2B&++++=++++&+=")
-        );
+        var readOnlySequence = ReadOnlySequenceFactory
+            .SingleSegmentFactory
+            .CreateWithContent(encoding.GetBytes("++%2B=+++%2B&++++=++++&+="));
 
         KeyValueAccumulator accumulator = default;
 
@@ -453,9 +453,11 @@ public class FormPipeReaderTests
     [MemberData(nameof(Encodings))]
     public void TryParseFormValues_SplitAcrossSegmentsThatNeedDecodingWorks(Encoding encoding)
     {
-        var readOnlySequence = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(
-            encoding.GetBytes("\"%-.<>\\^_`{|}~=\"%-.<>\\^_`{|}~&\"%-.<>\\^_`{|}=wow")
-        );
+        var readOnlySequence = ReadOnlySequenceFactory
+            .SegmentPerByteFactory
+            .CreateWithContent(
+                encoding.GetBytes("\"%-.<>\\^_`{|}~=\"%-.<>\\^_`{|}~&\"%-.<>\\^_`{|}=wow")
+            );
 
         KeyValueAccumulator accumulator = default;
 
@@ -492,9 +494,9 @@ public class FormPipeReaderTests
     [Fact]
     public void TryParseFormValues_ExceedKeyLengthThrows()
     {
-        var readOnlySequence = ReadOnlySequenceFactory.SingleSegmentFactory.CreateWithContent(
-            Encoding.UTF8.GetBytes("foo=bar&baz=boo&t=")
-        );
+        var readOnlySequence = ReadOnlySequenceFactory
+            .SingleSegmentFactory
+            .CreateWithContent(Encoding.UTF8.GetBytes("foo=bar&baz=boo&t="));
 
         KeyValueAccumulator accumulator = default;
 

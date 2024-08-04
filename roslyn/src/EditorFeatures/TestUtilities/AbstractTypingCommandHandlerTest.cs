@@ -87,9 +87,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             {
                 var caretPosition = textView.Caret.Position.BufferPosition;
                 var newSpanshot = textView.TextBuffer.Insert(caretPosition, text);
-                textView.Caret.MoveTo(
-                    new SnapshotPoint(newSpanshot, (int)caretPosition + text.Length)
-                );
+                textView
+                    .Caret
+                    .MoveTo(new SnapshotPoint(newSpanshot, (int)caretPosition + text.Length));
             };
         }
     }

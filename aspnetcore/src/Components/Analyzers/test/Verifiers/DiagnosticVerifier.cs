@@ -362,7 +362,10 @@ public abstract partial class DiagnosticVerifier
                         );
 
                         string resultMethodName = diagnostics[i]
-                            .Location.SourceTree.FilePath.EndsWith(".cs", StringComparison.Ordinal)
+                            .Location
+                            .SourceTree
+                            .FilePath
+                            .EndsWith(".cs", StringComparison.Ordinal)
                             ? "GetCSharpResultAt"
                             : "GetBasicResultAt";
                         var linePosition = diagnostics[i].Location.GetLineSpan().StartLinePosition;

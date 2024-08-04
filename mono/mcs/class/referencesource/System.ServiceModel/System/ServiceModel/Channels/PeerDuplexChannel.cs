@@ -239,25 +239,27 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.securityProtocol == null)
                     {
-                        this.securityProtocol = (
-                            (IPeerFactory)channelManager
-                        ).SecurityManager.CreateSecurityProtocol<IDuplexChannel>(
-                            this.to,
-                            timeoutHelper.RemainingTime()
-                        );
+                        this.securityProtocol = ((IPeerFactory)channelManager)
+                            .SecurityManager
+                            .CreateSecurityProtocol<IDuplexChannel>(
+                                this.to,
+                                timeoutHelper.RemainingTime()
+                            );
                     }
                 }
             }
-            return this.peerNode.InnerNode.BeginSend(
-                this,
-                message,
-                this.via,
-                (ITransportFactorySettings)Manager,
-                timeoutHelper.RemainingTime(),
-                callback,
-                state,
-                this.securityProtocol
-            );
+            return this.peerNode
+                .InnerNode
+                .BeginSend(
+                    this,
+                    message,
+                    this.via,
+                    (ITransportFactorySettings)Manager,
+                    timeoutHelper.RemainingTime(),
+                    callback,
+                    state,
+                    this.securityProtocol
+                );
         }
 
         protected override void OnEndSend(IAsyncResult result)

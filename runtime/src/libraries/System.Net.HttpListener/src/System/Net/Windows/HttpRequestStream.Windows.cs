@@ -43,15 +43,17 @@ namespace System.Net
 
             if (_dataChunkIndex != -1)
             {
-                dataRead = Interop.HttpApi.GetChunks(
-                    _httpContext.Request.RequestBuffer,
-                    _httpContext.Request.OriginalBlobAddress,
-                    ref _dataChunkIndex,
-                    ref _dataChunkOffset,
-                    buffer,
-                    offset,
-                    size
-                );
+                dataRead = Interop
+                    .HttpApi
+                    .GetChunks(
+                        _httpContext.Request.RequestBuffer,
+                        _httpContext.Request.OriginalBlobAddress,
+                        ref _dataChunkIndex,
+                        ref _dataChunkOffset,
+                        buffer,
+                        offset,
+                        size
+                    );
             }
 
             if (_dataChunkIndex == -1 && dataRead < size)
@@ -86,15 +88,17 @@ namespace System.Net
                             Interop.HttpApi.HTTP_FLAGS.HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY;
                     }
 
-                    statusCode = Interop.HttpApi.HttpReceiveRequestEntityBody(
-                        _httpContext.RequestQueueHandle,
-                        _httpContext.RequestId,
-                        flags,
-                        (void*)(pBuffer + offset),
-                        (uint)size,
-                        out extraDataRead,
-                        null
-                    );
+                    statusCode = Interop
+                        .HttpApi
+                        .HttpReceiveRequestEntityBody(
+                            _httpContext.RequestQueueHandle,
+                            _httpContext.RequestId,
+                            flags,
+                            (void*)(pBuffer + offset),
+                            (uint)size,
+                            out extraDataRead,
+                            null
+                        );
 
                     dataRead += extraDataRead;
                     if (NetEventSource.Log.IsEnabled())
@@ -162,15 +166,17 @@ namespace System.Net
             uint dataRead = 0;
             if (_dataChunkIndex != -1)
             {
-                dataRead = Interop.HttpApi.GetChunks(
-                    _httpContext.Request.RequestBuffer,
-                    _httpContext.Request.OriginalBlobAddress,
-                    ref _dataChunkIndex,
-                    ref _dataChunkOffset,
-                    buffer,
-                    offset,
-                    size
-                );
+                dataRead = Interop
+                    .HttpApi
+                    .GetChunks(
+                        _httpContext.Request.RequestBuffer,
+                        _httpContext.Request.OriginalBlobAddress,
+                        ref _dataChunkIndex,
+                        ref _dataChunkOffset,
+                        buffer,
+                        offset,
+                        size
+                    );
                 if (_dataChunkIndex != -1 && dataRead == size)
                 {
                     asyncResult = new HttpRequestStreamAsyncResult(
@@ -230,15 +236,17 @@ namespace System.Net
                                 Interop.HttpApi.HTTP_FLAGS.HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY;
                         }
 
-                        statusCode = Interop.HttpApi.HttpReceiveRequestEntityBody(
-                            _httpContext.RequestQueueHandle,
-                            _httpContext.RequestId,
-                            flags,
-                            asyncResult._pPinnedBuffer,
-                            (uint)size,
-                            out bytesReturned,
-                            asyncResult._pOverlapped
-                        );
+                        statusCode = Interop
+                            .HttpApi
+                            .HttpReceiveRequestEntityBody(
+                                _httpContext.RequestQueueHandle,
+                                _httpContext.RequestId,
+                                flags,
+                                asyncResult._pPinnedBuffer,
+                                (uint)size,
+                                out bytesReturned,
+                                asyncResult._pOverlapped
+                            );
 
                         if (NetEventSource.Log.IsEnabled())
                             NetEventSource.Info(
@@ -346,15 +354,17 @@ namespace System.Net
         // is currenlty the only consumer of this API
         internal uint GetChunks(byte[] buffer, int offset, int size)
         {
-            return Interop.HttpApi.GetChunks(
-                _httpContext.Request.RequestBuffer,
-                _httpContext.Request.OriginalBlobAddress,
-                ref _dataChunkIndex,
-                ref _dataChunkOffset,
-                buffer,
-                offset,
-                size
-            );
+            return Interop
+                .HttpApi
+                .GetChunks(
+                    _httpContext.Request.RequestBuffer,
+                    _httpContext.Request.OriginalBlobAddress,
+                    ref _dataChunkIndex,
+                    ref _dataChunkOffset,
+                    buffer,
+                    offset,
+                    size
+                );
         }
 
         private sealed unsafe class HttpRequestStreamAsyncResult : LazyAsyncResult

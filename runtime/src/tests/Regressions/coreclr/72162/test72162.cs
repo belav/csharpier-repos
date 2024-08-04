@@ -19,15 +19,17 @@ public class Test72162
             String strOut = dblTestValues[i].ToString("G4");
             if (!strOut.Equals(strExpectedValues[i]))
             {
-                TestLibrary.Logging.WriteLine(
-                    "Error: Formatting number '"
-                        + dblTestValues[i].ToString()
-                        + "', with G4 formatting should generate '"
-                        + strExpectedValues[i]
-                        + "' but instead generated '"
-                        + strOut
-                        + "'"
-                );
+                TestLibrary
+                    .Logging
+                    .WriteLine(
+                        "Error: Formatting number '"
+                            + dblTestValues[i].ToString()
+                            + "', with G4 formatting should generate '"
+                            + strExpectedValues[i]
+                            + "' but instead generated '"
+                            + strOut
+                            + "'"
+                    );
                 iRetVal = 0;
             }
         }

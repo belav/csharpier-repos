@@ -50,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         {
             baseClassName = null;
             var type = document
-                .Project.GetCompilationAsync(cancellationToken)
+                .Project
+                .GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken)
                 .GetTypeByMetadataName(className);
             if (type == null || type.BaseType == null)
@@ -72,7 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         )
         {
             var type = document
-                .Project.GetCompilationAsync(cancellationToken)
+                .Project
+                .GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken)
                 .GetTypeByMetadataName(className);
             var name = objectName + "_" + nameOfEvent;
@@ -82,8 +84,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 .WaitAndGetResult_Venus(cancellationToken);
 
             var tree = document.GetSyntaxTreeSynchronously(cancellationToken);
-            var typeNode = type
-                .DeclaringSyntaxReferences.Where(r => r.SyntaxTree == tree)
+            var typeNode = type.DeclaringSyntaxReferences
+                .Where(r => r.SyntaxTree == tree)
                 .Select(r => r.GetSyntax(cancellationToken))
                 .First();
             var codeModel = document.GetRequiredLanguageService<ICodeModelNavigationPointService>();
@@ -124,7 +126,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         )
         {
             var compilation = document
-                .Project.GetCompilationAsync(cancellationToken)
+                .Project
+                .GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken);
             var type = compilation.GetTypeByMetadataName(className);
             if (type == null)
@@ -218,7 +221,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 #pragma warning restore IDE0060 // Remove unused parameter
         {
             var thisCompilation = thisDocument
-                .Project.GetCompilationAsync(cancellationToken)
+                .Project
+                .GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken);
             var type = thisCompilation.GetTypeByMetadataName(className);
 
@@ -278,7 +282,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 accessibility: Accessibility.Protected,
                 modifiers: new DeclarationModifiers(),
                 returnType: targetDocument
-                    .Project.GetCompilationAsync(cancellationToken)
+                    .Project
+                    .GetCompilationAsync(cancellationToken)
                     .WaitAndGetResult_Venus(cancellationToken)
                     .GetSpecialType(SpecialType.System_Void),
                 refKind: RefKind.None,
@@ -292,16 +297,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
             var annotation = new SyntaxAnnotation();
             newMethod = annotation.AddAnnotationToSymbol(newMethod);
-            var codeModel =
-                targetDocument.Project.Services.GetRequiredService<ICodeModelNavigationPointService>();
-            var syntaxFacts =
-                targetDocument.Project.Services.GetRequiredService<ISyntaxFactsService>();
+            var codeModel = targetDocument
+                .Project
+                .Services
+                .GetRequiredService<ICodeModelNavigationPointService>();
+            var syntaxFacts = targetDocument
+                .Project
+                .Services
+                .GetRequiredService<ISyntaxFactsService>();
 
             var targetSyntaxTree = targetDocument.GetSyntaxTreeSynchronously(cancellationToken);
 
-            var position = type
-                .Locations.First(loc => loc.SourceTree == targetSyntaxTree)
-                .SourceSpan.Start;
+            var position = type.Locations
+                .First(loc => loc.SourceTree == targetSyntaxTree)
+                .SourceSpan
+                .Start;
             var destinationType = syntaxFacts.GetContainingTypeDeclaration(
                 targetSyntaxTree.GetRoot(cancellationToken),
                 position
@@ -400,7 +410,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             textSpan = default;
 
             var type = thisDocument
-                .Project.GetCompilationAsync(cancellationToken)
+                .Project
+                .GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken)
                 .GetTypeByMetadataName(className);
             var member = LookupMemberId(type, uniqueMemberID);
@@ -410,16 +421,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 return false;
             }
 
-            var codeModel =
-                thisDocument.Project.Services.GetService<ICodeModelNavigationPointService>();
+            var codeModel = thisDocument
+                .Project
+                .Services
+                .GetService<ICodeModelNavigationPointService>();
             var memberNode = member
-                .DeclaringSyntaxReferences.Select(r => r.GetSyntax(cancellationToken))
+                .DeclaringSyntaxReferences
+                .Select(r => r.GetSyntax(cancellationToken))
                 .FirstOrDefault();
             if (memberNode != null)
             {
-                var memberNodeDocument = thisDocument.Project.Solution.GetDocument(
-                    memberNode.SyntaxTree
-                );
+                var memberNodeDocument = thisDocument
+                    .Project
+                    .Solution
+                    .GetDocument(memberNode.SyntaxTree);
                 var options = memberNodeDocument
                     .GetLineFormattingOptionsAsync(globalOptions, cancellationToken)
                     .AsTask()
@@ -452,12 +467,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         )
         {
             var type = document
-                .Project.GetCompilationAsync(cancellationToken)
+                .Project
+                .GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken)
                 .GetTypeByMetadataName(className);
 
             var compilation = document
-                .Project.GetCompilationAsync(cancellationToken)
+                .Project
+                .GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken);
             var semanticModel = document
                 .GetSemanticModelAsync(cancellationToken)
@@ -497,10 +514,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             }
 
             if (
-                CodeAnalysis.Workspace.TryGetWorkspace(
-                    document.GetTextSynchronously(cancellationToken).Container,
-                    out var workspace
-                )
+                CodeAnalysis
+                    .Workspace
+                    .TryGetWorkspace(
+                        document.GetTextSynchronously(cancellationToken).Container,
+                        out var workspace
+                    )
             )
             {
                 var newName = newFullyQualifiedName[(newFullyQualifiedName.LastIndexOf('.') + 1)..];
@@ -629,7 +648,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             {
                 case ContainedLanguageRenameType.CLRT_CLASS:
                     return document
-                        .Project.GetCompilationAsync(cancellationToken)
+                        .Project
+                        .GetCompilationAsync(cancellationToken)
                         .WaitAndGetResult_Venus(cancellationToken)
                         .GetTypeByMetadataName(fullyQualifiedName);
 
@@ -641,7 +661,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                         fullyQualifiedName.Length - lastDot - 1
                     );
                     var type = document
-                        .Project.GetCompilationAsync(cancellationToken)
+                        .Project
+                        .GetCompilationAsync(cancellationToken)
                         .WaitAndGetResult_Venus(cancellationToken)
                         .GetTypeByMetadataName(typeName);
                     var semanticModel = document
@@ -652,7 +673,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
                 case ContainedLanguageRenameType.CLRT_NAMESPACE:
                     var ns = document
-                        .Project.GetCompilationAsync(cancellationToken)
+                        .Project
+                        .GetCompilationAsync(cancellationToken)
                         .WaitAndGetResult_Venus(cancellationToken)
                         .GlobalNamespace;
                     var parts = fullyQualifiedName.Split('.');
@@ -723,7 +745,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         )
         {
             var compilation = document
-                .Project.GetCompilationAsync(cancellationToken)
+                .Project
+                .GetCompilationAsync(cancellationToken)
                 .WaitAndGetResult_Venus(cancellationToken);
             var semanticModel = document
                 .GetSemanticModelAsync(cancellationToken)

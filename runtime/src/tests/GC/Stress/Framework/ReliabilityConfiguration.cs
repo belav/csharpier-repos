@@ -790,7 +790,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             if (
                                                 currentXML.Value.Length >= 7
                                                 && currentXML
-                                                    .Value.Substring(currentXML.Value.Length - 7)
+                                                    .Value
+                                                    .Substring(currentXML.Value.Length - 7)
                                                     .ToLower() == "cdb.exe"
                                             )
                                             {
@@ -799,7 +800,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             else if (
                                                 currentXML.Value.Length >= 10
                                                 && currentXML
-                                                    .Value.Substring(currentXML.Value.Length - 7)
+                                                    .Value
+                                                    .Substring(currentXML.Value.Length - 7)
                                                     .ToLower() == "windbg.exe"
                                             )
                                             {
@@ -1067,7 +1069,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             if (
                                                 currentXML.Value.Length >= 7
                                                 && currentXML
-                                                    .Value.Substring(currentXML.Value.Length - 7)
+                                                    .Value
+                                                    .Substring(currentXML.Value.Length - 7)
                                                     .ToLower() == "cdb.exe"
                                             )
                                             {
@@ -1076,7 +1079,8 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
                                             else if (
                                                 currentXML.Value.Length >= 10
                                                 && currentXML
-                                                    .Value.Substring(currentXML.Value.Length - 7)
+                                                    .Value
+                                                    .Substring(currentXML.Value.Length - 7)
                                                     .ToLower() == "windbg.exe"
                                             )
                                             {

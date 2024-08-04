@@ -77,15 +77,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 showProgress: false,
                 action: context =>
                 {
-                    _threadingContext.JoinableTaskFactory.Run(
-                        () =>
-                            AugumentPeekSessionAsync(
-                                peekableItems,
-                                context,
-                                triggerPoint.Value,
-                                document
-                            )
-                    );
+                    _threadingContext
+                        .JoinableTaskFactory
+                        .Run(
+                            () =>
+                                AugumentPeekSessionAsync(
+                                    peekableItems,
+                                    context,
+                                    triggerPoint.Value,
+                                    document
+                                )
+                        );
                 }
             );
         }
@@ -177,8 +179,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             if (navigableItems != null)
             {
                 var workspace = project.Solution.Workspace;
-                var navigationService =
-                    workspace.Services.GetRequiredService<IDocumentNavigationService>();
+                var navigationService = workspace
+                    .Services
+                    .GetRequiredService<IDocumentNavigationService>();
 
                 foreach (var item in navigableItems)
                 {

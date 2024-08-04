@@ -215,7 +215,8 @@ namespace System.CommandLine
 
             static string[] OptionsWithArgumentLimitReached(CommandResult commandResult) =>
                 commandResult
-                    .Children.OfType<OptionResult>()
+                    .Children
+                    .OfType<OptionResult>()
                     .Where(c => c.IsArgumentLimitReached)
                     .Select(o => o.Option)
                     .SelectMany(c => new[] { c.Name }.Concat(c.Aliases))
@@ -334,9 +335,9 @@ namespace System.CommandLine
 
                     if (textCompletionContext.WordToComplete.Length > 0)
                     {
-                        var tokenToComplete = parseResult.Tokens.Last(t =>
-                            t.Value == textCompletionContext.WordToComplete
-                        );
+                        var tokenToComplete = parseResult
+                            .Tokens
+                            .Last(t => t.Value == textCompletionContext.WordToComplete);
 
                         return optionResult.Tokens.Contains(tokenToComplete);
                     }

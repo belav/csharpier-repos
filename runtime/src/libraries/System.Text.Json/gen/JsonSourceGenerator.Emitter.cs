@@ -40,8 +40,9 @@ namespace System.Text.Json.SourceGeneration
             private const string ValueVarName = "value";
             private const string WriterVarName = "writer";
 
-            private static readonly AssemblyName s_assemblyName =
-                typeof(Emitter).Assembly.GetName();
+            private static readonly AssemblyName s_assemblyName = typeof(Emitter)
+                .Assembly
+                .GetName();
 
             // global::fully.qualified.name for referenced types
             private const string InvalidOperationExceptionTypeRef =

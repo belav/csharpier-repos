@@ -152,9 +152,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         );
 
                         if (
-                            !ILCompiler.Reflection.ReadyToRun.ReadyToRunReader.IsReadyToRunImage(
-                                r2rCheckPEReader
-                            )
+                            !ILCompiler
+                                .Reflection
+                                .ReadyToRun
+                                .ReadyToRunReader
+                                .IsReadyToRunImage(r2rCheckPEReader)
                         )
                             continue;
                     }

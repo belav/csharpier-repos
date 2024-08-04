@@ -57,9 +57,9 @@ namespace System.ServiceModel.Security
 
             if (serviceContract.SecurityTokenServiceConfiguration == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "serviceContract.SecurityTokenServiceConfiguration"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("serviceContract.SecurityTokenServiceConfiguration");
             }
 
             _serviceContract = serviceContract;
@@ -92,14 +92,15 @@ namespace System.ServiceModel.Security
         {
             if (this.BaseAddresses == null || this.BaseAddresses.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                    SR.GetString(SR.ID3140)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperInvalidOperation(SR.GetString(SR.ID3140));
             }
 
             // Check if a ServiceMetadataBehavior is added.
-            ServiceMetadataBehavior metadataBehavior =
-                Description.Behaviors.Find<ServiceMetadataBehavior>();
+            ServiceMetadataBehavior metadataBehavior = Description
+                .Behaviors
+                .Find<ServiceMetadataBehavior>();
             if (metadataBehavior == null)
             {
                 metadataBehavior = new ServiceMetadataBehavior();
@@ -134,10 +135,9 @@ namespace System.ServiceModel.Security
                     mexBinding = MetadataExchangeBindings.CreateMexTcpBinding();
                 }
                 else if (
-                    StringComparer.OrdinalIgnoreCase.Equals(
-                        baseAddress.Scheme,
-                        Uri.UriSchemeNetPipe
-                    )
+                    StringComparer
+                        .OrdinalIgnoreCase
+                        .Equals(baseAddress.Scheme, Uri.UriSchemeNetPipe)
                 )
                 {
                     mexBinding = MetadataExchangeBindings.CreateMexNamedPipeBinding();
@@ -179,9 +179,9 @@ namespace System.ServiceModel.Security
         {
             if (Description.Endpoints.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID3097))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3097)));
             }
 
             UpdateServiceConfiguration();

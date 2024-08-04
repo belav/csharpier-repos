@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes.ErrorCases
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var root = await context
-                .Document.GetSyntaxRootAsync(context.CancellationToken)
+                .Document
+                .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             throw new Exception(
                 $"Exception thrown in register method of {nameof(ExceptionInRegisterMethodAsync)}"

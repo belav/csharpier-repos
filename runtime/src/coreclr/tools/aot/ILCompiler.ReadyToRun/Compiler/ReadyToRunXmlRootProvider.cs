@@ -58,15 +58,17 @@ namespace ILCompiler
             out ReadyToRunXmlRootProvider provider
         )
         {
-            PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(
-                module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
-            );
+            PEMemoryBlock resourceDirectory = module
+                .PEReader
+                .GetSectionData(
+                    module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
+                );
 
             foreach (var resourceHandle in module.MetadataReader.ManifestResources)
             {
-                ManifestResource resource = module.MetadataReader.GetManifestResource(
-                    resourceHandle
-                );
+                ManifestResource resource = module
+                    .MetadataReader
+                    .GetManifestResource(resourceHandle);
 
                 // Don't try to process linked resources or resources in other assemblies
                 if (!resource.Implementation.IsNil)

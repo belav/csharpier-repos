@@ -478,11 +478,13 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
         )
         {
             var compilation = await document
-                .Project.GetCompilationAsync(cancellationToken)
+                .Project
+                .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             return compilation
-                .GlobalNamespace.GetAllNamespaces(cancellationToken)
+                .GlobalNamespace
+                .GetAllNamespaces(cancellationToken)
                 .Where(n =>
                     n.NamespaceKind == NamespaceKind.Module
                     && n.ContainingAssembly == compilation.Assembly

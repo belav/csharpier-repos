@@ -85,13 +85,12 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             {
                 parameters.Namespaces.Add(typeof(Dictionary<,>).Namespace!);
                 parameters.Namespaces.Add(typeof(BindingFlags).Namespace!);
-                var functionsVariable = Dependencies.CSharpHelper.Identifier(
-                    "functions",
-                    parameters.ScopeVariables,
-                    capitalize: false
-                );
+                var functionsVariable = Dependencies
+                    .CSharpHelper
+                    .Identifier("functions", parameters.ScopeVariables, capitalize: false);
                 parameters
-                    .MainBuilder.Append("var ")
+                    .MainBuilder
+                    .Append("var ")
                     .Append(functionsVariable)
                     .AppendLine(" = new Dictionary<string, IDbFunction>();");
 
@@ -115,11 +114,9 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             )
             {
                 parameters.Namespaces.Add(typeof(Dictionary<,>).Namespace!);
-                var sequencesVariable = Dependencies.CSharpHelper.Identifier(
-                    "sequences",
-                    parameters.ScopeVariables,
-                    capitalize: false
-                );
+                var sequencesVariable = Dependencies
+                    .CSharpHelper
+                    .Identifier("sequences", parameters.ScopeVariables, capitalize: false);
                 var mainBuilder = parameters.MainBuilder;
                 mainBuilder
                     .Append("var ")
@@ -165,11 +162,9 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
         {
             parameters.Namespaces.Add(typeof(RelationalModel).Namespace!);
             parameters.Namespaces.Add(typeof(RelationalModelExtensions).Namespace!);
-            var relationalModelVariable = Dependencies.CSharpHelper.Identifier(
-                "relationalModel",
-                parameters.ScopeVariables,
-                capitalize: false
-            );
+            var relationalModelVariable = Dependencies
+                .CSharpHelper
+                .Identifier("relationalModel", parameters.ScopeVariables, capitalize: false);
             mainBuilder.AppendLine(
                 $"var {relationalModelVariable} = new RelationalModel({parameters.TargetName});"
             );
@@ -240,7 +235,8 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             if (typeBase is IComplexType complexType)
             {
                 parameters
-                    .MainBuilder.AppendLine()
+                    .MainBuilder
+                    .AppendLine()
                     .Append($"var {typeBaseVariable} = ")
                     .AppendLine(
                         $"{declaringVariable}.FindComplexProperty({code.Literal(complexType.ComplexProperty.Name)})!.ComplexType;"
@@ -249,7 +245,8 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             else
             {
                 parameters
-                    .MainBuilder.AppendLine()
+                    .MainBuilder
+                    .AppendLine()
                     .AppendLine(
                         $"var {typeBaseVariable} = FindEntityType({code.Literal(typeBase.Name)})!;"
                     );
@@ -2320,13 +2317,12 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
                     parameters.Namespaces
                 );
                 AddNamespace(typeof(StoreObjectIdentifier), parameters.Namespaces);
-                var fragmentsVariable = Dependencies.CSharpHelper.Identifier(
-                    "fragments",
-                    parameters.ScopeVariables,
-                    capitalize: false
-                );
+                var fragmentsVariable = Dependencies
+                    .CSharpHelper
+                    .Identifier("fragments", parameters.ScopeVariables, capitalize: false);
                 parameters
-                    .MainBuilder.Append("var ")
+                    .MainBuilder
+                    .Append("var ")
                     .Append(fragmentsVariable)
                     .AppendLine(
                         " = new StoreObjectDictionary<RuntimeEntityTypeMappingFragment>();"
@@ -2351,11 +2347,9 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
                 )
             )
             {
-                var sprocVariable = Dependencies.CSharpHelper.Identifier(
-                    "insertSproc",
-                    parameters.ScopeVariables,
-                    capitalize: false
-                );
+                var sprocVariable = Dependencies
+                    .CSharpHelper
+                    .Identifier("insertSproc", parameters.ScopeVariables, capitalize: false);
 
                 Create(insertStoredProcedure, sprocVariable, parameters);
 
@@ -2374,11 +2368,9 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
                 )
             )
             {
-                var sprocVariable = Dependencies.CSharpHelper.Identifier(
-                    "deleteSproc",
-                    parameters.ScopeVariables,
-                    capitalize: false
-                );
+                var sprocVariable = Dependencies
+                    .CSharpHelper
+                    .Identifier("deleteSproc", parameters.ScopeVariables, capitalize: false);
 
                 Create(deleteStoredProcedure, sprocVariable, parameters);
 
@@ -2397,11 +2389,9 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
                 )
             )
             {
-                var sprocVariable = Dependencies.CSharpHelper.Identifier(
-                    "updateSproc",
-                    parameters.ScopeVariables,
-                    capitalize: false
-                );
+                var sprocVariable = Dependencies
+                    .CSharpHelper
+                    .Identifier("updateSproc", parameters.ScopeVariables, capitalize: false);
 
                 Create(updateStoredProcedure, sprocVariable, parameters);
 
@@ -2687,13 +2677,12 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
                     parameters.Namespaces
                 );
                 AddNamespace(typeof(StoreObjectIdentifier), parameters.Namespaces);
-                var overridesVariable = Dependencies.CSharpHelper.Identifier(
-                    "overrides",
-                    parameters.ScopeVariables,
-                    capitalize: false
-                );
+                var overridesVariable = Dependencies
+                    .CSharpHelper
+                    .Identifier("overrides", parameters.ScopeVariables, capitalize: false);
                 parameters
-                    .MainBuilder.AppendLine()
+                    .MainBuilder
+                    .AppendLine()
                     .Append("var ")
                     .Append(overridesVariable)
                     .AppendLine(

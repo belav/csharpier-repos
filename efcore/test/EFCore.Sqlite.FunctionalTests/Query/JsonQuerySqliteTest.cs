@@ -228,9 +228,11 @@ WHERE EXISTS (
             async,
             ss =>
                 ((DbSet<JsonEntityBasic>)ss.Set<JsonEntityBasic>()).FromSql(
-                    Fixture.TestStore.NormalizeDelimitersInInterpolatedString(
-                        $"SELECT * FROM [JsonEntitiesBasic] AS j WHERE [j].[Id] = {parameter}"
-                    )
+                    Fixture
+                        .TestStore
+                        .NormalizeDelimitersInInterpolatedString(
+                            $"SELECT * FROM [JsonEntitiesBasic] AS j WHERE [j].[Id] = {parameter}"
+                        )
                 ),
             ss => ss.Set<JsonEntityBasic>()
         );

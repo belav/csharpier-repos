@@ -110,10 +110,10 @@ namespace System.Web.Services.Discovery
         /// </devdoc>
         public override void WriteDocument(object document, Stream stream)
         {
-            WebServicesSection.Current.DiscoveryDocumentSerializer.Serialize(
-                new StreamWriter(stream, new UTF8Encoding(false)),
-                document
-            );
+            WebServicesSection
+                .Current
+                .DiscoveryDocumentSerializer
+                .Serialize(new StreamWriter(stream, new UTF8Encoding(false)), document);
         }
 
         /// <include file='doc\DiscoveryDocumentReference.uex' path='docs/doc[@for="DiscoveryDocumentReference.ReadDocument"]/*' />

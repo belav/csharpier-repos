@@ -59,7 +59,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     .Where(IsAnyCodeDirective)
                     .ToImmutableArray();
                 var closeBraceLeadingDirectives = block
-                    .CloseBraceToken.LeadingTrivia.Where(IsAnyCodeDirective)
+                    .CloseBraceToken
+                    .LeadingTrivia
+                    .Where(IsAnyCodeDirective)
                     .ToImmutableArray();
 
                 if (leadingDirectives.Length == 0)
@@ -239,9 +241,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     expression = firstStatement
                         .GetLeadingTrivia()
                         .Any(t => t.IsDirective || t.IsSingleOrMultiLineComment())
-                        ? returnStatement.Expression.WithLeadingTrivia(
-                            returnStatement.GetLeadingTrivia()
-                        )
+                        ? returnStatement
+                            .Expression
+                            .WithLeadingTrivia(returnStatement.GetLeadingTrivia())
                         : returnStatement.Expression;
                     semicolonToken = returnStatement.SemicolonToken;
                     return true;

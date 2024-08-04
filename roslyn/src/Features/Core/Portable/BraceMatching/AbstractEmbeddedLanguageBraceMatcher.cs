@@ -51,14 +51,16 @@ namespace Microsoft.CodeAnalysis.BraceMatching
             foreach (var braceMatcher in braceMatchers)
             {
                 // If this service added values then need to check the other ones.
-                var result = braceMatcher.Value.FindBraces(
-                    document.Project,
-                    semanticModel,
-                    token,
-                    position,
-                    options,
-                    cancellationToken
-                );
+                var result = braceMatcher
+                    .Value
+                    .FindBraces(
+                        document.Project,
+                        semanticModel,
+                        token,
+                        position,
+                        options,
+                        cancellationToken
+                    );
                 if (result.HasValue)
                     return result;
             }

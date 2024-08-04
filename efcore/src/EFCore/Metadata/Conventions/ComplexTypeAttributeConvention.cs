@@ -36,7 +36,8 @@ public class ComplexTypeAttributeConvention
         var complexType = propertyBuilder.Metadata.ComplexType;
         var memberTypes = complexType
             .GetRuntimeProperties()
-            .Values.Select(e => e.PropertyType)
+            .Values
+            .Select(e => e.PropertyType)
             .Concat(complexType.GetRuntimeFields().Values.Select(e => e.FieldType));
 
         foreach (var memberType in memberTypes)

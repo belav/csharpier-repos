@@ -905,8 +905,8 @@ namespace System.Data.Services.Client
             if (((string)name.Value).Trim() == UriHelper.DOLLARSIGN + UriHelper.OPTIONEXPAND)
             {
                 ValidationRules.RequireCanExpand(re);
-                re.ExpandPaths = re
-                    .ExpandPaths.Union(new string[] { (string)value.Value }, StringComparer.Ordinal)
+                re.ExpandPaths = re.ExpandPaths
+                    .Union(new string[] { (string)value.Value }, StringComparer.Ordinal)
                     .ToList();
             }
             else

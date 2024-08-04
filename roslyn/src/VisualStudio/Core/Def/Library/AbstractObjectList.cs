@@ -389,7 +389,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
 
             // Fire and forget
             var asynchronousOperationListener = LibraryManager
-                .ComponentModel.GetService<IAsynchronousOperationListenerProvider>()
+                .ComponentModel
+                .GetService<IAsynchronousOperationListenerProvider>()
                 .GetListener(FeatureAttribute.LibraryManager);
             var asyncToken = asynchronousOperationListener.BeginAsyncOperation(
                 nameof(IVsSimpleObjectList2) + "." + nameof(IVsSimpleObjectList2.GoToSource)

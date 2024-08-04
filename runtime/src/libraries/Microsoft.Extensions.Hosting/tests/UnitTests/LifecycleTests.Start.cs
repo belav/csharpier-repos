@@ -41,7 +41,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 1, 0, 0, 0, 0);
 
                 // Resume and check that both are not finished.
-                StartingTestClass<Impl1>.s_wait1.Release();
+                StartingTestClass<Impl1>
+                    .s_wait1
+                    .Release();
                 await StartingTestClass<Impl1>.s_wait2.WaitAsync();
                 Verify(1, 1, 1, 0, 0, 0);
 
@@ -50,7 +52,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 1, 1, 1, 0, 0);
 
                 // Resume and verify they finish.
-                StartingTestClass<Impl1>.s_wait3.Release();
+                StartingTestClass<Impl1>
+                    .s_wait3
+                    .Release();
                 StartingTestClass<Impl2>.s_wait3.Release();
                 await start;
                 Verify(1, 1, 1, 1, 1, 1);
@@ -126,7 +130,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 1, 0, 0, 0, 0);
 
                 // Resume and check that both are not finished.
-                StartTestClass<Impl1>.s_wait1.Release();
+                StartTestClass<Impl1>
+                    .s_wait1
+                    .Release();
                 await StartTestClass<Impl1>.s_wait2.WaitAsync();
                 Verify(1, 1, 1, 0, 0, 0);
 
@@ -135,7 +141,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 1, 1, 1, 0, 0);
 
                 // Resume and verify they finish.
-                StartTestClass<Impl1>.s_wait3.Release();
+                StartTestClass<Impl1>
+                    .s_wait3
+                    .Release();
                 StartTestClass<Impl2>.s_wait3.Release();
                 await start;
                 Verify(1, 1, 1, 1, 1, 1);
@@ -208,7 +216,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 0);
 
                 // Resume and verify they finish.
-                StartNonconcurrentTestClass<Impl1>.s_wait.Release();
+                StartNonconcurrentTestClass<Impl1>
+                    .s_wait
+                    .Release();
                 StartNonconcurrentTestClass<Impl2>.s_wait.Release();
                 await start;
                 Verify(1, 1);
@@ -273,7 +283,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 1, 0, 0, 0, 0);
 
                 // Resume and check that both are not finished.
-                StartedTestClass<Impl1>.s_wait1.Release();
+                StartedTestClass<Impl1>
+                    .s_wait1
+                    .Release();
                 await StartedTestClass<Impl1>.s_wait2.WaitAsync();
                 Verify(1, 1, 1, 0, 0, 0);
 
@@ -282,7 +294,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 1, 1, 1, 0, 0);
 
                 // Resume and verify they finish.
-                StartedTestClass<Impl1>.s_wait3.Release();
+                StartedTestClass<Impl1>
+                    .s_wait3
+                    .Release();
                 StartedTestClass<Impl2>.s_wait3.Release();
                 await start;
                 Verify(1, 1, 1, 1, 1, 1);

@@ -171,7 +171,8 @@ namespace System.Tests
             Assert.NotNull(thisMethod);
 
             CustomAttributeData cad = thisMethod
-                .CustomAttributes.Where(ca => ca.AttributeType == typeof(StringValueAttribute))
+                .CustomAttributes
+                .Where(ca => ca.AttributeType == typeof(StringValueAttribute))
                 .FirstOrDefault();
             Assert.NotNull(cad);
 

@@ -161,15 +161,17 @@ namespace System.Windows.Forms
                     }
                     catch (DllNotFoundException)
                     {
-                        Console.Error.WriteLine(
-                            "Gtk not found (missing LD_LIBRARY_PATH to libgtk-x11-2.0.so.0?), using built-in colorscheme"
-                        );
+                        Console
+                            .Error
+                            .WriteLine(
+                                "Gtk not found (missing LD_LIBRARY_PATH to libgtk-x11-2.0.so.0?), using built-in colorscheme"
+                            );
                     }
                     catch
                     {
-                        Console.Error.WriteLine(
-                            "Gtk colorscheme read failure, using built-in colorscheme"
-                        );
+                        Console
+                            .Error
+                            .WriteLine("Gtk colorscheme read failure, using built-in colorscheme");
                     }
                     break;
                 }
@@ -177,9 +179,9 @@ namespace System.Windows.Forms
                 case Desktop.KDE:
                 {
                     if (!ReadKDEColorsheme())
-                        Console.Error.WriteLine(
-                            "KDE colorscheme read failure, using built-in colorscheme"
-                        );
+                        Console
+                            .Error
+                            .WriteLine("KDE colorscheme read failure, using built-in colorscheme");
                     break;
                 }
 

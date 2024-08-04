@@ -69,16 +69,16 @@ class StackTraceDumper
 
         Catch(
             () =>
-                InnerGenericClass<string>.InnerInnerGenericClass<int>.ThrowException(
-                    "Stack trace with 2 inner generic class and generic overload"
-                )
+                InnerGenericClass<string>
+                    .InnerInnerGenericClass<int>
+                    .ThrowException("Stack trace with 2 inner generic class and generic overload")
         );
 
         Catch(
             () =>
-                InnerGenericClass<int>.InnerInnerGenericClass<string>.ThrowException(
-                    "Stack trace with 2 inner generic class and generic overload"
-                )
+                InnerGenericClass<int>
+                    .InnerInnerGenericClass<string>
+                    .ThrowException("Stack trace with 2 inner generic class and generic overload")
         );
 
         Catch(

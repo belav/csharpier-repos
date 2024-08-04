@@ -114,8 +114,11 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
         {
             bool succeeded;
 
-            var indicatorFactory =
-                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+            var indicatorFactory = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<IBackgroundWorkIndicatorFactory>();
 
             // TODO: prior logic was to get a tracking span of length 1 here.  Preserving that, though it's unclear if
             // that is necessary for the BWI to work properly.
@@ -150,7 +153,8 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
                 succeeded =
                     definitionLocation != null
                     && await definitionLocation
-                        .Location.TryNavigateToAsync(
+                        .Location
+                        .TryNavigateToAsync(
                             _threadingContext,
                             new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true),
                             cancellationToken
@@ -160,12 +164,15 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
 
             if (!succeeded)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    CancellationToken.None
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(CancellationToken.None);
 
-                var notificationService =
-                    document.Project.Solution.Services.GetRequiredService<INotificationService>();
+                var notificationService = document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetRequiredService<INotificationService>();
                 notificationService.SendNotification(
                     FeaturesResources.Cannot_navigate_to_the_symbol_under_the_caret,
                     EditorFeaturesResources.Go_to_Definition,

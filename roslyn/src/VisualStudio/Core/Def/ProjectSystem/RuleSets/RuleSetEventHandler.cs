@@ -55,9 +55,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
                         _threadingContext.JoinableTaskFactory
                     )
                     .ConfigureAwait(false);
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 if (!_eventsHookedUp)
                 {

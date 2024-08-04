@@ -105,9 +105,9 @@ internal sealed class RewriteAction : UrlAction
 
                 if (QueryStringAppend)
                 {
-                    request.QueryString = request.QueryString.Add(
-                        QueryString.FromUriComponent(pattern.Substring(split))
-                    );
+                    request.QueryString = request
+                        .QueryString
+                        .Add(QueryString.FromUriComponent(pattern.Substring(split)));
                 }
                 else
                 {

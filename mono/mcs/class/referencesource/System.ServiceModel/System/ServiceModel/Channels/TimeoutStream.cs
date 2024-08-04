@@ -16,10 +16,9 @@ namespace System.ServiceModel.Channels
         {
             if (!stream.CanTimeout)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "stream",
-                    SR.GetString(SR.StreamDoesNotSupportTimeout)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("stream", SR.GetString(SR.StreamDoesNotSupportTimeout));
             }
 
             this.timeoutHelper = timeoutHelper;

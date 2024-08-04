@@ -147,7 +147,7 @@ namespace {_spec.SetterNamespace}
 {{
     {_spec.SetterClassAccessibility} static partial class {_spec.SetterClassName}
     {{
-        private static System.IDisposable[] Register{typeSpec.FullyQualifiedTypeName.Replace(".", string.Empty)}(HubConnection connection, {typeSpec.FullyQualifiedTypeName} provider)
+        private static System.IDisposable[] Register{typeSpec .FullyQualifiedTypeName .Replace(".", string.Empty)}(HubConnection connection, {typeSpec.FullyQualifiedTypeName} provider)
         {{
             var registrations = new System.IDisposable[{typeSpec.Methods.Count}];"
             );

@@ -61,9 +61,9 @@ namespace Mono.CodeContracts.Static.AST
 
         public TypeNode GetType(string ns, string className)
         {
-            TypeReference firstOrDefault = this.definition.Types.FirstOrDefault(t =>
-                t.Namespace == ns && t.Name == className
-            );
+            TypeReference firstOrDefault = this.definition
+                .Types
+                .FirstOrDefault(t => t.Namespace == ns && t.Name == className);
             if (firstOrDefault == null)
                 return null;
 

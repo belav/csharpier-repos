@@ -23,11 +23,15 @@ internal sealed class CodeAnalysisDiagnosticAnalyzerServiceFactory() : IWorkspac
     public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
     {
         var diagnosticAnalyzerService = workspaceServices
-            .SolutionServices.ExportProvider.GetExports<IDiagnosticAnalyzerService>()
+            .SolutionServices
+            .ExportProvider
+            .GetExports<IDiagnosticAnalyzerService>()
             .Single()
             .Value;
         var diagnosticsRefresher = workspaceServices
-            .SolutionServices.ExportProvider.GetExports<IDiagnosticsRefresher>()
+            .SolutionServices
+            .ExportProvider
+            .GetExports<IDiagnosticsRefresher>()
             .Single()
             .Value;
         return new CodeAnalysisDiagnosticAnalyzerService(

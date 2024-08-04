@@ -162,9 +162,9 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.reliableSession.CopySettings(value);
             }
@@ -283,15 +283,17 @@ namespace System.ServiceModel
             NetTcpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.ConfigInvalidBindingConfigurationName,
-                            configurationName,
-                            ConfigurationStrings.NetTcpBindingCollectionElementName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidBindingConfigurationName,
+                                configurationName,
+                                ConfigurationStrings.NetTcpBindingCollectionElementName
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {
@@ -320,11 +322,13 @@ namespace System.ServiceModel
             }
             else if (mode == SecurityMode.Message)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.UnsupportedSecuritySetting, "Mode", mode)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.UnsupportedSecuritySetting, "Mode", mode)
+                        )
+                    );
             }
 
             // Message.ClientCredentialType = Certificate, IssuedToken or Windows are not supported.
@@ -340,15 +344,17 @@ namespace System.ServiceModel
                         || (mct == MessageCredentialType.Windows)
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR.GetString(
-                                    SR.UnsupportedSecuritySetting,
-                                    "Message.ClientCredentialType",
-                                    mct
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(
+                                        SR.UnsupportedSecuritySetting,
+                                        "Message.ClientCredentialType",
+                                        mct
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -365,15 +371,17 @@ namespace System.ServiceModel
                 && (transport.ClientCredentialType == TcpClientCredentialType.Certificate)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(
-                            SR.UnsupportedSecuritySetting,
-                            "Transport.ClientCredentialType",
-                            transport.ClientCredentialType
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.UnsupportedSecuritySetting,
+                                "Transport.ClientCredentialType",
+                                transport.ClientCredentialType
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 

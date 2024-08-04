@@ -17,7 +17,8 @@ public abstract class OptimisticConcurrencyRelationalTestBase<TFixture, TRowVers
     public virtual void Property_entry_original_value_is_set()
     {
         using var c = CreateF1Context();
-        c.Database.CreateExecutionStrategy()
+        c.Database
+            .CreateExecutionStrategy()
             .Execute(
                 c,
                 context =>

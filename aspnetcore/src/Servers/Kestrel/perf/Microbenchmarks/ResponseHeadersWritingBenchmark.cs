@@ -20,9 +20,9 @@ public class ResponseHeadersWritingBenchmark
 {
     private const int Iterations = 1000;
 
-    private static readonly byte[] _bytesServer = Encoding.ASCII.GetBytes(
-        "\r\nServer: " + Constants.ServerName
-    );
+    private static readonly byte[] _bytesServer = Encoding
+        .ASCII
+        .GetBytes("\r\nServer: " + Constants.ServerName);
     private static readonly byte[] _helloWorldPayload = Encoding.ASCII.GetBytes("Hello, World!");
 
     private HttpResponseHeaders _responseHeaders;

@@ -103,7 +103,9 @@ public class SqlServerConnectionTest
                 new RelationalCommandBuilderDependencies(
                     new TestRelationalTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                        TestServiceFactory
+                            .Instance
+                            .Create<RelationalTypeMappingSourceDependencies>()
                     ),
                     new SqlServerExceptionDetector()
                 )

@@ -248,7 +248,8 @@ namespace System.Net.Test.Common
 
                 // Forward the response body from the server to the client.
                 string responseBody = await response
-                    .Content.ReadAsStringAsync()
+                    .Content
+                    .ReadAsStringAsync()
                     .ConfigureAwait(false);
                 writer.Write(responseBody);
 

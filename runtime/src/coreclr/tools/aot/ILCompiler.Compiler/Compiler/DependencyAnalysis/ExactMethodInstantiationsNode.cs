@@ -98,12 +98,12 @@ namespace ILCompiler.DependencyAnalysis
                 // Get the name and sig of the method.
                 // Note: the method name and signature are stored in the NativeLayoutInfo blob, not in the hashtable we build here.
 
-                NativeLayoutMethodNameAndSignatureVertexNode nameAndSig =
-                    factory.NativeLayout.MethodNameAndSignatureVertex(
-                        method.GetTypicalMethodDefinition()
-                    );
-                NativeLayoutPlacedSignatureVertexNode placedNameAndSig =
-                    factory.NativeLayout.PlacedSignatureVertex(nameAndSig);
+                NativeLayoutMethodNameAndSignatureVertexNode nameAndSig = factory
+                    .NativeLayout
+                    .MethodNameAndSignatureVertex(method.GetTypicalMethodDefinition());
+                NativeLayoutPlacedSignatureVertexNode placedNameAndSig = factory
+                    .NativeLayout
+                    .PlacedSignatureVertex(nameAndSig);
                 Debug.Assert(placedNameAndSig.SavedVertex != null);
                 Vertex placedNameAndSigOffsetSig = nativeWriter.GetOffsetSignature(
                     placedNameAndSig.SavedVertex
@@ -174,10 +174,9 @@ namespace ILCompiler.DependencyAnalysis
                 );
 
             // Get native layout dependencies for the method signature.
-            NativeLayoutMethodNameAndSignatureVertexNode nameAndSig =
-                factory.NativeLayout.MethodNameAndSignatureVertex(
-                    method.GetTypicalMethodDefinition()
-                );
+            NativeLayoutMethodNameAndSignatureVertexNode nameAndSig = factory
+                .NativeLayout
+                .MethodNameAndSignatureVertex(method.GetTypicalMethodDefinition());
             dependencies.Add(
                 new DependencyListEntry(
                     factory.NativeLayout.PlacedSignatureVertex(nameAndSig),

@@ -32,14 +32,16 @@ internal sealed class ResponseCacheFilterApplicationModelProvider : IPageApplica
         ArgumentNullException.ThrowIfNull(context);
 
         var pageModel = context.PageApplicationModel;
-        var responseCacheAttributes =
-            pageModel.HandlerTypeAttributes.OfType<ResponseCacheAttribute>();
+        var responseCacheAttributes = pageModel
+            .HandlerTypeAttributes
+            .OfType<ResponseCacheAttribute>();
         foreach (var attribute in responseCacheAttributes)
         {
             var cacheProfile = attribute.GetCacheProfile(_mvcOptions);
-            context.PageApplicationModel.Filters.Add(
-                new PageResponseCacheFilter(cacheProfile, _loggerFactory)
-            );
+            context
+                .PageApplicationModel
+                .Filters
+                .Add(new PageResponseCacheFilter(cacheProfile, _loggerFactory));
         }
     }
 

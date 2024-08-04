@@ -30,10 +30,10 @@ public class DefaultValidationMetadataProviderTest
         // Assert
         Assert.NotNull(context.ValidationMetadata.PropertyValidationFilter);
         Assert.False(
-            context.ValidationMetadata.PropertyValidationFilter.ShouldValidateEntry(
-                new ValidationEntry(),
-                new ValidationEntry()
-            )
+            context
+                .ValidationMetadata
+                .PropertyValidationFilter
+                .ShouldValidateEntry(new ValidationEntry(), new ValidationEntry())
         );
     }
 
@@ -103,10 +103,10 @@ public class DefaultValidationMetadataProviderTest
         // Assert
         Assert.NotNull(context.ValidationMetadata.PropertyValidationFilter);
         Assert.False(
-            context.ValidationMetadata.PropertyValidationFilter.ShouldValidateEntry(
-                new ValidationEntry(),
-                new ValidationEntry()
-            )
+            context
+                .ValidationMetadata
+                .PropertyValidationFilter
+                .ShouldValidateEntry(new ValidationEntry(), new ValidationEntry())
         );
     }
 
@@ -132,10 +132,10 @@ public class DefaultValidationMetadataProviderTest
         // Assert
         Assert.NotNull(context.ValidationMetadata.PropertyValidationFilter);
         Assert.False(
-            context.ValidationMetadata.PropertyValidationFilter.ShouldValidateEntry(
-                new ValidationEntry(),
-                new ValidationEntry()
-            )
+            context
+                .ValidationMetadata
+                .PropertyValidationFilter
+                .ShouldValidateEntry(new ValidationEntry(), new ValidationEntry())
         );
     }
 

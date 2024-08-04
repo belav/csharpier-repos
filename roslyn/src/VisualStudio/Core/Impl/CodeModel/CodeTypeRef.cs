@@ -103,7 +103,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             var arrayType = project
                 .GetCompilationAsync()
-                .Result.CreateArrayTypeSymbol(LookupTypeSymbol(), rank);
+                .Result
+                .CreateArrayTypeSymbol(LookupTypeSymbol(), rank);
             return CodeTypeRef.Create(this.State, null, _projectId, arrayType);
         }
 

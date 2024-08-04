@@ -34,9 +34,9 @@ internal static class TestHelpers
         httpContext.RequestServices = serviceProvider;
         httpContext.Response.Body = bodyStream ?? new MemoryStream();
         httpContext.Connection.RemoteIpAddress = IPAddress.Parse("127.0.0.1");
-        httpContext.Features.Set<IHttpRequestLifetimeFeature>(
-            new HttpRequestLifetimeFeature(cancellationToken)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestLifetimeFeature>(new HttpRequestLifetimeFeature(cancellationToken));
         return httpContext;
     }
 

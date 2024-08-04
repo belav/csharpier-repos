@@ -467,11 +467,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
             catch (Exception e)
             {
-                EditAndContinueService.Log.Write(
-                    "Failed to create baseline for '{0}': {1}",
-                    projectId,
-                    e.Message
-                );
+                EditAndContinueService
+                    .Log
+                    .Write("Failed to create baseline for '{0}': {1}", projectId, e.Message);
 
                 var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(
                     EditAndContinueErrorCode.ErrorReadingFile
@@ -559,7 +557,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
 
                 var analysis = await EditSession
-                    .Analyses.GetDocumentAnalysisAsync(
+                    .Analyses
+                    .GetDocumentAnalysisAsync(
                         LastCommittedSolution,
                         oldDocument,
                         document,
@@ -591,10 +590,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<Diagnostic>.Empty;
                 }
 
-                EditSession.Telemetry.LogRudeEditDiagnostics(
-                    analysis.RudeEditErrors,
-                    project.State.Attributes.TelemetryId
-                );
+                EditSession
+                    .Telemetry
+                    .LogRudeEditDiagnostics(
+                        analysis.RudeEditErrors,
+                        project.State.Attributes.TelemetryId
+                    );
 
                 // track the document, so that we can refresh or clean diagnostics at the end of edit session:
                 EditSession.TrackDocumentWithReportedDiagnostics(document.Id);
@@ -726,7 +727,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
 
                 var baseActiveStatements = await EditSession
-                    .BaseActiveStatements.GetValueAsync(cancellationToken)
+                    .BaseActiveStatements
+                    .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 using var _1 = PooledDictionary<string, ArrayBuilder<(ProjectId, int)>>.GetInstance(
                     out var documentIndicesByMappedPath
@@ -786,8 +788,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     Debug.Assert(oldProject.SupportsEditAndContinue());
                     Debug.Assert(newProject.SupportsEditAndContinue());
 
-                    var analyzer =
-                        newProject.Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                    var analyzer = newProject
+                        .Services
+                        .GetRequiredService<IEditAndContinueAnalyzer>();
 
                     await foreach (
                         var documentId in EditSession
@@ -956,13 +959,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
 
                 var baseActiveStatements = await EditSession
-                    .BaseActiveStatements.GetValueAsync(cancellationToken)
+                    .BaseActiveStatements
+                    .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (
-                    !baseActiveStatements.DocumentPathMap.TryGetValue(
-                        mappedDocument.FilePath,
-                        out var oldMappedDocumentActiveStatements
-                    )
+                    !baseActiveStatements
+                        .DocumentPathMap
+                        .TryGetValue(
+                            mappedDocument.FilePath,
+                            out var oldMappedDocumentActiveStatements
+                        )
                 )
                 {
                     // no active statements in this document
@@ -1018,7 +1024,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     }
 
                     var analysis = await EditSession
-                        .Analyses.GetDocumentAnalysisAsync(
+                        .Analyses
+                        .GetDocumentAnalysisAsync(
                             LastCommittedSolution,
                             oldUnmappedDocument,
                             newUnmappedDocument,

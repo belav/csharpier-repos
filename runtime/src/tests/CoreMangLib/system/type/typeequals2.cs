@@ -32,10 +32,9 @@ public class TypeEquals2
 
             if (!t1.Equals(t2))
             {
-                TestLibrary.TestFramework.LogError(
-                    "001",
-                    "Type.Equals returns false when comparing two same types"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError("001", "Type.Equals returns false when comparing two same types");
                 retVal = false;
             }
         }
@@ -62,10 +61,9 @@ public class TypeEquals2
 
             if (t1.Equals(t2))
             {
-                TestLibrary.TestFramework.LogError(
-                    "003",
-                    "Type.Equals returns true when comparing two different types"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError("003", "Type.Equals returns true when comparing two different types");
                 retVal = false;
             }
         }
@@ -91,10 +89,9 @@ public class TypeEquals2
 
             if (!t1.Equals(t1))
             {
-                TestLibrary.TestFramework.LogError(
-                    "003",
-                    "Type.Equals returns false when comparing a type with itself"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError("003", "Type.Equals returns false when comparing a type with itself");
                 retVal = false;
             }
         }

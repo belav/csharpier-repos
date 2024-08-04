@@ -75,9 +75,9 @@ public class InternalDbSet<
                     );
                 }
 
-                var findSameTypeName = _context.Model.FindSameTypeNameWithDifferentNamespace(
-                    typeof(TEntity)
-                );
+                var findSameTypeName = _context
+                    .Model
+                    .FindSameTypeNameWithDifferentNamespace(typeof(TEntity));
                 //if the same name exists in your entity types we will show you the full namespace of the type
                 if (!string.IsNullOrEmpty(findSameTypeName))
                 {
@@ -591,12 +591,8 @@ public class InternalDbSet<
         {
             _context
                 .GetDependencies()
-                .EntityGraphAttacher.AttachGraph(
-                    entry,
-                    entityState,
-                    entityState,
-                    forceStateWhenUnknownKey: true
-                );
+                .EntityGraphAttacher
+                .AttachGraph(entry, entityState, entityState, forceStateWhenUnknownKey: true);
         }
         else
         {
@@ -616,7 +612,8 @@ public class InternalDbSet<
         entry.EntityState == EntityState.Detached
             ? _context
                 .GetDependencies()
-                .EntityGraphAttacher.AttachGraphAsync(
+                .EntityGraphAttacher
+                .AttachGraphAsync(
                     entry,
                     entityState,
                     entityState,

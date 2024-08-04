@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var compilation = CreateCompilation(program);
             var method = (MethodSymbol)
                 compilation
-                    .GlobalNamespace.GetTypeMembers(typeName)
+                    .GlobalNamespace
+                    .GetTypeMembers(typeName)
                     .Single()
                     .GetMembers(methodName)
                     .Single();

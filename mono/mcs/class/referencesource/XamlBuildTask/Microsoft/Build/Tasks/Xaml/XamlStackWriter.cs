@@ -167,9 +167,9 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (property == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.UnexpectedXamlValueNull("property"))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.UnexpectedXamlValueNull("property")));
             }
             SetTopFrame(property);
             _stack.Add(XamlStackFrame.ForMember(property));
@@ -179,9 +179,9 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (type == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.UnexpectedXamlValueNull("type"))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.UnexpectedXamlValueNull("type")));
             }
             SetTopFrame();
             _stack.Add(XamlStackFrame.ForObject(type));

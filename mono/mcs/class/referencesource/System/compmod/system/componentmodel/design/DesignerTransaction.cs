@@ -134,23 +134,32 @@ namespace System.ComponentModel.Design
             //
             if (!suppressedFinalization)
             {
-                System.Diagnostics.Debug.Fail(
-                    "Invalid state. Dispose(true) should have called cancel which does the SuppressFinalize"
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Fail(
+                        "Invalid state. Dispose(true) should have called cancel which does the SuppressFinalize"
+                    );
                 GC.SuppressFinalize(this);
             }
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            System.Diagnostics.Debug.Assert(
-                disposing,
-                "Designer transaction garbage collected, unable to cancel, please Cancel, Close, or Dispose your transaction."
-            );
-            System.Diagnostics.Debug.Assert(
-                disposing || canceled || committed,
-                "Disposing DesignerTransaction that has not been comitted or canceled; forcing Cancel"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    disposing,
+                    "Designer transaction garbage collected, unable to cancel, please Cancel, Close, or Dispose your transaction."
+                );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    disposing || canceled || committed,
+                    "Disposing DesignerTransaction that has not been comitted or canceled; forcing Cancel"
+                );
             Cancel();
         }
     }

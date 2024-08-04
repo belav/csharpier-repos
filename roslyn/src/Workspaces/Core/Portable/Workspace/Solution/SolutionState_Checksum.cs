@@ -167,8 +167,8 @@ namespace Microsoft.CodeAnalysis
                             // if it's a project that's specifically in the sync'ed cone, include this checksum so that
                             // this project definitely syncs over.
                             if (t.mustCompute)
-                                return await t
-                                    .state.GetStateChecksumsAsync(cancellationToken)
+                                return await t.state
+                                    .GetStateChecksumsAsync(cancellationToken)
                                     .ConfigureAwait(false);
 
                             // If it's a project that is not in the cone, still try to get the latest checksum for it if

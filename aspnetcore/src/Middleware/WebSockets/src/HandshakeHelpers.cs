@@ -186,11 +186,9 @@ internal static class HandshakeHelpers
                 builder.Append('=');
                 var len = (parsedOptions.ClientMaxWindowBits > 9) ? 2 : 1;
                 var span = builder.AppendSpan(len);
-                var ret = parsedOptions.ClientMaxWindowBits.TryFormat(
-                    span,
-                    out var written,
-                    provider: CultureInfo.InvariantCulture
-                );
+                var ret = parsedOptions
+                    .ClientMaxWindowBits
+                    .TryFormat(span, out var written, provider: CultureInfo.InvariantCulture);
                 Debug.Assert(ret);
                 Debug.Assert(written == len);
             }
@@ -295,11 +293,9 @@ internal static class HandshakeHelpers
             builder.Append('=');
             var len = (parsedOptions.ServerMaxWindowBits > 9) ? 2 : 1;
             var span = builder.AppendSpan(len);
-            var ret = parsedOptions.ServerMaxWindowBits.TryFormat(
-                span,
-                out var written,
-                provider: CultureInfo.InvariantCulture
-            );
+            var ret = parsedOptions
+                .ServerMaxWindowBits
+                .TryFormat(span, out var written, provider: CultureInfo.InvariantCulture);
             Debug.Assert(ret);
             Debug.Assert(written == len);
         }

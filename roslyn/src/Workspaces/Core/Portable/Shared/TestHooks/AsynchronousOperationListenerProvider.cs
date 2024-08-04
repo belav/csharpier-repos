@@ -236,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         /// </summary>
         public List<AsynchronousOperationListener.DiagnosticAsyncToken> GetTokens() =>
             _singletonListeners
-                .Values.Where(l => l.TrackActiveTokens)
+                .Values
+                .Where(l => l.TrackActiveTokens)
                 .SelectMany(l => l.ActiveDiagnosticTokens)
                 .ToList();
 

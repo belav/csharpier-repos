@@ -161,7 +161,8 @@ namespace System.ServiceModel.Activities.Presentation
                     )
                 )
                 {
-                    this.Activity.Properties[InitializeCorrelationDesigner.CorrelationPropertyName]
+                    this.Activity
+                        .Properties[InitializeCorrelationDesigner.CorrelationPropertyName]
                         .SetValue(this.CorrelationHandle);
                     ModelItemCollection correlationDataCollection = this.Activity
                         .Properties[InitializeCorrelationDesigner.CorrelationDataPropertyName]

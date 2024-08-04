@@ -313,10 +313,9 @@ namespace System.Data.Odbc
                 {
                     OdbcParameter lastParameter = InnerList[^1];
                     if (
-                        lastParameter.ParameterName.StartsWith(
-                            ADP.Parameter,
-                            StringComparison.Ordinal
-                        )
+                        lastParameter
+                            .ParameterName
+                            .StartsWith(ADP.Parameter, StringComparison.Ordinal)
                         && int.TryParse(
                             lastParameter.ParameterName.AsSpan(ADP.Parameter.Length),
                             out int lastIndex

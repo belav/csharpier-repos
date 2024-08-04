@@ -56,8 +56,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 result
                     .Should()
                     .Pass()
-                    .And.ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1)
-                    .And.ExecuteInIsolatedContext(componentProject.AssemblyName);
+                    .And
+                    .ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1)
+                    .And
+                    .ExecuteInIsolatedContext(componentProject.AssemblyName);
             }
             else
             {
@@ -100,8 +102,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 result
                     .Should()
                     .Pass()
-                    .And.ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1)
-                    .And.ExecuteInIsolatedContext(componentProject.AssemblyName);
+                    .And
+                    .ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1)
+                    .And
+                    .ExecuteInIsolatedContext(componentProject.AssemblyName);
             }
             else
             {
@@ -130,9 +134,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .InitializeContextForApp(app.AppDll)
-                .And.Pass()
-                .And.ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1)
-                .And.ExecuteInIsolatedContext(componentProject.AssemblyName);
+                .And
+                .Pass()
+                .And
+                .ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1)
+                .And
+                .ExecuteInIsolatedContext(componentProject.AssemblyName);
         }
 
         [Theory]
@@ -181,15 +188,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.InitializeContextForConfig(componentProject.RuntimeConfigJson)
-                .And.ExecuteInIsolatedContext(componentProject.AssemblyName);
+                .And
+                .InitializeContextForConfig(componentProject.RuntimeConfigJson)
+                .And
+                .ExecuteInIsolatedContext(componentProject.AssemblyName);
 
             for (int i = 1; i <= callCount; ++i)
             {
                 result
                     .Should()
                     .ExecuteFunctionPointer(comp1Name, i * 2 - 1, i)
-                    .And.ExecuteFunctionPointer(sharedState.ComponentEntryPoint2, i * 2, i);
+                    .And
+                    .ExecuteFunctionPointer(sharedState.ComponentEntryPoint2, i * 2, i);
             }
         }
 
@@ -230,15 +240,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.InitializeContextForConfig(componentProject.RuntimeConfigJson)
-                .And.ExecuteInIsolatedContext(componentProject.AssemblyName);
+                .And
+                .InitializeContextForConfig(componentProject.RuntimeConfigJson)
+                .And
+                .ExecuteInIsolatedContext(componentProject.AssemblyName);
 
             for (int i = 1; i <= callCount; ++i)
             {
                 result
                     .Should()
                     .ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, i, i)
-                    .And.ExecuteFunctionPointer(sharedState.ComponentEntryPoint2, i, i);
+                    .And
+                    .ExecuteFunctionPointer(sharedState.ComponentEntryPoint2, i, i);
             }
         }
 
@@ -262,8 +275,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.InitializeContextForConfig(componentProject.RuntimeConfigJson)
-                .And.ExecuteFunctionPointerWithException(entryPoint, 1);
+                .And
+                .InitializeContextForConfig(componentProject.RuntimeConfigJson)
+                .And
+                .ExecuteFunctionPointerWithException(entryPoint, 1);
         }
 
         public class SharedTestState : SharedTestStateBase

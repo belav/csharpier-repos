@@ -150,9 +150,9 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         )
         {
             ThrowHelper.ThrowIfNull(options);
-            options.Rules.Add(
-                new InstrumentRule(meterName, instrumentName, listenerName, scopes, enable)
-            );
+            options
+                .Rules
+                .Add(new InstrumentRule(meterName, instrumentName, listenerName, scopes, enable));
             return options;
         }
     }

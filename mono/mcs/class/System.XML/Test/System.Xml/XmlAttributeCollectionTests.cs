@@ -161,10 +161,10 @@ namespace MonoTests.System.Xml
             this.document.LoadXml("<root><elem a='1'/></root>");
             XmlAttribute attr = document.CreateAttribute("foo");
             attr.Value = "test";
-            document.DocumentElement.Attributes.InsertAfter(
-                attr,
-                document.DocumentElement.FirstChild.Attributes[0]
-            );
+            document
+                .DocumentElement
+                .Attributes
+                .InsertAfter(attr, document.DocumentElement.FirstChild.Attributes[0]);
         }
 
         [Test]

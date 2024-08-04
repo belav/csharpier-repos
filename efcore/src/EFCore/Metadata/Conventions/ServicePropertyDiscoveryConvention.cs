@@ -115,7 +115,8 @@ public class ServicePropertyDiscoveryConvention
     protected virtual IEnumerable<MemberInfo> GetMembers(IConventionTypeBase structuralType) =>
         structuralType
             .GetRuntimeProperties()
-            .Values.Cast<MemberInfo>()
+            .Values
+            .Cast<MemberInfo>()
             .Concat(structuralType.GetRuntimeFields().Values);
 
     /// <summary>
@@ -143,11 +144,9 @@ public class ServicePropertyDiscoveryConvention
             return false;
         }
 
-        factory = Dependencies.MemberClassifier.FindServicePropertyCandidateBindingFactory(
-            memberInfo,
-            model,
-            UseAttributes
-        );
+        factory = Dependencies
+            .MemberClassifier
+            .FindServicePropertyCandidateBindingFactory(memberInfo, model, UseAttributes);
         if (factory == null)
         {
             return false;

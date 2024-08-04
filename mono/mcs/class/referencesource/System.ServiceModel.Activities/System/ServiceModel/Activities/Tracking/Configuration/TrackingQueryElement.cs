@@ -82,9 +82,9 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
         {
             foreach (AnnotationElement annotation in this.Annotations)
             {
-                trackingQuery.QueryAnnotations.Add(
-                    new KeyValuePair<string, string>(annotation.Name, annotation.Value)
-                );
+                trackingQuery
+                    .QueryAnnotations
+                    .Add(new KeyValuePair<string, string>(annotation.Name, annotation.Value));
             }
         }
     }

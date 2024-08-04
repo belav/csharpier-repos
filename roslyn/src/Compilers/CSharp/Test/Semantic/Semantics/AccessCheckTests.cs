@@ -1153,11 +1153,13 @@ internal class InFriendCompilation
             c.VerifyDiagnostics();
             Assert.NotNull(c.GetReferencedAssemblySymbol(r1));
             var classC = compilation
-                .GlobalNamespace.GetMembers("C")
+                .GlobalNamespace
+                .GetMembers("C")
                 .OfType<INamedTypeSymbol>()
                 .Single();
             var classQ = compilation
-                .GlobalNamespace.GetMembers("Q")
+                .GlobalNamespace
+                .GetMembers("Q")
                 .OfType<INamedTypeSymbol>()
                 .Single();
             Assert.True(compilation.IsSymbolAccessibleWithin(classC, classQ));
@@ -1174,14 +1176,16 @@ internal class InFriendCompilation
             Assert.Null(c.GetReferencedAssemblySymbol(r1));
             // The variable classC represents a symbol from r1, which did not result in any symbols in c
             var c2 = ((Compilation)c)
-                .GlobalNamespace.GetMembers("C")
+                .GlobalNamespace
+                .GetMembers("C")
                 .OfType<INamedTypeSymbol>()
                 .Single();
             Assert.NotEqual(classC, c2);
 
             Assert.NotNull(c.GetReferencedAssemblySymbol(r2));
             classQ = ((Compilation)c)
-                .GlobalNamespace.GetMembers("Q")
+                .GlobalNamespace
+                .GetMembers("Q")
                 .OfType<INamedTypeSymbol>()
                 .Single();
             // the below should not throw a null reference exception.

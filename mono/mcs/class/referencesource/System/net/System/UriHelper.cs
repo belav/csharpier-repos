@@ -206,12 +206,14 @@ namespace System
                         );
 
                         short numberOfBytes = (short)
-                            Encoding.UTF8.GetBytes(
-                                pStr + i,
-                                count,
-                                bytes,
-                                c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar
-                            );
+                            Encoding
+                                .UTF8
+                                .GetBytes(
+                                    pStr + i,
+                                    count,
+                                    bytes,
+                                    c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar
+                                );
 
                         // This is the only exception that built in UriParser can throw after a Uri ctor.
                         // Should not happen unless the app tries to feed an invalid Unicode String
@@ -689,11 +691,9 @@ namespace System
                 {
                     bool isHighSurr = Char.IsHighSurrogate(unescapedCharsPtr[j]);
 
-                    byte[] encodedBytes = Encoding.UTF8.GetBytes(
-                        unescapedChars,
-                        j,
-                        isHighSurr ? 2 : 1
-                    );
+                    byte[] encodedBytes = Encoding
+                        .UTF8
+                        .GetBytes(unescapedChars, j, isHighSurr ? 2 : 1);
                     int encodedBytesLength = encodedBytes.Length;
 
                     // we have to keep unicode chars outside Iri range escaped
