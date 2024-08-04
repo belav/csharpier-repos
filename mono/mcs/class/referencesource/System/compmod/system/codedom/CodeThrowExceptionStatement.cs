@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeThrowExceptionStatement.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
@@ -20,12 +20,9 @@ namespace System.CodeDom {
     ///       a statement that throws an exception.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeThrowExceptionStatement : CodeStatement {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeThrowExceptionStatement : CodeStatement
+    {
         private CodeExpression toThrow;
 
         /// <devdoc>
@@ -33,15 +30,15 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeThrowExceptionStatement'/>.
         ///    </para>
         /// </devdoc>
-        public CodeThrowExceptionStatement() {
-        }
-        
+        public CodeThrowExceptionStatement() { }
+
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeThrowExceptionStatement'/> using the specified statement.
         ///    </para>
         /// </devdoc>
-        public CodeThrowExceptionStatement(CodeExpression toThrow) {
+        public CodeThrowExceptionStatement(CodeExpression toThrow)
+        {
             ToThrow = toThrow;
         }
 
@@ -51,13 +48,10 @@ namespace System.CodeDom {
         ///       the expression to throw.
         ///    </para>
         /// </devdoc>
-        public CodeExpression ToThrow {
-            get {
-                return toThrow;
-            }
-            set {
-                toThrow = value;
-            }
+        public CodeExpression ToThrow
+        {
+            get { return toThrow; }
+            set { toThrow = value; }
         }
     }
 }

@@ -68,8 +68,8 @@ public class SqliteParameterTest
     }
 
     [Fact]
-    public void DbType_defaults_to_string()
-        => Assert.Equal(DbType.String, new SqliteParameter().DbType);
+    public void DbType_defaults_to_string() =>
+        Assert.Equal(DbType.String, new SqliteParameter().DbType);
 
     [Fact]
     public void Size_validates_argument()
@@ -83,8 +83,8 @@ public class SqliteParameterTest
     }
 
     [Fact]
-    public void SqliteType_defaults_to_text()
-        => Assert.Equal(SqliteType.Text, new SqliteParameter().SqliteType);
+    public void SqliteType_defaults_to_text() =>
+        Assert.Equal(SqliteType.Text, new SqliteParameter().SqliteType);
 
     [Theory]
     [MemberData(nameof(TypesData))]
@@ -102,20 +102,26 @@ public class SqliteParameterTest
     }
 
     [Fact]
-    public void Direction_input_by_default()
-        => Assert.Equal(ParameterDirection.Input, new SqliteParameter().Direction);
+    public void Direction_input_by_default() =>
+        Assert.Equal(ParameterDirection.Input, new SqliteParameter().Direction);
 
     [Fact]
     public void Direction_validates_value()
     {
-        var ex = Assert.Throws<ArgumentException>(() => new SqliteParameter().Direction = ParameterDirection.Output);
+        var ex = Assert.Throws<ArgumentException>(
+            () => new SqliteParameter().Direction = ParameterDirection.Output
+        );
         Assert.Equal(Resources.InvalidParameterDirection(ParameterDirection.Output), ex.Message);
     }
 
     [Fact]
     public void ResetDbType_works()
     {
-        var parameter = new SqliteParameter { DbType = DbType.Int64, SqliteType = SqliteType.Integer };
+        var parameter = new SqliteParameter
+        {
+            DbType = DbType.Int64,
+            SqliteType = SqliteType.Integer,
+        };
 
         parameter.ResetDbType();
 
@@ -126,7 +132,11 @@ public class SqliteParameterTest
     [Fact]
     public void ResetSqliteType_works()
     {
-        var parameter = new SqliteParameter { DbType = DbType.Int64, SqliteType = SqliteType.Integer };
+        var parameter = new SqliteParameter
+        {
+            DbType = DbType.Int64,
+            SqliteType = SqliteType.Integer,
+        };
 
         parameter.ResetSqliteType();
 
@@ -255,86 +265,102 @@ public class SqliteParameterTest
     }
 
     [Fact]
-    public void Bind_works_when_DateTime()
-        => Bind_works(new DateTime(2014, 4, 14, 11, 13, 59), "2014-04-14 11:13:59");
+    public void Bind_works_when_DateTime() =>
+        Bind_works(new DateTime(2014, 4, 14, 11, 13, 59), "2014-04-14 11:13:59");
 
     [Fact]
-    public void Bind_works_when_DateTime_with_SqliteType_Real()
-        => Bind_works(new DateTime(2014, 4, 14, 11, 13, 59), 2456761.9680439816, SqliteType.Real);
+    public void Bind_works_when_DateTime_with_SqliteType_Real() =>
+        Bind_works(new DateTime(2014, 4, 14, 11, 13, 59), 2456761.9680439816, SqliteType.Real);
 
     [Fact]
-    public void Bind_works_when_DateTimeOffset()
-        => Bind_works(new DateTimeOffset(2014, 4, 14, 11, 13, 59, new TimeSpan(-8, 0, 0)), "2014-04-14 11:13:59-08:00");
+    public void Bind_works_when_DateTimeOffset() =>
+        Bind_works(
+            new DateTimeOffset(2014, 4, 14, 11, 13, 59, new TimeSpan(-8, 0, 0)),
+            "2014-04-14 11:13:59-08:00"
+        );
 
     [Fact]
-    public void Bind_works_when_DateTimeOffset_with_SqliteType_Real()
-        => Bind_works(
+    public void Bind_works_when_DateTimeOffset_with_SqliteType_Real() =>
+        Bind_works(
             new DateTimeOffset(new DateTime(2014, 4, 14, 11, 13, 59)),
             2456761.9680439816,
-            SqliteType.Real);
+            SqliteType.Real
+        );
 
 #if NET6_0_OR_GREATER
     [Fact]
-    public void Bind_works_when_DateOnly()
-        => Bind_works(new DateOnly(2014, 4, 14), "2014-04-14");
+    public void Bind_works_when_DateOnly() => Bind_works(new DateOnly(2014, 4, 14), "2014-04-14");
 
     [Fact]
-    public void Bind_works_when_DateOnly_with_SqliteType_Real()
-        => Bind_works(new DateOnly(2014, 4, 14), 2456761.5, SqliteType.Real);
+    public void Bind_works_when_DateOnly_with_SqliteType_Real() =>
+        Bind_works(new DateOnly(2014, 4, 14), 2456761.5, SqliteType.Real);
 
     [Fact]
-    public void Bind_works_when_TimeOnly()
-        => Bind_works(new TimeOnly(13, 10, 15), "13:10:15");
+    public void Bind_works_when_TimeOnly() => Bind_works(new TimeOnly(13, 10, 15), "13:10:15");
 
     [Fact]
-    public void Bind_works_when_TimeOnly_with_milliseconds()
-        => Bind_works(new TimeOnly(13, 10, 15, 500), "13:10:15.5000000");
+    public void Bind_works_when_TimeOnly_with_milliseconds() =>
+        Bind_works(new TimeOnly(13, 10, 15, 500), "13:10:15.5000000");
 
     [Fact]
-    public void Bind_works_when_TimeOnly_with_SqliteType_Real()
-        => Bind_works(new TimeOnly(13, 10, 15), 0.5487847222222222, SqliteType.Real);
+    public void Bind_works_when_TimeOnly_with_SqliteType_Real() =>
+        Bind_works(new TimeOnly(13, 10, 15), 0.5487847222222222, SqliteType.Real);
 #endif
 
     [Fact]
-    public void Bind_works_when_DBNull()
-        => Bind_works(DBNull.Value, DBNull.Value);
+    public void Bind_works_when_DBNull() => Bind_works(DBNull.Value, DBNull.Value);
 
     [Fact]
-    public void Bind_works_when_decimal()
-        => Bind_works(3.14m, "3.14");
+    public void Bind_works_when_decimal() => Bind_works(3.14m, "3.14");
 
     [Fact]
-    public void Bind_works_when_decimal_with_integral_value()
-        => Bind_works(3m, "3.0");
+    public void Bind_works_when_decimal_with_integral_value() => Bind_works(3m, "3.0");
 
     [Fact]
-    public void Bind_works_when_Enum()
-        => Bind_works(MyEnum.One, 1L);
+    public void Bind_works_when_Enum() => Bind_works(MyEnum.One, 1L);
 
     [Fact]
-    public void Bind_works_when_Guid_with_SqliteType_Blob()
-        => Bind_works(
+    public void Bind_works_when_Guid_with_SqliteType_Blob() =>
+        Bind_works(
             new Guid("1c902ddb-f4b6-4945-af38-0dc1b0760465"),
-            new byte[] { 0xDB, 0x2D, 0x90, 0x1C, 0xB6, 0xF4, 0x45, 0x49, 0xAF, 0x38, 0x0D, 0xC1, 0xB0, 0x76, 0x04, 0x65 },
-            SqliteType.Blob);
+            new byte[]
+            {
+                0xDB,
+                0x2D,
+                0x90,
+                0x1C,
+                0xB6,
+                0xF4,
+                0x45,
+                0x49,
+                0xAF,
+                0x38,
+                0x0D,
+                0xC1,
+                0xB0,
+                0x76,
+                0x04,
+                0x65,
+            },
+            SqliteType.Blob
+        );
 
     [Fact]
-    public void Bind_works_when_Guid()
-        => Bind_works(
+    public void Bind_works_when_Guid() =>
+        Bind_works(
             new Guid("1c902ddb-f4b6-4945-af38-0dc1b0760465"),
-            "1C902DDB-F4B6-4945-AF38-0DC1B0760465");
+            "1C902DDB-F4B6-4945-AF38-0DC1B0760465"
+        );
 
     [Fact]
-    public void Bind_works_when_Nullable()
-        => Bind_works((int?)1, 1L);
+    public void Bind_works_when_Nullable() => Bind_works((int?)1, 1L);
 
     [Fact]
-    public void Bind_works_when_TimeSpan()
-        => Bind_works(new TimeSpan(11, 19, 32), "11:19:32");
+    public void Bind_works_when_TimeSpan() => Bind_works(new TimeSpan(11, 19, 32), "11:19:32");
 
     [Fact]
-    public void Bind_works_when_TimeSpan_with_SqliteType_Real()
-        => Bind_works(new TimeSpan(11, 19, 32), 0.47189814814814812, SqliteType.Real);
+    public void Bind_works_when_TimeSpan_with_SqliteType_Real() =>
+        Bind_works(new TimeSpan(11, 19, 32), 0.47189814814814812, SqliteType.Real);
 
     [Fact]
     public void Bind_throws_when_unknown()
@@ -573,8 +599,8 @@ public class SqliteParameterTest
         }
     }
 
-    public static IEnumerable<object[]> TypesData
-        => new List<object[]>
+    public static IEnumerable<object[]> TypesData =>
+        new List<object[]>
         {
             new object[] { default(DateTime), SqliteType.Text },
             new object[] { default(DateTimeOffset), SqliteType.Text },
@@ -605,6 +631,6 @@ public class SqliteParameterTest
 
     private enum MyEnum
     {
-        One = 1
+        One = 1,
     }
 }

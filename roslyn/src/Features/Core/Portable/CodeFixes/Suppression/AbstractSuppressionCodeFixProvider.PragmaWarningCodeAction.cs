@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 {
     internal abstract partial class AbstractSuppressionCodeFixProvider : IConfigurationFixProvider
     {
-        internal sealed class PragmaWarningCodeAction : AbstractSuppressionCodeAction, IPragmaBasedCodeAction
+        internal sealed class PragmaWarningCodeAction
+            : AbstractSuppressionCodeAction,
+                IPragmaBasedCodeAction
         {
             private readonly SuppressionTargetInfo _suppressionTargetInfo;
             private readonly Document _document;
@@ -25,13 +27,24 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 Document document,
                 SyntaxFormattingOptions options,
                 Diagnostic diagnostic,
-                AbstractSuppressionCodeFixProvider fixer)
+                AbstractSuppressionCodeFixProvider fixer
+            )
             {
                 // We need to normalize the leading trivia on start token to account for
                 // the trailing trivia on its previous token (and similarly normalize trailing trivia for end token).
-                PragmaHelpers.NormalizeTriviaOnTokens(fixer, ref document, ref suppressionTargetInfo);
+                PragmaHelpers.NormalizeTriviaOnTokens(
+                    fixer,
+                    ref document,
+                    ref suppressionTargetInfo
+                );
 
-                return new PragmaWarningCodeAction(suppressionTargetInfo, document, options, diagnostic, fixer);
+                return new PragmaWarningCodeAction(
+                    suppressionTargetInfo,
+                    document,
+                    options,
+                    diagnostic,
+                    fixer
+                );
             }
 
             private PragmaWarningCodeAction(
@@ -40,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 SyntaxFormattingOptions options,
                 Diagnostic diagnostic,
                 AbstractSuppressionCodeFixProvider fixer,
-                bool forFixMultipleContext = false)
+                bool forFixMultipleContext = false
+            )
                 : base(fixer, title: FeaturesResources.in_Source)
             {
                 _suppressionTargetInfo = suppressionTargetInfo;
@@ -50,41 +64,83 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 _forFixMultipleContext = forFixMultipleContext;
             }
 
-            public PragmaWarningCodeAction CloneForFixMultipleContext()
-                => new(_suppressionTargetInfo, _document, _options, _diagnostic, Fixer, forFixMultipleContext: true);
-
-            protected override string DiagnosticIdForEquivalenceKey
-                => _forFixMultipleContext ? string.Empty : _diagnostic.Id;
-
-            protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
-                => await GetChangedDocumentAsync(includeStartTokenChange: true, includeEndTokenChange: true, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            public async Task<Document> GetChangedDocumentAsync(bool includeStartTokenChange, bool includeEndTokenChange, CancellationToken cancellationToken)
-            {
-                return await PragmaHelpers.GetChangeDocumentWithPragmaAdjustedAsync(
-                    _document,
-                    _diagnostic.Location.SourceSpan,
+            public PragmaWarningCodeAction CloneForFixMultipleContext() =>
+                new(
                     _suppressionTargetInfo,
-                    (startToken, currentDiagnosticSpan) =>
-                    {
-                        return includeStartTokenChange
-                            ? PragmaHelpers.GetNewStartTokenWithAddedPragma(startToken, currentDiagnosticSpan, _diagnostic, Fixer, FormatNode, isRemoveSuppression: false, cancellationToken)
-                            : startToken;
-                    },
-                    (endToken, currentDiagnosticSpan) =>
-                    {
-                        return includeEndTokenChange
-                            ? PragmaHelpers.GetNewEndTokenWithAddedPragma(endToken, currentDiagnosticSpan, _diagnostic, Fixer, FormatNode, isRemoveSuppression: false, cancellationToken)
-                            : endToken;
-                    },
-                    cancellationToken).ConfigureAwait(false);
+                    _document,
+                    _options,
+                    _diagnostic,
+                    Fixer,
+                    forFixMultipleContext: true
+                );
+
+            protected override string DiagnosticIdForEquivalenceKey =>
+                _forFixMultipleContext ? string.Empty : _diagnostic.Id;
+
+            protected override async Task<Document> GetChangedDocumentAsync(
+                CancellationToken cancellationToken
+            ) =>
+                await GetChangedDocumentAsync(
+                        includeStartTokenChange: true,
+                        includeEndTokenChange: true,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
+
+            public async Task<Document> GetChangedDocumentAsync(
+                bool includeStartTokenChange,
+                bool includeEndTokenChange,
+                CancellationToken cancellationToken
+            )
+            {
+                return await PragmaHelpers
+                    .GetChangeDocumentWithPragmaAdjustedAsync(
+                        _document,
+                        _diagnostic.Location.SourceSpan,
+                        _suppressionTargetInfo,
+                        (startToken, currentDiagnosticSpan) =>
+                        {
+                            return includeStartTokenChange
+                                ? PragmaHelpers.GetNewStartTokenWithAddedPragma(
+                                    startToken,
+                                    currentDiagnosticSpan,
+                                    _diagnostic,
+                                    Fixer,
+                                    FormatNode,
+                                    isRemoveSuppression: false,
+                                    cancellationToken
+                                )
+                                : startToken;
+                        },
+                        (endToken, currentDiagnosticSpan) =>
+                        {
+                            return includeEndTokenChange
+                                ? PragmaHelpers.GetNewEndTokenWithAddedPragma(
+                                    endToken,
+                                    currentDiagnosticSpan,
+                                    _diagnostic,
+                                    Fixer,
+                                    FormatNode,
+                                    isRemoveSuppression: false,
+                                    cancellationToken
+                                )
+                                : endToken;
+                        },
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             public SyntaxToken StartToken_TestOnly => _suppressionTargetInfo.StartToken;
             public SyntaxToken EndToken_TestOnly => _suppressionTargetInfo.EndToken;
 
-            private SyntaxNode FormatNode(SyntaxNode node, CancellationToken cancellationToken)
-                => Formatter.Format(node, _document.Project.Solution.Services, _options, cancellationToken);
+            private SyntaxNode FormatNode(SyntaxNode node, CancellationToken cancellationToken) =>
+                Formatter.Format(
+                    node,
+                    _document.Project.Solution.Services,
+                    _options,
+                    cancellationToken
+                );
         }
     }
 }

@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -29,11 +29,13 @@ public class RedirectToActionResultTest
             .Returns(CreateServices().BuildServiceProvider());
 
         var httpResponse = new Mock<HttpResponse>();
-        httpContext
-            .Setup(o => o.Response)
-            .Returns(httpResponse.Object);
+        httpContext.Setup(o => o.Response).Returns(httpResponse.Object);
 
-        var actionContext = new ActionContext(httpContext.Object, new RouteData(), new ActionDescriptor());
+        var actionContext = new ActionContext(
+            httpContext.Object,
+            new RouteData(),
+            new ActionDescriptor()
+        );
 
         var urlHelper = GetMockUrlHelper(expectedUrl);
         var result = new RedirectToActionResult("SampleAction", null, null)
@@ -56,20 +58,19 @@ public class RedirectToActionResultTest
     {
         // Arrange
         var httpContext = new Mock<HttpContext>();
-        httpContext
-            .Setup(o => o.Response)
-            .Returns(new Mock<HttpResponse>().Object);
+        httpContext.Setup(o => o.Response).Returns(new Mock<HttpResponse>().Object);
         httpContext
             .SetupGet(o => o.RequestServices)
             .Returns(CreateServices().BuildServiceProvider());
 
-        var actionContext = new ActionContext(httpContext.Object, new RouteData(), new ActionDescriptor());
+        var actionContext = new ActionContext(
+            httpContext.Object,
+            new RouteData(),
+            new ActionDescriptor()
+        );
 
         var urlHelper = GetMockUrlHelper(returnValue: null);
-        var result = new RedirectToActionResult(null, null, null)
-        {
-            UrlHelper = urlHelper,
-        };
+        var result = new RedirectToActionResult(null, null, null) { UrlHelper = urlHelper };
 
         // Act & Assert
         await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
@@ -77,7 +78,8 @@ public class RedirectToActionResultTest
             {
                 await result.ExecuteResultAsync(actionContext);
             },
-            "No route matches the supplied values.");
+            "No route matches the supplied values."
+        );
     }
 
     [Fact]
@@ -147,7 +149,10 @@ public class RedirectToActionResultTest
     private static IServiceCollection CreateServices()
     {
         var services = new ServiceCollection();
-        services.AddSingleton<IActionResultExecutor<RedirectToActionResult>, RedirectToActionResultExecutor>();
+        services.AddSingleton<
+            IActionResultExecutor<RedirectToActionResult>,
+            RedirectToActionResultExecutor
+        >();
         services.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
         services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
         return services;

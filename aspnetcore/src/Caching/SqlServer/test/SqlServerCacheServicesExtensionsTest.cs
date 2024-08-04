@@ -45,7 +45,9 @@ public class SqlServerCacheServicesExtensionsTest
         // Assert
         var serviceProvider = services.BuildServiceProvider();
 
-        var distributedCache = services.FirstOrDefault(desc => desc.ServiceType == typeof(IDistributedCache));
+        var distributedCache = services.FirstOrDefault(desc =>
+            desc.ServiceType == typeof(IDistributedCache)
+        );
 
         Assert.NotNull(distributedCache);
         Assert.Equal(ServiceLifetime.Scoped, distributedCache.Lifetime);

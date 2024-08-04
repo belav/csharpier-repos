@@ -29,7 +29,10 @@ namespace System.Memory.Tests.Span
         [InlineData(StringComparison.OrdinalIgnoreCase, "A", "a")]
         [InlineData(StringComparison.OrdinalIgnoreCase, "Ab", "Abc")]
         [InlineData(StringComparison.OrdinalIgnoreCase, "a", "Ab", "abc", "bC")]
-        public static void Values_ImplementsSearchValuesBase(StringComparison comparisonType, params string[] values)
+        public static void Values_ImplementsSearchValuesBase(
+            StringComparison comparisonType,
+            params string[] values
+        )
         {
             const string ValueNotInSet = "Hello world";
 
@@ -51,39 +54,120 @@ namespace System.Memory.Tests.Span
                 }
 
                 Assert.True(stringValues.Contains(value));
-                Assert.Equal(comparisonType == StringComparison.OrdinalIgnoreCase, stringValues.Contains(differentCase));
+                Assert.Equal(
+                    comparisonType == StringComparison.OrdinalIgnoreCase,
+                    stringValues.Contains(differentCase)
+                );
 
                 AssertIndexOfAnyAndFriends(new[] { value }, 0, -1, 0, -1);
                 AssertIndexOfAnyAndFriends(new[] { value, value }, 0, -1, 1, -1);
                 AssertIndexOfAnyAndFriends(new[] { value, ValueNotInSet }, 0, 1, 0, 1);
-                AssertIndexOfAnyAndFriends(new[] { value, ValueNotInSet, ValueNotInSet }, 0, 1, 0, 2);
+                AssertIndexOfAnyAndFriends(
+                    new[] { value, ValueNotInSet, ValueNotInSet },
+                    0,
+                    1,
+                    0,
+                    2
+                );
                 AssertIndexOfAnyAndFriends(new[] { ValueNotInSet, value }, 1, 0, 1, 0);
-                AssertIndexOfAnyAndFriends(new[] { ValueNotInSet, ValueNotInSet, value }, 2, 0, 2, 1);
-                AssertIndexOfAnyAndFriends(new[] { ValueNotInSet, value, ValueNotInSet }, 1, 0, 1, 2);
+                AssertIndexOfAnyAndFriends(
+                    new[] { ValueNotInSet, ValueNotInSet, value },
+                    2,
+                    0,
+                    2,
+                    1
+                );
+                AssertIndexOfAnyAndFriends(
+                    new[] { ValueNotInSet, value, ValueNotInSet },
+                    1,
+                    0,
+                    1,
+                    2
+                );
                 AssertIndexOfAnyAndFriends(new[] { value, ValueNotInSet, value }, 0, 1, 2, 1);
 
                 if (comparisonType == StringComparison.OrdinalIgnoreCase)
                 {
                     AssertIndexOfAnyAndFriends(new[] { differentCase }, 0, -1, 0, -1);
-                    AssertIndexOfAnyAndFriends(new[] { differentCase, differentCase }, 0, -1, 1, -1);
+                    AssertIndexOfAnyAndFriends(
+                        new[] { differentCase, differentCase },
+                        0,
+                        -1,
+                        1,
+                        -1
+                    );
                     AssertIndexOfAnyAndFriends(new[] { differentCase, ValueNotInSet }, 0, 1, 0, 1);
-                    AssertIndexOfAnyAndFriends(new[] { differentCase, ValueNotInSet, ValueNotInSet }, 0, 1, 0, 2);
+                    AssertIndexOfAnyAndFriends(
+                        new[] { differentCase, ValueNotInSet, ValueNotInSet },
+                        0,
+                        1,
+                        0,
+                        2
+                    );
                     AssertIndexOfAnyAndFriends(new[] { ValueNotInSet, differentCase }, 1, 0, 1, 0);
-                    AssertIndexOfAnyAndFriends(new[] { ValueNotInSet, ValueNotInSet, differentCase }, 2, 0, 2, 1);
-                    AssertIndexOfAnyAndFriends(new[] { ValueNotInSet, differentCase, ValueNotInSet }, 1, 0, 1, 2);
-                    AssertIndexOfAnyAndFriends(new[] { differentCase, ValueNotInSet, differentCase }, 0, 1, 2, 1);
+                    AssertIndexOfAnyAndFriends(
+                        new[] { ValueNotInSet, ValueNotInSet, differentCase },
+                        2,
+                        0,
+                        2,
+                        1
+                    );
+                    AssertIndexOfAnyAndFriends(
+                        new[] { ValueNotInSet, differentCase, ValueNotInSet },
+                        1,
+                        0,
+                        1,
+                        2
+                    );
+                    AssertIndexOfAnyAndFriends(
+                        new[] { differentCase, ValueNotInSet, differentCase },
+                        0,
+                        1,
+                        2,
+                        1
+                    );
                 }
                 else
                 {
                     AssertIndexOfAnyAndFriends(new[] { differentCase }, -1, 0, -1, 0);
-                    AssertIndexOfAnyAndFriends(new[] { differentCase, differentCase }, -1, 0, -1, 1);
-                    AssertIndexOfAnyAndFriends(new[] { differentCase, ValueNotInSet }, -1, 0, -1, 1);
-                    AssertIndexOfAnyAndFriends(new[] { ValueNotInSet, differentCase }, -1, 0, -1, 1);
-                    AssertIndexOfAnyAndFriends(new[] { differentCase, ValueNotInSet, ValueNotInSet }, -1, 0, -1, 2);
+                    AssertIndexOfAnyAndFriends(
+                        new[] { differentCase, differentCase },
+                        -1,
+                        0,
+                        -1,
+                        1
+                    );
+                    AssertIndexOfAnyAndFriends(
+                        new[] { differentCase, ValueNotInSet },
+                        -1,
+                        0,
+                        -1,
+                        1
+                    );
+                    AssertIndexOfAnyAndFriends(
+                        new[] { ValueNotInSet, differentCase },
+                        -1,
+                        0,
+                        -1,
+                        1
+                    );
+                    AssertIndexOfAnyAndFriends(
+                        new[] { differentCase, ValueNotInSet, ValueNotInSet },
+                        -1,
+                        0,
+                        -1,
+                        2
+                    );
                 }
             }
 
-            void AssertIndexOfAnyAndFriends(Span<string> values, int any, int anyExcept, int last, int lastExcept)
+            void AssertIndexOfAnyAndFriends(
+                Span<string> values,
+                int any,
+                int anyExcept,
+                int last,
+                int lastExcept
+            )
             {
                 Assert.Equal(any >= 0, last >= 0);
                 Assert.Equal(anyExcept >= 0, lastExcept >= 0);
@@ -91,16 +175,25 @@ namespace System.Memory.Tests.Span
                 Assert.Equal(any, values.IndexOfAny(stringValues));
                 Assert.Equal(any, ((ReadOnlySpan<string>)values).IndexOfAny(stringValues));
                 Assert.Equal(anyExcept, values.IndexOfAnyExcept(stringValues));
-                Assert.Equal(anyExcept, ((ReadOnlySpan<string>)values).IndexOfAnyExcept(stringValues));
+                Assert.Equal(
+                    anyExcept,
+                    ((ReadOnlySpan<string>)values).IndexOfAnyExcept(stringValues)
+                );
                 Assert.Equal(last, values.LastIndexOfAny(stringValues));
                 Assert.Equal(last, ((ReadOnlySpan<string>)values).LastIndexOfAny(stringValues));
                 Assert.Equal(lastExcept, values.LastIndexOfAnyExcept(stringValues));
-                Assert.Equal(lastExcept, ((ReadOnlySpan<string>)values).LastIndexOfAnyExcept(stringValues));
+                Assert.Equal(
+                    lastExcept,
+                    ((ReadOnlySpan<string>)values).LastIndexOfAnyExcept(stringValues)
+                );
 
                 Assert.Equal(any >= 0, values.ContainsAny(stringValues));
                 Assert.Equal(any >= 0, ((ReadOnlySpan<string>)values).ContainsAny(stringValues));
                 Assert.Equal(anyExcept >= 0, values.ContainsAnyExcept(stringValues));
-                Assert.Equal(anyExcept >= 0, ((ReadOnlySpan<string>)values).ContainsAnyExcept(stringValues));
+                Assert.Equal(
+                    anyExcept >= 0,
+                    ((ReadOnlySpan<string>)values).ContainsAnyExcept(stringValues)
+                );
             }
         }
 
@@ -134,13 +227,48 @@ namespace System.Memory.Tests.Span
         // A few more complex cases that test the Aho-Corasick implementation
         [InlineData(StringComparison.Ordinal, 3, "RyrIGEdt2S9", "IGEdt2, G, rIGm6i")]
         [InlineData(StringComparison.Ordinal, 2, "Npww1HtmO", "NVOhQu, w, XeR")]
-        [InlineData(StringComparison.Ordinal, 1, "08Qq6", "8, vx, BFA4s, aLP2, hm, lmT, y, CNTB, Q, vd")]
-        [InlineData(StringComparison.Ordinal, 3, "A4sRYUhKZR1Vn8N", "F, scsx, nWBhrx, Q, 7Of, BX, huoJ, R")]
-        [InlineData(StringComparison.Ordinal, 9, "40sufu3TdzcKQfK", "3MXvo26, zPd6t, zc, c5, ypUCK3A9, K, YlX")]
-        [InlineData(StringComparison.Ordinal, 0, "111KtTGeWuV", "11, B51tJ, Z, j0DWudC, kuJRbcovn, 0T2vnT9")]
-        [InlineData(StringComparison.Ordinal, 5, "Uykbt1zWw7wylEgC", "1zWw7, Bh, 7qDgAY, w, Z, dP, V, W, Hiols, T")]
-        [InlineData(StringComparison.Ordinal, 6, "PI9yZx9AOWrUR", "4, A, MLbg, jACE, x9AZEYPbLr, 4bYTzw, W, 9AOW, O")]
-        [InlineData(StringComparison.Ordinal, 7, "KV4cRyrIGEdt2S9kbXVK", "e64, 10Yw7k, IGEdt2, G, brL, rIGm6i, Z3, FHoVN, 7P2s")]
+        [InlineData(
+            StringComparison.Ordinal,
+            1,
+            "08Qq6",
+            "8, vx, BFA4s, aLP2, hm, lmT, y, CNTB, Q, vd"
+        )]
+        [InlineData(
+            StringComparison.Ordinal,
+            3,
+            "A4sRYUhKZR1Vn8N",
+            "F, scsx, nWBhrx, Q, 7Of, BX, huoJ, R"
+        )]
+        [InlineData(
+            StringComparison.Ordinal,
+            9,
+            "40sufu3TdzcKQfK",
+            "3MXvo26, zPd6t, zc, c5, ypUCK3A9, K, YlX"
+        )]
+        [InlineData(
+            StringComparison.Ordinal,
+            0,
+            "111KtTGeWuV",
+            "11, B51tJ, Z, j0DWudC, kuJRbcovn, 0T2vnT9"
+        )]
+        [InlineData(
+            StringComparison.Ordinal,
+            5,
+            "Uykbt1zWw7wylEgC",
+            "1zWw7, Bh, 7qDgAY, w, Z, dP, V, W, Hiols, T"
+        )]
+        [InlineData(
+            StringComparison.Ordinal,
+            6,
+            "PI9yZx9AOWrUR",
+            "4, A, MLbg, jACE, x9AZEYPbLr, 4bYTzw, W, 9AOW, O"
+        )]
+        [InlineData(
+            StringComparison.Ordinal,
+            7,
+            "KV4cRyrIGEdt2S9kbXVK",
+            "e64, 10Yw7k, IGEdt2, G, brL, rIGm6i, Z3, FHoVN, 7P2s"
+        )]
         // OrdinalIgnoreCase does not match ASCII chars with non-ASCII ones
         [InlineData(StringComparison.OrdinalIgnoreCase, 4, "AAAA\u212ABKBkBBCCCC", "\u212A")]
         [InlineData(StringComparison.OrdinalIgnoreCase, 6, "AAAAKB\u212ABkBBCCCC", "\u212A")]
@@ -149,7 +277,12 @@ namespace System.Memory.Tests.Span
         [InlineData(StringComparison.OrdinalIgnoreCase, 6, "AAAASB\u017FBsBBCCCC", "\u017F")]
         [InlineData(StringComparison.OrdinalIgnoreCase, 6, "AAAAsB\u017FBSBBCCCC", "\u017F")]
         // A few misc non-ASCII examples
-        [InlineData(StringComparison.OrdinalIgnoreCase, 2, "\0\u1226\u2C5F\0\n\0\u1226\u1242", "hh\u0012\uFE00\u26FF\0\u6C00\u2C00\0b, \u2C5F\0")]
+        [InlineData(
+            StringComparison.OrdinalIgnoreCase,
+            2,
+            "\0\u1226\u2C5F\0\n\0\u1226\u1242",
+            "hh\u0012\uFE00\u26FF\0\u6C00\u2C00\0b, \u2C5F\0"
+        )]
         [InlineData(StringComparison.OrdinalIgnoreCase, -1, "barkbarK", "foo, bar\u212A")]
         [InlineData(StringComparison.OrdinalIgnoreCase, 4, "bar\u212AbarK", "foo, bark")]
         [InlineData(StringComparison.OrdinalIgnoreCase, 0, "bar\u03A3barK", "foo, bar\u03C3")]
@@ -158,7 +291,12 @@ namespace System.Memory.Tests.Span
         [InlineData(StringComparison.OrdinalIgnoreCase, 1, " foo\u0131", "bar, foo\u0131")]
         [InlineData(StringComparison.OrdinalIgnoreCase, -1, "fooifooIfoo\u0130", "bar, foo\u0131")]
         [InlineData(StringComparison.OrdinalIgnoreCase, -1, "fooifooIfoo\u0131", "bar, foo\u0130")]
-        public static void IndexOfAny(StringComparison comparisonType, int expected, string text, string? values)
+        public static void IndexOfAny(
+            StringComparison comparisonType,
+            int expected,
+            string text,
+            string? values
+        )
         {
             Span<char> textSpan = text.ToArray(); // Test non-readonly Span<char> overloads
 
@@ -184,17 +322,62 @@ namespace System.Memory.Tests.Span
             IndexOfAny(StringComparison.Ordinal, -1, " foo\uD801bar", "foo\uD800bar, bar\uD800foo");
             IndexOfAny(StringComparison.Ordinal, 2, " foo\uD800bar", "oo\uD800bar, bar\uD800foo");
             IndexOfAny(StringComparison.Ordinal, -1, " foo\uD801bar", "oo\uD800bar, bar\uD800foo");
-            IndexOfAny(StringComparison.OrdinalIgnoreCase, 1, " foo\uD800bar", "foo\uD800bar, bar\uD800foo");
-            IndexOfAny(StringComparison.OrdinalIgnoreCase, -1, " foo\uD801bar", "foo\uD800bar, bar\uD800foo");
-            IndexOfAny(StringComparison.OrdinalIgnoreCase, 2, " foo\uD800bar", "oo\uD800bar, bar\uD800foo");
-            IndexOfAny(StringComparison.OrdinalIgnoreCase, -1, " foo\uD801bar", "oo\uD800bar, bar\uD800foo");
-            IndexOfAny(StringComparison.OrdinalIgnoreCase, 1, " fOo\uD800bar", "Foo\uD800bar, bar\uD800foo");
-            IndexOfAny(StringComparison.OrdinalIgnoreCase, -1, " fOo\uD801bar", "Foo\uD800bar, bar\uD800foo");
-            IndexOfAny(StringComparison.OrdinalIgnoreCase, 2, " foo\uD800bAr", "Oo\uD800bar, bar\uD800foo");
-            IndexOfAny(StringComparison.OrdinalIgnoreCase, -1, " foO\uD801bar", "oo\uD800baR, bar\uD800foo");
+            IndexOfAny(
+                StringComparison.OrdinalIgnoreCase,
+                1,
+                " foo\uD800bar",
+                "foo\uD800bar, bar\uD800foo"
+            );
+            IndexOfAny(
+                StringComparison.OrdinalIgnoreCase,
+                -1,
+                " foo\uD801bar",
+                "foo\uD800bar, bar\uD800foo"
+            );
+            IndexOfAny(
+                StringComparison.OrdinalIgnoreCase,
+                2,
+                " foo\uD800bar",
+                "oo\uD800bar, bar\uD800foo"
+            );
+            IndexOfAny(
+                StringComparison.OrdinalIgnoreCase,
+                -1,
+                " foo\uD801bar",
+                "oo\uD800bar, bar\uD800foo"
+            );
+            IndexOfAny(
+                StringComparison.OrdinalIgnoreCase,
+                1,
+                " fOo\uD800bar",
+                "Foo\uD800bar, bar\uD800foo"
+            );
+            IndexOfAny(
+                StringComparison.OrdinalIgnoreCase,
+                -1,
+                " fOo\uD801bar",
+                "Foo\uD800bar, bar\uD800foo"
+            );
+            IndexOfAny(
+                StringComparison.OrdinalIgnoreCase,
+                2,
+                " foo\uD800bAr",
+                "Oo\uD800bar, bar\uD800foo"
+            );
+            IndexOfAny(
+                StringComparison.OrdinalIgnoreCase,
+                -1,
+                " foO\uD801bar",
+                "oo\uD800baR, bar\uD800foo"
+            );
 
             // Low surrogate without the high surrogate.
-            IndexOfAny(StringComparison.OrdinalIgnoreCase, 1, "\uD801\uDCD8\uD8FB\uDCD8", "foo, \uDCD8");
+            IndexOfAny(
+                StringComparison.OrdinalIgnoreCase,
+                1,
+                "\uD801\uDCD8\uD8FB\uDCD8",
+                "foo, \uDCD8"
+            );
         }
 
         [Fact]
@@ -206,8 +389,18 @@ namespace System.Memory.Tests.Span
                 RunUsingInvariantCulture(static () =>
                 {
                     IndexOfAny(StringComparison.OrdinalIgnoreCase, 1, " \U00016E40", "\U00016E60");
-                    IndexOfAny(StringComparison.OrdinalIgnoreCase, 1, " \U00016E40abc", "\U00016E60, abc");
-                    IndexOfAny(StringComparison.OrdinalIgnoreCase, 1, " abc\U00016E40", "abc\U00016E60");
+                    IndexOfAny(
+                        StringComparison.OrdinalIgnoreCase,
+                        1,
+                        " \U00016E40abc",
+                        "\U00016E60, abc"
+                    );
+                    IndexOfAny(
+                        StringComparison.OrdinalIgnoreCase,
+                        1,
+                        " abc\U00016E40",
+                        "abc\U00016E60"
+                    );
                 });
             }
 
@@ -216,8 +409,18 @@ namespace System.Memory.Tests.Span
                 RunUsingNLS(static () =>
                 {
                     IndexOfAny(StringComparison.OrdinalIgnoreCase, -1, " \U00016E40", "\U00016E60");
-                    IndexOfAny(StringComparison.OrdinalIgnoreCase, 3, " \U00016E40abc", "\U00016E60, abc");
-                    IndexOfAny(StringComparison.OrdinalIgnoreCase, -1, " abc\U00016E40", "abc\U00016E60");
+                    IndexOfAny(
+                        StringComparison.OrdinalIgnoreCase,
+                        3,
+                        " \U00016E40abc",
+                        "\U00016E60, abc"
+                    );
+                    IndexOfAny(
+                        StringComparison.OrdinalIgnoreCase,
+                        -1,
+                        " abc\U00016E40",
+                        "abc\U00016E60"
+                    );
                 });
             }
         }
@@ -227,13 +430,17 @@ namespace System.Memory.Tests.Span
         {
             foreach (StringComparison comparisonType in Enum.GetValues<StringComparison>())
             {
-                if (comparisonType is StringComparison.Ordinal or StringComparison.OrdinalIgnoreCase)
+                if (
+                    comparisonType is StringComparison.Ordinal or StringComparison.OrdinalIgnoreCase
+                )
                 {
                     _ = SearchValues.Create(new[] { "abc" }, comparisonType);
                 }
                 else
                 {
-                    Assert.Throws<ArgumentException>(() => SearchValues.Create(new[] { "abc" }, comparisonType));
+                    Assert.Throws<ArgumentException>(
+                        () => SearchValues.Create(new[] { "abc" }, comparisonType)
+                    );
                 }
             }
         }
@@ -241,7 +448,10 @@ namespace System.Memory.Tests.Span
         [Fact]
         public static void Create_ThrowsOnNullValues()
         {
-            Assert.Throws<ArgumentNullException>("values", () => SearchValues.Create(new[] { "foo", null, "bar" }, StringComparison.Ordinal));
+            Assert.Throws<ArgumentNullException>(
+                "values",
+                () => SearchValues.Create(new[] { "foo", null, "bar" }, StringComparison.Ordinal)
+            );
         }
 
         [Fact]
@@ -249,7 +459,8 @@ namespace System.Memory.Tests.Span
         {
             var helper = new StringSearchValuesTestHelper(
                 expected: IndexOfAnyReferenceImpl,
-                searchValues: (searchSpace, values) => searchSpace.IndexOfAny(values));
+                searchValues: (searchSpace, values) => searchSpace.IndexOfAny(values)
+            );
 
             helper.TestRandomInputs();
         }
@@ -260,7 +471,10 @@ namespace System.Memory.Tests.Span
         {
             RunUsingInvariantCulture(static () =>
             {
-                Assert.Equal("Invariant Language (Invariant Country)", CultureInfo.CurrentCulture.NativeName);
+                Assert.Equal(
+                    "Invariant Language (Invariant Country)",
+                    CultureInfo.CurrentCulture.NativeName
+                );
 
                 TestIndexOfAny_RandomInputs();
             });
@@ -271,7 +485,10 @@ namespace System.Memory.Tests.Span
         {
             RunUsingNLS(static () =>
             {
-                Assert.NotEqual("Invariant Language (Invariant Country)", CultureInfo.CurrentCulture.NativeName);
+                Assert.NotEqual(
+                    "Invariant Language (Invariant Country)",
+                    CultureInfo.CurrentCulture.NativeName
+                );
 
                 TestIndexOfAny_RandomInputs();
             });
@@ -279,7 +496,9 @@ namespace System.Memory.Tests.Span
 
         [Fact]
         [SkipOnPlatform(TestPlatforms.LinuxBionic, "Remote executor has problems with exit codes")]
-        [ActiveIssue("Manual execution only. Worth running any time SearchValues<string> logic is modified.")]
+        [ActiveIssue(
+            "Manual execution only. Worth running any time SearchValues<string> logic is modified."
+        )]
         public static void TestIndexOfAny_RandomInputs_Stress()
         {
             RunStress();
@@ -304,8 +523,10 @@ namespace System.Memory.Tests.Span
                         {
                             var helper = new StringSearchValuesTestHelper(
                                 expected: IndexOfAnyReferenceImpl,
-                                searchValues: (searchSpace, values) => searchSpace.IndexOfAny(values),
-                                rngSeed: Random.Shared.Next())
+                                searchValues: (searchSpace, values) =>
+                                    searchSpace.IndexOfAny(values),
+                                rngSeed: Random.Shared.Next()
+                            )
                             {
                                 MaxNeedleCount = maxNeedleCount,
                                 MaxNeedleValueLength = maxNeedleValueLength,
@@ -320,7 +541,11 @@ namespace System.Memory.Tests.Span
             }
         }
 
-        private static int IndexOfAnyReferenceImpl(ReadOnlySpan<char> searchSpace, ReadOnlySpan<string> values, StringComparison comparisonType)
+        private static int IndexOfAnyReferenceImpl(
+            ReadOnlySpan<char> searchSpace,
+            ReadOnlySpan<string> values,
+            StringComparison comparisonType
+        )
         {
             int minIndex = int.MaxValue;
 
@@ -344,7 +569,12 @@ namespace System.Memory.Tests.Span
             psi.Environment.Clear();
             psi.Environment.Add("DOTNET_SYSTEM_GLOBALIZATION_INVARIANT", "true");
 
-            RemoteExecutor.Invoke(action, new RemoteInvokeOptions { StartInfo = psi, TimeOut = 10 * 60 * 1000 }).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    action,
+                    new RemoteInvokeOptions { StartInfo = psi, TimeOut = 10 * 60 * 1000 }
+                )
+                .Dispose();
         }
 
         private static void RunUsingNLS(Action action)
@@ -355,14 +585,26 @@ namespace System.Memory.Tests.Span
             psi.Environment.Clear();
             psi.Environment.Add("DOTNET_SYSTEM_GLOBALIZATION_USENLS", "true");
 
-            RemoteExecutor.Invoke(action, new RemoteInvokeOptions { StartInfo = psi, TimeOut = 10 * 60 * 1000 }).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    action,
+                    new RemoteInvokeOptions { StartInfo = psi, TimeOut = 10 * 60 * 1000 }
+                )
+                .Dispose();
         }
 
         private sealed class StringSearchValuesTestHelper
         {
-            public delegate int IndexOfAnySearchDelegate(ReadOnlySpan<char> searchSpace, ReadOnlySpan<string> values, StringComparison comparisonType);
+            public delegate int IndexOfAnySearchDelegate(
+                ReadOnlySpan<char> searchSpace,
+                ReadOnlySpan<string> values,
+                StringComparison comparisonType
+            );
 
-            public delegate int SearchValuesSearchDelegate(ReadOnlySpan<char> searchSpace, SearchValues<string> values);
+            public delegate int SearchValuesSearchDelegate(
+                ReadOnlySpan<char> searchSpace,
+                SearchValues<string> values
+            );
 
             public int MaxNeedleCount = 20;
             public int MaxNeedleValueLength = 10;
@@ -377,7 +619,11 @@ namespace System.Memory.Tests.Span
             private readonly char[] _randomSimpleAsciiChars;
             private readonly char[] _randomChars;
 
-            public StringSearchValuesTestHelper(IndexOfAnySearchDelegate expected, SearchValuesSearchDelegate searchValues, int rngSeed = 42)
+            public StringSearchValuesTestHelper(
+                IndexOfAnySearchDelegate expected,
+                SearchValuesSearchDelegate searchValues,
+                int rngSeed = 42
+            )
             {
                 _expectedDelegate = expected;
                 _searchValuesDelegate = searchValues;
@@ -397,12 +643,17 @@ namespace System.Memory.Tests.Span
                 {
                     int random = rng.Next(26 * 2 + 10);
 
-                    _randomSimpleAsciiChars[i] = (char)(random + (random switch
-                    {
-                        < 10 => '0',
-                        < 36 => 'a' - 10,
-                        _ => 'A' - 36,
-                    }));
+                    _randomSimpleAsciiChars[i] = (char)(
+                        random
+                        + (
+                            random switch
+                            {
+                                < 10 => '0',
+                                < 36 => 'a' - 10,
+                                _ => 'A' - 36,
+                            }
+                        )
+                    );
                 }
 
                 rng.NextBytes(MemoryMarshal.Cast<char, byte>(_randomChars));
@@ -413,20 +664,24 @@ namespace System.Memory.Tests.Span
                 ExceptionDispatchInfo? exception = null;
                 Stopwatch s = Stopwatch.StartNew();
 
-                Parallel.For(0, Environment.ProcessorCount - 1, _ =>
-                {
-                    while (s.Elapsed < duration && Volatile.Read(ref exception) is null)
+                Parallel.For(
+                    0,
+                    Environment.ProcessorCount - 1,
+                    _ =>
                     {
-                        try
+                        while (s.Elapsed < duration && Volatile.Read(ref exception) is null)
                         {
-                            TestRandomInputs(iterationCount: 1, rng: new Random());
-                        }
-                        catch (Exception ex)
-                        {
-                            exception = ExceptionDispatchInfo.Capture(ex);
+                            try
+                            {
+                                TestRandomInputs(iterationCount: 1, rng: new Random());
+                            }
+                            catch (Exception ex)
+                            {
+                                exception = ExceptionDispatchInfo.Capture(ex);
+                            }
                         }
                     }
-                });
+                );
 
                 exception?.Throw();
             }
@@ -449,7 +704,11 @@ namespace System.Memory.Tests.Span
                 }
             }
 
-            private void Test(Random rng, ReadOnlySpan<char> haystackRandom, ReadOnlySpan<char> needleRandom)
+            private void Test(
+                Random rng,
+                ReadOnlySpan<char> haystackRandom,
+                ReadOnlySpan<char> needleRandom
+            )
             {
                 string[] values = new string[rng.Next(MaxNeedleCount) + 1];
 
@@ -459,51 +718,92 @@ namespace System.Memory.Tests.Span
                     do
                     {
                         valueSpan = GetRandomSlice(rng, needleRandom, MaxNeedleValueLength);
-                    }
-                    while (valueSpan.Length < MinValueLength);
+                    } while (valueSpan.Length < MinValueLength);
 
                     values[i] = valueSpan.ToString();
                 }
 
-                SearchValues<string> valuesOrdinal = SearchValues.Create(values, StringComparison.Ordinal);
-                SearchValues<string> valuesOrdinalIgnoreCase = SearchValues.Create(values, StringComparison.OrdinalIgnoreCase);
+                SearchValues<string> valuesOrdinal = SearchValues.Create(
+                    values,
+                    StringComparison.Ordinal
+                );
+                SearchValues<string> valuesOrdinalIgnoreCase = SearchValues.Create(
+                    values,
+                    StringComparison.OrdinalIgnoreCase
+                );
 
                 for (int i = 0; i < HaystackIterationsPerNeedle; i++)
                 {
                     Test(rng, StringComparison.Ordinal, haystackRandom, values, valuesOrdinal);
-                    Test(rng, StringComparison.OrdinalIgnoreCase, haystackRandom, values, valuesOrdinalIgnoreCase);
+                    Test(
+                        rng,
+                        StringComparison.OrdinalIgnoreCase,
+                        haystackRandom,
+                        values,
+                        valuesOrdinalIgnoreCase
+                    );
                 }
             }
 
-            private void Test(Random rng, StringComparison comparisonType, ReadOnlySpan<char> haystackRandom,
-                string[] needle, SearchValues<string> searchValuesInstance)
+            private void Test(
+                Random rng,
+                StringComparison comparisonType,
+                ReadOnlySpan<char> haystackRandom,
+                string[] needle,
+                SearchValues<string> searchValuesInstance
+            )
             {
-                ReadOnlySpan<char> haystack = GetRandomSlice(rng, haystackRandom, MaxHaystackLength);
+                ReadOnlySpan<char> haystack = GetRandomSlice(
+                    rng,
+                    haystackRandom,
+                    MaxHaystackLength
+                );
 
                 int expectedIndex = _expectedDelegate(haystack, needle, comparisonType);
                 int searchValuesIndex = _searchValuesDelegate(haystack, searchValuesInstance);
 
                 if (expectedIndex != searchValuesIndex)
                 {
-                    AssertionFailed(haystack, needle, searchValuesInstance, comparisonType, expectedIndex, searchValuesIndex);
+                    AssertionFailed(
+                        haystack,
+                        needle,
+                        searchValuesInstance,
+                        comparisonType,
+                        expectedIndex,
+                        searchValuesIndex
+                    );
                 }
             }
 
-            private static ReadOnlySpan<T> GetRandomSlice<T>(Random rng, ReadOnlySpan<T> span, int maxLength)
+            private static ReadOnlySpan<T> GetRandomSlice<T>(
+                Random rng,
+                ReadOnlySpan<T> span,
+                int maxLength
+            )
             {
                 ReadOnlySpan<T> slice = span.Slice(rng.Next(span.Length + 1));
                 return slice.Slice(0, Math.Min(slice.Length, rng.Next(maxLength + 1)));
             }
 
-            private static void AssertionFailed(ReadOnlySpan<char> haystack, string[] needle, SearchValues<string> searchValues, StringComparison comparisonType, int expected, int actual)
+            private static void AssertionFailed(
+                ReadOnlySpan<char> haystack,
+                string[] needle,
+                SearchValues<string> searchValues,
+                StringComparison comparisonType,
+                int expected,
+                int actual
+            )
             {
                 Type implType = searchValues.GetType();
-                string impl = $"{implType.Name} [{string.Join(", ", implType.GenericTypeArguments.Select(t => t.Name))}]";
+                string impl =
+                    $"{implType.Name} [{string.Join(", ", implType.GenericTypeArguments.Select(t => t.Name))}]";
 
                 string readableHaystack = ReadableAsciiOrSerialized(haystack.ToString());
                 string readableNeedle = string.Join(", ", needle.Select(ReadableAsciiOrSerialized));
 
-                Assert.Fail($"Expected {expected}, got {actual} for impl='{impl}' comparison={comparisonType} needle='{readableNeedle}', haystack='{readableHaystack}'");
+                Assert.Fail(
+                    $"Expected {expected}, got {actual} for impl='{impl}' comparison={comparisonType} needle='{readableNeedle}', haystack='{readableHaystack}'"
+                );
 
                 static string ReadableAsciiOrSerialized(string value)
                 {

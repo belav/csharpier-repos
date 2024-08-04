@@ -1,30 +1,31 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 using System.Numerics;
+using System.Text;
 using System.Xml;
 using System.Xml.XPath;
-using System.Text;
-using System.Diagnostics.Contracts;
 using Microsoft.Win32.SafeHandles;
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
     /// <summary>
     ///     Utility class to convert ECC keys into XML and back using a format similar to the one described
     ///     in RFC 4050 (http://www.ietf.org/rfc/rfc4050.txt).
-    /// 
+    ///
     ///     #RFC4050ECKeyFormat
-    /// 
+    ///
     ///     The format looks similar to the following:
-    /// 
+    ///
     ///         <ECDSAKeyValue xmlns="http://www.w3.org/2001/04/xmldsig-more#">
     ///             <DomainParameters>
     ///                 <NamedCurve URN="urn:oid:1.3.132.0.35" />
@@ -35,7 +36,8 @@ namespace System.Security.Cryptography {
     ///             </PublicKey>
     ///         </ECDSAKeyValue>
     /// </summary>
-    internal static class Rfc4050KeyFormatter {
+    internal static class Rfc4050KeyFormatter
+    {
         private const string DomainParametersRoot = "DomainParameters";
         private const string ECDHRoot = "ECDHKeyValue";
         private const string ECDsaRoot = "ECDSAKeyValue";
@@ -60,7 +62,8 @@ namespace System.Security.Cryptography {
         /// <summary>
         ///     Restore a key from XML
         /// </summary>
-        internal static ECParameters FromXml(string xml, out bool isEcdh) {
+        internal static ECParameters FromXml(string xml, out bool isEcdh)
+        {
             Contract.Requires(xml != null);
             Contract.Ensures(Contract.Result<CngKey>() != null);
 
@@ -68,21 +71,26 @@ namespace System.Security.Cryptography {
 
             // Load the XML into an XPathNavigator to access sub elements
             using (TextReader textReader = new StringReader(xml))
-            using (XmlTextReader xmlReader = new XmlTextReader(textReader)) {
+            using (XmlTextReader xmlReader = new XmlTextReader(textReader))
+            {
                 XPathDocument document = new XPathDocument(xmlReader);
                 XPathNavigator navigator = document.CreateNavigator();
-                
+
                 // Move into the root element - we don't do a specific namespace check here for compatibility
                 // with XML that Windows generates.
-                if (!navigator.MoveToFirstChild()) {
-                    throw new ArgumentException(SR.GetString(SR.Cryptography_MissingDomainParameters));
+                if (!navigator.MoveToFirstChild())
+                {
+                    throw new ArgumentException(
+                        SR.GetString(SR.Cryptography_MissingDomainParameters)
+                    );
                 }
 
                 // First figure out which algorithm this key belongs to
                 parameters.Curve = ReadCurve(navigator, out isEcdh);
 
                 // Then read out the public key value
-                if (!navigator.MoveToNext(XPathNodeType.Element)) {
+                if (!navigator.MoveToNext(XPathNodeType.Element))
+                {
                     throw new ArgumentException(SR.GetString(SR.Cryptography_MissingPublicKey));
                 }
 
@@ -94,14 +102,20 @@ namespace System.Security.Cryptography {
         /// <summary>
         ///     Determine which ECC curve the key refers to
         /// </summary>
-        private static ECCurve ReadCurve(XPathNavigator navigator, out bool isEcdh) {
+        private static ECCurve ReadCurve(XPathNavigator navigator, out bool isEcdh)
+        {
             Contract.Requires(navigator != null);
             Contract.Ensures(Contract.Result<CngAlgorithm>() != null);
 
-            if (navigator.NamespaceURI != Namespace) {
-                throw new ArgumentException(SR.GetString(SR.Cryptography_UnexpectedXmlNamespace,
-                                                         navigator.NamespaceURI,
-                                                         Namespace));
+            if (navigator.NamespaceURI != Namespace)
+            {
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Cryptography_UnexpectedXmlNamespace,
+                        navigator.NamespaceURI,
+                        Namespace
+                    )
+                );
             }
 
             //
@@ -112,34 +126,45 @@ namespace System.Security.Cryptography {
             bool isDHKey = navigator.Name == ECDHRoot;
             bool isDsaKey = navigator.Name == ECDsaRoot;
 
-            if (!isDHKey && !isDsaKey) {
-                throw new ArgumentException(SR.GetString(SR.Cryptography_UnknownEllipticCurveAlgorithm));
+            if (!isDHKey && !isDsaKey)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.Cryptography_UnknownEllipticCurveAlgorithm)
+                );
             }
 
             // Move into the DomainParameters element
-            if (!navigator.MoveToFirstChild() || navigator.Name != DomainParametersRoot) {
+            if (!navigator.MoveToFirstChild() || navigator.Name != DomainParametersRoot)
+            {
                 throw new ArgumentException(SR.GetString(SR.Cryptography_MissingDomainParameters));
             }
 
             // Now move into the NamedCurve element
-            if (!navigator.MoveToFirstChild() || navigator.Name != NamedCurveElement) {
+            if (!navigator.MoveToFirstChild() || navigator.Name != NamedCurveElement)
+            {
                 throw new ArgumentException(SR.GetString(SR.Cryptography_MissingDomainParameters));
             }
 
             // And read its URN value
-            if (!navigator.MoveToFirstAttribute() || navigator.Name != UrnAttribute || String.IsNullOrEmpty(navigator.Value)) {
+            if (
+                !navigator.MoveToFirstAttribute()
+                || navigator.Name != UrnAttribute
+                || String.IsNullOrEmpty(navigator.Value)
+            )
+            {
                 throw new ArgumentException(SR.GetString(SR.Cryptography_MissingDomainParameters));
             }
 
             string oidUrn = navigator.Value;
 
-            if (!oidUrn.StartsWith(OidUrnPrefix, StringComparison.OrdinalIgnoreCase)) {
+            if (!oidUrn.StartsWith(OidUrnPrefix, StringComparison.OrdinalIgnoreCase))
+            {
                 throw new ArgumentException(SR.GetString(SR.Cryptography_UnknownEllipticCurve));
             }
-            
+
             // position the navigator at the end of the domain parameters
-            navigator.MoveToParent();   // NamedCurve
-            navigator.MoveToParent();   // DomainParameters
+            navigator.MoveToParent(); // NamedCurve
+            navigator.MoveToParent(); // DomainParameters
 
             // The out-bool only works because we have either/or.  If a third type of data is handled
             // then a more complex signal is required.
@@ -151,24 +176,37 @@ namespace System.Security.Cryptography {
         /// <summary>
         ///     Read the x and y components of the public key
         /// </summary>
-        private static void ReadPublicKey(XPathNavigator navigator, ref ECParameters parameters) {
+        private static void ReadPublicKey(XPathNavigator navigator, ref ECParameters parameters)
+        {
             Contract.Requires(navigator != null);
 
-            if (navigator.NamespaceURI != Namespace) {
-                throw new ArgumentException(SR.GetString(SR.Cryptography_UnexpectedXmlNamespace,
-                                                         navigator.NamespaceURI,
-                                                         Namespace));
+            if (navigator.NamespaceURI != Namespace)
+            {
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Cryptography_UnexpectedXmlNamespace,
+                        navigator.NamespaceURI,
+                        Namespace
+                    )
+                );
             }
 
-            if (navigator.Name != PublicKeyRoot) {
+            if (navigator.Name != PublicKeyRoot)
+            {
                 throw new ArgumentException(SR.GetString(SR.Cryptography_MissingPublicKey));
             }
 
             // First get the x parameter
-            if (!navigator.MoveToFirstChild() || navigator.Name != XElement) {
+            if (!navigator.MoveToFirstChild() || navigator.Name != XElement)
+            {
                 throw new ArgumentException(SR.GetString(SR.Cryptography_MissingPublicKey));
             }
-            if (!navigator.MoveToFirstAttribute() || navigator.Name != ValueAttribute || String.IsNullOrEmpty(navigator.Value)) {
+            if (
+                !navigator.MoveToFirstAttribute()
+                || navigator.Name != ValueAttribute
+                || String.IsNullOrEmpty(navigator.Value)
+            )
+            {
                 throw new ArgumentException(SR.GetString(SR.Cryptography_MissingPublicKey));
             }
 
@@ -176,10 +214,16 @@ namespace System.Security.Cryptography {
             navigator.MoveToParent();
 
             // Then the y parameter
-            if (!navigator.MoveToNext(XPathNodeType.Element) || navigator.Name != YElement) {
+            if (!navigator.MoveToNext(XPathNodeType.Element) || navigator.Name != YElement)
+            {
                 throw new ArgumentException(SR.GetString(SR.Cryptography_MissingPublicKey));
             }
-            if (!navigator.MoveToFirstAttribute() || navigator.Name != ValueAttribute || String.IsNullOrEmpty(navigator.Value)) {
+            if (
+                !navigator.MoveToFirstAttribute()
+                || navigator.Name != ValueAttribute
+                || String.IsNullOrEmpty(navigator.Value)
+            )
+            {
                 throw new ArgumentException(SR.GetString(SR.Cryptography_MissingPublicKey));
             }
 
@@ -210,8 +254,10 @@ namespace System.Security.Cryptography {
             // them match each other.
             int requiredLength = Math.Max(xLen, yLen);
 
-            try {
-                using (ECDsa ecdsa = ECDsa.Create(parameters.Curve)) {
+            try
+            {
+                using (ECDsa ecdsa = ECDsa.Create(parameters.Curve))
+                {
                     // Convert the bit value of keysize to a byte value.
                     // EC curves can have non-mod-8 keysizes (e.g. 521), so the +7 is really necessary.
                     int curveLength = (ecdsa.KeySize + 7) / 8;
@@ -221,9 +267,15 @@ namespace System.Security.Cryptography {
                     requiredLength = Math.Max(requiredLength, curveLength);
                 }
             }
-            catch (ArgumentException) { /* Curve had invalid data, like an empty OID */ }
-            catch (CryptographicException) { /* The system failed to generate a key for the curve */ }
-            catch (NotSupportedException) { /* An unknown curve type was requested */ }
+            catch (ArgumentException)
+            { /* Curve had invalid data, like an empty OID */
+            }
+            catch (CryptographicException)
+            { /* The system failed to generate a key for the curve */
+            }
+            catch (NotSupportedException)
+            { /* An unknown curve type was requested */
+            }
 
             // There is a chance that the curve is known to Windows but not allowed for ECDH
             // (curve25519 is known to be in this state). Since RFC4050 is officially only
@@ -245,7 +297,8 @@ namespace System.Security.Cryptography {
         /// <summary>
         ///     Serialize out information about the elliptic curve
         /// </summary>
-        private static void WriteDomainParameters(XmlWriter writer, ref ECParameters parameters) {
+        private static void WriteDomainParameters(XmlWriter writer, ref ECParameters parameters)
+        {
             Contract.Requires(writer != null);
 
             Oid curveOid = parameters.Curve.Oid;
@@ -291,14 +344,15 @@ namespace System.Security.Cryptography {
             // We always use OIDs for the named prime curves
             writer.WriteStartElement(NamedCurveElement);
             writer.WriteAttributeString(UrnAttribute, OidUrnPrefix + oidValue);
-            writer.WriteEndElement();   // </NamedCurve>
+            writer.WriteEndElement(); // </NamedCurve>
 
-            writer.WriteEndElement();   // </DomainParameters>
+            writer.WriteEndElement(); // </DomainParameters>
         }
 
-        private static void WritePublicKeyValue(XmlWriter writer, ref ECParameters parameters) {
+        private static void WritePublicKeyValue(XmlWriter writer, ref ECParameters parameters)
+        {
             Contract.Requires(writer != null);
-            
+
             writer.WriteStartElement(PublicKeyRoot);
 
             byte[] providedX = parameters.Q.X;
@@ -313,11 +367,13 @@ namespace System.Security.Cryptography {
             // If the high bit is set, we need to extract into a byte[] with a padding zero to keep the
             // sign bit cleared.
 
-            if ((providedX[0] & SignBit) == SignBit) {
+            if ((providedX[0] & SignBit) == SignBit)
+            {
                 xSize++;
             }
 
-            if ((providedY[0] & SignBit) == SignBit) {
+            if ((providedY[0] & SignBit) == SignBit)
+            {
                 ySize++;
             }
 
@@ -337,22 +393,39 @@ namespace System.Security.Cryptography {
             BigInteger y = new BigInteger(yBytes);
 
             writer.WriteStartElement(XElement);
-            writer.WriteAttributeString(ValueAttribute, x.ToString("R", CultureInfo.InvariantCulture));
-            writer.WriteAttributeString(XsiNamespacePrefix, XsiTypeAttribute, XsiNamespace, XsiTypeAttributeValue);
-            writer.WriteEndElement();   // </X>
+            writer.WriteAttributeString(
+                ValueAttribute,
+                x.ToString("R", CultureInfo.InvariantCulture)
+            );
+            writer.WriteAttributeString(
+                XsiNamespacePrefix,
+                XsiTypeAttribute,
+                XsiNamespace,
+                XsiTypeAttributeValue
+            );
+            writer.WriteEndElement(); // </X>
 
             writer.WriteStartElement(YElement);
-            writer.WriteAttributeString(ValueAttribute, y.ToString("R", CultureInfo.InvariantCulture));
-            writer.WriteAttributeString(XsiNamespacePrefix, XsiTypeAttribute, XsiNamespace, XsiTypeAttributeValue);
-            writer.WriteEndElement();   // </Y>
+            writer.WriteAttributeString(
+                ValueAttribute,
+                y.ToString("R", CultureInfo.InvariantCulture)
+            );
+            writer.WriteAttributeString(
+                XsiNamespacePrefix,
+                XsiTypeAttribute,
+                XsiNamespace,
+                XsiTypeAttributeValue
+            );
+            writer.WriteEndElement(); // </Y>
 
-            writer.WriteEndElement();   // </PublicKey>
+            writer.WriteEndElement(); // </PublicKey>
         }
 
         /// <summary>
         ///     Convert a key to XML
         /// </summary>
-        internal static string ToXml(ECParameters parameters, bool isEcdh) {
+        internal static string ToXml(ECParameters parameters, bool isEcdh)
+        {
             Contract.Ensures(Contract.Result<String>() != null);
 
             parameters.Validate();
@@ -364,7 +437,8 @@ namespace System.Security.Cryptography {
             settings.IndentChars = "  ";
             settings.OmitXmlDeclaration = true;
 
-            using (XmlWriter writer = XmlWriter.Create(keyXml, settings)) {
+            using (XmlWriter writer = XmlWriter.Create(keyXml, settings))
+            {
                 // The root element depends upon the type of key
                 string rootElement = isEcdh ? ECDHRoot : ECDsaRoot;
                 writer.WriteStartElement(rootElement, Namespace);
@@ -372,7 +446,7 @@ namespace System.Security.Cryptography {
                 WriteDomainParameters(writer, ref parameters);
                 WritePublicKeyValue(writer, ref parameters);
 
-                writer.WriteEndElement();   // root element
+                writer.WriteEndElement(); // root element
             }
 
             return keyXml.ToString();

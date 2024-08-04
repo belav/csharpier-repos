@@ -4,20 +4,23 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
+    using System.Diagnostics;
     using System.IO;
+    using System.Security.Principal;
+    using System.ServiceModel;
+    using System.ServiceModel.Diagnostics;
     using System.Text;
     using System.Threading;
-    using System.ServiceModel.Diagnostics;
-    using System.Diagnostics;
-    using System.Security.Principal;
 
     sealed class ExclusiveNamedPipeTransportManager : NamedPipeTransportManager
     {
         ConnectionDemuxer connectionDemuxer;
         IConnectionListener connectionListener;
 
-        public ExclusiveNamedPipeTransportManager(Uri listenUri, NamedPipeChannelListener channelListener)
+        public ExclusiveNamedPipeTransportManager(
+            Uri listenUri,
+            NamedPipeChannelListener channelListener
+        )
             : base(listenUri)
         {
             ApplyListenerSettings(channelListener);
@@ -28,21 +31,38 @@ namespace System.ServiceModel.Channels
         internal override void OnOpen()
         {
             connectionListener = new BufferedConnectionListener(
-                new PipeConnectionListener(ListenUri, HostNameComparisonMode, ConnectionBufferSize,
-                    AllowedUsers, true, int.MaxValue),
-                    MaxOutputDelay, ConnectionBufferSize);
+                new PipeConnectionListener(
+                    ListenUri,
+                    HostNameComparisonMode,
+                    ConnectionBufferSize,
+                    AllowedUsers,
+                    true,
+                    int.MaxValue
+                ),
+                MaxOutputDelay,
+                ConnectionBufferSize
+            );
             if (DiagnosticUtility.ShouldUseActivity)
             {
-                connectionListener = new TracingConnectionListener(connectionListener, this.ListenUri.ToString(), false);
+                connectionListener = new TracingConnectionListener(
+                    connectionListener,
+                    this.ListenUri.ToString(),
+                    false
+                );
             }
 
-            connectionDemuxer = new ConnectionDemuxer(connectionListener,
-                MaxPendingAccepts, MaxPendingConnections, ChannelInitializationTimeout,
-                IdleTimeout, MaxPooledConnections,
+            connectionDemuxer = new ConnectionDemuxer(
+                connectionListener,
+                MaxPendingAccepts,
+                MaxPendingConnections,
+                ChannelInitializationTimeout,
+                IdleTimeout,
+                MaxPooledConnections,
                 OnGetTransportFactorySettings,
                 OnGetSingletonMessageHandler,
                 OnHandleServerSessionPreamble,
-                OnDemuxerError);
+                OnDemuxerError
+            );
 
             bool startedDemuxing = false;
             try

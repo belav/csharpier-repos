@@ -46,8 +46,10 @@ namespace System.IO
 
             for (int i = 0; i < path.Length; i++)
             {
-                if (IsDirectorySeparator(path[i])
-                    && (i + 1 < path.Length && IsDirectorySeparator(path[i + 1])))
+                if (
+                    IsDirectorySeparator(path[i])
+                    && (i + 1 < path.Length && IsDirectorySeparator(path[i + 1]))
+                )
                 {
                     normalized = false;
                     break;
@@ -64,8 +66,10 @@ namespace System.IO
                 char current = path[i];
 
                 // Skip if we have another separator following
-                if (IsDirectorySeparator(current)
-                    && (i + 1 < path.Length && IsDirectorySeparator(path[i + 1])))
+                if (
+                    IsDirectorySeparator(current)
+                    && (i + 1 < path.Length && IsDirectorySeparator(path[i + 1]))
+                )
                     continue;
 
                 builder.Append(current);

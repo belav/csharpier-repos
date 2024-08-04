@@ -36,7 +36,9 @@ internal sealed class ViewComponentInvokerCache
         }
     }
 
-    internal ObjectMethodExecutor GetViewComponentMethodExecutor(ViewComponentContext viewComponentContext)
+    internal ObjectMethodExecutor GetViewComponentMethodExecutor(
+        ViewComponentContext viewComponentContext
+    )
     {
         var cache = CurrentCache;
         var viewComponentDescriptor = viewComponentContext.ViewComponentDescriptor;
@@ -49,18 +51,21 @@ internal sealed class ViewComponentInvokerCache
         var methodInfo = viewComponentContext.ViewComponentDescriptor?.MethodInfo;
         if (methodInfo == null)
         {
-            throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(ViewComponentDescriptor.MethodInfo),
-                nameof(ViewComponentDescriptor)));
+            throw new InvalidOperationException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(ViewComponentDescriptor.MethodInfo),
+                    nameof(ViewComponentDescriptor)
+                )
+            );
         }
 
-        var parameterDefaultValues = ParameterDefaultValues
-            .GetParameterDefaultValues(methodInfo);
+        var parameterDefaultValues = ParameterDefaultValues.GetParameterDefaultValues(methodInfo);
 
         executor = ObjectMethodExecutor.Create(
             viewComponentDescriptor.MethodInfo,
             viewComponentDescriptor.TypeInfo,
-            parameterDefaultValues);
+            parameterDefaultValues
+        );
 
         cache.Entries.TryAdd(viewComponentDescriptor, executor);
         return executor;
@@ -73,7 +78,10 @@ internal sealed class ViewComponentInvokerCache
             Version = version;
         }
 
-        public ConcurrentDictionary<ViewComponentDescriptor, ObjectMethodExecutor> Entries { get; } =
+        public ConcurrentDictionary<
+            ViewComponentDescriptor,
+            ObjectMethodExecutor
+        > Entries { get; } =
             new ConcurrentDictionary<ViewComponentDescriptor, ObjectMethodExecutor>();
 
         public int Version { get; }

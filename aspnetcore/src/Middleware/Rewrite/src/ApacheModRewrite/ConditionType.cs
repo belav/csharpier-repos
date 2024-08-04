@@ -8,5 +8,5 @@ internal enum ConditionType
     Regex,
     PropertyTest,
     StringComp,
-    IntComp
+    IntComp,
 }

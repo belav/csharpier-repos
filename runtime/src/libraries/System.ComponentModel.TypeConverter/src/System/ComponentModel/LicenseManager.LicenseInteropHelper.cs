@@ -62,13 +62,16 @@ namespace System.ComponentModel
         // Used from IClassFactory2 when retrieving LicInfo
         private sealed class LicInfoHelperLicenseContext : LicenseContext
         {
-            private readonly Dictionary<string, string> _savedLicenseKeys = new Dictionary<string, string>();
+            private readonly Dictionary<string, string> _savedLicenseKeys =
+                new Dictionary<string, string>();
 
-            public bool Contains(string assemblyName) => _savedLicenseKeys.ContainsKey(assemblyName);
+            public bool Contains(string assemblyName) =>
+                _savedLicenseKeys.ContainsKey(assemblyName);
 
             public override LicenseUsageMode UsageMode => LicenseUsageMode.Designtime;
 
-            public override string? GetSavedLicenseKey(Type type, Assembly? resourceAssembly) => null;
+            public override string? GetSavedLicenseKey(Type type, Assembly? resourceAssembly) =>
+                null;
 
             public override void SetSavedLicenseKey(Type type, string key)
             {
@@ -86,7 +89,8 @@ namespace System.ComponentModel
                 LicenseContext context,
                 Type type,
                 out License? license,
-                out string? licenseKey)
+                out string? licenseKey
+            )
             {
                 context ??= LicenseManager.CurrentContext;
 
@@ -96,13 +100,18 @@ namespace System.ComponentModel
                     instance: null,
                     allowExceptions: false,
                     out license,
-                    out licenseKey);
+                    out licenseKey
+                );
             }
 
             // The CLR invokes this when instantiating an unmanaged COM
             // object. The purpose is to decide which IClassFactory method to
             // use.
-            public static LicenseContext GetCurrentContextInfo(Type type, out bool isDesignTime, out string? key)
+            public static LicenseContext GetCurrentContextInfo(
+                Type type,
+                out bool isDesignTime,
+                out string? key
+            )
             {
                 LicenseContext licContext = LicenseManager.CurrentContext;
                 isDesignTime = licContext.UsageMode == LicenseUsageMode.Designtime;

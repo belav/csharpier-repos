@@ -11,28 +11,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 
-namespace System.Data.Common.Utils {
-    
+namespace System.Data.Common.Utils
+{
     // Miscellaneous helper routines
-    internal static class Helpers {
-
+    internal static class Helpers
+    {
         #region Trace methods
         // effects: Trace args according to the CLR format string with a new line
-        internal static void FormatTraceLine(string format, params object[] args) {
+        internal static void FormatTraceLine(string format, params object[] args)
+        {
             Trace.WriteLine(String.Format(CultureInfo.InvariantCulture, format, args));
         }
 
         // effects: Trace the string with a new line
-        internal static void StringTrace(string arg) {
+        internal static void StringTrace(string arg)
+        {
             Trace.Write(arg);
         }
 
         // effects: Trace the string without adding a new line
-        internal static void StringTraceLine(string arg) {
+        internal static void StringTraceLine(string arg)
+        {
             Trace.WriteLine(arg);
         }
         #endregion
@@ -40,7 +43,11 @@ namespace System.Data.Common.Utils {
         #region Misc Helpers
         // effects: compares two sets using the given comparer - removes
         // duplicates if they exist
-        internal static bool IsSetEqual<Type>(IEnumerable<Type> list1, IEnumerable<Type> list2, IEqualityComparer<Type> comparer)
+        internal static bool IsSetEqual<Type>(
+            IEnumerable<Type> list1,
+            IEnumerable<Type> list2,
+            IEqualityComparer<Type> comparer
+        )
         {
             Set<Type> set1 = new Set<Type>(list1, comparer);
             Set<Type> set2 = new Set<Type>(list2, comparer);
@@ -51,9 +58,13 @@ namespace System.Data.Common.Utils {
         // effects: Given a stream of values of type "SubType", returns a
         // stream of values of type "SuperType" where SuperType is a
         // superclass/supertype of SubType
-        internal static IEnumerable<SuperType> AsSuperTypeList<SubType, SuperType>(IEnumerable<SubType> values)
-            where SubType : SuperType {
-            foreach (SubType value in values) {
+        internal static IEnumerable<SuperType> AsSuperTypeList<SubType, SuperType>(
+            IEnumerable<SubType> values
+        )
+            where SubType : SuperType
+        {
+            foreach (SubType value in values)
+            {
                 yield return value;
             }
         }
@@ -81,7 +92,7 @@ namespace System.Data.Common.Utils {
         }
 
         /// <summary>
-        /// Builds a balanced binary tree with the specified nodes as leaves. 
+        /// Builds a balanced binary tree with the specified nodes as leaves.
         /// Note that the current elements of <paramref name="nodes"/> MAY be overwritten
         /// as the leaves are combined to produce the tree.
         /// </summary>
@@ -89,7 +100,10 @@ namespace System.Data.Common.Utils {
         /// <param name="nodes">The leaf nodes to combine into an balanced binary tree</param>
         /// <param name="combinator">A function that produces a new node that is the combination of the two specified argument nodes</param>
         /// <returns>The single node that is the root of the balanced binary tree</returns>
-        internal static TNode BuildBalancedTreeInPlace<TNode>(IList<TNode> nodes, Func<TNode, TNode, TNode> combinator)
+        internal static TNode BuildBalancedTreeInPlace<TNode>(
+            IList<TNode> nodes,
+            Func<TNode, TNode, TNode> combinator
+        )
         {
             EntityUtil.CheckArgumentNull(nodes, "nodes");
             EntityUtil.CheckArgumentNull(combinator, "combinator");
@@ -156,7 +170,11 @@ namespace System.Data.Common.Utils {
         /// <param name="isLeaf">A function that determines whether or not a given node should be considered a leaf node</param>
         /// <param name="getImmediateSubNodes">A function that traverses the tree by retrieving the <b>immediate</b> descendants of a (non-leaf) node.</param>
         /// <returns>An enumerable containing the leaf nodes (as determined by <paramref name="isLeaf"/>) retrieved by traversing the tree from <paramref name="root"/> using <paramref name="getImmediateSubNodes"/>.</returns>
-        internal static IEnumerable<TNode> GetLeafNodes<TNode>(TNode root, Func<TNode, bool> isLeaf, Func<TNode, IEnumerable<TNode>> getImmediateSubNodes)
+        internal static IEnumerable<TNode> GetLeafNodes<TNode>(
+            TNode root,
+            Func<TNode, bool> isLeaf,
+            Func<TNode, IEnumerable<TNode>> getImmediateSubNodes
+        )
         {
             EntityUtil.CheckArgumentNull(isLeaf, "isLeaf");
             EntityUtil.CheckArgumentNull(getImmediateSubNodes, "getImmediateSubNodes");
@@ -185,4 +203,3 @@ namespace System.Data.Common.Utils {
         #endregion
     }
 }
-    

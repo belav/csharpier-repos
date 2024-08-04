@@ -3,12 +3,12 @@
 
 using System.CommandLine.Help;
 using System.CommandLine.Invocation;
-using System.IO;
-using FluentAssertions;
-using Xunit;
 using System.CommandLine.Tests.Utility;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentAssertions;
+using Xunit;
 
 namespace System.CommandLine.Tests;
 
@@ -17,17 +17,10 @@ public class ParseErrorReportingTests
     [Fact] // https://github.com/dotnet/command-line-api/issues/817
     public void Parse_error_reporting_reports_error_when_help_is_used_and_required_subcommand_is_missing()
     {
-        var root = new CliRootCommand
-        {
-            new CliCommand("inner"),
-            new HelpOption()
-        };
+        var root = new CliRootCommand { new CliCommand("inner"), new HelpOption() };
 
         var output = new StringWriter();
-        var parseResult = root.Parse("", new CliConfiguration(root)
-        {
-            Output = output,
-        });
+        var parseResult = root.Parse("", new CliConfiguration(root) { Output = output });
 
         parseResult.Errors.Should().NotBeEmpty();
 
@@ -40,15 +33,9 @@ public class ParseErrorReportingTests
     [Fact]
     public void Help_display_can_be_disabled()
     {
-        CliRootCommand rootCommand = new()
-        {
-            new CliOption<bool>("--verbose")
-        };
+        CliRootCommand rootCommand = new() { new CliOption<bool>("--verbose") };
 
-        CliConfiguration config = new(rootCommand)
-        {
-            Output = new StringWriter()
-        };
+        CliConfiguration config = new(rootCommand) { Output = new StringWriter() };
 
         var result = rootCommand.Parse("oops", config);
 
@@ -67,19 +54,18 @@ public class ParseErrorReportingTests
     [Theory] // https://github.com/dotnet/command-line-api/issues/2226
     [InlineData(true)]
     [InlineData(false)]
-    public void When_there_are_parse_errors_then_customized_help_action_is_used_if_present(bool useAsyncAction)
+    public void When_there_are_parse_errors_then_customized_help_action_is_used_if_present(
+        bool useAsyncAction
+    )
     {
         var wasCalled = false;
         CliRootCommand rootCommand = new();
         rootCommand.Options.Clear();
         CliAction customHelpAction = useAsyncAction
-                                         ? new AsynchronousTestAction(_ => wasCalled = true)
-                                         : new SynchronousTestAction(_ => wasCalled = true);
+            ? new AsynchronousTestAction(_ => wasCalled = true)
+            : new SynchronousTestAction(_ => wasCalled = true);
 
-        rootCommand.Add(new HelpOption
-        {
-            Action = customHelpAction
-        });
+        rootCommand.Add(new HelpOption { Action = customHelpAction });
 
         rootCommand.Parse("oops").Invoke();
 
@@ -93,10 +79,7 @@ public class ParseErrorReportingTests
 
         var rootCommand = new CliRootCommand
         {
-            new CliCommand("child")
-            {
-                new CliCommand("grandchild")
-            }
+            new CliCommand("child") { new CliCommand("grandchild") },
         };
 
         rootCommand.Options.OfType<HelpOption>().Single().Action = new SynchronousTestAction(_ =>
@@ -117,10 +100,7 @@ public class ParseErrorReportingTests
         CliRootCommand rootCommand = new();
         rootCommand.Options.Clear();
         var output = new StringWriter();
-        CliConfiguration config = new(rootCommand)
-        {
-            Output = output
-        };
+        CliConfiguration config = new(rootCommand) { Output = output };
 
         config.Parse("oops").Invoke();
 

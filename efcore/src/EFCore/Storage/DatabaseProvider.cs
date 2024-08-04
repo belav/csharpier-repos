@@ -48,22 +48,22 @@ public class DatabaseProvider<TOptionsExtension> : IDatabaseProvider
     ///     The unique name used to identify the database provider. This should be the same as the NuGet package name
     ///     for the providers runtime.
     /// </summary>
-    public virtual string Name
-        => typeof(TOptionsExtension).Assembly.GetName().Name!;
+    public virtual string Name => typeof(TOptionsExtension).Assembly.GetName().Name!;
 
     /// <summary>
     ///     The value of the <see cref="AssemblyInformationalVersionAttribute.InformationalVersion" />
     ///     for the database provider assembly.
     /// </summary>
-    public virtual string? Version
-        => typeof(TOptionsExtension).Assembly
-            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+    public virtual string? Version =>
+        typeof(TOptionsExtension)
+            .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            ?.InformationalVersion;
 
     /// <summary>
     ///     Gets a value indicating whether this database provider has been selected for a given context.
     /// </summary>
     /// <param name="options">The options for the context.</param>
     /// <returns><see langword="true" /> if the database provider has been selected, otherwise <see langword="false" />.</returns>
-    public virtual bool IsConfigured(IDbContextOptions options)
-        => options.Extensions.OfType<TOptionsExtension>().Any();
+    public virtual bool IsConfigured(IDbContextOptions options) =>
+        options.Extensions.OfType<TOptionsExtension>().Any();
 }

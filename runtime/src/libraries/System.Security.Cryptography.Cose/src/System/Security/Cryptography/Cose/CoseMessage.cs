@@ -20,8 +20,10 @@ namespace System.Security.Cryptography.Cose
     {
         private const string SigStructureContextSign = "Signature";
         private const string SigStructureContextSign1 = "Signature1";
-        internal static readonly int SizeOfSigStructureCtxSign = CoseHelpers.GetTextStringEncodedSize(SigStructureContextSign);
-        internal static readonly int SizeOfSigStructureCtxSign1 = CoseHelpers.GetTextStringEncodedSize(SigStructureContextSign1);
+        internal static readonly int SizeOfSigStructureCtxSign =
+            CoseHelpers.GetTextStringEncodedSize(SigStructureContextSign);
+        internal static readonly int SizeOfSigStructureCtxSign1 =
+            CoseHelpers.GetTextStringEncodedSize(SigStructureContextSign1);
 
         // COSE tags https://datatracker.ietf.org/doc/html/rfc8152#page-8 Table 1.
         internal const CborTag Sign1Tag = (CborTag)18;
@@ -52,7 +54,13 @@ namespace System.Security.Cryptography.Cose
         /// <value>A region of memory that contains the raw bytes of the protected header parameters associated with this message.</value>
         public ReadOnlyMemory<byte> RawProtectedHeaders => _protectedHeaderAsBstr;
 
-        internal CoseMessage(CoseHeaderMap protectedHeader, CoseHeaderMap unprotectedHeader, byte[]? content, byte[] encodedProtectedHeader, bool isTagged)
+        internal CoseMessage(
+            CoseHeaderMap protectedHeader,
+            CoseHeaderMap unprotectedHeader,
+            byte[]? content,
+            byte[] encodedProtectedHeader,
+            bool isTagged
+        )
         {
             _content = content;
             _protectedHeaderAsBstr = encodedProtectedHeader;
@@ -110,7 +118,12 @@ namespace System.Security.Cryptography.Cose
             {
                 fixed (byte* ptr = &MemoryMarshal.GetReference(cborPayload))
                 {
-                    using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, cborPayload.Length))
+                    using (
+                        MemoryManager<byte> manager = new PointerMemoryManager<byte>(
+                            ptr,
+                            cborPayload.Length
+                        )
+                    )
                     {
                         return DecodeCoseSign1Core(new CborReader(manager.Memory));
                     }
@@ -132,16 +145,29 @@ namespace System.Security.Cryptography.Cose
 
                 if (reader.BytesRemaining != 0)
                 {
-                    throw new CryptographicException(SR.Format(SR.DecodeErrorWhileDecoding, SR.DecodeMessageContainedTrailingData));
+                    throw new CryptographicException(
+                        SR.Format(
+                            SR.DecodeErrorWhileDecoding,
+                            SR.DecodeMessageContainedTrailingData
+                        )
+                    );
                 }
 
                 reader = new CborReader(coseSignArray);
 
                 int? arrayLength = reader.ReadStartArray();
-                if (arrayLength.HasValue ? arrayLength != CoseSign1Message.Sign1ArrayLength :
-                    HasIndefiniteLengthArrayIncorrectLength(coseSignArray, CoseSign1Message.Sign1ArrayLength))
+                if (
+                    arrayLength.HasValue
+                        ? arrayLength != CoseSign1Message.Sign1ArrayLength
+                        : HasIndefiniteLengthArrayIncorrectLength(
+                            coseSignArray,
+                            CoseSign1Message.Sign1ArrayLength
+                        )
+                )
                 {
-                    throw new CryptographicException(SR.Format(SR.DecodeErrorWhileDecoding, SR.DecodeSign1ArrayLengthMustBeFour));
+                    throw new CryptographicException(
+                        SR.Format(SR.DecodeErrorWhileDecoding, SR.DecodeSign1ArrayLengthMustBeFour)
+                    );
                 }
 
                 var protectedHeader = new CoseHeaderMap();
@@ -161,7 +187,14 @@ namespace System.Security.Cryptography.Cose
 
                 Debug.Assert(reader.BytesRemaining == 0);
 
-                return new CoseSign1Message(protectedHeader, unprotectedHeader, payload, signature, protectedHeaderAsBstr, tag.HasValue);
+                return new CoseSign1Message(
+                    protectedHeader,
+                    unprotectedHeader,
+                    payload,
+                    signature,
+                    protectedHeaderAsBstr,
+                    tag.HasValue
+                );
             }
             catch (Exception ex) when (ex is CborContentException or InvalidOperationException)
             {
@@ -196,7 +229,12 @@ namespace System.Security.Cryptography.Cose
             {
                 fixed (byte* ptr = &MemoryMarshal.GetReference(cborPayload))
                 {
-                    using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, cborPayload.Length))
+                    using (
+                        MemoryManager<byte> manager = new PointerMemoryManager<byte>(
+                            ptr,
+                            cborPayload.Length
+                        )
+                    )
                     {
                         return DecodeCoseMultiSignCore(new CborReader(manager.Memory));
                     }
@@ -211,23 +249,41 @@ namespace System.Security.Cryptography.Cose
                 CborTag? tag = DecodeTag(reader);
                 if (tag != null && tag != MultiSignTag)
                 {
-                    throw new CryptographicException(SR.Format(SR.DecodeMultiSignIncorrectTag, tag));
+                    throw new CryptographicException(
+                        SR.Format(SR.DecodeMultiSignIncorrectTag, tag)
+                    );
                 }
 
                 ReadOnlyMemory<byte> coseSignArray = reader.ReadEncodedValue();
 
                 if (reader.BytesRemaining != 0)
                 {
-                    throw new CryptographicException(SR.Format(SR.DecodeErrorWhileDecoding, SR.DecodeMessageContainedTrailingData));
+                    throw new CryptographicException(
+                        SR.Format(
+                            SR.DecodeErrorWhileDecoding,
+                            SR.DecodeMessageContainedTrailingData
+                        )
+                    );
                 }
 
                 reader = new CborReader(coseSignArray);
 
                 int? arrayLength = reader.ReadStartArray();
-                if (arrayLength.HasValue ? arrayLength != CoseMultiSignMessage.MultiSignArrayLength :
-                    HasIndefiniteLengthArrayIncorrectLength(coseSignArray, CoseMultiSignMessage.MultiSignArrayLength))
+                if (
+                    arrayLength.HasValue
+                        ? arrayLength != CoseMultiSignMessage.MultiSignArrayLength
+                        : HasIndefiniteLengthArrayIncorrectLength(
+                            coseSignArray,
+                            CoseMultiSignMessage.MultiSignArrayLength
+                        )
+                )
                 {
-                    throw new CryptographicException(SR.Format(SR.DecodeErrorWhileDecoding, SR.DecodeMultiSignArrayLengthMustBeFour));
+                    throw new CryptographicException(
+                        SR.Format(
+                            SR.DecodeErrorWhileDecoding,
+                            SR.DecodeMultiSignArrayLengthMustBeFour
+                        )
+                    );
                 }
 
                 var protectedHeaders = new CoseHeaderMap();
@@ -247,7 +303,14 @@ namespace System.Security.Cryptography.Cose
                 reader.ReadEndArray();
                 Debug.Assert(reader.BytesRemaining == 0);
 
-                return new CoseMultiSignMessage(protectedHeaders, unprotectedHeaders, payload, signatures, encodedProtectedHeaders, tag.HasValue);
+                return new CoseMultiSignMessage(
+                    protectedHeaders,
+                    unprotectedHeaders,
+                    payload,
+                    signatures,
+                    encodedProtectedHeaders,
+                    tag.HasValue
+                );
             }
             catch (Exception ex) when (ex is CborContentException or InvalidOperationException)
             {
@@ -260,11 +323,15 @@ namespace System.Security.Cryptography.Cose
             return reader.PeekState() switch
             {
                 CborReaderState.Tag => reader.ReadTag(),
-                _ => null
+                _ => null,
             };
         }
 
-        private static void DecodeProtectedBucket(CborReader reader, CoseHeaderMap headerParameters, out byte[] protectedHeaderAsBstr)
+        private static void DecodeProtectedBucket(
+            CborReader reader,
+            CoseHeaderMap headerParameters,
+            out byte[] protectedHeaderAsBstr
+        )
         {
             protectedHeaderAsBstr = reader.ReadByteString();
             if (protectedHeaderAsBstr.Length == 0)
@@ -284,11 +351,19 @@ namespace System.Security.Cryptography.Cose
 
             if (protectedHeaderReader.BytesRemaining != 0)
             {
-                throw new CryptographicException(SR.Format(SR.DecodeErrorWhileDecoding, SR.DecodeSign1EncodedProtectedMapIncorrect));
+                throw new CryptographicException(
+                    SR.Format(
+                        SR.DecodeErrorWhileDecoding,
+                        SR.DecodeSign1EncodedProtectedMapIncorrect
+                    )
+                );
             }
         }
 
-        private static void DecodeUnprotectedBucket(CborReader reader, CoseHeaderMap headerParameters)
+        private static void DecodeUnprotectedBucket(
+            CborReader reader,
+            CoseHeaderMap headerParameters
+        )
         {
             DecodeBucket(reader, headerParameters);
         }
@@ -300,12 +375,22 @@ namespace System.Security.Cryptography.Cose
             {
                 CoseHeaderLabel label = reader.PeekState() switch
                 {
-                    CborReaderState.UnsignedInteger or CborReaderState.NegativeInteger => new CoseHeaderLabel(reader.ReadInt32()),
+                    CborReaderState.UnsignedInteger
+                    or CborReaderState.NegativeInteger
+                        => new CoseHeaderLabel(reader.ReadInt32()),
                     CborReaderState.TextString => new CoseHeaderLabel(reader.ReadTextString()),
-                    _ => throw new CryptographicException(SR.Format(SR.DecodeErrorWhileDecoding, SR.DecodeSign1MapLabelWasIncorrect))
+                    _
+                        => throw new CryptographicException(
+                            SR.Format(
+                                SR.DecodeErrorWhileDecoding,
+                                SR.DecodeSign1MapLabelWasIncorrect
+                            )
+                        ),
                 };
 
-                CoseHeaderValue value = CoseHeaderValue.FromEncodedValue(reader.ReadEncodedValue().Span);
+                CoseHeaderValue value = CoseHeaderValue.FromEncodedValue(
+                    reader.ReadEncodedValue().Span
+                );
                 headerParameters.Add(label, value);
             }
             reader.ReadEndMap();
@@ -324,7 +409,9 @@ namespace System.Security.Cryptography.Cose
                 return reader.ReadByteString();
             }
 
-            throw new CryptographicException(SR.Format(SR.DecodeErrorWhileDecoding, SR.DecodeSign1PayloadWasIncorrect));
+            throw new CryptographicException(
+                SR.Format(SR.DecodeErrorWhileDecoding, SR.DecodeSign1PayloadWasIncorrect)
+            );
         }
 
         private static byte[] DecodeSignature(CborReader reader)
@@ -335,7 +422,9 @@ namespace System.Security.Cryptography.Cose
         private static List<CoseSignature> DecodeCoseSignaturesArray(CborReader reader)
         {
             int? signaturesLength = reader.ReadStartArray();
-            List<CoseSignature> signatures = new List<CoseSignature>(signaturesLength.GetValueOrDefault());
+            List<CoseSignature> signatures = new List<CoseSignature>(
+                signaturesLength.GetValueOrDefault()
+            );
 
             while (reader.PeekState() == CborReaderState.StartArray)
             {
@@ -347,7 +436,12 @@ namespace System.Security.Cryptography.Cose
 
             if (signatures.Count < 1)
             {
-                throw new CryptographicException(SR.Format(SR.DecodeErrorWhileDecoding, SR.MultiSignMessageMustCarryAtLeastOneSignature));
+                throw new CryptographicException(
+                    SR.Format(
+                        SR.DecodeErrorWhileDecoding,
+                        SR.MultiSignMessageMustCarryAtLeastOneSignature
+                    )
+                );
             }
 
             return signatures;
@@ -358,10 +452,18 @@ namespace System.Security.Cryptography.Cose
             var reader = new CborReader(coseSignature);
             int? length = reader.ReadStartArray();
 
-            if (length.HasValue ? length != CoseMultiSignMessage.CoseSignatureArrayLength :
-                HasIndefiniteLengthArrayIncorrectLength(coseSignature, CoseMultiSignMessage.CoseSignatureArrayLength))
+            if (
+                length.HasValue
+                    ? length != CoseMultiSignMessage.CoseSignatureArrayLength
+                    : HasIndefiniteLengthArrayIncorrectLength(
+                        coseSignature,
+                        CoseMultiSignMessage.CoseSignatureArrayLength
+                    )
+            )
             {
-                throw new CryptographicException(SR.Format(SR.DecodeErrorWhileDecoding, SR.DecodeCoseSignatureMustBeArrayOfThree));
+                throw new CryptographicException(
+                    SR.Format(SR.DecodeErrorWhileDecoding, SR.DecodeCoseSignatureMustBeArrayOfThree)
+                );
             }
 
             var protectedHeaders = new CoseHeaderMap();
@@ -378,10 +480,18 @@ namespace System.Security.Cryptography.Cose
             byte[] signatureBytes = DecodeSignature(reader);
             reader.ReadEndArray();
 
-            return new CoseSignature(protectedHeaders, unprotectedHeaders, signProtected, signatureBytes);
+            return new CoseSignature(
+                protectedHeaders,
+                unprotectedHeaders,
+                signProtected,
+                signatureBytes
+            );
         }
 
-        private static bool HasIndefiniteLengthArrayIncorrectLength(ReadOnlyMemory<byte> encodedArray, int expectedLength)
+        private static bool HasIndefiniteLengthArrayIncorrectLength(
+            ReadOnlyMemory<byte> encodedArray,
+            int expectedLength
+        )
         {
             var reader = new CborReader(encodedArray);
             reader.ReadStartArray();
@@ -413,9 +523,17 @@ namespace System.Security.Cryptography.Cose
             ReadOnlySpan<byte> signProtected,
             ReadOnlySpan<byte> associatedData,
             ReadOnlySpan<byte> contentBytes,
-            Stream? contentStream)
+            Stream? contentStream
+        )
         {
-            int bytesWritten = CreateToBeSigned(buffer, context, bodyProtected, signProtected, associatedData, ReadOnlySpan<byte>.Empty);
+            int bytesWritten = CreateToBeSigned(
+                buffer,
+                context,
+                bodyProtected,
+                signProtected,
+                associatedData,
+                ReadOnlySpan<byte>.Empty
+            );
             bytesWritten -= 1; // Trim the empty bstr content, it is just a placeholder.
 
             hasher.AppendData(buffer.Slice(0, bytesWritten));
@@ -431,7 +549,10 @@ namespace System.Security.Cryptography.Cose
             else
             {
                 // content length
-                CoseHelpers.WriteByteStringLength(hasher, (ulong)(contentStream.Length - contentStream.Position));
+                CoseHelpers.WriteByteStringLength(
+                    hasher,
+                    (ulong)(contentStream.Length - contentStream.Position)
+                );
 
                 //content
                 byte[] contentBuffer = ArrayPool<byte>.Shared.Rent(4096);
@@ -439,7 +560,9 @@ namespace System.Security.Cryptography.Cose
 
                 try
                 {
-                    while ((bytesRead = contentStream.Read(contentBuffer, 0, contentBuffer.Length)) > 0)
+                    while (
+                        (bytesRead = contentStream.Read(contentBuffer, 0, contentBuffer.Length)) > 0
+                    )
                     {
                         hasher.AppendData(contentBuffer, 0, bytesRead);
                     }
@@ -459,9 +582,17 @@ namespace System.Security.Cryptography.Cose
             ReadOnlyMemory<byte> signProtected,
             ReadOnlyMemory<byte> associatedData,
             Stream content,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            int bytesWritten = CreateToBeSigned(buffer, context, bodyProtected.Span, signProtected.Span, associatedData.Span, ReadOnlySpan<byte>.Empty);
+            int bytesWritten = CreateToBeSigned(
+                buffer,
+                context,
+                bodyProtected.Span,
+                signProtected.Span,
+                associatedData.Span,
+                ReadOnlySpan<byte>.Empty
+            );
             bytesWritten -= 1; // Trim the empty bstr content, it is just a placeholder.
 
             hasher.AppendData(buffer, 0, bytesWritten);
@@ -473,9 +604,21 @@ namespace System.Security.Cryptography.Cose
             byte[] contentBuffer = ArrayPool<byte>.Shared.Rent(4096);
             int bytesRead;
 #if NETSTANDARD2_0 || NETFRAMEWORK
-            while ((bytesRead = await content.ReadAsync(contentBuffer, 0, contentBuffer.Length, cancellationToken).ConfigureAwait(false)) > 0)
+            while (
+                (
+                    bytesRead = await content
+                        .ReadAsync(contentBuffer, 0, contentBuffer.Length, cancellationToken)
+                        .ConfigureAwait(false)
+                ) > 0
+            )
 #else
-            while ((bytesRead = await content.ReadAsync(contentBuffer, cancellationToken).ConfigureAwait(false)) > 0)
+            while (
+                (
+                    bytesRead = await content
+                        .ReadAsync(contentBuffer, cancellationToken)
+                        .ConfigureAwait(false)
+                ) > 0
+            )
 #endif
             {
                 hasher.AppendData(contentBuffer, 0, bytesRead);
@@ -484,7 +627,14 @@ namespace System.Security.Cryptography.Cose
             ArrayPool<byte>.Shared.Return(contentBuffer, clearArray: true);
         }
 
-        internal static int CreateToBeSigned(Span<byte> destination, SigStructureContext context, ReadOnlySpan<byte> bodyProtected, ReadOnlySpan<byte> signProtected, ReadOnlySpan<byte> associatedData, ReadOnlySpan<byte> content)
+        internal static int CreateToBeSigned(
+            Span<byte> destination,
+            SigStructureContext context,
+            ReadOnlySpan<byte> bodyProtected,
+            ReadOnlySpan<byte> signProtected,
+            ReadOnlySpan<byte> associatedData,
+            ReadOnlySpan<byte> content
+        )
         {
             var writer = new CborWriter();
             if (context == SigStructureContext.Signature)
@@ -508,22 +658,39 @@ namespace System.Security.Cryptography.Cose
             writer.WriteEndArray();
 
             int bytesWritten = writer.Encode(destination);
-            Debug.Assert(bytesWritten == ComputeToBeSignedEncodedSize(context, bodyProtected.Length, signProtected.Length, associatedData.Length, content.Length));
+            Debug.Assert(
+                bytesWritten
+                    == ComputeToBeSignedEncodedSize(
+                        context,
+                        bodyProtected.Length,
+                        signProtected.Length,
+                        associatedData.Length,
+                        content.Length
+                    )
+            );
 
             return bytesWritten;
         }
 
-        internal static int ComputeToBeSignedEncodedSize(SigStructureContext context, int bodyProtectedLength, int signProtectedLength, int associatedDataLength, int contentLength)
+        internal static int ComputeToBeSignedEncodedSize(
+            SigStructureContext context,
+            int bodyProtectedLength,
+            int signProtectedLength,
+            int associatedDataLength,
+            int contentLength
+        )
         {
-            int encodedSize = CoseHelpers.SizeOfArrayOfLessThan24 +
-                CoseHelpers.GetByteStringEncodedSize(bodyProtectedLength) +
-                CoseHelpers.GetByteStringEncodedSize(associatedDataLength) +
-                CoseHelpers.GetByteStringEncodedSize(contentLength);
+            int encodedSize =
+                CoseHelpers.SizeOfArrayOfLessThan24
+                + CoseHelpers.GetByteStringEncodedSize(bodyProtectedLength)
+                + CoseHelpers.GetByteStringEncodedSize(associatedDataLength)
+                + CoseHelpers.GetByteStringEncodedSize(contentLength);
 
             if (context == SigStructureContext.Signature)
             {
-                encodedSize += SizeOfSigStructureCtxSign +
-                    CoseHelpers.GetByteStringEncodedSize(signProtectedLength);
+                encodedSize +=
+                    SizeOfSigStructureCtxSign
+                    + CoseHelpers.GetByteStringEncodedSize(signProtectedLength);
             }
             else
             {
@@ -536,7 +703,10 @@ namespace System.Security.Cryptography.Cose
         }
 
         // Validate duplicate labels https://datatracker.ietf.org/doc/html/rfc8152#section-3.
-        internal static bool ContainDuplicateLabels(CoseHeaderMap? protectedHeaders, CoseHeaderMap? unprotectedHeaders)
+        internal static bool ContainDuplicateLabels(
+            CoseHeaderMap? protectedHeaders,
+            CoseHeaderMap? unprotectedHeaders
+        )
         {
             if (protectedHeaders == null || unprotectedHeaders == null)
             {
@@ -554,10 +724,18 @@ namespace System.Security.Cryptography.Cose
             return false;
         }
 
-        internal static bool MissingCriticalHeaders(CoseHeaderMap? protectedHeders, out string? labelName)
+        internal static bool MissingCriticalHeaders(
+            CoseHeaderMap? protectedHeders,
+            out string? labelName
+        )
         {
-            if (protectedHeders == null ||
-                !protectedHeders.TryGetValue(CoseHeaderLabel.CriticalHeaders, out CoseHeaderValue critHeaderValue))
+            if (
+                protectedHeders == null
+                || !protectedHeders.TryGetValue(
+                    CoseHeaderLabel.CriticalHeaders,
+                    out CoseHeaderValue critHeaderValue
+                )
+            )
             {
                 labelName = null;
                 return false;
@@ -571,9 +749,11 @@ namespace System.Security.Cryptography.Cose
             {
                 CoseHeaderLabel label = reader.PeekState() switch
                 {
-                    CborReaderState.UnsignedInteger or CborReaderState.NegativeInteger => new CoseHeaderLabel(reader.ReadInt32()),
+                    CborReaderState.UnsignedInteger
+                    or CborReaderState.NegativeInteger
+                        => new CoseHeaderLabel(reader.ReadInt32()),
                     CborReaderState.TextString => new CoseHeaderLabel(reader.ReadTextString()),
-                    _ => throw new CryptographicException(SR.CriticalHeadersLabelWasIncorrect)
+                    _ => throw new CryptographicException(SR.CriticalHeadersLabelWasIncorrect),
                 };
 
                 if (!protectedHeders.ContainsKey(label))
@@ -614,7 +794,10 @@ namespace System.Security.Cryptography.Cose
         {
             if (!TryEncode(destination, out int bytesWritten))
             {
-                throw new ArgumentException(SR.Argument_EncodeDestinationTooSmall, nameof(destination));
+                throw new ArgumentException(
+                    SR.Argument_EncodeDestinationTooSmall,
+                    nameof(destination)
+                );
             }
 
             return bytesWritten;

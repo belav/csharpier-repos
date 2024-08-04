@@ -15,7 +15,8 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
-    public abstract class AbstractCSharpSnippetCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public abstract class AbstractCSharpSnippetCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
         protected abstract string ItemToCommit { get; }
 
@@ -24,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             ShowNewSnippetExperience = true;
         }
 
-        internal override Type GetCompletionProviderType()
-            => typeof(CSharpSnippetCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(CSharpSnippetCompletionProvider);
     }
 }

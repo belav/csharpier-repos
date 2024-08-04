@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -19,7 +18,12 @@ namespace ILCompiler.DependencyAnalysis
         protected override ObjectData GetDehydratableData(NodeFactory factory, bool relocsOnly)
         {
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, Array.Empty<ISymbolDefinitionNode>());
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    Array.Empty<ISymbolDefinitionNode>()
+                );
 
             var builder = new ObjectDataBuilder(factory, relocsOnly);
             builder.AddSymbol(this);
@@ -46,10 +50,19 @@ namespace ILCompiler.DependencyAnalysis
             //
             int runLength = 0;
             int currentSlot = NoSlot;
-            foreach (InterfaceDispatchCellNode node in new SortedSet<InterfaceDispatchCellNode>(factory.MetadataManager.GetInterfaceDispatchCells(), new DispatchCellComparer(factory)))
+            foreach (
+                InterfaceDispatchCellNode node in new SortedSet<InterfaceDispatchCellNode>(
+                    factory.MetadataManager.GetInterfaceDispatchCells(),
+                    new DispatchCellComparer(factory)
+                )
+            )
             {
                 MethodDesc targetMethod = node.TargetMethod;
-                int targetSlot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, targetMethod, targetMethod.OwningType);
+                int targetSlot = VirtualMethodSlotHelper.GetVirtualMethodSlot(
+                    factory,
+                    targetMethod,
+                    targetMethod.OwningType
+                );
                 if (currentSlot == NoSlot)
                 {
                     // This is the first dispatch cell we're emitting
@@ -85,10 +98,15 @@ namespace ILCompiler.DependencyAnalysis
             return builder.ToObjectData();
         }
 
-        public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
-            => sb.Append(nameMangler.CompilationUnitPrefix).Append("__InterfaceDispatchCellSection_Start");
-        protected override ObjectNodeSection GetDehydratedSection(NodeFactory factory) => ObjectNodeSection.DataSection;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb) =>
+            sb.Append(nameMangler.CompilationUnitPrefix)
+                .Append("__InterfaceDispatchCellSection_Start");
+
+        protected override ObjectNodeSection GetDehydratedSection(NodeFactory factory) =>
+            ObjectNodeSection.DataSection;
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override int ClassCode => -1389343;
 
@@ -117,8 +135,16 @@ namespace ILCompiler.DependencyAnalysis
                 MethodDesc methodY = y.TargetMethod;
 
                 // The primary purpose of this comparer is to sort everything by slot
-                int slotX = VirtualMethodSlotHelper.GetVirtualMethodSlot(_factory, methodX, methodX.OwningType);
-                int slotY = VirtualMethodSlotHelper.GetVirtualMethodSlot(_factory, methodY, methodY.OwningType);
+                int slotX = VirtualMethodSlotHelper.GetVirtualMethodSlot(
+                    _factory,
+                    methodX,
+                    methodX.OwningType
+                );
+                int slotY = VirtualMethodSlotHelper.GetVirtualMethodSlot(
+                    _factory,
+                    methodY,
+                    methodY.OwningType
+                );
 
                 int result = slotX - slotY;
                 if (result != 0)

@@ -53,7 +53,11 @@ namespace System.Formats.Cbor
         /// Defaults to <see cref="CborConformanceMode.Strict" /> conformance mode.</param>
         /// <param name="allowMultipleRootLevelValues"><see langword="true" /> to indicate that multiple root-level values are supported by the reader; otherwise, <see langword="false" />.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="conformanceMode" /> is not defined.</exception>
-        public CborReader(ReadOnlyMemory<byte> data, CborConformanceMode conformanceMode = CborConformanceMode.Strict, bool allowMultipleRootLevelValues = false)
+        public CborReader(
+            ReadOnlyMemory<byte> data,
+            CborConformanceMode conformanceMode = CborConformanceMode.Strict,
+            bool allowMultipleRootLevelValues = false
+        )
         {
             CborConformanceModeHelpers.Validate(conformanceMode);
 
@@ -136,14 +140,21 @@ namespace System.Formats.Cbor
                     // Indefinite-length string contexts allow two possible data items:
                     // 1) Definite-length string chunks of the same major type OR
                     // 2) a break byte denoting the end of the indefinite-length string context.
-                    if (nextByte.InitialByte == CborInitialByte.IndefiniteLengthBreakByte ||
-                        nextByte.MajorType == _currentMajorType.Value &&
-                        nextByte.AdditionalInfo != CborAdditionalInfo.IndefiniteLength)
+                    if (
+                        nextByte.InitialByte == CborInitialByte.IndefiniteLengthBreakByte
+                        || nextByte.MajorType == _currentMajorType.Value
+                            && nextByte.AdditionalInfo != CborAdditionalInfo.IndefiniteLength
+                    )
                     {
                         break;
                     }
 
-                    throw new CborContentException(SR.Format(SR.Cbor_Reader_InvalidCbor_IndefiniteLengthStringContainsInvalidDataItem, (int)nextByte.MajorType));
+                    throw new CborContentException(
+                        SR.Format(
+                            SR.Cbor_Reader_InvalidCbor_IndefiniteLengthStringContainsInvalidDataItem,
+                            (int)nextByte.MajorType
+                        )
+                    );
             }
 
             return nextByte;
@@ -155,7 +166,9 @@ namespace System.Formats.Cbor
 
             if (expectedType != result.MajorType)
             {
-                throw new InvalidOperationException(SR.Format(SR.Cbor_Reader_MajorTypeMismatch, (int)result.MajorType));
+                throw new InvalidOperationException(
+                    SR.Format(SR.Cbor_Reader_MajorTypeMismatch, (int)result.MajorType)
+                );
             }
 
             return result;
@@ -208,7 +221,9 @@ namespace System.Formats.Cbor
 
             if (expectedType != _currentMajorType)
             {
-                throw new InvalidOperationException(SR.Format(SR.Cbor_PopMajorTypeMismatch, (int)_currentMajorType.Value));
+                throw new InvalidOperationException(
+                    SR.Format(SR.Cbor_PopMajorTypeMismatch, (int)_currentMajorType.Value)
+                );
             }
 
             if (_definiteLength - _itemsRead > 0)
@@ -295,7 +310,8 @@ namespace System.Formats.Cbor
                 int itemsRead,
                 int? currentKeyOffset,
                 (int Offset, int Length)? previousKeyEncodingRange,
-                HashSet<(int Offset, int Length)>? keyEncodingRanges)
+                HashSet<(int Offset, int Length)>? keyEncodingRanges
+            )
             {
                 MajorType = type;
                 FrameOffset = frameOffset;
@@ -344,8 +360,8 @@ namespace System.Formats.Cbor
                 int frameOffset,
                 int itemsRead,
                 int? currentKeyOffset,
-                (int Offset, int Length)? previousKeyEncodingRange)
-
+                (int Offset, int Length)? previousKeyEncodingRange
+            )
             {
                 Depth = depth;
                 Offset = offset;
@@ -372,21 +388,28 @@ namespace System.Formats.Cbor
                 frameOffset: _frameOffset,
                 itemsRead: _itemsRead,
                 currentKeyOffset: _currentKeyOffset,
-                previousKeyEncodingRange: _previousKeyEncodingRange);
+                previousKeyEncodingRange: _previousKeyEncodingRange
+            );
         }
 
         private void RestoreCheckpoint(in Checkpoint checkpoint)
         {
             int restoreHeight = CurrentDepth - checkpoint.Depth;
-            Debug.Assert(restoreHeight >= 0, "Attempting to restore checkpoint outside of its original context.");
+            Debug.Assert(
+                restoreHeight >= 0,
+                "Attempting to restore checkpoint outside of its original context."
+            );
 
             if (restoreHeight > 0)
             {
                 // pop any nested contexts added after the checkpoint
 
                 Debug.Assert(_nestedDataItems != null);
-                Debug.Assert(_nestedDataItems.ToArray()[restoreHeight - 1].FrameOffset == checkpoint.FrameOffset,
-                                "Attempting to restore checkpoint outside of its original context.");
+                Debug.Assert(
+                    _nestedDataItems.ToArray()[restoreHeight - 1].FrameOffset
+                        == checkpoint.FrameOffset,
+                    "Attempting to restore checkpoint outside of its original context."
+                );
 
                 StackFrame frame;
                 for (int i = 0; i < restoreHeight - 1; i++)
@@ -400,7 +423,10 @@ namespace System.Formats.Cbor
             }
             else
             {
-                Debug.Assert(checkpoint.FrameOffset == _frameOffset, "Attempting to restore checkpoint outside of its original context.");
+                Debug.Assert(
+                    checkpoint.FrameOffset == _frameOffset,
+                    "Attempting to restore checkpoint outside of its original context."
+                );
             }
 
             // Remove any key encodings added after the current checkpoint.

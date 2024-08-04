@@ -25,13 +25,15 @@ namespace System.Web.UI.WebControls
         private readonly EntityDataSource _owner;
         private readonly bool _generateDefaultOrderByClause;
 
-        internal OrderByBuilder(string argsSortExpression,
+        internal OrderByBuilder(
+            string argsSortExpression,
             EntityDataSourceWrapperCollection wrapperCollection,
             string orderBy,
             bool autoGenerateOrderByClause,
             ParameterCollection orderByParameters,
             bool generateDefaultOrderByClause,
-            EntityDataSource owner)
+            EntityDataSource owner
+        )
         {
             _argsSortExpression = argsSortExpression;
             _wrapperCollection = wrapperCollection;
@@ -42,28 +44,49 @@ namespace System.Web.UI.WebControls
             _generateDefaultOrderByClause = generateDefaultOrderByClause;
         }
 
-        internal void Generate(TypeUsage tu, out string orderBy, out ObjectParameter[] orderByParameters, bool applySortExpression)
+        internal void Generate(
+            TypeUsage tu,
+            out string orderBy,
+            out ObjectParameter[] orderByParameters,
+            bool applySortExpression
+        )
         {
             Debug.Assert(null != tu, "Type Usage cannot be null");
             GenerateOrderByClause(tu, out orderBy, out orderByParameters, applySortExpression);
         }
 
-        private void GenerateOrderByClause(TypeUsage tu, out string orderByClause, out ObjectParameter[] orderByObjectParameters, bool applySortExpression)
+        private void GenerateOrderByClause(
+            TypeUsage tu,
+            out string orderByClause,
+            out ObjectParameter[] orderByObjectParameters,
+            bool applySortExpression
+        )
         {
             var orderByClauseBuilder = new StringBuilder();
 
             if (applySortExpression)
             {
                 // This sets the orderBy clause based on a clicked column header in the databound control.
-                AppendOrderByKey(orderByClauseBuilder, _argsSortExpression, Strings.EntityDataSourceView_ColumnHeader, tu);
+                AppendOrderByKey(
+                    orderByClauseBuilder,
+                    _argsSortExpression,
+                    Strings.EntityDataSourceView_ColumnHeader,
+                    tu
+                );
             }
 
             // AutoGenerateOrderByClause is mutually exclusive with OrderBy.
             // Only one of the following two if statements will execute.
             if (_autoGenerateOrderByClause)
             {
-                Debug.Assert(String.IsNullOrEmpty(_orderBy), "If AutoGenerateOrderByClause is true, then OrderBy cannot be set. This should have been caught by a runtime error check");
-                IOrderedDictionary paramValues = _orderByParameters.GetValues(_owner.HttpContext, _owner);
+                Debug.Assert(
+                    String.IsNullOrEmpty(_orderBy),
+                    "If AutoGenerateOrderByClause is true, then OrderBy cannot be set. This should have been caught by a runtime error check"
+                );
+                IOrderedDictionary paramValues = _orderByParameters.GetValues(
+                    _owner.HttpContext,
+                    _owner
+                );
                 foreach (DictionaryEntry de in paramValues)
                 {
                     // Skip AutoGenerateOrderBy on expressions that have a null value.
@@ -73,7 +96,12 @@ namespace System.Web.UI.WebControls
                         {
                             orderByClauseBuilder.Append(", ");
                         }
-                        AppendOrderByKey(orderByClauseBuilder, (string)(de.Value), Strings.EntityDataSourceView_AutoGenerateOrderByParameters, tu);
+                        AppendOrderByKey(
+                            orderByClauseBuilder,
+                            (string)(de.Value),
+                            Strings.EntityDataSourceView_AutoGenerateOrderByParameters,
+                            tu
+                        );
                     }
                 }
             }
@@ -82,7 +110,10 @@ namespace System.Web.UI.WebControls
             if (!String.IsNullOrEmpty(_orderBy))
             {
                 orderByObjectParameters = _owner.GetOrderByParameters();
-                Debug.Assert(!_autoGenerateOrderByClause, "If OrderBy is set, AutoGenerateOrderBy must be false. This should have been caught by a runtime error check");
+                Debug.Assert(
+                    !_autoGenerateOrderByClause,
+                    "If OrderBy is set, AutoGenerateOrderBy must be false. This should have been caught by a runtime error check"
+                );
                 if (0 < orderByClauseBuilder.Length)
                 {
                     orderByClauseBuilder.Append(", ");
@@ -94,7 +125,7 @@ namespace System.Web.UI.WebControls
                 orderByObjectParameters = new ObjectParameter[] { };
             }
 
-            if (orderByClauseBuilder.Length==0 && _generateDefaultOrderByClause)
+            if (orderByClauseBuilder.Length == 0 && _generateDefaultOrderByClause)
             {
                 // This only occurs if there's no EntitySet, which means entities are not wrapped.
                 orderByClauseBuilder.Append(GenerateDefaultOrderByFromTypeUsage(tu));
@@ -103,7 +134,12 @@ namespace System.Web.UI.WebControls
             orderByClause = orderByClauseBuilder.ToString();
         }
 
-        private void AppendOrderByKey(StringBuilder orderByClauseBuilder, string expression, string errorText, TypeUsage tu)
+        private void AppendOrderByKey(
+            StringBuilder orderByClauseBuilder,
+            string expression,
+            string errorText,
+            TypeUsage tu
+        )
         {
             if (!String.IsNullOrEmpty(expression))
             {
@@ -120,10 +156,22 @@ namespace System.Web.UI.WebControls
                         throw new ArgumentException(Strings.EntityDataSourceView_EmptyPropertyName);
                     }
 
-                    if (EntityDataSourceUtil.PropertyIsOnEntity(columnName, _wrapperCollection, null, tu))
+                    if (
+                        EntityDataSourceUtil.PropertyIsOnEntity(
+                            columnName,
+                            _wrapperCollection,
+                            null,
+                            tu
+                        )
+                    )
                     {
                         orderByClauseBuilder.Append(spacer);
-                        orderByClauseBuilder.Append(EntityDataSourceUtil.GetEntitySqlValueForColumnName(columnName, _wrapperCollection));
+                        orderByClauseBuilder.Append(
+                            EntityDataSourceUtil.GetEntitySqlValueForColumnName(
+                                columnName,
+                                _wrapperCollection
+                            )
+                        );
                     }
                     else // pass the sort expression through verbatim.
                     {
@@ -146,8 +194,16 @@ namespace System.Web.UI.WebControls
 
         private const string c_esqlAscendingTail = " ASC";
         private const string c_esqlDescendingTail = " DESC";
-        private static readonly string[] ascendingTails = new string[] { c_esqlAscendingTail, " ascending" };
-        private static readonly string[] descendingTails = new string[] { c_esqlDescendingTail, " descending" };
+        private static readonly string[] ascendingTails = new string[]
+        {
+            c_esqlAscendingTail,
+            " ascending",
+        };
+        private static readonly string[] descendingTails = new string[]
+        {
+            c_esqlDescendingTail,
+            " descending",
+        };
 
         private static string ParseStatement(string statement, out bool isAscending)
         {
@@ -171,10 +227,10 @@ namespace System.Web.UI.WebControls
 
             isAscending = true;
             return statement;
-        } 
+        }
 
         private static IQueryable ExpandQueryableOrderBy(IQueryable source, string[] statements)
-        {        
+        {
             var expression = source.Expression;
             var parameter = Expression.Parameter(source.ElementType, String.Empty);
 
@@ -185,7 +241,9 @@ namespace System.Web.UI.WebControls
                 string memberReference = ParseStatement(statements[idx], out isAscending);
                 bool isFirstOrderBy = (idx == 0);
 
-                var methodName = (isFirstOrderBy ? "OrderBy" : "ThenBy") + (isAscending ? String.Empty : "Descending");
+                var methodName =
+                    (isFirstOrderBy ? "OrderBy" : "ThenBy")
+                    + (isAscending ? String.Empty : "Descending");
 
                 // Unravel nested property accesses
                 var memberElements = memberReference.Split('.');
@@ -199,8 +257,16 @@ namespace System.Web.UI.WebControls
                     memberExpression = Expression.Property(memberExpression, memberElement.Trim());
                 }
 
-                expression = Expression.Call(typeof(Queryable), methodName, new Type[] { source.ElementType, memberExpression.Type },
-                                new Expression[] { expression, Expression.Quote(DynamicExpression.Lambda(memberExpression, parameter)) });
+                expression = Expression.Call(
+                    typeof(Queryable),
+                    methodName,
+                    new Type[] { source.ElementType, memberExpression.Type },
+                    new Expression[]
+                    {
+                        expression,
+                        Expression.Quote(DynamicExpression.Lambda(memberExpression, parameter)),
+                    }
+                );
             }
 
             return source.Provider.CreateQuery(expression);
@@ -249,7 +315,10 @@ namespace System.Web.UI.WebControls
 
             foreach (EdmProperty property in propertyCollection)
             {
-                if (keyMemberNames.Contains(property.Name) && EntityDataSourceUtil.IsScalar(property.TypeUsage.EdmType))
+                if (
+                    keyMemberNames.Contains(property.Name)
+                    && EntityDataSourceUtil.IsScalar(property.TypeUsage.EdmType)
+                )
                 {
                     if (0 < orderByBuilder.Length)
                     {
@@ -257,7 +326,9 @@ namespace System.Web.UI.WebControls
                     }
                     orderByBuilder.Append(EntityDataSourceUtil.EntitySqlElementAlias);
                     orderByBuilder.Append(".");
-                    orderByBuilder.Append(EntityDataSourceUtil.QuoteEntitySqlIdentifier(property.Name));
+                    orderByBuilder.Append(
+                        EntityDataSourceUtil.QuoteEntitySqlIdentifier(property.Name)
+                    );
                 }
             }
             return orderByBuilder.ToString();

@@ -36,7 +36,10 @@ namespace System.Tests
             var att = new AllowPartiallyTrustedCallersAttribute();
             att.PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault;
 
-            Assert.Equal(PartialTrustVisibilityLevel.NotVisibleByDefault, att.PartialTrustVisibilityLevel);
+            Assert.Equal(
+                PartialTrustVisibilityLevel.NotVisibleByDefault,
+                att.PartialTrustVisibilityLevel
+            );
         }
 
         [Fact]

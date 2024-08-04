@@ -28,8 +28,7 @@ internal abstract class ForkingSyntaxEditorBasedCodeFixProvider<TDiagnosticNode>
     private readonly string _title;
     private readonly string _equivalenceKey;
 
-    protected ForkingSyntaxEditorBasedCodeFixProvider(
-        string title, string equivalenceKey)
+    protected ForkingSyntaxEditorBasedCodeFixProvider(string title, string equivalenceKey)
     {
         _title = title;
         _equivalenceKey = equivalenceKey;
@@ -49,11 +48,13 @@ internal abstract class ForkingSyntaxEditorBasedCodeFixProvider<TDiagnosticNode>
         CodeActionOptionsProvider fallbackOptions,
         TDiagnosticNode diagnosticNode,
         ImmutableDictionary<string, string?> properties,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken
+    );
 
     protected sealed override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic)
         // Never try to fix the secondary diagnostics that were produced just to fade out code.
-        => !diagnostic.Descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.Unnecessary);
+        =>
+        !diagnostic.Descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.Unnecessary);
 
     public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
     {
@@ -66,15 +67,19 @@ internal abstract class ForkingSyntaxEditorBasedCodeFixProvider<TDiagnosticNode>
         ImmutableArray<Diagnostic> diagnostics,
         SyntaxEditor editor,
         CodeActionOptionsProvider fallbackOptions,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var originalRoot = editor.OriginalRoot;
 
         var originalNodes = new Stack<(TDiagnosticNode diagnosticNode, Diagnostic diagnostic)>();
         foreach (var diagnostic in diagnostics)
         {
-            var diagnosticNode = (TDiagnosticNode)originalRoot.FindNode(
-                diagnostic.AdditionalLocations[0].SourceSpan, getInnermostNodeForTie: true);
+            var diagnosticNode = (TDiagnosticNode)
+                originalRoot.FindNode(
+                    diagnostic.AdditionalLocations[0].SourceSpan,
+                    getInnermostNodeForTie: true
+                );
             originalNodes.Push((diagnosticNode, diagnostic));
         }
 
@@ -82,9 +87,14 @@ internal abstract class ForkingSyntaxEditorBasedCodeFixProvider<TDiagnosticNode>
 
         // We're going to be continually editing this tree.  Track all the nodes we care about so we can find them
         // across each edit.
-        var semanticDocument = await SemanticDocument.CreateAsync(
-            document.WithSyntaxRoot(originalRoot.TrackNodes(originalNodes.Select(static t => t.diagnosticNode))),
-            cancellationToken).ConfigureAwait(false);
+        var semanticDocument = await SemanticDocument
+            .CreateAsync(
+                document.WithSyntaxRoot(
+                    originalRoot.TrackNodes(originalNodes.Select(static t => t.diagnosticNode))
+                ),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         while (originalNodes.Count > 0)
         {
@@ -95,19 +105,22 @@ internal abstract class ForkingSyntaxEditorBasedCodeFixProvider<TDiagnosticNode>
             var subEditor = new SyntaxEditor(currentRoot, solutionServices);
 
             await FixAsync(
-                semanticDocument.Document,
-                subEditor,
-                fallbackOptions,
-                diagnosticNode,
-                diagnostic.Properties,
-                cancellationToken).ConfigureAwait(false);
+                    semanticDocument.Document,
+                    subEditor,
+                    fallbackOptions,
+                    diagnosticNode,
+                    diagnostic.Properties,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var changedRoot = subEditor.GetChangedRoot();
             if (currentRoot == changedRoot)
                 continue;
 
-            semanticDocument = await semanticDocument.WithSyntaxRootAsync(
-                changedRoot, cancellationToken).ConfigureAwait(false);
+            semanticDocument = await semanticDocument
+                .WithSyntaxRootAsync(changedRoot, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         editor.ReplaceNode(originalRoot, semanticDocument.Root);

@@ -6,5 +6,5 @@ namespace Microsoft.DotNet.OpenApi;
 public enum CodeGenerator
 {
     NSwagCSharp,
-    NSwagTypeScript
+    NSwagTypeScript,
 }

@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -13,16 +13,17 @@
 namespace System
 {
     using System;
-    using System.Runtime.Serialization;
-    using System.Security;
+    using System.Diagnostics.Contracts;
     using System.Runtime;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Security;
 
     [Serializable]
     // This class is sealed to mitigate security issues caused by Object::MemberwiseClone.
-    public sealed class WeakReference<T> : ISerializable where T : class
+    public sealed class WeakReference<T> : ISerializable
+        where T : class
     {
         // If you fix bugs here, please fix them in WeakReference at the same time.
 
@@ -33,9 +34,7 @@ namespace System
         // Assumes a Short Weak Reference (ie TrackResurrection is false.)
         //
         public WeakReference(T target)
-            : this(target, false)
-        {
-        }
+            : this(target, false) { }
 
         //Creates a new WeakReference that keeps track of target.
         //
@@ -46,7 +45,8 @@ namespace System
 
         internal WeakReference(SerializationInfo info, StreamingContext context)
         {
-            if (info == null) {
+            if (info == null)
+            {
                 throw new ArgumentNullException("info");
             }
             Contract.EndContractBlock();
@@ -105,7 +105,8 @@ namespace System
         [SecurityCritical]
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (info == null) {
+            if (info == null)
+            {
                 throw new ArgumentNullException("info");
             }
             Contract.EndContractBlock();

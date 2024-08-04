@@ -19,7 +19,8 @@ internal sealed class RequestCookieCollection : IRequestCookieCollection
     private static readonly string[] EmptyKeys = Array.Empty<string>();
 
     // Pre-box
-    private static readonly IEnumerator<KeyValuePair<string, string>> EmptyIEnumeratorType = default(Enumerator);
+    private static readonly IEnumerator<KeyValuePair<string, string>> EmptyIEnumeratorType =
+        default(Enumerator);
     private static readonly IEnumerator EmptyIEnumerator = default(Enumerator);
 
     private AdaptiveCapacityDictionary<string, string> Store { get; set; }
@@ -31,7 +32,10 @@ internal sealed class RequestCookieCollection : IRequestCookieCollection
 
     public RequestCookieCollection(int capacity)
     {
-        Store = new AdaptiveCapacityDictionary<string, string>(capacity, StringComparer.OrdinalIgnoreCase);
+        Store = new AdaptiveCapacityDictionary<string, string>(
+            capacity,
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     // For tests
@@ -145,7 +149,9 @@ internal sealed class RequestCookieCollection : IRequestCookieCollection
     /// Returns an enumerator that iterates through a collection, boxes in non-empty path.
     /// </summary>
     /// <returns>An <see cref="IEnumerator{T}" /> object that can be used to iterate through the collection.</returns>
-    IEnumerator<KeyValuePair<string, string>> IEnumerable<KeyValuePair<string, string>>.GetEnumerator()
+    IEnumerator<KeyValuePair<string, string>> IEnumerable<
+        KeyValuePair<string, string>
+    >.GetEnumerator()
     {
         if (Store == null || Store.Count == 0)
         {
@@ -177,7 +183,9 @@ internal sealed class RequestCookieCollection : IRequestCookieCollection
         private AdaptiveCapacityDictionary<string, string>.Enumerator _dictionaryEnumerator;
         private readonly bool _notEmpty;
 
-        internal Enumerator(AdaptiveCapacityDictionary<string, string>.Enumerator dictionaryEnumerator)
+        internal Enumerator(
+            AdaptiveCapacityDictionary<string, string>.Enumerator dictionaryEnumerator
+        )
         {
             _dictionaryEnumerator = dictionaryEnumerator;
             _notEmpty = true;
@@ -207,15 +215,10 @@ internal sealed class RequestCookieCollection : IRequestCookieCollection
 
         object IEnumerator.Current
         {
-            get
-            {
-                return Current;
-            }
+            get { return Current; }
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public void Reset()
         {

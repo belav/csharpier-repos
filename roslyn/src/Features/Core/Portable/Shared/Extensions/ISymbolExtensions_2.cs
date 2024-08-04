@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         return Glyph.EnumMemberPublic;
                     }
 
-                    publicIcon = ((IFieldSymbol)symbol).IsConst ? Glyph.ConstantPublic : Glyph.FieldPublic;
+                    publicIcon = ((IFieldSymbol)symbol).IsConst
+                        ? Glyph.ConstantPublic
+                        : Glyph.FieldPublic;
                     break;
 
                 case SymbolKind.Label:
@@ -54,55 +56,63 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
                 case SymbolKind.NamedType:
                 case SymbolKind.ErrorType:
+                {
+                    switch (((INamedTypeSymbol)symbol).TypeKind)
                     {
-                        switch (((INamedTypeSymbol)symbol).TypeKind)
-                        {
-                            case TypeKind.Class:
-                                publicIcon = Glyph.ClassPublic;
-                                break;
+                        case TypeKind.Class:
+                            publicIcon = Glyph.ClassPublic;
+                            break;
 
-                            case TypeKind.Delegate:
-                                publicIcon = Glyph.DelegatePublic;
-                                break;
+                        case TypeKind.Delegate:
+                            publicIcon = Glyph.DelegatePublic;
+                            break;
 
-                            case TypeKind.Enum:
-                                publicIcon = Glyph.EnumPublic;
-                                break;
+                        case TypeKind.Enum:
+                            publicIcon = Glyph.EnumPublic;
+                            break;
 
-                            case TypeKind.Interface:
-                                publicIcon = Glyph.InterfacePublic;
-                                break;
+                        case TypeKind.Interface:
+                            publicIcon = Glyph.InterfacePublic;
+                            break;
 
-                            case TypeKind.Module:
-                                publicIcon = Glyph.ModulePublic;
-                                break;
+                        case TypeKind.Module:
+                            publicIcon = Glyph.ModulePublic;
+                            break;
 
-                            case TypeKind.Struct:
-                                publicIcon = Glyph.StructurePublic;
-                                break;
+                        case TypeKind.Struct:
+                            publicIcon = Glyph.StructurePublic;
+                            break;
 
-                            case TypeKind.Error:
-                                return Glyph.Error;
+                        case TypeKind.Error:
+                            return Glyph.Error;
 
-                            default:
-                                throw new ArgumentException(FeaturesResources.The_symbol_does_not_have_an_icon, nameof(symbol));
-                        }
-
-                        break;
+                        default:
+                            throw new ArgumentException(
+                                FeaturesResources.The_symbol_does_not_have_an_icon,
+                                nameof(symbol)
+                            );
                     }
+
+                    break;
+                }
 
                 case SymbolKind.Method:
                     {
                         var methodSymbol = (IMethodSymbol)symbol;
 
-                        if (methodSymbol.MethodKind is MethodKind.UserDefinedOperator or
-                            MethodKind.Conversion or
-                            MethodKind.BuiltinOperator)
+                        if (
+                            methodSymbol.MethodKind
+                            is MethodKind.UserDefinedOperator
+                                or MethodKind.Conversion
+                                or MethodKind.BuiltinOperator
+                        )
                         {
                             return Glyph.Operator;
                         }
-                        else if (methodSymbol.IsExtensionMethod ||
-                                 methodSymbol.MethodKind == MethodKind.ReducedExtension)
+                        else if (
+                            methodSymbol.IsExtensionMethod
+                            || methodSymbol.MethodKind == MethodKind.ReducedExtension
+                        )
                         {
                             publicIcon = Glyph.ExtensionMethodPublic;
                         }
@@ -121,9 +131,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     return Glyph.Assembly;
 
                 case SymbolKind.Parameter:
-                    return symbol.IsImplicitValueParameter()
-                        ? Glyph.Keyword
-                        : Glyph.Parameter;
+                    return symbol.IsImplicitValueParameter() ? Glyph.Keyword : Glyph.Parameter;
 
                 case SymbolKind.PointerType:
                     return ((IPointerTypeSymbol)symbol).PointedAtType.GetGlyph();
@@ -154,7 +162,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     return Glyph.TypeParameter;
 
                 default:
-                    throw new ArgumentException(FeaturesResources.The_symbol_does_not_have_an_icon, nameof(symbol));
+                    throw new ArgumentException(
+                        FeaturesResources.The_symbol_does_not_have_an_icon,
+                        nameof(symbol)
+                    );
             }
 
             switch (symbol.DeclaredAccessibility)
@@ -177,37 +188,90 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return publicIcon;
         }
 
-        public static ImmutableArray<TaggedText> GetDocumentationParts(this ISymbol symbol, SemanticModel semanticModel, int position, IDocumentationCommentFormattingService formatter, CancellationToken cancellationToken)
-            => formatter.Format(GetAppropriateDocumentationComment(symbol, semanticModel.Compilation, cancellationToken).SummaryText,
-                symbol, semanticModel, position, CrefFormat, cancellationToken);
+        public static ImmutableArray<TaggedText> GetDocumentationParts(
+            this ISymbol symbol,
+            SemanticModel semanticModel,
+            int position,
+            IDocumentationCommentFormattingService formatter,
+            CancellationToken cancellationToken
+        ) =>
+            formatter.Format(
+                GetAppropriateDocumentationComment(
+                    symbol,
+                    semanticModel.Compilation,
+                    cancellationToken
+                ).SummaryText,
+                symbol,
+                semanticModel,
+                position,
+                CrefFormat,
+                cancellationToken
+            );
 
         /// <summary>
         /// Returns the <see cref="DocumentationComment"/> for a symbol, even if it involves going to other symbols to find it.
         /// </summary>
-        public static DocumentationComment GetAppropriateDocumentationComment(this ISymbol symbol, Compilation compilation, CancellationToken cancellationToken)
+        public static DocumentationComment GetAppropriateDocumentationComment(
+            this ISymbol symbol,
+            Compilation compilation,
+            CancellationToken cancellationToken
+        )
         {
             symbol = symbol.OriginalDefinition;
 
             return symbol switch
             {
-                IParameterSymbol parameter => GetParameterDocumentation(parameter, compilation, cancellationToken) ?? DocumentationComment.Empty,
-                ITypeParameterSymbol typeParam => typeParam.ContainingSymbol.GetDocumentationComment(compilation, expandIncludes: true, expandInheritdoc: true, cancellationToken: cancellationToken)?.GetTypeParameter(typeParam.Name) ?? DocumentationComment.Empty,
-                IMethodSymbol method => GetMethodDocumentation(method, compilation, cancellationToken),
-                IAliasSymbol alias => alias.Target.GetDocumentationComment(compilation, expandIncludes: true, expandInheritdoc: true, cancellationToken: cancellationToken),
-                _ => symbol.GetDocumentationComment(compilation, expandIncludes: true, expandInheritdoc: true, cancellationToken: cancellationToken),
+                IParameterSymbol parameter
+                    => GetParameterDocumentation(parameter, compilation, cancellationToken)
+                        ?? DocumentationComment.Empty,
+                ITypeParameterSymbol typeParam
+                    => typeParam
+                        .ContainingSymbol.GetDocumentationComment(
+                            compilation,
+                            expandIncludes: true,
+                            expandInheritdoc: true,
+                            cancellationToken: cancellationToken
+                        )
+                        ?.GetTypeParameter(typeParam.Name) ?? DocumentationComment.Empty,
+                IMethodSymbol method
+                    => GetMethodDocumentation(method, compilation, cancellationToken),
+                IAliasSymbol alias
+                    => alias.Target.GetDocumentationComment(
+                        compilation,
+                        expandIncludes: true,
+                        expandInheritdoc: true,
+                        cancellationToken: cancellationToken
+                    ),
+                _
+                    => symbol.GetDocumentationComment(
+                        compilation,
+                        expandIncludes: true,
+                        expandInheritdoc: true,
+                        cancellationToken: cancellationToken
+                    ),
             };
         }
 
-        private static DocumentationComment? GetParameterDocumentation(IParameterSymbol parameter, Compilation compilation, CancellationToken cancellationToken)
+        private static DocumentationComment? GetParameterDocumentation(
+            IParameterSymbol parameter,
+            Compilation compilation,
+            CancellationToken cancellationToken
+        )
         {
             var containingSymbol = parameter.ContainingSymbol;
-            if (containingSymbol.ContainingSymbol.IsDelegateType() && containingSymbol is IMethodSymbol methodSymbol)
+            if (
+                containingSymbol.ContainingSymbol.IsDelegateType()
+                && containingSymbol is IMethodSymbol methodSymbol
+            )
             {
                 // There are two ways to invoke a delegate that we care about here: the Invoke()/BeginInvoke() methods. (Direct invocation is equivalent to an Invoke() call.)
                 // DynamicInvoke() takes an object array, and EndInvoke() takes a System.IAsyncResult, so we can (and should) ignore those here.
 
                 var symbolName = methodSymbol.Name;
-                if (symbolName == WellKnownMemberNames.DelegateBeginInvokeName && parameter.Ordinal >= (methodSymbol.Parameters.Length - 2))
+                if (
+                    symbolName == WellKnownMemberNames.DelegateBeginInvokeName
+                    && parameter.Ordinal >= (methodSymbol.Parameters.Length - 2)
+                )
                 {
                     // Return null (similar to DocumentationComment.GetParameterText()) for the last two implicit parameters (usually called "callback" and "@object").
                     // We can't rely on those names because they might be renamed to avoid collision with a user-defined delegate parameter of the same name,
@@ -215,7 +279,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     return null;
                 }
 
-                if (symbolName is WellKnownMemberNames.DelegateInvokeName or WellKnownMemberNames.DelegateBeginInvokeName)
+                if (
+                    symbolName
+                    is WellKnownMemberNames.DelegateInvokeName
+                        or WellKnownMemberNames.DelegateBeginInvokeName
+                )
                 {
                     // We know that containingSymbol is the [Begin]Invoke() method of a delegate type, so we need to go up a level and take the method's containing symbol (i.e. the delegate), which contains the documentation.
                     containingSymbol = containingSymbol.ContainingSymbol;
@@ -223,27 +291,50 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             // Get the comments from the original definition of the containing symbol.
-            return containingSymbol.OriginalDefinition.GetDocumentationComment(compilation, expandIncludes: true, expandInheritdoc: true, cancellationToken: cancellationToken)?.GetParameter(parameter.Name);
+            return containingSymbol
+                .OriginalDefinition.GetDocumentationComment(
+                    compilation,
+                    expandIncludes: true,
+                    expandInheritdoc: true,
+                    cancellationToken: cancellationToken
+                )
+                ?.GetParameter(parameter.Name);
         }
 
         public static Func<CancellationToken, IEnumerable<TaggedText>> GetDocumentationPartsFactory(
-            this ISymbol symbol, SemanticModel semanticModel, int position, IDocumentationCommentFormattingService formatter)
-            => c => symbol.GetDocumentationParts(semanticModel, position, formatter, cancellationToken: c);
+            this ISymbol symbol,
+            SemanticModel semanticModel,
+            int position,
+            IDocumentationCommentFormattingService formatter
+        ) =>
+            c =>
+                symbol.GetDocumentationParts(
+                    semanticModel,
+                    position,
+                    formatter,
+                    cancellationToken: c
+                );
 
         public static readonly SymbolDisplayFormat CrefFormat =
             new(
                 globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
                 propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters | SymbolDisplayMemberOptions.IncludeExplicitInterface | SymbolDisplayMemberOptions.IncludeContainingType,
-                parameterOptions:
-                    SymbolDisplayParameterOptions.IncludeParamsRefOut |
-                    SymbolDisplayParameterOptions.IncludeType,
-                miscellaneousOptions:
-                    SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers |
-                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeVariance,
+                memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                    | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                    | SymbolDisplayMemberOptions.IncludeContainingType,
+                parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
+                    | SymbolDisplayParameterOptions.IncludeType,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
-        private static DocumentationComment GetMethodDocumentation(this IMethodSymbol method, Compilation compilation, CancellationToken cancellationToken)
+        private static DocumentationComment GetMethodDocumentation(
+            this IMethodSymbol method,
+            Compilation compilation,
+            CancellationToken cancellationToken
+        )
         {
             switch (method.MethodKind)
             {
@@ -252,9 +343,19 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 case MethodKind.EventRemove:
                 case MethodKind.PropertyGet:
                 case MethodKind.PropertySet:
-                    return method.AssociatedSymbol?.GetDocumentationComment(compilation, expandIncludes: true, expandInheritdoc: true, cancellationToken: cancellationToken) ?? DocumentationComment.Empty;
+                    return method.AssociatedSymbol?.GetDocumentationComment(
+                            compilation,
+                            expandIncludes: true,
+                            expandInheritdoc: true,
+                            cancellationToken: cancellationToken
+                        ) ?? DocumentationComment.Empty;
                 default:
-                    return method.GetDocumentationComment(compilation, expandIncludes: true, expandInheritdoc: true, cancellationToken: cancellationToken);
+                    return method.GetDocumentationComment(
+                        compilation,
+                        expandIncludes: true,
+                        expandInheritdoc: true,
+                        cancellationToken: cancellationToken
+                    );
             }
         }
     }

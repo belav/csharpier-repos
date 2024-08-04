@@ -15,13 +15,21 @@ namespace System.IO
             _asDirectory = this is DirectoryInfo;
         }
 
-        internal static FileSystemInfo Create(string fullPath, string fileName, bool asDirectory, ref FileStatus fileStatus)
+        internal static FileSystemInfo Create(
+            string fullPath,
+            string fileName,
+            bool asDirectory,
+            ref FileStatus fileStatus
+        )
         {
             FileSystemInfo info = asDirectory
                 ? new DirectoryInfo(fullPath, fileName: fileName, isNormalized: true)
                 : new FileInfo(fullPath, fileName: fileName, isNormalized: true);
 
-            Debug.Assert(!PathInternal.IsPartiallyQualified(fullPath), $"'{fullPath}' should be fully qualified when constructed from directory enumeration");
+            Debug.Assert(
+                !PathInternal.IsPartiallyQualified(fullPath),
+                $"'{fullPath}' should be fully qualified when constructed from directory enumeration"
+            );
 
             info.Init(ref fileStatus);
             return info;

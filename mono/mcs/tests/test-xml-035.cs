@@ -7,11 +7,10 @@ using System.Xml;
 /// <see cref="DataSet.ReadXml(XmlReader,XmlReadMode)" />
 /// <see cref="Environment.GetFolderPath(Environment.SpecialFolder)" />
 /// </summary>
-public class Test {
-	/// <summary>
-	/// <see cref="Environment.SpecialFolder" />
-	/// </summary>
-	public static void Main() {
-	}
+public class Test
+{
+    /// <summary>
+    /// <see cref="Environment.SpecialFolder" />
+    /// </summary>
+    public static void Main() { }
 }
-

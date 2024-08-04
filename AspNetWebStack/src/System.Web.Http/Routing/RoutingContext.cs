@@ -10,7 +10,10 @@ namespace System.Web.Http.Routing
     /// </summary>
     internal class RoutingContext
     {
-        private static readonly RoutingContext CachedInvalid = new RoutingContext() { IsValid = false };
+        private static readonly RoutingContext CachedInvalid = new RoutingContext()
+        {
+            IsValid = false,
+        };
 
         public static RoutingContext Invalid()
         {
@@ -19,27 +22,13 @@ namespace System.Web.Http.Routing
 
         public static RoutingContext Valid(List<string> pathSegments)
         {
-            return new RoutingContext()
-            {
-                PathSegments = pathSegments,
-                IsValid = true,
-            };
+            return new RoutingContext() { PathSegments = pathSegments, IsValid = true };
         }
 
-        private RoutingContext()
-        {
-        }
+        private RoutingContext() { }
 
-        public bool IsValid
-        {
-            get;
-            private set;
-        }
+        public bool IsValid { get; private set; }
 
-        public List<string> PathSegments
-        {
-            get;
-            private set;
-        }
+        public List<string> PathSegments { get; private set; }
     }
 }

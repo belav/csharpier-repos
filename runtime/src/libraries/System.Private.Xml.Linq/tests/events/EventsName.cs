@@ -10,10 +10,16 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
 {
     public class EventsXElementName
     {
-        public static object[][] ExecuteXElementVariationParams = new object[][] {
+        public static object[][] ExecuteXElementVariationParams = new object[][]
+        {
             new object[] { new XElement("element"), (XName)"newName" },
-            new object[] { new XElement("parent", new XElement("child", "child text")), (XName)"{b}newName" },
+            new object[]
+            {
+                new XElement("parent", new XElement("child", "child text")),
+                (XName)"{b}newName",
+            },
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XElement toChange, XName newName)
         {
@@ -24,8 +30,14 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 using (EventsHelper eHelper = new EventsHelper(toChange))
                 {
                     toChange.Name = newName;
-                    Assert.True(newName.Namespace == toChange.Name.Namespace, "Namespace did not change");
-                    Assert.True(newName.LocalName == toChange.Name.LocalName, "LocalName did not change");
+                    Assert.True(
+                        newName.Namespace == toChange.Name.Namespace,
+                        "Namespace did not change"
+                    );
+                    Assert.True(
+                        newName.LocalName == toChange.Name.LocalName,
+                        "LocalName did not change"
+                    );
                     eHelper.Verify(XObjectChange.Name, toChange);
                 }
                 undo.Undo();
@@ -69,6 +81,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
     public class EventsSpecialCases
     {
         private static void ChangingDelegate(object sender, XObjectChangeEventArgs e) { }
+
         private static void ChangedDelegate(object sender, XObjectChangeEventArgs e) { }
 
         [Fact]
@@ -127,10 +140,11 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
         {
             XElement element = XElement.Parse("<root></root>");
             element.Changing += new EventHandler<XObjectChangeEventArgs>(
-                delegate (object sender, XObjectChangeEventArgs e)
+                delegate(object sender, XObjectChangeEventArgs e)
                 {
                     element.Changed += new EventHandler<XObjectChangeEventArgs>(ChangedDelegate);
-                });
+                }
+            );
 
             element.Add(new XElement("Add", "Me"));
             element.Verify();
@@ -155,7 +169,9 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
         [Fact]
         public void AttachListenersAtEachLevelNestedElementsXElementAttachAtEachLevel()
         {
-            XDocument xDoc = new XDocument(XElement.Parse(@"<a>a<b>b<c>c<d>c<e>e<f>f</f></e></d></c></b></a>"));
+            XDocument xDoc = new XDocument(
+                XElement.Parse(@"<a>a<b>b<c>c<d>c<e>e<f>f</f></e></d></c></b></a>")
+            );
             EventsHelper[] listeners = new EventsHelper[xDoc.Descendants().Count()];
 
             int i = 0;
@@ -180,18 +196,25 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             XElement toChange = xDoc.Descendants().ElementAt(5);
 
             xDoc.Changing += new EventHandler<XObjectChangeEventArgs>(
-                delegate (object sender, XObjectChangeEventArgs e)
+                delegate(object sender, XObjectChangeEventArgs e)
                 {
-                    throw new InvalidOperationException("This should be propagated and operation should be aborted");
-                });
+                    throw new InvalidOperationException(
+                        "This should be propagated and operation should be aborted"
+                    );
+                }
+            );
 
             xDoc.Changed += new EventHandler<XObjectChangeEventArgs>(
-               delegate (object sender, XObjectChangeEventArgs e)
-               {
-                   // This should never be called
-               });
+                delegate(object sender, XObjectChangeEventArgs e)
+                {
+                    // This should never be called
+                }
+            );
 
-            Assert.Throws<InvalidOperationException>(() => { toChange.Add(new XElement("Add", "Me")); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                toChange.Add(new XElement("Add", "Me"));
+            });
             xDoc.Root.Verify();
             Assert.Null(toChange.Element("Add"));
         }
@@ -203,18 +226,25 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             XElement toChange = xDoc.Descendants().ElementAt(5);
 
             xDoc.Changing += new EventHandler<XObjectChangeEventArgs>(
-                delegate (object sender, XObjectChangeEventArgs e)
+                delegate(object sender, XObjectChangeEventArgs e)
                 {
                     // Do nothing
-                });
+                }
+            );
 
             xDoc.Changed += new EventHandler<XObjectChangeEventArgs>(
-               delegate (object sender, XObjectChangeEventArgs e)
-               {
-                   throw new InvalidOperationException("This should be propagated and operation should perform");
-               });
+                delegate(object sender, XObjectChangeEventArgs e)
+                {
+                    throw new InvalidOperationException(
+                        "This should be propagated and operation should perform"
+                    );
+                }
+            );
 
-            Assert.Throws<InvalidOperationException>(() => { toChange.Add(new XElement("Add", "Me")); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                toChange.Add(new XElement("Add", "Me"));
+            });
             xDoc.Root.Verify();
             Assert.NotNull(toChange.Element("Add"));
         }

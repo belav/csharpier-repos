@@ -13,8 +13,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 /// </summary>
 public class SqlServerDateTimeMemberTranslator : IMemberTranslator
 {
-    private static readonly Dictionary<string, string> DatePartMapping
-        = new()
+    private static readonly Dictionary<string, string> DatePartMapping =
+        new()
         {
             { nameof(DateTime.Year), "year" },
             { nameof(DateTime.Month), "month" },
@@ -23,7 +23,7 @@ public class SqlServerDateTimeMemberTranslator : IMemberTranslator
             { nameof(DateTime.Hour), "hour" },
             { nameof(DateTime.Minute), "minute" },
             { nameof(DateTime.Second), "second" },
-            { nameof(DateTime.Millisecond), "millisecond" }
+            { nameof(DateTime.Millisecond), "millisecond" },
         };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -37,7 +37,8 @@ public class SqlServerDateTimeMemberTranslator : IMemberTranslator
     /// </summary>
     public SqlServerDateTimeMemberTranslator(
         ISqlExpressionFactory sqlExpressionFactory,
-        IRelationalTypeMappingSource typeMappingSource)
+        IRelationalTypeMappingSource typeMappingSource
+    )
     {
         _sqlExpressionFactory = sqlExpressionFactory;
         _typeMappingSource = typeMappingSource;
@@ -53,12 +54,12 @@ public class SqlServerDateTimeMemberTranslator : IMemberTranslator
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         var declaringType = member.DeclaringType;
 
-        if (declaringType == typeof(DateTime)
-            || declaringType == typeof(DateTimeOffset))
+        if (declaringType == typeof(DateTime) || declaringType == typeof(DateTimeOffset))
         {
             var memberName = member.Name;
 
@@ -69,7 +70,8 @@ public class SqlServerDateTimeMemberTranslator : IMemberTranslator
                     new[] { _sqlExpressionFactory.Fragment(datePart), instance! },
                     nullable: true,
                     argumentsPropagateNullability: new[] { false, true },
-                    returnType);
+                    returnType
+                );
             }
 
             switch (memberName)
@@ -83,7 +85,8 @@ public class SqlServerDateTimeMemberTranslator : IMemberTranslator
                         returnType,
                         declaringType == typeof(DateTime)
                             ? instance!.TypeMapping
-                            : _typeMappingSource.FindMapping(typeof(DateTime)));
+                            : _typeMappingSource.FindMapping(typeof(DateTime))
+                    );
 
                 case nameof(DateTime.TimeOfDay):
                     return _sqlExpressionFactory.Function(
@@ -91,7 +94,8 @@ public class SqlServerDateTimeMemberTranslator : IMemberTranslator
                         new[] { _sqlExpressionFactory.Fragment("time"), instance! },
                         nullable: true,
                         argumentsPropagateNullability: new[] { false, true },
-                        returnType);
+                        returnType
+                    );
 
                 case nameof(DateTime.Now):
                     return _sqlExpressionFactory.Function(
@@ -99,7 +103,8 @@ public class SqlServerDateTimeMemberTranslator : IMemberTranslator
                         Enumerable.Empty<SqlExpression>(),
                         nullable: false,
                         argumentsPropagateNullability: Enumerable.Empty<bool>(),
-                        returnType);
+                        returnType
+                    );
 
                 case nameof(DateTime.UtcNow):
                     var serverTranslation = _sqlExpressionFactory.Function(
@@ -107,7 +112,8 @@ public class SqlServerDateTimeMemberTranslator : IMemberTranslator
                         Enumerable.Empty<SqlExpression>(),
                         nullable: false,
                         argumentsPropagateNullability: Enumerable.Empty<bool>(),
-                        returnType);
+                        returnType
+                    );
 
                     return declaringType == typeof(DateTime)
                         ? serverTranslation
@@ -124,11 +130,13 @@ public class SqlServerDateTimeMemberTranslator : IMemberTranslator
                                 Enumerable.Empty<SqlExpression>(),
                                 nullable: false,
                                 argumentsPropagateNullability: Enumerable.Empty<bool>(),
-                                typeof(DateTime))
+                                typeof(DateTime)
+                            ),
                         },
                         nullable: true,
                         argumentsPropagateNullability: new[] { false, true },
-                        returnType);
+                        returnType
+                    );
             }
         }
 

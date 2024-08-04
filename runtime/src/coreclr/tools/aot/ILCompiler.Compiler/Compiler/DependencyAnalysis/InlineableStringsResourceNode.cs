@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysisFramework;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
@@ -51,27 +50,53 @@ namespace ILCompiler.DependencyAnalysis
             if (resourceName != resourceName1 && resourceName != resourceName2)
                 return false;
 
-            MetadataType srType = module.GetType(ResourceAccessorTypeNamespace, ResourceAccessorTypeName, throwIfNotFound: false);
+            MetadataType srType = module.GetType(
+                ResourceAccessorTypeNamespace,
+                ResourceAccessorTypeName,
+                throwIfNotFound: false
+            );
             if (srType == null)
                 return false;
 
             return srType.GetMethod(ResourceAccessorGetStringMethodName, null) != null;
         }
 
-        public static void AddDependenciesDueToResourceStringUse(ref DependencyList dependencies, NodeFactory factory, MethodDesc method)
+        public static void AddDependenciesDueToResourceStringUse(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method
+        )
         {
-            if (method.Name == ResourceAccessorGetStringMethodName && method.OwningType is MetadataType mdType
-                && mdType.Name == ResourceAccessorTypeName && mdType.Namespace == ResourceAccessorTypeNamespace)
+            if (
+                method.Name == ResourceAccessorGetStringMethodName
+                && method.OwningType is MetadataType mdType
+                && mdType.Name == ResourceAccessorTypeName
+                && mdType.Namespace == ResourceAccessorTypeNamespace
+            )
             {
                 dependencies ??= new DependencyList();
-                dependencies.Add(factory.InlineableStringResource((EcmaModule)mdType.Module), "Using the System.SR class");
+                dependencies.Add(
+                    factory.InlineableStringResource((EcmaModule)mdType.Module),
+                    "Using the System.SR class"
+                );
             }
         }
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory context) => null;
-        public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory context) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory context) => null;
-        protected override string GetName(NodeFactory context)
-            => $"String resources for {_module.Assembly.GetName().Name}";
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory context
+        ) => null;
+
+        public override IEnumerable<DependencyListEntry> GetStaticDependencies(
+            NodeFactory context
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory context
+        ) => null;
+
+        protected override string GetName(NodeFactory context) =>
+            $"String resources for {_module.Assembly.GetName().Name}";
     }
 }

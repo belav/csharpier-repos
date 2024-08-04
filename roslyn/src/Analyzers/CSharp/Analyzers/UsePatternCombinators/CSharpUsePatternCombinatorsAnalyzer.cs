@@ -8,8 +8,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
 {
-    using static BinaryOperatorKind;
     using static AnalyzedPattern;
+    using static BinaryOperatorKind;
 
     internal static class CSharpUsePatternCombinatorsAnalyzer
     {
@@ -47,10 +47,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 case IBinaryOperation { OperatorKind: NotEquals } op:
                     return Not.TryCreate(ParseConstantPattern(op));
 
-                case IBinaryOperation { OperatorKind: ConditionalOr, Syntax: BinaryExpressionSyntax syntax } op:
+                case IBinaryOperation
+                {
+                    OperatorKind: ConditionalOr,
+                    Syntax: BinaryExpressionSyntax syntax
+                } op:
                     return ParseBinaryPattern(op, isDisjunctive: true, syntax.OperatorToken);
 
-                case IBinaryOperation { OperatorKind: ConditionalAnd, Syntax: BinaryExpressionSyntax syntax } op:
+                case IBinaryOperation
+                {
+                    OperatorKind: ConditionalAnd,
+                    Syntax: BinaryExpressionSyntax syntax
+                } op:
                     return ParseBinaryPattern(op, isDisjunctive: false, syntax.OperatorToken);
 
                 case IBinaryOperation op when IsRelationalOperator(op.OperatorKind):
@@ -72,7 +80,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             return null;
         }
 
-        private static AnalyzedPattern? ParseBinaryPattern(IBinaryOperation op, bool isDisjunctive, SyntaxToken token)
+        private static AnalyzedPattern? ParseBinaryPattern(
+            IBinaryOperation op,
+            bool isDisjunctive,
+            SyntaxToken token
+        )
         {
             var leftPattern = ParsePattern(op.LeftOperand);
             if (leftPattern is null)
@@ -106,7 +118,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                     => new Relational(Flip(op.OperatorKind), left, op.RightOperand),
                 ConstantResult.Right when op.RightOperand.Syntax is ExpressionSyntax right
                     => new Relational(op.OperatorKind, right, op.LeftOperand),
-                _ => null
+                _ => null,
             };
         }
 
@@ -118,7 +130,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                     => new Constant(left, op.RightOperand),
                 ConstantResult.Right when op.RightOperand.Syntax is ExpressionSyntax right
                     => new Constant(right, op.LeftOperand),
-                _ => null
+                _ => null,
             };
         }
 
@@ -152,7 +164,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 LessThanOrEqual => GreaterThanOrEqual,
                 GreaterThanOrEqual => LessThanOrEqual,
                 GreaterThan => LessThan,
-                var v => throw ExceptionUtilities.UnexpectedValue(v)
+                var v => throw ExceptionUtilities.UnexpectedValue(v),
             };
         }
 

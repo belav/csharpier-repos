@@ -14,7 +14,12 @@ public interface IMutableStoredProcedure : IReadOnlyStoredProcedure, IMutableAnn
     /// <summary>
     ///     Gets or sets the name of the stored procedure in the database.
     /// </summary>
-    new string? Name { get; [param: NotNull] set; }
+    new string? Name
+    {
+        get;
+        [param: NotNull]
+        set;
+    }
 
     /// <summary>
     ///     Gets or sets the schema of the stored procedure in the database.

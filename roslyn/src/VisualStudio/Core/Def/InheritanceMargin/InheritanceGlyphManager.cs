@@ -55,7 +55,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IEditorFormatMap editorFormatMap,
             IAsynchronousOperationListener listener,
             Canvas canvas,
-            double heightAndWidthOfTheGlyph) : base(threadingContext)
+            double heightAndWidthOfTheGlyph
+        )
+            : base(threadingContext)
         {
             _workspace = workspace;
             _textView = textView;
@@ -70,7 +72,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             _heightAndWidthOfTheGlyph = heightAndWidthOfTheGlyph;
             _editorFormatMap.FormatMappingChanged += FormatMappingChanged;
 
-            _glyphDataTree = new SimpleIntervalTree<GlyphData, GlyphDataIntrospector>(new GlyphDataIntrospector(), values: null);
+            _glyphDataTree = new SimpleIntervalTree<GlyphData, GlyphDataIntrospector>(
+                new GlyphDataIntrospector(),
+                values: null
+            );
             UpdateBackgroundColor();
         }
 
@@ -87,7 +92,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         {
             AssertIsForeground();
             var lines = _textView.TextViewLines;
-            if (lines.IntersectsBufferSpan(span) && GetStartingLine(lines, span) is IWpfTextViewLine line)
+            if (
+                lines.IntersectsBufferSpan(span)
+                && GetStartingLine(lines, span) is IWpfTextViewLine line
+            )
             {
                 var glyph = CreateNewGlyph(tag);
                 SetTop(line, glyph);
@@ -103,7 +111,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         public void RemoveGlyphs(SnapshotSpan snapshotSpan)
         {
             AssertIsForeground();
-            var glyphDataToRemove = _glyphDataTree.GetIntervalsThatIntersectWith(snapshotSpan.Start, snapshotSpan.Length);
+            var glyphDataToRemove = _glyphDataTree.GetIntervalsThatIntersectWith(
+                snapshotSpan.Start,
+                snapshotSpan.Length
+            );
             foreach (var (_, glyph) in glyphDataToRemove)
             {
                 _glyphsContainer.Children.Remove(glyph);
@@ -122,7 +133,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         /// Refresh all the other the existing glyphs with the <paramref name="snapshot"/>.
         /// It should only be called by UI thread because UI elements are manipulated by this method.
         /// </summary>
-        public void SetSnapshotAndUpdate(ITextSnapshot snapshot, IList<ITextViewLine> newOrReformattedLines, IList<ITextViewLine> translatedLines)
+        public void SetSnapshotAndUpdate(
+            ITextSnapshot snapshot,
+            IList<ITextViewLine> newOrReformattedLines,
+            IList<ITextViewLine> translatedLines
+        )
         {
             AssertIsForeground();
             if (!_glyphDataTree.IsEmpty())
@@ -133,7 +148,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 foreach (var (span, glyph) in allGlyphData)
                 {
                     var newSpan = span.TranslateTo(snapshot, SpanTrackingMode.EdgeInclusive);
-                    if (!_textView.TextViewLines.IntersectsBufferSpan(newSpan) || GetStartingLine(newOrReformattedLines, newSpan) != null)
+                    if (
+                        !_textView.TextViewLines.IntersectsBufferSpan(newSpan)
+                        || GetStartingLine(newOrReformattedLines, newSpan) != null
+                    )
                     {
                         //Either visual is no longer visible or it crosses a line
                         //that was reformatted.
@@ -152,21 +170,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             }
         }
 
-        private void SetTop(ITextViewLine line, InheritanceMarginGlyph glyph)
-            => Canvas.SetTop(glyph, line.TextTop - _textView.ViewportTop);
+        private void SetTop(ITextViewLine line, InheritanceMarginGlyph glyph) =>
+            Canvas.SetTop(glyph, line.TextTop - _textView.ViewportTop);
 
         private static ITextViewLine? GetStartingLine(IList<ITextViewLine> lines, Span span)
         {
             if (lines.Count > 0)
             {
-                var index = lines.ToImmutableArray().BinarySearch(span.Start, CompareWithLineStartAndEnd);
+                var index = lines
+                    .ToImmutableArray()
+                    .BinarySearch(span.Start, CompareWithLineStartAndEnd);
                 if (index >= 0)
                 {
                     return lines[index];
                 }
 
                 var lastLine = lines[^1];
-                if (lastLine.EndIncludingLineBreak == lastLine.Snapshot.Length && span.Start == lastLine.EndIncludingLineBreak)
+                if (
+                    lastLine.EndIncludingLineBreak == lastLine.Snapshot.Length
+                    && span.Start == lastLine.EndIncludingLineBreak
+                )
                 {
                     // As a special case, if the last line ends at the end of the buffer and the span starts at the end of the buffer
                     // as well, treat is as crossing the last line in the buffer.
@@ -194,8 +217,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             return 0;
         }
 
-        private InheritanceMarginGlyph CreateNewGlyph(InheritanceMarginTag tag)
-            => new(
+        private InheritanceMarginGlyph CreateNewGlyph(InheritanceMarginTag tag) =>
+            new(
                 _workspace,
                 _threadingContext,
                 _streamingFindUsagesPresenter,
@@ -204,11 +227,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 _operationExecutor,
                 tag,
                 _textView,
-                _listener)
-            { Height = _heightAndWidthOfTheGlyph, Width = _heightAndWidthOfTheGlyph };
+                _listener
+            )
+            {
+                Height = _heightAndWidthOfTheGlyph,
+                Width = _heightAndWidthOfTheGlyph,
+            };
 
-        private void FormatMappingChanged(object sender, FormatItemsEventArgs e)
-            => UpdateBackgroundColor();
+        private void FormatMappingChanged(object sender, FormatItemsEventArgs e) =>
+            UpdateBackgroundColor();
 
         private void UpdateBackgroundColor()
         {
@@ -216,7 +243,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             var resourceDictionary = _editorFormatMap.GetProperties(GlyphMarginName);
             if (resourceDictionary.Contains(EditorFormatDefinition.BackgroundColorId))
             {
-                var backgroundColor = (Color)resourceDictionary[EditorFormatDefinition.BackgroundColorId];
+                var backgroundColor = (Color)
+                    resourceDictionary[EditorFormatDefinition.BackgroundColorId];
                 // Set background color for all the glyphs
                 ImageThemingUtilities.SetImageBackgroundColor(_glyphsContainer, backgroundColor);
             }

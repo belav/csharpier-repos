@@ -16,16 +16,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         where TCodeFix : CodeFixProvider, new()
     {
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.Diagnostic()"/>
-        public static DiagnosticResult Diagnostic()
-            => CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic();
+        public static DiagnosticResult Diagnostic() =>
+            CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic();
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.Diagnostic(string)"/>
-        public static DiagnosticResult Diagnostic(string diagnosticId)
-            => CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic(diagnosticId);
+        public static DiagnosticResult Diagnostic(string diagnosticId) =>
+            CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic(diagnosticId);
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.Diagnostic(DiagnosticDescriptor)"/>
-        public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor)
-            => CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic(descriptor);
+        public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor) =>
+            CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic(descriptor);
 
         /// <summary>
         /// Verify standard properties of <typeparamref name="TAnalyzer"/>.
@@ -33,37 +33,40 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         /// <remarks>
         /// This validation method is largely specific to dotnet/roslyn scenarios.
         /// </remarks>
-        public static void VerifyStandardProperty(AnalyzerProperty property)
-            => CodeFixVerifierHelper.VerifyStandardProperty(new TAnalyzer(), property);
+        public static void VerifyStandardProperty(AnalyzerProperty property) =>
+            CodeFixVerifierHelper.VerifyStandardProperty(new TAnalyzer(), property);
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyAnalyzerAsync(string, DiagnosticResult[])"/>
-        public static async Task VerifyAnalyzerAsync(string source, params DiagnosticResult[] expected)
+        public static async Task VerifyAnalyzerAsync(
+            string source,
+            params DiagnosticResult[] expected
+        )
         {
-            var test = new Test
-            {
-                TestCode = source,
-            };
+            var test = new Test { TestCode = source };
 
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync();
         }
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, string)"/>
-        public static async Task VerifyCodeFixAsync(string source, string fixedSource)
-            => await VerifyCodeFixAsync(source, DiagnosticResult.EmptyDiagnosticResults, fixedSource);
+        public static async Task VerifyCodeFixAsync(string source, string fixedSource) =>
+            await VerifyCodeFixAsync(source, DiagnosticResult.EmptyDiagnosticResults, fixedSource);
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, DiagnosticResult, string)"/>
-        public static async Task VerifyCodeFixAsync(string source, DiagnosticResult expected, string fixedSource)
-            => await VerifyCodeFixAsync(source, [expected], fixedSource);
+        public static async Task VerifyCodeFixAsync(
+            string source,
+            DiagnosticResult expected,
+            string fixedSource
+        ) => await VerifyCodeFixAsync(source, [expected], fixedSource);
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, DiagnosticResult[], string)"/>
-        public static async Task VerifyCodeFixAsync(string source, DiagnosticResult[] expected, string fixedSource)
+        public static async Task VerifyCodeFixAsync(
+            string source,
+            DiagnosticResult[] expected,
+            string fixedSource
+        )
         {
-            var test = new Test
-            {
-                TestCode = source,
-                FixedCode = fixedSource,
-            };
+            var test = new Test { TestCode = source, FixedCode = fixedSource };
 
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync();

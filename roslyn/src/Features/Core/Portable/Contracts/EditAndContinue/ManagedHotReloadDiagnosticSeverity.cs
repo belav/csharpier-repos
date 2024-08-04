@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         Warning = 1,
 
         /// <summary>
-        /// Diagnostic for a rude edit. 
+        /// Diagnostic for a rude edit.
         /// This is a less severe diagnostic and can be generally addressed by restarting the application.
         /// </summary>
         RestartRequired = 2,
@@ -24,6 +24,6 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         /// Diagnostic for a compiler error.
         /// This means we can't do anything until the error is fixed.
         /// </summary>
-        Error = 3
+        Error = 3,
     }
 }

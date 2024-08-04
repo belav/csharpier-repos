@@ -69,7 +69,9 @@ public class CorsService : ICorsService
         var origin = requestHeaders.Origin;
 
         var isOptionsRequest = HttpMethods.IsOptions(context.Request.Method);
-        var isPreflightRequest = isOptionsRequest && requestHeaders.ContainsKey(CorsConstants.AccessControlRequestMethod);
+        var isPreflightRequest =
+            isOptionsRequest
+            && requestHeaders.ContainsKey(CorsConstants.AccessControlRequestMethod);
 
         if (isOptionsRequest && !isPreflightRequest)
         {
@@ -115,14 +117,19 @@ public class CorsService : ICorsService
         // https://fetch.spec.whatwg.org/#http-new-header-syntax
         AddHeaderValues(result.AllowedExposedHeaders, policy.ExposedHeaders);
 
-        var allowedMethods = policy.AllowAnyMethod ?
-            new[] { result.IsPreflightRequest ? headers.AccessControlRequestMethod.ToString() : context.Request.Method } :
-            policy.Methods;
+        var allowedMethods = policy.AllowAnyMethod
+            ? new[]
+            {
+                result.IsPreflightRequest
+                    ? headers.AccessControlRequestMethod.ToString()
+                    : context.Request.Method,
+            }
+            : policy.Methods;
         AddHeaderValues(result.AllowedMethods, allowedMethods);
 
-        var allowedHeaders = policy.AllowAnyHeader ?
-            headers.GetCommaSeparatedValues(CorsConstants.AccessControlRequestHeaders) :
-            policy.Headers;
+        var allowedHeaders = policy.AllowAnyHeader
+            ? headers.GetCommaSeparatedValues(CorsConstants.AccessControlRequestHeaders)
+            : policy.Headers;
         AddHeaderValues(result.AllowedHeaders, allowedHeaders);
     }
 
@@ -143,7 +150,11 @@ public class CorsService : ICorsService
     /// <param name="context">The current HTTP context.</param>
     /// <param name="policy">The <see cref="CorsPolicy"/> to evaluate.</param>
     /// <param name="result">The <see cref="CorsResult"/> to set the result on.</param>
-    public virtual void EvaluatePreflightRequest(HttpContext context, CorsPolicy policy, CorsResult result)
+    public virtual void EvaluatePreflightRequest(
+        HttpContext context,
+        CorsPolicy policy,
+        CorsResult result
+    )
     {
         PopulateResult(context, policy, result);
     }
@@ -177,17 +188,25 @@ public class CorsService : ICorsService
             // `Access-Control-Allow-Methods`, `Access-Control-Allow-Headers`, `Access-Control-Max-Age`
             if (result.AllowedHeaders.Count > 0)
             {
-                headers.SetCommaSeparatedValues(CorsConstants.AccessControlAllowHeaders, result.AllowedHeaders.ToArray());
+                headers.SetCommaSeparatedValues(
+                    CorsConstants.AccessControlAllowHeaders,
+                    result.AllowedHeaders.ToArray()
+                );
             }
 
             if (result.AllowedMethods.Count > 0)
             {
-                headers.SetCommaSeparatedValues(CorsConstants.AccessControlAllowMethods, result.AllowedMethods.ToArray());
+                headers.SetCommaSeparatedValues(
+                    CorsConstants.AccessControlAllowMethods,
+                    result.AllowedMethods.ToArray()
+                );
             }
 
             if (result.PreflightMaxAge.HasValue)
             {
-                headers.AccessControlMaxAge = result.PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture);
+                headers.AccessControlMaxAge = result.PreflightMaxAge.Value.TotalSeconds.ToString(
+                    CultureInfo.InvariantCulture
+                );
             }
         }
         else
@@ -196,7 +215,10 @@ public class CorsService : ICorsService
             // `Access-Control-Expose-Headers`
             if (result.AllowedExposedHeaders.Count > 0)
             {
-                headers.SetCommaSeparatedValues(CorsConstants.AccessControlExposeHeaders, result.AllowedExposedHeaders.ToArray());
+                headers.SetCommaSeparatedValues(
+                    CorsConstants.AccessControlExposeHeaders,
+                    result.AllowedExposedHeaders.ToArray()
+                );
             }
         }
 

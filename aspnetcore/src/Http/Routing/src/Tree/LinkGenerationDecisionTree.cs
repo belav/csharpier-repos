@@ -61,16 +61,26 @@ internal sealed class LinkGenerationDecisionTree
 
         _root = DecisionTreeBuilder<OutboundMatch>.GenerateTree(
             attributedEntries,
-            new OutboundMatchClassifier());
+            new OutboundMatchClassifier()
+        );
     }
 
-    public IList<OutboundMatchResult> GetMatches(RouteValueDictionary values, RouteValueDictionary ambientValues)
+    public IList<OutboundMatchResult> GetMatches(
+        RouteValueDictionary values,
+        RouteValueDictionary ambientValues
+    )
     {
         // Perf: Avoid allocation for List if there aren't any Matches or Criteria
         if (_root.Matches.Count > 0 || _root.Criteria.Count > 0 || _conventionalEntries.Count > 0)
         {
             var results = new List<OutboundMatchResult>();
-            Walk(results, values, ambientValues ?? EmptyAmbientValues, _root, isFallbackPath: false);
+            Walk(
+                results,
+                values,
+                ambientValues ?? EmptyAmbientValues,
+                _root,
+                isFallbackPath: false
+            );
             ProcessConventionalEntries(results);
             results.Sort(OutboundMatchResultComparer.Instance);
             return results;
@@ -109,7 +119,8 @@ internal sealed class LinkGenerationDecisionTree
         RouteValueDictionary values,
         RouteValueDictionary ambientValues,
         DecisionTreeNode<OutboundMatch> node,
-        bool isFallbackPath)
+        bool isFallbackPath
+    )
     {
         // Any entries in node.Matches have had all their required values satisfied, so add them
         // to the results.
@@ -142,8 +153,10 @@ internal sealed class LinkGenerationDecisionTree
                 // if an ambient value was supplied. The path explored with the empty value is considered
                 // the fallback path.
                 DecisionTreeNode<OutboundMatch> branch;
-                if (ambientValues.TryGetValue(key, out value) &&
-                    !criterion.Branches.Comparer.Equals(value, string.Empty))
+                if (
+                    ambientValues.TryGetValue(key, out value)
+                    && !criterion.Branches.Comparer.Equals(value, string.Empty)
+                )
                 {
                     if (criterion.Branches.TryGetValue(value, out branch))
                     {
@@ -173,7 +186,9 @@ internal sealed class LinkGenerationDecisionTree
 
         public IDictionary<string, DecisionCriterionValue> GetCriteria(OutboundMatch item)
         {
-            var results = new Dictionary<string, DecisionCriterionValue>(StringComparer.OrdinalIgnoreCase);
+            var results = new Dictionary<string, DecisionCriterionValue>(
+                StringComparer.OrdinalIgnoreCase
+            );
             foreach (var kvp in item.Entry.RequiredLinkValues)
             {
                 results.Add(kvp.Key, new DecisionCriterionValue(kvp.Value ?? string.Empty));
@@ -185,7 +200,8 @@ internal sealed class LinkGenerationDecisionTree
 
     private sealed class OutboundMatchResultComparer : IComparer<OutboundMatchResult>
     {
-        public static readonly OutboundMatchResultComparer Instance = new OutboundMatchResultComparer();
+        public static readonly OutboundMatchResultComparer Instance =
+            new OutboundMatchResultComparer();
 
         public int Compare(OutboundMatchResult x, OutboundMatchResult y)
         {
@@ -210,7 +226,8 @@ internal sealed class LinkGenerationDecisionTree
             return string.Compare(
                 x.Match.Entry.RouteTemplate.TemplateText,
                 y.Match.Entry.RouteTemplate.TemplateText,
-                StringComparison.Ordinal);
+                StringComparison.Ordinal
+            );
         }
     }
 
@@ -233,7 +250,11 @@ internal sealed class LinkGenerationDecisionTree
         }
     }
 
-    private static void FlattenTree(Stack<string> branchStack, StringBuilder sb, DecisionTreeNode<OutboundMatch> node)
+    private static void FlattenTree(
+        Stack<string> branchStack,
+        StringBuilder sb,
+        DecisionTreeNode<OutboundMatch> node
+    )
     {
         // leaf node
         if (node.Criteria.Count == 0)

@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Text;
-using System.Linq;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
 
 namespace System.Buffers.Text.Tests
 {
@@ -14,17 +14,35 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (ParserTestData<TimeSpan> testData in GeneratedParserTestDataUsingParseExact<TimeSpan>('G', TimeSpanParserBigGTestData.Concat(TimeSpanCombinatorialData), TimeSpan.TryParseExact))
+                foreach (
+                    ParserTestData<TimeSpan> testData in GeneratedParserTestDataUsingParseExact<TimeSpan>(
+                        'G',
+                        TimeSpanParserBigGTestData.Concat(TimeSpanCombinatorialData),
+                        TimeSpan.TryParseExact
+                    )
+                )
                 {
                     yield return testData;
                 }
 
-                foreach (ParserTestData<TimeSpan> testData in GeneratedParserTestDataUsingParseExact<TimeSpan>('g', TimeSpanParserLittleGTestData.Concat(TimeSpanCombinatorialData), TimeSpan.TryParseExact))
+                foreach (
+                    ParserTestData<TimeSpan> testData in GeneratedParserTestDataUsingParseExact<TimeSpan>(
+                        'g',
+                        TimeSpanParserLittleGTestData.Concat(TimeSpanCombinatorialData),
+                        TimeSpan.TryParseExact
+                    )
+                )
                 {
                     yield return testData;
                 }
 
-                foreach (ParserTestData<TimeSpan> testData in GeneratedParserTestDataUsingParseExact<TimeSpan>('c', TimeSpanParserCTestData.Concat(TimeSpanCombinatorialData), TimeSpan.TryParseExact))
+                foreach (
+                    ParserTestData<TimeSpan> testData in GeneratedParserTestDataUsingParseExact<TimeSpan>(
+                        'c',
+                        TimeSpanParserCTestData.Concat(TimeSpanCombinatorialData),
+                        TimeSpan.TryParseExact
+                    )
+                )
                 {
                     yield return testData;
                 }
@@ -40,7 +58,11 @@ namespace System.Buffers.Text.Tests
             {
                 for (int numComponents = 1; numComponents <= 6; numComponents++)
                 {
-                    for (int separatorMask = 0; separatorMask < (1 << (numComponents - 1)); separatorMask++)
+                    for (
+                        int separatorMask = 0;
+                        separatorMask < (1 << (numComponents - 1));
+                        separatorMask++
+                    )
                     {
                         StringBuilder sb = new StringBuilder();
                         for (int i = 0; i < numComponents; i++)

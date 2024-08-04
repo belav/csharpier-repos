@@ -11,8 +11,13 @@ using System.Xml;
 
 namespace System.Data
 {
-    [Designer("Microsoft.VSDesigner.Data.VS.DataViewManagerDesigner, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    public class DataViewManager : MarshalByValueComponent, IBindingList, System.ComponentModel.ITypedList
+    [Designer(
+        "Microsoft.VSDesigner.Data.VS.DataViewManagerDesigner, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
+    public class DataViewManager
+        : MarshalByValueComponent,
+            IBindingList,
+            System.ComponentModel.ITypedList
     {
         private DataViewSettingCollection _dataViewSettingsCollection;
         private DataSet? _dataSet;
@@ -22,9 +27,11 @@ namespace System.Data
 
         private static readonly NotSupportedException s_notSupported = new NotSupportedException();
 
-        public DataViewManager() : this(null, false) { }
+        public DataViewManager()
+            : this(null, false) { }
 
-        public DataViewManager(DataSet? dataSet) : this(dataSet, false) { }
+        public DataViewManager(DataSet? dataSet)
+            : this(dataSet, false) { }
 
         internal DataViewManager(DataSet? dataSet, bool locked)
         {
@@ -32,8 +39,12 @@ namespace System.Data
             _dataSet = dataSet;
             if (_dataSet != null)
             {
-                _dataSet.Tables.CollectionChanged += new CollectionChangeEventHandler(TableCollectionChanged);
-                _dataSet.Relations.CollectionChanged += new CollectionChangeEventHandler(RelationCollectionChanged);
+                _dataSet.Tables.CollectionChanged += new CollectionChangeEventHandler(
+                    TableCollectionChanged
+                );
+                _dataSet.Relations.CollectionChanged += new CollectionChangeEventHandler(
+                    RelationCollectionChanged
+                );
             }
             _locked = locked;
             _item = new DataViewManagerListItemTypeDescriptor(this);
@@ -64,13 +75,21 @@ namespace System.Data
                         throw ExceptionBuilder.CanNotSetDataSet();
                     }
 
-                    _dataSet.Tables.CollectionChanged -= new CollectionChangeEventHandler(TableCollectionChanged);
-                    _dataSet.Relations.CollectionChanged -= new CollectionChangeEventHandler(RelationCollectionChanged);
+                    _dataSet.Tables.CollectionChanged -= new CollectionChangeEventHandler(
+                        TableCollectionChanged
+                    );
+                    _dataSet.Relations.CollectionChanged -= new CollectionChangeEventHandler(
+                        RelationCollectionChanged
+                    );
                 }
 
                 _dataSet = value;
-                _dataSet.Tables.CollectionChanged += new CollectionChangeEventHandler(TableCollectionChanged);
-                _dataSet.Relations.CollectionChanged += new CollectionChangeEventHandler(RelationCollectionChanged);
+                _dataSet.Tables.CollectionChanged += new CollectionChangeEventHandler(
+                    TableCollectionChanged
+                );
+                _dataSet.Relations.CollectionChanged += new CollectionChangeEventHandler(
+                    RelationCollectionChanged
+                );
                 _dataViewSettingsCollection = new DataViewSettingCollection(this);
                 _item.Reset();
             }
@@ -93,12 +112,17 @@ namespace System.Data
                 foreach (DataTable dt in _dataSet.Tables)
                 {
                     DataViewSetting ds = _dataViewSettingsCollection[dt];
-                    builder.Append(CultureInfo.InvariantCulture, $"<{dt.EncodedTableName} Sort=\"{ds.Sort}\" RowFilter=\"{ds.RowFilter}\" RowStateFilter=\"{ds.RowStateFilter}\"/>");
+                    builder.Append(
+                        CultureInfo.InvariantCulture,
+                        $"<{dt.EncodedTableName} Sort=\"{ds.Sort}\" RowFilter=\"{ds.RowFilter}\" RowStateFilter=\"{ds.RowStateFilter}\"/>"
+                    );
                 }
                 builder.Append("</DataViewSettingCollectionString>");
                 return builder.ToString();
             }
-            [RequiresUnreferencedCode("Members of types used in the RowFilter expression might be trimmed.")]
+            [RequiresUnreferencedCode(
+                "Members of types used in the RowFilter expression might be trimmed."
+            )]
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -132,7 +156,8 @@ namespace System.Data
                     }
                     if (r.MoveToAttribute("RowStateFilter"))
                     {
-                        _dataViewSettingsCollection[table]!.RowStateFilter = Enum.Parse<DataViewRowState>(r.Value);
+                        _dataViewSettingsCollection[table]!.RowStateFilter =
+                            Enum.Parse<DataViewRowState>(r.Value);
                     }
                 }
             }
@@ -198,6 +223,7 @@ namespace System.Data
         // ------------- IBindingList: ---------------------------
 
         bool IBindingList.AllowNew => false;
+
         object IBindingList.AddNew()
         {
             throw s_notSupported;
@@ -279,7 +305,9 @@ namespace System.Data
             return string.Empty;
         }
 
-        PropertyDescriptorCollection System.ComponentModel.ITypedList.GetItemProperties(PropertyDescriptor[]? listAccessors)
+        PropertyDescriptorCollection System.ComponentModel.ITypedList.GetItemProperties(
+            PropertyDescriptor[]? listAccessors
+        )
         {
             DataSet? dataSet = DataSet;
             if (dataSet == null)
@@ -331,21 +359,44 @@ namespace System.Data
         {
             PropertyDescriptor? NullProp = null;
             OnListChanged(
-                e.Action == CollectionChangeAction.Add ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorAdded, new DataTablePropertyDescriptor((System.Data.DataTable)e.Element!)) :
-                e.Action == CollectionChangeAction.Refresh ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorChanged, NullProp) :
-                e.Action == CollectionChangeAction.Remove ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorDeleted, new DataTablePropertyDescriptor((System.Data.DataTable)e.Element!)) :
-                /*default*/ null! // TODO: This is very likely wrong
+                e.Action == CollectionChangeAction.Add
+                    ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorAdded,
+                        new DataTablePropertyDescriptor((System.Data.DataTable)e.Element!)
+                    )
+                : e.Action == CollectionChangeAction.Refresh
+                    ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorChanged, NullProp)
+                : e.Action == CollectionChangeAction.Remove
+                    ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorDeleted,
+                        new DataTablePropertyDescriptor((System.Data.DataTable)e.Element!)
+                    )
+                :
+                /*default*/null! // TODO: This is very likely wrong
             );
         }
 
-        protected virtual void RelationCollectionChanged(object? sender, CollectionChangeEventArgs e)
+        protected virtual void RelationCollectionChanged(
+            object? sender,
+            CollectionChangeEventArgs e
+        )
         {
             DataRelationPropertyDescriptor? NullProp = null;
             OnListChanged(
-                e.Action == CollectionChangeAction.Add ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorAdded, new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)) :
-                e.Action == CollectionChangeAction.Refresh ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorChanged, NullProp) :
-                e.Action == CollectionChangeAction.Remove ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorDeleted, new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)) :
-            /*default*/ null! // TODO: This is very likely wrong
+                e.Action == CollectionChangeAction.Add
+                    ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorAdded,
+                        new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
+                    )
+                : e.Action == CollectionChangeAction.Refresh
+                    ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorChanged, NullProp)
+                : e.Action == CollectionChangeAction.Remove
+                    ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorDeleted,
+                        new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
+                    )
+                :
+                /*default*/null! // TODO: This is very likely wrong
             );
         }
     }

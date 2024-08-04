@@ -1,20 +1,20 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.CommandLine.Help;
 using System.Collections.Generic;
+using System.CommandLine.Help;
 using System.CommandLine.Parsing;
 using System.IO;
 using System.IO.Compression;
 using System.Runtime.InteropServices;
-
 using Internal.TypeSystem;
 
 namespace System.CommandLine
 {
     internal sealed class CommandLineException : Exception
     {
-        public CommandLineException(string message) : base(message) { }
+        public CommandLineException(string message)
+            : base(message) { }
     }
 
     //
@@ -24,7 +24,10 @@ namespace System.CommandLine
     {
         public const string DefaultSystemModule = "System.Private.CoreLib";
 
-        public static Dictionary<string, string> BuildPathDictionary(IReadOnlyList<CliToken> tokens, bool strict)
+        public static Dictionary<string, string> BuildPathDictionary(
+            IReadOnlyList<CliToken> tokens,
+            bool strict
+        )
         {
             Dictionary<string, string> dictionary = new(StringComparer.OrdinalIgnoreCase);
 
@@ -56,7 +59,7 @@ namespace System.CommandLine
 
         public static TargetOS GetTargetOS(string token)
         {
-            if(string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token))
             {
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     return TargetOS.Windows;
@@ -81,13 +84,13 @@ namespace System.CommandLine
                 "ios" => TargetOS.iOS,
                 "tvossimulator" => TargetOS.tvOSSimulator,
                 "tvos" => TargetOS.tvOS,
-                _ => throw new CommandLineException($"Target OS '{token}' is not supported")
+                _ => throw new CommandLineException($"Target OS '{token}' is not supported"),
             };
         }
 
         public static TargetArchitecture GetTargetArchitecture(string token)
         {
-            if(string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token))
             {
                 return RuntimeInformation.ProcessArchitecture switch
                 {
@@ -96,7 +99,7 @@ namespace System.CommandLine
                     Architecture.Arm => TargetArchitecture.ARM,
                     Architecture.Arm64 => TargetArchitecture.ARM64,
                     Architecture.LoongArch64 => TargetArchitecture.LoongArch64,
-                    _ => throw new NotImplementedException()
+                    _ => throw new NotImplementedException(),
                 };
             }
             else
@@ -108,7 +111,10 @@ namespace System.CommandLine
                     "arm" or "armel" => TargetArchitecture.ARM,
                     "arm64" => TargetArchitecture.ARM64,
                     "loongarch64" => TargetArchitecture.LoongArch64,
-                    _ => throw new CommandLineException($"Target architecture '{token}' is not supported")
+                    _
+                        => throw new CommandLineException(
+                            $"Target architecture '{token}' is not supported"
+                        ),
                 };
             }
         }
@@ -127,7 +133,10 @@ namespace System.CommandLine
             return command;
         }
 
-        public static CliRootCommand UseExtendedHelp(this CliRootCommand command, Func<HelpContext, IEnumerable<Func<HelpContext, bool>>> customizer)
+        public static CliRootCommand UseExtendedHelp(
+            this CliRootCommand command,
+            Func<HelpContext, IEnumerable<Func<HelpContext, bool>>> customizer
+        )
         {
             foreach (CliOption option in command.Options)
             {
@@ -143,7 +152,14 @@ namespace System.CommandLine
             return command;
         }
 
-        public static void MakeReproPackage(string makeReproPath, string outputFilePath, string[] args, ParseResult res, IEnumerable<string> inputOptions, IEnumerable<string> outputOptions = null)
+        public static void MakeReproPackage(
+            string makeReproPath,
+            string outputFilePath,
+            string[] args,
+            ParseResult res,
+            IEnumerable<string> inputOptions,
+            IEnumerable<string> outputOptions = null
+        )
         {
             Directory.CreateDirectory(makeReproPath);
 
@@ -156,7 +172,13 @@ namespace System.CommandLine
             catch { }
             try
             {
-                details.Add(System.Diagnostics.FileVersionInfo.GetVersionInfo(Environment.GetCommandLineArgs()[0]).ToString());
+                details.Add(
+                    System
+                        .Diagnostics.FileVersionInfo.GetVersionInfo(
+                            Environment.GetCommandLineArgs()[0]
+                        )
+                        .ToString()
+                );
             }
             catch { }
 
@@ -203,7 +225,10 @@ namespace System.CommandLine
 
                 HashSet<string> inputOptionNames = new HashSet<string>(inputOptions);
                 Dictionary<string, string> inputToReproPackageFileName = new();
-                HashSet<string> outputOptionNames = outputOptions == null ? new HashSet<string>() : new HashSet<string>(outputOptions);
+                HashSet<string> outputOptionNames =
+                    outputOptions == null
+                        ? new HashSet<string>()
+                        : new HashSet<string>(outputOptions);
                 Dictionary<string, string> outputToReproPackageFileName = new();
 
                 List<string> rspFile = new List<string>();
@@ -233,7 +258,9 @@ namespace System.CommandLine
                                 }
                                 foreach (string inputFile in dictionary.Values)
                                 {
-                                    rspFile.Add($"{option.Name}:{ConvertFromOriginalPathToReproPackagePath(input: true, inputFile)}");
+                                    rspFile.Add(
+                                        $"{option.Name}:{ConvertFromOriginalPathToReproPackagePath(input: true, inputFile)}"
+                                    );
                                 }
                             }
                             else
@@ -252,7 +279,10 @@ namespace System.CommandLine
                                 if (outputOptionNames.Contains(option.Name))
                                 {
                                     // if output option is used, overwrite the path to the repro package
-                                    stringVal = ConvertFromOriginalPathToReproPackagePath(input: false, stringVal);
+                                    stringVal = ConvertFromOriginalPathToReproPackagePath(
+                                        input: false,
+                                        stringVal
+                                    );
                                 }
                                 rspFile.Add($"{option.Name}:{stringVal}");
                             }
@@ -280,12 +310,16 @@ namespace System.CommandLine
 
                         foreach (string optInList in values)
                         {
-                            rspFile.Add($"{ConvertFromOriginalPathToReproPackagePath(input: true, optInList)}");
+                            rspFile.Add(
+                                $"{ConvertFromOriginalPathToReproPackagePath(input: true, optInList)}"
+                            );
                         }
                     }
                     else
                     {
-                        rspFile.Add($"{ConvertFromOriginalPathToReproPackagePath(input: true, (string)val)}");
+                        rspFile.Add(
+                            $"{ConvertFromOriginalPathToReproPackagePath(input: true, (string)val)}"
+                        );
                     }
                 }
 
@@ -298,8 +332,15 @@ namespace System.CommandLine
 
                 string ConvertFromOriginalPathToReproPackagePath(bool input, string originalPath)
                 {
-                    var originalToReproPackageFileName = input ? inputToReproPackageFileName : outputToReproPackageFileName;
-                    if (originalToReproPackageFileName.TryGetValue(originalPath, out string reproPackagePath))
+                    var originalToReproPackageFileName = input
+                        ? inputToReproPackageFileName
+                        : outputToReproPackageFileName;
+                    if (
+                        originalToReproPackageFileName.TryGetValue(
+                            originalPath,
+                            out string reproPackagePath
+                        )
+                    )
                     {
                         return reproPackagePath;
                     }
@@ -307,8 +348,14 @@ namespace System.CommandLine
                     try
                     {
                         string prefix = input ? string.Empty : "out_"; // prefix output directories for clarity
-                        string reproFileDir = prefix + originalToReproPackageFileName.Count.ToString() + Path.DirectorySeparatorChar;
-                        reproPackagePath = Path.Combine(reproFileDir, Path.GetFileName(originalPath));
+                        string reproFileDir =
+                            prefix
+                            + originalToReproPackageFileName.Count.ToString()
+                            + Path.DirectorySeparatorChar;
+                        reproPackagePath = Path.Combine(
+                            reproFileDir,
+                            Path.GetFileName(originalPath)
+                        );
                         if (!input)
                             archive.CreateEntry(reproFileDir); // for outputs just create output directory
                         else
@@ -326,7 +373,11 @@ namespace System.CommandLine
         }
 
         // Helper to create a collection of paths unique in their simple names.
-        private static void AppendExpandedPaths(Dictionary<string, string> dictionary, string pattern, bool strict)
+        private static void AppendExpandedPaths(
+            Dictionary<string, string> dictionary,
+            string pattern,
+            bool strict
+        )
         {
             bool empty = true;
             string directoryName = Path.GetDirectoryName(pattern);
@@ -347,8 +398,12 @@ namespace System.CommandLine
                     {
                         if (strict)
                         {
-                            throw new CommandLineException("Multiple input files matching same simple name " +
-                                fullFileName + " " + otherFullFileName);
+                            throw new CommandLineException(
+                                "Multiple input files matching same simple name "
+                                    + fullFileName
+                                    + " "
+                                    + otherFullFileName
+                            );
                         }
                     }
                     else
@@ -383,7 +438,11 @@ namespace System.CommandLine
         ///   * referencing another response file.
         ///   * inline `#` comments.
         /// </remarks>
-        public static bool TryReadResponseFile(string filePath, out IReadOnlyList<string> newTokens, out string error)
+        public static bool TryReadResponseFile(
+            string filePath,
+            out IReadOnlyList<string> newTokens,
+            out string error
+        )
         {
             try
             {
@@ -398,10 +457,17 @@ namespace System.CommandLine
                             int firstQuotePosition = token.IndexOf('"');
 
                             // strip leading and trailing quotes from value.
-                            if (firstQuotePosition >= 0 && firstQuotePosition < token.Length - 1 &&
-                                (firstQuotePosition == 0 || token[firstQuotePosition - 1] != '\\'))
+                            if (
+                                firstQuotePosition >= 0
+                                && firstQuotePosition < token.Length - 1
+                                && (
+                                    firstQuotePosition == 0 || token[firstQuotePosition - 1] != '\\'
+                                )
+                            )
                             {
-                                token = token[..firstQuotePosition] + token[(firstQuotePosition + 1)..^1];
+                                token =
+                                    token[..firstQuotePosition]
+                                    + token[(firstQuotePosition + 1)..^1];
                             }
                         }
 

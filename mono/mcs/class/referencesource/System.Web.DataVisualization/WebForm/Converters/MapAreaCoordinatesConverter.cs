@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -30,7 +30,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Overrides the CanConvertFrom method of TypeConverter.
         /// The ITypeDescriptorContext interface provides the context for the
-        /// conversion. Typically this interface is used at design time to 
+        /// conversion. Typically this interface is used at design time to
         /// provide information about the design-time container.
         /// </summary>
         /// <param name="context">Descriptor context.</param>
@@ -53,7 +53,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="culture">Culture information.</param>
         /// <param name="value">Value to convert from.</param>
         /// <returns>Indicates if convertion is possible.</returns>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             // Can convert from string where each array element is separated by comma
             string stringValue = value as string;
@@ -63,7 +67,10 @@ namespace System.Web.UI.DataVisualization.Charting
                 float[] array = new float[values.Length];
                 for (int index = 0; index < values.Length; index++)
                 {
-                    array[index] = float.Parse(values[index], System.Globalization.CultureInfo.CurrentCulture);
+                    array[index] = float.Parse(
+                        values[index],
+                        System.Globalization.CultureInfo.CurrentCulture
+                    );
                 }
 
                 return array;
@@ -82,7 +89,12 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="value">Value to convert.</param>
         /// <param name="destinationType">Convertion destination type.</param>
         /// <returns>Converted object.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(string))
             {

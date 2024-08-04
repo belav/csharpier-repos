@@ -23,7 +23,14 @@ public class PlaintextBenchmark
     [GlobalSetup]
     public void Setup()
     {
-        _server = TestServer.Create(builder => builder.UseMiddleware<PlaintextMiddleware>(), new LoggerFactory(), new IISServerOptions()).GetAwaiter().GetResult();
+        _server = TestServer
+            .Create(
+                builder => builder.UseMiddleware<PlaintextMiddleware>(),
+                new LoggerFactory(),
+                new IISServerOptions()
+            )
+            .GetAwaiter()
+            .GetResult();
         // Recreate client, TestServer.Client has additional logging that can hurt performance
         _client = new HttpClient()
         {

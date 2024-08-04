@@ -23,7 +23,8 @@ public static class OpenApiEndpointConventionBuilderExtensions
     /// </summary>
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <returns>A <see cref="IEndpointConventionBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static TBuilder WithOpenApi<TBuilder>(this TBuilder builder) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder WithOpenApi<TBuilder>(this TBuilder builder)
+        where TBuilder : IEndpointConventionBuilder
     {
         builder.Finally(builder => AddAndConfigureOperationForEndpoint(builder));
         return builder;
@@ -36,14 +37,22 @@ public static class OpenApiEndpointConventionBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="configureOperation">An <see cref="Func{T, TResult}"/> that returns a new OpenAPI annotation given a generated operation.</param>
     /// <returns>A <see cref="IEndpointConventionBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static TBuilder WithOpenApi<TBuilder>(this TBuilder builder, Func<OpenApiOperation, OpenApiOperation> configureOperation)
+    public static TBuilder WithOpenApi<TBuilder>(
+        this TBuilder builder,
+        Func<OpenApiOperation, OpenApiOperation> configureOperation
+    )
         where TBuilder : IEndpointConventionBuilder
     {
-        builder.Finally(endpointBuilder => AddAndConfigureOperationForEndpoint(endpointBuilder, configureOperation));
+        builder.Finally(endpointBuilder =>
+            AddAndConfigureOperationForEndpoint(endpointBuilder, configureOperation)
+        );
         return builder;
     }
 
-    private static void AddAndConfigureOperationForEndpoint(EndpointBuilder endpointBuilder, Func<OpenApiOperation, OpenApiOperation>? configure = null)
+    private static void AddAndConfigureOperationForEndpoint(
+        EndpointBuilder endpointBuilder,
+        Func<OpenApiOperation, OpenApiOperation>? configure = null
+    )
     {
         foreach (var item in endpointBuilder.Metadata)
         {

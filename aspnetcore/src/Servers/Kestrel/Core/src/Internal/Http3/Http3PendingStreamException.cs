@@ -5,8 +5,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
 internal sealed class Http3PendingStreamException : Exception
 {
-    public Http3PendingStreamException(string message, long streamId, Exception? innerException = null)
-        : base($"HTTP/3 stream error while trying to identify stream {streamId}: {message}", innerException)
+    public Http3PendingStreamException(
+        string message,
+        long streamId,
+        Exception? innerException = null
+    )
+        : base(
+            $"HTTP/3 stream error while trying to identify stream {streamId}: {message}",
+            innerException
+        )
     {
         StreamId = streamId;
     }

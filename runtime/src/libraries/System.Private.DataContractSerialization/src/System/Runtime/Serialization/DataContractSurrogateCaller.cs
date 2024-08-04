@@ -13,7 +13,10 @@ namespace System.Runtime.Serialization
     {
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal static Type GetDataContractType(ISerializationSurrogateProvider surrogateProvider, Type type)
+        internal static Type GetDataContractType(
+            ISerializationSurrogateProvider surrogateProvider,
+            Type type
+        )
         {
             if (DataContract.GetBuiltInDataContract(type) != null)
                 return type;
@@ -23,7 +26,12 @@ namespace System.Runtime.Serialization
         [return: NotNullIfNotNull(nameof(obj))]
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal static object? GetObjectToSerialize(ISerializationSurrogateProvider surrogateProvider, object? obj, Type objType, Type membertype)
+        internal static object? GetObjectToSerialize(
+            ISerializationSurrogateProvider surrogateProvider,
+            object? obj,
+            Type objType,
+            Type membertype
+        )
         {
             if (obj == null)
                 return null;
@@ -35,7 +43,12 @@ namespace System.Runtime.Serialization
         [return: NotNullIfNotNull(nameof(obj))]
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal static object? GetDeserializedObject(ISerializationSurrogateProvider surrogateProvider, object? obj, Type objType, Type memberType)
+        internal static object? GetDeserializedObject(
+            ISerializationSurrogateProvider surrogateProvider,
+            object? obj,
+            Type objType,
+            Type memberType
+        )
         {
             if (obj == null)
                 return null;
@@ -44,28 +57,44 @@ namespace System.Runtime.Serialization
             return surrogateProvider.GetDeserializedObject(obj, memberType);
         }
 
-        internal static object? GetCustomDataToExport(ISerializationSurrogateProvider2 surrogateProvider, MemberInfo memberInfo, Type dataContractType)
+        internal static object? GetCustomDataToExport(
+            ISerializationSurrogateProvider2 surrogateProvider,
+            MemberInfo memberInfo,
+            Type dataContractType
+        )
         {
             return surrogateProvider.GetCustomDataToExport(memberInfo, dataContractType);
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal static object? GetCustomDataToExport(ISerializationSurrogateProvider2 surrogateProvider, Type clrType, Type dataContractType)
+        internal static object? GetCustomDataToExport(
+            ISerializationSurrogateProvider2 surrogateProvider,
+            Type clrType,
+            Type dataContractType
+        )
         {
             if (DataContract.GetBuiltInDataContract(clrType) != null)
                 return null;
             return surrogateProvider.GetCustomDataToExport(clrType, dataContractType);
         }
 
-        internal static void GetKnownCustomDataTypes(ISerializationSurrogateProvider2 surrogateProvider, Collection<Type> customDataTypes)
+        internal static void GetKnownCustomDataTypes(
+            ISerializationSurrogateProvider2 surrogateProvider,
+            Collection<Type> customDataTypes
+        )
         {
             surrogateProvider.GetKnownCustomDataTypes(customDataTypes);
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal static Type? GetReferencedTypeOnImport(ISerializationSurrogateProvider2 surrogateProvider, string typeName, string typeNamespace, object? customData)
+        internal static Type? GetReferencedTypeOnImport(
+            ISerializationSurrogateProvider2 surrogateProvider,
+            string typeName,
+            string typeNamespace,
+            object? customData
+        )
         {
             if (DataContract.GetBuiltInDataContract(typeName, typeNamespace) != null)
                 return null;

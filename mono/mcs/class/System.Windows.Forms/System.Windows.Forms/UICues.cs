@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,16 +26,17 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms {
-
-	[Flags]
-	public enum UICues {
-		None		= 0x00000000,
-		ShowFocus	= 0x00000001,
-		ShowKeyboard	= 0x00000002,
-		Shown		= 0x00000003,
-		ChangeFocus	= 0x00000004,
-		ChangeKeyboard	= 0x00000008,
-		Changed		= 0x0000000C
-	}
+namespace System.Windows.Forms
+{
+    [Flags]
+    public enum UICues
+    {
+        None = 0x00000000,
+        ShowFocus = 0x00000001,
+        ShowKeyboard = 0x00000002,
+        Shown = 0x00000003,
+        ChangeFocus = 0x00000004,
+        ChangeKeyboard = 0x00000008,
+        Changed = 0x0000000C,
+    }
 }

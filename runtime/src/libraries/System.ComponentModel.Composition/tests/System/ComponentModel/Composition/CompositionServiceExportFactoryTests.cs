@@ -44,8 +44,14 @@ namespace System.ComponentModel.Composition
         [Description("Verifies CompositionServices.SatisfyImportsOne with Scoped ExportFactories")]
         public void ComposeAppInNewScopeChildrenInRoot_ShouldSucceed()
         {
-            var childCatalog = new CompositionScopeDefinition(new TypeCatalog(typeof(Foo1)), new CompositionScopeDefinition[] { });
-            var rootCatalog = new CompositionScopeDefinition(new TypeCatalog(typeof(Child)), new CompositionScopeDefinition[] { childCatalog });
+            var childCatalog = new CompositionScopeDefinition(
+                new TypeCatalog(typeof(Foo1)),
+                new CompositionScopeDefinition[] { }
+            );
+            var rootCatalog = new CompositionScopeDefinition(
+                new TypeCatalog(typeof(Child)),
+                new CompositionScopeDefinition[] { childCatalog }
+            );
 
             var cs = rootCatalog.CreateCompositionService();
             var app = new App();
@@ -68,8 +74,14 @@ namespace System.ComponentModel.Composition
         [Description("Verifies CompositionServices.SatisfyImportsOne with Scoped ExportFactories")]
         public void ComposeAppInNewScopeChildrenInScope_ShouldSucceed()
         {
-            var childCatalog = new CompositionScopeDefinition(new TypeCatalog(typeof(Foo1), typeof(Child)), new CompositionScopeDefinition[] { });
-            var rootCatalog = new CompositionScopeDefinition(new TypeCatalog(), new CompositionScopeDefinition[] { childCatalog });
+            var childCatalog = new CompositionScopeDefinition(
+                new TypeCatalog(typeof(Foo1), typeof(Child)),
+                new CompositionScopeDefinition[] { }
+            );
+            var rootCatalog = new CompositionScopeDefinition(
+                new TypeCatalog(),
+                new CompositionScopeDefinition[] { childCatalog }
+            );
 
             var cs = rootCatalog.CreateCompositionService();
             var app = new App();
@@ -92,8 +104,14 @@ namespace System.ComponentModel.Composition
         [Description("Verifies CompositionServices.SatisfyImportsOne with Scoped ExportFactories")]
         public void ComposeAppInNewScopeChildrenInBoth_ShouldSucceed()
         {
-            var childCatalog = new CompositionScopeDefinition(new TypeCatalog(typeof(Foo1), typeof(Child)), new CompositionScopeDefinition[] { });
-            var rootCatalog = new CompositionScopeDefinition(new TypeCatalog(typeof(Child)), new CompositionScopeDefinition[] { childCatalog });
+            var childCatalog = new CompositionScopeDefinition(
+                new TypeCatalog(typeof(Foo1), typeof(Child)),
+                new CompositionScopeDefinition[] { }
+            );
+            var rootCatalog = new CompositionScopeDefinition(
+                new TypeCatalog(typeof(Child)),
+                new CompositionScopeDefinition[] { childCatalog }
+            );
 
             var cs = rootCatalog.CreateCompositionService();
             var app = new App();
@@ -113,7 +131,9 @@ namespace System.ComponentModel.Composition
         }
 
         [Fact]
-        [Description("Verifies CompositionServices.SatisfyImportsOne with NonScoped ExportFactories")]
+        [Description(
+            "Verifies CompositionServices.SatisfyImportsOne with NonScoped ExportFactories"
+        )]
         public void ComposeAppInRootScope_ShouldSucceed()
         {
             var catalog = new TypeCatalog(typeof(Foo1), typeof(Child));

@@ -41,7 +41,10 @@ namespace System.DirectoryServices.Protocols.Tests
             var attribute2 = new DirectoryAttribute("name2", "value");
             var collection = new DirectoryAttributeCollection { attribute1, attribute2 };
             Assert.Equal(2, collection.Count);
-            Assert.Equal(new DirectoryAttribute[] { attribute1, attribute2 }, collection.Cast<DirectoryAttribute>());
+            Assert.Equal(
+                new DirectoryAttribute[] { attribute1, attribute2 },
+                collection.Cast<DirectoryAttribute>()
+            );
         }
 
         [Fact]
@@ -54,7 +57,11 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void AddRange_ValidAttributes_AddsToCollection()
         {
-            DirectoryAttribute[] attributes = new DirectoryAttribute[] { new DirectoryAttribute(), new DirectoryAttribute() };
+            DirectoryAttribute[] attributes = new DirectoryAttribute[]
+            {
+                new DirectoryAttribute(),
+                new DirectoryAttribute(),
+            };
 
             var collection = new DirectoryAttributeCollection();
             collection.AddRange(attributes);
@@ -66,13 +73,21 @@ namespace System.DirectoryServices.Protocols.Tests
         public void AddRange_NullAttributes_ThrowsArgumentNullException()
         {
             var collection = new DirectoryAttributeCollection();
-            AssertExtensions.Throws<ArgumentNullException>("attributes", () => collection.AddRange((DirectoryAttribute[])null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "attributes",
+                () => collection.AddRange((DirectoryAttribute[])null)
+            );
         }
 
         [Fact]
         public void AddRange_NullObjectInValues_ThrowsArgumentException()
         {
-            DirectoryAttribute[] attributes = new DirectoryAttribute[] { new DirectoryAttribute(), null, new DirectoryAttribute() };
+            DirectoryAttribute[] attributes = new DirectoryAttribute[]
+            {
+                new DirectoryAttribute(),
+                null,
+                new DirectoryAttribute(),
+            };
             var collection = new DirectoryAttributeCollection();
 
             AssertExtensions.Throws<ArgumentException>(null, () => collection.AddRange(attributes));
@@ -82,7 +97,11 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void AddRange_ValidAttributeCollection_AddsToCollection()
         {
-            DirectoryAttribute[] attributes = new DirectoryAttribute[] { new DirectoryAttribute(), new DirectoryAttribute() };
+            DirectoryAttribute[] attributes = new DirectoryAttribute[]
+            {
+                new DirectoryAttribute(),
+                new DirectoryAttribute(),
+            };
             var attributeCollection = new DirectoryAttributeCollection();
             attributeCollection.AddRange(attributes);
 
@@ -96,7 +115,10 @@ namespace System.DirectoryServices.Protocols.Tests
         public void AddRange_NullAttributeCollection_ThrowsArgumentNullException()
         {
             var collection = new DirectoryAttributeCollection();
-            AssertExtensions.Throws<ArgumentNullException>("attributeCollection", () => collection.AddRange((DirectoryAttributeCollection)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "attributeCollection",
+                () => collection.AddRange((DirectoryAttributeCollection)null)
+            );
         }
 
         [Fact]
@@ -129,7 +151,10 @@ namespace System.DirectoryServices.Protocols.Tests
             collection.Insert(0, attribute1);
             collection.Insert(1, attribute2);
 
-            Assert.Equal(new DirectoryAttribute[] { attribute1, attribute2 }, collection.Cast<DirectoryAttribute>());
+            Assert.Equal(
+                new DirectoryAttribute[] { attribute1, attribute2 },
+                collection.Cast<DirectoryAttribute>()
+            );
         }
 
         [Fact]

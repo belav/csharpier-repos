@@ -7,6 +7,5 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.EditorConfigGenerator.Api
     internal interface IEditorConfigGenerator
     {
         public string? Generate(string language);
-
     }
 }

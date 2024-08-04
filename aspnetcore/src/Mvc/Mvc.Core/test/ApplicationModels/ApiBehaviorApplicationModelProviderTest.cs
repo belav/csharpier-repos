@@ -16,10 +16,15 @@ public class ApiBehaviorApplicationModelProviderTest
     public void OnProvidersExecuting_ThrowsIfControllerWithAttribute_HasActionsWithoutAttributeRouting()
     {
         // Arrange
-        var actionName = $"{typeof(TestApiController).FullName}.{nameof(TestApiController.TestAction)} ({typeof(TestApiController).Assembly.GetName().Name})";
-        var expected = $"Action '{actionName}' does not have an attribute route. Action methods on controllers annotated with ApiControllerAttribute must be attribute routed.";
+        var actionName =
+            $"{typeof(TestApiController).FullName}.{nameof(TestApiController.TestAction)} ({typeof(TestApiController).Assembly.GetName().Name})";
+        var expected =
+            $"Action '{actionName}' does not have an attribute route. Action methods on controllers annotated with ApiControllerAttribute must be attribute routed.";
 
-        var controllerModel = new ControllerModel(typeof(TestApiController).GetTypeInfo(), new[] { new ApiControllerAttribute() });
+        var controllerModel = new ControllerModel(
+            typeof(TestApiController).GetTypeInfo(),
+            new[] { new ApiControllerAttribute() }
+        );
         var method = typeof(TestApiController).GetMethod(nameof(TestApiController.TestAction));
         var actionModel = new ActionModel(method, Array.Empty<object>())
         {
@@ -33,7 +38,9 @@ public class ApiBehaviorApplicationModelProviderTest
         var provider = GetProvider();
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => provider.OnProvidersExecuting(context));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => provider.OnProvidersExecuting(context)
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -41,7 +48,10 @@ public class ApiBehaviorApplicationModelProviderTest
     public void OnProvidersExecuting_AppliesConventions()
     {
         // Arrange
-        var controllerModel = new ControllerModel(typeof(TestApiController).GetTypeInfo(), new[] { new ApiControllerAttribute() })
+        var controllerModel = new ControllerModel(
+            typeof(TestApiController).GetTypeInfo(),
+            new[] { new ApiControllerAttribute() }
+        )
         {
             Selectors = { new SelectorModel { AttributeRouteModel = new AttributeRouteModel() } },
         };
@@ -84,12 +94,17 @@ public class ApiBehaviorApplicationModelProviderTest
     public void OnProvidersExecuting_AppliesConventionsForIResult()
     {
         // Arrange
-        var controllerModel = new ControllerModel(typeof(TestApiController).GetTypeInfo(), new[] { new ApiControllerAttribute() })
+        var controllerModel = new ControllerModel(
+            typeof(TestApiController).GetTypeInfo(),
+            new[] { new ApiControllerAttribute() }
+        )
         {
             Selectors = { new SelectorModel { AttributeRouteModel = new AttributeRouteModel() } },
         };
 
-        var method = typeof(TestApiController).GetMethod(nameof(TestApiController.TestActionWithIResult));
+        var method = typeof(TestApiController).GetMethod(
+            nameof(TestApiController.TestActionWithIResult)
+        );
 
         var actionModel = new ActionModel(method, Array.Empty<object>())
         {
@@ -141,7 +156,8 @@ public class ApiBehaviorApplicationModelProviderTest
                 var convention = Assert.IsType<ApiConventionApplicationModelConvention>(c);
                 Assert.Equal(typeof(ProblemDetails), convention.DefaultErrorResponseType.Type);
             },
-            c => Assert.IsType<InferParameterBindingInfoConvention>(c));
+            c => Assert.IsType<InferParameterBindingInfoConvention>(c)
+        );
     }
 
     [Fact]
@@ -158,7 +174,9 @@ public class ApiBehaviorApplicationModelProviderTest
     public void Constructor_DoesNotAddInvalidModelStateFilterConvention_IfSuppressModelStateInvalidFilterIsSet()
     {
         // Arrange
-        var provider = GetProvider(new ApiBehaviorOptions { SuppressModelStateInvalidFilter = true });
+        var provider = GetProvider(
+            new ApiBehaviorOptions { SuppressModelStateInvalidFilter = true }
+        );
 
         // Act & Assert
         Assert.Empty(provider.ActionModelConventions.OfType<InvalidModelStateFilterConvention>());
@@ -168,17 +186,23 @@ public class ApiBehaviorApplicationModelProviderTest
     public void Constructor_DoesNotAddConsumesConstraintForFormFileParameterConvention_IfSuppressConsumesConstraintForFormFileParametersIsSet()
     {
         // Arrange
-        var provider = GetProvider(new ApiBehaviorOptions { SuppressConsumesConstraintForFormFileParameters = true });
+        var provider = GetProvider(
+            new ApiBehaviorOptions { SuppressConsumesConstraintForFormFileParameters = true }
+        );
 
         // Act & Assert
-        Assert.Empty(provider.ActionModelConventions.OfType<ConsumesConstraintForFormFileParameterConvention>());
+        Assert.Empty(
+            provider.ActionModelConventions.OfType<ConsumesConstraintForFormFileParameterConvention>()
+        );
     }
 
     [Fact]
     public void Constructor_DoesNotAddInferParameterBindingInfoConvention_IfSuppressInferBindingSourcesForParametersIsSet()
     {
         // Arrange
-        var provider = GetProvider(new ApiBehaviorOptions { SuppressInferBindingSourcesForParameters = true });
+        var provider = GetProvider(
+            new ApiBehaviorOptions { SuppressInferBindingSourcesForParameters = true }
+        );
 
         // Act & Assert
         Assert.Empty(provider.ActionModelConventions.OfType<InferParameterBindingInfoConvention>());
@@ -188,10 +212,16 @@ public class ApiBehaviorApplicationModelProviderTest
     public void Constructor_DoesNotInferServicesParameterBindingInfoConvention_IfSuppressInferBindingSourcesForParametersIsSet()
     {
         // Arrange
-        var provider = GetProvider(new ApiBehaviorOptions { DisableImplicitFromServicesParameters = true });
+        var provider = GetProvider(
+            new ApiBehaviorOptions { DisableImplicitFromServicesParameters = true }
+        );
 
         // Act & Assert
-        var convention = (InferParameterBindingInfoConvention)Assert.Single(provider.ActionModelConventions, c => c is InferParameterBindingInfoConvention);
+        var convention = (InferParameterBindingInfoConvention)
+            Assert.Single(
+                provider.ActionModelConventions,
+                c => c is InferParameterBindingInfoConvention
+            );
         Assert.False(convention.IsInferForServiceParametersEnabled);
     }
 
@@ -202,28 +232,31 @@ public class ApiBehaviorApplicationModelProviderTest
         var provider = GetProvider(new ApiBehaviorOptions { SuppressMapClientErrors = true });
 
         // Act & Assert
-        var convention = Assert.Single(provider.ActionModelConventions.OfType<ApiConventionApplicationModelConvention>());
+        var convention = Assert.Single(
+            provider.ActionModelConventions.OfType<ApiConventionApplicationModelConvention>()
+        );
         Assert.Equal(typeof(void), convention.DefaultErrorResponseType.Type);
     }
 
     private static ApiBehaviorApplicationModelProvider GetProvider(
-        ApiBehaviorOptions options = null)
+        ApiBehaviorOptions options = null
+    )
     {
-        options = options ?? new ApiBehaviorOptions
-        {
-            InvalidModelStateResponseFactory = _ => null,
-        };
+        options =
+            options ?? new ApiBehaviorOptions { InvalidModelStateResponseFactory = _ => null };
         var optionsAccessor = Options.Create(options);
 
         return new ApiBehaviorApplicationModelProvider(
             optionsAccessor,
             new EmptyModelMetadataProvider(),
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
     }
 
     private class TestApiController : ControllerBase
     {
         public IActionResult TestAction(object value) => null;
+
         public IResult TestActionWithIResult(object value) => null;
     }
 }

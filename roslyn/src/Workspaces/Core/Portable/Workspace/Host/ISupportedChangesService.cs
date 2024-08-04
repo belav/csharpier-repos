@@ -18,10 +18,18 @@ namespace Microsoft.CodeAnalysis
         bool CanApplyChange(ApplyChangesKind kind);
 
         /// <inheritdoc cref="Workspace.CanApplyCompilationOptionChange"/>
-        bool CanApplyCompilationOptionChange(CompilationOptions oldOptions, CompilationOptions newOptions, Project project);
+        bool CanApplyCompilationOptionChange(
+            CompilationOptions oldOptions,
+            CompilationOptions newOptions,
+            Project project
+        );
 
         /// <inheritdoc cref="Workspace.CanApplyParseOptionChange"/>
-        bool CanApplyParseOptionChange(ParseOptions oldOptions, ParseOptions newOptions, Project project);
+        bool CanApplyParseOptionChange(
+            ParseOptions oldOptions,
+            ParseOptions newOptions,
+            Project project
+        );
     }
 
     [ExportWorkspaceServiceFactory(typeof(ISupportedChangesService)), Shared]
@@ -29,23 +37,27 @@ namespace Microsoft.CodeAnalysis
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultSupportedChangesServiceFactory()
+        public DefaultSupportedChangesServiceFactory() { }
+
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new DefaultSupportedChangesService(workspaceServices.Workspace);
+
+        private sealed class DefaultSupportedChangesService(Workspace workspace)
+            : ISupportedChangesService
         {
-        }
+            public bool CanApplyChange(ApplyChangesKind kind) => workspace.CanApplyChange(kind);
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new DefaultSupportedChangesService(workspaceServices.Workspace);
+            public bool CanApplyCompilationOptionChange(
+                CompilationOptions oldOptions,
+                CompilationOptions newOptions,
+                Project project
+            ) => workspace.CanApplyCompilationOptionChange(oldOptions, newOptions, project);
 
-        private sealed class DefaultSupportedChangesService(Workspace workspace) : ISupportedChangesService
-        {
-            public bool CanApplyChange(ApplyChangesKind kind)
-                => workspace.CanApplyChange(kind);
-
-            public bool CanApplyCompilationOptionChange(CompilationOptions oldOptions, CompilationOptions newOptions, Project project)
-                => workspace.CanApplyCompilationOptionChange(oldOptions, newOptions, project);
-
-            public bool CanApplyParseOptionChange(ParseOptions oldOptions, ParseOptions newOptions, Project project)
-                => workspace.CanApplyParseOptionChange(oldOptions, newOptions, project);
+            public bool CanApplyParseOptionChange(
+                ParseOptions oldOptions,
+                ParseOptions newOptions,
+                Project project
+            ) => workspace.CanApplyParseOptionChange(oldOptions, newOptions, project);
         }
     }
 }

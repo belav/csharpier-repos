@@ -10,10 +10,14 @@ namespace Microsoft.AspNetCore.Builder;
 /// </summary>
 public static class RouteShortCircuitEndpointConventionBuilderExtensions
 {
-    private static readonly ShortCircuitMetadata _200ShortCircuitMetadata = new ShortCircuitMetadata(200);
-    private static readonly ShortCircuitMetadata _401ShortCircuitMetadata = new ShortCircuitMetadata(401);
-    private static readonly ShortCircuitMetadata _404ShortCircuitMetadata = new ShortCircuitMetadata(404);
-    private static readonly ShortCircuitMetadata _nullShortCircuitMetadata = new ShortCircuitMetadata(null);
+    private static readonly ShortCircuitMetadata _200ShortCircuitMetadata =
+        new ShortCircuitMetadata(200);
+    private static readonly ShortCircuitMetadata _401ShortCircuitMetadata =
+        new ShortCircuitMetadata(401);
+    private static readonly ShortCircuitMetadata _404ShortCircuitMetadata =
+        new ShortCircuitMetadata(404);
+    private static readonly ShortCircuitMetadata _nullShortCircuitMetadata =
+        new ShortCircuitMetadata(null);
 
     /// <summary>
     /// Short circuit the endpoint(s).
@@ -22,7 +26,10 @@ public static class RouteShortCircuitEndpointConventionBuilderExtensions
     /// <param name="builder">The endpoint convention builder.</param>
     /// <param name="statusCode">The status code to set in the response.</param>
     /// <returns>The original convention builder parameter.</returns>
-    public static IEndpointConventionBuilder ShortCircuit(this IEndpointConventionBuilder builder, int? statusCode = null)
+    public static IEndpointConventionBuilder ShortCircuit(
+        this IEndpointConventionBuilder builder,
+        int? statusCode = null
+    )
     {
         var metadata = statusCode switch
         {
@@ -30,7 +37,7 @@ public static class RouteShortCircuitEndpointConventionBuilderExtensions
             401 => _401ShortCircuitMetadata,
             404 => _404ShortCircuitMetadata,
             null => _nullShortCircuitMetadata,
-            _ => new ShortCircuitMetadata(statusCode)
+            _ => new ShortCircuitMetadata(statusCode),
         };
 
         builder.Add(b => b.Metadata.Add(metadata));

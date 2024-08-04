@@ -4,16 +4,16 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
     using System.Drawing;
     using System.Drawing.Design;
     using System.Globalization;
-    using System.Web.Security;
     using System.Web;
+    using System.Web.Security;
     using System.Web.UI;
     using System.Web.UI.WebControls;
     using System.Web.Util;
@@ -23,11 +23,12 @@ namespace System.Web.UI.WebControls.WebParts {
     /// dragging, verbs, and additional styles.  Zones that are database driven should inherit from
     /// this class.
     /// </devdoc>
-    [
-    Designer("System.Web.UI.Design.WebControls.WebParts.WebPartZoneBaseDesigner, " + AssemblyRef.SystemDesign),
-    ]
-    public abstract class WebPartZoneBase : WebZone, IPostBackEventHandler, IWebPartMenuUser {
-
+    [Designer(
+        "System.Web.UI.Design.WebControls.WebParts.WebPartZoneBaseDesigner, "
+            + AssemblyRef.SystemDesign
+    ),]
+    public abstract class WebPartZoneBase : WebZone, IPostBackEventHandler, IWebPartMenuUser
+    {
         private static readonly object CreateVerbsEvent = new object();
 
         internal const string EventArgumentSeparator = ":";
@@ -44,14 +45,22 @@ namespace System.Web.UI.WebControls.WebParts {
         private const string restoreEventArgument = "restore";
 
         // PERF: concat the event arg with the separator at compile-time
-        private const string partVerbEventArgumentWithSeparator = partVerbEventArgument + EventArgumentSeparator;
-        private const string zoneVerbEventArgumentWithSeparator = zoneVerbEventArgument + EventArgumentSeparator;
-        private const string connectEventArgumentWithSeparator = connectEventArgument + EventArgumentSeparator;
-        private const string editEventArgumentWithSeparator = editEventArgument + EventArgumentSeparator;
-        private const string minimizeEventArgumentWithSeparator = minimizeEventArgument + EventArgumentSeparator;
-        private const string restoreEventArgumentWithSeparator = restoreEventArgument + EventArgumentSeparator;
-        private const string closeEventArgumentWithSeparator = closeEventArgument + EventArgumentSeparator;
-        private const string deleteEventArgumentWithSeparator = deleteEventArgument + EventArgumentSeparator;
+        private const string partVerbEventArgumentWithSeparator =
+            partVerbEventArgument + EventArgumentSeparator;
+        private const string zoneVerbEventArgumentWithSeparator =
+            zoneVerbEventArgument + EventArgumentSeparator;
+        private const string connectEventArgumentWithSeparator =
+            connectEventArgument + EventArgumentSeparator;
+        private const string editEventArgumentWithSeparator =
+            editEventArgument + EventArgumentSeparator;
+        private const string minimizeEventArgumentWithSeparator =
+            minimizeEventArgument + EventArgumentSeparator;
+        private const string restoreEventArgumentWithSeparator =
+            restoreEventArgument + EventArgumentSeparator;
+        private const string closeEventArgumentWithSeparator =
+            closeEventArgument + EventArgumentSeparator;
+        private const string deleteEventArgumentWithSeparator =
+            deleteEventArgument + EventArgumentSeparator;
 
         // Indexes into the ViewState array
         private const int baseIndex = 0;
@@ -101,88 +110,89 @@ namespace System.Web.UI.WebControls.WebParts {
         private WebPartMenu _menu;
 
         [
-        DefaultValue(true),
-        Themeable(false),
-        WebCategory("Behavior"),
-        WebSysDescription(SR.WebPartZoneBase_AllowLayoutChange),
+            DefaultValue(true),
+            Themeable(false),
+            WebCategory("Behavior"),
+            WebSysDescription(SR.WebPartZoneBase_AllowLayoutChange),
         ]
-        public virtual bool AllowLayoutChange {
-            get {
+        public virtual bool AllowLayoutChange
+        {
+            get
+            {
                 object b = ViewState["AllowLayoutChange"];
                 return (b != null) ? (bool)b : true;
             }
-            set {
-                ViewState["AllowLayoutChange"] = value;
-            }
+            set { ViewState["AllowLayoutChange"] = value; }
         }
 
         /// <devdoc>
         /// Overridden to change default value.
         /// </devdoc>
-        [
-        DefaultValue(typeof(Color), "Gray"),
-        ]
-        public override Color BorderColor {
-            get {
-                if (ControlStyleCreated == false) {
+        [DefaultValue(typeof(Color), "Gray")]
+        public override Color BorderColor
+        {
+            get
+            {
+                if (ControlStyleCreated == false)
+                {
                     return Color.Gray;
                 }
                 return base.BorderColor;
             }
-            set {
-                base.BorderColor = value;
-            }
+            set { base.BorderColor = value; }
         }
 
         /// <devdoc>
         /// Overridden to change default value.
         /// </devdoc>
-        [
-        DefaultValue(BorderStyle.Solid)
-        ]
-        public override BorderStyle BorderStyle {
-            get {
-                if (ControlStyleCreated == false) {
+        [DefaultValue(BorderStyle.Solid)]
+        public override BorderStyle BorderStyle
+        {
+            get
+            {
+                if (ControlStyleCreated == false)
+                {
                     return BorderStyle.Solid;
                 }
                 return base.BorderStyle;
             }
-            set {
-                base.BorderStyle = value;
-            }
+            set { base.BorderStyle = value; }
         }
 
         /// <devdoc>
         /// Overridden to change default value.
         /// </devdoc>
-        [
-        DefaultValue(typeof(Unit), "1")
-        ]
-        public override Unit BorderWidth {
-            get {
-                if (ControlStyleCreated == false) {
+        [DefaultValue(typeof(Unit), "1")]
+        public override Unit BorderWidth
+        {
+            get
+            {
+                if (ControlStyleCreated == false)
+                {
                     return 1;
                 }
                 return base.BorderWidth;
             }
-            set {
-                base.BorderWidth = value;
-            }
+            set { base.BorderWidth = value; }
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Verbs"),
-        WebSysDescription(SR.WebPartZoneBase_CloseVerb),
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Verbs"),
+            WebSysDescription(SR.WebPartZoneBase_CloseVerb),
         ]
-        public virtual WebPartVerb CloseVerb {
-            get {
-                if (_closeVerb == null) {
+        public virtual WebPartVerb CloseVerb
+        {
+            get
+            {
+                if (_closeVerb == null)
+                {
                     _closeVerb = new WebPartCloseVerb();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_closeVerb).TrackViewState();
                     }
                 }
@@ -191,18 +201,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Verbs"),
-        WebSysDescription(SR.WebPartZoneBase_ConnectVerb),
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Verbs"),
+            WebSysDescription(SR.WebPartZoneBase_ConnectVerb),
         ]
-        public virtual WebPartVerb ConnectVerb {
-            get {
-                if (_connectVerb == null) {
+        public virtual WebPartVerb ConnectVerb
+        {
+            get
+            {
+                if (_connectVerb == null)
+                {
                     _connectVerb = new WebPartConnectVerb();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_connectVerb).TrackViewState();
                     }
                 }
@@ -211,18 +225,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Verbs"),
-        WebSysDescription(SR.WebPartZoneBase_DeleteVerb),
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Verbs"),
+            WebSysDescription(SR.WebPartZoneBase_DeleteVerb),
         ]
-        public virtual WebPartVerb DeleteVerb {
-            get {
-                if (_deleteVerb == null) {
+        public virtual WebPartVerb DeleteVerb
+        {
+            get
+            {
+                if (_deleteVerb == null)
+                {
                     _deleteVerb = new WebPartDeleteVerb();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_deleteVerb).TrackViewState();
                     }
                 }
@@ -233,77 +251,91 @@ namespace System.Web.UI.WebControls.WebParts {
         /// <devdoc>
         /// The string displayed to identify the zone.
         /// </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public virtual string DisplayTitle {
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual string DisplayTitle
+        {
+            get
+            {
                 string title = HeaderText;
-                if (!String.IsNullOrEmpty(title)) {
+                if (!String.IsNullOrEmpty(title))
+                {
                     return title;
                 }
 
                 string id = ID;
-                if (!String.IsNullOrEmpty(id)) {
+                if (!String.IsNullOrEmpty(id))
+                {
                     return id;
                 }
 
                 // ID is required to be set by WebPartManager.RegisterZone but this is still a good fallback.
                 int index = 1;
-                if (WebPartManager != null) {
+                if (WebPartManager != null)
+                {
                     index = WebPartManager.Zones.IndexOf(this) + 1;
                 }
-                return SR.GetString(SR.WebPartZoneBase_DisplayTitleFallback,
-                                                        index.ToString(CultureInfo.CurrentCulture));
+                return SR.GetString(
+                    SR.WebPartZoneBase_DisplayTitleFallback,
+                    index.ToString(CultureInfo.CurrentCulture)
+                );
             }
         }
 
-        protected internal bool DragDropEnabled {
-            get {
-                return (!DesignMode &&
-                        RenderClientScript &&
-                        AllowLayoutChange &&
-                        WebPartManager != null &&
-                        WebPartManager.DisplayMode.AllowPageDesign);
+        protected internal bool DragDropEnabled
+        {
+            get
+            {
+                return (
+                    !DesignMode
+                    && RenderClientScript
+                    && AllowLayoutChange
+                    && WebPartManager != null
+                    && WebPartManager.DisplayMode.AllowPageDesign
+                );
             }
         }
 
         [
-        DefaultValue(typeof(Color), "Blue"),
-        TypeConverterAttribute(typeof(WebColorConverter)),
-        WebCategory("Appearance"),
-        WebSysDescription(SR.WebPartZoneBase_DragHighlightColor),
+            DefaultValue(typeof(Color), "Blue"),
+            TypeConverterAttribute(typeof(WebColorConverter)),
+            WebCategory("Appearance"),
+            WebSysDescription(SR.WebPartZoneBase_DragHighlightColor),
         ]
-        public virtual Color DragHighlightColor {
-            get {
+        public virtual Color DragHighlightColor
+        {
+            get
+            {
                 object o = ViewState["DragHighlightColor"];
-                if (o != null) {
+                if (o != null)
+                {
                     Color c = (Color)o;
-                    if (c.IsEmpty == false) {
+                    if (c.IsEmpty == false)
+                    {
                         return c;
                     }
                 }
                 return Color.Blue;
             }
-            set {
-                ViewState["DragHighlightColor"] = value;
-            }
+            set { ViewState["DragHighlightColor"] = value; }
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Verbs"),
-        WebSysDescription(SR.WebPartZoneBase_EditVerb),
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Verbs"),
+            WebSysDescription(SR.WebPartZoneBase_EditVerb),
         ]
-        public virtual WebPartVerb EditVerb {
-            get {
-                if (_editVerb == null) {
+        public virtual WebPartVerb EditVerb
+        {
+            get
+            {
+                if (_editVerb == null)
+                {
                     _editVerb = new WebPartEditVerb();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_editVerb).TrackViewState();
                     }
                 }
@@ -311,34 +343,36 @@ namespace System.Web.UI.WebControls.WebParts {
             }
         }
 
-        [
-        WebSysDefaultValue(SR.WebPartZoneBase_DefaultEmptyZoneText)
-        ]
-        public override string EmptyZoneText {
+        [WebSysDefaultValue(SR.WebPartZoneBase_DefaultEmptyZoneText)]
+        public override string EmptyZoneText
+        {
             // Must look at viewstate directly instead of the property in the base class,
             // so we can distinguish between an unset property and a property set to String.Empty.
-            get {
+            get
+            {
                 string s = (string)ViewState["EmptyZoneText"];
-                return((s == null) ? SR.GetString(SR.WebPartZoneBase_DefaultEmptyZoneText) : s);
+                return ((s == null) ? SR.GetString(SR.WebPartZoneBase_DefaultEmptyZoneText) : s);
             }
-            set {
-                ViewState["EmptyZoneText"] = value;
-            }
+            set { ViewState["EmptyZoneText"] = value; }
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Verbs"),
-        WebSysDescription(SR.WebPartZoneBase_ExportVerb),
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Verbs"),
+            WebSysDescription(SR.WebPartZoneBase_ExportVerb),
         ]
-        public virtual WebPartVerb ExportVerb {
-            get {
-                if (_exportVerb == null) {
+        public virtual WebPartVerb ExportVerb
+        {
+            get
+            {
+                if (_exportVerb == null)
+                {
                     _exportVerb = new WebPartExportVerb();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_exportVerb).TrackViewState();
                     }
                 }
@@ -347,19 +381,22 @@ namespace System.Web.UI.WebControls.WebParts {
             }
         }
 
-        protected override bool HasFooter {
-            get {
-                return false;
-            }
+        protected override bool HasFooter
+        {
+            get { return false; }
         }
 
-        protected override bool HasHeader {
-            get {
+        protected override bool HasHeader
+        {
+            get
+            {
                 bool hasHeader = false;
-                if (DesignMode) {
+                if (DesignMode)
+                {
                     hasHeader = true;
                 }
-                else if (WebPartManager != null) {
+                else if (WebPartManager != null)
+                {
                     hasHeader = WebPartManager.DisplayMode.AllowPageDesign;
                 }
                 return hasHeader;
@@ -367,18 +404,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Verbs"),
-        WebSysDescription(SR.WebPartZoneBase_HelpVerb),
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Verbs"),
+            WebSysDescription(SR.WebPartZoneBase_HelpVerb),
         ]
-        public virtual WebPartVerb HelpVerb {
-            get {
-                if (_helpVerb == null) {
+        public virtual WebPartVerb HelpVerb
+        {
+            get
+            {
+                if (_helpVerb == null)
+                {
                     _helpVerb = new WebPartHelpVerb();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_helpVerb).TrackViewState();
                     }
                 }
@@ -387,9 +428,12 @@ namespace System.Web.UI.WebControls.WebParts {
             }
         }
 
-        internal WebPartMenu Menu {
-            get {
-                if (_menu == null) {
+        internal WebPartMenu Menu
+        {
+            get
+            {
+                if (_menu == null)
+                {
                     _menu = new WebPartMenu(this);
                 }
                 return _menu;
@@ -397,18 +441,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Styles"),
-        WebSysDescription(SR.WebPartZoneBase_MenuCheckImageStyle)
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Styles"),
+            WebSysDescription(SR.WebPartZoneBase_MenuCheckImageStyle)
         ]
-        public Style MenuCheckImageStyle {
-            get {
-                if (_menuCheckImageStyle == null) {
+        public Style MenuCheckImageStyle
+        {
+            get
+            {
+                if (_menuCheckImageStyle == null)
+                {
                     _menuCheckImageStyle = new Style();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_menuCheckImageStyle).TrackViewState();
                     }
                 }
@@ -420,35 +468,42 @@ namespace System.Web.UI.WebControls.WebParts {
         /// <devdoc>
         /// </devdoc>
         [
-        DefaultValue(""),
-        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        UrlProperty(),
-        WebCategory("Appearance"),
-        WebSysDescription(SR.WebPartZoneBase_MenuCheckImageUrl)
+            DefaultValue(""),
+            Editor(
+                "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            UrlProperty(),
+            WebCategory("Appearance"),
+            WebSysDescription(SR.WebPartZoneBase_MenuCheckImageUrl)
         ]
-        public virtual string MenuCheckImageUrl {
-            get {
+        public virtual string MenuCheckImageUrl
+        {
+            get
+            {
                 string s = (string)ViewState["MenuCheckImageUrl"];
                 return ((s == null) ? String.Empty : s);
             }
-            set {
-                ViewState["MenuCheckImageUrl"] = value;
-            }
+            set { ViewState["MenuCheckImageUrl"] = value; }
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Styles"),
-        WebSysDescription(SR.WebPartZoneBase_MenuLabelHoverStyle)
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Styles"),
+            WebSysDescription(SR.WebPartZoneBase_MenuLabelHoverStyle)
         ]
-        public Style MenuLabelHoverStyle {
-            get {
-                if (_menuLabelHoverStyle == null) {
+        public Style MenuLabelHoverStyle
+        {
+            get
+            {
+                if (_menuLabelHoverStyle == null)
+                {
                     _menuLabelHoverStyle = new Style();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_menuLabelHoverStyle).TrackViewState();
                     }
                 }
@@ -458,18 +513,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Styles"),
-        WebSysDescription(SR.WebPartZoneBase_MenuLabelStyle)
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Styles"),
+            WebSysDescription(SR.WebPartZoneBase_MenuLabelStyle)
         ]
-        public Style MenuLabelStyle {
-            get {
-                if (_menuLabelStyle == null) {
+        public Style MenuLabelStyle
+        {
+            get
+            {
+                if (_menuLabelStyle == null)
+                {
                     _menuLabelStyle = new Style();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_menuLabelStyle).TrackViewState();
                     }
                 }
@@ -479,53 +538,60 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(""),
-        Localizable(true),
-        WebCategory("Appearance"),
-        WebSysDescription(SR.WebPartZoneBase_MenuLabelText)
+            DefaultValue(""),
+            Localizable(true),
+            WebCategory("Appearance"),
+            WebSysDescription(SR.WebPartZoneBase_MenuLabelText)
         ]
-        public virtual string MenuLabelText {
-            get {
+        public virtual string MenuLabelText
+        {
+            get
+            {
                 string s = (string)ViewState["MenuLabelText"];
                 return ((s == null) ? String.Empty : s);
             }
-            set {
-                ViewState["MenuLabelText"] = value;
-            }
+            set { ViewState["MenuLabelText"] = value; }
         }
 
         /// <devdoc>
         /// </devdoc>
         [
-        DefaultValue(""),
-        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        UrlProperty(),
-        WebCategory("Appearance"),
-        WebSysDescription(SR.WebPartZoneBase_MenuPopupImageUrl)
+            DefaultValue(""),
+            Editor(
+                "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            UrlProperty(),
+            WebCategory("Appearance"),
+            WebSysDescription(SR.WebPartZoneBase_MenuPopupImageUrl)
         ]
-        public virtual string MenuPopupImageUrl {
-            get {
+        public virtual string MenuPopupImageUrl
+        {
+            get
+            {
                 string s = (string)ViewState["MenuPopupImageUrl"];
                 return ((s == null) ? String.Empty : s);
             }
-            set {
-                ViewState["MenuPopupImageUrl"] = value;
-            }
+            set { ViewState["MenuPopupImageUrl"] = value; }
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Styles"),
-        WebSysDescription(SR.WebPartZoneBase_MenuPopupStyle)
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Styles"),
+            WebSysDescription(SR.WebPartZoneBase_MenuPopupStyle)
         ]
-        public WebPartMenuStyle MenuPopupStyle {
-            get {
-                if (_menuPopupStyle == null) {
+        public WebPartMenuStyle MenuPopupStyle
+        {
+            get
+            {
+                if (_menuPopupStyle == null)
+                {
                     _menuPopupStyle = new WebPartMenuStyle();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_menuPopupStyle).TrackViewState();
                     }
                 }
@@ -535,18 +601,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Styles"),
-        WebSysDescription(SR.WebPartZoneBase_MenuVerbHoverStyle)
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Styles"),
+            WebSysDescription(SR.WebPartZoneBase_MenuVerbHoverStyle)
         ]
-        public Style MenuVerbHoverStyle {
-            get {
-                if (_menuVerbHoverStyle == null) {
+        public Style MenuVerbHoverStyle
+        {
+            get
+            {
+                if (_menuVerbHoverStyle == null)
+                {
                     _menuVerbHoverStyle = new Style();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_menuVerbHoverStyle).TrackViewState();
                     }
                 }
@@ -556,18 +626,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Styles"),
-        WebSysDescription(SR.WebPartZoneBase_MenuVerbStyle)
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Styles"),
+            WebSysDescription(SR.WebPartZoneBase_MenuVerbStyle)
         ]
-        public Style MenuVerbStyle {
-            get {
-                if (_menuVerbStyle == null) {
+        public Style MenuVerbStyle
+        {
+            get
+            {
+                if (_menuVerbStyle == null)
+                {
                     _menuVerbStyle = new Style();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_menuVerbStyle).TrackViewState();
                     }
                 }
@@ -577,18 +651,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Verbs"),
-        WebSysDescription(SR.WebPartZoneBase_MinimizeVerb),
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Verbs"),
+            WebSysDescription(SR.WebPartZoneBase_MinimizeVerb),
         ]
-        public virtual WebPartVerb MinimizeVerb {
-            get {
-                if (_minimizeVerb == null) {
+        public virtual WebPartVerb MinimizeVerb
+        {
+            get
+            {
+                if (_minimizeVerb == null)
+                {
                     _minimizeVerb = new WebPartMinimizeVerb();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_minimizeVerb).TrackViewState();
                     }
                 }
@@ -601,17 +679,21 @@ namespace System.Web.UI.WebControls.WebParts {
         /// The direction in which contained web parts are rendered.
         /// </devdoc>
         [
-        DefaultValue(Orientation.Vertical),
-        WebCategory("Layout"),
-        WebSysDescription(SR.WebPartZoneBase_LayoutOrientation),
+            DefaultValue(Orientation.Vertical),
+            WebCategory("Layout"),
+            WebSysDescription(SR.WebPartZoneBase_LayoutOrientation),
         ]
-        public virtual Orientation LayoutOrientation {
-            get {
+        public virtual Orientation LayoutOrientation
+        {
+            get
+            {
                 object o = ViewState["LayoutOrientation"];
                 return (o != null) ? (Orientation)(int)o : Orientation.Vertical;
             }
-            set {
-                if ((value < Orientation.Horizontal) || (value > Orientation.Vertical)) {
+            set
+            {
+                if ((value < Orientation.Horizontal) || (value > Orientation.Vertical))
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
 
@@ -620,18 +702,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Verbs"),
-        WebSysDescription(SR.WebPartZoneBase_RestoreVerb),
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Verbs"),
+            WebSysDescription(SR.WebPartZoneBase_RestoreVerb),
         ]
-        public virtual WebPartVerb RestoreVerb {
-            get {
-                if (_restoreVerb == null) {
+        public virtual WebPartVerb RestoreVerb
+        {
+            get
+            {
+                if (_restoreVerb == null)
+                {
                     _restoreVerb = new WebPartRestoreVerb();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_restoreVerb).TrackViewState();
                     }
                 }
@@ -641,18 +727,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        NotifyParentProperty(true),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("WebPart"),
-        WebSysDescription(SR.WebPartZoneBase_SelectedPartChromeStyle),
+            DefaultValue(null),
+            NotifyParentProperty(true),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("WebPart"),
+            WebSysDescription(SR.WebPartZoneBase_SelectedPartChromeStyle),
         ]
-        public Style SelectedPartChromeStyle {
-            get {
-                if (_selectedPartChromeStyle == null) {
+        public Style SelectedPartChromeStyle
+        {
+            get
+            {
+                if (_selectedPartChromeStyle == null)
+                {
                     _selectedPartChromeStyle = new Style();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_selectedPartChromeStyle).TrackViewState();
                     }
                 }
@@ -665,32 +755,36 @@ namespace System.Web.UI.WebControls.WebParts {
         /// Shows the icon image in the title bar of a part, if the TitleIconImageUrl is specified for a part.
         /// </devdoc>
         [
-        DefaultValue(true),
-        WebCategory("WebPart"),
-        WebSysDescription(SR.WebPartZoneBase_ShowTitleIcons),
+            DefaultValue(true),
+            WebCategory("WebPart"),
+            WebSysDescription(SR.WebPartZoneBase_ShowTitleIcons),
         ]
-        public virtual bool ShowTitleIcons {
-            get {
+        public virtual bool ShowTitleIcons
+        {
+            get
+            {
                 object b = ViewState["ShowTitleIcons"];
                 return (b != null) ? (bool)b : true;
             }
-            set {
-                ViewState["ShowTitleIcons"] = value;
-            }
+            set { ViewState["ShowTitleIcons"] = value; }
         }
 
         [
-        DefaultValue(ButtonType.Image),
-        WebCategory("Appearance"),
-        WebSysDescription(SR.WebPartZoneBase_TitleBarVerbButtonType),
+            DefaultValue(ButtonType.Image),
+            WebCategory("Appearance"),
+            WebSysDescription(SR.WebPartZoneBase_TitleBarVerbButtonType),
         ]
-        public virtual ButtonType TitleBarVerbButtonType {
-            get {
+        public virtual ButtonType TitleBarVerbButtonType
+        {
+            get
+            {
                 object obj = ViewState["TitleBarVerbButtonType"];
                 return (obj == null) ? ButtonType.Image : (ButtonType)obj;
             }
-            set {
-                if (value < ButtonType.Button || value > ButtonType.Link) {
+            set
+            {
+                if (value < ButtonType.Button || value > ButtonType.Link)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 ViewState["TitleBarVerbButtonType"] = value;
@@ -698,18 +792,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Styles"),
-        WebSysDescription(SR.WebPartZoneBase_TitleBarVerbStyle)
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Styles"),
+            WebSysDescription(SR.WebPartZoneBase_TitleBarVerbStyle)
         ]
-        public Style TitleBarVerbStyle {
-            get {
-                if (_titleBarVerbStyle == null) {
+        public Style TitleBarVerbStyle
+        {
+            get
+            {
+                if (_titleBarVerbStyle == null)
+                {
                     _titleBarVerbStyle = new Style();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_titleBarVerbStyle).TrackViewState();
                     }
                 }
@@ -718,51 +816,47 @@ namespace System.Web.UI.WebControls.WebParts {
             }
         }
 
-        [
-        Browsable(false),
-        EditorBrowsable(EditorBrowsableState.Never),
-        Themeable(false)
-        ]
-        public override ButtonType VerbButtonType {
-            get {
-                return base.VerbButtonType;
-            }
-            set {
-                base.VerbButtonType = value;
-            }
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Themeable(false)]
+        public override ButtonType VerbButtonType
+        {
+            get { return base.VerbButtonType; }
+            set { base.VerbButtonType = value; }
         }
 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public WebPartChrome WebPartChrome {
-            get {
-                if (_webPartChrome == null) {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public WebPartChrome WebPartChrome
+        {
+            get
+            {
+                if (_webPartChrome == null)
+                {
                     _webPartChrome = CreateWebPartChrome();
                 }
                 return _webPartChrome;
             }
         }
 
-        // 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public WebPartCollection WebParts {
-            get {
+        //
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public WebPartCollection WebParts
+        {
+            get
+            {
                 WebPartCollection webParts;
-                if (DesignMode) {
+                if (DesignMode)
+                {
                     WebPart[] parts = new WebPart[Controls.Count];
                     Controls.CopyTo(parts, 0);
                     return new WebPartCollection(parts);
                 }
-                else {
-                    if (WebPartManager != null) {
+                else
+                {
+                    if (WebPartManager != null)
+                    {
                         webParts = WebPartManager.GetWebPartsForZone(this);
                     }
-                    else {
+                    else
+                    {
                         webParts = new WebPartCollection();
                     }
                 }
@@ -772,80 +866,95 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(WebPartVerbRenderMode.Menu),
-        WebCategory("WebPart"),
-        WebSysDescription(SR.WebPartZoneBase_WebPartVerbRenderMode)
+            DefaultValue(WebPartVerbRenderMode.Menu),
+            WebCategory("WebPart"),
+            WebSysDescription(SR.WebPartZoneBase_WebPartVerbRenderMode)
         ]
-        public virtual WebPartVerbRenderMode WebPartVerbRenderMode {
-            get {
+        public virtual WebPartVerbRenderMode WebPartVerbRenderMode
+        {
+            get
+            {
                 object o = ViewState["WebPartVerbRenderMode"];
                 return (o != null) ? (WebPartVerbRenderMode)(int)o : WebPartVerbRenderMode.Menu;
             }
-            set {
-                if ((value < WebPartVerbRenderMode.Menu) || (value > WebPartVerbRenderMode.TitleBar)) {
+            set
+            {
+                if (
+                    (value < WebPartVerbRenderMode.Menu) || (value > WebPartVerbRenderMode.TitleBar)
+                )
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 ViewState["WebPartVerbRenderMode"] = (int)value;
             }
         }
 
-        [
-        WebCategory("Action"),
-        WebSysDescription(SR.WebPartZoneBase_CreateVerbs)
-        ]
-        public event WebPartVerbsEventHandler CreateVerbs {
-            add {
-                Events.AddHandler(CreateVerbsEvent, value);
-            }
-            remove {
-                Events.RemoveHandler(CreateVerbsEvent, value);
-            }
+        [WebCategory("Action"), WebSysDescription(SR.WebPartZoneBase_CreateVerbs)]
+        public event WebPartVerbsEventHandler CreateVerbs
+        {
+            add { Events.AddHandler(CreateVerbsEvent, value); }
+            remove { Events.RemoveHandler(CreateVerbsEvent, value); }
         }
 
-        protected virtual void CloseWebPart(WebPart webPart) {
-            if (webPart == null) {
+        protected virtual void CloseWebPart(WebPart webPart)
+        {
+            if (webPart == null)
+            {
                 throw new ArgumentNullException("webPart");
             }
-            if (WebPartManager != null && webPart.AllowClose && AllowLayoutChange) {
+            if (WebPartManager != null && webPart.AllowClose && AllowLayoutChange)
+            {
                 WebPartManager.CloseWebPart(webPart);
             }
         }
 
-        protected virtual void ConnectWebPart(WebPart webPart) {
-            if (webPart == null) {
+        protected virtual void ConnectWebPart(WebPart webPart)
+        {
+            if (webPart == null)
+            {
                 throw new ArgumentNullException("webPart");
             }
-            if (WebPartManager != null &&
-                WebPartManager.DisplayMode == WebPartManager.ConnectDisplayMode &&
-                webPart != WebPartManager.SelectedWebPart &&
-                webPart.AllowConnect) {
+            if (
+                WebPartManager != null
+                && WebPartManager.DisplayMode == WebPartManager.ConnectDisplayMode
+                && webPart != WebPartManager.SelectedWebPart
+                && webPart.AllowConnect
+            )
+            {
                 WebPartManager.BeginWebPartConnecting(webPart);
             }
         }
 
-        // 
-        protected internal override void CreateChildControls() {
-            if (DesignMode) {
+        //
+        protected internal override void CreateChildControls()
+        {
+            if (DesignMode)
+            {
                 Controls.Clear();
 
                 WebPartCollection webParts = GetInitialWebParts();
-                foreach (WebPart part in webParts) {
+                foreach (WebPart part in webParts)
+                {
                     Controls.Add(part);
                 }
             }
         }
 
         /// <internalonly/>
-        protected override ControlCollection CreateControlCollection() {
-            if (DesignMode) {
+        protected override ControlCollection CreateControlCollection()
+        {
+            if (DesignMode)
+            {
                 return new ControlCollection(this);
             }
-            else {
+            else
+            {
                 return new EmptyControlCollection(this);
             }
         }
 
-        protected override Style CreateControlStyle() {
+        protected override Style CreateControlStyle()
+        {
             // We need the ControlStyle to use its own StateBag, since we do not want the
             // default values we set here to be saved in ViewState.
             Style style = new Style();
@@ -860,26 +969,35 @@ namespace System.Web.UI.WebControls.WebParts {
         /// <devdoc>
         /// Overridden by subclasses to use a different chrome when rendering the WebParts.
         /// </devdoc>
-        protected virtual WebPartChrome CreateWebPartChrome() {
+        protected virtual WebPartChrome CreateWebPartChrome()
+        {
             return new WebPartChrome(this, WebPartManager);
         }
 
-        protected virtual void DeleteWebPart(WebPart webPart) {
-            if (webPart == null) {
+        protected virtual void DeleteWebPart(WebPart webPart)
+        {
+            if (webPart == null)
+            {
                 throw new ArgumentNullException("webPart");
             }
-            if (WebPartManager != null && AllowLayoutChange) {
+            if (WebPartManager != null && AllowLayoutChange)
+            {
                 WebPartManager.DeleteWebPart(webPart);
             }
         }
 
-        protected virtual void EditWebPart(WebPart webPart) {
-            if (webPart == null) {
+        protected virtual void EditWebPart(WebPart webPart)
+        {
+            if (webPart == null)
+            {
                 throw new ArgumentNullException("webPart");
             }
-            if (WebPartManager != null &&
-                WebPartManager.DisplayMode == WebPartManager.EditDisplayMode &&
-                webPart != WebPartManager.SelectedWebPart) {
+            if (
+                WebPartManager != null
+                && WebPartManager.DisplayMode == WebPartManager.EditDisplayMode
+                && webPart != WebPartManager.SelectedWebPart
+            )
+            {
                 WebPartManager.BeginWebPartEditing(webPart);
             }
         }
@@ -888,16 +1006,20 @@ namespace System.Web.UI.WebControls.WebParts {
         /// The effective frame type of a part, taking into consideration the PartChromeType
         /// of the zone and the DisplayMode of the page.
         /// </devdoc>
-        public override PartChromeType GetEffectiveChromeType(Part part) {
+        public override PartChromeType GetEffectiveChromeType(Part part)
+        {
             PartChromeType chromeType = base.GetEffectiveChromeType(part);
 
             // Add title to chromeType if we are in page design mode.  We always want
             // to render a title bar when in page design mode. (VSWhidbey 77730)
-            if ((WebPartManager != null) && (WebPartManager.DisplayMode.AllowPageDesign)) {
-                if (chromeType == PartChromeType.None) {
+            if ((WebPartManager != null) && (WebPartManager.DisplayMode.AllowPageDesign))
+            {
+                if (chromeType == PartChromeType.None)
+                {
                     chromeType = PartChromeType.TitleOnly;
                 }
-                else if (chromeType == PartChromeType.BorderOnly) {
+                else if (chromeType == PartChromeType.BorderOnly)
+                {
                     chromeType = PartChromeType.TitleAndBorder;
                 }
             }
@@ -912,67 +1034,98 @@ namespace System.Web.UI.WebControls.WebParts {
         /// </devdoc>
         protected internal abstract WebPartCollection GetInitialWebParts();
 
-        protected override void LoadViewState(object savedState) {
-            if (savedState == null) {
+        protected override void LoadViewState(object savedState)
+        {
+            if (savedState == null)
+            {
                 base.LoadViewState(null);
             }
-            else {
-                object[] myState = (object[]) savedState;
-                if (myState.Length != viewStateArrayLength) {
+            else
+            {
+                object[] myState = (object[])savedState;
+                if (myState.Length != viewStateArrayLength)
+                {
                     throw new ArgumentException(SR.GetString(SR.ViewState_InvalidViewState));
                 }
 
                 base.LoadViewState(myState[baseIndex]);
-                if (myState[selectedPartChromeStyleIndex] != null) {
-                    ((IStateManager) SelectedPartChromeStyle).LoadViewState(myState[selectedPartChromeStyleIndex]);
+                if (myState[selectedPartChromeStyleIndex] != null)
+                {
+                    ((IStateManager)SelectedPartChromeStyle).LoadViewState(
+                        myState[selectedPartChromeStyleIndex]
+                    );
                 }
-                if (myState[closeVerbIndex] != null) {
-                    ((IStateManager) CloseVerb).LoadViewState(myState[closeVerbIndex]);
+                if (myState[closeVerbIndex] != null)
+                {
+                    ((IStateManager)CloseVerb).LoadViewState(myState[closeVerbIndex]);
                 }
-                if (myState[connectVerbIndex] != null) {
-                    ((IStateManager) ConnectVerb).LoadViewState(myState[connectVerbIndex]);
+                if (myState[connectVerbIndex] != null)
+                {
+                    ((IStateManager)ConnectVerb).LoadViewState(myState[connectVerbIndex]);
                 }
-                if (myState[deleteVerbIndex] != null) {
-                    ((IStateManager) DeleteVerb).LoadViewState(myState[deleteVerbIndex]);
+                if (myState[deleteVerbIndex] != null)
+                {
+                    ((IStateManager)DeleteVerb).LoadViewState(myState[deleteVerbIndex]);
                 }
-                if (myState[editVerbIndex] != null) {
-                    ((IStateManager) EditVerb).LoadViewState(myState[editVerbIndex]);
+                if (myState[editVerbIndex] != null)
+                {
+                    ((IStateManager)EditVerb).LoadViewState(myState[editVerbIndex]);
                 }
-                if (myState[helpVerbIndex] != null) {
-                    ((IStateManager) HelpVerb).LoadViewState(myState[helpVerbIndex]);
+                if (myState[helpVerbIndex] != null)
+                {
+                    ((IStateManager)HelpVerb).LoadViewState(myState[helpVerbIndex]);
                 }
-                if (myState[minimizeVerbIndex] != null) {
-                    ((IStateManager) MinimizeVerb).LoadViewState(myState[minimizeVerbIndex]);
+                if (myState[minimizeVerbIndex] != null)
+                {
+                    ((IStateManager)MinimizeVerb).LoadViewState(myState[minimizeVerbIndex]);
                 }
-                if (myState[restoreVerbIndex] != null) {
-                    ((IStateManager) RestoreVerb).LoadViewState(myState[restoreVerbIndex]);
+                if (myState[restoreVerbIndex] != null)
+                {
+                    ((IStateManager)RestoreVerb).LoadViewState(myState[restoreVerbIndex]);
                 }
-                if (myState[exportVerbIndex] != null) {
-                    ((IStateManager) ExportVerb).LoadViewState(myState[exportVerbIndex]);
+                if (myState[exportVerbIndex] != null)
+                {
+                    ((IStateManager)ExportVerb).LoadViewState(myState[exportVerbIndex]);
                 }
-                if (myState[menuPopupStyleIndex] != null) {
-                    ((IStateManager) MenuPopupStyle).LoadViewState(myState[menuPopupStyleIndex]);
+                if (myState[menuPopupStyleIndex] != null)
+                {
+                    ((IStateManager)MenuPopupStyle).LoadViewState(myState[menuPopupStyleIndex]);
                 }
-                if (myState[menuLabelStyleIndex] != null) {
-                    ((IStateManager) MenuLabelStyle).LoadViewState(myState[menuLabelStyleIndex]);
+                if (myState[menuLabelStyleIndex] != null)
+                {
+                    ((IStateManager)MenuLabelStyle).LoadViewState(myState[menuLabelStyleIndex]);
                 }
-                if (myState[menuLabelHoverStyleIndex] != null) {
-                    ((IStateManager) MenuLabelHoverStyle).LoadViewState(myState[menuLabelHoverStyleIndex]);
+                if (myState[menuLabelHoverStyleIndex] != null)
+                {
+                    ((IStateManager)MenuLabelHoverStyle).LoadViewState(
+                        myState[menuLabelHoverStyleIndex]
+                    );
                 }
-                if (myState[menuCheckImageStyleIndex] != null) {
-                    ((IStateManager) MenuCheckImageStyle).LoadViewState(myState[menuCheckImageStyleIndex]);
+                if (myState[menuCheckImageStyleIndex] != null)
+                {
+                    ((IStateManager)MenuCheckImageStyle).LoadViewState(
+                        myState[menuCheckImageStyleIndex]
+                    );
                 }
-                if (myState[menuVerbStyleIndex] != null) {
-                    ((IStateManager) MenuVerbStyle).LoadViewState(myState[menuVerbStyleIndex]);
+                if (myState[menuVerbStyleIndex] != null)
+                {
+                    ((IStateManager)MenuVerbStyle).LoadViewState(myState[menuVerbStyleIndex]);
                 }
-                if (myState[menuVerbHoverStyleIndex] != null) {
-                    ((IStateManager) MenuVerbHoverStyle).LoadViewState(myState[menuVerbHoverStyleIndex]);
+                if (myState[menuVerbHoverStyleIndex] != null)
+                {
+                    ((IStateManager)MenuVerbHoverStyle).LoadViewState(
+                        myState[menuVerbHoverStyleIndex]
+                    );
                 }
-                if (myState[controlStyleIndex] != null) {
-                    ((IStateManager) ControlStyle).LoadViewState(myState[controlStyleIndex]);
+                if (myState[controlStyleIndex] != null)
+                {
+                    ((IStateManager)ControlStyle).LoadViewState(myState[controlStyleIndex]);
                 }
-                if (myState[titleBarVerbStyleIndex] != null) {
-                    ((IStateManager) TitleBarVerbStyle).LoadViewState(myState[titleBarVerbStyleIndex]);
+                if (myState[titleBarVerbStyleIndex] != null)
+                {
+                    ((IStateManager)TitleBarVerbStyle).LoadViewState(
+                        myState[titleBarVerbStyleIndex]
+                    );
                 }
             }
         }
@@ -980,50 +1133,81 @@ namespace System.Web.UI.WebControls.WebParts {
         /// <devdoc>
         /// Load the verbs defined by the page developer or zone subclass.
         /// </devdoc>
-        private void CreateZoneVerbs() {
+        private void CreateZoneVerbs()
+        {
             WebPartVerbsEventArgs args = new WebPartVerbsEventArgs();
             OnCreateVerbs(args);
             _verbs = args.Verbs;
         }
 
-        private bool IsDefaultVerbEvent(string[] eventArguments) {
+        private bool IsDefaultVerbEvent(string[] eventArguments)
+        {
             return (eventArguments.Length == 2);
         }
 
-        private bool IsDragEvent(string[] eventArguments) {
-            return (eventArguments.Length == 3 &&
-                    String.Equals(eventArguments[0], dragEventArgument, StringComparison.OrdinalIgnoreCase));
+        private bool IsDragEvent(string[] eventArguments)
+        {
+            return (
+                eventArguments.Length == 3
+                && String.Equals(
+                    eventArguments[0],
+                    dragEventArgument,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
         }
 
-        private bool IsPartVerbEvent(string[] eventArguments) {
-            return (eventArguments.Length == 3 &&
-                    String.Equals(eventArguments[0], partVerbEventArgument, StringComparison.OrdinalIgnoreCase));
+        private bool IsPartVerbEvent(string[] eventArguments)
+        {
+            return (
+                eventArguments.Length == 3
+                && String.Equals(
+                    eventArguments[0],
+                    partVerbEventArgument,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
         }
 
-        private bool IsZoneVerbEvent(string[] eventArguments) {
-            return (eventArguments.Length == 3 &&
-                    String.Equals(eventArguments[0], zoneVerbEventArgument, StringComparison.OrdinalIgnoreCase));
+        private bool IsZoneVerbEvent(string[] eventArguments)
+        {
+            return (
+                eventArguments.Length == 3
+                && String.Equals(
+                    eventArguments[0],
+                    zoneVerbEventArgument,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
         }
 
-        protected virtual void MinimizeWebPart(WebPart webPart) {
-            if (webPart == null) {
+        protected virtual void MinimizeWebPart(WebPart webPart)
+        {
+            if (webPart == null)
+            {
                 throw new ArgumentNullException("webPart");
             }
-            if (webPart.ChromeState == PartChromeState.Normal &&
-                webPart.AllowMinimize &&
-                AllowLayoutChange) {
+            if (
+                webPart.ChromeState == PartChromeState.Normal
+                && webPart.AllowMinimize
+                && AllowLayoutChange
+            )
+            {
                 webPart.ChromeState = PartChromeState.Minimized;
             }
         }
 
-        protected virtual void OnCreateVerbs(WebPartVerbsEventArgs e) {
+        protected virtual void OnCreateVerbs(WebPartVerbsEventArgs e)
+        {
             WebPartVerbsEventHandler handler = (WebPartVerbsEventHandler)Events[CreateVerbsEvent];
-            if (handler != null) {
+            if (handler != null)
+            {
                 handler(this, e);
             }
         }
 
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
             // The zone verbs may have been loaded in RaisePostBackEvent, but we must load
@@ -1032,12 +1216,13 @@ namespace System.Web.UI.WebControls.WebParts {
 
             WebPartChrome.PerformPreRender();
 
-            // 
-
+            //
         }
 
-        protected virtual void RaisePostBackEvent(string eventArgument) {
-            if (String.IsNullOrEmpty(eventArgument)) {
+        protected virtual void RaisePostBackEvent(string eventArgument)
+        {
+            if (String.IsNullOrEmpty(eventArgument))
+            {
                 return;
             }
 
@@ -1045,18 +1230,21 @@ namespace System.Web.UI.WebControls.WebParts {
 
             // We do not register all the possible combinations of drag/drop events because there are
             // too many combinations.  So we must not validate them either.  VSWhidbey 492706
-            if (!IsDragEvent(eventArguments)) {
+            if (!IsDragEvent(eventArguments))
+            {
                 ValidateEvent(UniqueID, eventArgument);
             }
 
-            if (WebPartManager == null) {
+            if (WebPartManager == null)
+            {
                 return;
             }
 
             // Look in collection of all WebParts instead of WebParts for this zone, since
             // an admin may have moved the part to a different Zone between postbacks.
             WebPartCollection allWebParts = WebPartManager.WebParts;
-            if (IsDefaultVerbEvent(eventArguments)) {
+            if (IsDefaultVerbEvent(eventArguments))
+            {
                 // Postback from a default verb
                 string verbEventArgument = eventArguments[0];
                 string partID = eventArguments[1];
@@ -1065,40 +1253,90 @@ namespace System.Web.UI.WebControls.WebParts {
                 // Part will be null or closed if the part was present on the previous request,
                 // but is missing or closed now.  It may have been deleted or closed by the admin
                 // or filtered by roles.
-                if (part != null && !part.IsClosed) {
-                    if (String.Equals(verbEventArgument, closeEventArgument, StringComparison.OrdinalIgnoreCase)) {
-                        if (CloseVerb.Visible && CloseVerb.Enabled) {
+                if (part != null && !part.IsClosed)
+                {
+                    if (
+                        String.Equals(
+                            verbEventArgument,
+                            closeEventArgument,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    {
+                        if (CloseVerb.Visible && CloseVerb.Enabled)
+                        {
                             CloseWebPart(part);
                         }
                     }
-                    else if (String.Equals(verbEventArgument, connectEventArgument, StringComparison.OrdinalIgnoreCase)) {
-                        if (ConnectVerb.Visible && ConnectVerb.Enabled) {
+                    else if (
+                        String.Equals(
+                            verbEventArgument,
+                            connectEventArgument,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    {
+                        if (ConnectVerb.Visible && ConnectVerb.Enabled)
+                        {
                             ConnectWebPart(part);
                         }
                     }
-                    else if (String.Equals(verbEventArgument, deleteEventArgument, StringComparison.OrdinalIgnoreCase)) {
-                        if (DeleteVerb.Visible && DeleteVerb.Enabled) {
+                    else if (
+                        String.Equals(
+                            verbEventArgument,
+                            deleteEventArgument,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    {
+                        if (DeleteVerb.Visible && DeleteVerb.Enabled)
+                        {
                             DeleteWebPart(part);
                         }
                     }
-                    else if (String.Equals(verbEventArgument, editEventArgument, StringComparison.OrdinalIgnoreCase)) {
-                        if (EditVerb.Visible && EditVerb.Enabled) {
+                    else if (
+                        String.Equals(
+                            verbEventArgument,
+                            editEventArgument,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    {
+                        if (EditVerb.Visible && EditVerb.Enabled)
+                        {
                             EditWebPart(part);
                         }
                     }
-                    else if (String.Equals(verbEventArgument, minimizeEventArgument, StringComparison.OrdinalIgnoreCase)) {
-                        if (MinimizeVerb.Visible && MinimizeVerb.Enabled) {
+                    else if (
+                        String.Equals(
+                            verbEventArgument,
+                            minimizeEventArgument,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    {
+                        if (MinimizeVerb.Visible && MinimizeVerb.Enabled)
+                        {
                             MinimizeWebPart(part);
                         }
                     }
-                    else if (String.Equals(verbEventArgument, restoreEventArgument, StringComparison.OrdinalIgnoreCase)) {
-                        if (RestoreVerb.Visible && RestoreVerb.Enabled) {
+                    else if (
+                        String.Equals(
+                            verbEventArgument,
+                            restoreEventArgument,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    {
+                        if (RestoreVerb.Visible && RestoreVerb.Enabled)
+                        {
                             RestoreWebPart(part);
                         }
                     }
                 }
             }
-            else if (IsDragEvent(eventArguments)) {
+            else if (IsDragEvent(eventArguments))
+            {
                 // Postback from a drop event
 
                 // The eventArgument contains the WholePartID instead of just ID, since we
@@ -1106,7 +1344,8 @@ namespace System.Web.UI.WebControls.WebParts {
                 string wholePartID = eventArguments[1];
 
                 string partID = null;
-                if (wholePartID.StartsWith(WebPart.WholePartIDPrefix, StringComparison.Ordinal)) {
+                if (wholePartID.StartsWith(WebPart.WholePartIDPrefix, StringComparison.Ordinal))
+                {
                     partID = wholePartID.Substring(WebPart.WholePartIDPrefix.Length);
                 }
 
@@ -1116,24 +1355,30 @@ namespace System.Web.UI.WebControls.WebParts {
                 // Part will be null or closed if the part was present on the previous request,
                 // but is missing or closed now.  It may have been deleted or closed by the admin
                 // or filtered by roles.
-                if (actionPart != null && !actionPart.IsClosed) {
+                if (actionPart != null && !actionPart.IsClosed)
+                {
                     // If dragged part to larger index in its current zone, correct drop index
                     // by subtracting 1.  Otherwise the part will move 1 position farther than desired.
-                    if (WebParts.Contains(actionPart) && (actionPart.ZoneIndex < dropPartIndex)) {
+                    if (WebParts.Contains(actionPart) && (actionPart.ZoneIndex < dropPartIndex))
+                    {
                         dropPartIndex--;
                     }
 
                     WebPartZoneBase fromZone = actionPart.Zone;
-                    if (AllowLayoutChange &&
-                        WebPartManager.DisplayMode.AllowPageDesign &&
-                        fromZone != null &&
-                        fromZone.AllowLayoutChange &&
-                        (actionPart.AllowZoneChange || (fromZone == this))) {
+                    if (
+                        AllowLayoutChange
+                        && WebPartManager.DisplayMode.AllowPageDesign
+                        && fromZone != null
+                        && fromZone.AllowLayoutChange
+                        && (actionPart.AllowZoneChange || (fromZone == this))
+                    )
+                    {
                         WebPartManager.MoveWebPart(actionPart, this, dropPartIndex);
                     }
                 }
             }
-            else if (IsPartVerbEvent(eventArguments)) {
+            else if (IsPartVerbEvent(eventArguments))
+            {
                 // Postback from a part verb
                 string verbID = eventArguments[1];
                 string partID = eventArguments[2];
@@ -1142,14 +1387,17 @@ namespace System.Web.UI.WebControls.WebParts {
                 // Part will be null or closed if the part was present on the previous request,
                 // but is missing or closed now.  It may have been deleted or closed by the admin
                 // or filtered by roles.
-                if (part != null && !part.IsClosed) {
+                if (part != null && !part.IsClosed)
+                {
                     WebPartVerb verb = part.Verbs[verbID];
-                    if (verb != null && verb.Visible && verb.Enabled) {
+                    if (verb != null && verb.Visible && verb.Enabled)
+                    {
                         verb.ServerClickHandler(verb, new WebPartEventArgs(part));
                     }
                 }
             }
-            else if (IsZoneVerbEvent(eventArguments)) {
+            else if (IsZoneVerbEvent(eventArguments))
+            {
                 // Postback from a zone verb
                 CreateZoneVerbs();
                 string verbID = eventArguments[1];
@@ -1159,17 +1407,21 @@ namespace System.Web.UI.WebControls.WebParts {
                 // Part will be null or closed if the part was present on the previous request,
                 // but is missing or closed now.  It may have been deleted or closed by the admin
                 // or filtered by roles.
-                if (part != null && !part.IsClosed) {
+                if (part != null && !part.IsClosed)
+                {
                     WebPartVerb verb = _verbs[verbID];
-                    if (verb != null && verb.Visible && verb.Enabled) {
+                    if (verb != null && verb.Visible && verb.Enabled)
+                    {
                         verb.ServerClickHandler(verb, new WebPartEventArgs(part));
                     }
                 }
             }
         }
 
-        protected internal override void Render(HtmlTextWriter writer) {
-            if (Page != null) {
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            if (Page != null)
+            {
                 Page.VerifyRenderingInServerForm(this);
             }
 
@@ -1179,7 +1431,8 @@ namespace System.Web.UI.WebControls.WebParts {
 
             // PERF: If the control style has not been created, we don't need to set these values,
             // since no style properties will be rendered
-            if (ControlStyleCreated) {
+            if (ControlStyleCreated)
+            {
                 BorderColor = Color.Empty;
                 BorderStyle = BorderStyle.NotSet;
                 BorderWidth = Unit.Empty;
@@ -1187,18 +1440,29 @@ namespace System.Web.UI.WebControls.WebParts {
 
             base.Render(writer);
 
-            if (ControlStyleCreated) {
+            if (ControlStyleCreated)
+            {
                 BorderColor = _borderColor;
                 BorderStyle = _borderStyle;
                 BorderWidth = _borderWidth;
             }
         }
 
-        protected override void RenderBody(HtmlTextWriter writer) {
+        protected override void RenderBody(HtmlTextWriter writer)
+        {
             Orientation orientation = LayoutOrientation;
 
-            if (DesignMode || (WebPartManager != null && (WebPartManager.DisplayMode.AllowPageDesign))) {
-                if (_borderColor != Color.Empty || _borderStyle != BorderStyle.NotSet || _borderWidth != Unit.Empty) {
+            if (
+                DesignMode
+                || (WebPartManager != null && (WebPartManager.DisplayMode.AllowPageDesign))
+            )
+            {
+                if (
+                    _borderColor != Color.Empty
+                    || _borderStyle != BorderStyle.NotSet
+                    || _borderWidth != Unit.Empty
+                )
+                {
                     Style s = new Style();
                     s.BorderColor = _borderColor;
                     s.BorderStyle = _borderStyle;
@@ -1208,40 +1472,52 @@ namespace System.Web.UI.WebControls.WebParts {
             }
 
             RenderBodyTableBeginTag(writer);
-            if (DesignMode) {
+            if (DesignMode)
+            {
                 RenderDesignerRegionBeginTag(writer, orientation);
             }
 
-            if (orientation == Orientation.Horizontal) {
+            if (orientation == Orientation.Horizontal)
+            {
                 writer.RenderBeginTag(HtmlTextWriterTag.Tr);
             }
 
             bool dragDropEnabled = DragDropEnabled;
-            if (dragDropEnabled) {
+            if (dragDropEnabled)
+            {
                 RenderDropCue(writer);
             }
 
             WebPartCollection webParts = WebParts;
-            if (webParts == null || webParts.Count == 0) {
+            if (webParts == null || webParts.Count == 0)
+            {
                 RenderEmptyZoneBody(writer);
             }
-            else {
+            else
+            {
                 WebPartChrome chrome = WebPartChrome;
-                foreach (WebPart webPart in webParts) {
+                foreach (WebPart webPart in webParts)
+                {
                     // Don't render anything visible for a  minimized part if its effective frame
                     // type dictates that a title bar will not be rendered. (VSWhidbey 77730)
-                    if (webPart.ChromeState == PartChromeState.Minimized) {
+                    if (webPart.ChromeState == PartChromeState.Minimized)
+                    {
                         PartChromeType chromeType = GetEffectiveChromeType(webPart);
-                        if (chromeType == PartChromeType.None || chromeType == PartChromeType.BorderOnly) {
+                        if (
+                            chromeType == PartChromeType.None
+                            || chromeType == PartChromeType.BorderOnly
+                        )
+                        {
                             writer.AddStyleAttribute(HtmlTextWriterStyle.Display, "none");
                         }
                     }
 
-
-                    if (orientation == Orientation.Vertical) {
+                    if (orientation == Orientation.Vertical)
+                    {
                         writer.RenderBeginTag(HtmlTextWriterTag.Tr);
                     }
-                    else {
+                    else
+                    {
                         // Mac IE needs height=100% set on <td> instead of <tr>
                         writer.AddStyleAttribute(HtmlTextWriterStyle.Height, "100%");
                         writer.AddAttribute(HtmlTextWriterAttribute.Valign, "top");
@@ -1250,17 +1526,20 @@ namespace System.Web.UI.WebControls.WebParts {
 
                     chrome.RenderWebPart(writer, webPart);
 
-                    writer.RenderEndTag();      // Td
-                    if (orientation == Orientation.Vertical) {
-                        writer.RenderEndTag();  // Tr
+                    writer.RenderEndTag(); // Td
+                    if (orientation == Orientation.Vertical)
+                    {
+                        writer.RenderEndTag(); // Tr
                     }
 
-                    if (dragDropEnabled) {
+                    if (dragDropEnabled)
+                    {
                         RenderDropCue(writer);
                     }
                 }
 
-                if (orientation == Orientation.Vertical) {
+                if (orientation == Orientation.Vertical)
+                {
                     // Add an extra row with height of 100%, to Microsoft up any extra space
                     // if the height of the zone is larger than its contents
                     writer.RenderBeginTag(HtmlTextWriterTag.Tr);
@@ -1275,7 +1554,8 @@ namespace System.Web.UI.WebControls.WebParts {
                     writer.RenderEndTag(); // Td
                     writer.RenderEndTag(); // Tr
                 }
-                else {
+                else
+                {
                     // Add an extra cell with width of 100%, to Microsoft up any extra space
                     // if the width of the zone is larger than its contents.
                     writer.AddStyleAttribute(HtmlTextWriterStyle.Width, "100%");
@@ -1288,36 +1568,42 @@ namespace System.Web.UI.WebControls.WebParts {
                 }
             }
 
-            if (orientation == Orientation.Horizontal) {
-                writer.RenderEndTag();  // Tr
+            if (orientation == Orientation.Horizontal)
+            {
+                writer.RenderEndTag(); // Tr
             }
 
-            if (DesignMode) {
+            if (DesignMode)
+            {
                 RenderDesignerRegionEndTag(writer);
             }
             RenderBodyTableEndTag(writer);
         }
 
-        protected virtual void RenderDropCue(HtmlTextWriter writer) {
-            if (LayoutOrientation == Orientation.Vertical) {
+        protected virtual void RenderDropCue(HtmlTextWriter writer)
+        {
+            if (LayoutOrientation == Orientation.Vertical)
+            {
                 writer.RenderBeginTag(HtmlTextWriterTag.Tr);
                 writer.AddStyleAttribute(HtmlTextWriterStyle.PaddingTop, "1");
                 writer.AddStyleAttribute(HtmlTextWriterStyle.PaddingBottom, "1");
                 writer.RenderBeginTag(HtmlTextWriterTag.Td);
                 RenderDropCueIBar(writer, Orientation.Horizontal);
-                writer.RenderEndTag();  // Td
-                writer.RenderEndTag();  // Tr
+                writer.RenderEndTag(); // Td
+                writer.RenderEndTag(); // Tr
             }
-            else {
+            else
+            {
                 writer.AddStyleAttribute(HtmlTextWriterStyle.PaddingLeft, "1");
                 writer.AddStyleAttribute(HtmlTextWriterStyle.PaddingRight, "1");
                 writer.RenderBeginTag(HtmlTextWriterTag.Td);
                 RenderDropCueIBar(writer, Orientation.Vertical);
-                writer.RenderEndTag();  // Td
+                writer.RenderEndTag(); // Td
             }
         }
 
-        private void RenderDropCueIBar(HtmlTextWriter writer, Orientation orientation) {
+        private void RenderDropCueIBar(HtmlTextWriter writer, Orientation orientation)
+        {
             // 10px is the total margin and border width that we have to substract
             // (2*2px for the margin, 2*3px for the border)
             // Places to touch if we want to change the rendering of the cues:
@@ -1329,12 +1615,14 @@ namespace System.Web.UI.WebControls.WebParts {
             writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, "0");
             writer.AddAttribute(HtmlTextWriterAttribute.Cellpadding, "0");
             writer.AddAttribute(HtmlTextWriterAttribute.Border, "0");
-            if (orientation == Orientation.Horizontal) {
+            if (orientation == Orientation.Horizontal)
+            {
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Width, "100%");
                 writer.AddStyleAttribute("border-left", border);
                 writer.AddStyleAttribute("border-right", border);
             }
-            else {
+            else
+            {
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Height, "100%");
                 writer.AddStyleAttribute("border-top", border);
                 writer.AddStyleAttribute("border-bottom", border);
@@ -1343,18 +1631,21 @@ namespace System.Web.UI.WebControls.WebParts {
             writer.RenderBeginTag(HtmlTextWriterTag.Table);
             writer.RenderBeginTag(HtmlTextWriterTag.Tr);
 
-            if (orientation == Orientation.Vertical) {
+            if (orientation == Orientation.Vertical)
+            {
                 writer.AddAttribute(HtmlTextWriterAttribute.Align, "center");
             }
             writer.AddStyleAttribute(HtmlTextWriterStyle.FontSize, "0px");
             writer.RenderBeginTag(HtmlTextWriterTag.Td);
 
-            if (orientation == Orientation.Horizontal) {
+            if (orientation == Orientation.Horizontal)
+            {
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Margin, "2px 0px 2px 0px");
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Height, "2px");
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Width, "100%");
             }
-            else {
+            else
+            {
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Margin, "0px 2px 0px 2px");
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Width, "2px");
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Height, "100%");
@@ -1362,33 +1653,43 @@ namespace System.Web.UI.WebControls.WebParts {
             writer.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, color);
             writer.RenderBeginTag(HtmlTextWriterTag.Div);
 
-            writer.RenderEndTag();      // Div
-            writer.RenderEndTag();      // Td
-            writer.RenderEndTag();      // Tr
-            writer.RenderEndTag();      // Table
+            writer.RenderEndTag(); // Div
+            writer.RenderEndTag(); // Td
+            writer.RenderEndTag(); // Tr
+            writer.RenderEndTag(); // Table
         }
 
-        private void RenderEmptyZoneBody(HtmlTextWriter writer) {
+        private void RenderEmptyZoneBody(HtmlTextWriter writer)
+        {
             bool vertical = (LayoutOrientation == Orientation.Vertical);
             bool horizontal = !vertical;
             string emptyZoneText = EmptyZoneText;
 
-            bool renderText = (!DesignMode && AllowLayoutChange && WebPartManager != null &&
-                               WebPartManager.DisplayMode.AllowPageDesign && !String.IsNullOrEmpty(emptyZoneText));
+            bool renderText = (
+                !DesignMode
+                && AllowLayoutChange
+                && WebPartManager != null
+                && WebPartManager.DisplayMode.AllowPageDesign
+                && !String.IsNullOrEmpty(emptyZoneText)
+            );
 
-            if (vertical) {
+            if (vertical)
+            {
                 writer.RenderBeginTag(HtmlTextWriterTag.Tr);
             }
 
-            if (renderText) {
+            if (renderText)
+            {
                 writer.AddAttribute(HtmlTextWriterAttribute.Valign, "top");
             }
 
-            if (horizontal) {
+            if (horizontal)
+            {
                 // Want drop zone to shrink to size, so take up all width in zone
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Width, "100%");
             }
-            else {
+            else
+            {
                 // Want drop zone to shrink to size, so take up all height in zone
                 // Mac IE needs height=100% set on <td> instead of <tr>
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Height, "100%");
@@ -1396,24 +1697,29 @@ namespace System.Web.UI.WebControls.WebParts {
 
             writer.RenderBeginTag(HtmlTextWriterTag.Td);
 
-            if (renderText) {
+            if (renderText)
+            {
                 Style emptyZoneTextStyle = EmptyZoneTextStyle;
-                if (!emptyZoneTextStyle.IsEmpty) {
+                if (!emptyZoneTextStyle.IsEmpty)
+                {
                     emptyZoneTextStyle.AddAttributesToRender(writer, this);
                 }
 
                 writer.RenderBeginTag(HtmlTextWriterTag.Div);
                 writer.Write(emptyZoneText);
-                writer.RenderEndTag();  // Div
+                writer.RenderEndTag(); // Div
             }
 
-            writer.RenderEndTag();  // Td
-            if (vertical) {
-                writer.RenderEndTag();  // Tr
+            writer.RenderEndTag(); // Td
+            if (vertical)
+            {
+                writer.RenderEndTag(); // Tr
             }
 
-            if (renderText) {
-                if (DragDropEnabled) {
+            if (renderText)
+            {
+                if (DragDropEnabled)
+                {
                     // This drop cue will never be activated since there are no web parts, but it
                     // reserves space below the text equal to the real drop cue above the text
                     RenderDropCue(writer);
@@ -1421,9 +1727,9 @@ namespace System.Web.UI.WebControls.WebParts {
             }
         }
 
-        protected override void RenderHeader(HtmlTextWriter writer) {
-
-            // 
+        protected override void RenderHeader(HtmlTextWriter writer)
+        {
+            //
 
 
 
@@ -1435,21 +1741,25 @@ namespace System.Web.UI.WebControls.WebParts {
             writer.AddStyleAttribute(HtmlTextWriterStyle.Width, "100%");
 
             TitleStyle headerStyle = HeaderStyle;
-            if (!headerStyle.IsEmpty) {
+            if (!headerStyle.IsEmpty)
+            {
                 // Apply font and forecolor from HeaderStyle to inner table
                 Style style = new Style();
-                if (!headerStyle.ForeColor.IsEmpty) {
+                if (!headerStyle.ForeColor.IsEmpty)
+                {
                     style.ForeColor = headerStyle.ForeColor;
                 }
                 style.Font.CopyFrom(headerStyle.Font);
-                if (!headerStyle.Font.Size.IsEmpty) {
+                if (!headerStyle.Font.Size.IsEmpty)
+                {
                     // If the font size is specified on the HeaderStyle, force the font size to 100%,
                     // so it inherits the font size from its parent in IE compatibility mode. I would
                     // think that "1em" would work here as well, but "1em" doesn't work when you change
                     // the font size in the browser.
                     style.Font.Size = new FontUnit(new Unit(100, UnitType.Percentage));
                 }
-                if (!style.IsEmpty) {
+                if (!style.IsEmpty)
+                {
                     style.AddAttributesToRender(writer, this);
                 }
             }
@@ -1459,9 +1769,10 @@ namespace System.Web.UI.WebControls.WebParts {
             writer.RenderBeginTag(HtmlTextWriterTag.Tr);
 
             // Copied from Panel.cs
-            // 
+            //
             HorizontalAlign hAlign = headerStyle.HorizontalAlign;
-            if (hAlign != HorizontalAlign.NotSet) {
+            if (hAlign != HorizontalAlign.NotSet)
+            {
                 TypeConverter hac = TypeDescriptor.GetConverter(typeof(HorizontalAlign));
                 writer.AddAttribute(HtmlTextWriterAttribute.Align, hac.ConvertToString(hAlign));
             }
@@ -1469,45 +1780,79 @@ namespace System.Web.UI.WebControls.WebParts {
             writer.AddStyleAttribute(HtmlTextWriterStyle.WhiteSpace, "nowrap");
             writer.RenderBeginTag(HtmlTextWriterTag.Td);
             writer.Write(DisplayTitle);
-            writer.RenderEndTag();  // Td
+            writer.RenderEndTag(); // Td
 
-            writer.RenderEndTag();  // Tr
-            writer.RenderEndTag();  // Table
+            writer.RenderEndTag(); // Tr
+            writer.RenderEndTag(); // Table
         }
 
-        protected virtual void RestoreWebPart(WebPart webPart) {
-            if (webPart == null) {
+        protected virtual void RestoreWebPart(WebPart webPart)
+        {
+            if (webPart == null)
+            {
                 throw new ArgumentNullException("webPart");
             }
-            if ((webPart.ChromeState == PartChromeState.Minimized) && AllowLayoutChange) {
+            if ((webPart.ChromeState == PartChromeState.Minimized) && AllowLayoutChange)
+            {
                 webPart.ChromeState = PartChromeState.Normal;
             }
         }
 
-        protected override object SaveViewState() {
+        protected override object SaveViewState()
+        {
             object[] myState = new object[viewStateArrayLength];
 
             myState[baseIndex] = base.SaveViewState();
-            myState[selectedPartChromeStyleIndex] = (_selectedPartChromeStyle != null) ? ((IStateManager)_selectedPartChromeStyle).SaveViewState() : null;
-            myState[closeVerbIndex] = (_closeVerb != null) ? ((IStateManager)_closeVerb).SaveViewState() : null;
-            myState[connectVerbIndex] = (_connectVerb != null) ? ((IStateManager)_connectVerb).SaveViewState() : null;
-            myState[deleteVerbIndex] = (_deleteVerb != null) ? ((IStateManager)_deleteVerb).SaveViewState() : null;
-            myState[editVerbIndex] = (_editVerb != null) ? ((IStateManager)_editVerb).SaveViewState() : null;
-            myState[helpVerbIndex] = (_helpVerb != null) ? ((IStateManager)_helpVerb).SaveViewState() : null;
-            myState[minimizeVerbIndex] = (_minimizeVerb != null) ? ((IStateManager)_minimizeVerb).SaveViewState() : null;
-            myState[restoreVerbIndex] = (_restoreVerb != null) ? ((IStateManager)_restoreVerb).SaveViewState() : null;
-            myState[exportVerbIndex] = (_exportVerb != null) ? ((IStateManager)_exportVerb).SaveViewState() : null;
-            myState[menuPopupStyleIndex] = (_menuPopupStyle != null) ? ((IStateManager)_menuPopupStyle).SaveViewState() : null;
-            myState[menuLabelStyleIndex] = (_menuLabelStyle != null) ? ((IStateManager)_menuLabelStyle).SaveViewState() : null;
-            myState[menuLabelHoverStyleIndex] = (_menuLabelHoverStyle != null) ? ((IStateManager)_menuLabelHoverStyle).SaveViewState() : null;
-            myState[menuCheckImageStyleIndex] = (_menuCheckImageStyle != null) ? ((IStateManager)_menuCheckImageStyle).SaveViewState() : null;
-            myState[menuVerbStyleIndex] = (_menuVerbStyle != null) ? ((IStateManager)_menuVerbStyle).SaveViewState() : null;
-            myState[menuVerbHoverStyleIndex] = (_menuVerbHoverStyle != null) ? ((IStateManager)_menuVerbHoverStyle).SaveViewState() : null;
-            myState[controlStyleIndex] = ControlStyleCreated ? ((IStateManager)ControlStyle).SaveViewState() : null;
-            myState[titleBarVerbStyleIndex] = (_titleBarVerbStyle != null) ? ((IStateManager)_titleBarVerbStyle).SaveViewState() : null;
+            myState[selectedPartChromeStyleIndex] =
+                (_selectedPartChromeStyle != null)
+                    ? ((IStateManager)_selectedPartChromeStyle).SaveViewState()
+                    : null;
+            myState[closeVerbIndex] =
+                (_closeVerb != null) ? ((IStateManager)_closeVerb).SaveViewState() : null;
+            myState[connectVerbIndex] =
+                (_connectVerb != null) ? ((IStateManager)_connectVerb).SaveViewState() : null;
+            myState[deleteVerbIndex] =
+                (_deleteVerb != null) ? ((IStateManager)_deleteVerb).SaveViewState() : null;
+            myState[editVerbIndex] =
+                (_editVerb != null) ? ((IStateManager)_editVerb).SaveViewState() : null;
+            myState[helpVerbIndex] =
+                (_helpVerb != null) ? ((IStateManager)_helpVerb).SaveViewState() : null;
+            myState[minimizeVerbIndex] =
+                (_minimizeVerb != null) ? ((IStateManager)_minimizeVerb).SaveViewState() : null;
+            myState[restoreVerbIndex] =
+                (_restoreVerb != null) ? ((IStateManager)_restoreVerb).SaveViewState() : null;
+            myState[exportVerbIndex] =
+                (_exportVerb != null) ? ((IStateManager)_exportVerb).SaveViewState() : null;
+            myState[menuPopupStyleIndex] =
+                (_menuPopupStyle != null) ? ((IStateManager)_menuPopupStyle).SaveViewState() : null;
+            myState[menuLabelStyleIndex] =
+                (_menuLabelStyle != null) ? ((IStateManager)_menuLabelStyle).SaveViewState() : null;
+            myState[menuLabelHoverStyleIndex] =
+                (_menuLabelHoverStyle != null)
+                    ? ((IStateManager)_menuLabelHoverStyle).SaveViewState()
+                    : null;
+            myState[menuCheckImageStyleIndex] =
+                (_menuCheckImageStyle != null)
+                    ? ((IStateManager)_menuCheckImageStyle).SaveViewState()
+                    : null;
+            myState[menuVerbStyleIndex] =
+                (_menuVerbStyle != null) ? ((IStateManager)_menuVerbStyle).SaveViewState() : null;
+            myState[menuVerbHoverStyleIndex] =
+                (_menuVerbHoverStyle != null)
+                    ? ((IStateManager)_menuVerbHoverStyle).SaveViewState()
+                    : null;
+            myState[controlStyleIndex] = ControlStyleCreated
+                ? ((IStateManager)ControlStyle).SaveViewState()
+                : null;
+            myState[titleBarVerbStyleIndex] =
+                (_titleBarVerbStyle != null)
+                    ? ((IStateManager)_titleBarVerbStyle).SaveViewState()
+                    : null;
 
-            for (int i=0; i < viewStateArrayLength; i++) {
-                if (myState[i] != null) {
+            for (int i = 0; i < viewStateArrayLength; i++)
+            {
+                if (myState[i] != null)
+                {
                     return myState;
                 }
             }
@@ -1516,80 +1861,105 @@ namespace System.Web.UI.WebControls.WebParts {
             return null;
         }
 
-        protected override void TrackViewState() {
+        protected override void TrackViewState()
+        {
             base.TrackViewState();
 
-            if (_selectedPartChromeStyle != null) {
-                ((IStateManager) _selectedPartChromeStyle).TrackViewState();
+            if (_selectedPartChromeStyle != null)
+            {
+                ((IStateManager)_selectedPartChromeStyle).TrackViewState();
             }
-            if (_closeVerb != null) {
-                ((IStateManager) _closeVerb).TrackViewState();
+            if (_closeVerb != null)
+            {
+                ((IStateManager)_closeVerb).TrackViewState();
             }
-            if (_connectVerb != null) {
-                ((IStateManager) _connectVerb).TrackViewState();
+            if (_connectVerb != null)
+            {
+                ((IStateManager)_connectVerb).TrackViewState();
             }
-            if (_deleteVerb != null) {
-                ((IStateManager) _deleteVerb).TrackViewState();
+            if (_deleteVerb != null)
+            {
+                ((IStateManager)_deleteVerb).TrackViewState();
             }
-            if (_editVerb != null) {
-                ((IStateManager) _editVerb).TrackViewState();
+            if (_editVerb != null)
+            {
+                ((IStateManager)_editVerb).TrackViewState();
             }
-            if (_helpVerb != null) {
-                ((IStateManager) _helpVerb).TrackViewState();
+            if (_helpVerb != null)
+            {
+                ((IStateManager)_helpVerb).TrackViewState();
             }
-            if (_minimizeVerb != null) {
-                ((IStateManager) _minimizeVerb).TrackViewState();
+            if (_minimizeVerb != null)
+            {
+                ((IStateManager)_minimizeVerb).TrackViewState();
             }
-            if (_restoreVerb != null) {
-                ((IStateManager) _restoreVerb).TrackViewState();
+            if (_restoreVerb != null)
+            {
+                ((IStateManager)_restoreVerb).TrackViewState();
             }
-            if (_exportVerb != null) {
-                ((IStateManager) _exportVerb).TrackViewState();
+            if (_exportVerb != null)
+            {
+                ((IStateManager)_exportVerb).TrackViewState();
             }
-            if (_menuPopupStyle != null) {
-                ((IStateManager) _menuPopupStyle).TrackViewState();
+            if (_menuPopupStyle != null)
+            {
+                ((IStateManager)_menuPopupStyle).TrackViewState();
             }
-            if (_menuLabelStyle != null) {
-                ((IStateManager) _menuLabelStyle).TrackViewState();
+            if (_menuLabelStyle != null)
+            {
+                ((IStateManager)_menuLabelStyle).TrackViewState();
             }
-            if (_menuLabelHoverStyle != null) {
-                ((IStateManager) _menuLabelHoverStyle).TrackViewState();
+            if (_menuLabelHoverStyle != null)
+            {
+                ((IStateManager)_menuLabelHoverStyle).TrackViewState();
             }
-            if (_menuCheckImageStyle != null) {
-                ((IStateManager) _menuCheckImageStyle).TrackViewState();
+            if (_menuCheckImageStyle != null)
+            {
+                ((IStateManager)_menuCheckImageStyle).TrackViewState();
             }
-            if (_menuVerbStyle != null) {
-                ((IStateManager) _menuVerbStyle).TrackViewState();
+            if (_menuVerbStyle != null)
+            {
+                ((IStateManager)_menuVerbStyle).TrackViewState();
             }
-            if (_menuVerbHoverStyle != null) {
+            if (_menuVerbHoverStyle != null)
+            {
                 ((IStateManager)_menuVerbHoverStyle).TrackViewState();
             }
-            if (ControlStyleCreated) {
-                ((IStateManager) ControlStyle).TrackViewState();
+            if (ControlStyleCreated)
+            {
+                ((IStateManager)ControlStyle).TrackViewState();
             }
-            if (_titleBarVerbStyle != null) {
+            if (_titleBarVerbStyle != null)
+            {
                 ((IStateManager)_titleBarVerbStyle).TrackViewState();
             }
         }
 
         // Called from WebPartChrome and DesignerWebPartChrome.  Can't be passed as argument to
         // RenderWebPart, since the WebPartZoneDesigner calls RenderWebPart as well.
-        internal WebPartVerbCollection VerbsForWebPart(WebPart webPart) {
+        internal WebPartVerbCollection VerbsForWebPart(WebPart webPart)
+        {
             WebPartVerbCollection verbs = new WebPartVerbCollection();
 
             WebPartVerbCollection partVerbs = webPart.Verbs;
-            if (partVerbs != null) {
-                foreach (WebPartVerb verb in partVerbs) {
-                    if (verb.ServerClickHandler != null) {
+            if (partVerbs != null)
+            {
+                foreach (WebPartVerb verb in partVerbs)
+                {
+                    if (verb.ServerClickHandler != null)
+                    {
                         verb.SetEventArgumentPrefix(partVerbEventArgumentWithSeparator);
                     }
                     verbs.Add(verb);
                 }
             }
 
-            if (_verbs != null) {
-                foreach (WebPartVerb verb in _verbs) {
-                    if (verb.ServerClickHandler != null) {
+            if (_verbs != null)
+            {
+                foreach (WebPartVerb verb in _verbs)
+                {
+                    if (verb.ServerClickHandler != null)
+                    {
                         verb.SetEventArgumentPrefix(zoneVerbEventArgumentWithSeparator);
                     }
                     verbs.Add(verb);
@@ -1631,109 +2001,102 @@ namespace System.Web.UI.WebControls.WebParts {
 
         #region Implementation of IPostBackEventHandler
         /// <internalonly/>
-        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument) {
+        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument)
+        {
             RaisePostBackEvent(eventArgument);
         }
         #endregion
 
         #region Implementation of IWebPartMenuUser
-        Style IWebPartMenuUser.CheckImageStyle {
-            get {
-                return _menuCheckImageStyle;
-            }
+        Style IWebPartMenuUser.CheckImageStyle
+        {
+            get { return _menuCheckImageStyle; }
         }
 
-        string IWebPartMenuUser.CheckImageUrl {
-            get {
+        string IWebPartMenuUser.CheckImageUrl
+        {
+            get
+            {
                 string s = MenuCheckImageUrl;
-                if (!String.IsNullOrEmpty(s)) {
+                if (!String.IsNullOrEmpty(s))
+                {
                     s = ResolveClientUrl(s);
                 }
                 return s;
             }
         }
 
-        string IWebPartMenuUser.ClientID {
-            get {
-                return ClientID;
-            }
+        string IWebPartMenuUser.ClientID
+        {
+            get { return ClientID; }
         }
 
-        string IWebPartMenuUser.PopupImageUrl {
-            get {
+        string IWebPartMenuUser.PopupImageUrl
+        {
+            get
+            {
                 string s = MenuPopupImageUrl;
-                if (!String.IsNullOrEmpty(s)) {
+                if (!String.IsNullOrEmpty(s))
+                {
                     s = ResolveClientUrl(s);
                 }
                 return s;
             }
         }
 
-        Style IWebPartMenuUser.ItemHoverStyle {
-            get {
-                return _menuVerbHoverStyle;
-            }
+        Style IWebPartMenuUser.ItemHoverStyle
+        {
+            get { return _menuVerbHoverStyle; }
         }
 
-        Style IWebPartMenuUser.ItemStyle {
-            get {
-                return _menuVerbStyle;
-            }
+        Style IWebPartMenuUser.ItemStyle
+        {
+            get { return _menuVerbStyle; }
         }
 
-        Style IWebPartMenuUser.LabelHoverStyle {
-            get {
-                return _menuLabelHoverStyle;
-            }
+        Style IWebPartMenuUser.LabelHoverStyle
+        {
+            get { return _menuLabelHoverStyle; }
         }
 
-        string IWebPartMenuUser.LabelImageUrl {
-            get {
-                return null;
-            }
+        string IWebPartMenuUser.LabelImageUrl
+        {
+            get { return null; }
         }
 
-        Style IWebPartMenuUser.LabelStyle {
-            get {
-                return MenuLabelStyle;
-            }
+        Style IWebPartMenuUser.LabelStyle
+        {
+            get { return MenuLabelStyle; }
         }
 
-        string IWebPartMenuUser.LabelText {
-            get {
-                return MenuLabelText;
-            }
+        string IWebPartMenuUser.LabelText
+        {
+            get { return MenuLabelText; }
         }
 
-        WebPartMenuStyle IWebPartMenuUser.MenuPopupStyle {
-            get {
-                return _menuPopupStyle;
-            }
+        WebPartMenuStyle IWebPartMenuUser.MenuPopupStyle
+        {
+            get { return _menuPopupStyle; }
         }
 
-        Page IWebPartMenuUser.Page {
-            get {
-                return Page;
-            }
+        Page IWebPartMenuUser.Page
+        {
+            get { return Page; }
         }
 
-        string IWebPartMenuUser.PostBackTarget {
-            get {
-                return UniqueID;
-            }
+        string IWebPartMenuUser.PostBackTarget
+        {
+            get { return UniqueID; }
         }
 
-        IUrlResolutionService IWebPartMenuUser.UrlResolver {
-            get {
-                return this;
-            }
+        IUrlResolutionService IWebPartMenuUser.UrlResolver
+        {
+            get { return this; }
         }
 
-        void IWebPartMenuUser.OnBeginRender(HtmlTextWriter writer) {
-        }
+        void IWebPartMenuUser.OnBeginRender(HtmlTextWriter writer) { }
 
-        void IWebPartMenuUser.OnEndRender(HtmlTextWriter writer) {
-        }
+        void IWebPartMenuUser.OnEndRender(HtmlTextWriter writer) { }
         #endregion
     }
 }

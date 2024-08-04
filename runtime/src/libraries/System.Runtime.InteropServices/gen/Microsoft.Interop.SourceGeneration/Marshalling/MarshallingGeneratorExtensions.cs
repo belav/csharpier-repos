@@ -17,31 +17,44 @@ namespace Microsoft.Interop
         /// </summary>
         /// <param name="generator">The marshalling generator for this <paramref name="info"/></param>
         /// <param name="info">Object to marshal</param>
-        public static TypeSyntax AsReturnType(this IMarshallingGenerator generator, TypePositionInfo info)
+        public static TypeSyntax AsReturnType(
+            this IMarshallingGenerator generator,
+            TypePositionInfo info
+        )
         {
             return generator.GetNativeSignatureBehavior(info) switch
             {
                 SignatureBehavior.ManagedTypeAndAttributes => info.ManagedType.Syntax,
                 SignatureBehavior.NativeType => generator.AsNativeType(info).Syntax,
-                SignatureBehavior.PointerToNativeType => PointerType(generator.AsNativeType(info).Syntax),
-                _ => throw new InvalidOperationException()
+                SignatureBehavior.PointerToNativeType
+                    => PointerType(generator.AsNativeType(info).Syntax),
+                _ => throw new InvalidOperationException(),
             };
         }
+
         /// <summary>
         /// Gets any attributes that should be applied to the return type for this <paramref name="info"/>.
         /// </summary>
         /// <param name="generator">The marshalling generator for this <paramref name="info"/></param>
         /// <param name="info">Object to marshal</param>
         /// <returns>Attributes for the return type for this <paramref name="info"/>, or <c>null</c> if no attributes should be added.</returns>
-        public static AttributeListSyntax? GenerateAttributesForReturnType(this IMarshallingGenerator generator, TypePositionInfo info)
+        public static AttributeListSyntax? GenerateAttributesForReturnType(
+            this IMarshallingGenerator generator,
+            TypePositionInfo info
+        )
         {
-            if (generator.GetNativeSignatureBehavior(info) != SignatureBehavior.ManagedTypeAndAttributes)
+            if (
+                generator.GetNativeSignatureBehavior(info)
+                != SignatureBehavior.ManagedTypeAndAttributes
+            )
             {
                 return null;
             }
 
-            if (info.MarshallingAttributeInfo is IForwardedMarshallingInfo forwarded
-                && forwarded.TryCreateAttributeSyntax(out AttributeSyntax forwardedAttribute))
+            if (
+                info.MarshallingAttributeInfo is IForwardedMarshallingInfo forwarded
+                && forwarded.TryCreateAttributeSyntax(out AttributeSyntax forwardedAttribute)
+            )
             {
                 return AttributeList(SingletonSeparatedList(forwardedAttribute));
             }
@@ -57,7 +70,11 @@ namespace Microsoft.Interop
         /// <param name="generator">The marshalling generator for this <paramref name="info"/></param>
         /// <param name="info">Object to marshal</param>
         /// <param name="context">The stub marshalling context</param>
-        public static ParameterSyntax AsParameter(this IMarshallingGenerator generator, TypePositionInfo info, StubCodeContext context)
+        public static ParameterSyntax AsParameter(
+            this IMarshallingGenerator generator,
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             SignatureBehavior behavior = generator.GetNativeSignatureBehavior(info);
             if (behavior == SignatureBehavior.ManagedTypeAndAttributes)
@@ -84,43 +101,61 @@ namespace Microsoft.Interop
                 identifierName = generator.GetValueBoundaryBehavior(info, context) switch
                 {
                     ValueBoundaryBehavior.ManagedIdentifier => info.IsByRef ? param : managed,
-                    ValueBoundaryBehavior.NativeIdentifier or ValueBoundaryBehavior.CastNativeIdentifier => native,
+                    ValueBoundaryBehavior.NativeIdentifier
+                    or ValueBoundaryBehavior.CastNativeIdentifier
+                        => native,
                     ValueBoundaryBehavior.AddressOfNativeIdentifier => param,
-                    _ => throw new UnreachableException()
+                    _ => throw new UnreachableException(),
                 };
             }
             else
             {
-                throw new ArgumentException("Context direction must be ManagedToUnmanaged or UnmanagedToManaged");
+                throw new ArgumentException(
+                    "Context direction must be ManagedToUnmanaged or UnmanagedToManaged"
+                );
             }
             return Parameter(Identifier(identifierName))
-                .WithType(behavior switch
-                {
-                    SignatureBehavior.NativeType => generator.AsNativeType(info).Syntax,
-                    SignatureBehavior.PointerToNativeType => PointerType(generator.AsNativeType(info).Syntax),
-                    _ => throw new InvalidOperationException()
-                });
+                .WithType(
+                    behavior switch
+                    {
+                        SignatureBehavior.NativeType => generator.AsNativeType(info).Syntax,
+                        SignatureBehavior.PointerToNativeType
+                            => PointerType(generator.AsNativeType(info).Syntax),
+                        _ => throw new InvalidOperationException(),
+                    }
+                );
         }
 
-        private static ParameterSyntax GenerateForwardingParameter(TypePositionInfo info, string identifier)
+        private static ParameterSyntax GenerateForwardingParameter(
+            TypePositionInfo info,
+            string identifier
+        )
         {
             ParameterSyntax param = Parameter(Identifier(identifier))
                 .WithModifiers(TokenList(Token(info.RefKindSyntax)))
                 .WithType(info.ManagedType.Syntax);
 
             List<AttributeSyntax> rehydratedAttributes = new();
-            if (info.MarshallingAttributeInfo is IForwardedMarshallingInfo forwardedMarshallingInfo
-                && forwardedMarshallingInfo.TryCreateAttributeSyntax(out AttributeSyntax forwardedAttribute))
+            if (
+                info.MarshallingAttributeInfo is IForwardedMarshallingInfo forwardedMarshallingInfo
+                && forwardedMarshallingInfo.TryCreateAttributeSyntax(
+                    out AttributeSyntax forwardedAttribute
+                )
+            )
             {
                 rehydratedAttributes.Add(forwardedAttribute);
             }
             if (info.ByValueContentsMarshalKind.HasFlag(ByValueContentsMarshalKind.In))
             {
-                rehydratedAttributes.Add(Attribute(IdentifierName(TypeNames.System_Runtime_InteropServices_InAttribute)));
+                rehydratedAttributes.Add(
+                    Attribute(IdentifierName(TypeNames.System_Runtime_InteropServices_InAttribute))
+                );
             }
             if (info.ByValueContentsMarshalKind.HasFlag(ByValueContentsMarshalKind.Out))
             {
-                rehydratedAttributes.Add(Attribute(IdentifierName(TypeNames.System_Runtime_InteropServices_OutAttribute)));
+                rehydratedAttributes.Add(
+                    Attribute(IdentifierName(TypeNames.System_Runtime_InteropServices_OutAttribute))
+                );
             }
 
             if (rehydratedAttributes.Count > 0)
@@ -137,34 +172,71 @@ namespace Microsoft.Interop
         /// <param name="generator">The marshalling generator for this <paramref name="info"/></param>
         /// <param name="info">Object to marshal</param>
         /// <param name="context">Marshalling context</param>
-        public static ArgumentSyntax AsArgument(this IMarshallingGenerator generator, TypePositionInfo info, StubCodeContext context)
+        public static ArgumentSyntax AsArgument(
+            this IMarshallingGenerator generator,
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             (string managedIdentifier, string nativeIdentifier) = context.GetIdentifiers(info);
             return generator.GetValueBoundaryBehavior(info, context) switch
             {
-                ValueBoundaryBehavior.ManagedIdentifier when !info.IsByRef => Argument(IdentifierName(managedIdentifier)),
-                ValueBoundaryBehavior.ManagedIdentifier when info.IsByRef => Argument(IdentifierName(managedIdentifier)).WithRefKindKeyword(Token(info.RefKindSyntax)),
-                ValueBoundaryBehavior.NativeIdentifier => Argument(IdentifierName(nativeIdentifier)),
-                ValueBoundaryBehavior.AddressOfNativeIdentifier => Argument(PrefixUnaryExpression(SyntaxKind.AddressOfExpression, IdentifierName(nativeIdentifier))),
-                ValueBoundaryBehavior.CastNativeIdentifier => Argument(CastExpression(generator.AsParameter(info, context).Type, IdentifierName(nativeIdentifier))),
-                _ => throw new InvalidOperationException()
+                ValueBoundaryBehavior.ManagedIdentifier when !info.IsByRef
+                    => Argument(IdentifierName(managedIdentifier)),
+                ValueBoundaryBehavior.ManagedIdentifier when info.IsByRef
+                    => Argument(IdentifierName(managedIdentifier))
+                        .WithRefKindKeyword(Token(info.RefKindSyntax)),
+                ValueBoundaryBehavior.NativeIdentifier
+                    => Argument(IdentifierName(nativeIdentifier)),
+                ValueBoundaryBehavior.AddressOfNativeIdentifier
+                    => Argument(
+                        PrefixUnaryExpression(
+                            SyntaxKind.AddressOfExpression,
+                            IdentifierName(nativeIdentifier)
+                        )
+                    ),
+                ValueBoundaryBehavior.CastNativeIdentifier
+                    => Argument(
+                        CastExpression(
+                            generator.AsParameter(info, context).Type,
+                            IdentifierName(nativeIdentifier)
+                        )
+                    ),
+                _ => throw new InvalidOperationException(),
             };
         }
 
-        public static ArgumentSyntax AsManagedArgument(this IMarshallingGenerator generator, TypePositionInfo info, StubCodeContext context)
+        public static ArgumentSyntax AsManagedArgument(
+            this IMarshallingGenerator generator,
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             var (managedIdentifier, _) = context.GetIdentifiers(info);
             if (info.IsByRef)
             {
-                return Argument(IdentifierName(managedIdentifier)).WithRefKindKeyword(Token(info.RefKindSyntax));
+                return Argument(IdentifierName(managedIdentifier))
+                    .WithRefKindKeyword(Token(info.RefKindSyntax));
             }
             return Argument(IdentifierName(managedIdentifier));
         }
 
-        public static ExpressionSyntax GenerateNativeByRefInitialization(this IMarshallingGenerator generator, TypePositionInfo info, StubCodeContext context)
+        public static ExpressionSyntax GenerateNativeByRefInitialization(
+            this IMarshallingGenerator generator,
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
-            string paramIdentifier = context.GetAdditionalIdentifier(info, ParameterIdentifierSuffix);
-            return RefExpression(PrefixUnaryExpression(SyntaxKind.PointerIndirectionExpression, IdentifierName(paramIdentifier)));
+            string paramIdentifier = context.GetAdditionalIdentifier(
+                info,
+                ParameterIdentifierSuffix
+            );
+            return RefExpression(
+                PrefixUnaryExpression(
+                    SyntaxKind.PointerIndirectionExpression,
+                    IdentifierName(paramIdentifier)
+                )
+            );
         }
     }
 }

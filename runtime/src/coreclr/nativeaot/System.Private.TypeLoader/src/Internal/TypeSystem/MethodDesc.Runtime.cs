@@ -3,7 +3,6 @@
 
 
 using System;
-
 using Internal.Runtime.CompilerServices;
 
 namespace Internal.TypeSystem
@@ -26,10 +25,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public IntPtr FunctionPointer
         {
-            get
-            {
-                return _functionPointer;
-            }
+            get { return _functionPointer; }
         }
 
         /// <summary>
@@ -37,10 +33,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public IntPtr UsgFunctionPointer
         {
-            get
-            {
-                return _usgFunctionPointer;
-            }
+            get { return _usgFunctionPointer; }
         }
 
         public abstract MethodNameAndSignature NameAndSignature { get; }
@@ -60,16 +53,14 @@ namespace Internal.TypeSystem
 
         protected virtual bool ComputeIsNonSharableMethod()
         {
-            return !OwningType.IsCanonicalSubtype(CanonicalFormKind.Any) &&
-                        OwningType == (OwningType.ConvertToCanonForm(CanonicalFormKind.Specific) as DefType);
+            return !OwningType.IsCanonicalSubtype(CanonicalFormKind.Any)
+                && OwningType
+                    == (OwningType.ConvertToCanonForm(CanonicalFormKind.Specific) as DefType);
         }
 
         public virtual bool UnboxingStub
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 }

@@ -16,22 +16,35 @@ namespace Microsoft.Extensions.Internal;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class ComponentInternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
 {
-    private static readonly string[] NamespaceParts = new[] { "RenderTree", "Components", "AspNetCore", "Microsoft", };
+    private static readonly string[] NamespaceParts = new[]
+    {
+        "RenderTree",
+        "Components",
+        "AspNetCore",
+        "Microsoft",
+    };
 
     private readonly InternalUsageAnalyzer _inner;
 
     public ComponentInternalUsageDiagnosticAnalyzer()
     {
         // We don't have in *internal* attribute in Blazor.
-        _inner = new InternalUsageAnalyzer(IsInInternalNamespace, hasInternalAttribute: null, DiagnosticDescriptors.DoNotUseRenderTreeTypes);
+        _inner = new InternalUsageAnalyzer(
+            IsInInternalNamespace,
+            hasInternalAttribute: null,
+            DiagnosticDescriptors.DoNotUseRenderTreeTypes
+        );
     }
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(DiagnosticDescriptors.DoNotUseRenderTreeTypes);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+        ImmutableArray.Create(DiagnosticDescriptors.DoNotUseRenderTreeTypes);
 
     public override void Initialize(AnalysisContext context)
     {
         context.EnableConcurrentExecution();
-        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
+        context.ConfigureGeneratedCodeAnalysis(
+            GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics
+        );
 
         _inner.Register(context);
     }
@@ -41,7 +54,10 @@ public class ComponentInternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
         var @namespace = symbol?.ContainingNamespace;
         for (var i = 0; i < NamespaceParts.Length; i++)
         {
-            if (@namespace == null || !string.Equals(NamespaceParts[i], @namespace.Name, StringComparison.Ordinal))
+            if (
+                @namespace == null
+                || !string.Equals(NamespaceParts[i], @namespace.Name, StringComparison.Ordinal)
+            )
             {
                 return false;
             }

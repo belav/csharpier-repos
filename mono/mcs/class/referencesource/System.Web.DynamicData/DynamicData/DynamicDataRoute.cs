@@ -1,11 +1,13 @@
-using System.Web.Routing;
 using System.Diagnostics;
+using System.Web.Routing;
 
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     /// <summary>
     /// Route used by Dynamic Data
     /// </summary>
-    public class DynamicDataRoute : Route {
+    public class DynamicDataRoute : Route
+    {
         internal const string ActionToken = "Action";
         internal const string TableToken = "Table";
         internal const string ModelToken = "__Model";
@@ -18,11 +20,13 @@ namespace System.Web.DynamicData {
         /// Construct a DynamicDataRoute
         /// </summary>
         /// <param name="url">url passed to the base ctor</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
-            Justification = "This is a URL template with special characters, not just a regular valid URL.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            Justification = "This is a URL template with special characters, not just a regular valid URL."
+        )]
         public DynamicDataRoute(string url)
-            : base(url, new DynamicDataRouteHandler()) {
-        }
+            : base(url, new DynamicDataRouteHandler()) { }
 
         /// <summary>
         /// Name of the table that this route applies to. Can be omitted.
@@ -42,17 +46,22 @@ namespace System.Web.DynamicData {
         /// <summary>
         /// The MetaModel that this route applies to
         /// </summary>
-        public MetaModel Model {
+        public MetaModel Model
+        {
             get { return _model ?? MetaModel.Default; }
             set { _model = value; }
         }
 
         // Make sure that if the Table or Action properties were used, they get added to
         // the Defaults dictionary
-        private void EnsureRouteInitialize() {
-            if (!_initialized) {
-                lock (_initializationLock) {
-                    if (!_initialized) {
+        private void EnsureRouteInitialize()
+        {
+            if (!_initialized)
+            {
+                lock (_initializationLock)
+                {
+                    if (!_initialized)
+                    {
                         // Give the model to the handler
                         Debug.Assert(Model != null);
                         RouteHandler.Model = Model;
@@ -65,7 +74,8 @@ namespace System.Web.DynamicData {
                         if (Defaults == null)
                             Defaults = new RouteValueDictionary();
 
-                        if (Table != null) {
+                        if (Table != null)
+                        {
                             // Try to get the table just to cause a failure if it doesn't exist
                             var metaTable = Model.GetTable(Table);
 
@@ -84,19 +94,21 @@ namespace System.Web.DynamicData {
         /// <summary>
         /// See base class documentation
         /// </summary>
-        public override RouteData GetRouteData(HttpContextBase httpContext) {
+        public override RouteData GetRouteData(HttpContextBase httpContext)
+        {
             EnsureRouteInitialize();
 
             // Try to get the route data for this route
             RouteData routeData = base.GetRouteData(httpContext);
 
             // If not, we're done
-            if (routeData == null) {
+            if (routeData == null)
+            {
                 return null;
             }
 
             // Add all the query string values to the RouteData
-            // 
+            //
             AddQueryStringParamsToRouteData(httpContext, routeData);
 
             // Check if the route values match an existing table and if they can be served by a scaffolded or custom page
@@ -106,10 +118,16 @@ namespace System.Web.DynamicData {
             return routeData;
         }
 
-        internal static void AddQueryStringParamsToRouteData(HttpContextBase httpContext, RouteData routeData) {
-            foreach (string key in httpContext.Request.QueryString) {
+        internal static void AddQueryStringParamsToRouteData(
+            HttpContextBase httpContext,
+            RouteData routeData
+        )
+        {
+            foreach (string key in httpContext.Request.QueryString)
+            {
                 // Don't overwrite existing items
-                if (!routeData.Values.ContainsKey(key)) {
+                if (!routeData.Values.ContainsKey(key))
+                {
                     routeData.Values[key] = httpContext.Request.QueryString[key];
                 }
             }
@@ -118,14 +136,20 @@ namespace System.Web.DynamicData {
         /// <summary>
         /// See base class documentation
         /// </summary>
-        public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values) {
+        public override VirtualPathData GetVirtualPath(
+            RequestContext requestContext,
+            RouteValueDictionary values
+        )
+        {
             EnsureRouteInitialize();
 
             // Check if the route values include a MetaModel
             object modelObject;
-            if (values.TryGetValue(ModelToken, out modelObject)) {
+            if (values.TryGetValue(ModelToken, out modelObject))
+            {
                 var model = modelObject as MetaModel;
-                if (model != null) {
+                if (model != null)
+                {
                     // If it's different from the one for this route, fail the route matching
                     if (modelObject != Model)
                         return null;
@@ -144,24 +168,33 @@ namespace System.Web.DynamicData {
                 return null;
 
             // Check if the route values match an existing table and if they can be served by a scaffolded or custom page
-            if (VerifyRouteValues(values)) {
+            if (VerifyRouteValues(values))
+            {
                 return virtualPathData;
             }
-            else {
+            else
+            {
                 return null;
             }
         }
 
-        private bool VerifyRouteValues(RouteValueDictionary values) {
+        private bool VerifyRouteValues(RouteValueDictionary values)
+        {
             // Get the MetaTable and action.  If either is missing, return false to skip this route
-            object tableNameObject, actionObject;
-            if (!values.TryGetValue(TableToken, out tableNameObject) || !values.TryGetValue(ActionToken, out actionObject)) {
+            object tableNameObject,
+                actionObject;
+            if (
+                !values.TryGetValue(TableToken, out tableNameObject)
+                || !values.TryGetValue(ActionToken, out actionObject)
+            )
+            {
                 return false;
             }
 
             MetaTable table;
             // If no table by such name is available, return false to move on to next route.
-            if (!Model.TryGetTable((string)tableNameObject, out table)) {
+            if (!Model.TryGetTable((string)tableNameObject, out table))
+            {
                 return false;
             }
 
@@ -175,7 +208,8 @@ namespace System.Web.DynamicData {
         /// </summary>
         /// <param name="routeData">The route data</param>
         /// <returns>The found MetaTable</returns>
-        public MetaTable GetTableFromRouteData(RouteData routeData) {
+        public MetaTable GetTableFromRouteData(RouteData routeData)
+        {
             string tableName = routeData.GetRequiredString(TableToken);
             return Model.GetTable(tableName);
         }
@@ -185,14 +219,16 @@ namespace System.Web.DynamicData {
         /// </summary>
         /// <param name="routeData">The route data</param>
         /// <returns>The found Action</returns>
-        public string GetActionFromRouteData(RouteData routeData) {
+        public string GetActionFromRouteData(RouteData routeData)
+        {
             return routeData.GetRequiredString(ActionToken);
         }
 
         /// <summary>
         /// Strongly typed version of Route.RouteHandler for convenience
         /// </summary>
-        public new DynamicDataRouteHandler RouteHandler {
+        public new DynamicDataRouteHandler RouteHandler
+        {
             get { return (DynamicDataRouteHandler)base.RouteHandler; }
             set { base.RouteHandler = value; }
         }

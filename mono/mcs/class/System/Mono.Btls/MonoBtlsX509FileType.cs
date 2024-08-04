@@ -25,13 +25,14 @@
 // THE SOFTWARE.
 #if SECURITY_DEP && MONO_FEATURE_BTLS
 using System;
+
 namespace Mono.Btls
 {
-	enum MonoBtlsX509FileType
-	{
-		PEM = 1,
-		ASN1 = 2,
-		DEFAULT = 3
-	}
+    enum MonoBtlsX509FileType
+    {
+        PEM = 1,
+        ASN1 = 2,
+        DEFAULT = 3,
+    }
 }
 #endif

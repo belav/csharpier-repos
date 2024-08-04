@@ -10,19 +10,20 @@
 using System;
 using System.Security.Cryptography;
 
-namespace Mono.Security.Cryptography {
+namespace Mono.Security.Cryptography
+{
+    class CapiRandomNumberGenerator : CapiContext
+    {
+        public CapiRandomNumberGenerator()
+            : base() { }
 
-class CapiRandomNumberGenerator : CapiContext {
+        public CapiRandomNumberGenerator(CspParameters cspParams)
+            : base(cspParams) { }
 
-	public CapiRandomNumberGenerator () : base () {}
-
-	public CapiRandomNumberGenerator (CspParameters cspParams) : base (cspParams) {}
-
-	public void GenRandom (byte[] data) 
-	{
-		uint l = (uint) data.Length;
-		InternalResult = CryptoAPI.CryptGenRandom (Handle, l, data);
-	}
-}
-
+        public void GenRandom(byte[] data)
+        {
+            uint l = (uint)data.Length;
+            InternalResult = CryptoAPI.CryptGenRandom(Handle, l, data);
+        }
+    }
 }

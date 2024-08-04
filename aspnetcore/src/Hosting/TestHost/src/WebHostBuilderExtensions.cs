@@ -36,7 +36,10 @@ public static class WebHostBuilderExtensions
     /// <param name="builder">The <see cref="IWebHostBuilder"/>.</param>
     /// <param name="configureOptions">Configures test server options</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
-    public static IWebHostBuilder UseTestServer(this IWebHostBuilder builder, Action<TestServerOptions> configureOptions)
+    public static IWebHostBuilder UseTestServer(
+        this IWebHostBuilder builder,
+        Action<TestServerOptions> configureOptions
+    )
     {
         return builder.ConfigureServices(services =>
         {
@@ -72,7 +75,10 @@ public static class WebHostBuilderExtensions
     /// <param name="webHostBuilder">The <see cref="IWebHostBuilder"/>.</param>
     /// <param name="servicesConfiguration">An <see cref="Action"/> that registers services onto the <see cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
-    public static IWebHostBuilder ConfigureTestServices(this IWebHostBuilder webHostBuilder, Action<IServiceCollection> servicesConfiguration)
+    public static IWebHostBuilder ConfigureTestServices(
+        this IWebHostBuilder webHostBuilder,
+        Action<IServiceCollection> servicesConfiguration
+    )
     {
         ArgumentNullException.ThrowIfNull(webHostBuilder);
         ArgumentNullException.ThrowIfNull(servicesConfiguration);
@@ -85,9 +91,11 @@ public static class WebHostBuilderExtensions
         else
         {
 #pragma warning disable CS0612 // Type or member is obsolete
-            webHostBuilder.ConfigureServices(
-                s => s.AddSingleton<IStartupConfigureServicesFilter>(
-                    new ConfigureTestServicesStartupConfigureServicesFilter(servicesConfiguration)));
+            webHostBuilder.ConfigureServices(s =>
+                s.AddSingleton<IStartupConfigureServicesFilter>(
+                    new ConfigureTestServicesStartupConfigureServicesFilter(servicesConfiguration)
+                )
+            );
 #pragma warning restore CS0612 // Type or member is obsolete
         }
 
@@ -101,15 +109,22 @@ public static class WebHostBuilderExtensions
     /// <param name="servicesConfiguration">An <see cref="Action"/> that registers services onto the <typeparamref name="TContainer"/>.</param>
     /// <typeparam name="TContainer">A collection of service descriptors.</typeparam>
     /// <returns></returns>
-    public static IWebHostBuilder ConfigureTestContainer<TContainer>(this IWebHostBuilder webHostBuilder, Action<TContainer> servicesConfiguration)
+    public static IWebHostBuilder ConfigureTestContainer<TContainer>(
+        this IWebHostBuilder webHostBuilder,
+        Action<TContainer> servicesConfiguration
+    )
     {
         ArgumentNullException.ThrowIfNull(webHostBuilder);
         ArgumentNullException.ThrowIfNull(servicesConfiguration);
 
 #pragma warning disable CS0612 // Type or member is obsolete
-        webHostBuilder.ConfigureServices(
-            s => s.AddSingleton<IStartupConfigureContainerFilter<TContainer>>(
-                new ConfigureTestServicesStartupConfigureContainerFilter<TContainer>(servicesConfiguration)));
+        webHostBuilder.ConfigureServices(s =>
+            s.AddSingleton<IStartupConfigureContainerFilter<TContainer>>(
+                new ConfigureTestServicesStartupConfigureContainerFilter<TContainer>(
+                    servicesConfiguration
+                )
+            )
+        );
 #pragma warning restore CS0612 // Type or member is obsolete
 
         return webHostBuilder;
@@ -122,13 +137,22 @@ public static class WebHostBuilderExtensions
     /// <param name="solutionRelativePath">The directory of the solution file.</param>
     /// <param name="solutionName">The name of the solution file to make the content root relative to.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static IWebHostBuilder UseSolutionRelativeContentRoot(
         this IWebHostBuilder builder,
         string solutionRelativePath,
-        string solutionName = "*.sln")
+        string solutionName = "*.sln"
+    )
     {
-        return builder.UseSolutionRelativeContentRoot(solutionRelativePath, AppContext.BaseDirectory, solutionName);
+        return builder.UseSolutionRelativeContentRoot(
+            solutionRelativePath,
+            AppContext.BaseDirectory,
+            solutionName
+        );
     }
 
     /// <summary>
@@ -139,12 +163,17 @@ public static class WebHostBuilderExtensions
     /// <param name="applicationBasePath">The root of the app's directory.</param>
     /// <param name="solutionName">The name of the solution file to make the content root relative to.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static IWebHostBuilder UseSolutionRelativeContentRoot(
         this IWebHostBuilder builder,
         string solutionRelativePath,
         string applicationBasePath,
-        string solutionName = "*.sln")
+        string solutionName = "*.sln"
+    )
     {
         ArgumentNullException.ThrowIfNull(solutionRelativePath);
         ArgumentNullException.ThrowIfNull(applicationBasePath);
@@ -152,27 +181,35 @@ public static class WebHostBuilderExtensions
         var directoryInfo = new DirectoryInfo(applicationBasePath);
         do
         {
-            var solutionPath = Directory.EnumerateFiles(directoryInfo.FullName, solutionName).FirstOrDefault();
+            var solutionPath = Directory
+                .EnumerateFiles(directoryInfo.FullName, solutionName)
+                .FirstOrDefault();
             if (solutionPath != null)
             {
-                builder.UseContentRoot(Path.GetFullPath(Path.Combine(directoryInfo.FullName, solutionRelativePath)));
+                builder.UseContentRoot(
+                    Path.GetFullPath(Path.Combine(directoryInfo.FullName, solutionRelativePath))
+                );
                 return builder;
             }
 
             directoryInfo = directoryInfo.Parent;
-        }
-        while (directoryInfo is not null);
+        } while (directoryInfo is not null);
 
-        throw new InvalidOperationException($"Solution root could not be located using application root {applicationBasePath}.");
+        throw new InvalidOperationException(
+            $"Solution root could not be located using application root {applicationBasePath}."
+        );
     }
 
 #pragma warning disable CS0612 // Type or member is obsolete
-    private sealed class ConfigureTestServicesStartupConfigureServicesFilter : IStartupConfigureServicesFilter
+    private sealed class ConfigureTestServicesStartupConfigureServicesFilter
+        : IStartupConfigureServicesFilter
 #pragma warning restore CS0612 // Type or member is obsolete
     {
         private readonly Action<IServiceCollection> _servicesConfiguration;
 
-        public ConfigureTestServicesStartupConfigureServicesFilter(Action<IServiceCollection> servicesConfiguration)
+        public ConfigureTestServicesStartupConfigureServicesFilter(
+            Action<IServiceCollection> servicesConfiguration
+        )
         {
             ArgumentNullException.ThrowIfNull(servicesConfiguration);
 
@@ -188,12 +225,15 @@ public static class WebHostBuilderExtensions
     }
 
 #pragma warning disable CS0612 // Type or member is obsolete
-    private sealed class ConfigureTestServicesStartupConfigureContainerFilter<TContainer> : IStartupConfigureContainerFilter<TContainer>
+    private sealed class ConfigureTestServicesStartupConfigureContainerFilter<TContainer>
+        : IStartupConfigureContainerFilter<TContainer>
 #pragma warning restore CS0612 // Type or member is obsolete
     {
         private readonly Action<TContainer> _servicesConfiguration;
 
-        public ConfigureTestServicesStartupConfigureContainerFilter(Action<TContainer> containerConfiguration)
+        public ConfigureTestServicesStartupConfigureContainerFilter(
+            Action<TContainer> containerConfiguration
+        )
         {
             ArgumentNullException.ThrowIfNull(containerConfiguration);
 

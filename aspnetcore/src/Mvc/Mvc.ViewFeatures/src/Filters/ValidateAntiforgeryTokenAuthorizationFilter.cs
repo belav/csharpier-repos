@@ -7,12 +7,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-internal partial class ValidateAntiforgeryTokenAuthorizationFilter : IAsyncAuthorizationFilter, IAntiforgeryPolicy
+internal partial class ValidateAntiforgeryTokenAuthorizationFilter
+    : IAsyncAuthorizationFilter,
+        IAntiforgeryPolicy
 {
     private readonly IAntiforgery _antiforgery;
     private readonly ILogger _logger;
 
-    public ValidateAntiforgeryTokenAuthorizationFilter(IAntiforgery antiforgery, ILoggerFactory loggerFactory)
+    public ValidateAntiforgeryTokenAuthorizationFilter(
+        IAntiforgery antiforgery,
+        ILoggerFactory loggerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(antiforgery);
 
@@ -53,10 +58,24 @@ internal partial class ValidateAntiforgeryTokenAuthorizationFilter : IAsyncAutho
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Antiforgery token validation failed. {Message}", EventName = "AntiforgeryTokenInvalid")]
-        public static partial void AntiforgeryTokenInvalid(ILogger logger, string message, Exception exception);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Antiforgery token validation failed. {Message}",
+            EventName = "AntiforgeryTokenInvalid"
+        )]
+        public static partial void AntiforgeryTokenInvalid(
+            ILogger logger,
+            string message,
+            Exception exception
+        );
 
-        [LoggerMessage(2, LogLevel.Trace, "Skipping the execution of current filter as its not the most effective filter implementing the policy {FilterPolicy}.", EventName = "NotMostEffectiveFilter")]
+        [LoggerMessage(
+            2,
+            LogLevel.Trace,
+            "Skipping the execution of current filter as its not the most effective filter implementing the policy {FilterPolicy}.",
+            EventName = "NotMostEffectiveFilter"
+        )]
         public static partial void NotMostEffectiveFilter(ILogger logger, Type filterPolicy);
     }
 }

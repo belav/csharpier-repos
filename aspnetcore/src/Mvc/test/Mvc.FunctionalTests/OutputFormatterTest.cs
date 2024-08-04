@@ -7,7 +7,8 @@ using System.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class OutputFormatterTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+public class OutputFormatterTest
+    : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
 {
     public OutputFormatterTest(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
     {
@@ -21,7 +22,9 @@ public class OutputFormatterTest : IClassFixture<MvcTestFixture<BasicWebSite.Sta
     [InlineData("ReturnTaskOfObject_StringValue")]
     [InlineData("ReturnString")]
     [InlineData("ReturnObject_StringValue")]
-    public async Task StringOutputFormatter_ForStringValues_GetsSelectedReturnsTextPlainContentType(string actionName)
+    public async Task StringOutputFormatter_ForStringValues_GetsSelectedReturnsTextPlainContentType(
+        string actionName
+    )
     {
         // Arrange
         var expectedContentType = MediaTypeHeaderValue.Parse("text/plain;charset=utf-8");
@@ -72,7 +75,9 @@ public class OutputFormatterTest : IClassFixture<MvcTestFixture<BasicWebSite.Sta
     [InlineData("ReturnTaskOfString_NullValue")]
     [InlineData("ReturnTaskOfObject_NullValue")]
     [InlineData("ReturnObject_NullValue")]
-    public async Task NoContentFormatter_ForNullValue_ByDefault_GetsSelectedAndWritesResponse(string actionName)
+    public async Task NoContentFormatter_ForNullValue_ByDefault_GetsSelectedAndWritesResponse(
+        string actionName
+    )
     {
         // Arrange & Act
         var response = await Client.GetAsync("http://localhost/NoContent/" + actionName);
@@ -90,12 +95,14 @@ public class OutputFormatterTest : IClassFixture<MvcTestFixture<BasicWebSite.Sta
     [InlineData("ReturnTaskOfString_NullValue")]
     [InlineData("ReturnTaskOfObject_NullValue")]
     [InlineData("ReturnObject_NullValue")]
-    public async Task
-        NoContentFormatter_ForNullValue_AndTreatNullAsNoContentFlagSetToFalse_DoesNotGetSelected(string actionName)
+    public async Task NoContentFormatter_ForNullValue_AndTreatNullAsNoContentFlagSetToFalse_DoesNotGetSelected(
+        string actionName
+    )
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/NoContentDoNotTreatNullValueAsNoContent/" +
-                                             actionName);
+        var response = await Client.GetAsync(
+            "http://localhost/NoContentDoNotTreatNullValueAsNoContent/" + actionName
+        );
 
         // Assert
         Assert.Null(response.Content.Headers.ContentType);

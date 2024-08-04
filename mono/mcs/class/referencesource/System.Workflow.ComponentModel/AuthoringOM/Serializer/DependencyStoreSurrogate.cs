@@ -1,21 +1,27 @@
 ﻿namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
     using System.Collections;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Xml;
 
     #region DependencyStoreSurrogate
     internal sealed class DependencyStoreSurrogate : ISerializationSurrogate
     {
         internal DependencyStoreSurrogate() { }
-        void ISerializationSurrogate.GetObjectData(object obj, SerializationInfo info, StreamingContext context)
+
+        void ISerializationSurrogate.GetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context
+        )
         {
-            IDictionary<DependencyProperty, object> store = obj as IDictionary<DependencyProperty, object>;
+            IDictionary<DependencyProperty, object> store =
+                obj as IDictionary<DependencyProperty, object>;
             if (store == null)
                 throw new ArgumentException("obj");
 
@@ -39,7 +45,13 @@
 
             info.SetType(typeof(DependencyStoreRef));
         }
-        object ISerializationSurrogate.SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
+
+        object ISerializationSurrogate.SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector selector
+        )
         {
             return null;
         }
@@ -61,6 +73,7 @@
 
                 return this.store;
             }
+
             void IDeserializationCallback.OnDeserialization(Object sender)
             {
                 if (this.store != null)

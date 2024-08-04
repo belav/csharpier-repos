@@ -14,7 +14,13 @@ namespace System.Xml.XmlConvertTests
         {
             for (int i = 0; i < _byte_CombiningChar.Length; i = i + 2)
             {
-                AddVariation(new CVariation(this, "EncodeNmToken-EncodeLocalNmToken : " + _Expbyte_CombiningChar[i / 2], XmlEncodeName2));
+                AddVariation(
+                    new CVariation(
+                        this,
+                        "EncodeNmToken-EncodeLocalNmToken : " + _Expbyte_CombiningChar[i / 2],
+                        XmlEncodeName2
+                    )
+                );
             }
         }
 
@@ -27,11 +33,19 @@ namespace System.Xml.XmlConvertTests
             int i = ((CurVariation.id) - 1) * 2;
             string strEnVal = string.Empty;
 
-            char c = (char)BinaryPrimitives.ReadUInt16LittleEndian(new Span<byte>(_byte_CombiningChar, i, 2));
+            char c = (char)
+                BinaryPrimitives.ReadUInt16LittleEndian(new Span<byte>(_byte_CombiningChar, i, 2));
             strEnVal = XmlConvert.EncodeNmToken(c.ToString());
-            if (_Expbyte_CombiningChar[i / 2] != "_x0A6F_" && _Expbyte_CombiningChar[i / 2] != "_x0E46_")
+            if (
+                _Expbyte_CombiningChar[i / 2] != "_x0A6F_"
+                && _Expbyte_CombiningChar[i / 2] != "_x0E46_"
+            )
             {
-                CError.Compare(strEnVal, _Expbyte_CombiningChar[i / 2], "Comparison failed at " + i);
+                CError.Compare(
+                    strEnVal,
+                    _Expbyte_CombiningChar[i / 2],
+                    "Comparison failed at " + i
+                );
             }
             return TEST_PASS;
         }

@@ -14,50 +14,53 @@
 
 namespace Castle.DynamicProxy.Tests.BugsReported
 {
-	using System;
-	using System.Reflection;
-	using System.Threading.Tasks;
+    using System;
+    using System.Reflection;
+    using System.Threading.Tasks;
+    using NUnit.Framework;
 
-	using NUnit.Framework;
+    [TestFixture]
+    public class GitHubIssue536 : BasePEVerifyTestCase
+    {
+        [Test]
+        public void DynamicProxy_NonIntercepted_Property_Leaked()
+        {
+            var instance = new TestClassForCache();
+            var toProxy = instance.GetType();
 
-	[TestFixture]
-	public class GitHubIssue536 : BasePEVerifyTestCase
-	{
-		[Test]
-		public void DynamicProxy_NonIntercepted_Property_Leaked()
-		{
-			var instance = new TestClassForCache();
-			var toProxy = instance.GetType();
+            var proxyGenerationOptions = new ProxyGenerationOptions(
+                new TestCacheProxyGenerationHook()
+            );
 
-			var proxyGenerationOptions = new ProxyGenerationOptions(new TestCacheProxyGenerationHook());
+            var generator = new ProxyGenerator();
+            var proxy = generator.CreateClassProxyWithTarget(
+                toProxy,
+                instance,
+                proxyGenerationOptions
+            );
 
-			var generator = new ProxyGenerator();
-			var proxy = generator.CreateClassProxyWithTarget(toProxy,
-				instance,
-				proxyGenerationOptions);
+            var accessor = (ITestCacheInterface)proxy;
+            accessor.InstanceProperty = 1;
 
-			var accessor = (ITestCacheInterface)proxy;
-			accessor.InstanceProperty = 1;
+            Assert.AreEqual(accessor.InstanceProperty, instance.InstanceProperty);
+        }
 
-			Assert.AreEqual(accessor.InstanceProperty, instance.InstanceProperty);
-		}
+        public class TestCacheProxyGenerationHook : AllMethodsHook
+        {
+            public override bool ShouldInterceptMethod(Type type, MethodInfo methodInfo)
+            {
+                return false;
+            }
+        }
 
-		public class TestCacheProxyGenerationHook : AllMethodsHook
-		{
-			public override bool ShouldInterceptMethod(Type type, MethodInfo methodInfo)
-			{
-				return false;
-			}
-		}
+        public interface ITestCacheInterface
+        {
+            int InstanceProperty { get; set; }
+        }
 
-		public interface ITestCacheInterface
-		{
-			int InstanceProperty { get; set; }
-		}
-
-		public class TestClassForCache : ITestCacheInterface
-		{
-			public virtual int InstanceProperty { get; set; }
-		}
-	}
+        public class TestClassForCache : ITestCacheInterface
+        {
+            public virtual int InstanceProperty { get; set; }
+        }
+    }
 }

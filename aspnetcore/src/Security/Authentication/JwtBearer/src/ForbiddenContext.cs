@@ -17,6 +17,7 @@ public class ForbiddenContext : ResultContext<JwtBearerOptions>
     public ForbiddenContext(
         HttpContext context,
         AuthenticationScheme scheme,
-        JwtBearerOptions options)
+        JwtBearerOptions options
+    )
         : base(context, scheme, options) { }
 }

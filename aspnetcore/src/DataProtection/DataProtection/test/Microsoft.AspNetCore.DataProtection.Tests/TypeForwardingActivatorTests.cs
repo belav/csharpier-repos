@@ -17,7 +17,8 @@ public class TypeForwardingActivatorTests : MarshalByRefObject
         var activator = services.GetActivator();
 
         // Act
-        var name = "Microsoft.AspNet.DataProtection.TypeForwardingActivatorTests+ClassWithParameterlessCtor, Microsoft.AspNet.DataProtection.Tests, Version=1.0.0.0";
+        var name =
+            "Microsoft.AspNet.DataProtection.TypeForwardingActivatorTests+ClassWithParameterlessCtor, Microsoft.AspNet.DataProtection.Tests, Version=1.0.0.0";
         var instance = activator.CreateInstance<object>(name);
 
         // Assert
@@ -34,7 +35,8 @@ public class TypeForwardingActivatorTests : MarshalByRefObject
         var activator = services.GetActivator();
 
         // Act & Assert
-        var name = "Microsoft.AspNet.DataProtection.TypeForwardingActivatorTests+NonExistentClassWithParameterlessCtor, Microsoft.AspNet.DataProtection.Tests";
+        var name =
+            "Microsoft.AspNet.DataProtection.TypeForwardingActivatorTests+NonExistentClassWithParameterlessCtor, Microsoft.AspNet.DataProtection.Tests";
         var exception = Assert.ThrowsAny<Exception>(() => activator.CreateInstance<object>(name));
 
         Assert.Contains("Microsoft.AspNet.DataProtection.Test", exception.Message);
@@ -74,13 +76,16 @@ public class TypeForwardingActivatorTests : MarshalByRefObject
     [Theory]
     [InlineData(
         "System.Tuple`1[[Some.Type, Microsoft.AspNetCore.DataProtection, Version=1.0.0.0, Culture=neutral]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-        "System.Tuple`1[[Some.Type, Microsoft.AspNetCore.DataProtection, Culture=neutral]], mscorlib, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+        "System.Tuple`1[[Some.Type, Microsoft.AspNetCore.DataProtection, Culture=neutral]], mscorlib, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     [InlineData(
         "Some.Type`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Microsoft.AspNetCore.DataProtection, Version=1.0.0.0, Culture=neutral",
-        "Some.Type`1[[System.Int32, mscorlib, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Microsoft.AspNetCore.DataProtection, Culture=neutral")]
+        "Some.Type`1[[System.Int32, mscorlib, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Microsoft.AspNetCore.DataProtection, Culture=neutral"
+    )]
     [InlineData(
         "System.Tuple`1[[System.Tuple`1[[Some.Type, Microsoft.AspNetCore.DataProtection, Version=1.0.0.0, Culture=neutral]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-        "System.Tuple`1[[System.Tuple`1[[Some.Type, Microsoft.AspNetCore.DataProtection, Culture=neutral]], mscorlib, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+        "System.Tuple`1[[System.Tuple`1[[Some.Type, Microsoft.AspNetCore.DataProtection, Culture=neutral]], mscorlib, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public void ParsesFullyQualifiedTypeName(string typeName, string expected)
     {
         Assert.Equal(expected, new MockTypeForwardingActivator().Parse(typeName));
@@ -91,8 +96,15 @@ public class TypeForwardingActivatorTests : MarshalByRefObject
     [InlineData(typeof(FactAttribute))]
     public void CreateInstance_DoesNotForwardingTypesExternalTypes(Type type)
     {
-        new TypeForwardingActivator(null).CreateInstance(typeof(object), type.AssemblyQualifiedName, out var forwarded);
-        Assert.False(forwarded, "Should not have forwarded types that are not in Microsoft.AspNetCore.DataProjection");
+        new TypeForwardingActivator(null).CreateInstance(
+            typeof(object),
+            type.AssemblyQualifiedName,
+            out var forwarded
+        );
+        Assert.False(
+            forwarded,
+            "Should not have forwarded types that are not in Microsoft.AspNetCore.DataProjection"
+        );
     }
 
     [Theory]
@@ -114,7 +126,9 @@ public class TypeForwardingActivatorTests : MarshalByRefObject
         var newName = $"{typeName}, {assemblyName}";
 
         Assert.NotEqual(type.AssemblyQualifiedName, newName);
-        Assert.IsType<ClassWithParameterlessCtor>(activator.CreateInstance(typeof(object), newName, out var forwarded));
+        Assert.IsType<ClassWithParameterlessCtor>(
+            activator.CreateInstance(typeof(object), newName, out var forwarded)
+        );
         Assert.True(forwarded, "Should have forwarded this type to new version or namespace");
     }
 
@@ -124,30 +138,26 @@ public class TypeForwardingActivatorTests : MarshalByRefObject
         {
             var current = typeof(ActivatorTests).Assembly.GetName().Version;
             return new TheoryData<Version>
-                {
-                    new Version(Math.Max(0, current.Major - 1), 0, 0, 0),
-                    new Version(current.Major + 1, 0, 0, 0),
-                    new Version(current.Major, current.Minor + 1, 0, 0),
-                    new Version(current.Major, current.Minor, current.Build + 1, 0),
-                };
+            {
+                new Version(Math.Max(0, current.Major - 1), 0, 0, 0),
+                new Version(current.Major + 1, 0, 0, 0),
+                new Version(current.Major, current.Minor + 1, 0, 0),
+                new Version(current.Major, current.Minor, current.Build + 1, 0),
+            };
         }
     }
 
     private class MockTypeForwardingActivator : TypeForwardingActivator
     {
-        public MockTypeForwardingActivator() : base(null) { }
+        public MockTypeForwardingActivator()
+            : base(null) { }
+
         public string Parse(string typeName) => RemoveVersionFromAssemblyName(typeName);
     }
 
-    private class ClassWithParameterlessCtor
-    {
-    }
+    private class ClassWithParameterlessCtor { }
 
-    private class GenericType<T>
-    {
-    }
+    private class GenericType<T> { }
 
-    private class GenericType<T1, T2>
-    {
-    }
+    private class GenericType<T1, T2> { }
 }

@@ -13,9 +13,14 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 internal sealed class EmbeddedFilesManifest
 {
     private static readonly char[] _invalidFileNameChars = Path.GetInvalidFileNameChars()
-        .Where(c => c != Path.DirectorySeparatorChar && c != Path.AltDirectorySeparatorChar).ToArray();
+        .Where(c => c != Path.DirectorySeparatorChar && c != Path.AltDirectorySeparatorChar)
+        .ToArray();
 
-    private static readonly char[] _separators = new char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar };
+    private static readonly char[] _separators = new char[]
+    {
+        Path.DirectorySeparatorChar,
+        Path.AltDirectorySeparatorChar,
+    };
 
     private readonly ManifestDirectory _rootDirectory;
 
@@ -69,14 +74,18 @@ internal sealed class EmbeddedFilesManifest
             return StringSegment.Empty;
         }
 
-        var end = Array.IndexOf(_separators, path[path.Length - 1]) == -1 ? path.Length : path.Length - 1;
+        var end =
+            Array.IndexOf(_separators, path[path.Length - 1]) == -1 ? path.Length : path.Length - 1;
         var trimmed = new StringSegment(path, start, end - start);
         return trimmed;
     }
 
     internal EmbeddedFilesManifest Scope(string path)
     {
-        if (ResolveEntry(path) is ManifestDirectory directory && directory != ManifestEntry.UnknownPath)
+        if (
+            ResolveEntry(path) is ManifestDirectory directory
+            && directory != ManifestEntry.UnknownPath
+        )
         {
             return new EmbeddedFilesManifest(directory.ToRootDirectory());
         }
@@ -84,5 +93,6 @@ internal sealed class EmbeddedFilesManifest
         throw new InvalidOperationException($"Invalid path: '{path}'");
     }
 
-    private static bool HasInvalidPathChars(string path) => path.IndexOfAny(_invalidFileNameChars) != -1;
+    private static bool HasInvalidPathChars(string path) =>
+        path.IndexOfAny(_invalidFileNameChars) != -1;
 }

@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -20,9 +20,9 @@ namespace System.Data.Services.Client
     using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
+    using System.Text;
     using System.Xml;
     using System.Xml.Linq;
-    using System.Text;
 
     #endregion Namespaces.
 
@@ -37,7 +37,7 @@ namespace System.Data.Services.Client
         private enum EntryFlags
         {
             ShouldUpdateFromPayload = 0x01,
-            
+
             CreatedByMaterializer = 0x02,
 
             EntityHasBeenResolved = 0x04,
@@ -48,7 +48,7 @@ namespace System.Data.Services.Client
 
             EntityPropertyMappingsApplied = 0x20,
 
-            IsNull = 0x40
+            IsNull = 0x40,
         }
 
         #endregion Private fields.
@@ -57,60 +57,36 @@ namespace System.Data.Services.Client
 
         public bool? MediaLinkEntry
         {
-            get 
+            get
             {
-                return this.GetFlagValue(EntryFlags.MediaLinkEntryAssigned) ? (bool?)this.GetFlagValue(EntryFlags.MediaLinkEntryValue) : null; 
+                return this.GetFlagValue(EntryFlags.MediaLinkEntryAssigned)
+                    ? (bool?)this.GetFlagValue(EntryFlags.MediaLinkEntryValue)
+                    : null;
             }
-
-            set 
+            set
             {
-                Debug.Assert(value.HasValue, "value.HasValue -- callers shouldn't set the value to unknown");
+                Debug.Assert(
+                    value.HasValue,
+                    "value.HasValue -- callers shouldn't set the value to unknown"
+                );
                 this.SetFlagValue(EntryFlags.MediaLinkEntryAssigned, true);
                 this.SetFlagValue(EntryFlags.MediaLinkEntryValue, value.Value);
             }
         }
 
-        public Uri MediaContentUri 
-        { 
-            get; 
-            set; 
-        }
+        public Uri MediaContentUri { get; set; }
 
-        public Uri MediaEditUri 
-        { 
-            get; 
-            set; 
-        }
+        public Uri MediaEditUri { get; set; }
 
-        public string TypeName 
-        { 
-            get; 
-            set; 
-        }
+        public string TypeName { get; set; }
 
-        public ClientType ActualType 
-        { 
-            get; 
-            set; 
-        }
+        public ClientType ActualType { get; set; }
 
-        public Uri EditLink 
-        { 
-            get; 
-            set; 
-        }
+        public Uri EditLink { get; set; }
 
-        public Uri QueryLink
-        {
-            get;
-            set;
-        }
+        public Uri QueryLink { get; set; }
 
-        public string Identity 
-        { 
-            get; 
-            set; 
-        }
+        public string Identity { get; set; }
 
         public bool IsNull
         {
@@ -118,35 +94,15 @@ namespace System.Data.Services.Client
             set { this.SetFlagValue(EntryFlags.IsNull, value); }
         }
 
-        public List<AtomContentProperty> DataValues 
-        { 
-            get; 
-            set; 
-        }
+        public List<AtomContentProperty> DataValues { get; set; }
 
-        public object ResolvedObject 
-        { 
-            get; 
-            set; 
-        }
+        public object ResolvedObject { get; set; }
 
-        public object Tag 
-        { 
-            get; 
-            set; 
-        }
+        public object Tag { get; set; }
 
-        public string ETagText 
-        { 
-            get; 
-            set; 
-        }
+        public string ETagText { get; set; }
 
-        public string StreamETagText
-        {
-            get;
-            set;
-        }
+        public string StreamETagText { get; set; }
 
         public bool ShouldUpdateFromPayload
         {

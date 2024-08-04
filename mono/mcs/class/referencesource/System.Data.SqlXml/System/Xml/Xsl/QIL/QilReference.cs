@@ -7,12 +7,13 @@
 using System;
 using System.Diagnostics;
 
-namespace System.Xml.Xsl.Qil {
-
+namespace System.Xml.Xsl.Qil
+{
     /// <summary>
     /// View over a Qil node which is the target of a reference (functions, variables, parameters).
     /// </summary>
-    internal class QilReference : QilNode {
+    internal class QilReference : QilNode
+    {
         // Names longer than 1023 characters cause AV in cscompee.dll, see VSWhidbey 485526
         // So we set the internal limit to 1000. Needs to be lower since we might later append
         //   few characters (for example "(2)") if we end up with two same named methods after
@@ -28,9 +29,8 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Construct a reference
         /// </summary>
-        public QilReference(QilNodeType nodeType) : base(nodeType) {
-        }
-
+        public QilReference(QilNodeType nodeType)
+            : base(nodeType) { }
 
         //-----------------------------------------------
         // QilReference methods
@@ -39,9 +39,11 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Name of this reference, preserved for debugging (may be null).
         /// </summary>
-        public string DebugName {
+        public string DebugName
+        {
             get { return this.debugName; }
-            set {
+            set
+            {
                 if (value.Length > MaxDebugNameLength)
                     value = value.Substring(0, MaxDebugNameLength);
 

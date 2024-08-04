@@ -30,6 +30,7 @@ namespace System.Dynamic.Tests
             public virtual int VirtualReadonlyProperty => 1;
 
             public virtual int VirtualMethod(int argument) => argument;
+
             public int HideProperty { get; set; }
 
             public int HideMethod(int argument) => argument;
@@ -193,8 +194,9 @@ namespace System.Dynamic.Tests
                 return false;
             }
 
-            public static explicit operator DateTimeOffset(DynamicallyConvertibleNotOverride source) =>
-                new DateTimeOffset(1991, 8, 6, 0, 0, 0, new TimeSpan(2, 0, 0));
+            public static explicit operator DateTimeOffset(
+                DynamicallyConvertibleNotOverride source
+            ) => new DateTimeOffset(1991, 8, 6, 0, 0, 0, new TimeSpan(2, 0, 0));
 
             public static implicit operator Uri(DynamicallyConvertibleNotOverride source) =>
                 new Uri("http://example.net/");
@@ -258,11 +260,21 @@ namespace System.Dynamic.Tests
 
         private class DynamicallyInvokableIntPowerMember : DynamicObject
         {
-            public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
+            public override bool TryInvokeMember(
+                InvokeMemberBinder binder,
+                object[] args,
+                out object result
+            )
             {
-                if (binder.Name.Equals(
-                    "Power", binder.IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal)
-                    && args.Length == 2)
+                if (
+                    binder.Name.Equals(
+                        "Power",
+                        binder.IgnoreCase
+                            ? StringComparison.OrdinalIgnoreCase
+                            : StringComparison.Ordinal
+                    )
+                    && args.Length == 2
+                )
                 {
                     int x;
                     int y;
@@ -308,9 +320,14 @@ namespace System.Dynamic.Tests
         private class IndexableObject : DynamicObject
         {
             Dictionary<int, int> _oneDimension = new Dictionary<int, int>();
-            Dictionary<Tuple<int, int>, string> _twoDimensions = new Dictionary<Tuple<int, int>, string>();
+            Dictionary<Tuple<int, int>, string> _twoDimensions =
+                new Dictionary<Tuple<int, int>, string>();
 
-            public override bool TryGetIndex(GetIndexBinder binder, object[] indexes, out object result)
+            public override bool TryGetIndex(
+                GetIndexBinder binder,
+                object[] indexes,
+                out object result
+            )
             {
                 switch (indexes.Length)
                 {
@@ -326,7 +343,9 @@ namespace System.Dynamic.Tests
                     case 2:
                         if (indexes[0] is int && indexes[1] is int)
                         {
-                            string value = _twoDimensions[Tuple.Create((int)indexes[0], (int)indexes[1])];
+                            string value = _twoDimensions[
+                                Tuple.Create((int)indexes[0], (int)indexes[1])
+                            ];
                             result = value;
                             return true;
                         }
@@ -353,7 +372,8 @@ namespace System.Dynamic.Tests
                     case 2:
                         if (indexes[0] is int && indexes[1] is int && value is string)
                         {
-                            _twoDimensions[Tuple.Create((int)indexes[0], (int)indexes[1])] = (string)value;
+                            _twoDimensions[Tuple.Create((int)indexes[0], (int)indexes[1])] =
+                                (string)value;
                             return true;
                         }
 
@@ -395,7 +415,11 @@ namespace System.Dynamic.Tests
 
             public int Value { get; }
 
-            public override bool TryBinaryOperation(BinaryOperationBinder binder, object arg, out object result)
+            public override bool TryBinaryOperation(
+                BinaryOperationBinder binder,
+                object arg,
+                out object result
+            )
             {
                 if (binder.Operation == ExpressionType.Add)
                 {
@@ -422,7 +446,11 @@ namespace System.Dynamic.Tests
 
             public int Value { get; }
 
-            public override bool TryBinaryOperation(BinaryOperationBinder binder, object arg, out object result)
+            public override bool TryBinaryOperation(
+                BinaryOperationBinder binder,
+                object arg,
+                out object result
+            )
             {
                 if (binder.Operation == ExpressionType.Add)
                 {
@@ -443,8 +471,14 @@ namespace System.Dynamic.Tests
         {
             private static readonly string[] Names =
             {
-                "Foo", "Bar", "Baz", "Quux", "Quuux", "Quuuux", "Quuuuux",
-                "Quuuuuux"
+                "Foo",
+                "Bar",
+                "Baz",
+                "Quux",
+                "Quuux",
+                "Quuuux",
+                "Quuuuux",
+                "Quuuuuux",
             };
 
             public override IEnumerable<string> GetDynamicMemberNames() => Names;
@@ -503,7 +537,10 @@ namespace System.Dynamic.Tests
         {
             dynamic d = new TestDynamicNameReflective();
             d.DynProp = nameof(d.DynProp);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => d.DynProp = "I wandered lonely as a cloud.");
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => d.DynProp = "I wandered lonely as a cloud."
+            );
         }
 
         [Fact]
@@ -553,7 +590,10 @@ namespace System.Dynamic.Tests
         public void MetaDynamicKnowsNamesFromDynamic()
         {
             var trad = new TraditionalDynamicObject();
-            Assert.Same(trad.GetDynamicMemberNames(), trad.GetMetaObject(Expression.Parameter(typeof(object))).GetDynamicMemberNames());
+            Assert.Same(
+                trad.GetDynamicMemberNames(),
+                trad.GetMetaObject(Expression.Parameter(typeof(object))).GetDynamicMemberNames()
+            );
         }
 
         [Fact]
@@ -685,7 +725,9 @@ namespace System.Dynamic.Tests
             Assert.Throws<RuntimeBinderException>(() => d.modulo(233, 12));
             Assert.Throws<RuntimeBinderException>(() => d.Modulo());
             Assert.Throws<RuntimeBinderException>(() => d.Modulo(233, 12, 9));
-            Assert.Throws<RuntimeBinderException>(() => d.Modulo("two hundred and thirty-three", "twelve"));
+            Assert.Throws<RuntimeBinderException>(
+                () => d.Modulo("two hundred and thirty-three", "twelve")
+            );
         }
 
         [Fact]

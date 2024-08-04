@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,41 +14,43 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
+    using System;
 
-	/// <summary>
-	/// Assigns a prefix to the keyed properties of an interface.
-	/// </summary>
-	/// <remarks>
-	/// Key prefixes are not inherited by sub-interfaces.
-	/// </remarks>
-	[AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
-	public class KeyPrefixAttribute : DictionaryBehaviorAttribute, IDictionaryKeyBuilder
-	{
-		/// <summary>
-		/// Initializes a default instance of the <see cref="KeyPrefixAttribute"/> class.
-		/// </summary>
-		public KeyPrefixAttribute()
-		{
-		}
+    /// <summary>
+    /// Assigns a prefix to the keyed properties of an interface.
+    /// </summary>
+    /// <remarks>
+    /// Key prefixes are not inherited by sub-interfaces.
+    /// </remarks>
+    [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
+    public class KeyPrefixAttribute : DictionaryBehaviorAttribute, IDictionaryKeyBuilder
+    {
+        /// <summary>
+        /// Initializes a default instance of the <see cref="KeyPrefixAttribute"/> class.
+        /// </summary>
+        public KeyPrefixAttribute() { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="KeyPrefixAttribute"/> class.
-		/// </summary>
-		/// <param name="keyPrefix">The prefix for the keyed properties of the interface.</param>
-		public KeyPrefixAttribute(string keyPrefix)
-		{
-			this.KeyPrefix = keyPrefix;
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KeyPrefixAttribute"/> class.
+        /// </summary>
+        /// <param name="keyPrefix">The prefix for the keyed properties of the interface.</param>
+        public KeyPrefixAttribute(string keyPrefix)
+        {
+            this.KeyPrefix = keyPrefix;
+        }
 
-		/// <summary>
-		/// Gets the prefix key added to the properties of the interface.
-		/// </summary>
-		public string KeyPrefix { get; set; }
+        /// <summary>
+        /// Gets the prefix key added to the properties of the interface.
+        /// </summary>
+        public string KeyPrefix { get; set; }
 
-		string IDictionaryKeyBuilder.GetKey(IDictionaryAdapter dictionaryAdapter, string key, PropertyDescriptor property)
-		{
-			return KeyPrefix + key;
-		}
-	}
+        string IDictionaryKeyBuilder.GetKey(
+            IDictionaryAdapter dictionaryAdapter,
+            string key,
+            PropertyDescriptor property
+        )
+        {
+            return KeyPrefix + key;
+        }
+    }
 }

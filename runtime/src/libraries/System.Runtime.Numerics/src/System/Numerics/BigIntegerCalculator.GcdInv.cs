@@ -64,9 +64,11 @@ namespace System.Numerics
             left.CopyTo(result);
 
             uint[]? rightCopyFromPool = null;
-            Span<uint> rightCopy = (right.Length <= StackAllocThreshold ?
-                                  stackalloc uint[StackAllocThreshold]
-                                  : rightCopyFromPool = ArrayPool<uint>.Shared.Rent(right.Length)).Slice(0, right.Length);
+            Span<uint> rightCopy = (
+                right.Length <= StackAllocThreshold
+                    ? stackalloc uint[StackAllocThreshold]
+                    : rightCopyFromPool = ArrayPool<uint>.Shared.Rent(right.Length)
+            ).Slice(0, right.Length);
             right.CopyTo(rightCopy);
 
             Gcd(result, rightCopy);
@@ -81,7 +83,7 @@ namespace System.Numerics
             Debug.Assert(right.Length >= 2);
             Debug.Assert(left.Length >= right.Length);
 
-            Span<uint> result = left;   //keep result buffer untouched during computation
+            Span<uint> result = left; //keep result buffer untouched during computation
 
             // Executes Lehmer's gcd algorithm, but uses the most
             // significant bits to work with 64-bit (not 32-bit) values.
@@ -92,19 +94,25 @@ namespace System.Numerics
 
             while (right.Length > 2)
             {
-                ulong x, y;
+                ulong x,
+                    y;
 
                 ExtractDigits(left, right, out x, out y);
 
-                uint a = 1U, b = 0U;
-                uint c = 0U, d = 1U;
+                uint a = 1U,
+                    b = 0U;
+                uint c = 0U,
+                    d = 1U;
 
                 int iteration = 0;
 
                 // Lehmer's guessing
                 while (y != 0)
                 {
-                    ulong q, r, s, t;
+                    ulong q,
+                        r,
+                        s,
+                        t;
 
                     // Odd iteration
                     q = x / y;
@@ -215,12 +223,17 @@ namespace System.Numerics
 
             buffer[1] = hi;
             buffer[0] = lo;
-            return hi != 0 ? 2 : lo != 0 ? 1 : 0;
+            return hi != 0 ? 2
+                : lo != 0 ? 1
+                : 0;
         }
 
-        private static void ExtractDigits(ReadOnlySpan<uint> xBuffer,
-                                          ReadOnlySpan<uint> yBuffer,
-                                          out ulong x, out ulong y)
+        private static void ExtractDigits(
+            ReadOnlySpan<uint> xBuffer,
+            ReadOnlySpan<uint> yBuffer,
+            out ulong x,
+            out ulong y
+        )
         {
             Debug.Assert(xBuffer.Length >= 3);
             Debug.Assert(yBuffer.Length >= 3);
@@ -233,7 +246,9 @@ namespace System.Numerics
             ulong xm = xBuffer[xBuffer.Length - 2];
             ulong xl = xBuffer[xBuffer.Length - 3];
 
-            ulong yh, ym, yl;
+            ulong yh,
+                ym,
+                yl;
 
             // arrange the bits
             switch (xBuffer.Length - yBuffer.Length)
@@ -272,10 +287,7 @@ namespace System.Numerics
             Debug.Assert(x >= y);
         }
 
-        private static int LehmerCore(Span<uint> x,
-                                      Span<uint> y,
-                                      long a, long b,
-                                      long c, long d)
+        private static int LehmerCore(Span<uint> x, Span<uint> y, long a, long b, long c, long d)
         {
             Debug.Assert(x.Length >= 1);
             Debug.Assert(y.Length >= 1);
@@ -287,7 +299,8 @@ namespace System.Numerics
 
             int length = y.Length;
 
-            long xCarry = 0L, yCarry = 0L;
+            long xCarry = 0L,
+                yCarry = 0L;
             for (int i = 0; i < length; i++)
             {
                 long xDigit = a * x[i] - b * y[i] + xCarry;

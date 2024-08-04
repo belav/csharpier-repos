@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,48 +32,46 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
-namespace MonoTests.System.IO.Packaging {
-    public abstract class TestBase {
-
+namespace MonoTests.System.IO.Packaging
+{
+    public abstract class TestBase
+    {
         protected string contentType = "mime/type";
         protected Package package;
-        protected Uri relationshipUri = new Uri ("/_rels/.rels", UriKind.Relative);
+        protected Uri relationshipUri = new Uri("/_rels/.rels", UriKind.Relative);
         protected FakeStream stream;
-        protected Uri [] uris = { new Uri("/file1.png", UriKind.Relative),
-                       new Uri("/file2.png", UriKind.Relative),
-                       new Uri("/file3.png", UriKind.Relative) };
+        protected Uri[] uris =
+        {
+            new Uri("/file1.png", UriKind.Relative),
+            new Uri("/file2.png", UriKind.Relative),
+            new Uri("/file3.png", UriKind.Relative),
+        };
 
         [TestFixtureSetUp]
-        public virtual void FixtureSetup ()
-        {
-
-        }
+        public virtual void FixtureSetup() { }
 
         [SetUp]
-        public virtual void Setup ()
+        public virtual void Setup()
         {
-            stream = new FakeStream ();
-            package = Package.Open (stream, FileMode.Create);
+            stream = new FakeStream();
+            package = Package.Open(stream, FileMode.Create);
         }
 
         [TearDown]
-        public virtual void TearDown ()
+        public virtual void TearDown()
         {
-			try {
-	            if (package != null)
-	                package.Close ();
-			} catch {
-				
-			}
-			
+            try
+            {
+                if (package != null)
+                    package.Close();
+            }
+            catch { }
+
             if (stream != null)
-                stream.Close ();
+                stream.Close();
         }
 
         [TestFixtureTearDown]
-        public virtual void FixtureTeardown ()
-        {
-
-        }
+        public virtual void FixtureTeardown() { }
     }
 }

@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static partial class INamedTypeSymbolExtensions
     {
-        public static IEnumerable<INamedTypeSymbol> GetBaseTypesAndThis(this INamedTypeSymbol? namedType)
+        public static IEnumerable<INamedTypeSymbol> GetBaseTypesAndThis(
+            this INamedTypeSymbol? namedType
+        )
         {
             var current = namedType;
             while (current != null)
@@ -27,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        public static ImmutableArray<ITypeParameterSymbol> GetAllTypeParameters(this INamedTypeSymbol? symbol)
+        public static ImmutableArray<ITypeParameterSymbol> GetAllTypeParameters(
+            this INamedTypeSymbol? symbol
+        )
         {
             var stack = GetContainmentStack(symbol);
             return stack.SelectManyAsArray(n => n.TypeParameters);
@@ -50,7 +54,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return stack;
         }
 
-        public static bool IsContainedWithin([NotNullWhen(returnValue: true)] this INamedTypeSymbol? symbol, INamedTypeSymbol outer)
+        public static bool IsContainedWithin(
+            [NotNullWhen(returnValue: true)] this INamedTypeSymbol? symbol,
+            INamedTypeSymbol outer
+        )
         {
             // TODO(cyrusn): Should we be using OriginalSymbol here?
             for (var current = symbol; current != null; current = current.ContainingType)
@@ -64,31 +71,41 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static ISymbol? FindImplementationForAbstractMember(this INamedTypeSymbol? type, ISymbol symbol)
+        public static ISymbol? FindImplementationForAbstractMember(
+            this INamedTypeSymbol? type,
+            ISymbol symbol
+        )
         {
             if (symbol.IsAbstract)
             {
-                return type.GetBaseTypesAndThis().SelectMany(t => t.GetMembers(symbol.Name))
-                                                 .FirstOrDefault(s => symbol.Equals(s.GetOverriddenMember()));
+                return type.GetBaseTypesAndThis()
+                    .SelectMany(t => t.GetMembers(symbol.Name))
+                    .FirstOrDefault(s => symbol.Equals(s.GetOverriddenMember()));
             }
 
             return null;
         }
 
-        private static bool ImplementationExists(INamedTypeSymbol classOrStructType, ISymbol member)
-            => classOrStructType.FindImplementationForInterfaceMember(member) != null;
+        private static bool ImplementationExists(
+            INamedTypeSymbol classOrStructType,
+            ISymbol member
+        ) => classOrStructType.FindImplementationForInterfaceMember(member) != null;
 
         private static bool IsImplemented(
             this INamedTypeSymbol classOrStructType,
             ISymbol member,
             Func<INamedTypeSymbol, ISymbol, bool> isValidImplementation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (member.ContainingType.TypeKind == TypeKind.Interface)
             {
                 if (member.Kind == SymbolKind.Property)
                 {
-                    return IsInterfacePropertyImplemented(classOrStructType, (IPropertySymbol)member);
+                    return IsInterfacePropertyImplemented(
+                        classOrStructType,
+                        (IPropertySymbol)member
+                    );
                 }
                 else
                 {
@@ -100,7 +117,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 if (member.Kind == SymbolKind.Property)
                 {
-                    return IsAbstractPropertyImplemented(classOrStructType, (IPropertySymbol)member);
+                    return IsAbstractPropertyImplemented(
+                        classOrStructType,
+                        (IPropertySymbol)member
+                    );
                 }
                 else
                 {
@@ -111,26 +131,41 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return true;
         }
 
-        private static bool IsInterfacePropertyImplemented(INamedTypeSymbol classOrStructType, IPropertySymbol propertySymbol)
+        private static bool IsInterfacePropertyImplemented(
+            INamedTypeSymbol classOrStructType,
+            IPropertySymbol propertySymbol
+        )
         {
             // A property is only fully implemented if both it's setter and getter is implemented.
 
-            return IsAccessorImplemented(propertySymbol.GetMethod, classOrStructType) && IsAccessorImplemented(propertySymbol.SetMethod, classOrStructType);
+            return IsAccessorImplemented(propertySymbol.GetMethod, classOrStructType)
+                && IsAccessorImplemented(propertySymbol.SetMethod, classOrStructType);
 
             // local functions
 
-            static bool IsAccessorImplemented(IMethodSymbol? accessor, INamedTypeSymbol classOrStructType)
+            static bool IsAccessorImplemented(
+                IMethodSymbol? accessor,
+                INamedTypeSymbol classOrStructType
+            )
             {
-                return accessor == null || !IsImplementable(accessor) || classOrStructType.FindImplementationForInterfaceMember(accessor) != null;
+                return accessor == null
+                    || !IsImplementable(accessor)
+                    || classOrStructType.FindImplementationForInterfaceMember(accessor) != null;
             }
         }
 
-        private static bool IsAbstractPropertyImplemented(INamedTypeSymbol classOrStructType, IPropertySymbol propertySymbol)
+        private static bool IsAbstractPropertyImplemented(
+            INamedTypeSymbol classOrStructType,
+            IPropertySymbol propertySymbol
+        )
         {
             // A property is only fully implemented if both it's setter and getter is implemented.
             if (propertySymbol.GetMethod != null)
             {
-                if (classOrStructType.FindImplementationForAbstractMember(propertySymbol.GetMethod) == null)
+                if (
+                    classOrStructType.FindImplementationForAbstractMember(propertySymbol.GetMethod)
+                    == null
+                )
                 {
                     return false;
                 }
@@ -138,7 +173,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             if (propertySymbol.SetMethod != null)
             {
-                if (classOrStructType.FindImplementationForAbstractMember(propertySymbol.SetMethod) == null)
+                if (
+                    classOrStructType.FindImplementationForAbstractMember(propertySymbol.SetMethod)
+                    == null
+                )
                 {
                     return false;
                 }
@@ -151,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this INamedTypeSymbol classOrStructType,
             ISymbol member,
             Func<INamedTypeSymbol, ISymbol, bool> isValid,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var implementation = classOrStructType.FindImplementationForInterfaceMember(member);
 
@@ -173,11 +212,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             };
         }
 
-        public static ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)> GetAllUnimplementedMembers(
+        public static ImmutableArray<(
+            INamedTypeSymbol type,
+            ImmutableArray<ISymbol> members
+        )> GetAllUnimplementedMembers(
             this INamedTypeSymbol classOrStructType,
             IEnumerable<INamedTypeSymbol> interfaces,
             bool includeMembersRequiringExplicitImplementation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return classOrStructType.GetAllUnimplementedMembers(
                 interfaces,
@@ -187,18 +230,26 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     ? GetExplicitlyImplementableMembers
                     : GetImplicitlyImplementableMembers,
                 allowReimplementation: false,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken
+            );
 
             // local functions
 
-            static ImmutableArray<ISymbol> GetImplicitlyImplementableMembers(INamedTypeSymbol type, ISymbol within)
+            static ImmutableArray<ISymbol> GetImplicitlyImplementableMembers(
+                INamedTypeSymbol type,
+                ISymbol within
+            )
             {
                 if (type.TypeKind == TypeKind.Interface)
                 {
-                    return type.GetMembers().WhereAsArray(m => m.DeclaredAccessibility == Accessibility.Public &&
-                                                               m.Kind != SymbolKind.NamedType && IsImplementable(m) &&
-                                                               !IsPropertyWithNonPublicImplementableAccessor(m) &&
-                                                               IsImplicitlyImplementable(m, within));
+                    return type.GetMembers()
+                        .WhereAsArray(m =>
+                            m.DeclaredAccessibility == Accessibility.Public
+                            && m.Kind != SymbolKind.NamedType
+                            && IsImplementable(m)
+                            && !IsPropertyWithNonPublicImplementableAccessor(m)
+                            && IsImplicitlyImplementable(m, within)
+                        );
                 }
 
                 return type.GetMembers();
@@ -213,17 +264,27 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
                 var property = (IPropertySymbol)member;
 
-                return IsNonPublicImplementableAccessor(property.GetMethod) || IsNonPublicImplementableAccessor(property.SetMethod);
+                return IsNonPublicImplementableAccessor(property.GetMethod)
+                    || IsNonPublicImplementableAccessor(property.SetMethod);
             }
 
             static bool IsNonPublicImplementableAccessor(IMethodSymbol? accessor)
             {
-                return accessor != null && IsImplementable(accessor) && accessor.DeclaredAccessibility != Accessibility.Public;
+                return accessor != null
+                    && IsImplementable(accessor)
+                    && accessor.DeclaredAccessibility != Accessibility.Public;
             }
 
             static bool IsImplicitlyImplementable(ISymbol member, ISymbol within)
             {
-                if (member is IMethodSymbol { IsStatic: true, IsAbstract: true, MethodKind: MethodKind.UserDefinedOperator } method)
+                if (
+                    member is IMethodSymbol
+                    {
+                        IsStatic: true,
+                        IsAbstract: true,
+                        MethodKind: MethodKind.UserDefinedOperator
+                    } method
+                )
                 {
                     // For example, the following is not implementable implicitly.
                     // interface I { static abstract int operator -(I x); }
@@ -231,20 +292,26 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     // interface I<T> where T : I<T> { static abstract int operator -(T x); }
 
                     // See https://github.com/dotnet/csharplang/blob/main/spec/classes.md#unary-operators.
-                    return method.Parameters.Any(static (p, within) => p.Type.Equals(within, SymbolEqualityComparer.Default), within);
+                    return method.Parameters.Any(
+                        static (p, within) => p.Type.Equals(within, SymbolEqualityComparer.Default),
+                        within
+                    );
                 }
 
                 return true;
             }
         }
 
-        private static bool IsImplementable(ISymbol m)
-            => m.IsVirtual || m.IsAbstract;
+        private static bool IsImplementable(ISymbol m) => m.IsVirtual || m.IsAbstract;
 
-        public static ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)> GetAllUnimplementedMembersInThis(
+        public static ImmutableArray<(
+            INamedTypeSymbol type,
+            ImmutableArray<ISymbol> members
+        )> GetAllUnimplementedMembersInThis(
             this INamedTypeSymbol classOrStructType,
             IEnumerable<INamedTypeSymbol> interfacesOrAbstractClasses,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return classOrStructType.GetAllUnimplementedMembers(
                 interfacesOrAbstractClasses,
@@ -252,18 +319,24 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 (t, m) =>
                 {
                     var implementation = classOrStructType.FindImplementationForInterfaceMember(m);
-                    return implementation != null && Equals(implementation.ContainingType, classOrStructType);
+                    return implementation != null
+                        && Equals(implementation.ContainingType, classOrStructType);
                 },
                 GetMembers,
                 allowReimplementation: true,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken
+            );
         }
 
-        public static ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)> GetAllUnimplementedMembersInThis(
+        public static ImmutableArray<(
+            INamedTypeSymbol type,
+            ImmutableArray<ISymbol> members
+        )> GetAllUnimplementedMembersInThis(
             this INamedTypeSymbol classOrStructType,
             IEnumerable<INamedTypeSymbol> interfacesOrAbstractClasses,
             Func<INamedTypeSymbol, ISymbol, ImmutableArray<ISymbol>> interfaceMemberGetter,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return classOrStructType.GetAllUnimplementedMembers(
                 interfacesOrAbstractClasses,
@@ -271,17 +344,23 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 (t, m) =>
                 {
                     var implementation = classOrStructType.FindImplementationForInterfaceMember(m);
-                    return implementation != null && Equals(implementation.ContainingType, classOrStructType);
+                    return implementation != null
+                        && Equals(implementation.ContainingType, classOrStructType);
                 },
                 interfaceMemberGetter,
                 allowReimplementation: true,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken
+            );
         }
 
-        public static ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)> GetAllUnimplementedExplicitMembers(
+        public static ImmutableArray<(
+            INamedTypeSymbol type,
+            ImmutableArray<ISymbol> members
+        )> GetAllUnimplementedExplicitMembers(
             this INamedTypeSymbol classOrStructType,
             IEnumerable<INamedTypeSymbol> interfaces,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return classOrStructType.GetAllUnimplementedMembers(
                 interfaces,
@@ -289,22 +368,33 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 ImplementationExists,
                 GetExplicitlyImplementableMembers,
                 allowReimplementation: false,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken
+            );
         }
 
-        private static ImmutableArray<ISymbol> GetExplicitlyImplementableMembers(INamedTypeSymbol type, ISymbol within)
+        private static ImmutableArray<ISymbol> GetExplicitlyImplementableMembers(
+            INamedTypeSymbol type,
+            ISymbol within
+        )
         {
             if (type.TypeKind == TypeKind.Interface)
             {
-                return type.GetMembers().WhereAsArray(m => m.Kind != SymbolKind.NamedType &&
-                                                           IsImplementable(m) && m.IsAccessibleWithin(within) &&
-                                                           !IsPropertyWithInaccessibleImplementableAccessor(m, within));
+                return type.GetMembers()
+                    .WhereAsArray(m =>
+                        m.Kind != SymbolKind.NamedType
+                        && IsImplementable(m)
+                        && m.IsAccessibleWithin(within)
+                        && !IsPropertyWithInaccessibleImplementableAccessor(m, within)
+                    );
             }
 
             return type.GetMembers();
         }
 
-        private static bool IsPropertyWithInaccessibleImplementableAccessor(ISymbol member, ISymbol within)
+        private static bool IsPropertyWithInaccessibleImplementableAccessor(
+            ISymbol member,
+            ISymbol within
+        )
         {
             if (member.Kind != SymbolKind.Property)
             {
@@ -313,20 +403,33 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             var property = (IPropertySymbol)member;
 
-            return IsInaccessibleImplementableAccessor(property.GetMethod, within) || IsInaccessibleImplementableAccessor(property.SetMethod, within);
+            return IsInaccessibleImplementableAccessor(property.GetMethod, within)
+                || IsInaccessibleImplementableAccessor(property.SetMethod, within);
         }
 
-        private static bool IsInaccessibleImplementableAccessor(IMethodSymbol? accessor, ISymbol within)
-            => accessor != null && IsImplementable(accessor) && !accessor.IsAccessibleWithin(within);
+        private static bool IsInaccessibleImplementableAccessor(
+            IMethodSymbol? accessor,
+            ISymbol within
+        ) => accessor != null && IsImplementable(accessor) && !accessor.IsAccessibleWithin(within);
 
-        private static ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)> GetAllUnimplementedMembers(
+        private static ImmutableArray<(
+            INamedTypeSymbol type,
+            ImmutableArray<ISymbol> members
+        )> GetAllUnimplementedMembers(
             this INamedTypeSymbol classOrStructType,
             IEnumerable<INamedTypeSymbol> interfacesOrAbstractClasses,
-            Func<INamedTypeSymbol, ISymbol, Func<INamedTypeSymbol, ISymbol, bool>, CancellationToken, bool> isImplemented,
+            Func<
+                INamedTypeSymbol,
+                ISymbol,
+                Func<INamedTypeSymbol, ISymbol, bool>,
+                CancellationToken,
+                bool
+            > isImplemented,
             Func<INamedTypeSymbol, ISymbol, bool> isValidImplementation,
             Func<INamedTypeSymbol, ISymbol, ImmutableArray<ISymbol>> interfaceMemberGetter,
             bool allowReimplementation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(classOrStructType);
             Contract.ThrowIfNull(interfacesOrAbstractClasses);
@@ -334,62 +437,102 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             if (classOrStructType.TypeKind is not TypeKind.Class and not TypeKind.Struct)
             {
-                return ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)>.Empty;
+                return ImmutableArray<(
+                    INamedTypeSymbol type,
+                    ImmutableArray<ISymbol> members
+                )>.Empty;
             }
 
             if (!interfacesOrAbstractClasses.Any())
             {
-                return ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)>.Empty;
+                return ImmutableArray<(
+                    INamedTypeSymbol type,
+                    ImmutableArray<ISymbol> members
+                )>.Empty;
             }
 
-            if (!interfacesOrAbstractClasses.All(i => i.TypeKind == TypeKind.Interface) &&
-                !interfacesOrAbstractClasses.All(i => i.IsAbstractClass()))
+            if (
+                !interfacesOrAbstractClasses.All(i => i.TypeKind == TypeKind.Interface)
+                && !interfacesOrAbstractClasses.All(i => i.IsAbstractClass())
+            )
             {
-                return ImmutableArray<(INamedTypeSymbol type, ImmutableArray<ISymbol> members)>.Empty;
+                return ImmutableArray<(
+                    INamedTypeSymbol type,
+                    ImmutableArray<ISymbol> members
+                )>.Empty;
             }
 
-            var typesToImplement = GetTypesToImplement(classOrStructType, interfacesOrAbstractClasses, allowReimplementation, cancellationToken);
-            return typesToImplement.SelectAsArray(s => (s, members: GetUnimplementedMembers(classOrStructType, s, isImplemented, isValidImplementation, interfaceMemberGetter, cancellationToken)))
-                                   .WhereAsArray(t => t.members.Length > 0);
+            var typesToImplement = GetTypesToImplement(
+                classOrStructType,
+                interfacesOrAbstractClasses,
+                allowReimplementation,
+                cancellationToken
+            );
+            return typesToImplement
+                .SelectAsArray(s =>
+                    (
+                        s,
+                        members: GetUnimplementedMembers(
+                            classOrStructType,
+                            s,
+                            isImplemented,
+                            isValidImplementation,
+                            interfaceMemberGetter,
+                            cancellationToken
+                        )
+                    )
+                )
+                .WhereAsArray(t => t.members.Length > 0);
         }
 
         private static ImmutableArray<INamedTypeSymbol> GetTypesToImplement(
             INamedTypeSymbol classOrStructType,
             IEnumerable<INamedTypeSymbol> interfacesOrAbstractClasses,
             bool allowReimplementation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return interfacesOrAbstractClasses.First().TypeKind == TypeKind.Interface
-                ? GetInterfacesToImplement(classOrStructType, interfacesOrAbstractClasses, allowReimplementation, cancellationToken)
+                ? GetInterfacesToImplement(
+                    classOrStructType,
+                    interfacesOrAbstractClasses,
+                    allowReimplementation,
+                    cancellationToken
+                )
                 : GetAbstractClassesToImplement(interfacesOrAbstractClasses);
         }
 
         private static ImmutableArray<INamedTypeSymbol> GetAbstractClassesToImplement(
-            IEnumerable<INamedTypeSymbol> abstractClasses)
+            IEnumerable<INamedTypeSymbol> abstractClasses
+        )
         {
-            return abstractClasses.SelectMany(a => a.GetBaseTypesAndThis())
-                                  .Where(t => t.IsAbstractClass())
-                                  .ToImmutableArray();
+            return abstractClasses
+                .SelectMany(a => a.GetBaseTypesAndThis())
+                .Where(t => t.IsAbstractClass())
+                .ToImmutableArray();
         }
 
         private static ImmutableArray<INamedTypeSymbol> GetInterfacesToImplement(
             INamedTypeSymbol classOrStructType,
             IEnumerable<INamedTypeSymbol> interfaces,
             bool allowReimplementation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // We need to not only implement the specified interface, but also everything it
             // inherits from.
             cancellationToken.ThrowIfCancellationRequested();
             var interfacesToImplement = new List<INamedTypeSymbol>(
-                interfaces.SelectMany(i => i.GetAllInterfacesIncludingThis()).Distinct());
+                interfaces.SelectMany(i => i.GetAllInterfacesIncludingThis()).Distinct()
+            );
 
             // However, there's no need to re-implement any interfaces that our base types already
             // implement.  By definition they must contain all the necessary methods.
             var baseType = classOrStructType.BaseType;
-            var alreadyImplementedInterfaces = baseType == null || allowReimplementation
-                ? SpecializedCollections.EmptyEnumerable<INamedTypeSymbol>()
-                : baseType.AllInterfaces;
+            var alreadyImplementedInterfaces =
+                baseType == null || allowReimplementation
+                    ? SpecializedCollections.EmptyEnumerable<INamedTypeSymbol>()
+                    : baseType.AllInterfaces;
 
             cancellationToken.ThrowIfCancellationRequested();
             interfacesToImplement.RemoveRange(alreadyImplementedInterfaces);
@@ -399,10 +542,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static ImmutableArray<ISymbol> GetUnimplementedMembers(
             this INamedTypeSymbol classOrStructType,
             INamedTypeSymbol interfaceType,
-            Func<INamedTypeSymbol, ISymbol, Func<INamedTypeSymbol, ISymbol, bool>, CancellationToken, bool> isImplemented,
+            Func<
+                INamedTypeSymbol,
+                ISymbol,
+                Func<INamedTypeSymbol, ISymbol, bool>,
+                CancellationToken,
+                bool
+            > isImplemented,
             Func<INamedTypeSymbol, ISymbol, bool> isValidImplementation,
             Func<INamedTypeSymbol, ISymbol, ImmutableArray<ISymbol>> interfaceMemberGetter,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<ISymbol>.GetInstance(out var results);
 
@@ -423,8 +573,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         break;
 
                     case IMethodSymbol method:
-                        if (method is { MethodKind: MethodKind.UserDefinedOperator or MethodKind.Conversion } ||
-                            method is { MethodKind: MethodKind.Ordinary, CanBeReferencedByName: true })
+                        if (
+                            method
+                                is {
+                                    MethodKind: MethodKind.UserDefinedOperator
+                                        or MethodKind.Conversion
+                                }
+                            || method
+                                is { MethodKind: MethodKind.Ordinary, CanBeReferencedByName: true }
+                        )
                         {
                             AddIfNotImplemented(method);
                         }
@@ -437,7 +594,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             void AddIfNotImplemented(ISymbol member)
             {
-                if (!isImplemented(classOrStructType, member, isValidImplementation, cancellationToken))
+                if (
+                    !isImplemented(
+                        classOrStructType,
+                        member,
+                        isValidImplementation,
+                        cancellationToken
+                    )
+                )
                     results.Add(member);
             }
         }
@@ -445,7 +609,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<ISymbol> GetAttributeNamedParameters(
             this INamedTypeSymbol attributeSymbol,
             Compilation compilation,
-            ISymbol within)
+            ISymbol within
+        )
         {
             using var _ = PooledHashSet<string>.GetInstance(out var seenNames);
 
@@ -460,7 +625,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
                 foreach (var member in type.GetMembers())
                 {
-                    var namedParameter = IsAttributeNamedParameter(member, within ?? compilation.Assembly);
+                    var namedParameter = IsAttributeNamedParameter(
+                        member,
+                        within ?? compilation.Assembly
+                    );
                     if (namedParameter != null && seenNames.Add(namedParameter.Name))
                     {
                         yield return namedParameter;
@@ -469,12 +637,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        private static ISymbol? IsAttributeNamedParameter(
-            ISymbol symbol,
-            ISymbol within)
+        private static ISymbol? IsAttributeNamedParameter(ISymbol symbol, ISymbol within)
         {
-            if (!symbol.CanBeReferencedByName ||
-                !symbol.IsAccessibleWithin(within))
+            if (!symbol.CanBeReferencedByName || !symbol.IsAccessibleWithin(within))
             {
                 return null;
             }
@@ -483,9 +648,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 case SymbolKind.Field:
                     var fieldSymbol = (IFieldSymbol)symbol;
-                    if (!fieldSymbol.IsConst &&
-                        !fieldSymbol.IsReadOnly &&
-                        !fieldSymbol.IsStatic)
+                    if (!fieldSymbol.IsConst && !fieldSymbol.IsReadOnly && !fieldSymbol.IsStatic)
                     {
                         return fieldSymbol;
                     }
@@ -494,13 +657,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
                 case SymbolKind.Property:
                     var propertySymbol = (IPropertySymbol)symbol;
-                    if (!propertySymbol.IsReadOnly &&
-                        !propertySymbol.IsWriteOnly &&
-                        !propertySymbol.IsStatic &&
-                        propertySymbol.GetMethod != null &&
-                        propertySymbol.SetMethod != null &&
-                        propertySymbol.GetMethod.IsAccessibleWithin(within) &&
-                        propertySymbol.SetMethod.IsAccessibleWithin(within))
+                    if (
+                        !propertySymbol.IsReadOnly
+                        && !propertySymbol.IsWriteOnly
+                        && !propertySymbol.IsStatic
+                        && propertySymbol.GetMethod != null
+                        && propertySymbol.SetMethod != null
+                        && propertySymbol.GetMethod.IsAccessibleWithin(within)
+                        && propertySymbol.SetMethod.IsAccessibleWithin(within)
+                    )
                     {
                         return propertySymbol;
                     }
@@ -511,35 +676,39 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return null;
         }
 
-        private static ImmutableArray<ISymbol> GetMembers(INamedTypeSymbol type, ISymbol within)
-            => type.GetMembers();
+        private static ImmutableArray<ISymbol> GetMembers(INamedTypeSymbol type, ISymbol within) =>
+            type.GetMembers();
 
         /// <summary>
         /// Gets the set of members in the inheritance chain of <paramref name="containingType"/> that
         /// are overridable.  The members will be returned in furthest-base type to closest-base
         /// type order.  i.e. the overridable members of <see cref="System.Object"/> will be at the start
-        /// of the list, and the members of the direct parent type of <paramref name="containingType"/> 
+        /// of the list, and the members of the direct parent type of <paramref name="containingType"/>
         /// will be at the end of the list.
-        /// 
-        /// If a member has already been overridden (in <paramref name="containingType"/> or any base type) 
+        ///
+        /// If a member has already been overridden (in <paramref name="containingType"/> or any base type)
         /// it will not be included in the list.
         /// </summary>
         public static ImmutableArray<ISymbol> GetOverridableMembers(
-            this INamedTypeSymbol containingType, CancellationToken cancellationToken)
+            this INamedTypeSymbol containingType,
+            CancellationToken cancellationToken
+        )
         {
-            // Keep track of the symbols we've seen and what order we saw them in.  The 
+            // Keep track of the symbols we've seen and what order we saw them in.  The
             // order allows us to produce the symbols in the end from the furthest base-type
             // to the closest base-type
             using var _ = PooledDictionary<ISymbol, int>.GetInstance(out var result);
             var index = 0;
 
-            if (containingType is
+            if (
+                containingType is
                 {
                     IsScriptClass: false,
                     IsImplicitClass: false,
                     IsStatic: false,
                     TypeKind: TypeKind.Class or TypeKind.Struct
-                })
+                }
+            )
             {
                 var baseTypes = containingType.GetBaseTypes().Reverse();
                 foreach (var type in baseTypes)
@@ -550,7 +719,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     RemoveOverriddenMembers(result, type, cancellationToken);
 
                     // Retain overridable methods
-                    AddOverridableMembers(result, containingType, type, ref index, cancellationToken);
+                    AddOverridableMembers(
+                        result,
+                        containingType,
+                        type,
+                        ref index,
+                        cancellationToken
+                    );
                 }
 
                 // Don't suggest already overridden members
@@ -563,7 +738,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return result.Keys.OrderBy(s => result[s]).ToImmutableArray();
 
             static void RemoveOverriddenMembers(
-                Dictionary<ISymbol, int> result, INamedTypeSymbol containingType, CancellationToken cancellationToken)
+                Dictionary<ISymbol, int> result,
+                INamedTypeSymbol containingType,
+                CancellationToken cancellationToken
+            )
             {
                 foreach (var member in containingType.GetMembers())
                 {
@@ -584,10 +762,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             static void RemoveNonOverriddableMembers(
-                Dictionary<ISymbol, int> result, INamedTypeSymbol containingType, CancellationToken cancellationToken)
+                Dictionary<ISymbol, int> result,
+                INamedTypeSymbol containingType,
+                CancellationToken cancellationToken
+            )
             {
                 var caseSensitive = containingType.Language != LanguageNames.VisualBasic;
-                var comparer = caseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase;
+                var comparer = caseSensitive
+                    ? StringComparer.Ordinal
+                    : StringComparer.OrdinalIgnoreCase;
                 foreach (var member in containingType.GetMembers())
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -595,8 +778,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         continue;
 
                     var matches = result.Where(kvp =>
-                        comparer.Equals(member.Name, kvp.Key.Name) &&
-                        SignatureComparer.Instance.HaveSameSignature(member, kvp.Key, caseSensitive));
+                        comparer.Equals(member.Name, kvp.Key.Name)
+                        && SignatureComparer.Instance.HaveSameSignature(
+                            member,
+                            kvp.Key,
+                            caseSensitive
+                        )
+                    );
 
                     // realize the matches since we're mutating the collection we're querying.
                     foreach (var match in matches.ToImmutableArray())
@@ -606,8 +794,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         private static void AddOverridableMembers(
-            Dictionary<ISymbol, int> result, INamedTypeSymbol containingType,
-            INamedTypeSymbol type, ref int index, CancellationToken cancellationToken)
+            Dictionary<ISymbol, int> result,
+            INamedTypeSymbol containingType,
+            INamedTypeSymbol type,
+            ref int index,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var member in type.GetMembers())
             {
@@ -634,7 +826,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return member switch
             {
                 IEventSymbol => true,
-                IMethodSymbol { MethodKind: MethodKind.Ordinary, CanBeReferencedByName: true } => true,
+                IMethodSymbol { MethodKind: MethodKind.Ordinary, CanBeReferencedByName: true }
+                    => true,
                 IPropertySymbol { IsWithEvents: false } => true,
                 _ => false,
             };
@@ -653,35 +846,37 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         private static bool IsEqualsObject(ISymbol member)
         {
-            return member is IMethodSymbol
-            {
-                Name: nameof(Equals),
-                IsStatic: false,
-                ContainingType.SpecialType: SpecialType.System_Object,
-                Parameters.Length: 1,
-            };
+            return member
+                is IMethodSymbol
+                {
+                    Name: nameof(Equals),
+                    IsStatic: false,
+                    ContainingType.SpecialType: SpecialType.System_Object,
+                    Parameters.Length: 1,
+                };
         }
 
-        public static INamedTypeSymbol TryConstruct(this INamedTypeSymbol type, ITypeSymbol[] typeArguments)
-            => typeArguments.Length > 0 ? type.Construct(typeArguments) : type;
+        public static INamedTypeSymbol TryConstruct(
+            this INamedTypeSymbol type,
+            ITypeSymbol[] typeArguments
+        ) => typeArguments.Length > 0 ? type.Construct(typeArguments) : type;
 
-        public static bool IsCollectionBuilderAttribute([NotNullWhen(true)] this INamedTypeSymbol? type)
-            => type is
-            {
-                Name: "CollectionBuilderAttribute",
-                ContainingNamespace:
-                {
-                    Name: nameof(System.Runtime.CompilerServices),
+        public static bool IsCollectionBuilderAttribute(
+            [NotNullWhen(true)] this INamedTypeSymbol? type
+        ) =>
+            type
+                is {
+                    Name: "CollectionBuilderAttribute",
                     ContainingNamespace:
                     {
-                        Name: nameof(System.Runtime),
+                        Name: nameof(System.Runtime.CompilerServices),
                         ContainingNamespace:
                         {
-                            Name: nameof(System),
-                            ContainingNamespace.IsGlobalNamespace: true,
+                            Name: nameof(System.Runtime),
+                            ContainingNamespace:
+                            { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true }
                         }
                     }
-                }
-            };
+                };
     }
 }

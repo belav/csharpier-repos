@@ -37,18 +37,21 @@ public class SupplyParameterFromFormTest
         {
             Name = "scope-name",
             FormValueModelBinder = new TestFormModelValueBinder("[scope-name]handler-name"),
-            ChildContent = modelBindingContext => builder =>
-            {
-                builder.OpenComponent<FormParametersComponentWithName>(0);
-                builder.CloseComponent();
-            }
+            ChildContent = modelBindingContext =>
+                builder =>
+                {
+                    builder.OpenComponent<FormParametersComponentWithName>(0);
+                    builder.CloseComponent();
+                },
         };
 
         // Act
         var componentId = renderer.AssignRootComponentId(formMappingScope);
         await renderer.RenderRootComponentAsync(componentId);
-        var formComponentState = renderer.Batches.Single()
-            .GetComponentFrames<FormParametersComponentWithName>().Single()
+        var formComponentState = renderer
+            .Batches.Single()
+            .GetComponentFrames<FormParametersComponentWithName>()
+            .Single()
             .ComponentState;
 
         var result = CascadingParameterState.FindCascadingParameters(formComponentState, out _);
@@ -63,19 +66,22 @@ public class SupplyParameterFromFormTest
         var services = new ServiceCollection();
         var valueBinder = new TestFormModelValueBinder();
         services.AddSingleton<IFormValueMapper>(valueBinder);
-        services.AddSingleton<ICascadingValueSupplier>(_ => new SupplyParameterFromFormValueProvider(
-            valueBinder, mappingScopeName: ""));
+        services.AddSingleton<ICascadingValueSupplier>(
+            _ => new SupplyParameterFromFormValueProvider(valueBinder, mappingScopeName: "")
+        );
         return new TestRenderer(services.BuildServiceProvider());
     }
 
     class FormParametersComponent : TestComponentBase
     {
-        [SupplyParameterFromForm] public string FormParameter { get; set; }
+        [SupplyParameterFromForm]
+        public string FormParameter { get; set; }
     }
 
     class FormParametersComponentWithName : TestComponentBase
     {
-        [SupplyParameterFromForm(FormName = "handler-name")] public string FormParameter { get; set; }
+        [SupplyParameterFromForm(FormName = "handler-name")]
+        public string FormParameter { get; set; }
     }
 
     class TestFormModelValueBinder(string IncomingScopeQualifiedFormName = "") : IFormValueMapper
@@ -90,18 +96,16 @@ public class SupplyParameterFromFormTest
             }
             else
             {
-                return IncomingScopeQualifiedFormName == $"[{mappingScopeName}]{formName ?? string.Empty}";
+                return IncomingScopeQualifiedFormName
+                    == $"[{mappingScopeName}]{formName ?? string.Empty}";
             }
         }
     }
 
     class TestComponentBase : IComponent
     {
-        public void Attach(RenderHandle renderHandle)
-        {
-        }
+        public void Attach(RenderHandle renderHandle) { }
 
-        public Task SetParametersAsync(ParameterView parameters)
-            => Task.CompletedTask;
+        public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
     }
 }
