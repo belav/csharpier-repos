@@ -77,10 +77,12 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                 // error here.  We'll let the code fix take care of that.
                 //
                 // Similarly if this is for the codefix only offer if we do see that there's an error.
-                var syntaxFacts =
-                    semanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
-                var headerFacts =
-                    semanticDocument.Document.GetRequiredLanguageService<IHeaderFactsService>();
+                var syntaxFacts = semanticDocument
+                    .Document
+                    .GetRequiredLanguageService<ISyntaxFactsService>();
+                var headerFacts = semanticDocument
+                    .Document
+                    .GetRequiredLanguageService<IHeaderFactsService>();
                 if (
                     headerFacts.IsOnTypeHeader(
                         semanticDocument.Root,
@@ -95,20 +97,24 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                         return false;
                 }
 
-                var semanticFacts =
-                    semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
+                var semanticFacts = semanticDocument
+                    .Document
+                    .GetLanguageService<ISemanticFactsService>();
                 var classConstructors = ClassType.InstanceConstructors;
 
-                var destinationProvider =
-                    semanticDocument.Project.Solution.Services.GetLanguageServices(
-                        ClassType.Language
-                    );
+                var destinationProvider = semanticDocument
+                    .Project
+                    .Solution
+                    .Services
+                    .GetLanguageServices(ClassType.Language);
                 var isCaseSensitive = syntaxFacts.IsCaseSensitive;
 
-                UnimplementedConstructors = baseType.InstanceConstructors.WhereAsArray(c =>
-                    c.IsAccessibleWithin(ClassType)
-                    && IsMissing(c, classConstructors, isCaseSensitive)
-                );
+                UnimplementedConstructors = baseType
+                    .InstanceConstructors
+                    .WhereAsArray(c =>
+                        c.IsAccessibleWithin(ClassType)
+                        && IsMissing(c, classConstructors, isCaseSensitive)
+                    );
 
                 return UnimplementedConstructors.Length > 0;
             }
@@ -119,14 +125,14 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                 // one for them.   If so, also see if there's an accessible no-arg contructor in the base.
                 // If not, then the compiler will error and we want the code-fix to take over solving this problem.
                 if (
-                    classType.Constructors.Any(static c =>
-                        c.Parameters.Length == 0 && c.IsImplicitlyDeclared
-                    )
+                    classType
+                        .Constructors
+                        .Any(static c => c.Parameters.Length == 0 && c.IsImplicitlyDeclared)
                 )
                 {
-                    var baseNoArgConstructor = baseType.Constructors.FirstOrDefault(c =>
-                        c.Parameters.Length == 0
-                    );
+                    var baseNoArgConstructor = baseType
+                        .Constructors
+                        .FirstOrDefault(c => c.Parameters.Length == 0);
                     if (
                         baseNoArgConstructor == null
                         || !baseNoArgConstructor.IsAccessibleWithin(classType)
@@ -156,12 +162,14 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
             )
             {
                 var matchingConstructor = classConstructors.FirstOrDefault(c =>
-                    SignatureComparer.Instance.HaveSameSignature(
-                        constructor.Parameters,
-                        c.Parameters,
-                        compareParameterName: true,
-                        isCaseSensitive: isCaseSensitive
-                    )
+                    SignatureComparer
+                        .Instance
+                        .HaveSameSignature(
+                            constructor.Parameters,
+                            c.Parameters,
+                            compareParameterName: true,
+                            isCaseSensitive: isCaseSensitive
+                        )
                 );
 
                 if (matchingConstructor == null)

@@ -634,13 +634,15 @@ namespace System.ServiceModel.Configuration
                         );
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidEnumArgumentException(
-                            "AuthenticationMode",
-                            (int)this.AuthenticationMode,
-                            typeof(AuthenticationMode)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidEnumArgumentException(
+                                "AuthenticationMode",
+                                (int)this.AuthenticationMode,
+                                typeof(AuthenticationMode)
+                            )
+                        );
             }
 
             this.ApplyConfiguration(result);
@@ -1384,8 +1386,9 @@ namespace System.ServiceModel.Configuration
                 property.ValueOrigin == PropertyValueOrigin.SetHere;
             if (
                 this.IsSecurityElementBootstrap
-                && !this
-                    .ElementInformation.Properties.OfType<PropertyInformation>()
+                && !this.ElementInformation
+                    .Properties
+                    .OfType<PropertyInformation>()
                     .Any(nontrivialProperty)
             )
             {

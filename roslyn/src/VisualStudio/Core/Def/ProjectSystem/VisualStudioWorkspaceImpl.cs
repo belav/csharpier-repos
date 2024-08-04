@@ -195,28 +195,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             // This pattern ensures that we are called whenever the build starts/completes even if it is already in progress.
-            KnownUIContexts.SolutionBuildingContext.WhenActivated(() =>
-            {
-                KnownUIContexts.SolutionBuildingContext.UIContextChanged += (
-                    object _,
-                    UIContextChangedEventArgs e
-                ) =>
+            KnownUIContexts
+                .SolutionBuildingContext
+                .WhenActivated(() =>
                 {
-                    if (e.Activated)
+                    KnownUIContexts.SolutionBuildingContext.UIContextChanged += (
+                        object _,
+                        UIContextChangedEventArgs e
+                    ) =>
                     {
-                        ExternalErrorDiagnosticUpdateSource.OnSolutionBuildStarted();
-                    }
-                    else
-                    {
-                        // A real build just finished.  Clear out any results from the last "run code analysis" command.
-                        this.Services.GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>()
-                            .Clear();
-                        ExternalErrorDiagnosticUpdateSource.OnSolutionBuildCompleted();
-                    }
-                };
+                        if (e.Activated)
+                        {
+                            ExternalErrorDiagnosticUpdateSource.OnSolutionBuildStarted();
+                        }
+                        else
+                        {
+                            // A real build just finished.  Clear out any results from the last "run code analysis" command.
+                            this.Services
+                                .GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>()
+                                .Clear();
+                            ExternalErrorDiagnosticUpdateSource.OnSolutionBuildCompleted();
+                        }
+                    };
 
-                ExternalErrorDiagnosticUpdateSource.OnSolutionBuildStarted();
-            });
+                    ExternalErrorDiagnosticUpdateSource.OnSolutionBuildStarted();
+                });
 
             _isExternalErrorDiagnosticUpdateSourceSubscribedToSolutionBuildEvents = true;
         }
@@ -226,9 +229,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         )
         {
             // Create services that are bound to the UI thread
-            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                _threadingContext.DisposalToken
-            );
+            await _threadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(_threadingContext.DisposalToken);
 
             // Fetch the session synchronously on the UI thread; if this doesn't happen before we try using this on
             // the background thread then we will experience hangs like we see in this bug:
@@ -290,8 +293,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             );
 
             // Initialize task-list in BG.
-            var taskListService = this
-                .Services.SolutionServices.ExportProvider.GetExports<VisualStudioTaskListService>()
+            var taskListService = this.Services
+                .SolutionServices
+                .ExportProvider
+                .GetExports<VisualStudioTaskListService>()
                 .Single()
                 .Value;
             taskListService.Start(this);
@@ -388,12 +393,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 throw new ArgumentNullException(nameof(documentId));
             }
 
-            var document = _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    CurrentSolution
-                        .GetDocumentAsync(documentId, includeSourceGenerated: true)
-                        .AsTask()
-            );
+            var document = _threadingContext
+                .JoinableTaskFactory
+                .Run(
+                    () =>
+                        CurrentSolution
+                            .GetDocumentAsync(documentId, includeSourceGenerated: true)
+                            .AsTask()
+                );
             if (document == null)
             {
                 throw new ArgumentException(
@@ -408,10 +415,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
             else
             {
-                return _projectCodeModelFactory.Value.GetOrCreateFileCodeModel(
-                    documentId.ProjectId,
-                    document.FilePath
-                );
+                return _projectCodeModelFactory
+                    .Value
+                    .GetOrCreateFileCodeModel(documentId.ProjectId, document.FilePath);
             }
         }
 
@@ -509,7 +515,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             CodeAnalysis.Project project
         ) =>
             project
-                .Services.GetRequiredService<ICompilationOptionsChangingService>()
+                .Services
+                .GetRequiredService<ICompilationOptionsChangingService>()
                 .CanApplyChange(oldOptions, newOptions);
 
         public override bool CanApplyParseOptionChange(
@@ -522,7 +529,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 ProjectSystemProjectFactory.TryGetMaxSupportedLanguageVersion(project.Id);
 
             return project
-                .Services.GetRequiredService<IParseOptionsChangingService>()
+                .Services
+                .GetRequiredService<IParseOptionsChangingService>()
                 .CanApplyChange(oldOptions, newOptions, maxSupportLangVersion);
         }
 
@@ -530,10 +538,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             object sender,
             TextBufferCreatedEventArgs e
         ) =>
-            e.TextBuffer.Properties.AddProperty(
-                typeof(ITextBufferCloneService),
-                _textBufferCloneService
-            );
+            e.TextBuffer
+                .Properties
+                .AddProperty(typeof(ITextBufferCloneService), _textBufferCloneService);
 
         public override bool CanApplyChange(ApplyChangesKind feature)
         {
@@ -634,8 +641,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             var originalProject = CurrentSolution.GetRequiredProject(projectId);
-            var compilationOptionsService =
-                originalProject.Services.GetRequiredService<ICompilationOptionsChangingService>();
+            var compilationOptionsService = originalProject
+                .Services
+                .GetRequiredService<ICompilationOptionsChangingService>();
             var storage = ProjectPropertyStorage.Create(
                 TryGetDTEProject(projectId),
                 ServiceProvider.GlobalProvider
@@ -657,7 +665,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             var parseOptionsService = CurrentSolution
                 .GetRequiredProject(projectId)
-                .Services.GetRequiredService<IParseOptionsChangingService>();
+                .Services
+                .GetRequiredService<IParseOptionsChangingService>();
             var storage = ProjectPropertyStorage.Create(
                 TryGetDTEProject(projectId),
                 ServiceProvider.GlobalProvider
@@ -800,9 +809,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // Instead, we invoke this in JTF run which will mitigate deadlocks when the ConfigureAwait(true)
             // tries to switch back to the main thread in the LSP client.
             // Link to LSP client bug for ConfigureAwait(true) - https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1216657
-            var mappedChanges = _threadingContext.JoinableTaskFactory.Run(
-                () => GetMappedTextChangesAsync(solutionChanges)
-            );
+            var mappedChanges = _threadingContext
+                .JoinableTaskFactory
+                .Run(() => GetMappedTextChangesAsync(solutionChanges));
 
             // Group the mapped text changes by file, then apply all mapped text changes for the file.
             foreach (var changesForFile in mappedChanges)
@@ -811,7 +820,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 var projectId = changesForFile.Value.First().ProjectId;
                 // Make sure we only take distinct changes - we'll have duplicates from different projects for linked files or multi-targeted files.
                 var distinctTextChanges = changesForFile
-                    .Value.Select(change => change.TextChange)
+                    .Value
+                    .Select(change => change.TextChange)
                     .Distinct()
                     .ToImmutableArray();
                 using var invisibleEditor = new InvisibleEditor(
@@ -840,9 +850,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 {
                     foreach (var changedDocumentId in projectChanges.GetChangedDocuments())
                     {
-                        var oldDocument = projectChanges.OldProject.GetRequiredDocument(
-                            changedDocumentId
-                        );
+                        var oldDocument = projectChanges
+                            .OldProject
+                            .GetRequiredDocument(changedDocumentId);
                         if (
                             !ShouldApplyChangesToMappedDocuments(
                                 oldDocument,
@@ -853,9 +863,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             continue;
                         }
 
-                        var newDocument = projectChanges.NewProject.GetRequiredDocument(
-                            changedDocumentId
-                        );
+                        var newDocument = projectChanges
+                            .NewProject
+                            .GetRequiredDocument(changedDocumentId);
                         var mappedTextChanges = await mappingService
                             .GetMappedTextChangesAsync(
                                 oldDocument,
@@ -1371,10 +1381,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 // document using its ItemId. Thus, we must use OpenDocumentViaProject, which only
                 // depends on the file path.
 
-                var openDocumentService = ServiceProvider.GlobalProvider.GetServiceOnMainThread<
-                    SVsUIShellOpenDocument,
-                    IVsUIShellOpenDocument
-                >();
+                var openDocumentService = ServiceProvider
+                    .GlobalProvider
+                    .GetServiceOnMainThread<SVsUIShellOpenDocument, IVsUIShellOpenDocument>();
                 return ErrorHandler.Succeeded(
                     openDocumentService.OpenDocumentViaProject(
                         filePath,
@@ -1423,10 +1432,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 var filePath = this.GetFilePath(documentId);
                 if (filePath != null)
                 {
-                    var openDocumentService = ServiceProvider.GlobalProvider.GetServiceOnMainThread<
-                        SVsUIShellOpenDocument,
-                        IVsUIShellOpenDocument
-                    >();
+                    var openDocumentService = ServiceProvider
+                        .GlobalProvider
+                        .GetServiceOnMainThread<SVsUIShellOpenDocument, IVsUIShellOpenDocument>();
                     if (
                         ErrorHandler.Succeeded(
                             openDocumentService.IsDocumentOpen(
@@ -1477,10 +1485,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             {
                 if (IsDocumentOpen(documentId))
                 {
-                    var textBuffer = this
-                        .CurrentSolution.GetTextDocument(documentId)!
+                    var textBuffer = this.CurrentSolution
+                        .GetTextDocument(documentId)!
                         .GetTextSynchronously(CancellationToken.None)
-                        .Container.TryGetTextBuffer();
+                        .Container
+                        .TryGetTextBuffer();
 
                     if (textBuffer != null)
                     {
@@ -1548,11 +1557,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     projectItemForDocument.Save();
                 }
 
-                var uniqueName = projectItemForDocument.Collection.GetUniqueNameIgnoringProjectItem(
-                    projectItemForDocument,
-                    Path.GetFileNameWithoutExtension(updatedInfo.Name),
-                    Path.GetExtension(updatedInfo.Name)
-                );
+                var uniqueName = projectItemForDocument
+                    .Collection
+                    .GetUniqueNameIgnoringProjectItem(
+                        projectItemForDocument,
+                        Path.GetFileNameWithoutExtension(updatedInfo.Name),
+                        Path.GetExtension(updatedInfo.Name)
+                    );
 
                 // Get the current undoManager before any file renames/documentId changes happen
                 var undoManager = TryGetUndoManager();
@@ -1945,10 +1956,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             CancellationToken cancellationToken
         )
         {
-            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                alwaysYield: true,
-                cancellationToken
-            );
+            await _threadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
 
             var uiContext = _languageToProjectExistsUIContext.GetOrAdd(
                 language,

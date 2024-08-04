@@ -39,11 +39,13 @@ namespace System.ServiceModel.Activities.Activation
 
             if (string.IsNullOrEmpty(constructorString))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.WorkflowServiceHostFactoryConstructorStringNotProvided
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.WorkflowServiceHostFactoryConstructorStringNotProvided
+                        )
+                    );
             }
 
             if (baseAddresses == null)
@@ -53,20 +55,22 @@ namespace System.ServiceModel.Activities.Activation
 
             if (baseAddresses.Length == 0)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.BaseAddressesNotProvided)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.BaseAddressesNotProvided));
             }
 
             if (!HostingEnvironment.IsHosted)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.Hosting_ProcessNotExecutingUnderHostedContext(
-                            "WorkflowServiceHostFactory.CreateServiceHost"
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.Hosting_ProcessNotExecutingUnderHostedContext(
+                                "WorkflowServiceHostFactory.CreateServiceHost"
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             // We expect most users will use .xamlx file instead of precompiled assembly
@@ -143,9 +147,13 @@ namespace System.ServiceModel.Activities.Activation
                 {
                     if (!TypeHelper.AreTypesCompatible(activityType, typeof(Activity)))
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.TypeNotActivity(activityType.FullName))
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.TypeNotActivity(activityType.FullName)
+                                )
+                            );
                     }
 
                     Activity activity = (Activity)Activator.CreateInstance(activityType);
@@ -154,11 +162,13 @@ namespace System.ServiceModel.Activities.Activation
             }
             if (serviceHost == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.CannotResolveConstructorStringToWorkflowType(constructorString)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.CannotResolveConstructorStringToWorkflowType(constructorString)
+                        )
+                    );
             }
 
             //The Description.Name and Description.NameSpace aren't included intentionally - because
@@ -382,7 +392,8 @@ namespace System.ServiceModel.Activities.Activation
                             if (HostingEnvironment.VirtualPathProvider.FileExists(virtualFile))
                             {
                                 activityStream = HostingEnvironment
-                                    .VirtualPathProvider.GetFile(virtualFile)
+                                    .VirtualPathProvider
+                                    .GetFile(virtualFile)
                                     .Open();
                                 streamList.Add(Tuple.Create(path, activityStream));
                             }
@@ -522,9 +533,11 @@ namespace System.ServiceModel.Activities.Activation
             string[] components = compileCustomString.Split('|');
             if (components.Length < 3)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.InvalidCompiledString(compileCustomString))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.InvalidCompiledString(compileCustomString))
+                    );
             }
             Type activityType = null;
             for (int i = 3; i < components.Length; i++)
@@ -595,7 +608,8 @@ namespace System.ServiceModel.Activities.Activation
                     if (HostingEnvironment.VirtualPathProvider.FileExists(virtualPath))
                     {
                         serviceFileStream = HostingEnvironment
-                            .VirtualPathProvider.GetFile(virtualPath)
+                            .VirtualPathProvider
+                            .GetFile(virtualPath)
                             .Open();
                         return true;
                     }

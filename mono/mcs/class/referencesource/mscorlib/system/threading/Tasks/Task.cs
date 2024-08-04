@@ -2487,10 +2487,9 @@ namespace System.Threading.Tasks
 
                 // No need to lock around this, as other logic prevents the consumption of exceptions
                 // before they have been completely processed.
-                return m_contingentProperties.m_exceptionsHolder.CreateExceptionObject(
-                    false,
-                    canceledException
-                );
+                return m_contingentProperties
+                    .m_exceptionsHolder
+                    .CreateExceptionObject(false, canceledException);
             }
             else if (canceledException != null)
             {
@@ -6712,12 +6711,14 @@ namespace System.Threading.Tasks
                 return Task.FromCancellation(cancellationToken);
 
             // Kick off initial Task, which will call the user-supplied function and yield a Task.
-            Task<Task> task1 = Task<Task>.Factory.StartNew(
-                function,
-                cancellationToken,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task<Task> task1 = Task<Task>
+                .Factory
+                .StartNew(
+                    function,
+                    cancellationToken,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
 
             // Create a promise-style Task to be used as a proxy for the operation
             // Set lookForOce == true so that unwrap logic can be on the lookout for OCEs thrown as faults from task1, to support in-delegate cancellation.
@@ -6775,12 +6776,14 @@ namespace System.Threading.Tasks
                 return Task.FromCancellation<TResult>(cancellationToken);
 
             // Kick off initial Task, which will call the user-supplied function and yield a Task.
-            Task<Task<TResult>> task1 = Task<Task<TResult>>.Factory.StartNew(
-                function,
-                cancellationToken,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task<Task<TResult>> task1 = Task<Task<TResult>>
+                .Factory
+                .StartNew(
+                    function,
+                    cancellationToken,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
 
             // Create a promise-style Task to be used as a proxy for the operation
             // Set lookForOce == true so that unwrap logic can be on the lookout for OCEs thrown as faults from task1, to support in-delegate cancellation.

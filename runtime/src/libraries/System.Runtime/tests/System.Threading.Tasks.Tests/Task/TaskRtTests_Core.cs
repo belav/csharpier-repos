@@ -725,22 +725,26 @@ namespace System.Threading.Tasks.Tests
                     {
                         if (useObj)
                         {
-                            f1 = Task<int>.Factory.StartNew(
-                                obj =>
-                                {
-                                    sideEffect = true;
-                                    return 42;
-                                },
-                                refObj
-                            );
+                            f1 = Task<int>
+                                .Factory
+                                .StartNew(
+                                    obj =>
+                                    {
+                                        sideEffect = true;
+                                        return 42;
+                                    },
+                                    refObj
+                                );
                         }
                         else
                         {
-                            f1 = Task<int>.Factory.StartNew(() =>
-                            {
-                                sideEffect = true;
-                                return 42;
-                            });
+                            f1 = Task<int>
+                                .Factory
+                                .StartNew(() =>
+                                {
+                                    sideEffect = true;
+                                    return 42;
+                                });
                         }
                     }
 
@@ -1008,22 +1012,15 @@ namespace System.Threading.Tasks.Tests
                     {
                         if (useObj)
                         {
-                            f1 = Task<int>.Factory.StartNew(
-                                obj => 42,
-                                refObj,
-                                ct,
-                                tco,
-                                TaskScheduler.Default
-                            );
+                            f1 = Task<int>
+                                .Factory
+                                .StartNew(obj => 42, refObj, ct, tco, TaskScheduler.Default);
                         }
                         else
                         {
-                            f1 = Task<int>.Factory.StartNew(
-                                () => 42,
-                                ct,
-                                tco,
-                                TaskScheduler.Default
-                            );
+                            f1 = Task<int>
+                                .Factory
+                                .StartNew(() => 42, ct, tco, TaskScheduler.Default);
                         }
                     }
 
@@ -1172,12 +1169,14 @@ namespace System.Threading.Tasks.Tests
             });
             Assert.Throws<ArgumentNullException>(() =>
             {
-                Task<int>.Factory.StartNew(
-                    (Func<int>)null,
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    (TaskScheduler)null
-                );
+                Task<int>
+                    .Factory
+                    .StartNew(
+                        (Func<int>)null,
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        (TaskScheduler)null
+                    );
             });
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -1185,13 +1184,15 @@ namespace System.Threading.Tasks.Tests
             });
             Assert.Throws<ArgumentNullException>(() =>
             {
-                Task<int>.Factory.StartNew(
-                    (obj) => 42,
-                    new object(),
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    (TaskScheduler)null
-                );
+                Task<int>
+                    .Factory
+                    .StartNew(
+                        (obj) => 42,
+                        new object(),
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        (TaskScheduler)null
+                    );
             });
         }
 
@@ -1301,7 +1302,8 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void RunSynchronouslyTest()
         {
-            Task.Factory.StartNew(
+            Task.Factory
+                .StartNew(
                     delegate
                     {
                         CoreRunSynchronouslyTest();
@@ -2737,12 +2739,14 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task<int>.Factory.StartNew(
-                delegate()
-                {
-                    return 1;
-                }
-            );
+            f = Task<int>
+                .Factory
+                .StartNew(
+                    delegate()
+                    {
+                        return 1;
+                    }
+                );
             temp = f.Result;
             if (temp != 1)
             {
@@ -2754,13 +2758,15 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task<int>.Factory.StartNew(
-                delegate()
-                {
-                    return 1;
-                },
-                TaskCreationOptions.None
-            );
+            f = Task<int>
+                .Factory
+                .StartNew(
+                    delegate()
+                    {
+                        return 1;
+                    },
+                    TaskCreationOptions.None
+                );
             temp = f.Result;
             if (temp != 1)
             {
@@ -2772,15 +2778,17 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task<int>.Factory.StartNew(
-                delegate()
-                {
-                    return 1;
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Current
-            );
+            f = Task<int>
+                .Factory
+                .StartNew(
+                    delegate()
+                    {
+                        return 1;
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Current
+                );
             temp = f.Result;
             if (temp != 1)
             {
@@ -2792,13 +2800,15 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task<int>.Factory.StartNew(
-                delegate(object i)
-                {
-                    return (int)i;
-                },
-                1
-            );
+            f = Task<int>
+                .Factory
+                .StartNew(
+                    delegate(object i)
+                    {
+                        return (int)i;
+                    },
+                    1
+                );
             temp = f.Result;
             if (temp != 1)
             {
@@ -2810,14 +2820,16 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task<int>.Factory.StartNew(
-                delegate(object i)
-                {
-                    return (int)i;
-                },
-                1,
-                TaskCreationOptions.None
-            );
+            f = Task<int>
+                .Factory
+                .StartNew(
+                    delegate(object i)
+                    {
+                        return (int)i;
+                    },
+                    1,
+                    TaskCreationOptions.None
+                );
             temp = f.Result;
             if (temp != 1)
             {
@@ -2829,16 +2841,18 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task<int>.Factory.StartNew(
-                delegate(object i)
-                {
-                    return (int)i;
-                },
-                1,
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Current
-            );
+            f = Task<int>
+                .Factory
+                .StartNew(
+                    delegate(object i)
+                    {
+                        return (int)i;
+                    },
+                    1,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Current
+                );
             temp = f.Result;
             if (temp != 1)
             {

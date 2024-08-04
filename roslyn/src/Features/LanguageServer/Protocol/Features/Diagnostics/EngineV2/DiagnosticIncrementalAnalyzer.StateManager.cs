@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             {
                 var projectStateSets = GetOrUpdateProjectStateSets(project);
                 return GetOrCreateHostStateSets(project, projectStateSets)
-                    .OrderedStateSets.AddRange(projectStateSets.StateSetMap.Values);
+                    .OrderedStateSets
+                    .AddRange(projectStateSets.StateSetMap.Values);
             }
 
             /// <summary>
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             {
                 var projectStateSets = GetOrCreateProjectStateSets(project);
                 return GetOrCreateHostStateSets(project, projectStateSets)
-                    .OrderedStateSets.Concat(projectStateSets.StateSetMap.Values);
+                    .OrderedStateSets
+                    .Concat(projectStateSets.StateSetMap.Values);
             }
 
             /// <summary>
@@ -167,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
                 // create project analyzer reference identity map
                 var projectAnalyzerReferenceIds = project
-                    .AnalyzerReferences.Select(r => r.Id)
+                    .AnalyzerReferences
+                    .Select(r => r.Id)
                     .ToSet();
 
                 // create build only stateSet array

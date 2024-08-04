@@ -28,7 +28,8 @@ public class SqlAzureFundamentalsTest : IClassFixture<SqlAzureFixture>
     {
         using var context = CreateContext();
         context
-            .Database.CreateExecutionStrategy()
+            .Database
+            .CreateExecutionStrategy()
             .Execute(
                 context,
                 contextScoped =>
@@ -55,7 +56,8 @@ public class SqlAzureFundamentalsTest : IClassFixture<SqlAzureFixture>
     {
         using var context = CreateContext();
         context
-            .Database.CreateExecutionStrategy()
+            .Database
+            .CreateExecutionStrategy()
             .Execute(
                 context,
                 contextScoped =>
@@ -79,7 +81,8 @@ public class SqlAzureFundamentalsTest : IClassFixture<SqlAzureFixture>
     {
         using var context = CreateContext();
         var order = context
-            .SalesOrders.OrderBy(s => s.SalesOrderID)
+            .SalesOrders
+            .OrderBy(s => s.SalesOrderID)
             .Include(s => s.Customer)
             .First();
 

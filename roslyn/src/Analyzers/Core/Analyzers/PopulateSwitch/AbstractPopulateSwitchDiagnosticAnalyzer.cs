@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             {
                 Debug.Assert(missingCases || missingDefaultCase);
                 var properties = ImmutableDictionary<string, string?>
-                    .Empty.Add(PopulateSwitchStatementHelpers.MissingCases, missingCases.ToString())
+                    .Empty
+                    .Add(PopulateSwitchStatementHelpers.MissingCases, missingCases.ToString())
                     .Add(
                         PopulateSwitchStatementHelpers.MissingDefaultCase,
                         missingDefaultCase.ToString()

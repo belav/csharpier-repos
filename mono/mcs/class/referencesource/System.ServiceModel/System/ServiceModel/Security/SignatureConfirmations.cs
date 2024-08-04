@@ -50,12 +50,14 @@ namespace System.ServiceModel.Security
         {
             if (index < 0 || index >= length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "index",
-                        SR.GetString(SR.ValueMustBeInRange, 0, length)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "index",
+                            SR.GetString(SR.ValueMustBeInRange, 0, length)
+                        )
+                    );
             }
 
             value = confirmations[index].value;

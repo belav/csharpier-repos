@@ -1814,7 +1814,8 @@ namespace Microsoft.CodeAnalysis
             {
                 Assert.True(_verifyGetControlFlowGraph);
                 return _controlFlowGraphMapOpt
-                    .Values.OrderBy(flowGraphAndSymbol =>
+                    .Values
+                    .OrderBy(flowGraphAndSymbol =>
                         flowGraphAndSymbol.Graph.OriginalOperation.Syntax.SpanStart
                     )
                     .ToImmutableArray();
@@ -3669,7 +3670,8 @@ namespace Microsoft.CodeAnalysis
                     context.RegisterSyntaxTreeAction(context =>
                     {
                         var fields = context
-                            .Tree.GetRoot()
+                            .Tree
+                            .GetRoot()
                             .DescendantNodes()
                             .OfType<CSharp.Syntax.FieldDeclarationSyntax>();
                         foreach (var variable in fields.SelectMany(f => f.Declaration.Variables))
@@ -4036,7 +4038,8 @@ namespace Microsoft.CodeAnalysis
             {
                 var arg = $"{actionName}({symbol.Name})";
                 var trees = symbol
-                    .DeclaringSyntaxReferences.Select(syntaxRef => syntaxRef.SyntaxTree)
+                    .DeclaringSyntaxReferences
+                    .Select(syntaxRef => syntaxRef.SyntaxTree)
                     .Distinct();
                 foreach (var tree in trees)
                 {

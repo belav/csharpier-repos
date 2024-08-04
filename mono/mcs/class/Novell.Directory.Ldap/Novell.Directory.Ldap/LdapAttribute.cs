@@ -650,7 +650,9 @@ namespace Novell.Directory.Ldap
             {
                 // Get InputStream from the URL
                 System.IO.Stream in_Renamed = System
-                    .Net.WebRequest.Create(url)
+                    .Net
+                    .WebRequest
+                    .Create(url)
                     .GetResponse()
                     .GetResponseStream();
                 // Read the bytes into buffers and store the them in an arraylist

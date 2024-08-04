@@ -27,296 +27,296 @@ public abstract class CompositeKeysQueryFixtureBase
             {
                 (typeof(CompositeOne), "OneToOne_Optional_Self1Id1"),
                 e =>
-                    l1s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeOne)e)?.Id1
-                    )?.OneToOne_Optional_Self1?.Id1
+                    l1s.SingleOrDefault(l => l.Id1 == ((CompositeOne)e)?.Id1)
+                        ?.OneToOne_Optional_Self1
+                        ?.Id1
             },
             {
                 (typeof(CompositeOne), "OneToOne_Optional_Self1Id2"),
                 e =>
-                    l1s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeOne)e)?.Id2
-                    )?.OneToOne_Optional_Self1?.Id2
+                    l1s.SingleOrDefault(l => l.Id2 == ((CompositeOne)e)?.Id2)
+                        ?.OneToOne_Optional_Self1
+                        ?.Id2
             },
             {
                 (typeof(CompositeOne), "OneToMany_Required_Self_Inverse1Id1"),
                 e =>
-                    l1s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeOne)e)?.Id1
-                    )?.OneToMany_Required_Self_Inverse1?.Id1
+                    l1s.SingleOrDefault(l => l.Id1 == ((CompositeOne)e)?.Id1)
+                        ?.OneToMany_Required_Self_Inverse1
+                        ?.Id1
             },
             {
                 (typeof(CompositeOne), "OneToMany_Required_Self_Inverse1Id2"),
                 e =>
-                    l1s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeOne)e)?.Id2
-                    )?.OneToMany_Required_Self_Inverse1?.Id2
+                    l1s.SingleOrDefault(l => l.Id2 == ((CompositeOne)e)?.Id2)
+                        ?.OneToMany_Required_Self_Inverse1
+                        ?.Id2
             },
             {
                 (typeof(CompositeOne), "OneToMany_Optional_Self_Inverse1Id1"),
                 e =>
-                    l1s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeOne)e)?.Id1
-                    )?.OneToMany_Optional_Self_Inverse1?.Id1
+                    l1s.SingleOrDefault(l => l.Id1 == ((CompositeOne)e)?.Id1)
+                        ?.OneToMany_Optional_Self_Inverse1
+                        ?.Id1
             },
             {
                 (typeof(CompositeOne), "OneToMany_Optional_Self_Inverse1Id2"),
                 e =>
-                    l1s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeOne)e)?.Id2
-                    )?.OneToMany_Optional_Self_Inverse1?.Id2
+                    l1s.SingleOrDefault(l => l.Id2 == ((CompositeOne)e)?.Id2)
+                        ?.OneToMany_Optional_Self_Inverse1
+                        ?.Id2
             },
             {
                 (typeof(CompositeTwo), "OneToOne_Optional_PK_Inverse2Id1"),
                 e =>
-                    l2s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeTwo)e)?.Id1
-                    )?.OneToOne_Optional_PK_Inverse2?.Id1
+                    l2s.SingleOrDefault(l => l.Id1 == ((CompositeTwo)e)?.Id1)
+                        ?.OneToOne_Optional_PK_Inverse2
+                        ?.Id1
             },
             {
                 (typeof(CompositeTwo), "OneToOne_Optional_PK_Inverse2Id2"),
                 e =>
-                    l2s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeTwo)e)?.Id2
-                    )?.OneToOne_Optional_PK_Inverse2?.Id2
+                    l2s.SingleOrDefault(l => l.Id2 == ((CompositeTwo)e)?.Id2)
+                        ?.OneToOne_Optional_PK_Inverse2
+                        ?.Id2
             },
             {
                 (typeof(CompositeTwo), "OneToMany_Required_Inverse2Id1"),
                 e =>
-                    l2s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeTwo)e)?.Id1
-                    )?.OneToMany_Required_Inverse2?.Id1
+                    l2s.SingleOrDefault(l => l.Id1 == ((CompositeTwo)e)?.Id1)
+                        ?.OneToMany_Required_Inverse2
+                        ?.Id1
             },
             {
                 (typeof(CompositeTwo), "OneToMany_Required_Inverse2Id2"),
                 e =>
-                    l2s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeTwo)e)?.Id2
-                    )?.OneToMany_Required_Inverse2?.Id2
+                    l2s.SingleOrDefault(l => l.Id2 == ((CompositeTwo)e)?.Id2)
+                        ?.OneToMany_Required_Inverse2
+                        ?.Id2
             },
             {
                 (typeof(CompositeTwo), "OneToMany_Optional_Inverse2Id1"),
                 e =>
-                    l2s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeTwo)e)?.Id1
-                    )?.OneToMany_Optional_Inverse2?.Id1
+                    l2s.SingleOrDefault(l => l.Id1 == ((CompositeTwo)e)?.Id1)
+                        ?.OneToMany_Optional_Inverse2
+                        ?.Id1
             },
             {
                 (typeof(CompositeTwo), "OneToMany_Optional_Inverse2Id2"),
                 e =>
-                    l2s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeTwo)e)?.Id2
-                    )?.OneToMany_Optional_Inverse2?.Id2
+                    l2s.SingleOrDefault(l => l.Id2 == ((CompositeTwo)e)?.Id2)
+                        ?.OneToMany_Optional_Inverse2
+                        ?.Id2
             },
             {
                 (typeof(CompositeTwo), "OneToOne_Optional_Self2Id1"),
                 e =>
-                    l2s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeTwo)e)?.Id1
-                    )?.OneToOne_Optional_Self2?.Id1
+                    l2s.SingleOrDefault(l => l.Id1 == ((CompositeTwo)e)?.Id1)
+                        ?.OneToOne_Optional_Self2
+                        ?.Id1
             },
             {
                 (typeof(CompositeTwo), "OneToOne_Optional_Self2Id2"),
                 e =>
-                    l2s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeTwo)e)?.Id2
-                    )?.OneToOne_Optional_Self2?.Id2
+                    l2s.SingleOrDefault(l => l.Id2 == ((CompositeTwo)e)?.Id2)
+                        ?.OneToOne_Optional_Self2
+                        ?.Id2
             },
             {
                 (typeof(CompositeTwo), "OneToMany_Required_Self_Inverse2Id1"),
                 e =>
-                    l2s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeTwo)e)?.Id1
-                    )?.OneToMany_Required_Self_Inverse2?.Id1
+                    l2s.SingleOrDefault(l => l.Id1 == ((CompositeTwo)e)?.Id1)
+                        ?.OneToMany_Required_Self_Inverse2
+                        ?.Id1
             },
             {
                 (typeof(CompositeTwo), "OneToMany_Required_Self_Inverse2Id2"),
                 e =>
-                    l2s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeTwo)e)?.Id2
-                    )?.OneToMany_Required_Self_Inverse2?.Id2
+                    l2s.SingleOrDefault(l => l.Id2 == ((CompositeTwo)e)?.Id2)
+                        ?.OneToMany_Required_Self_Inverse2
+                        ?.Id2
             },
             {
                 (typeof(CompositeTwo), "OneToMany_Optional_Self_Inverse2Id1"),
                 e =>
-                    l2s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeTwo)e)?.Id1
-                    )?.OneToMany_Optional_Self_Inverse2?.Id1
+                    l2s.SingleOrDefault(l => l.Id1 == ((CompositeTwo)e)?.Id1)
+                        ?.OneToMany_Optional_Self_Inverse2
+                        ?.Id1
             },
             {
                 (typeof(CompositeTwo), "OneToMany_Optional_Self_Inverse2Id2"),
                 e =>
-                    l2s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeTwo)e)?.Id2
-                    )?.OneToMany_Optional_Self_Inverse2?.Id2
+                    l2s.SingleOrDefault(l => l.Id2 == ((CompositeTwo)e)?.Id2)
+                        ?.OneToMany_Optional_Self_Inverse2
+                        ?.Id2
             },
             {
                 (typeof(CompositeThree), "OneToOne_Optional_PK_Inverse3Id1"),
                 e =>
-                    l3s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeThree)e)?.Id1
-                    )?.OneToOne_Optional_PK_Inverse3?.Id1
+                    l3s.SingleOrDefault(l => l.Id1 == ((CompositeThree)e)?.Id1)
+                        ?.OneToOne_Optional_PK_Inverse3
+                        ?.Id1
             },
             {
                 (typeof(CompositeThree), "OneToOne_Optional_PK_Inverse3Id2"),
                 e =>
-                    l3s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeThree)e)?.Id2
-                    )?.OneToOne_Optional_PK_Inverse3?.Id2
+                    l3s.SingleOrDefault(l => l.Id2 == ((CompositeThree)e)?.Id2)
+                        ?.OneToOne_Optional_PK_Inverse3
+                        ?.Id2
             },
             {
                 (typeof(CompositeThree), "OneToMany_Required_Inverse3Id1"),
                 e =>
-                    l3s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeThree)e)?.Id1
-                    )?.OneToMany_Required_Inverse3?.Id1
+                    l3s.SingleOrDefault(l => l.Id1 == ((CompositeThree)e)?.Id1)
+                        ?.OneToMany_Required_Inverse3
+                        ?.Id1
             },
             {
                 (typeof(CompositeThree), "OneToMany_Required_Inverse3Id2"),
                 e =>
-                    l3s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeThree)e)?.Id2
-                    )?.OneToMany_Required_Inverse3?.Id2
+                    l3s.SingleOrDefault(l => l.Id2 == ((CompositeThree)e)?.Id2)
+                        ?.OneToMany_Required_Inverse3
+                        ?.Id2
             },
             {
                 (typeof(CompositeThree), "OneToMany_Optional_Inverse3Id1"),
                 e =>
-                    l3s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeThree)e)?.Id1
-                    )?.OneToMany_Optional_Inverse3?.Id1
+                    l3s.SingleOrDefault(l => l.Id1 == ((CompositeThree)e)?.Id1)
+                        ?.OneToMany_Optional_Inverse3
+                        ?.Id1
             },
             {
                 (typeof(CompositeThree), "OneToMany_Optional_Inverse3Id2"),
                 e =>
-                    l3s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeThree)e)?.Id2
-                    )?.OneToMany_Optional_Inverse3?.Id2
+                    l3s.SingleOrDefault(l => l.Id2 == ((CompositeThree)e)?.Id2)
+                        ?.OneToMany_Optional_Inverse3
+                        ?.Id2
             },
             {
                 (typeof(CompositeThree), "OneToOne_Optional_Self3Id1"),
                 e =>
-                    l3s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeThree)e)?.Id1
-                    )?.OneToOne_Optional_Self3?.Id1
+                    l3s.SingleOrDefault(l => l.Id1 == ((CompositeThree)e)?.Id1)
+                        ?.OneToOne_Optional_Self3
+                        ?.Id1
             },
             {
                 (typeof(CompositeThree), "OneToOne_Optional_Self3Id2"),
                 e =>
-                    l3s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeThree)e)?.Id2
-                    )?.OneToOne_Optional_Self3?.Id2
+                    l3s.SingleOrDefault(l => l.Id2 == ((CompositeThree)e)?.Id2)
+                        ?.OneToOne_Optional_Self3
+                        ?.Id2
             },
             {
                 (typeof(CompositeThree), "OneToMany_Required_Self_Inverse3Id1"),
                 e =>
-                    l3s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeThree)e)?.Id1
-                    )?.OneToMany_Required_Self_Inverse3?.Id1
+                    l3s.SingleOrDefault(l => l.Id1 == ((CompositeThree)e)?.Id1)
+                        ?.OneToMany_Required_Self_Inverse3
+                        ?.Id1
             },
             {
                 (typeof(CompositeThree), "OneToMany_Required_Self_Inverse3Id2"),
                 e =>
-                    l3s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeThree)e)?.Id2
-                    )?.OneToMany_Required_Self_Inverse3?.Id2
+                    l3s.SingleOrDefault(l => l.Id2 == ((CompositeThree)e)?.Id2)
+                        ?.OneToMany_Required_Self_Inverse3
+                        ?.Id2
             },
             {
                 (typeof(CompositeThree), "OneToMany_Optional_Self_Inverse3Id1"),
                 e =>
-                    l3s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeThree)e)?.Id1
-                    )?.OneToMany_Optional_Self_Inverse3?.Id1
+                    l3s.SingleOrDefault(l => l.Id1 == ((CompositeThree)e)?.Id1)
+                        ?.OneToMany_Optional_Self_Inverse3
+                        ?.Id1
             },
             {
                 (typeof(CompositeThree), "OneToMany_Optional_Self_Inverse3Id2"),
                 e =>
-                    l3s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeThree)e)?.Id2
-                    )?.OneToMany_Optional_Self_Inverse3?.Id2
+                    l3s.SingleOrDefault(l => l.Id2 == ((CompositeThree)e)?.Id2)
+                        ?.OneToMany_Optional_Self_Inverse3
+                        ?.Id2
             },
             {
                 (typeof(CompositeFour), "OneToOne_Optional_PK_Inverse4Id1"),
                 e =>
-                    l4s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeFour)e)?.Id1
-                    )?.OneToOne_Optional_PK_Inverse4?.Id1
+                    l4s.SingleOrDefault(l => l.Id1 == ((CompositeFour)e)?.Id1)
+                        ?.OneToOne_Optional_PK_Inverse4
+                        ?.Id1
             },
             {
                 (typeof(CompositeFour), "OneToOne_Optional_PK_Inverse4Id2"),
                 e =>
-                    l4s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeFour)e)?.Id2
-                    )?.OneToOne_Optional_PK_Inverse4?.Id2
+                    l4s.SingleOrDefault(l => l.Id2 == ((CompositeFour)e)?.Id2)
+                        ?.OneToOne_Optional_PK_Inverse4
+                        ?.Id2
             },
             {
                 (typeof(CompositeFour), "OneToMany_Required_Inverse4Id1"),
                 e =>
-                    l4s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeFour)e)?.Id1
-                    )?.OneToMany_Required_Inverse4?.Id1
+                    l4s.SingleOrDefault(l => l.Id1 == ((CompositeFour)e)?.Id1)
+                        ?.OneToMany_Required_Inverse4
+                        ?.Id1
             },
             {
                 (typeof(CompositeFour), "OneToMany_Required_Inverse4Id2"),
                 e =>
-                    l4s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeFour)e)?.Id2
-                    )?.OneToMany_Required_Inverse4?.Id2
+                    l4s.SingleOrDefault(l => l.Id2 == ((CompositeFour)e)?.Id2)
+                        ?.OneToMany_Required_Inverse4
+                        ?.Id2
             },
             {
                 (typeof(CompositeFour), "OneToMany_Optional_Inverse4Id1"),
                 e =>
-                    l4s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeFour)e)?.Id1
-                    )?.OneToMany_Optional_Inverse4?.Id1
+                    l4s.SingleOrDefault(l => l.Id1 == ((CompositeFour)e)?.Id1)
+                        ?.OneToMany_Optional_Inverse4
+                        ?.Id1
             },
             {
                 (typeof(CompositeFour), "OneToMany_Optional_Inverse4Id2"),
                 e =>
-                    l4s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeFour)e)?.Id2
-                    )?.OneToMany_Optional_Inverse4?.Id2
+                    l4s.SingleOrDefault(l => l.Id2 == ((CompositeFour)e)?.Id2)
+                        ?.OneToMany_Optional_Inverse4
+                        ?.Id2
             },
             {
                 (typeof(CompositeFour), "OneToOne_Optional_Self4Id1"),
                 e =>
-                    l4s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeFour)e)?.Id1
-                    )?.OneToOne_Optional_Self4?.Id1
+                    l4s.SingleOrDefault(l => l.Id1 == ((CompositeFour)e)?.Id1)
+                        ?.OneToOne_Optional_Self4
+                        ?.Id1
             },
             {
                 (typeof(CompositeFour), "OneToOne_Optional_Self4Id2"),
                 e =>
-                    l4s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeFour)e)?.Id2
-                    )?.OneToOne_Optional_Self4?.Id2
+                    l4s.SingleOrDefault(l => l.Id2 == ((CompositeFour)e)?.Id2)
+                        ?.OneToOne_Optional_Self4
+                        ?.Id2
             },
             {
                 (typeof(CompositeFour), "OneToMany_Required_Self_Inverse4Id1"),
                 e =>
-                    l4s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeFour)e)?.Id1
-                    )?.OneToMany_Required_Self_Inverse4?.Id1
+                    l4s.SingleOrDefault(l => l.Id1 == ((CompositeFour)e)?.Id1)
+                        ?.OneToMany_Required_Self_Inverse4
+                        ?.Id1
             },
             {
                 (typeof(CompositeFour), "OneToMany_Required_Self_Inverse4Id2"),
                 e =>
-                    l4s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeFour)e)?.Id2
-                    )?.OneToMany_Required_Self_Inverse4?.Id2
+                    l4s.SingleOrDefault(l => l.Id2 == ((CompositeFour)e)?.Id2)
+                        ?.OneToMany_Required_Self_Inverse4
+                        ?.Id2
             },
             {
                 (typeof(CompositeFour), "OneToMany_Optional_Self_Inverse4Id1"),
                 e =>
-                    l4s.SingleOrDefault(l =>
-                        l.Id1 == ((CompositeFour)e)?.Id1
-                    )?.OneToMany_Optional_Self_Inverse4?.Id1
+                    l4s.SingleOrDefault(l => l.Id1 == ((CompositeFour)e)?.Id1)
+                        ?.OneToMany_Optional_Self_Inverse4
+                        ?.Id1
             },
             {
                 (typeof(CompositeFour), "OneToMany_Optional_Self_Inverse4Id2"),
                 e =>
-                    l4s.SingleOrDefault(l =>
-                        l.Id2 == ((CompositeFour)e)?.Id2
-                    )?.OneToMany_Optional_Self_Inverse4?.Id2
+                    l4s.SingleOrDefault(l => l.Id2 == ((CompositeFour)e)?.Id2)
+                        ?.OneToMany_Optional_Self_Inverse4
+                        ?.Id2
             },
         };
     }

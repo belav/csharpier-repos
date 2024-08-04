@@ -399,25 +399,29 @@ namespace System.ServiceModel.Description
                     if (operationMessage.Message.IsEmpty)
                     {
                         if (operationMessage is WsdlNS.OperationInput)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.SFxWsdlOperationInputNeedsMessageAttribute2,
-                                        wsdlOperation.Name,
-                                        wsdlOperation.PortType.Name
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.SFxWsdlOperationInputNeedsMessageAttribute2,
+                                            wsdlOperation.Name,
+                                            wsdlOperation.PortType.Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         if (operationMessage is WsdlNS.OperationOutput)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.SFxWsdlOperationOutputNeedsMessageAttribute2,
-                                        wsdlOperation.Name,
-                                        wsdlOperation.PortType.Name
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.SFxWsdlOperationOutputNeedsMessageAttribute2,
+                                            wsdlOperation.Name,
+                                            wsdlOperation.PortType.Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                     }
                     WsdlNS.Message wsdlMessage = documents.GetMessage(operationMessage.Message);
 
@@ -517,25 +521,29 @@ namespace System.ServiceModel.Description
                 if (wsdlOperationMessage.Message.IsEmpty)
                 {
                     if (wsdlOperationMessage is WsdlNS.OperationInput)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxWsdlOperationInputNeedsMessageAttribute2,
-                                    wsdlOperation.Name,
-                                    wsdlOperation.PortType.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxWsdlOperationInputNeedsMessageAttribute2,
+                                        wsdlOperation.Name,
+                                        wsdlOperation.PortType.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     if (wsdlOperationMessage is WsdlNS.OperationOutput)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxWsdlOperationOutputNeedsMessageAttribute2,
-                                    wsdlOperation.Name,
-                                    wsdlOperation.PortType.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxWsdlOperationOutputNeedsMessageAttribute2,
+                                        wsdlOperation.Name,
+                                        wsdlOperation.PortType.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
                 WsdlNS.Message wsdlMessage = documents.GetMessage(wsdlOperationMessage.Message);
 
@@ -1148,16 +1156,18 @@ namespace System.ServiceModel.Description
                 if (part.Name == name)
                     return part;
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(
-                        SR.SFxWsdlMessageDoesNotContainPart3,
-                        name,
-                        message.Name,
-                        message.ServiceDescription.TargetNamespace
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxWsdlMessageDoesNotContainPart3,
+                            name,
+                            message.Name,
+                            message.ServiceDescription.TargetNamespace
+                        )
                     )
-                )
-            );
+                );
         }
 
         static XmlSchemaElement FindSchemaElement(
@@ -1187,15 +1197,17 @@ namespace System.ServiceModel.Description
                 }
             }
             if (element == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxSchemaDoesNotContainElement,
-                            elementName.Name,
-                            elementName.Namespace
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxSchemaDoesNotContainElement,
+                                elementName.Name,
+                                elementName.Namespace
+                            )
                         )
-                    )
-                );
+                    );
             return element;
         }
 
@@ -1228,15 +1240,17 @@ namespace System.ServiceModel.Description
                 }
             }
             if (type == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxSchemaDoesNotContainType,
-                            typeName.Name,
-                            typeName.Namespace
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxSchemaDoesNotContainType,
+                                typeName.Name,
+                                typeName.Namespace
+                            )
                         )
-                    )
-                );
+                    );
             return type;
         }
 
@@ -1527,9 +1541,14 @@ namespace System.ServiceModel.Description
                     foreach (WsdlNS.OperationMessage message in operation.Messages)
                     {
                         if (
-                            message.Message.Equals(
-                                new XmlQualifiedName(part.Message.Name, description.TargetNamespace)
-                            )
+                            message
+                                .Message
+                                .Equals(
+                                    new XmlQualifiedName(
+                                        part.Message.Name,
+                                        description.TargetNamespace
+                                    )
+                                )
                         )
                         {
                             associatedOperation = operation;
@@ -1649,9 +1668,11 @@ namespace System.ServiceModel.Description
         {
             ICollection schemas = schemaSet.Schemas(ns);
             if (schemas == null || schemas.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxSchemaNotFound, ns))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SFxSchemaNotFound, ns))
+                    );
             return schemas;
         }
 
@@ -1942,10 +1963,10 @@ namespace System.ServiceModel.Description
         )
         {
             isEncoded = (headerBinding.Use == WsdlNS.SoapBindingUse.Encoded);
-            WsdlNS.Message wsdlHeaderMessage =
-                wsdlMessage.ServiceDescription.ServiceDescriptions.GetMessage(
-                    headerBinding.Message
-                );
+            WsdlNS.Message wsdlHeaderMessage = wsdlMessage
+                .ServiceDescription
+                .ServiceDescriptions
+                .GetMessage(headerBinding.Message);
             WsdlNS.MessagePart part = FindPartByName(wsdlHeaderMessage, headerBinding.Part);
 
             OperationFormatStyle headerStyle;
@@ -2029,22 +2050,24 @@ namespace System.ServiceModel.Description
             string operationName
         )
         {
-            WsdlNS.Message wsdlHeaderMessage =
-                wsdlMessage.ServiceDescription.ServiceDescriptions.GetMessage(
-                    headerBinding.Message
-                );
+            WsdlNS.Message wsdlHeaderMessage = wsdlMessage
+                .ServiceDescription
+                .ServiceDescriptions
+                .GetMessage(headerBinding.Message);
             WsdlNS.MessagePart part = FindPartByName(wsdlHeaderMessage, headerBinding.Part);
             if (!description.Headers.Contains(this.CurrentSchemaImporter.GetPartName(part)))
             {
-                description.Headers.Add(
-                    (MessageHeaderDescription)
-                        schemaImporter.ImportMessagePart(
-                            part,
-                            true /*isHeader*/
-                            ,
-                            isEncoded
-                        )
-                );
+                description
+                    .Headers
+                    .Add(
+                        (MessageHeaderDescription)
+                            schemaImporter.ImportMessagePart(
+                                part,
+                                true /*isHeader*/
+                                ,
+                                isEncoded
+                            )
+                    );
                 this.CurrentSchemaImporter.ValidateStyleAndUse(style, isEncoded, operationName);
             }
         }
@@ -2066,16 +2089,18 @@ namespace System.ServiceModel.Description
                     return part.Element;
                 if (!IsNullOrEmpty(part.Type))
                     return new XmlQualifiedName(part.Name, String.Empty);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxWsdlPartMustHaveElementOrType,
-                            part.Name,
-                            part.Message.Name,
-                            part.Message.Namespaces
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxWsdlPartMustHaveElementOrType,
+                                part.Name,
+                                part.Message.Name,
+                                part.Message.Namespaces
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             internal bool CanImportMessagePart(
@@ -2116,16 +2141,18 @@ namespace System.ServiceModel.Description
                     bodyPart.BaseType = ImportType(bodyPart, part.Type, isEncoded);
                     return bodyPart;
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxWsdlPartMustHaveElementOrType,
-                            part.Name,
-                            part.Message.Name,
-                            part.Message.Namespaces
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxWsdlPartMustHaveElementOrType,
+                                part.Name,
+                                part.Message.Name,
+                                part.Message.Namespaces
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             internal MessagePartDescription ImportParameterElement(
@@ -2171,9 +2198,9 @@ namespace System.ServiceModel.Description
                 XmlQualifiedName detailElementTypeName
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException());
             }
 
             internal virtual CodeTypeReference ImportFaultElement(
@@ -2182,9 +2209,9 @@ namespace System.ServiceModel.Description
                 bool isEncoded
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException());
             }
 
             internal virtual CodeTypeReference ImportFaultType(
@@ -2193,9 +2220,9 @@ namespace System.ServiceModel.Description
                 bool isEncoded
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException());
             }
 
             internal virtual void SetOperationSupportFaults(
@@ -2203,9 +2230,9 @@ namespace System.ServiceModel.Description
                 bool supportFaults
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException());
             }
 
             internal abstract void PreprocessSchema();
@@ -2270,10 +2297,9 @@ namespace System.ServiceModel.Description
                 {
                     object dataContractImporter;
                     if (
-                        !importer.State.TryGetValue(
-                            typeof(XsdDataContractImporter),
-                            out dataContractImporter
-                        )
+                        !importer
+                            .State
+                            .TryGetValue(typeof(XsdDataContractImporter), out dataContractImporter)
                     )
                     {
                         object compileUnit;
@@ -2412,14 +2438,16 @@ namespace System.ServiceModel.Description
             )
             {
                 if (isEncoded)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxDataContractSerializerDoesNotSupportEncoded,
-                                part.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxDataContractSerializerDoesNotSupportEncoded,
+                                    part.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 DataContractImporter.Import(schemaSet, typeName);
                 CodeTypeReference typeRef = DataContractImporter.GetCodeTypeReference(typeName);
                 ICollection<CodeTypeReference> knownTypeRefs =
@@ -2463,14 +2491,16 @@ namespace System.ServiceModel.Description
             )
             {
                 if (part.Multiple)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxDataContractSerializerDoesNotSupportBareArray,
-                                part.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxDataContractSerializerDoesNotSupportBareArray,
+                                    part.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 XmlQualifiedName typeName = null;
                 Type failedReferenceType;
 
@@ -2485,9 +2515,10 @@ namespace System.ServiceModel.Description
                     {
                         if (TryGetFailedReferenceType(ex, out failedReferenceType))
                         {
-                            DataContractImporter.Options.ReferencedTypes.Remove(
-                                failedReferenceType
-                            );
+                            DataContractImporter
+                                .Options
+                                .ReferencedTypes
+                                .Remove(failedReferenceType);
                             continue;
                         }
                         throw;
@@ -2496,9 +2527,10 @@ namespace System.ServiceModel.Description
                     {
                         if (TryGetFailedReferenceType(ex, out failedReferenceType))
                         {
-                            DataContractImporter.Options.ReferencedTypes.Remove(
-                                failedReferenceType
-                            );
+                            DataContractImporter
+                                .Options
+                                .ReferencedTypes
+                                .Remove(failedReferenceType);
                             continue;
                         }
                         throw;
@@ -2666,14 +2698,16 @@ namespace System.ServiceModel.Description
             )
             {
                 if (isEncoded)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxDataContractSerializerDoesNotSupportEncoded,
-                                operationName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxDataContractSerializerDoesNotSupportEncoded,
+                                    operationName
+                                )
                             )
-                        )
-                    );
+                        );
             }
 
             internal override void SetOperationStyle(
@@ -2681,8 +2715,9 @@ namespace System.ServiceModel.Description
                 OperationFormatStyle style
             )
             {
-                DataContractSerializerOperationBehavior operationBehavior =
-                    operation.Behaviors.Find<DataContractSerializerOperationBehavior>();
+                DataContractSerializerOperationBehavior operationBehavior = operation
+                    .Behaviors
+                    .Find<DataContractSerializerOperationBehavior>();
                 if (operationBehavior == null)
                 {
                     operationBehavior = new DataContractSerializerOperationBehavior(
@@ -2705,14 +2740,16 @@ namespace System.ServiceModel.Description
             )
             {
                 if (isEncoded)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxDataContractSerializerDoesNotSupportEncoded,
-                                operation.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxDataContractSerializerDoesNotSupportEncoded,
+                                    operation.Name
+                                )
                             )
-                        )
-                    );
+                        );
             }
 
             internal override void SetOperationSupportFaults(
@@ -2787,13 +2824,15 @@ namespace System.ServiceModel.Description
                 {
                     foreach (string extTypeName in webReferenceOptions.SchemaImporterExtensions)
                     {
-                        xmlImporter.Extensions.Add(
-                            extTypeName,
-                            Type.GetType(
+                        xmlImporter
+                            .Extensions
+                            .Add(
                                 extTypeName,
-                                true /*throwOnError*/
-                            )
-                        );
+                                Type.GetType(
+                                    extTypeName,
+                                    true /*throwOnError*/
+                                )
+                            );
                     }
                 }
                 //SchemaImporter.ctor is not thread safe: MB49115, VSWhidbey580396
@@ -2889,17 +2928,19 @@ namespace System.ServiceModel.Description
             )
             {
                 if (isEncoded)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxDocEncodedFaultNotSupported)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxDocEncodedFaultNotSupported)
+                            )
+                        );
                 XmlMembersMapping membersMapping = xmlImporter.ImportMembersMapping(
                     new XmlQualifiedName[] { elementName }
                 );
-                this.xmlSerializerOperationGenerator.XmlExporter.ExportMembersMapping(
-                    membersMapping
-                );
+                this.xmlSerializerOperationGenerator
+                    .XmlExporter
+                    .ExportMembersMapping(membersMapping);
                 return new CodeTypeReference(
                     this.xmlSerializerOperationGenerator.GetTypeName(membersMapping[0])
                 );
@@ -2927,9 +2968,9 @@ namespace System.ServiceModel.Description
                         memberNs,
                         new SoapSchemaMember[] { schemaMember }
                     );
-                    this.xmlSerializerOperationGenerator.SoapExporter.ExportMembersMapping(
-                        membersMapping
-                    );
+                    this.xmlSerializerOperationGenerator
+                        .SoapExporter
+                        .ExportMembersMapping(membersMapping);
                 }
                 else
                 {
@@ -2938,9 +2979,9 @@ namespace System.ServiceModel.Description
                         memberNs,
                         new SoapSchemaMember[] { schemaMember }
                     );
-                    this.xmlSerializerOperationGenerator.XmlExporter.ExportMembersMapping(
-                        membersMapping
-                    );
+                    this.xmlSerializerOperationGenerator
+                        .XmlExporter
+                        .ExportMembersMapping(membersMapping);
                 }
                 return new CodeTypeReference(
                     this.xmlSerializerOperationGenerator.GetTypeName(membersMapping[0])
@@ -2984,11 +3025,13 @@ namespace System.ServiceModel.Description
             )
             {
                 if (isEncoded)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxDocEncodedNotSupported, part.Name)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxDocEncodedNotSupported, part.Name)
+                            )
+                        );
                 XmlMembersMapping membersMapping = xmlImporter.ImportMembersMapping(
                     new XmlQualifiedName[] { element.QualifiedName }
                 );
@@ -3051,11 +3094,13 @@ namespace System.ServiceModel.Description
             )
             {
                 if (isEncoded && style != OperationFormatStyle.Rpc)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxDocEncodedNotSupported, operationName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxDocEncodedNotSupported, operationName)
+                            )
+                        );
             }
 
             internal static XmlSerializerFormatAttribute GetFormatAttribute(
@@ -3063,8 +3108,9 @@ namespace System.ServiceModel.Description
                 bool createNew
             )
             {
-                XmlSerializerOperationBehavior operationBehavior =
-                    operation.Behaviors.Find<XmlSerializerOperationBehavior>();
+                XmlSerializerOperationBehavior operationBehavior = operation
+                    .Behaviors
+                    .Find<XmlSerializerOperationBehavior>();
 
                 if (operationBehavior != null)
                     return operationBehavior.XmlSerializerFormatAttribute;

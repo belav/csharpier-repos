@@ -55,9 +55,9 @@ public class InternalComplexPropertyBuilder
             return null;
         }
 
-        var property = complexProperty.DeclaringType.FindDeclaredComplexProperty(
-            complexProperty.Name
-        );
+        var property = complexProperty
+            .DeclaringType
+            .FindDeclaredComplexProperty(complexProperty.Name);
         if (property == null)
         {
             return null;
@@ -70,7 +70,8 @@ public class InternalComplexPropertyBuilder
         List<RelationshipSnapshot>? detachedRelationships = null;
         foreach (
             var relationshipToBeDetached in complexType
-                .ContainingEntityType.GetDeclaredForeignKeys()
+                .ContainingEntityType
+                .GetDeclaredForeignKeys()
                 .ToList()
         )
         {
@@ -87,7 +88,9 @@ public class InternalComplexPropertyBuilder
             );
             if (
                 detachedRelationship
-                    .Relationship.Metadata.GetConfigurationSource()
+                    .Relationship
+                    .Metadata
+                    .GetConfigurationSource()
                     .Overrides(ConfigurationSource.DataAnnotation)
                 || relationshipToBeDetached.IsOwnership
             )
@@ -125,7 +128,9 @@ public class InternalComplexPropertyBuilder
                 );
                 if (
                     detachedRelationship
-                        .Relationship.Metadata.GetConfigurationSource()
+                        .Relationship
+                        .Metadata
+                        .GetConfigurationSource()
                         .Overrides(ConfigurationSource.DataAnnotation)
                     || relationshipToBeDetached.IsOwnership
                 )
@@ -144,7 +149,9 @@ public class InternalComplexPropertyBuilder
             var detachedKey = InternalEntityTypeBuilder.DetachKey(keyToDetach);
             if (
                 detachedKey
-                    .Item1.Metadata.GetConfigurationSource()
+                    .Item1
+                    .Metadata
+                    .GetConfigurationSource()
                     .Overrides(ConfigurationSource.Explicit)
             )
             {
@@ -167,7 +174,8 @@ public class InternalComplexPropertyBuilder
             var detachedIndex = InternalEntityTypeBuilder.DetachIndex(indexToBeDetached);
             if (
                 detachedIndex
-                    .Metadata.GetConfigurationSource()
+                    .Metadata
+                    .GetConfigurationSource()
                     .Overrides(ConfigurationSource.Explicit)
             )
             {

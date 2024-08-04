@@ -182,11 +182,13 @@ public class SingleQueryingEnumerable<T>
                 {
                     if (_dataReader == null)
                     {
-                        _relationalQueryContext.ExecutionStrategy.Execute(
-                            this,
-                            static (_, enumerator) => InitializeReader(enumerator),
-                            null
-                        );
+                        _relationalQueryContext
+                            .ExecutionStrategy
+                            .Execute(
+                                this,
+                                static (_, enumerator) => InitializeReader(enumerator),
+                                null
+                            );
                     }
 
                     var hasNext = _resultCoordinator!.HasNext ?? _dataReader!.Read();
@@ -263,10 +265,9 @@ public class SingleQueryingEnumerable<T>
         {
             EntityFrameworkEventSource.Log.QueryExecuting();
 
-            var relationalCommand = enumerator._relationalCommand =
-                enumerator._relationalCommandCache.RentAndPopulateRelationalCommand(
-                    enumerator._relationalQueryContext
-                );
+            var relationalCommand = enumerator._relationalCommand = enumerator
+                ._relationalCommandCache
+                .RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
 
             var dataReader = enumerator._dataReader = relationalCommand.ExecuteReader(
                 new RelationalCommandParameterObject(
@@ -283,9 +284,9 @@ public class SingleQueryingEnumerable<T>
 
             enumerator._resultCoordinator = new SingleQueryResultCoordinator();
 
-            enumerator._relationalQueryContext.InitializeStateManager(
-                enumerator._standAloneStateManager
-            );
+            enumerator
+                ._relationalQueryContext
+                .InitializeStateManager(enumerator._standAloneStateManager);
 
             return false;
         }
@@ -362,7 +363,8 @@ public class SingleQueryingEnumerable<T>
                     if (_dataReader == null)
                     {
                         await _relationalQueryContext
-                            .ExecutionStrategy.ExecuteAsync(
+                            .ExecutionStrategy
+                            .ExecuteAsync(
                                 this,
                                 static (_, enumerator, cancellationToken) =>
                                     InitializeReaderAsync(enumerator, cancellationToken),
@@ -455,10 +457,9 @@ public class SingleQueryingEnumerable<T>
         {
             EntityFrameworkEventSource.Log.QueryExecuting();
 
-            var relationalCommand = enumerator._relationalCommand =
-                enumerator._relationalCommandCache.RentAndPopulateRelationalCommand(
-                    enumerator._relationalQueryContext
-                );
+            var relationalCommand = enumerator._relationalCommand = enumerator
+                ._relationalCommandCache
+                .RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
 
             var dataReader = enumerator._dataReader = await relationalCommand
                 .ExecuteReaderAsync(
@@ -478,9 +479,9 @@ public class SingleQueryingEnumerable<T>
 
             enumerator._resultCoordinator = new SingleQueryResultCoordinator();
 
-            enumerator._relationalQueryContext.InitializeStateManager(
-                enumerator._standAloneStateManager
-            );
+            enumerator
+                ._relationalQueryContext
+                .InitializeStateManager(enumerator._standAloneStateManager);
 
             return false;
         }

@@ -59,9 +59,11 @@ namespace System.ServiceModel.Channels
         {
             if (message.Properties.ContainsKey(PropertyName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FaultException(SR.GetString(SR.SFxTryAddMultipleTransactionsOnMessage))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new FaultException(SR.GetString(SR.SFxTryAddMultipleTransactionsOnMessage))
+                    );
             }
 
             return new TransactionMessageProperty();
@@ -157,9 +159,13 @@ namespace System.ServiceModel.Channels
             {
                 if (property.flowedTransaction != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FaultException(SR.GetString(SR.SFxTryAddMultipleTransactionsOnMessage))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new FaultException(
+                                SR.GetString(SR.SFxTryAddMultipleTransactionsOnMessage)
+                            )
+                        );
                 }
             }
             else

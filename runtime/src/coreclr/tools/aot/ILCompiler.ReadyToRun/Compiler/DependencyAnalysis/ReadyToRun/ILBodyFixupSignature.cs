@@ -52,9 +52,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return new ModuleToken(
                     factory.ManifestMetadataTable._mutableModule,
                     factory
-                        .ManifestMetadataTable._mutableModule.TryGetEntityHandle(
-                            _method.GetTypicalMethodDefinition()
-                        )
+                        .ManifestMetadataTable
+                        ._mutableModule
+                        .TryGetEntityHandle(_method.GetTypicalMethodDefinition())
                         .Value
                 );
         }
@@ -85,7 +85,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     if (
                         factory
-                            .SignatureContext.Resolver.GetModuleTokenForType(
+                            .SignatureContext
+                            .Resolver
+                            .GetModuleTokenForType(
                                 (EcmaType)typeRef,
                                 allowDynamicallyCreatedReference: true,
                                 throwIfNotFound: false

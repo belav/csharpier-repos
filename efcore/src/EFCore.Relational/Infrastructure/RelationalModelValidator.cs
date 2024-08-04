@@ -659,11 +659,13 @@ public class RelationalModelValidator : ModelValidator
                     )
                     {
                         if (
-                            sproc.Parameters.Any(p =>
-                                p.PropertyName == property.Name
-                                && p.ForOriginalValue != parameter.ForOriginalValue
-                                && p.Direction != ParameterDirection.Input
-                            )
+                            sproc
+                                .Parameters
+                                .Any(p =>
+                                    p.PropertyName == property.Name
+                                    && p.ForOriginalValue != parameter.ForOriginalValue
+                                    && p.Direction != ParameterDirection.Input
+                                )
                         )
                         {
                             throw new InvalidOperationException(
@@ -1052,9 +1054,10 @@ public class RelationalModelValidator : ModelValidator
                     {
                         var principalEntityType = foreignKey.PrincipalEntityType;
                         if (
-                            foreignKey.PrincipalEntityType.IsAssignableFrom(
-                                foreignKey.DeclaringEntityType
-                            ) || !mappedTypes.Contains(principalEntityType)
+                            foreignKey
+                                .PrincipalEntityType
+                                .IsAssignableFrom(foreignKey.DeclaringEntityType)
+                            || !mappedTypes.Contains(principalEntityType)
                         )
                         {
                             continue;
@@ -2947,7 +2950,8 @@ public class RelationalModelValidator : ModelValidator
             if (declaringStoreObject != null)
             {
                 var fragments = property
-                    .DeclaringType.GetMappingFragments(storeObjectType)
+                    .DeclaringType
+                    .GetMappingFragments(storeObjectType)
                     .ToList();
                 if (fragments.Count > 0)
                 {
@@ -3393,8 +3397,10 @@ public class RelationalModelValidator : ModelValidator
         }
 
         var ownerEntityTypeKeyPropertiesCount = ownership
-            .PrincipalEntityType.FindPrimaryKey()!
-            .Properties.Count;
+            .PrincipalEntityType
+            .FindPrimaryKey()!
+            .Properties
+            .Count;
         var expectedKeyCount = ownership.IsUnique
             ? ownerEntityTypeKeyPropertiesCount
             : ownerEntityTypeKeyPropertiesCount + 1;

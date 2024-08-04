@@ -273,10 +273,9 @@ namespace System.Activities.Statements
                     InternalTransition originalTransition;
 
                     if (
-                        originalInternalState.triggerInternalTransitionMapping.TryGetValue(
-                            triggerMatch,
-                            out originalTransition
-                        )
+                        originalInternalState
+                            .triggerInternalTransitionMapping
+                            .TryGetValue(triggerMatch, out originalTransition)
                     )
                     {
                         originalTriggerInUpdatedDefinition++;

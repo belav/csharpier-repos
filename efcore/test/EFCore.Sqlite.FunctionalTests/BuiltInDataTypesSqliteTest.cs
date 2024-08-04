@@ -1046,7 +1046,8 @@ public class BuiltInDataTypesSqliteTest
 
         foreach (
             var property in context
-                .Model.GetEntityTypes()
+                .Model
+                .GetEntityTypes()
                 .SelectMany(e => e.GetDeclaredProperties())
         )
         {

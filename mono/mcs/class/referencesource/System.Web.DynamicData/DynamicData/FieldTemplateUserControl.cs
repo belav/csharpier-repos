@@ -626,7 +626,8 @@ namespace System.Web.DynamicData
         {
             // Nothing to do if no regex was specified
             var regexAttribute = column
-                .Attributes.OfType<RegularExpressionAttribute>()
+                .Attributes
+                .OfType<RegularExpressionAttribute>()
                 .FirstOrDefault();
             if (regexAttribute == null)
                 return;

@@ -244,7 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             var parentSourceText = parentExpression.SyntaxTree.GetText();
             var indentationLength =
                 parentSourceText
-                    .Lines.GetLineFromPosition(parentExpression.Span.End)
+                    .Lines
+                    .GetLineFromPosition(parentExpression.Span.End)
                     .GetFirstNonWhitespaceOffset() ?? 0;
 
             // Create a source-text view over the token.  This makes it very easy to treat the token as a set of lines

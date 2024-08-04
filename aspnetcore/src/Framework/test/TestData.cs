@@ -364,7 +364,8 @@ public static class TestData
 
     private static string GetTestDataValue(string key) =>
         typeof(TestData)
-            .Assembly.GetCustomAttributes<TestDataAttribute>()
+            .Assembly
+            .GetCustomAttributes<TestDataAttribute>()
             .Single(d => d.Key == key)
             .Value;
 }

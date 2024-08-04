@@ -196,8 +196,8 @@ namespace System.Net.Sockets.Tests
                                     : acceptApi == 1
                                         ? listener.AcceptAsync().GetAwaiter().GetResult()
                                     : acceptApi == 2
-                                        ? Task
-                                            .Factory.FromAsync(
+                                        ? Task.Factory
+                                            .FromAsync(
                                                 listener.BeginAccept,
                                                 listener.EndAccept,
                                                 null

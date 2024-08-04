@@ -314,11 +314,13 @@ namespace System.Diagnostics.PerformanceData
                                 }
                                 CurrentCounter++;
                             }
-                            Status = Interop.PerfCounter.PerfSetCounterSetInfo(
-                                _provider._hProvider,
-                                CounterSetInfo,
-                                CounterSetInfoSize
-                            );
+                            Status = Interop
+                                .PerfCounter
+                                .PerfSetCounterSetInfo(
+                                    _provider._hProvider,
+                                    CounterSetInfo,
+                                    CounterSetInfoSize
+                                );
 
                             // ERROR_INVALID_PARAMETER, ERROR_ALREADY_EXISTS, ERROR_NOT_ENOUGH_MEMORY, ERROR_OUTOFMEMORY
                             if (Status != (uint)Interop.Errors.ERROR_SUCCESS)

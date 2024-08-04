@@ -114,7 +114,8 @@ public class CreatedOfTResultTests
 
         // Assert
         var producesResponseTypeMetadata = builder
-            .Metadata.OfType<ProducesResponseTypeMetadata>()
+            .Metadata
+            .OfType<ProducesResponseTypeMetadata>()
             .Last();
         Assert.Equal(StatusCodes.Status201Created, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(Todo), producesResponseTypeMetadata.Type);

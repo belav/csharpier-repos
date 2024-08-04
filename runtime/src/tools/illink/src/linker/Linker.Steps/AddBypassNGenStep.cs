@@ -73,9 +73,9 @@ namespace Mono.Linker.Steps
                 corelibMainModule,
                 targetModule.TypeSystem.CoreLibrary
             );
-            TypeDefinition bypassNGenAttributeDef = corelibMainModule.MetadataResolver.Resolve(
-                bypassNGenAttributeRef
-            );
+            TypeDefinition bypassNGenAttributeDef = corelibMainModule
+                .MetadataResolver
+                .Resolve(bypassNGenAttributeRef);
             MethodDefinition? bypassNGenAttributeDefaultConstructor = null;
 
             if (bypassNGenAttributeDef == null)
@@ -87,9 +87,9 @@ namespace Mono.Linker.Steps
                     corelibMainModule,
                     targetModule.TypeSystem.CoreLibrary
                 );
-                TypeReference systemAttribute = corelibMainModule.MetadataResolver.Resolve(
-                    systemAttributeRef
-                );
+                TypeReference systemAttribute = corelibMainModule
+                    .MetadataResolver
+                    .Resolve(systemAttributeRef);
                 systemAttribute = corelibMainModule.ImportReference(systemAttribute);
 
                 if (systemAttribute == null)
@@ -103,10 +103,9 @@ namespace Mono.Linker.Steps
                     corelibMainModule.TypeSystem.Void,
                     systemAttributeRef
                 );
-                MethodReference systemAttributeDefaultConstructor =
-                    corelibMainModule.MetadataResolver.Resolve(
-                        systemAttributeDefaultConstructorRef
-                    );
+                MethodReference systemAttributeDefaultConstructor = corelibMainModule
+                    .MetadataResolver
+                    .Resolve(systemAttributeDefaultConstructorRef);
                 systemAttributeDefaultConstructor = corelibMainModule.ImportReference(
                     systemAttributeDefaultConstructor
                 );

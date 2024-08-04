@@ -264,7 +264,11 @@ public class OpenIdConnectTests
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
 
         var query = transaction
-            .Response.Headers.Location.Query.Substring(1)
+            .Response
+            .Headers
+            .Location
+            .Query
+            .Substring(1)
             .Split('&')
             .Select(each => each.Split('='))
             .ToDictionary(pair => pair[0], pair => pair[1]);
@@ -303,7 +307,11 @@ public class OpenIdConnectTests
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
 
         var query = transaction
-            .Response.Headers.Location.Query.Substring(1)
+            .Response
+            .Headers
+            .Location
+            .Query
+            .Substring(1)
             .Split('&')
             .Select(each => each.Split('='))
             .ToDictionary(pair => pair[0], pair => pair[1]);

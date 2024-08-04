@@ -290,11 +290,9 @@ namespace System.Workflow.Runtime
 
             if (null == broker)
             {
-                WorkflowTrace.Tracking.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    ExecutionStringManager.NullTrackingBroker
-                );
+                WorkflowTrace
+                    .Tracking
+                    .TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NullTrackingBroker);
                 return null;
             }
 
@@ -504,11 +502,9 @@ namespace System.Workflow.Runtime
         {
             if ((null == sked) || (null == skedExec))
             {
-                WorkflowTrace.Tracking.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    ExecutionStringManager.NullParameters
-                );
+                WorkflowTrace
+                    .Tracking
+                    .TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NullParameters);
                 return null;
             }
 
@@ -704,11 +700,9 @@ namespace System.Workflow.Runtime
         {
             if ((null == sked) || (null == broker))
             {
-                WorkflowTrace.Tracking.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    ExecutionStringManager.NullParameters
-                );
+                WorkflowTrace
+                    .Tracking
+                    .TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NullParameters);
                 return;
             }
             _factory = factory;
@@ -741,10 +735,12 @@ namespace System.Workflow.Runtime
             WorkflowExecutor.ActivityStatusChangeEventArgs e
         )
         {
-            WorkflowTrace.Tracking.TraceInformation(
-                "TrackingListener::ActivityStatusChange - Received Activity Status Change Event for activity {0}",
-                e.Activity.QualifiedName
-            );
+            WorkflowTrace
+                .Tracking
+                .TraceInformation(
+                    "TrackingListener::ActivityStatusChange - Received Activity Status Change Event for activity {0}",
+                    e.Activity.QualifiedName
+                );
 
             if (null == sender)
                 throw new ArgumentNullException("sender");
@@ -759,11 +755,9 @@ namespace System.Workflow.Runtime
 
             if ((null == _channels) || (_channels.Count <= 0))
             {
-                WorkflowTrace.Tracking.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    ExecutionStringManager.NoChannels
-                );
+                WorkflowTrace
+                    .Tracking
+                    .TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NoChannels);
                 return;
             }
 
@@ -1432,11 +1426,9 @@ namespace System.Workflow.Runtime
 
             if ((null == service) || (null == schedule))
             {
-                WorkflowTrace.Tracking.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    ExecutionStringManager.NullParameters
-                );
+                WorkflowTrace
+                    .Tracking
+                    .TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NullParameters);
                 return null;
             }
 
@@ -1722,10 +1714,9 @@ namespace System.Workflow.Runtime
                         return false;
 
                     if (
-                        profiles.Profiles.TryGetValue(
-                            new CacheItem(workflowType, versionId),
-                            out item
-                        )
+                        profiles
+                            .Profiles
+                            .TryGetValue(new CacheItem(workflowType, versionId), out item)
                     )
                     {
                         profile = item.TrackingProfile;

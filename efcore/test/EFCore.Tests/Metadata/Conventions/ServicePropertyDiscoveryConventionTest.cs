@@ -134,7 +134,8 @@ public class ServicePropertyDiscoveryConventionTest
             ConfigurationSource.Explicit
         );
         entityType!
-            .Builder.Property(
+            .Builder
+            .Property(
                 typeof(ILazyLoader),
                 nameof(BlogOneService.Loader),
                 ConfigurationSource.Explicit
@@ -156,11 +157,17 @@ public class ServicePropertyDiscoveryConventionTest
             owned: false,
             ConfigurationSource.Explicit
         );
-        entityType!.Builder.HasRelationship(
-            model.AddEntityType(typeof(LazyLoader), owned: false, ConfigurationSource.Explicit)!,
-            nameof(BlogOneService.Loader),
-            ConfigurationSource.Explicit
-        );
+        entityType!
+            .Builder
+            .HasRelationship(
+                model.AddEntityType(
+                    typeof(LazyLoader),
+                    owned: false,
+                    ConfigurationSource.Explicit
+                )!,
+                nameof(BlogOneService.Loader),
+                ConfigurationSource.Explicit
+            );
 
         RunConvention(entityType);
 
@@ -173,10 +180,9 @@ public class ServicePropertyDiscoveryConventionTest
     {
         var entityType = RunConvention<BlogDuplicateService>();
 
-        entityType.Builder.Ignore(
-            nameof(BlogDuplicateService.ContextTwo),
-            ConfigurationSource.Convention
-        );
+        entityType
+            .Builder
+            .Ignore(nameof(BlogDuplicateService.ContextTwo), ConfigurationSource.Convention);
 
         Assert.NotNull(entityType.FindServiceProperty(nameof(BlogDuplicateService.ContextOne)));
         Assert.Null(entityType.FindServiceProperty(nameof(BlogDuplicateService.ContextTwo)));
@@ -210,7 +216,8 @@ public class ServicePropertyDiscoveryConventionTest
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
         InMemoryTestHelpers
-            .Instance.CreateContextServices()
+            .Instance
+            .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     private class BlogOneService : Blog

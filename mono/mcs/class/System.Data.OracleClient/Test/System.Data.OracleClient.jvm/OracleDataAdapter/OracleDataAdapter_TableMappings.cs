@@ -227,7 +227,8 @@ namespace MonoTests.System.Data.OracleClient
                     ICmd.Parameters.Clear();
                     ICmd.Parameters.Add(new OracleParameter("EmployeeIDPrm", 1));
                     ((OracleCommand)ICmd)
-                        .Parameters.Add(new OracleParameter("result", OracleType.Cursor))
+                        .Parameters
+                        .Add(new OracleParameter("result", OracleType.Cursor))
                         .Direction = ParameterDirection.Output;
                     dbDA.Fill(ds1);
                     Compare(ds1.Tables.Count, 1);
@@ -245,7 +246,10 @@ namespace MonoTests.System.Data.OracleClient
             }
 
             //
-            ((IDbDataAdapter)dbDA).SelectCommand.Transaction.Commit();
+            ((IDbDataAdapter)dbDA)
+                .SelectCommand
+                .Transaction
+                .Commit();
 
             //close connection
             if (((IDbDataAdapter)dbDA).SelectCommand.Connection.State != ConnectionState.Closed)

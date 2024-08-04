@@ -869,11 +869,13 @@ class C
             var nullableIntType = compilation
                 .GetSpecialType(SpecialType.System_Nullable_T)
                 .Construct(compilation.GetSpecialType(SpecialType.System_Int32));
-            var conversion = compilation.Conversions.ClassifyConversionFromExpression(
-                compilation.GetBinder(target).BindExpression(operand, bag),
-                nullableIntType,
-                ref unused
-            );
+            var conversion = compilation
+                .Conversions
+                .ClassifyConversionFromExpression(
+                    compilation.GetBinder(target).BindExpression(operand, bag),
+                    nullableIntType,
+                    ref unused
+                );
             Assert.True(conversion.IsExplicit && conversion.IsNullable);
         }
     }

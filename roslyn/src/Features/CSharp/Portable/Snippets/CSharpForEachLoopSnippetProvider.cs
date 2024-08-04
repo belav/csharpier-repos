@@ -118,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
                 inlineExpression is not null
                 && semanticModel
                     .GetTypeInfo(inlineExpression)
-                    .Type!.CanBeAsynchronouslyEnumerated(semanticModel.Compilation)
+                    .Type!
+                    .CanBeAsynchronouslyEnumerated(semanticModel.Compilation)
             )
             {
                 forEachStatement = SyntaxFactory.ForEachStatement(

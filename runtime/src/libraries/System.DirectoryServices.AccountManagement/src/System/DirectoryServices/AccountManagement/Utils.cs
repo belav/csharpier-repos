@@ -344,11 +344,9 @@ namespace System.DirectoryServices.AccountManagement
 
                     // Does the user SID have the same domain as the machine SID?
                     bool sameDomain = false;
-                    bool success = Interop.Advapi32.EqualDomainSid(
-                        pCopyOfUserSid,
-                        pMachineDomainSid,
-                        ref sameDomain
-                    );
+                    bool success = Interop
+                        .Advapi32
+                        .EqualDomainSid(pCopyOfUserSid, pMachineDomainSid, ref sameDomain);
 
                     // Since both pCopyOfUserSid and pMachineDomainSid should always be account SIDs
                     Debug.Assert(success);
@@ -386,12 +384,14 @@ namespace System.DirectoryServices.AccountManagement
 
                 // Get the current thread's token
                 if (
-                    !Interop.Advapi32.OpenThreadToken(
-                        Interop.Kernel32.GetCurrentThread(),
-                        TokenAccessLevels.Query,
-                        true,
-                        out tokenHandle
-                    )
+                    !Interop
+                        .Advapi32
+                        .OpenThreadToken(
+                            Interop.Kernel32.GetCurrentThread(),
+                            TokenAccessLevels.Query,
+                            true,
+                            out tokenHandle
+                        )
                 )
                 {
                     if ((error = Marshal.GetLastPInvokeError()) == 1008) // ERROR_NO_TOKEN
@@ -401,11 +401,13 @@ namespace System.DirectoryServices.AccountManagement
 
                         // Current thread doesn't have a token, try the process
                         if (
-                            !Interop.Advapi32.OpenProcessToken(
-                                Interop.Kernel32.GetCurrentProcess(),
-                                (int)TokenAccessLevels.Query,
-                                out tokenHandle
-                            )
+                            !Interop
+                                .Advapi32
+                                .OpenProcessToken(
+                                    Interop.Kernel32.GetCurrentProcess(),
+                                    (int)TokenAccessLevels.Query,
+                                    out tokenHandle
+                                )
                         )
                         {
                             int lastError = Marshal.GetLastPInvokeError();
@@ -440,13 +442,15 @@ namespace System.DirectoryServices.AccountManagement
 
                 // Retrieve the user info from the current thread's token
                 // First, determine how big a buffer we need.
-                bool success = Interop.Advapi32.GetTokenInformation(
-                    tokenHandle.DangerousGetHandle(),
-                    (uint)Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenUser,
-                    IntPtr.Zero,
-                    0,
-                    out neededBufferSize
-                );
+                bool success = Interop
+                    .Advapi32
+                    .GetTokenInformation(
+                        tokenHandle.DangerousGetHandle(),
+                        (uint)Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenUser,
+                        IntPtr.Zero,
+                        0,
+                        out neededBufferSize
+                    );
 
                 int getTokenInfoError = 0;
                 if ((getTokenInfoError = Marshal.GetLastPInvokeError()) != 122) // ERROR_INSUFFICIENT_BUFFER
@@ -468,13 +472,15 @@ namespace System.DirectoryServices.AccountManagement
                 pBuffer = Marshal.AllocHGlobal((int)neededBufferSize);
 
                 // Load the user info into the buffer
-                success = Interop.Advapi32.GetTokenInformation(
-                    tokenHandle.DangerousGetHandle(),
-                    (uint)Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenUser,
-                    pBuffer,
-                    neededBufferSize,
-                    out neededBufferSize
-                );
+                success = Interop
+                    .Advapi32
+                    .GetTokenInformation(
+                        tokenHandle.DangerousGetHandle(),
+                        (uint)Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenUser,
+                        pBuffer,
+                        neededBufferSize,
+                        out neededBufferSize
+                    );
 
                 if (!success)
                 {
@@ -538,12 +544,14 @@ namespace System.DirectoryServices.AccountManagement
             {
                 Interop.OBJECT_ATTRIBUTES oa = default;
 
-                uint err = Interop.Advapi32.LsaOpenPolicy(
-                    SystemName: null,
-                    ref oa,
-                    (int)Interop.Advapi32.PolicyRights.POLICY_VIEW_LOCAL_INFORMATION,
-                    out policyHandle
-                );
+                uint err = Interop
+                    .Advapi32
+                    .LsaOpenPolicy(
+                        SystemName: null,
+                        ref oa,
+                        (int)Interop.Advapi32.PolicyRights.POLICY_VIEW_LOCAL_INFORMATION,
+                        out policyHandle
+                    );
                 if (err != 0)
                 {
                     GlobalDebug.WriteLineIf(
@@ -562,11 +570,13 @@ namespace System.DirectoryServices.AccountManagement
                 }
 
                 Debug.Assert(!policyHandle.IsInvalid);
-                err = Interop.Advapi32.LsaQueryInformationPolicy(
-                    policyHandle.DangerousGetHandle(),
-                    5, // PolicyAccountDomainInformation
-                    ref pBuffer
-                );
+                err = Interop
+                    .Advapi32
+                    .LsaQueryInformationPolicy(
+                        policyHandle.DangerousGetHandle(),
+                        5, // PolicyAccountDomainInformation
+                        ref pBuffer
+                    );
 
                 if (err != 0)
                 {
@@ -628,8 +638,11 @@ namespace System.DirectoryServices.AccountManagement
         internal static string GetNT4UserName()
         {
             using (
-                WindowsIdentity currentIdentity =
-                    System.Security.Principal.WindowsIdentity.GetCurrent()
+                WindowsIdentity currentIdentity = System
+                    .Security
+                    .Principal
+                    .WindowsIdentity
+                    .GetCurrent()
             )
             {
                 string s = currentIdentity.Name;
@@ -662,14 +675,16 @@ namespace System.DirectoryServices.AccountManagement
 
             try
             {
-                int err = Interop.Logoncli.DsGetDcName(
-                    computerName,
-                    domainName,
-                    IntPtr.Zero,
-                    siteName,
-                    flags,
-                    out domainControllerInfoPtr
-                );
+                int err = Interop
+                    .Logoncli
+                    .DsGetDcName(
+                        computerName,
+                        domainName,
+                        IntPtr.Zero,
+                        siteName,
+                        flags,
+                        out domainControllerInfoPtr
+                    );
 
                 if (err != 0)
                 {
@@ -731,15 +746,17 @@ namespace System.DirectoryServices.AccountManagement
                         )
                 );
 
-                int f = Interop.Advapi32.LookupAccountSid(
-                    serverName,
-                    sid,
-                    null,
-                    ref nameLength,
-                    null,
-                    ref domainNameLength,
-                    out accountUsage
-                );
+                int f = Interop
+                    .Advapi32
+                    .LookupAccountSid(
+                        serverName,
+                        sid,
+                        null,
+                        ref nameLength,
+                        null,
+                        ref domainNameLength,
+                        out accountUsage
+                    );
 
                 int lastErr = Marshal.GetLastPInvokeError();
                 if (lastErr != 122) // ERROR_INSUFFICIENT_BUFFER
@@ -760,15 +777,17 @@ namespace System.DirectoryServices.AccountManagement
                 fixed (char* sbName = new char[nameLength])
                 fixed (char* sbDomainName = new char[domainNameLength])
                 {
-                    f = Interop.Advapi32.LookupAccountSid(
-                        serverName,
-                        sid,
-                        sbName,
-                        ref nameLength,
-                        sbDomainName,
-                        ref domainNameLength,
-                        out accountUsage
-                    );
+                    f = Interop
+                        .Advapi32
+                        .LookupAccountSid(
+                            serverName,
+                            sid,
+                            sbName,
+                            ref nameLength,
+                            sbDomainName,
+                            ref domainNameLength,
+                            out accountUsage
+                        );
 
                     if (f == 0)
                     {
@@ -920,14 +939,16 @@ namespace System.DirectoryServices.AccountManagement
                 "BeginImpersonation: trying to impersonate " + userName
             );
 
-            int result = Interop.Advapi32.LogonUser(
-                userName,
-                domainName,
-                password,
-                9, /* LOGON32_LOGON_NEW_CREDENTIALS */
-                3, /* LOGON32_PROVIDER_WINNT50 */
-                ref hToken
-            );
+            int result = Interop
+                .Advapi32
+                .LogonUser(
+                    userName,
+                    domainName,
+                    password,
+                    9, /* LOGON32_LOGON_NEW_CREDENTIALS */
+                    3, /* LOGON32_PROVIDER_WINNT50 */
+                    ref hToken
+                );
             // check the result
             if (result == 0)
             {
@@ -980,11 +1001,16 @@ namespace System.DirectoryServices.AccountManagement
 
             try
             {
-                err = Interop.Dsrole.DsRoleGetPrimaryDomainInformation(
-                    computerName,
-                    Interop.Dsrole.DSROLE_PRIMARY_DOMAIN_INFO_LEVEL.DsRolePrimaryDomainInfoBasic,
-                    out dsRoleInfoPtr
-                );
+                err = Interop
+                    .Dsrole
+                    .DsRoleGetPrimaryDomainInformation(
+                        computerName,
+                        Interop
+                            .Dsrole
+                            .DSROLE_PRIMARY_DOMAIN_INFO_LEVEL
+                            .DsRolePrimaryDomainInfoBasic,
+                        out dsRoleInfoPtr
+                    );
 
                 if (err != 0)
                 {

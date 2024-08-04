@@ -104,12 +104,14 @@ namespace System.IdentityModel.Tokens
                         int error = Marshal.GetLastWin32Error();
                         try
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(SR.FailedToDeleteKeyContainerFile),
-                                    new Win32Exception(error)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.FailedToDeleteKeyContainerFile),
+                                        new Win32Exception(error)
+                                    )
+                                );
                         }
                         catch (InvalidOperationException ex)
                         {
@@ -196,15 +198,17 @@ namespace System.IdentityModel.Tokens
             if (typeof(T) == typeof(RsaKeyIdentifierClause))
                 return (T)((object)new RsaKeyIdentifierClause(this.rsa));
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR.GetString(
-                        SR.TokenDoesNotSupportKeyIdentifierClauseCreation,
-                        GetType().Name,
-                        typeof(T).Name
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(
+                            SR.TokenDoesNotSupportKeyIdentifierClauseCreation,
+                            GetType().Name,
+                            typeof(T).Name
+                        )
                     )
-                )
-            );
+                );
         }
 
         public override bool MatchesKeyIdentifierClause(

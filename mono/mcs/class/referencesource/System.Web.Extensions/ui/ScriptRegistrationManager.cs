@@ -395,12 +395,10 @@ namespace System.Web.UI
                     ClientUrlResolver = sm,
                 };
                 string resourceUrl = script.GetUrlInternal(sm, sm.Zip);
-                control.Page.ClientScript.RegisterClientScriptInclude(
-                    type,
-                    resourceName,
-                    resourceUrl,
-                    true
-                );
+                control
+                    .Page
+                    .ClientScript
+                    .RegisterClientScriptInclude(type, resourceName, resourceUrl, true);
                 RegisteredScript entry = new RegisteredScript(
                     control,
                     type,
@@ -475,12 +473,15 @@ namespace System.Web.UI
                     // DevDiv Bugs 128123: Register directly with ClientScriptManager so that a RegisteredScript
                     // entry is not created. Otherwise, calls to RegisterDispose would result in viewable
                     // RegisteredScript entries through GetRegisteredStartupScripts().
-                    _scriptManager.IPage.ClientScript.RegisterStartupScript(
-                        typeof(ScriptRegistrationManager),
-                        _scriptManager.CreateUniqueScriptKey(),
-                        sb.ToString(),
-                        true
-                    );
+                    _scriptManager
+                        .IPage
+                        .ClientScript
+                        .RegisterStartupScript(
+                            typeof(ScriptRegistrationManager),
+                            _scriptManager.CreateUniqueScriptKey(),
+                            sb.ToString(),
+                            true
+                        );
                 }
             }
         }
@@ -505,12 +506,10 @@ namespace System.Web.UI
                 );
             }
 
-            control.Page.ClientScript.RegisterExpandoAttribute(
-                controlId,
-                attributeName,
-                attributeValue,
-                encode
-            );
+            control
+                .Page
+                .ClientScript
+                .RegisterExpandoAttribute(controlId, attributeName, attributeValue, encode);
 
             ScriptManager sm = ScriptManager.GetCurrent(control.Page);
             if (sm != null)

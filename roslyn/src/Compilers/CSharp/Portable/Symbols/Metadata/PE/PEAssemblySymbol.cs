@@ -345,10 +345,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 if (_lazyObsoleteAttributeData == ObsoleteAttributeData.Uninitialized)
                 {
-                    var experimentalData = PrimaryModule.Module.TryDecodeExperimentalAttributeData(
-                        Assembly.Handle,
-                        new MetadataDecoder(PrimaryModule)
-                    );
+                    var experimentalData = PrimaryModule
+                        .Module
+                        .TryDecodeExperimentalAttributeData(
+                            Assembly.Handle,
+                            new MetadataDecoder(PrimaryModule)
+                        );
                     Interlocked.CompareExchange(
                         ref _lazyObsoleteAttributeData,
                         experimentalData,

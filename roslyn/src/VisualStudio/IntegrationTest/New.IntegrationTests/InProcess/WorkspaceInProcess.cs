@@ -121,10 +121,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
-                    cancellationToken
-                );
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(cancellationToken);
             globalOptions.SetGlobalOption(
                 Microsoft
                     .CodeAnalysis
@@ -163,10 +162,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
-                    cancellationToken
-                );
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(cancellationToken);
 
             globalOptions.SetGlobalOption(
                 SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
@@ -251,8 +249,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
             if (featureNames.Contains(FeatureAttribute.NavigateTo))
             {
-                var statusService =
-                    workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+                var statusService = workspace
+                    .Services
+                    .GetRequiredService<IWorkspaceStatusService>();
                 Contract.ThrowIfFalse(await statusService.IsFullyLoadedAsync(cancellationToken));
 
                 // Make sure the "priming" operation has started for Nav To
@@ -347,14 +346,16 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             {
                 if (saveTask is not null)
                 {
-                    _ = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
-                    {
-                        // Track asynchronous save operations via Roslyn's Workspace events
-                        using var _ = _asynchronousOperationListener.BeginAsyncOperation(
-                            "OnBeforeSaveAsync"
-                        );
-                        await saveTask;
-                    });
+                    _ = _threadingContext
+                        .JoinableTaskFactory
+                        .RunAsync(async () =>
+                        {
+                            // Track asynchronous save operations via Roslyn's Workspace events
+                            using var _ = _asynchronousOperationListener.BeginAsyncOperation(
+                                "OnBeforeSaveAsync"
+                            );
+                            await saveTask;
+                        });
                 }
 
                 // No additional work for the caller to handle

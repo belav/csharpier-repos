@@ -263,12 +263,9 @@ public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_ma
         {
             ParentModel parentModel = _parentModels[source];
             return (ParentDto)
-                resolutionContext.Mapper.Map(
-                    parentModel,
-                    destination,
-                    typeof(ParentModel),
-                    typeof(ParentDto)
-                );
+                resolutionContext
+                    .Mapper
+                    .Map(parentModel, destination, typeof(ParentModel), typeof(ParentDto));
         }
     }
 
@@ -289,12 +286,14 @@ public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_ma
         {
             List<ChildModel> childModels = _childModels.Where(x => x.Parent.ID == source).ToList();
             return (List<ChildDto>)
-                resolutionContext.Mapper.Map(
-                    childModels,
-                    destination,
-                    typeof(List<ChildModel>),
-                    typeof(List<ChildDto>)
-                );
+                resolutionContext
+                    .Mapper
+                    .Map(
+                        childModels,
+                        destination,
+                        typeof(List<ChildModel>),
+                        typeof(List<ChildDto>)
+                    );
         }
     }
 

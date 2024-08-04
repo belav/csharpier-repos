@@ -941,9 +941,9 @@ class C
                     var dummyComp = CreateCompilation(
                         "",
                         new[] { comp.EmitToImageReference() },
-                        options: TestOptions.DebugDll.WithMetadataImportOptions(
-                            MetadataImportOptions.All
-                        )
+                        options: TestOptions
+                            .DebugDll
+                            .WithMetadataImportOptions(MetadataImportOptions.All)
                     );
                     var typeC = dummyComp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
                     var displayClassTypes = typeC.GetMembers().OfType<NamedTypeSymbol>();
@@ -1033,9 +1033,9 @@ class C
                     var dummyComp = CreateCompilation(
                         "",
                         new[] { comp.EmitToImageReference() },
-                        options: TestOptions.DebugDll.WithMetadataImportOptions(
-                            MetadataImportOptions.All
-                        )
+                        options: TestOptions
+                            .DebugDll
+                            .WithMetadataImportOptions(MetadataImportOptions.All)
                     );
                     var typeC = dummyComp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
                     var displayClassTypes = typeC.GetMembers().OfType<NamedTypeSymbol>();

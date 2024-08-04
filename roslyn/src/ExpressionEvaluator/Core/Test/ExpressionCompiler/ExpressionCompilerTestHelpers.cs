@@ -368,7 +368,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal static TypeDefinition GetTypeDef(this MetadataReader reader, string typeName)
         {
             return reader
-                .TypeDefinitions.Select(reader.GetTypeDefinition)
+                .TypeDefinitions
+                .Select(reader.GetTypeDefinition)
                 .First(t => reader.StringComparer.Equals(t.Name, typeName));
         }
 
@@ -505,13 +506,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                     builder.AppendLine();
                 }
 
-                ILVisualizer.Default.DumpMethod(
-                    builder,
-                    methodBody.MaxStack,
-                    methodBody.GetILContent(),
-                    ImmutableArray.Create<ILVisualizer.LocalInfo>(),
-                    ImmutableArray.Create<ILVisualizer.HandlerSpan>()
-                );
+                ILVisualizer
+                    .Default
+                    .DumpMethod(
+                        builder,
+                        methodBody.MaxStack,
+                        methodBody.GetILContent(),
+                        ImmutableArray.Create<ILVisualizer.LocalInfo>(),
+                        ImmutableArray.Create<ILVisualizer.HandlerSpan>()
+                    );
 
                 var actualIL = pooled.ToStringAndFree();
 
@@ -712,10 +715,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             {
                 builder.Sort(
                     (x, y) =>
-                        AssemblyIdentityComparer.SimpleNameComparer.Compare(
-                            x.Item1.GetDisplayName(),
-                            y.Item1.GetDisplayName()
-                        )
+                        AssemblyIdentityComparer
+                            .SimpleNameComparer
+                            .Compare(x.Item1.GetDisplayName(), y.Item1.GetDisplayName())
                 );
             }
 #endif
@@ -728,7 +730,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             where TAssemblyContext : struct
         {
             var actualIds = metadataContext
-                .AssemblyContexts.Keys.Select(key => key.ModuleVersionId.ToString())
+                .AssemblyContexts
+                .Keys
+                .Select(key => key.ModuleVersionId.ToString())
                 .ToArray();
             Array.Sort(actualIds);
             var expectedIds = moduleVersionIds.Select(mvid => mvid.ToString()).ToArray();
@@ -745,12 +749,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(h =>
-                    metadataReader.StringComparer.Equals(
-                        metadataReader.GetMethodDefinition(h).Name,
-                        methodName
-                    )
-                );
+                var methodHandle = metadataReader
+                    .MethodDefinitions
+                    .Single(h =>
+                        metadataReader
+                            .StringComparer
+                            .Equals(metadataReader.GetMethodDefinition(h).Name, methodName)
+                    );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
                 return new MockSymUnmanagedReader(
@@ -1006,7 +1011,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         {
             var diagnostics = DiagnosticBag.GetInstance();
             var emitOptions = EmitOptions
-                .Default.WithRuntimeMetadataVersion("0.0.0.0")
+                .Default
+                .WithRuntimeMetadataVersion("0.0.0.0")
                 .WithDebugInformationFormat(DebugInformationFormat.PortablePdb);
             var moduleBuilder = comp.CheckOptionsAndCreateModuleBuilder(
                 diagnostics,

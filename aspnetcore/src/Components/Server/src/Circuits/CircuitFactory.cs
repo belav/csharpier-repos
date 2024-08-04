@@ -71,13 +71,15 @@ internal sealed partial class CircuitFactory : ICircuitFactory
             // Skip initializing the state if there are no components.
             // This is the case on Blazor Web scenarios, which will initialize the state
             // when the first set of components is provided via an UpdateRootComponents call.
-            var appLifetime =
-                scope.ServiceProvider.GetRequiredService<ComponentStatePersistenceManager>();
+            var appLifetime = scope
+                .ServiceProvider
+                .GetRequiredService<ComponentStatePersistenceManager>();
             await appLifetime.RestoreStateAsync(store);
         }
 
-        var serverComponentDeserializer =
-            scope.ServiceProvider.GetRequiredService<IServerComponentDeserializer>();
+        var serverComponentDeserializer = scope
+            .ServiceProvider
+            .GetRequiredService<IServerComponentDeserializer>();
         var jsComponentInterop = new CircuitJSComponentInterop(_options);
         var renderer = new RemoteRenderer(
             scope.ServiceProvider,
@@ -98,7 +100,8 @@ internal sealed partial class CircuitFactory : ICircuitFactory
             components.Count == 0
                 ? []
                 : scope
-                    .ServiceProvider.GetServices<CircuitHandler>()
+                    .ServiceProvider
+                    .GetServices<CircuitHandler>()
                     .OrderBy(h => h.Order)
                     .ToArray();
 

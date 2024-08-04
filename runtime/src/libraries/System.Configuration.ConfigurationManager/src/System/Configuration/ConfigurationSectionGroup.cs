@@ -117,10 +117,9 @@ namespace System.Configuration
             {
                 FactoryRecord parentFactoryRecord = null;
                 if (!configRecord.Parent.IsRootConfig)
-                    parentFactoryRecord = configRecord.Parent.FindFactoryRecord(
-                        factoryRecord.ConfigKey,
-                        true
-                    );
+                    parentFactoryRecord = configRecord
+                        .Parent
+                        .FindFactoryRecord(factoryRecord.ConfigKey, true);
 
                 IsDeclarationRequired = parentFactoryRecord?.FactoryTypeName == null;
                 IsDeclared = configRecord.GetFactoryRecord(factoryRecord.ConfigKey, true) != null;
@@ -146,10 +145,9 @@ namespace System.Configuration
             FactoryRecord factoryRecord = null;
 
             if ((_configRecord != null) && !_configRecord.Parent.IsRootConfig)
-                factoryRecord = _configRecord.Parent.FindFactoryRecord(
-                    SectionGroupName,
-                    permitErrors
-                );
+                factoryRecord = _configRecord
+                    .Parent
+                    .FindFactoryRecord(SectionGroupName, permitErrors);
 
             return factoryRecord;
         }

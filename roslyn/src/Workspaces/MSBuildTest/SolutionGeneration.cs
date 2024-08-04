@@ -258,7 +258,8 @@ EndGlobal
 
                 var document = XDocument.Parse(CSharpProjectTemplate);
                 var propertyGroup = document
-                    .Root.Descendants(XName.Get("PropertyGroup", NS))
+                    .Root
+                    .Descendants(XName.Get("PropertyGroup", NS))
                     .First();
                 AddXElement(propertyGroup, "ProjectGuid", Guid.ToString("B"));
                 AddXElement(propertyGroup, "OutputType", OutputType);

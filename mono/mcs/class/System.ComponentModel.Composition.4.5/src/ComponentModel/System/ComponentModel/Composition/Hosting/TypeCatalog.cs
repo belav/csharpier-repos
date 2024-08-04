@@ -347,9 +347,9 @@ namespace System.ComponentModel.Composition.Hosting
                 return this.PartsInternal;
             }
 
-            string genericContractName = definition.Metadata.GetValue<string>(
-                CompositionConstants.GenericContractMetadataName
-            );
+            string genericContractName = definition
+                .Metadata
+                .GetValue<string>(CompositionConstants.GenericContractMetadataName);
 
             List<ComposablePartDefinition> nonGenericMatches = this.GetCandidateParts(contractName);
             List<ComposablePartDefinition> genericMatches = this.GetCandidateParts(
@@ -381,8 +381,8 @@ namespace System.ComponentModel.Composition.Hosting
             foreach (var part in this.PartsInternal)
             {
                 foreach (
-                    string contractName in part
-                        .ExportDefinitions.Select(export => export.ContractName)
+                    string contractName in part.ExportDefinitions
+                        .Select(export => export.ContractName)
                         .Distinct()
                 )
                 {

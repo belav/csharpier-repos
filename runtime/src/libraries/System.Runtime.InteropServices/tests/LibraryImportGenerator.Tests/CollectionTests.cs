@@ -567,17 +567,17 @@ namespace LibraryImportGenerator.IntegrationTests
             List<BoolStruct> expected = GetNegatedBoolStructs(list);
 
             {
-                List<BoolStruct> result = NativeExportsNE.Collections.Stateless.NegateBools(
-                    list,
-                    list.Count
-                );
+                List<BoolStruct> result = NativeExportsNE
+                    .Collections
+                    .Stateless
+                    .NegateBools(list, list.Count);
                 Assert.Equal(expected, result);
             }
             {
-                List<BoolStruct> result = NativeExportsNE.Collections.Stateful.NegateBools(
-                    list,
-                    list.Count
-                );
+                List<BoolStruct> result = NativeExportsNE
+                    .Collections
+                    .Stateful
+                    .NegateBools(list, list.Count);
                 Assert.Equal(expected, result);
             }
         }
@@ -592,9 +592,10 @@ namespace LibraryImportGenerator.IntegrationTests
                 .AllocateContainerForManagedElementsFinallyCalled = false;
             Assert.Throws<Exception>(
                 () =>
-                    NativeExportsNE.Collections.Stateless.GuaranteedUnmarshal(
-                        out List<BoolStruct> _
-                    )
+                    NativeExportsNE
+                        .Collections
+                        .Stateless
+                        .GuaranteedUnmarshal(out List<BoolStruct> _)
             );
             Assert.True(
                 NativeExportsNE

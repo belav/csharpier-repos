@@ -90,9 +90,10 @@ public sealed partial class LazyAssemblyLoader
                 }
 
                 var assemblyName = Path.GetFileNameWithoutExtension(newAssembliesToLoad[i]);
-                var assembly = AssemblyLoadContext.Default.Assemblies.FirstOrDefault(a =>
-                    a.GetName().Name == assemblyName
-                );
+                var assembly = AssemblyLoadContext
+                    .Default
+                    .Assemblies
+                    .FirstOrDefault(a => a.GetName().Name == assemblyName);
                 if (assembly != null)
                 {
                     loadedAssemblies.Add(assembly);

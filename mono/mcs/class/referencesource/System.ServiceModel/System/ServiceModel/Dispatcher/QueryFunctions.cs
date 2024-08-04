@@ -86,15 +86,17 @@ namespace System.ServiceModel.Dispatcher
                     break;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new QueryCompileException(
-                            QueryCompileError.InvalidType,
-                            SR.GetString(
-                                SR.QueryFunctionTypeNotSupported,
-                                this.function.ReturnType.ToString()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new QueryCompileException(
+                                QueryCompileError.InvalidType,
+                                SR.GetString(
+                                    SR.QueryFunctionTypeNotSupported,
+                                    this.function.ReturnType.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
             }
         }
 
@@ -142,15 +144,17 @@ namespace System.ServiceModel.Dispatcher
 
                         default:
                             // This should never be reached
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                                new QueryProcessingException(
-                                    QueryProcessingError.Unexpected,
-                                    SR.GetString(
-                                        SR.QueryFunctionTypeNotSupported,
-                                        this.function.ReturnType.ToString()
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperCritical(
+                                    new QueryProcessingException(
+                                        QueryProcessingError.Unexpected,
+                                        SR.GetString(
+                                            SR.QueryFunctionTypeNotSupported,
+                                            this.function.ReturnType.ToString()
+                                        )
                                     )
-                                )
-                            );
+                                );
                     }
                 }
             }
@@ -190,15 +194,17 @@ namespace System.ServiceModel.Dispatcher
 
                             default:
                                 // This should never be reached
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                                    new QueryProcessingException(
-                                        QueryProcessingError.Unexpected,
-                                        SR.GetString(
-                                            SR.QueryFunctionTypeNotSupported,
-                                            this.function.ArgTypes[i].ToString()
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperCritical(
+                                        new QueryProcessingException(
+                                            QueryProcessingError.Unexpected,
+                                            SR.GetString(
+                                                SR.QueryFunctionTypeNotSupported,
+                                                this.function.ArgTypes[i].ToString()
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                         }
                     }
 
@@ -248,15 +254,17 @@ namespace System.ServiceModel.Dispatcher
 
                         default:
                             // This should never be reached
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                                new QueryProcessingException(
-                                    QueryProcessingError.Unexpected,
-                                    SR.GetString(
-                                        SR.QueryFunctionTypeNotSupported,
-                                        this.function.ReturnType.ToString()
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperCritical(
+                                    new QueryProcessingException(
+                                        QueryProcessingError.Unexpected,
+                                        SR.GetString(
+                                            SR.QueryFunctionTypeNotSupported,
+                                            this.function.ReturnType.ToString()
+                                        )
                                     )
-                                )
-                            );
+                                );
                     }
                 }
 
@@ -815,9 +823,13 @@ namespace System.ServiceModel.Dispatcher
             switch (this.functionID)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotImplementedException(SR.GetString(SR.QueryNotImplemented, this.name))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotImplementedException(
+                                SR.GetString(SR.QueryNotImplemented, this.name)
+                            )
+                        );
 
                 case XPathFunctionID.IterateSequences:
                     XPathFunction.IterateAndPushSequences(context);

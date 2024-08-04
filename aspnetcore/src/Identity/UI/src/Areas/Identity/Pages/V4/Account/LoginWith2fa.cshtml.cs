@@ -134,7 +134,8 @@ internal sealed class LoginWith2faModel<TUser> : LoginWith2faModel
         }
 
         var authenticatorCode = Input
-            .TwoFactorCode.Replace(" ", string.Empty)
+            .TwoFactorCode
+            .Replace(" ", string.Empty)
             .Replace("-", string.Empty);
 
         var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(

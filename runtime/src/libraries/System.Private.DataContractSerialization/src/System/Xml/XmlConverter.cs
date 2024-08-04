@@ -386,13 +386,9 @@ namespace System.Xml
         {
             try
             {
-                return DataContractSerializer.ValidatingUTF8.GetChars(
-                    buffer,
-                    offset,
-                    count,
-                    chars,
-                    charOffset
-                );
+                return DataContractSerializer
+                    .ValidatingUTF8
+                    .GetChars(buffer, offset, count, chars, charOffset);
             }
             catch (DecoderFallbackException exception)
             {

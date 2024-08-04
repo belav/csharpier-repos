@@ -38,7 +38,9 @@ internal class EditAndContinueTestUtilities
         );
 
         var hasPortableDebugInformation = module
-            .Module.PEReaderOpt.ReadDebugDirectory()
+            .Module
+            .PEReaderOpt
+            .ReadDebugDirectory()
             .Any(static entry => entry.IsPortableCodeView);
 
         return EmitBaseline.CreateInitialBaseline(

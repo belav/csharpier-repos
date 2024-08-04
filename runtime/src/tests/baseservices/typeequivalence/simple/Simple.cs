@@ -258,7 +258,8 @@ public class Simple
             Console.WriteLine($"-- GetFunctionPointer()");
             IntPtr fptr = typeof(CreateFunctionPointer)
                 .GetMethod("For_1")
-                .MethodHandle.GetFunctionPointer();
+                .MethodHandle
+                .GetFunctionPointer();
             Assert.NotEqual(IntPtr.Zero, fptr);
             var s = new OnlyLoadOnce_1() { Field = 0x11 };
             int res = ((delegate* <OnlyLoadOnce_1, int>)fptr)(s);

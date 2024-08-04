@@ -832,9 +832,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     RoslynDebug.Assert(newAnalysisResult.DocumentIds != null);
 
                     // first remove ones no longer needed.
-                    var documentsToRemove = oldAnalysisResult.DocumentIds.Except(
-                        newAnalysisResult.DocumentIds
-                    );
+                    var documentsToRemove = oldAnalysisResult
+                        .DocumentIds
+                        .Except(newAnalysisResult.DocumentIds);
                     AddProjectDiagnosticsRemovedArgs(
                         ref argsBuilder.AsRef(),
                         stateSet,
@@ -970,7 +970,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 if (
                     document is null
                     && project
-                        .Solution.Services.GetService<ISolutionCrawlerOptionsService>()
+                        .Solution
+                        .Services
+                        .GetService<ISolutionCrawlerOptionsService>()
                         ?.EnableDiagnosticsInSourceGeneratedFiles == true
                 )
                 {

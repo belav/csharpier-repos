@@ -208,9 +208,9 @@ namespace MonoTests.System.ServiceModel
         {
             ServiceHost host = new ServiceHost(typeof(Foo3), address);
             host.AddServiceEndpoint(typeof(IFoo3), binding, address);
-            host.Description.Behaviors.Add(
-                new ServiceThrottlingBehavior() { MaxConcurrentSessions = 1 }
-            );
+            host.Description
+                .Behaviors
+                .Add(new ServiceThrottlingBehavior() { MaxConcurrentSessions = 1 });
             Foo3.CreatedInstances = Foo3.DisposedInstances = 0; // Reset
             host.Open();
             Assert.AreEqual(0, Foo3.InstanceCounter, "Initial state wrong"); // just to be sure

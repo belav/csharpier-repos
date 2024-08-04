@@ -185,9 +185,9 @@ namespace Mono.Cecil.Cil
                         WriteToken(
                             new MetadataToken(
                                 TokenType.String,
-                                m_reflectWriter.MetadataWriter.AddUserString(
-                                    instr.Operand as string
-                                )
+                                m_reflectWriter
+                                    .MetadataWriter
+                                    .AddUserString(instr.Operand as string)
                             )
                         );
                         break;
@@ -276,19 +276,20 @@ namespace Mono.Cecil.Cil
             uint sig;
             int sentinel = cs.GetSentinel();
             if (sentinel > 0)
-                sig = m_reflectWriter.SignatureWriter.AddMethodDefSig(
-                    m_reflectWriter.GetMethodDefSig(cs)
-                );
+                sig = m_reflectWriter
+                    .SignatureWriter
+                    .AddMethodDefSig(m_reflectWriter.GetMethodDefSig(cs));
             else
-                sig = m_reflectWriter.SignatureWriter.AddMethodRefSig(
-                    m_reflectWriter.GetMethodRefSig(cs)
-                );
+                sig = m_reflectWriter
+                    .SignatureWriter
+                    .AddMethodRefSig(m_reflectWriter.GetMethodRefSig(cs));
 
             if (m_standaloneSigCache.Contains(sig))
                 return (MetadataToken)m_standaloneSigCache[sig];
 
-            StandAloneSigTable sasTable =
-                m_reflectWriter.MetadataTableWriter.GetStandAloneSigTable();
+            StandAloneSigTable sasTable = m_reflectWriter
+                .MetadataTableWriter
+                .GetStandAloneSigTable();
             StandAloneSigRow sasRow = m_reflectWriter.MetadataRowWriter.CreateStandAloneSigRow(sig);
 
             sasTable.Rows.Add(sasRow);
@@ -416,8 +417,9 @@ namespace Mono.Cecil.Cil
                 return;
             }
 
-            StandAloneSigTable sasTable =
-                m_reflectWriter.MetadataTableWriter.GetStandAloneSigTable();
+            StandAloneSigTable sasTable = m_reflectWriter
+                .MetadataTableWriter
+                .GetStandAloneSigTable();
             StandAloneSigRow sasRow = m_reflectWriter.MetadataRowWriter.CreateStandAloneSigRow(sig);
 
             sasTable.Rows.Add(sasRow);

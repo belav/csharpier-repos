@@ -183,12 +183,9 @@ namespace System.Security.Cryptography
                     }
 
                     if (
-                        !Interop.AndroidCrypto.EcdhDeriveKey(
-                            ourKey,
-                            theirKey,
-                            secret,
-                            out int usedBufferLength
-                        )
+                        !Interop
+                            .AndroidCrypto
+                            .EcdhDeriveKey(ourKey, theirKey, secret, out int usedBufferLength)
                     )
                     {
                         throw new CryptographicException();

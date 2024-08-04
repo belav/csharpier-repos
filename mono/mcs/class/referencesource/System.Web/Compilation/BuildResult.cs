@@ -1382,9 +1382,9 @@ namespace System.Web.Compilation
 
             foreach (string placeHolderID in _placeHolderList)
             {
-                masterPage.ContentPlaceHolders.Add(
-                    placeHolderID.ToLower(CultureInfo.InvariantCulture)
-                );
+                masterPage
+                    .ContentPlaceHolders
+                    .Add(placeHolderID.ToLower(CultureInfo.InvariantCulture));
             }
 
             return masterPage;

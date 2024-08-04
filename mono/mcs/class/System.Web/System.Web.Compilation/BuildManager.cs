@@ -1816,15 +1816,17 @@ namespace System.Web.Compilation
             else
                 dep = null;
 
-            HttpRuntime.InternalCache.Add(
-                BUILD_MANAGER_VIRTUAL_PATH_CACHE_PREFIX + virtualPath,
-                true,
-                dep,
-                Cache.NoAbsoluteExpiration,
-                Cache.NoSlidingExpiration,
-                CacheItemPriority.High,
-                new CacheItemRemovedCallback(OnVirtualPathChanged)
-            );
+            HttpRuntime
+                .InternalCache
+                .Add(
+                    BUILD_MANAGER_VIRTUAL_PATH_CACHE_PREFIX + virtualPath,
+                    true,
+                    dep,
+                    Cache.NoAbsoluteExpiration,
+                    Cache.NoSlidingExpiration,
+                    CacheItemPriority.High,
+                    new CacheItemRemovedCallback(OnVirtualPathChanged)
+                );
         }
     }
 }

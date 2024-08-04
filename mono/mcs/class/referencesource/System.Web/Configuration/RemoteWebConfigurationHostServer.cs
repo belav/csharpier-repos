@@ -284,10 +284,10 @@ namespace System.Web.Configuration
                         appSiteID,
                         currentVirtualPath.VirtualPathString
                     );
-                    currentFilePath = System.IO.Path.Combine(
-                        currentFilePath,
-                        HttpConfigurationSystem.WebConfigFileName
-                    );
+                    currentFilePath = System
+                        .IO
+                        .Path
+                        .Combine(currentFilePath, HttpConfigurationSystem.WebConfigFileName);
 
                     filePaths.Add(currentConfigPath);
                     filePaths.Add(currentFilePath);

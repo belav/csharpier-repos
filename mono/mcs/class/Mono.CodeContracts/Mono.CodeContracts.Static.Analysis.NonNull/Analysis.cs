@@ -90,11 +90,9 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
         )
         {
             bool nonNullWeaker;
-            SetDomain<V> nonNulls = prevstate.NonNulls.Join(
-                newstate.NonNulls,
-                widen,
-                out nonNullWeaker
-            );
+            SetDomain<V> nonNulls = prevstate
+                .NonNulls
+                .Join(newstate.NonNulls, widen, out nonNullWeaker);
             bool nullWeaker;
             SetDomain<V> nulls = prevstate.Nulls.Join(newstate.Nulls, widen, out nullWeaker);
 
@@ -242,15 +240,17 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
             NonNullDomain<V> data
         )
         {
-            return ContextProvider.ExpressionContext.Decode<
-                Pair<bool, NonNullDomain<V>>,
-                NonNullDomain<V>,
-                ExpressionAssumeDecoder<E, V>
-            >(
-                ContextProvider.ExpressionContext.Refine(pc, condition),
-                new ExpressionAssumeDecoder<E, V>(ContextProvider),
-                new Pair<bool, NonNullDomain<V>>(true, data)
-            );
+            return ContextProvider
+                .ExpressionContext
+                .Decode<
+                    Pair<bool, NonNullDomain<V>>,
+                    NonNullDomain<V>,
+                    ExpressionAssumeDecoder<E, V>
+                >(
+                    ContextProvider.ExpressionContext.Refine(pc, condition),
+                    new ExpressionAssumeDecoder<E, V>(ContextProvider),
+                    new Pair<bool, NonNullDomain<V>>(true, data)
+                );
         }
 
         public override NonNullDomain<V> Assume(
@@ -376,11 +376,9 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
                 domain = AssumeNonNull(sv1, domain);
             if (
                 !MetaDataProvider.IsStatic(method)
-                && ContextProvider.ValueContext.TryParameterValue(
-                    pc,
-                    MetaDataProvider.This(method),
-                    out sv1
-                )
+                && ContextProvider
+                    .ValueContext
+                    .TryParameterValue(pc, MetaDataProvider.This(method), out sv1)
             )
                 domain = AssumeNonNull(sv1, domain);
 
@@ -471,10 +469,9 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
         )
         {
             NonNullDomain<V> domain = AssumeNonNull(obj, data);
-            FlatDomain<TypeNode> aType = ContextProvider.ValueContext.GetType(
-                ContextProvider.MethodContext.CFG.Next(pc),
-                dest
-            );
+            FlatDomain<TypeNode> aType = ContextProvider
+                .ValueContext
+                .GetType(ContextProvider.MethodContext.CFG.Next(pc), dest);
             if (aType.IsNormal() && MetaDataProvider.IsManagedPointer(aType.Value))
                 domain = AssumeNonNull(dest, domain);
 

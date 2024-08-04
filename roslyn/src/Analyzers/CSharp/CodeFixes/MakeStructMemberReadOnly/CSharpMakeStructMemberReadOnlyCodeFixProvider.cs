@@ -92,12 +92,12 @@ internal sealed class CSharpMakeStructMemberReadOnlyCodeFixProvider()
                             var currentAccessorList = currentProperty.AccessorList;
                             Contract.ThrowIfNull(currentAccessorList);
 
-                            var currentAccessor = currentAccessorList.Accessors.First(a =>
-                                a.Kind() == accessor.Kind()
-                            );
-                            var otherAccessor = currentAccessorList.Accessors.Single(a =>
-                                a != currentAccessor
-                            );
+                            var currentAccessor = currentAccessorList
+                                .Accessors
+                                .First(a => a.Kind() == accessor.Kind());
+                            var otherAccessor = currentAccessorList
+                                .Accessors
+                                .Single(a => a != currentAccessor);
 
                             if (otherAccessor.Modifiers.Any(SyntaxKind.ReadOnlyKeyword))
                             {

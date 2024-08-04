@@ -257,22 +257,26 @@ namespace System.Data.Metadata.Edm
                         {
                             EdmItemCollection edmCollection = (EdmItemCollection)collection;
                             if (
-                                !MetadataWorkspace.SupportedEdmVersions.Contains(
-                                    edmCollection.EdmVersion
-                                )
+                                !MetadataWorkspace
+                                    .SupportedEdmVersions
+                                    .Contains(edmCollection.EdmVersion)
                             )
                             {
                                 throw EntityUtil.InvalidOperation(
-                                    System.Data.Entity.Strings.EdmVersionNotSupportedByRuntime(
-                                        edmCollection.EdmVersion,
-                                        Helper.GetCommaDelimitedString(
-                                            SupportedEdmVersions
-                                                .Where(e => e != XmlConstants.UndefinedVersion)
-                                                .Select(e =>
-                                                    e.ToString(CultureInfo.InvariantCulture)
-                                                )
+                                    System
+                                        .Data
+                                        .Entity
+                                        .Strings
+                                        .EdmVersionNotSupportedByRuntime(
+                                            edmCollection.EdmVersion,
+                                            Helper.GetCommaDelimitedString(
+                                                SupportedEdmVersions
+                                                    .Where(e => e != XmlConstants.UndefinedVersion)
+                                                    .Select(e =>
+                                                        e.ToString(CultureInfo.InvariantCulture)
+                                                    )
+                                            )
                                         )
-                                    )
                                 );
                             }
 

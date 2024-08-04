@@ -62,12 +62,14 @@ public class DataProtectionProviderTests
             setupAction: builder =>
             {
                 builder.SetApplicationName("TestApplication");
-                builder.Services.AddSingleton<IKeyManager>(s => new XmlKeyManager(
-                    s.GetRequiredService<IOptions<KeyManagementOptions>>(),
-                    s.GetRequiredService<IActivator>(),
-                    NullLoggerFactory.Instance,
-                    mock.Object
-                ));
+                builder
+                    .Services
+                    .AddSingleton<IKeyManager>(s => new XmlKeyManager(
+                        s.GetRequiredService<IOptions<KeyManagementOptions>>(),
+                        s.GetRequiredService<IActivator>(),
+                        NullLoggerFactory.Instance,
+                        mock.Object
+                    ));
             }
         );
 
@@ -164,11 +166,9 @@ public class DataProtectionProviderTests
             {
                 var certificateStore = new X509Store(StoreName.My, StoreLocation.CurrentUser);
                 certificateStore.Open(OpenFlags.ReadWrite);
-                var certificate = certificateStore.Certificates.Find(
-                    X509FindType.FindBySubjectName,
-                    "TestCert",
-                    false
-                )[0];
+                var certificate = certificateStore
+                    .Certificates
+                    .Find(X509FindType.FindBySubjectName, "TestCert", false)[0];
                 Assert.True(certificate.HasPrivateKey, "Cert should have a private key");
                 try
                 {
@@ -235,11 +235,9 @@ public class DataProtectionProviderTests
             using (var certificateStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
             {
                 certificateStore.Open(OpenFlags.ReadWrite);
-                var certInStore = certificateStore.Certificates.Find(
-                    X509FindType.FindBySubjectName,
-                    "TestCert",
-                    false
-                )[0];
+                var certInStore = certificateStore
+                    .Certificates
+                    .Find(X509FindType.FindBySubjectName, "TestCert", false)[0];
                 Assert.NotNull(certInStore);
                 Assert.False(certInStore.HasPrivateKey, "Cert should not have private key");
 
@@ -351,11 +349,9 @@ public class DataProtectionProviderTests
 
             // ensure this cert is not in the x509 store
             Assert.Empty(
-                store.Certificates.Find(
-                    X509FindType.FindByThumbprint,
-                    certificate.Thumbprint,
-                    false
-                )
+                store
+                    .Certificates
+                    .Find(X509FindType.FindByThumbprint, certificate.Thumbprint, false)
             );
         }
     }

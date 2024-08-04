@@ -272,12 +272,10 @@ namespace Mono.CSharp
 
         public static void ErrorIsInaccesible(IMemberContext rc, string member, Location loc)
         {
-            rc.Module.Compiler.Report.Error(
-                122,
-                loc,
-                "`{0}' is inaccessible due to its protection level",
-                member
-            );
+            rc.Module
+                .Compiler
+                .Report
+                .Error(122, loc, "`{0}' is inaccessible due to its protection level", member);
         }
 
         public void Error_ExpressionMustBeConstant(ResolveContext rc, Location loc, string e_name)
@@ -461,13 +459,17 @@ namespace Mono.CSharp
             Location loc
         )
         {
-            context.Module.Compiler.Report.Error(
-                307,
-                loc,
-                "The {0} `{1}' cannot be used with type arguments",
-                exprType,
-                name
-            );
+            context
+                .Module
+                .Compiler
+                .Report
+                .Error(
+                    307,
+                    loc,
+                    "The {0} `{1}' cannot be used with type arguments",
+                    exprType,
+                    name
+                );
         }
 
         public virtual void Error_TypeDoesNotContainDefinition(
@@ -788,20 +790,26 @@ namespace Mono.CSharp
         {
             if (Attribute.IsValidArgumentType(parameterType))
             {
-                rc.Module.Compiler.Report.Error(
-                    182,
-                    loc,
-                    "An attribute argument must be a constant expression, typeof expression or array creation expression"
-                );
+                rc.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        182,
+                        loc,
+                        "An attribute argument must be a constant expression, typeof expression or array creation expression"
+                    );
             }
             else
             {
-                rc.Module.Compiler.Report.Error(
-                    181,
-                    loc,
-                    "Attribute constructor parameter has type `{0}', which is not a valid attribute parameter type",
-                    targetType.GetSignatureForError()
-                );
+                rc.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        181,
+                        loc,
+                        "Attribute constructor parameter has type `{0}', which is not a valid attribute parameter type",
+                        targetType.GetSignatureForError()
+                    );
             }
         }
 
@@ -1440,14 +1448,10 @@ namespace Mono.CSharp
         {
             var name = memberExpr.GetSignatureForError();
 
-            ctx.Module.Compiler.Report.Error(
-                118,
-                loc,
-                "`{0}' is a `{1}' but a `{2}' was expected",
-                name,
-                was,
-                expected
-            );
+            ctx.Module
+                .Compiler
+                .Report
+                .Error(118, loc, "`{0}' is a `{1}' but a `{2}' was expected", name, was, expected);
         }
 
         public virtual void Error_UnexpectedKind(
@@ -3607,12 +3611,15 @@ namespace Mono.CSharp
             {
                 if (!mc.Module.PredefinedAttributes.Dynamic.IsDefined)
                 {
-                    mc.Module.Compiler.Report.Error(
-                        1980,
-                        Location,
-                        "Dynamic keyword requires `{0}' to be defined. Are you missing System.Core.dll assembly reference?",
-                        mc.Module.PredefinedAttributes.Dynamic.GetSignatureForError()
-                    );
+                    mc.Module
+                        .Compiler
+                        .Report
+                        .Error(
+                            1980,
+                            Location,
+                            "Dynamic keyword requires `{0}' to be defined. Are you missing System.Core.dll assembly reference?",
+                            mc.Module.PredefinedAttributes.Dynamic.GetSignatureForError()
+                        );
                 }
 
                 fne = new DynamicTypeExpr(loc);
@@ -3667,11 +3674,10 @@ namespace Mono.CSharp
                 if (current_block != null && lookup_arity == 0)
                 {
                     if (
-                        current_block.ParametersBlock.TopBlock.GetLocalName(
-                            Name,
-                            current_block.Original,
-                            ref variable
-                        )
+                        current_block
+                            .ParametersBlock
+                            .TopBlock
+                            .GetLocalName(Name, current_block.Original, ref variable)
                     )
                     {
                         if (!variable.IsDeclared)
@@ -4087,11 +4093,10 @@ namespace Mono.CSharp
 
             if (type.Kind == MemberKind.Void)
             {
-                mc.Module.Compiler.Report.Error(
-                    673,
-                    loc,
-                    "System.Void cannot be used from C#. Consider using `void'"
-                );
+                mc.Module
+                    .Compiler
+                    .Report
+                    .Error(673, loc, "System.Void cannot be used from C#. Consider using `void'");
             }
 
             //
@@ -4289,24 +4294,30 @@ namespace Mono.CSharp
 
             if (Namespace is GlobalRootNamespace)
             {
-                ctx.Module.Compiler.Report.Error(
-                    400,
-                    loc,
-                    "The type or namespace name `{0}' could not be found in the global namespace. Are you missing {1} assembly reference?",
-                    name,
-                    assembly
-                );
+                ctx.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        400,
+                        loc,
+                        "The type or namespace name `{0}' could not be found in the global namespace. Are you missing {1} assembly reference?",
+                        name,
+                        assembly
+                    );
             }
             else
             {
-                ctx.Module.Compiler.Report.Error(
-                    234,
-                    loc,
-                    "The type or namespace name `{0}' does not exist in the namespace `{1}'. Are you missing {2} assembly reference?",
-                    name,
-                    GetSignatureForError(),
-                    assembly
-                );
+                ctx.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        234,
+                        loc,
+                        "The type or namespace name `{0}' does not exist in the namespace `{1}'. Are you missing {2} assembly reference?",
+                        name,
+                        GetSignatureForError(),
+                        assembly
+                    );
             }
         }
 
@@ -4467,11 +4478,10 @@ namespace Mono.CSharp
                     if (method.Parameters.HasArglist)
                         throw new NotImplementedException("__arglist base call proxy");
 
-                    method =
-                        rc.CurrentMemberDefinition.Parent.PartialContainer.CreateHoistedBaseCallProxy(
-                            rc,
-                            method
-                        );
+                    method = rc.CurrentMemberDefinition
+                        .Parent
+                        .PartialContainer
+                        .CreateHoistedBaseCallProxy(rc, method);
 
                     // Ideally this should apply to any proxy rewrite but in the case of unary mutators on
                     // get/set member expressions second call would fail to proxy because left expression
@@ -4539,9 +4549,10 @@ namespace Mono.CSharp
 
             if (
                 (member.Modifiers & Modifiers.INTERNAL) != 0
-                && member.DeclaringType.MemberDefinition.IsInternalAsPublic(
-                    ct.MemberDefinition.DeclaringAssembly
-                )
+                && member
+                    .DeclaringType
+                    .MemberDefinition
+                    .IsInternalAsPublic(ct.MemberDefinition.DeclaringAssembly)
             )
                 return true;
 
@@ -5010,12 +5021,9 @@ namespace Mono.CSharp
 
             int arity = type_arguments == null ? 0 : type_arguments.Count;
 
-            candidates = candidates.Container.LookupExtensionMethod(
-                candidates.Context,
-                Name,
-                arity,
-                candidates.LookupIndex
-            );
+            candidates = candidates
+                .Container
+                .LookupExtensionMethod(candidates.Context, Name, arity, candidates.LookupIndex);
             if (candidates == null)
                 return null;
 
@@ -7322,10 +7330,9 @@ namespace Mono.CSharp
                             bool is_better;
                             if (
                                 best_candidate.DeclaringType.IsInterface
-                                && member.DeclaringType.ImplementsInterface(
-                                    best_candidate.DeclaringType,
-                                    false
-                                )
+                                && member
+                                    .DeclaringType
+                                    .ImplementsInterface(best_candidate.DeclaringType, false)
                             )
                             {
                                 //
@@ -7345,10 +7352,12 @@ namespace Mono.CSharp
                                     foreach (var amb_cand in ambiguous_candidates)
                                     {
                                         if (
-                                            member.DeclaringType.ImplementsInterface(
-                                                best_candidate.DeclaringType,
-                                                false
-                                            )
+                                            member
+                                                .DeclaringType
+                                                .ImplementsInterface(
+                                                    best_candidate.DeclaringType,
+                                                    false
+                                                )
                                         )
                                         {
                                             continue;
@@ -9684,11 +9693,10 @@ namespace Mono.CSharp
                 INamedBlockVariable variable = null;
                 if (
                     best_candidate != null
-                    && rc.CurrentBlock.ParametersBlock.TopBlock.GetLocalName(
-                        best_candidate.Name,
-                        rc.CurrentBlock,
-                        ref variable
-                    )
+                    && rc.CurrentBlock
+                        .ParametersBlock
+                        .TopBlock
+                        .GetLocalName(best_candidate.Name, rc.CurrentBlock, ref variable)
                     && variable is Linq.RangeVariable
                 )
                 {
@@ -10298,11 +10306,14 @@ namespace Mono.CSharp
             if (ec.Module.Compiler.Settings.Version < LanguageVersion.V_3)
                 base.Error_TypeOrNamespaceNotFound(ec);
             else
-                ec.Module.Compiler.Report.Error(
-                    825,
-                    loc,
-                    "The contextual keyword `var' may only appear within a local variable declaration"
-                );
+                ec.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        825,
+                        loc,
+                        "The contextual keyword `var' may only appear within a local variable declaration"
+                    );
         }
     }
 }

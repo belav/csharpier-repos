@@ -20,9 +20,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (operationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "operationContext"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("operationContext");
             }
             operationContext.OutgoingMessageProperties[suppressContextOnReply] = true;
         }
@@ -97,19 +97,24 @@ namespace System.ServiceModel.Dispatcher
             }
             finally
             {
-                DurableInstance durableInstance =
-                    OperationContext.Current.InstanceContext.Extensions.Find<DurableInstance>();
+                DurableInstance durableInstance = OperationContext
+                    .Current
+                    .InstanceContext
+                    .Extensions
+                    .Find<DurableInstance>();
 
                 if (durableInstance == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.RequiredInstanceContextExtensionNotFound,
-                                typeof(DurableInstance).Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.RequiredInstanceContextExtensionNotFound,
+                                    typeof(DurableInstance).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 //Decrement InstanceActivity Count
                 durableInstance.DecrementActivityCount();

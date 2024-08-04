@@ -232,7 +232,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 return;
 
             var checksums = await _remoteWorkspace
-                .CurrentSolution.State.GetStateChecksumsAsync(cancellationToken)
+                .CurrentSolution
+                .State
+                .GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);
             checksums.AddAllTo(pinnedChecksums);
         }

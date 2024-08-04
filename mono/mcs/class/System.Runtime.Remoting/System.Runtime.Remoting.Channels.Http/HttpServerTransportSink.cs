@@ -205,10 +205,9 @@ namespace System.Runtime.Remoting.Channels.Http
                     string key = entry.Key.ToString();
                     if (key != "__HttpStatusCode" && key != "__HttpReasonPhrase")
                     {
-                        context.Response.AddHeader(
-                            (string)entry.Key,
-                            responseHeaders[entry.Key].ToString()
-                        );
+                        context
+                            .Response
+                            .AddHeader((string)entry.Key, responseHeaders[entry.Key].ToString());
                     }
                 }
             }

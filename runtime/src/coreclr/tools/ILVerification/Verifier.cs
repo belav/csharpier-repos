@@ -207,10 +207,9 @@ namespace ILVerify
 
                 importer.ReportVerificationError = (args, code) =>
                 {
-                    var codeResource = _stringResourceManager.Value.GetString(
-                        code.ToString(),
-                        CultureInfo.InvariantCulture
-                    );
+                    var codeResource = _stringResourceManager
+                        .Value
+                        .GetString(code.ToString(), CultureInfo.InvariantCulture);
 
                     builder.Add(
                         new VerificationResult()

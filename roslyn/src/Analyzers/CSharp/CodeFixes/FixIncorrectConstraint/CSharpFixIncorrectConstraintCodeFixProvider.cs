@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixIncorrectConstraint
         {
             var generator = SyntaxGenerator.GetGenerator(document);
             var compilation = await document
-                .Project.GetRequiredCompilationAsync(cancellationToken)
+                .Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             foreach (var diagnostic in diagnostics)
@@ -139,12 +140,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixIncorrectConstraint
                             {
                                 var clause = (TypeParameterConstraintClauseSyntax)parent;
                                 return clause.WithConstraints(
-                                    clause.Constraints.Insert(
-                                        0,
-                                        SyntaxFactory.ClassOrStructConstraint(
-                                            SyntaxKind.StructConstraint
+                                    clause
+                                        .Constraints
+                                        .Insert(
+                                            0,
+                                            SyntaxFactory.ClassOrStructConstraint(
+                                                SyntaxKind.StructConstraint
+                                            )
                                         )
-                                    )
                                 );
                             }
                         );

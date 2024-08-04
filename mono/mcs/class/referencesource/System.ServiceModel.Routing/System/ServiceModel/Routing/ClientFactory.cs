@@ -108,8 +108,9 @@ namespace System.ServiceModel.Routing
                         binding = new CustomBinding(endpoint.Binding);
                     }
 
-                    SynchronousSendBindingElement syncSend =
-                        binding.Elements.Find<SynchronousSendBindingElement>();
+                    SynchronousSendBindingElement syncSend = binding
+                        .Elements
+                        .Find<SynchronousSendBindingElement>();
                     if (syncSend == null)
                     {
                         binding.Elements.Insert(0, new SynchronousSendBindingElement());
@@ -125,8 +126,9 @@ namespace System.ServiceModel.Routing
                 {
                     binding = new CustomBinding(endpoint.Binding);
                 }
-                TransactionFlowBindingElement transactionFlow =
-                    binding.Elements.Find<TransactionFlowBindingElement>();
+                TransactionFlowBindingElement transactionFlow = binding
+                    .Elements
+                    .Find<TransactionFlowBindingElement>();
                 if (transactionFlow != null)
                 {
                     transactionFlow.AllowWildcardAction = true;

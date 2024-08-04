@@ -63,7 +63,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     InterceptorInfo = _interceptorInfoBuilder.ToIncrementalValue(),
                     BindingHelperInfo = _helperInfoBuilder!.ToIncrementalValue(),
                     ConfigTypes = _createdTypeSpecs
-                        .Values.OrderBy(s => s.TypeRef.FullyQualifiedName)
+                        .Values
+                        .OrderBy(s => s.TypeRef.FullyQualifiedName)
                         .ToImmutableEquatableArray(),
                     EmitEnumParseMethod = _emitEnumParseMethod,
                     EmitGenericParseEnum = _emitGenericParseEnum,
@@ -76,10 +77,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 if (
                     type is null
                     || type.SpecialType is SpecialType.System_Object or SpecialType.System_Void
-                    || !_typeSymbols.Compilation.IsSymbolAccessibleWithin(
-                        type,
-                        _typeSymbols.Compilation.Assembly
-                    )
+                    || !_typeSymbols
+                        .Compilation
+                        .IsSymbolAccessibleWithin(type, _typeSymbols.Compilation.Assembly)
                     || type.TypeKind is TypeKind.TypeParameter or TypeKind.Pointer or TypeKind.Error
                     || type.IsRefLikeType
                     || ContainsGenericParameters(type)
@@ -101,28 +101,31 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     Debug.Assert(targetMethod.IsExtensionMethod);
 
                     if (
-                        SymbolEqualityComparer.Default.Equals(
-                            candidateBinderType,
-                            _typeSymbols.ConfigurationBinder
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(candidateBinderType, _typeSymbols.ConfigurationBinder)
                     )
                     {
                         ParseInvocation_ConfigurationBinder(invocation);
                     }
                     else if (
-                        SymbolEqualityComparer.Default.Equals(
-                            candidateBinderType,
-                            _typeSymbols.OptionsBuilderConfigurationExtensions
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(
+                                candidateBinderType,
+                                _typeSymbols.OptionsBuilderConfigurationExtensions
+                            )
                     )
                     {
                         ParseInvocation_OptionsBuilderExt(invocation);
                     }
                     else if (
-                        SymbolEqualityComparer.Default.Equals(
-                            candidateBinderType,
-                            _typeSymbols.OptionsConfigurationServiceCollectionExtensions
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(
+                                candidateBinderType,
+                                _typeSymbols.OptionsConfigurationServiceCollectionExtensions
+                            )
                     )
                     {
                         ParseInvocation_ServiceCollectionExt(invocation);
@@ -817,10 +820,12 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                             AttributeData? attributeData = property
                                 .GetAttributes()
                                 .FirstOrDefault(a =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        a.AttributeClass,
-                                        _typeSymbols.ConfigurationKeyNameAttribute
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(
+                                            a.AttributeClass,
+                                            _typeSymbols.ConfigurationKeyNameAttribute
+                                        )
                                 );
                             string configKeyName =
                                 attributeData?.ConstructorArguments.FirstOrDefault().Value as string
@@ -1063,10 +1068,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                             .GetMembers("Add")
                             .Any(member =>
                                 member is IMethodSymbol { Parameters.Length: 1 } method
-                                && SymbolEqualityComparer.Default.Equals(
-                                    element,
-                                    method.Parameters[0].Type
-                                )
+                                && SymbolEqualityComparer
+                                    .Default
+                                    .Equals(element, method.Parameters[0].Type)
                             )
                     )
                     {
@@ -1091,14 +1095,12 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                             .GetMembers("Add")
                             .Any(member =>
                                 member is IMethodSymbol { Parameters.Length: 2 } method
-                                && SymbolEqualityComparer.Default.Equals(
-                                    key,
-                                    method.Parameters[0].Type
-                                )
-                                && SymbolEqualityComparer.Default.Equals(
-                                    element,
-                                    method.Parameters[1].Type
-                                )
+                                && SymbolEqualityComparer
+                                    .Default
+                                    .Equals(key, method.Parameters[0].Type)
+                                && SymbolEqualityComparer
+                                    .Default
+                                    .Equals(element, method.Parameters[1].Type)
                             )
                     )
                     {
@@ -1192,7 +1194,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     {
                         _emitEnumParseMethod = true;
                         _emitGenericParseEnum = _typeSymbols
-                            .Enum.GetMembers("Parse")
+                            .Enum
+                            .GetMembers("Parse")
                             .Any(m =>
                                 m is IMethodSymbol methodSymbol && methodSymbol.IsGenericMethod
                             );
@@ -1205,9 +1208,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             {
                 if (_typeSymbols.ArgumentNullException is not null)
                 {
-                    var throwIfNullMethods = _typeSymbols.ArgumentNullException.GetMembers(
-                        "ThrowIfNull"
-                    );
+                    var throwIfNullMethods = _typeSymbols
+                        .ArgumentNullException
+                        .GetMembers("ThrowIfNull");
 
                     foreach (var throwIfNullMethod in throwIfNullMethods)
                     {
@@ -1225,10 +1228,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                                 firstParam.Name == "argument"
                                 && firstParam.Type.SpecialType == SpecialType.System_Object
                                 && secondParam.Name == "paramName"
-                                && secondParam.Type.Equals(
-                                    _typeSymbols.String,
-                                    SymbolEqualityComparer.Default
-                                )
+                                && secondParam
+                                    .Type
+                                    .Equals(_typeSymbols.String, SymbolEqualityComparer.Default)
                             )
                             {
                                 return true;

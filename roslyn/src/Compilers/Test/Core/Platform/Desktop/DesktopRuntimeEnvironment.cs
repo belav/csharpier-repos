@@ -240,7 +240,8 @@ namespace Roslyn.Test.Utilities.Desktop
                 var mainPdb = mainOutput.Value.Pdb;
                 var corLibIdentity = mainCompilation
                     .GetSpecialType(SpecialType.System_Object)
-                    .ContainingAssembly.Identity;
+                    .ContainingAssembly
+                    .Identity;
                 var identity = mainCompilation.Assembly.Identity;
                 _emitData.MainModule = new ModuleData(
                     identity,
@@ -283,12 +284,14 @@ namespace Roslyn.Test.Utilities.Desktop
             {
                 var emitData = GetEmitData();
                 emitData.RuntimeData.ExecuteRequested = true;
-                var resultCode = emitData.Manager.Execute(
-                    moduleName,
-                    args,
-                    expectedOutputLength: expectedOutput?.Length,
-                    out var output
-                );
+                var resultCode = emitData
+                    .Manager
+                    .Execute(
+                        moduleName,
+                        args,
+                        expectedOutputLength: expectedOutput?.Length,
+                        out var output
+                    );
 
                 if (expectedOutput != null)
                 {
@@ -368,10 +371,9 @@ namespace Roslyn.Test.Utilities.Desktop
             try
             {
                 emitData.RuntimeData.PeverifyRequested = true;
-                emitData.Manager.PeVerifyModules(
-                    new[] { emitData.MainModule.FullName },
-                    throwOnError: true
-                );
+                emitData
+                    .Manager
+                    .PeVerifyModules(new[] { emitData.MainModule.FullName }, throwOnError: true);
                 if (!shouldSucceed)
                 {
                     throw new Exception("PE Verify succeeded unexpectedly");
@@ -416,14 +418,12 @@ namespace Roslyn.Test.Utilities.Desktop
         {
             var emitData = GetEmitData();
             var searchIds = emitData
-                .AllModuleData.Select(x => new RuntimeModuleDataId(x.Id))
+                .AllModuleData
+                .Select(x => new RuntimeModuleDataId(x.Id))
                 .ToList();
             return GetEmitData()
-                .Manager.GetMemberSignaturesFromMetadata(
-                    fullyQualifiedTypeName,
-                    memberName,
-                    searchIds
-                );
+                .Manager
+                .GetMemberSignaturesFromMetadata(fullyQualifiedTypeName, memberName, searchIds);
         }
 
         void IDisposable.Dispose()

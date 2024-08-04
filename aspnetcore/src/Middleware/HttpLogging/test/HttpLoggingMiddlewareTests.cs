@@ -1637,7 +1637,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         var lines = Assert
             .Single(TestSink.Writes.Where(w => w.LogLevel >= LogLevel.Information))
-            .Message.Split(Environment.NewLine);
+            .Message
+            .Split(Environment.NewLine);
         var i = 0;
         Assert.Equal("Request and Response:", lines[i++]);
         if (fields.HasFlag(HttpLoggingFields.RequestPropertiesAndHeaders))

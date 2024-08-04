@@ -45,10 +45,9 @@ namespace System.IdentityModel
 
             if (0 == encoded.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "encoded",
-                    SR.GetString(SR.ID6045)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("encoded", SR.GetString(SR.ID6045));
             }
 
             // CurrentUser is used here, and this has been tested as
@@ -66,9 +65,9 @@ namespace System.IdentityModel
             }
             catch (CryptographicException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID1073), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID1073), e));
             }
 
             return decoded;
@@ -90,10 +89,9 @@ namespace System.IdentityModel
 
             if (0 == value.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "value",
-                    SR.GetString(SR.ID6044)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("value", SR.GetString(SR.ID6044));
             }
 
             // See note in Decode about the DataProtectionScope.
@@ -108,9 +106,9 @@ namespace System.IdentityModel
             }
             catch (CryptographicException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID1074), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID1074), e));
             }
 
             return encoded;

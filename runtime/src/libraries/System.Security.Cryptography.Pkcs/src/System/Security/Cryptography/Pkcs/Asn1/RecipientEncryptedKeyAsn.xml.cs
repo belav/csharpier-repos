@@ -95,11 +95,13 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-            System.Security.Cryptography.Pkcs.Asn1.KeyAgreeRecipientIdentifierAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.Rid
-            );
+            System
+                .Security
+                .Cryptography
+                .Pkcs
+                .Asn1
+                .KeyAgreeRecipientIdentifierAsn
+                .Decode(ref sequenceReader, rebind, out decoded.Rid);
 
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {

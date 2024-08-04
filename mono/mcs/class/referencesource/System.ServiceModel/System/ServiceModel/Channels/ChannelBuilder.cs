@@ -72,11 +72,13 @@ namespace System.ServiceModel.Channels
                 TransportBindingElement transport = elements.Find<TransportBindingElement>();
                 if (transport == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.TransportBindingElementNotFound)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.TransportBindingElementNotFound)
+                            )
+                        );
                 }
                 // cache the context state in the demuxer so that the same context state can be provided to the transport
                 // when building auxilliary channels and listeners (for ex, for security negotiation)

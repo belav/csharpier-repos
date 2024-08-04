@@ -59,19 +59,24 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.Compare(
-                            span,
-                            other,
-                            string.GetCaseCompareOfComparisonCulture(comparisonType)
-                        ) == 0;
+                    return CultureInfo
+                            .CurrentCulture
+                            .CompareInfo
+                            .Compare(
+                                span,
+                                other,
+                                string.GetCaseCompareOfComparisonCulture(comparisonType)
+                            ) == 0;
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.Compare(
-                            span,
-                            other,
-                            string.GetCaseCompareOfComparisonCulture(comparisonType)
-                        ) == 0;
+                    return CompareInfo
+                            .Invariant
+                            .Compare(
+                                span,
+                                other,
+                                string.GetCaseCompareOfComparisonCulture(comparisonType)
+                            ) == 0;
 
                 case StringComparison.Ordinal:
                     return EqualsOrdinal(span, other);
@@ -128,19 +133,24 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.Compare(
-                        span,
-                        other,
-                        string.GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CultureInfo
+                        .CurrentCulture
+                        .CompareInfo
+                        .Compare(
+                            span,
+                            other,
+                            string.GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.Compare(
-                        span,
-                        other,
-                        string.GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CompareInfo
+                        .Invariant
+                        .Compare(
+                            span,
+                            other,
+                            string.GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.Ordinal:
                     if (span.Length == 0 || other.Length == 0)
@@ -186,19 +196,24 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.IndexOf(
-                        span,
-                        value,
-                        string.GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CultureInfo
+                        .CurrentCulture
+                        .CompareInfo
+                        .IndexOf(
+                            span,
+                            value,
+                            string.GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.IndexOf(
-                        span,
-                        value,
-                        string.GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CompareInfo
+                        .Invariant
+                        .IndexOf(
+                            span,
+                            value,
+                            string.GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 default:
                     Debug.Assert(comparisonType == StringComparison.OrdinalIgnoreCase);
@@ -234,19 +249,24 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.LastIndexOf(
-                        span,
-                        value,
-                        string.GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CultureInfo
+                        .CurrentCulture
+                        .CompareInfo
+                        .LastIndexOf(
+                            span,
+                            value,
+                            string.GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.LastIndexOf(
-                        span,
-                        value,
-                        string.GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CompareInfo
+                        .Invariant
+                        .LastIndexOf(
+                            span,
+                            value,
+                            string.GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 default:
                     Debug.Assert(comparisonType == StringComparison.OrdinalIgnoreCase);
@@ -392,19 +412,24 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.IsSuffix(
-                        span,
-                        value,
-                        string.GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CultureInfo
+                        .CurrentCulture
+                        .CompareInfo
+                        .IsSuffix(
+                            span,
+                            value,
+                            string.GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.IsSuffix(
-                        span,
-                        value,
-                        string.GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CompareInfo
+                        .Invariant
+                        .IsSuffix(
+                            span,
+                            value,
+                            string.GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.Ordinal:
                     return span.EndsWith(value);
@@ -446,19 +471,24 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.IsPrefix(
-                        span,
-                        value,
-                        string.GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CultureInfo
+                        .CurrentCulture
+                        .CompareInfo
+                        .IsPrefix(
+                            span,
+                            value,
+                            string.GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.IsPrefix(
-                        span,
-                        value,
-                        string.GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CompareInfo
+                        .Invariant
+                        .IsPrefix(
+                            span,
+                            value,
+                            string.GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.Ordinal:
                     return span.StartsWith(value);

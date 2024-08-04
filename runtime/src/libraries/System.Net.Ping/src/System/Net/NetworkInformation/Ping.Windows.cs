@@ -203,21 +203,23 @@ namespace System.Net.NetworkInformation
             if (!_ipv6)
             {
                 return (int)
-                    Interop.IpHlpApi.IcmpSendEcho2(
-                        _handlePingV4!,
-                        GetWaitHandle(isAsync),
-                        IntPtr.Zero,
-                        IntPtr.Zero,
+                    Interop
+                        .IpHlpApi
+                        .IcmpSendEcho2(
+                            _handlePingV4!,
+                            GetWaitHandle(isAsync),
+                            IntPtr.Zero,
+                            IntPtr.Zero,
 #pragma warning disable CS0618 // Address is marked obsolete
-                        (uint)address.Address,
+                            (uint)address.Address,
 #pragma warning restore CS0618
-                        _requestBuffer!,
-                        (ushort)buffer.Length,
-                        ref ipOptions,
-                        _replyBuffer!,
-                        MaxUdpPacket,
-                        (uint)timeout
-                    );
+                            _requestBuffer!,
+                            (ushort)buffer.Length,
+                            ref ipOptions,
+                            _replyBuffer!,
+                            MaxUdpPacket,
+                            (uint)timeout
+                        );
             }
 
             Span<byte> remoteAddr = stackalloc byte[SocketAddressPal.IPv6AddressSize];
@@ -227,20 +229,22 @@ namespace System.Net.NetworkInformation
             sourceAddr.Clear();
 
             return (int)
-                Interop.IpHlpApi.Icmp6SendEcho2(
-                    _handlePingV6!,
-                    GetWaitHandle(isAsync),
-                    IntPtr.Zero,
-                    IntPtr.Zero,
-                    sourceAddr,
-                    remoteAddr,
-                    _requestBuffer!,
-                    (ushort)buffer.Length,
-                    ref ipOptions,
-                    _replyBuffer!,
-                    MaxUdpPacket,
-                    (uint)timeout
-                );
+                Interop
+                    .IpHlpApi
+                    .Icmp6SendEcho2(
+                        _handlePingV6!,
+                        GetWaitHandle(isAsync),
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        sourceAddr,
+                        remoteAddr,
+                        _requestBuffer!,
+                        (ushort)buffer.Length,
+                        ref ipOptions,
+                        _replyBuffer!,
+                        MaxUdpPacket,
+                        (uint)timeout
+                    );
         }
 
         private unsafe PingReply CreatePingReply()

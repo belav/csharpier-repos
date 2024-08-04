@@ -152,9 +152,9 @@ namespace System.Net
                 )
                     return null;
 
-                SpnToken spn = httpWebRequest.CurrentAuthenticationState.GetComputeSpn(
-                    httpWebRequest
-                );
+                SpnToken spn = httpWebRequest
+                    .CurrentAuthenticationState
+                    .GetComputeSpn(httpWebRequest);
                 GlobalLog.Print(
                     "KerberosClient::Authenticate() ChallengedSpn:" + ValidationHelper.ToString(spn)
                 );
@@ -162,10 +162,10 @@ namespace System.Net
                 ChannelBinding binding = null;
                 if (httpWebRequest.CurrentAuthenticationState.TransportContext != null)
                 {
-                    binding =
-                        httpWebRequest.CurrentAuthenticationState.TransportContext.GetChannelBinding(
-                            ChannelBindingKind.Endpoint
-                        );
+                    binding = httpWebRequest
+                        .CurrentAuthenticationState
+                        .TransportContext
+                        .GetChannelBinding(ChannelBindingKind.Endpoint);
                 }
 
                 authSession = new NTAuthentication(AuthType, NC, spn, httpWebRequest, binding);
@@ -236,8 +236,9 @@ namespace System.Net
             //
             // try to retrieve the state of the ongoing handshake
             //
-            NTAuthentication authSession =
-                httpWebRequest.CurrentAuthenticationState.GetSecurityContext(this);
+            NTAuthentication authSession = httpWebRequest
+                .CurrentAuthenticationState
+                .GetSecurityContext(this);
             GlobalLog.Print(
                 "KerberosClient::Update() key:"
                     + ValidationHelper.HashString(httpWebRequest.CurrentAuthenticationState)
@@ -313,10 +314,9 @@ namespace System.Net
             }
 
             // Extract the CBT we used and cache it for future requests that want to do preauth
-            httpWebRequest.ServicePoint.SetCachedChannelBinding(
-                httpWebRequest.ChallengedUri,
-                authSession.ChannelBinding
-            );
+            httpWebRequest
+                .ServicePoint
+                .SetCachedChannelBinding(httpWebRequest.ChallengedUri, authSession.ChannelBinding);
 
             GlobalLog.Print(
                 "KerberosClient::Update() session removed and ConnectionGroup released returning true"

@@ -164,8 +164,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SourceEventSymbol fieldLikeEvent = AssociatedEvent;
                 if (fieldLikeEvent.Type.IsDelegateType())
                 {
-                    BoundBlock body =
-                        CSharp.MethodBodySynthesizer.ConstructFieldLikeEventAccessorBody(
+                    BoundBlock body = CSharp
+                        .MethodBodySynthesizer
+                        .ConstructFieldLikeEventAccessorBody(
                             fieldLikeEvent,
                             isAddMethod: MethodKind == MethodKind.EventAdd,
                             compilationState.Compilation,

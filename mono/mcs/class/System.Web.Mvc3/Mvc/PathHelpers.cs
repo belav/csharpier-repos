@@ -42,9 +42,9 @@
                     contentPath,
                     httpContext.Request.ApplicationPath
                 );
-                string modifiedAbsoluteContentPath = httpContext.Response.ApplyAppPathModifier(
-                    absoluteContentPath
-                );
+                string modifiedAbsoluteContentPath = httpContext
+                    .Response
+                    .ApplyAppPathModifier(absoluteContentPath);
                 return GenerateClientUrlInternal(httpContext, modifiedAbsoluteContentPath);
             }
 

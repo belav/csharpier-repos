@@ -75,9 +75,9 @@ namespace System.Net.Http.Headers
         internal static string Encode5987(string input)
         {
             var builder = new ValueStringBuilder(stackalloc char[256]);
-            byte[] utf8bytes = ArrayPool<byte>.Shared.Rent(
-                Encoding.UTF8.GetMaxByteCount(input.Length)
-            );
+            byte[] utf8bytes = ArrayPool<byte>
+                .Shared
+                .Rent(Encoding.UTF8.GetMaxByteCount(input.Length));
             int utf8length = Encoding.UTF8.GetBytes(input, 0, input.Length, utf8bytes, 0);
 
             builder.Append("utf-8\'\'");

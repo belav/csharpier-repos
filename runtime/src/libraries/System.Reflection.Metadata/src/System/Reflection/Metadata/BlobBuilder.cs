@@ -236,8 +236,8 @@ namespace System.Reflection.Metadata
 
                 int minLength = Math.Min(left.Length - leftStart, right.Length - rightStart);
                 if (
-                    !left
-                        ._buffer.AsSpan(leftStart, minLength)
+                    !left._buffer
+                        .AsSpan(leftStart, minLength)
                         .SequenceEqual(right._buffer.AsSpan(rightStart, minLength))
                 )
                 {

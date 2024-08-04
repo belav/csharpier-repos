@@ -724,9 +724,9 @@ namespace MonoTests.System.Data
             DataColumn colParentID = dataTable.Columns.Add("ParentID", typeof(int));
 
             // table PK (ID, Culture)
-            dataTable.Constraints.Add(
-                new UniqueConstraint("MenuPK", new DataColumn[] { colID, colCulture }, true)
-            );
+            dataTable
+                .Constraints
+                .Add(new UniqueConstraint("MenuPK", new DataColumn[] { colID, colCulture }, true));
 
             // add a FK referencing the same table: (ID, Culture) <- (ParentID, Culture)
             ForeignKeyConstraint fkc = new ForeignKeyConstraint(

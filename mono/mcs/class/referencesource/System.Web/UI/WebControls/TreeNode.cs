@@ -927,10 +927,13 @@ namespace System.Web.UI.WebControls
             }
             if (_owner.Page != null)
             {
-                _owner.Page.ClientScript.RegisterForEventValidation(
-                    _owner.UniqueID,
-                    String.Concat(indexString, Text, InternalValuePath, DataPath)
-                );
+                _owner
+                    .Page
+                    .ClientScript
+                    .RegisterForEventValidation(
+                        _owner.UniqueID,
+                        String.Concat(indexString, Text, InternalValuePath, DataPath)
+                    );
             }
 
             return populateNodeAttributeValue;
@@ -1472,12 +1475,15 @@ namespace System.Web.UI.WebControls
                                 string href = "javascript:0";
                                 if (_owner.Page != null)
                                 {
-                                    href = _owner.Page.ClientScript.GetPostBackClientHyperlink(
-                                        _owner,
-                                        "t" + InternalValuePath,
-                                        true,
-                                        true
-                                    );
+                                    href = _owner
+                                        .Page
+                                        .ClientScript
+                                        .GetPostBackClientHyperlink(
+                                            _owner,
+                                            "t" + InternalValuePath,
+                                            true,
+                                            true
+                                        );
                                 }
                                 writer.AddAttribute(HtmlTextWriterAttribute.Href, href);
                             }
@@ -1495,11 +1501,10 @@ namespace System.Web.UI.WebControls
                         string href = "javascript:0";
                         if (_owner.Page != null)
                         {
-                            href = _owner.Page.ClientScript.GetPostBackClientHyperlink(
-                                _owner,
-                                "t" + InternalValuePath,
-                                true
-                            );
+                            href = _owner
+                                .Page
+                                .ClientScript
+                                .GetPostBackClientHyperlink(_owner, "t" + InternalValuePath, true);
                         }
                         // If we aren't using client script to perform expansions, get a postback reference
                         writer.AddAttribute(HtmlTextWriterAttribute.Href, href);
@@ -1613,12 +1618,15 @@ namespace System.Web.UI.WebControls
                                 //
                                 onClick = Util.MergeScript(
                                     onClick,
-                                    _owner.Page.ClientScript.GetPostBackClientHyperlink(
-                                        _owner,
-                                        "t" + InternalValuePath,
-                                        true,
-                                        true
-                                    )
+                                    _owner
+                                        .Page
+                                        .ClientScript
+                                        .GetPostBackClientHyperlink(
+                                            _owner,
+                                            "t" + InternalValuePath,
+                                            true,
+                                            true
+                                        )
                                 );
                             }
                             else if (!_owner.CustomExpandCollapseHandlerExists && canExpand)
@@ -1677,12 +1685,15 @@ namespace System.Web.UI.WebControls
                             string href = "javascript:0";
                             if (_owner.Page != null)
                             {
-                                href = _owner.Page.ClientScript.GetPostBackClientHyperlink(
-                                    _owner,
-                                    "t" + InternalValuePath,
-                                    true,
-                                    true
-                                );
+                                href = _owner
+                                    .Page
+                                    .ClientScript
+                                    .GetPostBackClientHyperlink(
+                                        _owner,
+                                        "t" + InternalValuePath,
+                                        true,
+                                        true
+                                    );
                             }
                             anchorAttributes.Add(href);
                         }
@@ -1702,12 +1713,15 @@ namespace System.Web.UI.WebControls
 
                     if (_owner.Page != null)
                     {
-                        string href = _owner.Page.ClientScript.GetPostBackClientHyperlink(
-                            _owner,
-                            "s" + InternalValuePath,
-                            true,
-                            true
-                        );
+                        string href = _owner
+                            .Page
+                            .ClientScript
+                            .GetPostBackClientHyperlink(
+                                _owner,
+                                "s" + InternalValuePath,
+                                true,
+                                true
+                            );
                         anchorAttributes.Add(href);
 
                         if (_owner.RenderClientScript)

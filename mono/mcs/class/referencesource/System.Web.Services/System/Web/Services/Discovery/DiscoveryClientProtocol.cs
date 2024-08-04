@@ -338,7 +338,9 @@ namespace System.Web.Services.Discovery
                     {
                         switch (
                             response
-                                .ResponseUri.AbsolutePath.Substring(dotIndex + 1)
+                                .ResponseUri
+                                .AbsolutePath
+                                .Substring(dotIndex + 1)
                                 .ToLower(CultureInfo.InvariantCulture)
                         )
                         {
@@ -681,13 +683,15 @@ namespace System.Web.Services.Discovery
                     filenames,
                     Path.GetFullPath(Path.Combine(directory, filename))
                 );
-                results.Results.Add(
-                    new DiscoveryClientResult(
-                        reference == null ? null : reference.GetType(),
-                        url,
-                        GetRelativePath(filename, topLevelFullPath)
-                    )
-                );
+                results
+                    .Results
+                    .Add(
+                        new DiscoveryClientResult(
+                            reference == null ? null : reference.GetType(),
+                            url,
+                            GetRelativePath(filename, topLevelFullPath)
+                        )
+                    );
                 Stream file = File.Create(filename);
                 try
                 {

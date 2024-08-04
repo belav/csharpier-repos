@@ -14,10 +14,9 @@ namespace Internal.IL.Stubs
         protected override int CompareToImpl(MethodDesc other, TypeSystemComparer comparer)
         {
             var otherMethod = (TypeGetTypeMethodThunk)other;
-            int result = StringComparer.Ordinal.Compare(
-                DefaultAssemblyName,
-                otherMethod.DefaultAssemblyName
-            );
+            int result = StringComparer
+                .Ordinal
+                .Compare(DefaultAssemblyName, otherMethod.DefaultAssemblyName);
             if (result != 0)
                 return result;
 

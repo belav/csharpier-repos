@@ -350,7 +350,9 @@ public partial class HttpConnectionTests
                     {
                         await connection.StartAsync().DefaultTimeout();
                         await connection
-                            .Transport.Output.WriteAsync(new byte[] { 0x42 })
+                            .Transport
+                            .Output
+                            .WriteAsync(new byte[] { 0x42 })
                             .DefaultTimeout();
 
                         await Assert.ThrowsAsync<HttpRequestException>(

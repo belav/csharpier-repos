@@ -79,8 +79,9 @@ internal sealed partial class RateLimitingMiddleware
         {
             return _next(context);
         }
-        var enableRateLimitingAttribute =
-            endpoint?.Metadata.GetMetadata<EnableRateLimitingAttribute>();
+        var enableRateLimitingAttribute = endpoint
+            ?.Metadata
+            .GetMetadata<EnableRateLimitingAttribute>();
         // If this endpoint has no EnableRateLimitingAttribute & there's no global limiter, don't apply any rate limits.
         if (enableRateLimitingAttribute is null && _globalLimiter is null)
         {
@@ -317,7 +318,8 @@ internal sealed partial class RateLimitingMiddleware
                 DefaultRateLimiterPolicy? policy;
                 var enableRateLimitingAttribute = context
                     .GetEndpoint()
-                    ?.Metadata.GetMetadata<EnableRateLimitingAttribute>();
+                    ?.Metadata
+                    .GetMetadata<EnableRateLimitingAttribute>();
                 if (enableRateLimitingAttribute is null)
                 {
                     return RateLimitPartition.GetNoLimiter<DefaultKeyType>(_defaultPolicyKey);

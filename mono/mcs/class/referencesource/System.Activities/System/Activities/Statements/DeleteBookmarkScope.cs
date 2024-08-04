@@ -36,16 +36,20 @@ namespace System.Activities.Statements
 
             if (toUnregister == null)
             {
-                throw SA.FxTrace.Exception.AsError(
-                    new InvalidOperationException(SA.SR.CannotUnregisterNullBookmarkScope)
-                );
+                throw SA.FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SA.SR.CannotUnregisterNullBookmarkScope)
+                    );
             }
 
             if (toUnregister.Equals(context.DefaultBookmarkScope))
             {
-                throw SA.FxTrace.Exception.AsError(
-                    new InvalidOperationException(SA.SR.CannotUnregisterDefaultBookmarkScope)
-                );
+                throw SA.FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SA.SR.CannotUnregisterDefaultBookmarkScope)
+                    );
             }
 
             context.UnregisterBookmarkScope(toUnregister);

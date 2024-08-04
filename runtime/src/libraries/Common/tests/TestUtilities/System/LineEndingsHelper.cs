@@ -8,10 +8,9 @@ namespace System
         public const string CompiledNewline =
             @"
 ";
-        public static readonly bool s_consistentNewlines = StringComparer.Ordinal.Equals(
-            CompiledNewline,
-            Environment.NewLine
-        );
+        public static readonly bool s_consistentNewlines = StringComparer
+            .Ordinal
+            .Equals(CompiledNewline, Environment.NewLine);
 
         public static bool IsNewLineConsistent
         {

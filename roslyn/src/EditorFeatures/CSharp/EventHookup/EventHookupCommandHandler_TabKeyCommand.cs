@@ -102,10 +102,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 == TaskStatus.RanToCompletion
             )
             {
-                eventHandlerMethodName =
-                    EventHookupSessionManager.CurrentSession.GetEventNameTask.WaitAndGetResult(
-                        cancellationToken
-                    );
+                eventHandlerMethodName = EventHookupSessionManager
+                    .CurrentSession
+                    .GetEventNameTask
+                    .WaitAndGetResult(cancellationToken);
             }
 
             if (
@@ -253,12 +253,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             plusEqualTokenEndPosition = newRoot
                 .GetAnnotatedNodesAndTokens(plusEqualsTokenAnnotation)
                 .Single()
-                .Span.End;
+                .Span
+                .End;
 
-            return document.Project.Solution.WithDocumentText(
-                formattedDocument.Id,
-                formattedDocument.GetTextSynchronously(cancellationToken)
-            );
+            return document
+                .Project
+                .Solution
+                .WithDocumentText(
+                    formattedDocument.Id,
+                    formattedDocument.GetTextSynchronously(cancellationToken)
+                );
         }
 
         private static Document AddMethodNameAndAnnotationsToSolution(
@@ -340,8 +344,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             var container =
                 (SyntaxNode)typeDecl ?? eventHookupExpression.GetAncestor<CompilationUnitSyntax>();
 
-            var codeGenerator =
-                document.Document.GetRequiredLanguageService<ICodeGenerationService>();
+            var codeGenerator = document
+                .Document
+                .GetRequiredLanguageService<ICodeGenerationService>();
             var codeGenOptions = codeGenerator.GetInfo(
                 new CodeGenerationContext(afterThisLocation: eventHookupExpression.GetLocation()),
                 options,
@@ -376,8 +381,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 return null;
             }
 
-            var typeInference =
-                semanticDocument.Document.GetLanguageService<ITypeInferenceService>();
+            var typeInference = semanticDocument
+                .Document
+                .GetLanguageService<ITypeInferenceService>();
             var delegateType = typeInference.InferDelegateType(
                 semanticModel,
                 eventHookupExpression.Right,
@@ -389,8 +395,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             }
 
             var syntaxFactory = semanticDocument.Document.GetLanguageService<SyntaxGenerator>();
-            var delegateInvokeMethod =
-                delegateType.DelegateInvokeMethod.RemoveInaccessibleAttributesAndAttributesOfTypes(
+            var delegateInvokeMethod = delegateType
+                .DelegateInvokeMethod
+                .RemoveInaccessibleAttributesAndAttributesOfTypes(
                     semanticDocument.SemanticModel.Compilation.Assembly
                 );
 

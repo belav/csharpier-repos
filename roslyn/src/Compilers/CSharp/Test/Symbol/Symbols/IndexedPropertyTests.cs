@@ -2745,8 +2745,8 @@ class D : CodeModule
                     )
             );
 
-            var interfaceProperty = comp
-                .GlobalNamespace.GetMember<NamespaceSymbol>("Microsoft")
+            var interfaceProperty = comp.GlobalNamespace
+                .GetMember<NamespaceSymbol>("Microsoft")
                 .GetMember<NamespaceSymbol>("Vbe")
                 .GetMember<NamespaceSymbol>("Interop")
                 .GetMember<NamedTypeSymbol>("_CodeModule")

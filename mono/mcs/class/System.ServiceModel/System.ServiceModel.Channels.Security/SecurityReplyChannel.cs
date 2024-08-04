@@ -100,10 +100,9 @@ namespace System.ServiceModel.Channels.Security
                     var commAuth =
                         support.TokenAuthenticator as CommunicationSecurityTokenAuthenticator;
                     if (commAuth != null)
-                        res = commAuth.Communication.ProcessNegotiation(
-                            req,
-                            timeout - (DateTime.UtcNow - start)
-                        );
+                        res = commAuth
+                            .Communication
+                            .ProcessNegotiation(req, timeout - (DateTime.UtcNow - start));
                     else
                         throw new MessageSecurityException(
                             "This reply channel does not expect incoming WS-Trust requests"

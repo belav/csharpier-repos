@@ -856,10 +856,10 @@ namespace ILCompiler
                         IsConst = 0,
                         IsReference = 0,
                         ElementType = GetTypeIndex(
-                            defType.Context.SystemModule.GetType(
-                                "Internal.Runtime.CompilerHelpers",
-                                "TypeManagerSlot"
-                            ),
+                            defType
+                                .Context
+                                .SystemModule
+                                .GetType("Internal.Runtime.CompilerHelpers", "TypeManagerSlot"),
                             true
                         ),
                     };
@@ -877,9 +877,11 @@ namespace ILCompiler
                         new DataFieldDescriptor
                         {
                             FieldTypeIndex = GetVariableTypeIndex(
-                                defType.Context.GetWellKnownType(
-                                    Is64Bit ? WellKnownType.Int64 : WellKnownType.Int32
-                                ),
+                                defType
+                                    .Context
+                                    .GetWellKnownType(
+                                        Is64Bit ? WellKnownType.Int64 : WellKnownType.Int32
+                                    ),
                                 true
                             ),
                             Offset = (ulong)NodeFactory.Target.PointerSize,

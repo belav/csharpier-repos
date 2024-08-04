@@ -62,21 +62,29 @@ namespace System.Security.Cryptography.X509Certificates
                         Interop.Crypt32.ContentType contentType;
                         SafeCertStoreHandle certStore;
                         if (
-                            !Interop.Crypt32.CryptQueryObject(
-                                fromFile
-                                    ? Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_FILE
-                                    : Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
-                                pvObject,
-                                StoreExpectedContentFlags,
-                                Interop.Crypt32.ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,
-                                0,
-                                IntPtr.Zero,
-                                out contentType,
-                                IntPtr.Zero,
-                                out certStore,
-                                IntPtr.Zero,
-                                IntPtr.Zero
-                            )
+                            !Interop
+                                .Crypt32
+                                .CryptQueryObject(
+                                    fromFile
+                                        ? Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_FILE
+                                        : Interop
+                                            .Crypt32
+                                            .CertQueryObjectType
+                                            .CERT_QUERY_OBJECT_BLOB,
+                                    pvObject,
+                                    StoreExpectedContentFlags,
+                                    Interop
+                                        .Crypt32
+                                        .ExpectedFormatTypeFlags
+                                        .CERT_QUERY_FORMAT_FLAG_ALL,
+                                    0,
+                                    IntPtr.Zero,
+                                    out contentType,
+                                    IntPtr.Zero,
+                                    out certStore,
+                                    IntPtr.Zero,
+                                    IntPtr.Zero
+                                )
                         )
                         {
                             Exception e = Marshal.GetLastPInvokeError().ToCryptographicException();
@@ -107,11 +115,9 @@ namespace System.Security.Cryptography.X509Certificates
                                     new IntPtr(pRawData2),
                                     (uint)rawData!.Length
                                 );
-                                certStore = Interop.Crypt32.PFXImportCertStore(
-                                    ref blob2,
-                                    password,
-                                    certStoreFlags
-                                );
+                                certStore = Interop
+                                    .Crypt32
+                                    .PFXImportCertStore(ref blob2, password, certStoreFlags);
                                 if (certStore == null || certStore.IsInvalid)
                                 {
                                     Exception e = Marshal
@@ -131,27 +137,28 @@ namespace System.Security.Cryptography.X509Certificates
                                 //
                                 SafeCertContextHandle? pCertContext = null;
                                 while (
-                                    Interop.crypt32.CertEnumCertificatesInStore(
-                                        certStore,
-                                        ref pCertContext
-                                    )
+                                    Interop
+                                        .crypt32
+                                        .CertEnumCertificatesInStore(certStore, ref pCertContext)
                                 )
                                 {
                                     Interop.Crypt32.DATA_BLOB nullBlob =
                                         new Interop.Crypt32.DATA_BLOB(IntPtr.Zero, 0);
                                     if (
-                                        !Interop.Crypt32.CertSetCertificateContextProperty(
-                                            pCertContext,
-                                            Interop
-                                                .Crypt32
-                                                .CertContextPropId
-                                                .CERT_CLR_DELETE_KEY_PROP_ID,
-                                            Interop
-                                                .Crypt32
-                                                .CertSetPropertyFlags
-                                                .CERT_SET_PROPERTY_INHIBIT_PERSIST_FLAG,
-                                            &nullBlob
-                                        )
+                                        !Interop
+                                            .Crypt32
+                                            .CertSetCertificateContextProperty(
+                                                pCertContext,
+                                                Interop
+                                                    .Crypt32
+                                                    .CertContextPropId
+                                                    .CERT_CLR_DELETE_KEY_PROP_ID,
+                                                Interop
+                                                    .Crypt32
+                                                    .CertSetPropertyFlags
+                                                    .CERT_SET_PROPERTY_INHIBIT_PERSIST_FLAG,
+                                                &nullBlob
+                                            )
                                     )
                                     {
                                         Exception e = Marshal
@@ -174,26 +181,33 @@ namespace System.Security.Cryptography.X509Certificates
         {
             CertificatePal certificatePal = (CertificatePal)cert;
 
-            SafeCertStoreHandle certStore = Interop.crypt32.CertOpenStore(
-                CertStoreProvider.CERT_STORE_PROV_MEMORY,
-                Interop.Crypt32.CertEncodingType.All,
-                IntPtr.Zero,
-                Interop.Crypt32.CertStoreFlags.CERT_STORE_ENUM_ARCHIVED_FLAG
-                    | Interop.Crypt32.CertStoreFlags.CERT_STORE_CREATE_NEW_FLAG
-                    | Interop.Crypt32.CertStoreFlags.CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG,
-                null
-            );
+            SafeCertStoreHandle certStore = Interop
+                .crypt32
+                .CertOpenStore(
+                    CertStoreProvider.CERT_STORE_PROV_MEMORY,
+                    Interop.Crypt32.CertEncodingType.All,
+                    IntPtr.Zero,
+                    Interop.Crypt32.CertStoreFlags.CERT_STORE_ENUM_ARCHIVED_FLAG
+                        | Interop.Crypt32.CertStoreFlags.CERT_STORE_CREATE_NEW_FLAG
+                        | Interop
+                            .Crypt32
+                            .CertStoreFlags
+                            .CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG,
+                    null
+                );
 
             using (SafeCertContextHandle certContext = certificatePal.GetCertContext())
             {
                 if (
                     certStore.IsInvalid
-                    || !Interop.Crypt32.CertAddCertificateLinkToStore(
-                        certStore,
-                        certContext,
-                        Interop.Crypt32.CertStoreAddDisposition.CERT_STORE_ADD_ALWAYS,
-                        IntPtr.Zero
-                    )
+                    || !Interop
+                        .Crypt32
+                        .CertAddCertificateLinkToStore(
+                            certStore,
+                            certContext,
+                            Interop.Crypt32.CertStoreAddDisposition.CERT_STORE_ADD_ALWAYS,
+                            IntPtr.Zero
+                        )
                 )
                 {
                     Exception e = Marshal.GetHRForLastWin32Error().ToCryptographicException();
@@ -216,14 +230,16 @@ namespace System.Security.Cryptography.X509Certificates
             // we always want to use CERT_STORE_ENUM_ARCHIVED_FLAG since we want to preserve the collection in this operation.
             // By default, Archived certificates will not be included.
 
-            SafeCertStoreHandle certStore = Interop.crypt32.CertOpenStore(
-                CertStoreProvider.CERT_STORE_PROV_MEMORY,
-                Interop.Crypt32.CertEncodingType.All,
-                IntPtr.Zero,
-                Interop.Crypt32.CertStoreFlags.CERT_STORE_ENUM_ARCHIVED_FLAG
-                    | Interop.Crypt32.CertStoreFlags.CERT_STORE_CREATE_NEW_FLAG,
-                null
-            );
+            SafeCertStoreHandle certStore = Interop
+                .crypt32
+                .CertOpenStore(
+                    CertStoreProvider.CERT_STORE_PROV_MEMORY,
+                    Interop.Crypt32.CertEncodingType.All,
+                    IntPtr.Zero,
+                    Interop.Crypt32.CertStoreFlags.CERT_STORE_ENUM_ARCHIVED_FLAG
+                        | Interop.Crypt32.CertStoreFlags.CERT_STORE_CREATE_NEW_FLAG,
+                    null
+                );
             try
             {
                 if (certStore.IsInvalid)
@@ -245,12 +261,14 @@ namespace System.Security.Cryptography.X509Certificates
                     )
                     {
                         if (
-                            !Interop.Crypt32.CertAddCertificateLinkToStore(
-                                certStore,
-                                certContext,
-                                Interop.Crypt32.CertStoreAddDisposition.CERT_STORE_ADD_ALWAYS,
-                                IntPtr.Zero
-                            )
+                            !Interop
+                                .Crypt32
+                                .CertAddCertificateLinkToStore(
+                                    certStore,
+                                    certContext,
+                                    Interop.Crypt32.CertStoreAddDisposition.CERT_STORE_ADD_ALWAYS,
+                                    IntPtr.Zero
+                                )
                         )
                         {
                             throw Marshal.GetLastPInvokeError().ToCryptographicException();
@@ -278,13 +296,15 @@ namespace System.Security.Cryptography.X509Certificates
                 openFlags
             );
 
-            SafeCertStoreHandle certStore = Interop.crypt32.CertOpenStore(
-                CertStoreProvider.CERT_STORE_PROV_SYSTEM_W,
-                Interop.Crypt32.CertEncodingType.All,
-                IntPtr.Zero,
-                certStoreFlags,
-                storeName
-            );
+            SafeCertStoreHandle certStore = Interop
+                .crypt32
+                .CertOpenStore(
+                    CertStoreProvider.CERT_STORE_PROV_SYSTEM_W,
+                    Interop.Crypt32.CertEncodingType.All,
+                    IntPtr.Zero,
+                    certStoreFlags,
+                    storeName
+                );
             if (certStore.IsInvalid)
             {
                 Exception e = Marshal.GetLastPInvokeError().ToCryptographicException();
@@ -298,12 +318,14 @@ namespace System.Security.Cryptography.X509Certificates
             //
             // For compat with desktop, ignoring any failures from this call. (It is pretty unlikely to fail, in any case.)
             //
-            _ = Interop.Crypt32.CertControlStore(
-                certStore,
-                Interop.Crypt32.CertControlStoreFlags.None,
-                Interop.Crypt32.CertControlStoreType.CERT_STORE_CTRL_AUTO_RESYNC,
-                IntPtr.Zero
-            );
+            _ = Interop
+                .Crypt32
+                .CertControlStore(
+                    certStore,
+                    Interop.Crypt32.CertControlStoreFlags.None,
+                    Interop.Crypt32.CertControlStoreType.CERT_STORE_CTRL_AUTO_RESYNC,
+                    IntPtr.Zero
+                );
 
             return new StorePal(certStore);
         }

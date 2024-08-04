@@ -423,10 +423,12 @@ namespace MonoTests.System.ServiceModel.Security.Tokens
             //   <e:CipherData> {{....}} </e:CipherData>
             //  </e:EncryptedData>
             // </o:Security>
-            int i = input.Headers.FindHeader(
-                "Security",
-                "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
-            );
+            int i = input
+                .Headers
+                .FindHeader(
+                    "Security",
+                    "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+                );
             Assert.IsTrue(i >= 0, "Security header existence");
             MessageHeaderInfo info = input.Headers[i];
             Assert.IsNotNull(info, "Security header item");

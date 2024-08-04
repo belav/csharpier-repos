@@ -159,8 +159,8 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
         if (state != EntityState.Unchanged)
         {
             foreach (
-                var child in left
-                    .TwoSkip.Cast<object>()
+                var child in left.TwoSkip
+                    .Cast<object>()
                     .Concat(left.TwoSkipShared)
                     .Concat(left.SelfSkipPayloadLeft)
                     .Concat(left.SelfSkipPayloadRight)
@@ -1023,9 +1023,9 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     {
         using var context = Fixture.CreateContext();
 
-        var queryable = context.EntityOnes.Include(e =>
-            e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2)
-        );
+        var queryable = context
+            .EntityOnes
+            .Include(e => e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2));
         var left = async
             ? await queryable.SingleAsync(e => e.Id == 1)
             : queryable.Single(e => e.Id == 1);

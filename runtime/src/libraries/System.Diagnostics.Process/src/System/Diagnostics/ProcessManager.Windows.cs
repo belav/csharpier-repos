@@ -34,12 +34,14 @@ namespace System.Diagnostics
             if (processId != 0 && !IsRemoteMachine(machineName))
             {
                 using (
-                    SafeProcessHandle processHandle = Interop.Kernel32.OpenProcess(
-                        ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION
-                            | ProcessOptions.SYNCHRONIZE,
-                        false,
-                        processId
-                    )
+                    SafeProcessHandle processHandle = Interop
+                        .Kernel32
+                        .OpenProcess(
+                            ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION
+                                | ProcessOptions.SYNCHRONIZE,
+                            false,
+                            processId
+                        )
                 )
                 {
                     if (processHandle.IsInvalid)
@@ -232,11 +234,9 @@ namespace System.Diagnostics
 
             Interop.Advapi32.LUID luid;
             if (
-                !Interop.Advapi32.LookupPrivilegeValue(
-                    null,
-                    Interop.Advapi32.SeDebugPrivilege,
-                    out luid
-                )
+                !Interop
+                    .Advapi32
+                    .LookupPrivilegeValue(null, Interop.Advapi32.SeDebugPrivilege, out luid)
             )
             {
                 return;
@@ -246,11 +246,13 @@ namespace System.Diagnostics
             try
             {
                 if (
-                    !Interop.Advapi32.OpenProcessToken(
-                        Interop.Kernel32.GetCurrentProcess(),
-                        Interop.Kernel32.HandleOptions.TOKEN_ADJUST_PRIVILEGES,
-                        out tokenHandle
-                    )
+                    !Interop
+                        .Advapi32
+                        .OpenProcessToken(
+                            Interop.Kernel32.GetCurrentProcess(),
+                            Interop.Kernel32.HandleOptions.TOKEN_ADJUST_PRIVILEGES,
+                            out tokenHandle
+                        )
                 )
                 {
                     return;
@@ -272,11 +274,9 @@ namespace System.Diagnostics
 
         public static SafeProcessHandle OpenProcess(int processId, int access, bool throwIfExited)
         {
-            SafeProcessHandle processHandle = Interop.Kernel32.OpenProcess(
-                access,
-                false,
-                processId
-            );
+            SafeProcessHandle processHandle = Interop
+                .Kernel32
+                .OpenProcess(access, false, processId);
             int result = Marshal.GetLastWin32Error();
             if (!processHandle.IsInvalid)
             {

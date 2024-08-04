@@ -20,7 +20,8 @@ public class CustomEncoderTagHelper : TagHelper
         // writing it into a response. Here for example, could pass SetContent() a string and that would be
         // HTML encoded later.
         output
-            .PreContent.SetHtmlContent("Custom encoder: ")
+            .PreContent
+            .SetHtmlContent("Custom encoder: ")
             .AppendHtml(customContent)
             .AppendHtml("<br />");
     }

@@ -760,11 +760,9 @@ namespace System.Xml.Xsl.XsltOld
                 if (builtIn != null && builtIn.Length != 0)
                 {
                     compiler.AllowBuiltInMode = true;
-                    builtInSheet = compiler.RootAction.CompileImport(
-                        compiler,
-                        compiler.ResolveUri(builtIn),
-                        int.MaxValue
-                    );
+                    builtInSheet = compiler
+                        .RootAction
+                        .CompileImport(compiler, compiler.ResolveUri(builtIn), int.MaxValue);
                     compiler.AllowBuiltInMode = false;
                 }
 

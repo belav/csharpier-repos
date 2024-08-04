@@ -943,9 +943,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Pass()
-                .And.RestartedFrameworkResolution("5.1.1", "5.4.1")
-                .And.RestartedFrameworkResolution("5.4.1", "5.6.0")
-                .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
+                .And
+                .RestartedFrameworkResolution("5.1.1", "5.4.1")
+                .And
+                .RestartedFrameworkResolution("5.4.1", "5.6.0")
+                .And
+                .HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
         }
 
         // This test:
@@ -980,9 +983,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Pass()
-                .And.RestartedFrameworkResolution("5.1.1", "5.4.1")
-                .And.RestartedFrameworkResolution("5.4.1", "5.6.0")
-                .And.HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
+                .And
+                .RestartedFrameworkResolution("5.1.1", "5.4.1")
+                .And
+                .RestartedFrameworkResolution("5.4.1", "5.6.0")
+                .And
+                .HaveResolvedFramework(MicrosoftNETCoreApp, "5.6.0");
         }
 
         // Verifies that reconciling framework references correctly remembers whether it should prefer release versions or not.

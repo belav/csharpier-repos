@@ -161,10 +161,10 @@ namespace ILCompiler
             // Do not attempt to inline resource strings if we only want to use resource keys.
             // The optimizations are not compatible.
             bool shouldInlineResourceStrings =
-                !_hashtable._switchValues.TryGetValue(
-                    "System.Resources.UseSystemResourceKeys",
-                    out bool useResourceKeys
-                ) || !useResourceKeys;
+                !_hashtable
+                    ._switchValues
+                    .TryGetValue("System.Resources.UseSystemResourceKeys", out bool useResourceKeys)
+                || !useResourceKeys;
 
             ILExceptionRegion[] ehRegions = method.GetExceptionRegions();
             byte[] methodBytes = method.GetILBytes();
@@ -1041,9 +1041,10 @@ namespace ILCompiler
                 )
                 {
                     int rid = token & 0xFFFFFF;
-                    int maxRealTokenRid = ecmaMethodIL.Module.MetadataReader.GetHeapSize(
-                        HeapIndex.UserString
-                    );
+                    int maxRealTokenRid = ecmaMethodIL
+                        .Module
+                        .MetadataReader
+                        .GetHeapSize(HeapIndex.UserString);
                     if (rid >= maxRealTokenRid)
                     {
                         // Yep, string injected by us.
@@ -1136,15 +1137,22 @@ namespace ILCompiler
             {
                 Module = module;
 
-                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(
-                    module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
-                );
+                PEMemoryBlock resourceDirectory = module
+                    .PEReader
+                    .GetSectionData(
+                        module
+                            .PEReader
+                            .PEHeaders
+                            .CorHeader
+                            .ResourcesDirectory
+                            .RelativeVirtualAddress
+                    );
 
                 foreach (var resourceHandle in module.MetadataReader.ManifestResources)
                 {
-                    ManifestResource resource = module.MetadataReader.GetManifestResource(
-                        resourceHandle
-                    );
+                    ManifestResource resource = module
+                        .MetadataReader
+                        .GetManifestResource(resourceHandle);
 
                     // Don't try to process linked resources or resources in other assemblies
                     if (!resource.Implementation.IsNil)

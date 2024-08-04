@@ -115,10 +115,9 @@ namespace System.Web.Hosting
             public void Unregister()
             {
                 object dummy;
-                bool removed = _customRuntimeManager._activeRegistrations.TryRemove(
-                    this,
-                    out dummy
-                );
+                bool removed = _customRuntimeManager
+                    ._activeRegistrations
+                    .TryRemove(this, out dummy);
 
                 Debug.Assert(
                     removed,

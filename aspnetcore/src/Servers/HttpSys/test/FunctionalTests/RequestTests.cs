@@ -58,8 +58,9 @@ public class RequestTests : LoggedTest
                         Assert.NotNull(connectionInfo.ConnectionId);
 
                         // Trace identifier
-                        var requestIdentifierFeature =
-                            httpContext.Features.Get<IHttpRequestIdentifierFeature>();
+                        var requestIdentifierFeature = httpContext
+                            .Features
+                            .Get<IHttpRequestIdentifierFeature>();
                         Assert.NotNull(requestIdentifierFeature);
                         Assert.NotNull(requestIdentifierFeature.TraceIdentifier);
 
@@ -129,8 +130,9 @@ public class RequestTests : LoggedTest
                         Assert.Equal("CustomId", connectionInfo.ConnectionId);
 
                         // Trace identifier
-                        var requestIdentifierFeature =
-                            httpContext.Features.Get<IHttpRequestIdentifierFeature>();
+                        var requestIdentifierFeature = httpContext
+                            .Features
+                            .Get<IHttpRequestIdentifierFeature>();
                         Assert.NotNull(requestIdentifierFeature);
                         requestIdentifierFeature.TraceIdentifier = "customTrace";
                         Assert.Equal("customTrace", requestIdentifierFeature.TraceIdentifier);
@@ -200,8 +202,9 @@ public class RequestTests : LoggedTest
                         Assert.Null(connectionInfo.ConnectionId);
 
                         // Trace identifier
-                        var requestIdentifierFeature =
-                            httpContext.Features.Get<IHttpRequestIdentifierFeature>();
+                        var requestIdentifierFeature = httpContext
+                            .Features
+                            .Get<IHttpRequestIdentifierFeature>();
                         Assert.NotNull(requestIdentifierFeature);
                         requestIdentifierFeature.TraceIdentifier = null;
                         Assert.Null(requestIdentifierFeature.TraceIdentifier);
@@ -251,8 +254,9 @@ public class RequestTests : LoggedTest
                     {
                         var requestInfo = httpContext.Features.Get<IHttpRequestFeature>();
                         var connectionInfo = httpContext.Features.Get<IHttpConnectionFeature>();
-                        var requestIdentifierFeature =
-                            httpContext.Features.Get<IHttpRequestIdentifierFeature>();
+                        var requestIdentifierFeature = httpContext
+                            .Features
+                            .Get<IHttpRequestIdentifierFeature>();
 
                         // Request Keys
                         Assert.Equal("http", requestInfo.Scheme);
@@ -388,8 +392,9 @@ public class RequestTests : LoggedTest
                 httpContext =>
                 {
                     var requestInfo = httpContext.Features.Get<IHttpRequestFeature>();
-                    var requestIdentifierFeature =
-                        httpContext.Features.Get<IHttpRequestIdentifierFeature>();
+                    var requestIdentifierFeature = httpContext
+                        .Features
+                        .Get<IHttpRequestIdentifierFeature>();
                     try
                     {
                         Assert.Equal(expectedPath, requestInfo.Path);
@@ -724,9 +729,11 @@ public class RequestTests : LoggedTest
 
         foreach (string path in new[] { "/", "/11", "/2/3", "/2", "/11/2" })
         {
-            server.Listener.Options.UrlPrefixes.Add(
-                UrlPrefix.Create(rootUri.Scheme, rootUri.Host, rootUri.Port, path)
-            );
+            server
+                .Listener
+                .Options
+                .UrlPrefixes
+                .Add(UrlPrefix.Create(rootUri.Scheme, rootUri.Host, rootUri.Port, path));
         }
 
         server.StartAsync(new DummyApplication(app), CancellationToken.None).Wait();

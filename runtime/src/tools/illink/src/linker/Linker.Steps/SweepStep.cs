@@ -399,11 +399,13 @@ namespace Mono.Linker.Steps
                 // then we need to set HasSecurity to false
                 if (
                     !provider.HasCustomAttributes
-                    || provider.CustomAttributes.All(attr =>
-                    {
-                        TypeDefinition? attributeType = Context.TryResolve(attr.AttributeType);
-                        return attributeType == null || !IsSecurityAttributeType(attributeType);
-                    })
+                    || provider
+                        .CustomAttributes
+                        .All(attr =>
+                        {
+                            TypeDefinition? attributeType = Context.TryResolve(attr.AttributeType);
+                            return attributeType == null || !IsSecurityAttributeType(attributeType);
+                        })
                 )
                     return true;
             }

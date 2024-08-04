@@ -321,10 +321,9 @@ namespace ILCompiler.DependencyAnalysis
                 )
                 {
                     if (
-                        !_factory.TypeSystemContext.IsCanonicalDefinitionType(
-                            canonicalType,
-                            CanonicalFormKind.Any
-                        )
+                        !_factory
+                            .TypeSystemContext
+                            .IsCanonicalDefinitionType(canonicalType, CanonicalFormKind.Any)
                     )
                         yield return _factory.NativeLayout.TemplateTypeLayout(canonicalType);
                 }
@@ -374,10 +373,12 @@ namespace ILCompiler.DependencyAnalysis
                     GenericParameterDesc genericParameter = (
                         (RuntimeDeterminedType)type
                     ).RuntimeDeterminedDetailsType;
-                    type = _factory.TypeSystemContext.GetSignatureVariable(
-                        genericParameter.Index,
-                        method: (genericParameter.Kind == GenericParameterKind.Method)
-                    );
+                    type = _factory
+                        .TypeSystemContext
+                        .GetSignatureVariable(
+                            genericParameter.Index,
+                            method: (genericParameter.Kind == GenericParameterKind.Method)
+                        );
                 }
 
                 return _typeSignatures.GetOrAdd(type);

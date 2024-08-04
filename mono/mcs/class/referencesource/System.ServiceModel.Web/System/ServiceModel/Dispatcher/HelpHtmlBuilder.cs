@@ -734,7 +734,8 @@ namespace System.ServiceModel.Dispatcher
             Uri result = template.BindByPosition(
                 baseUri,
                 template
-                    .PathSegmentVariableNames.Concat(template.QueryValueVariableNames)
+                    .PathSegmentVariableNames
+                    .Concat(template.QueryValueVariableNames)
                     .Select(name => "{" + name + "}")
                     .ToArray()
             );

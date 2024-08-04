@@ -60,9 +60,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 .PEHeaders
                 .CorHeader
                 .ResourcesDirectory;
-            PEMemoryBlock block = _module.PEReader.GetSectionData(
-                resourcesDirectory.RelativeVirtualAddress
-            );
+            PEMemoryBlock block = _module
+                .PEReader
+                .GetSectionData(resourcesDirectory.RelativeVirtualAddress);
             builder.EmitBytes(block.GetReader().ReadBytes(resourcesDirectory.Size));
 
             return builder.ToObjectData();

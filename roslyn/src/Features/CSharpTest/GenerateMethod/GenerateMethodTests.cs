@@ -9023,9 +9023,9 @@ public class GenerateMethodTests(ITestOutputHelper logger)
                 }
             }
             """,
-            parseOptions: TestOptions.Regular.WithLanguageVersion(
-                CodeAnalysis.CSharp.LanguageVersion.CSharp6
-            )
+            parseOptions: TestOptions
+                .Regular
+                .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
         );
     }
 
@@ -9058,9 +9058,9 @@ public class GenerateMethodTests(ITestOutputHelper logger)
                 }
             }
             """,
-            parseOptions: TestOptions.Regular.WithLanguageVersion(
-                CodeAnalysis.CSharp.LanguageVersion.CSharp6
-            )
+            parseOptions: TestOptions
+                .Regular
+                .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
         );
     }
 
@@ -9093,9 +9093,9 @@ public class GenerateMethodTests(ITestOutputHelper logger)
                 }
             }
             """,
-            parseOptions: TestOptions.Regular.WithLanguageVersion(
-                CodeAnalysis.CSharp.LanguageVersion.CSharp6
-            )
+            parseOptions: TestOptions
+                .Regular
+                .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
         );
     }
 
@@ -9128,9 +9128,9 @@ public class GenerateMethodTests(ITestOutputHelper logger)
                 }
             }
             """,
-            parseOptions: TestOptions.Regular.WithLanguageVersion(
-                CodeAnalysis.CSharp.LanguageVersion.CSharp6
-            )
+            parseOptions: TestOptions
+                .Regular
+                .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
         );
     }
 

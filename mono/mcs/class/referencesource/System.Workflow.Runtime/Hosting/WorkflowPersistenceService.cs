@@ -79,15 +79,17 @@ namespace System.Workflow.Runtime.Hosting
                         (ActivityExecutionContextInfo)
                             activity.GetValue(Activity.ActivityExecutionContextInfoProperty);
                     TimeSpan timeElapsed = DateTime.Now - startTime;
-                    WorkflowTrace.Host.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "Serialized a {0} with id {1} to length {2}. Took {3}.",
-                        executionContextInfo,
-                        executionContextInfo.ContextGuid,
-                        compressedStream.Length,
-                        timeElapsed
-                    );
+                    WorkflowTrace
+                        .Host
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "Serialized a {0} with id {1} to length {2}. Took {3}.",
+                            executionContextInfo,
+                            executionContextInfo.ContextGuid,
+                            compressedStream.Length,
+                            timeElapsed
+                        );
 
                     result = compressedStream.GetBuffer();
                     Array.Resize<Byte>(ref result, Convert.ToInt32(compressedStream.Length));
@@ -113,14 +115,16 @@ namespace System.Workflow.Runtime.Hosting
             }
             Debug.Assert(state != null, "invalid state recovered");
             TimeSpan timeElapsed = DateTime.Now - startTime;
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Deserialized a {0} to length {1}. Took {2}.",
-                state,
-                stream.Length,
-                timeElapsed
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Deserialized a {0} to length {1}. Took {2}.",
+                    state,
+                    stream.Length,
+                    timeElapsed
+                );
 
             return state;
         }

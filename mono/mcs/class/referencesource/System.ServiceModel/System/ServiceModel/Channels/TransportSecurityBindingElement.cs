@@ -83,9 +83,9 @@ namespace System.ServiceModel.Channels
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             if (credentialsManager == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "credentialsManager"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("credentialsManager");
 
             TransportSecurityProtocolFactory protocolFactory =
                 new TransportSecurityProtocolFactory();
@@ -110,8 +110,9 @@ namespace System.ServiceModel.Channels
             ISecurityCapabilities securityCapabilities = this.GetProperty<ISecurityCapabilities>(
                 context
             );
-            SecurityCredentialsManager credentialsManager =
-                context.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager credentialsManager = context
+                .BindingParameters
+                .Find<SecurityCredentialsManager>();
             if (credentialsManager == null)
             {
                 credentialsManager = ClientCredentials.CreateDefaultCredentials();
@@ -140,13 +141,15 @@ namespace System.ServiceModel.Channels
             if (scParameters != null)
             {
                 if (scParameters.BootstrapSecurityBindingElement == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SecureConversationSecurityTokenParametersRequireBootstrapBinding
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SecureConversationSecurityTokenParametersRequireBootstrapBinding
+                                )
                             )
-                        )
-                    );
+                        );
 
                 scParameters.IssuerBindingContext = issuerBindingContext;
                 if (scParameters.RequireCancellation)
@@ -215,10 +218,11 @@ namespace System.ServiceModel.Channels
                         SecureConversationSecurityTokenParameters acceleratedTokenParameters =
                             (SecureConversationSecurityTokenParameters)scParameters.Clone();
                         acceleratedTokenParameters.IssuerBindingContext = issuerBindingContext;
-                        protocolFactory.SecurityBindingElement.EndpointSupportingTokenParameters.Endorsing.Insert(
-                            0,
-                            acceleratedTokenParameters
-                        );
+                        protocolFactory
+                            .SecurityBindingElement
+                            .EndpointSupportingTokenParameters
+                            .Endorsing
+                            .Insert(0, acceleratedTokenParameters);
                     }
                     finally
                     {
@@ -260,8 +264,9 @@ namespace System.ServiceModel.Channels
             SecurityChannelListener<TChannel> channelListener =
                 new SecurityChannelListener<TChannel>(this, context);
 
-            SecurityCredentialsManager credentialsManager =
-                context.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager credentialsManager = context
+                .BindingParameters
+                .Find<SecurityCredentialsManager>();
             if (credentialsManager == null)
                 credentialsManager = ServiceCredentials.CreateDefaultCredentials();
 
@@ -285,13 +290,15 @@ namespace System.ServiceModel.Channels
             if (scParameters != null)
             {
                 if (scParameters.BootstrapSecurityBindingElement == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SecureConversationSecurityTokenParametersRequireBootstrapBinding
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SecureConversationSecurityTokenParametersRequireBootstrapBinding
+                                )
                             )
-                        )
-                    );
+                        );
 
                 AddDemuxerForSecureConversation(channelBuilder, issuerBindingContext);
 
@@ -352,11 +359,13 @@ namespace System.ServiceModel.Channels
                         && !IsUnderlyingListenerDuplex<TChannel>(context)
                     )
                     {
-                        context.BindingParameters.Add(
-                            new SecuritySessionServerSettings.SecuritySessionDemuxFailureHandler(
-                                sessionFactory.StandardsManager
-                            )
-                        );
+                        context
+                            .BindingParameters
+                            .Add(
+                                new SecuritySessionServerSettings.SecuritySessionDemuxFailureHandler(
+                                    sessionFactory.StandardsManager
+                                )
+                            );
                     }
                 }
                 else
@@ -377,10 +386,11 @@ namespace System.ServiceModel.Channels
                         SecureConversationSecurityTokenParameters acceleratedTokenParameters =
                             (SecureConversationSecurityTokenParameters)scParameters.Clone();
                         acceleratedTokenParameters.IssuerBindingContext = issuerBindingContext;
-                        protocolFactory.SecurityBindingElement.EndpointSupportingTokenParameters.Endorsing.Insert(
-                            0,
-                            acceleratedTokenParameters
-                        );
+                        protocolFactory
+                            .SecurityBindingElement
+                            .EndpointSupportingTokenParameters
+                            .Endorsing
+                            .Insert(0, acceleratedTokenParameters);
                     }
                     finally
                     {
@@ -416,8 +426,10 @@ namespace System.ServiceModel.Channels
             {
                 AddressingVersion addressing = MessageVersion.Default.Addressing;
 #pragma warning suppress 56506
-                MessageEncodingBindingElement encoding =
-                    context.Binding.Elements.Find<MessageEncodingBindingElement>();
+                MessageEncodingBindingElement encoding = context
+                    .Binding
+                    .Elements
+                    .Find<MessageEncodingBindingElement>();
                 if (encoding != null)
                 {
                     addressing = encoding.MessageVersion.Addressing;
@@ -458,13 +470,15 @@ namespace System.ServiceModel.Channels
             {
                 if (!this.AllowInsecureTransport)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ExportOfBindingWithTransportSecurityBindingElementAndNoTransportSecurityNotSupported
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ExportOfBindingWithTransportSecurityBindingElementAndNoTransportSecurityNotSupported
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 // In AllowInsecureTransport mode there is no assertion provider to export the endpoint supporting tokens. Hence we explicitly call into ExportPolicyForTransportTokenAssertionProviders.

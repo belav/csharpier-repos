@@ -58,16 +58,18 @@ namespace ILLink.RoslynAnalyzer.Tests
                 ReferenceAssemblies = TestCaseUtils.NetCoreAppReferencessemblies,
             };
             test.ExpectedDiagnostics.AddRange(baselineExpected);
-            test.TestState.AnalyzerConfigFiles.Add(
-                (
-                    "/.editorconfig",
-                    SourceText.From(
-                        @$"
+            test.TestState
+                .AnalyzerConfigFiles
+                .Add(
+                    (
+                        "/.editorconfig",
+                        SourceText.From(
+                            @$"
 is_global = true
 build_property.{MSBuildPropertyOptionNames.EnableSingleFileAnalyzer} = true"
+                        )
                     )
-                )
-            );
+                );
             if (numberOfIterations != null)
             {
                 test.NumberOfIncrementalIterations = numberOfIterations;

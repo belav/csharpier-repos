@@ -278,13 +278,15 @@ namespace System.Xml
                 this.buffer = newBuffer;
                 this.streamBuffer = newBuffer;
             }
-            System.Buffer.BlockCopy(
-                this.buffer,
-                this.offset,
-                this.buffer,
-                this.offset + count,
-                this.offsetMax - this.offset
-            );
+            System
+                .Buffer
+                .BlockCopy(
+                    this.buffer,
+                    this.offset,
+                    this.buffer,
+                    this.offset + count,
+                    this.offsetMax - this.offset
+                );
             offsetMax += count;
             System.Buffer.BlockCopy(buffer, offset, this.buffer, this.offset, count);
         }
@@ -522,33 +524,39 @@ namespace System.Xml
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(
-                        value.ToString(CultureInfo.InvariantCulture),
-                        "DateTime",
-                        exception
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            value.ToString(CultureInfo.InvariantCulture),
+                            "DateTime",
+                            exception
+                        )
+                    );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(
-                        value.ToString(CultureInfo.InvariantCulture),
-                        "DateTime",
-                        exception
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            value.ToString(CultureInfo.InvariantCulture),
+                            "DateTime",
+                            exception
+                        )
+                    );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(
-                        value.ToString(CultureInfo.InvariantCulture),
-                        "DateTime",
-                        exception
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            value.ToString(CultureInfo.InvariantCulture),
+                            "DateTime",
+                            exception
+                        )
+                    );
             }
         }
 
@@ -562,33 +570,39 @@ namespace System.Xml
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(
-                        value.ToString(CultureInfo.InvariantCulture),
-                        "TimeSpan",
-                        exception
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            value.ToString(CultureInfo.InvariantCulture),
+                            "TimeSpan",
+                            exception
+                        )
+                    );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(
-                        value.ToString(CultureInfo.InvariantCulture),
-                        "TimeSpan",
-                        exception
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            value.ToString(CultureInfo.InvariantCulture),
+                            "TimeSpan",
+                            exception
+                        )
+                    );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlExceptionHelper.CreateConversionException(
-                        value.ToString(CultureInfo.InvariantCulture),
-                        "TimeSpan",
-                        exception
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            value.ToString(CultureInfo.InvariantCulture),
+                            "TimeSpan",
+                            exception
+                        )
+                    );
             }
         }
 

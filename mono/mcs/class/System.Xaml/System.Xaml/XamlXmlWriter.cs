@@ -404,7 +404,8 @@ namespace System.Xaml
                 member == XamlLanguage.PositionalParameters
                 && posprms == null
                 && state
-                    .Type.GetSortedConstructorArguments()
+                    .Type
+                    .GetSortedConstructorArguments()
                     .All(m => m == state.Type.ContentProperty)
             ) // PositionalParameters and ContentProperty, excluding such cases that it is already processed above (as attribute).
                 OnWriteStartMemberContent(state.Type, member);

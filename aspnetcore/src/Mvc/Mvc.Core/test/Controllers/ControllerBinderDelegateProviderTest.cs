@@ -30,15 +30,17 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.Parameters.Add(
-            new ControllerParameterDescriptor
-            {
-                Name = "foo",
-                ParameterType = typeof(object),
-                BindingInfo = new BindingInfo(),
-                ParameterInfo = ParameterInfos.BindNeverParameterInfo,
-            }
-        );
+        actionDescriptor
+            .Parameters
+            .Add(
+                new ControllerParameterDescriptor
+                {
+                    Name = "foo",
+                    ParameterType = typeof(object),
+                    BindingInfo = new BindingInfo(),
+                    ParameterInfo = ParameterInfos.BindNeverParameterInfo,
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         var arguments = new Dictionary<string, object>(StringComparer.Ordinal);
@@ -81,13 +83,15 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.BoundProperties.Add(
-            new ParameterDescriptor
-            {
-                Name = nameof(TestController.RequiredButBindNeverProperty),
-                ParameterType = typeof(object),
-            }
-        );
+        actionDescriptor
+            .BoundProperties
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = nameof(TestController.RequiredButBindNeverProperty),
+                    ParameterType = typeof(object),
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         var arguments = new Dictionary<string, object>(StringComparer.Ordinal);
@@ -131,14 +135,16 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.Parameters.Add(
-            new ParameterDescriptor
-            {
-                Name = "foo",
-                ParameterType = typeof(object),
-                BindingInfo = new BindingInfo(),
-            }
-        );
+        actionDescriptor
+            .Parameters
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = "foo",
+                    ParameterType = typeof(object),
+                    BindingInfo = new BindingInfo(),
+                }
+            );
 
         var binder = new Mock<IModelBinder>();
         binder
@@ -173,14 +179,16 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.Parameters.Add(
-            new ParameterDescriptor
-            {
-                Name = "foo",
-                ParameterType = typeof(object),
-                BindingInfo = new BindingInfo(),
-            }
-        );
+        actionDescriptor
+            .Parameters
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = "foo",
+                    ParameterType = typeof(object),
+                    BindingInfo = new BindingInfo(),
+                }
+            );
 
         var binder = new Mock<IModelBinder>();
         binder
@@ -215,14 +223,16 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.Parameters.Add(
-            new ParameterDescriptor
-            {
-                Name = "foo",
-                ParameterType = typeof(string),
-                BindingInfo = new BindingInfo(),
-            }
-        );
+        actionDescriptor
+            .Parameters
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = "foo",
+                    ParameterType = typeof(string),
+                    BindingInfo = new BindingInfo(),
+                }
+            );
 
         var value = "Hello world";
         var metadataProvider = new EmptyModelMetadataProvider();
@@ -268,14 +278,16 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.Parameters.Add(
-            new ControllerParameterDescriptor
-            {
-                Name = "foo",
-                ParameterType = typeof(object),
-                ParameterInfo = ParameterInfos.NoAttributesParameterInfo,
-            }
-        );
+        actionDescriptor
+            .Parameters
+            .Add(
+                new ControllerParameterDescriptor
+                {
+                    Name = "foo",
+                    ParameterType = typeof(object),
+                    ParameterInfo = ParameterInfos.NoAttributesParameterInfo,
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
 
@@ -324,9 +336,11 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.Parameters.Add(
-            new ControllerParameterDescriptor { Name = "foo", ParameterType = typeof(Person) }
-        );
+        actionDescriptor
+            .Parameters
+            .Add(
+                new ControllerParameterDescriptor { Name = "foo", ParameterType = typeof(Person) }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
 
@@ -373,14 +387,16 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.Parameters.Add(
-            new ControllerParameterDescriptor
-            {
-                Name = "foo",
-                ParameterType = typeof(object),
-                ParameterInfo = ParameterInfos.CustomValidationParameterInfo,
-            }
-        );
+        actionDescriptor
+            .Parameters
+            .Add(
+                new ControllerParameterDescriptor
+                {
+                    Name = "foo",
+                    ParameterType = typeof(object),
+                    ParameterInfo = ParameterInfos.CustomValidationParameterInfo,
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
 
@@ -427,14 +443,16 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.Parameters.Add(
-            new ParameterDescriptor
-            {
-                Name = "foo",
-                ParameterType = typeof(object),
-                BindingInfo = new BindingInfo(),
-            }
-        );
+        actionDescriptor
+            .Parameters
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = "foo",
+                    ParameterType = typeof(object),
+                    BindingInfo = new BindingInfo(),
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         var arguments = new Dictionary<string, object>(StringComparer.Ordinal);
@@ -475,13 +493,15 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.BoundProperties.Add(
-            new ParameterDescriptor
-            {
-                Name = nameof(TestController.ValidatedProperty),
-                ParameterType = typeof(string),
-            }
-        );
+        actionDescriptor
+            .BoundProperties
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = nameof(TestController.ValidatedProperty),
+                    ParameterType = typeof(string),
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         var controller = new TestController();
@@ -530,13 +550,15 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.BoundProperties.Add(
-            new ParameterDescriptor
-            {
-                Name = nameof(TestController.ValidatedProperty),
-                ParameterType = typeof(string),
-            }
-        );
+        actionDescriptor
+            .BoundProperties
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = nameof(TestController.ValidatedProperty),
+                    ParameterType = typeof(string),
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         var controller = new TestController();
@@ -582,13 +604,15 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.BoundProperties.Add(
-            new ParameterDescriptor
-            {
-                Name = nameof(TestController.StringProperty),
-                ParameterType = typeof(string),
-            }
-        );
+        actionDescriptor
+            .BoundProperties
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = nameof(TestController.StringProperty),
+                    ParameterType = typeof(string),
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         var controller = new TestController();
@@ -634,14 +658,16 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.BoundProperties.Add(
-            new ParameterDescriptor
-            {
-                Name = nameof(TestController.StringProperty),
-                BindingInfo = new BindingInfo(),
-                ParameterType = typeof(string),
-            }
-        );
+        actionDescriptor
+            .BoundProperties
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = nameof(TestController.StringProperty),
+                    BindingInfo = new BindingInfo(),
+                    ParameterType = typeof(string),
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         var controller = new TestController();
@@ -673,14 +699,16 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.BoundProperties.Add(
-            new ParameterDescriptor
-            {
-                Name = nameof(TestController.CollectionProperty),
-                BindingInfo = new BindingInfo(),
-                ParameterType = typeof(ICollection<string>),
-            }
-        );
+        actionDescriptor
+            .BoundProperties
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = nameof(TestController.CollectionProperty),
+                    BindingInfo = new BindingInfo(),
+                    ParameterType = typeof(ICollection<string>),
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         var controller = new TestController();
@@ -713,14 +741,16 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.BoundProperties.Add(
-            new ParameterDescriptor
-            {
-                Name = nameof(TestController.NonNullableProperty),
-                BindingInfo = new BindingInfo() { BindingSource = BindingSource.Custom },
-                ParameterType = typeof(int),
-            }
-        );
+        actionDescriptor
+            .BoundProperties
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = nameof(TestController.NonNullableProperty),
+                    BindingInfo = new BindingInfo() { BindingSource = BindingSource.Custom },
+                    ParameterType = typeof(int),
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         var controller = new TestController();
@@ -754,14 +784,16 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.BoundProperties.Add(
-            new ParameterDescriptor
-            {
-                Name = "NullableProperty",
-                BindingInfo = new BindingInfo() { BindingSource = BindingSource.Custom },
-                ParameterType = typeof(int?),
-            }
-        );
+        actionDescriptor
+            .BoundProperties
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = "NullableProperty",
+                    BindingInfo = new BindingInfo() { BindingSource = BindingSource.Custom },
+                    ParameterType = typeof(int?),
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         var controller = new TestController();
@@ -796,39 +828,43 @@ public class ControllerBinderDelegateProviderTest
         // Arrange
         var actionDescriptor = GetActionDescriptor();
 
-        actionDescriptor.Parameters.Add(
-            new ParameterDescriptor
-            {
-                Name = "test-parameter",
-                BindingInfo = new BindingInfo()
+        actionDescriptor
+            .Parameters
+            .Add(
+                new ParameterDescriptor
                 {
-                    BindingSource = BindingSource.Custom,
+                    Name = "test-parameter",
+                    BindingInfo = new BindingInfo()
+                    {
+                        BindingSource = BindingSource.Custom,
 
-                    // Simulates [BindProperty] on a parameter
-                    RequestPredicate = (
-                        (IRequestPredicateProvider)new BindPropertyAttribute()
-                    ).RequestPredicate,
-                },
-                ParameterType = typeof(string),
-            }
-        );
+                        // Simulates [BindProperty] on a parameter
+                        RequestPredicate = (
+                            (IRequestPredicateProvider)new BindPropertyAttribute()
+                        ).RequestPredicate,
+                    },
+                    ParameterType = typeof(string),
+                }
+            );
 
-        actionDescriptor.BoundProperties.Add(
-            new ParameterDescriptor
-            {
-                Name = nameof(TestController.NullableProperty),
-                BindingInfo = new BindingInfo()
+        actionDescriptor
+            .BoundProperties
+            .Add(
+                new ParameterDescriptor
                 {
-                    BindingSource = BindingSource.Custom,
+                    Name = nameof(TestController.NullableProperty),
+                    BindingInfo = new BindingInfo()
+                    {
+                        BindingSource = BindingSource.Custom,
 
-                    // Simulates [BindProperty] on a property
-                    RequestPredicate = (
-                        (IRequestPredicateProvider)new BindPropertyAttribute()
-                    ).RequestPredicate,
-                },
-                ParameterType = typeof(string),
-            }
-        );
+                        // Simulates [BindProperty] on a property
+                        RequestPredicate = (
+                            (IRequestPredicateProvider)new BindPropertyAttribute()
+                        ).RequestPredicate,
+                    },
+                    ParameterType = typeof(string),
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         controllerContext.HttpContext.Request.Method = "GET";
@@ -866,39 +902,43 @@ public class ControllerBinderDelegateProviderTest
         // Arrange
         var actionDescriptor = GetActionDescriptor();
 
-        actionDescriptor.Parameters.Add(
-            new ParameterDescriptor
-            {
-                Name = "test-parameter",
-                BindingInfo = new BindingInfo()
+        actionDescriptor
+            .Parameters
+            .Add(
+                new ParameterDescriptor
                 {
-                    BindingSource = BindingSource.Custom,
+                    Name = "test-parameter",
+                    BindingInfo = new BindingInfo()
+                    {
+                        BindingSource = BindingSource.Custom,
 
-                    // Simulates [BindProperty] on a parameter
-                    RequestPredicate = (
-                        (IRequestPredicateProvider)new BindPropertyAttribute()
-                    ).RequestPredicate,
-                },
-                ParameterType = typeof(string),
-            }
-        );
+                        // Simulates [BindProperty] on a parameter
+                        RequestPredicate = (
+                            (IRequestPredicateProvider)new BindPropertyAttribute()
+                        ).RequestPredicate,
+                    },
+                    ParameterType = typeof(string),
+                }
+            );
 
-        actionDescriptor.BoundProperties.Add(
-            new ParameterDescriptor
-            {
-                Name = nameof(TestController.NullableProperty),
-                BindingInfo = new BindingInfo()
+        actionDescriptor
+            .BoundProperties
+            .Add(
+                new ParameterDescriptor
                 {
-                    BindingSource = BindingSource.Custom,
+                    Name = nameof(TestController.NullableProperty),
+                    BindingInfo = new BindingInfo()
+                    {
+                        BindingSource = BindingSource.Custom,
 
-                    // Simulates [BindProperty] on a property
-                    RequestPredicate = (
-                        (IRequestPredicateProvider)new BindPropertyAttribute()
-                    ).RequestPredicate,
-                },
-                ParameterType = typeof(string),
-            }
-        );
+                        // Simulates [BindProperty] on a property
+                        RequestPredicate = (
+                            (IRequestPredicateProvider)new BindPropertyAttribute()
+                        ).RequestPredicate,
+                    },
+                    ParameterType = typeof(string),
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         controllerContext.HttpContext.Request.Method = "POST";
@@ -982,14 +1022,16 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor.BoundProperties.Add(
-            new ParameterDescriptor
-            {
-                Name = propertyName,
-                BindingInfo = new BindingInfo(),
-                ParameterType = propertyType,
-            }
-        );
+        actionDescriptor
+            .BoundProperties
+            .Add(
+                new ParameterDescriptor
+                {
+                    Name = propertyName,
+                    BindingInfo = new BindingInfo(),
+                    ParameterType = propertyType,
+                }
+            );
 
         var controllerContext = GetControllerContext(actionDescriptor);
         var controller = new TestController();
@@ -1049,14 +1091,16 @@ public class ControllerBinderDelegateProviderTest
         var actionDescriptor = GetActionDescriptor();
         foreach (var keyValuePair in boundPropertyTypes)
         {
-            actionDescriptor.BoundProperties.Add(
-                new ParameterDescriptor
-                {
-                    Name = keyValuePair.Key,
-                    BindingInfo = new BindingInfo(),
-                    ParameterType = keyValuePair.Value,
-                }
-            );
+            actionDescriptor
+                .BoundProperties
+                .Add(
+                    new ParameterDescriptor
+                    {
+                        Name = keyValuePair.Key,
+                        BindingInfo = new BindingInfo(),
+                        ParameterType = keyValuePair.Value,
+                    }
+                );
         }
 
         var controllerContext = GetControllerContext(actionDescriptor);

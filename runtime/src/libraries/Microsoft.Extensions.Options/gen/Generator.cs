@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.Options.Generators
                 TypeDeclarationSyntax? TypeSyntax,
                 SemanticModel SemanticModel
             )> typeDeclarations = context
-                .SyntaxProvider.ForAttributeWithMetadataName(
+                .SyntaxProvider
+                .ForAttributeWithMetadataName(
                     SymbolLoader.OptionsValidatorAttribute,
                     (node, _) => node is TypeDeclarationSyntax,
                     (context, _) =>
@@ -35,9 +36,9 @@ namespace Microsoft.Extensions.Options.Generators
             IncrementalValueProvider<(
                 Compilation,
                 ImmutableArray<(TypeDeclarationSyntax? TypeSyntax, SemanticModel SemanticModel)>
-            )> compilationAndTypes = context.CompilationProvider.Combine(
-                typeDeclarations.Collect()
-            );
+            )> compilationAndTypes = context
+                .CompilationProvider
+                .Combine(typeDeclarations.Collect());
 
             context.RegisterSourceOutput(
                 compilationAndTypes,

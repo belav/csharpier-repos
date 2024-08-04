@@ -175,8 +175,10 @@ namespace System.ServiceModel.Description
                 "The calling method is responsible for ensuring that the 'operationName' key exists in the formatters dictionary."
             );
 
-            IList<ContentType> acceptHeaderElements =
-                WebOperationContext.Current.IncomingRequest.GetAcceptHeaderElements();
+            IList<ContentType> acceptHeaderElements = WebOperationContext
+                .Current
+                .IncomingRequest
+                .GetAcceptHeaderElements();
 
             for (int i = 0; i < acceptHeaderElements.Count; i++)
             {

@@ -16,10 +16,9 @@ namespace System.Activities.Core.Presentation
     {
         public DelegateArgumentsValueEditor()
         {
-            this.InlineEditorTemplate =
-                EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
-                    "DelegateArguments_InlineTemplate"
-                );
+            this.InlineEditorTemplate = EditorCategoryTemplateDictionary
+                .Instance
+                .GetCategoryTemplate("DelegateArguments_InlineTemplate");
         }
 
         public override void ShowDialog(

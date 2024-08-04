@@ -183,9 +183,9 @@ namespace MonoTests.System.ServiceModel.Channels
                 new NamedPipeTransportBindingElement();
             IPolicyExportExtension export_extension = binding_element as IPolicyExportExtension;
             PolicyConversionContext conversion_context = new CustomPolicyConversionContext();
-            conversion_context.BindingElements.Add(
-                new MyMessageEncodingElement(MessageVersion.Soap12)
-            );
+            conversion_context
+                .BindingElements
+                .Add(new MyMessageEncodingElement(MessageVersion.Soap12));
             export_extension.ExportPolicy(new WsdlExporter(), conversion_context);
 
             PolicyAssertionCollection binding_assertions =
@@ -202,9 +202,9 @@ namespace MonoTests.System.ServiceModel.Channels
                 new NamedPipeTransportBindingElement();
             IPolicyExportExtension export_extension = binding_element as IPolicyExportExtension;
             PolicyConversionContext conversion_context = new CustomPolicyConversionContext();
-            conversion_context.BindingElements.Add(
-                new MyMessageEncodingElement(MessageVersion.Soap12WSAddressingAugust2004)
-            );
+            conversion_context
+                .BindingElements
+                .Add(new MyMessageEncodingElement(MessageVersion.Soap12WSAddressingAugust2004));
             export_extension.ExportPolicy(new WsdlExporter(), conversion_context);
 
             PolicyAssertionCollection binding_assertions =

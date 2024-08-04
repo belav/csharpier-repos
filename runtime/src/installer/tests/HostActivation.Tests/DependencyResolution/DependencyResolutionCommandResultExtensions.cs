@@ -26,7 +26,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             foreach (string value in values)
             {
                 Execute
-                    .Assertion.ForCondition(propertyValue != null && propertyValue.Contains(value))
+                    .Assertion
+                    .ForCondition(propertyValue != null && propertyValue.Contains(value))
                     .FailWith(
                         $"The property {propertyName} doesn't contain expected value: '{value}'{Environment.NewLine}"
                             + $"{propertyName}='{propertyValue}'"
@@ -48,7 +49,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             foreach (string value in values)
             {
                 Execute
-                    .Assertion.ForCondition(propertyValue != null && !propertyValue.Contains(value))
+                    .Assertion
+                    .ForCondition(propertyValue != null && !propertyValue.Contains(value))
                     .FailWith(
                         $"The property {propertyName} contains unexpected value: '{value}'{Environment.NewLine}"
                             + $"{propertyName}='{propertyValue}'"
@@ -131,7 +133,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             foreach (string value in values)
             {
                 Execute
-                    .Assertion.ForCondition(propertyValue != null && propertyValue.Contains(value))
+                    .Assertion
+                    .ForCondition(propertyValue != null && propertyValue.Contains(value))
                     .FailWith(
                         $"The resolved {propertyName} doesn't contain expected value: '{value}'{Environment.NewLine}"
                             + $"{propertyName}='{propertyValue}'"
@@ -153,7 +156,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             foreach (string value in values)
             {
                 Execute
-                    .Assertion.ForCondition(propertyValue != null && !propertyValue.Contains(value))
+                    .Assertion
+                    .ForCondition(propertyValue != null && !propertyValue.Contains(value))
                     .FailWith(
                         $"The resolved {propertyName} contains unexpected value: '{value}'{Environment.NewLine}"
                             + $"{propertyName}='{propertyValue}'"
@@ -246,7 +250,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         {
             return assertion
                 .HaveStdErrContaining($"Additional probe dir: {path}")
-                .And.HaveStdErrContaining($"probe type=lookup dir=[{path}]");
+                .And
+                .HaveStdErrContaining($"probe type=lookup dir=[{path}]");
         }
 
         public static AndConstraint<CommandResultAssertions> HaveReadRidGraph(
@@ -259,10 +264,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             return readRidGraph
                 ? assertion
                     .HaveStdErrContaining(ridGraphMsg)
-                    .And.NotHaveStdErrContaining(hostRidsMsg)
+                    .And
+                    .NotHaveStdErrContaining(hostRidsMsg)
                 : assertion
                     .HaveStdErrContaining(hostRidsMsg)
-                    .And.NotHaveStdErrContaining(ridGraphMsg);
+                    .And
+                    .NotHaveStdErrContaining(ridGraphMsg);
         }
 
         public static AndConstraint<CommandResultAssertions> HaveUsedFallbackRid(

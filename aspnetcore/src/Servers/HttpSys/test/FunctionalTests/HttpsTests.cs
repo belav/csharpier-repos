@@ -258,8 +258,9 @@ public class HttpsTests : LoggedTest
                     try
                     {
                         var tlsFeature = httpContext.Features.Get<ITlsHandshakeFeature>();
-                        var requestInfoFeature =
-                            httpContext.Features.Get<IHttpSysRequestInfoFeature>();
+                        var requestInfoFeature = httpContext
+                            .Features
+                            .Get<IHttpSysRequestInfoFeature>();
                         Assert.NotNull(tlsFeature);
                         Assert.NotNull(requestInfoFeature);
                         Assert.True(requestInfoFeature.RequestInfo.Count > 0);
@@ -314,8 +315,9 @@ public class HttpsTests : LoggedTest
                 {
                     try
                     {
-                        var requestTimingFeature =
-                            httpContext.Features.Get<IHttpSysRequestTimingFeature>();
+                        var requestTimingFeature = httpContext
+                            .Features
+                            .Get<IHttpSysRequestTimingFeature>();
                         Assert.NotNull(requestTimingFeature);
                         Assert.True(
                             requestTimingFeature.Timestamps.Length

@@ -115,10 +115,9 @@ namespace System.Web.Cors
             {
                 // Filter out simple request headers
                 IEnumerable<string> nonSimpleAllowRequestHeaders = AllowedHeaders.Where(header =>
-                    !CorsConstants.SimpleRequestHeaders.Contains(
-                        header,
-                        StringComparer.OrdinalIgnoreCase
-                    )
+                    !CorsConstants
+                        .SimpleRequestHeaders
+                        .Contains(header, StringComparer.OrdinalIgnoreCase)
                 );
                 AddHeader(
                     headers,
@@ -132,10 +131,9 @@ namespace System.Web.Cors
                 // Filter out simple response headers
                 IEnumerable<string> nonSimpleAllowResponseHeaders = AllowedExposedHeaders.Where(
                     header =>
-                        !CorsConstants.SimpleResponseHeaders.Contains(
-                            header,
-                            StringComparer.OrdinalIgnoreCase
-                        )
+                        !CorsConstants
+                            .SimpleResponseHeaders
+                            .Contains(header, StringComparer.OrdinalIgnoreCase)
                 );
                 AddHeader(
                     headers,

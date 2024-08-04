@@ -51,7 +51,8 @@ class C
                 runtime =>
                 {
                     GetMethodDebugInfo(runtime, "C.M")
-                        .ImportRecordGroups.Verify(
+                        .ImportRecordGroups
+                        .Verify(
                             @"
                 {
                     Namespace: string='System'
@@ -87,7 +88,8 @@ namespace N1
                 runtime =>
                 {
                     GetMethodDebugInfo(runtime, "N1.N2.N3.C.M")
-                        .ImportRecordGroups.Verify(
+                        .ImportRecordGroups
+                        .Verify(
                             @"
                 {
                 }
@@ -150,7 +152,8 @@ class C
                 runtime =>
                 {
                     GetMethodDebugInfo(runtime, "C.M", ilOffset: 0x0004)
-                        .ImportRecordGroups.Verify(
+                        .ImportRecordGroups
+                        .Verify(
                             @"
                 {
                     Namespace: string='System'
@@ -186,7 +189,8 @@ namespace A
                 runtime =>
                 {
                     GetMethodDebugInfo(runtime, "A.C.M")
-                        .ImportRecordGroups.Verify(
+                        .ImportRecordGroups
+                        .Verify(
                             @"
                 {
                     Namespace: string='System.IO'
@@ -226,7 +230,8 @@ namespace A
                 runtime =>
                 {
                     GetMethodDebugInfo(runtime, "A.C.M1")
-                        .ImportRecordGroups.Verify(
+                        .ImportRecordGroups
+                        .Verify(
                             @"
                 {
                     Namespace: string='System.IO'
@@ -238,7 +243,8 @@ namespace A
                         );
 
                     GetMethodDebugInfo(runtime, "A.C.M2")
-                        .ImportRecordGroups.Verify(
+                        .ImportRecordGroups
+                        .Verify(
                             @"
                 {
                     Namespace: string='System.IO'
@@ -415,35 +421,39 @@ namespace D
                 {
                     var debugInfo1 = GetMethodDebugInfo(runtime, "B.C.M1");
 
-                    debugInfo1.ImportRecordGroups.Verify(
-                        @"
+                    debugInfo1
+                        .ImportRecordGroups
+                        .Verify(
+                            @"
                 {
                     Namespace: string='System'
                 }
                 {
                     Assembly: alias='A'
                 }"
-                    );
+                        );
 
-                    debugInfo1.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
+                    debugInfo1
+                        .ExternAliasRecords
+                        .Verify("A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
 
                     var debugInfo2 = GetMethodDebugInfo(runtime, "D.E.M2");
 
-                    debugInfo2.ImportRecordGroups.Verify(
-                        @"
+                    debugInfo2
+                        .ImportRecordGroups
+                        .Verify(
+                            @"
                 {
                     Namespace: string='System.Text'
                 }
                 {
                     Assembly: alias='A'
                 }"
-                    );
+                        );
 
-                    debugInfo2.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
+                    debugInfo2
+                        .ExternAliasRecords
+                        .Verify("A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
                 }
             );
         }
@@ -469,16 +479,19 @@ namespace D
                             return new MethodDebugInfoBytes.Builder()
                                 .AddForward(methodToken2)
                                 .Build()
-                                .Bytes.ToArray();
+                                .Bytes
+                                .ToArray();
                         case methodToken2:
                             return new MethodDebugInfoBytes.Builder()
                                 .AddForward(methodToken3)
                                 .Build()
-                                .Bytes.ToArray();
+                                .Bytes
+                                .ToArray();
                         case methodToken3:
                             return new MethodDebugInfoBytes.Builder([new[] { importString }])
                                 .Build()
-                                .Bytes.ToArray();
+                                .Bytes
+                                .ToArray();
                         default:
                             throw null;
                     }
@@ -544,7 +557,8 @@ namespace D
                             return new MethodDebugInfoBytes.Builder()
                                 .AddForward(methodToken1)
                                 .Build()
-                                .Bytes.ToArray();
+                                .Bytes
+                                .ToArray();
                         default:
                             throw null;
                     }
@@ -655,12 +669,13 @@ public class C
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(h =>
-                    metadataReader.StringComparer.Equals(
-                        metadataReader.GetMethodDefinition(h).Name,
-                        "Main"
-                    )
-                );
+                var methodHandle = metadataReader
+                    .MethodDefinitions
+                    .Single(h =>
+                        metadataReader
+                            .StringComparer
+                            .Equals(metadataReader.GetMethodDefinition(h).Name, "Main")
+                    );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
                 symReader = new MockSymUnmanagedReader(
@@ -714,12 +729,13 @@ namespace N
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(h =>
-                    metadataReader.StringComparer.Equals(
-                        metadataReader.GetMethodDefinition(h).Name,
-                        "Main"
-                    )
-                );
+                var methodHandle = metadataReader
+                    .MethodDefinitions
+                    .Single(h =>
+                        metadataReader
+                            .StringComparer
+                            .Equals(metadataReader.GetMethodDefinition(h).Name, "Main")
+                    );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
                 symReader = new MockSymUnmanagedReader(
@@ -770,12 +786,13 @@ namespace N
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(h =>
-                    metadataReader.StringComparer.Equals(
-                        metadataReader.GetMethodDefinition(h).Name,
-                        "Main"
-                    )
-                );
+                var methodHandle = metadataReader
+                    .MethodDefinitions
+                    .Single(h =>
+                        metadataReader
+                            .StringComparer
+                            .Equals(metadataReader.GetMethodDefinition(h).Name, "Main")
+                    );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
                 symReader = new MockSymUnmanagedReader(

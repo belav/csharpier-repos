@@ -1138,14 +1138,16 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 settings.XmlResolver = new XmlUrlResolver();
                 settings.Schemas.XmlResolver = new XmlUrlResolver();
                 // TempDirectory path must end with a DirectorySeratorChar, otherwise it will throw in the Xml validation.
-                settings.Schemas.Add(
-                    "mainschema",
-                    XmlReader.Create(
-                        new StringReader(xsd),
-                        null,
-                        EnsureTrailingSlash(tempDirectory.Path)
-                    )
-                );
+                settings
+                    .Schemas
+                    .Add(
+                        "mainschema",
+                        XmlReader.Create(
+                            new StringReader(xsd),
+                            null,
+                            EnsureTrailingSlash(tempDirectory.Path)
+                        )
+                    );
                 settings.ValidationType = ValidationType.Schema;
                 XmlReader reader = XmlReader.Create(new StringReader(xml), settings);
                 XmlDocument doc = new XmlDocument();
@@ -1172,14 +1174,16 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 settings.XmlResolver = new XmlUrlResolver();
                 settings.Schemas.XmlResolver = new XmlUrlResolver();
                 // TempDirectory path must end with a DirectorySeratorChar, otherwise it will throw in the Xml validation.
-                settings.Schemas.Add(
-                    "mainschema",
-                    XmlReader.Create(
-                        new StringReader(xsd),
-                        null,
-                        EnsureTrailingSlash(tempDirectory.Path)
-                    )
-                );
+                settings
+                    .Schemas
+                    .Add(
+                        "mainschema",
+                        XmlReader.Create(
+                            new StringReader(xsd),
+                            null,
+                            EnsureTrailingSlash(tempDirectory.Path)
+                        )
+                    );
                 settings.ValidationType = ValidationType.Schema;
                 XmlReader reader = XmlReader.Create(new StringReader(xml), settings);
                 XmlDocument doc = new XmlDocument();

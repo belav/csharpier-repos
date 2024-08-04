@@ -591,21 +591,32 @@ public class Program
                                         HashAlgorithmName.SHA256,
                                         RSASignaturePadding.Pkcs1
                                     );
-                                    certReq.CertificateExtensions.Add(
-                                        new X509BasicConstraintsExtension(false, false, 0, false)
-                                    );
-                                    certReq.CertificateExtensions.Add(
-                                        new X509EnhancedKeyUsageExtension(
-                                            new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
-                                            false
-                                        )
-                                    );
-                                    certReq.CertificateExtensions.Add(
-                                        new X509KeyUsageExtension(
-                                            X509KeyUsageFlags.DigitalSignature,
-                                            false
-                                        )
-                                    );
+                                    certReq
+                                        .CertificateExtensions
+                                        .Add(
+                                            new X509BasicConstraintsExtension(
+                                                false,
+                                                false,
+                                                0,
+                                                false
+                                            )
+                                        );
+                                    certReq
+                                        .CertificateExtensions
+                                        .Add(
+                                            new X509EnhancedKeyUsageExtension(
+                                                new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
+                                                false
+                                            )
+                                        );
+                                    certReq
+                                        .CertificateExtensions
+                                        .Add(
+                                            new X509KeyUsageExtension(
+                                                X509KeyUsageFlags.DigitalSignature,
+                                                false
+                                            )
+                                        );
                                     X509Certificate2 cert = certReq.CreateSelfSigned(
                                         DateTimeOffset.UtcNow.AddMonths(-1),
                                         DateTimeOffset.UtcNow.AddMonths(1)
@@ -650,9 +661,9 @@ public class Program
                                     // Sends back the content a character at a time.
                                     for (int i = 0; i < contentSource.Length; i++)
                                     {
-                                        await context.Response.WriteAsync(
-                                            contentSource[i].ToString()
-                                        );
+                                        await context
+                                            .Response
+                                            .WriteAsync(contentSource[i].ToString());
                                         await context.Response.Body.FlushAsync();
                                     }
                                 }
@@ -664,23 +675,11 @@ public class Program
                                     // Get request but with a bunch of extra headers
                                     for (int i = 0; i < 20; i++)
                                     {
-                                        context.Response.Headers.Add(
-                                            "CustomHeader" + i,
-                                            new StringValues(
-                                                Enumerable
-                                                    .Range(0, i)
-                                                    .Select(id => "value" + id)
-                                                    .ToArray()
-                                            )
-                                        );
-                                    }
-                                    await context.Response.WriteAsync(contentSource);
-                                    if (context.Response.SupportsTrailers())
-                                    {
-                                        for (int i = 0; i < 10; i++)
-                                        {
-                                            context.Response.AppendTrailer(
-                                                "CustomTrailer" + i,
+                                        context
+                                            .Response
+                                            .Headers
+                                            .Add(
+                                                "CustomHeader" + i,
                                                 new StringValues(
                                                     Enumerable
                                                         .Range(0, i)
@@ -688,6 +687,23 @@ public class Program
                                                         .ToArray()
                                                 )
                                             );
+                                    }
+                                    await context.Response.WriteAsync(contentSource);
+                                    if (context.Response.SupportsTrailers())
+                                    {
+                                        for (int i = 0; i < 10; i++)
+                                        {
+                                            context
+                                                .Response
+                                                .AppendTrailer(
+                                                    "CustomTrailer" + i,
+                                                    new StringValues(
+                                                        Enumerable
+                                                            .Range(0, i)
+                                                            .Select(id => "value" + id)
+                                                            .ToArray()
+                                                    )
+                                                );
                                         }
                                     }
                                 }
@@ -697,9 +713,11 @@ public class Program
                                 async context =>
                                 {
                                     // Server writes some content, then aborts the connection
-                                    await context.Response.WriteAsync(
-                                        contentSource.Substring(0, contentSource.Length / 2)
-                                    );
+                                    await context
+                                        .Response
+                                        .WriteAsync(
+                                            contentSource.Substring(0, contentSource.Length / 2)
+                                        );
                                     context.Abort();
                                 }
                             );
@@ -708,9 +726,11 @@ public class Program
                                 async context =>
                                 {
                                     // Server writes some content and aborts the connection in the background.
-                                    var writeTask = context.Response.WriteAsync(
-                                        contentSource.Substring(0, contentSource.Length)
-                                    );
+                                    var writeTask = context
+                                        .Response
+                                        .WriteAsync(
+                                            contentSource.Substring(0, contentSource.Length)
+                                        );
                                     await Task.Yield();
                                     context.Abort();
                                     await writeTask;

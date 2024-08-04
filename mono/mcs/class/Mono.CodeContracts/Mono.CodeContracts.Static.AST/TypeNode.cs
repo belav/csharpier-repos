@@ -86,7 +86,8 @@ namespace Mono.CodeContracts.Static.AST
             {
                 if (this.properties == null)
                     this.properties = TypeDefinition
-                        .Properties.Select(it => new Property(it))
+                        .Properties
+                        .Select(it => new Property(it))
                         .ToList();
                 return this.properties;
             }
@@ -110,7 +111,8 @@ namespace Mono.CodeContracts.Static.AST
             {
                 if (this.nestedTypes == null)
                     this.nestedTypes = TypeDefinition
-                        .NestedTypes.Select(it => new TypeNode(it))
+                        .NestedTypes
+                        .Select(it => new TypeNode(it))
                         .ToList();
                 return this.nestedTypes;
             }

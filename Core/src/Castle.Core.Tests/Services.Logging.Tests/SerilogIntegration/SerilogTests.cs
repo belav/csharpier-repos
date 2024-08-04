@@ -36,8 +36,10 @@ namespace Castle.Services.Logging.SerilogIntegration.Tests
             var output = new StringWriter();
 
             var serilogLogger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.TextWriter(output)
+                .MinimumLevel
+                .Debug()
+                .WriteTo
+                .TextWriter(output)
                 .CreateLogger();
 
             var factory = new SerilogFactory(serilogLogger);
@@ -57,8 +59,10 @@ namespace Castle.Services.Logging.SerilogIntegration.Tests
             var output = new StringWriter();
 
             var serilogLogger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.TextWriter(output)
+                .MinimumLevel
+                .Debug()
+                .WriteTo
+                .TextWriter(output)
                 .CreateLogger();
 
             var factory = new SerilogFactory(serilogLogger);
@@ -105,8 +109,10 @@ namespace Castle.Services.Logging.SerilogIntegration.Tests
             var output = new StringWriter();
 
             var serilogLogger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.TextWriter(output)
+                .MinimumLevel
+                .Debug()
+                .WriteTo
+                .TextWriter(output)
                 .CreateLogger();
 
             var factory = new SerilogFactory(serilogLogger);
@@ -125,8 +131,10 @@ namespace Castle.Services.Logging.SerilogIntegration.Tests
             var output = new StringWriter();
 
             var serilogLogger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.TextWriter(output)
+                .MinimumLevel
+                .Debug()
+                .WriteTo
+                .TextWriter(output)
                 .CreateLogger();
 
             var factory = new SerilogFactory(serilogLogger);
@@ -171,8 +179,10 @@ namespace Castle.Services.Logging.SerilogIntegration.Tests
         {
             var output = new StringWriter();
             var serilogLogger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.TextWriter(output)
+                .MinimumLevel
+                .Debug()
+                .WriteTo
+                .TextWriter(output)
                 .CreateLogger();
 
             var factory = new SerilogFactory(serilogLogger);

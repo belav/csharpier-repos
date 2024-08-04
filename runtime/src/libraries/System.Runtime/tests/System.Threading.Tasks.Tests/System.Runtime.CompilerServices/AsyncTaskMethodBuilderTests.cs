@@ -603,8 +603,8 @@ namespace System.Threading.Tasks.Tests
                         )
                     )
                     .Unwrap(),
-                Task
-                    .Factory.StartNew(
+                Task.Factory
+                    .StartNew(
                         () =>
                             Task.Factory.StartNew(() =>
                             {
@@ -612,8 +612,8 @@ namespace System.Threading.Tasks.Tests
                             })
                     )
                     .Unwrap(),
-                Task
-                    .Factory.StartNew<Task<int>>(
+                Task.Factory
+                    .StartNew<Task<int>>(
                         () =>
                             Task.Factory.StartNew<int>(() =>
                             {

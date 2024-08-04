@@ -115,41 +115,45 @@ namespace System.ServiceModel
                 && (this.host.State != CommunicationState.Opening)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString("SFxServiceHostBaseCannotAddEndpointAfterOpen")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString("SFxServiceHostBaseCannotAddEndpointAfterOpen")
+                        )
+                    );
             }
 
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString("SFxServiceHostBaseCannotAddEndpointWithoutDescription")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString("SFxServiceHostBaseCannotAddEndpointWithoutDescription")
+                        )
+                    );
             }
 
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString("SFxEndpointAddressNotSpecified")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString("SFxEndpointAddressNotSpecified"));
             }
 
             if (endpoint.Contract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString("SFxEndpointContractNotSpecified")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString("SFxEndpointContractNotSpecified"));
             }
 
             if (endpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString("SFxEndpointBindingNotSpecified")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString("SFxEndpointBindingNotSpecified"));
             }
 
             if (
@@ -210,19 +214,24 @@ namespace System.ServiceModel
             ContractDescription contract =
                 this.host.ImplementedContracts == null
                     ? null
-                    : this.host.ImplementedContracts.Values.FirstOrDefault(implementedContract =>
-                        implementedContract.ContractType == contractType
-                    );
+                    : this.host
+                        .ImplementedContracts
+                        .Values
+                        .FirstOrDefault(implementedContract =>
+                            implementedContract.ContractType == contractType
+                        );
             if (contract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "contractType",
-                    SR.GetString(
-                        SR.SFxMethodNotSupportedByType2,
-                        this.host.Description.ServiceType,
-                        contractType
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "contractType",
+                        SR.GetString(
+                            SR.SFxMethodNotSupportedByType2,
+                            this.host.Description.ServiceType,
+                            contractType
+                        )
+                    );
             }
 
             ServiceEndpoint endpoint = new ServiceEndpoint(

@@ -170,8 +170,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 foreach (var target in targets)
                     nameToTargets.Add(target.DisplayName, target);
 
-                return item
-                    .TargetItems.GroupBy(t => t.RelationToMember)
+                return item.TargetItems
+                    .GroupBy(t => t.RelationToMember)
                     .SelectMany(g => CreateMenuItemsWithHeader(item, g.Key, g, nameToTargets))
                     .ToImmutableArray();
             }

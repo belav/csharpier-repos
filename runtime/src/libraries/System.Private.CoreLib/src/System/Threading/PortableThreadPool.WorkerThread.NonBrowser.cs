@@ -46,12 +46,16 @@ namespace System.Threading
                 {
                     if (NativeRuntimeEventSource.Log.IsEnabled())
                     {
-                        NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadWait(
-                            (uint)
-                                ThreadPoolInstance
-                                    ._separated.counts.VolatileRead()
-                                    .NumExistingThreads
-                        );
+                        NativeRuntimeEventSource
+                            .Log
+                            .ThreadPoolWorkerThreadWait(
+                                (uint)
+                                    ThreadPoolInstance
+                                        ._separated
+                                        .counts
+                                        .VolatileRead()
+                                        .NumExistingThreads
+                            );
                     }
                 }
             );
@@ -66,9 +70,16 @@ namespace System.Threading
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
-                    NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadStart(
-                        (uint)threadPoolInstance._separated.counts.VolatileRead().NumExistingThreads
-                    );
+                    NativeRuntimeEventSource
+                        .Log
+                        .ThreadPoolWorkerThreadStart(
+                            (uint)
+                                threadPoolInstance
+                                    ._separated
+                                    .counts
+                                    .VolatileRead()
+                                    .NumExistingThreads
+                        );
                 }
 
                 LowLevelLock threadAdjustmentLock = threadPoolInstance._threadAdjustmentLock;

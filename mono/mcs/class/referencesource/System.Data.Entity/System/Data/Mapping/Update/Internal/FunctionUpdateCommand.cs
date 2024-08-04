@@ -359,10 +359,14 @@ namespace System.Data.Mapping.Update.Internal
                         {
                             // wrap the exception
                             throw EntityUtil.Update(
-                                System.Data.Entity.Strings.Update_UnableToConvertRowsAffectedParameterToInt32(
-                                    m_rowsAffectedParameter.ParameterName,
-                                    typeof(int).FullName
-                                ),
+                                System
+                                    .Data
+                                    .Entity
+                                    .Strings
+                                    .Update_UnableToConvertRowsAffectedParameterToInt32(
+                                        m_rowsAffectedParameter.ParameterName,
+                                        typeof(int).FullName
+                                    ),
                                 e,
                                 this.GetStateEntries(translator)
                             );
@@ -445,18 +449,19 @@ namespace System.Data.Mapping.Update.Internal
             }
 
             // order by entity set
-            result = StringComparer.Ordinal.Compare(
-                thisParent.EntitySet.Name,
-                otherParent.EntitySet.Name
-            );
+            result = StringComparer
+                .Ordinal
+                .Compare(thisParent.EntitySet.Name, otherParent.EntitySet.Name);
             if (0 != result)
             {
                 return result;
             }
-            result = StringComparer.Ordinal.Compare(
-                thisParent.EntitySet.EntityContainer.Name,
-                otherParent.EntitySet.EntityContainer.Name
-            );
+            result = StringComparer
+                .Ordinal
+                .Compare(
+                    thisParent.EntitySet.EntityContainer.Name,
+                    otherParent.EntitySet.EntityContainer.Name
+                );
             if (0 != result)
             {
                 return result;

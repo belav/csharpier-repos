@@ -14,13 +14,15 @@ public static class Extensions
     );
 
     static IQueryable Select(IQueryable source, LambdaExpression lambda) =>
-        source.Provider.CreateQuery(
-            Call(
-                SelectMethod.MakeGenericMethod(source.ElementType, lambda.ReturnType),
-                source.Expression,
-                Quote(lambda)
-            )
-        );
+        source
+            .Provider
+            .CreateQuery(
+                Call(
+                    SelectMethod.MakeGenericMethod(source.ElementType, lambda.ReturnType),
+                    source.Expression,
+                    Quote(lambda)
+                )
+            );
 
     /// <summary>
     /// Extension method to project from a queryable using the provided mapping engine
@@ -141,7 +143,8 @@ public static class Extensions
     ) =>
         configuration
             .Internal()
-            .ProjectionBuilder.GetProjection(
+            .ProjectionBuilder
+            .GetProjection(
                 source.ElementType,
                 destinationType,
                 parameters,

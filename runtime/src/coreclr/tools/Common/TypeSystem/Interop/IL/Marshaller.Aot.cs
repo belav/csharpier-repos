@@ -284,9 +284,9 @@ namespace Internal.TypeSystem.Interop
             LoadManagedAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.ldfld,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropTypes.GetHandleRef(Context).GetKnownField("_handle")
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(InteropTypes.GetHandleRef(Context).GetKnownField("_handle"))
             );
             StoreNativeValue(codeStream);
         }
@@ -306,15 +306,15 @@ namespace Internal.TypeSystem.Interop
             LoadManagedAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.ldfld,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropTypes.GetHandleRef(Context).GetKnownField("_wrapper")
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(InteropTypes.GetHandleRef(Context).GetKnownField("_wrapper"))
             );
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropTypes.GetGC(Context).GetKnownMethod("KeepAlive", null)
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(InteropTypes.GetGC(Context).GetKnownMethod("KeepAlive", null))
             );
         }
     }
@@ -333,9 +333,11 @@ namespace Internal.TypeSystem.Interop
             LoadNativeAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropStateManager.GetStructMarshallingManagedToNativeThunk(ManagedType)
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(
+                        InteropStateManager.GetStructMarshallingManagedToNativeThunk(ManagedType)
+                    )
             );
         }
 
@@ -345,9 +347,11 @@ namespace Internal.TypeSystem.Interop
             LoadManagedAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropStateManager.GetStructMarshallingNativeToManagedThunk(ManagedType)
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(
+                        InteropStateManager.GetStructMarshallingNativeToManagedThunk(ManagedType)
+                    )
             );
         }
 
@@ -362,9 +366,9 @@ namespace Internal.TypeSystem.Interop
             LoadNativeAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropStateManager.GetStructMarshallingCleanupThunk(ManagedType)
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(InteropStateManager.GetStructMarshallingCleanupThunk(ManagedType))
             );
         }
     }
@@ -736,9 +740,11 @@ namespace Internal.TypeSystem.Interop
             LoadNativeAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropStateManager.GetStructMarshallingManagedToNativeThunk(ManagedType)
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(
+                        InteropStateManager.GetStructMarshallingManagedToNativeThunk(ManagedType)
+                    )
             );
 
             codeStream.EmitLabel(lNull);
@@ -764,9 +770,11 @@ namespace Internal.TypeSystem.Interop
             LoadManagedValue(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropStateManager.GetStructMarshallingNativeToManagedThunk(ManagedType)
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(
+                        InteropStateManager.GetStructMarshallingNativeToManagedThunk(ManagedType)
+                    )
             );
         }
 
@@ -781,9 +789,9 @@ namespace Internal.TypeSystem.Interop
             LoadNativeAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropStateManager.GetStructMarshallingCleanupThunk(ManagedType)
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(InteropStateManager.GetStructMarshallingCleanupThunk(ManagedType))
             );
         }
     }
@@ -839,9 +847,11 @@ namespace Internal.TypeSystem.Interop
             LoadNativeValue(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropStateManager.GetStructMarshallingManagedToNativeThunk(ManagedType)
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(
+                        InteropStateManager.GetStructMarshallingManagedToNativeThunk(ManagedType)
+                    )
             );
 
             codeStream.EmitLabel(lNull);
@@ -859,9 +869,11 @@ namespace Internal.TypeSystem.Interop
             LoadManagedValue(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropStateManager.GetStructMarshallingNativeToManagedThunk(ManagedType)
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(
+                        InteropStateManager.GetStructMarshallingNativeToManagedThunk(ManagedType)
+                    )
             );
 
             codeStream.EmitLabel(lNull);
@@ -943,9 +955,11 @@ namespace Internal.TypeSystem.Interop
             LoadNativeValue(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    Context.GetHelperEntryPoint("InteropHelpers", "AsAnyMarshalManagedToNative")
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(
+                        Context.GetHelperEntryPoint("InteropHelpers", "AsAnyMarshalManagedToNative")
+                    )
             );
 
             codeStream.EmitLabel(lNull);
@@ -963,9 +977,11 @@ namespace Internal.TypeSystem.Interop
             LoadManagedValue(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    Context.GetHelperEntryPoint("InteropHelpers", "AsAnyMarshalNativeToManaged")
-                )
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(
+                        Context.GetHelperEntryPoint("InteropHelpers", "AsAnyMarshalNativeToManaged")
+                    )
             );
 
             codeStream.EmitLabel(lNull);
@@ -1297,10 +1313,9 @@ namespace Internal.TypeSystem.Interop
                 ThrowHelper.ThrowTypeLoadException(marshallerType);
             }
 
-            var customMarshallerType = Context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices",
-                "ICustomMarshaler"
-            );
+            var customMarshallerType = Context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices", "ICustomMarshaler");
             var getInstanceMethod = marshallerType.GetMethod(
                 "GetInstance",
                 new MethodSignature(
@@ -1348,10 +1363,9 @@ namespace Internal.TypeSystem.Interop
         {
             var lMarshaller = InitializeMarshallerVariable();
 
-            var customMarshallerType = Context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices",
-                "ICustomMarshaler"
-            );
+            var customMarshallerType = Context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices", "ICustomMarshaler");
             ILEmitter emitter = _ilCodeStreams.Emitter;
             var manageToNativeMethod = customMarshallerType.GetKnownMethod(
                 "MarshalManagedToNative",
@@ -1386,10 +1400,9 @@ namespace Internal.TypeSystem.Interop
         {
             var lMarshaller = InitializeMarshallerVariable();
 
-            var customMarshallerType = Context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices",
-                "ICustomMarshaler"
-            );
+            var customMarshallerType = Context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices", "ICustomMarshaler");
             ILEmitter emitter = _ilCodeStreams.Emitter;
             var marshalNativeToManagedMethod = customMarshallerType.GetKnownMethod(
                 "MarshalNativeToManaged",
@@ -1411,10 +1424,9 @@ namespace Internal.TypeSystem.Interop
         {
             var lMarshaller = InitializeMarshallerVariable();
 
-            var customMarshallerType = Context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices",
-                "ICustomMarshaler"
-            );
+            var customMarshallerType = Context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices", "ICustomMarshaler");
             ILEmitter emitter = _ilCodeStreams.Emitter;
 
             // Call CleanUpManagedData on cleanup code stream.
@@ -1437,10 +1449,9 @@ namespace Internal.TypeSystem.Interop
         {
             var lMarshaller = InitializeMarshallerVariable();
 
-            var customMarshallerType = Context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices",
-                "ICustomMarshaler"
-            );
+            var customMarshallerType = Context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices", "ICustomMarshaler");
             ILEmitter emitter = _ilCodeStreams.Emitter;
 
             // Call CleanUpNativeData on cleanup code stream.

@@ -59,10 +59,9 @@ namespace System.Diagnostics
 
             IntPtr methodStartAddress = _ipAddress - _nativeOffset;
             Debug.Assert(RuntimeImports.RhFindMethodStartAddress(_ipAddress) == methodStartAddress);
-            _method =
-                ReflectionAugments.ReflectionCoreCallbacks.GetMethodBaseFromStartAddressIfAvailable(
-                    methodStartAddress
-                );
+            _method = ReflectionAugments
+                .ReflectionCoreCallbacks
+                .GetMethodBaseFromStartAddressIfAvailable(methodStartAddress);
             if (_method == null)
             {
                 _noMethodBaseAvailable = true;
@@ -101,12 +100,14 @@ namespace System.Diagnostics
 
                 if (needFileInfo)
                 {
-                    DeveloperExperience.Default.TryGetSourceLineInfo(
-                        _ipAddress,
-                        out _fileName,
-                        out _lineNumber,
-                        out _columnNumber
-                    );
+                    DeveloperExperience
+                        .Default
+                        .TryGetSourceLineInfo(
+                            _ipAddress,
+                            out _fileName,
+                            out _lineNumber,
+                            out _columnNumber
+                        );
                 }
             }
         }
@@ -151,11 +152,9 @@ namespace System.Diagnostics
         private bool AppendStackFrameWithoutMethodBase(StringBuilder builder)
         {
             builder.Append(
-                DeveloperExperience.Default.CreateStackTraceString(
-                    _ipAddress,
-                    includeFileInfo: false,
-                    out _
-                )
+                DeveloperExperience
+                    .Default
+                    .CreateStackTraceString(_ipAddress, includeFileInfo: false, out _)
             );
             return true;
         }
@@ -175,11 +174,9 @@ namespace System.Diagnostics
         {
             if (_ipAddress != Exception.EdiSeparator)
             {
-                string s = DeveloperExperience.Default.CreateStackTraceString(
-                    _ipAddress,
-                    _needFileInfo,
-                    out bool isStackTraceHidden
-                );
+                string s = DeveloperExperience
+                    .Default
+                    .CreateStackTraceString(_ipAddress, _needFileInfo, out bool isStackTraceHidden);
                 if (!isStackTraceHidden)
                 {
                     // Passing a default string for "at" in case SR.UsingResourceKeys() is true

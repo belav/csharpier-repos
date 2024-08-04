@@ -137,9 +137,9 @@ namespace System.ServiceModel.Security.Tokens
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.messageSecurityVersion = value;
             }
@@ -230,11 +230,13 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (this.securityTokenSerializer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.TokenSerializerNotSetonFederationProvider)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.TokenSerializerNotSetonFederationProvider)
+                        )
+                    );
             }
             this.federatedTokenProvider.StandardsManager = new SecurityStandardsManager(
                 this.messageSecurityVersion,
@@ -307,9 +309,10 @@ namespace System.ServiceModel.Security.Tokens
 
             if (actAsOnBehalfOfParameters.IssuedSecurityToken != null)
             {
-                throw System.IdentityModel.DiagnosticUtility.ThrowHelperInvalidOperation(
-                    SR.GetString(SR.AuthFailed)
-                );
+                throw System
+                    .IdentityModel
+                    .DiagnosticUtility
+                    .ThrowHelperInvalidOperation(SR.GetString(SR.AuthFailed));
             }
 
             if (actAsOnBehalfOfParameters.OnBehalfOf != null)
@@ -323,12 +326,15 @@ namespace System.ServiceModel.Security.Tokens
                         )
                     )
                     {
-                        throw System.IdentityModel.DiagnosticUtility.ThrowHelperInvalidOperation(
-                            SR.GetString(
-                                SR.DuplicateFederatedClientCredentialsParameters,
-                                WSTrust13Constants.ElementNames.OnBehalfOf
-                            )
-                        );
+                        throw System
+                            .IdentityModel
+                            .DiagnosticUtility
+                            .ThrowHelperInvalidOperation(
+                                SR.GetString(
+                                    SR.DuplicateFederatedClientCredentialsParameters,
+                                    WSTrust13Constants.ElementNames.OnBehalfOf
+                                )
+                            );
                     }
 
                     TokenRequestParameters.Add(
@@ -350,12 +356,15 @@ namespace System.ServiceModel.Security.Tokens
                         )
                     )
                     {
-                        throw System.IdentityModel.DiagnosticUtility.ThrowHelperInvalidOperation(
-                            SR.GetString(
-                                SR.DuplicateFederatedClientCredentialsParameters,
-                                WSTrustFeb2005Constants.ElementNames.OnBehalfOf
-                            )
-                        );
+                        throw System
+                            .IdentityModel
+                            .DiagnosticUtility
+                            .ThrowHelperInvalidOperation(
+                                SR.GetString(
+                                    SR.DuplicateFederatedClientCredentialsParameters,
+                                    WSTrustFeb2005Constants.ElementNames.OnBehalfOf
+                                )
+                            );
                     }
 
                     TokenRequestParameters.Add(
@@ -370,14 +379,16 @@ namespace System.ServiceModel.Security.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.UnsupportedTrustVersion,
-                                MessageSecurityVersion.TrustVersion.Namespace
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.UnsupportedTrustVersion,
+                                    MessageSecurityVersion.TrustVersion.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             if (actAsOnBehalfOfParameters.ActAs != null)
@@ -389,12 +400,15 @@ namespace System.ServiceModel.Security.Tokens
                     )
                 )
                 {
-                    throw System.IdentityModel.DiagnosticUtility.ThrowHelperInvalidOperation(
-                        SR.GetString(
-                            SR.DuplicateFederatedClientCredentialsParameters,
-                            WSTrust14Constants.ElementNames.ActAs
-                        )
-                    );
+                    throw System
+                        .IdentityModel
+                        .DiagnosticUtility
+                        .ThrowHelperInvalidOperation(
+                            SR.GetString(
+                                SR.DuplicateFederatedClientCredentialsParameters,
+                                WSTrust14Constants.ElementNames.ActAs
+                            )
+                        );
                 }
 
                 TokenRequestParameters.Add(
@@ -594,10 +608,9 @@ namespace System.ServiceModel.Security.Tokens
                     for (int i = 0; i < this.requestProperties.Count; ++i)
                     {
                         if (
-                            this.StandardsManager.TrustDriver.TryParseKeyTypeElement(
-                                this.requestProperties[i],
-                                out keyType
-                            )
+                            this.StandardsManager
+                                .TrustDriver
+                                .TryParseKeyTypeElement(this.requestProperties[i], out keyType)
                         )
                         {
                             return true;
@@ -615,10 +628,9 @@ namespace System.ServiceModel.Security.Tokens
                     for (int i = 0; i < this.requestProperties.Count; ++i)
                     {
                         if (
-                            this.StandardsManager.TrustDriver.TryParseKeySizeElement(
-                                this.requestProperties[i],
-                                out keySize
-                            )
+                            this.StandardsManager
+                                .TrustDriver
+                                .TryParseKeySizeElement(this.requestProperties[i], out keySize)
                         )
                         {
                             return true;
@@ -633,36 +645,44 @@ namespace System.ServiceModel.Security.Tokens
             {
                 if (this.IssuerAddress == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.StsAddressNotSet, this.TargetAddress)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.StsAddressNotSet, this.TargetAddress)
+                            )
+                        );
                 }
                 if (this.IssuerBinding == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.StsBindingNotSet, this.IssuerAddress)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.StsBindingNotSet, this.IssuerAddress)
+                            )
+                        );
                 }
                 if (this.SecurityAlgorithmSuite == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SecurityAlgorithmSuiteNotSet,
-                                typeof(IssuedSecurityTokenProvider)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SecurityAlgorithmSuiteNotSet,
+                                    typeof(IssuedSecurityTokenProvider)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
-                this.channelFactory = this.StandardsManager.TrustDriver.CreateFederationProxy(
-                    this.IssuerAddress,
-                    this.IssuerBinding,
-                    this.IssuerChannelBehaviors
-                );
+                this.channelFactory = this.StandardsManager
+                    .TrustDriver
+                    .CreateFederationProxy(
+                        this.IssuerAddress,
+                        this.IssuerBinding,
+                        this.IssuerChannelBehaviors
+                    );
                 this.messageVersion = this.IssuerBinding.MessageVersion;
 
                 // if an appliesTo is specified in the request properties, then do not add the target service EPR as
@@ -670,10 +690,12 @@ namespace System.ServiceModel.Security.Tokens
                 for (int i = 0; i < this.requestProperties.Count; ++i)
                 {
                     if (
-                        this.StandardsManager.TrustDriver.IsAppliesTo(
-                            this.requestProperties[i].LocalName,
-                            this.requestProperties[i].NamespaceURI
-                        )
+                        this.StandardsManager
+                            .TrustDriver
+                            .IsAppliesTo(
+                                this.requestProperties[i].LocalName,
+                                this.requestProperties[i].NamespaceURI
+                            )
                     )
                     {
                         this.addTargetServiceAppliesTo = false;
@@ -707,11 +729,13 @@ namespace System.ServiceModel.Security.Tokens
                 {
                     if (this.IssuerBinding == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.StsBindingNotSet, this.IssuerAddress)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.StsBindingNotSet, this.IssuerAddress)
+                                )
+                            );
                     }
                     this.credentialsHandle = SecurityUtils.GetCredentialsHandle(
                         this.IssuerBinding,
@@ -918,9 +942,9 @@ namespace System.ServiceModel.Security.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new NotSupportedException());
                 }
             }
 
@@ -959,14 +983,16 @@ namespace System.ServiceModel.Security.Tokens
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(
-                                    SR.AddressingVersionNotSupported,
-                                    this.MessageVersion.Addressing
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(
+                                    SR.GetString(
+                                        SR.AddressingVersionNotSupported,
+                                        this.MessageVersion.Addressing
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 rst.Context = negotiationState.Context;
@@ -984,8 +1010,9 @@ namespace System.ServiceModel.Security.Tokens
                 }
                 if (!isKeyTypePresentInRstProperties)
                 {
-                    XmlElement keyTypeElement =
-                        this.StandardsManager.TrustDriver.CreateKeyTypeElement(this.keyType);
+                    XmlElement keyTypeElement = this.StandardsManager
+                        .TrustDriver
+                        .CreateKeyTypeElement(this.keyType);
                     newRequestProperties.Insert(0, keyTypeElement);
                 }
                 if (this.keyType == SecurityKeyType.SymmetricKey)
@@ -1000,10 +1027,9 @@ namespace System.ServiceModel.Security.Tokens
                     );
                     SecurityKeyIdentifier keyIdentifier = new SecurityKeyIdentifier(rsaClause);
                     newRequestProperties.Add(
-                        this.StandardsManager.TrustDriver.CreateUseKeyElement(
-                            keyIdentifier,
-                            this.StandardsManager
-                        )
+                        this.StandardsManager
+                            .TrustDriver
+                            .CreateUseKeyElement(keyIdentifier, this.StandardsManager)
                     );
                     RsaSecurityTokenParameters rsaParameters = new RsaSecurityTokenParameters();
                     rsaParameters.InclusionMode = SecurityTokenInclusionMode.Never;
@@ -1025,9 +1051,11 @@ namespace System.ServiceModel.Security.Tokens
                 )
                 {
                     newRequestProperties.Add(
-                        this.StandardsManager.TrustDriver.CreateComputedKeyAlgorithmElement(
-                            this.StandardsManager.TrustDriver.ComputedKeyAlgorithm
-                        )
+                        this.StandardsManager
+                            .TrustDriver
+                            .CreateComputedKeyAlgorithmElement(
+                                this.StandardsManager.TrustDriver.ComputedKeyAlgorithm
+                            )
                     );
                 }
                 rst.RequestProperties = newRequestProperties;
@@ -1113,34 +1141,35 @@ namespace System.ServiceModel.Security.Tokens
                         this.StandardsManager.MessageSecurityVersion.TrustVersion
                         == TrustVersion.WSTrustFeb2005
                     )
-                        rstr = this.StandardsManager.TrustDriver.CreateRequestSecurityTokenResponse(
-                            bodyReader
-                        );
+                        rstr = this.StandardsManager
+                            .TrustDriver
+                            .CreateRequestSecurityTokenResponse(bodyReader);
                     else if (
                         this.StandardsManager.MessageSecurityVersion.TrustVersion
                         == TrustVersion.WSTrust13
                     )
                     {
-                        RequestSecurityTokenResponseCollection rstrc =
-                            this.StandardsManager.TrustDriver.CreateRequestSecurityTokenResponseCollection(
-                                bodyReader
-                            );
+                        RequestSecurityTokenResponseCollection rstrc = this.StandardsManager
+                            .TrustDriver
+                            .CreateRequestSecurityTokenResponseCollection(bodyReader);
                         foreach (RequestSecurityTokenResponse rstrItem in rstrc.RstrCollection)
                         {
                             if (rstr != null)
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new MessageSecurityException(
-                                        SR.GetString(SR.MoreThanOneRSTRInRSTRC)
-                                    )
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new MessageSecurityException(
+                                            SR.GetString(SR.MoreThanOneRSTRInRSTRC)
+                                        )
+                                    );
                             rstr = rstrItem;
                         }
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException()
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new NotSupportedException());
                     }
 
                     incomingMessage.ReadFromBodyContentsToEnd(bodyReader);
@@ -1184,9 +1213,9 @@ namespace System.ServiceModel.Security.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new NotSupportedException());
                 }
                 negotiationState.SetServiceToken(serviceToken);
                 return null;
@@ -1267,9 +1296,11 @@ namespace System.ServiceModel.Security.Tokens
                     {
                         return false;
                     }
-                    System.ServiceModel.Dispatcher.ErrorBehavior.ThrowAndCatch(
-                        new Win32Exception(error)
-                    );
+                    System
+                        .ServiceModel
+                        .Dispatcher
+                        .ErrorBehavior
+                        .ThrowAndCatch(new Win32Exception(error));
                     return true;
                 }
                 tokenHandle.Close();

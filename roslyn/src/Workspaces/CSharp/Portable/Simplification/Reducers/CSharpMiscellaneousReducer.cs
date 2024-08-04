@@ -67,17 +67,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     );
                     newParameterSyntax = (ParameterSyntax)
                         speculationAnalyzer
-                            .ReplacedExpression.GetAnnotatedNodesAndTokens(annotation)
+                            .ReplacedExpression
+                            .GetAnnotatedNodesAndTokens(annotation)
                             .First();
 
                     var oldSymbol = semanticModel.GetDeclaredSymbol(
                         parameterSyntax,
                         cancellationToken
                     );
-                    var newSymbol = speculationAnalyzer.SpeculativeSemanticModel.GetDeclaredSymbol(
-                        newParameterSyntax,
-                        cancellationToken
-                    );
+                    var newSymbol = speculationAnalyzer
+                        .SpeculativeSemanticModel
+                        .GetDeclaredSymbol(newParameterSyntax, cancellationToken);
                     if (
                         oldSymbol != null
                         && newSymbol != null

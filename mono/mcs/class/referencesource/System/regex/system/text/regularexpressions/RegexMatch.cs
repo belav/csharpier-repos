@@ -90,15 +90,18 @@ namespace System.Text.RegularExpressions
             _balancing = false;
 
             // No need for an exception here.  This is only called internally, so we'll use an Assert instead
-            System.Diagnostics.Debug.Assert(
-                !(
-                    _textbeg < 0
-                    || _textstart < _textbeg
-                    || _textend < _textstart
-                    || _text.Length < _textend
-                ),
-                "The parameters are out of range."
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    !(
+                        _textbeg < 0
+                        || _textstart < _textbeg
+                        || _textend < _textstart
+                        || _text.Length < _textend
+                    ),
+                    "The parameters are out of range."
+                );
         }
 
         /*
@@ -445,9 +448,10 @@ namespace System.Text.RegularExpressions
 
             for (i = 0; i < _matchcount.Length; i++)
             {
-                System.Diagnostics.Debug.WriteLine(
-                    "Capnum " + i.ToString(CultureInfo.InvariantCulture) + ":"
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .WriteLine("Capnum " + i.ToString(CultureInfo.InvariantCulture) + ":");
 
                 for (j = 0; j < _matchcount[i]; j++)
                 {
@@ -456,14 +460,17 @@ namespace System.Text.RegularExpressions
                     if (_matches[i][j * 2] >= 0)
                         text = _text.Substring(_matches[i][j * 2], _matches[i][j * 2 + 1]);
 
-                    System.Diagnostics.Debug.WriteLine(
-                        "  ("
-                            + _matches[i][j * 2].ToString(CultureInfo.InvariantCulture)
-                            + ","
-                            + _matches[i][j * 2 + 1].ToString(CultureInfo.InvariantCulture)
-                            + ") "
-                            + text
-                    );
+                    System
+                        .Diagnostics
+                        .Debug
+                        .WriteLine(
+                            "  ("
+                                + _matches[i][j * 2].ToString(CultureInfo.InvariantCulture)
+                                + ","
+                                + _matches[i][j * 2 + 1].ToString(CultureInfo.InvariantCulture)
+                                + ") "
+                                + text
+                        );
                 }
             }
         }
@@ -530,9 +537,12 @@ namespace System.Text.RegularExpressions
 #endif
                 while (e.MoveNext())
                 {
-                    System.Diagnostics.Debug.WriteLine(
-                        "Slot " + e.Current.ToString() + " -> " + _caps[e.Current].ToString()
-                    );
+                    System
+                        .Diagnostics
+                        .Debug
+                        .WriteLine(
+                            "Slot " + e.Current.ToString() + " -> " + _caps[e.Current].ToString()
+                        );
                 }
             }
 

@@ -126,10 +126,9 @@ namespace System.ServiceModel.Discovery
                 (ResolveDuplexAsyncResult<TResolveMessage, TResponseChannel>)result.AsyncState;
 
             if (
-                thisPtr.multicastSuppressionImpl.EndShouldRedirectResolve(
-                    result,
-                    out redirectionEndpoints
-                )
+                thisPtr
+                    .multicastSuppressionImpl
+                    .EndShouldRedirectResolve(result, out redirectionEndpoints)
             )
             {
                 return thisPtr.SendProxyAnnouncements(redirectionEndpoints);
@@ -151,9 +150,9 @@ namespace System.ServiceModel.Discovery
             ResolveDuplexAsyncResult<TResolveMessage, TResponseChannel> thisPtr =
                 (ResolveDuplexAsyncResult<TResolveMessage, TResponseChannel>)result.AsyncState;
 
-            EndpointDiscoveryMetadata matchingEndpoint = thisPtr.discoveryServiceImpl.EndResolve(
-                result
-            );
+            EndpointDiscoveryMetadata matchingEndpoint = thisPtr
+                .discoveryServiceImpl
+                .EndResolve(result);
 
             return thisPtr.SendResolveResponse(matchingEndpoint);
         }

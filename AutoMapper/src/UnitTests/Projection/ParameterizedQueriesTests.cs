@@ -201,8 +201,8 @@ public class ParameterizedQueriesTests_with_filter : AutoMapperSpecBase
     {
         var db = new DB();
 
-        var user = db
-            .Users.ProjectTo<UserViewModel>(Configuration, new { db })
+        var user = db.Users
+            .ProjectTo<UserViewModel>(Configuration, new { db })
             .FirstOrDefault(a => a.Id == 2);
 
         user.position.ShouldBe(1);

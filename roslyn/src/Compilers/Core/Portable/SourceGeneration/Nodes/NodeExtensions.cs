@@ -36,17 +36,19 @@ namespace Microsoft.CodeAnalysis
                 // don't log the new table if we skipped creating a new one
                 var newTableOpt = newTable != previousTable ? newTable : null;
 
-                CodeAnalysisEventSource.Log.NodeTransform(
-                    self.GetHashCode(),
-                    name ?? "<anonymous>",
-                    typeof(TSelf).FullName ?? "<unknown>",
-                    previousTable?.GetHashCode() ?? -1,
-                    previousTable?.GetPackedStates() ?? "",
-                    newTableOpt?.GetHashCode() ?? -1,
-                    newTableOpt?.GetPackedStates() ?? "",
-                    inputNode1.GetHashCode(),
-                    inputNode2?.GetHashCode() ?? -1
-                );
+                CodeAnalysisEventSource
+                    .Log
+                    .NodeTransform(
+                        self.GetHashCode(),
+                        name ?? "<anonymous>",
+                        typeof(TSelf).FullName ?? "<unknown>",
+                        previousTable?.GetHashCode() ?? -1,
+                        previousTable?.GetPackedStates() ?? "",
+                        newTableOpt?.GetHashCode() ?? -1,
+                        newTableOpt?.GetPackedStates() ?? "",
+                        inputNode1.GetHashCode(),
+                        inputNode2?.GetHashCode() ?? -1
+                    );
             }
         }
     }

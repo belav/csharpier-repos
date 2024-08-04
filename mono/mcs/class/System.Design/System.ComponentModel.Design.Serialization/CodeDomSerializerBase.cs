@@ -374,9 +374,9 @@ namespace System.ComponentModel.Design.Serialization
                     member.Name
                 );
                 if (descriptor.Arguments != null && descriptor.Arguments.Count > 0)
-                    methodInvoke.Parameters.AddRange(
-                        SerializeParameters(manager, descriptor.Arguments)
-                    );
+                    methodInvoke
+                        .Parameters
+                        .AddRange(SerializeParameters(manager, descriptor.Arguments));
                 expression = methodInvoke;
             }
             else if (member is ConstructorInfo)
@@ -385,9 +385,9 @@ namespace System.ComponentModel.Design.Serialization
                     member.DeclaringType
                 );
                 if (descriptor.Arguments != null && descriptor.Arguments.Count > 0)
-                    createExpr.Parameters.AddRange(
-                        SerializeParameters(manager, descriptor.Arguments)
-                    );
+                    createExpr
+                        .Parameters
+                        .AddRange(SerializeParameters(manager, descriptor.Arguments));
                 expression = createExpr;
             }
 

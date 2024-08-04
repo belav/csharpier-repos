@@ -90,10 +90,12 @@ namespace System.Runtime.CompilerServices.Tests
         public static void DynamicCode_ContextSwitch(bool isDynamicCodeSupported)
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.RuntimeConfigurationOptions.Add(
-                "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
-                isDynamicCodeSupported.ToString()
-            );
+            options
+                .RuntimeConfigurationOptions
+                .Add(
+                    "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
+                    isDynamicCodeSupported.ToString()
+                );
 
             // IsDynamicCodeCompiled on Mono interpreter always returns false
             bool isDynamicCodeCompiled = PlatformDetection.IsMonoInterpreter

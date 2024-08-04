@@ -406,17 +406,19 @@ namespace System.Linq.Expressions.Interpreter
             MethodInfo method = delegateType.GetInvokeMethod();
             if (method.ReturnType == typeof(void))
             {
-                return System.Dynamic.Utils.DelegateHelpers.CreateObjectArrayDelegate(
-                    delegateType,
-                    RunVoid
-                );
+                return System
+                    .Dynamic
+                    .Utils
+                    .DelegateHelpers
+                    .CreateObjectArrayDelegate(delegateType, RunVoid);
             }
             else
             {
-                return System.Dynamic.Utils.DelegateHelpers.CreateObjectArrayDelegate(
-                    delegateType,
-                    Run
-                );
+                return System
+                    .Dynamic
+                    .Utils
+                    .DelegateHelpers
+                    .CreateObjectArrayDelegate(delegateType, Run);
             }
 #else
             Func<LightLambda, Delegate> fastCtor = GetRunDelegateCtor(delegateType);

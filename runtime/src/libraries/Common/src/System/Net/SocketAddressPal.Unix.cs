@@ -133,13 +133,15 @@ namespace System.Net
             fixed (byte* rawAddress = &MemoryMarshal.GetReference(buffer))
             fixed (byte* ipAddress = &MemoryMarshal.GetReference(address))
             {
-                err = Interop.Sys.GetIPv6Address(
-                    rawAddress,
-                    buffer.Length,
-                    ipAddress,
-                    address.Length,
-                    &localScope
-                );
+                err = Interop
+                    .Sys
+                    .GetIPv6Address(
+                        rawAddress,
+                        buffer.Length,
+                        ipAddress,
+                        address.Length,
+                        &localScope
+                    );
             }
 
             ThrowOnFailure(err);
@@ -181,13 +183,9 @@ namespace System.Net
             Interop.Error err;
             fixed (byte* rawAddress = buffer)
             {
-                err = Interop.Sys.SetIPv6Address(
-                    rawAddress,
-                    buffer.Length,
-                    address,
-                    addressLength,
-                    scope
-                );
+                err = Interop
+                    .Sys
+                    .SetIPv6Address(rawAddress, buffer.Length, address, addressLength, scope);
             }
 
             ThrowOnFailure(err);

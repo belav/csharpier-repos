@@ -43,16 +43,25 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 from l4 in ss.Set<Level1>()
                     .SelectMany(l1 =>
-                        l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                        l1.OneToOne_Required_FK1
+                            .OneToOne_Optional_FK2
+                            .OneToMany_Required3
+                            .DefaultIfEmpty()
                     )
                 join l2 in ss.Set<Level4>()
                     .SelectMany(l4 =>
-                        l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                        l4.OneToOne_Required_FK_Inverse4
+                            .OneToOne_Optional_FK_Inverse3
+                            .OneToMany_Required_Self2
+                            .DefaultIfEmpty()
                     )
                     on l4.Id equals l2.Id
                 join l3 in ss.Set<Level4>()
                     .SelectMany(l4 =>
-                        l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                        l4.OneToOne_Required_FK_Inverse4
+                            .OneToOne_Required_FK_Inverse3
+                            .OneToMany_Required2
+                            .DefaultIfEmpty()
                     )
                     on l2.Id equals l3.Id
                     into grouping
@@ -68,16 +77,25 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 from l4 in ss.Set<Level1>()
                     .SelectMany(l1 =>
-                        l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                        l1.OneToOne_Required_FK1
+                            .OneToOne_Optional_FK2
+                            .OneToMany_Required3
+                            .DefaultIfEmpty()
                     )
                 join l2 in ss.Set<Level4>()
                     .SelectMany(l4 =>
-                        l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                        l4.OneToOne_Required_FK_Inverse4
+                            .OneToOne_Optional_FK_Inverse3
+                            .OneToMany_Required_Self2
+                            .DefaultIfEmpty()
                     )
                     on l4.Id equals l2.Id
                 join l3 in ss.Set<Level4>()
                     .SelectMany(l4 =>
-                        l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                        l4.OneToOne_Required_FK_Inverse4
+                            .OneToOne_Required_FK_Inverse3
+                            .OneToMany_Required2
+                            .DefaultIfEmpty()
                     )
                     on l2.Id equals l3.Id
                     into grouping
@@ -277,8 +295,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .OrderBy(l1 => l1.Id)
                     .Select(l1 => new
                     {
-                        Level2s = l1
-                            .OneToMany_Optional1.Select(l2 => new
+                        Level2s = l1.OneToMany_Optional1
+                            .Select(l2 => new
                             {
                                 Level3 = l2.OneToOne_Required_FK2 == null
                                     ? null
@@ -301,8 +319,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .OrderBy(l1 => l1.Id)
                     .Select(l1 => new
                     {
-                        Level2s = l1
-                            .OneToMany_Optional1.Select(l2 => new
+                        Level2s = l1.OneToMany_Optional1
+                            .Select(l2 => new
                             {
                                 Level3 = l2.OneToOne_Required_FK2 == null
                                     ? null
@@ -426,12 +444,12 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .OrderBy(l1 => l1.Id)
                     .Select(l1 => new
                     {
-                        Level2 = l1
-                            .OneToMany_Optional1.OrderBy(l2 => l2.Id)
+                        Level2 = l1.OneToMany_Optional1
+                            .OrderBy(l2 => l2.Id)
                             .Select(l2 => new
                             {
-                                Level3s = l2
-                                    .OneToMany_Optional2.OrderBy(l3 => l3.Id)
+                                Level3s = l2.OneToMany_Optional2
+                                    .OrderBy(l3 => l3.Id)
                                     .Select(l3 => new { l3.Id })
                                     .ToList(),
                             })
@@ -461,16 +479,16 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .OrderBy(l1 => l1.Id)
                     .Select(l1 => new
                     {
-                        Level2s = l1
-                            .OneToMany_Optional1.OrderBy(l2 => l2.Id)
+                        Level2s = l1.OneToMany_Optional1
+                            .OrderBy(l2 => l2.Id)
                             .Select(l2 => new
                             {
-                                Level3 = l2
-                                    .OneToMany_Optional2.OrderBy(l3 => l3.Id)
+                                Level3 = l2.OneToMany_Optional2
+                                    .OrderBy(l3 => l3.Id)
                                     .Select(l3 => new
                                     {
-                                        Level4s = l3
-                                            .OneToMany_Optional3.OrderBy(l4 => l4.Id)
+                                        Level4s = l3.OneToMany_Optional3
+                                            .OrderBy(l4 => l4.Id)
                                             .Select(l4 => new { l4.Id })
                                             .ToList(),
                                     })
@@ -580,16 +598,25 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 from l4 in ss.Set<Level1>()
                     .SelectMany(l1 =>
-                        l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                        l1.OneToOne_Required_FK1
+                            .OneToOne_Optional_FK2
+                            .OneToMany_Required3
+                            .DefaultIfEmpty()
                     )
                 join l2 in ss.Set<Level4>()
                     .SelectMany(l4 =>
-                        l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                        l4.OneToOne_Required_FK_Inverse4
+                            .OneToOne_Optional_FK_Inverse3
+                            .OneToMany_Required_Self2
+                            .DefaultIfEmpty()
                     )
                     on l4.Id equals l2.Id
                 join l3 in ss.Set<Level4>()
                     .SelectMany(l4 =>
-                        l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                        l4.OneToOne_Required_FK_Inverse4
+                            .OneToOne_Required_FK_Inverse3
+                            .OneToMany_Required2
+                            .DefaultIfEmpty()
                     )
                     on l2.Id equals l3.Id
                     into grouping
@@ -605,16 +632,25 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 from l4 in ss.Set<Level1>()
                     .SelectMany(l1 =>
-                        l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                        l1.OneToOne_Required_FK1
+                            .OneToOne_Optional_FK2
+                            .OneToMany_Required3
+                            .DefaultIfEmpty()
                     )
                 join l2 in ss.Set<Level4>()
                     .SelectMany(l4 =>
-                        l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                        l4.OneToOne_Required_FK_Inverse4
+                            .OneToOne_Optional_FK_Inverse3
+                            .OneToMany_Required_Self2
+                            .DefaultIfEmpty()
                     )
                     on l4.Id equals l2.Id
                 join l3 in ss.Set<Level4>()
                     .SelectMany(l4 =>
-                        l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                        l4.OneToOne_Required_FK_Inverse4
+                            .OneToOne_Required_FK_Inverse3
+                            .OneToMany_Required2
+                            .DefaultIfEmpty()
                     )
                     on l2.Id equals l3.Id
                     into grouping
@@ -649,8 +685,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     {
                         l1.Id,
                         l1.Name,
-                        Level2s = l1
-                            .OneToMany_Required1.OrderBy(l2 => l2.Id)
+                        Level2s = l1.OneToMany_Required1
+                            .OrderBy(l2 => l2.Id)
                             .Take(3)
                             .Select(l2 => new
                             {
@@ -696,8 +732,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     {
                         l1.Id,
                         l1.Name,
-                        Level2s = l1
-                            .OneToMany_Required1.OrderBy(l2 => l2.Id)
+                        Level2s = l1.OneToMany_Required1
+                            .OrderBy(l2 => l2.Id)
                             .Skip(1)
                             .Take(3)
                             .Select(l2 => new
@@ -1417,8 +1453,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             async,
             ss =>
                 from l1 in ss.Set<Level1>().Include(l => l.OneToMany_Optional1)
-                from l2 in l1
-                    .OneToMany_Optional1.Select(x => new
+                from l2 in l1.OneToMany_Optional1
+                    .Select(x => new
                     {
                         x.Id,
                         x.Name,
@@ -1972,7 +2008,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .ThenInclude(l2 => l2.OneToOne_Optional_PK2)
                     .ThenInclude(l3 => l3.OneToOne_Optional_FK3)
                     .Where(l1 =>
-                        l1.OneToMany_Optional1.Where(l2 => l2.OneToOne_Optional_PK2.Name != "Foo")
+                        l1.OneToMany_Optional1
+                            .Where(l2 => l2.OneToOne_Optional_PK2.Name != "Foo")
                             .Count() > 0
                     ),
             elementAsserter: (e, a) =>
@@ -2316,7 +2353,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToOne_Optional_FK1)
                     .ThenInclude(l2 =>
-                        l2.OneToMany_Optional2.Where(x => x.Name != "Foo")
+                        l2.OneToMany_Optional2
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Name)
                             .Skip(1)
                             .Take(3)
@@ -2372,7 +2410,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 =>
-                        l1.OneToOne_Optional_FK1.OneToMany_Optional2.Where(x => x.Name != "Foo")
+                        l1.OneToOne_Optional_FK1
+                            .OneToMany_Optional2
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Name)
                             .Skip(1)
                             .Take(3)
@@ -2399,12 +2439,14 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 =>
-                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                        l1.OneToMany_Optional1
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Name)
                             .Take(3)
                     )
                     .Include(l1 =>
-                        l1.OneToMany_Required1.Where(x => x.Name != "Bar")
+                        l1.OneToMany_Required1
+                            .Where(x => x.Name != "Bar")
                             .OrderByDescending(x => x.Name)
                             .Skip(1)
                     ),
@@ -2437,12 +2479,14 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 =>
-                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                        l1.OneToMany_Optional1
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Name)
                             .Take(3)
                     )
                     .ThenInclude(l2 =>
-                        l2.OneToMany_Required2.Where(x => x.Name != "Bar")
+                        l2.OneToMany_Required2
+                            .Where(x => x.Name != "Bar")
                             .OrderByDescending(x => x.Name)
                             .Skip(1)
                     ),
@@ -2487,19 +2531,22 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             ss =>
                                 ss.Set<Level1>()
                                     .Include(l1 =>
-                                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                                        l1.OneToMany_Optional1
+                                            .Where(x => x.Name != "Foo")
                                             .OrderBy(x => x.Id)
                                             .Take(3)
                                     )
                                     .Include(l1 =>
-                                        l1.OneToMany_Optional1.Where(x => x.Name != "Bar")
+                                        l1.OneToMany_Optional1
+                                            .Where(x => x.Name != "Bar")
                                             .OrderByDescending(x => x.Name)
                                             .Take(3)
                                     )
                         )
                 )
             )
-                .Message.Replace("\r", "")
+                .Message
+                .Replace("\r", "")
                 .Replace("\n", "")
         );
 
@@ -2534,7 +2581,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         )
                 )
             )
-                .Message.Replace("\r", "")
+                .Message
+                .Replace("\r", "")
                 .Replace("\n", "")
         );
 
@@ -2546,12 +2594,14 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 =>
-                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                        l1.OneToMany_Optional1
+                            .Where(x => x.Name != "Foo")
                             .OrderByDescending(x => x.Id)
                             .Take(2)
                     )
                     .Include(l1 =>
-                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                        l1.OneToMany_Optional1
+                            .Where(x => x.Name != "Foo")
                             .OrderByDescending(x => x.Id)
                             .Take(2)
                     ),
@@ -2578,13 +2628,15 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 =>
-                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                        l1.OneToMany_Optional1
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Id)
                             .Take(2)
                     )
                     .ThenInclude(l2 => l2.OneToMany_Optional2)
                     .Include(l1 =>
-                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                        l1.OneToMany_Optional1
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Id)
                             .Take(2)
                     )
@@ -2614,7 +2666,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 =>
-                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                        l1.OneToMany_Optional1
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Id)
                             .Take(2)
                     )
@@ -2645,7 +2698,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1)
                     .Include(l1 =>
-                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                        l1.OneToMany_Optional1
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Id)
                             .Take(3)
                     ),
@@ -2670,7 +2724,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 =>
-                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                        l1.OneToMany_Optional1
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Id)
                             .Take(3)
                     )
@@ -2698,7 +2753,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 =>
-                        l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                        l1.OneToMany_Optional1
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Id)
                             .Take(1)
                     )
@@ -2739,14 +2795,16 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1)
                     .ThenInclude(l2 =>
-                        l2.OneToMany_Optional2.Where(x => x.Name != "Foo")
+                        l2.OneToMany_Optional2
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Id)
                             .Take(1)
                     )
                     .ThenInclude(l3 => l3.OneToMany_Optional3)
                     .Include(l1 => l1.OneToMany_Optional1)
                     .ThenInclude(l2 =>
-                        l2.OneToMany_Optional2.Where(x => x.Name != "Foo")
+                        l2.OneToMany_Optional2
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Id)
                             .Take(1)
                     )
@@ -2785,7 +2843,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .Include(l1 => l1.OneToMany_Optional1)
                     .ThenInclude(l2 =>
-                        l2.OneToMany_Optional2.Where(x => x.Name != "Foo")
+                        l2.OneToMany_Optional2
+                            .Where(x => x.Name != "Foo")
                             .OrderBy(x => x.Id)
                             .Take(1)
                     )
@@ -2850,7 +2909,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 =>
-                        l1.OneToMany_Optional1.Where(x => ss.Set<Level1>().Count() > 7)
+                        l1.OneToMany_Optional1
+                            .Where(x => ss.Set<Level1>().Count() > 7)
                             .OrderBy(x => x.Id)
                             .Take(3)
                     ),
@@ -2873,9 +2933,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss =>
                 ss.Set<Level1>()
                     .Include(l1 =>
-                        l1.OneToMany_Optional1.Where(x =>
-                                ss.Set<Level1>().Count(xx => xx.Id != x.Id) > 1
-                            )
+                        l1.OneToMany_Optional1
+                            .Where(x => ss.Set<Level1>().Count(xx => xx.Id != x.Id) > 1)
                             .OrderBy(x => x.Id)
                             .Take(3)
                     ),
@@ -2949,8 +3008,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
     public virtual async Task Filtered_include_is_considered_loaded(bool async)
     {
         using var ctx = CreateContext();
-        var query = ctx
-            .LevelOne.AsTracking()
+        var query = ctx.LevelOne
+            .AsTracking()
             .Include(l1 => l1.OneToMany_Optional1.OrderBy(x => x.Id).Take(1));
         var result = async ? await query.ToListAsync() : query.ToList();
         foreach (var resultElement in result)
@@ -3361,9 +3420,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         ss.Set<Level2>()
                             .SelectMany(l2 =>
                                 l2.Id == 1
-                                    ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(e =>
-                                        e.Id
-                                    )
+                                    ? l2.OneToMany_Required_Inverse2
+                                        .OneToMany_Optional1
+                                        .Select(e => e.Id)
                                     : null
                             )
                 )
@@ -3380,9 +3439,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         ss.Set<Level2>()
                             .SelectMany(l2 =>
                                 l2.Id == 1
-                                    ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(e =>
-                                        e.Id
-                                    )
+                                    ? l2.OneToMany_Required_Inverse2
+                                        .OneToMany_Optional1
+                                        .Select(e => e.Id)
                                     : Enumerable.Empty<int>()
                             )
                 )
@@ -3526,8 +3585,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         ChildCount = l1.OneToMany_Optional_Self1.Count,
                         Level2Count = l1.OneToMany_Optional1.Count(),
                         IsLevel2There = l1.OneToMany_Optional1.Any(l2 => l2.Id == 2),
-                        Children = l1
-                            .OneToMany_Optional_Self1.OrderBy(e => e.Name)
+                        Children = l1.OneToMany_Optional_Self1
+                            .OrderBy(e => e.Name)
                             .Skip(1)
                             .Take(5)
                             .Select(lc1 => new
@@ -3575,11 +3634,13 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .Select(l1 => new
                     {
                         l1.Id,
-                        Collection = l1.OneToOne_Optional_FK1.OneToMany_Optional2.Select(l3 => new
-                        {
-                            ChildId = l3.Id,
-                            ParentName = l1.OneToOne_Optional_FK1.Name,
-                        }),
+                        Collection = l1.OneToOne_Optional_FK1
+                            .OneToMany_Optional2
+                            .Select(l3 => new
+                            {
+                                ChildId = l3.Id,
+                                ParentName = l1.OneToOne_Optional_FK1.Name,
+                            }),
                     }),
             ss =>
                 ss.Set<Level1>()
@@ -3621,8 +3682,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     {
                         l1.Id,
                         Entity = l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2,
-                        Collection = l1
-                            .OneToOne_Optional_FK1.OneToMany_Optional2.GroupBy(x => x.Name)
+                        Collection = l1.OneToOne_Optional_FK1
+                            .OneToMany_Optional2
+                            .GroupBy(x => x.Name)
                             .Select(g => new { g.Key, Count = g.Count() }),
                     }),
             ss =>
@@ -3633,7 +3695,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         Entity = l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2,
                         Collection = l1.Maybe(x =>
                             x.OneToOne_Optional_FK1.Maybe(xx =>
-                                xx.OneToMany_Optional2.GroupBy(x => x.Name)
+                                xx.OneToMany_Optional2
+                                    .GroupBy(x => x.Name)
                                     .Select(g => new { g.Key, Count = g.Count() })
                             )
                         ),
@@ -3833,8 +3896,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .OrderBy(x => x.Id)
                     .Select(x => new
                     {
-                        Collection = x
-                            .OneToMany_Optional1.OrderBy(xx => xx.Id)
+                        Collection = x.OneToMany_Optional1
+                            .OrderBy(xx => xx.Id)
                             .Select(xx => xx.Name)
                             .ToList(),
                         Condition = x.Id == 1 ? "01"

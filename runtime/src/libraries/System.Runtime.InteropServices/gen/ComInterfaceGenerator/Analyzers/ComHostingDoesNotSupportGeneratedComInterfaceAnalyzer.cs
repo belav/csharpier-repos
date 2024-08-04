@@ -24,10 +24,14 @@ namespace Microsoft.Interop.Analyzers
             context.RegisterCompilationStartAction(context =>
             {
                 if (
-                    !context.Options.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue(
-                        "build_property.EnableComHosting",
-                        out string? enableComHosting
-                    )
+                    !context
+                        .Options
+                        .AnalyzerConfigOptionsProvider
+                        .GlobalOptions
+                        .TryGetValue(
+                            "build_property.EnableComHosting",
+                            out string? enableComHosting
+                        )
                     || !bool.TryParse(enableComHosting, out bool enableComHostingValue)
                     || !enableComHostingValue
                 )
@@ -35,16 +39,15 @@ namespace Microsoft.Interop.Analyzers
                     return;
                 }
 
-                INamedTypeSymbol? generatedComClassAttribute =
-                    context.Compilation.GetBestTypeByMetadataName(
-                        TypeNames.GeneratedComClassAttribute
-                    );
-                INamedTypeSymbol? generatedComInterfaceAttribute =
-                    context.Compilation.GetBestTypeByMetadataName(
-                        TypeNames.GeneratedComInterfaceAttribute
-                    );
-                INamedTypeSymbol? comVisibleAttribute =
-                    context.Compilation.GetBestTypeByMetadataName(
+                INamedTypeSymbol? generatedComClassAttribute = context
+                    .Compilation
+                    .GetBestTypeByMetadataName(TypeNames.GeneratedComClassAttribute);
+                INamedTypeSymbol? generatedComInterfaceAttribute = context
+                    .Compilation
+                    .GetBestTypeByMetadataName(TypeNames.GeneratedComInterfaceAttribute);
+                INamedTypeSymbol? comVisibleAttribute = context
+                    .Compilation
+                    .GetBestTypeByMetadataName(
                         TypeNames.System_Runtime_InteropServices_ComVisibleAttribute
                     )!;
 
@@ -88,10 +91,12 @@ namespace Microsoft.Interop.Analyzers
                         )
                         {
                             context.ReportDiagnostic(
-                                context.ContainingSymbol.CreateDiagnostic(
-                                    ComHostingDoesNotSupportGeneratedComInterface,
-                                    context.ContainingSymbol.Name
-                                )
+                                context
+                                    .ContainingSymbol
+                                    .CreateDiagnostic(
+                                        ComHostingDoesNotSupportGeneratedComInterface,
+                                        context.ContainingSymbol.Name
+                                    )
                             );
                             return;
                         }
@@ -110,10 +115,12 @@ namespace Microsoft.Interop.Analyzers
                             )
                             {
                                 context.ReportDiagnostic(
-                                    context.ContainingSymbol.CreateDiagnostic(
-                                        ComHostingDoesNotSupportGeneratedComInterface,
-                                        context.ContainingSymbol.Name
-                                    )
+                                    context
+                                        .ContainingSymbol
+                                        .CreateDiagnostic(
+                                            ComHostingDoesNotSupportGeneratedComInterface,
+                                            context.ContainingSymbol.Name
+                                        )
                                 );
                                 return;
                             }

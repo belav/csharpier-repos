@@ -57,7 +57,8 @@ namespace BasicApi.Controllers
             }
 
             var handler = _options
-                .SecurityTokenValidators.OfType<JwtSecurityTokenHandler>()
+                .SecurityTokenValidators
+                .OfType<JwtSecurityTokenHandler>()
                 .First();
             var tokenDescriptor = new SecurityTokenDescriptor()
             {

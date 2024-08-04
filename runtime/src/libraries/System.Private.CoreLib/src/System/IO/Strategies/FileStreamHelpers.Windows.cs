@@ -175,13 +175,9 @@ namespace System.IO.Strategies
             int lengthHigh = unchecked((int)(length >> 32));
 
             if (
-                !Interop.Kernel32.UnlockFile(
-                    handle,
-                    positionLow,
-                    positionHigh,
-                    lengthLow,
-                    lengthHigh
-                )
+                !Interop
+                    .Kernel32
+                    .UnlockFile(handle, positionLow, positionHigh, lengthLow, lengthHigh)
             )
             {
                 throw Win32Marshal.GetExceptionForLastWin32Error(handle.Path);
@@ -203,20 +199,12 @@ namespace System.IO.Strategies
             {
                 r =
                     overlapped == null
-                        ? Interop.Kernel32.ReadFile(
-                            handle,
-                            p,
-                            bytes.Length,
-                            out numBytesRead,
-                            overlapped
-                        )
-                        : Interop.Kernel32.ReadFile(
-                            handle,
-                            p,
-                            bytes.Length,
-                            IntPtr.Zero,
-                            overlapped
-                        );
+                        ? Interop
+                            .Kernel32
+                            .ReadFile(handle, p, bytes.Length, out numBytesRead, overlapped)
+                        : Interop
+                            .Kernel32
+                            .ReadFile(handle, p, bytes.Length, IntPtr.Zero, overlapped);
             }
 
             if (r == 0)
@@ -288,10 +276,12 @@ namespace System.IO.Strategies
                                     {
                                         // Try to cancel the I/O.  We ignore the return value, as cancellation is opportunistic and we
                                         // don't want to fail the operation because we couldn't cancel it.
-                                        Interop.Kernel32.CancelIoEx(
-                                            innerAwaitable._fileHandle,
-                                            innerAwaitable._nativeOverlapped
-                                        );
+                                        Interop
+                                            .Kernel32
+                                            .CancelIoEx(
+                                                innerAwaitable._fileHandle,
+                                                innerAwaitable._nativeOverlapped
+                                            );
                                     }
                                 }
                             }
@@ -315,10 +305,9 @@ namespace System.IO.Strategies
                             // Allocate a native overlapped for our reusable overlapped, and set position to read based on the next
                             // desired address stored in the awaitable.  (This position may be 0, if either we're at the beginning or
                             // if the stream isn't seekable.)
-                            readAwaitable._nativeOverlapped =
-                                handle.ThreadPoolBinding!.AllocateNativeOverlapped(
-                                    awaitableOverlapped
-                                );
+                            readAwaitable._nativeOverlapped = handle
+                                .ThreadPoolBinding!
+                                .AllocateNativeOverlapped(awaitableOverlapped);
                             if (canSeek)
                             {
                                 readAwaitable._nativeOverlapped->OffsetLow = unchecked(

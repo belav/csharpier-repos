@@ -687,23 +687,25 @@ namespace System.Web.UI.DataVisualization.Charting
                         while (iterator.NextMarker(subPath) > 0)
                         {
                             // Use callout defined hot region
-                            this.Common.HotRegionsList.AddHotRegion(
-                                graphics,
-                                subPath,
-                                false,
-                                ReplaceKeywords(this.ToolTip),
+                            this.Common
+                                .HotRegionsList
+                                .AddHotRegion(
+                                    graphics,
+                                    subPath,
+                                    false,
+                                    ReplaceKeywords(this.ToolTip),
 #if Microsoft_CONTROL
-                                String.Empty,
-                                String.Empty,
-                                String.Empty,
+                                    String.Empty,
+                                    String.Empty,
+                                    String.Empty,
 #else // Microsoft_CONTROL
-                                ReplaceKeywords(this.Url),
-                                ReplaceKeywords(this.MapAreaAttributes),
-                                ReplaceKeywords(this.PostBackValue),
+                                    ReplaceKeywords(this.Url),
+                                    ReplaceKeywords(this.MapAreaAttributes),
+                                    ReplaceKeywords(this.PostBackValue),
 #endif // Microsoft_CONTROL
-                                this,
-                                ChartElementType.Annotation
-                            );
+                                    this,
+                                    ChartElementType.Annotation
+                                );
 
                             // Reset current path
                             subPath.Reset();
@@ -713,22 +715,24 @@ namespace System.Web.UI.DataVisualization.Charting
                 else
                 {
                     // Use rectangular hot region
-                    this.Common.HotRegionsList.AddHotRegion(
-                        rectanglePosition,
-                        ReplaceKeywords(this.ToolTip),
+                    this.Common
+                        .HotRegionsList
+                        .AddHotRegion(
+                            rectanglePosition,
+                            ReplaceKeywords(this.ToolTip),
 #if Microsoft_CONTROL
-                        String.Empty,
-                        String.Empty,
-                        String.Empty,
+                            String.Empty,
+                            String.Empty,
+                            String.Empty,
 #else // Microsoft_CONTROL
-                        ReplaceKeywords(this.Url),
-                        ReplaceKeywords(this.MapAreaAttributes),
-                        ReplaceKeywords(this.PostBackValue),
+                            ReplaceKeywords(this.Url),
+                            ReplaceKeywords(this.MapAreaAttributes),
+                            ReplaceKeywords(this.PostBackValue),
 #endif // Microsoft_CONTROL
-                        this,
-                        ChartElementType.Annotation,
-                        String.Empty
-                    );
+                            this,
+                            ChartElementType.Annotation,
+                            String.Empty
+                        );
                 }
             }
 

@@ -625,10 +625,9 @@ namespace System.Collections.Immutable.Tests
             IEqualityComparer<TValue> valueComparer = null
         )
         {
-            return ImmutableSortedDictionary<TKey, TValue>.Empty.WithComparers(
-                keyComparer,
-                valueComparer
-            );
+            return ImmutableSortedDictionary<TKey, TValue>
+                .Empty
+                .WithComparers(keyComparer, valueComparer);
         }
     }
 }

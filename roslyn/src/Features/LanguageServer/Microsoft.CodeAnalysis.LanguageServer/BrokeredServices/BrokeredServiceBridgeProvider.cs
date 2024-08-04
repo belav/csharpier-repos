@@ -76,7 +76,8 @@ internal class BrokeredServiceBridgeProvider
             using IpcRelayServiceBroker relayServiceBroker = new(serviceBroker);
 
             FrameworkServices
-                .RemoteServiceBroker.WithTraceSource(_brokeredServiceTraceSource)
+                .RemoteServiceBroker
+                .WithTraceSource(_brokeredServiceTraceSource)
                 .ConstructRpc(relayServiceBroker, profferedServiceBrokerChannel);
 
             await relayServiceBroker.Completion;
@@ -89,7 +90,8 @@ internal class BrokeredServiceBridgeProvider
                 cancellationToken
             );
             var remoteClient = FrameworkServices
-                .RemoteServiceBroker.WithTraceSource(_brokeredServiceTraceSource)
+                .RemoteServiceBroker
+                .WithTraceSource(_brokeredServiceTraceSource)
                 .ConstructRpc<IRemoteServiceBroker>(consumingServiceBrokerChannel);
 
             using (

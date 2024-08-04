@@ -244,15 +244,17 @@ namespace System.Xml.Schema
                 {
                     derivedRestriction.Enumeration = new ArrayList();
                 }
-                derivedRestriction.Enumeration.Add(
-                    ParseFacetValue(
-                        datatype,
-                        facet,
-                        Res.Sch_EnumerationFacetInvalid,
-                        nsmgr,
-                        nameTable
-                    )
-                );
+                derivedRestriction
+                    .Enumeration
+                    .Add(
+                        ParseFacetValue(
+                            datatype,
+                            facet,
+                            Res.Sch_EnumerationFacetInvalid,
+                            nsmgr,
+                            nameTable
+                        )
+                    );
                 SetFlag(facet, RestrictionFlags.Enumeration);
             }
 
@@ -556,9 +558,9 @@ namespace System.Xml.Schema
                             regStr.Insert(0, "(");
                             regStr.Append(")");
                         }
-                        derivedRestriction.Patterns.Add(
-                            new Regex(Preprocess(regStr.ToString()), RegexOptions.None)
-                        );
+                        derivedRestriction
+                            .Patterns
+                            .Add(new Regex(Preprocess(regStr.ToString()), RegexOptions.None));
                     }
                     catch (Exception e)
                     {

@@ -165,9 +165,9 @@ namespace System.Runtime.Loader.Tests
             );
 
             defaultAlc = AssemblyLoadContext.Default;
-            defaultAlcAssembly = AssemblyLoadContext.Default.LoadFromAssemblyName(
-                executingAssembly.GetName()
-            );
+            defaultAlcAssembly = AssemblyLoadContext
+                .Default
+                .LoadFromAssemblyName(executingAssembly.GetName());
             defaultAlcFixtureType = defaultAlcAssembly.GetType(
                 "System.Runtime.Loader.Tests.ContextualReflectionTestFixture"
             );
@@ -893,11 +893,9 @@ namespace System.Runtime.Loader.Tests
 
             TypeGetTypeTestCase(
                 () =>
-                    _fixture.isolatedAlcFixtureInstance.TypeGetType(
-                        typeName,
-                        throwOnError: false,
-                        ignoreCase: true
-                    ),
+                    _fixture
+                        .isolatedAlcFixtureInstance
+                        .TypeGetType(typeName, throwOnError: false, ignoreCase: true),
                 assembly,
                 assembly,
                 assembly
@@ -912,12 +910,9 @@ namespace System.Runtime.Loader.Tests
 
             TypeGetTypeTestCase(
                 () =>
-                    _fixture.isolatedAlcFixtureInstance.TypeGetType(
-                        typeName,
-                        null,
-                        null,
-                        throwOnError: false
-                    ),
+                    _fixture
+                        .isolatedAlcFixtureInstance
+                        .TypeGetType(typeName, null, null, throwOnError: false),
                 assembly,
                 assembly,
                 assembly
@@ -925,13 +920,9 @@ namespace System.Runtime.Loader.Tests
 
             TypeGetTypeTestCase(
                 () =>
-                    _fixture.isolatedAlcFixtureInstance.TypeGetType(
-                        typeName,
-                        null,
-                        null,
-                        throwOnError: false,
-                        ignoreCase: true
-                    ),
+                    _fixture
+                        .isolatedAlcFixtureInstance
+                        .TypeGetType(typeName, null, null, throwOnError: false, ignoreCase: true),
                 assembly,
                 assembly,
                 assembly
@@ -1015,11 +1006,9 @@ namespace System.Runtime.Loader.Tests
 
             TypeGetTypeTestCase(
                 () =>
-                    _fixture.isolatedAlcFixtureInstance.TypeGetType(
-                        typeName,
-                        throwOnError: false,
-                        ignoreCase: true
-                    ),
+                    _fixture
+                        .isolatedAlcFixtureInstance
+                        .TypeGetType(typeName, throwOnError: false, ignoreCase: true),
                 _fixture.isolatedAlcAssembly,
                 _fixture.defaultAlcAssembly,
                 _fixture.isolatedAlcAssembly
@@ -1034,12 +1023,9 @@ namespace System.Runtime.Loader.Tests
 
             TypeGetTypeTestCase(
                 () =>
-                    _fixture.isolatedAlcFixtureInstance.TypeGetType(
-                        typeName,
-                        null,
-                        null,
-                        throwOnError: false
-                    ),
+                    _fixture
+                        .isolatedAlcFixtureInstance
+                        .TypeGetType(typeName, null, null, throwOnError: false),
                 _fixture.isolatedAlcAssembly,
                 _fixture.defaultAlcAssembly,
                 _fixture.isolatedAlcAssembly
@@ -1047,13 +1033,9 @@ namespace System.Runtime.Loader.Tests
 
             TypeGetTypeTestCase(
                 () =>
-                    _fixture.isolatedAlcFixtureInstance.TypeGetType(
-                        typeName,
-                        null,
-                        null,
-                        throwOnError: false,
-                        ignoreCase: true
-                    ),
+                    _fixture
+                        .isolatedAlcFixtureInstance
+                        .TypeGetType(typeName, null, null, throwOnError: false, ignoreCase: true),
                 _fixture.isolatedAlcAssembly,
                 _fixture.defaultAlcAssembly,
                 _fixture.isolatedAlcAssembly
@@ -1134,33 +1116,36 @@ namespace System.Runtime.Loader.Tests
 
             AssemblyGetTypeTestCase(
                 () =>
-                    _fixture.isolatedAlcFixtureInstance.AssemblyGetType(
-                        _fixture.defaultAlcAssembly,
-                        typeName
-                    ),
+                    _fixture
+                        .isolatedAlcFixtureInstance
+                        .AssemblyGetType(_fixture.defaultAlcAssembly, typeName),
                 assembly,
                 assembly,
                 assembly
             );
             AssemblyGetTypeTestCase(
                 () =>
-                    _fixture.isolatedAlcFixtureInstance.AssemblyGetType(
-                        _fixture.defaultAlcAssembly,
-                        typeName,
-                        throwOnError: false
-                    ),
+                    _fixture
+                        .isolatedAlcFixtureInstance
+                        .AssemblyGetType(
+                            _fixture.defaultAlcAssembly,
+                            typeName,
+                            throwOnError: false
+                        ),
                 assembly,
                 assembly,
                 assembly
             );
             AssemblyGetTypeTestCase(
                 () =>
-                    _fixture.isolatedAlcFixtureInstance.AssemblyGetType(
-                        _fixture.defaultAlcAssembly,
-                        typeName,
-                        throwOnError: false,
-                        ignoreCase: true
-                    ),
+                    _fixture
+                        .isolatedAlcFixtureInstance
+                        .AssemblyGetType(
+                            _fixture.defaultAlcAssembly,
+                            typeName,
+                            throwOnError: false,
+                            ignoreCase: true
+                        ),
                 assembly,
                 assembly,
                 assembly
@@ -1218,10 +1203,9 @@ namespace System.Runtime.Loader.Tests
 
             AssemblyGetTypeTestCase(
                 () =>
-                    _fixture.isolatedAlcFixtureInstance.AssemblyGetType(
-                        _fixture.isolatedAlcAssembly,
-                        typeName
-                    ),
+                    _fixture
+                        .isolatedAlcFixtureInstance
+                        .AssemblyGetType(_fixture.isolatedAlcAssembly, typeName),
                 _fixture.isolatedAlcAssembly,
                 _fixture.defaultAlcAssembly,
                 _fixture.isolatedAlcAssembly
@@ -1229,11 +1213,13 @@ namespace System.Runtime.Loader.Tests
 
             AssemblyGetTypeTestCase(
                 () =>
-                    _fixture.isolatedAlcFixtureInstance.AssemblyGetType(
-                        _fixture.isolatedAlcAssembly,
-                        typeName,
-                        throwOnError: false
-                    ),
+                    _fixture
+                        .isolatedAlcFixtureInstance
+                        .AssemblyGetType(
+                            _fixture.isolatedAlcAssembly,
+                            typeName,
+                            throwOnError: false
+                        ),
                 _fixture.isolatedAlcAssembly,
                 _fixture.defaultAlcAssembly,
                 _fixture.isolatedAlcAssembly
@@ -1241,12 +1227,14 @@ namespace System.Runtime.Loader.Tests
 
             AssemblyGetTypeTestCase(
                 () =>
-                    _fixture.isolatedAlcFixtureInstance.AssemblyGetType(
-                        _fixture.isolatedAlcAssembly,
-                        typeName,
-                        throwOnError: false,
-                        ignoreCase: true
-                    ),
+                    _fixture
+                        .isolatedAlcFixtureInstance
+                        .AssemblyGetType(
+                            _fixture.isolatedAlcAssembly,
+                            typeName,
+                            throwOnError: false,
+                            ignoreCase: true
+                        ),
                 _fixture.isolatedAlcAssembly,
                 _fixture.defaultAlcAssembly,
                 _fixture.isolatedAlcAssembly
@@ -1276,7 +1264,8 @@ namespace System.Runtime.Loader.Tests
             TypeGetTypeTestCase(
                 () =>
                     _fixture
-                        .isolatedAlcFixtureInstance.ActivatorCreateInstance(null, typeName)
+                        .isolatedAlcFixtureInstance
+                        .ActivatorCreateInstance(null, typeName)
                         .Unwrap()
                         .GetType(),
                 _fixture.isolatedAlcAssembly,
@@ -1308,7 +1297,8 @@ namespace System.Runtime.Loader.Tests
             TypeGetTypeTestCase(
                 () =>
                     _fixture
-                        .isolatedAlcFixtureInstance.ActivatorCreateInstance(assemblyName, typeName)
+                        .isolatedAlcFixtureInstance
+                        .ActivatorCreateInstance(assemblyName, typeName)
                         .Unwrap()
                         .GetType(),
                 _fixture.isolatedAlcAssembly,
@@ -1344,7 +1334,8 @@ namespace System.Runtime.Loader.Tests
             AssemblyGetTypeTestCase(
                 () =>
                     _fixture
-                        .isolatedAlcFixtureInstance.ActivatorCreateInstance(null, typeName)
+                        .isolatedAlcFixtureInstance
+                        .ActivatorCreateInstance(null, typeName)
                         .Unwrap()
                         .GetType(),
                 _fixture.isolatedAlcAssembly,
@@ -1382,7 +1373,8 @@ namespace System.Runtime.Loader.Tests
             AssemblyGetTypeTestCase(
                 () =>
                     _fixture
-                        .isolatedAlcFixtureInstance.ActivatorCreateInstance(assemblyName, typeName)
+                        .isolatedAlcFixtureInstance
+                        .ActivatorCreateInstance(assemblyName, typeName)
                         .Unwrap()
                         .GetType(),
                 _fixture.isolatedAlcAssembly,

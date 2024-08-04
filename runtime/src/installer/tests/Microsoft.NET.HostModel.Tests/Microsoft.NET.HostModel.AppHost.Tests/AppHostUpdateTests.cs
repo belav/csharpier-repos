@@ -22,9 +22,9 @@ namespace Microsoft.NET.HostModel.Tests
         /// </summary>
         private const string AppBinaryPathPlaceholder =
             "c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2";
-        private static readonly byte[] AppBinaryPathPlaceholderSearchValue = Encoding.UTF8.GetBytes(
-            AppBinaryPathPlaceholder
-        );
+        private static readonly byte[] AppBinaryPathPlaceholderSearchValue = Encoding
+            .UTF8
+            .GetBytes(AppBinaryPathPlaceholder);
 
         [Fact]
         public void ItEmbedsAppBinaryPath()
@@ -305,7 +305,8 @@ namespace Microsoft.NET.HostModel.Tests
                 using (var p = Process.Start(psi))
                 {
                     p.Start();
-                    p.StandardError.ReadToEnd()
+                    p.StandardError
+                        .ReadToEnd()
                         .Should()
                         .Contain($"Executable=/private{Path.GetFullPath(destinationFilePath)}");
                     p.WaitForExit();
@@ -349,7 +350,8 @@ namespace Microsoft.NET.HostModel.Tests
                 using (var p = Process.Start(psi))
                 {
                     p.Start();
-                    p.StandardError.ReadToEnd()
+                    p.StandardError
+                        .ReadToEnd()
                         .Should()
                         .Contain(
                             $"{Path.GetFullPath(destinationFilePath)}: code object is not signed at all"
@@ -800,13 +802,16 @@ namespace Microsoft.NET.HostModel.Tests
                 string subDir = ""
             )
             {
-                string path = System.IO.Path.Combine(
-                    System.IO.Path.GetTempPath(),
-                    "dotNetSdkUnitTest_"
-                        + callingMethod
-                        + (Guid.NewGuid().ToString().Substring(0, 8)),
-                    subDir
-                );
+                string path = System
+                    .IO
+                    .Path
+                    .Combine(
+                        System.IO.Path.GetTempPath(),
+                        "dotNetSdkUnitTest_"
+                            + callingMethod
+                            + (Guid.NewGuid().ToString().Substring(0, 8)),
+                        subDir
+                    );
                 return new TestDirectory(path);
             }
 

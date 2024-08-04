@@ -597,8 +597,10 @@ namespace System.Threading
 #if FEATURE_LEGACYNETCF
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
             {
-                System.Reflection.Assembly callingAssembly =
-                    System.Reflection.Assembly.GetCallingAssembly();
+                System.Reflection.Assembly callingAssembly = System
+                    .Reflection
+                    .Assembly
+                    .GetCallingAssembly();
                 if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
                 {
                     string caller = new StackFrame(1).GetMethod().FullName;

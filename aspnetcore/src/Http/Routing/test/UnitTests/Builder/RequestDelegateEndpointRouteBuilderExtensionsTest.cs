@@ -712,9 +712,9 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
 
         public static void PopulateMetadata(ParameterInfo parameter, EndpointBuilder builder)
         {
-            builder.Metadata.Add(
-                new ParameterNameMetadata { Name = parameter.Name ?? string.Empty }
-            );
+            builder
+                .Metadata
+                .Add(new ParameterNameMetadata { Name = parameter.Name ?? string.Empty });
         }
 
         public static void PopulateMetadata(MethodInfo method, EndpointBuilder builder)

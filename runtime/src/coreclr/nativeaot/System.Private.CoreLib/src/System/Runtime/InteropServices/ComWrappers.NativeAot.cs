@@ -2054,8 +2054,11 @@ namespace System.Runtime.InteropServices
             public static int Resolve(IntPtr pThis, Guid guid, out IntPtr inspectable)
             {
                 fixed (IntPtr* inspectablePtr = &inspectable)
-                    return (*(delegate* unmanaged<IntPtr, Guid*, IntPtr*, int>**)pThis)[3]
-                        (pThis, &guid, inspectablePtr);
+                    return (*(delegate* unmanaged<IntPtr, Guid*, IntPtr*, int>**)pThis)[3](
+                        pThis,
+                        &guid,
+                        inspectablePtr
+                    );
             }
         }
 
@@ -2065,8 +2068,10 @@ namespace System.Runtime.InteropServices
             public static int GetWeakReference(IntPtr pThis, out IntPtr weakReference)
             {
                 fixed (IntPtr* weakReferencePtr = &weakReference)
-                    return (*(delegate* unmanaged<IntPtr, IntPtr*, int>**)pThis)[3]
-                        (pThis, weakReferencePtr);
+                    return (*(delegate* unmanaged<IntPtr, IntPtr*, int>**)pThis)[3](
+                        pThis,
+                        weakReferencePtr
+                    );
             }
         }
 

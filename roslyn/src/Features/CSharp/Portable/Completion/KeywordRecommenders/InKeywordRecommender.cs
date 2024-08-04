@@ -39,13 +39,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsInParameterModifierContext(int position, CSharpSyntaxContext context)
         {
             if (
-                context.SyntaxTree.IsParameterModifierContext(
-                    position,
-                    context.LeftToken,
-                    includeOperators: true,
-                    out var parameterIndex,
-                    out var previousModifier
-                )
+                context
+                    .SyntaxTree
+                    .IsParameterModifierContext(
+                        position,
+                        context.LeftToken,
+                        includeOperators: true,
+                        out var parameterIndex,
+                        out var previousModifier
+                    )
             )
             {
                 if (previousModifier is SyntaxKind.None or SyntaxKind.ScopedKeyword)
@@ -160,10 +162,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                         joinClause.Type != null
                         && joinClause.Type is IdentifierNameSyntax joinIdentifier
                         && token == joinIdentifier.Identifier
-                        && !joinClause.Type.IsPotentialTypeName(
-                            context.SemanticModel,
-                            cancellationToken
-                        )
+                        && !joinClause
+                            .Type
+                            .IsPotentialTypeName(context.SemanticModel, cancellationToken)
                     )
                     {
                         return true;

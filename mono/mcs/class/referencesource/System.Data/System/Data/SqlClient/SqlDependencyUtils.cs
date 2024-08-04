@@ -90,9 +90,10 @@ namespace System.Data.SqlClient
         // BID members
         // -----------
 
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        private readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
         private static int _objectTypeCount; // Bid counter
         internal int ObjectID
         {
@@ -820,9 +821,9 @@ namespace System.Data.SqlClient
                     {
                         if (null != dependencies[i])
                         {
-                            SingletonInstance._dependencyIdToDependencyHash.Remove(
-                                dependencies[i].Id
-                            );
+                            SingletonInstance
+                                ._dependencyIdToDependencyHash
+                                .Remove(dependencies[i].Id);
                         }
                     }
                     if (newNextTimeout < SingletonInstance._nextTimeout)

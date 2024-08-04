@@ -172,10 +172,12 @@ public class NavigationFixer : INavigationFixer
                                         victimDependentEntry[navigation],
                                         newTargetEntry.Entity
                                     )
-                                    && victimDependentEntry.StateManager.TryGetEntry(
-                                        victimDependentEntry.Entity,
-                                        navigation.DeclaringEntityType
-                                    ) != null
+                                    && victimDependentEntry
+                                        .StateManager
+                                        .TryGetEntry(
+                                            victimDependentEntry.Entity,
+                                            navigation.DeclaringEntityType
+                                        ) != null
                                 )
                                 {
                                     SetNavigation(
@@ -248,7 +250,8 @@ public class NavigationFixer : INavigationFixer
                         && ReferenceEquals(oldTargetEntry[inverse], entry.Entity)
                         && (
                             entry
-                                .EntityType.GetNavigations()
+                                .EntityType
+                                .GetNavigations()
                                 .All(n =>
                                     n == navigation
                                     || !ReferenceEquals(oldTargetEntry.Entity, entry[n])
@@ -587,10 +590,12 @@ public class NavigationFixer : INavigationFixer
                                         targetDependentEntry[dependentToPrincipal],
                                         newPrincipalEntry.Entity
                                     )
-                                    && targetDependentEntry.StateManager.TryGetEntry(
-                                        targetDependentEntry.Entity,
-                                        foreignKey.DeclaringEntityType
-                                    ) != null
+                                    && targetDependentEntry
+                                        .StateManager
+                                        .TryGetEntry(
+                                            targetDependentEntry.Entity,
+                                            foreignKey.DeclaringEntityType
+                                        ) != null
                                 )
                                 {
                                     SetNavigation(
@@ -617,10 +622,9 @@ public class NavigationFixer : INavigationFixer
                     {
                         if (
                             ReferenceEquals(entry[dependentToPrincipal], oldPrincipalEntry.Entity)
-                            && entry.StateManager.TryGetEntry(
-                                entry.Entity,
-                                foreignKey.DeclaringEntityType
-                            ) != null
+                            && entry
+                                .StateManager
+                                .TryGetEntry(entry.Entity, foreignKey.DeclaringEntityType) != null
                         )
                         {
                             SetNavigation(entry, dependentToPrincipal, null, fromQuery: false);
@@ -630,10 +634,9 @@ public class NavigationFixer : INavigationFixer
                     {
                         if (
                             entry[dependentToPrincipal] == null
-                            && entry.StateManager.TryGetEntry(
-                                entry.Entity,
-                                foreignKey.DeclaringEntityType
-                            ) != null
+                            && entry
+                                .StateManager
+                                .TryGetEntry(entry.Entity, foreignKey.DeclaringEntityType) != null
                         )
                         {
                             // FK has changed but navigation is still null
@@ -1319,10 +1322,10 @@ public class NavigationFixer : INavigationFixer
         && (
             dependentEntry.SharedIdentityEntry != null
             || dependentEntry.EntityType.HasSharedClrType
-                && dependentEntry.StateManager.TryGetEntry(
-                    dependentEntry.Entity,
-                    throwOnNonUniqueness: false
-                ) != dependentEntry
+                && dependentEntry
+                    .StateManager
+                    .TryGetEntry(dependentEntry.Entity, throwOnNonUniqueness: false)
+                    != dependentEntry
         );
 
     private void DelayedFixup(
@@ -1407,10 +1410,9 @@ public class NavigationFixer : INavigationFixer
             var leftEntry = entry.StateManager.FindPrincipal(entry, foreignKey);
             if (leftEntry != null)
             {
-                var rightEntry = entry.StateManager.FindPrincipal(
-                    entry,
-                    skipNavigation.Inverse.ForeignKey
-                );
+                var rightEntry = entry
+                    .StateManager
+                    .FindPrincipal(entry, skipNavigation.Inverse.ForeignKey);
                 if (rightEntry != null)
                 {
                     AddToCollection(leftEntry, skipNavigation, rightEntry, fromQuery);
@@ -1551,7 +1553,9 @@ public class NavigationFixer : INavigationFixer
         // Perf - see #21900
 
         var keyValues = foreignKey
-            .PrincipalKey.Properties.Select(p => entry[p])
+            .PrincipalKey
+            .Properties
+            .Select(p => entry[p])
             .Concat(otherForeignKey.PrincipalKey.Properties.Select(p => otherEntry[p]))
             .ToList();
 
@@ -1595,14 +1599,16 @@ public class NavigationFixer : INavigationFixer
             );
             if (key != null)
             {
-                joinEntry = entry.StateManager.TryGetEntry(
-                    key,
-                    new[]
-                    {
-                        firstEntry[firstForeignKey.PrincipalKey.Properties[0]],
-                        secondEntry[secondForeignKey.PrincipalKey.Properties[0]],
-                    }
-                );
+                joinEntry = entry
+                    .StateManager
+                    .TryGetEntry(
+                        key,
+                        new[]
+                        {
+                            firstEntry[firstForeignKey.PrincipalKey.Properties[0]],
+                            secondEntry[secondForeignKey.PrincipalKey.Properties[0]],
+                        }
+                    );
                 return true;
             }
 
@@ -1690,16 +1696,13 @@ public class NavigationFixer : INavigationFixer
                 principalToDependent == null ? null : principalEntry[principalToDependent];
             var oldDependentEntry =
                 oldDependent != null && !ReferenceEquals(dependentEntry.Entity, oldDependent)
-                    ? dependentEntry.StateManager.TryGetEntry(
-                        oldDependent,
-                        foreignKey.DeclaringEntityType
-                    )
+                    ? dependentEntry
+                        .StateManager
+                        .TryGetEntry(oldDependent, foreignKey.DeclaringEntityType)
                     : (InternalEntityEntry?)
                         dependentEntry
-                            .StateManager.GetDependentsUsingRelationshipSnapshot(
-                                principalEntry,
-                                foreignKey
-                            )
+                            .StateManager
+                            .GetDependentsUsingRelationshipSnapshot(principalEntry, foreignKey)
                             .FirstOrDefault();
 
             if (
@@ -1721,10 +1724,10 @@ public class NavigationFixer : INavigationFixer
                         oldDependentEntry[dependentToPrincipal],
                         principalEntry.Entity
                     )
-                    && oldDependentEntry.StateManager.TryGetEntry(
-                        oldDependentEntry.Entity,
-                        foreignKey.DeclaringEntityType
-                    ) != null
+                    && oldDependentEntry
+                        .StateManager
+                        .TryGetEntry(oldDependentEntry.Entity, foreignKey.DeclaringEntityType)
+                        != null
                 )
                 {
                     SetNavigation(oldDependentEntry, dependentToPrincipal, null, fromQuery);
@@ -1809,10 +1812,9 @@ public class NavigationFixer : INavigationFixer
         IForeignKey foreignKey
     )
     {
-        var currentPrincipal = dependentEntry.StateManager.FindPrincipal(
-            dependentEntry,
-            foreignKey
-        );
+        var currentPrincipal = dependentEntry
+            .StateManager
+            .FindPrincipal(dependentEntry, foreignKey);
         if (currentPrincipal != null && currentPrincipal != principalEntry)
         {
             return;
@@ -1924,10 +1926,9 @@ public class NavigationFixer : INavigationFixer
             return false;
         }
 
-        var existingEntry = entry.StateManager.TryGetEntry(
-            existingValue,
-            throwOnNonUniqueness: false
-        );
+        var existingEntry = entry
+            .StateManager
+            .TryGetEntry(existingValue, throwOnNonUniqueness: false);
         if (existingEntry == null)
         {
             return true;

@@ -636,8 +636,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 
             // Check if we already have this accessor.  (however, don't count it
             // if the user is *on* that accessor.
-            var existingAccessor = list
-                .Accessors.Select(a => a.Keyword)
+            var existingAccessor = list.Accessors
+                .Select(a => a.Keyword)
                 .FirstOrDefault(a => !a.IsMissing && a.IsKindOrHasMatchingText(kind));
 
             if (existingAccessor.Kind() != SyntaxKind.None)

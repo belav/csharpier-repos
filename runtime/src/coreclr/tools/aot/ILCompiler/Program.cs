@@ -480,13 +480,15 @@ namespace ILCompiler
 
                 resourceBlocks = ManifestResourceBlockingPolicy.UnionBlockings(
                     resourceBlocks,
-                    ManifestResourceBlockingPolicy.SubstitutionsReader.GetSubstitutions(
-                        logger,
-                        typeSystemContext,
-                        XmlReader.Create(fs),
-                        substitutionFilePath,
-                        featureSwitches
-                    )
+                    ManifestResourceBlockingPolicy
+                        .SubstitutionsReader
+                        .GetSubstitutions(
+                            logger,
+                            typeSystemContext,
+                            XmlReader.Create(fs),
+                            substitutionFilePath,
+                            featureSwitches
+                        )
                 );
             }
 

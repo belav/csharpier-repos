@@ -48,10 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 SymbolDisplayMiscellaneousOptions.UseSpecialTypes
             );
 
-        private static readonly SymbolDisplayFormat MinimalParameterTypeFormat =
-            SymbolDisplayFormat.MinimallyQualifiedFormat.AddMiscellaneousOptions(
-                SymbolDisplayMiscellaneousOptions.ExpandValueTuple
-            );
+        private static readonly SymbolDisplayFormat MinimalParameterTypeFormat = SymbolDisplayFormat
+            .MinimallyQualifiedFormat
+            .AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.ExpandValueTuple);
 
         private Action<SyntaxNode?>? _testSpeculativeNodeCallback;
 
@@ -142,8 +141,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // To get a Speculative SemanticModel (which is much faster), we need to
             // walk up to the node the DocumentationTrivia is attached to.
             var parentNode = token
-                .Parent?.FirstAncestorOrSelf<DocumentationCommentTriviaSyntax>()
-                ?.ParentTrivia.Token.Parent;
+                .Parent
+                ?.FirstAncestorOrSelf<DocumentationCommentTriviaSyntax>()
+                ?.ParentTrivia
+                .Token
+                .Parent;
             _testSpeculativeNodeCallback?.Invoke(parentNode);
             if (parentNode == null)
                 return default;

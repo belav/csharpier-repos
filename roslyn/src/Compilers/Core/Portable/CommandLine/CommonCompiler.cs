@@ -196,9 +196,10 @@ namespace Microsoft.CodeAnalysis
         {
             // The attribute stores a SemVer2-formatted string: `A.B.C(-...)?(+...)?`
             // We remove the section after the + (if any is present)
-            return type
-                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                ?.InformationalVersion.Split('+')[0];
+            return type.Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                ?.InformationalVersion
+                .Split('+')[0];
         }
 
         private static string? GetShortCommitHash(Type type)
@@ -795,8 +796,10 @@ namespace Microsoft.CodeAnalysis
             // Now, go through each of the referenced assemblies and print their IVT information.
             foreach (
                 var assembly in currentAssembly
-                    .Modules.First()
-                    .ReferencedAssemblySymbols.OrderBy(a => a.Name)
+                    .Modules
+                    .First()
+                    .ReferencedAssemblySymbols
+                    .OrderBy(a => a.Name)
             )
             {
                 // Assembly reference: '{0}'
@@ -1055,8 +1058,8 @@ namespace Microsoft.CodeAnalysis
             if (this.GeneratorDriverCache is object && !disableCache)
             {
                 cacheKey = deriveCacheKey();
-                driver = this
-                    .GeneratorDriverCache.TryGetDriver(cacheKey)
+                driver = this.GeneratorDriverCache
+                    .TryGetDriver(cacheKey)
                     ?.WithUpdatedParseOptions(parseOptions)
                     .WithUpdatedAnalyzerConfigOptions(analyzerConfigOptionsProvider)
                     .ReplaceAdditionalTexts(additionalTexts);
@@ -1181,9 +1184,9 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 globalConfigOptions = analyzerConfigSet.GlobalConfigOptions;
-                sourceFileAnalyzerConfigOptions = Arguments.SourceFiles.SelectAsArray(f =>
-                    analyzerConfigSet.GetOptionsForSourcePath(f.Path)
-                );
+                sourceFileAnalyzerConfigOptions = Arguments
+                    .SourceFiles
+                    .SelectAsArray(f => analyzerConfigSet.GetOptionsForSourcePath(f.Path));
 
                 foreach (var sourceFileAnalyzerConfigOption in sourceFileAnalyzerConfigOptions)
                 {
@@ -1493,7 +1496,8 @@ namespace Microsoft.CodeAnalysis
                         Arguments.GeneratedFilesOutputDirectory
                     );
                     var generatedSyntaxTrees = compilation
-                        .SyntaxTrees.Skip(Arguments.SourceFiles.Length)
+                        .SyntaxTrees
+                        .Skip(Arguments.SourceFiles.Length)
                         .ToList();
                     var analyzerOptionsBuilder = hasAnalyzerConfigs
                         ? ArrayBuilder<AnalyzerConfigOptionsResult>.GetInstance(
@@ -1634,7 +1638,8 @@ namespace Microsoft.CodeAnalysis
             {
                 // NOTE: Unlike the PDB path, the XML doc path is not embedded in the assembly, so we don't need to pass it to emit.
                 var emitOptions = Arguments
-                    .EmitOptions.WithOutputNameOverride(outputName)
+                    .EmitOptions
+                    .WithOutputNameOverride(outputName)
                     .WithPdbFilePath(
                         PathUtilities.NormalizePathPrefix(finalPdbFilePath, Arguments.PathMap)
                     );

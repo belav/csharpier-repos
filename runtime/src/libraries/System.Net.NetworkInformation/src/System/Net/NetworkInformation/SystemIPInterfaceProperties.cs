@@ -39,29 +39,35 @@ namespace System.Net.NetworkInformation
 
             _multicastAddresses =
                 SystemMulticastIPAddressInformation.ToMulticastIpAddressInformationCollection(
-                    Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressInformationCollection(
-                        ipAdapterAddresses.firstMulticastAddress
-                    )
+                    Interop
+                        .IpHlpApi
+                        .IpAdapterAddress
+                        .MarshalIpAddressInformationCollection(
+                            ipAdapterAddresses.firstMulticastAddress
+                        )
                 );
-            _dnsAddresses = Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressCollection(
-                ipAdapterAddresses.firstDnsServerAddress
-            );
-            _anycastAddresses =
-                Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressInformationCollection(
-                    ipAdapterAddresses.firstAnycastAddress
-                );
+            _dnsAddresses = Interop
+                .IpHlpApi
+                .IpAdapterAddress
+                .MarshalIpAddressCollection(ipAdapterAddresses.firstDnsServerAddress);
+            _anycastAddresses = Interop
+                .IpHlpApi
+                .IpAdapterAddress
+                .MarshalIpAddressInformationCollection(ipAdapterAddresses.firstAnycastAddress);
             _unicastAddresses =
                 SystemUnicastIPAddressInformation.MarshalUnicastIpAddressInformationCollection(
                     ipAdapterAddresses.firstUnicastAddress
                 );
-            _winsServersAddresses = Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressCollection(
-                ipAdapterAddresses.firstWinsServerAddress
-            );
+            _winsServersAddresses = Interop
+                .IpHlpApi
+                .IpAdapterAddress
+                .MarshalIpAddressCollection(ipAdapterAddresses.firstWinsServerAddress);
             _gatewayAddresses =
                 SystemGatewayIPAddressInformation.ToGatewayIpAddressInformationCollection(
-                    Interop.IpHlpApi.IpAdapterAddress.MarshalIpAddressCollection(
-                        ipAdapterAddresses.firstGatewayAddress
-                    )
+                    Interop
+                        .IpHlpApi
+                        .IpAdapterAddress
+                        .MarshalIpAddressCollection(ipAdapterAddresses.firstGatewayAddress)
                 );
 
             _dhcpServers = new InternalIPAddressCollection();

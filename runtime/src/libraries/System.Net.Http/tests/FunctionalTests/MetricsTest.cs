@@ -530,9 +530,9 @@ namespace System.Net.Http.Functional.Tests
                     }
                 });
 
-            using IDisposable subscription = DiagnosticListener.AllListeners.Subscribe(
-                diagnosticListenerObserver
-            );
+            using IDisposable subscription = DiagnosticListener
+                .AllListeners
+                .Subscribe(diagnosticListenerObserver);
 
             await LoopbackServerFactory.CreateClientAndServerAsync(
                 async uri =>
@@ -1744,37 +1744,41 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public void HttpClientHandler_SetMeterFactoryAfterStart_ThrowsInvalidOperationException()
         {
-            Http11LoopbackServerFactory.Singleton.CreateClientAndServerAsync(
-                async uri =>
-                {
-                    using HttpClientHandler handler = new();
-                    using HttpClient client = new HttpClient(handler);
-                    await client.GetAsync(uri);
+            Http11LoopbackServerFactory
+                .Singleton
+                .CreateClientAndServerAsync(
+                    async uri =>
+                    {
+                        using HttpClientHandler handler = new();
+                        using HttpClient client = new HttpClient(handler);
+                        await client.GetAsync(uri);
 
-                    Assert.Throws<InvalidOperationException>(
-                        () => handler.MeterFactory = new TestMeterFactory()
-                    );
-                },
-                server => server.AcceptConnectionSendResponseAndCloseAsync()
-            );
+                        Assert.Throws<InvalidOperationException>(
+                            () => handler.MeterFactory = new TestMeterFactory()
+                        );
+                    },
+                    server => server.AcceptConnectionSendResponseAndCloseAsync()
+                );
         }
 
         [ConditionalFact(typeof(SocketsHttpHandler), nameof(SocketsHttpHandler.IsSupported))]
         public void SocketsHttpHandler_SetMeterFactoryAfterStart_ThrowsInvalidOperationException()
         {
-            Http11LoopbackServerFactory.Singleton.CreateClientAndServerAsync(
-                async uri =>
-                {
-                    using SocketsHttpHandler handler = new();
-                    using HttpClient client = new HttpClient(handler);
-                    await client.GetAsync(uri);
+            Http11LoopbackServerFactory
+                .Singleton
+                .CreateClientAndServerAsync(
+                    async uri =>
+                    {
+                        using SocketsHttpHandler handler = new();
+                        using HttpClient client = new HttpClient(handler);
+                        await client.GetAsync(uri);
 
-                    Assert.Throws<InvalidOperationException>(
-                        () => handler.MeterFactory = new TestMeterFactory()
-                    );
-                },
-                server => server.AcceptConnectionSendResponseAndCloseAsync()
-            );
+                        Assert.Throws<InvalidOperationException>(
+                            () => handler.MeterFactory = new TestMeterFactory()
+                        );
+                    },
+                    server => server.AcceptConnectionSendResponseAndCloseAsync()
+                );
         }
     }
 

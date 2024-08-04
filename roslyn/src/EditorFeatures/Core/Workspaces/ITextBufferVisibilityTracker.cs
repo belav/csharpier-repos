@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Workspaces
                     return;
 
                 await threadingContext
-                    .JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken)
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken)
                     .NoThrowAwaitable();
                 if (cancellationToken.IsCancellationRequested)
                     return;

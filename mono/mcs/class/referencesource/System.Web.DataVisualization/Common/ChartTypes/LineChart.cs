@@ -453,9 +453,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 // Check tension attribute in the series
@@ -807,9 +809,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPostPaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPostPaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
             }
         }
@@ -1098,14 +1102,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         coord[2 * i + 1] = pointNew.Y;
                     }
 
-                    common.HotRegionsList.AddHotRegion(
-                        path,
-                        false,
-                        coord,
-                        point,
-                        series.Name,
-                        pointIndex
-                    );
+                    common
+                        .HotRegionsList
+                        .AddHotRegion(path, false, coord, point, series.Name, pointIndex);
                 }
             }
         }
@@ -1629,9 +1628,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             // Check if point markers lines should be drawn
                             this.showPointLines = false;
                             if (
-                                pointAttr.dataPoint.IsCustomPropertySet(
-                                    CustomPropertyName.ShowMarkerLines
-                                )
+                                pointAttr
+                                    .dataPoint
+                                    .IsCustomPropertySet(CustomPropertyName.ShowMarkerLines)
                             )
                             {
                                 if (
@@ -1648,9 +1647,10 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             else
                             {
                                 if (
-                                    pointAttr.dataPoint.series.IsCustomPropertySet(
-                                        CustomPropertyName.ShowMarkerLines
-                                    )
+                                    pointAttr
+                                        .dataPoint
+                                        .series
+                                        .IsCustomPropertySet(CustomPropertyName.ShowMarkerLines)
                                 )
                                 {
                                     if (
@@ -1703,14 +1703,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         //************************************************************
                         if (common.ProcessModeRegions && rectPath != null)
                         {
-                            common.HotRegionsList.AddHotRegion(
-                                rectPath,
-                                false,
-                                graph,
-                                point,
-                                ser.Name,
-                                pointEx.index - 1
-                            );
+                            common
+                                .HotRegionsList
+                                .AddHotRegion(
+                                    rectPath,
+                                    false,
+                                    graph,
+                                    point,
+                                    ser.Name,
+                                    pointEx.index - 1
+                                );
                         }
                         if (rectPath != null)
                         {

@@ -84,7 +84,9 @@ namespace Microsoft.CodeAnalysis.Remote
                     {
                         // We know in the remote layer that this type must exist.
                         var globalOperationNotificationService = services
-                            .SolutionServices.ExportProvider.GetExports<IGlobalOperationNotificationService>()
+                            .SolutionServices
+                            .ExportProvider
+                            .GetExports<IGlobalOperationNotificationService>()
                             .Single()
                             .Value;
                         _performanceReporter = new PerformanceReporter(

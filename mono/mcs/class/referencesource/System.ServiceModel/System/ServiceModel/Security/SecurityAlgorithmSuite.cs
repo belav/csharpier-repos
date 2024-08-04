@@ -329,14 +329,16 @@ namespace System.ServiceModel.Security
             if (SecurityUtils.IsSupportedAlgorithm(derivationAlgorithm, token))
             {
                 if (this.DefaultEncryptionKeyDerivationLength % 8 != 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(
-                                SR.Psha1KeyLengthInvalid,
-                                this.DefaultEncryptionKeyDerivationLength
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(
+                                    SR.Psha1KeyLengthInvalid,
+                                    this.DefaultEncryptionKeyDerivationLength
+                                )
                             )
-                        )
-                    );
+                        );
 
                 return this.DefaultEncryptionKeyDerivationLength / 8;
             }
@@ -377,9 +379,11 @@ namespace System.ServiceModel.Security
             ReadOnlyCollection<SecurityKey> keys = token.SecurityKeys;
             if (keys == null || keys.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SigningTokenHasNoKeys, token))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SigningTokenHasNoKeys, token))
+                    );
             }
 
             for (int i = 0; i < keys.Count; i++)
@@ -402,11 +406,17 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(SR.SigningTokenHasNoKeysSupportingTheAlgorithmSuite, token, this)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SigningTokenHasNoKeysSupportingTheAlgorithmSuite,
+                            token,
+                            this
+                        )
+                    )
+                );
         }
 
         internal string GetSignatureKeyDerivationAlgorithm(
@@ -436,14 +446,16 @@ namespace System.ServiceModel.Security
             if (SecurityUtils.IsSupportedAlgorithm(derivationAlgorithm, token))
             {
                 if (this.DefaultSignatureKeyDerivationLength % 8 != 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(
-                                SR.Psha1KeyLengthInvalid,
-                                this.DefaultSignatureKeyDerivationLength
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(
+                                    SR.Psha1KeyLengthInvalid,
+                                    this.DefaultSignatureKeyDerivationLength
+                                )
                             )
-                        )
-                    );
+                        );
 
                 return this.DefaultSignatureKeyDerivationLength / 8;
             }
@@ -455,16 +467,18 @@ namespace System.ServiceModel.Security
         {
             if (!IsSymmetricSignatureAlgorithmSupported(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(
-                            SR.SuiteDoesNotAcceptAlgorithm,
-                            algorithm,
-                            "SymmetricSignature",
-                            this
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.SuiteDoesNotAcceptAlgorithm,
+                                algorithm,
+                                "SymmetricSignature",
+                                this
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -475,16 +489,18 @@ namespace System.ServiceModel.Security
             {
                 if (!IsAsymmetricKeyLengthSupported(asymmetricSecurityKey.KeySize))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(
-                                SR.TokenDoesNotMeetKeySizeRequirements,
-                                this,
-                                token,
-                                asymmetricSecurityKey.KeySize
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.TokenDoesNotMeetKeySizeRequirements,
+                                    this,
+                                    token,
+                                    asymmetricSecurityKey.KeySize
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             else
@@ -492,11 +508,13 @@ namespace System.ServiceModel.Security
                 SymmetricSecurityKey symmetricSecurityKey = securityKey as SymmetricSecurityKey;
                 if (symmetricSecurityKey == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnknownICryptoType, symmetricSecurityKey)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.UnknownICryptoType, symmetricSecurityKey)
+                            )
+                        );
                 }
                 EnsureAcceptableSignatureSymmetricKeySize(symmetricSecurityKey, token);
             }
@@ -522,16 +540,18 @@ namespace System.ServiceModel.Security
                 // the sending side doesn't honor the algorithm suite. It used the DefaultSignatureKeyDerivationLength instead
                 if (dkt.SecurityKeys[0].KeySize < this.DefaultSignatureKeyDerivationLength)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(
-                                SR.TokenDoesNotMeetKeySizeRequirements,
-                                this,
-                                dkt,
-                                dkt.SecurityKeys[0].KeySize
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.TokenDoesNotMeetKeySizeRequirements,
+                                    this,
+                                    dkt,
+                                    dkt.SecurityKeys[0].KeySize
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             else
@@ -541,11 +561,18 @@ namespace System.ServiceModel.Security
 
             if (!IsSymmetricKeyLengthSupported(keySize))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.TokenDoesNotMeetKeySizeRequirements, this, token, keySize)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.TokenDoesNotMeetKeySizeRequirements,
+                                this,
+                                token,
+                                keySize
+                            )
+                        )
+                    );
             }
         }
 
@@ -569,16 +596,18 @@ namespace System.ServiceModel.Security
                 // the sending side doesn't honor the algorithm suite. It used the DefaultSignatureKeyDerivationLength instead
                 if (dkt.SecurityKeys[0].KeySize < this.DefaultEncryptionKeyDerivationLength)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(
-                                SR.TokenDoesNotMeetKeySizeRequirements,
-                                this,
-                                dkt,
-                                dkt.SecurityKeys[0].KeySize
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.TokenDoesNotMeetKeySizeRequirements,
+                                    this,
+                                    dkt,
+                                    dkt.SecurityKeys[0].KeySize
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             else
@@ -588,11 +617,18 @@ namespace System.ServiceModel.Security
 
             if (!IsSymmetricKeyLengthSupported(keySize))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.TokenDoesNotMeetKeySizeRequirements, this, token, keySize)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.TokenDoesNotMeetKeySizeRequirements,
+                                this,
+                                token,
+                                keySize
+                            )
+                        )
+                    );
             }
         }
 
@@ -612,11 +648,13 @@ namespace System.ServiceModel.Security
                 AsymmetricSecurityKey asymmetricKey = verificationKey as AsymmetricSecurityKey;
                 if (asymmetricKey == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnknownICryptoType, verificationKey)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.UnknownICryptoType, verificationKey)
+                            )
+                        );
                 }
 
                 this.EnsureAcceptableAsymmetricSignatureAlgorithm(algorithm);
@@ -627,16 +665,18 @@ namespace System.ServiceModel.Security
         {
             if (!IsAsymmetricSignatureAlgorithmSupported(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(
-                            SR.SuiteDoesNotAcceptAlgorithm,
-                            algorithm,
-                            "AsymmetricSignature",
-                            this
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.SuiteDoesNotAcceptAlgorithm,
+                                algorithm,
+                                "AsymmetricSignature",
+                                this
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -646,32 +686,36 @@ namespace System.ServiceModel.Security
             {
                 if (!IsAsymmetricKeyWrapAlgorithmSupported(algorithm))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(
-                                SR.SuiteDoesNotAcceptAlgorithm,
-                                algorithm,
-                                "AsymmetricKeyWrap",
-                                this
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.SuiteDoesNotAcceptAlgorithm,
+                                    algorithm,
+                                    "AsymmetricKeyWrap",
+                                    this
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             else
             {
                 if (!IsSymmetricKeyWrapAlgorithmSupported(algorithm))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(
-                                SR.SuiteDoesNotAcceptAlgorithm,
-                                algorithm,
-                                "SymmetricKeyWrap",
-                                this
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.SuiteDoesNotAcceptAlgorithm,
+                                    algorithm,
+                                    "SymmetricKeyWrap",
+                                    this
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -680,11 +724,18 @@ namespace System.ServiceModel.Security
         {
             if (!IsEncryptionAlgorithmSupported(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.SuiteDoesNotAcceptAlgorithm, algorithm, "Encryption", this)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.SuiteDoesNotAcceptAlgorithm,
+                                algorithm,
+                                "Encryption",
+                                this
+                            )
+                        )
+                    );
             }
         }
 
@@ -692,16 +743,18 @@ namespace System.ServiceModel.Security
         {
             if (!IsSignatureKeyDerivationAlgorithmSupported(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(
-                            SR.SuiteDoesNotAcceptAlgorithm,
-                            algorithm,
-                            "SignatureKeyDerivation",
-                            this
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.SuiteDoesNotAcceptAlgorithm,
+                                algorithm,
+                                "SignatureKeyDerivation",
+                                this
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -709,16 +762,18 @@ namespace System.ServiceModel.Security
         {
             if (!IsEncryptionKeyDerivationAlgorithmSupported(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(
-                            SR.SuiteDoesNotAcceptAlgorithm,
-                            algorithm,
-                            "EncryptionKeyDerivation",
-                            this
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.SuiteDoesNotAcceptAlgorithm,
+                                algorithm,
+                                "EncryptionKeyDerivation",
+                                this
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -726,11 +781,13 @@ namespace System.ServiceModel.Security
         {
             if (!IsDigestAlgorithmSupported(algorithm))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.SuiteDoesNotAcceptAlgorithm, algorithm, "Digest", this)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.SuiteDoesNotAcceptAlgorithm, algorithm, "Digest", this)
+                        )
+                    );
             }
         }
     }

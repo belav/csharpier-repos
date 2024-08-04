@@ -98,8 +98,9 @@ namespace Internal.Runtime.CompilerServices
             if (resolveType == OpenNonVirtualResolve)
                 _nonVirtualOpenInvokeCodePointer = codePointer;
             else if (resolveType == OpenNonVirtualResolveLookthruUnboxing)
-                _nonVirtualOpenInvokeCodePointer =
-                    RuntimeAugments.TypeLoaderCallbacks.ConvertUnboxingFunctionPointerToUnderlyingNonUnboxingPointer(
+                _nonVirtualOpenInvokeCodePointer = RuntimeAugments
+                    .TypeLoaderCallbacks
+                    .ConvertUnboxingFunctionPointerToUnderlyingNonUnboxingPointer(
                         codePointer,
                         declaringType
                     );

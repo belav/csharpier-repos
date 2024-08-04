@@ -4267,11 +4267,10 @@ namespace System.Windows.Forms
                 if (isPrefixSearch)
                 { // prefix search
                     if (
-                        CultureInfo.CurrentCulture.CompareInfo.IsPrefix(
-                            lvi.Text,
-                            text,
-                            CompareOptions.IgnoreCase
-                        )
+                        CultureInfo
+                            .CurrentCulture
+                            .CompareInfo
+                            .IsPrefix(lvi.Text, text, CompareOptions.IgnoreCase)
                     )
                         return lvi;
                 }
@@ -4303,11 +4302,10 @@ namespace System.Windows.Forms
                         if (isPrefixSearch)
                         {
                             if (
-                                CultureInfo.CurrentCulture.CompareInfo.IsPrefix(
-                                    sub_item.Text,
-                                    text,
-                                    CompareOptions.IgnoreCase
-                                )
+                                CultureInfo
+                                    .CurrentCulture
+                                    .CompareInfo
+                                    .IsPrefix(sub_item.Text, text, CompareOptions.IgnoreCase)
                             )
                                 return lvi;
                         }

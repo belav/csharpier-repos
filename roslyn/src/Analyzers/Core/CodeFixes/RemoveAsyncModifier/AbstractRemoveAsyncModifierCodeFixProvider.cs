@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
             var document = context.Document;
             var cancellationToken = context.CancellationToken;
             var compilation = await document
-                .Project.GetRequiredCompilationAsync(cancellationToken)
+                .Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var knownTypes = new KnownTypes(compilation);
 

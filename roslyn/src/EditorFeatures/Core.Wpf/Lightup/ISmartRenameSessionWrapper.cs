@@ -39,11 +39,9 @@ internal readonly struct ISmartRenameSessionWrapper : INotifyPropertyChanged, ID
 
     static ISmartRenameSessionWrapper()
     {
-        s_wrappedType = typeof(AggregateFocusInterceptor).Assembly.GetType(
-            WrappedTypeName,
-            throwOnError: false,
-            ignoreCase: false
-        );
+        s_wrappedType = typeof(AggregateFocusInterceptor)
+            .Assembly
+            .GetType(WrappedTypeName, throwOnError: false, ignoreCase: false);
 
         s_isAvailableAccessor = LightupHelpers.CreatePropertyAccessor<object, bool>(
             s_wrappedType,

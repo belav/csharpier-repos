@@ -85,7 +85,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                     this.CodeModelService.CreateCodeType(
                         this.State,
                         this.FileCodeModel.GetProjectId(),
-                        this.FileCodeModel.GetCompilation()
+                        this.FileCodeModel
+                            .GetCompilation()
                             .GetSpecialType(SpecialType.System_Delegate)
                     );
             }

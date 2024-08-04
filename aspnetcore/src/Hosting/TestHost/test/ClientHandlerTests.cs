@@ -651,10 +651,12 @@ public class ClientHandlerTests
             PathString.Empty,
             new DummyApplication(context =>
             {
-                context.Response.OnStarting(() =>
-                {
-                    throw new InvalidOperationException(new string('a', 1024 * 32));
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        throw new InvalidOperationException(new string('a', 1024 * 32));
+                    });
                 return context.Response.WriteAsync("Hello World");
             })
         );
@@ -675,10 +677,12 @@ public class ClientHandlerTests
             PathString.Empty,
             new DummyApplication(context =>
             {
-                context.Response.OnStarting(() =>
-                {
-                    throw new InvalidOperationException(new string('a', 1024 * 32));
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        throw new InvalidOperationException(new string('a', 1024 * 32));
+                    });
                 return Task.CompletedTask;
             })
         );
@@ -699,10 +703,12 @@ public class ClientHandlerTests
             PathString.Empty,
             new DummyApplication(async context =>
             {
-                context.Response.OnStarting(() =>
-                {
-                    throw new InvalidOperationException(new string('a', 1024 * 32));
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        throw new InvalidOperationException(new string('a', 1024 * 32));
+                    });
                 try
                 {
                     await context.Response.WriteAsync("Hello World");

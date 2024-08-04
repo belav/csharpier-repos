@@ -24,15 +24,17 @@ namespace System.Runtime.InteropServices.JavaScript
                 throw new InvalidOperationException("Expected Task converted from JS Promise");
 
 #if FEATURE_WASM_THREADS
-            holder.SynchronizationContext!.Send(
-                static (JSHostImplementation.PromiseHolder holder) =>
-                {
+            holder
+                .SynchronizationContext!
+                .Send(
+                    static (JSHostImplementation.PromiseHolder holder) =>
+                    {
 #endif
-                    _CancelPromise(holder.GCVHandle);
+                        _CancelPromise(holder.GCVHandle);
 #if FEATURE_WASM_THREADS
-                },
-                holder
-            );
+                    },
+                    holder
+                );
 #endif
         }
 
@@ -49,16 +51,18 @@ namespace System.Runtime.InteropServices.JavaScript
                 throw new InvalidOperationException("Expected Task converted from JS Promise");
 
 #if FEATURE_WASM_THREADS
-            holder.SynchronizationContext!.Send(
-                (JSHostImplementation.PromiseHolder holder) =>
-                {
+            holder
+                .SynchronizationContext!
+                .Send(
+                    (JSHostImplementation.PromiseHolder holder) =>
+                    {
 #endif
-                    _CancelPromise(holder.GCVHandle);
-                    callback.Invoke(state);
+                        _CancelPromise(holder.GCVHandle);
+                        callback.Invoke(state);
 #if FEATURE_WASM_THREADS
-                },
-                holder
-            );
+                    },
+                    holder
+                );
 #endif
         }
     }

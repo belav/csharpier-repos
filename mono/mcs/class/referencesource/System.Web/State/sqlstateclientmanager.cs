@@ -1378,9 +1378,9 @@ namespace System.Web.SessionState
 
                     // AppDomainAppId will contain the whole metabase path of the request's app
                     // e.g. /lm/w3svc/1/root/fxtest
-                    p = cmdTempGetAppId.Parameters.Add(
-                        new SqlParameter("@appName", SqlDbType.VarChar, APPID_MAX)
-                    );
+                    p = cmdTempGetAppId
+                        .Parameters
+                        .Add(new SqlParameter("@appName", SqlDbType.VarChar, APPID_MAX));
                     p.Value = HttpRuntime.AppDomainAppId;
 
                     p = cmdTempGetAppId.Parameters.Add(new SqlParameter("@appId", SqlDbType.Int));
@@ -1628,62 +1628,66 @@ namespace System.Web.SessionState
                         // Use a different set of parameters for the sprocs that support GetLockAge
                         if ((_partitionInfo.SupportFlags & SupportFlags.GetLockAge) != 0)
                         {
-                            _cmdTempGet.Parameters.Add(
-                                new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                            );
-                            p = _cmdTempGet.Parameters.Add(
-                                new SqlParameter(
-                                    "@itemShort",
-                                    SqlDbType.VarBinary,
-                                    ITEM_SHORT_LENGTH
-                                )
-                            );
+                            _cmdTempGet
+                                .Parameters
+                                .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                            p = _cmdTempGet
+                                .Parameters
+                                .Add(
+                                    new SqlParameter(
+                                        "@itemShort",
+                                        SqlDbType.VarBinary,
+                                        ITEM_SHORT_LENGTH
+                                    )
+                                );
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGet.Parameters.Add(
-                                new SqlParameter("@locked", SqlDbType.Bit)
-                            );
+                            p = _cmdTempGet
+                                .Parameters
+                                .Add(new SqlParameter("@locked", SqlDbType.Bit));
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGet.Parameters.Add(
-                                new SqlParameter("@lockAge", SqlDbType.Int)
-                            );
+                            p = _cmdTempGet
+                                .Parameters
+                                .Add(new SqlParameter("@lockAge", SqlDbType.Int));
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGet.Parameters.Add(
-                                new SqlParameter("@lockCookie", SqlDbType.Int)
-                            );
+                            p = _cmdTempGet
+                                .Parameters
+                                .Add(new SqlParameter("@lockCookie", SqlDbType.Int));
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGet.Parameters.Add(
-                                new SqlParameter("@actionFlags", SqlDbType.Int)
-                            );
+                            p = _cmdTempGet
+                                .Parameters
+                                .Add(new SqlParameter("@actionFlags", SqlDbType.Int));
                             p.Direction = ParameterDirection.Output;
                         }
                         else
                         {
-                            _cmdTempGet.Parameters.Add(
-                                new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                            );
-                            p = _cmdTempGet.Parameters.Add(
-                                new SqlParameter(
-                                    "@itemShort",
-                                    SqlDbType.VarBinary,
-                                    ITEM_SHORT_LENGTH
-                                )
-                            );
+                            _cmdTempGet
+                                .Parameters
+                                .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                            p = _cmdTempGet
+                                .Parameters
+                                .Add(
+                                    new SqlParameter(
+                                        "@itemShort",
+                                        SqlDbType.VarBinary,
+                                        ITEM_SHORT_LENGTH
+                                    )
+                                );
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGet.Parameters.Add(
-                                new SqlParameter("@locked", SqlDbType.Bit)
-                            );
+                            p = _cmdTempGet
+                                .Parameters
+                                .Add(new SqlParameter("@locked", SqlDbType.Bit));
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGet.Parameters.Add(
-                                new SqlParameter("@lockDate", SqlDbType.DateTime)
-                            );
+                            p = _cmdTempGet
+                                .Parameters
+                                .Add(new SqlParameter("@lockDate", SqlDbType.DateTime));
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGet.Parameters.Add(
-                                new SqlParameter("@lockCookie", SqlDbType.Int)
-                            );
+                            p = _cmdTempGet
+                                .Parameters
+                                .Add(new SqlParameter("@lockCookie", SqlDbType.Int));
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGet.Parameters.Add(
-                                new SqlParameter("@actionFlags", SqlDbType.Int)
-                            );
+                            p = _cmdTempGet
+                                .Parameters
+                                .Add(new SqlParameter("@actionFlags", SqlDbType.Int));
                             p.Direction = ParameterDirection.Output;
                         }
                     }
@@ -1710,62 +1714,66 @@ namespace System.Web.SessionState
                         // Use a different set of parameters for the sprocs that support GetLockAge
                         if ((_partitionInfo.SupportFlags & SupportFlags.GetLockAge) != 0)
                         {
-                            _cmdTempGetExclusive.Parameters.Add(
-                                new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                            );
-                            p = _cmdTempGetExclusive.Parameters.Add(
-                                new SqlParameter(
-                                    "@itemShort",
-                                    SqlDbType.VarBinary,
-                                    ITEM_SHORT_LENGTH
-                                )
-                            );
+                            _cmdTempGetExclusive
+                                .Parameters
+                                .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                            p = _cmdTempGetExclusive
+                                .Parameters
+                                .Add(
+                                    new SqlParameter(
+                                        "@itemShort",
+                                        SqlDbType.VarBinary,
+                                        ITEM_SHORT_LENGTH
+                                    )
+                                );
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGetExclusive.Parameters.Add(
-                                new SqlParameter("@locked", SqlDbType.Bit)
-                            );
+                            p = _cmdTempGetExclusive
+                                .Parameters
+                                .Add(new SqlParameter("@locked", SqlDbType.Bit));
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGetExclusive.Parameters.Add(
-                                new SqlParameter("@lockAge", SqlDbType.Int)
-                            );
+                            p = _cmdTempGetExclusive
+                                .Parameters
+                                .Add(new SqlParameter("@lockAge", SqlDbType.Int));
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGetExclusive.Parameters.Add(
-                                new SqlParameter("@lockCookie", SqlDbType.Int)
-                            );
+                            p = _cmdTempGetExclusive
+                                .Parameters
+                                .Add(new SqlParameter("@lockCookie", SqlDbType.Int));
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGetExclusive.Parameters.Add(
-                                new SqlParameter("@actionFlags", SqlDbType.Int)
-                            );
+                            p = _cmdTempGetExclusive
+                                .Parameters
+                                .Add(new SqlParameter("@actionFlags", SqlDbType.Int));
                             p.Direction = ParameterDirection.Output;
                         }
                         else
                         {
-                            _cmdTempGetExclusive.Parameters.Add(
-                                new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                            );
-                            p = _cmdTempGetExclusive.Parameters.Add(
-                                new SqlParameter(
-                                    "@itemShort",
-                                    SqlDbType.VarBinary,
-                                    ITEM_SHORT_LENGTH
-                                )
-                            );
+                            _cmdTempGetExclusive
+                                .Parameters
+                                .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                            p = _cmdTempGetExclusive
+                                .Parameters
+                                .Add(
+                                    new SqlParameter(
+                                        "@itemShort",
+                                        SqlDbType.VarBinary,
+                                        ITEM_SHORT_LENGTH
+                                    )
+                                );
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGetExclusive.Parameters.Add(
-                                new SqlParameter("@locked", SqlDbType.Bit)
-                            );
+                            p = _cmdTempGetExclusive
+                                .Parameters
+                                .Add(new SqlParameter("@locked", SqlDbType.Bit));
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGetExclusive.Parameters.Add(
-                                new SqlParameter("@lockDate", SqlDbType.DateTime)
-                            );
+                            p = _cmdTempGetExclusive
+                                .Parameters
+                                .Add(new SqlParameter("@lockDate", SqlDbType.DateTime));
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGetExclusive.Parameters.Add(
-                                new SqlParameter("@lockCookie", SqlDbType.Int)
-                            );
+                            p = _cmdTempGetExclusive
+                                .Parameters
+                                .Add(new SqlParameter("@lockCookie", SqlDbType.Int));
                             p.Direction = ParameterDirection.Output;
-                            p = _cmdTempGetExclusive.Parameters.Add(
-                                new SqlParameter("@actionFlags", SqlDbType.Int)
-                            );
+                            p = _cmdTempGetExclusive
+                                .Parameters
+                                .Add(new SqlParameter("@actionFlags", SqlDbType.Int));
                             p.Direction = ParameterDirection.Output;
                         }
                     }
@@ -1787,12 +1795,12 @@ namespace System.Web.SessionState
                         );
                         _cmdTempReleaseExclusive.CommandType = CommandType.StoredProcedure;
                         _cmdTempReleaseExclusive.CommandTimeout = s_commandTimeout;
-                        _cmdTempReleaseExclusive.Parameters.Add(
-                            new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                        );
-                        _cmdTempReleaseExclusive.Parameters.Add(
-                            new SqlParameter("@lockCookie", SqlDbType.Int)
-                        );
+                        _cmdTempReleaseExclusive
+                            .Parameters
+                            .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                        _cmdTempReleaseExclusive
+                            .Parameters
+                            .Add(new SqlParameter("@lockCookie", SqlDbType.Int));
                     }
 
                     return _cmdTempReleaseExclusive;
@@ -1811,15 +1819,15 @@ namespace System.Web.SessionState
                         );
                         _cmdTempInsertLong.CommandType = CommandType.StoredProcedure;
                         _cmdTempInsertLong.CommandTimeout = s_commandTimeout;
-                        _cmdTempInsertLong.Parameters.Add(
-                            new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                        );
-                        _cmdTempInsertLong.Parameters.Add(
-                            new SqlParameter("@itemLong", SqlDbType.Image, 8000)
-                        );
-                        _cmdTempInsertLong.Parameters.Add(
-                            new SqlParameter("@timeout", SqlDbType.Int)
-                        );
+                        _cmdTempInsertLong
+                            .Parameters
+                            .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                        _cmdTempInsertLong
+                            .Parameters
+                            .Add(new SqlParameter("@itemLong", SqlDbType.Image, 8000));
+                        _cmdTempInsertLong
+                            .Parameters
+                            .Add(new SqlParameter("@timeout", SqlDbType.Int));
                     }
 
                     return _cmdTempInsertLong;
@@ -1839,15 +1847,21 @@ namespace System.Web.SessionState
                         );
                         _cmdTempInsertShort.CommandType = CommandType.StoredProcedure;
                         _cmdTempInsertShort.CommandTimeout = s_commandTimeout;
-                        _cmdTempInsertShort.Parameters.Add(
-                            new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                        );
-                        _cmdTempInsertShort.Parameters.Add(
-                            new SqlParameter("@itemShort", SqlDbType.VarBinary, ITEM_SHORT_LENGTH)
-                        );
-                        _cmdTempInsertShort.Parameters.Add(
-                            new SqlParameter("@timeout", SqlDbType.Int)
-                        );
+                        _cmdTempInsertShort
+                            .Parameters
+                            .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                        _cmdTempInsertShort
+                            .Parameters
+                            .Add(
+                                new SqlParameter(
+                                    "@itemShort",
+                                    SqlDbType.VarBinary,
+                                    ITEM_SHORT_LENGTH
+                                )
+                            );
+                        _cmdTempInsertShort
+                            .Parameters
+                            .Add(new SqlParameter("@timeout", SqlDbType.Int));
                     }
 
                     return _cmdTempInsertShort;
@@ -1866,18 +1880,18 @@ namespace System.Web.SessionState
                         );
                         _cmdTempUpdateLong.CommandType = CommandType.StoredProcedure;
                         _cmdTempUpdateLong.CommandTimeout = s_commandTimeout;
-                        _cmdTempUpdateLong.Parameters.Add(
-                            new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                        );
-                        _cmdTempUpdateLong.Parameters.Add(
-                            new SqlParameter("@itemLong", SqlDbType.Image, 8000)
-                        );
-                        _cmdTempUpdateLong.Parameters.Add(
-                            new SqlParameter("@timeout", SqlDbType.Int)
-                        );
-                        _cmdTempUpdateLong.Parameters.Add(
-                            new SqlParameter("@lockCookie", SqlDbType.Int)
-                        );
+                        _cmdTempUpdateLong
+                            .Parameters
+                            .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                        _cmdTempUpdateLong
+                            .Parameters
+                            .Add(new SqlParameter("@itemLong", SqlDbType.Image, 8000));
+                        _cmdTempUpdateLong
+                            .Parameters
+                            .Add(new SqlParameter("@timeout", SqlDbType.Int));
+                        _cmdTempUpdateLong
+                            .Parameters
+                            .Add(new SqlParameter("@lockCookie", SqlDbType.Int));
                     }
 
                     return _cmdTempUpdateLong;
@@ -1897,18 +1911,24 @@ namespace System.Web.SessionState
                         );
                         _cmdTempUpdateShort.CommandType = CommandType.StoredProcedure;
                         _cmdTempUpdateShort.CommandTimeout = s_commandTimeout;
-                        _cmdTempUpdateShort.Parameters.Add(
-                            new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                        );
-                        _cmdTempUpdateShort.Parameters.Add(
-                            new SqlParameter("@itemShort", SqlDbType.VarBinary, ITEM_SHORT_LENGTH)
-                        );
-                        _cmdTempUpdateShort.Parameters.Add(
-                            new SqlParameter("@timeout", SqlDbType.Int)
-                        );
-                        _cmdTempUpdateShort.Parameters.Add(
-                            new SqlParameter("@lockCookie", SqlDbType.Int)
-                        );
+                        _cmdTempUpdateShort
+                            .Parameters
+                            .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                        _cmdTempUpdateShort
+                            .Parameters
+                            .Add(
+                                new SqlParameter(
+                                    "@itemShort",
+                                    SqlDbType.VarBinary,
+                                    ITEM_SHORT_LENGTH
+                                )
+                            );
+                        _cmdTempUpdateShort
+                            .Parameters
+                            .Add(new SqlParameter("@timeout", SqlDbType.Int));
+                        _cmdTempUpdateShort
+                            .Parameters
+                            .Add(new SqlParameter("@lockCookie", SqlDbType.Int));
                     }
 
                     return _cmdTempUpdateShort;
@@ -1927,18 +1947,24 @@ namespace System.Web.SessionState
                         );
                         _cmdTempUpdateShortNullLong.CommandType = CommandType.StoredProcedure;
                         _cmdTempUpdateShortNullLong.CommandTimeout = s_commandTimeout;
-                        _cmdTempUpdateShortNullLong.Parameters.Add(
-                            new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                        );
-                        _cmdTempUpdateShortNullLong.Parameters.Add(
-                            new SqlParameter("@itemShort", SqlDbType.VarBinary, ITEM_SHORT_LENGTH)
-                        );
-                        _cmdTempUpdateShortNullLong.Parameters.Add(
-                            new SqlParameter("@timeout", SqlDbType.Int)
-                        );
-                        _cmdTempUpdateShortNullLong.Parameters.Add(
-                            new SqlParameter("@lockCookie", SqlDbType.Int)
-                        );
+                        _cmdTempUpdateShortNullLong
+                            .Parameters
+                            .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                        _cmdTempUpdateShortNullLong
+                            .Parameters
+                            .Add(
+                                new SqlParameter(
+                                    "@itemShort",
+                                    SqlDbType.VarBinary,
+                                    ITEM_SHORT_LENGTH
+                                )
+                            );
+                        _cmdTempUpdateShortNullLong
+                            .Parameters
+                            .Add(new SqlParameter("@timeout", SqlDbType.Int));
+                        _cmdTempUpdateShortNullLong
+                            .Parameters
+                            .Add(new SqlParameter("@lockCookie", SqlDbType.Int));
                     }
 
                     return _cmdTempUpdateShortNullLong;
@@ -1957,18 +1983,18 @@ namespace System.Web.SessionState
                         );
                         _cmdTempUpdateLongNullShort.CommandType = CommandType.StoredProcedure;
                         _cmdTempUpdateLongNullShort.CommandTimeout = s_commandTimeout;
-                        _cmdTempUpdateLongNullShort.Parameters.Add(
-                            new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                        );
-                        _cmdTempUpdateLongNullShort.Parameters.Add(
-                            new SqlParameter("@itemLong", SqlDbType.Image, 8000)
-                        );
-                        _cmdTempUpdateLongNullShort.Parameters.Add(
-                            new SqlParameter("@timeout", SqlDbType.Int)
-                        );
-                        _cmdTempUpdateLongNullShort.Parameters.Add(
-                            new SqlParameter("@lockCookie", SqlDbType.Int)
-                        );
+                        _cmdTempUpdateLongNullShort
+                            .Parameters
+                            .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                        _cmdTempUpdateLongNullShort
+                            .Parameters
+                            .Add(new SqlParameter("@itemLong", SqlDbType.Image, 8000));
+                        _cmdTempUpdateLongNullShort
+                            .Parameters
+                            .Add(new SqlParameter("@timeout", SqlDbType.Int));
+                        _cmdTempUpdateLongNullShort
+                            .Parameters
+                            .Add(new SqlParameter("@lockCookie", SqlDbType.Int));
                     }
 
                     return _cmdTempUpdateLongNullShort;
@@ -1985,12 +2011,12 @@ namespace System.Web.SessionState
                         _cmdTempRemove = new SqlCommand("dbo.TempRemoveStateItem", _sqlConnection);
                         _cmdTempRemove.CommandType = CommandType.StoredProcedure;
                         _cmdTempRemove.CommandTimeout = s_commandTimeout;
-                        _cmdTempRemove.Parameters.Add(
-                            new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                        );
-                        _cmdTempRemove.Parameters.Add(
-                            new SqlParameter("@lockCookie", SqlDbType.Int)
-                        );
+                        _cmdTempRemove
+                            .Parameters
+                            .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                        _cmdTempRemove
+                            .Parameters
+                            .Add(new SqlParameter("@lockCookie", SqlDbType.Int));
                     }
 
                     return _cmdTempRemove;
@@ -2009,15 +2035,21 @@ namespace System.Web.SessionState
                         );
                         _cmdTempInsertUninitializedItem.CommandType = CommandType.StoredProcedure;
                         _cmdTempInsertUninitializedItem.CommandTimeout = s_commandTimeout;
-                        _cmdTempInsertUninitializedItem.Parameters.Add(
-                            new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                        );
-                        _cmdTempInsertUninitializedItem.Parameters.Add(
-                            new SqlParameter("@itemShort", SqlDbType.VarBinary, ITEM_SHORT_LENGTH)
-                        );
-                        _cmdTempInsertUninitializedItem.Parameters.Add(
-                            new SqlParameter("@timeout", SqlDbType.Int)
-                        );
+                        _cmdTempInsertUninitializedItem
+                            .Parameters
+                            .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
+                        _cmdTempInsertUninitializedItem
+                            .Parameters
+                            .Add(
+                                new SqlParameter(
+                                    "@itemShort",
+                                    SqlDbType.VarBinary,
+                                    ITEM_SHORT_LENGTH
+                                )
+                            );
+                        _cmdTempInsertUninitializedItem
+                            .Parameters
+                            .Add(new SqlParameter("@timeout", SqlDbType.Int));
                     }
 
                     return _cmdTempInsertUninitializedItem;
@@ -2037,9 +2069,9 @@ namespace System.Web.SessionState
                         );
                         _cmdTempResetTimeout.CommandType = CommandType.StoredProcedure;
                         _cmdTempResetTimeout.CommandTimeout = s_commandTimeout;
-                        _cmdTempResetTimeout.Parameters.Add(
-                            new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH)
-                        );
+                        _cmdTempResetTimeout
+                            .Parameters
+                            .Add(new SqlParameter("@id", SqlDbType.NVarChar, ID_LENGTH));
                     }
 
                     return _cmdTempResetTimeout;

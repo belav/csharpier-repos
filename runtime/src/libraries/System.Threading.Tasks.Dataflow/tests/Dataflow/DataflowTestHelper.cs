@@ -366,7 +366,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 transforms[i].LinkTo(transforms[i + 1]);
                 transforms[i]
-                    .Completion.ContinueWith(
+                    .Completion
+                    .ContinueWith(
                         delegate
                         {
                             transforms[i].Complete();

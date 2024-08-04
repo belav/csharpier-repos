@@ -329,15 +329,17 @@ namespace System.Web.WebPages.Deployment
             CacheDependency cacheDependency = new CacheDependency(physicalPath, DateTime.UtcNow);
             var key = WebPagesDeployment.CacheKeyPrefix + physicalPath;
 
-            HttpRuntime.Cache.Insert(
-                key,
-                physicalPath,
-                cacheDependency,
-                Cache.NoAbsoluteExpiration,
-                Cache.NoSlidingExpiration,
-                CacheItemPriority.NotRemovable,
-                new CacheItemRemovedCallback(OnChanged)
-            );
+            HttpRuntime
+                .Cache
+                .Insert(
+                    key,
+                    physicalPath,
+                    cacheDependency,
+                    Cache.NoAbsoluteExpiration,
+                    Cache.NoSlidingExpiration,
+                    CacheItemPriority.NotRemovable,
+                    new CacheItemRemovedCallback(OnChanged)
+                );
         }
 
         private static void OnChanged(string key, object value, CacheItemRemovedReason reason)

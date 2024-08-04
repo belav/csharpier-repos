@@ -312,9 +312,11 @@ namespace System.Web.Mvc.Html
             string innerHtmlPrefix = null
         )
         {
-            string fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
-                name
-            );
+            string fullName = htmlHelper
+                .ViewContext
+                .ViewData
+                .TemplateInfo
+                .GetFullHtmlFieldName(name);
             if (String.IsNullOrEmpty(fullName))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "name");

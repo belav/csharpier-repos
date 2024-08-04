@@ -256,10 +256,13 @@ namespace System.Workflow.ComponentModel.Design
         internal static string GetString(CultureInfo culture, string resID, params object[] args)
         {
             string str = DR.resourceManager.GetString(resID, culture);
-            System.Diagnostics.Debug.Assert(
-                str != null,
-                string.Format(culture, "String resource {0} not found.", new object[] { resID })
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    str != null,
+                    string.Format(culture, "String resource {0} not found.", new object[] { resID })
+                );
             if (args != null && args.Length > 0)
                 str = string.Format(culture, str, args);
             return str;

@@ -165,9 +165,10 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             // Default Large Object Heap size threshold
             // https://github.com/dotnet/runtime/blob/c9d69e38d0e54bea5d188593ef6c3b30139f3ab1/src/coreclr/src/gc/gc.h#L111
             const uint Threshold = 85000;
-            return System.Numerics.BitOperations.Log2(
-                (uint)((Threshold / elementSize) - (2 * Unsafe.SizeOf<object>() + 8))
-            );
+            return System
+                .Numerics
+                .BitOperations
+                .Log2((uint)((Threshold / elementSize) - (2 * Unsafe.SizeOf<object>() + 8)));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

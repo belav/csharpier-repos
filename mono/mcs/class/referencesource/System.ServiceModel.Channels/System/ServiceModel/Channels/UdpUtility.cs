@@ -34,8 +34,9 @@ namespace System.ServiceModel.Channels
 
         public static MessageEncoderFactory GetEncoder(BindingContext context)
         {
-            MessageEncodingBindingElement messageEncoderBindingElement =
-                context.BindingParameters.Remove<MessageEncodingBindingElement>();
+            MessageEncodingBindingElement messageEncoderBindingElement = context
+                .BindingParameters
+                .Remove<MessageEncodingBindingElement>();
             MessageEncoderFactory factory = null;
             if (messageEncoderBindingElement != null)
             {
@@ -254,9 +255,9 @@ namespace System.ServiceModel.Channels
 
             if (ipv4Socket == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new AddressAlreadyInUseException(SR.UniquePortNotAvailable)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new AddressAlreadyInUseException(SR.UniquePortNotAvailable));
             }
 
             Fx.Assert(
@@ -289,28 +290,32 @@ namespace System.ServiceModel.Channels
             {
                 if (retransmissionEnabled)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.TransportRequiresAddressingOnEncoderForRetransmission(
-                                encoderMessageVersion,
-                                "RetransmissionSettings",
-                                typeof(UdpTransportBindingElement).Name
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.TransportRequiresAddressingOnEncoderForRetransmission(
+                                    encoderMessageVersion,
+                                    "RetransmissionSettings",
+                                    typeof(UdpTransportBindingElement).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 if (duplicateDetectionEnabled)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.TransportRequiresAddressingOnEncoderForDuplicateDetection(
-                                encoderMessageVersion,
-                                "DuplicateMessageHistoryLength",
-                                typeof(UdpTransportBindingElement).Name
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.TransportRequiresAddressingOnEncoderForDuplicateDetection(
+                                    encoderMessageVersion,
+                                    "DuplicateMessageHistoryLength",
+                                    typeof(UdpTransportBindingElement).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -330,11 +335,16 @@ namespace System.ServiceModel.Channels
                 || !ipV6 && uri.HostNameType == UriHostNameType.IPv6
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentException(
-                        SR.UriHostNameTypeNotSupportedByOS(uri.Host, uri.HostNameType.ToString())
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ArgumentException(
+                            SR.UriHostNameTypeNotSupportedByOS(
+                                uri.Host,
+                                uri.HostNameType.ToString()
+                            )
+                        )
+                    );
             }
         }
 
@@ -394,14 +404,16 @@ namespace System.ServiceModel.Channels
                             OperationalStatus status = adapter.OperationalStatus;
                             if (status != OperationalStatus.Up)
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new InvalidOperationException(
-                                        SR.UdpAdapterSpecifiedNotConnected(
-                                            multicastInterfaceIdentifier,
-                                            status
+                                throw FxTrace
+                                    .Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            SR.UdpAdapterSpecifiedNotConnected(
+                                                multicastInterfaceIdentifier,
+                                                status
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
 
                             results = new NetworkInterface[] { adapter };
@@ -409,24 +421,28 @@ namespace System.ServiceModel.Channels
                         }
                         else
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR.UdpAdapterSpecifiedNotSuitableForMulticast(
-                                        multicastInterfaceIdentifier
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.UdpAdapterSpecifiedNotSuitableForMulticast(
+                                            multicastInterfaceIdentifier
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                 }
 
                 if (results == null || results.Length == 0)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.UdpInterfaceIndexMatchNotFound(multicastInterfaceIdentifier)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.UdpInterfaceIndexMatchNotFound(multicastInterfaceIdentifier)
+                            )
+                        );
                 }
             }
 
@@ -489,20 +505,16 @@ namespace System.ServiceModel.Channels
         {
             if (offset < 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "offset",
-                    offset,
-                    SR.ValueMustBeNonNegative(offset)
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange("offset", offset, SR.ValueMustBeNonNegative(offset));
             }
 
             if (offset > bufferSize)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "offset",
-                    offset,
-                    SR.OffsetExceedsBufferSize(bufferSize)
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange("offset", offset, SR.OffsetExceedsBufferSize(bufferSize));
             }
 
             if (size <= 0)
@@ -513,11 +525,13 @@ namespace System.ServiceModel.Channels
             int remainingBufferSpace = bufferSize - offset;
             if (size > remainingBufferSpace)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "size",
-                    size,
-                    SR.SizeExceedsRemainingBufferSpace(remainingBufferSpace)
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange(
+                        "size",
+                        size,
+                        SR.SizeExceedsRemainingBufferSpace(remainingBufferSpace)
+                    );
             }
         }
 
@@ -563,21 +577,25 @@ namespace System.ServiceModel.Channels
             {
                 if (ex.SocketErrorCode == SocketError.AddressAlreadyInUse)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new AddressAlreadyInUseException(
-                            SR.SocketAddressInUse(localEndpoint.ToString()),
-                            ex
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new AddressAlreadyInUseException(
+                                SR.SocketAddressInUse(localEndpoint.ToString()),
+                                ex
+                            )
+                        );
                 }
                 else if (ex.SocketErrorCode == SocketError.AccessDenied)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new AddressAccessDeniedException(
-                            SR.SocketAddressAccessDenied(localEndpoint.ToString()),
-                            ex
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new AddressAccessDeniedException(
+                                SR.SocketAddressAccessDenied(localEndpoint.ToString()),
+                                ex
+                            )
+                        );
                 }
                 else
                 {
@@ -747,13 +765,15 @@ namespace System.ServiceModel.Channels
 
                 if (message != null)
                 {
-                    message.Properties.Add(
-                        RemoteEndpointMessageProperty.Name,
-                        new RemoteEndpointMessageProperty(
-                            remoteEndPoint.Address.ToString(),
-                            remoteEndPoint.Port
-                        )
-                    );
+                    message
+                        .Properties
+                        .Add(
+                            RemoteEndpointMessageProperty.Name,
+                            new RemoteEndpointMessageProperty(
+                                remoteEndPoint.Address.ToString(),
+                                remoteEndPoint.Port
+                            )
+                        );
 
                     NetworkInterfaceMessageProperty networkInterfaceMessageProperty =
                         new NetworkInterfaceMessageProperty(interfaceIndex);

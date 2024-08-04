@@ -186,9 +186,9 @@ namespace System.Net
 #endif
 
                 if (i == 0)
-                    returnResult.m_Context.Add(
-                        new RequestContext(requests[i], firstRequestException)
-                    );
+                    returnResult
+                        .m_Context
+                        .Add(new RequestContext(requests[i], firstRequestException));
                 else
                     returnResult.m_Context.Add(new RequestContext(requests[i], exception));
             }
@@ -580,10 +580,12 @@ namespace System.Net
             m_Error = WebExceptionStatus.Success;
             if (PinnableBufferCacheEventSource.Log.IsEnabled())
             {
-                PinnableBufferCacheEventSource.Log.DebugMessage1(
-                    "CTOR: In System.Net.Connection.Connnection",
-                    this.GetHashCode()
-                );
+                PinnableBufferCacheEventSource
+                    .Log
+                    .DebugMessage1(
+                        "CTOR: In System.Net.Connection.Connnection",
+                        this.GetHashCode()
+                    );
             }
         }
 
@@ -593,10 +595,12 @@ namespace System.Net
             {
                 if (PinnableBufferCacheEventSource.Log.IsEnabled())
                 {
-                    PinnableBufferCacheEventSource.Log.DebugMessage1(
-                        "DTOR: ERROR Needing to Free m_ReadBuffer in Connection Destructor",
-                        m_ReadBuffer.GetHashCode()
-                    );
+                    PinnableBufferCacheEventSource
+                        .Log
+                        .DebugMessage1(
+                            "DTOR: ERROR Needing to Free m_ReadBuffer in Connection Destructor",
+                            m_ReadBuffer.GetHashCode()
+                        );
                 }
             }
             FreeReadBuffer();
@@ -618,10 +622,9 @@ namespace System.Net
         {
             if (PinnableBufferCacheEventSource.Log.IsEnabled())
             {
-                PinnableBufferCacheEventSource.Log.DebugMessage1(
-                    "In System.Net.Connection.Dispose()",
-                    this.GetHashCode()
-                );
+                PinnableBufferCacheEventSource
+                    .Log
+                    .DebugMessage1("In System.Net.Connection.Dispose()", this.GetHashCode());
             }
             FreeReadBuffer();
             base.Dispose(disposing);
@@ -845,9 +848,9 @@ namespace System.Net
                     m_WaitList.Add(
                         new WaitListItem(request, NetworkingPerfCounters.GetTimestamp())
                     );
-                    NetworkingPerfCounters.Instance.Increment(
-                        NetworkingPerfCounterName.HttpWebRequestQueued
-                    );
+                    NetworkingPerfCounters
+                        .Instance
+                        .Increment(NetworkingPerfCounterName.HttpWebRequestQueued);
                     GlobalLog.Print(
                         "Connection#"
                             + ValidationHelper.HashString(this)
@@ -1300,10 +1303,12 @@ namespace System.Net
                         + (m_WaitList.Count - 1).ToString()
                 );
 
-                NetworkingPerfCounters.Instance.IncrementAverage(
-                    NetworkingPerfCounterName.HttpWebRequestAvgQueueTime,
-                    item.QueueStartTime
-                );
+                NetworkingPerfCounters
+                    .Instance
+                    .IncrementAverage(
+                        NetworkingPerfCounterName.HttpWebRequestAvgQueueTime,
+                        item.QueueStartTime
+                    );
                 m_WaitList.RemoveAt(0);
                 CheckIdle();
             }
@@ -2268,11 +2273,13 @@ namespace System.Net
             // add to Description if already partialy parsed
             if (startIndexStatusDescription != -1)
             {
-                statusDescription += WebHeaderCollection.HeaderEncoding.GetString(
-                    statusLine,
-                    startIndexStatusDescription,
-                    lastUnSpaceIndex - startIndexStatusDescription + 1
-                );
+                statusDescription += WebHeaderCollection
+                    .HeaderEncoding
+                    .GetString(
+                        statusLine,
+                        startIndexStatusDescription,
+                        lastUnSpaceIndex - startIndexStatusDescription + 1
+                    );
             }
 
             if (bytesParsed == statusLineLength)
@@ -2630,10 +2637,9 @@ namespace System.Net
 
                             if (++bytesParsed == effectiveMax)
                             {
-                                string s = WebHeaderCollection.HeaderEncoding.GetString(
-                                    byteBuffer + beginning,
-                                    bytesParsed - beginning
-                                );
+                                string s = WebHeaderCollection
+                                    .HeaderEncoding
+                                    .GetString(byteBuffer + beginning, bytesParsed - beginning);
                                 if (statusLineValues.StatusDescription == null)
                                     statusLineValues.StatusDescription = s;
                                 else
@@ -2645,10 +2651,9 @@ namespace System.Net
 
                         if (bytesParsed > beginning)
                         {
-                            string s = WebHeaderCollection.HeaderEncoding.GetString(
-                                byteBuffer + beginning,
-                                bytesParsed - beginning
-                            );
+                            string s = WebHeaderCollection
+                                .HeaderEncoding
+                                .GetString(byteBuffer + beginning, bytesParsed - beginning);
                             if (statusLineValues.StatusDescription == null)
                                 statusLineValues.StatusDescription = s;
                             else
@@ -3375,25 +3380,29 @@ namespace System.Net
 
                     if (SettingsSectionInternal.Section.UseUnsafeHeaderParsing)
                     {
-                        parseSubStatus = m_ResponseData.m_ResponseHeaders.ParseHeaders(
-                            m_ReadBuffer,
-                            m_BytesRead,
-                            ref m_BytesScanned,
-                            ref m_TotalResponseHeadersLength,
-                            m_MaximumResponseHeadersLength,
-                            ref m_ParseError
-                        );
+                        parseSubStatus = m_ResponseData
+                            .m_ResponseHeaders
+                            .ParseHeaders(
+                                m_ReadBuffer,
+                                m_BytesRead,
+                                ref m_BytesScanned,
+                                ref m_TotalResponseHeadersLength,
+                                m_MaximumResponseHeadersLength,
+                                ref m_ParseError
+                            );
                     }
                     else
                     {
-                        parseSubStatus = m_ResponseData.m_ResponseHeaders.ParseHeadersStrict(
-                            m_ReadBuffer,
-                            m_BytesRead,
-                            ref m_BytesScanned,
-                            ref m_TotalResponseHeadersLength,
-                            m_MaximumResponseHeadersLength,
-                            ref m_ParseError
-                        );
+                        parseSubStatus = m_ResponseData
+                            .m_ResponseHeaders
+                            .ParseHeadersStrict(
+                                m_ReadBuffer,
+                                m_BytesRead,
+                                ref m_BytesScanned,
+                                ref m_TotalResponseHeadersLength,
+                                m_MaximumResponseHeadersLength,
+                                ref m_ParseError
+                            );
                     }
 
                     if (
@@ -3679,10 +3688,12 @@ namespace System.Net
                     // If so then we let request.Abort() to deal with this situation.
                     if (foundItem != null)
                     {
-                        NetworkingPerfCounters.Instance.IncrementAverage(
-                            NetworkingPerfCounterName.HttpWebRequestAvgQueueTime,
-                            foundItem.QueueStartTime
-                        );
+                        NetworkingPerfCounters
+                            .Instance
+                            .IncrementAverage(
+                                NetworkingPerfCounterName.HttpWebRequestAvgQueueTime,
+                                foundItem.QueueStartTime
+                            );
                         m_WaitList.Remove(foundItem);
                         UnlockIfNeeded(foundItem.Request);
                     }
@@ -4067,10 +4078,12 @@ namespace System.Net
 
                 foreach (WaitListItem item in m_WaitList)
                 {
-                    NetworkingPerfCounters.Instance.IncrementAverage(
-                        NetworkingPerfCounterName.HttpWebRequestAvgQueueTime,
-                        item.QueueStartTime
-                    );
+                    NetworkingPerfCounters
+                        .Instance
+                        .IncrementAverage(
+                            NetworkingPerfCounterName.HttpWebRequestAvgQueueTime,
+                            item.QueueStartTime
+                        );
                 }
                 m_WaitList.Clear();
             }

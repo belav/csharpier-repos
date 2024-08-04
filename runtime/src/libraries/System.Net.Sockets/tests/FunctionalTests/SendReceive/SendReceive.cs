@@ -1372,8 +1372,8 @@ namespace System.Net.Sockets.Tests
                 using (server)
                 using (var b = new Barrier(2))
                 {
-                    Task dispose = Task
-                        .Factory.StartNew(
+                    Task dispose = Task.Factory
+                        .StartNew(
                             () =>
                             {
                                 b.SignalAndWait();
@@ -1385,8 +1385,8 @@ namespace System.Net.Sockets.Tests
                         )
                         .WaitAsync(TestSettings.PassingTestTimeout);
 
-                    Task send = Task
-                        .Factory.StartNew(
+                    Task send = Task.Factory
+                        .StartNew(
                             () =>
                             {
                                 SendAsync(server, new ArraySegment<byte>(new byte[1]))

@@ -53,8 +53,10 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
     {
         public static IEnumerable<object[]> AllServiceDescriptors =>
             ServiceDescriptors
-                .Instance.GetTestAccessor()
-                .Descriptors.Select(descriptor =>
+                .Instance
+                .GetTestAccessor()
+                .Descriptors
+                .Select(descriptor =>
                     new object[]
                     {
                         descriptor.Key,
@@ -71,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             foreach (
                 var (serviceType, (descriptor, _, _, _)) in ServiceDescriptors
-                    .Instance.GetTestAccessor()
+                    .Instance
+                    .GetTestAccessor()
                     .Descriptors
             )
             {
@@ -188,9 +191,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [MemberData(nameof(GetEncodingTestCases))]
         public void EncodingIsMessagePackSerializable(Encoding original)
         {
-            var messagePackOptions = MessagePackSerializerOptions.Standard.WithResolver(
-                MessagePackFormatters.DefaultResolver
-            );
+            var messagePackOptions = MessagePackSerializerOptions
+                .Standard
+                .WithResolver(MessagePackFormatters.DefaultResolver);
 
             using var stream = new MemoryStream();
             MessagePackSerializer.Serialize(stream, original, messagePackOptions);
@@ -220,9 +223,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact]
         public void EncodingIsMessagePackSerializable_WithCustomFallbacks()
         {
-            var messagePackOptions = MessagePackSerializerOptions.Standard.WithResolver(
-                MessagePackFormatters.DefaultResolver
-            );
+            var messagePackOptions = MessagePackSerializerOptions
+                .Standard
+                .WithResolver(MessagePackFormatters.DefaultResolver);
 
             var original = Encoding.GetEncoding(
                 Encoding.ASCII.CodePage,
@@ -246,9 +249,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact]
         public void OptionsAreMessagePackSerializable_LanguageAgnostic()
         {
-            var messagePackOptions = MessagePackSerializerOptions.Standard.WithResolver(
-                MessagePackFormatters.DefaultResolver
-            );
+            var messagePackOptions = MessagePackSerializerOptions
+                .Standard
+                .WithResolver(MessagePackFormatters.DefaultResolver);
             var options = new object[]
             {
                 ExtractMethodOptions.Default,
@@ -279,14 +282,15 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [InlineData(LanguageNames.VisualBasic)]
         public void OptionsAreMessagePackSerializable(string language)
         {
-            var messagePackOptions = MessagePackSerializerOptions.Standard.WithResolver(
-                MessagePackFormatters.DefaultResolver
-            );
+            var messagePackOptions = MessagePackSerializerOptions
+                .Standard
+                .WithResolver(MessagePackFormatters.DefaultResolver);
 
             using var workspace = new AdhocWorkspace();
-            var languageServices = workspace.Services.SolutionServices.GetLanguageServices(
-                language
-            );
+            var languageServices = workspace
+                .Services
+                .SolutionServices
+                .GetLanguageServices(language);
 
             var options = new object[]
             {
@@ -417,12 +421,16 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                     {
                         // custom abstract types must be explicitly listed in MessagePackFormatters.AbstractTypeFormatters
                         if (
-                            !MessagePackFormatters.Formatters.Any(formatter =>
-                                formatter.GetType() is { IsGenericType: true } and var formatterType
-                                && formatterType.GetGenericTypeDefinition()
-                                    == typeof(ForceTypelessFormatter<>)
-                                && formatterType.GenericTypeArguments[0] == type
-                            )
+                            !MessagePackFormatters
+                                .Formatters
+                                .Any(formatter =>
+                                    formatter.GetType()
+                                        is { IsGenericType: true }
+                                            and var formatterType
+                                    && formatterType.GetGenericTypeDefinition()
+                                        == typeof(ForceTypelessFormatter<>)
+                                    && formatterType.GenericTypeArguments[0] == type
+                                )
                         )
                         {
                             errors.Add(
@@ -473,7 +481,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         public void CallbackDispatchers()
         {
             var hostServices = FeaturesTestCompositions
-                .Features.WithTestHostParts(Testing.TestHost.OutOfProcess)
+                .Features
+                .WithTestHostParts(Testing.TestHost.OutOfProcess)
                 .GetHostServices();
             var callbackDispatchers = ((IMefHostExportProvider)hostServices).GetExports<
                 IRemoteServiceCallbackDispatcher,
@@ -481,8 +490,10 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             >();
 
             var descriptorsWithCallbackServiceTypes = ServiceDescriptors
-                .Instance.GetTestAccessor()
-                .Descriptors.Where(d => d.Value.descriptor64.ClientInterface != null)
+                .Instance
+                .GetTestAccessor()
+                .Descriptors
+                .Where(d => d.Value.descriptor64.ClientInterface != null)
                 .Select(d => d.Key);
 
             var callbackDispatcherServiceTypes = callbackDispatchers.Select(d =>

@@ -91,9 +91,9 @@ namespace System
             _taggedHandle = trackResurrection ? h | TracksResurrectionBit : h;
 
 #if FEATURE_COMINTEROP || FEATURE_COMWRAPPERS
-            ComAwareWeakReference.ComInfo? comInfo = ComAwareWeakReference.ComInfo.FromObject(
-                target
-            );
+            ComAwareWeakReference.ComInfo? comInfo = ComAwareWeakReference
+                .ComInfo
+                .FromObject(target);
             if (comInfo != null)
             {
                 ComAwareWeakReference.SetComInfoInConstructor(ref _taggedHandle, comInfo);

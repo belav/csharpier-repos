@@ -267,13 +267,9 @@ namespace System.Xml
                 _buffer = newBuffer;
                 _streamBuffer = newBuffer;
             }
-            System.Buffer.BlockCopy(
-                _buffer,
-                _offset,
-                _buffer,
-                _offset + count,
-                _offsetMax - _offset
-            );
+            System
+                .Buffer
+                .BlockCopy(_buffer, _offset, _buffer, _offset + count, _offsetMax - _offset);
             _offsetMax += count;
             System.Buffer.BlockCopy(buffer, offset, _buffer, _offset, count);
         }
@@ -290,13 +286,9 @@ namespace System.Xml
 
             if (_offset != windowOffset)
             {
-                System.Buffer.BlockCopy(
-                    _buffer,
-                    _offset,
-                    _buffer,
-                    windowOffset,
-                    _offsetMax - _offset
-                );
+                System
+                    .Buffer
+                    .BlockCopy(_buffer, _offset, _buffer, windowOffset, _offsetMax - _offset);
                 _offsetMax = windowOffset + (_offsetMax - _offset);
                 _offset = windowOffset;
             }

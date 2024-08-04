@@ -73,10 +73,10 @@ internal static class CommandResultExtensions
         {
             string nameWithoutPrefix = RemovePrefix(option.Name);
             if (
-                valueDescriptor.ValueName.Equals(
-                    nameWithoutPrefix,
-                    StringComparison.OrdinalIgnoreCase
-                ) || valueDescriptor.ValueName.IsMatch(nameWithoutPrefix)
+                valueDescriptor
+                    .ValueName
+                    .Equals(nameWithoutPrefix, StringComparison.OrdinalIgnoreCase)
+                || valueDescriptor.ValueName.IsMatch(nameWithoutPrefix)
             )
             {
                 return true;

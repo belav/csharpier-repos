@@ -665,9 +665,9 @@ namespace System.Data.Query.InternalTrees
             //Nonnullable definitions
             nodeInfo.NonNullableDefinitions.InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
             nodeInfo.NonNullableDefinitions.And(op.Outputs);
-            nodeInfo.NonNullableVisibleDefinitions.InitFrom(
-                relOpChildNodeInfo.NonNullableDefinitions
-            );
+            nodeInfo
+                .NonNullableVisibleDefinitions
+                .InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
 
             // Local definitions
             foreach (Node chi in n.Child1.Children)
@@ -748,9 +748,9 @@ namespace System.Data.Query.InternalTrees
 
             //The non-nullable definitions are same as these of the child
             nodeInfo.NonNullableDefinitions.InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
-            nodeInfo.NonNullableVisibleDefinitions.InitFrom(
-                relOpChildNodeInfo.NonNullableDefinitions
-            );
+            nodeInfo
+                .NonNullableVisibleDefinitions
+                .InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
 
             // inherit max RowCount from child; set min RowCount to 0, because
             // we require way more analysis to do anything smarter
@@ -955,9 +955,9 @@ namespace System.Data.Query.InternalTrees
             {
                 nodeInfo.NonNullableDefinitions.Or(rightRelOpNodeInfo.NonNullableDefinitions);
             }
-            nodeInfo.NonNullableVisibleDefinitions.InitFrom(
-                leftRelOpNodeInfo.NonNullableDefinitions
-            );
+            nodeInfo
+                .NonNullableVisibleDefinitions
+                .InitFrom(leftRelOpNodeInfo.NonNullableDefinitions);
             nodeInfo.NonNullableVisibleDefinitions.Or(rightRelOpNodeInfo.NonNullableDefinitions);
 
             RowCount maxRows;
@@ -1037,9 +1037,9 @@ namespace System.Data.Query.InternalTrees
             {
                 nodeInfo.NonNullableDefinitions.Or(rightRelOpNodeInfo.NonNullableDefinitions);
             }
-            nodeInfo.NonNullableVisibleDefinitions.InitFrom(
-                leftRelOpNodeInfo.NonNullableDefinitions
-            );
+            nodeInfo
+                .NonNullableVisibleDefinitions
+                .InitFrom(leftRelOpNodeInfo.NonNullableDefinitions);
             nodeInfo.NonNullableVisibleDefinitions.Or(rightRelOpNodeInfo.NonNullableDefinitions);
 
             RowCount maxRows;
@@ -1138,9 +1138,10 @@ namespace System.Data.Query.InternalTrees
                             .GetExtendedNodeInfo(m_command);
                         if (!childNodeInfo.Keys.NoKeys && !childNodeInfo.Keys.KeyVars.IsEmpty)
                         {
-                            mappedKeyVec = childNodeInfo.Keys.KeyVars.Remap(
-                                unionAllOp.VarMap[i].GetReverseMap()
-                            );
+                            mappedKeyVec = childNodeInfo
+                                .Keys
+                                .KeyVars
+                                .Remap(unionAllOp.VarMap[i].GetReverseMap());
                             nodeKeys.Or(mappedKeyVec);
                         }
                         else
@@ -1168,16 +1169,16 @@ namespace System.Data.Query.InternalTrees
             }
 
             //Non-nullable definitions
-            VarVec leftNonNullableVars = leftChildNodeInfo.NonNullableDefinitions.Remap(
-                op.VarMap[0].GetReverseMap()
-            );
+            VarVec leftNonNullableVars = leftChildNodeInfo
+                .NonNullableDefinitions
+                .Remap(op.VarMap[0].GetReverseMap());
             nodeInfo.NonNullableDefinitions.InitFrom(leftNonNullableVars);
 
             if (op.OpType != OpType.Except)
             {
-                VarVec rightNonNullableVars = rightChildNodeInfo.NonNullableDefinitions.Remap(
-                    op.VarMap[1].GetReverseMap()
-                );
+                VarVec rightNonNullableVars = rightChildNodeInfo
+                    .NonNullableDefinitions
+                    .Remap(op.VarMap[1].GetReverseMap());
                 if (op.OpType == OpType.Intersect)
                 {
                     nodeInfo.NonNullableDefinitions.Or(rightNonNullableVars);
@@ -1226,9 +1227,9 @@ namespace System.Data.Query.InternalTrees
 
             //Non-nullable definitions are same as the input
             nodeInfo.NonNullableDefinitions.InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
-            nodeInfo.NonNullableVisibleDefinitions.InitFrom(
-                relOpChildNodeInfo.NonNullableDefinitions
-            );
+            nodeInfo
+                .NonNullableVisibleDefinitions
+                .InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
 
             //Row counts are same as the input
             nodeInfo.InitRowCountFrom(relOpChildNodeInfo);
@@ -1383,9 +1384,9 @@ namespace System.Data.Query.InternalTrees
             //Non-nullable definitions
             nodeInfo.NonNullableDefinitions.Or(driverChildNodeInfo.NonNullableDefinitions);
             nodeInfo.NonNullableDefinitions.And(nodeInfo.Definitions);
-            nodeInfo.NonNullableVisibleDefinitions.Or(
-                driverChildNodeInfo.NonNullableVisibleDefinitions
-            );
+            nodeInfo
+                .NonNullableVisibleDefinitions
+                .Or(driverChildNodeInfo.NonNullableVisibleDefinitions);
 
             return nodeInfo;
         }

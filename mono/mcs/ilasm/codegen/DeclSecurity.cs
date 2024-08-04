@@ -84,11 +84,9 @@ namespace Mono.ILASM
                 PEAPI.SecurityAction sec_action = (PEAPI.SecurityAction)entry.Key;
                 SSPermissionSet ps = (SSPermissionSet)entry.Value;
 
-                code_gen.PEFile.AddDeclSecurity(
-                    sec_action,
-                    ue.GetBytes(ps.ToXml().ToString()),
-                    elem
-                );
+                code_gen
+                    .PEFile
+                    .AddDeclSecurity(sec_action, ue.GetBytes(ps.ToXml().ToString()), elem);
             }
 
             if (permissionset20_table == null)

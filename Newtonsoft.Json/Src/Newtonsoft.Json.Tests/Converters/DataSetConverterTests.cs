@@ -624,9 +624,9 @@ namespace Newtonsoft.Json.Tests.Converters
             var table = new DataTable();
             for (int i = 1; i <= cols; i++)
             {
-                table.Columns.Add(
-                    new DataColumn() { ColumnName = colNamePrefix + i, DefaultValue = i }
-                );
+                table
+                    .Columns
+                    .Add(new DataColumn() { ColumnName = colNamePrefix + i, DefaultValue = i });
             }
             table.Rows.Add(table.NewRow());
             return table;

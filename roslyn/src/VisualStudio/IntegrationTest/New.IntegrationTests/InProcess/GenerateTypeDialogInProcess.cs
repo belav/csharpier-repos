@@ -96,11 +96,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             Contract.ThrowIfFalse(
                 await dialog
                     .GetTestAccessor()
-                    .AccessListComboBox.SimulateSelectItemAsync(
-                        JoinableTaskFactory,
-                        accessibility,
-                        cancellationToken
-                    )
+                    .AccessListComboBox
+                    .SimulateSelectItemAsync(JoinableTaskFactory, accessibility, cancellationToken)
             );
         }
 
@@ -114,11 +111,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             Contract.ThrowIfFalse(
                 await dialog
                     .GetTestAccessor()
-                    .KindListComboBox.SimulateSelectItemAsync(
-                        JoinableTaskFactory,
-                        kind,
-                        cancellationToken
-                    )
+                    .KindListComboBox
+                    .SimulateSelectItemAsync(JoinableTaskFactory, kind, cancellationToken)
             );
         }
 
@@ -135,11 +129,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             Contract.ThrowIfFalse(
                 await dialog
                     .GetTestAccessor()
-                    .ProjectListComboBox.SimulateSelectItemAsync(
-                        JoinableTaskFactory,
-                        projectName,
-                        cancellationToken
-                    )
+                    .ProjectListComboBox
+                    .SimulateSelectItemAsync(JoinableTaskFactory, projectName, cancellationToken)
             );
         }
 
@@ -156,12 +147,14 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             Contract.ThrowIfFalse(
                 await dialog
                     .GetTestAccessor()
-                    .CreateNewFileRadioButton.SimulateClickAsync(JoinableTaskFactory)
+                    .CreateNewFileRadioButton
+                    .SimulateClickAsync(JoinableTaskFactory)
             );
             Contract.ThrowIfFalse(
                 await dialog
                     .GetTestAccessor()
-                    .CreateNewFileComboBox.SimulateSelectItemAsync(
+                    .CreateNewFileComboBox
+                    .SimulateSelectItemAsync(
                         JoinableTaskFactory,
                         newFileName,
                         mustExist: false,
@@ -176,10 +169,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         public async Task ClickOKAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().OKButton, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.LightBulb,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
         }
 
         /// <summary>
@@ -188,10 +180,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         public async Task ClickCancelAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().CancelButton, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.LightBulb,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
         }
 
         public async Task<ImmutableArray<string>> GetNewFileComboBoxItemsAsync(
@@ -205,7 +196,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
 
             return dialog
                 .GetTestAccessor()
-                .CreateNewFileComboBox.Items.Cast<string>()
+                .CreateNewFileComboBox
+                .Items
+                .Cast<string>()
                 .ToImmutableArray();
         }
     }

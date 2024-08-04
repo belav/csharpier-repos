@@ -235,15 +235,16 @@ public class WebHostTests : LoggedTest
                             var serverName = Thread.CurrentPrincipal.Identity.Name;
 
                             var namedPipeStream = context
-                                .Features.Get<IConnectionNamedPipeFeature>()
+                                .Features
+                                .Get<IConnectionNamedPipeFeature>()
                                 .NamedPipe;
                             var impersonatedName = namedPipeStream.GetImpersonationUserName();
 
                             context.Response.Headers.Add("X-Server-Identity", serverName);
-                            context.Response.Headers.Add(
-                                "X-Impersonated-Identity",
-                                impersonatedName
-                            );
+                            context
+                                .Response
+                                .Headers
+                                .Add("X-Impersonated-Identity", impersonatedName);
 
                             var buffer = new byte[1024];
                             while (await context.Request.Body.ReadAsync(buffer) != 0) { }

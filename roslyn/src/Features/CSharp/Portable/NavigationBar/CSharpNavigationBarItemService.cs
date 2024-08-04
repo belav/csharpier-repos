@@ -24,10 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
     [ExportLanguageService(typeof(INavigationBarItemService), LanguageNames.CSharp), Shared]
     internal class CSharpNavigationBarItemService : AbstractNavigationBarItemService
     {
-        private static readonly SymbolDisplayFormat s_typeFormat =
-            SymbolDisplayFormat.CSharpErrorMessageFormat.AddGenericsOptions(
-                SymbolDisplayGenericsOptions.IncludeVariance
-            );
+        private static readonly SymbolDisplayFormat s_typeFormat = SymbolDisplayFormat
+            .CSharpErrorMessageFormat
+            .AddGenericsOptions(SymbolDisplayGenericsOptions.IncludeVariance);
 
         private static readonly SymbolDisplayFormat s_memberFormat =
             new(

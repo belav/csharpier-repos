@@ -217,13 +217,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
                     );
                     if (type != null)
                     {
-                        var parameter = CSharpSemanticFacts.Instance.FindParameterForArgument(
-                            semanticModel,
-                            argument,
-                            allowUncertainCandidates: true,
-                            allowParams: false,
-                            cancellationToken
-                        );
+                        var parameter = CSharpSemanticFacts
+                            .Instance
+                            .FindParameterForArgument(
+                                semanticModel,
+                                argument,
+                                allowUncertainCandidates: true,
+                                allowParams: false,
+                                cancellationToken
+                            );
 
                         result = new NameDeclarationInfo(
                             ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Local)),

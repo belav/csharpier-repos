@@ -841,9 +841,11 @@ namespace System.Configuration
             if (IsClickOnceDeployed(AppDomain.CurrentDomain))
             {
                 // Now check if this is the first run since deployment or last upgrade
-                return System.Deployment.Internal.InternalActivationContextHelper.IsFirstRun(
-                    actCtx
-                );
+                return System
+                    .Deployment
+                    .Internal
+                    .InternalActivationContextHelper
+                    .IsFirstRun(actCtx);
             }
 
             return false;

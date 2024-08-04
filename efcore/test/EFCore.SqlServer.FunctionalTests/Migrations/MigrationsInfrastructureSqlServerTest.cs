@@ -605,7 +605,8 @@ GO
         {
             using var context = new BloggingContext(
                 Fixture
-                    .TestStore.AddProviderOptions(
+                    .TestStore
+                    .AddProviderOptions(
                         new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
                     )
                     .Options

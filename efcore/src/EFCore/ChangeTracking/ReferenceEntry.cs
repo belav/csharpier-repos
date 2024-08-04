@@ -214,10 +214,9 @@ public class ReferenceEntry : NavigationEntry
                 var navigationValue = CurrentValue;
                 if (navigationValue != null)
                 {
-                    var relatedEntry = InternalEntry.StateManager.TryGetEntry(
-                        navigationValue,
-                        Metadata.TargetEntityType
-                    );
+                    var relatedEntry = InternalEntry
+                        .StateManager
+                        .TryGetEntry(navigationValue, Metadata.TargetEntityType);
                     if (relatedEntry != null)
                     {
                         SetFkPropertiesModified(navigation, relatedEntry, value);
@@ -254,10 +253,9 @@ public class ReferenceEntry : NavigationEntry
             return false;
         }
 
-        var relatedEntry = InternalEntry.StateManager.TryGetEntry(
-            relatedEntity,
-            Metadata.TargetEntityType
-        );
+        var relatedEntry = InternalEntry
+            .StateManager
+            .TryGetEntry(relatedEntity, Metadata.TargetEntityType);
 
         return relatedEntry != null
             && (

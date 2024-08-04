@@ -472,9 +472,9 @@ namespace System.Security.Cryptography
                             else
                             {
                                 // Otherwise, we need to rent a temporary from the pool.
-                                byte[] tempOutputBuffer = ArrayPool<byte>.Shared.Rent(
-                                    numWholeReadBlocks * _outputBlockSize
-                                );
+                                byte[] tempOutputBuffer = ArrayPool<byte>
+                                    .Shared
+                                    .Rent(numWholeReadBlocks * _outputBlockSize);
                                 numOutputBytes = numWholeReadBlocks * _outputBlockSize;
                                 try
                                 {
@@ -766,9 +766,9 @@ namespace System.Security.Cryptography
                         int numWholeBlocksInBytes = numWholeBlocks * _inputBlockSize;
 
                         // Use ArrayPool.Shared instead of CryptoPool because the array is passed out.
-                        byte[]? tempOutputBuffer = ArrayPool<byte>.Shared.Rent(
-                            checked(numWholeBlocks * _outputBlockSize)
-                        );
+                        byte[]? tempOutputBuffer = ArrayPool<byte>
+                            .Shared
+                            .Rent(checked(numWholeBlocks * _outputBlockSize));
                         numOutputBytes = 0;
 
                         try

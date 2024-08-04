@@ -51,10 +51,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     ? " @ "
                         + string.Join(
                             ", ",
-                            System.Linq.Enumerable.Select(
-                                DeclaringSyntaxReferences,
-                                r => r.GetLocation().GetLineSpan()
-                            )
+                            System
+                                .Linq
+                                .Enumerable
+                                .Select(
+                                    DeclaringSyntaxReferences,
+                                    r => r.GetLocation().GetLineSpan()
+                                )
                         )
                     : null;
             return "SymbolDeclaredCompilationEvent("

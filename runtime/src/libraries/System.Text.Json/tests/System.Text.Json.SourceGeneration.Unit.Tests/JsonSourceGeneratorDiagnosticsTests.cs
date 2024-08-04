@@ -87,10 +87,9 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             using var emitStream = new MemoryStream();
             using var xmlStream = new MemoryStream();
-            var result = sourceGenResult.NewCompilation.Emit(
-                emitStream,
-                xmlDocumentationStream: xmlStream
-            );
+            var result = sourceGenResult
+                .NewCompilation
+                .Emit(emitStream, xmlDocumentationStream: xmlStream);
         }
 
         [Fact]

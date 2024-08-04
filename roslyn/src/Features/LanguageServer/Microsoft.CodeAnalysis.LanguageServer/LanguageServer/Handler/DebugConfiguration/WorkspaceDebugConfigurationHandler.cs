@@ -42,7 +42,9 @@ internal class WorkspaceDebugConfigurationHandler
         Contract.ThrowIfNull(context.Solution, nameof(context.Solution));
 
         var projects = context
-            .Solution.Projects.Where(p => p.FilePath != null && p.OutputFilePath != null)
+            .Solution
+            .Projects
+            .Where(p => p.FilePath != null && p.OutputFilePath != null)
             .Where(p => IsProjectInWorkspace(request.WorkspacePath, p))
             .Select(GetProjectDebugConfiguration)
             .ToArray();

@@ -47,9 +47,9 @@ namespace System.Net
         {
             try
             {
-                RegistryKey httpSysParameters = Registry.LocalMachine.OpenSubKey(
-                    httpSysParametersKey
-                );
+                RegistryKey httpSysParameters = Registry
+                    .LocalMachine
+                    .OpenSubKey(httpSysParametersKey);
 
                 if (httpSysParameters == null)
                 {

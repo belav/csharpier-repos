@@ -194,7 +194,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 for (
                     var node = location
-                        .SourceTree.GetRoot()
+                        .SourceTree
+                        .GetRoot()
                         .FindNode(location.SourceSpan, getInnermostNodeForTie: true);
                     node != null;
                     node = node.Parent

@@ -116,7 +116,8 @@ public class EntityTypeHierarchyMappingConvention : IModelFinalizingConvention
                         if (closestMappedType != null)
                         {
                             entityType
-                                .Builder.HasRelationship(closestMappedType, pk.Properties, pk)
+                                .Builder
+                                .HasRelationship(closestMappedType, pk.Properties, pk)
                                 ?.IsUnique(true);
                         }
                     }

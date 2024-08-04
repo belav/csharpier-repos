@@ -103,10 +103,9 @@ internal static class UseCollectionExpressionHelpers
         // collection type).
         //
         // Note: an identity conversion is always legal without needing any more checks.
-        var conversion = speculationAnalyzer.SpeculativeSemanticModel.GetConversion(
-            speculationAnalyzer.ReplacedExpression,
-            cancellationToken
-        );
+        var conversion = speculationAnalyzer
+            .SpeculativeSemanticModel
+            .GetConversion(speculationAnalyzer.ReplacedExpression, cancellationToken);
         if (conversion.IsIdentity)
             return true;
 
@@ -115,10 +114,9 @@ internal static class UseCollectionExpressionHelpers
 
         // The new expression's converted type has to equal the old expressions as well.  Otherwise, we're now
         // converting this to some different collection type unintentionally.
-        var replacedTypeInfo = speculationAnalyzer.SpeculativeSemanticModel.GetTypeInfo(
-            speculationAnalyzer.ReplacedExpression,
-            cancellationToken
-        );
+        var replacedTypeInfo = speculationAnalyzer
+            .SpeculativeSemanticModel
+            .GetTypeInfo(speculationAnalyzer.ReplacedExpression, cancellationToken);
         if (!originalTypeInfo.ConvertedType.Equals(replacedTypeInfo.ConvertedType))
             return false;
 
@@ -733,7 +731,8 @@ internal static class UseCollectionExpressionHelpers
         var openBracket = Token(SyntaxKind.OpenBracketToken)
             .WithTriviaFrom(initializer.OpenBraceToken);
         var elements = initializer
-            .Expressions.GetWithSeparators()
+            .Expressions
+            .GetWithSeparators()
             .SelectAsArray(i => i.IsToken ? i : ExpressionElement((ExpressionSyntax)i.AsNode()!));
         var closeBracket = Token(SyntaxKind.CloseBracketToken)
             .WithTriviaFrom(initializer.CloseBraceToken);
@@ -978,7 +977,8 @@ internal static class UseCollectionExpressionHelpers
                         // this to a collection expression.
                         if (
                             assignmentExpression
-                                .Right.DescendantNodesAndSelf()
+                                .Right
+                                .DescendantNodesAndSelf()
                                 .OfType<IdentifierNameSyntax>()
                                 .Any(i =>
                                     localSymbol.Equals(
@@ -1062,7 +1062,9 @@ internal static class UseCollectionExpressionHelpers
         // actual collection type (`ImmutableArray<T>`) has to have a `[CollectionBuilder(...)]` attribute on it that
         // then points at the factory type.
         var collectionBuilderAttributeData = createMethod
-            .ReturnType.OriginalDefinition.GetAttributes()
+            .ReturnType
+            .OriginalDefinition
+            .GetAttributes()
             .FirstOrDefault(a => a.AttributeClass.IsCollectionBuilderAttribute());
         if (
             collectionBuilderAttributeData?.ConstructorArguments
@@ -1162,10 +1164,15 @@ internal static class UseCollectionExpressionHelpers
 
                 // If we have `Create<T>(T)`, `Create<T>(T, T)` etc., then this is convertible.
                 if (
-                    originalCreateMethod.Parameters.All(static p =>
-                        p.Type
-                            is ITypeParameterSymbol { TypeParameterKind: TypeParameterKind.Method }
-                    )
+                    originalCreateMethod
+                        .Parameters
+                        .All(static p =>
+                            p.Type
+                                is ITypeParameterSymbol
+                                {
+                                    TypeParameterKind: TypeParameterKind.Method
+                                }
+                        )
                 )
                     return arguments.Count == originalCreateMethod.Parameters.Length;
 
@@ -1423,7 +1430,8 @@ internal static class UseCollectionExpressionHelpers
             ? default
             : SeparatedList<ArgumentSyntax>(
                 initializer
-                    .Expressions.GetWithSeparators()
+                    .Expressions
+                    .GetWithSeparators()
                     .Select(nodeOrToken =>
                         nodeOrToken.IsToken
                             ? nodeOrToken

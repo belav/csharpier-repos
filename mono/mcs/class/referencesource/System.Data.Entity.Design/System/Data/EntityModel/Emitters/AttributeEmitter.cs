@@ -344,12 +344,14 @@ namespace System.Data.EntityModel.Emitters
                 }
                 catch (ArgumentNullException e)
                 {
-                    emitter.Generator.AddError(
-                        Strings.InvalidAttributeSuppliedForProperty(emitter.Item.Name),
-                        ModelBuilderErrorCode.InvalidAttributeSuppliedForProperty,
-                        EdmSchemaErrorSeverity.Error,
-                        e
-                    );
+                    emitter
+                        .Generator
+                        .AddError(
+                            Strings.InvalidAttributeSuppliedForProperty(emitter.Item.Name),
+                            ModelBuilderErrorCode.InvalidAttributeSuppliedForProperty,
+                            EdmSchemaErrorSeverity.Error,
+                            e
+                        );
                 }
             }
 
@@ -449,9 +451,9 @@ namespace System.Data.EntityModel.Emitters
                 CodeExpression expression = arguments[i] as CodeExpression;
                 if (expression == null)
                     expression = new CodePrimitiveExpression(arguments[i]);
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(arguments[i - 1].ToString(), expression)
-                );
+                attribute
+                    .Arguments
+                    .Add(new CodeAttributeArgument(arguments[i - 1].ToString(), expression));
             }
         }
 

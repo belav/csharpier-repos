@@ -45,9 +45,9 @@ public class HomeController : Controller
     {
         public void Apply(ActionModel model)
         {
-            var selector = model.Selectors.First(f =>
-                f.AttributeRouteModel.Template == "Home/CannotBeRouted"
-            );
+            var selector = model
+                .Selectors
+                .First(f => f.AttributeRouteModel.Template == "Home/CannotBeRouted");
             selector.AttributeRouteModel.SuppressPathMatching = true;
         }
     }

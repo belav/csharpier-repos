@@ -56,9 +56,10 @@ namespace System.ServiceModel.Security
             if (
                 this.factory.ActAsInitiator
                 && this.factory.SecurityBindingElement.EnableUnsecuredResponse
-                && !this.factory.StandardsManager.SecurityVersion.DoesMessageContainSecurityHeader(
-                    message
-                )
+                && !this.factory
+                    .StandardsManager
+                    .SecurityVersion
+                    .DoesMessageContainSecurityHeader(message)
             )
                 return false;
 
@@ -334,11 +335,13 @@ namespace System.ServiceModel.Security
             }
             if (this.Target == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.NoOutgoingEndpointAddressAvailableForDoingIdentityCheck)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.NoOutgoingEndpointAddressAvailableForDoingIdentityCheck)
+                        )
+                    );
             }
             ReadOnlyCollection<IAuthorizationPolicy> authzPolicies = authenticator.ValidateToken(
                 token
@@ -389,19 +392,23 @@ namespace System.ServiceModel.Security
                     }
                     else if (!object.ReferenceEquals(token, correlationStates[i].Token))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MessageSecurityException(
-                                SR.GetString(SR.MultipleCorrelationTokensFound)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(SR.MultipleCorrelationTokensFound)
+                                )
+                            );
                     }
                 }
             }
             if (token == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(SR.GetString(SR.NoCorrelationTokenFound))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(SR.GetString(SR.NoCorrelationTokenFound))
+                    );
             }
             return token;
         }
@@ -412,11 +419,13 @@ namespace System.ServiceModel.Security
         {
             if (correlationState == null || correlationState.Token == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.CannotFindCorrelationStateForApplyingSecurity)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.CannotFindCorrelationStateForApplyingSecurity)
+                        )
+                    );
             }
             return correlationState.Token;
         }
@@ -647,11 +656,13 @@ namespace System.ServiceModel.Security
             );
             if (this.factory.AddTimestamp && securityHeader.Timestamp == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new MessageSecurityException(
-                        SR.GetString(SR.RequiredTimestampMissingInSecurityHeader)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(SR.RequiredTimestampMissingInSecurityHeader)
+                        )
+                    );
             }
 
             if (
@@ -707,11 +718,13 @@ namespace System.ServiceModel.Security
             {
                 if (receivedConfirmations != null && receivedConfirmations.Count > 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(SR.FoundUnexpectedSignatureConfirmations)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(SR.FoundUnexpectedSignatureConfirmations)
+                            )
+                        );
                 }
                 return;
             }
@@ -765,9 +778,11 @@ namespace System.ServiceModel.Security
             }
             if (!allSignaturesConfirmed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(SR.GetString(SR.NotAllSignaturesConfirmed))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(SR.GetString(SR.NotAllSignaturesConfirmed))
+                    );
             }
         }
 
@@ -842,11 +857,13 @@ namespace System.ServiceModel.Security
                 && !this.factory.ExpectOutgoingMessages
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SecurityBindingNotSetUpToProcessOutgoingMessages)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SecurityBindingNotSetUpToProcessOutgoingMessages)
+                        )
+                    );
             }
             if (message == null)
             {
@@ -864,11 +881,13 @@ namespace System.ServiceModel.Security
                     && !factory.ExpectIncomingMessages
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SecurityBindingNotSetUpToProcessIncomingMessages)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SecurityBindingNotSetUpToProcessIncomingMessages)
+                            )
+                        );
                 }
                 if (message == null)
                 {
@@ -894,12 +913,14 @@ namespace System.ServiceModel.Security
                     throw;
 
                 base.OnVerifyIncomingMessageFailure(message, e);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.MessageSecurityVerificationFailed),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.MessageSecurityVerificationFailed),
+                            e
+                        )
+                    );
             }
         }
 
@@ -917,11 +938,13 @@ namespace System.ServiceModel.Security
                     && !factory.ExpectIncomingMessages
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SecurityBindingNotSetUpToProcessIncomingMessages)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SecurityBindingNotSetUpToProcessIncomingMessages)
+                            )
+                        );
                 }
                 if (message == null)
                 {
@@ -953,12 +976,14 @@ namespace System.ServiceModel.Security
                     throw;
 
                 base.OnVerifyIncomingMessageFailure(message, e);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.MessageSecurityVerificationFailed),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.MessageSecurityVerificationFailed),
+                            e
+                        )
+                    );
             }
         }
 
@@ -1050,14 +1075,16 @@ namespace System.ServiceModel.Security
             {
                 if (token == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(
-                                SR.TokenProviderCannotGetTokensForTarget,
-                                this.binding.Target
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.TokenProviderCannotGetTokensForTarget,
+                                    this.binding.Target
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 if (this.doIdentityChecks)
                 {
@@ -1087,10 +1114,9 @@ namespace System.ServiceModel.Security
                     result.AsyncState as GetOneTokenAndSetUpSecurityAsyncResult;
                 if (self == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "result",
-                        SR.GetString(SR.InvalidAsyncResult)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("result", SR.GetString(SR.InvalidAsyncResult));
                 }
                 Exception completionException = null;
                 bool completeSelf = false;
@@ -1306,10 +1332,9 @@ namespace System.ServiceModel.Security
                     result.AsyncState as GetTwoTokensAndSetUpSecurityAsyncResult;
                 if (self == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "result",
-                        SR.GetString(SR.InvalidAsyncResult)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("result", SR.GetString(SR.InvalidAsyncResult));
                 }
                 bool completeSelf = false;
                 Exception completionException = null;
@@ -1348,10 +1373,9 @@ namespace System.ServiceModel.Security
                     result.AsyncState as GetTwoTokensAndSetUpSecurityAsyncResult;
                 if (self == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "result",
-                        SR.GetString(SR.InvalidAsyncResult)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("result", SR.GetString(SR.InvalidAsyncResult));
                 }
                 bool completeSelf = false;
                 Exception completionException = null;

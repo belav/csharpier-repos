@@ -50,7 +50,8 @@
             RouteCollection = routeCollection;
             ClientValidationRuleFactory = (name, metadata) =>
                 ModelValidatorProviders
-                    .Providers.GetValidators(
+                    .Providers
+                    .GetValidators(
                         metadata ?? ModelMetadata.FromStringExpression(name, ViewData),
                         ViewContext
                     )
@@ -443,10 +444,12 @@
             {
                 if (modelState.Value != null)
                 {
-                    return modelState.Value.ConvertTo(
-                        destinationType,
-                        null /* culture */
-                    );
+                    return modelState
+                        .Value
+                        .ConvertTo(
+                            destinationType,
+                            null /* culture */
+                        );
                 }
             }
             return null;

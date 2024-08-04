@@ -709,17 +709,19 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             catch (Exception e)
             {
-                results.Errors.Add(
-                    new WorkflowCompilerError(
-                        String.Empty,
-                        -1,
-                        -1,
-                        ErrorNumbers.Error_UnknownCompilerException.ToString(
-                            CultureInfo.InvariantCulture
-                        ),
-                        SR.GetString(SR.Error_CompilationFailed, e.Message)
-                    )
-                );
+                results
+                    .Errors
+                    .Add(
+                        new WorkflowCompilerError(
+                            String.Empty,
+                            -1,
+                            -1,
+                            ErrorNumbers
+                                .Error_UnknownCompilerException
+                                .ToString(CultureInfo.InvariantCulture),
+                            SR.GetString(SR.Error_CompilationFailed, e.Message)
+                        )
+                    );
             }
             finally
             {
@@ -859,8 +861,9 @@ namespace System.Workflow.ComponentModel.Compiler
             clonedParams.GenerateInMemory = true;
 
             if (string.IsNullOrEmpty(parameters.OutputAssembly))
-                localAssemblyPath = clonedParams.OutputAssembly =
-                    clonedParams.TempFiles.AddExtension("dll");
+                localAssemblyPath = clonedParams.OutputAssembly = clonedParams
+                    .TempFiles
+                    .AddExtension("dll");
             else
             {
                 string tempAssemblyDirectory = clonedParams.TempFiles.BasePath;
@@ -900,10 +903,9 @@ namespace System.Workflow.ComponentModel.Compiler
                 // We need to add the pdb file to the clonedParameters.TempFiles collection so that
                 // it gets deleted, even in the case where we didn't end up creating the tempAssemblyDirectory above.
                 string pdbFilename = Path.GetFileNameWithoutExtension(localAssemblyPath) + ".pdb";
-                clonedParams.TempFiles.AddFile(
-                    Path.GetDirectoryName(localAssemblyPath) + "\\" + pdbFilename,
-                    true
-                );
+                clonedParams
+                    .TempFiles
+                    .AddFile(Path.GetDirectoryName(localAssemblyPath) + "\\" + pdbFilename, true);
             }
 
             // Explictily ignore warnings (in case the user set this property in the project options).
@@ -1047,26 +1049,30 @@ namespace System.Workflow.ComponentModel.Compiler
                             {
                                 if (error is WorkflowMarkupSerializationException)
                                 {
-                                    results.Errors.Add(
-                                        new WorkflowCompilerError(
-                                            fileName,
-                                            (WorkflowMarkupSerializationException)error
-                                        )
-                                    );
+                                    results
+                                        .Errors
+                                        .Add(
+                                            new WorkflowCompilerError(
+                                                fileName,
+                                                (WorkflowMarkupSerializationException)error
+                                            )
+                                        );
                                 }
                                 else
                                 {
-                                    results.Errors.Add(
-                                        new WorkflowCompilerError(
-                                            fileName,
-                                            -1,
-                                            -1,
-                                            ErrorNumbers.Error_SerializationError.ToString(
-                                                CultureInfo.InvariantCulture
-                                            ),
-                                            error.ToString()
-                                        )
-                                    );
+                                    results
+                                        .Errors
+                                        .Add(
+                                            new WorkflowCompilerError(
+                                                fileName,
+                                                -1,
+                                                -1,
+                                                ErrorNumbers
+                                                    .Error_SerializationError
+                                                    .ToString(CultureInfo.InvariantCulture),
+                                                error.ToString()
+                                            )
+                                        );
                                 }
                             }
                         }
@@ -1074,40 +1080,44 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
                 catch (WorkflowMarkupSerializationException xomlSerializationException)
                 {
-                    results.Errors.Add(
-                        new WorkflowCompilerError(fileName, xomlSerializationException)
-                    );
+                    results
+                        .Errors
+                        .Add(new WorkflowCompilerError(fileName, xomlSerializationException));
                     continue;
                 }
                 catch (Exception e)
                 {
-                    results.Errors.Add(
-                        new WorkflowCompilerError(
-                            fileName,
-                            -1,
-                            -1,
-                            ErrorNumbers.Error_SerializationError.ToString(
-                                CultureInfo.InvariantCulture
-                            ),
-                            SR.GetString(SR.Error_CompilationFailed, e.Message)
-                        )
-                    );
+                    results
+                        .Errors
+                        .Add(
+                            new WorkflowCompilerError(
+                                fileName,
+                                -1,
+                                -1,
+                                ErrorNumbers
+                                    .Error_SerializationError
+                                    .ToString(CultureInfo.InvariantCulture),
+                                SR.GetString(SR.Error_CompilationFailed, e.Message)
+                            )
+                        );
                     continue;
                 }
 
                 if (rootActivity == null)
                 {
-                    results.Errors.Add(
-                        new WorkflowCompilerError(
-                            fileName,
-                            1,
-                            1,
-                            ErrorNumbers.Error_SerializationError.ToString(
-                                CultureInfo.InvariantCulture
-                            ),
-                            SR.GetString(SR.Error_RootActivityTypeInvalid)
-                        )
-                    );
+                    results
+                        .Errors
+                        .Add(
+                            new WorkflowCompilerError(
+                                fileName,
+                                1,
+                                1,
+                                ErrorNumbers
+                                    .Error_SerializationError
+                                    .ToString(CultureInfo.InvariantCulture),
+                                SR.GetString(SR.Error_RootActivityTypeInvalid)
+                            )
+                        );
                     continue;
                 }
 
@@ -1118,17 +1128,19 @@ namespace System.Workflow.ComponentModel.Compiler
                 );
                 if (!createNewClass)
                 {
-                    results.Errors.Add(
-                        new WorkflowCompilerError(
-                            fileName,
-                            1,
-                            1,
-                            ErrorNumbers.Error_SerializationError.ToString(
-                                CultureInfo.InvariantCulture
-                            ),
-                            SR.GetString(SR.Error_CannotCompile_No_XClass)
-                        )
-                    );
+                    results
+                        .Errors
+                        .Add(
+                            new WorkflowCompilerError(
+                                fileName,
+                                1,
+                                1,
+                                ErrorNumbers
+                                    .Error_SerializationError
+                                    .ToString(CultureInfo.InvariantCulture),
+                                SR.GetString(SR.Error_CannotCompile_No_XClass)
+                            )
+                        );
                     continue;
                 }
 
@@ -1143,31 +1155,33 @@ namespace System.Workflow.ComponentModel.Compiler
                         ErrorNumbers.Error_CodeWithinNotAllowed
                     );
                     error.UserData[typeof(Activity)] = rootActivity;
-                    results.Errors.Add(
-                        XomlCompilerHelper.CreateXomlCompilerError(error, parameters)
-                    );
+                    results
+                        .Errors
+                        .Add(XomlCompilerHelper.CreateXomlCompilerError(error, parameters));
                 }
 
                 ValidationErrorCollection errors = new ValidationErrorCollection();
 
                 errors = ValidateIdentifiers(context.ServiceProvider, rootActivity);
                 foreach (ValidationError error in errors)
-                    results.Errors.Add(
-                        XomlCompilerHelper.CreateXomlCompilerError(error, parameters)
-                    );
+                    results
+                        .Errors
+                        .Add(XomlCompilerHelper.CreateXomlCompilerError(error, parameters));
 
                 if (results.Errors.HasErrors)
                     continue;
 
-                codeCompileUnit.Namespaces.AddRange(
-                    WorkflowMarkupSerializationHelpers.GenerateCodeFromXomlDocument(
-                        rootActivity,
-                        fileName,
-                        context.RootNamespace,
-                        CompilerHelpers.GetSupportedLanguage(context.Language),
-                        context.ServiceProvider
-                    )
-                );
+                codeCompileUnit
+                    .Namespaces
+                    .AddRange(
+                        WorkflowMarkupSerializationHelpers.GenerateCodeFromXomlDocument(
+                            rootActivity,
+                            fileName,
+                            context.RootNamespace,
+                            CompilerHelpers.GetSupportedLanguage(context.Language),
+                            context.ServiceProvider
+                        )
+                    );
             }
 
             WorkflowMarkupSerializationHelpers.FixStandardNamespacesAndRootNamespace(

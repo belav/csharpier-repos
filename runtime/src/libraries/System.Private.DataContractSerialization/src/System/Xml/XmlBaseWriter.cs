@@ -1610,18 +1610,14 @@ namespace System.Xml
                     if (_attributeValue != null)
                     {
                         WriteAttributeText(
-                            DataContractSerializer.Base64Encoding.GetString(
-                                _trailBytes,
-                                0,
-                                _trailByteCount
-                            )
+                            DataContractSerializer
+                                .Base64Encoding
+                                .GetString(_trailBytes, 0, _trailByteCount)
                         );
                         WriteAttributeText(
-                            DataContractSerializer.Base64Encoding.GetString(
-                                buffer,
-                                offset,
-                                actualByteCount - _trailByteCount
-                            )
+                            DataContractSerializer
+                                .Base64Encoding
+                                .GetString(buffer, offset, actualByteCount - _trailByteCount)
                         );
                     }
 
@@ -1687,18 +1683,14 @@ namespace System.Xml
                     if (_attributeValue != null)
                     {
                         WriteAttributeText(
-                            DataContractSerializer.Base64Encoding.GetString(
-                                _trailBytes,
-                                0,
-                                _trailByteCount
-                            )
+                            DataContractSerializer
+                                .Base64Encoding
+                                .GetString(_trailBytes, 0, _trailByteCount)
                         );
                         WriteAttributeText(
-                            DataContractSerializer.Base64Encoding.GetString(
-                                buffer,
-                                offset,
-                                actualByteCount - _trailByteCount
-                            )
+                            DataContractSerializer
+                                .Base64Encoding
+                                .GetString(buffer, offset, actualByteCount - _trailByteCount)
                         );
                     }
                     if (!_isXmlnsAttribute)

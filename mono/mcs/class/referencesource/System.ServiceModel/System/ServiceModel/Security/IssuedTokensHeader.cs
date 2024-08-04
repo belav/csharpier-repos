@@ -62,9 +62,15 @@ namespace System.ServiceModel.Security
             {
                 if (rstr == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        String.Format(CultureInfo.InvariantCulture, "tokenIssuances[{0}]", index)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "tokenIssuances[{0}]",
+                                index
+                            )
+                        );
                 }
                 coll.Add(rstr);
                 ++index;
@@ -79,9 +85,9 @@ namespace System.ServiceModel.Security
         {
             if (standardsManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("standardsManager")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("standardsManager"));
             }
             this.standardsManager = standardsManager;
             this.tokenIssuances = new ReadOnlyCollection<RequestSecurityTokenResponse>(coll);
@@ -103,9 +109,9 @@ namespace System.ServiceModel.Security
             }
             if (standardsManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("standardsManager")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("standardsManager"));
             }
             this.standardsManager = standardsManager;
             XmlDictionaryReader reader = XmlDictionaryReader.CreateDictionaryReader(xmlReader);
@@ -124,10 +130,9 @@ namespace System.ServiceModel.Security
                 this.standardsManager.TrustDriver.IsAtRequestSecurityTokenResponseCollection(reader)
             )
             {
-                RequestSecurityTokenResponseCollection rstrColl =
-                    this.standardsManager.TrustDriver.CreateRequestSecurityTokenResponseCollection(
-                        reader
-                    );
+                RequestSecurityTokenResponseCollection rstrColl = this.standardsManager
+                    .TrustDriver
+                    .CreateRequestSecurityTokenResponseCollection(reader);
                 foreach (RequestSecurityTokenResponse rstr in rstrColl.RstrCollection)
                 {
                     coll.Add(rstr);
@@ -135,8 +140,9 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                RequestSecurityTokenResponse rstr =
-                    this.standardsManager.TrustDriver.CreateRequestSecurityTokenResponse(reader);
+                RequestSecurityTokenResponse rstr = this.standardsManager
+                    .TrustDriver
+                    .CreateRequestSecurityTokenResponse(reader);
                 coll.Add(rstr);
             }
             this.tokenIssuances = new ReadOnlyCollection<RequestSecurityTokenResponse>(coll);
@@ -185,10 +191,9 @@ namespace System.ServiceModel.Security
         {
             if (this.tokenIssuances.Count == 1)
             {
-                this.standardsManager.TrustDriver.WriteRequestSecurityTokenResponse(
-                    this.tokenIssuances[0],
-                    writer
-                );
+                this.standardsManager
+                    .TrustDriver
+                    .WriteRequestSecurityTokenResponse(this.tokenIssuances[0], writer);
             }
             else
             {

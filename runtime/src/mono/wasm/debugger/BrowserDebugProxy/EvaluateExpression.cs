@@ -30,11 +30,13 @@ namespace Microsoft.WebAssembly.Diagnostics
     {
         internal static Script<object> script = CSharpScript.Create(
             "",
-            ScriptOptions.Default.WithReferences(
-                typeof(object).Assembly,
-                typeof(Enumerable).Assembly,
-                typeof(JObject).Assembly
-            )
+            ScriptOptions
+                .Default
+                .WithReferences(
+                    typeof(object).Assembly,
+                    typeof(Enumerable).Assembly,
+                    typeof(JObject).Assembly
+                )
         );
 
         private sealed partial class ExpressionSyntaxReplacer : CSharpSyntaxWalker
@@ -681,10 +683,12 @@ namespace Microsoft.WebAssembly.Diagnostics
                     {
                         var typeIds = await resolver
                             .GetContext()
-                            .SdbAgent.GetTypeIdsForObject(objectId.Value, withParents: true, token);
+                            .SdbAgent
+                            .GetTypeIdsForObject(objectId.Value, withParents: true, token);
                         var toString = await resolver
                             .GetContext()
-                            .SdbAgent.InvokeToStringAsync(
+                            .SdbAgent
+                            .InvokeToStringAsync(
                                 typeIds,
                                 isValueType: false,
                                 isEnum: false,

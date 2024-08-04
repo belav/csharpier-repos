@@ -67,7 +67,8 @@ public class MapToInterface : NonValidatingSpecBase
     public void Should_throw() =>
         new Action(() => Mapper.Map<IEnumerable<object>>(new object()))
             .ShouldThrow<AutoMapperMappingException>()
-            .Message.ShouldStartWith(
+            .Message
+            .ShouldStartWith(
                 "Cannot create interface System.Collections.Generic.IEnumerable`1[System.Object]"
             );
 }
@@ -449,7 +450,8 @@ public class When_mapping_an_interface_type_to_a_concrete_type_and_reverse : Aut
             .Throw<AutoMapperMappingException>(
                 () => Mapper.Map<Destination, ISource>(new Destination { Value = 5 })
             )
-            .Message.ShouldStartWith("Cannot create interface " + typeof(ISource).FullName);
+            .Message
+            .ShouldStartWith("Cannot create interface " + typeof(ISource).FullName);
     }
 }
 

@@ -427,9 +427,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                             // For Native View, create a DkmIntermediateEvaluationResult.
                             // This will allow the C++ EE to take over expansion.
                             var process = inspectionContext.RuntimeInstance.Process;
-                            var cpp = process.EngineSettings.GetLanguage(
-                                new DkmCompilerId(DkmVendorId.Microsoft, DkmLanguageId.Cpp)
-                            );
+                            var cpp = process
+                                .EngineSettings
+                                .GetLanguage(
+                                    new DkmCompilerId(DkmVendorId.Microsoft, DkmLanguageId.Cpp)
+                                );
                             evalResult = DkmIntermediateEvaluationResult.Create(
                                 inspectionContext,
                                 stackFrame,
@@ -602,8 +604,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
                 if (!value.IsNull)
                 {
-                    DkmCustomUIVisualizerInfo[] customUIVisualizerInfo =
-                        value.Type.GetDebuggerCustomUIVisualizerInfo();
+                    DkmCustomUIVisualizerInfo[] customUIVisualizerInfo = value
+                        .Type
+                        .GetDebuggerCustomUIVisualizerInfo();
                     if (customUIVisualizerInfo != null)
                     {
                         customUIVisualizers = new ReadOnlyCollection<DkmCustomUIVisualizerInfo>(

@@ -434,10 +434,9 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 foreach (var item in oldItems)
                 {
                     // EdgeInclusive so that if we type on the end of an existing item it maps forward to the new full span.
-                    var mapped = item.Data.SelectionRangeSpan.TranslateTo(
-                        newSnapshot,
-                        SpanTrackingMode.EdgeInclusive
-                    );
+                    var mapped = item.Data
+                        .SelectionRangeSpan
+                        .TranslateTo(newSnapshot, SpanTrackingMode.EdgeInclusive);
                     oldState[mapped.Span] = (item.IsExpanded, item.IsSelected);
 
                     AddPreviousState(newSnapshot, item.Children, oldState);
@@ -513,10 +512,11 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             // Map the caret back to the snapshot used to create the last set of items.
             var modelTree = this.LastPresentedViewState.ViewModelItemsTree;
             var textView = _codeWindowViewTracker.GetActiveView();
-            var caretPosition = textView.Caret.Position.BufferPosition.TranslateTo(
-                this.LastPresentedViewState.TextSnapshot,
-                PointTrackingMode.Positive
-            );
+            var caretPosition = textView
+                .Caret
+                .Position
+                .BufferPosition
+                .TranslateTo(this.LastPresentedViewState.TextSnapshot, PointTrackingMode.Positive);
 
             this.IsNavigating = true;
             try

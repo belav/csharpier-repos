@@ -241,14 +241,16 @@ namespace System.IO
 
             try
             {
-                using SafeFileHandle handle = Interop.Kernel32.CreateFile(
-                    TestDirectory,
-                    dwDesiredAccess: 0,
-                    dwShareMode: FileShare.ReadWrite | FileShare.Delete,
-                    dwCreationDisposition: FileMode.Open,
-                    dwFlagsAndAttributes: Interop.Kernel32.FileOperations.OPEN_EXISTING
-                        | Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS // Necessary to obtain a handle to a directory
-                );
+                using SafeFileHandle handle = Interop
+                    .Kernel32
+                    .CreateFile(
+                        TestDirectory,
+                        dwDesiredAccess: 0,
+                        dwShareMode: FileShare.ReadWrite | FileShare.Delete,
+                        dwCreationDisposition: FileMode.Open,
+                        dwFlagsAndAttributes: Interop.Kernel32.FileOperations.OPEN_EXISTING
+                            | Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS // Necessary to obtain a handle to a directory
+                    );
 
                 if (!handle.IsInvalid)
                 {
@@ -256,12 +258,14 @@ namespace System.IO
                     uint result;
                     fixed (char* bufPtr = buffer)
                     {
-                        result = Interop.Kernel32.GetFinalPathNameByHandle(
-                            handle,
-                            bufPtr,
-                            (uint)buffer.Length,
-                            Interop.Kernel32.FILE_NAME_NORMALIZED
-                        );
+                        result = Interop
+                            .Kernel32
+                            .GetFinalPathNameByHandle(
+                                handle,
+                                bufPtr,
+                                (uint)buffer.Length,
+                                Interop.Kernel32.FILE_NAME_NORMALIZED
+                            );
                     }
 
                     if (result == 0)

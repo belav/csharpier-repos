@@ -22,9 +22,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         public async Task ActiveDocumentIsSavedAsync(CancellationToken cancellationToken)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var activeDocument = await TestServices.Editor.GetActiveTextViewAsync(
-                cancellationToken
-            );
+            var activeDocument = await TestServices
+                .Editor
+                .GetActiveTextViewAsync(cancellationToken);
             var editorAdaptersFactoryService =
                 await GetComponentModelServiceAsync<IVsEditorAdaptersFactoryService>(
                     cancellationToken
@@ -99,10 +99,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            var assemblyReferences = await TestServices.SolutionExplorer.GetAssemblyReferencesAsync(
-                projectName,
-                cancellationToken
-            );
+            var assemblyReferences = await TestServices
+                .SolutionExplorer
+                .GetAssemblyReferencesAsync(projectName, cancellationToken);
             var expectedAssemblyReference =
                 assemblyName + "," + assemblyVersion + "," + assemblyPublicKeyToken.ToUpper();
             Assert.Contains(expectedAssemblyReference, assemblyReferences);
@@ -114,10 +113,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            var projectReferences = await TestServices.SolutionExplorer.GetProjectReferencesAsync(
-                projectName,
-                cancellationToken
-            );
+            var projectReferences = await TestServices
+                .SolutionExplorer
+                .GetProjectReferencesAsync(projectName, cancellationToken);
             Assert.Contains(referencedProjectName, projectReferences);
         }
     }

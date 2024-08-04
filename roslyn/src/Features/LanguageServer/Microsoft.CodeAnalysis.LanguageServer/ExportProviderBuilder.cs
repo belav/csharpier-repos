@@ -104,7 +104,8 @@ internal sealed class ExportProviderBuilder
         //         part definition Microsoft.CodeAnalysis.ExternalAccess.Pythia.PythiaSignatureHelpProvider
         var erroredParts =
             configuration
-                .CompositionErrors.FirstOrDefault()
+                .CompositionErrors
+                .FirstOrDefault()
                 ?.SelectMany(error => error.Parts)
                 .Select(part => part.Definition.Type.Name) ?? Enumerable.Empty<string>();
         var expectedErroredParts = new string[] { "PythiaSignatureHelpProvider" };

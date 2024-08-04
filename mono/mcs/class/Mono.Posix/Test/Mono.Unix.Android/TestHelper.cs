@@ -12,7 +12,8 @@ namespace Mono.Unix.Android
         {
 #if MONODROID
             var method = typeof(Mono.Unix.Native.NativeConvert)
-                .Assembly.GetType("Mono.Unix.Android.AndroidUtils")
+                .Assembly
+                .GetType("Mono.Unix.Android.AndroidUtils")
                 .GetMethod("AreRealTimeSignalsSafe", BindingFlags.Public | BindingFlags.Static);
             areRealTimeSignalsSafe = (bool)method.Invoke(null, null);
 #else

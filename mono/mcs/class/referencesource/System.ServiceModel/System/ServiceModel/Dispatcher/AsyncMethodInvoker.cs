@@ -26,13 +26,13 @@ namespace System.ServiceModel.Dispatcher
         public AsyncMethodInvoker(MethodInfo beginMethod, MethodInfo endMethod)
         {
             if (beginMethod == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("beginMethod")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("beginMethod"));
             if (endMethod == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("endMethod")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("endMethod"));
 
             this.beginMethod = beginMethod;
             this.endMethod = endMethod;
@@ -60,9 +60,9 @@ namespace System.ServiceModel.Dispatcher
 
         public object Invoke(object instance, object[] inputs, out object[] outputs)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         internal static void CreateActivityInfo(
@@ -106,31 +106,37 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             if (instance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
+                    );
             if (inputs == null)
             {
                 if (this.InputParameterCount > 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxInputParametersToServiceNull,
+                                    this.InputParameterCount
+                                )
+                            )
+                        );
+            }
+            else if (inputs.Length != this.InputParameterCount)
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
-                                SR.SFxInputParametersToServiceNull,
-                                this.InputParameterCount
+                                SR.SFxInputParametersToServiceInvalid,
+                                this.InputParameterCount,
+                                inputs.Length
                             )
                         )
                     );
-            }
-            else if (inputs.Length != this.InputParameterCount)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxInputParametersToServiceInvalid,
-                            this.InputParameterCount,
-                            inputs.Length
-                        )
-                    )
-                );
 
             StartOperationInvokePerformanceCounters(
                 this.beginMethod.Name.Substring(ServiceReflector.BeginMethodNamePrefix.Length)
@@ -186,9 +192,9 @@ namespace System.ServiceModel.Dispatcher
             catch (System.Security.SecurityException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    AuthorizationBehavior.CreateAccessDeniedFaultException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(AuthorizationBehavior.CreateAccessDeniedFaultException());
             }
             catch (Exception e)
             {
@@ -263,9 +269,11 @@ namespace System.ServiceModel.Dispatcher
             object returnVal;
 
             if (instance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
+                    );
 
             outputs = EmptyArray.Allocate(this.OutputParameterCount);
             bool callFailed = true;
@@ -285,9 +293,9 @@ namespace System.ServiceModel.Dispatcher
             catch (SecurityException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    AuthorizationBehavior.CreateAccessDeniedFaultException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(AuthorizationBehavior.CreateAccessDeniedFaultException());
             }
             catch (FaultException)
             {

@@ -40,7 +40,8 @@ public partial class ParserTests
                 Split($"\"{CliRootCommand.ExecutablePath}\" inner -x hello")
             );
             parserResult
-                .Errors.Should()
+                .Errors
+                .Should()
                 .ContainSingle(e =>
                     e.Message
                     == LocalizationResources.UnrecognizedCommandOrArgument(
@@ -74,7 +75,10 @@ public partial class ParserTests
             var result2 = command.Parse($"\"{CliRootCommand.ExecutablePath}\" inner -x hello");
 
             result2
-                .RootCommandResult.IdentifierToken.Value.Should()
+                .RootCommandResult
+                .IdentifierToken
+                .Value
+                .Should()
                 .Be(CliRootCommand.ExecutablePath);
         }
 

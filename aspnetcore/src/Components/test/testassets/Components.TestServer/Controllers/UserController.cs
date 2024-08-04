@@ -24,8 +24,8 @@ public class UserController : Controller
         {
             IsAuthenticated = User.Identity.IsAuthenticated,
             UserName = User.Identity.Name,
-            ExposedClaims = User
-                .Claims.Where(c => c.Type == "test-claim" || IsExposedRole(c))
+            ExposedClaims = User.Claims
+                .Where(c => c.Type == "test-claim" || IsExposedRole(c))
                 .Select(c => new ExposedClaim { Type = c.Type, Value = c.Value })
                 .ToList(),
         };

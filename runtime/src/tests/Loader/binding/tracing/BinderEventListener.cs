@@ -191,11 +191,13 @@ namespace BinderTracingTests
             {
                 lock (eventsLock)
                 {
-                    var events = bindOperations.Values.Where(e =>
-                        e.Completed
-                        && Helpers.AssemblyNamesMatch(e.AssemblyName, assemblyName)
-                        && !e.Nested
-                    );
+                    var events = bindOperations
+                        .Values
+                        .Where(e =>
+                            e.Completed
+                            && Helpers.AssemblyNamesMatch(e.AssemblyName, assemblyName)
+                            && !e.Nested
+                        );
                     if (events.Any())
                     {
                         return events.ToArray();

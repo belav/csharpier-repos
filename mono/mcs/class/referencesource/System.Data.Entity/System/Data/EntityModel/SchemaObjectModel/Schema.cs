@@ -250,11 +250,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             AddError(
                                 ErrorCode.UnexpectedXmlElement,
                                 EdmSchemaErrorSeverity.Error,
-                                System.Data.Entity.Strings.UnexpectedRootElement(
-                                    sourceReader.NamespaceURI,
-                                    sourceReader.LocalName,
-                                    SchemaXmlNamespace
-                                )
+                                System
+                                    .Data
+                                    .Entity
+                                    .Strings
+                                    .UnexpectedRootElement(
+                                        sourceReader.NamespaceURI,
+                                        sourceReader.LocalName,
+                                        SchemaXmlNamespace
+                                    )
                             );
                             break;
                     }
@@ -981,11 +985,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         usingElement.AddError(
                             ErrorCode.NotInNamespace,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.NotInNamespaceAlias(
-                                unqualifiedTypeName,
-                                namespaceName,
-                                definingQualification
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .NotInNamespaceAlias(
+                                    unqualifiedTypeName,
+                                    namespaceName,
+                                    definingQualification
+                                )
                         );
                     }
                     else
@@ -993,10 +1001,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         usingElement.AddError(
                             ErrorCode.NotInNamespace,
                             EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.NotInNamespaceNoAlias(
-                                unqualifiedTypeName,
-                                namespaceName
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .NotInNamespaceNoAlias(unqualifiedTypeName, namespaceName)
                         );
                     }
                 }
@@ -1307,21 +1316,21 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         protected void TryAddType(SchemaType schemaType, bool doNotAddErrorForEmptyName)
         {
-            this.SchemaManager.SchemaTypes.Add(
-                schemaType,
-                doNotAddErrorForEmptyName,
-                Strings.TypeNameAlreadyDefinedDuplicate
-            );
+            this.SchemaManager
+                .SchemaTypes
+                .Add(
+                    schemaType,
+                    doNotAddErrorForEmptyName,
+                    Strings.TypeNameAlreadyDefinedDuplicate
+                );
             this.SchemaTypes.Add(schemaType);
         }
 
         protected void TryAddContainer(SchemaType schemaType, bool doNotAddErrorForEmptyName)
         {
-            this.SchemaManager.SchemaTypes.Add(
-                schemaType,
-                doNotAddErrorForEmptyName,
-                Strings.EntityContainerAlreadyExists
-            );
+            this.SchemaManager
+                .SchemaTypes
+                .Add(schemaType, doNotAddErrorForEmptyName, Strings.EntityContainerAlreadyExists);
             this.SchemaTypes.Add(schemaType);
         }
 
@@ -1470,8 +1479,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 Debug.Assert(resourceName != null, "resourceName cannot be null");
 
                 Stream resourceStream = null;
-                System.Reflection.Assembly executingAssembly =
-                    System.Reflection.Assembly.GetExecutingAssembly();
+                System.Reflection.Assembly executingAssembly = System
+                    .Reflection
+                    .Assembly
+                    .GetExecutingAssembly();
                 if (executingAssembly != null)
                 {
                     resourceStream = executingAssembly.GetManifestResourceStream(resourceName);

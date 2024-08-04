@@ -49,11 +49,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             FileExtensionsMetadata
         > GetDynamicFileInfoProvider()
         {
-            var composition = TestComposition.Empty.AddParts(
-                typeof(TestDynamicFileInfoProviderThatProducesNoFiles)
-            );
+            var composition = TestComposition
+                .Empty
+                .AddParts(typeof(TestDynamicFileInfoProviderThatProducesNoFiles));
             return composition
-                .ExportProviderFactory.CreateExportProvider()
+                .ExportProviderFactory
+                .CreateExportProvider()
                 .GetExport<IDynamicFileInfoProvider, FileExtensionsMetadata>();
         }
     }

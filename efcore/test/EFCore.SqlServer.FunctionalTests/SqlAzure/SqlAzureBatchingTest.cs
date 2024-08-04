@@ -24,7 +24,8 @@ public class SqlAzureBatchingTest : IClassFixture<BatchingSqlAzureFixture>
     {
         using var context = Fixture.CreateContext(batchSize);
         context
-            .Database.CreateExecutionStrategy()
+            .Database
+            .CreateExecutionStrategy()
             .Execute(
                 context,
                 contextScoped =>
@@ -34,15 +35,17 @@ public class SqlAzureBatchingTest : IClassFixture<BatchingSqlAzureFixture>
                         for (var i = 0; i < batchSize; i++)
                         {
                             var uuid = Guid.NewGuid().ToString();
-                            contextScoped.Products.Add(
-                                new Product
-                                {
-                                    Name = uuid,
-                                    ProductNumber = uuid.Substring(0, 25),
-                                    Weight = 1000,
-                                    SellStartDate = DateTime.Now,
-                                }
-                            );
+                            contextScoped
+                                .Products
+                                .Add(
+                                    new Product
+                                    {
+                                        Name = uuid,
+                                        ProductNumber = uuid.Substring(0, 25),
+                                        Weight = 1000,
+                                        SellStartDate = DateTime.Now,
+                                    }
+                                );
                         }
 
                         Assert.Equal(batchSize, contextScoped.SaveChanges());

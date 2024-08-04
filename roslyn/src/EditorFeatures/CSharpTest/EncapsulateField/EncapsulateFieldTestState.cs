@@ -31,9 +31,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
         public EncapsulateFieldTestState(TestWorkspace workspace)
         {
             Workspace = workspace;
-            _testDocument = Workspace.Documents.Single(d =>
-                d.CursorPosition.HasValue || d.SelectedSpans.Any()
-            );
+            _testDocument = Workspace
+                .Documents
+                .Single(d => d.CursorPosition.HasValue || d.SelectedSpans.Any());
             TargetDocument = Workspace.CurrentSolution.GetDocument(_testDocument.Id);
 
             var notificationService =
@@ -52,14 +52,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
                 composition: EditorTestCompositions.EditorFeatures
             );
 
-            workspace.GlobalOptions.SetGlobalOption(
-                CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
-                CSharpCodeStyleOptions.NeverWithSilentEnforcement
-            );
-            workspace.GlobalOptions.SetGlobalOption(
-                CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
-                CSharpCodeStyleOptions.NeverWithSilentEnforcement
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                );
 
             return new EncapsulateFieldTestState(workspace);
         }
@@ -70,13 +74,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
                 _testDocument.GetTextView(),
                 _testDocument.GetTextBuffer()
             );
-            var commandHandler =
-                Workspace.ExportProvider.GetCommandHandler<EncapsulateFieldCommandHandler>(
+            var commandHandler = Workspace
+                .ExportProvider
+                .GetCommandHandler<EncapsulateFieldCommandHandler>(
                     PredefinedCommandHandlerNames.EncapsulateField,
                     ContentTypeNames.CSharpContentType
                 );
-            var provider =
-                Workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var provider = Workspace
+                .ExportProvider
+                .GetExportedValue<IAsynchronousOperationListenerProvider>();
             var waiter = (IAsynchronousOperationWaiter)
                 provider.GetListener(FeatureAttribute.EncapsulateField);
             commandHandler.ExecuteCommand(args, TestCommandExecutionContext.Create());

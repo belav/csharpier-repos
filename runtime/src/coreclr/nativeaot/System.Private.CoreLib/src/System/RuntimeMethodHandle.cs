@@ -47,18 +47,22 @@ namespace System
             RuntimeTypeHandle[] genericArgs1,
                 genericArgs2;
 
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(
-                this,
-                out declaringType1,
-                out nameAndSignature1,
-                out genericArgs1
-            );
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(
-                handle,
-                out declaringType2,
-                out nameAndSignature2,
-                out genericArgs2
-            );
+            RuntimeAugments
+                .TypeLoaderCallbacks
+                .GetRuntimeMethodHandleComponents(
+                    this,
+                    out declaringType1,
+                    out nameAndSignature1,
+                    out genericArgs1
+                );
+            RuntimeAugments
+                .TypeLoaderCallbacks
+                .GetRuntimeMethodHandleComponents(
+                    handle,
+                    out declaringType2,
+                    out nameAndSignature2,
+                    out genericArgs2
+                );
 
             if (!declaringType1.Equals(declaringType2))
                 return false;
@@ -97,12 +101,14 @@ namespace System
             RuntimeTypeHandle declaringType;
             MethodNameAndSignature nameAndSignature;
             RuntimeTypeHandle[] genericArgs;
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(
-                this,
-                out declaringType,
-                out nameAndSignature,
-                out genericArgs
-            );
+            RuntimeAugments
+                .TypeLoaderCallbacks
+                .GetRuntimeMethodHandleComponents(
+                    this,
+                    out declaringType,
+                    out nameAndSignature,
+                    out genericArgs
+                );
 
             int hashcode = declaringType.GetHashCode();
             hashcode = (hashcode + _rotl(hashcode, 13)) ^ nameAndSignature.Name.GetHashCode();
@@ -136,17 +142,13 @@ namespace System
         public IntPtr GetFunctionPointer()
         {
             RuntimeTypeHandle declaringType;
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(
-                this,
-                out declaringType,
-                out _,
-                out _
-            );
+            RuntimeAugments
+                .TypeLoaderCallbacks
+                .GetRuntimeMethodHandleComponents(this, out declaringType, out _, out _);
 
-            return ReflectionAugments.ReflectionCoreCallbacks.GetFunctionPointer(
-                this,
-                declaringType
-            );
+            return ReflectionAugments
+                .ReflectionCoreCallbacks
+                .GetFunctionPointer(this, declaringType);
         }
 
         [Obsolete(

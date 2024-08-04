@@ -58,9 +58,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 // quickinfo in InlineRename. Instead, we return no quickinfo information while the adornment
                 // is being shown. This can be removed after IFeaturesService supports disabling quickinfo
                 if (
-                    _editorOptionsService.GlobalOptions.GetOption(
-                        InlineRenameUIOptionsStorage.UseInlineAdornment
-                    ) && _inlineRenameService.ActiveSession is not null
+                    _editorOptionsService
+                        .GlobalOptions
+                        .GetOption(InlineRenameUIOptionsStorage.UseInlineAdornment)
+                    && _inlineRenameService.ActiveSession is not null
                 )
                     return null;
 
@@ -83,10 +84,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        var options =
-                            _editorOptionsService.GlobalOptions.GetSymbolDescriptionOptions(
-                                document.Project.Language
-                            );
+                        var options = _editorOptionsService
+                            .GlobalOptions
+                            .GetSymbolDescriptionOptions(document.Project.Language);
                         var item = await service
                             .GetQuickInfoAsync(
                                 document,
@@ -102,12 +102,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                                 item.Span.ToSpan(),
                                 SpanTrackingMode.EdgeInclusive
                             );
-                            var classificationOptions =
-                                _editorOptionsService.GlobalOptions.GetClassificationOptions(
-                                    document.Project.Language
-                                );
-                            var lineFormattingOptions =
-                                snapshot.TextBuffer.GetLineFormattingOptions(
+                            var classificationOptions = _editorOptionsService
+                                .GlobalOptions
+                                .GetClassificationOptions(document.Project.Language);
+                            var lineFormattingOptions = snapshot
+                                .TextBuffer
+                                .GetLineFormattingOptions(
                                     _editorOptionsService,
                                     explicitFormat: false
                                 );

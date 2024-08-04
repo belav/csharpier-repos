@@ -1274,9 +1274,12 @@ namespace System.Workflow.Activities
                 return;
 
             if (
-                !stateDesignerConnector.Target.AssociatedDesigner.Activity.QualifiedName.Equals(
-                    stateDesignerConnector.TargetStateName
-                )
+                !stateDesignerConnector
+                    .Target
+                    .AssociatedDesigner
+                    .Activity
+                    .QualifiedName
+                    .Equals(stateDesignerConnector.TargetStateName)
             )
             {
                 StateActivity rootState = (StateActivity)this.RootStateDesigner.Activity;
@@ -1300,9 +1303,10 @@ namespace System.Workflow.Activities
             StateDesigner.DesignerLayoutConnectionPoint sourceConnectionPoint =
                 (StateDesigner.DesignerLayoutConnectionPoint)stateDesignerConnector.Source;
             if (
-                !sourceConnectionPoint.EventHandler.QualifiedName.Equals(
-                    stateDesignerConnector.EventHandlerName
-                )
+                !sourceConnectionPoint
+                    .EventHandler
+                    .QualifiedName
+                    .Equals(stateDesignerConnector.EventHandlerName)
             )
             {
                 StateActivity rootState = (StateActivity)this.RootStateDesigner.Activity;
@@ -1745,10 +1749,12 @@ namespace System.Workflow.Activities
                         if (
                             activityDesigner == null
                             || activityDesigner.ParentDesigner == null
-                            || !activityDesigner.ParentDesigner.CanMoveActivities(
-                                moveLocation,
-                                new List<Activity>(new Activity[] { activity }).AsReadOnly()
-                            )
+                            || !activityDesigner
+                                .ParentDesigner
+                                .CanMoveActivities(
+                                    moveLocation,
+                                    new List<Activity>(new Activity[] { activity }).AsReadOnly()
+                                )
                         )
                         {
                             return false;
@@ -1918,10 +1924,9 @@ namespace System.Workflow.Activities
             StateDesigner sourceStateDesigner = (StateDesigner)GetDesigner(eventHandler.Parent);
             DesignerLayout eventHandlerLayout;
             if (
-                !sourceStateDesigner.DesignerLayouts.TryGetValue(
-                    eventHandler,
-                    out eventHandlerLayout
-                )
+                !sourceStateDesigner
+                    .DesignerLayouts
+                    .TryGetValue(eventHandler, out eventHandlerLayout)
             )
                 return null;
 
@@ -3035,9 +3040,10 @@ namespace System.Workflow.Activities
             Bitmap image = null;
             if (path.Contains(Path.DirectorySeparatorChar.ToString()) && directory.Length > 0)
             {
-                string imageFilePath = System.Web.HttpUtility.UrlDecode(
-                    (new Uri(new Uri(directory), path).LocalPath)
-                );
+                string imageFilePath = System
+                    .Web
+                    .HttpUtility
+                    .UrlDecode((new Uri(new Uri(directory), path).LocalPath));
                 if (File.Exists(imageFilePath))
                 {
                     try

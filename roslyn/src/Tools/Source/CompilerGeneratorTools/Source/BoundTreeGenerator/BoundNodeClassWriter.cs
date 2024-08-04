@@ -39,8 +39,8 @@ namespace BoundTreeGenerator
             _writer = writer;
             _tree = tree;
             _targetLang = targetLang;
-            _typeMap = tree
-                .Types.Where(t => t is not (EnumType or ValueType))
+            _typeMap = tree.Types
+                .Where(t => t is not (EnumType or ValueType))
                 .ToDictionary(n => n.Name, n => n.Base);
             _typeMap.Add(tree.Root, null);
 

@@ -318,7 +318,8 @@ internal partial class RuntimeViewCompiler : IViewCompiler
         // OK this means we can do compilation. For now let's just identify the other files we need to watch
         // so we can create the cache entry. Compilation will happen after we release the lock.
         var importFeature = _projectEngine
-            .ProjectFeatures.OfType<IImportProjectFeature>()
+            .ProjectFeatures
+            .OfType<IImportProjectFeature>()
             .ToArray();
         foreach (var feature in importFeature)
         {

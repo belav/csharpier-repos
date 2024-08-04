@@ -66,12 +66,14 @@ namespace MonoTests.System.ServiceModel.Discovery
             Assert.AreEqual("ITestService", de.Contract.Name, "#11-3");
             Assert.IsNotNull(de.Binding, "#12"); // Custom{DiscoveryClient|BasicHttpBinding-elements}
             Assert.IsNotNull(
-                de.Binding.CreateBindingElements()
+                de.Binding
+                    .CreateBindingElements()
                     .FirstOrDefault(be => be is DiscoveryClientBindingElement),
                 "#12-2"
             );
             Assert.IsNotNull(
-                de.Binding.CreateBindingElements()
+                de.Binding
+                    .CreateBindingElements()
                     .FirstOrDefault(be => be is HttpTransportBindingElement),
                 "#12-3"
             );
@@ -100,7 +102,8 @@ namespace MonoTests.System.ServiceModel.Discovery
             Assert.IsNotNull(de.Binding, "#12");
             TransportBindingElement tbe;
             Assert.IsTrue(
-                de.Binding.CreateBindingElements()
+                de.Binding
+                    .CreateBindingElements()
                     .Any(be =>
                         (tbe = be as TransportBindingElement) != null && tbe.Scheme == "soap.udp"
                     ),

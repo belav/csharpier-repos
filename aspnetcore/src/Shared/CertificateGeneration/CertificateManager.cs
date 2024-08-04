@@ -66,7 +66,8 @@ internal abstract class CertificateManager
 
     public static bool IsHttpsDevelopmentCertificate(X509Certificate2 certificate) =>
         certificate
-            .Extensions.OfType<X509Extension>()
+            .Extensions
+            .OfType<X509Extension>()
             .Any(e => string.Equals(AspNetHttpsOid, e.Oid?.Value, StringComparison.Ordinal));
 
     public IList<X509Certificate2> ListCertificates(
@@ -136,13 +137,14 @@ internal abstract class CertificateManager
 
         bool HasOid(X509Certificate2 certificate, string oid) =>
             certificate
-                .Extensions.OfType<X509Extension>()
+                .Extensions
+                .OfType<X509Extension>()
                 .Any(e => string.Equals(oid, e.Oid?.Value, StringComparison.Ordinal));
 
         static byte GetCertificateVersion(X509Certificate2 c)
         {
-            var byteArray = c
-                .Extensions.OfType<X509Extension>()
+            var byteArray = c.Extensions
+                .OfType<X509Extension>()
                 .Where(e => string.Equals(AspNetHttpsOid, e.Oid?.Value, StringComparison.Ordinal))
                 .Single()
                 .RawData;
@@ -593,12 +595,14 @@ internal abstract class CertificateManager
                         Array.Clear(keyBytes, 0, keyBytes.Length);
                         Array.Clear(pem, 0, pem.Length);
 
-                        bytes = Encoding.ASCII.GetBytes(
-                            PemEncoding.Write(
-                                "CERTIFICATE",
-                                certificate.Export(X509ContentType.Cert)
-                            )
-                        );
+                        bytes = Encoding
+                            .ASCII
+                            .GetBytes(
+                                PemEncoding.Write(
+                                    "CERTIFICATE",
+                                    certificate.Export(X509ContentType.Cert)
+                                )
+                            );
                         break;
                     default:
                         throw new InvalidOperationException("Unknown format.");
@@ -608,9 +612,14 @@ internal abstract class CertificateManager
             {
                 if (format == CertificateKeyExportFormat.Pem)
                 {
-                    bytes = Encoding.ASCII.GetBytes(
-                        PemEncoding.Write("CERTIFICATE", certificate.Export(X509ContentType.Cert))
-                    );
+                    bytes = Encoding
+                        .ASCII
+                        .GetBytes(
+                            PemEncoding.Write(
+                                "CERTIFICATE",
+                                certificate.Export(X509ContentType.Cert)
+                            )
+                        );
                 }
                 else
                 {
@@ -893,7 +902,8 @@ internal abstract class CertificateManager
         using var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
         store.Open(OpenFlags.ReadWrite);
         var matching = store
-            .Certificates.OfType<X509Certificate2>()
+            .Certificates
+            .OfType<X509Certificate2>()
             .Single(c => c.SerialNumber == certificate.SerialNumber);
 
         store.Remove(matching);

@@ -300,10 +300,9 @@ namespace MonoTests.System.Xml
         public void CreateValidatorFromNonIXmlNamespaceResolver()
         {
             XmlReaderSettings settings = new XmlReaderSettings();
-            settings.Schemas.Add(
-                null,
-                TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/xsd/xml.xsd")
-            );
+            settings
+                .Schemas
+                .Add(null, TestResourceHelper.GetFullPathOfResource("Test/XmlFiles/xsd/xml.xsd"));
             settings.ValidationType = ValidationType.Schema;
             XmlReader xr = XmlReader.Create(new StringReader("<root/>"));
             XmlReader dr = new Commons.Xml.XmlDefaultReader(xr);

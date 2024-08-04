@@ -680,11 +680,9 @@ namespace System.Json
                     case TypeCode.UInt16:
                     case TypeCode.Byte:
                     case TypeCode.SByte:
-                        index = System.Convert.ChangeType(
-                            index,
-                            typeof(int),
-                            CultureInfo.InvariantCulture
-                        );
+                        index = System
+                            .Convert
+                            .ChangeType(index, typeof(int), CultureInfo.InvariantCulture);
                         goto case TypeCode.Int32;
 
                     case TypeCode.Int32:

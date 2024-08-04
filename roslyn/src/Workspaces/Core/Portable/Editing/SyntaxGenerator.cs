@@ -265,12 +265,16 @@ namespace Microsoft.CodeAnalysis.Editing
             bool HasNullableAnnotation(ITypeParameterSymbol typeParameter, IMethodSymbol method)
             {
                 return method
-                        .ReturnType.GetReferencedTypeParameters()
+                        .ReturnType
+                        .GetReferencedTypeParameters()
                         .Any(t => IsNullableAnnotatedTypeParameter(typeParameter, t))
-                    || method.Parameters.Any(p =>
-                        p.Type.GetReferencedTypeParameters()
-                            .Any(t => IsNullableAnnotatedTypeParameter(typeParameter, t))
-                    );
+                    || method
+                        .Parameters
+                        .Any(p =>
+                            p.Type
+                                .GetReferencedTypeParameters()
+                                .Any(t => IsNullableAnnotatedTypeParameter(typeParameter, t))
+                        );
             }
 
             static bool IsNullableAnnotatedTypeParameter(
@@ -1002,9 +1006,9 @@ namespace Microsoft.CodeAnalysis.Editing
                                 ? DelegateDeclaration(
                                     type.Name,
                                     typeParameters: type.TypeParameters.Select(TypeParameter),
-                                    parameters: invoke.Parameters.Select(p =>
-                                        ParameterDeclaration(p)
-                                    ),
+                                    parameters: invoke
+                                        .Parameters
+                                        .Select(p => ParameterDeclaration(p)),
                                     returnType: invoke.ReturnsVoid
                                         ? null
                                         : TypeExpression(invoke.ReturnType),
@@ -1323,13 +1327,14 @@ namespace Microsoft.CodeAnalysis.Editing
             Contract.ThrowIfNull(attribute.AttributeClass);
 
             var args = attribute
-                .ConstructorArguments.Select(a =>
-                    this.AttributeArgument(this.TypedConstantExpression(a))
-                )
+                .ConstructorArguments
+                .Select(a => this.AttributeArgument(this.TypedConstantExpression(a)))
                 .Concat(
-                    attribute.NamedArguments.Select(n =>
-                        this.AttributeArgument(n.Key, this.TypedConstantExpression(n.Value))
-                    )
+                    attribute
+                        .NamedArguments
+                        .Select(n =>
+                            this.AttributeArgument(n.Key, this.TypedConstantExpression(n.Value))
+                        )
                 )
                 .ToBoxedImmutableArray();
 

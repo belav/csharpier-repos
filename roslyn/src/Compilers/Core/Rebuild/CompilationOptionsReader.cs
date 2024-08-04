@@ -350,17 +350,17 @@ namespace Microsoft.CodeAnalysis.Rebuild
             var metadataReader = PeReader.GetMetadataReader();
             if (
                 PeReader.PEHeaders.CorHeader is not { } corHeader
-                || !PeReader.PEHeaders.TryGetDirectoryOffset(
-                    corHeader.ResourcesDirectory,
-                    out var resourcesOffset
-                )
+                || !PeReader
+                    .PEHeaders
+                    .TryGetDirectoryOffset(corHeader.ResourcesDirectory, out var resourcesOffset)
             )
             {
                 return null;
             }
 
             var result = metadataReader
-                .ManifestResources.Select(handle =>
+                .ManifestResources
+                .Select(handle =>
                 {
                     var resource = metadataReader.GetManifestResource(handle);
                     var name = metadataReader.GetString(resource.Name);

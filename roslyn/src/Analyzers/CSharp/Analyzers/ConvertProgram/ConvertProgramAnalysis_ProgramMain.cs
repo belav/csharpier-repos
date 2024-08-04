@@ -65,8 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
             // statement.  That way the user can make the change anywhere in teh top level code.  Otherwise, just put
             // the diagnostic on the start of the first global statement.
             if (!isHidden)
-                return root
-                    .Members.OfType<GlobalStatementSyntax>()
+                return root.Members
+                    .OfType<GlobalStatementSyntax>()
                     .First()
                     .GetFirstToken()
                     .GetLocation();
@@ -74,9 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
             // note: the legal start has to come after any #pragma directives.  We don't want this to be suppressed, but
             // then have the span of the diagnostic end up outside the suppression.
             var lastPragma = root.GetFirstToken()
-                .LeadingTrivia.LastOrDefault(t =>
-                    t.Kind() is SyntaxKind.PragmaWarningDirectiveTrivia
-                );
+                .LeadingTrivia
+                .LastOrDefault(t => t.Kind() is SyntaxKind.PragmaWarningDirectiveTrivia);
             var start = lastPragma == default ? 0 : lastPragma.FullSpan.End;
 
             return Location.Create(

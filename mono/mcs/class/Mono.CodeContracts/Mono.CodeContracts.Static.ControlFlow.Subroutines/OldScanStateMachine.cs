@@ -59,9 +59,10 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
 
             this.state = ScanState.OutsideOld;
             this.current_block.EndOldWithoutInstruction(
-                this.subroutine.SubroutineFacade.MetaDataProvider.ManagedPointer(
-                    this.next_end_old_type
-                )
+                this.subroutine
+                    .SubroutineFacade
+                    .MetaDataProvider
+                    .ManagedPointer(this.next_end_old_type)
             );
             return true;
         }
@@ -121,8 +122,10 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
         )
         {
             if (this.state == ScanState.InsertingOld)
-                this.next_end_old_type =
-                    this.subroutine.SubroutineFacade.MetaDataProvider.FieldType(field);
+                this.next_end_old_type = this.subroutine
+                    .SubroutineFacade
+                    .MetaDataProvider
+                    .FieldType(field);
             return this.current_block.UsesOverriding;
         }
 
@@ -148,26 +151,29 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             if (block == null || this.state != ScanState.InsertingOld)
                 return;
 
-            int count = this
-                .subroutine.SubroutineFacade.MetaDataProvider.Parameters(block.CalledMethod)
+            int count = this.subroutine
+                .SubroutineFacade
+                .MetaDataProvider
+                .Parameters(block.CalledMethod)
                 .Count;
             if (!this.subroutine.SubroutineFacade.MetaDataProvider.IsStatic(block.CalledMethod))
                 ++count;
             if (count > 1)
             {
                 this.state = ScanState.OutsideOld;
-                TypeNode mp = this.subroutine.SubroutineFacade.MetaDataProvider.ManagedPointer(
-                    this.next_end_old_type
-                );
+                TypeNode mp = this.subroutine
+                    .SubroutineFacade
+                    .MetaDataProvider
+                    .ManagedPointer(this.next_end_old_type);
                 priorBlock.EndOldWithoutInstruction(mp);
             }
             else
             {
                 this.state = ScanState.InsertingOldAfterCall;
-                this.next_end_old_type =
-                    this.subroutine.SubroutineFacade.MetaDataProvider.ReturnType(
-                        block.CalledMethod
-                    );
+                this.next_end_old_type = this.subroutine
+                    .SubroutineFacade
+                    .MetaDataProvider
+                    .ReturnType(block.CalledMethod);
             }
         }
 

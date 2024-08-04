@@ -125,7 +125,8 @@ namespace System.Text.Json.Nodes
                     case JsonValueKind.Number:
                         return thisElement
                             .GetRawValue()
-                            .Span.SequenceEqual(otherElement.GetRawValue().Span);
+                            .Span
+                            .SequenceEqual(otherElement.GetRawValue().Span);
                     default:
                         Debug.Fail(
                             "Object and Array JsonElements cannot be contained in JsonValue."

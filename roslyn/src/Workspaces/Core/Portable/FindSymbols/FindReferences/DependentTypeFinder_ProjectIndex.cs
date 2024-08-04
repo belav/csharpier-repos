@@ -76,18 +76,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 var regularDocumentStates = project.State.DocumentStates;
                 var sourceGeneratorDocumentStates = await project
-                    .Solution.State.GetSourceGeneratedDocumentStatesAsync(
-                        project.State,
-                        cancellationToken
-                    )
+                    .Solution
+                    .State
+                    .GetSourceGeneratedDocumentStatesAsync(project.State, cancellationToken)
                     .ConfigureAwait(false);
 
                 var allStates = regularDocumentStates
-                    .States.Select(kvp => (kvp.Key, kvp.Value))
+                    .States
+                    .Select(kvp => (kvp.Key, kvp.Value))
                     .Concat(
-                        sourceGeneratorDocumentStates.States.Select(kvp =>
-                            (kvp.Key, (DocumentState)kvp.Value)
-                        )
+                        sourceGeneratorDocumentStates
+                            .States
+                            .Select(kvp => (kvp.Key, (DocumentState)kvp.Value))
                     );
 
                 // Avoid realizing actual Document instances here.  We don't need them, and it can allocate a lot of

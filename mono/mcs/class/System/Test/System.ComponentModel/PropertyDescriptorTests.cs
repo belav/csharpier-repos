@@ -584,35 +584,40 @@ namespace MonoTests.System.ComponentModel
                 typeof(TypeConverter),
                 TypeDescriptor
                     .GetProperties(typeof(Converter_test))["NoConverter"]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#1"
             );
             Assert.AreEqual(
                 typeof(MyVersionTypeConverter),
                 TypeDescriptor
                     .GetProperties(typeof(Converter_test))["WithConverter"]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#2"
             );
             Assert.AreEqual(
                 typeof(MyVersionTypeConverter),
                 TypeDescriptor
                     .GetProperties(typeof(Converter_test))["WithConverterNamed"]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#3"
             );
             Assert.AreEqual(
                 typeof(CharConverter),
                 TypeDescriptor
                     .GetProperties(typeof(Converter_test))["WithConverterNamedAssmQuald"]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#4"
             );
             Assert.AreEqual(
                 typeof(Int32Converter),
                 TypeDescriptor
                     .GetProperties(typeof(Converter_test))["WithDefaultConverter"]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#5"
             );
 
@@ -622,7 +627,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterSubclassNotOverridenProperties_test))[
                         "NoConverter"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#6"
             );
             Assert.AreEqual(
@@ -631,7 +637,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterSubclassNotOverridenProperties_test))[
                         "WithConverter"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#7"
             );
             Assert.AreEqual(
@@ -640,7 +647,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterSubclassNotOverridenProperties_test))[
                         "WithConverterNamed"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#8"
             );
             Assert.AreEqual(
@@ -649,7 +657,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterSubclassNotOverridenProperties_test))[
                         "WithConverterNamedAssmQuald"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#9"
             );
             Assert.AreEqual(
@@ -658,7 +667,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterSubclassNotOverridenProperties_test))[
                         "WithDefaultConverter"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#10"
             );
 
@@ -666,7 +676,8 @@ namespace MonoTests.System.ComponentModel
                 typeof(TypeConverter),
                 TypeDescriptor
                     .GetProperties(typeof(ConverterSubclassOverridenProperties_test))["NoConverter"]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#11"
             );
             Assert.AreEqual(
@@ -675,7 +686,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterSubclassOverridenProperties_test))[
                         "WithConverter"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#12"
             );
             Assert.AreEqual(
@@ -684,7 +696,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterSubclassOverridenProperties_test))[
                         "WithConverterNamed"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#13"
             );
             Assert.AreEqual(
@@ -693,7 +706,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterSubclassOverridenProperties_test))[
                         "WithConverterNamedAssmQuald"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#14"
             );
             Assert.AreEqual(
@@ -702,7 +716,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterSubclassOverridenProperties_test))[
                         "WithDefaultConverter"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#15"
             );
 
@@ -712,7 +727,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterEmptyConvertersOnOveriddenProperties))[
                         "NoConverter"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#116"
             );
             Assert.AreEqual(
@@ -721,7 +737,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterEmptyConvertersOnOveriddenProperties))[
                         "WithConverter"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#17"
             );
             Assert.AreEqual(
@@ -730,7 +747,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterEmptyConvertersOnOveriddenProperties))[
                         "WithConverterNamed"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#18"
             );
             Assert.AreEqual(
@@ -739,7 +757,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterEmptyConvertersOnOveriddenProperties))[
                         "WithConverterNamedAssmQuald"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#19"
             );
             Assert.AreEqual(
@@ -748,7 +767,8 @@ namespace MonoTests.System.ComponentModel
                     .GetProperties(typeof(ConverterEmptyConvertersOnOveriddenProperties))[
                         "WithDefaultConverter"
                     ]
-                    .Converter.GetType(),
+                    .Converter
+                    .GetType(),
                 "#20"
             );
         }

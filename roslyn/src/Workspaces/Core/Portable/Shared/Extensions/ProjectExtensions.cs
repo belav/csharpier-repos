@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             string filePath
         ) =>
             project
-                .Solution.GetDocumentIdsWithFilePath(filePath)
+                .Solution
+                .GetDocumentIdsWithFilePath(filePath)
                 .FirstOrDefault(id => id.ProjectId == project.Id);
 
         public static Document GetRequiredDocument(this Project project, DocumentId documentId) =>

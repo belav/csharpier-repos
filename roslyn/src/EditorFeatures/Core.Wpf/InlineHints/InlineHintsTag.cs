@@ -123,14 +123,17 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                     .ConfigureAwait(false);
                 if (!taggedText.IsDefaultOrEmpty)
                 {
-                    var classificationOptions =
-                        _taggerProvider.EditorOptionsService.GlobalOptions.GetClassificationOptions(
-                            document.Project.Language
+                    var classificationOptions = _taggerProvider
+                        .EditorOptionsService
+                        .GlobalOptions
+                        .GetClassificationOptions(document.Project.Language);
+                    var lineFormattingOptions = _span
+                        .Snapshot
+                        .TextBuffer
+                        .GetLineFormattingOptions(
+                            _taggerProvider.EditorOptionsService,
+                            explicitFormat: false
                         );
-                    var lineFormattingOptions = _span.Snapshot.TextBuffer.GetLineFormattingOptions(
-                        _taggerProvider.EditorOptionsService,
-                        explicitFormat: false
-                    );
 
                     var context = new IntellisenseQuickInfoBuilderContext(
                         document,
@@ -141,10 +144,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                         _taggerProvider.AsynchronousOperationListener,
                         _taggerProvider.StreamingFindUsagesPresenter
                     );
-                    return Implementation.IntelliSense.Helpers.BuildInteractiveTextElements(
-                        taggedText,
-                        context
-                    );
+                    return Implementation
+                        .IntelliSense
+                        .Helpers
+                        .BuildInteractiveTextElements(taggedText, context);
                 }
             }
 
@@ -308,10 +311,12 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 );
             }
 
-            var toolTipPresenter = _taggerProvider.ToolTipService.CreatePresenter(
-                _textView,
-                new ToolTipParameters(trackMouse: true, ignoreBufferChange: false, KeepOpen)
-            );
+            var toolTipPresenter = _taggerProvider
+                .ToolTipService
+                .CreatePresenter(
+                    _textView,
+                    new ToolTipParameters(trackMouse: true, ignoreBufferChange: false, KeepOpen)
+                );
             _ = StartToolTipServiceAsync(toolTipPresenter);
         }
 
@@ -325,16 +330,14 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                     () => CreateDescriptionAsync(threadingContext.DisposalToken)
                 )
                 .ConfigureAwait(false);
-            await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                threadingContext.DisposalToken
-            );
+            await threadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(threadingContext.DisposalToken);
 
             toolTipPresenter.StartOrUpdate(
-                _textView.TextSnapshot.CreateTrackingSpan(
-                    _span.Start,
-                    _span.Length,
-                    SpanTrackingMode.EdgeInclusive
-                ),
+                _textView
+                    .TextSnapshot
+                    .CreateTrackingSpan(_span.Start, _span.Length, SpanTrackingMode.EdgeInclusive),
                 uiList
             );
         }
@@ -353,7 +356,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 // Will revise if there are some scenarios we did not think of that produce undesirable behavior.
                 subjectBuffer.Replace(
                     textChange
-                        .Span.ToSnapshotSpan(snapshot)
+                        .Span
+                        .ToSnapshotSpan(snapshot)
                         .TranslateTo(subjectBuffer.CurrentSnapshot, SpanTrackingMode.EdgeExclusive),
                     textChange.NewText
                 );

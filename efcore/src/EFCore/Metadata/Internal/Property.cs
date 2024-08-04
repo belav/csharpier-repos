@@ -100,11 +100,10 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         FieldInfo? newFieldInfo,
         FieldInfo? oldFieldInfo
     ) =>
-        DeclaringType.Model.ConventionDispatcher.OnPropertyFieldChanged(
-            Builder,
-            newFieldInfo,
-            oldFieldInfo
-        );
+        DeclaringType
+            .Model
+            .ConventionDispatcher
+            .OnPropertyFieldChanged(Builder, newFieldInfo, oldFieldInfo);
 
     /// <summary>
     ///     Runs the conventions when an annotation was set or removed.
@@ -118,12 +117,10 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        DeclaringType.Model.ConventionDispatcher.OnPropertyAnnotationChanged(
-            Builder,
-            name,
-            annotation,
-            oldAnnotation
-        );
+        DeclaringType
+            .Model
+            .ConventionDispatcher
+            .OnPropertyAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -736,7 +733,8 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
                 factoryType.IsAbstract
                 || !factoryType
                     .GetTypeInfo()
-                    .DeclaredConstructors.Any(c => c.IsPublic && c.GetParameters().Length == 0)
+                    .DeclaredConstructors
+                    .Any(c => c.IsPublic && c.GetParameters().Length == 0)
             )
             {
                 throw new InvalidOperationException(
@@ -1061,8 +1059,11 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
                     (IProperty)this,
                     static property =>
                         property
-                            .DeclaringType.Model.GetModelDependencies()
-                            .TypeMappingSource.FindMapping(property)!
+                            .DeclaringType
+                            .Model
+                            .GetModelDependencies()
+                            .TypeMappingSource
+                            .FindMapping(property)!
                 )
                 : _typeMapping;
         set => SetTypeMapping(value, ConfigurationSource.Explicit);
@@ -1510,11 +1511,10 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         IElementType? newElementType,
         IElementType? oldElementType
     ) =>
-        DeclaringType.Model.ConventionDispatcher.OnPropertyElementTypeChanged(
-            Builder,
-            newElementType,
-            oldElementType
-        );
+        DeclaringType
+            .Model
+            .ConventionDispatcher
+            .OnPropertyElementTypeChanged(Builder, newElementType, oldElementType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

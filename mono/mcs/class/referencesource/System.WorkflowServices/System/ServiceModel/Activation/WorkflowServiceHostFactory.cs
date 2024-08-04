@@ -32,20 +32,26 @@ namespace System.ServiceModel.Activation
 
             if (string.IsNullOrEmpty(constructorString))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.WorkflowServiceHostFactoryConstructorStringNotProvided)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.WorkflowServiceHostFactoryConstructorStringNotProvided
+                            )
+                        )
+                    );
             }
 
             if (!HostingEnvironment.IsHosted)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.ProcessNotExecutingUnderHostedContext)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.ProcessNotExecutingUnderHostedContext)
+                        )
+                    );
             }
 
             Type workflowType = this.GetTypeFromString(constructorString, baseAddresses);
@@ -76,7 +82,8 @@ namespace System.ServiceModel.Activation
                         if (HostingEnvironment.VirtualPathProvider.FileExists(xomlVirtualPath))
                         {
                             workflowDefinitionStream = HostingEnvironment
-                                .VirtualPathProvider.GetFile(xomlVirtualPath)
+                                .VirtualPathProvider
+                                .GetFile(xomlVirtualPath)
                                 .Open();
                             string ruleFilePath = Path.ChangeExtension(
                                 xomlVirtualPath,
@@ -86,7 +93,8 @@ namespace System.ServiceModel.Activation
                             if (HostingEnvironment.VirtualPathProvider.FileExists(ruleFilePath))
                             {
                                 ruleDefinitionStream = HostingEnvironment
-                                    .VirtualPathProvider.GetFile(ruleFilePath)
+                                    .VirtualPathProvider
+                                    .GetFile(ruleFilePath)
                                     .Open();
                                 workflowDefinitionContext = new StreamedWorkflowDefinitionContext(
                                     workflowDefinitionStream,
@@ -132,14 +140,16 @@ namespace System.ServiceModel.Activation
 
             if (workflowDefinitionContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.CannotResolveConstructorStringToWorkflowType,
-                            constructorString
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.CannotResolveConstructorStringToWorkflowType,
+                                constructorString
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             WorkflowServiceHost serviceHost = new WorkflowServiceHost(
@@ -167,9 +177,11 @@ namespace System.ServiceModel.Activation
             }
             if (baseAddresses.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.BaseAddressesNotProvided))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR2.GetString(SR2.BaseAddressesNotProvided))
+                    );
             }
 
             Type workflowType = Type.GetType(typeString, false);
@@ -210,20 +222,30 @@ namespace System.ServiceModel.Activation
 
                 if (string.IsNullOrEmpty(compiledString))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.InvalidCompiledString, baseAddresses[0].AbsolutePath)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.InvalidCompiledString,
+                                    baseAddresses[0].AbsolutePath
+                                )
+                            )
+                        );
                 }
                 string[] components = compiledString.Split('|');
                 if (components.Length < 3)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.InvalidCompiledString, baseAddresses[0].AbsolutePath)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.InvalidCompiledString,
+                                    baseAddresses[0].AbsolutePath
+                                )
+                            )
+                        );
                 }
 
                 //Walk reverse direction to increase our chance to match assembly;

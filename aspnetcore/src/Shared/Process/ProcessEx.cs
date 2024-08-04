@@ -62,10 +62,12 @@ internal sealed class ProcessEx : IDisposable
             $"Process proc {proc.ProcessName} {proc.StartInfo.Arguments} timed out after {timeout}.";
 
         _processTimeoutCts = new CancellationTokenSource(timeout);
-        _processTimeoutCts.Token.Register(() =>
-        {
-            _exited.TrySetException(new TimeoutException(timeoutExMessage));
-        });
+        _processTimeoutCts
+            .Token
+            .Register(() =>
+            {
+                _exited.TrySetException(new TimeoutException(timeoutExMessage));
+            });
     }
 
     public Process Process => _process;
@@ -247,7 +249,8 @@ internal sealed class ProcessEx : IDisposable
     private static string GetNugetPackagesRestorePath() =>
         (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NUGET_RESTORE")))
             ? typeof(ProcessEx)
-                .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                .Assembly
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
                 .FirstOrDefault(attribute => attribute.Key == "TestPackageRestorePath")
                 ?.Value
             : Environment.GetEnvironmentVariable("NUGET_RESTORE");

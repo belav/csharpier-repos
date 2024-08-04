@@ -158,10 +158,9 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
     private static string DateTimeOffsetToFilenameSafeString(DateTimeOffset dateTime)
     {
         // similar to the XML format for dates, but with punctuation stripped
-        return dateTime.UtcDateTime.ToString(
-            "yyyyMMddTHHmmssFFFFFFFZ",
-            CultureInfo.InvariantCulture
-        );
+        return dateTime
+            .UtcDateTime
+            .ToString("yyyyMMddTHHmmssFFFFFFFZ", CultureInfo.InvariantCulture);
     }
 
     /// <inheritdoc/>

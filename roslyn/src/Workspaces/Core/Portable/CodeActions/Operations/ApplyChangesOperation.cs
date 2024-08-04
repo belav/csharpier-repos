@@ -158,10 +158,14 @@ namespace Microsoft.CodeAnalysis.CodeActions
 
                 foreach (var documentId in changedDocuments)
                 {
-                    var originalDocument =
-                        changedProject.OldProject.Solution.GetRequiredTextDocument(documentId);
-                    var changedDocument =
-                        changedProject.NewProject.Solution.GetRequiredTextDocument(documentId);
+                    var originalDocument = changedProject
+                        .OldProject
+                        .Solution
+                        .GetRequiredTextDocument(documentId);
+                    var changedDocument = changedProject
+                        .NewProject
+                        .Solution
+                        .GetRequiredTextDocument(documentId);
 
                     // it has to be a text change the operation wants to make.  If the operation is making some other
                     // sort of change, we can't merge this operation in.

@@ -95,21 +95,27 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
             // With no selection we just use the caret position as expected
             if (textViewOpt.Selection.IsEmpty)
             {
-                return textViewOpt.Caret.Position.Point.GetPoint(
-                    b => IsSupportedContentType(b.ContentType),
-                    PositionAffinity.Successor
-                );
+                return textViewOpt
+                    .Caret
+                    .Position
+                    .Point
+                    .GetPoint(
+                        b => IsSupportedContentType(b.ContentType),
+                        PositionAffinity.Successor
+                    );
             }
 
             // If there is a selection then it makes more sense for highlighting to apply to the token at the start
             // of the selection rather than where the caret is, otherwise you can be in a situation like [|count$$|]++
             // and it will try to highlight the operator.
-            return textViewOpt.BufferGraph.MapDownToFirstMatch(
-                textViewOpt.Selection.Start.Position,
-                PointTrackingMode.Positive,
-                b => IsSupportedContentType(b.ContentType),
-                PositionAffinity.Successor
-            );
+            return textViewOpt
+                .BufferGraph
+                .MapDownToFirstMatch(
+                    textViewOpt.Selection.Start.Position,
+                    PointTrackingMode.Positive,
+                    b => IsSupportedContentType(b.ContentType),
+                    PositionAffinity.Successor
+                );
         }
 
         protected override IEnumerable<SnapshotSpan> GetSpansToTag(
@@ -120,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
             // Note: this may return no snapshot spans.  We have to be resilient to that
             // when processing the TaggerContext<>.SpansToTag below.
             return textViewOpt
-                .BufferGraph.GetTextBuffers(b => IsSupportedContentType(b.ContentType))
+                .BufferGraph
+                .GetTextBuffers(b => IsSupportedContentType(b.ContentType))
                 .Select(b => b.CurrentSnapshot.GetFullSpan())
                 .ToList();
         }
@@ -143,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
 
             // GetSpansToTag may have produced no actual spans to tag.  Be resilient to that.
             var document = context
-                .SpansToTag.FirstOrDefault(vt => vt.SnapshotSpan.Snapshot == caretPosition.Snapshot)
+                .SpansToTag
+                .FirstOrDefault(vt => vt.SnapshotSpan.Snapshot == caretPosition.Snapshot)
                 .Document;
             if (document == null)
             {
@@ -234,8 +242,10 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
             var document = documentHighlights.Document;
 
             var textSnapshot = context
-                .SpansToTag.FirstOrDefault(s => s.Document == document)
-                .SnapshotSpan.Snapshot;
+                .SpansToTag
+                .FirstOrDefault(s => s.Document == document)
+                .SnapshotSpan
+                .Snapshot;
             if (textSnapshot == null)
             {
                 // There is no longer an editor snapshot for this document, so we can't care about the

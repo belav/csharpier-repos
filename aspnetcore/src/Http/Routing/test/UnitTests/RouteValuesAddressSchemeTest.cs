@@ -504,10 +504,12 @@ public class RouteValuesAddressSchemeTest
         Assert.NotNull(state.MatchesWithRequiredValues);
         Assert.NotNull(state.NamedMatches);
 
-        var namedMatches = state.NamedMatches.Aggregate(
-            Enumerable.Empty<Tree.OutboundMatch>(),
-            (acc, kvp) => acc.Concat(kvp.Value.Select(matchResult => matchResult.Match))
-        );
+        var namedMatches = state
+            .NamedMatches
+            .Aggregate(
+                Enumerable.Empty<Tree.OutboundMatch>(),
+                (acc, kvp) => acc.Concat(kvp.Value.Select(matchResult => matchResult.Match))
+            );
         return state.MatchesWithRequiredValues.Concat(namedMatches).ToList();
     }
 

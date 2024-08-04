@@ -145,10 +145,9 @@ namespace Internal.TypeSystem
             {
                 MethodSignature oldSig = ((FunctionPointerType)type).Signature;
                 MethodSignatureBuilder sigBuilder = new MethodSignatureBuilder(oldSig);
-                sigBuilder.ReturnType = oldSig.ReturnType.ReplaceTypesInConstructionOfType(
-                    typesToReplace,
-                    replacementTypes
-                );
+                sigBuilder.ReturnType = oldSig
+                    .ReturnType
+                    .ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
                 for (int paramIndex = 0; paramIndex < oldSig.Length; paramIndex++)
                     sigBuilder[paramIndex] = oldSig[paramIndex]
                         .ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
@@ -178,10 +177,9 @@ namespace Internal.TypeSystem
             TypeDesc[] replacementTypes
         )
         {
-            TypeDesc newOwningType = method.OwningType.ReplaceTypesInConstructionOfType(
-                typesToReplace,
-                replacementTypes
-            );
+            TypeDesc newOwningType = method
+                .OwningType
+                .ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
             MethodDesc methodOnOwningType;
             bool owningTypeChanged = false;
             if (newOwningType == method.OwningType)
@@ -229,15 +227,16 @@ namespace Internal.TypeSystem
                 }
 
                 if (newInstantiation != null)
-                    result = method.Context.GetInstantiatedMethod(
-                        methodOnOwningType,
-                        new Instantiation(newInstantiation)
-                    );
+                    result = method
+                        .Context
+                        .GetInstantiatedMethod(
+                            methodOnOwningType,
+                            new Instantiation(newInstantiation)
+                        );
                 else if (owningTypeChanged)
-                    result = method.Context.GetInstantiatedMethod(
-                        methodOnOwningType,
-                        method.Instantiation
-                    );
+                    result = method
+                        .Context
+                        .GetInstantiatedMethod(methodOnOwningType, method.Instantiation);
                 else
                     result = method;
             }

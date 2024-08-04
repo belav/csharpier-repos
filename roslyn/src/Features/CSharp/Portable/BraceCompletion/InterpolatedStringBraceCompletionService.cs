@@ -102,17 +102,17 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 
             var previousToken = token.GetPreviousToken();
 
-            return document.SyntaxTree.IsExpressionContext(
-                    token.SpanStart,
-                    previousToken,
-                    attributes: true,
-                    cancellationToken
-                )
-                || document.SyntaxTree.IsStatementContext(
-                    token.SpanStart,
-                    previousToken,
-                    cancellationToken
-                );
+            return document
+                    .SyntaxTree
+                    .IsExpressionContext(
+                        token.SpanStart,
+                        previousToken,
+                        attributes: true,
+                        cancellationToken
+                    )
+                || document
+                    .SyntaxTree
+                    .IsStatementContext(token.SpanStart, previousToken, cancellationToken);
         }
     }
 }

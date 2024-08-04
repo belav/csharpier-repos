@@ -3848,16 +3848,18 @@ public static partial class XmlSerializerTests
             TextColor = System.Drawing.Color.FromArgb(3, 4, 5, 6),
         };
         value.LocalReadingPositionState = new List<LocalReadingPosition>();
-        value.LocalReadingPositionState.Add(
-            new LocalReadingPosition()
-            {
-                Ean = "Ean",
-                LastReadTime = new DateTime(2013, 1, 2),
-                PageCount = 1,
-                PageNumber = "1",
-                PlatformOffset = "offset",
-            }
-        );
+        value
+            .LocalReadingPositionState
+            .Add(
+                new LocalReadingPosition()
+                {
+                    Ean = "Ean",
+                    LastReadTime = new DateTime(2013, 1, 2),
+                    PageCount = 1,
+                    PageNumber = "1",
+                    PlatformOffset = "offset",
+                }
+            );
 
         var deserializedValue = SerializeAndDeserialize<NookAppLocalState>(
             value,

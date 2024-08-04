@@ -67,8 +67,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return Array.Empty<TextEdit>();
             }
 
-            var formattingService =
-                document.Project.Services.GetRequiredService<ISyntaxFormattingService>();
+            var formattingService = document
+                .Project
+                .Services
+                .GetRequiredService<ISyntaxFormattingService>();
             var documentSyntax = await ParsedDocument
                 .CreateAsync(document, cancellationToken)
                 .ConfigureAwait(false);

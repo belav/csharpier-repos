@@ -239,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     && (
                         model
                             .GetSymbolInfo(nameSyntax, cancellationToken)
-                            .Symbol?.Equals(localOrParameter) ?? false
+                            .Symbol
+                            ?.Equals(localOrParameter) ?? false
                     )
                 select node;
         }
@@ -323,9 +324,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                             if (partnerStatement != null)
                             {
-                                partnerStatement = (
-                                    (VariableDeclarationSyntax)partnerStatement
-                                ).Variables.First();
+                                partnerStatement = ((VariableDeclarationSyntax)partnerStatement)
+                                    .Variables
+                                    .First();
                             }
 
                             statementPart = DefaultStatementPart;
@@ -1036,12 +1037,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             BlockSyntax newBlock
         )
         {
-            var oldUsingDeclarations = oldBlock.Statements.Where(s =>
-                s is LocalDeclarationStatementSyntax l && l.UsingKeyword != default
-            );
-            var newUsingDeclarations = newBlock.Statements.Where(s =>
-                s is LocalDeclarationStatementSyntax l && l.UsingKeyword != default
-            );
+            var oldUsingDeclarations = oldBlock
+                .Statements
+                .Where(s => s is LocalDeclarationStatementSyntax l && l.UsingKeyword != default);
+            var newUsingDeclarations = newBlock
+                .Statements
+                .Where(s => s is LocalDeclarationStatementSyntax l && l.UsingKeyword != default);
 
             return oldUsingDeclarations.SequenceEqual(
                 newUsingDeclarations,
@@ -1088,9 +1089,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             // Check that switch statement decision tree has not changed.
-            var hasDecitionTree = oldNode.Sections.Any(s =>
-                s.Labels.Any(l => l is CasePatternSwitchLabelSyntax)
-            );
+            var hasDecitionTree = oldNode
+                .Sections
+                .Any(s => s.Labels.Any(l => l is CasePatternSwitchLabelSyntax));
             return !hasDecitionTree || AreEquivalentSwitchStatementDecisionTrees(oldNode, newNode);
         }
 
@@ -1260,9 +1261,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         {
             var syntaxRefs = type.DeclaringSyntaxReferences;
             return syntaxRefs.Length > 1
-                || ((BaseTypeDeclarationSyntax)syntaxRefs.Single().GetSyntax()).Modifiers.Any(
-                    SyntaxKind.PartialKeyword
-                );
+                || ((BaseTypeDeclarationSyntax)syntaxRefs.Single().GetSyntax())
+                    .Modifiers
+                    .Any(SyntaxKind.PartialKeyword);
         }
 
         protected override SyntaxNode? GetSymbolDeclarationSyntax(
@@ -1310,10 +1311,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 var recordType = (INamedTypeSymbol?)
                     model.GetDeclaredSymbol(declaration.Parent, cancellationToken);
                 Contract.ThrowIfNull(recordType);
-                return recordType.InstanceConstructors.Single(ctor =>
-                    ctor.DeclaringSyntaxReferences is [var syntaxRef]
-                    && syntaxRef.GetSyntax(cancellationToken) == declaration.Parent
-                );
+                return recordType
+                    .InstanceConstructors
+                    .Single(ctor =>
+                        ctor.DeclaringSyntaxReferences is [var syntaxRef]
+                        && syntaxRef.GetSyntax(cancellationToken) == declaration.Parent
+                    );
             }
 
             return model.GetDeclaredSymbol(declaration, cancellationToken);
@@ -1490,11 +1493,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                     var oldSynthesizedAutoProperty = (IPropertySymbol?)
                         oldSymbol
-                            ?.ContainingType.GetMembers(oldSymbol.Name)
+                            ?.ContainingType
+                            .GetMembers(oldSymbol.Name)
                             .FirstOrDefault(m => m.IsSynthesizedAutoProperty());
                     var newSynthesizedAutoProperty = (IPropertySymbol?)
                         newSymbol
-                            ?.ContainingType.GetMembers(newSymbol.Name)
+                            ?.ContainingType
+                            .GetMembers(newSymbol.Name)
                             .FirstOrDefault(m => m.IsSynthesizedAutoProperty());
 
                     if (oldSynthesizedAutoProperty != null || newSynthesizedAutoProperty != null)
@@ -1784,12 +1789,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                             )
                         )
                         {
-                            var oldCopyConstructor = oldType.InstanceConstructors.FirstOrDefault(
-                                c => c.IsCopyConstructor()
-                            );
-                            var newCopyConstructor = newType.InstanceConstructors.FirstOrDefault(
-                                c => c.IsCopyConstructor()
-                            );
+                            var oldCopyConstructor = oldType
+                                .InstanceConstructors
+                                .FirstOrDefault(c => c.IsCopyConstructor());
+                            var newCopyConstructor = newType
+                                .InstanceConstructors
+                                .FirstOrDefault(c => c.IsCopyConstructor());
                             Debug.Assert(oldCopyConstructor != null || newCopyConstructor != null);
 
                             result.Add((oldCopyConstructor, newCopyConstructor, EditKind.Update));
@@ -2959,9 +2964,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.LocalDeclarationStatement:
                     if (
-                        ((LocalDeclarationStatementSyntax)node).UsingKeyword.IsKind(
-                            SyntaxKind.UsingKeyword
-                        )
+                        ((LocalDeclarationStatementSyntax)node)
+                            .UsingKeyword
+                            .IsKind(SyntaxKind.UsingKeyword)
                     )
                     {
                         return CSharpFeaturesResources.using_declaration;
@@ -2980,17 +2985,17 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             {
                 case SyntaxKind.ForEachStatement:
                     Debug.Assert(
-                        ((CommonForEachStatementSyntax)node).AwaitKeyword.IsKind(
-                            SyntaxKind.AwaitKeyword
-                        )
+                        ((CommonForEachStatementSyntax)node)
+                            .AwaitKeyword
+                            .IsKind(SyntaxKind.AwaitKeyword)
                     );
                     return CSharpFeaturesResources.asynchronous_foreach_statement;
 
                 case SyntaxKind.VariableDeclarator:
                     RoslynDebug.Assert(
-                        ((LocalDeclarationStatementSyntax)node.Parent!.Parent!).AwaitKeyword.IsKind(
-                            SyntaxKind.AwaitKeyword
-                        )
+                        ((LocalDeclarationStatementSyntax)node.Parent!.Parent!)
+                            .AwaitKeyword
+                            .IsKind(SyntaxKind.AwaitKeyword)
                     );
                     return CSharpFeaturesResources.asynchronous_using_declaration;
 

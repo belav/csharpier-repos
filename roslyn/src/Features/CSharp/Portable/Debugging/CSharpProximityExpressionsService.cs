@@ -83,8 +83,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             // sure that that local isn't after the statement that we're currently looking at.
             if (info.Symbol.Kind == SymbolKind.Local)
             {
-                var statement = info
-                    .Symbol.Locations.First()
+                var statement = info.Symbol
+                    .Locations
+                    .First()
                     .FindToken(cancellationToken)
                     .GetAncestor<StatementSyntax>();
                 if (statement != null && position < statement.SpanStart)

@@ -26,13 +26,19 @@ namespace System.Xml
         public void SetOutput(Stream stream, Encoding encoding, bool ownsStream)
         {
             if (stream == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "stream"
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("stream");
             if (encoding == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "encoding"
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("encoding");
             if (encoding.WebName != Encoding.UTF8.WebName)
             {
                 stream = new EncodingStreamWrapper(stream, encoding, true);
@@ -1221,15 +1227,17 @@ namespace System.Xml
                         );
                         int charCount = byteCount / 3 * 4;
 
-                        thisPtr.writer.Advance(
-                            encoding.GetChars(
-                                writerArgs.Buffer,
-                                writerArgs.Offset,
-                                byteCount,
-                                chars,
-                                offset
-                            )
-                        );
+                        thisPtr
+                            .writer
+                            .Advance(
+                                encoding.GetChars(
+                                    writerArgs.Buffer,
+                                    writerArgs.Offset,
+                                    byteCount,
+                                    chars,
+                                    offset
+                                )
+                            );
 
                         if (byteCount >= 3)
                         {

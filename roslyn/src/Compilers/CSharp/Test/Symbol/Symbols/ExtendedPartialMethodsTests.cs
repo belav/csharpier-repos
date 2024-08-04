@@ -2428,7 +2428,8 @@ public partial class C
             void validator(ModuleSymbol module)
             {
                 var method = module
-                    .ContainingAssembly.GetTypeByMetadataName("C")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("C")
                     .GetMember<MethodSymbol>("M");
 
                 Assert.Equal(

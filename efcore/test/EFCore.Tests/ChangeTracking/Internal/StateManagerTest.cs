@@ -911,7 +911,8 @@ public class StateManagerTest
         Assert.Equal(
             new[] { 77, 78 },
             stateManager
-                .Entries.Select(e => e.Entity)
+                .Entries
+                .Select(e => e.Entity)
                 .OfType<Category>()
                 .Select(e => e.Id)
                 .OrderBy(k => k)
@@ -921,7 +922,8 @@ public class StateManagerTest
         Assert.Equal(
             new[] { productId2, productId1 },
             stateManager
-                .Entries.Select(e => e.Entity)
+                .Entries
+                .Select(e => e.Entity)
                 .OfType<Product>()
                 .Select(e => e.Id)
                 .OrderBy(k => k)
@@ -1131,7 +1133,8 @@ public class StateManagerTest
 
     private static IStateManager CreateStateManager(IModel model) =>
         InMemoryTestHelpers
-            .Instance.CreateContextServices(model)
+            .Instance
+            .CreateContextServices(model)
             .GetRequiredService<IStateManager>();
 
     public class Widget

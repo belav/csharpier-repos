@@ -44,12 +44,14 @@ namespace System.ServiceModel.Channels
                 && bindingElement.MaxReceivedMessageSize > int.MaxValue
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "bindingElement.MaxReceivedMessageSize",
-                        SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "bindingElement.MaxReceivedMessageSize",
+                            SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
+                        )
+                    );
             }
 
             this.connectionBufferSize = bindingElement.ConnectionBufferSize;
@@ -61,16 +63,19 @@ namespace System.ServiceModel.Channels
             this.maxOutputDelay = bindingElement.MaxOutputDelay;
             this.transferMode = bindingElement.TransferMode;
 
-            Collection<StreamUpgradeBindingElement> upgradeBindingElements =
-                context.BindingParameters.FindAll<StreamUpgradeBindingElement>();
+            Collection<StreamUpgradeBindingElement> upgradeBindingElements = context
+                .BindingParameters
+                .FindAll<StreamUpgradeBindingElement>();
 
             if (upgradeBindingElements.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MultipleStreamUpgradeProvidersInParameters)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MultipleStreamUpgradeProvidersInParameters)
+                        )
+                    );
             }
             else if (
                 (upgradeBindingElements.Count == 1)
@@ -180,11 +185,13 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56503 // Internal method.
             get
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.SecurityAuditNotSupportedOnChannelFactory)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.SecurityAuditNotSupportedOnChannelFactory)
+                        )
+                    );
             }
         }
 

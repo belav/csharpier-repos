@@ -2533,9 +2533,11 @@ namespace System.Runtime.Serialization.DataContracts
                         )
                         {
                             DataContract itemDataContract = DataContract.GetDataContract(
-                                Globals.TypeOfKeyValuePair.MakeGenericType(
-                                    collectionDataContract.ItemType.GetGenericArguments()
-                                )
+                                Globals
+                                    .TypeOfKeyValuePair
+                                    .MakeGenericType(
+                                        collectionDataContract.ItemType.GetGenericArguments()
+                                    )
                             );
                             knownDataContracts ??= new DataContractDictionary();
 

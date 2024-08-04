@@ -113,7 +113,8 @@ namespace System.IO.Pipes
                 try
                 {
                     acceptedSocket = await _instance!
-                        .ListeningSocket.AcceptAsync(linkedTokenSource.Token)
+                        .ListeningSocket
+                        .AcceptAsync(linkedTokenSource.Token)
                         .ConfigureAwait(false);
                 }
                 catch (OperationCanceledException) when (!cancellationToken.IsCancellationRequested)

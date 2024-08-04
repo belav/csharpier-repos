@@ -86,13 +86,15 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.CannotImportSupportingTokensForOperationWithoutRequestAction
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.CannotImportSupportingTokensForOperationWithoutRequestAction
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 if (
@@ -109,13 +111,15 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.CannotImportSupportingTokensForOperationWithoutRequestAction
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.CannotImportSupportingTokensForOperationWithoutRequestAction
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -144,11 +148,16 @@ namespace System.ServiceModel.Channels
                     && assertion != null
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.UnsupportedSecurityPolicyAssertion,
+                                    assertion.OuterXml
+                                )
+                            )
+                        );
                 }
 
                 if (
@@ -160,11 +169,16 @@ namespace System.ServiceModel.Channels
                     && assertion != null
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.UnsupportedSecurityPolicyAssertion,
+                                    assertion.OuterXml
+                                )
+                            )
+                        );
                 }
             }
 
@@ -225,15 +239,17 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(
-                                SR.CannotImportProtectionLevelForContract,
-                                contract.Name,
-                                contract.Namespace
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(
+                                    SR.CannotImportProtectionLevelForContract,
+                                    contract.Name,
+                                    contract.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -241,13 +257,13 @@ namespace System.ServiceModel.Channels
         void AddParts(ref MessagePartSpecification parts1, MessagePartSpecification parts2)
         {
             if (parts1 == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("parts1")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("parts1"));
             if (parts2 == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("parts2")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("parts2"));
 
             if (!parts2.IsEmpty())
             {
@@ -526,15 +542,17 @@ namespace System.ServiceModel.Channels
                     {
                         if (fault.ProtectionLevel != newProtectionLevel)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ArgumentException(
-                                    SR.GetString(
-                                        SR.CannotImportProtectionLevelForContract,
-                                        policyContext.Contract.Name,
-                                        policyContext.Contract.Namespace
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new ArgumentException(
+                                        SR.GetString(
+                                            SR.CannotImportProtectionLevelForContract,
+                                            policyContext.Contract.Name,
+                                            policyContext.Contract.Namespace
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                     else
@@ -566,15 +584,17 @@ namespace System.ServiceModel.Channels
                     || contractProtectionLevel != otherBindingProtectionLevel.UniformProtectionLevel
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(
-                                SR.CannotImportProtectionLevelForContract,
-                                policyContext.Contract.Name,
-                                policyContext.Contract.Namespace
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(
+                                    SR.CannotImportProtectionLevelForContract,
+                                    policyContext.Contract.Name,
+                                    policyContext.Contract.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             else
@@ -637,11 +657,16 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidChannelBindingException(
-                            SR.GetString(SR.PolicyRequiresConfidentialityWithoutIntegrity, action)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidChannelBindingException(
+                                SR.GetString(
+                                    SR.PolicyRequiresConfidentialityWithoutIntegrity,
+                                    action
+                                )
+                            )
+                        );
                 }
             }
             else if (signed)
@@ -717,11 +742,16 @@ namespace System.ServiceModel.Channels
                     && assertion != null
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.UnsupportedSecurityPolicyAssertion,
+                                    assertion.OuterXml
+                                )
+                            )
+                        );
                 }
 
                 if (
@@ -734,11 +764,16 @@ namespace System.ServiceModel.Channels
                     && assertion != null
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.UnsupportedSecurityPolicyAssertion,
+                                    assertion.OuterXml
+                                )
+                            )
+                        );
                 }
             }
 
@@ -792,11 +827,16 @@ namespace System.ServiceModel.Channels
                 }
                 else if (assertion != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.UnsupportedSecurityPolicyAssertion,
+                                    assertion.OuterXml
+                                )
+                            )
+                        );
                 }
             }
 
@@ -845,11 +885,16 @@ namespace System.ServiceModel.Channels
                 }
                 else if (assertion != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.UnsupportedSecurityPolicyAssertion,
+                                    assertion.OuterXml
+                                )
+                            )
+                        );
                 }
             }
 
@@ -901,9 +946,9 @@ namespace System.ServiceModel.Channels
                             binding
                         );
                         if (
-                            importer.State.ContainsKey(
-                                InSecureConversationBootstrapBindingImportMode
-                            )
+                            importer
+                                .State
+                                .ContainsKey(InSecureConversationBootstrapBindingImportMode)
                         )
                         {
                             this.ImportMessageScopeProtectionPolicy(importer, policyContext);
@@ -918,11 +963,16 @@ namespace System.ServiceModel.Channels
                 }
                 else if (assertion != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.UnsupportedSecurityPolicyAssertion,
+                                    assertion.OuterXml
+                                )
+                            )
+                        );
                 }
             }
 
@@ -1033,12 +1083,16 @@ namespace System.ServiceModel.Channels
                     if (config.HasImportFailed)
                     {
 #pragma warning suppress 56506
-                        importer.Errors.Add(
-                            new MetadataConversionError(
-                                SR.GetString(SR.SecurityBindingElementCannotBeExpressedInConfig),
-                                true
-                            )
-                        );
+                        importer
+                            .Errors
+                            .Add(
+                                new MetadataConversionError(
+                                    SR.GetString(
+                                        SR.SecurityBindingElementCannotBeExpressedInConfig
+                                    ),
+                                    true
+                                )
+                            );
                     }
                 }
             }

@@ -279,10 +279,15 @@ namespace System.Data.Query.InternalTrees
         {
             // At this time, we shouldn't ever see this type here; it's for SPROCS which don't use
             // the plan compiler.
-            System.Data.Query.PlanCompiler.PlanCompiler.Assert(
-                false,
-                "unexpected MultipleDiscriminatorPolymorphicColumnMap in ColumnMapCopier"
-            );
+            System
+                .Data
+                .Query
+                .PlanCompiler
+                .PlanCompiler
+                .Assert(
+                    false,
+                    "unexpected MultipleDiscriminatorPolymorphicColumnMap in ColumnMapCopier"
+                );
             return null;
         }
 

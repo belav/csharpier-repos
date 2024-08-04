@@ -184,9 +184,11 @@ namespace System.Data.Common.CommandTrees
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             throw EntityUtil.NotSupported(
-                System.Data.Entity.Strings.Cqt_General_UnsupportedExpression(
-                    expression.GetType().FullName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .Cqt_General_UnsupportedExpression(expression.GetType().FullName)
             );
         }
 

@@ -76,20 +76,30 @@ public class KeyValuePairModelBinder<TKey, TValue> : IModelBinder
 
         if (!keyResult.IsModelSet && valueResult.IsModelSet)
         {
-            bindingContext.ModelState.TryAddModelError(
-                keyModelName,
-                bindingContext.ModelMetadata.ModelBindingMessageProvider.MissingKeyOrValueAccessor()
-            );
+            bindingContext
+                .ModelState
+                .TryAddModelError(
+                    keyModelName,
+                    bindingContext
+                        .ModelMetadata
+                        .ModelBindingMessageProvider
+                        .MissingKeyOrValueAccessor()
+                );
             _logger.DoneAttemptingToBindModel(bindingContext);
             return;
         }
 
         if (keyResult.IsModelSet && !valueResult.IsModelSet)
         {
-            bindingContext.ModelState.TryAddModelError(
-                valueModelName,
-                bindingContext.ModelMetadata.ModelBindingMessageProvider.MissingKeyOrValueAccessor()
-            );
+            bindingContext
+                .ModelState
+                .TryAddModelError(
+                    valueModelName,
+                    bindingContext
+                        .ModelMetadata
+                        .ModelBindingMessageProvider
+                        .MissingKeyOrValueAccessor()
+                );
             _logger.DoneAttemptingToBindModel(bindingContext);
             return;
         }

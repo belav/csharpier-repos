@@ -34,58 +34,70 @@ public class Startup
             {
                 context.Response.ContentType = "text/plain";
 
-                await context.Response.WriteAsync(
-                    "Hello World - " + DateTimeOffset.Now + Environment.NewLine
-                );
+                await context
+                    .Response
+                    .WriteAsync("Hello World - " + DateTimeOffset.Now + Environment.NewLine);
                 await context.Response.WriteAsync(Environment.NewLine);
 
                 await context.Response.WriteAsync("Address:" + Environment.NewLine);
-                await context.Response.WriteAsync(
-                    "Scheme: " + context.Request.Scheme + Environment.NewLine
-                );
-                await context.Response.WriteAsync(
-                    "Host: " + context.Request.Headers["Host"] + Environment.NewLine
-                );
-                await context.Response.WriteAsync(
-                    "PathBase: " + context.Request.PathBase.Value + Environment.NewLine
-                );
-                await context.Response.WriteAsync(
-                    "Path: " + context.Request.Path.Value + Environment.NewLine
-                );
-                await context.Response.WriteAsync(
-                    "Query: " + context.Request.QueryString.Value + Environment.NewLine
-                );
+                await context
+                    .Response
+                    .WriteAsync("Scheme: " + context.Request.Scheme + Environment.NewLine);
+                await context
+                    .Response
+                    .WriteAsync("Host: " + context.Request.Headers["Host"] + Environment.NewLine);
+                await context
+                    .Response
+                    .WriteAsync(
+                        "PathBase: " + context.Request.PathBase.Value + Environment.NewLine
+                    );
+                await context
+                    .Response
+                    .WriteAsync("Path: " + context.Request.Path.Value + Environment.NewLine);
+                await context
+                    .Response
+                    .WriteAsync(
+                        "Query: " + context.Request.QueryString.Value + Environment.NewLine
+                    );
                 await context.Response.WriteAsync(Environment.NewLine);
 
                 await context.Response.WriteAsync("Connection:" + Environment.NewLine);
-                await context.Response.WriteAsync(
-                    "RemoteIp: " + context.Connection.RemoteIpAddress + Environment.NewLine
-                );
-                await context.Response.WriteAsync(
-                    "RemotePort: " + context.Connection.RemotePort + Environment.NewLine
-                );
-                await context.Response.WriteAsync(
-                    "LocalIp: " + context.Connection.LocalIpAddress + Environment.NewLine
-                );
-                await context.Response.WriteAsync(
-                    "LocalPort: " + context.Connection.LocalPort + Environment.NewLine
-                );
-                await context.Response.WriteAsync(
-                    "ClientCert: " + context.Connection.ClientCertificate + Environment.NewLine
-                );
+                await context
+                    .Response
+                    .WriteAsync(
+                        "RemoteIp: " + context.Connection.RemoteIpAddress + Environment.NewLine
+                    );
+                await context
+                    .Response
+                    .WriteAsync(
+                        "RemotePort: " + context.Connection.RemotePort + Environment.NewLine
+                    );
+                await context
+                    .Response
+                    .WriteAsync(
+                        "LocalIp: " + context.Connection.LocalIpAddress + Environment.NewLine
+                    );
+                await context
+                    .Response
+                    .WriteAsync("LocalPort: " + context.Connection.LocalPort + Environment.NewLine);
+                await context
+                    .Response
+                    .WriteAsync(
+                        "ClientCert: " + context.Connection.ClientCertificate + Environment.NewLine
+                    );
                 await context.Response.WriteAsync(Environment.NewLine);
 
-                await context.Response.WriteAsync(
-                    "User: " + context.User.Identity.Name + Environment.NewLine
-                );
+                await context
+                    .Response
+                    .WriteAsync("User: " + context.User.Identity.Name + Environment.NewLine);
                 if (_authSchemeProvider != null)
                 {
                     var scheme = await _authSchemeProvider.GetSchemeAsync(
                         IISServerDefaults.AuthenticationScheme
                     );
-                    await context.Response.WriteAsync(
-                        "DisplayName: " + scheme?.DisplayName + Environment.NewLine
-                    );
+                    await context
+                        .Response
+                        .WriteAsync("DisplayName: " + scheme?.DisplayName + Environment.NewLine);
                 }
 
                 await context.Response.WriteAsync(Environment.NewLine);
@@ -93,17 +105,17 @@ public class Startup
                 await context.Response.WriteAsync("Headers:" + Environment.NewLine);
                 foreach (var header in context.Request.Headers)
                 {
-                    await context.Response.WriteAsync(
-                        header.Key + ": " + header.Value + Environment.NewLine
-                    );
+                    await context
+                        .Response
+                        .WriteAsync(header.Key + ": " + header.Value + Environment.NewLine);
                 }
                 await context.Response.WriteAsync(Environment.NewLine);
 
                 await context.Response.WriteAsync("Environment Variables:" + Environment.NewLine);
                 var vars = Environment.GetEnvironmentVariables();
                 foreach (
-                    var key in vars
-                        .Keys.Cast<string>()
+                    var key in vars.Keys
+                        .Cast<string>()
                         .OrderBy(key => key, StringComparer.OrdinalIgnoreCase)
                 )
                 {
@@ -117,9 +129,14 @@ public class Startup
 
                 foreach (var varName in IISServerVarNames)
                 {
-                    await context.Response.WriteAsync(
-                        varName + ": " + context.GetServerVariable(varName) + Environment.NewLine
-                    );
+                    await context
+                        .Response
+                        .WriteAsync(
+                            varName
+                                + ": "
+                                + context.GetServerVariable(varName)
+                                + Environment.NewLine
+                        );
                 }
 
                 await context.Response.WriteAsync(Environment.NewLine);
@@ -144,46 +161,62 @@ public class Startup
                 if (server.Features.Get<IIISEnvironmentFeature>() is { } envFeature)
                 {
                     await context.Response.WriteAsync(Environment.NewLine);
-                    await context.Response.WriteAsync(
-                        "IIS Environment Information:" + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "IIS Version: " + envFeature.IISVersion + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "ApplicationId: " + envFeature.ApplicationId + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "Application Path: "
-                            + envFeature.ApplicationPhysicalPath
-                            + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "Application Virtual Path: "
-                            + envFeature.ApplicationVirtualPath
-                            + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "Application Config Path: " + envFeature.AppConfigPath + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "AppPool ID: " + envFeature.AppPoolId + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "AppPool Config File: " + envFeature.AppPoolConfigFile + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "Site ID: " + envFeature.SiteId + Environment.NewLine
-                    );
-                    await context.Response.WriteAsync(
-                        "Site Name: " + envFeature.SiteName + Environment.NewLine
-                    );
+                    await context
+                        .Response
+                        .WriteAsync("IIS Environment Information:" + Environment.NewLine);
+                    await context
+                        .Response
+                        .WriteAsync("IIS Version: " + envFeature.IISVersion + Environment.NewLine);
+                    await context
+                        .Response
+                        .WriteAsync(
+                            "ApplicationId: " + envFeature.ApplicationId + Environment.NewLine
+                        );
+                    await context
+                        .Response
+                        .WriteAsync(
+                            "Application Path: "
+                                + envFeature.ApplicationPhysicalPath
+                                + Environment.NewLine
+                        );
+                    await context
+                        .Response
+                        .WriteAsync(
+                            "Application Virtual Path: "
+                                + envFeature.ApplicationVirtualPath
+                                + Environment.NewLine
+                        );
+                    await context
+                        .Response
+                        .WriteAsync(
+                            "Application Config Path: "
+                                + envFeature.AppConfigPath
+                                + Environment.NewLine
+                        );
+                    await context
+                        .Response
+                        .WriteAsync("AppPool ID: " + envFeature.AppPoolId + Environment.NewLine);
+                    await context
+                        .Response
+                        .WriteAsync(
+                            "AppPool Config File: "
+                                + envFeature.AppPoolConfigFile
+                                + Environment.NewLine
+                        );
+                    await context
+                        .Response
+                        .WriteAsync("Site ID: " + envFeature.SiteId + Environment.NewLine);
+                    await context
+                        .Response
+                        .WriteAsync("Site Name: " + envFeature.SiteName + Environment.NewLine);
                 }
                 else
                 {
-                    await context.Response.WriteAsync(
-                        $"No {nameof(IIISEnvironmentFeature)} available." + Environment.NewLine
-                    );
+                    await context
+                        .Response
+                        .WriteAsync(
+                            $"No {nameof(IIISEnvironmentFeature)} available." + Environment.NewLine
+                        );
                 }
             }
         );

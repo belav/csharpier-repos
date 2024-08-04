@@ -161,10 +161,9 @@ namespace System.Workflow.ComponentModel
                 Dictionary<string, object> namedArgumentValues
             )
             {
-                return this.executionContext.WorkflowCoreRuntime.StartWorkflow(
-                    workflowType,
-                    namedArgumentValues
-                );
+                return this.executionContext
+                    .WorkflowCoreRuntime
+                    .StartWorkflow(workflowType, namedArgumentValues);
             }
         }
         #endregion
@@ -218,10 +217,9 @@ namespace System.Workflow.ComponentModel
                     return null;
             }
 
-            return this.currentActivity.WorkflowCoreRuntime.GetService(
-                this.currentActivity,
-                serviceType
-            );
+            return this.currentActivity
+                .WorkflowCoreRuntime
+                .GetService(this.currentActivity, serviceType);
         }
 
         #endregion
@@ -316,16 +314,18 @@ namespace System.Workflow.ComponentModel
             finally
             {
                 Debug.Assert(activity.ExecutionStatus == ActivityExecutionStatus.Executing);
-                this.currentActivity.WorkflowCoreRuntime.ScheduleItem(
-                    new ActivityExecutorOperation(
-                        activity,
-                        ActivityOperationType.Execute,
-                        this.ContextId
-                    ),
-                    IsInAtomicTransaction(activity),
-                    false,
-                    false
-                );
+                this.currentActivity
+                    .WorkflowCoreRuntime
+                    .ScheduleItem(
+                        new ActivityExecutorOperation(
+                            activity,
+                            ActivityOperationType.Execute,
+                            this.ContextId
+                        ),
+                        IsInAtomicTransaction(activity),
+                        false,
+                        false
+                    );
             }
         }
 
@@ -364,16 +364,18 @@ namespace System.Workflow.ComponentModel
             }
             finally
             {
-                this.currentActivity.WorkflowCoreRuntime.ScheduleItem(
-                    new ActivityExecutorOperation(
-                        activity,
-                        ActivityOperationType.Cancel,
-                        this.ContextId
-                    ),
-                    IsInAtomicTransaction(activity),
-                    false,
-                    false
-                );
+                this.currentActivity
+                    .WorkflowCoreRuntime
+                    .ScheduleItem(
+                        new ActivityExecutorOperation(
+                            activity,
+                            ActivityOperationType.Cancel,
+                            this.ContextId
+                        ),
+                        IsInAtomicTransaction(activity),
+                        false,
+                        false
+                    );
             }
         }
 
@@ -399,16 +401,18 @@ namespace System.Workflow.ComponentModel
             }
             finally
             {
-                this.currentActivity.WorkflowCoreRuntime.ScheduleItem(
-                    new ActivityExecutorOperation(
-                        activity,
-                        ActivityOperationType.Compensate,
-                        this.ContextId
-                    ),
-                    IsInAtomicTransaction(activity),
-                    false,
-                    false
-                );
+                this.currentActivity
+                    .WorkflowCoreRuntime
+                    .ScheduleItem(
+                        new ActivityExecutorOperation(
+                            activity,
+                            ActivityOperationType.Compensate,
+                            this.ContextId
+                        ),
+                        IsInAtomicTransaction(activity),
+                        false,
+                        false
+                    );
             }
         }
 
@@ -428,11 +432,9 @@ namespace System.Workflow.ComponentModel
                 }
                 else
                 {
-                    this.currentActivity.WorkflowCoreRuntime.RaiseException(
-                        e,
-                        this.currentActivity.Parent,
-                        string.Empty
-                    );
+                    this.currentActivity
+                        .WorkflowCoreRuntime
+                        .RaiseException(e, this.currentActivity.Parent, string.Empty);
                 }
             }
             else
@@ -449,17 +451,19 @@ namespace System.Workflow.ComponentModel
                 }
                 finally
                 {
-                    this.currentActivity.WorkflowCoreRuntime.ScheduleItem(
-                        new ActivityExecutorOperation(
-                            this.currentActivity,
-                            ActivityOperationType.HandleFault,
-                            this.ContextId,
-                            e
-                        ),
-                        IsInAtomicTransaction(this.currentActivity),
-                        false,
-                        false
-                    );
+                    this.currentActivity
+                        .WorkflowCoreRuntime
+                        .ScheduleItem(
+                            new ActivityExecutorOperation(
+                                this.currentActivity,
+                                ActivityOperationType.HandleFault,
+                                this.ContextId,
+                                e
+                            ),
+                            IsInAtomicTransaction(this.currentActivity),
+                            false,
+                            false
+                        );
                 }
             }
         }
@@ -791,13 +795,15 @@ namespace System.Workflow.ComponentModel
             if (this.currentActivity == null)
                 throw new ObjectDisposedException("ActivityExecutionContext");
 
-            this.currentActivity.WorkflowCoreRuntime.RequestRevertToCheckpointState(
-                this.currentActivity,
-                handler,
-                data,
-                suspendOnRevert,
-                suspendOnRevertInfo
-            );
+            this.currentActivity
+                .WorkflowCoreRuntime
+                .RequestRevertToCheckpointState(
+                    this.currentActivity,
+                    handler,
+                    data,
+                    suspendOnRevert,
+                    suspendOnRevertInfo
+                );
         }
 
         internal void DisposeCheckpointState()

@@ -844,10 +844,14 @@ namespace System.Data.Objects.DataClasses
                 if (!(value is IEnumerable))
                 {
                     throw new EntityException(
-                        System.Data.Entity.Strings.ObjectStateEntry_UnableToEnumerateCollection(
-                            this.TargetAccessor.PropertyName,
-                            this.WrappedOwner.Entity.GetType().FullName
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .ObjectStateEntry_UnableToEnumerateCollection(
+                                this.TargetAccessor.PropertyName,
+                                this.WrappedOwner.Entity.GetType().FullName
+                            )
                     );
                 }
 

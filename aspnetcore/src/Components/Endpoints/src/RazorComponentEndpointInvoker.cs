@@ -73,13 +73,15 @@ internal partial class RazorComponentEndpointInvoker : IRazorComponentEndpointIn
             return;
         }
 
-        context.Response.OnStarting(() =>
-        {
-            // Generate the antiforgery tokens before we start streaming the response, as it needs
-            // to set the cookie header.
-            antiforgery!.GetAndStoreTokens(context);
-            return Task.CompletedTask;
-        });
+        context
+            .Response
+            .OnStarting(() =>
+            {
+                // Generate the antiforgery tokens before we start streaming the response, as it needs
+                // to set the cookie header.
+                antiforgery!.GetAndStoreTokens(context);
+                return Task.CompletedTask;
+            });
 
         await EndpointHtmlRenderer.InitializeStandardComponentServicesAsync(
             context,
@@ -227,9 +229,11 @@ internal partial class RazorComponentEndpointInvoker : IRazorComponentEndpointIn
 
                 if (context.RequestServices.GetService<IHostEnvironment>()?.IsDevelopment() == true)
                 {
-                    await context.Response.WriteAsync(
-                        "A valid antiforgery token was not provided with the request. Add an antiforgery token, or disable antiforgery validation for this endpoint."
-                    );
+                    await context
+                        .Response
+                        .WriteAsync(
+                            "A valid antiforgery token was not provided with the request. Add an antiforgery token, or disable antiforgery validation for this endpoint."
+                        );
                 }
                 return RequestValidationState.InvalidPostRequest;
             }

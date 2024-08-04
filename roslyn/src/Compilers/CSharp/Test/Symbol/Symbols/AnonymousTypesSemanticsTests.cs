@@ -888,10 +888,9 @@ class ClassA
             var info0 = GetAnonymousTypeInfoSummary(
                 data,
                 0,
-                data.Tree.FindNodeOrTokenByKind(
-                    SyntaxKind.NewKeyword,
-                    NumberOfNewKeywords(LINQ) + 2
-                ).Span,
+                data.Tree
+                    .FindNodeOrTokenByKind(SyntaxKind.NewKeyword, NumberOfNewKeywords(LINQ) + 2)
+                    .Span,
                 1,
                 2
             );
@@ -975,10 +974,9 @@ class ClassA
             var info0 = GetAnonymousTypeInfoSummary(
                 data,
                 0,
-                data.Tree.FindNodeOrTokenByKind(
-                    SyntaxKind.NewKeyword,
-                    NumberOfNewKeywords(LINQ) + 2
-                ).Span,
+                data.Tree
+                    .FindNodeOrTokenByKind(SyntaxKind.NewKeyword, NumberOfNewKeywords(LINQ) + 2)
+                    .Span,
                 1,
                 2
             );
@@ -1796,8 +1794,8 @@ public class ClassA
             );
 
             var pos = data.Nodes[0].Span.End;
-            var syms = data
-                .Model.LookupSymbols(pos, container: info0.Type)
+            var syms = data.Model
+                .LookupSymbols(pos, container: info0.Type)
                 .Select(x => x.ToTestDisplayString())
                 .OrderBy(x => x)
                 .ToArray();
@@ -1834,8 +1832,8 @@ public class ClassA
             Assert.Equal("<empty anonymous type>", info0.Type.ToTestDisplayString());
 
             pos = data.Nodes[3].Span.End;
-            syms = data
-                .Model.LookupSymbols(pos, container: info0.Type)
+            syms = data.Model
+                .LookupSymbols(pos, container: info0.Type)
                 .Select(x => x.ToTestDisplayString())
                 .OrderBy(x => x)
                 .ToArray();

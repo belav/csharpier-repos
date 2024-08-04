@@ -693,20 +693,18 @@ namespace System.Data.Common
                 isSuccess = true;
             }
             else if (
-                StringComparer.InvariantCultureIgnoreCase.Equals(
-                    value,
-                    ActiveDirectoryPasswordString
-                )
+                StringComparer
+                    .InvariantCultureIgnoreCase
+                    .Equals(value, ActiveDirectoryPasswordString)
             )
             {
                 result = SqlAuthenticationMethod.ActiveDirectoryPassword;
                 isSuccess = true;
             }
             else if (
-                StringComparer.InvariantCultureIgnoreCase.Equals(
-                    value,
-                    ActiveDirectoryIntegratedString
-                )
+                StringComparer
+                    .InvariantCultureIgnoreCase
+                    .Equals(value, ActiveDirectoryIntegratedString)
             )
             {
                 result = SqlAuthenticationMethod.ActiveDirectoryIntegrated;
@@ -739,20 +737,18 @@ namespace System.Data.Common
             bool isSuccess = false;
 
             if (
-                StringComparer.InvariantCultureIgnoreCase.Equals(
-                    value,
-                    ColumnEncryptionSettingEnabledString
-                )
+                StringComparer
+                    .InvariantCultureIgnoreCase
+                    .Equals(value, ColumnEncryptionSettingEnabledString)
             )
             {
                 result = SqlConnectionColumnEncryptionSetting.Enabled;
                 isSuccess = true;
             }
             else if (
-                StringComparer.InvariantCultureIgnoreCase.Equals(
-                    value,
-                    ColumnEncryptionSettingDisabledString
-                )
+                StringComparer
+                    .InvariantCultureIgnoreCase
+                    .Equals(value, ColumnEncryptionSettingDisabledString)
             )
             {
                 result = SqlConnectionColumnEncryptionSetting.Disabled;

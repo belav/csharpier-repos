@@ -42,12 +42,14 @@ namespace System.Threading
                     lpSecurityDescriptor = pSecurityDescriptor,
                 };
 
-                SafeWaitHandle handle = Interop.Kernel32.CreateMutexEx(
-                    (IntPtr)(&secAttrs),
-                    name,
-                    mutexFlags,
-                    (uint)MutexRights.FullControl // Equivalent to MUTEX_ALL_ACCESS
-                );
+                SafeWaitHandle handle = Interop
+                    .Kernel32
+                    .CreateMutexEx(
+                        (IntPtr)(&secAttrs),
+                        name,
+                        mutexFlags,
+                        (uint)MutexRights.FullControl // Equivalent to MUTEX_ALL_ACCESS
+                    );
 
                 int errorCode = Marshal.GetLastPInvokeError();
 

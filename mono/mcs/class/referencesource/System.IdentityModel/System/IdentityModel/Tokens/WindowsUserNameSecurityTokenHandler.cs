@@ -55,10 +55,12 @@ namespace System.IdentityModel.Tokens
             UserNameSecurityToken usernameToken = token as UserNameSecurityToken;
             if (usernameToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "token",
-                    SR.GetString(SR.ID0018, typeof(UserNameSecurityToken))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "token",
+                        SR.GetString(SR.ID0018, typeof(UserNameSecurityToken))
+                    );
             }
 
             if (this.Configuration == null)
@@ -77,10 +79,9 @@ namespace System.IdentityModel.Tokens
                     if (strings.Length != 2 || string.IsNullOrEmpty(strings[0]))
                     {
                         // Only support one slash and domain cannot be empty (consistent with windowslogon).
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            "token",
-                            SR.GetString(SR.ID4062)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument("token", SR.GetString(SR.ID4062));
                     }
 
                     // This is the downlevel case - domain\userName
@@ -105,12 +106,14 @@ namespace System.IdentityModel.Tokens
                     )
                     {
                         int error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenValidationException(
-                                SR.GetString(SR.ID4063, userName),
-                                new Win32Exception(error)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityTokenValidationException(
+                                    SR.GetString(SR.ID4063, userName),
+                                    new Win32Exception(error)
+                                )
+                            );
                     }
 
                     WindowsIdentity windowsIdentity = new WindowsIdentity(

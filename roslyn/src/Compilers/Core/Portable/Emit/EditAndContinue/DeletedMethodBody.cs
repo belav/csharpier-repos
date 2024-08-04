@@ -75,10 +75,10 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         private static ImmutableArray<byte> GetIL(EmitContext context)
         {
-            var missingMethodExceptionStringStringConstructor =
-                context.Module.CommonCompilation.CommonGetWellKnownTypeMember(
-                    WellKnownMember.System_MissingMethodException__ctor
-                );
+            var missingMethodExceptionStringStringConstructor = context
+                .Module
+                .CommonCompilation
+                .CommonGetWellKnownTypeMember(WellKnownMember.System_MissingMethodException__ctor);
             Debug.Assert(missingMethodExceptionStringStringConstructor is not null);
 
             var builder = new ILBuilder(

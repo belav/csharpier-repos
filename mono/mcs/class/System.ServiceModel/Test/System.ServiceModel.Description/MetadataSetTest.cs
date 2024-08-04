@@ -60,16 +60,16 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.AreEqual(
                 2,
                 metadata
-                    .MetadataSections.Where(m =>
-                        m.Dialect == MetadataSection.ServiceDescriptionDialect
-                    )
+                    .MetadataSections
+                    .Where(m => m.Dialect == MetadataSection.ServiceDescriptionDialect)
                     .Count(),
                 "#2"
             );
             Assert.AreEqual(
                 3,
                 metadata
-                    .MetadataSections.Where(m => m.Dialect == MetadataSection.XmlSchemaDialect)
+                    .MetadataSections
+                    .Where(m => m.Dialect == MetadataSection.XmlSchemaDialect)
                     .Count(),
                 "#3"
             );

@@ -230,13 +230,9 @@ namespace Mono.Security.Protocol.Ntlm
         {
             byte[] key7 = new byte[7];
             int len = System.Math.Min(password.Length - position, 7);
-            Encoding.ASCII.GetBytes(
-                password.ToUpper(CultureInfo.CurrentCulture),
-                position,
-                len,
-                key7,
-                0
-            );
+            Encoding
+                .ASCII
+                .GetBytes(password.ToUpper(CultureInfo.CurrentCulture), position, len, key7, 0);
             byte[] key8 = PrepareDESKey(key7, 0);
             // cleanup intermediate key material
             Array.Clear(key7, 0, key7.Length);

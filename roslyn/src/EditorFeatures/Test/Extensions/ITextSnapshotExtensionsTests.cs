@@ -187,16 +187,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
 
         private static string GetLeadingWhitespaceOfLineAtPosition(string code, int position)
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var snapshot = EditorFactory.CreateBuffer(exportProvider, code).CurrentSnapshot;
             return snapshot.GetLeadingWhitespaceOfLineAtPosition(position);
         }
 
         private static ITextSnapshot GetSampleCodeSnapshot()
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
 
             // to make verification simpler, each line of code is 4 characters and will be joined to other lines
             // with a single newline character making the formula to calculate the offset from a given line and

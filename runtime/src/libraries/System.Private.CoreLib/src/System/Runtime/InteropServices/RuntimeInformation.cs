@@ -18,7 +18,8 @@ namespace System.Runtime.InteropServices
                 if (s_frameworkDescription == null)
                 {
                     ReadOnlySpan<char> versionString = typeof(object)
-                        .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                        .Assembly
+                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                         ?.InformationalVersion;
 
                     // Strip the git hash if there is one

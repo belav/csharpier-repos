@@ -85,9 +85,9 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
             ref LocalStateAndContext<MultiValue, FeatureContext> currentState
         )
         {
-            currentState.Context = currentState.Context.Union(
-                new FeatureContext(featureChecksValue.EnabledFeatures)
-            );
+            currentState.Context = currentState
+                .Context
+                .Union(new FeatureContext(featureChecksValue.EnabledFeatures));
         }
 
         // Override visitor methods to create tracked values when visiting operations
@@ -201,10 +201,9 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                 case "EmptyTypes" when field.ContainingType.IsTypeOf("System", "Type"):
 #if DEBUG
                 case "ArrayField"
-                    when field.ContainingType.IsTypeOf(
-                        "Mono.Linker.Tests.Cases.DataFlow",
-                        "WriteArrayField"
-                    ):
+                    when field
+                        .ContainingType
+                        .IsTypeOf("Mono.Linker.Tests.Cases.DataFlow", "WriteArrayField"):
 #endif
                 {
                     return ArrayValue.Create(0);
@@ -534,10 +533,9 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                             {
                                 var annotation = FlowAnnotations.GetTypeAnnotation(staticType);
                                 AddReturnValue(
-                                    FlowAnnotations.Instance.GetMethodReturnValue(
-                                        new(calledMethod),
-                                        annotation
-                                    )
+                                    FlowAnnotations
+                                        .Instance
+                                        .GetMethodReturnValue(new(calledMethod), annotation)
                                 );
                             }
                         }

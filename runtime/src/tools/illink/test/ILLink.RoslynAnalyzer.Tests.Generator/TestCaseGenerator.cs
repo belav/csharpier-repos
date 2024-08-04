@@ -167,10 +167,12 @@ namespace {TestNamespace}{suiteNamespacePart}
                             )
                                 return ImmutableArray<(IAssemblySymbol, string?)>.Empty;
                             if (
-                                !options.GlobalOptions.TryGetValue(
-                                    "build_property.TestCaseBuildOutputRoot",
-                                    out var testCaseBuildOutputRootValue
-                                )
+                                !options
+                                    .GlobalOptions
+                                    .TryGetValue(
+                                        "build_property.TestCaseBuildOutputRoot",
+                                        out var testCaseBuildOutputRootValue
+                                    )
                             )
                                 throw new Exception(
                                     "Missing build property TestCaseBuildOutputRoot"
@@ -235,8 +237,9 @@ namespace {TestNamespace}{suiteNamespacePart}
                 );
 
             // Find already-generated test types
-            IncrementalValuesProvider<INamedTypeSymbol?> existingTestTypes =
-                context.SyntaxProvider.CreateSyntaxProvider(
+            IncrementalValuesProvider<INamedTypeSymbol?> existingTestTypes = context
+                .SyntaxProvider
+                .CreateSyntaxProvider(
                     static (node, cancellationToken) =>
                     {
                         if (node is not ClassDeclarationSyntax classSyntax)
@@ -256,10 +259,9 @@ namespace {TestNamespace}{suiteNamespacePart}
                     {
                         var node = generatorSyntaxContext.Node;
                         return
-                            generatorSyntaxContext.SemanticModel.GetDeclaredSymbol(
-                                node,
-                                cancellationToken
-                            )
+                            generatorSyntaxContext
+                                .SemanticModel
+                                .GetDeclaredSymbol(node, cancellationToken)
                                 is INamedTypeSymbol typeSymbol
                             ? typeSymbol
                             : null;
@@ -341,10 +343,9 @@ namespace {TestNamespace}{suiteNamespacePart}
                     string suiteName = kvp.Key;
                     var cases = kvp.Value;
 
-                    bool newTestSuite = !existingTestCases.Suites.TryGetValue(
-                        suiteName,
-                        out HashSet<string> existingCases
-                    );
+                    bool newTestSuite = !existingTestCases
+                        .Suites
+                        .TryGetValue(suiteName, out HashSet<string> existingCases);
                     var newCases = newTestSuite ? cases : cases.Except(existingCases);
                     // Skip generating a test class if all testcases in the suite already exist.
                     if (!newCases.Any())

@@ -691,12 +691,14 @@ namespace System.Windows.Forms
             ResPool.AddUIImage(image, name, 0);
             if (image.Width != width && width != 0)
             {
-                Console.Error.WriteLine(
-                    "warning: requesting icon that not been tuned {0}_{1} {2}",
-                    width,
-                    name,
-                    image.Width
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "warning: requesting icon that not been tuned {0}_{1} {2}",
+                        width,
+                        name,
+                        image.Width
+                    );
                 int height = (image.Height * width) / image.Width;
                 Bitmap b = new Bitmap(width, height);
                 using (Graphics g = Graphics.FromImage(b))

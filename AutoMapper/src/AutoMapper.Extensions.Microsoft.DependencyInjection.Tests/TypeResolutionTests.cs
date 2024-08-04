@@ -31,7 +31,8 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
                 .GetService<IConfigurationProvider>()
                 .Internal()
                 .GetAllTypeMaps()
-                .Count.ShouldBe(4);
+                .Count
+                .ShouldBe(4);
         }
 
         [Fact]
@@ -71,7 +72,8 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
             _provider
                 .GetService<IMapper>()
                 .Map<EnumDescriptor<ConsoleColor>>(ConsoleColor.Green)
-                .Value.ShouldBe(int.MaxValue);
+                .Value
+                .ShouldBe(int.MaxValue);
         }
 
         [Fact]

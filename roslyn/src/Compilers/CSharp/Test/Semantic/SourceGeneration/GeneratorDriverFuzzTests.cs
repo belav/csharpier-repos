@@ -727,22 +727,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
 
             void registerPipeline(IncrementalGeneratorInitializationContext context)
             {
-                var provider = context.AdditionalTextsProvider.SelectMany(
-                    (additionalText, _) =>
-                        new (bool TransformAs, bool TransformCs)[] { (false, false) }.Select(
-                            logic =>
-                                (AdditionalText)
-                                    new InMemoryAdditionalText(
-                                        hintNameProvider.GetNextHintName(),
-                                        additionalText.GetText()!.ToString() switch
-                                        {
-                                            "a" when logic.TransformAs => "b",
-                                            "c" when logic.TransformCs => "d",
-                                            var other => other,
-                                        }
-                                    )
-                        )
-                );
+                var provider = context
+                    .AdditionalTextsProvider
+                    .SelectMany(
+                        (additionalText, _) =>
+                            new (bool TransformAs, bool TransformCs)[] { (false, false) }.Select(
+                                logic =>
+                                    (AdditionalText)
+                                        new InMemoryAdditionalText(
+                                            hintNameProvider.GetNextHintName(),
+                                            additionalText.GetText()!.ToString() switch
+                                            {
+                                                "a" when logic.TransformAs => "b",
+                                                "c" when logic.TransformCs => "d",
+                                                var other => other,
+                                            }
+                                        )
+                            )
+                    );
                 context.RegisterSourceOutput(
                     provider,
                     (context, text) =>

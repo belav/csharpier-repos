@@ -263,12 +263,8 @@ namespace MonoTests.System.Data
             ds.Tables["table2"].Columns.Add("col1");
 
             ds.Tables[1]
-                .ParentRelations.Add(
-                    "name1",
-                    ds.Tables[0].Columns["col1"],
-                    ds.Tables[1].Columns["col1"],
-                    false
-                );
+                .ParentRelations
+                .Add("name1", ds.Tables[0].Columns["col1"], ds.Tables[1].Columns["col1"], false);
 
             Assert.AreEqual(
                 false,

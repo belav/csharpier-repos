@@ -192,7 +192,8 @@ namespace Castle.DynamicProxy
                     .Select(m => m.Key)
                     .Where(TypeUtil.IsDelegateType);
                 var otherDelegateMixinTypes = other
-                    .mixinPositions.Select(m => m.Key)
+                    .mixinPositions
+                    .Select(m => m.Key)
                     .Where(TypeUtil.IsDelegateType);
                 return Enumerable.SequenceEqual(delegateMixinTypes, otherDelegateMixinTypes);
             }

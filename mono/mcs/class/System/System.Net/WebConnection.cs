@@ -193,8 +193,8 @@ namespace System.Net
                          *
                          * Explicitly use our implementation from SocketTaskExtensions.cs here.
                          */
-                        await Task
-                            .Factory.FromAsync(
+                        await Task.Factory
+                            .FromAsync(
                                 (targetEndPoint, callback, state) =>
                                     ((Socket)state).BeginConnect(targetEndPoint, callback, state),
                                 asyncResult =>

@@ -96,8 +96,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
                 )
             )
             {
-                document = await args
-                    .SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
+                document = await args.SubjectBuffer
+                    .CurrentSnapshot
+                    .GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
                         commandExecutionContext.OperationContext
                     )
                     .ConfigureAwait(true);
@@ -124,8 +125,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
                 if (symbolUnderCaret != null)
                 {
                     // Map symbols so that Call Hierarchy works from metadata-as-source
-                    var mappingService =
-                        document.Project.Solution.Services.GetService<ISymbolMappingService>();
+                    var mappingService = document
+                        .Project
+                        .Solution
+                        .Services
+                        .GetService<ISymbolMappingService>();
                     var mapping = await mappingService
                         .MapSymbolAsync(document, symbolUnderCaret, cancellationToken)
                         .ConfigureAwait(false);
@@ -143,9 +147,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
 
                         if (node != null)
                         {
-                            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                                cancellationToken
-                            );
+                            await _threadingContext
+                                .JoinableTaskFactory
+                                .SwitchToMainThreadAsync(cancellationToken);
                             _presenter.PresentRoot((CallHierarchyItem)node);
                             return;
                         }
@@ -153,13 +157,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
                 }
 
                 // Come back to the UI thread so we can give the user an error notification.
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
             }
 
-            var notificationService =
-                document.Project.Solution.Services.GetService<INotificationService>();
+            var notificationService = document
+                .Project
+                .Solution
+                .Services
+                .GetService<INotificationService>();
             notificationService.SendNotification(
                 EditorFeaturesResources.Cursor_must_be_on_a_member_name,
                 severity: NotificationSeverity.Information

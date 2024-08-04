@@ -81,23 +81,21 @@ namespace Microsoft.CodeAnalysis.Simplification.Simplifiers
                 memberAccessExpression,
                 cancellationToken
             );
-            var newSymbolInfo = speculationAnalyzer.SpeculativeSemanticModel.GetSymbolInfo(
-                speculationAnalyzer.ReplacedExpression,
-                cancellationToken
-            );
+            var newSymbolInfo = speculationAnalyzer
+                .SpeculativeSemanticModel
+                .GetSymbolInfo(speculationAnalyzer.ReplacedExpression, cancellationToken);
             if (
-                !symbolInfo.Symbol.Equals(
-                    newSymbolInfo.Symbol,
-                    SymbolEqualityComparer.IncludeNullability
-                )
+                !symbolInfo
+                    .Symbol
+                    .Equals(newSymbolInfo.Symbol, SymbolEqualityComparer.IncludeNullability)
             )
                 return false;
 
             notificationOption = optionValue.Notification;
-            return !semanticModel.SyntaxTree.OverlapsHiddenPosition(
-                    memberAccessExpression.Span,
-                    cancellationToken
-                ) && !MayCauseParseDifference(memberAccessExpression);
+            return !semanticModel
+                    .SyntaxTree
+                    .OverlapsHiddenPosition(memberAccessExpression.Span, cancellationToken)
+                && !MayCauseParseDifference(memberAccessExpression);
         }
     }
 }

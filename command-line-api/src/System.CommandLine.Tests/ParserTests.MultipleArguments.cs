@@ -240,7 +240,9 @@ namespace System.CommandLine.Tests
                 var result = CliParser.Parse(command, providedArgs);
 
                 result
-                    .Errors.Count.Should()
+                    .Errors
+                    .Count
+                    .Should()
                     .Be(
                         4
                             - providedArgs

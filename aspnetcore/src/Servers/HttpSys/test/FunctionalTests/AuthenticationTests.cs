@@ -255,12 +255,14 @@ public class AuthenticationTests : LoggedTest
                     Assert.NotNull(httpContext.User);
                     Assert.NotNull(httpContext.User.Identity);
                     Assert.True(httpContext.User.Identity.IsAuthenticated);
-                    httpContext.Response.OnCompleted(() =>
-                    {
-                        userName = httpContext.User.Identity.Name;
-                        completed.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    httpContext
+                        .Response
+                        .OnCompleted(() =>
+                        {
+                            userName = httpContext.User.Identity.Name;
+                            completed.SetResult();
+                            return Task.CompletedTask;
+                        });
                     return Task.FromResult(0);
                 },
                 LoggerFactory

@@ -151,7 +151,8 @@ public class ValueConvertersEndToEndSqliteTest
         using var context = CreateContext();
 
         var property = context
-            .Model.FindEntityType(typeof(ConvertingEntity))!
+            .Model
+            .FindEntityType(typeof(ConvertingEntity))!
             .FindProperty(propertyName);
 
         Assert.Equal(databaseType, property!.GetColumnType());

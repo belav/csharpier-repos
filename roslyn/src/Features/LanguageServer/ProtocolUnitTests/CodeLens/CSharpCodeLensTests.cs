@@ -481,8 +481,10 @@ public class CSharpCodeLensTests : AbstractCodeLensTests
 
         var documentUri = testLspServer
             .GetCurrentSolution()
-            .Projects.Single()
-            .Documents.Single()
+            .Projects
+            .Single()
+            .Documents
+            .Single()
             .GetURI();
         var codeLensParamsDoc1 = new LSP.CodeLensParams
         {

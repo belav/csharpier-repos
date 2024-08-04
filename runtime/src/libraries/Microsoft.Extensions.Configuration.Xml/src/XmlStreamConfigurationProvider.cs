@@ -82,17 +82,15 @@ namespace Microsoft.Extensions.Configuration.Xml
                                 {
                                     // check if this element has appeared before, elements are considered siblings if their SiblingName properties match
                                     if (
-                                        !parent.ChildrenBySiblingName.TryGetValue(
-                                            element.SiblingName,
-                                            out var siblings
-                                        )
+                                        !parent
+                                            .ChildrenBySiblingName
+                                            .TryGetValue(element.SiblingName, out var siblings)
                                     )
                                     {
                                         siblings = new List<XmlConfigurationElement>();
-                                        parent.ChildrenBySiblingName.Add(
-                                            element.SiblingName,
-                                            siblings
-                                        );
+                                        parent
+                                            .ChildrenBySiblingName
+                                            .Add(element.SiblingName, siblings);
                                     }
                                     siblings.Add(element);
                                 }
@@ -270,14 +268,16 @@ namespace Microsoft.Extensions.Configuration.Xml
                     );
                 }
 
-                element.Attributes!.Add(
-                    new XmlConfigurationElementAttributeValue(
-                        reader.LocalName,
-                        reader.Value,
-                        lineNumber,
-                        linePosition
-                    )
-                );
+                element
+                    .Attributes!
+                    .Add(
+                        new XmlConfigurationElementAttributeValue(
+                            reader.LocalName,
+                            reader.Value,
+                            lineNumber,
+                            linePosition
+                        )
+                    );
             }
 
             // Go back to the element containing the attributes we just processed

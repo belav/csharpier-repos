@@ -52,7 +52,8 @@ namespace System.Data.Services.Client
                 || ClientType.CheckElementTypeIsEntity(le.Parameters[0].Type)
                 || !(
                     le.Parameters[0]
-                        .Type.GetProperties()
+                        .Type
+                        .GetProperties()
                         .Any(p => p.PropertyType == proposedParameterType)
                 )
             )

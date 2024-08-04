@@ -31,14 +31,16 @@ namespace System.Runtime.InteropServices
             int uniLength
         )
         {
-            return Interop.Kernel32.MultiByteToWideChar(
-                Interop.Kernel32.CP_ACP,
-                0,
-                buffer,
-                ansiLength,
-                pWChar,
-                uniLength
-            );
+            return Interop
+                .Kernel32
+                .MultiByteToWideChar(
+                    Interop.Kernel32.CP_ACP,
+                    0,
+                    buffer,
+                    ansiLength,
+                    pWChar,
+                    uniLength
+                );
         }
 
         // Convert a UTF16 string to ANSI byte array
@@ -49,16 +51,18 @@ namespace System.Runtime.InteropServices
             int multiByteLen
         )
         {
-            return Interop.Kernel32.WideCharToMultiByte(
-                Interop.Kernel32.CP_ACP,
-                0,
-                wideCharStr,
-                wideCharLen,
-                multiByteStr,
-                multiByteLen,
-                null,
-                null
-            );
+            return Interop
+                .Kernel32
+                .WideCharToMultiByte(
+                    Interop.Kernel32.CP_ACP,
+                    0,
+                    wideCharStr,
+                    wideCharLen,
+                    multiByteStr,
+                    multiByteLen,
+                    null,
+                    null
+                );
         }
 
         // Convert a UTF16 string to ANSI byte array using flags
@@ -73,16 +77,18 @@ namespace System.Runtime.InteropServices
         {
             uint flags = (bestFit ? 0 : Interop.Kernel32.WC_NO_BEST_FIT_CHARS);
             Interop.BOOL defaultCharUsed = Interop.BOOL.FALSE;
-            int ret = Interop.Kernel32.WideCharToMultiByte(
-                Interop.Kernel32.CP_ACP,
-                flags,
-                wideCharStr,
-                wideCharLen,
-                multiByteStr,
-                multiByteLen,
-                null,
-                throwOnUnmappableChar ? &defaultCharUsed : null
-            );
+            int ret = Interop
+                .Kernel32
+                .WideCharToMultiByte(
+                    Interop.Kernel32.CP_ACP,
+                    flags,
+                    wideCharStr,
+                    wideCharLen,
+                    multiByteStr,
+                    multiByteLen,
+                    null,
+                    throwOnUnmappableChar ? &defaultCharUsed : null
+                );
             if (defaultCharUsed != Interop.BOOL.FALSE)
             {
                 throw new ArgumentException(SR.Interop_Marshal_Unmappable_Char);
@@ -94,29 +100,33 @@ namespace System.Runtime.InteropServices
         // Return size in bytes required to convert a UTF16 string to byte array.
         public static unsafe int GetByteCount(char* wStr, int wideStrLen)
         {
-            return Interop.Kernel32.WideCharToMultiByte(
-                Interop.Kernel32.CP_ACP,
-                0,
-                wStr,
-                wideStrLen,
-                default(byte*),
-                0,
-                null,
-                null
-            );
+            return Interop
+                .Kernel32
+                .WideCharToMultiByte(
+                    Interop.Kernel32.CP_ACP,
+                    0,
+                    wStr,
+                    wideStrLen,
+                    default(byte*),
+                    0,
+                    null,
+                    null
+                );
         }
 
         // Return number of charaters encoded in native byte array lpMultiByteStr
         public static unsafe int GetCharCount(byte* multiByteStr, int multiByteLen)
         {
-            return Interop.Kernel32.MultiByteToWideChar(
-                Interop.Kernel32.CP_ACP,
-                0,
-                multiByteStr,
-                multiByteLen,
-                default(char*),
-                0
-            );
+            return Interop
+                .Kernel32
+                .MultiByteToWideChar(
+                    Interop.Kernel32.CP_ACP,
+                    0,
+                    multiByteStr,
+                    multiByteLen,
+                    default(char*),
+                    0
+                );
         }
         #endregion
     }

@@ -84,30 +84,30 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         }
 
         public async Task InvokeAsync(CancellationToken cancellationToken) =>
-            await TestServices.Input.SendAsync(
-                [
-                    (VirtualKeyCode.VK_R, VirtualKeyCode.CONTROL),
-                    (VirtualKeyCode.VK_V, VirtualKeyCode.CONTROL),
-                ],
-                cancellationToken
-            );
+            await TestServices
+                .Input
+                .SendAsync(
+                    [
+                        (VirtualKeyCode.VK_R, VirtualKeyCode.CONTROL),
+                        (VirtualKeyCode.VK_V, VirtualKeyCode.CONTROL),
+                    ],
+                    cancellationToken
+                );
 
         public async Task ClickOKAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().OKButton, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.LightBulb,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
         }
 
         public async Task ClickCancelAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().CancelButton, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.LightBulb,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
         }
 
         public async Task ClickDownButtonAsync(CancellationToken cancellationToken)
@@ -148,7 +148,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             var members = dialog.GetTestAccessor().Members;
             members.SelectedItem = dialog
                 .GetTestAccessor()
-                .ViewModel.AllParameters.Single(p => p.ShortAutomationText == parameterName);
+                .ViewModel
+                .AllParameters
+                .Single(p => p.ShortAutomationText == parameterName);
 
             // Wait for changes to propagate
             await Task.Yield();

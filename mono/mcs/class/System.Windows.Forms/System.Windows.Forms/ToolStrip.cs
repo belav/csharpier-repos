@@ -1527,9 +1527,10 @@ namespace System.Windows.Forms
                 item.Owner.Items.RemoveNoOwnerOrLayout(item);
 
                 if (item.Owner is ToolStripOverflow)
-                    (item.Owner as ToolStripOverflow).ParentToolStrip.Items.RemoveNoOwnerOrLayout(
-                        item
-                    );
+                    (item.Owner as ToolStripOverflow)
+                        .ParentToolStrip
+                        .Items
+                        .RemoveNoOwnerOrLayout(item);
             }
 
             parent.Items.AddNoOwnerOrLayout(item);
@@ -2017,9 +2018,10 @@ namespace System.Windows.Forms
             if (item.Parent != null && item.Parent != this)
             {
                 if (item.Parent is ToolStripOverflow)
-                    (item.Parent as ToolStripOverflow).ParentToolStrip.Items.RemoveNoOwnerOrLayout(
-                        item
-                    );
+                    (item.Parent as ToolStripOverflow)
+                        .ParentToolStrip
+                        .Items
+                        .RemoveNoOwnerOrLayout(item);
                 else
                     item.Parent.Items.RemoveNoOwnerOrLayout(item);
 
@@ -2036,10 +2038,9 @@ namespace System.Windows.Forms
             {
                 if (this.Items.Contains(this.pre_merge_items[i]))
                 {
-                    item.Owner.Items.InsertNoOwnerOrLayout(
-                        this.Items.IndexOf(this.pre_merge_items[i]),
-                        item
-                    );
+                    item.Owner
+                        .Items
+                        .InsertNoOwnerOrLayout(this.Items.IndexOf(this.pre_merge_items[i]), item);
                     return;
                 }
             }

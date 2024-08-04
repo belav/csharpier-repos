@@ -175,9 +175,9 @@ internal sealed class WebServerStartup
                         {
                             requestPath = "/";
                         }
-                        context.Response.Redirect(
-                            $"{LaunchedDebugProxyUrl}{browserUrl!.PathAndQuery}"
-                        );
+                        context
+                            .Response
+                            .Redirect($"{LaunchedDebugProxyUrl}{browserUrl!.PathAndQuery}");
                         await Task.FromResult(0);
                     }
                 );

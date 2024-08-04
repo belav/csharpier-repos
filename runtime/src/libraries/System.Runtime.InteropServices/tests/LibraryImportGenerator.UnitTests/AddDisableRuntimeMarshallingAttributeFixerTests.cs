@@ -138,27 +138,33 @@ namespace LibraryImportGenerator.UnitTests
             test.ExpectedDiagnostics.Add(diagnostic);
             if (propertiesFile is not null)
             {
-                test.TestState.Sources.Add(
-                    (
-                        $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
-                        propertiesFile
-                    )
-                );
+                test.TestState
+                    .Sources
+                    .Add(
+                        (
+                            $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
+                            propertiesFile
+                        )
+                    );
             }
             if (expectedPropertiesFile is not null)
             {
-                test.FixedState.Sources.Add(
-                    (
-                        $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
-                        expectedPropertiesFile
-                    )
-                );
-                test.BatchFixedState.Sources.Add(
-                    (
-                        $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
-                        expectedPropertiesFile
-                    )
-                );
+                test.FixedState
+                    .Sources
+                    .Add(
+                        (
+                            $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
+                            expectedPropertiesFile
+                        )
+                    );
+                test.BatchFixedState
+                    .Sources
+                    .Add(
+                        (
+                            $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
+                            expectedPropertiesFile
+                        )
+                    );
             }
             await test.RunAsync();
         }

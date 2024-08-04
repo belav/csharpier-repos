@@ -728,11 +728,9 @@ namespace System.Runtime.Serialization
                     for (int i = 0; i < _element.attributeCount; i++)
                     {
                         AttributeData a = _element.attributes![i];
-                        XmlAttribute xmlAttr = dataNode.OwnerDocument.CreateAttribute(
-                            a.prefix,
-                            a.localName!,
-                            a.ns
-                        );
+                        XmlAttribute xmlAttr = dataNode
+                            .OwnerDocument
+                            .CreateAttribute(a.prefix, a.localName!, a.ns);
                         xmlAttr.Value = a.value;
                         wrapperElement.Attributes.Append(xmlAttr);
                     }

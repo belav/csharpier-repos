@@ -178,7 +178,9 @@ public class ValueConverters
         public void Should_report_error() =>
             new Action(() => Map<Dest>(new Source()))
                 .ShouldThrow<AutoMapperMappingException>()
-                .InnerException.Message.ShouldBe(
+                .InnerException
+                .Message
+                .ShouldBe(
                     "Cannot find a source member to pass to the value converter of type AutoMapper.UnitTests.ValueConverters+When_specifying_value_converter_with_no_source+EightDigitIntToStringConverter. Configure a source member to map from."
                 );
     }

@@ -347,9 +347,8 @@ namespace Microsoft.Build.Construction
             var @group = ItemGroups
                 .Where(p =>
                     string.IsNullOrEmpty(p.Condition)
-                    && p.Items.Where(s =>
-                            s.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
-                        )
+                    && p.Items
+                        .Where(s => s.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase))
                         .FirstOrDefault() != null
                 )
                 .FirstOrDefault();
@@ -363,9 +362,8 @@ namespace Microsoft.Build.Construction
             var @group = ItemDefinitionGroups
                 .Where(p =>
                     string.IsNullOrEmpty(p.Condition)
-                    && p.ItemDefinitions.Where(s =>
-                            s.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase)
-                        )
+                    && p.ItemDefinitions
+                        .Where(s => s.ItemType.Equals(itemType, StringComparison.OrdinalIgnoreCase))
                         .FirstOrDefault() != null
                 )
                 .FirstOrDefault();
@@ -404,7 +402,8 @@ namespace Microsoft.Build.Construction
                     if (parentGroup == null)
                         parentGroup = @group;
                     var property = @group
-                        .Properties.Where(p =>
+                        .Properties
+                        .Where(p =>
                             string.IsNullOrEmpty(p.Condition)
                             && p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
                         )

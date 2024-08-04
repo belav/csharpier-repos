@@ -46,10 +46,8 @@ public class SelectExpressionPruningExpressionVisitor : ExpressionVisitor
                 return updateExpression.Update(
                     updateExpression.SelectExpression.Prune(),
                     updateExpression
-                        .ColumnValueSetters.Select(e => new ColumnValueSetter(
-                            e.Column,
-                            (SqlExpression)Visit(e.Value)
-                        ))
+                        .ColumnValueSetters
+                        .Select(e => new ColumnValueSetter(e.Column, (SqlExpression)Visit(e.Value)))
                         .ToList()
                 );
 

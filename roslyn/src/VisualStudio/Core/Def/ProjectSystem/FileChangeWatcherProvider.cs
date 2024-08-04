@@ -26,13 +26,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             [Import(typeof(SVsServiceProvider))] Shell.IAsyncServiceProvider serviceProvider
         )
         {
-            var fileChangeService = Task
-                .Factory.StartNew(
+            var fileChangeService = Task.Factory
+                .StartNew(
                     async () =>
                     {
-                        await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            threadingContext.DisposalToken
-                        );
+                        await threadingContext
+                            .JoinableTaskFactory
+                            .SwitchToMainThreadAsync(threadingContext.DisposalToken);
 
                         var fileChangeService = (IVsAsyncFileChangeEx?)
                             await serviceProvider

@@ -34,9 +34,9 @@ namespace Microsoft.Web.Mvc.ModelBinding
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
-                bindingContext.ModelName
-            );
+            ValueProviderResult valueProviderResult = bindingContext
+                .ValueProvider
+                .GetValue(bindingContext.ModelName);
             if (valueProviderResult == null)
             {
                 return null; // the value doesn't exist

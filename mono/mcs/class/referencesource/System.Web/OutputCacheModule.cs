@@ -296,10 +296,9 @@ namespace System.Web.Caching
 
                     try
                     {
-                        value = context.ApplicationInstance.GetVaryByCustomString(
-                            context,
-                            cachedVary._varyByCustom
-                        );
+                        value = context
+                            .ApplicationInstance
+                            .GetVaryByCustomString(context, cachedVary._varyByCustom);
                         if (value == null)
                         {
                             value = NULL_VARYBY_VALUE;
@@ -792,9 +791,9 @@ namespace System.Web.Caching
 #endif
                     item = null;
                     bool identityIsAcceptable = true;
-                    string acceptEncoding = context.WorkerRequest.GetKnownRequestHeader(
-                        HttpWorkerRequest.HeaderAcceptEncoding
-                    );
+                    string acceptEncoding = context
+                        .WorkerRequest
+                        .GetKnownRequestHeader(HttpWorkerRequest.HeaderAcceptEncoding);
                     if (acceptEncoding != null)
                     {
                         string[] contentEncodings = cachedVary._contentEncodings;
@@ -1469,9 +1468,9 @@ namespace System.Web.Caching
 
                 if (
                     cache.VaryByContentEncodings.IsModified()
-                    && !cache.VaryByContentEncodings.IsCacheableEncoding(
-                        context.Response.GetHttpHeaderContentEncoding()
-                    )
+                    && !cache
+                        .VaryByContentEncodings
+                        .IsCacheableEncoding(context.Response.GetHttpHeaderContentEncoding())
                 )
                 {
 #if DBG
@@ -1556,9 +1555,10 @@ namespace System.Web.Caching
                     {
                         varyByHeaders[i] =
                             "HTTP_"
-                            + CultureInfo.InvariantCulture.TextInfo.ToUpper(
-                                varyByHeaders[i].Replace('-', '_')
-                            );
+                            + CultureInfo
+                                .InvariantCulture
+                                .TextInfo
+                                .ToUpper(varyByHeaders[i].Replace('-', '_'));
                     }
                 }
 
@@ -1574,9 +1574,10 @@ namespace System.Web.Caching
                     {
                         for (i = 0, n = varyByParams.Length; i < n; i++)
                         {
-                            varyByParams[i] = CultureInfo.InvariantCulture.TextInfo.ToLower(
-                                varyByParams[i]
-                            );
+                            varyByParams[i] = CultureInfo
+                                .InvariantCulture
+                                .TextInfo
+                                .ToLower(varyByParams[i]);
                         }
                     }
                 }

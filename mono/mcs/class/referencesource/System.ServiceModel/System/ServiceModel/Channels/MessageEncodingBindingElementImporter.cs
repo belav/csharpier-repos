@@ -38,9 +38,9 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56506 // Microsoft, these properties cannot be null in this context
             if (context.Endpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "context.Endpoint.Binding"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("context.Endpoint.Binding");
             }
 
             BindingElementCollection bindingElements = GetBindingElements(context);
@@ -106,9 +106,9 @@ namespace System.ServiceModel.Channels
             if (contractContext != null)
             {
                 OperationFault wsdlOperationFault = contractContext.GetOperationFault(fault);
-                string wsaAction = WsdlImporter.WSAddressingHelper.FindWsaActionAttribute(
-                    wsdlOperationFault
-                );
+                string wsaAction = WsdlImporter
+                    .WSAddressingHelper
+                    .FindWsaActionAttribute(wsdlOperationFault);
                 if (wsaAction == null && soapAction != null)
                     fault.Action = soapAction;
                 //
@@ -133,9 +133,9 @@ namespace System.ServiceModel.Channels
                 OperationMessage wsdlOperationMessage = contractContext.GetOperationMessage(
                     message
                 );
-                string wsaAction = WsdlImporter.WSAddressingHelper.FindWsaActionAttribute(
-                    wsdlOperationMessage
-                );
+                string wsaAction = WsdlImporter
+                    .WSAddressingHelper
+                    .FindWsaActionAttribute(wsdlOperationMessage);
                 if (wsaAction == null && soapAction != null)
                 {
                     if (isResponse)
@@ -185,7 +185,8 @@ namespace System.ServiceModel.Channels
             if (!encodingBindingElement.MessageVersion.IsMatch(newMessageVersion))
             {
                 ConvertToCustomBinding(context)
-                    .Elements.Find<MessageEncodingBindingElement>()
+                    .Elements
+                    .Find<MessageEncodingBindingElement>()
                     .MessageVersion = MessageVersion.CreateVersion(soapVersion, addressingVersion);
             }
         }
@@ -240,8 +241,9 @@ namespace System.ServiceModel.Channels
                 out encodingAssertion
             );
 
-            AddressingVersion addressingVersion =
-                WsdlImporter.WSAddressingHelper.FindAddressingVersion(context);
+            AddressingVersion addressingVersion = WsdlImporter
+                .WSAddressingHelper
+                .FindAddressingVersion(context);
             ApplyAddressingVersion(encodingBindingElement, addressingVersion);
 
 #pragma warning suppress 56506

@@ -1350,7 +1350,8 @@ class C
     }
 }"
             );
-            file.SyntaxTree.GetDiagnostics()
+            file.SyntaxTree
+                .GetDiagnostics()
                 .Verify(
                     // (3,9): error CS0106: The modifier 'async' is not valid for this item
                     //         async public virtual M() {}

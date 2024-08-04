@@ -20,11 +20,13 @@ namespace System.IdentityModel.Selectors
             SecurityToken token;
             if (!this.TryResolveTokenCore(keyIdentifier, out token))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new InvalidOperationException(
-                        SR.GetString(SR.UnableToResolveTokenReference, keyIdentifier)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnableToResolveTokenReference, keyIdentifier)
+                        )
+                    );
             }
             return token;
         }
@@ -42,18 +44,20 @@ namespace System.IdentityModel.Selectors
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "keyIdentifierClause"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("keyIdentifierClause");
             }
             SecurityToken token;
             if (!this.TryResolveTokenCore(keyIdentifierClause, out token))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new InvalidOperationException(
-                        SR.GetString(SR.UnableToResolveTokenReference, keyIdentifierClause)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnableToResolveTokenReference, keyIdentifierClause)
+                        )
+                    );
             }
             return token;
         }
@@ -65,9 +69,9 @@ namespace System.IdentityModel.Selectors
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "keyIdentifierClause"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("keyIdentifierClause");
             }
             return this.TryResolveTokenCore(keyIdentifierClause, out token);
         }
@@ -76,18 +80,20 @@ namespace System.IdentityModel.Selectors
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "keyIdentifierClause"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("keyIdentifierClause");
             }
             SecurityKey key;
             if (!this.TryResolveSecurityKeyCore(keyIdentifierClause, out key))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new InvalidOperationException(
-                        SR.GetString(SR.UnableToResolveKeyReference, keyIdentifierClause)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnableToResolveKeyReference, keyIdentifierClause)
+                        )
+                    );
             }
             return key;
         }
@@ -99,9 +105,9 @@ namespace System.IdentityModel.Selectors
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "keyIdentifierClause"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("keyIdentifierClause");
             }
             return this.TryResolveSecurityKeyCore(keyIdentifierClause, out key);
         }
@@ -112,11 +118,13 @@ namespace System.IdentityModel.Selectors
         /// <param name="nodelist">Custom configuration elements</param>
         public virtual void LoadCustomConfiguration(XmlNodeList nodelist)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException(
-                    SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotImplementedException(
+                        SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)
+                    )
+                );
         }
 
         // protected methods
@@ -164,9 +172,9 @@ namespace System.IdentityModel.Selectors
             )
             {
                 if (keyIdentifierClause == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "keyIdentifierClause"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("keyIdentifierClause");
 
                 key = null;
                 for (int i = 0; i < this.tokens.Count; ++i)
@@ -214,9 +222,9 @@ namespace System.IdentityModel.Selectors
             )
             {
                 if (keyIdentifier == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "keyIdentifier"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("keyIdentifier");
 
                 token = null;
                 for (int i = 0; i < keyIdentifier.Count; ++i)
@@ -238,9 +246,9 @@ namespace System.IdentityModel.Selectors
             )
             {
                 if (keyIdentifierClause == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "keyIdentifierClause"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("keyIdentifierClause");
 
                 token = null;
 
@@ -254,9 +262,9 @@ namespace System.IdentityModel.Selectors
             SecurityToken ResolveSecurityToken(SecurityKeyIdentifierClause keyIdentifierClause)
             {
                 if (keyIdentifierClause == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "keyIdentifierClause"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("keyIdentifierClause");
 
                 if (!this.canMatchLocalId && keyIdentifierClause is LocalIdKeyIdentifierClause)
                     return null;

@@ -22,11 +22,16 @@ namespace System.Runtime.Serialization
 
             object existingObject;
             if (objectDictionary.TryGetValue(id, out existingObject))
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.GetString(SR.MultipleIdDefinition, id)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(SR.MultipleIdDefinition, id)
+                        )
+                    );
             objectDictionary.Add(id, obj);
         }
 

@@ -157,7 +157,8 @@ namespace System.Data.Common
             //  <add name="SqlClient Data Provider" invariant="System.Data.SqlClient" description=".Net Framework Data Provider for SqlServer" type="System.Data.SqlClient.SqlClientFactory, System.Data, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
             Type sysDataType = typeof(System.Data.SqlClient.SqlClientFactory);
             string asmQualName = sysDataType
-                .AssemblyQualifiedName.ToString()
+                .AssemblyQualifiedName
+                .ToString()
                 .Replace(
                     DbProviderFactoriesConfigurationHandler.sqlclientPartialAssemblyQualifiedName,
                     DbProviderFactoriesConfigurationHandler.oracleclientPartialAssemblyQualifiedName
@@ -213,9 +214,9 @@ namespace System.Data.Common
                             if (
                                 (null != providerInstance)
                                 && (
-                                    providerInstance.FieldType.IsSubclassOf(
-                                        typeof(DbProviderFactory)
-                                    )
+                                    providerInstance
+                                        .FieldType
+                                        .IsSubclassOf(typeof(DbProviderFactory))
                                 )
                             )
                             {
@@ -265,7 +266,8 @@ namespace System.Data.Common
                             .ToLowerInvariant()
                             .Contains(
                                 DbProviderFactoriesConfigurationHandler
-                                    .oracleclientProviderNamespace.ToString()
+                                    .oracleclientProviderNamespace
+                                    .ToString()
                                     .ToLowerInvariant()
                             )
                     )
@@ -285,9 +287,9 @@ namespace System.Data.Common
                             if (
                                 (null != providerInstance)
                                 && (
-                                    providerInstance.FieldType.IsSubclassOf(
-                                        typeof(DbProviderFactory)
-                                    )
+                                    providerInstance
+                                        .FieldType
+                                        .IsSubclassOf(typeof(DbProviderFactory))
                                 )
                             )
                             {

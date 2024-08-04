@@ -31,16 +31,20 @@ internal sealed class IdentityDefaultUIConfigureOptions<TUser>
         options.Conventions.AuthorizeAreaFolder(IdentityUIDefaultAreaName, "/Account/Manage");
         options.Conventions.AuthorizeAreaPage(IdentityUIDefaultAreaName, "/Account/Logout");
         var convention = new IdentityPageModelConvention<TUser>();
-        options.Conventions.AddAreaFolderApplicationModelConvention(
-            IdentityUIDefaultAreaName,
-            "/",
-            convention.Apply
-        );
-        options.Conventions.AddAreaFolderApplicationModelConvention(
-            IdentityUIDefaultAreaName,
-            "/Account/Manage",
-            pam => pam.Filters.Add(new ExternalLoginsPageFilter<TUser>())
-        );
+        options
+            .Conventions
+            .AddAreaFolderApplicationModelConvention(
+                IdentityUIDefaultAreaName,
+                "/",
+                convention.Apply
+            );
+        options
+            .Conventions
+            .AddAreaFolderApplicationModelConvention(
+                IdentityUIDefaultAreaName,
+                "/Account/Manage",
+                pam => pam.Filters.Add(new ExternalLoginsPageFilter<TUser>())
+            );
     }
 
     public void Configure(CookieAuthenticationOptions options)

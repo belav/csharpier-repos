@@ -157,13 +157,15 @@ public class SqliteDbContextOptionsBuilderExtensionsTest
         using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
             var coreOptions = serviceScope
-                .ServiceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()
+                .ServiceProvider
+                .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                 .GetExtension<CoreOptionsExtension>();
 
             Assert.True(coreOptions.DetailedErrorsEnabled);
 
             var sqliteOptions = serviceScope
-                .ServiceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()
+                .ServiceProvider
+                .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                 .GetExtension<SqliteOptionsExtension>();
 
             Assert.Equal(123, sqliteOptions.MaxBatchSize);

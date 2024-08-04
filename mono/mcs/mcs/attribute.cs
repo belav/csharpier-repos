@@ -263,11 +263,11 @@ namespace Mono.CSharp
 
         public static void Error_AttributeArgumentIsDynamic(IMemberContext context, Location loc)
         {
-            context.Module.Compiler.Report.Error(
-                1982,
-                loc,
-                "An attribute argument cannot be dynamic expression"
-            );
+            context
+                .Module
+                .Compiler
+                .Report
+                .Error(1982, loc, "An attribute argument cannot be dynamic expression");
         }
 
         public void Error_MissingGuidAttribute()
@@ -1208,10 +1208,9 @@ namespace Mono.CSharp
         public CharSet GetCharSetValue()
         {
             return (CharSet)
-                System.Enum.Parse(
-                    typeof(CharSet),
-                    ((Constant)pos_args[0].Expr).GetValue().ToString()
-                );
+                System
+                    .Enum
+                    .Parse(typeof(CharSet), ((Constant)pos_args[0].Expr).GetValue().ToString());
         }
 
         public bool HasField(string fieldName)
@@ -1242,10 +1241,12 @@ namespace Mono.CSharp
             if (pos_args.Count == 1)
             {
                 options = (MethodImplOptions)
-                    System.Enum.Parse(
-                        typeof(MethodImplOptions),
-                        ((Constant)pos_args[0].Expr).GetValue().ToString()
-                    );
+                    System
+                        .Enum
+                        .Parse(
+                            typeof(MethodImplOptions),
+                            ((Constant)pos_args[0].Expr).GetValue().ToString()
+                        );
             }
             else if (HasField("Value"))
             {
@@ -1266,10 +1267,9 @@ namespace Mono.CSharp
                 return false;
 
             var value = (LayoutKind)
-                System.Enum.Parse(
-                    typeof(LayoutKind),
-                    ((Constant)pos_args[0].Expr).GetValue().ToString()
-                );
+                System
+                    .Enum
+                    .Parse(typeof(LayoutKind), ((Constant)pos_args[0].Expr).GetValue().ToString());
             return value == LayoutKind.Explicit;
         }
 
@@ -1351,12 +1351,16 @@ namespace Mono.CSharp
                                     || (Type == predefined.IndexerName && Tokenizer.IsKeyword(v))
                                 )
                                 {
-                                    context.Module.Compiler.Report.Error(
-                                        633,
-                                        arg_expr.Location,
-                                        "The argument to the `{0}' attribute must be a valid identifier",
-                                        GetSignatureForError()
-                                    );
+                                    context
+                                        .Module
+                                        .Compiler
+                                        .Report
+                                        .Error(
+                                            633,
+                                            arg_expr.Location,
+                                            "The argument to the `{0}' attribute must be a valid identifier",
+                                            GetSignatureForError()
+                                        );
                                     return;
                                 }
                             }
@@ -1384,10 +1388,12 @@ namespace Mono.CSharp
                                 if (pos_args.Count == 1)
                                 {
                                     var u_type = (UnmanagedType)
-                                        System.Enum.Parse(
-                                            typeof(UnmanagedType),
-                                            ((Constant)pos_args[0].Expr).GetValue().ToString()
-                                        );
+                                        System
+                                            .Enum
+                                            .Parse(
+                                                typeof(UnmanagedType),
+                                                ((Constant)pos_args[0].Expr).GetValue().ToString()
+                                            );
                                     if (u_type == UnmanagedType.ByValArray && !(Owner is FieldBase))
                                     {
                                         Report.Error(
@@ -1437,12 +1443,9 @@ namespace Mono.CSharp
 
                         encoder.Encode(na.Key.Type);
                         encoder.Encode(na.Value.Name);
-                        na.Value.Expr.EncodeAttributeValue(
-                            context,
-                            encoder,
-                            na.Key.Type,
-                            na.Key.Type
-                        );
+                        na.Value
+                            .Expr
+                            .EncodeAttributeValue(context, encoder, na.Key.Type, na.Key.Type);
                     }
                 }
                 else

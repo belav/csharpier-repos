@@ -1047,9 +1047,9 @@ namespace System.ServiceModel.Dispatcher
 
         private void ThrowError(QueryCompileError err, string msg)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new QueryCompileException(err, msg)
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new QueryCompileException(err, msg));
         }
     }
 }

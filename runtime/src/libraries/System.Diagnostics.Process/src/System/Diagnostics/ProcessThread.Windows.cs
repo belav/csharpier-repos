@@ -190,13 +190,15 @@ namespace System.Diagnostics
             {
                 var threadTimes = new ProcessThreadTimes();
                 if (
-                    !Interop.Kernel32.GetThreadTimes(
-                        threadHandle,
-                        out threadTimes._create,
-                        out threadTimes._exit,
-                        out threadTimes._kernel,
-                        out threadTimes._user
-                    )
+                    !Interop
+                        .Kernel32
+                        .GetThreadTimes(
+                            threadHandle,
+                            out threadTimes._create,
+                            out threadTimes._exit,
+                            out threadTimes._kernel,
+                            out threadTimes._user
+                        )
                 )
                 {
                     throw new Win32Exception();

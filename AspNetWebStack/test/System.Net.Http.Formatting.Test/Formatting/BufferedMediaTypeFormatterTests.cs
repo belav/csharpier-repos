@@ -65,16 +65,18 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void BufferSize_RoundTrips()
         {
-            Assert.Reflection.IntegerProperty(
-                new MockBufferedMediaTypeFormatter(),
-                c => c.BufferSize,
-                expectedDefaultValue: 16 * 1024,
-                minLegalValue: 0,
-                illegalLowerValue: -1,
-                maxLegalValue: null,
-                illegalUpperValue: null,
-                roundTripTestValue: 1024
-            );
+            Assert
+                .Reflection
+                .IntegerProperty(
+                    new MockBufferedMediaTypeFormatter(),
+                    c => c.BufferSize,
+                    expectedDefaultValue: 16 * 1024,
+                    minLegalValue: 0,
+                    illegalLowerValue: -1,
+                    maxLegalValue: null,
+                    illegalUpperValue: null,
+                    roundTripTestValue: 1024
+                );
         }
 
         [Fact]

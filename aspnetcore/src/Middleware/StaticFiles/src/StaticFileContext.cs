@@ -433,12 +433,9 @@ internal struct StaticFileContext
                 ? _fileInfo.PhysicalPath
                 : SubPath;
             _logger.SendingFileRange(_response.Headers.ContentRange, logPath);
-            await _context.Response.SendFileAsync(
-                _fileInfo,
-                start,
-                length,
-                _context.RequestAborted
-            );
+            await _context
+                .Response
+                .SendFileAsync(_fileInfo, start, length, _context.RequestAborted);
         }
         catch (OperationCanceledException ex)
         {

@@ -122,9 +122,10 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
         {
             if (
                 property.AccessorList is null
-                || property.AccessorList.Accessors.Any(static a =>
-                    a.ExpressionBody != null || a.Body != null
-                )
+                || property
+                    .AccessorList
+                    .Accessors
+                    .Any(static a => a.ExpressionBody != null || a.Body != null)
             )
             {
                 return false;
@@ -337,9 +338,9 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
                     return null;
 
                 if (
-                    primaryConstructor.Parameters.Any(static p =>
-                        p.RefKind is RefKind.Ref or RefKind.Out
-                    )
+                    primaryConstructor
+                        .Parameters
+                        .Any(static p => p.RefKind is RefKind.Ref or RefKind.Out)
                 )
                     return null;
 
@@ -472,9 +473,15 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
             {
                 // Quick pass.  Must all be assignment expressions.  Don't have to do any more analysis if we see anything beyond that.
                 if (
-                    !block.Statements.All(static s =>
-                        s is ExpressionStatementSyntax { Expression: AssignmentExpressionSyntax }
-                    )
+                    !block
+                        .Statements
+                        .All(static s =>
+                            s
+                                is ExpressionStatementSyntax
+                                {
+                                    Expression: AssignmentExpressionSyntax
+                                }
+                        )
                 )
                     return false;
 

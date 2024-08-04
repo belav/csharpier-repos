@@ -708,13 +708,15 @@ namespace System.Net
                     fixed (byte* pStatusDescription = statusDescriptionBytes)
                     {
                         m_NativeResponse.ReasonLength = (ushort)statusDescriptionBytes.Length;
-                        WebHeaderCollection.HeaderEncoding.GetBytes(
-                            StatusDescription,
-                            0,
-                            statusDescriptionBytes.Length,
-                            statusDescriptionBytes,
-                            0
-                        );
+                        WebHeaderCollection
+                            .HeaderEncoding
+                            .GetBytes(
+                                StatusDescription,
+                                0,
+                                statusDescriptionBytes.Length,
+                                statusDescriptionBytes,
+                                0
+                            );
                         m_NativeResponse.pReason = (sbyte*)pStatusDescription;
                         fixed (
                             UnsafeNclNativeMethods.HttpApi.HTTP_RESPONSE* pResponse =
@@ -725,18 +727,20 @@ namespace System.Net
                             {
                                 HttpListenerContext.EnsureBoundHandle();
                             }
-                            statusCode = UnsafeNclNativeMethods.HttpApi.HttpSendHttpResponse(
-                                HttpListenerContext.RequestQueueHandle,
-                                HttpListenerRequest.RequestId,
-                                (uint)flags,
-                                pResponse,
-                                null,
-                                &bytesSent,
-                                SafeLocalFree.Zero,
-                                0,
-                                asyncResult == null ? null : asyncResult.m_pOverlapped,
-                                null
-                            );
+                            statusCode = UnsafeNclNativeMethods
+                                .HttpApi
+                                .HttpSendHttpResponse(
+                                    HttpListenerContext.RequestQueueHandle,
+                                    HttpListenerRequest.RequestId,
+                                    (uint)flags,
+                                    pResponse,
+                                    null,
+                                    &bytesSent,
+                                    SafeLocalFree.Zero,
+                                    0,
+                                    asyncResult == null ? null : asyncResult.m_pOverlapped,
+                                    null
+                                );
 
                             if (
                                 asyncResult != null
@@ -760,18 +764,20 @@ namespace System.Net
                         {
                             HttpListenerContext.EnsureBoundHandle();
                         }
-                        statusCode = UnsafeNclNativeMethods.HttpApi.HttpSendHttpResponse(
-                            HttpListenerContext.RequestQueueHandle,
-                            HttpListenerRequest.RequestId,
-                            (uint)flags,
-                            pResponse,
-                            null,
-                            &bytesSent,
-                            SafeLocalFree.Zero,
-                            0,
-                            asyncResult == null ? null : asyncResult.m_pOverlapped,
-                            null
-                        );
+                        statusCode = UnsafeNclNativeMethods
+                            .HttpApi
+                            .HttpSendHttpResponse(
+                                HttpListenerContext.RequestQueueHandle,
+                                HttpListenerRequest.RequestId,
+                                (uint)flags,
+                                pResponse,
+                                null,
+                                &bytesSent,
+                                SafeLocalFree.Zero,
+                                0,
+                                asyncResult == null ? null : asyncResult.m_pOverlapped,
+                                null
+                            );
 
                         if (
                             asyncResult != null
@@ -1090,9 +1096,10 @@ namespace System.Net
                 headerName = Headers.GetKey(index) as string;
 
                 //See if this is an unknown header
-                lookup = UnsafeNclNativeMethods.HttpApi.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(
-                    headerName
-                );
+                lookup = UnsafeNclNativeMethods
+                    .HttpApi
+                    .HTTP_RESPONSE_HEADER_ID
+                    .IndexOfKnownHeader(headerName);
 
                 //Treat Set-Cookie as well as Connection header in Websocket mode as unknown
                 if (
@@ -1121,10 +1128,10 @@ namespace System.Net
                     {
                         headerName = Headers.GetKey(index) as string;
                         headerValue = Headers.Get(index) as string;
-                        lookup =
-                            UnsafeNclNativeMethods.HttpApi.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(
-                                headerName
-                            );
+                        lookup = UnsafeNclNativeMethods
+                            .HttpApi
+                            .HTTP_RESPONSE_HEADER_ID
+                            .IndexOfKnownHeader(headerName);
                         if (
                             lookup == (int)HttpResponseHeader.SetCookie
                             || isWebSocketHandshake && lookup == (int)HttpResponseHeader.Connection
@@ -1183,13 +1190,9 @@ namespace System.Net
                                 ];
                                 unknownHeaders[headers.UnknownHeaderCount].NameLength = (ushort)
                                     bytes.Length;
-                                WebHeaderCollection.HeaderEncoding.GetBytes(
-                                    headerName,
-                                    0,
-                                    bytes.Length,
-                                    bytes,
-                                    0
-                                );
+                                WebHeaderCollection
+                                    .HeaderEncoding
+                                    .GetBytes(headerName, 0, bytes.Length, bytes, 0);
                                 gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
                                 unknownHeaders[headers.UnknownHeaderCount].pName = (sbyte*)
@@ -1202,13 +1205,9 @@ namespace System.Net
                                 ];
                                 unknownHeaders[headers.UnknownHeaderCount].RawValueLength = (ushort)
                                     bytes.Length;
-                                WebHeaderCollection.HeaderEncoding.GetBytes(
-                                    headerValue,
-                                    0,
-                                    bytes.Length,
-                                    bytes,
-                                    0
-                                );
+                                WebHeaderCollection
+                                    .HeaderEncoding
+                                    .GetBytes(headerValue, 0, bytes.Length, bytes, 0);
                                 gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
                                 unknownHeaders[headers.UnknownHeaderCount].pRawValue = (sbyte*)
@@ -1240,13 +1239,9 @@ namespace System.Net
                                     WebHeaderCollection.HeaderEncoding.GetByteCount(headerValue)
                                 ];
                                 pKnownHeaders[lookup].RawValueLength = (ushort)bytes.Length;
-                                WebHeaderCollection.HeaderEncoding.GetBytes(
-                                    headerValue,
-                                    0,
-                                    bytes.Length,
-                                    bytes,
-                                    0
-                                );
+                                WebHeaderCollection
+                                    .HeaderEncoding
+                                    .GetBytes(headerValue, 0, bytes.Length, bytes, 0);
                                 gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
                                 pKnownHeaders[lookup].pRawValue = (sbyte*)

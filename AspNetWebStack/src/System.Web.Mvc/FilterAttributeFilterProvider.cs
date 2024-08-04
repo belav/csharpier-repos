@@ -31,9 +31,9 @@ namespace System.Web.Mvc
             ActionDescriptor actionDescriptor
         )
         {
-            return actionDescriptor.ControllerDescriptor.GetFilterAttributes(
-                _cacheAttributeInstances
-            );
+            return actionDescriptor
+                .ControllerDescriptor
+                .GetFilterAttributes(_cacheAttributeInstances);
         }
 
         public virtual IEnumerable<Filter> GetFilters(

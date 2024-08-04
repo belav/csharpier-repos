@@ -173,12 +173,9 @@ namespace System.Web.Script.Services
                         {
                             // Dev10 718863: It's possible 'deps' is null if the service is modified between GetCompiledType and here.
                             // in that case simply do not cache the result so it is re-established next time it is required.
-                            CacheDependency cd =
-                                HostingEnvironment.VirtualPathProvider.GetCacheDependency(
-                                    virtualPath,
-                                    deps.VirtualPaths,
-                                    DateTime.Now
-                                );
+                            CacheDependency cd = HostingEnvironment
+                                .VirtualPathProvider
+                                .GetCacheDependency(virtualPath, deps.VirtualPaths, DateTime.Now);
                             context.Cache.Insert(cacheKey, data, cd);
                         }
                     }
@@ -438,10 +435,9 @@ namespace System.Web.Script.Services
                 // Process any GenerateScriptTypes on the Service type
                 ProcessIncludeAttributes(
                     (GenerateScriptTypeAttribute[])
-                        _typeData.Type.GetCustomAttributes(
-                            typeof(GenerateScriptTypeAttribute),
-                            true
-                        )
+                        _typeData
+                            .Type
+                            .GetCustomAttributes(typeof(GenerateScriptTypeAttribute), true)
                 );
 
                 foreach (WebServiceMethodData methodData in MethodDatas)
@@ -449,10 +445,9 @@ namespace System.Web.Script.Services
                     // Process any GenerateScriptTypes on the method
                     ProcessIncludeAttributes(
                         (GenerateScriptTypeAttribute[])
-                            methodData.MethodInfo.GetCustomAttributes(
-                                typeof(GenerateScriptTypeAttribute),
-                                true
-                            )
+                            methodData
+                                .MethodInfo
+                                .GetCustomAttributes(typeof(GenerateScriptTypeAttribute), true)
                     );
 
                     // Also add any input parameters

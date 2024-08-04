@@ -98,11 +98,13 @@ public class SimpleTypeModelBinder : IModelBinder
                 exception = ExceptionDispatchInfo.Capture(exception.InnerException).SourceException;
             }
 
-            bindingContext.ModelState.TryAddModelError(
-                bindingContext.ModelName,
-                exception,
-                bindingContext.ModelMetadata
-            );
+            bindingContext
+                .ModelState
+                .TryAddModelError(
+                    bindingContext.ModelName,
+                    exception,
+                    bindingContext.ModelMetadata
+                );
         }
 
         _logger.DoneAttemptingToBindModel(bindingContext);
@@ -125,12 +127,15 @@ public class SimpleTypeModelBinder : IModelBinder
         // current bindingContext. If not, an error is logged.
         if (model == null && !bindingContext.ModelMetadata.IsReferenceOrNullableType)
         {
-            bindingContext.ModelState.TryAddModelError(
-                bindingContext.ModelName,
-                bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                    valueProviderResult.ToString()
-                )
-            );
+            bindingContext
+                .ModelState
+                .TryAddModelError(
+                    bindingContext.ModelName,
+                    bindingContext
+                        .ModelMetadata
+                        .ModelBindingMessageProvider
+                        .ValueMustNotBeNullAccessor(valueProviderResult.ToString())
+                );
         }
         else
         {

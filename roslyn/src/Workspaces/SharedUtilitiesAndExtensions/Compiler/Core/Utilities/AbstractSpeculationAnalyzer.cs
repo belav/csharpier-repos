@@ -273,12 +273,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             RoslynDebug.AssertNotNull(originalExpression);
             Debug.Assert(
-                this.SemanticRootOfOriginalExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfOriginalExpression
+                    .DescendantNodesAndSelf()
                     .Contains(originalExpression)
             );
             RoslynDebug.AssertNotNull(newExpression);
             Debug.Assert(
-                this.SemanticRootOfReplacedExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfReplacedExpression
+                    .DescendantNodesAndSelf()
                     .Contains(newExpression)
             );
 
@@ -314,12 +316,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             RoslynDebug.AssertNotNull(originalExpression);
             Debug.Assert(
-                this.SemanticRootOfOriginalExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfOriginalExpression
+                    .DescendantNodesAndSelf()
                     .Contains(originalExpression)
             );
             RoslynDebug.AssertNotNull(newExpression);
             Debug.Assert(
-                this.SemanticRootOfReplacedExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfReplacedExpression
+                    .DescendantNodesAndSelf()
                     .Contains(newExpression)
             );
 
@@ -335,12 +339,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             RoslynDebug.AssertNotNull(originalExpression);
             Debug.Assert(
-                this.SemanticRootOfOriginalExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfOriginalExpression
+                    .DescendantNodesAndSelf()
                     .Contains(originalExpression)
             );
             RoslynDebug.AssertNotNull(newExpression);
             Debug.Assert(
-                this.SemanticRootOfReplacedExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfReplacedExpression
+                    .DescendantNodesAndSelf()
                     .Contains(newExpression)
             );
 
@@ -361,12 +367,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             RoslynDebug.AssertNotNull(originalExpression);
             Debug.Assert(
-                this.SemanticRootOfOriginalExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfOriginalExpression
+                    .DescendantNodesAndSelf()
                     .Contains(originalExpression)
             );
             RoslynDebug.AssertNotNull(newExpression);
             Debug.Assert(
-                this.SemanticRootOfReplacedExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfReplacedExpression
+                    .DescendantNodesAndSelf()
                     .Contains(newExpression)
             );
             RoslynDebug.AssertNotNull(originalTargetType);
@@ -401,7 +409,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             RoslynDebug.AssertNotNull(originalNode);
             Debug.Assert(
-                this.SemanticRootOfOriginalExpression.DescendantNodesAndSelf()
+                this.SemanticRootOfOriginalExpression
+                    .DescendantNodesAndSelf()
                     .Contains(originalNode)
             );
             RoslynDebug.AssertNotNull(newNode);
@@ -620,7 +629,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         newMethodSymbol.ReturnType
                     )
                     && methodSymbol
-                        .Parameters.Zip(newMethodSymbol.Parameters, (p1, p2) => (p1, p2))
+                        .Parameters
+                        .Zip(newMethodSymbol.Parameters, (p1, p2) => (p1, p2))
                         .All(t => CompareAcrossSemanticModels(t.p1, t.p2));
             }
 
@@ -829,12 +839,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
                 RoslynDebug.AssertNotNull(originalExpression);
                 Debug.Assert(
-                    this.SemanticRootOfOriginalExpression.DescendantNodesAndSelf()
+                    this.SemanticRootOfOriginalExpression
+                        .DescendantNodesAndSelf()
                         .Contains(originalExpression)
                 );
                 RoslynDebug.AssertNotNull(newExpression);
                 Debug.Assert(
-                    this.SemanticRootOfReplacedExpression.DescendantNodesAndSelf()
+                    this.SemanticRootOfReplacedExpression
+                        .DescendantNodesAndSelf()
                         .Contains(newExpression)
                 );
 
@@ -900,10 +912,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     _semanticModel.GetSymbolInfo(originalExpression, CancellationToken).Symbol
                 );
                 var replacedIsStaticAccess = IsStaticAccess(
-                    this.SpeculativeSemanticModel.GetSymbolInfo(
-                        newExpression,
-                        CancellationToken
-                    ).Symbol
+                    this.SpeculativeSemanticModel
+                        .GetSymbolInfo(newExpression, CancellationToken)
+                        .Symbol
                 );
                 if (originalIsStaticAccess != replacedIsStaticAccess)
                     return false;
@@ -978,11 +989,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             if (previousOriginalNode != null && previousReplacedNode != null)
             {
-                var originalExpressionSymbol = this
-                    .OriginalSemanticModel.GetSymbolInfo(currentOriginalNode)
+                var originalExpressionSymbol = this.OriginalSemanticModel
+                    .GetSymbolInfo(currentOriginalNode)
                     .Symbol;
-                var replacedExpressionSymbol = this
-                    .SpeculativeSemanticModel.GetSymbolInfo(currentReplacedNode)
+                var replacedExpressionSymbol = this.SpeculativeSemanticModel
+                    .GetSymbolInfo(currentReplacedNode)
                     .Symbol;
 
                 if (
@@ -990,11 +1001,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     && IsSymbolSystemObjectInstanceMethod(replacedExpressionSymbol)
                 )
                 {
-                    var previousOriginalType = this
-                        .OriginalSemanticModel.GetTypeInfo(previousOriginalNode)
+                    var previousOriginalType = this.OriginalSemanticModel
+                        .GetTypeInfo(previousOriginalNode)
                         .Type;
-                    var previousReplacedType = this
-                        .SpeculativeSemanticModel.GetTypeInfo(previousReplacedNode)
+                    var previousReplacedType = this.SpeculativeSemanticModel
+                        .GetTypeInfo(previousReplacedNode)
                         .Type;
                     if (previousReplacedType != null && previousOriginalType != null)
                     {
@@ -1142,11 +1153,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 // GetEnumerator method on a specific type.
                 if (getEnumerator.IsImplementableMember())
                 {
-                    var expressionType = this
-                        .SpeculativeSemanticModel.GetTypeInfo(
-                            newForEachStatementExpression,
-                            _cancellationToken
-                        )
+                    var expressionType = this.SpeculativeSemanticModel
+                        .GetTypeInfo(newForEachStatementExpression, _cancellationToken)
                         .ConvertedType;
                     if (expressionType != null)
                     {
@@ -1181,12 +1189,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         )
         {
             var originalThrowExpression = GetThrowStatementExpression(originalThrowStatement);
-            var originalThrowExpressionType = this
-                .OriginalSemanticModel.GetTypeInfo(originalThrowExpression)
+            var originalThrowExpressionType = this.OriginalSemanticModel
+                .GetTypeInfo(originalThrowExpression)
                 .Type;
             var newThrowExpression = GetThrowStatementExpression(newThrowStatement);
-            var newThrowExpressionType = this
-                .SpeculativeSemanticModel.GetTypeInfo(newThrowExpression)
+            var newThrowExpressionType = this.SpeculativeSemanticModel
+                .GetTypeInfo(newThrowExpression)
                 .Type;
 
             // C# language specification requires that type of the expression passed to ThrowStatement is or derives from System.Exception.
@@ -1211,8 +1219,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             ISymbol? newSymbol;
             if (useSpeculativeModel)
             {
-                newSymbol = this
-                    .SpeculativeSemanticModel.GetSymbolInfo(newType, _cancellationToken)
+                newSymbol = this.SpeculativeSemanticModel
+                    .GetSymbolInfo(newType, _cancellationToken)
                     .Symbol;
             }
             else
@@ -1220,12 +1228,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 var bindingOption = IsInNamespaceOrTypeContext(type)
                     ? SpeculativeBindingOption.BindAsTypeOrNamespace
                     : SpeculativeBindingOption.BindAsExpression;
-                newSymbol = this
-                    .OriginalSemanticModel.GetSpeculativeSymbolInfo(
-                        type.SpanStart,
-                        newType,
-                        bindingOption
-                    )
+                newSymbol = this.OriginalSemanticModel
+                    .GetSpeculativeSymbolInfo(type.SpanStart, newType, bindingOption)
                     .Symbol;
             }
 
@@ -1688,8 +1692,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
             else
             {
-                var originalConvertedTypeSymbol = this
-                    .OriginalSemanticModel.GetTypeInfo(originalExpression)
+                var originalConvertedTypeSymbol = this.OriginalSemanticModel
+                    .GetTypeInfo(originalExpression)
                     .ConvertedType;
                 if (originalConvertedTypeSymbol != null)
                 {
@@ -1700,8 +1704,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     );
                 }
 
-                var newConvertedTypeSymbol = this
-                    .SpeculativeSemanticModel.GetTypeInfo(newExpression)
+                var newConvertedTypeSymbol = this.SpeculativeSemanticModel
+                    .GetTypeInfo(newExpression)
                     .ConvertedType;
                 if (newConvertedTypeSymbol != null)
                 {

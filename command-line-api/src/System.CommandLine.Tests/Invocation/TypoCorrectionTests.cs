@@ -23,7 +23,8 @@ namespace System.CommandLine.Tests.Invocation
             await result.InvokeAsync();
 
             config
-                .Output.ToString()
+                .Output
+                .ToString()
                 .Should()
                 .Contain(
                     $"'niof' was not matched. Did you mean one of the following?{NewLine}info"
@@ -77,7 +78,8 @@ namespace System.CommandLine.Tests.Invocation
             await result.InvokeAsync();
 
             configuration
-                .Output.ToString()
+                .Output
+                .ToString()
                 .Should()
                 .Contain(
                     $"'sertor' was not matched. Did you mean one of the following?{NewLine}restore"
@@ -99,7 +101,8 @@ namespace System.CommandLine.Tests.Invocation
             await result.InvokeAsync();
 
             configuration
-                .Output.ToString()
+                .Output
+                .ToString()
                 .Should()
                 .Contain(
                     $"'een' was not matched. Did you mean one of the following?{NewLine}seen{NewLine}been"
@@ -126,7 +129,8 @@ namespace System.CommandLine.Tests.Invocation
             await result.InvokeAsync();
 
             configuration
-                .Output.ToString()
+                .Output
+                .ToString()
                 .Should()
                 .Contain($"'een' was not matched. Did you mean one of the following?{NewLine}been");
         }
@@ -165,7 +169,8 @@ namespace System.CommandLine.Tests.Invocation
             await result.InvokeAsync();
 
             config
-                .Output.ToString()
+                .Output
+                .ToString()
                 .Should()
                 .Contain($"'een' was not matched. Did you mean one of the following?{NewLine}been");
         }
@@ -184,7 +189,8 @@ namespace System.CommandLine.Tests.Invocation
             await result.InvokeAsync();
 
             config
-                .Output.ToString()
+                .Output
+                .ToString()
                 .Should()
                 .Contain(
                     $"'-all' was not matched. Did you mean one of the following?{NewLine}-call"

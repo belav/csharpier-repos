@@ -244,10 +244,9 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
 
                     if (tag != EdgeTag.False)
                     {
-                        var abstractType = ContextProvider.ValueContext.GetType(
-                            ContextProvider.MethodContext.CFG.Post(pc),
-                            condition
-                        );
+                        var abstractType = ContextProvider
+                            .ValueContext
+                            .GetType(ContextProvider.MethodContext.CFG.Post(pc), condition);
                         if (
                             abstractType.IsNormal()
                             && MetaDataProvider.Equal(
@@ -279,10 +278,9 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
 
                     data = data.AssumeTrue(boxed);
 
-                    var type = ContextProvider.ValueContext.GetType(
-                        ContextProvider.MethodContext.CFG.Post(pc),
-                        condition
-                    );
+                    var type = ContextProvider
+                        .ValueContext
+                        .GetType(ContextProvider.MethodContext.CFG.Post(pc), condition);
                     if (
                         type.IsNormal()
                         && MetaDataProvider.Equal(type.Value, MetaDataProvider.System_Boolean)

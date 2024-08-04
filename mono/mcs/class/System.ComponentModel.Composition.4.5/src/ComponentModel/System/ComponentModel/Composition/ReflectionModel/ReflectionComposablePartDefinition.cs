@@ -103,8 +103,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 if (this._metadata == null)
                 {
-                    IDictionary<string, object> metadata = this
-                        ._creationInfo.GetMetadata()
+                    IDictionary<string, object> metadata = this._creationInfo
+                        .GetMetadata()
                         .AsReadOnly();
                     lock (this._lock)
                     {
@@ -158,9 +158,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
                 var genericParameters =
                     (definition.Metadata.Count > 0)
-                        ? definition.Metadata.GetValue<IEnumerable<object>>(
-                            CompositionConstants.GenericParametersMetadataName
-                        )
+                        ? definition
+                            .Metadata
+                            .GetValue<IEnumerable<object>>(
+                                CompositionConstants.GenericParametersMetadataName
+                            )
                         : null;
                 // if and only if generic parameters have been supplied can we attempt to "close" the generic
                 if (genericParameters != null)
@@ -208,9 +210,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
             // we iterate over all exports and find only generic ones. Assuming the arity matches, we reorder the original parameters
             foreach (ExportDefinition export in this.ExportDefinitions)
             {
-                var genericParametersOrder = export.Metadata.GetValue<int[]>(
-                    CompositionConstants.GenericExportParametersOrderMetadataName
-                );
+                var genericParametersOrder = export
+                    .Metadata
+                    .GetValue<int[]>(CompositionConstants.GenericExportParametersOrderMetadataName);
                 if (
                     (genericParametersOrder != null)
                     && (genericParametersOrder.Length == genericParameters.Length)

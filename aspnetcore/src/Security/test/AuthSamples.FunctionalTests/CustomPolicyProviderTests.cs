@@ -56,7 +56,8 @@ public class CustomPolicyProviderTests
             Client,
             "Dude",
             DateTime
-                .Now.Subtract(TimeSpan.FromDays(365 * 20))
+                .Now
+                .Subtract(TimeSpan.FromDays(365 * 20))
                 .ToString(
                     DateTimeFormatInfo.InvariantInfo.ShortDatePattern,
                     CultureInfo.InvariantCulture
@@ -81,7 +82,8 @@ public class CustomPolicyProviderTests
             Client,
             "Dude",
             DateTime
-                .Now.Subtract(TimeSpan.FromDays(365 * 5))
+                .Now
+                .Subtract(TimeSpan.FromDays(365 * 5))
                 .ToString(
                     DateTimeFormatInfo.InvariantInfo.ShortDatePattern,
                     CultureInfo.InvariantCulture
@@ -105,7 +107,8 @@ public class CustomPolicyProviderTests
             Client,
             "Dude",
             DateTime
-                .Now.Subtract(TimeSpan.FromDays(365 * 55))
+                .Now
+                .Subtract(TimeSpan.FromDays(365 * 55))
                 .ToString(
                     DateTimeFormatInfo.InvariantInfo.ShortDatePattern,
                     CultureInfo.InvariantCulture
@@ -130,7 +133,8 @@ public class CustomPolicyProviderTests
             Client,
             "Dude",
             DateTime
-                .Now.Subtract(TimeSpan.FromDays(365 * 20))
+                .Now
+                .Subtract(TimeSpan.FromDays(365 * 20))
                 .ToString(
                     DateTimeFormatInfo.InvariantInfo.ShortDatePattern,
                     CultureInfo.InvariantCulture

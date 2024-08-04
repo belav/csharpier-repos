@@ -114,12 +114,9 @@ namespace Microsoft.CodeAnalysis
 
             private Stream OpenFileStream()
             {
-                return _streamToDispose = _compiler.FileSystem.OpenFile(
-                    _filePath,
-                    FileMode.Create,
-                    FileAccess.ReadWrite,
-                    FileShare.None
-                );
+                return _streamToDispose = _compiler
+                    .FileSystem
+                    .OpenFile(_filePath, FileMode.Create, FileAccess.ReadWrite, FileShare.None);
             }
 
             private void ReportOpenFileDiagnostic(DiagnosticBag diagnostics, Exception e)

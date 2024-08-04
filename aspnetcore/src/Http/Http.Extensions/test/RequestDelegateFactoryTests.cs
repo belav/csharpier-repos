@@ -1183,12 +1183,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Request.Headers["Content-Length"] = stream
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var jsonOptions = new JsonOptions();
         jsonOptions.SerializerOptions.Converters.Add(new TodoJsonConverter());
@@ -1225,9 +1225,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "0";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(false)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(false));
 
         var factoryResult = RequestDelegateFactory.Create(action);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -1613,10 +1613,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         // IEnumerable<T> always resolves from DI but is empty and throws from test method
         if (
-            action.Method.Name.Contains(
-                "TestExplicitFromIEnumerableService",
-                StringComparison.Ordinal
-            )
+            action
+                .Method
+                .Name
+                .Contains("TestExplicitFromIEnumerableService", StringComparison.Ordinal)
         )
         {
             return;
@@ -1908,9 +1908,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             ValueTask<CustomResult> ValueTaskTestAction() =>
                 ValueTask.FromResult(new CustomResult(resultString));
             FSharp.Control.FSharpAsync<CustomResult> FSharpAsyncTestAction() =>
-                FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
-                    new CustomResult(resultString)
-                );
+                FSharp
+                    .Core
+                    .ExtraTopLevelOperators
+                    .DefaultAsyncBuilder
+                    .Return(new CustomResult(resultString));
 
             static CustomResult StaticTestAction() => new CustomResult("Still not enough tests!");
             static Task<CustomResult> StaticTaskTestAction() =>
@@ -1918,9 +1920,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             static ValueTask<CustomResult> StaticValueTaskTestAction() =>
                 ValueTask.FromResult(new CustomResult("Still not enough tests!"));
             static FSharp.Control.FSharpAsync<CustomResult> StaticFSharpAsyncTestAction() =>
-                FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
-                    new CustomResult("Still not enough tests!")
-                );
+                FSharp
+                    .Core
+                    .ExtraTopLevelOperators
+                    .DefaultAsyncBuilder
+                    .Return(new CustomResult("Still not enough tests!"));
 
             // Object return type where the object is IResult
             static object StaticResultAsObject() => new CustomResult("Still not enough tests!");
@@ -1931,9 +1935,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             static ValueTask<object> StaticValueTaskOfIResultAsObject() =>
                 ValueTask.FromResult<object>(new CustomResult("Still not enough tests!"));
             static FSharp.Control.FSharpAsync<object> StaticFSharpAsyncOfIResultAsObject() =>
-                FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return<object>(
-                    new CustomResult("Still not enough tests!")
-                );
+                FSharp
+                    .Core
+                    .ExtraTopLevelOperators
+                    .DefaultAsyncBuilder
+                    .Return<object>(new CustomResult("Still not enough tests!"));
 
             StructResult TestStructAction() => new StructResult(resultString);
             Task<StructResult> TaskTestStructAction() =>
@@ -1941,9 +1947,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             ValueTask<StructResult> ValueTaskTestStructAction() =>
                 ValueTask.FromResult(new StructResult(resultString));
             FSharp.Control.FSharpAsync<StructResult> FSharpAsyncTestStructAction() =>
-                FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
-                    new StructResult(resultString)
-                );
+                FSharp
+                    .Core
+                    .ExtraTopLevelOperators
+                    .DefaultAsyncBuilder
+                    .Return(new StructResult(resultString));
 
             return new List<object[]>
             {
@@ -2733,9 +2741,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(exception);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -2771,9 +2779,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1000";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(exception);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -3220,9 +3228,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
             FSharp.Control.FSharpAsync<FSharp.Core.Unit> FSharpAsyncOfUnitMethod()
             {
-                return FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
-                    default(FSharp.Core.Unit)!
-                );
+                return FSharp
+                    .Core
+                    .ExtraTopLevelOperators
+                    .DefaultAsyncBuilder
+                    .Return(default(FSharp.Core.Unit)!);
             }
 
             async ValueTask ValueTaskWithYieldMethod()
@@ -3386,9 +3396,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
             FSharp.Control.FSharpAsync<TodoStruct> FSharpAsyncOfStructMethod()
             {
-                return FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
-                    new TodoStruct { Name = "Test todo" }
-                );
+                return FSharp
+                    .Core
+                    .ExtraTopLevelOperators
+                    .DefaultAsyncBuilder
+                    .Return(new TodoStruct { Name = "Test todo" });
             }
 
             FSharp.Control.FSharpAsync<TodoStruct> FSharpAsyncOfStructWithYieldMethod()
@@ -3638,9 +3650,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         // Arrange
         var @delegate = () =>
-            FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
-                new AddsCustomEndpointMetadataResult()
-            );
+            FSharp
+                .Core
+                .ExtraTopLevelOperators
+                .DefaultAsyncBuilder
+                .Return(new AddsCustomEndpointMetadataResult());
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate);
@@ -3729,9 +3743,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         // Arrange
         var @delegate = () =>
-            FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
-                new CountsDefaultEndpointMetadataResult()
-            );
+            FSharp
+                .Core
+                .ExtraTopLevelOperators
+                .DefaultAsyncBuilder
+                .Return(new CountsDefaultEndpointMetadataResult());
         var options = new RequestDelegateFactoryOptions
         {
             EndpointBuilder = CreateEndpointBuilder(
@@ -3897,12 +3913,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Request.Headers["Content-Length"] = stream
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options, metadataResult);
@@ -4002,9 +4018,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         // Arrange
         var @delegate = (Todo todo) =>
-            FSharp.Core.ExtraTopLevelOperators.DefaultAsyncBuilder.Return(
-                new RemovesAcceptsMetadataResult()
-            );
+            FSharp
+                .Core
+                .ExtraTopLevelOperators
+                .DefaultAsyncBuilder
+                .Return(new RemovesAcceptsMetadataResult());
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate);
@@ -4299,10 +4317,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void RequestDelegateFactory_WhenJsonIsReflectionEnabledByDefaultFalse()
     {
         var options = new RemoteInvokeOptions();
-        options.RuntimeConfigurationOptions.Add(
-            "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault",
-            false.ToString()
-        );
+        options
+            .RuntimeConfigurationOptions
+            .Add("System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault", false.ToString());
 
         using var remoteHandle = RemoteExecutor.Invoke(
             static () =>
@@ -4330,10 +4347,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void RequestDelegateFactory_WhenJsonIsReflectionEnabledByDefaultTrue()
     {
         var options = new RemoteInvokeOptions();
-        options.RuntimeConfigurationOptions.Add(
-            "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault",
-            true.ToString()
-        );
+        options
+            .RuntimeConfigurationOptions
+            .Add("System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault", true.ToString());
 
         using var remoteHandle = RemoteExecutor.Invoke(
             static () =>
@@ -4606,12 +4622,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 return;
             }
 
-            builder.Metadata.Add(
-                new RoutePatternMetadata
-                {
-                    RoutePattern = reb.RoutePattern?.RawText ?? string.Empty,
-                }
-            );
+            builder
+                .Metadata
+                .Add(
+                    new RoutePatternMetadata
+                    {
+                        RoutePattern = reb.RoutePattern?.RawText ?? string.Empty,
+                    }
+                );
         }
     }
 

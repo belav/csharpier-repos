@@ -27,13 +27,17 @@ namespace System.Web.Http.ModelBinding.Binders
                 ValueProvider = new SimpleHttpValueProvider(),
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(
-                typeof(ModelBinderProvider),
-                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
-                {
-                    SuppressPrefixCheck = true,
-                }
-            );
+            context
+                .ControllerContext
+                .Configuration
+                .Services
+                .Replace(
+                    typeof(ModelBinderProvider),
+                    new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+                    {
+                        SuppressPrefixCheck = true,
+                    }
+                );
 
             mockIntBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
@@ -78,13 +82,17 @@ namespace System.Web.Http.ModelBinding.Binders
                 ValueProvider = new SimpleHttpValueProvider(),
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(
-                typeof(ModelBinderProvider),
-                new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
-                {
-                    SuppressPrefixCheck = true,
-                }
-            );
+            context
+                .ControllerContext
+                .Configuration
+                .Services
+                .Replace(
+                    typeof(ModelBinderProvider),
+                    new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+                    {
+                        SuppressPrefixCheck = true,
+                    }
+                );
 
             mockIntBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))

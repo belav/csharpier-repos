@@ -140,7 +140,9 @@ namespace RunTests
                     var currentWorkItem = ImmutableSortedDictionary<
                         AssemblyInfo,
                         ImmutableArray<TestMethodInfo>
-                    >.Empty.Add(assembly, ImmutableArray<TestMethodInfo>.Empty);
+                    >
+                        .Empty
+                        .Add(assembly, ImmutableArray<TestMethodInfo>.Empty);
                     workItems.Add(new WorkItemInfo(currentWorkItem, partitionIndex++));
                 }
 
@@ -207,9 +209,9 @@ namespace RunTests
                     );
                 }
 
-                var unmatchedRemoteTests = testHistory.Keys.Where(type =>
-                    !matchedRemoteTests.Contains(type)
-                );
+                var unmatchedRemoteTests = testHistory
+                    .Keys
+                    .Where(type => !matchedRemoteTests.Contains(type));
                 foreach (var unmatchedRemoteTest in unmatchedRemoteTests)
                 {
                     Logger.Log(
@@ -218,14 +220,16 @@ namespace RunTests
                 }
 
                 var allTests = assemblyTypes
-                    .Values.SelectMany(v => v)
+                    .Values
+                    .SelectMany(v => v)
                     .SelectMany(v => v.Tests)
                     .Select(t => t.FullyQualifiedName)
                     .ToList();
 
                 var totalExpectedRunTime = TimeSpan.FromMilliseconds(
                     updated
-                        .Values.SelectMany(types => types)
+                        .Values
+                        .SelectMany(types => types)
                         .SelectMany(type => type.Tests)
                         .Sum(test => test.ExecutionTime.TotalMilliseconds)
                 );
@@ -343,7 +347,9 @@ namespace RunTests
             {
                 var totalExecutionTime = TimeSpan.FromMilliseconds(
                     workItem
-                        .Filters.Values.SelectMany(f => f)
+                        .Filters
+                        .Values
+                        .SelectMany(f => f)
                         .Sum(f => f.ExecutionTime.TotalMilliseconds)
                 );
                 Logger.Log(

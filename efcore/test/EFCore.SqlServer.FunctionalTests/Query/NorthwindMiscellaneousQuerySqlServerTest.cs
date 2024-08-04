@@ -6526,7 +6526,8 @@ ORDER BY [c].[CustomerID]
     {
         using var context = CreateContext();
         await context
-            .OrderDetails.Where(od => od.OrderID > 0)
+            .OrderDetails
+            .Where(od => od.OrderID > 0)
             .Intersect(context.OrderDetails.Where(od => od.OrderID > 0))
             .Intersect(context.OrderDetails.Where(od => od.OrderID > 0))
             .ToListAsync();
@@ -6537,15 +6538,18 @@ ORDER BY [c].[CustomerID]
     {
         using var context = CreateContext();
         await using var asyncEnumerator = context
-            .Customers.AsAsyncEnumerable()
+            .Customers
+            .AsAsyncEnumerable()
             .GetAsyncEnumerator();
         while (await asyncEnumerator.MoveNextAsync())
         {
             // Outer query is buffered by default
-            await context.Database.ExecuteSqlRawAsync(
-                "[dbo].[CustOrderHist] @CustomerID = {0}",
-                asyncEnumerator.Current.CustomerID
-            );
+            await context
+                .Database
+                .ExecuteSqlRawAsync(
+                    "[dbo].[CustOrderHist] @CustomerID = {0}",
+                    asyncEnumerator.Current.CustomerID
+                );
         }
     }
 

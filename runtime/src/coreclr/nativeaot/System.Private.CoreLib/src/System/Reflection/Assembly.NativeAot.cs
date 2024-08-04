@@ -53,7 +53,13 @@ namespace System.Reflection
             if (s_assemblyCount == 0)
                 s_assemblyCount = (uint)
                     Internal
-                        .Reflection.Core.Execution.ReflectionCoreExecution.ExecutionEnvironment.AssemblyBinder.GetLoadedAssemblies()
+                        .Reflection
+                        .Core
+                        .Execution
+                        .ReflectionCoreExecution
+                        .ExecutionEnvironment
+                        .AssemblyBinder
+                        .GetLoadedAssemblies()
                         .Count;
             return s_assemblyCount;
         }

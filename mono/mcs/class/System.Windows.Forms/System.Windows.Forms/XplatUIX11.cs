@@ -291,9 +291,11 @@ namespace System.Windows.Forms
             }
             catch
             {
-                Console.Error.WriteLine(
-                    "Could not disable keyboard auto repeat, will attempt to disable manually."
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "Could not disable keyboard auto repeat, will attempt to disable manually."
+                    );
                 detectable_key_auto_repeat = false;
             }
 

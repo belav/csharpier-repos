@@ -27,9 +27,9 @@ public static class AssemblyPartExtensions
         var dependencyContext = DependencyContext.Load(assembly);
         if (dependencyContext != null)
         {
-            return dependencyContext.CompileLibraries.SelectMany(library =>
-                library.ResolveReferencePaths()
-            );
+            return dependencyContext
+                .CompileLibraries
+                .SelectMany(library => library.ResolveReferencePaths());
         }
 
         // If an application has been compiled without preserveCompilationContext, return the path to the assembly

@@ -196,19 +196,21 @@ namespace Microsoft.Interop
                 return new NativeMarshallingAttributeInfo(
                     marshallerTypeInfo,
                     new CustomTypeMarshallers(
-                        ImmutableDictionary<MarshalMode, CustomTypeMarshallerData>.Empty.Add(
-                            MarshalMode.UnmanagedToManagedOut,
-                            new CustomTypeMarshallerData(
-                                marshallerTypeInfo,
-                                unmanagedType,
-                                HasState: false,
-                                MarshallerShape.ToUnmanaged,
-                                IsStrictlyBlittable: true,
-                                BufferElementType: null,
-                                CollectionElementType: null,
-                                CollectionElementMarshallingInfo: null
+                        ImmutableDictionary<MarshalMode, CustomTypeMarshallerData>
+                            .Empty
+                            .Add(
+                                MarshalMode.UnmanagedToManagedOut,
+                                new CustomTypeMarshallerData(
+                                    marshallerTypeInfo,
+                                    unmanagedType,
+                                    HasState: false,
+                                    MarshallerShape.ToUnmanaged,
+                                    IsStrictlyBlittable: true,
+                                    BufferElementType: null,
+                                    CollectionElementType: null,
+                                    CollectionElementMarshallingInfo: null
+                                )
                             )
-                        )
                     )
                 );
             }

@@ -1291,10 +1291,9 @@ namespace System.Text.Json.Serialization.Metadata
                 // It is invalid for the extension data property to bind to a constructor argument.
                 else if (
                     ExtensionDataProperty != null
-                    && StringComparer.OrdinalIgnoreCase.Equals(
-                        paramToCheck.Name,
-                        ExtensionDataProperty.Name
-                    )
+                    && StringComparer
+                        .OrdinalIgnoreCase
+                        .Equals(paramToCheck.Name, ExtensionDataProperty.Name)
                 )
                 {
                     Debug.Assert(
@@ -1562,10 +1561,9 @@ namespace System.Text.Json.Serialization.Metadata
                             // Was a property with the same CLR name ignored? That property hid the current property,
                             // thus, if it was ignored, the current property should be ignored too.
                             (
-                                state.IgnoredProperties?.TryGetValue(
-                                    memberName,
-                                    out JsonPropertyInfo? ignored
-                                ) == true
+                                state
+                                    .IgnoredProperties
+                                    ?.TryGetValue(memberName, out JsonPropertyInfo? ignored) == true
                                 && jsonPropertyInfo.IsOverriddenOrShadowedBy(ignored)
                             );
 

@@ -15,8 +15,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal readonly struct Data(DebuggingSessionTelemetry telemetry)
         {
             public readonly Guid SolutionSessionId = telemetry._solutionSessionId;
-            public readonly ImmutableArray<EditSessionTelemetry.Data> EditSessionData =
-                telemetry._editSessionData.ToImmutableArray();
+            public readonly ImmutableArray<EditSessionTelemetry.Data> EditSessionData = telemetry
+                ._editSessionData
+                .ToImmutableArray();
             public readonly int EmptyEditSessionCount = telemetry._emptyEditSessionCount;
             public readonly int EmptyHotReloadEditSessionCount =
                 telemetry._emptyHotReloadEditSessionCount;
@@ -82,8 +83,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 FunctionId.Debugging_EncSession,
                 KeyValueLogMessage.Create(map =>
                 {
-                    map["SolutionSessionId"] = data
-                        .SolutionSessionId.ToString("B")
+                    map["SolutionSessionId"] = data.SolutionSessionId
+                        .ToString("B")
                         .ToUpperInvariant();
                     map[SessionId] = debugSessionId;
                     map["SessionCount"] = data.EditSessionData.Count(session =>

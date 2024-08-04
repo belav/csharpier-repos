@@ -78,17 +78,22 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     _includeNonLocalDocumentDiagnostics,
                     CancellationToken.None
                 );
-                documentDiagnostics = await CodeAnalysis.Diagnostics.Extensions.ToDiagnosticsAsync(
-                    filterSpan is null
-                        ? dxs.Where(d => d.DataLocation.DocumentId != null)
-                        : dxs.Where(d =>
-                            d.DataLocation.DocumentId != null
-                            && d.DataLocation.UnmappedFileSpan.GetClampedTextSpan(text)
-                                .IntersectsWith(filterSpan.Value)
-                        ),
-                    project,
-                    CancellationToken.None
-                );
+                documentDiagnostics = await CodeAnalysis
+                    .Diagnostics
+                    .Extensions
+                    .ToDiagnosticsAsync(
+                        filterSpan is null
+                            ? dxs.Where(d => d.DataLocation.DocumentId != null)
+                            : dxs.Where(d =>
+                                d.DataLocation.DocumentId != null
+                                && d.DataLocation
+                                    .UnmappedFileSpan
+                                    .GetClampedTextSpan(text)
+                                    .IntersectsWith(filterSpan.Value)
+                            ),
+                        project,
+                        CancellationToken.None
+                    );
             }
 
             if (getProjectDiagnostics)
@@ -101,11 +106,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     _includeNonLocalDocumentDiagnostics,
                     CancellationToken.None
                 );
-                projectDiagnostics = await CodeAnalysis.Diagnostics.Extensions.ToDiagnosticsAsync(
-                    dxs.Where(d => d.DocumentId is null),
-                    project,
-                    CancellationToken.None
-                );
+                projectDiagnostics = await CodeAnalysis
+                    .Diagnostics
+                    .Extensions
+                    .ToDiagnosticsAsync(
+                        dxs.Where(d => d.DocumentId is null),
+                        project,
+                        CancellationToken.None
+                    );
             }
 
             var allDiagnostics = documentDiagnostics.Concat(projectDiagnostics);

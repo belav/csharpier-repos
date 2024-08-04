@@ -51,17 +51,20 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 structuralTypeDisplayService,
                 method.IsParams(),
                 c =>
-                    method.OriginalDefinition.GetDocumentationParts(
-                        semanticModel,
-                        position,
-                        documentationCommentFormattingService,
-                        c
-                    ),
+                    method
+                        .OriginalDefinition
+                        .GetDocumentationParts(
+                            semanticModel,
+                            position,
+                            documentationCommentFormattingService,
+                            c
+                        ),
                 GetMethodGroupPreambleParts(method, semanticModel, position),
                 GetSeparatorParts(),
                 GetMethodGroupPostambleParts(),
                 method
-                    .Parameters.Select(p =>
+                    .Parameters
+                    .Select(p =>
                         Convert(p, semanticModel, position, documentationCommentFormattingService)
                     )
                     .ToList(),

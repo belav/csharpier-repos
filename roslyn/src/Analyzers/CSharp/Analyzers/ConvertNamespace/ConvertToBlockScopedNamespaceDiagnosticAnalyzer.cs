@@ -70,12 +70,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
             var diagnosticLocation =
                 severity.WithDefaultSeverity(DiagnosticSeverity.Hidden) != ReportDiagnostic.Hidden
                     ? declaration.Name.GetLocation()
-                    : declaration.SyntaxTree.GetLocation(
-                        TextSpan.FromBounds(
-                            declaration.SpanStart,
-                            declaration.SemicolonToken.Span.End
-                        )
-                    );
+                    : declaration
+                        .SyntaxTree
+                        .GetLocation(
+                            TextSpan.FromBounds(
+                                declaration.SpanStart,
+                                declaration.SemicolonToken.Span.End
+                            )
+                        );
 
             return DiagnosticHelper.Create(
                 this.Descriptor,

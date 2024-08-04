@@ -38,7 +38,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                 if (!argumentIsOptional && routeParameter.IsOptional)
                 {
                     var location = parameter
-                        .DeclaringSyntaxReferences.FirstOrDefault()
+                        .DeclaringSyntaxReferences
+                        .FirstOrDefault()
                         ?.GetSyntax()
                         .GetLocation();
                     context.ReportDiagnostic(

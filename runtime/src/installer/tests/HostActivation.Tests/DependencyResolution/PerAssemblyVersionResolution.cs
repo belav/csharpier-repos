@@ -153,13 +153,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             );
 
             SharedState
-                .DotNetWithNetCoreApp.Exec(app.AppDll)
+                .DotNetWithNetCoreApp
+                .Exec(app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveResolvedAssembly(expectedTestAssemblyPath)
-                .And.HaveUsedFrameworkProbe(
+                .And
+                .HaveResolvedAssembly(expectedTestAssemblyPath)
+                .And
+                .HaveUsedFrameworkProbe(
                     SharedState.DotNetWithNetCoreApp.GreatestVersionSharedFxPath,
                     level: 1
                 );
@@ -213,7 +216,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                         $"{testAssemblyName}.dll"
                     );
                 SharedState
-                    .DotNetWithNetCoreApp.Exec(
+                    .DotNetWithNetCoreApp
+                    .Exec(
                         Constants.AdditionalDeps.CommandLineArgument,
                         additionalDependency.DepsJson,
                         app.AppDll
@@ -222,9 +226,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveUsedAdditionalDeps(additionalDependency.DepsJson)
-                    .And.HaveResolvedAssembly(expectedTestAssemblyPath)
-                    .And.HaveUsedFrameworkProbe(
+                    .And
+                    .HaveUsedAdditionalDeps(additionalDependency.DepsJson)
+                    .And
+                    .HaveResolvedAssembly(expectedTestAssemblyPath)
+                    .And
+                    .HaveUsedFrameworkProbe(
                         SharedState.DotNetWithNetCoreApp.GreatestVersionSharedFxPath,
                         level: 1
                     );
@@ -272,8 +279,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 .RunComponentResolutionTest(component)
                 .Should()
                 .Pass()
-                .And.HaveSuccessfullyResolvedComponentDependencies()
-                .And.HaveResolvedComponentDependencyAssembly(
+                .And
+                .HaveSuccessfullyResolvedComponentDependencies()
+                .And
+                .HaveResolvedComponentDependencyAssembly(
                     $"{component.AppDll};{expectedTestAssemblyPath}"
                 );
         }

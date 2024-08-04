@@ -234,10 +234,9 @@ namespace System.Web
             if (_activityIdTracingIsEnabled)
             {
                 Debug.Assert(_requestActivityId != Guid.Empty);
-                AspNetEventSource.Instance.RequestEnteredAspNetPipeline(
-                    WorkerRequest,
-                    _requestActivityId
-                );
+                AspNetEventSource
+                    .Instance
+                    .RequestEnteredAspNetPipeline(WorkerRequest, _requestActivityId);
             }
         }
 
@@ -250,10 +249,12 @@ namespace System.Web
             internal ActivityIdToken(RootedObjects rootedObjects, bool isDestroying)
             {
                 Debug.Assert(ActivityIdHelper.Instance != null);
-                ActivityIdHelper.Instance.SetCurrentThreadActivityId(
-                    rootedObjects._requestActivityId,
-                    out _originalActivityId
-                );
+                ActivityIdHelper
+                    .Instance
+                    .SetCurrentThreadActivityId(
+                        rootedObjects._requestActivityId,
+                        out _originalActivityId
+                    );
 
                 lock (rootedObjects)
                 {
@@ -308,10 +309,9 @@ namespace System.Web
                     {
                         // this overload restores the original activity ID but preserves the current activity ID
                         Guid unused;
-                        ActivityIdHelper.Instance.SetCurrentThreadActivityId(
-                            _originalActivityId,
-                            out unused
-                        );
+                        ActivityIdHelper
+                            .Instance
+                            .SetCurrentThreadActivityId(_originalActivityId, out unused);
                     }
                 }
             }

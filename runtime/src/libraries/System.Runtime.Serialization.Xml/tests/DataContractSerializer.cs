@@ -4624,10 +4624,9 @@ public static partial class DataContractSerializerTests
         CompareBaseline(baseline, ms);
         ms.Position = 0;
         var dcrVariationsReturning = dcs2.ReadObject(ms);
-        SerializationTestTypes.ComparisonHelper.CompareRecursively(
-            dcrVariationsGoing,
-            dcrVariationsReturning
-        );
+        SerializationTestTypes
+            .ComparisonHelper
+            .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
     }
 
     [Fact]
@@ -4652,10 +4651,9 @@ public static partial class DataContractSerializerTests
         ms.Position = 0;
         var xmlReader = XmlDictionaryReader.CreateTextReader(ms, XmlDictionaryReaderQuotas.Max);
         var dcrVariationsReturning = dcs.ReadObject(xmlReader, false, dcr2);
-        SerializationTestTypes.ComparisonHelper.CompareRecursively(
-            dcrVariationsGoing,
-            dcrVariationsReturning
-        );
+        SerializationTestTypes
+            .ComparisonHelper
+            .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
     }
 
     [Fact]
@@ -4684,10 +4682,9 @@ public static partial class DataContractSerializerTests
         ms.Position = 0;
         var xmlReader = XmlDictionaryReader.CreateTextReader(ms, XmlDictionaryReaderQuotas.Max);
         var dcrVariationsReturning = dcs.ReadObject(xmlReader, false);
-        SerializationTestTypes.ComparisonHelper.CompareRecursively(
-            dcrVariationsGoing,
-            dcrVariationsReturning
-        );
+        SerializationTestTypes
+            .ComparisonHelper
+            .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
     }
 
     [Fact]
@@ -4716,10 +4713,9 @@ public static partial class DataContractSerializerTests
         ms.Position = 0;
         var xmlReader = XmlDictionaryReader.CreateTextReader(ms, XmlDictionaryReaderQuotas.Max);
         var dcrVariationsReturning = dcs.ReadObject(xmlReader, false, dcr2);
-        SerializationTestTypes.ComparisonHelper.CompareRecursively(
-            dcrVariationsGoing,
-            dcrVariationsReturning
-        );
+        SerializationTestTypes
+            .ComparisonHelper
+            .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
     }
 
     private static void CompareBaseline(string baseline, MemoryStream ms)
@@ -5726,7 +5722,8 @@ public static partial class DataContractSerializerTests
 
         Assert.True(
             valueSerPublicDatasetPublic
-                .Data.GetType()
+                .Data
+                .GetType()
                 .Equals(resultSerPublicDatasetPublic.Data.GetType())
         );
         var valueDataSetPublic = (SerializationTestTypes.SerPublicDatasetPublic)(
@@ -5779,7 +5776,8 @@ public static partial class DataContractSerializerTests
 
         Assert.True(
             valueSerPublicDatasetPrivate
-                .Data.GetType()
+                .Data
+                .GetType()
                 .Equals(resultSerPublicDatasetPrivate.Data.GetType())
         );
         var valueDataSetPrivate = (SerializationTestTypes.SerPublicDatasetPrivate)(
@@ -7574,17 +7572,15 @@ public static partial class DataContractSerializerTests
         //netcorePayload
         var deserializedNetcoreObject = DeserializeString<T>(netcorePayload, settings: settings);
         Assert.NotNull(deserializedNetcoreObject);
-        SerializationTestTypes.ComparisonHelper.CompareRecursively(
-            value,
-            deserializedNetcoreObject
-        );
+        SerializationTestTypes
+            .ComparisonHelper
+            .CompareRecursively(value, deserializedNetcoreObject);
 
         //desktopPayload
         var deserializedDesktopObject = DeserializeString<T>(desktopPayload, settings: settings);
         Assert.NotNull(deserializedDesktopObject);
-        SerializationTestTypes.ComparisonHelper.CompareRecursively(
-            value,
-            deserializedDesktopObject
-        );
+        SerializationTestTypes
+            .ComparisonHelper
+            .CompareRecursively(value, deserializedDesktopObject);
     }
 }

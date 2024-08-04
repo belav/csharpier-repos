@@ -20,10 +20,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 /// </summary>
 public class ErrorPageTests : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWebSite.Startup>>
 {
-    private static readonly string PreserveCompilationContextMessage = HtmlEncoder.Default.Encode(
-        "One or more compilation references may be missing. "
-            + "If you're seeing this in a published application, set 'CopyRefAssembliesToPublishDirectory' to true in your project file to ensure files in the refs directory are published."
-    );
+    private static readonly string PreserveCompilationContextMessage = HtmlEncoder
+        .Default
+        .Encode(
+            "One or more compilation references may be missing. "
+                + "If you're seeing this in a published application, set 'CopyRefAssembliesToPublishDirectory' to true in your project file to ensure files in the refs directory are published."
+        );
     private readonly AssemblyTestLog _assemblyTestLog;
 
     private readonly MvcTestFixture<ErrorPageMiddlewareWebSite.Startup> _fixture;
@@ -153,9 +155,9 @@ public class ErrorPageTests : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWe
     public async Task RuntimeErrorAreListedByErrorPageMiddleware()
     {
         // Arrange
-        var expectedMessage = HtmlEncoder.Default.Encode(
-            "throw new Exception(\"Error from view\");"
-        );
+        var expectedMessage = HtmlEncoder
+            .Default
+            .Encode("throw new Exception(\"Error from view\");");
         var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
 
         // Act

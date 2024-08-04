@@ -193,7 +193,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
         {
             return property.GetMethod != null
                 && property
-                    .ContainingType.GetMembers(GetPrefix + name)
+                    .ContainingType
+                    .GetMembers(GetPrefix + name)
                     .OfType<IMethodSymbol>()
                     .Any(m => m.Parameters.Length == 0);
         }
@@ -203,7 +204,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             var comparer = SymbolEquivalenceComparer.Instance.SignatureTypeEquivalenceComparer;
             return property.SetMethod != null
                 && property
-                    .ContainingType.GetMembers(SetPrefix + name)
+                    .ContainingType
+                    .GetMembers(SetPrefix + name)
                     .OfType<IMethodSymbol>()
                     .Any(m =>
                         m.Parameters.Length == 1

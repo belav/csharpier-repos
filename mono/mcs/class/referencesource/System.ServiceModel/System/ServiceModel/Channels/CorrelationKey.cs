@@ -94,9 +94,13 @@ namespace System.ServiceModel.Channels
             {
                 if (!IsValid)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.CannotSetNameOnTheInvalidKey))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.CannotSetNameOnTheInvalidKey)
+                            )
+                        );
                 }
                 this.name = value;
             }
@@ -120,18 +124,16 @@ namespace System.ServiceModel.Channels
         {
             if (string.IsNullOrEmpty(scopeName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "scopeName",
-                    SR.GetString(SR.ScopeNameMustBeSpecified)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("scopeName", SR.GetString(SR.ScopeNameMustBeSpecified));
             }
 
             if (provider.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "provider",
-                    SR.GetString(SR.ProviderCannotBeEmptyString)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("provider", SR.GetString(SR.ProviderCannotBeEmptyString));
             }
 
             StringBuilder key = new StringBuilder();

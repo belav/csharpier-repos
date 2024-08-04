@@ -33,22 +33,26 @@ public partial class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
                     if (
                         methodReference.Parent is { } parent
                         && parent.Kind == OperationKind.DelegateCreation
-                        && SymbolEqualityComparer.Default.Equals(
-                            parent.Type,
-                            wellKnownTypes.Get(
-                                WellKnownType.Microsoft_AspNetCore_Http_RequestDelegate
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(
+                                parent.Type,
+                                wellKnownTypes.Get(
+                                    WellKnownType.Microsoft_AspNetCore_Http_RequestDelegate
+                                )
                             )
-                        )
                     )
                     {
                         // Inspect return type of method signature for Task<T>.
                         var returnType = methodReference.Method.ReturnType;
 
                         if (
-                            SymbolEqualityComparer.Default.Equals(
-                                returnType.OriginalDefinition,
-                                wellKnownTypes.Get(WellKnownType.System_Threading_Tasks_Task_T)
-                            )
+                            SymbolEqualityComparer
+                                .Default
+                                .Equals(
+                                    returnType.OriginalDefinition,
+                                    wellKnownTypes.Get(WellKnownType.System_Threading_Tasks_Task_T)
+                                )
                         )
                         {
                             AddDiagnosticWarning(
@@ -68,12 +72,14 @@ public partial class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
                     if (
                         anonymousFunction.Parent is { } parent
                         && parent.Kind == OperationKind.DelegateCreation
-                        && SymbolEqualityComparer.Default.Equals(
-                            parent.Type,
-                            wellKnownTypes.Get(
-                                WellKnownType.Microsoft_AspNetCore_Http_RequestDelegate
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(
+                                parent.Type,
+                                wellKnownTypes.Get(
+                                    WellKnownType.Microsoft_AspNetCore_Http_RequestDelegate
+                                )
                             )
-                        )
                     )
                     {
                         // Inspect contents of anonymous function and search for return statements.
@@ -93,12 +99,14 @@ public partial class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
                                 // 2. The method throws an exception.
                                 if (
                                     returnType != null
-                                    && SymbolEqualityComparer.Default.Equals(
-                                        returnType.OriginalDefinition,
-                                        wellKnownTypes.Get(
-                                            WellKnownType.System_Threading_Tasks_Task_T
+                                    && SymbolEqualityComparer
+                                        .Default
+                                        .Equals(
+                                            returnType.OriginalDefinition,
+                                            wellKnownTypes.Get(
+                                                WellKnownType.System_Threading_Tasks_Task_T
+                                            )
                                         )
-                                    )
                                 )
                                 {
                                     AddDiagnosticWarning(

@@ -323,7 +323,8 @@ internal sealed class ApplicationModelFactory
             var routeTemplate = selector.AttributeRouteModel?.Template ?? nullTemplate;
 
             var verbs = selector
-                .ActionConstraints?.OfType<HttpMethodActionConstraint>()
+                .ActionConstraints
+                ?.OfType<HttpMethodActionConstraint>()
                 .FirstOrDefault()
                 ?.HttpMethods;
 

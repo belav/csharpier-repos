@@ -40,9 +40,9 @@ namespace System.ServiceModel.Security.Tokens
 
             if (tokenProvider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("tokenProvider")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("tokenProvider"));
             }
 
             _tokenProvider = tokenProvider;
@@ -89,14 +89,16 @@ namespace System.ServiceModel.Security.Tokens
 
             if (_securityToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(
-                            SR.SecurityTokenNotResolved,
-                            _tokenProvider.GetType().ToString()
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.SecurityTokenNotResolved,
+                                _tokenProvider.GetType().ToString()
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             return;

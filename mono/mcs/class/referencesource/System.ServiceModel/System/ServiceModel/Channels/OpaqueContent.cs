@@ -73,11 +73,13 @@ namespace System.ServiceModel.Channels
 
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR.GetString(SR.WebSocketOpaqueStreamContentNotSupportError)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.WebSocketOpaqueStreamContentNotSupportError)
+                    )
+                );
         }
 
         protected override bool TryComputeLength(out long length)

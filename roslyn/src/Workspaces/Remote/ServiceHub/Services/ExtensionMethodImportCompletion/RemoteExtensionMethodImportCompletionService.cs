@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Remote
                         .GetRequiredDocument(documentId)
                         .WithFrozenPartialSemantics(cancellationToken);
                     var compilation = await document
-                        .Project.GetRequiredCompilationAsync(cancellationToken)
+                        .Project
+                        .GetRequiredCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var symbol = SymbolKey
                         .ResolveString(

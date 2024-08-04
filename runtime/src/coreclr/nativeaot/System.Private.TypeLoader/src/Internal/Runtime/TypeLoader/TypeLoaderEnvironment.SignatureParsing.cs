@@ -30,15 +30,15 @@ namespace Internal.Runtime.TypeLoader
                 if (signature1.StructuralEquals(signature2))
                     return true;
 
-                NativeFormatModuleInfo module1 = ModuleList.Instance.GetModuleInfoByHandle(
-                    new TypeManagerHandle(signature1.ModuleHandle)
-                );
+                NativeFormatModuleInfo module1 = ModuleList
+                    .Instance
+                    .GetModuleInfoByHandle(new TypeManagerHandle(signature1.ModuleHandle));
                 NativeReader reader1 = GetNativeLayoutInfoReader(signature1);
                 NativeParser parser1 = new NativeParser(reader1, signature1.NativeLayoutOffset);
 
-                NativeFormatModuleInfo module2 = ModuleList.Instance.GetModuleInfoByHandle(
-                    new TypeManagerHandle(signature2.ModuleHandle)
-                );
+                NativeFormatModuleInfo module2 = ModuleList
+                    .Instance
+                    .GetModuleInfoByHandle(new TypeManagerHandle(signature2.ModuleHandle));
                 NativeReader reader2 = GetNativeLayoutInfoReader(signature2);
                 NativeParser parser2 = new NativeParser(reader2, signature2.NativeLayoutOffset);
 
@@ -47,9 +47,9 @@ namespace Internal.Runtime.TypeLoader
             else if (signature1.IsNativeLayoutSignature)
             {
                 int token = signature2.Token;
-                MetadataReader metadataReader = ModuleList.Instance.GetMetadataReaderForModule(
-                    new TypeManagerHandle(signature2.ModuleHandle)
-                );
+                MetadataReader metadataReader = ModuleList
+                    .Instance
+                    .GetMetadataReaderForModule(new TypeManagerHandle(signature2.ModuleHandle));
 
                 MethodSignatureComparer comparer = new MethodSignatureComparer(
                     metadataReader,
@@ -60,9 +60,9 @@ namespace Internal.Runtime.TypeLoader
             else if (signature2.IsNativeLayoutSignature)
             {
                 int token = signature1.Token;
-                MetadataReader metadataReader = ModuleList.Instance.GetMetadataReaderForModule(
-                    new TypeManagerHandle(signature1.ModuleHandle)
-                );
+                MetadataReader metadataReader = ModuleList
+                    .Instance
+                    .GetMetadataReaderForModule(new TypeManagerHandle(signature1.ModuleHandle));
 
                 MethodSignatureComparer comparer = new MethodSignatureComparer(
                     metadataReader,
@@ -115,7 +115,9 @@ namespace Internal.Runtime.TypeLoader
                 NativeFormatModuleInfo nativeFormatModule = (NativeFormatModuleInfo)module;
                 var metadataReader = nativeFormatModule.MetadataReader;
                 var methodHandle = signature
-                    .Signature.Token.AsHandle()
+                    .Signature
+                    .Token
+                    .AsHandle()
                     .ToMethodHandle(metadataReader);
 
                 var method = methodHandle.GetMethod(metadataReader);

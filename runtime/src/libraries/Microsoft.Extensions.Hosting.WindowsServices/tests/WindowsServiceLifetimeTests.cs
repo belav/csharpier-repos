@@ -172,15 +172,15 @@ namespace Microsoft.Extensions.Hosting
 
                     var applicationLifetime =
                         host.Services.GetRequiredService<IHostApplicationLifetime>();
-                    applicationLifetime.ApplicationStarted.Register(
-                        () => FileLogger.Log($"lifetime started")
-                    );
-                    applicationLifetime.ApplicationStopping.Register(
-                        () => FileLogger.Log($"lifetime stopping")
-                    );
-                    applicationLifetime.ApplicationStopped.Register(
-                        () => FileLogger.Log($"lifetime stopped")
-                    );
+                    applicationLifetime
+                        .ApplicationStarted
+                        .Register(() => FileLogger.Log($"lifetime started"));
+                    applicationLifetime
+                        .ApplicationStopping
+                        .Register(() => FileLogger.Log($"lifetime stopping"));
+                    applicationLifetime
+                        .ApplicationStopped
+                        .Register(() => FileLogger.Log($"lifetime stopped"));
 
                     FileLogger.Log("host.Start()");
                     host.Start();
@@ -254,15 +254,15 @@ namespace Microsoft.Extensions.Hosting
 
                     var applicationLifetime =
                         host.Services.GetRequiredService<IHostApplicationLifetime>();
-                    applicationLifetime.ApplicationStarted.Register(
-                        () => FileLogger.Log($"lifetime started")
-                    );
-                    applicationLifetime.ApplicationStopping.Register(
-                        () => FileLogger.Log($"lifetime stopping")
-                    );
-                    applicationLifetime.ApplicationStopped.Register(
-                        () => FileLogger.Log($"lifetime stopped")
-                    );
+                    applicationLifetime
+                        .ApplicationStarted
+                        .Register(() => FileLogger.Log($"lifetime started"));
+                    applicationLifetime
+                        .ApplicationStopping
+                        .Register(() => FileLogger.Log($"lifetime stopping"));
+                    applicationLifetime
+                        .ApplicationStopped
+                        .Register(() => FileLogger.Log($"lifetime stopped"));
 
                     FileLogger.Log("host.Run()");
                     host.Run();

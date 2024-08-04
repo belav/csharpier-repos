@@ -626,7 +626,8 @@ public class IncludeMembersSelectFirstOrDefaultWithSubqueryMapFrom
                     d => d.Details,
                     o =>
                         o.MapFrom(s =>
-                            s.InnerSourceDetailsWrapper.Select(s => s.InnerSourceDetails)
+                            s.InnerSourceDetailsWrapper
+                                .Select(s => s.InnerSourceDetails)
                                 .FirstOrDefault()
                         )
                 );

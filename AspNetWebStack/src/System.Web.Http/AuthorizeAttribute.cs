@@ -164,10 +164,10 @@ namespace System.Web.Http
                 throw Error.ArgumentNull("actionContext");
             }
 
-            actionContext.Response = actionContext.ControllerContext.Request.CreateErrorResponse(
-                HttpStatusCode.Unauthorized,
-                SRResources.RequestNotAuthorized
-            );
+            actionContext.Response = actionContext
+                .ControllerContext
+                .Request
+                .CreateErrorResponse(HttpStatusCode.Unauthorized, SRResources.RequestNotAuthorized);
         }
 
         private static bool SkipAuthorization(HttpActionContext actionContext)
@@ -175,10 +175,13 @@ namespace System.Web.Http
             Contract.Assert(actionContext != null);
 
             return actionContext
-                    .ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>()
+                    .ActionDescriptor
+                    .GetCustomAttributes<AllowAnonymousAttribute>()
                     .Any()
                 || actionContext
-                    .ControllerContext.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>()
+                    .ControllerContext
+                    .ControllerDescriptor
+                    .GetCustomAttributes<AllowAnonymousAttribute>()
                     .Any();
         }
 

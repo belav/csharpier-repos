@@ -54,26 +54,30 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void Indent_RoundTrips()
         {
-            Assert.Reflection.BooleanProperty(
-                new XmlMediaTypeFormatter(),
-                c => c.Indent,
-                expectedDefaultValue: false
-            );
+            Assert
+                .Reflection
+                .BooleanProperty(
+                    new XmlMediaTypeFormatter(),
+                    c => c.Indent,
+                    expectedDefaultValue: false
+                );
         }
 
         [Fact]
         public void MaxDepth_RoundTrips()
         {
-            Assert.Reflection.IntegerProperty(
-                new DataContractJsonMediaTypeFormatter(),
-                c => c.MaxDepth,
-                expectedDefaultValue: 256,
-                minLegalValue: 1,
-                illegalLowerValue: 0,
-                maxLegalValue: null,
-                illegalUpperValue: null,
-                roundTripTestValue: 256
-            );
+            Assert
+                .Reflection
+                .IntegerProperty(
+                    new DataContractJsonMediaTypeFormatter(),
+                    c => c.MaxDepth,
+                    expectedDefaultValue: 256,
+                    minLegalValue: 1,
+                    illegalLowerValue: 0,
+                    maxLegalValue: null,
+                    illegalUpperValue: null,
+                    roundTripTestValue: 256
+                );
         }
 
         [Theory]
@@ -132,15 +136,17 @@ namespace System.Net.Http.Formatting
             JsonMediaTypeFormatter xmlFormatter = new DataContractJsonMediaTypeFormatter();
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert.Task.SucceedsAsync(
-                xmlFormatter.WriteToStreamAsync(
-                    type,
-                    null,
-                    memoryStream,
-                    content,
-                    transportContext: null
-                )
-            );
+            await Assert
+                .Task
+                .SucceedsAsync(
+                    xmlFormatter.WriteToStreamAsync(
+                        type,
+                        null,
+                        memoryStream,
+                        content,
+                        transportContext: null
+                    )
+                );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             Assert.True(
@@ -348,15 +354,17 @@ namespace System.Net.Http.Formatting
                 new DataContractJsonMediaTypeFormatter();
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert.Task.SucceedsAsync(
-                jsonFormatter.WriteToStreamAsync(
-                    typeof(SampleType),
-                    new SampleType(),
-                    memoryStream,
-                    content,
-                    transportContext: null
-                )
-            );
+            await Assert
+                .Task
+                .SucceedsAsync(
+                    jsonFormatter.WriteToStreamAsync(
+                        typeof(SampleType),
+                        new SampleType(),
+                        memoryStream,
+                        content,
+                        transportContext: null
+                    )
+                );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             Assert.False(
@@ -552,11 +560,13 @@ namespace System.Net.Http.Formatting
                 return false;
             }
 
-            return !Assert.Http.IsKnownUnserializable(
-                type,
-                obj,
-                (t) => typeof(INotJsonSerializable).IsAssignableFrom(t)
-            );
+            return !Assert
+                .Http
+                .IsKnownUnserializable(
+                    type,
+                    obj,
+                    (t) => typeof(INotJsonSerializable).IsAssignableFrom(t)
+                );
         }
     }
 }

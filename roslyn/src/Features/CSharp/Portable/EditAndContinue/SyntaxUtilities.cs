@@ -217,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             var firstGetter = accessorList
-                ?.Accessors.Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
+                ?.Accessors
+                .Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
                 .FirstOrDefault();
             if (firstGetter == null)
             {
@@ -259,9 +260,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             return property.ExpressionBody == null
-                && property.AccessorList!.Accessors.Any(e =>
-                    e.Body == null && e.ExpressionBody == null
-                );
+                && property
+                    .AccessorList!
+                    .Accessors
+                    .Any(e => e.Body == null && e.ExpressionBody == null);
         }
 
         /// <summary>

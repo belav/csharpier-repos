@@ -271,7 +271,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
             // don't include the root checksum itself.  it's not one of the assets of the actual project.
             var projectStateChecksums = await project
-                .State.GetStateChecksumsAsync(cancellationToken)
+                .State
+                .GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);
             map.Remove(projectStateChecksums.Checksum);
 
@@ -294,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Remote
             if (projectId == null)
             {
                 var solutionChecksums = await solution
-                    .State.GetStateChecksumsAsync(cancellationToken)
+                    .State
+                    .GetStateChecksumsAsync(cancellationToken)
                     .ConfigureAwait(false);
                 await solutionChecksums
                     .FindAsync(
@@ -312,7 +314,8 @@ namespace Microsoft.CodeAnalysis.Remote
             else
             {
                 var solutionChecksums = await solution
-                    .State.GetStateChecksumsAsync(projectId, cancellationToken)
+                    .State
+                    .GetStateChecksumsAsync(projectId, cancellationToken)
                     .ConfigureAwait(false);
                 await solutionChecksums
                     .FindAsync(
@@ -350,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             var projectChecksums = await project
-                .State.GetStateChecksumsAsync(cancellationToken)
+                .State
+                .GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);
             await projectChecksums
                 .FindAsync(
@@ -364,12 +368,14 @@ namespace Microsoft.CodeAnalysis.Remote
 
             foreach (
                 var document in project
-                    .Documents.Concat(project.AdditionalDocuments)
+                    .Documents
+                    .Concat(project.AdditionalDocuments)
                     .Concat(project.AnalyzerConfigDocuments)
             )
             {
                 var documentChecksums = await document
-                    .State.GetStateChecksumsAsync(cancellationToken)
+                    .State
+                    .GetStateChecksumsAsync(cancellationToken)
                     .ConfigureAwait(false);
                 await documentChecksums
                     .FindAsync(document.State, Flatten(documentChecksums), map, cancellationToken)

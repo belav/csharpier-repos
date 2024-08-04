@@ -1147,12 +1147,14 @@ namespace System.Speech.Recognition
                         if (grammar._proxy != null)
                         {
                             Exception appDomainException;
-                            newValue = grammar._proxy.OnParse(
-                                script._rule,
-                                script._sMethod,
-                                parameters,
-                                out appDomainException
-                            );
+                            newValue = grammar
+                                ._proxy
+                                .OnParse(
+                                    script._rule,
+                                    script._sMethod,
+                                    parameters,
+                                    out appDomainException
+                                );
 
                             if (appDomainException != null)
                             {
@@ -1201,12 +1203,14 @@ namespace System.Speech.Recognition
                         if (grammar._proxy != null)
                         {
                             Exception appDomainException;
-                            grammar._proxy.OnError(
-                                script._rule,
-                                script._sMethod,
-                                parameters,
-                                out appDomainException
-                            );
+                            grammar
+                                ._proxy
+                                .OnError(
+                                    script._rule,
+                                    script._sMethod,
+                                    parameters,
+                                    out appDomainException
+                                );
                             if (appDomainException != null)
                             {
                                 ExceptionDispatchInfo.Throw(appDomainException);
@@ -1260,11 +1264,13 @@ namespace System.Speech.Recognition
                             if (grammar._proxy != null)
                             {
                                 Exception appDomainException;
-                                resultValue = grammar._proxy.OnRecognition(
-                                    script._sMethod,
-                                    parameters,
-                                    out appDomainException
-                                );
+                                resultValue = grammar
+                                    ._proxy
+                                    .OnRecognition(
+                                        script._sMethod,
+                                        parameters,
+                                        out appDomainException
+                                    );
                                 if (appDomainException != null)
                                 {
                                     ExceptionDispatchInfo.Throw(appDomainException);

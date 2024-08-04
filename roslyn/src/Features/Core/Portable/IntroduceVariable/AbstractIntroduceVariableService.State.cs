@@ -81,10 +81,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 cancellationToken.ThrowIfCancellationRequested();
 
                 Expression = await document
-                    .Document.TryGetRelevantNodeAsync<TExpressionSyntax>(
-                        textSpan,
-                        cancellationToken
-                    )
+                    .Document
+                    .TryGetRelevantNodeAsync<TExpressionSyntax>(textSpan, cancellationToken)
                     .ConfigureAwait(false);
                 if (
                     Expression == null
@@ -97,13 +95,15 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     return false;
 
                 // Too noisy to offer introduce-local on `this/me`.
-                var syntaxFacts =
-                    document.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = document
+                    .Document
+                    .GetRequiredLanguageService<ISyntaxFactsService>();
                 if (syntaxFacts.IsThisExpression(Expression))
                     return false;
 
                 var expressionType = Document
-                    .SemanticModel.GetTypeInfo(Expression, cancellationToken)
+                    .SemanticModel
+                    .GetTypeInfo(Expression, cancellationToken)
                     .Type;
                 if (expressionType is IErrorTypeSymbol)
                     return false;
@@ -112,7 +112,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 if (
                     this.IsInAttributeContext()
                     && !Document
-                        .SemanticModel.GetConstantValue(Expression, cancellationToken)
+                        .SemanticModel
+                        .GetConstantValue(Expression, cancellationToken)
                         .HasValue
                 )
                 {
@@ -232,8 +233,9 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     TExpressionSyntax expression
                 )
                 {
-                    var syntaxFacts =
-                        document.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                    var syntaxFacts = document
+                        .Document
+                        .GetRequiredLanguageService<ISyntaxFactsService>();
 
                     var current = expression;
                     while (syntaxFacts.IsParenthesizedExpression(current.Parent))
@@ -271,8 +273,9 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                         { HasValue: true, Value: var value }
                     )
                     {
-                        var syntaxKindsService =
-                            document.Document.GetRequiredLanguageService<ISyntaxKindsService>();
+                        var syntaxKindsService = document
+                            .Document
+                            .GetRequiredLanguageService<ISyntaxKindsService>();
                         if (
                             syntaxKindsService.InterpolatedStringExpression == expression.RawKind
                             && value is string
@@ -280,10 +283,9 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                         {
                             // Interpolated strings can have constant values, but if it's being converted to a FormattableString
                             // or IFormattable then we cannot treat it as one
-                            var typeInfo = document.SemanticModel.GetTypeInfo(
-                                expression,
-                                cancellationToken
-                            );
+                            var typeInfo = document
+                                .SemanticModel
+                                .GetTypeInfo(expression, cancellationToken);
                             return typeInfo.ConvertedType?.IsFormattableStringOrIFormattable()
                                 != true;
                         }
@@ -301,10 +303,9 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
             public SemanticMap GetSemanticMap(CancellationToken cancellationToken)
             {
-                _semanticMap ??= Document.SemanticModel.GetSemanticMap(
-                    Expression,
-                    cancellationToken
-                );
+                _semanticMap ??= Document
+                    .SemanticModel
+                    .GetSemanticMap(Expression, cancellationToken);
                 return _semanticMap;
             }
 

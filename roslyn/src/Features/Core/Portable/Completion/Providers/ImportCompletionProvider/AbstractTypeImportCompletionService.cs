@@ -117,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 projectsBuilder.AddRange(referencedProjects);
                 nonGlobalAliasedProjectReferencesSet.AddRange(
                     currentProject
-                        .ProjectReferences.Where(pr => !HasGlobalAlias(pr.Aliases))
+                        .ProjectReferences
+                        .Where(pr => !HasGlobalAlias(pr.Aliases))
                         .Select(pr => pr.ProjectId)
                 );
 
@@ -155,7 +156,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     () => new EditorBrowsableInfo(originCompilation)
                 );
                 foreach (
-                    var peReference in currentProject.MetadataReferences.OfType<PortableExecutableReference>()
+                    var peReference in currentProject
+                        .MetadataReferences
+                        .OfType<PortableExecutableReference>()
                 )
                 {
                     // Can't cache items for reference with null key. We don't want risk potential perf regression by

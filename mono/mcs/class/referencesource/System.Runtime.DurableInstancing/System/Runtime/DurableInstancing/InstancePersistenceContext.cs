@@ -1583,11 +1583,14 @@ namespace System.Runtime.DurableInstancing
                                 txScope = TransactionHelper.CreateTransactionScope(
                                     this.context.Transaction
                                 );
-                                commandProcessed = this.context.InstanceHandle.Store.TryCommand(
-                                    this.context,
-                                    CurrentCommand,
-                                    this.timeoutHelper.RemainingTime()
-                                );
+                                commandProcessed = this.context
+                                    .InstanceHandle
+                                    .Store
+                                    .TryCommand(
+                                        this.context,
+                                        CurrentCommand,
+                                        this.timeoutHelper.RemainingTime()
+                                    );
                             }
                             catch (BindReclaimedLockException exception)
                             {
@@ -1602,9 +1605,9 @@ namespace System.Runtime.DurableInstancing
                             if (bindReclaimedLockException != null)
                             {
                                 BindReclaimed(
-                                    !bindReclaimedLockException.MarkerWaitHandle.Wait(
-                                        this.timeoutHelper.RemainingTime()
-                                    )
+                                    !bindReclaimedLockException
+                                        .MarkerWaitHandle
+                                        .Wait(this.timeoutHelper.RemainingTime())
                                 );
                             }
                         }
@@ -1615,13 +1618,16 @@ namespace System.Runtime.DurableInstancing
                             {
                                 try
                                 {
-                                    result = this.context.InstanceHandle.Store.BeginTryCommand(
-                                        this.context,
-                                        CurrentCommand,
-                                        this.timeoutHelper.RemainingTime(),
-                                        PrepareAsyncCompletion(ExecuteAsyncResult.onTryCommand),
-                                        this
-                                    );
+                                    result = this.context
+                                        .InstanceHandle
+                                        .Store
+                                        .BeginTryCommand(
+                                            this.context,
+                                            CurrentCommand,
+                                            this.timeoutHelper.RemainingTime(),
+                                            PrepareAsyncCompletion(ExecuteAsyncResult.onTryCommand),
+                                            this
+                                        );
                                 }
                                 catch (BindReclaimedLockException exception)
                                 {
@@ -1633,11 +1639,13 @@ namespace System.Runtime.DurableInstancing
                             {
                                 AfterCommand(true);
                                 if (
-                                    !bindReclaimedLockException.MarkerWaitHandle.WaitAsync(
-                                        ExecuteAsyncResult.onBindReclaimed,
-                                        this,
-                                        this.timeoutHelper.RemainingTime()
-                                    )
+                                    !bindReclaimedLockException
+                                        .MarkerWaitHandle
+                                        .WaitAsync(
+                                            ExecuteAsyncResult.onBindReclaimed,
+                                            this,
+                                            this.timeoutHelper.RemainingTime()
+                                        )
                                 )
                                 {
                                     return false;
@@ -1729,11 +1737,13 @@ namespace System.Runtime.DurableInstancing
                 if (bindReclaimedLockException != null)
                 {
                     if (
-                        !bindReclaimedLockException.MarkerWaitHandle.WaitAsync(
-                            ExecuteAsyncResult.onBindReclaimed,
-                            this,
-                            this.timeoutHelper.RemainingTime()
-                        )
+                        !bindReclaimedLockException
+                            .MarkerWaitHandle
+                            .WaitAsync(
+                                ExecuteAsyncResult.onBindReclaimed,
+                                this,
+                                this.timeoutHelper.RemainingTime()
+                            )
                     )
                     {
                         return false;
@@ -1807,9 +1817,11 @@ namespace System.Runtime.DurableInstancing
             {
                 if (timedOut)
                 {
-                    this.context.InstanceHandle.CancelReclaim(
-                        new TimeoutException(SRCore.TimedOutWaitingForLockResolution)
-                    );
+                    this.context
+                        .InstanceHandle
+                        .CancelReclaim(
+                            new TimeoutException(SRCore.TimedOutWaitingForLockResolution)
+                        );
                 }
                 this.context.ConcludeBindReclaimedLockHelper();
 
@@ -2071,9 +2083,12 @@ namespace System.Runtime.DurableInstancing
                 {
                     if (timeoutException != null)
                     {
-                        thisPtr.context.InstanceHandle.CancelReclaim(
-                            new TimeoutException(SRCore.TimedOutWaitingForLockResolution)
-                        );
+                        thisPtr
+                            .context
+                            .InstanceHandle
+                            .CancelReclaim(
+                                new TimeoutException(SRCore.TimedOutWaitingForLockResolution)
+                            );
                     }
                     thisPtr.context.ConcludeBindReclaimedLockHelper();
                 }

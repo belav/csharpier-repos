@@ -292,10 +292,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     // interface I<T> where T : I<T> { static abstract int operator -(T x); }
 
                     // See https://github.com/dotnet/csharplang/blob/main/spec/classes.md#unary-operators.
-                    return method.Parameters.Any(
-                        static (p, within) => p.Type.Equals(within, SymbolEqualityComparer.Default),
-                        within
-                    );
+                    return method
+                        .Parameters
+                        .Any(
+                            static (p, within) =>
+                                p.Type.Equals(within, SymbolEqualityComparer.Default),
+                            within
+                        );
                 }
 
                 return true;
@@ -779,11 +782,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
                     var matches = result.Where(kvp =>
                         comparer.Equals(member.Name, kvp.Key.Name)
-                        && SignatureComparer.Instance.HaveSameSignature(
-                            member,
-                            kvp.Key,
-                            caseSensitive
-                        )
+                        && SignatureComparer
+                            .Instance
+                            .HaveSameSignature(member, kvp.Key, caseSensitive)
                     );
 
                     // realize the matches since we're mutating the collection we're querying.

@@ -628,9 +628,9 @@ R Program.<>c.<Main>b__0_1(scoped R r)
 
         private static NamedTypeSymbol GetScopedRefType(ModuleSymbol module)
         {
-            return module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "System.Runtime.CompilerServices.ScopedRefAttribute"
-            );
+            return module
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("System.Runtime.CompilerServices.ScopedRefAttribute");
         }
     }
 }

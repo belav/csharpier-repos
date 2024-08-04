@@ -66,10 +66,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
 
             // apply changes to an old text if it already exists
             return (root.SyntaxTree != null && root.SyntaxTree.TryGetText(out var oldText))
-                ? root
-                    .SyntaxTree.WithChangedText(
-                        oldText.WithChanges(result.GetTextChanges(cancellationToken))
-                    )
+                ? root.SyntaxTree
+                    .WithChangedText(oldText.WithChanges(result.GetTextChanges(cancellationToken)))
                     .GetRootAsync(cancellationToken)
                 : Task.FromResult(result.GetFormattedRoot(cancellationToken));
         }

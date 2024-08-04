@@ -452,9 +452,11 @@ namespace System.ServiceModel.Channels
                 case UnsafeNativeMethods.ERROR_NOT_ENOUGH_MEMORY:
                 case UnsafeNativeMethods.ERROR_OUTOFMEMORY:
                 case UnsafeNativeMethods.ERROR_NO_SYSTEM_RESOURCES:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InsufficientMemoryException(SR.GetString(SR.InsufficentMemory), e)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InsufficientMemoryException(SR.GetString(SR.InsufficentMemory), e)
+                        );
                 default:
                     return ExceptionHandler.HandleTransportExceptionHelper(e);
             }
@@ -583,14 +585,16 @@ namespace System.ServiceModel.Channels
                     break;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.UnrecognizedHostNameComparisonMode,
-                                HostNameComparisonMode.ToString()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.UnrecognizedHostNameComparisonMode,
+                                    HostNameComparisonMode.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
             }
 
             string path = ListenUri.GetComponents(UriComponents.Path, UriFormat.Unescaped);
@@ -643,9 +647,9 @@ namespace System.ServiceModel.Channels
                         listenStartedEvent = null;
                         if (listenStartedException != null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                listenStartedException
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(listenStartedException);
                         }
                     }
                     startedListening = true;
@@ -665,53 +669,65 @@ namespace System.ServiceModel.Channels
                 switch (listenerException.NativeErrorCode)
                 {
                     case UnsafeNativeMethods.ERROR_ALREADY_EXISTS:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new AddressAlreadyInUseException(
-                                SR.GetString(SR.HttpRegistrationAlreadyExists, httpListenUrl),
-                                listenerException
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new AddressAlreadyInUseException(
+                                    SR.GetString(SR.HttpRegistrationAlreadyExists, httpListenUrl),
+                                    listenerException
+                                )
+                            );
 
                     case UnsafeNativeMethods.ERROR_SHARING_VIOLATION:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new AddressAlreadyInUseException(
-                                SR.GetString(
-                                    SR.HttpRegistrationPortInUse,
-                                    httpListenUrl,
-                                    ListenUri.Port
-                                ),
-                                listenerException
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new AddressAlreadyInUseException(
+                                    SR.GetString(
+                                        SR.HttpRegistrationPortInUse,
+                                        httpListenUrl,
+                                        ListenUri.Port
+                                    ),
+                                    listenerException
+                                )
+                            );
 
                     case UnsafeNativeMethods.ERROR_ACCESS_DENIED:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new AddressAccessDeniedException(
-                                SR.GetString(SR.HttpRegistrationAccessDenied, httpListenUrl),
-                                listenerException
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new AddressAccessDeniedException(
+                                    SR.GetString(SR.HttpRegistrationAccessDenied, httpListenUrl),
+                                    listenerException
+                                )
+                            );
 
                     case UnsafeNativeMethods.ERROR_ALLOTTED_SPACE_EXCEEDED:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new CommunicationException(
-                                SR.GetString(SR.HttpRegistrationLimitExceeded, httpListenUrl),
-                                listenerException
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new CommunicationException(
+                                    SR.GetString(SR.HttpRegistrationLimitExceeded, httpListenUrl),
+                                    listenerException
+                                )
+                            );
 
                     case UnsafeNativeMethods.ERROR_INVALID_PARAMETER:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.HttpInvalidListenURI, ListenUri.OriginalString),
-                                listenerException
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.HttpInvalidListenURI, ListenUri.OriginalString),
+                                    listenerException
+                                )
+                            );
 
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            HttpChannelUtilities.CreateCommunicationException(listenerException)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                HttpChannelUtilities.CreateCommunicationException(listenerException)
+                            );
                 }
             }
             finally

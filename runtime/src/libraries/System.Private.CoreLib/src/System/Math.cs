@@ -1218,7 +1218,8 @@ namespace System
             if (AdvSimd.Arm64.IsSupported)
             {
                 return AdvSimd
-                    .Arm64.ReciprocalSquareRootEstimateScalar(Vector64.CreateScalar(d))
+                    .Arm64
+                    .ReciprocalSquareRootEstimateScalar(Vector64.CreateScalar(d))
                     .ToScalar();
             }
             else

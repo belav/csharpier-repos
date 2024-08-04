@@ -91,9 +91,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         {
             if (originalBlock.Statements.Count == currentBlock.Statements.Count)
             {
-                var statementToUpdateIndex = originalBlock.Statements.IndexOf(s =>
-                    topmostUsingStatements.Contains(s)
-                );
+                var statementToUpdateIndex = originalBlock
+                    .Statements
+                    .IndexOf(s => topmostUsingStatements.Contains(s));
                 var statementToUpdate = currentBlock.Statements[statementToUpdateIndex];
 
                 if (
@@ -101,10 +101,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
                     && usingStatement.Declaration != null
                 )
                 {
-                    var updatedStatements = currentBlock.Statements.ReplaceRange(
-                        statementToUpdate,
-                        Expand(usingStatement)
-                    );
+                    var updatedStatements = currentBlock
+                        .Statements
+                        .ReplaceRange(statementToUpdate, Expand(usingStatement));
                     return currentBlock.WithStatements(updatedStatements);
                 }
             }
@@ -152,9 +151,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
 
                     var openBraceLeadingTrivia = blockSyntax.OpenBraceToken.LeadingTrivia;
                     var openBraceTrailingTrivia = blockSyntax.OpenBraceToken.TrailingTrivia;
-                    var usingHasEndOfLineTrivia = usingStatement.CloseParenToken.TrailingTrivia.Any(
-                        SyntaxKind.EndOfLineTrivia
-                    );
+                    var usingHasEndOfLineTrivia = usingStatement
+                        .CloseParenToken
+                        .TrailingTrivia
+                        .Any(SyntaxKind.EndOfLineTrivia);
                     if (!usingHasEndOfLineTrivia)
                     {
                         var newFirstStatement = statements

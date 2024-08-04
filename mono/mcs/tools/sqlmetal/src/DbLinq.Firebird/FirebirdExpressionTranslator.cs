@@ -13,8 +13,8 @@ namespace DbLinq.Firebird
             // Check for (from f in foo orderby f.Field select f).Count() trees
             // Firebird doesn't support 'ORDER BY' for 'SELECT COUNT(*)'.
             if (
-                e
-                    .Operands.Select(o => o as SpecialExpression)
+                e.Operands
+                    .Select(o => o as SpecialExpression)
                     .Where(o => o != null)
                     .Where(s => s.SpecialNodeType == SpecialExpressionType.Count)
                     .Any()

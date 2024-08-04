@@ -424,8 +424,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                     .Where(c => c.CustomerID.StartsWith("A"))
                     .Select(c => new
                     {
-                        OrderDates = c
-                            .Orders.Where(o => o.OrderID < 10500)
+                        OrderDates = c.Orders
+                            .Where(o => o.OrderID < 10500)
                             .OrderBy(o => o.OrderID)
                             .Take(3)
                             .Select(o => new { Date = o.OrderDate }),
@@ -445,8 +445,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                     .Where(c => c.CustomerID.StartsWith("A"))
                     .Select(c => new
                     {
-                        OrderDates = c
-                            .Orders.OrderBy(o => o.OrderID)
+                        OrderDates = c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Where(o => o.OrderID < 10500)
                             .Select(o => o.OrderDate)
                             .FirstOrDefault(),
@@ -487,11 +487,12 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                     .Select(c => new
                     {
                         Order = (int?)
-                            c
-                                .Orders.OrderBy(o => o.OrderID)
+                            c.Orders
+                                .OrderBy(o => o.OrderID)
                                 .Where(o => o.OrderID < 10500)
                                 .Select(o =>
-                                    o.OrderDetails.Where(od => od.OrderID > 10)
+                                    o.OrderDetails
+                                        .Where(od => od.OrderID > 10)
                                         .Select(od => od.ProductID)
                                         .Count()
                                 )
@@ -512,11 +513,12 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                     .Select(c => new
                     {
                         Order = (int?)
-                            c
-                                .Orders.OrderBy(o => o.OrderID)
+                            c.Orders
+                                .OrderBy(o => o.OrderID)
                                 .Where(o => o.OrderID < 10500)
                                 .Select(o =>
-                                    o.OrderDetails.OrderBy(od => od.OrderID)
+                                    o.OrderDetails
+                                        .OrderBy(od => od.OrderID)
                                         .ThenBy(od => od.ProductID)
                                         .Where(od => od.OrderID != c.Orders.Count)
                                         .Select(od => od.ProductID)
@@ -539,11 +541,12 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                     .Select(c => new
                     {
                         Order = (int?)
-                            c
-                                .Orders.OrderBy(o => o.OrderID)
+                            c.Orders
+                                .OrderBy(o => o.OrderID)
                                 .Where(o => o.OrderID < 10500)
                                 .Select(o =>
-                                    o.OrderDetails.OrderBy(od => od.OrderID)
+                                    o.OrderDetails
+                                        .OrderBy(od => od.OrderID)
                                         .ThenBy(od => od.ProductID)
                                         .Where(od => od.OrderID != c.CustomerID.Length)
                                         .Select(od => od.ProductID)
@@ -1123,7 +1126,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Select(o => o.CustomerID)
                             .Take(1)
                             .FirstOrDefault()
@@ -1140,7 +1144,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Select(o => o.CustomerID)
                             .Skip(1)
                             .FirstOrDefault()
@@ -1157,7 +1162,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Select(o => o.CustomerID)
                             .Distinct()
                             .FirstOrDefault()
@@ -1174,7 +1180,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Select(o => o.CustomerID)
                             .Distinct()
                             .FirstOrDefault()
@@ -1183,7 +1190,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Select(o => o.CustomerID)
                             .Distinct()
                             .FirstOrDefault()
@@ -1202,7 +1210,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID == "ALFKI")
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Select(o => o.CustomerID)
                             .Take(1)
                             .SingleOrDefault()
@@ -1221,7 +1230,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Select(o => o.CustomerID)
                             .Take(i)
                             .FirstOrDefault()
@@ -1239,7 +1249,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .ThenByDescending(o => o.OrderDate)
                             .Select(o => o.CustomerID)
                             .Take(2)
@@ -1258,8 +1269,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                 ss.Set<Customer>()
                     .Select(c =>
                         (int?)
-                            c
-                                .Orders.OrderBy(o => o.OrderID)
+                            c.Orders
+                                .OrderBy(o => o.OrderID)
                                 .ThenByDescending(o => o.OrderDate)
                                 .Select(o => o.CustomerID)
                                 .Take(2)
@@ -1269,7 +1280,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .ThenByDescending(o => o.OrderDate)
                             .Select(o => o.CustomerID)
                             .Take(2)
@@ -1288,7 +1300,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.CustomerID)
+                        c.Orders
+                            .OrderBy(o => o.CustomerID)
                             .ThenByDescending(o => o.OrderDate)
                             .Select(o => o.CustomerID)
                             .Take(2)
@@ -1307,7 +1320,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                 ss.Set<Order>()
                     .Where(o => o.OrderID < 10300)
                     .Select(o =>
-                        o.OrderDetails.OrderBy(od => od.Product.ProductName)
+                        o.OrderDetails
+                            .OrderBy(od => od.Product.ProductName)
                             .Select(od => od.OrderID)
                             .Take(1)
                             .FirstOrDefault()
@@ -1325,7 +1339,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                 ss.Set<Order>()
                     .Where(o => o.OrderID < 10250)
                     .Select(o =>
-                        o.OrderDetails.OrderBy(od => od.Product.ProductName)
+                        o.OrderDetails
+                            .OrderBy(od => od.Product.ProductName)
                             .Take(1)
                             .FirstOrDefault()
                     )
@@ -1706,8 +1721,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                 select new
                 {
                     c.CustomerID,
-                    OrderId = c
-                        .Orders.OrderBy(o => o.OrderID)
+                    OrderId = c.Orders
+                        .OrderBy(o => o.OrderID)
                         .Select(o => o.OrderID)
                         .FirstOrDefault(),
                 }
@@ -1782,7 +1797,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
     {
         using var context = CreateContext();
         var query = context
-            .Customers.Where(c => c.CustomerID.StartsWith("A"))
+            .Customers
+            .Where(c => c.CustomerID.StartsWith("A"))
             .Select(c => new
             {
                 Customer = c,
@@ -1802,7 +1818,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
     {
         using var context = CreateContext();
         var query = context
-            .Customers.Where(c => c.CustomerID.StartsWith("A"))
+            .Customers
+            .Where(c => c.CustomerID.StartsWith("A"))
             .Select(c => new
             {
                 Customer = c,
@@ -2151,8 +2168,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                     .Select(c => new
                     {
                         c.CustomerID,
-                        Orders = c
-                            .Orders.Where(x => filteredOrderIds.Contains(x.OrderID))
+                        Orders = c.Orders
+                            .Where(x => filteredOrderIds.Contains(x.OrderID))
                             .OrderBy(x => x.OrderID)
                             .Select(x => new
                             {
@@ -2382,8 +2399,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                     .OrderBy(c => c.CustomerID)
                     .Select(c =>
                         (int?)
-                            c
-                                .Orders.OrderBy(o => o.OrderID)
+                            c.Orders
+                                .OrderBy(o => o.OrderID)
                                 .Select(o => o.CustomerID)
                                 .FirstOrDefault()
                                 .Length
@@ -2392,7 +2409,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                 ss.Set<Customer>()
                     .OrderBy(c => c.CustomerID)
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Select(o => o.CustomerID)
                             .FirstOrDefault()
                             .MaybeScalar(x => x.Length)
@@ -2734,8 +2752,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                     {
                         OrderID = o.OrderID,
                         OrderDate = o.OrderDate,
-                        OrderDetails = o
-                            .OrderDetails.Select(e => new OrderDetail
+                        OrderDetails = o.OrderDetails
+                            .Select(e => new OrderDetail
                             {
                                 OrderID = e.OrderID,
                                 Product = e.Product,
@@ -2759,8 +2777,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                     .OrderBy(e => e.CustomerID)
                     .Select(o => new
                     {
-                        Orders = o
-                            .Orders.OrderBy(a => a.OrderDate)
+                        Orders = o.Orders
+                            .OrderBy(a => a.OrderDate)
                             .Take(1)
                             .Select(e => new
                             {
@@ -2873,8 +2891,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                     .Select(c => new
                     {
                         c.CustomerID,
-                        Order = c
-                            .Orders.FirstOrDefault(o => o.OrderID < 11000)
+                        Order = c.Orders
+                            .FirstOrDefault(o => o.OrderID < 11000)
                             .MaybeScalar(e => e.OrderDate),
                         InterpolatedString = $"test{c.City}",
                         NonInterpolatedString = "test" + c.City,
@@ -2931,8 +2949,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                     .Select(c => new
                     {
                         c.CustomerID,
-                        ListWithSubList = c
-                            .Orders.OrderBy(e => e.OrderID)
+                        ListWithSubList = c.Orders
+                            .OrderBy(e => e.OrderID)
                             .Select(o =>
                                 o.OrderDetails.Select(e => new { e.OrderID, e.ProductID })
                             ),
@@ -3028,7 +3046,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
                 ss.Set<Customer>()
                     .OrderBy(c => c.CustomerID)
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderDate)
+                        c.Orders
+                            .OrderBy(o => o.OrderDate)
                             .Select(e => e.OrderDetails.Select(od => od.ProductID))
                             .FirstOrDefault()
                     ),

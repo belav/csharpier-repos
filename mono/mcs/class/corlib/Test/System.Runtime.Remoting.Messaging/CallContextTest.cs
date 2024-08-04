@@ -151,8 +151,8 @@ namespace MonoTests.System.Runtime.Remoting.Messaging
             var ct = Thread.CurrentThread.ManagedThreadId;
             CallContext.LogicalSetData("d1", "logicalData");
             CallContext.SetData("d2", "data2");
-            var t = Task
-                .Factory.StartNew(() => { })
+            var t = Task.Factory
+                .StartNew(() => { })
                 .ContinueWith(
                     task =>
                     {

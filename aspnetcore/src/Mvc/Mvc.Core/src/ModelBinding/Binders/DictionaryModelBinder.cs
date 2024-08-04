@@ -233,16 +233,18 @@ public partial class DictionaryModelBinder<TKey, TValue>
         }
 
         bindingContext.Result = ModelBindingResult.Success(model);
-        bindingContext.ValidationState.Add(
-            model,
-            new ValidationStateEntry()
-            {
-                Strategy = new ShortFormDictionaryValidationStrategy<TKey, TValue?>(
-                    keyMappings,
-                    valueMetadata
-                ),
-            }
-        );
+        bindingContext
+            .ValidationState
+            .Add(
+                model,
+                new ValidationStateEntry()
+                {
+                    Strategy = new ShortFormDictionaryValidationStrategy<TKey, TValue?>(
+                        keyMappings,
+                        valueMetadata
+                    ),
+                }
+            );
     }
 
     /// <inheritdoc />

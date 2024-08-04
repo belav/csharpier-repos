@@ -52,9 +52,9 @@ namespace System.ServiceModel
                     break;
                 default:
                     Fx.Assert("unsupported proxy credential type");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new NotSupportedException());
             }
             return result;
         }
@@ -83,9 +83,9 @@ namespace System.ServiceModel
                     break;
                 default:
                     Fx.Assert("unsupported authentication Scheme");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new NotSupportedException());
             }
             return result;
         }

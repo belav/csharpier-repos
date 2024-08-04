@@ -50,7 +50,8 @@ namespace System.Data.Common.CommandTrees
                 validator.ValidateExpression(query, "query");
 
                 this._parameters = validator
-                    .Parameters.Select(paramInfo => paramInfo.Value)
+                    .Parameters
+                    .Select(paramInfo => paramInfo.Value)
                     .ToList()
                     .AsReadOnly();
             }

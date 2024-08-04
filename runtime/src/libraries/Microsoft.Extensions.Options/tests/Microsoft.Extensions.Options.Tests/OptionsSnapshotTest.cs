@@ -94,9 +94,9 @@ namespace Microsoft.Extensions.Options.Tests
             // Snapshot only updated once per scope
             using (var scope = sp.CreateScope())
             {
-                var snapshot = scope.ServiceProvider.GetRequiredService<
-                    IOptionsSnapshot<FakeOptions>
-                >();
+                var snapshot = scope
+                    .ServiceProvider
+                    .GetRequiredService<IOptionsSnapshot<FakeOptions>>();
                 Assert.Equal("1", snapshot.Value.Message);
                 config.Reload();
                 Assert.Equal("1", snapshot.Value.Message);
@@ -104,9 +104,9 @@ namespace Microsoft.Extensions.Options.Tests
 
             using (var scope = sp.CreateScope())
             {
-                var snapshot = scope.ServiceProvider.GetRequiredService<
-                    IOptionsSnapshot<FakeOptions>
-                >();
+                var snapshot = scope
+                    .ServiceProvider
+                    .GetRequiredService<IOptionsSnapshot<FakeOptions>>();
                 Assert.Equal("2", snapshot.Value.Message);
                 config.Reload();
                 Assert.Equal("2", snapshot.Value.Message);
@@ -146,7 +146,8 @@ namespace Microsoft.Extensions.Options.Tests
             using (var scope = factory.CreateScope())
             {
                 options = scope
-                    .ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>()
+                    .ServiceProvider
+                    .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
                     .Value;
                 Assert.Equal(
                     options,
@@ -154,12 +155,14 @@ namespace Microsoft.Extensions.Options.Tests
                 );
                 Assert.Equal(1, TestConfigure.ConfigureCount);
                 namedOne = scope
-                    .ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>()
+                    .ServiceProvider
+                    .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
                     .Get("1");
                 Assert.Equal(
                     namedOne,
                     scope
-                        .ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>()
+                        .ServiceProvider
+                        .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
                         .Get("1")
                 );
                 Assert.Equal(2, TestConfigure.ConfigureCount);
@@ -168,12 +171,14 @@ namespace Microsoft.Extensions.Options.Tests
             using (var scope = factory.CreateScope())
             {
                 var options2 = scope
-                    .ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>()
+                    .ServiceProvider
+                    .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
                     .Value;
                 Assert.NotEqual(options, options2);
                 Assert.Equal(3, TestConfigure.ConfigureCount);
                 var namedOne2 = scope
-                    .ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>()
+                    .ServiceProvider
+                    .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
                     .Get("1");
                 Assert.NotEqual(namedOne2, namedOne);
                 Assert.Equal(4, TestConfigure.ConfigureCount);
@@ -265,9 +270,11 @@ namespace Microsoft.Extensions.Options.Tests
             >();
 
             // from the created scope
-            var scopedOptions = scope.ServiceProvider.GetRequiredService<
-                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
-            >();
+            var scopedOptions = scope
+                .ServiceProvider
+                .GetRequiredService<
+                    IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+                >();
 
             // we should have 2 navigation managers. One in the root scope, and one in the created scope.
             Assert.Equal(2, calls);

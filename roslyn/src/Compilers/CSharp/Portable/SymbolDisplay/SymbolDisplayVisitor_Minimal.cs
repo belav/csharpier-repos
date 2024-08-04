@@ -91,9 +91,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var containingNamespace =
                     symbol.ContainingNamespace == null
                         ? null
-                        : SemanticModelOpt.Compilation.GetCompilationNamespace(
-                            symbol.ContainingNamespace
-                        );
+                        : SemanticModelOpt
+                            .Compilation
+                            .GetCompilationNamespace(symbol.ContainingNamespace);
                 if (containingNamespace != null)
                 {
                     if (containingNamespace.IsGlobalNamespace)
@@ -158,9 +158,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var containingNamespace =
                             symbol.ContainingNamespace == null
                                 ? null
-                                : SemanticModelOpt.Compilation.GetCompilationNamespace(
-                                    symbol.ContainingNamespace
-                                );
+                                : SemanticModelOpt
+                                    .Compilation
+                                    .GetCompilationNamespace(symbol.ContainingNamespace);
                         if (containingNamespace != null)
                         {
                             if (containingNamespace.IsGlobalNamespace)
@@ -300,9 +300,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (
                 this.IsMinimizing
-                && Format.MiscellaneousOptions.IncludesOption(
-                    SymbolDisplayMiscellaneousOptions.RemoveAttributeSuffix
-                )
+                && Format
+                    .MiscellaneousOptions
+                    .IncludesOption(SymbolDisplayMiscellaneousOptions.RemoveAttributeSuffix)
                 && SemanticModelOpt.Compilation.IsAttributeType(symbol)
             )
             {

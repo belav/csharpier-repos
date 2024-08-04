@@ -576,9 +576,9 @@ namespace System.Net.Http.Functional.Tests
                                 {
                                     destination.Flush();
                                     Assert.True(
-                                        serverReceivedRequest.Task.Wait(
-                                            TestHelper.PassingTestTimeout
-                                        )
+                                        serverReceivedRequest
+                                            .Task
+                                            .Wait(TestHelper.PassingTestTimeout)
                                     );
                                     destination.Write(postContent);
                                 },

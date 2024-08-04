@@ -266,10 +266,9 @@ namespace System.Text.Json.Serialization
                             options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve
                         );
                         Debug.Assert(state.Current.ReturnValue is TDictionary);
-                        state.ReferenceResolver.AddReference(
-                            state.ReferenceId,
-                            state.Current.ReturnValue
-                        );
+                        state
+                            .ReferenceResolver
+                            .AddReference(state.ReferenceId, state.Current.ReturnValue);
                         state.ReferenceId = null;
                     }
 

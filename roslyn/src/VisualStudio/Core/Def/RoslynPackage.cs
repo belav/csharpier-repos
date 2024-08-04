@@ -96,9 +96,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
         {
             if (_lazyInstance is null)
             {
-                await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 var shell = (IVsShell7?)
                     await serviceProvider.GetServiceAsync(typeof(SVsShell)).ConfigureAwait(true);
@@ -184,8 +184,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             // Misc workspace has to be up and running by the time our package is usable so that it can track running
             // doc events and appropriately map files to/from it and other relevant workspaces (like the
             // metadata-as-source workspace).
-            await this
-                .ComponentModel.GetService<MiscellaneousFilesWorkspace>()
+            await this.ComponentModel
+                .GetService<MiscellaneousFilesWorkspace>()
                 .InitializeAsync()
                 .ConfigureAwait(false);
 
@@ -254,44 +254,44 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
 
             // we need to load it as early as possible since we can have errors from
             // package from each language very early
-            await this
-                .ComponentModel.GetService<TaskCenterSolutionAnalysisProgressReporter>()
+            await this.ComponentModel
+                .GetService<TaskCenterSolutionAnalysisProgressReporter>()
                 .InitializeAsync()
                 .ConfigureAwait(false);
-            await this
-                .ComponentModel.GetService<VisualStudioSuppressionFixService>()
+            await this.ComponentModel
+                .GetService<VisualStudioSuppressionFixService>()
                 .InitializeAsync(this)
                 .ConfigureAwait(false);
-            await this
-                .ComponentModel.GetService<VisualStudioDiagnosticListTableCommandHandler>()
+            await this.ComponentModel
+                .GetService<VisualStudioDiagnosticListTableCommandHandler>()
                 .InitializeAsync(this, cancellationToken)
                 .ConfigureAwait(false);
-            await this
-                .ComponentModel.GetService<VisualStudioDiagnosticListSuppressionStateService>()
+            await this.ComponentModel
+                .GetService<VisualStudioDiagnosticListSuppressionStateService>()
                 .InitializeAsync(this, cancellationToken)
                 .ConfigureAwait(false);
 
-            await this
-                .ComponentModel.GetService<VisualStudioMetadataAsSourceFileSupportService>()
+            await this.ComponentModel
+                .GetService<VisualStudioMetadataAsSourceFileSupportService>()
                 .InitializeAsync(this, cancellationToken)
                 .ConfigureAwait(false);
 
             // Load and initialize the add solution item service so ConfigurationUpdater can use it to create editorconfig files.
-            await this
-                .ComponentModel.GetService<VisualStudioAddSolutionItemService>()
+            await this.ComponentModel
+                .GetService<VisualStudioAddSolutionItemService>()
                 .InitializeAsync(this)
                 .ConfigureAwait(false);
 
-            await this
-                .ComponentModel.GetService<IVisualStudioDiagnosticAnalyzerService>()
+            await this.ComponentModel
+                .GetService<IVisualStudioDiagnosticAnalyzerService>()
                 .InitializeAsync(this, cancellationToken)
                 .ConfigureAwait(false);
-            await this
-                .ComponentModel.GetService<RemoveUnusedReferencesCommandHandler>()
+            await this.ComponentModel
+                .GetService<RemoveUnusedReferencesCommandHandler>()
                 .InitializeAsync(this, cancellationToken)
                 .ConfigureAwait(false);
-            await this
-                .ComponentModel.GetService<SyncNamespacesCommandHandler>()
+            await this.ComponentModel
+                .GetService<SyncNamespacesCommandHandler>()
                 .InitializeAsync(this, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -337,7 +337,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
 
             // Initialize keybinding reset detector
             await ComponentModel
-                .DefaultExportProvider.GetExportedValue<KeybindingReset.KeybindingResetDetector>()
+                .DefaultExportProvider
+                .GetExportedValue<KeybindingReset.KeybindingResetDetector>()
                 .InitializeAsync()
                 .ConfigureAwait(true);
         }
@@ -414,8 +415,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
 
         private async Task LoadAnalyzerNodeComponentsAsync(CancellationToken cancellationToken)
         {
-            await this
-                .ComponentModel.GetService<IAnalyzerNodeSetup>()
+            await this.ComponentModel
+                .GetService<IAnalyzerNodeSetup>()
                 .InitializeAsync(this, cancellationToken)
                 .ConfigureAwait(false);
 

@@ -44,23 +44,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 // gather expression-declared variables from invalid array dimensions. eg. using(int[x is var y] z = new int[0])
-                declarationSyntax.Type.VisitRankSpecifiers(
-                    (rankSpecifier, args) =>
-                    {
-                        foreach (var size in rankSpecifier.Sizes)
+                declarationSyntax
+                    .Type
+                    .VisitRankSpecifiers(
+                        (rankSpecifier, args) =>
                         {
-                            if (size.Kind() != SyntaxKind.OmittedArraySizeExpression)
+                            foreach (var size in rankSpecifier.Sizes)
                             {
-                                ExpressionVariableFinder.FindExpressionVariables(
-                                    args.binder,
-                                    args.locals,
-                                    size
-                                );
+                                if (size.Kind() != SyntaxKind.OmittedArraySizeExpression)
+                                {
+                                    ExpressionVariableFinder.FindExpressionVariables(
+                                        args.binder,
+                                        args.locals,
+                                        size
+                                    );
+                                }
                             }
-                        }
-                    },
-                    (binder: this, locals: locals)
-                );
+                        },
+                        (binder: this, locals: locals)
+                    );
 
                 foreach (VariableDeclaratorSyntax declarator in declarationSyntax.Variables)
                 {
@@ -299,9 +301,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (hasAwait)
                     {
-                        awaitableType = originalBinder.Compilation.GetWellKnownType(
-                            WellKnownType.System_Threading_Tasks_ValueTask
-                        );
+                        awaitableType = originalBinder
+                            .Compilation
+                            .GetWellKnownType(WellKnownType.System_Threading_Tasks_ValueTask);
                     }
 
                     return !ReportUseSite(
@@ -325,12 +327,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                             WasCompilerGenerated = true,
                         };
 
-                    BindingDiagnosticBag patternDiagnostics =
-                        originalBinder.Compilation.IsFeatureEnabled(
-                            MessageID.IDS_FeatureDisposalPattern
-                        )
-                            ? diagnostics
-                            : BindingDiagnosticBag.Discarded;
+                    BindingDiagnosticBag patternDiagnostics = originalBinder
+                        .Compilation
+                        .IsFeatureEnabled(MessageID.IDS_FeatureDisposalPattern)
+                        ? diagnostics
+                        : BindingDiagnosticBag.Discarded;
                     MethodSymbol disposeMethod = originalBinder.TryFindDisposePatternMethod(
                         receiver,
                         syntax,
@@ -339,11 +340,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                     if (disposeMethod is object)
                     {
-                        MessageID.IDS_FeatureDisposalPattern.CheckFeatureAvailability(
-                            diagnostics,
-                            originalBinder.Compilation,
-                            syntax.Location
-                        );
+                        MessageID
+                            .IDS_FeatureDisposalPattern
+                            .CheckFeatureAvailability(
+                                diagnostics,
+                                originalBinder.Compilation,
+                                syntax.Location
+                            );
 
                         var argumentsBuilder = ArrayBuilder<BoundExpression>.GetInstance(
                             disposeMethod.ParameterCount
@@ -458,9 +461,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol getDisposableInterface(bool isAsync)
             {
                 return isAsync
-                    ? originalBinder.Compilation.GetWellKnownType(
-                        WellKnownType.System_IAsyncDisposable
-                    )
+                    ? originalBinder
+                        .Compilation
+                        .GetWellKnownType(WellKnownType.System_IAsyncDisposable)
                     : originalBinder.Compilation.GetSpecialType(SpecialType.System_IDisposable);
             }
         }

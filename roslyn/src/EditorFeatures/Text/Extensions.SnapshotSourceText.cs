@@ -549,9 +549,9 @@ namespace Microsoft.CodeAnalysis.Text
             {
                 for (var version = oldVersion; version != newVersion; version = version.Next)
                 {
-                    yield return version.Changes.Select(
-                        forward ? s_forwardTextChangeRange : s_backwardTextChangeRange
-                    );
+                    yield return version
+                        .Changes
+                        .Select(forward ? s_forwardTextChangeRange : s_backwardTextChangeRange);
                 }
             }
 

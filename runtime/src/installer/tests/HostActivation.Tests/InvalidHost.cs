@@ -32,9 +32,8 @@ namespace HostActivation.Tests
             result
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
-                    "This executable is not bound to a managed DLL to execute."
-                );
+                .And
+                .HaveStdErrContaining("This executable is not bound to a managed DLL to execute.");
 
             int exitCode = result.ExitCode;
             const int AppHostExeNotBoundFailure = unchecked((int)0x80008095);
@@ -62,9 +61,8 @@ namespace HostActivation.Tests
                 .Execute()
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
-                    "This executable is not bound to a managed DLL to execute."
-                );
+                .And
+                .HaveStdErrContaining("This executable is not bound to a managed DLL to execute.");
         }
 
         [Fact]
@@ -80,14 +78,15 @@ namespace HostActivation.Tests
                 .Execute()
                 .Should()
                 .Fail()
-                .And.FileExists(traceFilePath)
-                .And.FileContains(
+                .And
+                .FileExists(traceFilePath)
+                .And
+                .FileContains(
                     traceFilePath,
                     "This executable is not bound to a managed DLL to execute."
                 )
-                .And.HaveStdErrContaining(
-                    "This executable is not bound to a managed DLL to execute."
-                );
+                .And
+                .HaveStdErrContaining("This executable is not bound to a managed DLL to execute.");
 
             FileUtils.DeleteFileIfPossible(traceFilePath);
         }
@@ -104,7 +103,8 @@ namespace HostActivation.Tests
             result
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"Error: cannot execute dotnet when renamed to {Path.GetFileNameWithoutExtension(sharedTestState.RenamedDotNet)}"
                 );
 

@@ -127,11 +127,16 @@ namespace System.ServiceModel.Configuration
                 behavior.RoleProvider = SystemWebHelper.GetRoleProvider(roleProviderName);
                 if (behavior.RoleProvider == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(SR.InvalidRoleProviderSpecifiedInConfig, roleProviderName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.InvalidRoleProviderSpecifiedInConfig,
+                                    roleProviderName
+                                )
+                            )
+                        );
                 }
             }
 
@@ -144,15 +149,17 @@ namespace System.ServiceModel.Configuration
                 Type type = Type.GetType(serviceAuthorizationManagerType, true);
                 if (!typeof(ServiceAuthorizationManager).IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidServiceAuthorizationManagerType,
-                                serviceAuthorizationManagerType,
-                                typeof(ServiceAuthorizationManager)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidServiceAuthorizationManagerType,
+                                    serviceAuthorizationManagerType,
+                                    typeof(ServiceAuthorizationManager)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 behavior.ServiceAuthorizationManager = (ServiceAuthorizationManager)
                     Activator.CreateInstance(type);
@@ -169,15 +176,17 @@ namespace System.ServiceModel.Configuration
                     Type type = Type.GetType(authorizationPolicies[i].PolicyType, true);
                     if (!typeof(IAuthorizationPolicy).IsAssignableFrom(type))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(
-                                    SR.ConfigInvalidAuthorizationPolicyType,
-                                    authorizationPolicies[i].PolicyType,
-                                    typeof(IAuthorizationPolicy)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ConfigurationErrorsException(
+                                    SR.GetString(
+                                        SR.ConfigInvalidAuthorizationPolicyType,
+                                        authorizationPolicies[i].PolicyType,
+                                        typeof(IAuthorizationPolicy)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     policies.Add((IAuthorizationPolicy)Activator.CreateInstance(type));
                 }

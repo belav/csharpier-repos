@@ -575,11 +575,13 @@ namespace System.Data.Entity.Design.Common
             //
             if (
                 _isModel
-                && member.MetadataProperties.Contains(
-                    DesignXmlConstants.EdmAnnotationNamespace
-                        + ":"
-                        + DesignXmlConstants.StoreGeneratedPattern
-                )
+                && member
+                    .MetadataProperties
+                    .Contains(
+                        DesignXmlConstants.EdmAnnotationNamespace
+                            + ":"
+                            + DesignXmlConstants.StoreGeneratedPattern
+                    )
             )
             {
                 _writer.WriteAttributeString(
@@ -875,11 +877,13 @@ namespace System.Data.Entity.Design.Common
             //
             if (
                 _isModel
-                && container.MetadataProperties.Contains(
-                    DesignXmlConstants.EdmAnnotationNamespace
-                        + ":"
-                        + DesignXmlConstants.LazyLoadingEnabled
-                )
+                && container
+                    .MetadataProperties
+                    .Contains(
+                        DesignXmlConstants.EdmAnnotationNamespace
+                            + ":"
+                            + DesignXmlConstants.LazyLoadingEnabled
+                    )
             )
             {
                 _writer.WriteAttributeString(
@@ -913,9 +917,9 @@ namespace System.Data.Entity.Design.Common
             }
 
             foreach (
-                EdmFunction functionImport in container.FunctionImports.Where(fi =>
-                    fi.IsComposableAttribute
-                )
+                EdmFunction functionImport in container
+                    .FunctionImports
+                    .Where(fi => fi.IsComposableAttribute)
             )
             {
                 WriteFunctionElement(functionImport);
@@ -960,11 +964,9 @@ namespace System.Data.Entity.Design.Common
 
             MetadataProperty property;
             if (
-                entitySet.MetadataProperties.TryGetValue(
-                    XmlConstants.DefiningQuery,
-                    false,
-                    out property
-                )
+                entitySet
+                    .MetadataProperties
+                    .TryGetValue(XmlConstants.DefiningQuery, false, out property)
                 && property.Value != null
             )
             {
@@ -975,11 +977,9 @@ namespace System.Data.Entity.Design.Common
             else
             {
                 if (
-                    entitySet.MetadataProperties.TryGetValue(
-                        XmlConstants.Schema,
-                        false,
-                        out property
-                    )
+                    entitySet
+                        .MetadataProperties
+                        .TryGetValue(XmlConstants.Schema, false, out property)
                     && property.Value != null
                 )
                 {
@@ -987,11 +987,9 @@ namespace System.Data.Entity.Design.Common
                 }
 
                 if (
-                    entitySet.MetadataProperties.TryGetValue(
-                        XmlConstants.Table,
-                        false,
-                        out property
-                    )
+                    entitySet
+                        .MetadataProperties
+                        .TryGetValue(XmlConstants.Table, false, out property)
                     && property.Value != null
                 )
                 {

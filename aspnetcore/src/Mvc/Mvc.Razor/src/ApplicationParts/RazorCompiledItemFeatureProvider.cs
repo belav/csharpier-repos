@@ -20,7 +20,8 @@ internal sealed class RazorCompiledItemFeatureProvider : IApplicationFeatureProv
             // Ensure parts do not specify views with differing cases. This is not supported
             // at runtime and we should flag at as such for precompiled views.
             var duplicates = provider
-                .CompiledItems.GroupBy(i => i.Identifier, StringComparer.OrdinalIgnoreCase)
+                .CompiledItems
+                .GroupBy(i => i.Identifier, StringComparer.OrdinalIgnoreCase)
                 .FirstOrDefault(g => g.Count() > 1);
 
             if (duplicates != null)

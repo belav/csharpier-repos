@@ -498,17 +498,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         continue;
                     }
 
-                    var diagnosticSpan =
-                        diagnostic.DataLocation.UnmappedFileSpan.GetClampedTextSpan(text);
+                    var diagnosticSpan = diagnostic
+                        .DataLocation
+                        .UnmappedFileSpan
+                        .GetClampedTextSpan(text);
                     if (diagnosticSpan.Start < oldSpan.Start)
                     {
                         // Bail out if the diagnostic has any additional locations that we don't know how to handle.
                         if (
-                            diagnostic.AdditionalLocations.Any(l =>
-                                l.DocumentId != null
-                                && l.UnmappedFileSpan.GetClampedTextSpan(text).Start
-                                    >= oldSpan.Start
-                            )
+                            diagnostic
+                                .AdditionalLocations
+                                .Any(l =>
+                                    l.DocumentId != null
+                                    && l.UnmappedFileSpan.GetClampedTextSpan(text).Start
+                                        >= oldSpan.Start
+                                )
                         )
                         {
                             updatedDiagnostics = default;
@@ -529,10 +533,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     {
                         // Bail out if the diagnostic has any additional locations that we don't know how to handle.
                         if (
-                            diagnostic.AdditionalLocations.Any(l =>
-                                l.DocumentId != null
-                                && oldSpan.End > l.UnmappedFileSpan.GetClampedTextSpan(text).Start
-                            )
+                            diagnostic
+                                .AdditionalLocations
+                                .Any(l =>
+                                    l.DocumentId != null
+                                    && oldSpan.End
+                                        > l.UnmappedFileSpan.GetClampedTextSpan(text).Start
+                                )
                         )
                         {
                             updatedDiagnostics = default;
@@ -562,9 +569,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 {
                     Debug.Assert(diagnostic.DataLocation != null);
                     var location = UpdateLocation(diagnostic.DataLocation);
-                    var additionalLocations = diagnostic.AdditionalLocations.SelectAsArray(
-                        UpdateLocation
-                    );
+                    var additionalLocations = diagnostic
+                        .AdditionalLocations
+                        .SelectAsArray(UpdateLocation);
                     return diagnostic.WithLocations(location, additionalLocations);
 
                     DiagnosticDataLocation UpdateLocation(DiagnosticDataLocation location)

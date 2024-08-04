@@ -442,10 +442,9 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
                 $"Could not find the pattern in the build output: '{s_runtimePackPathPattern}'.{Environment.NewLine}Build output: {buildOutput}"
             );
 
-        string expectedRuntimePackDir = BuildTestBase.s_buildEnv.GetRuntimePackDir(
-            targetFramework,
-            runtimeType
-        );
+        string expectedRuntimePackDir = BuildTestBase
+            .s_buildEnv
+            .GetRuntimePackDir(targetFramework, runtimeType);
         string actualPath = match.Groups[1].Value;
         if (string.Compare(actualPath, expectedRuntimePackDir) != 0)
             throw new XunitException(
@@ -465,10 +464,12 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
         {
             TestUtils.AssertFile(
                 Path.Combine(
-                    BuildTestBase.s_buildEnv.GetRuntimeNativeDir(
-                        assertOptions.TargetFramework,
-                        assertOptions.RuntimeType
-                    ),
+                    BuildTestBase
+                        .s_buildEnv
+                        .GetRuntimeNativeDir(
+                            assertOptions.TargetFramework,
+                            assertOptions.RuntimeType
+                        ),
                     "dotnet.native.js.symbols"
                 ),
                 Path.Combine(assertOptions.BinFrameworkDir, "dotnet.native.js.symbols"),
@@ -531,9 +532,10 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
         BootJsonData bootJson = ParseBootData(bootJsonPath);
         string spcExpectedFilename = $"System.Private.CoreLib{WasmAssemblyExtension}";
         string? spcActualFilename = bootJson
-            .resources.assembly.Keys.Where(a =>
-                Path.GetFileNameWithoutExtension(a) == "System.Private.CoreLib"
-            )
+            .resources
+            .assembly
+            .Keys
+            .Where(a => Path.GetFileNameWithoutExtension(a) == "System.Private.CoreLib")
             .SingleOrDefault();
         if (spcActualFilename is null)
             throw new XunitException(
@@ -545,7 +547,10 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
             );
 
         var bootJsonEntries = bootJson
-            .resources.jsModuleNative.Keys.Union(bootJson.resources.jsModuleRuntime.Keys)
+            .resources
+            .jsModuleNative
+            .Keys
+            .Union(bootJson.resources.jsModuleRuntime.Keys)
             .Union(bootJson.resources.jsModuleWorker?.Keys ?? Enumerable.Empty<string>())
             .Union(bootJson.resources.wasmSymbols?.Keys ?? Enumerable.Empty<string>())
             .Union(bootJson.resources.wasmNative.Keys)

@@ -46,10 +46,9 @@ namespace Microsoft.CodeAnalysis
                 typeof(AnalyzerAssemblyLoader).Assembly.Location
             );
             if (
-                PathUtilities.Comparer.Equals(
-                    compilerDirectory,
-                    Path.GetDirectoryName(assembly.Location)
-                )
+                PathUtilities
+                    .Comparer
+                    .Equals(compilerDirectory, Path.GetDirectoryName(assembly.Location))
             )
             {
                 return true;

@@ -109,9 +109,9 @@ namespace System.ServiceModel.Syndication
             }
             if (string.IsNullOrEmpty(outerElementName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.OuterElementNameNotSpecified)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.OuterElementNameNotSpecified));
             }
             writer.WriteStartElement(outerElementName, outerElementNamespace);
             writer.WriteAttributeString(Atom10Constants.TypeTag, string.Empty, this.Type);

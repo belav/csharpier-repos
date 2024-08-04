@@ -1920,11 +1920,9 @@ namespace System.Threading.Tasks
                 _count = tasksCopy.Length;
 
                 if (TplEventSource.Log.IsEnabled())
-                    TplEventSource.Log.TraceOperationBegin(
-                        this.Id,
-                        "TaskFactory.ContinueWhenAll",
-                        0
-                    );
+                    TplEventSource
+                        .Log
+                        .TraceOperationBegin(this.Id, "TaskFactory.ContinueWhenAll", 0);
 
                 if (s_asyncDebuggingEnabled)
                     AddToActiveTasks(this);
@@ -1940,10 +1938,9 @@ namespace System.Threading.Tasks
                 if (Interlocked.Decrement(ref _count) == 0)
                 {
                     if (TplEventSource.Log.IsEnabled())
-                        TplEventSource.Log.TraceOperationEnd(
-                            this.Id,
-                            AsyncCausalityStatus.Completed
-                        );
+                        TplEventSource
+                            .Log
+                            .TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
 
                     if (s_asyncDebuggingEnabled)
                         RemoveFromActiveTasks(this);
@@ -2002,11 +1999,9 @@ namespace System.Threading.Tasks
                 _count = tasksCopy.Length;
 
                 if (TplEventSource.Log.IsEnabled())
-                    TplEventSource.Log.TraceOperationBegin(
-                        this.Id,
-                        "TaskFactory.ContinueWhenAll<>",
-                        0
-                    );
+                    TplEventSource
+                        .Log
+                        .TraceOperationBegin(this.Id, "TaskFactory.ContinueWhenAll<>", 0);
 
                 if (s_asyncDebuggingEnabled)
                     AddToActiveTasks(this);
@@ -2022,10 +2017,9 @@ namespace System.Threading.Tasks
                 if (Interlocked.Decrement(ref _count) == 0)
                 {
                     if (TplEventSource.Log.IsEnabled())
-                        TplEventSource.Log.TraceOperationEnd(
-                            this.Id,
-                            AsyncCausalityStatus.Completed
-                        );
+                        TplEventSource
+                            .Log
+                            .TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
 
                     if (s_asyncDebuggingEnabled)
                         RemoveFromActiveTasks(this);
@@ -2833,11 +2827,9 @@ namespace System.Threading.Tasks
                 }
 
                 if (TplEventSource.Log.IsEnabled())
-                    TplEventSource.Log.TraceOperationBegin(
-                        this.Id,
-                        "TaskFactory.ContinueWhenAny",
-                        0
-                    );
+                    TplEventSource
+                        .Log
+                        .TraceOperationBegin(this.Id, "TaskFactory.ContinueWhenAny", 0);
 
                 if (s_asyncDebuggingEnabled)
                     AddToActiveTasks(this);
@@ -2857,14 +2849,12 @@ namespace System.Threading.Tasks
                 {
                     if (TplEventSource.Log.IsEnabled())
                     {
-                        TplEventSource.Log.TraceOperationRelation(
-                            this.Id,
-                            CausalityRelation.Choice
-                        );
-                        TplEventSource.Log.TraceOperationEnd(
-                            this.Id,
-                            AsyncCausalityStatus.Completed
-                        );
+                        TplEventSource
+                            .Log
+                            .TraceOperationRelation(this.Id, CausalityRelation.Choice);
+                        TplEventSource
+                            .Log
+                            .TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
                     }
 
                     if (s_asyncDebuggingEnabled)

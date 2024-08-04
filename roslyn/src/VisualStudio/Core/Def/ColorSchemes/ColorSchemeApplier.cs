@@ -172,9 +172,11 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
 
         private bool IsSupportedTheme(Guid themeId)
         {
-            return _colorSchemes.Values.Any(scheme =>
-                scheme.Themes.Any(static (theme, themeId) => theme.Guid == themeId, themeId)
-            );
+            return _colorSchemes
+                .Values
+                .Any(scheme =>
+                    scheme.Themes.Any(static (theme, themeId) => theme.Guid == themeId, themeId)
+                );
         }
 
         public async Task<bool> IsThemeCustomizedAsync(CancellationToken cancellationToken) =>

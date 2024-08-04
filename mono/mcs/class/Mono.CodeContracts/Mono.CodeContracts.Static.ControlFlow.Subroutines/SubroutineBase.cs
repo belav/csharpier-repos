@@ -240,9 +240,10 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
 
             BlockWithLabels<Label> onlyOne = null;
             foreach (
-                BlockWithLabels<Label> successor in point.Block.Subroutine.SuccessorBlocks(
-                    point.Block
-                )
+                BlockWithLabels<Label> successor in point
+                    .Block
+                    .Subroutine
+                    .SuccessorBlocks(point.Block)
             )
             {
                 if (onlyOne == null)
@@ -348,9 +349,9 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
 
             return APC.ForEnd(
                 sub.Exit,
-                point.SubroutineContext.Cons(
-                    new Edge<CFGBlock, EdgeTag>(head.From, head.To, first.Key)
-                )
+                point
+                    .SubroutineContext
+                    .Cons(new Edge<CFGBlock, EdgeTag>(head.From, head.To, first.Key))
             );
         }
 
@@ -580,9 +581,9 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
                 Subroutine nextSubroutine = first.Value;
                 yield return APC.ForEnd(
                     nextSubroutine.Exit,
-                    point.SubroutineContext.Cons(
-                        new Edge<CFGBlock, EdgeTag>(edge.From, edge.To, first.Key)
-                    )
+                    point
+                        .SubroutineContext
+                        .Cons(new Edge<CFGBlock, EdgeTag>(edge.From, edge.To, first.Key))
                 );
             }
         }
@@ -683,11 +684,14 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
                                     bool isVirtual2;
                                     if (
                                         context.Head.Tag.Is(EdgeTag.AfterMask)
-                                        && context.Head.From.IsMethodCallBlock(
-                                            out calledMethod2,
-                                            out isNewObj2,
-                                            out isVirtual2
-                                        )
+                                        && context
+                                            .Head
+                                            .From
+                                            .IsMethodCallBlock(
+                                                out calledMethod2,
+                                                out isNewObj2,
+                                                out isVirtual2
+                                            )
                                     )
                                     {
                                         TypeNode sub = metadataDecoder.DeclaringType(calledMethod2);
@@ -702,11 +706,14 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
                                     }
                                     else if (
                                         context.Head.Tag.Is(EdgeTag.BeforeMask)
-                                        && context.Head.To.IsMethodCallBlock(
-                                            out calledMethod2,
-                                            out isNewObj2,
-                                            out isVirtual2
-                                        )
+                                        && context
+                                            .Head
+                                            .To
+                                            .IsMethodCallBlock(
+                                                out calledMethod2,
+                                                out isNewObj2,
+                                                out isVirtual2
+                                            )
                                     )
                                     {
                                         TypeNode sub = metadataDecoder.DeclaringType(calledMethod2);

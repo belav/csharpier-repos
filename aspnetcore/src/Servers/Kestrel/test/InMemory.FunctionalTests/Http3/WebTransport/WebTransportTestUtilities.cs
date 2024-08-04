@@ -33,8 +33,9 @@ internal class WebTransportTestUtilities
 
         await inMemory.InitializeConnectionAsync(async context =>
         {
-            var webTransportFeature =
-                context.Features.GetRequiredFeature<IHttpWebTransportFeature>();
+            var webTransportFeature = context
+                .Features
+                .GetRequiredFeature<IHttpWebTransportFeature>();
 
             try
             {

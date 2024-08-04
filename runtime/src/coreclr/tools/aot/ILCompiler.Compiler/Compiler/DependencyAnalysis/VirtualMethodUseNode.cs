@@ -70,11 +70,13 @@ namespace ILCompiler.DependencyAnalysis
 
             // Do not report things like Foo<object, __Canon>.Frob().
             if (!_decl.IsCanonicalMethod(CanonicalFormKind.Any) || canonDecl == _decl)
-                factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(
-                    ref dependencies,
-                    factory,
-                    _decl
-                );
+                factory
+                    .MetadataManager
+                    .GetDependenciesDueToVirtualMethodReflectability(
+                        ref dependencies,
+                        factory,
+                        _decl
+                    );
 
             if (VariantInterfaceMethodUseNode.IsVariantMethodCall(factory, _decl))
                 dependencies.Add(

@@ -30,8 +30,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             // apply that filter internally.
             using (X509Certificate2 cert = new X509Certificate2(TestFiles.MicrosoftRootCertFile))
             {
-                X509AuthorityInformationAccessExtension aia = cert
-                    .Extensions.OfType<X509AuthorityInformationAccessExtension>()
+                X509AuthorityInformationAccessExtension aia = cert.Extensions
+                    .OfType<X509AuthorityInformationAccessExtension>()
                     .Single();
 
                 string[] caIssuersValues =
@@ -278,8 +278,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             using (X509Certificate2 cert = new X509Certificate2(TestFiles.MicrosoftRootCertFile))
             {
-                X509AuthorityInformationAccessExtension aia = cert
-                    .Extensions.OfType<X509AuthorityInformationAccessExtension>()
+                X509AuthorityInformationAccessExtension aia = cert.Extensions
+                    .OfType<X509AuthorityInformationAccessExtension>()
                     .Single();
 
                 Assert.Throws<ArgumentNullException>(
@@ -307,8 +307,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             using (X509Certificate2 cert = new X509Certificate2(TestFiles.MicrosoftRootCertFile))
             {
-                X509AuthorityInformationAccessExtension aia = cert
-                    .Extensions.OfType<X509AuthorityInformationAccessExtension>()
+                X509AuthorityInformationAccessExtension aia = cert.Extensions
+                    .OfType<X509AuthorityInformationAccessExtension>()
                     .Single();
 
                 string[] caIssuersValues =

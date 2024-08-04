@@ -334,8 +334,10 @@ public class OpenIdConnectChallengeTests
             OpenIdConnectParameterNames.RedirectUri
         );
 
-        var actual = res
-            .Headers.Location.Query.Trim('?')
+        var actual = res.Headers
+            .Location
+            .Query
+            .Trim('?')
             .Split('&')
             .Single(seg =>
                 seg.StartsWith($"{OpenIdConnectParameterNames.ClientId}=", StringComparison.Ordinal)
@@ -453,10 +455,9 @@ public class OpenIdConnectChallengeTests
         var challengeCookies = SetCookieHeaderValue.ParseList(transaction.SetCookie);
         var nonceCookie = challengeCookies
             .Where(cookie =>
-                cookie.Name.StartsWith(
-                    OpenIdConnectDefaults.CookieNoncePrefix,
-                    StringComparison.Ordinal
-                )
+                cookie
+                    .Name
+                    .StartsWith(OpenIdConnectDefaults.CookieNoncePrefix, StringComparison.Ordinal)
             )
             .Single();
         Assert.True(nonceCookie.Expires.HasValue);

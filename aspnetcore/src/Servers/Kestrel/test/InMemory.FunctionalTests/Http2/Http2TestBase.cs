@@ -128,9 +128,9 @@ public class Http2TestBase
     protected static readonly byte[] _worldBytes = Encoding.ASCII.GetBytes("world");
     protected static readonly byte[] _helloWorldBytes = Encoding.ASCII.GetBytes("hello, world");
     protected static readonly byte[] _noData = new byte[0];
-    protected static readonly byte[] _maxData = Encoding.ASCII.GetBytes(
-        new string('a', Http2PeerSettings.MinAllowedMaxFrameSize)
-    );
+    protected static readonly byte[] _maxData = Encoding
+        .ASCII
+        .GetBytes(new string('a', Http2PeerSettings.MinAllowedMaxFrameSize));
 
     private readonly MemoryPool<byte> _memoryPool = PinnedBlockMemoryPoolFactory.Create();
 
@@ -231,7 +231,8 @@ public class Http2TestBase
             _receivedRequestFields.Scheme = context.Request.Scheme;
             _receivedRequestFields.Path = context.Request.Path.Value;
             _receivedRequestFields.RawTarget = context
-                .Features.Get<IHttpRequestFeature>()
+                .Features
+                .Get<IHttpRequestFeature>()
                 .RawTarget;
             _receivedRequestFields.Authority = context.Request.Host.Value;
             foreach (var header in context.Request.Headers)
@@ -260,7 +261,8 @@ public class Http2TestBase
             _receivedRequestFields.Scheme = context.Request.Scheme;
             _receivedRequestFields.Path = context.Request.Path.Value;
             _receivedRequestFields.RawTarget = context
-                .Features.Get<IHttpRequestFeature>()
+                .Features
+                .Get<IHttpRequestFeature>()
                 .RawTarget;
             foreach (var header in context.Request.Headers)
             {
@@ -312,10 +314,12 @@ public class Http2TestBase
 
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(() =>
-            {
-                sem.Release();
-            });
+            context
+                .RequestAborted
+                .Register(() =>
+                {
+                    sem.Release();
+                });
 
             await sem.WaitAsync().DefaultTimeout();
         };
@@ -335,15 +339,17 @@ public class Http2TestBase
             var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(() =>
-            {
-                lock (_abortedStreamIdsLock)
+            context
+                .RequestAborted
+                .Register(() =>
                 {
-                    _abortedStreamIds.Add(streamIdFeature.StreamId);
-                }
+                    lock (_abortedStreamIdsLock)
+                    {
+                        _abortedStreamIds.Add(streamIdFeature.StreamId);
+                    }
 
-                sem.Release();
-            });
+                    sem.Release();
+                });
 
             await sem.WaitAsync().DefaultTimeout();
 
@@ -355,15 +361,17 @@ public class Http2TestBase
             var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(() =>
-            {
-                lock (_abortedStreamIdsLock)
+            context
+                .RequestAborted
+                .Register(() =>
                 {
-                    _abortedStreamIds.Add(streamIdFeature.StreamId);
-                }
+                    lock (_abortedStreamIdsLock)
+                    {
+                        _abortedStreamIds.Add(streamIdFeature.StreamId);
+                    }
 
-                sem.Release();
-            });
+                    sem.Release();
+                });
 
             await sem.WaitAsync().DefaultTimeout();
 
@@ -417,7 +425,8 @@ public class Http2TestBase
             Assert.False(context.Request.Headers.ContainsKey(InternalHeaderNames.Path));
             context.Response.Headers["path"] = context.Request.Path.ToString();
             context.Response.Headers["rawtarget"] = context
-                .Features.Get<IHttpRequestFeature>()
+                .Features
+                .Get<IHttpRequestFeature>()
                 .RawTarget;
 
             return Task.CompletedTask;

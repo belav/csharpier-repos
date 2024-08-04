@@ -92,11 +92,12 @@ namespace System.Security.Cryptography.Asn1
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.DigestAlgorithm
-            );
+            System
+                .Security
+                .Cryptography
+                .Asn1
+                .AlgorithmIdentifierAsn
+                .Decode(ref sequenceReader, rebind, out decoded.DigestAlgorithm);
 
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {

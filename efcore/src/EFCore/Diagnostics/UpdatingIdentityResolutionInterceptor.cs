@@ -51,9 +51,9 @@ public class UpdatingIdentityResolutionInterceptor : IIdentityResolutionIntercep
         if (existingEntry.State == EntityState.Added)
         {
             foreach (
-                var propertyEntry in tempEntry.Properties.Where(e =>
-                    e.Metadata.GetBeforeSaveBehavior() != PropertySaveBehavior.Throw
-                )
+                var propertyEntry in tempEntry
+                    .Properties
+                    .Where(e => e.Metadata.GetBeforeSaveBehavior() != PropertySaveBehavior.Throw)
             )
             {
                 existingEntry.Property(propertyEntry.Metadata.Name).CurrentValue =
@@ -63,9 +63,9 @@ public class UpdatingIdentityResolutionInterceptor : IIdentityResolutionIntercep
         else
         {
             foreach (
-                var propertyEntry in tempEntry.Properties.Where(e =>
-                    e.Metadata.GetAfterSaveBehavior() != PropertySaveBehavior.Throw
-                )
+                var propertyEntry in tempEntry
+                    .Properties
+                    .Where(e => e.Metadata.GetAfterSaveBehavior() != PropertySaveBehavior.Throw)
             )
             {
                 var existingPropertyEntry = existingEntry.Property(propertyEntry.Metadata.Name);

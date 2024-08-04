@@ -67,9 +67,14 @@ public abstract class DiagnosticAnalyzerRunner
             var options = ConfigureCompilationOptions(compilation.Options);
             if (additionalEnabledDiagnostics.Length > 0)
             {
-                options = compilation.Options.WithSpecificDiagnosticOptions(
-                    additionalEnabledDiagnostics.ToDictionary(s => s, s => ReportDiagnostic.Info)
-                );
+                options = compilation
+                    .Options
+                    .WithSpecificDiagnosticOptions(
+                        additionalEnabledDiagnostics.ToDictionary(
+                            s => s,
+                            s => ReportDiagnostic.Info
+                        )
+                    );
             }
 
             var compilationWithAnalyzers = compilation

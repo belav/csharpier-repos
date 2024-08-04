@@ -64,20 +64,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                     if (ruleNames.TryGetValue(ruleKey, out var existingName))
                     {
                         // For duplicated rules, only preserve the one with a name that would sort first
-                        var ordinalIgnoreCaseOrdering = StringComparer.OrdinalIgnoreCase.Compare(
-                            namingRuleTitle,
-                            existingName
-                        );
+                        var ordinalIgnoreCaseOrdering = StringComparer
+                            .OrdinalIgnoreCase
+                            .Compare(namingRuleTitle, existingName);
                         if (ordinalIgnoreCaseOrdering > 0)
                         {
                             continue;
                         }
                         else if (ordinalIgnoreCaseOrdering == 0)
                         {
-                            var ordinalOrdering = StringComparer.Ordinal.Compare(
-                                namingRuleTitle,
-                                existingName
-                            );
+                            var ordinalOrdering = StringComparer
+                                .Ordinal
+                                .Compare(namingRuleTitle, existingName);
                             if (ordinalOrdering > 0)
                             {
                                 continue;
@@ -115,7 +113,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             // which a user has trouble ordering, the intersection of the two rules can be broken out into a new rule
             // will always match earlier than the broader rules it was derived from.
             var orderedRules = preferences
-                .Rules.NamingRules.OrderBy(rule => rule, NamingRuleModifierListComparer.Instance)
+                .Rules
+                .NamingRules
+                .OrderBy(rule => rule, NamingRuleModifierListComparer.Instance)
                 .ThenBy(rule => rule, NamingRuleAccessibilityListComparer.Instance)
                 .ThenBy(rule => rule, NamingRuleSymbolListComparer.Instance)
                 .ThenBy(
@@ -249,10 +249,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                     )
                     {
                         if (
-                            x.SymbolSpecification.RequiredModifierList.Any(static x =>
-                                x.ModifierKindWrapper
-                                == SymbolSpecification.ModifierKindEnum.IsConst
-                            )
+                            x.SymbolSpecification
+                                .RequiredModifierList
+                                .Any(static x =>
+                                    x.ModifierKindWrapper
+                                    == SymbolSpecification.ModifierKindEnum.IsConst
+                                )
                         )
                         {
                             // 'const' implies both 'readonly' and 'static'

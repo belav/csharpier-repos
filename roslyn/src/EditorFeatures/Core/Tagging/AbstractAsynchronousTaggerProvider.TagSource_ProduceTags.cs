@@ -34,9 +34,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 _dataSource.ThreadingContext.ThrowIfNotOnUIThread();
 
                 Debug.Assert(
-                    _dataSource.CaretChangeBehavior.HasFlag(
-                        TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag
-                    )
+                    _dataSource
+                        .CaretChangeBehavior
+                        .HasFlag(TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag)
                 );
 
                 var caret = _dataSource.GetCaretPoint(_textView, _subjectBuffer);
@@ -153,9 +153,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 // Don't bother going forward if we're not going adjust any tags based on edits.
                 if (
-                    _dataSource.TextChangeBehavior.HasFlag(
-                        TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits
-                    )
+                    _dataSource
+                        .TextChangeBehavior
+                        .HasFlag(TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits)
                 )
                 {
                     RemoveTagsThatIntersectEdit(e);
@@ -250,7 +250,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             )
             {
                 await _dataSource
-                    .ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken)
+                    .ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken)
                     .NoThrowAwaitable();
                 if (cancellationToken.IsCancellationRequested)
                     return default;
@@ -327,9 +329,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                     // Then switch back to the UI thread to update our state and kick off the work to notify the editor.
                     await _dataSource
-                        .ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationToken
-                        )
+                        .ThreadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken)
                         .NoThrowAwaitable();
                     if (cancellationToken.IsCancellationRequested)
                         return default;
@@ -415,7 +417,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     .Select(dss => dss.SnapshotSpan.Snapshot.TextBuffer)
                     .ToSet();
                 var newTagsByBuffer = context
-                    .TagSpans.Where(ts => buffersToTag.Contains(ts.Span.Snapshot.TextBuffer))
+                    .TagSpans
+                    .Where(ts => buffersToTag.Contains(ts.Span.Snapshot.TextBuffer))
                     .ToLookup(t => t.Span.Snapshot.TextBuffer);
                 var spansTagged = context._spansTagged;
 
@@ -522,14 +525,16 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             {
                 if (
                     _dataSource
-                        .Options.OfType<Option2<bool>>()
+                        .Options
+                        .OfType<Option2<bool>>()
                         .Any(option => !_dataSource.GlobalOptions.GetOption(option))
                 )
                     return true;
 
                 var languageName = _subjectBuffer.GetLanguageName();
                 return _dataSource
-                    .Options.OfType<PerLanguageOption2<bool>>()
+                    .Options
+                    .OfType<PerLanguageOption2<bool>>()
                     .Any(option =>
                         languageName == null
                         || !_dataSource.GlobalOptions.GetOption(option, languageName)
@@ -564,7 +569,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     {
                         var snapshot = spansToTag
                             .First(s => s.SnapshotSpan.Snapshot.TextBuffer == latestBuffer)
-                            .SnapshotSpan.Snapshot;
+                            .SnapshotSpan
+                            .Snapshot;
 
                         if (oldTagTrees.TryGetValue(latestBuffer, out var previousSpans))
                         {
@@ -706,10 +712,16 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 )
                 {
                     // Compute this as a high priority work item to have the lease amount of blocking as possible.
-                    _dataSource.ThreadingContext.JoinableTaskFactory.Run(
-                        () =>
-                            this.RecomputeTagsAsync(highPriority: true, _disposalTokenSource.Token)
-                    );
+                    _dataSource
+                        .ThreadingContext
+                        .JoinableTaskFactory
+                        .Run(
+                            () =>
+                                this.RecomputeTagsAsync(
+                                    highPriority: true,
+                                    _disposalTokenSource.Token
+                                )
+                        );
                 }
 
                 _firstTagsRequest = false;

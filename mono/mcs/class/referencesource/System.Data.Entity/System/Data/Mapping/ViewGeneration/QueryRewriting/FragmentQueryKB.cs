@@ -167,16 +167,18 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     {
                         // Now check that the FromEnd is 1..1 (only then will all the Addresses be present in the assoc set)
                         if (
-                            constraint.FromRole.RelationshipMultiplicity.Equals(
-                                RelationshipMultiplicity.One
-                            )
+                            constraint
+                                .FromRole
+                                .RelationshipMultiplicity
+                                .Equals(RelationshipMultiplicity.One)
                         )
                         {
                             // Make sure that the ToEnd is not 0..* because then the schema is broken
                             Debug.Assert(
-                                constraint.ToRole.RelationshipMultiplicity.Equals(
-                                    RelationshipMultiplicity.Many
-                                ) == false
+                                constraint
+                                    .ToRole
+                                    .RelationshipMultiplicity
+                                    .Equals(RelationshipMultiplicity.Many) == false
                             );
                             // Equate the ends
                             BoolExpression inRoleExpression1 = BoolExpression.CreateLiteral(
@@ -223,14 +225,16 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 {
                     //make sure that the method called with a 1:1 association
                     Debug.Assert(
-                        constraint.FromRole.RelationshipMultiplicity.Equals(
-                            RelationshipMultiplicity.One
-                        )
+                        constraint
+                            .FromRole
+                            .RelationshipMultiplicity
+                            .Equals(RelationshipMultiplicity.One)
                     );
                     Debug.Assert(
-                        constraint.ToRole.RelationshipMultiplicity.Equals(
-                            RelationshipMultiplicity.One
-                        )
+                        constraint
+                            .ToRole
+                            .RelationshipMultiplicity
+                            .Equals(RelationshipMultiplicity.One)
                     );
                     // Create an Equivalence between the two Sets participating in this AssociationSet
                     BoolExpression fromSetExpression = BoolExpression.CreateLiteral(

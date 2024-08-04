@@ -121,9 +121,10 @@ End Class";
             using (var workspace = CreateWorkspace(LanguageNames.VisualBasic, code))
             {
                 var ideAnalyzerOptions = IdeAnalyzerOptions.GetDefault(
-                    workspace.Services.SolutionServices.GetLanguageServices(
-                        LanguageNames.VisualBasic
-                    )
+                    workspace
+                        .Services
+                        .SolutionServices
+                        .GetLanguageServices(LanguageNames.VisualBasic)
                 );
 
                 ideAnalyzerOptions = ideAnalyzerOptions with
@@ -248,10 +249,12 @@ End Class";
             var ideAnalyzerOptions = IdeAnalyzerOptions.GetDefault(
                 workspace.Services.SolutionServices.GetLanguageServices(LanguageNames.CSharp)
             );
-            workspace.GlobalOptions.SetGlobalOption(
-                CSharpCodeStyleOptions.VarWhenTypeIsApparent,
-                new CodeStyleOption<bool>(false, NotificationOption.Suggestion)
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    new CodeStyleOption<bool>(false, NotificationOption.Suggestion)
+                );
 
             // run analysis
             var project = workspace.CurrentSolution.Projects.First();
@@ -315,13 +318,16 @@ End Class";
             );
 
             // add host analyzer as global assets
-            var remotableDataService =
-                workspace.Services.GetService<ISolutionAssetStorageProvider>();
+            var remotableDataService = workspace
+                .Services
+                .GetService<ISolutionAssetStorageProvider>();
             var serializer = workspace.Services.GetRequiredService<ISerializerService>();
 
             // run analysis
             var project = workspace
-                .CurrentSolution.Projects.First()
+                .CurrentSolution
+                .Projects
+                .First()
                 .AddAnalyzerReference(analyzerReference);
 
             var runner = CreateAnalyzerRunner();
@@ -374,7 +380,8 @@ End Class";
                 new TestAnalyzerAssemblyLoader()
             );
             var project = workspace
-                .CurrentSolution.GetProject(projectId)
+                .CurrentSolution
+                .GetProject(projectId)
                 .AddAnalyzerReference(analyzerReference);
 
             var analyzerDriver = (await project.GetCompilationAsync()).WithAnalyzers(
@@ -403,9 +410,9 @@ End Class";
             ParseOptions options = null
         )
         {
-            var composition = EditorTestCompositions.EditorFeatures.WithTestHostParts(
-                TestHost.OutOfProcess
-            );
+            var composition = EditorTestCompositions
+                .EditorFeatures
+                .WithTestHostParts(TestHost.OutOfProcess);
 
             var workspace =
                 (language == LanguageNames.CSharp)
@@ -420,16 +427,20 @@ End Class";
                         composition: composition
                     );
 
-            workspace.GlobalOptions.SetGlobalOption(
-                SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
-                LanguageNames.CSharp,
-                BackgroundAnalysisScope.FullSolution
-            );
-            workspace.GlobalOptions.SetGlobalOption(
-                SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
-                LanguageNames.VisualBasic,
-                BackgroundAnalysisScope.FullSolution
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    BackgroundAnalysisScope.FullSolution
+                );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
+                    LanguageNames.VisualBasic,
+                    BackgroundAnalysisScope.FullSolution
+                );
 
             return workspace;
         }

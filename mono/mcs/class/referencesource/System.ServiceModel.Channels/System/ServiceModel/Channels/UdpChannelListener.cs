@@ -68,16 +68,18 @@ namespace System.ServiceModel.Channels
                     < this.udpTransportBindingElement.MaxReceivedMessageSize
             )
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "SocketReceiveBufferSize",
-                    this.udpTransportBindingElement.SocketReceiveBufferSize,
-                    SR.Property1LessThanOrEqualToProperty2(
-                        "MaxReceivedMessageSize",
-                        this.udpTransportBindingElement.MaxReceivedMessageSize,
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange(
                         "SocketReceiveBufferSize",
-                        this.udpTransportBindingElement.SocketReceiveBufferSize
-                    )
-                );
+                        this.udpTransportBindingElement.SocketReceiveBufferSize,
+                        SR.Property1LessThanOrEqualToProperty2(
+                            "MaxReceivedMessageSize",
+                            this.udpTransportBindingElement.MaxReceivedMessageSize,
+                            "SocketReceiveBufferSize",
+                            this.udpTransportBindingElement.SocketReceiveBufferSize
+                        )
+                    );
             }
 
             int maxBufferSize = (int)
@@ -580,11 +582,13 @@ namespace System.ServiceModel.Channels
         {
             if (listenUriBaseAddress.IsDefaultPort || listenUriBaseAddress.Port == 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "context.ListenUriBaseAddress",
-                    listenUriBaseAddress,
-                    SR.ExplicitListenUriModeRequiresPort
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange(
+                        "context.ListenUriBaseAddress",
+                        listenUriBaseAddress,
+                        SR.ExplicitListenUriModeRequiresPort
+                    );
             }
 
             this.listenUri = UdpUtility.AppendRelativePath(listenUriBaseAddress, relativeAddress);
@@ -707,11 +711,13 @@ namespace System.ServiceModel.Channels
 
                     if (listenSockets.Count == 0)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new ArgumentException(
-                                SR.UdpFailedToFindMulticastAdapter(this.listenUri)
-                            )
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new ArgumentException(
+                                    SR.UdpFailedToFindMulticastAdapter(this.listenUri)
+                                )
+                            );
                     }
                 }
                 else
@@ -847,18 +853,22 @@ namespace System.ServiceModel.Channels
 
                 if (!listenUriBase.IsAbsoluteUri)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "context.ListenUriBaseAddress",
-                        SR.RelativeUriNotAllowed(listenUriBase)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument(
+                            "context.ListenUriBaseAddress",
+                            SR.RelativeUriNotAllowed(listenUriBase)
+                        );
                 }
 
                 if (context.ListenUriMode == ListenUriMode.Unique && !listenUriBase.IsDefaultPort)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "context.ListenUriBaseAddress",
-                        SR.DefaultPortRequiredForListenUriModeUnique(listenUriBase)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument(
+                            "context.ListenUriBaseAddress",
+                            SR.DefaultPortRequiredForListenUriModeUnique(listenUriBase)
+                        );
                 }
 
                 if (
@@ -866,21 +876,25 @@ namespace System.ServiceModel.Channels
                     == false
                 )
                 {
-                    throw FxTrace.Exception.Argument(
-                        "context.ListenUriBaseAddress",
-                        SR.UriSchemeNotSupported(listenUriBase.Scheme)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument(
+                            "context.ListenUriBaseAddress",
+                            SR.UriSchemeNotSupported(listenUriBase.Scheme)
+                        );
                 }
 
                 if (!UdpUtility.IsSupportedHostNameType(listenUriBase.HostNameType))
                 {
-                    throw FxTrace.Exception.Argument(
-                        "context.ListenUriBaseAddress",
-                        SR.UnsupportedUriHostNameType(
-                            listenUriBase.Host,
-                            listenUriBase.HostNameType
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument(
+                            "context.ListenUriBaseAddress",
+                            SR.UnsupportedUriHostNameType(
+                                listenUriBase.Host,
+                                listenUriBase.HostNameType
+                            )
+                        );
                 }
             }
 

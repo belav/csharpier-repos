@@ -31,16 +31,16 @@ namespace System.ServiceModel
         {
             if (partialQueueName == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "partialQueueName"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("partialQueueName");
             }
 
             if (contextProperties == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "contextProperties"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("contextProperties");
             }
 
             string conversationId = null;

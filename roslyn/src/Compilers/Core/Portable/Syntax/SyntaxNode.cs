@@ -1064,7 +1064,8 @@ namespace Microsoft.CodeAnalysis
             }
 
             var node = FindToken(span.Start, findInsideTrivia)
-                .Parent!.FirstAncestorOrSelf<SyntaxNode, TextSpan>(
+                .Parent!
+                .FirstAncestorOrSelf<SyntaxNode, TextSpan>(
                     (a, span) => a.FullSpan.Contains(span),
                     span
                 );
@@ -1118,13 +1119,15 @@ namespace Microsoft.CodeAnalysis
             bool includeDocumentationComments = false
         )
         {
-            return SyntaxNavigator.Instance.GetFirstToken(
-                this,
-                includeZeroWidth,
-                includeSkipped,
-                includeDirectives,
-                includeDocumentationComments
-            );
+            return SyntaxNavigator
+                .Instance
+                .GetFirstToken(
+                    this,
+                    includeZeroWidth,
+                    includeSkipped,
+                    includeDirectives,
+                    includeDocumentationComments
+                );
         }
 
         /// <summary>
@@ -1138,13 +1141,15 @@ namespace Microsoft.CodeAnalysis
             bool includeDocumentationComments = false
         )
         {
-            return SyntaxNavigator.Instance.GetLastToken(
-                this,
-                includeZeroWidth,
-                includeSkipped,
-                includeDirectives,
-                includeDocumentationComments
-            );
+            return SyntaxNavigator
+                .Instance
+                .GetLastToken(
+                    this,
+                    includeZeroWidth,
+                    includeSkipped,
+                    includeDirectives,
+                    includeDocumentationComments
+                );
         }
 
         /// <summary>

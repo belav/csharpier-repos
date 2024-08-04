@@ -263,7 +263,8 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
         using (var context = CreateContext())
         {
             var entityTypeMappings = context
-                .Model.GetEntityTypes()
+                .Model
+                .GetEntityTypes()
                 .Select(e => new EntityTypeMapping(e))
                 .ToList();
 

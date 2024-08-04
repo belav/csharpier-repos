@@ -1784,9 +1784,9 @@ namespace System.Net.Sockets.Tests
                     Assert.Equal(expectedEP, args.RemoteEndPoint);
                     Assert.True(
                         args.ReceiveMessageFromPacketInfo.Address.Equals(IPAddress.Loopback)
-                            || args.ReceiveMessageFromPacketInfo.Address.Equals(
-                                IPAddress.Loopback.MapToIPv6()
-                            )
+                            || args.ReceiveMessageFromPacketInfo
+                                .Address
+                                .Equals(IPAddress.Loopback.MapToIPv6())
                     );
                 }
             }
@@ -2113,11 +2113,13 @@ namespace System.Net.Sockets.Tests
                 // Assert.Equal(connectTo.MapToIPv6(), remoteEndPoint.Address);
 
                 SocketUdpClient client = new SocketUdpClient(_log, serverSocket, connectTo, port);
-                bool success = async.AsyncWaitHandle.WaitOne(
-                    expectedToTimeout
-                        ? TestSettings.FailingTestTimeout
-                        : TestSettings.PassingTestTimeout
-                );
+                bool success = async
+                    .AsyncWaitHandle
+                    .WaitOne(
+                        expectedToTimeout
+                            ? TestSettings.FailingTestTimeout
+                            : TestSettings.PassingTestTimeout
+                    );
                 if (!success)
                 {
                     throw new TimeoutException();

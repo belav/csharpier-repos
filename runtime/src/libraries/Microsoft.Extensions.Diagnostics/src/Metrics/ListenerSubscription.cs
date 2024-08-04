@@ -223,10 +223,14 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
 
                 if (
                     !instrument
-                        .Meter.Name.AsSpan()
+                        .Meter
+                        .Name
+                        .AsSpan()
                         .StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
                     || !instrument
-                        .Meter.Name.AsSpan()
+                        .Meter
+                        .Name
+                        .AsSpan()
                         .EndsWith(suffix, StringComparison.OrdinalIgnoreCase)
                 )
                 {

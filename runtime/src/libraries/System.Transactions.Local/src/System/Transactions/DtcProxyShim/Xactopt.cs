@@ -36,11 +36,13 @@ internal struct Xactopt
             XactoptNative native = new() { UlTimeout = managed.UlTimeout };
 
             // Usage of Xactopt never passes non-ASCII chars, so we can ignore them.
-            Encoding.ASCII.TryGetBytes(
-                managed.SzDescription,
-                new Span<byte>(native.SzDescription, 40),
-                out _
-            );
+            Encoding
+                .ASCII
+                .TryGetBytes(
+                    managed.SzDescription,
+                    new Span<byte>(native.SzDescription, 40),
+                    out _
+                );
 
             return native;
         }

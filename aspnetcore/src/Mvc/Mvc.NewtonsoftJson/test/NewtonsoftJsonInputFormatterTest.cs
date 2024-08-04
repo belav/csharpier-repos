@@ -446,9 +446,9 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
             new MvcNewtonsoftJsonOptions()
         );
 
-        var contentBytes = Encoding.UTF8.GetBytes(
-            "{ \"Complex\": { \"WithPrimitives\": [ { \"ShortValue\":\"32768\" } ] } }"
-        );
+        var contentBytes = Encoding
+            .UTF8
+            .GetBytes("{ \"Complex\": { \"WithPrimitives\": [ { \"ShortValue\":\"32768\" } ] } }");
         var httpContext = GetHttpContext(contentBytes);
 
         var formatterContext = CreateInputFormatterContext(

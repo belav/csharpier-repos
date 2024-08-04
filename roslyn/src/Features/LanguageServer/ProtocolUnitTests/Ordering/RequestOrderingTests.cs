@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
             : base(testOutputHelper) { }
 
         protected override TestComposition Composition =>
-            base
-                .Composition.AddParts(typeof(MutatingRequestHandler))
+            base.Composition
+                .AddParts(typeof(MutatingRequestHandler))
                 .AddParts(typeof(NonMutatingRequestHandler))
                 .AddParts(typeof(FailingRequestHandler))
                 .AddParts(typeof(FailingMutatingRequestHandler))
@@ -209,13 +209,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
             // Wait for the queue to finish handling the failed request and shutdown.
             await testLspServer
                 .GetQueueAccessor()!
-                .Value.WaitForProcessingToStopAsync()
+                .Value
+                .WaitForProcessingToStopAsync()
                 .ConfigureAwait(false);
 
             // remaining tasks should be canceled
             var areAllItemsCancelled = await testLspServer
                 .GetQueueAccessor()!
-                .Value.AreAllItemsCancelledUnsafeAsync();
+                .Value
+                .AreAllItemsCancelledUnsafeAsync();
             Assert.True(areAllItemsCancelled);
         }
 
@@ -252,10 +254,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
             Assert.Equal(expectedSolution, solution);
 
             // Apply some random change to the workspace that the LSP server doesn't "see"
-            testLspServer.TestWorkspace.SetCurrentSolution(
-                s => s.WithProjectName(s.Projects.First().Id, "NewName"),
-                WorkspaceChangeKind.ProjectChanged
-            );
+            testLspServer
+                .TestWorkspace
+                .SetCurrentSolution(
+                    s => s.WithProjectName(s.Projects.First().Id, "NewName"),
+                    WorkspaceChangeKind.ProjectChanged
+                );
 
             expectedSolution = testLspServer.GetCurrentSolution();
 

@@ -40,25 +40,29 @@ namespace System.Net.Http
         // Both features were introduced in Manganese and are planned to be backported to older Windows versions together.
         private static bool GetTrailersSupported()
         {
-            using SafeWinHttpHandle sessionHandle = Interop.WinHttp.WinHttpOpen(
-                IntPtr.Zero,
-                Interop.WinHttp.WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
-                Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
-                Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
-                (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
-            );
+            using SafeWinHttpHandle sessionHandle = Interop
+                .WinHttp
+                .WinHttpOpen(
+                    IntPtr.Zero,
+                    Interop.WinHttp.WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
+                    Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
+                    Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
+                    (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
+                );
 
             if (sessionHandle.IsInvalid)
                 return false;
             uint buffer = 0;
             uint bufferSize = sizeof(uint);
             if (
-                Interop.WinHttp.WinHttpQueryOption(
-                    sessionHandle,
-                    Interop.WinHttp.WINHTTP_OPTION_STREAM_ERROR_CODE,
-                    ref buffer,
-                    ref bufferSize
-                )
+                Interop
+                    .WinHttp
+                    .WinHttpQueryOption(
+                        sessionHandle,
+                        Interop.WinHttp.WINHTTP_OPTION_STREAM_ERROR_CODE,
+                        ref buffer,
+                        ref bufferSize
+                    )
             )
             {
                 Debug.Fail(

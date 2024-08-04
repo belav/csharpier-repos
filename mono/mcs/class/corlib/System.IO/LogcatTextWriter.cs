@@ -67,12 +67,9 @@ namespace System.IO
                         fixed (char* b_message = message)
                         {
                             byte* buffer = stackalloc byte[buffer_size];
-                            int written = Encoding.UTF8.GetBytes(
-                                b_message,
-                                message.Length,
-                                buffer,
-                                buffer_size - 1
-                            );
+                            int written = Encoding
+                                .UTF8
+                                .GetBytes(b_message, message.Length, buffer, buffer_size - 1);
                             buffer[written] = (byte)'\0';
 
                             Log(buffer);

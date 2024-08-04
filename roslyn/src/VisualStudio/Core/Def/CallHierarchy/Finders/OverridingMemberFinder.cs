@@ -54,9 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             foreach (var @override in overrides)
             {
                 var sourceLocations = @override
-                    .DeclaringSyntaxReferences.Select(d =>
-                        project.Solution.GetDocument(d.SyntaxTree)
-                    )
+                    .DeclaringSyntaxReferences
+                    .Select(d => project.Solution.GetDocument(d.SyntaxTree))
                     .WhereNotNull();
                 var bestLocation = sourceLocations.FirstOrDefault(d =>
                     documents == null || documents.Contains(d)

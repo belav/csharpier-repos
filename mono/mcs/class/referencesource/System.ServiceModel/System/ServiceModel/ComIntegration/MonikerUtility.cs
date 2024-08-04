@@ -18,16 +18,20 @@ namespace System.ServiceModel.ComIntegration
             moniker = moniker.TrimStart();
             int indexOfEqualSign = moniker.IndexOf("=", StringComparison.Ordinal);
             if (indexOfEqualSign == -1)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MonikerSyntaxException(SR.GetString(SR.NoEqualSignFound, moniker))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MonikerSyntaxException(SR.GetString(SR.NoEqualSignFound, moniker))
+                    );
 
             int indexOfComma = moniker.IndexOf(",", StringComparison.Ordinal);
 
             if (indexOfComma != -1 && indexOfComma < indexOfEqualSign)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MonikerSyntaxException(SR.GetString(SR.NoEqualSignFound, moniker))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MonikerSyntaxException(SR.GetString(SR.NoEqualSignFound, moniker))
+                    );
 
             string suspectedKeyword = moniker.Substring(0, indexOfEqualSign).Trim();
             suspectedKeyword = suspectedKeyword.ToLower(
@@ -45,9 +49,13 @@ namespace System.ServiceModel.ComIntegration
                     return moniker;
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new MonikerSyntaxException(SR.GetString(SR.UnknownMonikerKeyword, suspectedKeyword))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new MonikerSyntaxException(
+                        SR.GetString(SR.UnknownMonikerKeyword, suspectedKeyword)
+                    )
+                );
         }
 
         internal static string GetValue(string moniker, out string val)
@@ -56,9 +64,11 @@ namespace System.ServiceModel.ComIntegration
             int index = 0;
             moniker = moniker.Trim();
             if (string.IsNullOrEmpty(moniker))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MonikerSyntaxException(SR.GetString(SR.KewordMissingValue))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MonikerSyntaxException(SR.GetString(SR.KewordMissingValue))
+                    );
             switch (moniker[index])
             {
                 case '"':
@@ -103,22 +113,29 @@ namespace System.ServiceModel.ComIntegration
                                     moniker = moniker.Trim();
                                 }
                                 else
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new MonikerSyntaxException(
-                                            SR.GetString(SR.BadlyTerminatedValue, value.ToString())
-                                        )
-                                    );
+                                    throw DiagnosticUtility
+                                        .ExceptionUtility
+                                        .ThrowHelperError(
+                                            new MonikerSyntaxException(
+                                                SR.GetString(
+                                                    SR.BadlyTerminatedValue,
+                                                    value.ToString()
+                                                )
+                                            )
+                                        );
                             }
                         }
                         else
                             moniker = "";
                     }
                     else
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MonikerSyntaxException(
-                                SR.GetString(SR.MissingQuote, value.ToString())
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new MonikerSyntaxException(
+                                    SR.GetString(SR.MissingQuote, value.ToString())
+                                )
+                            );
 
                     break;
                 }
@@ -152,9 +169,11 @@ namespace System.ServiceModel.ComIntegration
         {
             int indexOfMonikerData = displayName.IndexOf(":", StringComparison.Ordinal);
             if (indexOfMonikerData == -1)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MonikerSyntaxException(SR.GetString(SR.MonikerMissingColon))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MonikerSyntaxException(SR.GetString(SR.MonikerMissingColon))
+                    );
             string monikerParams = displayName.Substring(indexOfMonikerData + 1).Trim();
             MonikerHelper.MonikerAttribute keyword;
             string value;
@@ -164,9 +183,11 @@ namespace System.ServiceModel.ComIntegration
                 monikerParams = Getkeyword(monikerParams, out keyword);
                 propertyTable.TryGetValue(keyword, out value);
                 if (!String.IsNullOrEmpty(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MonikerSyntaxException(SR.GetString(SR.RepeatedKeyword))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MonikerSyntaxException(SR.GetString(SR.RepeatedKeyword))
+                        );
                 monikerParams = GetValue(monikerParams, out value);
                 propertyTable[keyword] = value;
             }

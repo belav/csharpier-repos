@@ -84,10 +84,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return false;
             }
 
-            return property1.Parameters.SequenceEqual(
-                property2.Parameters,
-                this.ParameterEquivalenceComparer
-            );
+            return property1
+                .Parameters
+                .SequenceEqual(property2.Parameters, this.ParameterEquivalenceComparer);
         }
 
         private static bool BadPropertyAccessor(IMethodSymbol method1, IMethodSymbol method2)
@@ -170,12 +169,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             for (var i = 0; i < parameters1.Count; ++i)
             {
                 if (
-                    !_symbolEquivalenceComparer.ParameterEquivalenceComparer.Equals(
-                        parameters1[i],
-                        parameters2[i],
-                        compareParameterName,
-                        isCaseSensitive
-                    )
+                    !_symbolEquivalenceComparer
+                        .ParameterEquivalenceComparer
+                        .Equals(
+                            parameters1[i],
+                            parameters2[i],
+                            compareParameterName,
+                            isCaseSensitive
+                        )
                 )
                 {
                     return false;
@@ -314,10 +315,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return false;
             }
 
-            return typeParameter1.ConstraintTypes.SetEquals(
-                typeParameter2.ConstraintTypes,
-                this.SignatureTypeEquivalenceComparer
-            );
+            return typeParameter1
+                .ConstraintTypes
+                .SetEquals(typeParameter2.ConstraintTypes, this.SignatureTypeEquivalenceComparer);
         }
 
         private bool HaveSameReturnType(IEventSymbol ev1, IEventSymbol ev2) =>

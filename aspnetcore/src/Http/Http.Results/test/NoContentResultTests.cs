@@ -59,7 +59,8 @@ public class NoContentResultTests
 
         // Assert
         var producesResponseTypeMetadata = builder
-            .Metadata.OfType<ProducesResponseTypeMetadata>()
+            .Metadata
+            .OfType<ProducesResponseTypeMetadata>()
             .Last();
         Assert.Equal(StatusCodes.Status204NoContent, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(void), producesResponseTypeMetadata.Type);

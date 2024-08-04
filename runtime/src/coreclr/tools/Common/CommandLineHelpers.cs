@@ -174,9 +174,9 @@ namespace System.CommandLine
             {
                 details.Add(
                     System
-                        .Diagnostics.FileVersionInfo.GetVersionInfo(
-                            Environment.GetCommandLineArgs()[0]
-                        )
+                        .Diagnostics
+                        .FileVersionInfo
+                        .GetVersionInfo(Environment.GetCommandLineArgs()[0])
                         .ToString()
                 );
             }

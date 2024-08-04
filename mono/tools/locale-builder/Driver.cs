@@ -832,7 +832,8 @@ namespace Mono.Tools.LocaleBuilder
 
                 var territories = entry
                     .Attributes["territories"]
-                    .Value.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                    .Value
+                    .Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var t in territories)
                 {
                     var tr = t.Trim();

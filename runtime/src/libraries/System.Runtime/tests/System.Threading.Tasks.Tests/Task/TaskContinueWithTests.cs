@@ -286,26 +286,30 @@ namespace System.Threading.Tasks.Tests
             Task<int> t4 = t3.ContinueWith(
                     delegate(Task<int> t)
                     {
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 10;
-                            }
-                        );
+                        return Task<int>
+                            .Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    return 10;
+                                }
+                            );
                     }
                 )
                 .Unwrap();
             Task<string> t5 = t4.ContinueWith(
                     delegate(Task<int> t)
                     {
-                        return Task<string>.Factory.StartNew(
-                            delegate
-                            {
-                                for (int i = 0; i < 400; i++)
-                                    ;
-                                return "worked";
-                            }
-                        );
+                        return Task<string>
+                            .Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    for (int i = 0; i < 400; i++)
+                                        ;
+                                    return "worked";
+                                }
+                            );
                     }
                 )
                 .Unwrap();
@@ -1058,13 +1062,15 @@ namespace System.Threading.Tasks.Tests
                 .ContinueWith(
                     (antecedent) =>
                     {
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                mres.WaitOne();
-                                return 1;
-                            }
-                        );
+                        return Task<int>
+                            .Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    mres.WaitOne();
+                                    return 1;
+                                }
+                            );
                     }
                 )
                 .Unwrap();
@@ -1072,31 +1078,35 @@ namespace System.Threading.Tasks.Tests
                 .ContinueWith(
                     (antecedent) =>
                     {
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                mres.WaitOne();
-                                return 2;
-                            }
-                        );
+                        return Task<int>
+                            .Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    mres.WaitOne();
+                                    return 2;
+                                }
+                            );
                     }
                 )
                 .Unwrap();
             var v3 = new Task<Task<int>>(
                 delegate
                 {
-                    return Task<int>.Factory.StartNew(
-                        delegate
-                        {
-                            mres.WaitOne();
-                            return 3;
-                        }
-                    );
+                    return Task<int>
+                        .Factory
+                        .StartNew(
+                            delegate
+                            {
+                                mres.WaitOne();
+                                return 3;
+                            }
+                        );
                 }
             );
             c3 = v3.Unwrap();
-            c4 = Task
-                .Factory.ContinueWhenAll(
+            c4 = Task.Factory
+                .ContinueWhenAll(
                     new Task[] { taskRoot, futureRoot },
                     completedTasks =>
                     {
@@ -1155,8 +1165,8 @@ namespace System.Threading.Tasks.Tests
                 }
             );
             c7 = v7.Unwrap();
-            c8 = Task
-                .Factory.ContinueWhenAny(
+            c8 = Task.Factory
+                .ContinueWhenAny(
                     new Task[] { taskRoot, futureRoot },
                     winner =>
                     {
@@ -1345,12 +1355,14 @@ namespace System.Threading.Tasks.Tests
                     delegate(Task t)
                     {
                         doExc();
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 1;
-                            }
-                        );
+                        return Task<int>
+                            .Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    return 1;
+                                }
+                            );
                     }
                 )
                 .Unwrap();
@@ -1359,12 +1371,14 @@ namespace System.Threading.Tasks.Tests
                     delegate(Task<int> t)
                     {
                         doExc();
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 2;
-                            }
-                        );
+                        return Task<int>
+                            .Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    return 2;
+                                }
+                            );
                     }
                 )
                 .Unwrap();
@@ -1372,13 +1386,15 @@ namespace System.Threading.Tasks.Tests
                 .ContinueWith(
                     delegate(Task t)
                     {
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                doExc();
-                                return 3;
-                            }
-                        );
+                        return Task<int>
+                            .Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    doExc();
+                                    return 3;
+                                }
+                            );
                     }
                 )
                 .Unwrap();
@@ -1386,13 +1402,15 @@ namespace System.Threading.Tasks.Tests
                 .ContinueWith(
                     delegate(Task<int> t)
                     {
-                        return Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                doExc();
-                                return 4;
-                            }
-                        );
+                        return Task<int>
+                            .Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    doExc();
+                                    return 4;
+                                }
+                            );
                     }
                 )
                 .Unwrap();
@@ -1504,8 +1522,8 @@ namespace System.Threading.Tasks.Tests
             //
             // Exception handling
             //
-            var c = Task
-                .Factory.StartNew(() => { })
+            var c = Task.Factory
+                .StartNew(() => { })
                 .ContinueWith(_ =>
                     Task.Factory.StartNew(() =>
                     {
@@ -2267,21 +2285,25 @@ namespace System.Threading.Tasks.Tests
 
             // These TCS/continuation combos will serve to initiate antecedent completion or CTS signaling asynchronously
             TaskCompletionSource completionTcs = new TaskCompletionSource();
-            completionTcs.Task.ContinueWith(
-                _ =>
-                {
-                    antecedentTcs.TrySetResult();
-                },
-                TaskContinuationOptions.PreferFairness
-            );
+            completionTcs
+                .Task
+                .ContinueWith(
+                    _ =>
+                    {
+                        antecedentTcs.TrySetResult();
+                    },
+                    TaskContinuationOptions.PreferFairness
+                );
             TaskCompletionSource cancellationTcs = new TaskCompletionSource();
-            cancellationTcs.Task.ContinueWith(
-                _ =>
-                {
-                    cts.Cancel();
-                },
-                TaskContinuationOptions.PreferFairness
-            );
+            cancellationTcs
+                .Task
+                .ContinueWith(
+                    _ =>
+                    {
+                        cts.Cancel();
+                    },
+                    TaskContinuationOptions.PreferFairness
+                );
 
             // Keep track of continuations so that you can wait on them
             Task[] normalContinuations = new Task[numLeftover];
@@ -2464,13 +2486,15 @@ namespace System.Threading.Tasks.Tests
             else
             {
                 // WE ARE CREATING A BUNCH OF TASKS THAT SHARE THE SAME CANCELLATION TOKEN
-                var t = Task<T>.Factory.StartNew(
-                    () =>
-                    {
-                        return default(T);
-                    },
-                    cts.Token
-                );
+                var t = Task<T>
+                    .Factory
+                    .StartNew(
+                        () =>
+                        {
+                            return default(T);
+                        },
+                        cts.Token
+                    );
                 t.ContinueWith(
                     delegate { },
                     cts.Token,
@@ -2478,15 +2502,17 @@ namespace System.Threading.Tasks.Tests
                     TaskScheduler.Default
                 );
 
-                return Task<T>.Factory.StartNew(
-                    () =>
-                    {
-                        if (!cts.IsCancellationRequested)
-                            cts.Cancel();
-                        return default(T);
-                    },
-                    cts.Token
-                );
+                return Task<T>
+                    .Factory
+                    .StartNew(
+                        () =>
+                        {
+                            if (!cts.IsCancellationRequested)
+                                cts.Cancel();
+                            return default(T);
+                        },
+                        cts.Token
+                    );
             }
         }
 

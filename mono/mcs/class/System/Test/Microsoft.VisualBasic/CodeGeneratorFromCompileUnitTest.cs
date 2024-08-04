@@ -117,20 +117,20 @@ namespace MonoTests.Microsoft.VisualBasic
             CodeAttributeDeclaration attrDec = new CodeAttributeDeclaration();
             attrDec.Name = "A";
 
-            attrDec.Arguments.Add(
-                new CodeAttributeArgument("A1", new CodePrimitiveExpression(false))
-            );
-            attrDec.Arguments.Add(
-                new CodeAttributeArgument("A2", new CodePrimitiveExpression(true))
-            );
+            attrDec
+                .Arguments
+                .Add(new CodeAttributeArgument("A1", new CodePrimitiveExpression(false)));
+            attrDec
+                .Arguments
+                .Add(new CodeAttributeArgument("A2", new CodePrimitiveExpression(true)));
             // null name should not be output
-            attrDec.Arguments.Add(
-                new CodeAttributeArgument(null, new CodePrimitiveExpression(true))
-            );
+            attrDec
+                .Arguments
+                .Add(new CodeAttributeArgument(null, new CodePrimitiveExpression(true)));
             // zero length name should not be output
-            attrDec.Arguments.Add(
-                new CodeAttributeArgument(string.Empty, new CodePrimitiveExpression(false))
-            );
+            attrDec
+                .Arguments
+                .Add(new CodeAttributeArgument(string.Empty, new CodePrimitiveExpression(false)));
 
             codeUnit.AssemblyCustomAttributes.Add(attrDec);
             Assert.AreEqual(

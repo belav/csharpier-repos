@@ -57,7 +57,8 @@ class B
         {
             var semanticModel = GetSemanticModelWithIgnoreAccessibility();
             var invocation = semanticModel
-                .SyntaxTree.GetRoot()
+                .SyntaxTree
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .Single();
@@ -85,7 +86,8 @@ class B
         {
             var semanticModel = GetSemanticModelWithIgnoreAccessibility();
             var invocation = semanticModel
-                .SyntaxTree.GetRoot()
+                .SyntaxTree
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .Single();
@@ -100,7 +102,8 @@ class B
                         exp,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Type.Name
+                    .Type
+                    .Name
             );
 
             Assert.Equal(
@@ -111,7 +114,8 @@ class B
                         exp,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Symbol.Name
+                    .Symbol
+                    .Name
             );
         }
 
@@ -120,7 +124,8 @@ class B
         {
             var semanticModel = GetSemanticModelWithIgnoreAccessibility();
             var invocation = semanticModel
-                .SyntaxTree.GetRoot()
+                .SyntaxTree
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .Single();
@@ -248,7 +253,8 @@ class B
                         speculativeInvocation,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Type.Name
+                    .Type
+                    .Name
             );
             Assert.Equal(
                 "InternalExtension",
@@ -258,7 +264,8 @@ class B
                         speculativeInvocation,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Symbol.Name
+                    .Symbol
+                    .Name
             );
         }
 
@@ -318,7 +325,8 @@ class C : R
             Assert.NotNull(speculativeModel);
 
             var p = speculativeModel
-                .SyntaxTree.GetRoot()
+                .SyntaxTree
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Single(s => s.Identifier.ValueText == "_p");

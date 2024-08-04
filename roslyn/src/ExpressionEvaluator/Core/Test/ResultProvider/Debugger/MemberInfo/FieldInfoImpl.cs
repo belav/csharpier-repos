@@ -86,8 +86,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
-            return this
-                .Field.GetCustomAttributesData()
+            return this.Field
+                .GetCustomAttributesData()
                 .Select(a => new CustomAttributeDataImpl(a))
                 .ToArray();
         }

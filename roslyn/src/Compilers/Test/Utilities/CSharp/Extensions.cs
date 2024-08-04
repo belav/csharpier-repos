@@ -283,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
 
             return primaryConstructor
-                .ContainingType.GetMembers("Deconstruct")
+                .ContainingType
+                .GetMembers("Deconstruct")
                 .OfType<IMethodSymbol>()
                 .Single(m =>
                     m.Parameters.Length == primaryConstructor.Parameters.Length
@@ -874,9 +875,10 @@ internal static class Extensions
         this ITypeParameterSymbol symbol
     )
     {
-        return (
-            (Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel.TypeParameterSymbol)symbol
-        ).UnderlyingTypeParameterSymbol.AllEffectiveInterfacesNoUseSiteDiagnostics.GetPublicSymbols();
+        return ((Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel.TypeParameterSymbol)symbol)
+            .UnderlyingTypeParameterSymbol
+            .AllEffectiveInterfacesNoUseSiteDiagnostics
+            .GetPublicSymbols();
     }
 
     public static ITypeSymbol GetParameterType(this IMethodSymbol method, int index) =>
@@ -1197,10 +1199,11 @@ internal static class Extensions
         DiagnosticBag diagnostics
     )
     {
-        var bindingDiagnostics = Microsoft.CodeAnalysis.CSharp.BindingDiagnosticBag.GetInstance(
-            withDiagnostics: true,
-            withDependencies: false
-        );
+        var bindingDiagnostics = Microsoft
+            .CodeAnalysis
+            .CSharp
+            .BindingDiagnosticBag
+            .GetInstance(withDiagnostics: true, withDependencies: false);
         var result = binder.BindCref(syntax, out ambiguityWinner, bindingDiagnostics);
         diagnostics.AddRange(bindingDiagnostics.DiagnosticBag);
         bindingDiagnostics.Free();
@@ -1213,10 +1216,11 @@ internal static class Extensions
         DiagnosticBag diagnostics
     )
     {
-        var bindingDiagnostics = Microsoft.CodeAnalysis.CSharp.BindingDiagnosticBag.GetInstance(
-            withDiagnostics: true,
-            withDependencies: false
-        );
+        var bindingDiagnostics = Microsoft
+            .CodeAnalysis
+            .CSharp
+            .BindingDiagnosticBag
+            .GetInstance(withDiagnostics: true, withDependencies: false);
         var result = binder.BindEmbeddedBlock(node, bindingDiagnostics);
         diagnostics.AddRange(bindingDiagnostics.DiagnosticBag);
         bindingDiagnostics.Free();
@@ -1229,10 +1233,11 @@ internal static class Extensions
         DiagnosticBag diagnostics
     )
     {
-        var bindingDiagnostics = Microsoft.CodeAnalysis.CSharp.BindingDiagnosticBag.GetInstance(
-            withDiagnostics: true,
-            withDependencies: false
-        );
+        var bindingDiagnostics = Microsoft
+            .CodeAnalysis
+            .CSharp
+            .BindingDiagnosticBag
+            .GetInstance(withDiagnostics: true, withDependencies: false);
         var result = binder.BindExpression(node, bindingDiagnostics);
         diagnostics.AddRange(bindingDiagnostics.DiagnosticBag);
         bindingDiagnostics.Free();

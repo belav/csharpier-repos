@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
     public static class EditorTestCompositions
     {
         public static readonly TestComposition Editor = TestComposition
-            .Empty.AddAssemblies(
+            .Empty
+            .AddAssemblies(
                 // Microsoft.VisualStudio.Platform.VSEditor.dll:
                 Assembly.LoadFrom("Microsoft.VisualStudio.Platform.VSEditor.dll"),
                 // Microsoft.VisualStudio.Text.Logic.dll:
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             ); // TODO: https://devdiv.visualstudio.com/DevDiv/_workitems?id=544569
 
         public static readonly TestComposition EditorFeatures = FeaturesTestCompositions
-            .Features.AddParts(typeof(TestGlobalOperationNotificationService))
+            .Features
+            .AddParts(typeof(TestGlobalOperationNotificationService))
             .Add(Editor)
             .AddAssemblies(
                 typeof(TextEditorResources).Assembly,
@@ -70,10 +72,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             .AddAssemblies(typeof(IInteractiveWindow).Assembly)
             .AddParts(typeof(TestInteractiveWindowEditorFactoryService));
 
-        public static readonly TestComposition LanguageServerProtocol =
-            FeaturesTestCompositions.Features.AddAssemblies(
-                typeof(LanguageServerProtocolResources).Assembly
-            );
+        public static readonly TestComposition LanguageServerProtocol = FeaturesTestCompositions
+            .Features
+            .AddAssemblies(typeof(LanguageServerProtocolResources).Assembly);
 
         public static readonly TestComposition LanguageServerProtocolEditorFeatures =
             EditorFeatures.AddAssemblies(typeof(LanguageServerProtocolResources).Assembly);

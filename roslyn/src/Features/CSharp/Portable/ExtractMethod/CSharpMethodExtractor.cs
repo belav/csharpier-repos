@@ -256,7 +256,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (
                     !originalMethodDefinition
                         .FindTokenOnLeftOfPosition(originalMethodDefinition.SpanStart)
-                        .TrailingTrivia.Any(SyntaxKind.EndOfLineTrivia)
+                        .TrailingTrivia
+                        .Any(SyntaxKind.EndOfLineTrivia)
                 )
                 {
                     // Add a second new line since there were no line endings in the original form

@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             async Task AddReferencingSymbolsAsync(ReferencedSymbol reference, bool isDirect)
             {
                 var result = await reference
-                    .Locations.FindReferencingSymbolsAsync(cancellationToken)
+                    .Locations
+                    .FindReferencingSymbolsAsync(cancellationToken)
                     .ConfigureAwait(false);
                 foreach (var (callingSymbol, locations) in result)
                 {

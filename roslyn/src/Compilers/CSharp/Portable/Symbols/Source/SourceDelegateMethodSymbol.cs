@@ -187,10 +187,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var parameterSymbol = invoke.Parameters[i];
                 if (
-                    !parameterSymbol.TypeWithAnnotations.IsAtLeastAsVisibleAs(
-                        delegateType,
-                        ref useSiteInfo
-                    )
+                    !parameterSymbol
+                        .TypeWithAnnotations
+                        .IsAtLeastAsVisibleAs(delegateType, ref useSiteInfo)
                 )
                 {
                     // Inconsistent accessibility: parameter type '{1}' is less accessible than delegate '{0}'

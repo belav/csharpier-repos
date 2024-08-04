@@ -123,10 +123,12 @@ public class RelationalProjectionBindingExpressionVisitor : ExpressionVisitor
 
                     case ParameterExpression parameterExpression:
                         return
-                            parameterExpression.Name?.StartsWith(
-                                QueryCompilationContext.QueryParameterPrefix,
-                                StringComparison.Ordinal
-                            ) == true
+                            parameterExpression
+                                .Name
+                                ?.StartsWith(
+                                    QueryCompilationContext.QueryParameterPrefix,
+                                    StringComparison.Ordinal
+                                ) == true
                             ? Expression.Call(
                                 GetParameterValueMethodInfo.MakeGenericMethod(
                                     parameterExpression.Type
@@ -158,7 +160,10 @@ public class RelationalProjectionBindingExpressionVisitor : ExpressionVisitor
 
                     case MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression:
                         if (
-                            materializeCollectionNavigationExpression.Navigation.TargetEntityType.IsMappedToJson()
+                            materializeCollectionNavigationExpression
+                                .Navigation
+                                .TargetEntityType
+                                .IsMappedToJson()
                         )
                         {
                             var subquery = materializeCollectionNavigationExpression.Subquery;
@@ -206,7 +211,10 @@ public class RelationalProjectionBindingExpressionVisitor : ExpressionVisitor
                                         jsonQueryExpression.Type
                                     ),
                                     materializeCollectionNavigationExpression.Navigation,
-                                    materializeCollectionNavigationExpression.Navigation.ClrType.GetSequenceType()
+                                    materializeCollectionNavigationExpression
+                                        .Navigation
+                                        .ClrType
+                                        .GetSequenceType()
                                 );
                             }
                         }
@@ -225,7 +233,10 @@ public class RelationalProjectionBindingExpressionVisitor : ExpressionVisitor
                                 expression.Type
                             ),
                             materializeCollectionNavigationExpression.Navigation,
-                            materializeCollectionNavigationExpression.Navigation.ClrType.GetSequenceType()
+                            materializeCollectionNavigationExpression
+                                .Navigation
+                                .ClrType
+                                .GetSequenceType()
                         );
                 }
 

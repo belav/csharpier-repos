@@ -402,14 +402,16 @@ namespace System.ServiceModel.Channels
         {
             if (!this.SupportsDuplex)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SecurityProtocolFactoryDoesNotSupportDuplex,
-                            this.securityProtocolFactory
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SecurityProtocolFactoryDoesNotSupportDuplex,
+                                this.securityProtocolFactory
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -417,11 +419,13 @@ namespace System.ServiceModel.Channels
         {
             if (this.securityProtocolFactory == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SecurityProtocolFactoryShouldBeSetBeforeThisOperation)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SecurityProtocolFactoryShouldBeSetBeforeThisOperation)
+                        )
+                    );
             }
         }
 
@@ -429,14 +433,16 @@ namespace System.ServiceModel.Channels
         {
             if (!this.SupportsRequestReply)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SecurityProtocolFactoryDoesNotSupportRequestReply,
-                            this.securityProtocolFactory
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SecurityProtocolFactoryDoesNotSupportRequestReply,
+                                this.securityProtocolFactory
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -539,13 +545,15 @@ namespace System.ServiceModel.Channels
                         != null
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.ExtendedProtectionPolicyCustomChannelBindingNotSupported
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.ExtendedProtectionPolicyCustomChannelBindingNotSupported
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 // Do not enable channel binding if there is no reason as it sets up chunking mode.
@@ -608,8 +616,9 @@ namespace System.ServiceModel.Channels
                 {
                     this.timeoutHelper = new TimeoutHelper(timeout);
                     this.clientChannel = clientChannel;
-                    SecurityProtocol securityProtocol =
-                        this.clientChannel.SecurityProtocolFactory.CreateSecurityProtocol(
+                    SecurityProtocol securityProtocol = this.clientChannel
+                        .SecurityProtocolFactory
+                        .CreateSecurityProtocol(
                             this.clientChannel.to,
                             this.clientChannel.Via,
                             null,
@@ -653,9 +662,11 @@ namespace System.ServiceModel.Channels
                     OpenAsyncResult self = result.AsyncState as OpenAsyncResult;
                     if (self == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result")
+                            );
                     }
                     Exception completionException = null;
                     bool completeSelf = false;
@@ -682,11 +693,13 @@ namespace System.ServiceModel.Channels
 
                 bool OnSecurityProtocolOpenComplete()
                 {
-                    IAsyncResult result = this.clientChannel.InnerChannel.BeginOpen(
-                        this.timeoutHelper.RemainingTime(),
-                        openInnerChannelCallback,
-                        this
-                    );
+                    IAsyncResult result = this.clientChannel
+                        .InnerChannel
+                        .BeginOpen(
+                            this.timeoutHelper.RemainingTime(),
+                            openInnerChannelCallback,
+                            this
+                        );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -699,9 +712,9 @@ namespace System.ServiceModel.Channels
                 {
                     if (result == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentNullException("result")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new ArgumentNullException("result"));
                     }
                     if (result.CompletedSynchronously)
                     {
@@ -710,9 +723,11 @@ namespace System.ServiceModel.Channels
                     OpenAsyncResult self = result.AsyncState as OpenAsyncResult;
                     if (self == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result")
+                            );
                     }
                     Exception completionException = null;
                     try
@@ -911,9 +926,9 @@ namespace System.ServiceModel.Channels
                         if (faultException != null)
                         {
                             this.Fault(faultException);
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                                faultException
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperWarning(faultException);
                         }
                     }
                 }

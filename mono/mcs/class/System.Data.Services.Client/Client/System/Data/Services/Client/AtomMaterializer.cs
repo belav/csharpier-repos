@@ -589,10 +589,9 @@ namespace System.Data.Services.Client
 
             for (int i = 0; i < properties.Length; i++)
             {
-                var property = entry.ActualType.GetProperty(
-                    properties[i],
-                    materializer.ignoreMissingProperties
-                );
+                var property = entry
+                    .ActualType
+                    .GetProperty(properties[i], materializer.ignoreMissingProperties);
                 object value = propertyValues[i](materializer, entry, expectedType);
                 if (
                     entry.ShouldUpdateFromPayload

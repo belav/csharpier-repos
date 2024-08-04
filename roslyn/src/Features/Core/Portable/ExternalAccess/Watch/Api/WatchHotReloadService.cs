@@ -140,14 +140,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
                 _encService.CommitSolutionUpdate(sessionId, out _);
             }
 
-            var updates = results.ModuleUpdates.Updates.SelectAsArray(update => new Update(
-                update.Module,
-                update.ILDelta,
-                update.MetadataDelta,
-                update.PdbDelta,
-                update.UpdatedTypes,
-                update.RequiredCapabilities
-            ));
+            var updates = results
+                .ModuleUpdates
+                .Updates
+                .SelectAsArray(update => new Update(
+                    update.Module,
+                    update.ILDelta,
+                    update.MetadataDelta,
+                    update.PdbDelta,
+                    update.UpdatedTypes,
+                    update.RequiredCapabilities
+                ));
 
             var diagnostics = await results
                 .GetAllDiagnosticsAsync(solution, cancellationToken)

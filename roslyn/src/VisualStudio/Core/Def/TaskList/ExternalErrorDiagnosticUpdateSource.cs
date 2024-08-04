@@ -113,8 +113,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             _workspace.WorkspaceChanged += OnWorkspaceChanged;
 
             _diagnosticService = diagnosticService;
-            _buildOnlyDiagnosticsService =
-                _workspace.Services.GetRequiredService<IBuildOnlyDiagnosticsService>();
+            _buildOnlyDiagnosticsService = _workspace
+                .Services
+                .GetRequiredService<IBuildOnlyDiagnosticsService>();
 
             _notificationService = notificationService;
         }
@@ -435,13 +436,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                         // here we give initializeLazily: false so that solution crawler is fully initialized when we do de-dup live and build errors,
                         // otherwise, we will think none of error we have here belong to live errors since diagnostic service is not initialized yet.
                         if (
-                            _diagnosticService.GlobalOptions.GetOption(
-                                SolutionCrawlerRegistrationService.EnableSolutionCrawler
-                            )
+                            _diagnosticService
+                                .GlobalOptions
+                                .GetOption(SolutionCrawlerRegistrationService.EnableSolutionCrawler)
                         )
                         {
                             var registrationService = (SolutionCrawlerRegistrationService)
-                                _workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+                                _workspace
+                                    .Services
+                                    .GetRequiredService<ISolutionCrawlerRegistrationService>();
                             registrationService.EnsureRegistration(
                                 _workspace,
                                 initializeLazily: false
@@ -466,9 +469,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                     }
                     finally
                     {
-                        await _postBuildAndErrorListRefreshTaskQueue.LastScheduledTask.ConfigureAwait(
-                            false
-                        );
+                        await _postBuildAndErrorListRefreshTaskQueue
+                            .LastScheduledTask
+                            .ConfigureAwait(false);
                     }
                 },
                 GetApplicableCancellationToken(inProgressState)
@@ -578,7 +581,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             // Remove all document errors
             foreach (
                 var documentId in project
-                    .DocumentIds.Concat(project.AdditionalDocumentIds)
+                    .DocumentIds
+                    .Concat(project.AdditionalDocumentIds)
                     .Concat(project.AnalyzerConfigDocumentIds)
             )
             {
@@ -1005,8 +1009,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
                     // set ids set
                     var builder = ImmutableHashSet.CreateBuilder<string>();
-                    var descriptorMap =
-                        Solution.State.Analyzers.GetDiagnosticDescriptorsPerReference(
+                    var descriptorMap = Solution
+                        .State
+                        .Analyzers
+                        .GetDiagnosticDescriptorsPerReference(
                             _owner._diagnosticService.AnalyzerInfoCache,
                             project
                         );
@@ -1021,7 +1027,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 // return errors in the order that is reported
                 return ImmutableArray.CreateRange(
                     _projectMap
-                        .Values.SelectMany(d => d)
+                        .Values
+                        .SelectMany(d => d)
                         .Concat(_documentMap.Values.SelectMany(d => d))
                         .OrderBy(kv => kv.Value)
                         .Select(kv => kv.Key)
@@ -1202,10 +1209,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
             private ImmutableHashSet<string> GetOrCreateSupportedLiveDiagnostics(Project project)
             {
-                var fullSolutionAnalysis =
-                    _owner._diagnosticService.GlobalOptions.IsFullSolutionAnalysisEnabled(
-                        project.Language
-                    );
+                var fullSolutionAnalysis = _owner
+                    ._diagnosticService
+                    .GlobalOptions
+                    .IsFullSolutionAnalysisEnabled(project.Language);
                 if (!project.SupportsCompilation || fullSolutionAnalysis)
                 {
                     // Defer to _allDiagnosticIdMap so we avoid placing FSA diagnostics in _liveDiagnosticIdMap
@@ -1225,9 +1232,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                     var infoCache = _owner._diagnosticService.AnalyzerInfoCache;
 
                     foreach (
-                        var analyzersPerReference in project.Solution.State.Analyzers.CreateDiagnosticAnalyzersPerReference(
-                            project
-                        )
+                        var analyzersPerReference in project
+                            .Solution
+                            .State
+                            .Analyzers
+                            .CreateDiagnosticAnalyzersPerReference(project)
                     )
                     {
                         foreach (var analyzer in analyzersPerReference.Value)

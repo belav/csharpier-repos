@@ -226,17 +226,19 @@ namespace System.ServiceModel.Channels
             {
                 if (certificateTokenProvider == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "certificateTokenProvider"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("certificateTokenProvider");
                 }
                 X509Certificate2 clientCertificate = certificateTokenProvider.GetCertificate(
                     timeout
                 );
                 if (clientCertificate == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                        new InvalidOperationException(SR.GetString(SR.MsmqCertificateNotFound))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperCritical(
+                            new InvalidOperationException(SR.GetString(SR.MsmqCertificateNotFound))
+                        );
                 this.senderCert.SetBufferReference(clientCertificate.GetRawCertData());
             }
         }

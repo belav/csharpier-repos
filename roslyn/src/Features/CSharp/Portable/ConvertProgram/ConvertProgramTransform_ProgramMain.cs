@@ -36,14 +36,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
             if (root.IsTopLevelProgram())
             {
                 var compilation = await document
-                    .Project.GetRequiredCompilationAsync(cancellationToken)
+                    .Project
+                    .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var mainMethod = compilation.GetTopLevelStatementsMethod();
                 if (mainMethod is not null)
                 {
-                    var oldClassDeclaration = root
-                        .Members.OfType<ClassDeclarationSyntax>()
+                    var oldClassDeclaration = root.Members
+                        .OfType<ClassDeclarationSyntax>()
                         .FirstOrDefault(IsProgramClass);
 
                     var classDeclaration = await GenerateProgramClassAsync(
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                     Contract.ThrowIfNull(newRoot);
 
                     var firstGlobalStatement = newRoot
-                        .Members.OfType<GlobalStatementSyntax>()
+                        .Members
+                        .OfType<GlobalStatementSyntax>()
                         .Single();
                     newRoot = newRoot.ReplaceNode(firstGlobalStatement, classDeclaration);
 
@@ -110,11 +112,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
             var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
 
             // See if we have an existing part in another file.  If so, we'll have to generate our declaration as partial.
-            var hasExistingPart = programType.DeclaringSyntaxReferences.Any(
-                static (d, cancellationToken) =>
-                    d.GetSyntax(cancellationToken) is TypeDeclarationSyntax,
-                cancellationToken
-            );
+            var hasExistingPart = programType
+                .DeclaringSyntaxReferences
+                .Any(
+                    static (d, cancellationToken) =>
+                        d.GetSyntax(cancellationToken) is TypeDeclarationSyntax,
+                    cancellationToken
+                );
 
             var method = (MethodDeclarationSyntax)
                 generator.MethodDeclaration(
@@ -188,9 +192,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
             {
                 // Remove leading trivia from first statement.  We'll move it to the Program type. Any directly attached
                 // comments though stay attached to the first statement.
-                var statement = globalStatement.Statement.WithAdditionalAnnotations(
-                    Formatter.Annotation
-                );
+                var statement = globalStatement
+                    .Statement
+                    .WithAdditionalAnnotations(Formatter.Annotation);
                 if (first)
                 {
                     first = false;

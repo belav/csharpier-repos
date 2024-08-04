@@ -490,10 +490,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             public override bool Equals(object? obj)
             {
-                return StringComparer.OrdinalIgnoreCase.Equals(
-                    this.Value,
-                    ((CaseInsensitiveString?)obj)!.Value
-                );
+                return StringComparer
+                    .OrdinalIgnoreCase
+                    .Equals(this.Value, ((CaseInsensitiveString?)obj)!.Value);
             }
         }
     }

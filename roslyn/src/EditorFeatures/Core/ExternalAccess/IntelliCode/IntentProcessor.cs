@@ -57,8 +57,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
             CancellationToken cancellationToken
         )
         {
-            var currentDocument =
-                intentRequestContext.CurrentSnapshotSpan.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var currentDocument = intentRequestContext
+                .CurrentSnapshotSpan
+                .Snapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (currentDocument == null)
             {
                 throw new ArgumentException("could not retrieve document for request snapshot");
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
             var selectionTextSpan = intentRequestContext.PriorSelection;
 
             var results = await provider
-                .Value.ComputeIntentAsync(
+                .Value
+                .ComputeIntentAsync(
                     originalDocument,
                     selectionTextSpan,
                     currentDocument,
@@ -182,8 +185,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
             var changedDocument = changedSolution.GetRequiredDocument(changedDocumentId);
             var currentDocument = currentSolution.GetRequiredDocument(changedDocumentId);
 
-            var textDiffService =
-                changedSolution.Services.GetRequiredService<IDocumentTextDifferencingService>();
+            var textDiffService = changedSolution
+                .Services
+                .GetRequiredService<IDocumentTextDifferencingService>();
             // Compute changes against the current version of the document.
             var textDiffs = await textDiffService
                 .GetTextChangesAsync(currentDocument, changedDocument, cancellationToken)

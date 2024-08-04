@@ -71,9 +71,12 @@ namespace System.CommandLine.Tests.Binding
             var result = new CliRootCommand { option }.Parse(new string[] { "--file", "" });
 
             result
-                .Errors.Should()
+                .Errors
+                .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Contain("Cannot parse argument '' for option '--file'");
         }
 
@@ -239,7 +242,9 @@ namespace System.CommandLine.Tests.Binding
             getValue
                 .Should()
                 .Throw<InvalidOperationException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be("Required argument missing for option: '-x'.");
         }
 
@@ -689,9 +694,12 @@ namespace System.CommandLine.Tests.Binding
             var value = new CliRootCommand { option }.Parse("-x Notaday");
 
             value
-                .Errors.Should()
+                .Errors
+                .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Contain(
                     "Cannot parse argument 'Notaday' for option '-x' as expected type 'System.DayOfWeek'."
                 );
@@ -709,7 +717,9 @@ namespace System.CommandLine.Tests.Binding
             getValue
                 .Should()
                 .Throw<InvalidOperationException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be(
                     "Cannot parse argument 'not-an-int' for option '-x' as expected type 'System.Int32'."
                 );
@@ -723,7 +733,9 @@ namespace System.CommandLine.Tests.Binding
             getValue
                 .Should()
                 .Throw<InvalidOperationException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be(
                     "Cannot parse argument 'not-an-int' for option '-x' as expected type 'System.Int32'."
                 );

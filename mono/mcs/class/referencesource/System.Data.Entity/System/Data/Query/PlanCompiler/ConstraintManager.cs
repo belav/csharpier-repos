@@ -165,14 +165,18 @@ namespace System.Data.Query.PlanCompiler
             }
 
             m_constraint = constraint;
-            md.EntitySet parent = System.Data.Common.Utils.MetadataHelper.GetEntitySetAtEnd(
-                assocSet,
-                fromEnd
-            ); // relationshipSet.GetRelationshipEndExtent(constraint.FromRole);
-            md.EntitySet child = System.Data.Common.Utils.MetadataHelper.GetEntitySetAtEnd(
-                assocSet,
-                toEnd
-            ); // relationshipSet.GetRelationshipEndExtent(constraint.ToRole);
+            md.EntitySet parent = System
+                .Data
+                .Common
+                .Utils
+                .MetadataHelper
+                .GetEntitySetAtEnd(assocSet, fromEnd); // relationshipSet.GetRelationshipEndExtent(constraint.FromRole);
+            md.EntitySet child = System
+                .Data
+                .Common
+                .Utils
+                .MetadataHelper
+                .GetEntitySetAtEnd(assocSet, toEnd); // relationshipSet.GetRelationshipEndExtent(constraint.ToRole);
             m_extentPair = new ExtentPair(parent, child);
             m_childKeys = new List<string>();
             foreach (md.EdmProperty prop in constraint.ToProperties)

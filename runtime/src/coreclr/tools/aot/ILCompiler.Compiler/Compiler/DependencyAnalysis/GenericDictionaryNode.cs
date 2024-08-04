@@ -139,9 +139,9 @@ namespace ILCompiler.DependencyAnalysis
             );
             if (
                 factory.CompilationModuleGroup.ContainsType(canonicalOwningType)
-                || !factory.CompilationModuleGroup.ShouldReferenceThroughImportTable(
-                    canonicalOwningType
-                )
+                || !factory
+                    .CompilationModuleGroup
+                    .ShouldReferenceThroughImportTable(canonicalOwningType)
             )
                 result.Add(GetDictionaryLayout(factory), "Layout");
 
@@ -236,10 +236,9 @@ namespace ILCompiler.DependencyAnalysis
             NodeFactory factory
         )
         {
-            return factory.MetadataManager.GetConditionalDependenciesDueToGenericDictionary(
-                factory,
-                _owningMethod
-            );
+            return factory
+                .MetadataManager
+                .GetConditionalDependenciesDueToGenericDictionary(factory, _owningMethod);
         }
 
         protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
@@ -252,17 +251,13 @@ namespace ILCompiler.DependencyAnalysis
             if (factory.CompilationModuleGroup.ContainsMethodBody(canonicalTarget, false))
                 dependencies.Add(GetDictionaryLayout(factory), "Layout");
 
-            factory.MetadataManager.GetDependenciesDueToGenericDictionary(
-                ref dependencies,
-                factory,
-                _owningMethod
-            );
+            factory
+                .MetadataManager
+                .GetDependenciesDueToGenericDictionary(ref dependencies, factory, _owningMethod);
 
-            factory.InteropStubManager.AddMarshalAPIsGenericDependencies(
-                ref dependencies,
-                factory,
-                _owningMethod
-            );
+            factory
+                .InteropStubManager
+                .AddMarshalAPIsGenericDependencies(ref dependencies, factory, _owningMethod);
 
             // Lazy generic use of the Activator.CreateInstance<T> heuristic requires tracking type parameters that are used in lazy generics.
             if (factory.LazyGenericsPolicy.UsesLazyGenerics(_owningMethod))

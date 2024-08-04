@@ -248,11 +248,12 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             decoded.SerialNumber = rebindSpan.Overlaps(tmpSpan, out offset)
                 ? rebind.Slice(offset, tmpSpan.Length)
                 : tmpSpan.ToArray();
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.SignatureAlgorithm
-            );
+            System
+                .Security
+                .Cryptography
+                .Asn1
+                .AlgorithmIdentifierAsn
+                .Decode(ref sequenceReader, rebind, out decoded.SignatureAlgorithm);
             if (!sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16)))
             {
                 throw new CryptographicException();
@@ -262,10 +263,13 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             decoded.Issuer = rebindSpan.Overlaps(tmpSpan, out offset)
                 ? rebind.Slice(offset, tmpSpan.Length)
                 : tmpSpan.ToArray();
-            System.Security.Cryptography.X509Certificates.Asn1.ValidityAsn.Decode(
-                ref sequenceReader,
-                out decoded.Validity
-            );
+            System
+                .Security
+                .Cryptography
+                .X509Certificates
+                .Asn1
+                .ValidityAsn
+                .Decode(ref sequenceReader, out decoded.Validity);
             if (!sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16)))
             {
                 throw new CryptographicException();
@@ -275,11 +279,12 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             decoded.Subject = rebindSpan.Overlaps(tmpSpan, out offset)
                 ? rebind.Slice(offset, tmpSpan.Length)
                 : tmpSpan.ToArray();
-            System.Security.Cryptography.Asn1.SubjectPublicKeyInfoAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.SubjectPublicKeyInfo
-            );
+            System
+                .Security
+                .Cryptography
+                .Asn1
+                .SubjectPublicKeyInfoAsn
+                .Decode(ref sequenceReader, rebind, out decoded.SubjectPublicKeyInfo);
 
             if (
                 sequenceReader.HasData
@@ -356,11 +361,12 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System.Security.Cryptography.Asn1.X509ExtensionAsn.Decode(
-                            ref collectionReader,
-                            rebind,
-                            out tmpItem
-                        );
+                        System
+                            .Security
+                            .Cryptography
+                            .Asn1
+                            .X509ExtensionAsn
+                            .Decode(ref collectionReader, rebind, out tmpItem);
                         tmpList.Add(tmpItem);
                     }
 

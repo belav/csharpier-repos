@@ -399,7 +399,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedIntKeyClass?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -430,7 +431,9 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedIntKeyStruct?>("PrincipalId")
-                        .CurrentValue!.Value.Value
+                        .CurrentValue!
+                        .Value
+                        .Value
                 );
             }
 
@@ -461,7 +464,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedIntKeyRecord?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -500,7 +504,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedIntKeyClass?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -532,7 +537,9 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedIntKeyStruct?>("PrincipalId")
-                        .CurrentValue!.Value.Value
+                        .CurrentValue!
+                        .Value
+                        .Value
                 );
             }
 
@@ -564,7 +571,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedIntKeyRecord?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -1226,7 +1234,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedStringKeyClass?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -1257,7 +1266,9 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedStringKeyStruct?>("PrincipalId")
-                        .CurrentValue!.Value.Value
+                        .CurrentValue!
+                        .Value
+                        .Value
                 );
             }
 
@@ -1288,7 +1299,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedStringKeyRecord?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -1327,7 +1339,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedStringKeyClass?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -1359,7 +1372,9 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedStringKeyStruct?>("PrincipalId")
-                        .CurrentValue!.Value.Value
+                        .CurrentValue!
+                        .Value
+                        .Value
                 );
             }
 
@@ -1391,7 +1406,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedStringKeyRecord?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -1870,7 +1886,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedGuidKeyClass?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -1901,7 +1918,9 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedGuidKeyStruct?>("PrincipalId")
-                        .CurrentValue!.Value.Value
+                        .CurrentValue!
+                        .Value
+                        .Value
                 );
             }
 
@@ -1932,7 +1951,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedGuidKeyRecord?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -1971,7 +1991,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedGuidKeyClass?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -2003,7 +2024,9 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedGuidKeyStruct?>("PrincipalId")
-                        .CurrentValue!.Value.Value
+                        .CurrentValue!
+                        .Value
+                        .Value
                 );
             }
 
@@ -2035,7 +2058,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedGuidKeyRecord?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -2516,7 +2540,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedUriKeyClass?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -2547,7 +2572,9 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedUriKeyStruct?>("PrincipalId")
-                        .CurrentValue!.Value.Value
+                        .CurrentValue!
+                        .Value
+                        .Value
                 );
             }
 
@@ -2578,7 +2605,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedUriKeyRecord?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -2617,7 +2645,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedUriKeyClass?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 
@@ -2649,7 +2678,9 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedUriKeyStruct?>("PrincipalId")
-                        .CurrentValue!.Value.Value
+                        .CurrentValue!
+                        .Value
+                        .Value
                 );
             }
 
@@ -2681,7 +2712,8 @@ public class StoreGeneratedInMemoryTest
                     context
                         .Entry(dependent)
                         .Property<WrappedUriKeyRecord?>("PrincipalId")
-                        .CurrentValue!.Value
+                        .CurrentValue!
+                        .Value
                 );
             }
 

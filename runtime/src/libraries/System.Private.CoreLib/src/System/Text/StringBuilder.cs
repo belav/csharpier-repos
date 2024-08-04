@@ -2306,10 +2306,9 @@ namespace System.Text
                 // find all occurrences of it contained entirely within the chunk. We stop searching
                 // once we're within oldValue.Length from the end of the chunk (or count limit), at which point
                 // we need to consider a value that bridges between two chunks.
-                ReadOnlySpan<char> remainingChunk = chunk.m_ChunkChars.AsSpan(
-                    indexInChunk,
-                    Math.Min(chunk.m_ChunkLength - indexInChunk, count)
-                );
+                ReadOnlySpan<char> remainingChunk = chunk
+                    .m_ChunkChars
+                    .AsSpan(indexInChunk, Math.Min(chunk.m_ChunkLength - indexInChunk, count));
                 while (oldValue.Length <= remainingChunk.Length)
                 {
                     // Find the next match.
@@ -2444,10 +2443,9 @@ namespace System.Text
                     int curInChunk = Math.Max(startIndexInChunk, 0);
                     int endInChunk = Math.Min(chunk.m_ChunkLength, endIndexInChunk);
 
-                    Span<char> span = chunk.m_ChunkChars.AsSpan(
-                        curInChunk,
-                        endInChunk - curInChunk
-                    );
+                    Span<char> span = chunk
+                        .m_ChunkChars
+                        .AsSpan(curInChunk, endInChunk - curInChunk);
                     span.Replace(oldChar, newChar);
                 }
 

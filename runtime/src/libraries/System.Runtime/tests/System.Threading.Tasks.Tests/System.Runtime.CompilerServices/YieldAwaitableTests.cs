@@ -85,7 +85,8 @@ namespace System.Threading.Tasks.Tests
 
             {
                 // Yield when there's a current TaskScheduler
-                Task.Factory.StartNew(
+                Task.Factory
+                    .StartNew(
                         () =>
                         {
                             try
@@ -135,7 +136,8 @@ namespace System.Threading.Tasks.Tests
 
             {
                 // Yield when there's a current TaskScheduler and SynchronizationContext.Current is the base SynchronizationContext
-                Task.Factory.StartNew(
+                Task.Factory
+                    .StartNew(
                         () =>
                         {
                             SynchronizationContext.SetSynchronizationContext(
@@ -253,8 +255,8 @@ namespace System.Threading.Tasks.Tests
         {
             QUWITaskScheduler ts = new QUWITaskScheduler();
             Assert.NotSame(ts, TaskScheduler.Current);
-            await Task
-                .Factory.StartNew(
+            await Task.Factory
+                .StartNew(
                     async delegate
                     {
                         Assert.Same(ts, TaskScheduler.Current);

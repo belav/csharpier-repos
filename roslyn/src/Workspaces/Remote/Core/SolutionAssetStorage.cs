@@ -138,8 +138,10 @@ internal partial class SolutionAssetStorage
         )
         {
             return await _solutionAssetStorage
-                ._checksumToScope.Single()
-                .Value.GetTestAccessor()
+                ._checksumToScope
+                .Single()
+                .Value
+                .GetTestAccessor()
                 .GetAssetAsync(checksum, cancellationToken)
                 .ConfigureAwait(false);
         }

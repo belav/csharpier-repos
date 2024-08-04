@@ -37,30 +37,36 @@ namespace System.Activities.DurableInstancing
                 base.InstancePersistenceCommand
             );
 
-            sqlCommand.Parameters.Add(
-                new SqlParameter
-                {
-                    ParameterName = "@instanceId",
-                    SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = unlockCommand.InstanceId,
-                }
-            );
-            sqlCommand.Parameters.Add(
-                new SqlParameter
-                {
-                    ParameterName = "@surrogateLockOwnerId",
-                    SqlDbType = SqlDbType.BigInt,
-                    Value = unlockCommand.SurrogateOwnerId,
-                }
-            );
-            sqlCommand.Parameters.Add(
-                new SqlParameter
-                {
-                    ParameterName = "@handleInstanceVersion",
-                    SqlDbType = SqlDbType.BigInt,
-                    Value = unlockCommand.InstanceVersion,
-                }
-            );
+            sqlCommand
+                .Parameters
+                .Add(
+                    new SqlParameter
+                    {
+                        ParameterName = "@instanceId",
+                        SqlDbType = SqlDbType.UniqueIdentifier,
+                        Value = unlockCommand.InstanceId,
+                    }
+                );
+            sqlCommand
+                .Parameters
+                .Add(
+                    new SqlParameter
+                    {
+                        ParameterName = "@surrogateLockOwnerId",
+                        SqlDbType = SqlDbType.BigInt,
+                        Value = unlockCommand.SurrogateOwnerId,
+                    }
+                );
+            sqlCommand
+                .Parameters
+                .Add(
+                    new SqlParameter
+                    {
+                        ParameterName = "@handleInstanceVersion",
+                        SqlDbType = SqlDbType.BigInt,
+                        Value = unlockCommand.InstanceVersion,
+                    }
+                );
         }
 
         protected override string GetSqlCommandText()

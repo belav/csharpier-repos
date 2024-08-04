@@ -210,8 +210,10 @@ public class When_mapping_from_StringDictionary_multiple_matching_keys : NonVali
             {
                 Mapper.Map<Destination>(_source);
             })
-            .InnerException.ShouldBeOfType<AutoMapperMappingException>()
-            .Types.ShouldBe(new TypePair(typeof(IDictionary<string, object>), typeof(Destination)));
+            .InnerException
+            .ShouldBeOfType<AutoMapperMappingException>()
+            .Types
+            .ShouldBe(new TypePair(typeof(IDictionary<string, object>), typeof(Destination)));
     }
 }
 
@@ -393,9 +395,9 @@ public class When_mapping_from_StringDictionary_to_abstract_type : AutoMapperSpe
         new Action(
             () => Mapper.Map<SomeBase>(new StringDictionary())
         ).ShouldThrowException<AutoMapperMappingException>(ex =>
-            ex.InnerException.Message.ShouldStartWith(
-                $"Cannot create an instance of abstract type {typeof(SomeBase)}."
-            )
+            ex.InnerException
+                .Message
+                .ShouldStartWith($"Cannot create an instance of abstract type {typeof(SomeBase)}.")
         );
     }
 }

@@ -15,10 +15,12 @@ namespace System.Net.Http
         )
         {
             if (
-                response.Headers.TryGetValues(
-                    KnownHeaders.SetCookie.Descriptor,
-                    out IEnumerable<string>? values
-                )
+                response
+                    .Headers
+                    .TryGetValues(
+                        KnownHeaders.SetCookie.Descriptor,
+                        out IEnumerable<string>? values
+                    )
             )
             {
                 // The header values are always a string[]

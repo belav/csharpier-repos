@@ -486,16 +486,18 @@ public class ModificationCommandTest
     {
         var model = BuildModel(generateKeyValues, computeNonKeyValue);
 
-        return FakeRelationalTestHelpers.Instance.CreateInternalEntry(
-            model,
-            entityState,
-            new T1
-            {
-                Id = 1,
-                Name1 = computeNonKeyValue ? null : "Test",
-                Name2 = computeNonKeyValue ? null : "Test",
-            }
-        );
+        return FakeRelationalTestHelpers
+            .Instance
+            .CreateInternalEntry(
+                model,
+                entityState,
+                new T1
+                {
+                    Id = 1,
+                    Name1 = computeNonKeyValue ? null : "Test",
+                    Name2 = computeNonKeyValue ? null : "Test",
+                }
+            );
     }
 
     private static IModificationCommand CreateModificationCommand(

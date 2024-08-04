@@ -415,9 +415,9 @@ namespace System.Web.Compilation
             if (matches == null || matches.Count == 0)
                 return null;
 
-            string wantedDirectiveName = tparser.DefaultDirectiveName.ToLower(
-                Helpers.InvariantCulture
-            );
+            string wantedDirectiveName = tparser
+                .DefaultDirectiveName
+                .ToLower(Helpers.InvariantCulture);
             string directiveName;
             GroupCollection groups;
             CaptureCollection ccNames;
@@ -808,11 +808,9 @@ namespace System.Web.Compilation
                 for (int i = 0; i < deps.Length; i++)
                     deps[i] = req.MapPath(deps[i]);
 
-                HttpRuntime.InternalCache.Insert(
-                    "@@Type" + inputFile,
-                    type,
-                    new CacheDependency(deps)
-                );
+                HttpRuntime
+                    .InternalCache
+                    .Insert("@@Type" + inputFile, type, new CacheDependency(deps));
             }
             else
                 HttpRuntime.InternalCache.Insert("@@Type" + inputFile, type);
@@ -1410,9 +1408,14 @@ namespace System.Web.Compilation
                 )
                     return;
 
-                tparser.Scripts.Add(
-                    new ServerSideScript(t, new System.Web.Compilation.Location(tparser.Location))
-                );
+                tparser
+                    .Scripts
+                    .Add(
+                        new ServerSideScript(
+                            t,
+                            new System.Web.Compilation.Location(tparser.Location)
+                        )
+                    );
                 return;
             }
 

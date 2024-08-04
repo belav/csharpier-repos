@@ -18,14 +18,16 @@ namespace System.Globalization
             char* buffer = stackalloc char[CALENDAR_INFO_BUFFER_LEN];
             int exception;
             object exResult;
-            int resultLength = Interop.JsGlobalization.GetCalendarInfo(
-                localeName,
-                calendarId,
-                buffer,
-                CALENDAR_INFO_BUFFER_LEN,
-                out exception,
-                out exResult
-            );
+            int resultLength = Interop
+                .JsGlobalization
+                .GetCalendarInfo(
+                    localeName,
+                    calendarId,
+                    buffer,
+                    CALENDAR_INFO_BUFFER_LEN,
+                    out exception,
+                    out exResult
+                );
             if (exception != 0)
                 throw new Exception((string)exResult);
             string result = new string(buffer, 0, resultLength);

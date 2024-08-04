@@ -44,9 +44,9 @@ namespace Microsoft.Web.Mvc
                     throw new ArgumentNullException("bindingContext");
                 }
 
-                ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
-                    bindingContext.ModelName
-                );
+                ValueProviderResult valueProviderResult = bindingContext
+                    .ValueProvider
+                    .GetValue(bindingContext.ModelName);
                 if (valueProviderResult == null)
                 {
                     // nothing found

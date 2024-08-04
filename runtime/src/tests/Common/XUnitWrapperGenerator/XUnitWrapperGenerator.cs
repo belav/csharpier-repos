@@ -42,17 +42,20 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var methodsInSource = context.SyntaxProvider.CreateSyntaxProvider(
-            static (node, ct) =>
-                node.IsKind(SyntaxKind.MethodDeclaration)
-                && node is MethodDeclarationSyntax method
-                && method.AttributeLists.Count > 0,
-            static (context, ct) =>
-                (IMethodSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node, ct)!
-        );
+        var methodsInSource = context
+            .SyntaxProvider
+            .CreateSyntaxProvider(
+                static (node, ct) =>
+                    node.IsKind(SyntaxKind.MethodDeclaration)
+                    && node is MethodDeclarationSyntax method
+                    && method.AttributeLists.Count > 0,
+                static (context, ct) =>
+                    (IMethodSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node, ct)!
+            );
 
         var outOfProcessTests = context
-            .AdditionalTextsProvider.Combine(context.AnalyzerConfigOptionsProvider)
+            .AdditionalTextsProvider
+            .Combine(context.AnalyzerConfigOptionsProvider)
             .SelectMany(
                 (data, ct) =>
                 {
@@ -77,7 +80,8 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
             );
 
         var aliasMap = context
-            .CompilationProvider.Select(
+            .CompilationProvider
+            .Select(
                 (comp, ct) =>
                 {
                     var aliasMap = ImmutableDictionary.CreateBuilder<string, string>();
@@ -99,15 +103,17 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                 )
             );
 
-        var compData = context.CompilationProvider.Select(
-            (comp, ct) =>
-                new CompData(
-                    assemblyName: comp.Assembly.MetadataName,
-                    entryPoint: comp.GetEntryPoint(ct),
-                    possibleEntryPoints: RoslynUtils.GetPossibleEntryPoints(comp, ct),
-                    outputKind: comp.Options.OutputKind
-                )
-        );
+        var compData = context
+            .CompilationProvider
+            .Select(
+                (comp, ct) =>
+                    new CompData(
+                        assemblyName: comp.Assembly.MetadataName,
+                        entryPoint: comp.GetEntryPoint(ct),
+                        possibleEntryPoints: RoslynUtils.GetPossibleEntryPoints(comp, ct),
+                        outputKind: comp.Options.OutputKind
+                    )
+            );
 
         var testsInSource = methodsInSource
             .Combine(context.AnalyzerConfigOptionsProvider)
@@ -120,7 +126,8 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
             );
 
         var pathsForReferences = context
-            .AdditionalTextsProvider.Combine(context.AnalyzerConfigOptionsProvider)
+            .AdditionalTextsProvider
+            .Combine(context.AnalyzerConfigOptionsProvider)
             .Select(
                 (data, ct) =>
                     new KeyValuePair<string, string?>(
@@ -138,7 +145,8 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
             );
 
         var testsInReferencedAssemblies = context
-            .MetadataReferencesProvider.Combine(context.CompilationProvider)
+            .MetadataReferencesProvider
+            .Combine(context.CompilationProvider)
             .Combine(context.AnalyzerConfigOptionsProvider)
             .Combine(pathsForReferences)
             .Combine(aliasMap)
@@ -995,8 +1003,10 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                     {
                         switch (
                             filterAttribute
-                                .AttributeConstructor.Parameters[1]
-                                .Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                                .AttributeConstructor
+                                .Parameters[1]
+                                .Type
+                                .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
                         )
                         {
                             case "global::Xunit.TestPlatforms":
@@ -1088,8 +1098,10 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                             filterAttribute.ConstructorArguments[argumentIndex].Value!;
                         switch (
                             filterAttribute
-                                .AttributeConstructor!.Parameters[argumentIndex]
-                                .Type.ToDisplayString()
+                                .AttributeConstructor!
+                                .Parameters[argumentIndex]
+                                .Type
+                                .ToDisplayString()
                         )
                         {
                             case "Xunit.TestPlatforms":
@@ -1285,7 +1297,8 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                     string displayNameOverride =
                         $@"$""{alias}::{method.ContainingType.ToDisplayString(FullyQualifiedWithoutGlobalNamespace)}.{method.Name}({{string.Join("","", {argumentVariableIdentifier})}})""";
                     var argsAsCode = method
-                        .Parameters.Select(
+                        .Parameters
+                        .Select(
                             (p, i) =>
                                 $"({p.Type.ToDisplayString()}){argumentVariableIdentifier}[{i}]"
                         )
@@ -1406,7 +1419,7 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
     }
 
     public static readonly SymbolDisplayFormat FullyQualifiedWithoutGlobalNamespace =
-        SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
-            SymbolDisplayGlobalNamespaceStyle.Omitted
-        );
+        SymbolDisplayFormat
+            .FullyQualifiedFormat
+            .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted);
 }

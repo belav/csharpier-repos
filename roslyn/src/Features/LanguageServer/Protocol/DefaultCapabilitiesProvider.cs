@@ -123,7 +123,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 {
                     TokenTypes = SemanticTokensSchema
                         .GetSchema(clientCapabilities.HasVisualStudioLspCapability())
-                        .AllTokenTypes.ToArray(),
+                        .AllTokenTypes
+                        .ToArray(),
                     TokenModifiers = SemanticTokensSchema.TokenModifiers,
                 },
             };

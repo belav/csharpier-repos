@@ -4432,14 +4432,16 @@ namespace System.Web
                 {
                     bool stepCalled = false;
 
-                    _application._stepInvoker.Invoke(() =>
-                    {
-                        if (!stepCalled)
+                    _application
+                        ._stepInvoker
+                        .Invoke(() =>
                         {
-                            stepCalled = true;
-                            _endHandler(ar);
-                        }
-                    });
+                            if (!stepCalled)
+                            {
+                                stepCalled = true;
+                                _endHandler(ar);
+                            }
+                        });
 
                     if (!stepCalled)
                     {
@@ -4859,14 +4861,16 @@ namespace System.Web
                 {
                     bool stepCalled = false;
 
-                    _application._stepInvoker.Invoke(() =>
-                    {
-                        if (!stepCalled)
+                    _application
+                        ._stepInvoker
+                        .Invoke(() =>
                         {
-                            stepCalled = true;
-                            _handler.EndProcessRequest(ar);
-                        }
-                    });
+                            if (!stepCalled)
+                            {
+                                stepCalled = true;
+                                _handler.EndProcessRequest(ar);
+                            }
+                        });
 
                     if (!stepCalled)
                     {
@@ -5090,9 +5094,9 @@ namespace System.Web
                 {
                     // DevDiv #273639: Let the HttpRequest instance maintain a reference to the response
                     // cookie collection, as the HttpResponse instance won't be available after the transition.
-                    context.Request.StoreReferenceToResponseCookies(
-                        context.Response.GetCookiesNoCreate()
-                    );
+                    context
+                        .Request
+                        .StoreReferenceToResponseCookies(context.Response.GetCookiesNoCreate());
 
                     // If this is a WebSocket request, mark as transitioned so that asynchronous events (like SendRequest)
                     // don't execute. We also need to mark ourselves as not having completed synchronously so that the
@@ -5141,10 +5145,12 @@ namespace System.Web
                         )
                     )
                     {
-                        _application.Context.DisableNotifications(
-                            RequestNotification.LogRequest,
-                            0 /*postNotifications*/
-                        );
+                        _application
+                            .Context
+                            .DisableNotifications(
+                                RequestNotification.LogRequest,
+                                0 /*postNotifications*/
+                            );
                     }
                 }
             }
@@ -5790,16 +5796,19 @@ namespace System.Web
                                         (RequestNotification)currentNotification;
                                     context.CurrentModuleEventIndex = -1;
                                     currentModuleLastEventIndex =
-                                        _application.CurrentModuleContainer.GetEventCount(
-                                            context.CurrentNotification,
-                                            context.IsPostNotification
-                                        ) - 1;
+                                        _application
+                                            .CurrentModuleContainer
+                                            .GetEventCount(
+                                                context.CurrentNotification,
+                                                context.IsPostNotification
+                                            ) - 1;
                                 }
 
                                 context.CurrentModuleEventIndex++;
 
-                                IExecutionStep step =
-                                    _application.CurrentModuleContainer.GetNextEvent(
+                                IExecutionStep step = _application
+                                    .CurrentModuleContainer
+                                    .GetNextEvent(
                                         context.CurrentNotification,
                                         context.IsPostNotification,
                                         context.CurrentModuleEventIndex
@@ -5952,14 +5961,16 @@ namespace System.Web
                         if (needToComplete)
                         {
                             // call HttpRuntime::OnRequestNotificationCompletion
-                            _application.AsyncResult.Complete(
-                                isSynchronousCompletion,
-                                null /*result*/
-                                ,
-                                null /*error*/
-                                ,
-                                status
-                            );
+                            _application
+                                .AsyncResult
+                                .Complete(
+                                    isSynchronousCompletion,
+                                    null /*result*/
+                                    ,
+                                    null /*error*/
+                                    ,
+                                    status
+                                );
                         }
                     } // end of try statement that begins after AssociateWithCurrentThread
                     finally

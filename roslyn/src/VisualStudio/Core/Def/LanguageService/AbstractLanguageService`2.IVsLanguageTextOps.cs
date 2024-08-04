@@ -29,8 +29,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         public int Format(IVsTextLayer textLayer, TextSpan[] selections)
         {
             var result = VSConstants.S_OK;
-            var uiThreadOperationExecutor =
-                this.Package.ComponentModel.GetService<IUIThreadOperationExecutor>();
+            var uiThreadOperationExecutor = this.Package
+                .ComponentModel
+                .GetService<IUIThreadOperationExecutor>();
             uiThreadOperationExecutor.Execute(
                 "Intellisense",
                 defaultDescription: "",
@@ -78,8 +79,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             // Since we know we are on the UI thread, lets get the base indentation now, so that there is less
             // cleanup work to do later in Venus.
-            var ruleFactory =
-                Workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
+            var ruleFactory = Workspace
+                .Services
+                .GetService<IHostDependentFormattingRuleFactoryService>();
             var rules = ruleFactory
                 .CreateRule(documentSyntax, start)
                 .Concat(Formatter.GetDefaultFormattingRules(document.Project.Services));

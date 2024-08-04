@@ -712,8 +712,10 @@ namespace Mono.CSharp
                     PredefinedAttribute pa = module.PredefinedAttributes.RuntimeCompatibility;
                     if (pa.IsDefined && pa.ResolveBuilder())
                     {
-                        var prop =
-                            module.PredefinedMembers.RuntimeCompatibilityWrapNonExceptionThrows.Get();
+                        var prop = module
+                            .PredefinedMembers
+                            .RuntimeCompatibilityWrapNonExceptionThrows
+                            .Get();
                         if (prop != null)
                         {
                             AttributeEncoder encoder = new AttributeEncoder();
@@ -1302,13 +1304,9 @@ namespace Mono.CSharp
                 if (main_class != null)
                 {
                     // TODO: Handle dotted names
-                    var texpr = module.GlobalRootNamespace.LookupType(
-                        module,
-                        main_class,
-                        0,
-                        LookupMode.Probing,
-                        Location.Null
-                    );
+                    var texpr = module
+                        .GlobalRootNamespace
+                        .LookupType(module, main_class, 0, LookupMode.Probing, Location.Null);
                     if (texpr == null)
                     {
                         Report.Error(
@@ -1575,29 +1573,31 @@ namespace Mono.CSharp
 
         protected void Error_FileCorrupted(string fileName)
         {
-            compiler.Report.Error(
-                9,
-                "Metadata file `{0}' does not contain valid metadata",
-                fileName
-            );
+            compiler
+                .Report
+                .Error(9, "Metadata file `{0}' does not contain valid metadata", fileName);
         }
 
         protected void Error_AssemblyIsModule(string fileName)
         {
-            compiler.Report.Error(
-                1509,
-                "Referenced assembly file `{0}' is a module. Consider using `-addmodule' option to add the module",
-                fileName
-            );
+            compiler
+                .Report
+                .Error(
+                    1509,
+                    "Referenced assembly file `{0}' is a module. Consider using `-addmodule' option to add the module",
+                    fileName
+                );
         }
 
         protected void Error_ModuleIsAssembly(string fileName)
         {
-            compiler.Report.Error(
-                1542,
-                "Added module file `{0}' is an assembly. Consider using `-r' option to reference the file",
-                fileName
-            );
+            compiler
+                .Report
+                .Error(
+                    1542,
+                    "Added module file `{0}' is an assembly. Consider using `-r' option to reference the file",
+                    fileName
+                );
         }
 
         protected void LoadReferencesCore(

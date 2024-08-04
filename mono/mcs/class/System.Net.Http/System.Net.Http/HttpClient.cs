@@ -404,7 +404,8 @@ namespace System.Net.Http
                 )
                 {
                     await response
-                        .Content.LoadIntoBufferAsync(MaxResponseContentBufferSize)
+                        .Content
+                        .LoadIntoBufferAsync(MaxResponseContentBufferSize)
                         .ConfigureAwait(false);
                 }
 
